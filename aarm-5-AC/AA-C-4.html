@@ -17,6 +17,8 @@
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -26,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,14 +48,14 @@ the Preelaborate pragma (see <A HREF="AA-10-2-1.html">10.2.1</A>).]&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">The implementation shall not incur any run-time overhead 
 for the elaboration checks of subprograms and <SPAN Class="swiss">protected_bodies</SPAN> 
-declared in preelaborated library units. <A NAME="I9084"></A></div>
+declared in preelaborated library units. <A NAME="I9653"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal">The implementation shall not execute any memory write 
 operations after load time for the elaboration of constant objects declared 
 immediately within the declarative region of a preelaborated library 
 package, so long as the subtype and initial expression (or default initial 
 expressions if initialized by default) of the <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-satisfy the following restrictions. <A NAME="I9085"></A>The meaning of 
+satisfy the following restrictions. <A NAME="I9654"></A>The meaning of 
 <I>load time</I> is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>On systems where the image 
@@ -84,7 +86,7 @@ of course, so they should still execute as little code as possible.</span>
 <div class="Bulleted">any <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 is a static constraint;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted">any <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Bulleted">any <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 is for an access-to-constant type;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Bulleted">any uses of predefined operators appear only within 
@@ -98,15 +100,19 @@ for the Access or Address attributes, appear only within static expressions;
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This cuts out <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
 that are not static, except for Access and Address.&nbsp;</div>
-<div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted">any <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that is not part of a static expression is an expanded name or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
-that statically denotes some entity;&nbsp;</div>
-<div class="paranum"><a name="p9.a">9.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>This cuts out <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>s 
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+any <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> that 
+is not part of a static expression is an expanded name or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+that statically <span class="insert5">names</span><span class="delete5">&nbsp;denotes</span> 
+some entity;&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+This cuts out <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>s 
 that are not static, including calls on attribute functions like 'Image 
-and 'Value.&nbsp;</div>
+and 'Value.<span class="insert5">&nbsp;We do allow components if those components 
+don't require any evaluation or checks.</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted">any <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
@@ -168,9 +174,15 @@ of entities.</span></div>
 types allowed in preelaborated units from the Implementation Requirements.</span> 
 </div>
 
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p14.c">14.c/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert5">Added wording to allow components so long as no 
+evaluation or checks are required for the reference.</span>&nbsp;</div>
+
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

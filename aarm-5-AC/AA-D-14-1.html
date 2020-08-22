@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -54,33 +54,33 @@ exists:</span>&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
 <span class="insert2"><B>with</B>&nbsp;System;<BR>
 <B>package</B>&nbsp;Ada.Execution_Time.Timers</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">&nbsp;<B>is</B><A NAME="I9538"></A></span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">&nbsp;<B>is</B><A NAME="I10157"></A></span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9539"></A>Timer&nbsp;(T&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B><BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I10158"></A>Timer&nbsp;(T&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Task_Id)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>tagged&nbsp;limited&nbsp;private</B>;</span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9540"></A>Timer_Handler&nbsp;<B>is</B><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I10159"></A>Timer_Handler&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access&nbsp;protected&nbsp;procedure</B>&nbsp;(TM&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I9541"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I10160"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9542"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10161"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timer_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9543"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10162"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At_Time&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timer_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9544"></A>Current_Handler&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Timer_Handler;<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9545"></A>Cancel_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I10163"></A>Current_Handler&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Timer_Handler;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10164"></A>Cancel_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</span></div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9546"></A>Time_Remaining&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Time_Span;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I10165"></A>Time_Remaining&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Time_Span;</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I9547"></A>Timer_Resource_Error&nbsp;:&nbsp;<B>exception</B>;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I10166"></A>Timer_Resource_Error&nbsp;:&nbsp;<B>exception</B>;</span></div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Examples"><span class="insert2"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -95,12 +95,12 @@ needs finalization (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
 <span class="insert2">An object of type Timer is said to be <I>set</I> 
 if it is associated with a nonnull value of type Timer_Handler and <I>cleared</I> 
-otherwise. All Timer objects are initially cleared. <A NAME="I9548"></A><A NAME="I9549"></A></span></div>
+otherwise. All Timer objects are initially cleared. <A NAME="I10167"></A><A NAME="I10168"></A></span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
 <span class="insert2">The type Timer_Handler identifies a protected procedure 
 to be executed by the implementation when the timer expires. Such a protected 
-procedure is called a <I>handler</I>. <A NAME="I9550"></A></span></div>
+procedure is called a <I>handler</I>. <A NAME="I10169"></A></span></div>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>Type 
 Timer is tagged. This makes it possible to share a handler between several 
@@ -131,7 +131,7 @@ timer expires immediately. The second procedure Set_Handler loads the
 timer TM with the absolute value specified by At_Time. In this mode, 
 the timer TM expires when the execution time of the task identified by 
 TM.T.<B>all</B> reaches At_Time; if the value of At_Time has already 
-been reached when Set_Handler is called, the timer expires immediately.<A NAME="I9551"></A></span></div>
+been reached when Set_Handler is called, the timer expires immediately.<A NAME="I10170"></A></span></div>
 <div class="paranum"><a name="p15.a">15.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Implementation Note: 
 </B>Since an access-to-constant can designate a variable, the Task_Id 
@@ -191,7 +191,7 @@ as part of the expiration of a timer has no effect.</span></div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p25">25/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
-<span class="insert2"><A NAME="I9552"></A>For a call of any of the subprograms 
+<span class="insert2"><A NAME="I10171"></A>For a call of any of the subprograms 
 defined in this package, if the task identified by TM.T.<B>all</B> no 
 longer exists, the execution of the program is erroneous.</span></div>
 
@@ -229,12 +229,12 @@ Timer objects.</span></div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p29.a">29.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
-<span class="insert2"><A NAME="I9553"></A>The package Execution_Time.Timers 
+<span class="insert2"><A NAME="I10172"></A>The package Execution_Time.Timers 
 is new.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

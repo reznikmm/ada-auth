@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -34,63 +34,63 @@
 <HR>
 <H1>7.1 Package Specifications and Declarations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">A package is generally provided in two parts: a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN> 
-and a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0209">package_body</A></SPAN>. 
-Every package has a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>, 
-but not all packages have a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0209">package_body</A></SPAN>. 
+<div class="Normal">A package is generally provided in two parts: a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN> 
+and a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN>. 
+Every package has a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>, 
+but not all packages have a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">package_declaration</SPAN><A NAME="I3714"></A><A NAME="S0207"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3715"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">package_declaration</SPAN><A NAME="I3921"></A><A NAME="S0229"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3922"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">package_specification</SPAN><A NAME="I3716"></A><A NAME="S0208"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I3717"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0186">defining_program_unit_name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3718"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3719"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">package_specification</SPAN><A NAME="I3923"></A><A NAME="S0230"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I3924"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0201">defining_program_unit_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3925"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3926"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;[<B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3720"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>}]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3721"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN>.]<A NAME="I3722"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3927"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>}]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3928"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>.]<A NAME="I3929"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1">If an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-appears at the end of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>, 
-then this sequence of lexical elements shall repeat the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0186">defining_program_unit_name</A></SPAN>. 
+or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+appears at the end of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>, 
+then this sequence of lexical elements shall repeat the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0201">defining_program_unit_name</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Normal"><A NAME="I3723"></A><A NAME="I3724"></A>A <SPAN Class="swiss"><A HREF="RM-7-1.html#S0207">package_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-12-1.html#S0290">generic_package_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I3930"></A><A NAME="I3931"></A>A <SPAN Class="swiss"><A HREF="RM-7-1.html#S0229">package_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-12-1.html#S0312">generic_package_declaration</A></SPAN> 
 requires a completion (a body) if it contains any <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN> 
-that requires a completion, but whose completion is not in its <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>. 
+that requires a completion, but whose completion is not in its <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I3725"></A>The first list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
-of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN> 
+<div class="Normal"><A NAME="I3932"></A>The first list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN> 
 of a package other than a generic formal package is called the <I>visible 
-part</I> of the package. <A NAME="I3726"></A>The optional list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
-after the reserved word <B>private</B> (of any <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>) 
+part</I> of the package. <A NAME="I3933"></A>The optional list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
+after the reserved word <B>private</B> (of any <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>) 
 is called the <I>private part</I> of the package. If the reserved word 
 <B>private</B> does not appear, the package has an implicit empty private 
 part. Each list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
-of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN> 
-forms a <I>declaration list</I> of the package.<A NAME="I3727"></A></div>
+of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN> 
+forms a <I>declaration list</I> of the package.<A NAME="I3934"></A></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">An entity declared in the private part of a package 
 is visible only within the declarative region of the package itself (including 
 any child units &mdash; see <A HREF="RM-10-1-1.html">10.1.1</A>). In 
 contrast, expanded names denoting entities declared in the visible part 
 can be used even outside the package; furthermore, direct visibility 
-of such entities can be achieved by means of <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>s 
+of such entities can be achieved by means of <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN>s 
 (see <A HREF="RM-4-1-3.html">4.1.3</A> and <A HREF="RM-8-4.html">8.4</A>). 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3728"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0207">package_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I3935"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0229">package_declaration</A></SPAN> 
 consists of the elaboration of its <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
 in the given order.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
@@ -133,7 +133,7 @@ A</A>).&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

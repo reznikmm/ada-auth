@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-1-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -49,7 +49,7 @@ that contains such an error is not a legal Ada program; on the other
 hand, the fact that a program is legal does not mean, <I>per se</I>, 
 that the program is free from other forms of error.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted-NoPrefix"><A NAME="I1102"></A><A NAME="I1103"></A><A NAME="I1104"></A><A NAME="I1105"></A>The 
+<div class="Bulleted-NoPrefix"><A NAME="I1101"></A><A NAME="I1102"></A><A NAME="I1103"></A><A NAME="I1104"></A>The 
 rules are further classified as either compile time rules, or post compilation 
 rules, depending on whether a violation has to be detected at the time 
 a compilation unit is submitted to the compiler, or may be postponed 
@@ -70,16 +70,17 @@ semantics to some other construct <I>C2</I>, then there should be a language
 rule that says that <I>C1</I> is illegal if <I>C2</I> is illegal.</div>
 <div class="paranum"><a name="p4.c">4.c/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0204-1.TXT">AI12-0204-1</A></I>} 
-We don't want to infer Legality Rules from Dynamic Semantics rules.&nbsp;</div>
+We do not want to infer Legality Rules from Dynamic Semantics rules. 
+</div>
 <div class="paranum"><a name="p4.d">4.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-When the value of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+When the value of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is needed to enforce a Legality Rule or Post-Compilation Rule, then there 
-should be a language rule requiring the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+should be a language rule requiring the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 to be static (see <A HREF="AA-4-9.html">4.9</A>).</div>
 <div class="paranum"><a name="p4.e">4.e/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-This most likely occurs when the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+This most likely occurs when the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 specifies the value of an aspect.&nbsp;</div>
 <div class="paranum"><a name="p4.f">4.f/5</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
@@ -91,7 +92,7 @@ for instance.&nbsp;</div>
 <div class="Bulleted">Errors that are required to be detected at run 
 time by the execution of an Ada program;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted-NoPrefix"><A NAME="I1106"></A><A NAME="I1107"></A>The 
+<div class="Bulleted-NoPrefix"><A NAME="I1105"></A><A NAME="I1106"></A>The 
 corresponding error situations are associated with the names of the predefined 
 exceptions. Every Ada compiler is required to generate code that raises 
 the corresponding exception if such an error situation arises during 
@@ -104,14 +105,14 @@ not required) to report this fact at compilation time.]</div>
 <div class="Bulleted-NoPrefix">The language rules define certain kinds 
 of errors that need not be detected either prior to or during run time, 
 but if not detected, the range of possible effects shall be bounded. 
-<A NAME="I1108"></A>The errors of this category are called <I>bounded 
-errors</I>. <A NAME="I1109"></A>The possible effects of a given bounded 
-error are specified for each such error, but in any case one possible 
-effect of a bounded error is the raising of the exception Program_Error.</div>
+<A NAME="I1107"></A>The errors of this category are called <I>bounded 
+errors</I>. The possible effects of a given bounded error are specified 
+for each such error, but in any case one possible effect of a bounded 
+error is the raising of the exception Program_Error. <A NAME="I1108"></A></div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Bulleted">Erroneous execution.</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted-NoPrefix"><A NAME="I1110"></A>In addition to bounded 
+<div class="Bulleted-NoPrefix"><A NAME="I1109"></A>In addition to bounded 
 errors, the language rules define certain kinds of errors as leading 
 to <I>erroneous execution</I>. Like bounded errors, the implementation 
 need not detect such errors either prior to or during run time. Unlike 
@@ -140,20 +141,20 @@ has a slightly more disapproving flavor.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal">[<A NAME="I1111"></A> <A NAME="I1112"></A>An implementation 
+<div class="Normal">[<A NAME="I1110"></A> <A NAME="I1111"></A>An implementation 
 may provide <I>nonstandard modes</I> of operation. Typically these modes 
 would be selected by a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 or by a command line switch when the compiler is invoked. When operating 
-in a nonstandard mode, the implementation may reject <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
+in a nonstandard mode, the implementation may reject <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>s 
 that do not conform to additional requirements associated with the mode, 
 such as an excessive number of warnings or violation of coding style 
 guidelines. Similarly, in a nonstandard mode, the implementation may 
 apply special optimizations or alternative algorithms that are only meaningful 
 for programs that satisfy certain criteria specified by the implementation. 
-<A NAME="I1113"></A><A NAME="I1114"></A>In any case, an implementation 
+<A NAME="I1112"></A><A NAME="I1113"></A>In any case, an implementation 
 shall support a <I>standard</I> mode that conforms to the requirements 
 of this International Standard; in particular, in the standard mode, 
-all legal <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
+all legal <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>s 
 shall be accepted.]&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>These permissions are designed 
@@ -166,9 +167,8 @@ to foster maximum portability, is always available.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I1115"></A>If an implementation detects 
-a bounded error or erroneous execution, it should raise Program_Error. 
-</div>
+<div class="Normal">If an implementation detects a bounded error or erroneous 
+execution, it should raise Program_Error.&nbsp;</div>
 <div class="paranum"><a name="p12.a.1">12.a.1/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>If a bounded error 
 or erroneous execution is detected, Program_Error should be raised.</div>
@@ -181,14 +181,13 @@ passing mechanism when unspecified is possibly nonportable, but not erroneous.</
 <div class="paranum"><a name="p12.b">12.b</a></div>
 <div class="Annotations">Other situations that are erroneous in Ada 83 
 are changed to be bounded errors. In particular, evaluating an uninitialized 
-scalar variable is a bounded error. <A NAME="I1116"></A>The possible 
-results are to raise Program_Error (as always), or to produce a machine-representable 
-value (which might not be in the subtype of the variable). <A NAME="I1117"></A>Violating 
-a Range_Check or Overflow_Check raises Constraint_Error, even if the 
-value came from an uninitialized variable. This means that optimizers 
-can no longer &ldquo;assume&rdquo; that all variables are initialized 
-within their subtype's range. Violating a check that is suppressed remains 
-erroneous.</div>
+scalar variable is a bounded error. The possible results are to raise 
+Program_Error (as always), or to produce a machine-representable value 
+(which might not be in the subtype of the variable). Violating a Range_Check 
+or Overflow_Check raises Constraint_Error, even if the value came from 
+an uninitialized variable. This means that optimizers can no longer &ldquo;assume&rdquo; 
+that all variables are initialized within their subtype's range. Violating 
+a check that is suppressed remains erroneous.</div>
 <div class="paranum"><a name="p12.c">12.c</a></div>
 <div class="Annotations">The &ldquo;incorrect order dependences&rdquo; 
 category of errors is removed. All such situations are simply considered 
@@ -203,7 +202,7 @@ not be.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-1-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

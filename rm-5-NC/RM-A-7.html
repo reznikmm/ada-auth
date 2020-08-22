@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,7 +36,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I6505"></A><A NAME="I6506"></A><A NAME="I6507"></A>Values 
+<div class="Normal"><A NAME="I6795"></A><A NAME="I6796"></A><A NAME="I6797"></A>Values 
 input from the external environment of the program, or output to the 
 external environment, are considered to occupy <I>external files</I>. 
 An external file can be anything external to the program that can produce 
@@ -46,7 +46,7 @@ gives further system-dependent characteristics that may be associated
 with the file, such as the physical organization or access rights. The 
 conventions governing the interpretation of such strings shall be documented.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I6508"></A>Input and output operations are 
+<div class="Normal"><A NAME="I6798"></A>Input and output operations are 
 expressed as operations on objects of some <I>file type</I>, rather than 
 directly in terms of the external files. In the remainder of this clause, 
 the term <I>file</I> is always used to refer to a file object; the term 
@@ -77,10 +77,10 @@ and otherwise the file is said to be <I>closed</I>.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">The language does not define what happens to external 
 files after the completion of the main program and all the library tasks 
-(in particular, if corresponding files have not been closed). <A NAME="I6509"></A><A NAME="I6510"></A><A NAME="I6511"></A>The 
+(in particular, if corresponding files have not been closed). <A NAME="I6799"></A><A NAME="I6800"></A><A NAME="I6801"></A>The 
 effect of input-output for access types is unspecified.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6512"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6802"></A>An 
 open file has a <I>current mode</I>, which is a value of one of the following 
 enumeration types:&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
@@ -109,10 +109,10 @@ input-output are described in subclause <A HREF="RM-A-10-2.html">A.10.2</A>.</di
 of an input-output subprogram are defined in the package IO_Exceptions; 
 the situations in which they can be propagated are described following 
 the description of the subprogram (and in subclause <A HREF="RM-A-13.html">A.13</A>). 
-<A NAME="I6513"></A><A NAME="I6514"></A>The exceptions Storage_Error 
-and Program_Error may be propagated. (Program_Error can only be propagated 
-due to errors made by the caller of the subprogram.) Finally, exceptions 
-can be propagated in certain implementation-defined situations.&nbsp;</div>
+The exceptions Storage_Error and Program_Error may be propagated. (Program_Error 
+can only be propagated due to errors made by the caller of the subprogram.) 
+Finally, exceptions can be propagated in certain implementation-defined 
+situations.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Notes">23&nbsp;&nbsp;Each instantiation of the generic packages 
@@ -127,7 +127,7 @@ number of files that may be associated with a given external file.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

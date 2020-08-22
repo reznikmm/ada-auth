@@ -1,0 +1,543 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Container Aggregates</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Indented4 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 4.3em; margin-top: 0em; margin-bottom: 0em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.3.5 <span class="insert5">Container Aggregates</span><span class="delete5"></span></H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><span class="insert5">In a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0123">container_aggregate</A></SPAN>, 
+values are specified for elements of a container; for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0125">positional_container_aggregate</A></SPAN>, 
+the elements are given sequentially; for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN>, 
+the elements are specified by a sequence of key/value pairs, or using 
+an iterator. The Aggregate aspect of the type of the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+determines how the elements are combined to form the container.<A NAME="I2668"></A></span></div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+a type other than an array type, the following type-related operational 
+aspect may be specified:</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em"><span class="insert5">Aggregate</span></div><div class="WideHanging-Body">
+<span class="insert5">This aspect is an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+of the form:<A NAME="I2669"></A><A NAME="I2670"></A></span></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Indented4"><span class="insert5">&nbsp;&nbsp;&nbsp;(Empty&nbsp;=&gt;&nbsp;<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>[,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Add_Named&nbsp;=&gt;&nbsp;<I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>][,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Add_Unnamed&nbsp;=&gt;&nbsp;<I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>][,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;New_Indexed&nbsp;=&gt;&nbsp;<I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Assign_Indexed&nbsp;=&gt;&nbsp;<I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>])</span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">The type for which 
+this aspect is specified is known as the <I>container type</I> of the 
+Aggregate aspect.<A NAME="I2671"></A> A <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall be specified for at least one of Add_Named, Add_Unnamed, or Assign_Indexed. 
+If Add_Named is specified, neither Add_Unnamed nor Assign_Indexed shall 
+be specified. Either both or neither of New_Indexed and Assign_Indexed 
+shall be specified.</span></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Normal"><span class="insert5">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+specified for Empty for an Aggregate aspect shall denote a constant of 
+the container type, or denote a function with a result type of the container 
+type that has no parameters, or that has one <B>in</B> parameter of type 
+Integer.</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal"><span class="insert5">The <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+specified for Add_Unnamed for an Aggregate aspect shall denote a procedure 
+that has two parameters, the first an <B>in out</B> parameter of the 
+container type, and the second an <B>in</B> parameter of some nonlimited 
+type, called the <I>element type</I> of the container type.<A NAME="I2672"></A></span></div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal"><span class="insert5">The <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+specified for New_Indexed for an Aggregate aspect shall denote a function 
+with a result type of the container type, and two parameters of the same 
+discrete type, with that type being the <I>key type</I> of the container 
+type.<A NAME="I2673"></A></span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal"><span class="insert5">The <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+specified for Add_Named or Assign_Indexed for an Aggregate aspect shall 
+denote a procedure that has three parameters, the first an <B>in out</B> 
+parameter of the container type, the second an <B>in</B> parameter of 
+a nonlimited type (the <I>key type</I> of the container type), and the 
+third, an <B>in</B> parameter of a nonlimited type that is called the 
+<I>element type</I> of the container type.<A NAME="I2674"></A><A NAME="I2675"></A></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal"><span class="insert5">If the container type of an 
+Aggregate aspect is a private type, the full type of the container type 
+shall not be an array type. If the container type is limited, the name 
+specified for Empty shall denote a function rather than a constant object.</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal"><span class="insert5">For an Aggregate aspect, the 
+key type of Assign_Indexed shall be the same type as that of the parameters 
+of New_Indexed. Additionally, if both Add_Unnamed and Assign_Indexed 
+are specified, the final parameters shall be of the same type &mdash; 
+the element type of the container type.</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal"><span class="insert5">The Aggregate aspect is nonoverridable.</span> 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">container_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2676"></A><A NAME="S0123"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2677"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0124">null_container_aggregate</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2678"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0125">positional_container_aggregate</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2679"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN></span></div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">null_container_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2680"></A><A NAME="S0124"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">'['&nbsp;']'</span></div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">positional_container_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2681"></A><A NAME="S0125"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">'['&nbsp;<A NAME="I2682"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>{,&nbsp;<A NAME="I2683"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>}&nbsp;']'</span></div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">named_container_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2684"></A><A NAME="S0126"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">'['&nbsp;<A NAME="I2685"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0127">container_element_association_list</A></SPAN>&nbsp;']'</span></div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">container_element_association_list</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2686"></A><A NAME="S0127"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2687"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2688"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>}</span></div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">container_element_association</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2689"></A><A NAME="S0128"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2690"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2691"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2692"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2693"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN></span></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">key_choice_list</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2694"></A><A NAME="S0129"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I2695"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN>&nbsp;{'|'&nbsp;<A NAME="I2696"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN>}</span></div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">key_choice</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2697"></A><A NAME="S0130"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><I>key_</I><A NAME="I2698"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I2699"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN></span></div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterated_element_association</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2700"></A><A NAME="S0131"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I2701"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>[&nbsp;<B>use</B>&nbsp;<I>key_</I><A NAME="I2702"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]&nbsp;=&gt;&nbsp;<A NAME="I2703"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I2704"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>[&nbsp;<B>use</B>&nbsp;<I>key_</I><A NAME="I2705"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]&nbsp;=&gt;&nbsp;<A NAME="I2706"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal"><span class="insert5">The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0123">container_aggregate</A></SPAN> 
+shall be a type for which the Aggregate aspect has been specified. The 
+expected type for each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0123">container_aggregate</A></SPAN> 
+is the element type of the expected type.</span></div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal"><span class="insert5">The expected type for a <I>key_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN>, 
+is the key type of the expected type of the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Normal"><span class="insert5">The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0125">positional_container_aggregate</A></SPAN> 
+shall have an Aggregate aspect that includes a specification for an Add_Unnamed 
+procedure or an Assign_Indexed procedure. The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+that contains one or more <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN>s 
+with a <I>key_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+shall have an Aggregate aspect that includes a specification for the 
+Add_Named procedure. The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+that contains one or more <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN>s 
+shall have an Aggregate aspect that includes a specification for the 
+Add_Named or Assign_Indexed procedure. A <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0124">null_container_aggregate</A></SPAN> 
+can be of any type with an Aggregate aspect.</span></div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Normal"><span class="insert5">A non-null container aggregate 
+is called an <I>indexed aggregate</I> if the<A NAME="I2707"></A> expected 
+type <I>T</I> of the aggregate specifies an Assign_Indexed procedure 
+in its Aggregate aspect, and either there is no Add_Unnamed procedure 
+specified for the type, or the aggregate is a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN> 
+that contains a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>. 
+The key type of an indexed aggregate is also called the <I>index type</I> 
+of the aggregate.<A NAME="I2708"></A><A NAME="I2709"></A></span></div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN> 
+with a &lt;&gt; rather than an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+or with a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>, 
+is permitted only in an indexed aggregate.</span></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+an <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
+without a <I>key_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+if the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+is an indexed aggregate or the expected type of the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+specifies an Add_Named procedure in its Aggregate aspect, then the type 
+of the loop parameter of the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
+shall be the same as the key type of the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>.</span></div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+that is an indexed aggregate, all <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>s 
+shall contain either a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+without a <I>key_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN>. 
+Furthermore, for such an aggregate, either:</span>&nbsp;</div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="Bulleted"><span class="insert5">all <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN>s 
+shall be static expressions or static ranges, and every <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+shall have a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+that defines a non-null static range, and the set of values of the index 
+type covered by the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN>s 
+and the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
+shall form a contiguous range of values with no duplications; or</span></div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Bulleted"><span class="insert5">there shall be exactly one 
+<SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>, 
+and if it has a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN>, 
+the list shall have exactly one <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN>.</span> 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
+evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0123">container_aggregate</A></SPAN> 
+starts by creating an anonymous object <I>A</I> of the expected type 
+<I>T</I> initialized as follows:</span></div>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">if 
+the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+is an indexed aggregate, from the result of a call on the New_Indexed 
+function; the actual parameters in this call represent the lower and 
+upper bound of the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
+and are determined as follows:</span>&nbsp;</div>
+<div class="paranum"><a name="p33">33/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">if the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0125">positional_container_aggregate</A></SPAN>, 
+the lower bound is the low bound of the subtype of the key parameter 
+of the Add_Indexed procedure, and the upper bound has a position number 
+that is the sum of the position number of the lower bound and one less 
+than the number of <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
+in the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>;</span></div>
+<div class="paranum"><a name="p34">34/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">if the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN>, 
+the lower bound is the lowest value covered by a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN> 
+or is the low bound of a range defined by a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>; 
+the upper bound is the highest value covered by a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN> 
+or is the high bound of a range defined by a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p35">35/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">if 
+the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+is not an indexed aggregate, by assignment from the Empty constant, or 
+from a call on the Empty function specified in the Aggregate aspect. 
+In the case of an Empty function with a formal parameter, the actual 
+parameter has the following value:</span></div>
+<div class="paranum"><a name="p36">36/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0124">null_container_aggregate</A></SPAN>, 
+the value zero;</span></div>
+<div class="paranum"><a name="p37">37/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0125">positional_container_aggregate</A></SPAN>, 
+the number of <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s;</span></div>
+<div class="paranum"><a name="p38">38/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+without an <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN>, 
+the number of <I>key_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s;</span></div>
+<div class="paranum"><a name="p39">39/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+where every <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
+contains a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>, 
+the total number of elements specified by all of the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>s;</span></div>
+<div class="paranum"><a name="p40">40/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">otherwise, to an 
+implementation-defined value.</span></div>
+<div class="paranum"><a name="p41">41/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
+evaluation then proceeds as follows:</span></div>
+<div class="paranum"><a name="p42">42/5</a></div>
+<div class="Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0124">null_container_aggregate</A></SPAN>, 
+the anonymous object <I>A</I> is the result;</span></div>
+<div class="paranum"><a name="p43">43/5</a></div>
+<div class="Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0125">positional_container_aggregate</A></SPAN> 
+of a type with a specified Add_Unnamed procedure, each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is evaluated in an arbitrary order,<A NAME="I2710"></A> and the Add_Unnamed 
+procedure is invoked in sequence with the anonymous object <I>A</I> as 
+the first parameter and the result of evaluating each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+as the second parameter, in the order of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s;</span></div>
+<div class="paranum"><a name="p44">44/5</a></div>
+<div class="Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0125">positional_container_aggregate</A></SPAN> 
+that is an indexed aggregate, each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is evaluated in an arbitrary order,<A NAME="I2711"></A> and the Assign_Indexed 
+procedure is invoked in sequence with the anonymous object <I>A</I> as 
+the first parameter, the key value as the second parameter, computed 
+by starting with the low bound of the subtype of the key formal parameter 
+of the Assign_Indexed procedure and taking the successor of this value 
+for each successive <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+and the result of evaluating each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+as the third parameter;</span></div>
+<div class="paranum"><a name="p45">45/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">for 
+a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+for a type with an Add_Named procedure in its Aggregate aspect, the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>s 
+are evaluated in an arbitrary order:<A NAME="I2712"></A></span>&nbsp;</div>
+<div class="paranum"><a name="p46">46/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0129">key_choice_list</A></SPAN>, 
+for each <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN> 
+of the list in an arbitrary order, the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN> 
+is evaluated as is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN> 
+(in an arbitrary order),<A NAME="I2713"></A> and the Add_Named procedure 
+is invoked once for each value covered by the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN>, 
+with the anonymous object <I>A</I> as the first parameter, the value 
+from the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0130">key_choice</A></SPAN> 
+as the second parameter, and the result of evaluating the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+as the third parameter;</span></div>
+<div class="paranum"><a name="p47">47/5</a></div>
+<div class="Indented2Bulleted" style="margin-bottom: 0.3em"><span class="insert5">for 
+a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN>, 
+first the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
+is elaborated, then an iteration is performed, and for each value conditionally 
+produced by the iteration (see <A HREF="RM-5-5.html">5.5</A> and <A HREF="RM-5-5-2.html">5.5.2</A>) 
+the Add_Named rocedure is invoked with the anonymous object <I>A</I> 
+as the first parameter, the result of evaluating the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+as the third parameter, and:</span></div>
+<div class="paranum"><a name="p48">48/5</a></div>
+<div class="Indented3Bulleted"><span class="insert5">if there is a <I>key_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+the result of evaluating the <I>key_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+as the second parameter;</span></div>
+<div class="paranum"><a name="p49">49/5</a></div>
+<div class="Indented3Bulleted"><span class="insert5">otherwise, with 
+the loop parameter as the second parameter;</span></div>
+<div class="paranum"><a name="p50">50/5</a></div>
+<div class="Bulleted"><span class="insert5">for a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN> 
+that is an indexed aggregate, the evaluation proceeds as above for the 
+case of Add_Named, but with the Assign_Indexed procedure being invoked 
+in its stead; in the case of a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN> 
+with a &lt;&gt; rather than an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+the corresponding call on Assign_Indexed is not performed, leaving the 
+component as it was upon return from the New_Indexed function;</span></div>
+<div class="paranum"><a name="p51">51/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">for 
+any other <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0126">named_container_aggregate</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>s 
+(which are necessarily <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN>s) 
+are evaluated in the order given; each such evaluation comprises two 
+steps:</span>&nbsp;</div>
+<div class="paranum"><a name="p52">52/5</a></div>
+<div class="Indented2Enumerated-Term">1.</div><div class="Indented2Enumerated-Body">
+<span class="insert5">the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
+is elaborated;</span></div>
+<div class="paranum"><a name="p53">53/5</a></div>
+<div class="Indented2Enumerated-Term">2.</div><div class="Indented2Enumerated-Body">
+<span class="insert5">an iteration is performed, and for each value conditionally 
+produced by the iteration (see <A HREF="RM-5-5.html">5.5</A> and <A HREF="RM-5-5-2.html">5.5.2</A>) 
+the Add_Unnamed procedure is invoked, with the anonymous object <I>A</I> 
+as the first parameter and the result of evaluating the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+as the second parameter.</span></div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p54">54/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">Declarations 
+of Set_Type, Map_Type, and Vector_Type:</span></div>
+<div class="paranum"><a name="p55">55/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>Set_Type&nbsp;is&nbsp;a&nbsp;set-like&nbsp;container&nbsp;type.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Set_Type&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Aggregate&nbsp;=&gt;&nbsp;(Empty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Empty_Set,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add_Unnamed&nbsp;=&gt;&nbsp;Include);<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Empty_Set&nbsp;<B>return</B>&nbsp;Set_Type;</span></div>
+<div class="paranum"><a name="p56">56/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Small_Natural&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;0..1000;</span></div>
+<div class="paranum"><a name="p57">57/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Include&nbsp;(S&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set_Type;&nbsp;N&nbsp;:&nbsp;<B>in</B>&nbsp;Small_Natural);</span></div>
+<div class="paranum"><a name="p58">58/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>Map_Type&nbsp;is&nbsp;a&nbsp;map-like&nbsp;container&nbsp;type.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Map_Type&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Aggregate&nbsp;=&gt;&nbsp;&nbsp;(Empty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Empty_Map,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add_Named&nbsp;=&gt;&nbsp;Add_To_Map);</span></div>
+<div class="paranum"><a name="p59">59/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Add_To_Map&nbsp;(M&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map_Type;&nbsp;Key&nbsp;:&nbsp;<B>in</B>&nbsp;Integer;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p60">60/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map_Type;</span></div>
+<div class="paranum"><a name="p61">61/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>Vector_Type&nbsp;is&nbsp;an&nbsp;extensible&nbsp;array-like&nbsp;container&nbsp;type.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Vector_Type&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Aggregate&nbsp;=&gt;&nbsp;(Empty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Empty_Vector,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add_Unnamed&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Append_One,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Indexed&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;New_Vector,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assign_Indexed&nbsp;=&gt;&nbsp;Assign_Element);</span></div>
+<div class="paranum"><a name="p62">62/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Empty_Vector&nbsp;(Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;Vector_Type;</span></div>
+<div class="paranum"><a name="p63">63/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Append_One&nbsp;(V&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector_Type;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p64">64/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Assign_Element&nbsp;(V&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p65">65/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;New_Vector&nbsp;(First,&nbsp;Last&nbsp;:&nbsp;Positive)&nbsp;<B>return</B>&nbsp;Vector_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;First&nbsp;=&nbsp;Positive'First;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>Vectors&nbsp;are&nbsp;always&nbsp;indexed&nbsp;starting&nbsp;at&nbsp;the</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>lower&nbsp;bound&nbsp;of&nbsp;their&nbsp;index&nbsp;subtype.</I></SPAN></span></div>
+<div class="paranum"><a name="p66">66/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;<SPAN Class="roman"><I>Private&nbsp;part&nbsp;not&nbsp;shown.</I></SPAN></span></div>
+<div class="paranum"><a name="p67">67/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">Examples 
+of container aggregates for Set_Type, Map_Type, and Vector_Type:</span></div>
+<div class="paranum"><a name="p68">68/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Example&nbsp;aggregates&nbsp;using&nbsp;Set_Type.</I></SPAN><BR>
+S&nbsp;:&nbsp;Set_Type;</span></div>
+<div class="paranum"><a name="p69">69/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Assign&nbsp;the&nbsp;empty&nbsp;set&nbsp;to&nbsp;S:</I></SPAN><BR>
+S&nbsp;:=&nbsp;[];</span></div>
+<div class="paranum"><a name="p70">70/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+S&nbsp;:=&nbsp;Empty_Set;</span></div>
+<div class="paranum"><a name="p71">71/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;positional&nbsp;set&nbsp;aggregate:</I></SPAN><BR>
+S&nbsp;:=&nbsp;[1,&nbsp;2];</span></div>
+<div class="paranum"><a name="p72">72/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+S&nbsp;:=&nbsp;Empty_Set;<BR>
+Include&nbsp;(S,&nbsp;1);<BR>
+Include&nbsp;(S,&nbsp;2);</span></div>
+<div class="paranum"><a name="p73">73/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;set&nbsp;aggregate&nbsp;with&nbsp;an&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN><SPAN Class="roman"><I>:</I></SPAN><BR>
+S&nbsp;:=&nbsp;[<B>for</B>&nbsp;Item&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;5&nbsp;=&gt;&nbsp;Item&nbsp;*&nbsp;2];</span></div>
+<div class="paranum"><a name="p74">74/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+S&nbsp;:=&nbsp;Empty_Set;<BR>
+<B>for</B>&nbsp;Item&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;5&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;Include&nbsp;(S,&nbsp;Item&nbsp;*&nbsp;2);<BR>
+<B>end&nbsp;loop</B>;</span></div>
+<div class="paranum"><a name="p75">75/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;set&nbsp;aggregate&nbsp;consisting&nbsp;of&nbsp;two&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN><SPAN Class="roman"><I>s:</I></SPAN><BR>
+S&nbsp;:=&nbsp;[<B>for</B>&nbsp;Item&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;5&nbsp;=&gt;&nbsp;Item,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Item&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;5&nbsp;=&gt;&nbsp;-Item];</span></div>
+<div class="paranum"><a name="p76">76/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;(assuming&nbsp;set&nbsp;semantics)&nbsp;to:</I></SPAN><BR>
+S&nbsp;:=&nbsp;Empty_Set;<BR>
+<B>for</B>&nbsp;Item&nbsp;<B>in</B>&nbsp;-5&nbsp;..&nbsp;5&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Item&nbsp;/=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Include&nbsp;(S,&nbsp;Item);<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+<B>end&nbsp;loop</B>;</span></div>
+<div class="paranum"><a name="p77">77/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Example&nbsp;aggregates&nbsp;using&nbsp;Map_Type.</I></SPAN><BR>
+M&nbsp;:&nbsp;Map_Type;</span></div>
+<div class="paranum"><a name="p78">78/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;simple&nbsp;named&nbsp;map&nbsp;aggregate:</I></SPAN><BR>
+M&nbsp;:=&nbsp;[12&nbsp;=&gt;&nbsp;&quot;house&quot;,&nbsp;14&nbsp;=&gt;&nbsp;&quot;beige&quot;];</span></div>
+<div class="paranum"><a name="p79">79/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+M&nbsp;:=&nbsp;Empty_Map;<BR>
+Add_To_Map&nbsp;(M,&nbsp;12,&nbsp;&quot;house&quot;);<BR>
+Add_To_Map&nbsp;(M,&nbsp;14,&nbsp;&quot;beige&quot;);</span></div>
+<div class="paranum"><a name="p80">80/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Define&nbsp;a&nbsp;table&nbsp;of&nbsp;pairs:</I></SPAN><BR>
+<B>type</B>&nbsp;Pair&nbsp;<B>is&nbsp;record</B><BR>
+&nbsp;&nbsp;&nbsp;Key&nbsp;:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;<B>access&nbsp;constant</B>&nbsp;String;<BR>
+<B>end&nbsp;record</B>;</span></div>
+<div class="paranum"><a name="p81">81/5</a></div>
+<div class="Examples"><span class="insert5">Table&nbsp;:&nbsp;<B>constant&nbsp;array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Pair&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;[(Key&nbsp;=&gt;&nbsp;33,&nbsp;Value&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;String'(&quot;a&nbsp;nice&nbsp;string&quot;)),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(Key&nbsp;=&gt;&nbsp;44,&nbsp;Value&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;String'(&quot;an&nbsp;even&nbsp;better&nbsp;string&quot;))];</span></div>
+<div class="paranum"><a name="p82">82/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;map&nbsp;aggregate&nbsp;using&nbsp;an&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN><BR>
+--&nbsp;&nbsp;<SPAN Class="roman"><I>and&nbsp;a&nbsp;key_</I></SPAN><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><SPAN Class="roman"><I>,&nbsp;built&nbsp;from&nbsp;from&nbsp;a&nbsp;table&nbsp;of&nbsp;key/value&nbsp;pairs:</I></SPAN><BR>
+M&nbsp;:=&nbsp;[<B>for</B>&nbsp;P&nbsp;<B>of</B>&nbsp;Table&nbsp;<B>use</B>&nbsp;P.Key&nbsp;=&gt;&nbsp;P.Value.<B>all</B>];</span></div>
+<div class="paranum"><a name="p83">83/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+M&nbsp;:=&nbsp;Empty_Map;<BR>
+<B>for</B>&nbsp;P&nbsp;<B>of</B>&nbsp;Table&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;Add_To_Map&nbsp;(M,&nbsp;P.Key,&nbsp;P.Value.<B>all</B>);<BR>
+<B>end&nbsp;loop</B>;</span></div>
+<div class="paranum"><a name="p84">84/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Create&nbsp;an&nbsp;image&nbsp;table&nbsp;for&nbsp;an&nbsp;array&nbsp;of&nbsp;integers:</I></SPAN><BR>
+Keys&nbsp;:&nbsp;<B>constant&nbsp;array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Integer&nbsp;:=&nbsp;[2,&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;11];</span></div>
+<div class="paranum"><a name="p85">85/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;map&nbsp;aggregate&nbsp;where&nbsp;the&nbsp;values&nbsp;produced&nbsp;by&nbsp;the</I></SPAN><BR>
+--&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN><SPAN Class="roman"><I>&nbsp;are&nbsp;of&nbsp;the&nbsp;same&nbsp;type&nbsp;as&nbsp;the&nbsp;key</I></SPAN><BR>
+--&nbsp;&nbsp;<SPAN Class="roman"><I>(eliminating&nbsp;the&nbsp;need&nbsp;for&nbsp;a&nbsp;separate&nbsp;key_</I></SPAN><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><SPAN Class="roman"><I>):</I></SPAN><BR>
+M&nbsp;:=&nbsp;[<B>for</B>&nbsp;Key&nbsp;<B>of</B>&nbsp;Keys&nbsp;=&gt;&nbsp;Integer'Image&nbsp;(Key)];</span></div>
+<div class="paranum"><a name="p86">86/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+M&nbsp;:=&nbsp;Empty_Map;<BR>
+<B>for</B>&nbsp;Key&nbsp;<B>of</B>&nbsp;Keys&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;Add_To_Map&nbsp;(M,&nbsp;Key,&nbsp;Integer'Image&nbsp;(Key));<BR>
+<B>end&nbsp;loop</B>;</span></div>
+<div class="paranum"><a name="p87">87/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Example&nbsp;aggregates&nbsp;using&nbsp;Vector_Type.</I></SPAN><BR>
+V&nbsp;:&nbsp;Vector_Type;</span></div>
+<div class="paranum"><a name="p88">88/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;positional&nbsp;vector&nbsp;aggregate:</I></SPAN><BR>
+V&nbsp;:=&nbsp;[&quot;abc&quot;,&nbsp;&quot;def&quot;];</span></div>
+<div class="paranum"><a name="p89">89/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+V&nbsp;:=&nbsp;Empty_Vector&nbsp;(2);<BR>
+Append_One&nbsp;(V,&nbsp;&quot;abc&quot;);<BR>
+Append_One&nbsp;(V,&nbsp;&quot;def&quot;);</span></div>
+<div class="paranum"><a name="p90">90/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>An&nbsp;indexed&nbsp;vector&nbsp;aggregate:</I></SPAN><BR>
+V&nbsp;:=&nbsp;[1&nbsp;=&gt;&nbsp;&quot;this&quot;,&nbsp;2&nbsp;=&gt;&nbsp;&quot;is&quot;,&nbsp;3&nbsp;=&gt;&nbsp;&quot;a&quot;,&nbsp;4&nbsp;=&gt;&nbsp;&quot;test&quot;];</span></div>
+<div class="paranum"><a name="p91">91/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+V&nbsp;:=&nbsp;New_Vector&nbsp;(1,&nbsp;4);<BR>
+Assign_Element&nbsp;(V,&nbsp;1,&nbsp;&quot;this&quot;);<BR>
+Assign_Element&nbsp;(V,&nbsp;2,&nbsp;&quot;is&quot;);<BR>
+Assign_Element&nbsp;(V,&nbsp;3,&nbsp;&quot;a&quot;);<BR>
+Assign_Element&nbsp;(V,&nbsp;4,&nbsp;&quot;test&quot;);</span></div>
+<div class="paranum"><a name="p92">92/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>A&nbsp;vector&nbsp;made&nbsp;from&nbsp;the&nbsp;elements&nbsp;of&nbsp;a&nbsp;map:</I></SPAN><BR>
+V&nbsp;:=&nbsp;[<B>for</B>&nbsp;Elem&nbsp;<B>of</B>&nbsp;M&nbsp;=&gt;&nbsp;Elem];</span></div>
+<div class="paranum"><a name="p93">93/5</a></div>
+<div class="Examples"><span class="insert5">--&nbsp;&nbsp;<SPAN Class="roman"><I>Is&nbsp;equivalent&nbsp;to:</I></SPAN><BR>
+V&nbsp;:=&nbsp;Empty_Vector&nbsp;(&lt;estimate&nbsp;of&nbsp;size&nbsp;of&nbsp;M&gt;);<BR>
+<B>for</B>&nbsp;Elem&nbsp;<B>of</B>&nbsp;M&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;Add_Positional&nbsp;(V,&nbsp;Elem);<BR>
+<B>end&nbsp;loop</B>;</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

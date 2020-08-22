@@ -21,6 +21,8 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -35,9 +37,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,21 +53,21 @@ of the execution of constructs and entities. A <I>master</I> is the execution
 of a construct that includes finalization of local objects after it is 
 complete (and after waiting for any local tasks &mdash; see <A HREF="AA-9-3.html">9.3</A>), 
 but before leaving. Other constructs and entities are left immediately 
-upon completion. <A NAME="I4387"></A><A NAME="I4388"></A>]</div>
+upon completion. <A NAME="I4599"></A><A NAME="I4600"></A>]</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I4389"></A><A NAME="I4390"></A>The execution of a construct 
+<A NAME="I4601"></A><A NAME="I4602"></A>The execution of a construct 
 or entity is <I>complete</I> when the end of that execution has been 
 reached, or when a transfer of control (see <A HREF="AA-5-1.html">5.1</A>) 
-causes it to be abandoned. <A NAME="I4391"></A><A NAME="I4392"></A><A NAME="I4393"></A><A NAME="I4394"></A>Completion 
+causes it to be abandoned. <A NAME="I4603"></A><A NAME="I4604"></A><A NAME="I4605"></A><A NAME="I4606"></A>Completion 
 due to reaching the end of execution, or due to the transfer of control 
-of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN>, 
-return statement, <SPAN Class="swiss"><A HREF="AA-5-8.html#S0179">goto_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;exit_</SPAN>, 
+of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN>, 
+return statement, <SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;exit_</SPAN>, 
 <SPAN Class="swiss">return_</SPAN>, <SPAN Class="swiss">goto_</SPAN></span>, 
-or <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
-or of the selection of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN> 
+or of the selection of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0275">terminate_alternative</A></SPAN> 
 is <I>normal completion</I>. Completion is <I>abnormal</I> otherwise 
 [&mdash; when control is transferred out of a construct due to abort 
 or the raising of an exception].&nbsp;</div>
@@ -76,70 +78,74 @@ in <A HREF="AA-3-11-1.html">3.11.1</A>.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
-<A NAME="I4395"></A><A NAME="I4396"></A>After execution of a construct 
+<A NAME="I4607"></A><A NAME="I4608"></A>After execution of a construct 
 or entity is complete, it is <I>left</I>, meaning that execution continues 
 with the next action, as defined for the execution that is taking place. 
-<A NAME="I4397"></A>Leaving an execution happens immediately after its 
+<A NAME="I4609"></A>Leaving an execution happens immediately after its 
 completion, except in the case of a <I>master</I>: the execution of a 
-<span class="insert2">body other than a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN>; 
-the execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>; 
-or the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>, 
+<span class="insert2">body other than a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN>; 
+the execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>; 
+or the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> that 
-is not part of an enclosing <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>, 
+is not part of an enclosing <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>, or 
-<SPAN Class="swiss"><A HREF="AA-5-1.html#S0154">simple_statement</A></SPAN> 
-other than a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">&nbsp;task_body</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0176">block_statement</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>, 
-an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
-or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN></span>. 
+<SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">simple_statement</A></SPAN> 
+other than a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">&nbsp;task_body</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0191">block_statement</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0260">entry_body</A></SPAN>, 
+or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN></span>. 
 A master is finalized after it is complete, and before it is left.</div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
-<span class="insert2"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">Expression</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>s 
+<span class="insert2"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">Expression</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>s 
 are masters so that objects created by subprogram calls (in <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s, 
-<SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 for anonymous access-to-object types, and so on) are finalized and have 
-their tasks awaited before the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
-or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>s 
-are left. Note that <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
-like the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN> 
-are masters, because they are not enclosed by a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0154">simple_statement</A></SPAN>. 
-Similarly, a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
-which is renamed is a master, as it is not in a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0154">simple_statement</A></SPAN>.</span><span class="delete2">&nbsp;Note 
-that although an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+their tasks awaited before the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
+or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>s 
+are left. Note that <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
+like the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0175">if_statement</A></SPAN> 
+are masters, because they are not enclosed by a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">simple_statement</A></SPAN>. 
+Similarly, a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
+which is renamed is a master, as it is not in a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">simple_statement</A></SPAN>.</span><span class="delete2">&nbsp;Note 
+that although an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN> 
 has no <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 it can call functions and evaluate <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s, 
 possibly causing anonymous controlled objects to be created, and we don't 
 want those objects to escape outside the rendezvous.</span></div>
 <div class="paranum"><a name="p3.b">3.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
-<span class="insert2">We have to include <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>s 
-in the contexts that do not cause masters to occur so that <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
-contained in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
-(that is not part of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0154">simple_statement</A></SPAN>) 
+<span class="insert2">We have to include <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s 
+in the contexts that do not cause masters to occur so that <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
+contained in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
+(that is not part of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">simple_statement</A></SPAN>) 
 do not individually become masters. We certainly do not want the parameter 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
-of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
 to be separate masters, as they would then be finalized before the function 
 is called.</span>&nbsp;</div>
 <div class="paranum"><a name="p3.c">3.c/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
-<span class="insert2">The fact that a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
+<span class="insert2">The fact that a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
 is a master does not change the accessibility of the return object denoted 
-by the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>; 
-that depends on the use of the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>. 
-The <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
+by the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>; 
+that depends on the use of the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>. 
+The <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
 is the master of any short-lived entities (such as <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 used as parameters of types with task or controlled parts).</span>&nbsp;</div>
+<div class="paranum"><a name="p3.c.1">3.c.1/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Glossary entry:&nbsp;</B>The 
+execution of a construct that includes waiting for tasks and finalization 
+of objects associated with the master, prior to leaving the construct.</span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I4398"></A>For the <I>finalization</I> of 
+<div class="Normal"><A NAME="I4610"></A>For the <I>finalization</I> of 
 a master, dependent tasks are first awaited, as explained in <A HREF="AA-9-3.html">9.3</A>. 
 Then each object whose accessibility level is the same as that of the 
 master is finalized if the object was successfully initialized and still 
@@ -151,7 +157,7 @@ in order, from innermost outward.&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>As explained in <A HREF="AA-3-10-2.html">3.10.2</A>, 
 the set of objects with the same accessibility level as that of the master 
 includes objects declared immediately within the master, objects declared 
-in nested packages, objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+in nested packages, objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 (if the ultimate ancestor access type is declared in one of those places) 
 and subcomponents of all of these things. If an object was already finalized 
 by Unchecked_Deallocation, then it is not finalized again when the master 
@@ -181,7 +187,7 @@ are being completed. Thus, for example, &ldquo;the subprogram call or
 task is complete&rdquo; really means &ldquo;<I>the execution of</I> the 
 subprogram call or task is complete.&rdquo;&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4399"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4611"></A>For 
 the <I>finalization</I> of an object:&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0099-1.TXT">AI05-0099-1</A></I>} 
@@ -212,7 +218,7 @@ performed;</div>
 If <span class="insert3">the full type of&nbsp;</span>the object is <span class="delete3">of 
 </span>a composite type, then after performing the above actions, if 
 any, every component of the object is finalized in an arbitrary order, 
-except as follows:<A NAME="I4400"></A> if the object has a component 
+except as follows:<A NAME="I4612"></A> if the object has a component 
 with an access discriminant constrained by a per-object expression, this 
 component is finalized before any components that do not have such discriminants; 
 for an object with several components with such a discriminant, they 
@@ -245,10 +251,10 @@ being initialized and are not finalized until the object being initialized
 is ultimately finalized, even if an anonymous object is created as part 
 of the operation.</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I4401"></A>Immediately before an instance 
+<div class="Normal"><A NAME="I4613"></A>Immediately before an instance 
 of Unchecked_Deallocation reclaims the storage of an object, the object 
 is finalized. [If an instance of Unchecked_Deallocation is never applied 
-to an object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
+to an object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
 the object will still exist when the corresponding master completes, 
 and it will be finalized then.]</div>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -258,23 +264,23 @@ and it will be finalized then.]</div>
 The <span class="delete3">order in which the&nbsp;</span>finalization of a 
 master performs finalization of objects <span class="delete3">is as follows: 
 Objects&nbsp;</span>created by declarations in the master <span class="delete3">are 
-finalized&nbsp;</span>in the reverse order of their creation.<span class="delete3">&nbsp;For objects that were created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+finalized&nbsp;</span>in the reverse order of their creation.<span class="delete3">&nbsp;For objects that were created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 for an access type whose ultimate ancestor is declared in the master, 
 this rule is applied as though each such object that still exists had 
-been created in an arbitrary order at the first freezing point (see <A HREF="AA-13-14.html">13.14</A>)<A NAME="I4402"></A> 
+been created in an arbitrary order at the first freezing point (see <A HREF="AA-13-14.html">13.14</A>)<A NAME="I4614"></A> 
 of the ultimate ancestor type</span><span class="insert2"><span class="delete3">; 
 the finalization of these objects is called the <I>finalization of the 
-collection</I><A NAME="I4403"></A><A NAME="I4404"></A></span></span><span class="delete3">.</span><span class="insert3"><span class="delete3">&nbsp;Objects created by allocators for an anonymous access type that are not 
+collection</I><A NAME="I4615"></A><A NAME="I4616"></A></span></span><span class="delete3">.</span><span class="insert3"><span class="delete3">&nbsp;Objects created by allocators for an anonymous access type that are not 
 coextensions of some other object, are finalized in an arbitrary order 
-during the finalization of their associated master.<A NAME="I4405"></A></span></span><span class="delete3"></span><span class="insert2">&nbsp;After the finalization of a master is complete, the objects finalized 
+during the finalization of their associated master.<A NAME="I4617"></A></span></span><span class="delete3"></span><span class="insert2">&nbsp;After the finalization of a master is complete, the objects finalized 
 as part of its finalization cease to <I>exist</I>, as do any types and 
-subtypes defined and created within the master.<A NAME="I4406"></A> <A NAME="I4407"></A><A NAME="I4408"></A></span></div>
+subtypes defined and created within the master.<A NAME="I4618"></A> <A NAME="I4619"></A><A NAME="I4620"></A></span></div>
 <div class="paranum"><a name="p11.a">11.a/3</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
-<span class="delete3">Note that we talk about the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+<span class="delete3">Note that we talk about the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 here. There may be access values of a (general) access type pointing 
-at objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+at objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 for some other type; these are not finalized at this point.</span></div>
 <div class="paranum"><a name="p11.b">11.b/3</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
@@ -291,7 +297,7 @@ object itself.</span>&nbsp;</div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="delete3">Finalization of allocated objects is done according 
-to the (ultimate ancestor) <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+to the (ultimate ancestor) <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 type, not according to the storage pool in which they are allocated. 
 Pool finalization might reclaim storage (see <A HREF="AA-13-11.html">13.11</A>, 
 &ldquo;<A HREF="AA-13-11.html">Storage Management</A>&rdquo;), but has 
@@ -323,13 +329,13 @@ finalized state.&nbsp;</div>
 <div class="paranum"><a name="p11.1">11.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3">Each nonderived access type <I>T</I> has an associated 
-<I>collection</I>,<A NAME="I4409"></A> which is the set of objects created 
-by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+<I>collection</I>,<A NAME="I4621"></A> which is the set of objects created 
+by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 of <I>T</I>, or of types derived from <I>T</I>. Unchecked_Deallocation 
 removes an object from its collection. Finalization of a collection consists 
 of finalization of each object in the collection, in an arbitrary order. 
 The collection of an access type is an object implicitly declared at 
-the following place:<A NAME="I4410"></A></span></div>
+the following place:<A NAME="I4622"></A></span></div>
 <div class="paranum"><a name="p11.h">11.h/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3">The place of the implicit declaration determines 
@@ -338,7 +344,7 @@ at the same place, we do not define the order of their implicit declarations.</s
 <div class="paranum"><a name="p11.i">11.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3">Finalization of allocated objects is done according 
-to the (ultimate ancestor) <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+to the (ultimate ancestor) <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 type, not according to the storage pool in which they are allocated. 
 Pool finalization might reclaim storage (see <A HREF="AA-13-11.html">13.11</A>, 
 &ldquo;<A HREF="AA-13-11.html">Storage Management</A>&rdquo;), but has 
@@ -351,9 +357,9 @@ gotten rid of a given pool element, that pool element will not be finalized
 when the master is left.</span>&nbsp;</div>
 <div class="paranum"><a name="p11.k">11.k/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
-<span class="insert3">Note that we talk about the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+<span class="insert3">Note that we talk about the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 here. There may be access values of a (general) access type pointing 
-at objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+at objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 for some other type; these are not (necessarily) finalized at this point.</span> 
 </div>
 <div class="paranum"><a name="p11.2">11.2/3</a></div>
@@ -372,7 +378,7 @@ them. Nor do we want to finalize pool elements after finalizing the pool
 object itself.</span>&nbsp;</div>
 <div class="paranum"><a name="p11.3">11.3/3</a></div>
 <div class="Bulleted"><span class="insert3">For the type of an access 
-parameter, the call that contains the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>.</span></div>
+parameter, the call that contains the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>.</span></div>
 <div class="paranum"><a name="p11.4">11.4/3</a></div>
 <div class="Bulleted"><span class="insert3">For the type of an access 
 result, within the master of the call (see <A HREF="AA-3-10-2.html">3.10.2</A>).</span> 
@@ -391,7 +397,7 @@ type, the first freezing point of the innermost enclosing declaration.</span>
 </div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
-<A NAME="I4411"></A>The target of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
+<A NAME="I4623"></A>The target of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
 statement</span> is finalized before copying in the new value, as explained 
 in <A HREF="AA-7-6.html">7.6</A>.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
@@ -415,9 +421,9 @@ is the innermost master enclosing the evaluation of the <SPAN Class="swiss"><A H
 or function call, which may be the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 or function call itself</span><span class="insert2">.</span><span class="delete2"></span><span class="insert1"><span class="delete2">&nbsp;If 
 the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-in an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN>, 
+in an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0239">object_renaming_declaration</A></SPAN>, 
 or the actual parameter for a generic formal <B>in out</B> parameter 
-in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
+in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
 denotes any part of an anonymous object created by a function call, the 
 anonymous object is not finalized until after it is no longer accessible 
 via any name. Otherwise, an</span></span><span class="delete2"></span><span class="delete1">&nbsp;The</span><span class="delete2">&nbsp;anonymous object</span><span class="delete1">s</span><span class="delete2">&nbsp;created by&nbsp;</span><span class="insert1"><span class="delete2">a&nbsp;</span></span><span class="delete2">function 
@@ -426,12 +432,12 @@ and</span><span class="delete2">&nbsp;by&nbsp;</span><span class="insert1"><span
 </span></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN></span><span class="insert1"><span class="delete2">&nbsp;is</span></span><span class="delete2"></span><span class="delete1">&nbsp;s 
 are</span><span class="delete2">&nbsp;finalized no later than the end of the 
 innermost enclosing <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>; 
-if that is a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0155">compound_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>; 
+if that is a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0169">compound_statement</A></SPAN>, 
 </span><span class="insert1"><span class="delete2">the object is</span></span><span class="delete2"></span><span class="delete1">&nbsp;they 
 are</span><span class="delete2">&nbsp;finalized before starting the execution 
-of any <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN> 
-within the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0155">compound_statement</A></SPAN>.</span> 
+of any <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN> 
+within the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0169">compound_statement</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
@@ -459,7 +465,7 @@ operation, resulting in erroneous access to shared variables.</span>
 <div class="paranum"><a name="p13.d">13.d/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
 <span class="insert2">This effectively imports all of the special rules 
-for the accessibility level of renames, <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s, 
+for the accessibility level of renames, <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s, 
 and so on, and applies them to determine where objects created in them 
 are finalized. For instance, the master of a rename of a subprogram is 
 that of the renamed subprogram.</span><span class="delete2">&nbsp;It might 
@@ -502,7 +508,7 @@ could not be used after the procedure returns (other than via Unchecked_Access).
 <span class="insert3">Note that the lifetime of the master given to anonymous 
 objects in explicitly aliased parameters of functions is not necessarily 
 as long as the lifetime of the master of the object being initialized 
-(if the function call is used to initialize an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
+(if the function call is used to initialize an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
 for instance). In that case, the accessibility check on explicitly aliased 
 parameters will necessarily fail if any such anonymous objects exist. 
 This is necessary to avoid requiring the objects to live as long as the 
@@ -514,11 +520,11 @@ access type or having the implementation complexity of an implicit coextension.<
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0066-1.TXT">AI05-0066-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert2">In the case of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<span class="insert2">In the case of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 that is a master, finalization of any (anonymous) objects occurs&nbsp;</span><span class="insert3">after 
 completing</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;as 
 the final part of</span></span><span class="insert2">&nbsp;evaluation of the 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></span><span class="insert3">&nbsp;and all use of the objects, prior to starting the execution of any subsequent 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></span><span class="insert3">&nbsp;and all use of the objects, prior to starting the execution of any subsequent 
 construct</span><span class="insert2">.</span><span class="delete2"></span><span class="insert1"><span class="delete2">&nbsp;If 
 a transfer of control or raising of an exception occurs prior to performing 
 a finalization of an anonymous object, the anonymous object is finalized 
@@ -529,7 +535,7 @@ enclosing master.</span></span><span class="delete2"></span></div>
 <div class="paranum"><a name="p14">14/1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0023">8652/0023</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00169.TXT">AI95-00169-01</A></I>} 
-<A NAME="I4412"></A>It is a bounded error for a call on Finalize or Adjust 
+<A NAME="I4624"></A>It is a bounded error for a call on Finalize or Adjust 
 <span class="insert1">that occurs as part of object finalization or assignment 
 </span>to propagate an exception. The possible consequences depend on 
 what action invoked the Finalize or Adjust operation:&nbsp;</div>
@@ -547,20 +553,20 @@ call to Finalize or Adjust to propagate an exception. We do not want
 implementations to have to treat explicit calls to these routines specially.</span> 
 </div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I4413"></A>For a Finalize invoked as part 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>, 
+<div class="Bulleted"><A NAME="I4625"></A>For a Finalize invoked as part 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>, 
 Program_Error is raised at that point.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Bulleted">{<I><A HREF="defect1.html#8652/0024">8652/0024</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00193.TXT">AI95-00193-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
 <span class="insert1">For an Adjust invoked as part of&nbsp;</span><span class="insert2">assignment 
-operations other than those invoked as part of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN></span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;the 
+operations other than those invoked as part of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;the 
 initialization of a controlled object</span></span><span class="insert1">, 
 other adjustments due to be performed might or might not be performed, 
 and then Program_Error is raised. During its propagation, finalization 
 might or might not be applied to objects whose Adjust failed.</span> 
-<A NAME="I4414"></A>For an Adjust invoked as part of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
+<A NAME="I4626"></A>For an Adjust invoked as part of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
 </span><span class="insert1"><span class="delete2">statement</span></span><span class="delete2"></span><span class="delete1">&nbsp;operation</span><span class="delete2"></span>, 
 any other adjustments due to be performed are performed, and then Program_Error 
 is raised.&nbsp;</div>
@@ -576,11 +582,11 @@ initialized as part of an enclosing composite assignment operation for
 which some adjustments are performed. However, there is no harm in an 
 implementation making additional Adjust calls (as long as any additional 
 components that are adjusted are also finalized), so we allow the implementation 
-flexibility here. On the other hand, for an&nbsp;</span><span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN></span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;assignment 
+flexibility here. On the other hand, for an&nbsp;</span><span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;assignment 
 statement</span></span><span class="insert1">, it is important that all 
 adjustments be performed, even if one fails, because all controlled subcomponents 
 are going to be finalized.</span><span class="insert2">&nbsp;Other kinds of 
-assignment are more like initialization than <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s, 
+assignment are more like initialization than <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>s, 
 so we include them as well in the permission.</span><span class="insert1"></span> 
 </div>
 <div class="paranum"><a name="p16.a.1">16.a.1/1</a></div>
@@ -593,7 +599,7 @@ be finalized. The permission above only applies to objects whose Adjust
 failed. Objects for which Adjust was never even invoked must not be finalized.</span> 
 </div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Bulleted"><A NAME="I4415"></A>For a Finalize invoked as part 
+<div class="Bulleted"><A NAME="I4627"></A>For a Finalize invoked as part 
 of a call on an instance of Unchecked_Deallocation, any other finalizations 
 due to be performed are performed, and then Program_Error is raised. 
 </div>
@@ -602,14 +608,14 @@ due to be performed are performed, and then Program_Error is raised.
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00179.TXT">AI95-00179-01</A></I>} 
 <span class="insert1">The standard does not specify if storage is recovered 
 in this case. If storage is not recovered (and the object continues to 
-exist), Finalize may be called on the object again (when the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>'s 
+exist), Finalize may be called on the object again (when the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>'s 
 master is finalized).</span>&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/3</a></div>
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="defect1.html#8652/0023">8652/0023</A></I>} 
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00169.TXT">AI95-00169-01</A></I>} 
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0064-1.TXT">AI05-0064-1</A></I>} 
-<span class="delete3"></span><span class="insert1"><span class="delete3"><A NAME="I4416"></A>For 
+<span class="delete3"></span><span class="insert1"><span class="delete3"><A NAME="I4628"></A>For 
 a Finalize invoked as part of the finalization of the anonymous object 
 created by a function call or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
 any other finalizations due to be performed are performed, and then Program_Error 
@@ -617,7 +623,7 @@ is raised.</span></span><span class="delete3"></span></div>
 <div class="paranum"><a name="p17.2">17.2/1</a></div>
 <div class="Bulleted">{<I><A HREF="defect1.html#8652/0023">8652/0023</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00169.TXT">AI95-00169-01</A></I>} 
-<span class="insert1"><A NAME="I4417"></A>For a Finalize invoked due 
+<span class="insert1"><A NAME="I4629"></A>For a Finalize invoked due 
 to reaching the end of the execution of a master, any other finalizations 
 associated with the master are performed, and Program_Error is raised 
 immediately after leaving the master.</span></div>
@@ -625,16 +631,16 @@ immediately after leaving the master.</span></div>
 <div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0064-1.TXT">AI05-0064-1</A></I>} 
 <span class="insert3">This rule covers both ordinary objects created 
 by a declaration, and anonymous objects created as part of evaluating 
-an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>. 
+an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>. 
 All contexts that create objects that need finalization are defined to 
 be masters.</span>&nbsp;</div>
 <div class="paranum"><a name="p18">18/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I4418"></A>For a Finalize invoked by the transfer of control 
-of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN>, 
-return statement, <SPAN Class="swiss"><A HREF="AA-5-8.html#S0179">goto_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;exit_</SPAN>, 
+<A NAME="I4630"></A>For a Finalize invoked by the transfer of control 
+of an <span class="insert2"><SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN>, 
+return statement, <SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;exit_</SPAN>, 
 <SPAN Class="swiss">return_</SPAN>, <SPAN Class="swiss">goto_</SPAN></span>, 
-or <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN>, 
 Program_Error is raised no earlier than after the finalization of the 
 master being finalized when the exception occurred, and no later than 
 the point where normal execution would have continued. Any other finalizations 
@@ -642,11 +648,11 @@ due to be performed up to that point are performed before raising Program_Error.
 </div>
 <div class="paranum"><a name="p18.a">18.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For example, upon leaving 
-a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0176">block_statement</A></SPAN> 
-due to a <SPAN Class="swiss"><A HREF="AA-5-8.html#S0179">goto_statement</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0191">block_statement</A></SPAN> 
+due to a <SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN>, 
 the Program_Error would be raised at the point of the target statement 
 denoted by the label, or else in some more dynamically nested place, 
-but not so nested as to allow an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN> 
+but not so nested as to allow an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN> 
 that has visibility upon the finalized object to handle it. For example, 
 </div>
 <div class="paranum"><a name="p18.b">18.b</a></div>
@@ -671,7 +677,7 @@ that has visibility upon the finalized object to handle it. For example,
 &nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Program_Error&nbsp;=&gt;&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;Handler&nbsp;number&nbsp;3.</I></SPAN><BR>
 <B>end</B>&nbsp;Main;</div>
 <div class="paranum"><a name="p18.c">18.c</a></div>
-<div class="Annotations">The <SPAN Class="swiss"><A HREF="AA-5-8.html#S0179">goto_statement</A></SPAN> 
+<div class="Annotations">The <SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN> 
 will first cause Finalize(Y) to be called. Suppose that Finalize(Y) propagates 
 an exception. Program_Error will be raised after leaving Inner_Block_Statement, 
 but before leaving Main. Thus, handler number 1 cannot handle this Program_Error; 
@@ -686,23 +692,23 @@ performed for the same master are performed; Program_Error is raised
 immediately after leaving the master.&nbsp;</div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If, in the above example, 
-the <SPAN Class="swiss"><A HREF="AA-5-8.html#S0179">goto_statement</A></SPAN> 
-were replaced by a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN> 
+were replaced by a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN>, 
 then the Program_Error would be handled by handler number 2, and Finalize(Z) 
 would be done before executing the handler.&nbsp;</div>
 <div class="paranum"><a name="p19.b">19.b</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We considered treating this case 
-in the same way as the others, but that would render certain <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>s 
-useless. For example, suppose the only <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN> 
+in the same way as the others, but that would render certain <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN>s 
+useless. For example, suppose the only <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN> 
 is one for <B>others</B> in the main subprogram. If some deeply nested 
 call raises an exception, causing some Finalize operation to be called, 
 which then raises an exception, then normal execution &ldquo;would have 
-continued&rdquo; at the beginning of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>. 
+continued&rdquo; at the beginning of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN>. 
 Raising Program_Error at that point would cause that handler's code to 
-be skipped. One would need two nested <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>s 
+be skipped. One would need two nested <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN>s 
 to be sure of catching such cases!</div>
 <div class="paranum"><a name="p19.c">19.c</a></div>
-<div class="Annotations">On the other hand, the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN> 
+<div class="Annotations">On the other hand, the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN> 
 for a given master should not be allowed to handle exceptions raised 
 during finalization of that master.&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
@@ -714,7 +720,7 @@ is ignored; any other finalizations due to be performed are performed.
 <div class="Annotations"><B>Ramification:&nbsp;</B>This case includes an asynchronous 
 transfer of control.&nbsp;</div>
 <div class="paranum"><a name="p20.b">20.b</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I4419"></A>This 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I4631"></A>This 
 violates the general principle that it is always possible for a bounded 
 error to raise Program_Error (see <A HREF="AA-1-1-5.html">1.1.5</A>, 
 &ldquo;<A HREF="AA-1-1-5.html">Classification of Errors</A>&rdquo;). 
@@ -723,10 +729,10 @@ error to raise Program_Error (see <A HREF="AA-1-1-5.html">1.1.5</A>,
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p20.1">20.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0107-1.TXT">AI05-0107-1</A></I>} 
-<span class="insert3">If the execution of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+<span class="insert3">If the execution of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 propagates an exception, any parts of the allocated object that were 
 successfully initialized may be finalized as part of the finalization 
-of the innermost master enclosing the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>.</span></div>
+of the innermost master enclosing the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>.</span></div>
 <div class="paranum"><a name="p20.c">20.c/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This allows 
 deallocating the memory for the allocated object at the innermost master, 
@@ -738,32 +744,37 @@ level.</span>&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 <span class="insert3">The implementation may finalize objects created 
-by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 for an access type whose storage pool supports subpools (see <A HREF="AA-13-11-4.html">13.11.4</A>) 
 as if the objects were created (in an arbitrary order) at the point where 
 the storage pool was elaborated instead of at the first freezing point 
-of the access type.<A NAME="I4420"></A></span></div>
+of the access type.<A NAME="I4632"></A></span></div>
 <div class="paranum"><a name="p20.d">20.d/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
 allows the finalization of such objects to occur later than they otherwise 
 would, but still as part of the finalization of the same master. Accessibility 
 rules in <A HREF="AA-13-11-4.html">13.11.4</A> ensure that it is the 
 same master (usually that of the environment task).</span>&nbsp;</div>
-<div class="paranum"><a name="p20.e">20.e/3</a></div>
+<div class="paranum"><a name="p20.e">20.e/5</a></div>
 <div class="Annotations"><span class="insert3"><B>Implementation Note: 
-</B>This permission is intended to allow the allocated objects to &quot;belong&quot; 
-to the subpool objects and to allow those objects to be finalized at 
-the time that the storage pool is finalized (if they are not finalized 
-earlier). This is expected to ease implementation, as the objects will 
-only need to belong to the subpool and not also to the collection.</span> 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<span class="insert3">This permission is intended to allow the allocated 
+objects to &quot;belong&quot; to the subpool objects and to allow those 
+objects to be finalized at the time that the storage pool is finalized 
+(if they are not finalized earlier). This is expected to ease implementation, 
+as the&nbsp;</span><span class="insert5">remaining yet-to-be deallocated&nbsp;</span><span class="insert3">objects 
+will only need to&nbsp;</span><span class="insert5">be accessible at run time 
+from the subpool header and not also from the overall access type collection 
+header. That is, they only need to belong to a single list, rather two</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;belong 
+to the subpool and not also to the collection</span></span><span class="insert3">.</span> 
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Notes">21&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<div class="Notes">22&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 The rules of <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
 10 imply that immediately prior to partition termination, Finalize operations 
 are applied to library-level controlled objects (including those created 
-by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 of library-level access types, except those already finalized). This 
 occurs after waiting for library-level tasks to terminate.&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a</a></div>
@@ -774,16 +785,16 @@ This would be useful for types whose finalization actions consist of
 simply reclaiming global heap storage, when this is already provided 
 automatically by the environment upon program termination.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Notes">22&nbsp;&nbsp;A constant is only constant between 
+<div class="Notes">23&nbsp;&nbsp;A constant is only constant between 
 its initialization and finalization. Both initialization and finalization 
 are allowed to change the value of a constant.</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Notes">23&nbsp;&nbsp;Abort is deferred during certain operations 
+<div class="Notes">24&nbsp;&nbsp;Abort is deferred during certain operations 
 related to controlled types, as explained in <A HREF="AA-9-8.html">9.8</A>. 
 Those rules prevent an abort from causing a controlled object to be left 
 in an ill-defined state.</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Notes">24&nbsp;&nbsp;The Finalize procedure is called upon 
+<div class="Notes">25&nbsp;&nbsp;The Finalize procedure is called upon 
 finalization of a controlled object, even if Finalize was called earlier, 
 either explicitly or as part of an assignment; hence, if a controlled 
 type is visibly controlled (implying that its Finalize primitive is directly 
@@ -798,8 +809,8 @@ same object should be equivalent to applying it once.&nbsp;</div>
 <div class="Annotations"><B>Reason:&nbsp;</B>A user-written Finalize procedure 
 should be idempotent since it can be called explicitly by a client (at 
 least if the type is &quot;visibly&quot; controlled). Also, Finalize 
-is used implicitly as part of the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
-if the type is nonlimited, and an abort is permitted to disrupt an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
+is used implicitly as part of the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
+if the type is nonlimited, and an abort is permitted to disrupt an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
 between finalizing the left-hand side and assigning the new value to 
 it (an abort is not permitted to disrupt an assignment operation between 
 copying in the new value and adjusting it).&nbsp;</div>
@@ -816,11 +827,11 @@ that is built-in-place)</span>; Initialize is not applied to the <SPAN Class="sw
 as a whole, nor is the value of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 <span class="insert2">or object&nbsp;</span>adjusted.</div>
 <div class="paranum"><a name="p24.d">24.d</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em"><A NAME="I4421"></A>All 
+<div class="Annotations" style="margin-bottom: 0.4em"><A NAME="I4633"></A>All 
 of the following use the assignment operation, and thus perform value 
 adjustment:&nbsp;</div>
 <div class="paranum"><a name="p24.e">24.e</a></div>
-<div class="SmallBulleted">the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
+<div class="SmallBulleted">the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
 (see <A HREF="AA-5-2.html">5.2</A>);</div>
 <div class="paranum"><a name="p24.f">24.f</a></div>
 <div class="SmallBulleted">explicit initialization of a stand-alone object 
@@ -907,7 +918,7 @@ to as the &ldquo;PC-map&rdquo; approach essentially implies inserting
 exception handlers at various places, and finalizing objects based on 
 where the exception was raised.</div>
 <div class="paranum"><a name="p24.s">24.s</a></div>
-<div class="Annotations"><A NAME="I4422"></A><A NAME="I4423"></A>The 
+<div class="Annotations"><A NAME="I4634"></A><A NAME="I4635"></A>The 
 PC-map approach is for the compiler/linker to create a map of code addresses; 
 when an exception is raised, or abort occurs, the map can be consulted 
 to see where the task was executing, and what finalization needs to be 
@@ -938,7 +949,7 @@ the rules here refer to the task-waiting rules of <span class="insert3">Clause</
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p24.v.1">24.v.1/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0066-1.TXT">AI05-0066-1</A></I>} 
-<span class="insert3"><A NAME="I4424"></A><B>Ada 2012 Correction:</B> 
+<span class="insert3"><A NAME="I4636"></A><B>Ada 2012 Correction:</B> 
 Changed the definition of the master of an anonymous object used to directly 
 initialize an object, so it can be finalized immediately rather than 
 having to hang around as long as the object. In this case, the Ada 2005 
@@ -966,12 +977,12 @@ omitted.</span></div>
 <span class="insert2"><B>Corrigendum:</B> Stated that if Adjust raises 
 an exception during initialization, nothing further is required. This 
 is corrected in Ada 2005 to include all kinds of assignment other than 
-<SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s.</span></div>
+<SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>s.</span></div>
 <div class="paranum"><a name="p24.z">24.z/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
-<span class="insert2">Revised the definition of master to include <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>s, 
+<span class="insert2">Revised the definition of master to include <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>s, 
 in order to cleanly define what happens for tasks and controlled objects 
 created as part of a subprogram call. Having done that, all of the special 
 wording to cover those cases is eliminated (at least until the Ada comments 
@@ -991,7 +1002,7 @@ the concept did not have a name, it was overlooked.)</span>&nbsp;</div>
 <div class="paranum"><a name="p24.cc">24.cc/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
-<span class="insert3"><A NAME="I4425"></A><B>Correction:</B> Better defined 
+<span class="insert3"><A NAME="I4637"></A><B>Correction:</B> Better defined 
 when objects allocated from anonymous access types are finalized. This 
 could be inconsistent if objects are finalized in a different order than 
 in an Ada 2005 implementation and that order caused different program 
@@ -1012,7 +1023,7 @@ objects of&nbsp;</span><span class="insert4">class-wide</span><span class="inser
 <div class="paranum"><a name="p24.ff">24.ff/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0107-1.TXT">AI05-0107-1</A></I>} 
 <span class="insert3"><B>Correction:</B> Allowed premature finalization 
-of parts of failed <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s. 
+of parts of failed <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s. 
 This could be an inconsistency, but the previous behavior is still allowed 
 and there is no requirement that implementations take advantage of the 
 permission.</span></div>
@@ -1029,7 +1040,7 @@ of functions. The model for these parameters is explained in detail in
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

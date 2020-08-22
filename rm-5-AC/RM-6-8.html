@@ -31,9 +31,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -42,45 +42,45 @@
 <HR>
 <H1>6.8 <span class="insert3">Expression Functions</span><span class="delete3"></span></H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><span class="insert3">An <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+<div class="Normal"><span class="insert3">An <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 provides a shorthand to declare a function whose body consists of a single 
 return statement.</span>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/4</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">expression_function_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3856"></A><A NAME="S0206"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;[<A NAME="I3857"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3858"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0183">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3859"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3860"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</span><span class="insert4"><BR>
-&nbsp;|&nbsp;[<A NAME="I3861"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3862"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0183">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3863"></A><SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3864"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</span><span class="insert3"></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">expression_function_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4064"></A><A NAME="S0228"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I4065"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4066"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I4067"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4068"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</span><span class="insert4"><BR>
+&nbsp;|&nbsp;[<A NAME="I4069"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4070"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4071"></A><SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4072"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</span><span class="insert3"></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/4</a></div>
-<div class="Normal"><span class="insert3">The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal"><span class="insert3">The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 </span><span class="insert4">or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
-</span><span class="insert3">of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-is the result type (see <A HREF="RM-6-5.html">6.5</A>) of the function.<A NAME="I3865"></A></span> 
+</span><span class="insert3">of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+is the result type (see <A HREF="RM-6-5.html">6.5</A>) of the function.<A NAME="I4073"></A></span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3.1">3.1/5</a></div>
-<div class="Normal">&nbsp;<span class="insert5">An <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-declares an <I>expression function</I>.<A NAME="I3866"></A><A NAME="I3867"></A> 
-The <I>return expression</I><A NAME="I3868"></A> of an expression function 
-is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">&nbsp;<span class="insert5">An <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+declares an <I>expression function</I>.<A NAME="I4074"></A><A NAME="I4075"></A> 
+The <I>return expression</I><A NAME="I4076"></A> of an expression function 
+is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>. 
-A completion is not allowed for an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>; 
-however, an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN>. 
+A completion is not allowed for an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN>; 
+however, an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 can complete a previous declaration.</span></div>
 <div class="paranum"><a name="p3.2">3.2/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">A 
 <I>potentially static expression</I> is defined in the same way as a 
-static expression except that<A NAME="I3869"></A></span></div>
+static expression except that<A NAME="I4077"></A></span></div>
 <div class="paranum"><a name="p3.3">3.3/5</a></div>
 <div class="Bulleted"><span class="insert5">a name denoting a formal 
 parameter of an expression function is a potentially static expression; 
@@ -99,8 +99,8 @@ an expression function:</span></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert5">Static</span></div><div class="WideHanging-Body">
 <span class="insert5">The type of aspect Static is Boolean. When aspect 
 Static is True for an expression function, the function is a <I>static 
-expression function</I>. If directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
-shall be a static<A NAME="I3870"></A><A NAME="I3871"></A> expression.<A NAME="I3872"></A><A NAME="I3873"></A></span></div>
+expression function</I>. If directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
+shall be a static<A NAME="I4078"></A><A NAME="I4079"></A> expression.<A NAME="I4080"></A><A NAME="I4081"></A></span></div>
 <div class="paranum"><a name="p3.7">3.7/5</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert5"></span></div><div class="WideHanging-Body">
 <span class="insert5">The Static value for an inherited function is True 
@@ -113,28 +113,28 @@ is a static function; see <A HREF="RM-4-9.html">4.9</A>.</span>&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><span class="insert3">If an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0180">subprogram_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>. 
-The profile of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-that completes a declaration shall conform fully to that of the declaration.<A NAME="I3874"></A></span></div>
+<div class="Normal"><span class="insert3">If an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>. 
+The profile of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+that completes a declaration shall conform fully to that of the declaration.<A NAME="I4082"></A></span></div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal"><span class="insert3">If the result subtype has one 
 or more unconstrained access discriminants, the accessibility level of 
 the anonymous access type of each access discriminant, as determined 
-by the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+by the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 </span><span class="insert4">or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
-</span><span class="insert3">of the&nbsp;</span><span class="insert4"><SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;expression 
+</span><span class="insert3">of the&nbsp;</span><span class="insert4"><SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;expression 
 function</span></span><span class="insert3">, shall not be statically 
-deeper than that of the master that elaborated the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>.</span></div>
+deeper than that of the master that elaborated the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN>.</span></div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">Aspect 
 Static shall be specified to have the value True only if the associated 
-<SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>:</span></div>
+<SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN>:</span></div>
 <div class="paranum"><a name="p5.2">5.2/5</a></div>
 <div class="Bulleted"><span class="insert5">is not a completion;</span></div>
 <div class="paranum"><a name="p5.3">5.3/5</a></div>
-<div class="Bulleted"><span class="insert5">has an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted"><span class="insert5">has an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 that is a potentially static expression;</span></div>
 <div class="paranum"><a name="p5.4">5.4/5</a></div>
 <div class="Bulleted"><span class="insert5">contains no calls to itself;</span></div>
@@ -148,23 +148,25 @@ is a static subtype;</span></div>
 <div class="Bulleted"><span class="insert5">has no applicable precondition 
 or postcondition expression; and</span></div>
 <div class="paranum"><a name="p5.8">5.8/5</a></div>
-<div class="Bulleted"><span class="insert5">is not type-invariant preserving 
-for any type (see <A HREF="RM-7-3-2.html">7.3.2</A>).</span>&nbsp;</div>
+<div class="Bulleted"><span class="insert5">for result type <I>R</I>, 
+if the function is a boundary entity for type <I>R</I> (see <A HREF="RM-7-3-2.html">7.3.2</A>), 
+no type invariant applies to type <I>R</I>; if <I>R</I> has a component 
+type <I>C</I>, a similar rule applies to <I>C</I>.</span>&nbsp;</div>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
 6 was deleted.</I></SPAN></span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal"><span class="insert3"></span><span class="insert3"><span class="delete5">An 
-<SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-declares an <I>expression function</I>.<A NAME="I3875"></A><A NAME="I3876"></A> 
+<SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+declares an <I>expression function</I>.<A NAME="I4083"></A><A NAME="I4084"></A> 
 </span></span><span class="insert4"><span class="delete5">The <I>return 
-expression</I><A NAME="I3877"></A> of an expression function is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+expression</I><A NAME="I4085"></A> of an expression function is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>. 
+of the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN>. 
 </span></span><span class="insert3"><span class="delete5">A completion 
-is not allowed for an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>; 
-however, an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+is not allowed for an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN>; 
+however, an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 can complete a previous declaration.</span></span><span class="insert3"></span> 
 </div>
 
@@ -172,13 +174,13 @@ can complete a previous declaration.</span></span><span class="insert3"></span>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Normal"><span class="insert3">&nbsp;The execution of an expression 
 function is invoked by a subprogram call. For the execution of a subprogram 
-call on an expression function, the execution of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN> 
-executes an implicit function body containing only a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0200">simple_return_statement</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+call on an expression function, the execution of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
+executes an implicit function body containing only a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0222">simple_return_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is&nbsp;</span><span class="insert4">the return expression</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;that</span></span><span class="insert3">&nbsp;of the expression function.</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I3878"></A>The elaboration 
-of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+<div class="Normal"><span class="insert3"><A NAME="I4086"></A>The elaboration 
+of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 has no other effect than to establish that the expression function can 
 be called without failing the Elaboration_Check.</span>&nbsp;</div>
 
@@ -189,7 +191,7 @@ be called without failing the Elaboration_Check.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

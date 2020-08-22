@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-H-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -49,11 +49,11 @@ form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>
 Detect_Blocking is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> 
-<A NAME="I9209"></A><A NAME="I9210"></A>Detect_Blocking;</span>&nbsp;</div>
+<A NAME="I9786"></A><A NAME="I9787"></A>Detect_Blocking;</span>&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I9211"></A><A NAME="I9212"></A>A 
+<div class="Normal"><span class="insert2"><A NAME="I9788"></A><A NAME="I9789"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Detect_Blocking 
 is a configuration pragma.</span>&nbsp;</div>
 
@@ -63,16 +63,16 @@ is a configuration pragma.</span>&nbsp;</div>
 to detect a potentially blocking operation&nbsp;</span><span class="insert5">that 
 occurs during the execution of</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;within</span></span><span class="insert2">&nbsp;a protected operation</span><span class="insert5">&nbsp;or a parallel construct 
 defined within a compilation unit to which the pragma applies</span><span class="insert2">, 
-and to raise Program_Error (see&nbsp;</span><span class="insert5"><A HREF="RM-9-5.html">9.5</A></span><span class="insert2"></span><span class="insert2"><span class="delete5"><A HREF="RM-9-5-1.html">&nbsp;9.5.1</A></span></span><span class="insert2">).</span> 
+and to raise<A NAME="I9790"></A> Program_Error (see&nbsp;</span><span class="insert5"><A HREF="RM-9-5.html">9.5</A></span><span class="insert2"></span><span class="insert2"><span class="delete5"><A HREF="RM-9-5-1.html">&nbsp;9.5.1</A></span></span><span class="insert2">).</span> 
 </div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal"><span class="insert2">An implementation is allowed 
-to reject a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN> 
+to reject a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN> 
 </span><span class="insert5">to which a pragma Detect_Blocking applies 
 </span><span class="insert2">if a potentially blocking operation is present 
-directly within an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN></span><span class="insert5">,</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;or</span></span><span class="insert2">&nbsp;the body of a protected subprogram</span><span class="insert5">, 
+directly within an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN></span><span class="insert5">,</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;or</span></span><span class="insert2">&nbsp;the body of a protected subprogram</span><span class="insert5">, 
 or a parallel construct occurring within the compilation unit</span><span class="insert2">.</span> 
 </div>
 <div class="NotesHeader">NOTES</div>
@@ -83,7 +83,7 @@ to be potentially blocking, and need not be detected.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-H-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

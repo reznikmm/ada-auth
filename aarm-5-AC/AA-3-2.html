@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,9 +41,9 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1458"></A><A NAME="I1459"></A>A <I>type</I> 
+<div class="Normal"><A NAME="I1454"></A><A NAME="I1455"></A>A <I>type</I> 
 is characterized by a set of values, and a set of <I>primitive operations</I> 
-which implement the fundamental aspects of its semantics. <A NAME="I1460"></A>An 
+which implement the fundamental aspects of its semantics. <A NAME="I1456"></A>An 
 <I>object</I> of a given type is a run-time entity that contains (has) 
 a value of the type.&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a/2</a></div>
@@ -53,7 +53,7 @@ operations</I> which implement the fundamental aspects of its semantics.
 Types are grouped into <span class="insert2"><I>categories</I></span><span class="delete2"><I>&nbsp;classes</I></span>. 
 <span class="insert2">Most language-defined categories of types are also 
 <I>classes</I> of types</span><span class="delete2">&nbsp;The types of a given 
-class share a set of primitive operations. <A NAME="I1461"></A> Classes 
+class share a set of primitive operations. <A NAME="I1457"></A> Classes 
 are closed under derivation; that is, if a type is in a class, then all 
 of its derivatives are in that class</span>.</div>
 <div class="paranum"><a name="p1.b">1.b/3</a></div>
@@ -65,23 +65,23 @@ the values of the subtype to satisfy <span class="delete3">a&nbsp;</span>certain
 The values of a subtype are a subset of the values of its type.</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
-<span class="insert2"><A NAME="I1462"></A></span><A NAME="I1463"></A>Types 
+<span class="insert2"><A NAME="I1458"></A></span><A NAME="I1459"></A>Types 
 are grouped into <span class="insert2"><I>categories</I></span><span class="delete2"><I>&nbsp;classes</I></span> 
 of types<span class="delete2">, reflecting the similarity of their values 
-and primitive operations</span>. <A NAME="I1464"></A>There exist several 
+and primitive operations</span>. <A NAME="I1460"></A>There exist several 
 <I>language-defined&nbsp;</I><span class="insert2"><I>categories</I></span><I></I><span class="delete2"><I>&nbsp;classes</I></span><I></I> 
 of types (see NOTES below)<span class="insert2">, reflecting the similarity 
-of their values and primitive operations</span>.<span class="insert2"><A NAME="I1465"></A> 
-[Most categories of types form <I>classes</I> of types.]</span> <A NAME="I1466"></A><I>Elementary</I> 
-types are those whose values are logically indivisible; <A NAME="I1467"></A><A NAME="I1468"></A><I>composite</I> 
+of their values and primitive operations</span>.<span class="insert2"><A NAME="I1461"></A> 
+[Most categories of types form <I>classes</I> of types.]</span> <A NAME="I1462"></A><I>Elementary</I> 
+types are those whose values are logically indivisible; <A NAME="I1463"></A><A NAME="I1464"></A><I>composite</I> 
 types are those whose values are composed of <I>component</I> values. 
-<A NAME="I1469"></A></div>
+<A NAME="I1465"></A></div>
 <div class="paranum"><a name="p2.a">2.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Proof:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
 <span class="insert2">The formal definition of <I>category</I> and <I>class</I> 
 is found in <A HREF="AA-3-4.html">3.4</A>.</span>&nbsp;</div>
 <div class="paranum"><a name="p2.b">2.b/2</a></div>
-<div class="Annotations"><B>Glossary entry:&nbsp;</B><A NAME="I1470"></A>A 
+<div class="Annotations"><B>Glossary entry:&nbsp;</B><A NAME="I1466"></A>A 
 class is a set of types that is closed under derivation, which means 
 that if a given type is in the class, then all types derived from that 
 type are also in the class. The set of types of a class share common 
@@ -107,7 +107,7 @@ types&rdquo; or &ldquo;reference types&rdquo; in some other languages.</div>
 <div class="paranum"><a name="p2.g">2.g</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>A discrete type is either 
 an integer type or an enumeration type. Discrete types may be used, for 
-example, in <SPAN Class="swiss"><A HREF="AA-5-4.html#S0162">case_statement</A></SPAN>s 
+example, in <SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN>s 
 and as array indices.</div>
 <div class="paranum"><a name="p2.h">2.h</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>A real type has values 
@@ -172,19 +172,19 @@ incomplete type gives a view of a type that reveals only some of its
 properties. The remaining properties are provided by the full view given 
 elsewhere. Incomplete types can be used for defining recursive data structures.</span></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I1471"></A>The elementary types are the 
+<div class="Normal"><A NAME="I1467"></A>The elementary types are the 
 <I>scalar</I> types (<I>discrete</I> and <I>real</I>) and the <I>access</I> 
-types (whose values provide access to objects or subprograms). <A NAME="I1472"></A><A NAME="I1473"></A>Discrete 
+types (whose values provide access to objects or subprograms). <A NAME="I1468"></A><A NAME="I1469"></A>Discrete 
 types are either <I>integer</I> types or are defined by enumeration of 
-their values (<I>enumeration</I> types). <A NAME="I1474"></A>Real types 
+their values (<I>enumeration</I> types). <A NAME="I1470"></A>Real types 
 are either <I>floating point</I> types or <I>fixed point</I> types.</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 The composite types are the <I>record</I> types, <I>record extensions</I>, 
 <I>array</I> types, <span class="insert2"><I>interface</I> types,&nbsp;</span><I>task</I> 
-types, and <I>protected</I> types.<span class="delete2"><A NAME="I1475"></A> 
-<A NAME="I1476"></A>A <I>private</I> type or <I>private extension</I> 
+types, and <I>protected</I> types.<span class="delete2"><A NAME="I1471"></A> 
+<A NAME="I1472"></A>A <I>private</I> type or <I>private extension</I> 
 represents a partial view (see <A HREF="AA-7-3.html">7.3</A>) of a type, 
 providing support for data abstraction. A partial view is a composite 
 type.</span>&nbsp;</div>
@@ -204,7 +204,7 @@ the set of all nonlimited types, since that is what a generic formal
 (nonlimited) private type matches.</span>&nbsp;</div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
-<span class="insert2"><A NAME="I1477"></A><A NAME="I1478"></A><A NAME="I1479"></A>There 
+<span class="insert2"><A NAME="I1473"></A><A NAME="I1474"></A><A NAME="I1475"></A>There 
 can be multiple views of a type with varying sets of operations. [An 
 <I>incomplete</I> type represents an incomplete view (see <A HREF="AA-3-10-1.html">3.10.1</A>) 
 of a type with a very restricted usage, providing support for recursive 
@@ -221,19 +221,19 @@ view is considered a composite type[, even if the full view is not].</span>
 </div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
-<A NAME="I1480"></A>Certain composite types (and<span class="delete2">&nbsp;partial</span> views thereof) have special components called <I>discriminants</I> 
+<A NAME="I1476"></A>Certain composite types (and<span class="delete2">&nbsp;partial</span> views thereof) have special components called <I>discriminants</I> 
 whose values affect the presence, constraints, or initialization of other 
 components. Discriminants can be thought of as parameters of the type.</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
-<A NAME="I1481"></A>The term <I>subcomponent</I> is used in this International 
+<A NAME="I1477"></A>The term <I>subcomponent</I> is used in this International 
 Standard in place of the term component to indicate either a component, 
 or a component of another subcomponent. Where other subcomponents are 
-excluded, the term component is used instead. <A NAME="I1482"></A>Similarly, 
+excluded, the term component is used instead. <A NAME="I1478"></A>Similarly, 
 a <I>part</I> of an object or value is used to mean the whole object 
 or value, or any set of its subcomponents.<span class="insert2">&nbsp;The 
 terms component, subcomponent, and part are also applied to a type meaning 
-the component, subcomponent, or part of objects and values of the type.<A NAME="I1483"></A><A NAME="I1484"></A></span> 
+the component, subcomponent, or part of objects and values of the type.<A NAME="I1479"></A><A NAME="I1480"></A></span> 
 </div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The definition of &ldquo;part&rdquo; 
@@ -252,9 +252,9 @@ it applies if the object as a whole is controlled, or any subcomponent
 is.&nbsp;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<A NAME="I1485"></A>The set of possible values for an object of a given 
+<A NAME="I1481"></A>The set of possible values for an object of a given 
 type can be subjected to a condition that is called a <I>constraint</I> 
-<A NAME="I1486"></A><A NAME="I1487"></A>(the case of a <I>null constraint</I> 
+<A NAME="I1482"></A><A NAME="I1483"></A>(the case of a <I>null constraint</I> 
 that specifies no restriction is also included)[; the rules for which 
 values satisfy a given kind of constraint are given in <A HREF="AA-3-5.html">3.5</A> 
 for <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>s, 
@@ -270,17 +270,17 @@ array type declarations (which are explicit ways to declare no constraint).</spa
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00415.TXT">AI95-00415-01</A></I>} 
-<A NAME="I1488"></A>A <I>subtype</I> of a given type is a combination 
+<A NAME="I1484"></A>A <I>subtype</I> of a given type is a combination 
 of the type, a constraint on values of the type, and certain attributes 
 specific to the subtype. The given type is called the <span class="insert2"><I>type 
-of the subtype</I></span><span class="delete2">&nbsp;type <I>of</I> the subtype</span>.<span class="insert2"><A NAME="I1489"></A> 
-<A NAME="I1490"></A></span>Similarly, the associated constraint is called 
+of the subtype</I></span><span class="delete2">&nbsp;type <I>of</I> the subtype</span>.<span class="insert2"><A NAME="I1485"></A> 
+<A NAME="I1486"></A></span>Similarly, the associated constraint is called 
 the <span class="insert2"><I>constraint of the subtype</I></span><span class="delete2">&nbsp;constraint 
-<I>of</I> the subtype</span>.<span class="insert2"><A NAME="I1491"></A> 
-<A NAME="I1492"></A></span> The set of values of a subtype consists of 
-the values of its type that satisfy its constraint<span class="insert2">&nbsp;and any exclusion of the null value</span>. <A NAME="I1493"></A>Such 
-values <I>belong</I> to the subtype.<span class="insert2"><A NAME="I1494"></A> 
-<A NAME="I1495"></A></span></div>
+<I>of</I> the subtype</span>.<span class="insert2"><A NAME="I1487"></A> 
+<A NAME="I1488"></A></span> The set of values of a subtype consists of 
+the values of its type that satisfy its constraint<span class="insert2">&nbsp;and any exclusion of the null value</span>. <A NAME="I1489"></A>Such 
+values <I>belong</I> to the subtype.<span class="insert2"><A NAME="I1490"></A> 
+<A NAME="I1491"></A></span></div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We make a strong distinction 
 between a type and its subtypes. In particular, a type is <I>not</I> 
@@ -312,7 +312,7 @@ the subtype is &ldquo;parent type&rdquo; or &ldquo;index type.&rdquo;
 terms without explicitly defining them, when the meaning is obvious. 
 </div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I1496"></A><A NAME="I1497"></A><A NAME="I1498"></A><A NAME="I1499"></A>A 
+<div class="Normal"><A NAME="I1492"></A><A NAME="I1493"></A><A NAME="I1494"></A><A NAME="I1495"></A>A 
 subtype is called an <I>unconstrained</I> subtype if its type has unknown 
 discriminants, or if its type allows range, index, or discriminant constraints, 
 but the subtype does not impose such a constraint; otherwise, the subtype 
@@ -344,7 +344,7 @@ and&nbsp;</span>classes are used in the description of the rules of the language
 &mdash; generally those that have their own particular set of primitive 
 operations (see <A HREF="AA-3-2-3.html">3.2.3</A>), or that correspond 
 to a set of types that are matched by a given kind of generic formal 
-type (see <A HREF="AA-12-5.html">12.5</A>). <A NAME="I1500"></A>The following 
+type (see <A HREF="AA-12-5.html">12.5</A>). <A NAME="I1496"></A>The following 
 are examples of &ldquo;interesting&rdquo; <I>language-defined classes</I>: 
 elementary, scalar, discrete, enumeration, character, boolean, integer, 
 signed integer, modular, real, floating point, fixed point, ordinary 
@@ -353,12 +353,12 @@ access-to-subprogram, composite, array, string, (untagged) record, tagged,
 task, protected, nonlimited. Special syntax is provided to define types 
 in each of these classes.<span class="insert2">&nbsp;In addition to these 
 classes, the following are examples of &ldquo;interesting&rdquo; <I>language-defined 
-categories</I>: <A NAME="I1501"></A>abstract, incomplete, interface, 
+categories</I>: <A NAME="I1497"></A>abstract, incomplete, interface, 
 limited, private, record.</span>&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I1502"></A>A <I>value</I> 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I1498"></A>A <I>value</I> 
 is a run-time entity with a given type which can be assigned to an object 
-of an appropriate subtype of the type. <A NAME="I1503"></A>An <I>operation</I> 
+of an appropriate subtype of the type. <A NAME="I1499"></A>An <I>operation</I> 
 is a program entity that operates on zero or more operands to produce 
 an effect, or yield a result, or both.&nbsp;</div>
 <div class="paranum"><a name="p10.b">10.b/2</a></div>
@@ -502,7 +502,7 @@ now in <A HREF="AA-3-4.html">3.4</A>.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -22,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,12 +43,20 @@ from within an Ada program.]&nbsp;</div>
 intrinsic subprograms.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
-<div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I8686"></A>The implementation shall support 
-machine code insertions (see <A HREF="AA-13-8.html">13.8</A>) or intrinsic 
-subprograms (see <A HREF="AA-6-3-1.html">6.3.1</A>) (or both). Implementation-defined 
-attributes shall be provided to allow the use of Ada entities as operands. 
-</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<A NAME="I9262"></A>The implementation shall support machine code insertions 
+(see <A HREF="AA-13-8.html">13.8</A>) or intrinsic subprograms (see <A HREF="AA-6-3-1.html">6.3.1</A>) 
+(or both). <span class="insert5">The implementation</span><span class="delete5">&nbsp;Implementation-defined 
+attributes</span> shall <span class="delete5">be provided to&nbsp;</span>allow 
+the use of Ada entities as operands<span class="insert5">&nbsp;for such machine 
+code insertions or intrinsic subprograms</span>.</div>
+<div class="paranum"><a name="p2.a">2.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<span class="insert5">Ada entities could be used as operands in machine 
+code insertions and/or intrinsic subprograms using language-defined attributes 
+(such as address), implementation-defined attributes, or could be directly 
+allowed.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p3">3</a></div>
@@ -66,7 +76,7 @@ access to them so that Ada can be used to write systems programs that
 run in privileged mode.&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8687"></A><A NAME="I8688"></A><A NAME="I8689"></A><A NAME="I8690"></A>The 
+<A NAME="I9263"></A><A NAME="I9264"></A><A NAME="I9265"></A><A NAME="I9266"></A>The 
 support for interfacing aspects (see <A HREF="AA-B.html">Annex B</A>) 
 should include interface to assembler; the default assembler should be 
 associated with the convention identifier Assembler.&nbsp;</div>
@@ -162,7 +172,7 @@ capabilities or efficiency not normally available.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

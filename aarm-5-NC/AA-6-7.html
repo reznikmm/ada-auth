@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,26 +35,26 @@
 <H1>6.7 Null Procedures</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN> 
 provides a shorthand to declare a procedure with an empty body.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">null_procedure_declaration</SPAN><A NAME="I3985"></A><A NAME="S0205"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<A NAME="I3986"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3987"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0182">procedure_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>null</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3988"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">null_procedure_declaration</SPAN><A NAME="I4182"></A><A NAME="S0227"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I4183"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4184"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0197">procedure_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>null</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4185"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-If a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
-is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>. 
-The profile of a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
-that completes a declaration shall conform fully to that of the declaration.<A NAME="I3989"></A> 
+If a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN> 
+is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>. 
+The profile of a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN> 
+that completes a declaration shall conform fully to that of the declaration.<A NAME="I4186"></A> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -62,10 +62,10 @@ that completes a declaration shall conform fully to that of the declaration.<A N
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
-declares a <I>null procedure</I>.<A NAME="I3990"></A><A NAME="I3991"></A> 
-A completion is not allowed for a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN>; 
-however, a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN> 
+declares a <I>null procedure</I>.<A NAME="I4187"></A><A NAME="I4188"></A> 
+A completion is not allowed for a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN>; 
+however, a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN> 
 can complete a previous declaration.&nbsp;</div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>There are no null functions because 
@@ -78,7 +78,7 @@ raises Program_Error doesn't seem very useful or worth the complication.
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 The execution of a null procedure is invoked by a subprogram call. For 
 the execution of a subprogram call on a null procedure, the execution 
-of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Thus, a null procedure 
@@ -93,7 +93,7 @@ be used in place of a procedure specification.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<A NAME="I3992"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
+<A NAME="I4189"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN> 
 has no other effect than to establish that the null procedure can be 
 called without failing the Elaboration_Check.&nbsp;</div>
 
@@ -106,22 +106,22 @@ called without failing the Elaboration_Check.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p6.a">6.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I3993"></A>Null procedures are new.&nbsp;</div>
+<A NAME="I4190"></A>Null procedures are new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<A NAME="I3994"></A>A <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
+<A NAME="I4191"></A>A <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN> 
 can now be a completion.</div>
 <div class="paranum"><a name="p6.c">6.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN>. 
+An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

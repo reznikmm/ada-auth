@@ -18,15 +18,17 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
     DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
     DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,23 +41,26 @@
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
 <span class="insert5">For a private type or private extension (including 
 a generic formal type), the following language-defined aspect may be 
-specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):</span></div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
 <span class="insert5">Default_Initial_Condition</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert5">This aspect shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+<span class="insert5">This aspect shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
 called a <I>default initial condition expression</I>. Default_Initial_Condition 
-may be specified on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0302">formal_private_type_definition</A></SPAN>, 
-or a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0303">formal_derived_type_definition</A></SPAN>. 
-<A NAME="I4306"></A><A NAME="I4307"></A><A NAME="I4308"></A></span></div>
+may be specified on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0324">formal_private_type_definition</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0325">formal_derived_type_definition</A></SPAN>. 
+<A NAME="I4517"></A><A NAME="I4518"></A><A NAME="I4519"></A></span></div>
 <div class="paranum"><a name="p2.a">2.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert5"><B>Default_Initial_Condition:&nbsp;</B></span><span class="insert5">A 
 condition that must hold true after the default initialization of an 
 object.</span></div>
+<div class="paranum"><a name="p2.a.1">2.a.1/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Glossary entry:&nbsp;</B>A 
+property that holds for every default-initialized object of a given type.</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
@@ -82,15 +87,15 @@ T and to all descendants of T.</span></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
 <span class="insert5">If one or more default initial condition expressions 
 apply to a type T, then a default initial condition check is performed 
-after successful default initialization of an object of type T by default 
-(see <A HREF="AA-3-3-1.html">3.3.1</A>). In the case of a controlled 
-type, the check is performed after the call to the type's Initialize 
-procedure (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
+after successful initialization of an object of type T by default (see 
+<A HREF="AA-3-3-1.html">3.3.1</A>). In the case of a controlled type, 
+the check is performed after the call to the type's Initialize procedure 
+(see <A HREF="AA-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
 <span class="insert5">If performing checks is required by the Default_Initial_Condition 
 assertion policy (see <A HREF="AA-11-4-2.html">11.4.2</A>) in effect 
-at the point of the corresponding <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+at the point of the corresponding <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 applicable to a given type, then the respective default initial condition 
 expression is considered enabled.</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
@@ -99,28 +104,53 @@ expression is considered enabled.</span></div>
 the evaluation of each enabled default initial condition expression that 
 applies to T. These evaluations, if there are more than one, are performed 
 in an arbitrary order. If any of these evaluate to False, Assertions.Assertion_Error 
-is raised at the point of the object initialization.<A NAME="I4309"></A><A NAME="I4310"></A></span></div>
+is raised at the point of the object initialization.<A NAME="I4520"></A><A NAME="I4521"></A><A NAME="I4522"></A></span></div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
 <span class="insert5">[For a generic formal type T, default initial condition 
 checks performed are as determined by the actual type, along with any 
 default initial condition of the formal type itself.]</span></div>
-<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="paranum"><a name="p9.a">9.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Proof:&nbsp;</B>This follows 
 from the general dynamic semantics rules given above, but we mention 
 it explicitly so that there can be no doubt that it is intended.</span> 
 </div>
 
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0332-1.TXT">AI12-0332-1</A></I>} 
+<span class="insert5">Implementations may extend the syntax or semantics 
+of the Default_Initial_Condition aspect in an implementation-defined 
+manner.</span></div>
+<div class="paranum"><a name="p10.a">10.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation defined: 
+</B></span><span class="insert5">Any extensions of the Default_Initial_Condition 
+aspect.</span></div>
+<div class="paranum"><a name="p10.b">10.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>This is 
+intended to allow preexisting usages from SPARK 2014 to remain acceptable 
+in conforming implementations, as well as to provide future flexibility. 
+Note the word &ldquo;extend&rdquo; in this permission; we expect that 
+any aspect usage that conforms with the (other) rules of this clause 
+will be accepted by any Ada implementation, regardless of any implementation-defined 
+extensions.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Notes">14&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0312-1.TXT">AI12-0312-1</A></I>} 
+<span class="insert5">For an example of the use of this aspect, see the 
+Vector container definition in <A HREF="AA-A-18-2.html">A.18.2</A>.</span> 
+</div>
+
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p9.b">9.b/5</a></div>
+<div class="paranum"><a name="p11.a">11.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
-<span class="insert5"><A NAME="I4311"></A>Aspect Default_Initial_Condition 
+<span class="insert5"><A NAME="I4523"></A>Aspect Default_Initial_Condition 
 is new.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

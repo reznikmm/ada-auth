@@ -20,9 +20,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-11-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -31,17 +31,17 @@
 <HR>
 <H1>12 &nbsp; Generic Units</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5558"></A>A <I>generic unit</I> is a program 
-unit that is either a generic subprogram or a generic package. <A NAME="I5559"></A>A 
+<div class="Normal"><A NAME="I5810"></A>A <I>generic unit</I> is a program 
+unit that is either a generic subprogram or a generic package. <A NAME="I5811"></A>A 
 generic unit is a <I>template</I>[, which can be parameterized, and from 
 which corresponding (nongeneric) subprograms or packages can be obtained]. 
 The resulting program units are said to be <I>instances</I> of the original 
-generic unit. <A NAME="I5560"></A><A NAME="I5561"></A><A NAME="I5562"></A></div>
+generic unit. <A NAME="I5812"></A><A NAME="I5813"></A><A NAME="I5814"></A></div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>A generic unit is a template 
 for a (nongeneric) program unit; the template can be parameterized by 
 objects, types, subprograms, and packages. An instance of a generic unit 
-is created by a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>. 
+is created by a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>. 
 The rules of the language are enforced when a generic unit is compiled, 
 using a generic contract model; additional checks are performed upon 
 instantiation to verify the contract is met. That is, the declaration 
@@ -49,10 +49,10 @@ of a generic unit represents a contract between the body of the generic
 and instances of the generic. Generic units can be used to perform the 
 role that macros sometimes play in other languages.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal">[A generic unit is declared by a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN>. 
-This form of declaration has a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN> 
+<div class="Normal">[A generic unit is declared by a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN>. 
+This form of declaration has a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN> 
 declaring any generic formal parameters. An instance of a generic unit 
-is obtained as the result of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
+is obtained as the result of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
 with appropriate generic actual parameters for the generic formal parameters. 
 An instance of a generic subprogram is a subprogram. An instance of a 
 generic package is a package.</div>
@@ -66,7 +66,7 @@ to produce further instances.]&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-11-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

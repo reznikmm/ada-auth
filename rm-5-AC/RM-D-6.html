@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -60,7 +60,7 @@ delayed later than what is specified for a single processor.&nbsp;</div>
 shall document the following metrics:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Bulleted">The execution time, in processor clock cycles, 
-that it takes for an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0262">abort_statement</A></SPAN> 
+that it takes for an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0284">abort_statement</A></SPAN> 
 to cause the completion of the aborted task. This is measured in a situation 
 where a task T2 preempts task T1 and aborts T1. T1 does not have any 
 finalization code. T2 shall verify that T1 has terminated, by means of 
@@ -70,31 +70,31 @@ the Terminated attribute.</div>
 on the time that the completion of an aborted task can be delayed beyond 
 the point that it is required for a single processor.</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Bulleted">An upper bound on the execution time of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN>, 
+<div class="Bulleted">An upper bound on the execution time of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN>, 
 in processor clock cycles. This is measured between a point immediately 
 before a task T1 executes a protected operation Pr.Set that makes the 
-<SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0240">entry_barrier</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0262">entry_barrier</A></SPAN> 
 Pr.Wait <span class="insert2">True</span><span class="delete2">&nbsp;true</span>, 
 and the point where task T2 resumes execution immediately after an entry 
-call to Pr.Wait in an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN>. 
+call to Pr.Wait in an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN>. 
 T1 preempts T2 while T2 is executing the abortable part, and then blocks 
 itself so that T2 can execute. The execution time of T1 is measured separately, 
 and subtracted.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Bulleted">An upper bound on the execution time of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN>, 
+<div class="Bulleted">An upper bound on the execution time of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN>, 
 in the case that no asynchronous transfer of control takes place. This 
-is measured between a point immediately before a task executes the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
+is measured between a point immediately before a task executes the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
 with a nonnull abortable part, and the point where the task continues 
 execution immediately after it. The execution time of the abortable part 
 is subtracted.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">Even though the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0262">abort_statement</A></SPAN> 
+<div class="Normal">Even though the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0284">abort_statement</A></SPAN> 
 is included in the list of potentially blocking operations (see <A HREF="RM-9-5-1.html">9.5.1</A>), 
 it is recommended that this statement be implemented in a way that never 
-requires the task executing the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0262">abort_statement</A></SPAN> 
+requires the task executing the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0284">abort_statement</A></SPAN> 
 to block.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">On a multi-processor, the delay associated with aborting 
@@ -111,7 +111,7 @@ and in protected actions.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

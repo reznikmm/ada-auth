@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,7 +35,7 @@
 <HR>
 <H1>13.9 Unchecked Type Conversions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5376"></A><A NAME="I5377"></A><A NAME="I5378"></A><A NAME="I5379"></A><A NAME="I5380"></A>An 
+<div class="Normal"><A NAME="I5632"></A><A NAME="I5633"></A><A NAME="I5634"></A><A NAME="I5635"></A><A NAME="I5636"></A>An 
 unchecked type conversion can be achieved by a call to an instance of 
 the generic function Unchecked_Conversion.&nbsp;</div>
 
@@ -47,7 +47,7 @@ generic library function exists:&nbsp;</div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Source(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Target(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-<A NAME="I5381"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<BR>
+<A NAME="I5637"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<span class="insert5">Pure,&nbsp;Nonblocking,&nbsp;</span>Convention&nbsp;=&gt;&nbsp;Intrinsic;<span class="delete5"><BR>
 <B>pragma</B>&nbsp;Pure(Ada.Unchecked_Conversion);</span></div>
 
@@ -72,7 +72,7 @@ Target'Alignment is zero.</div>
 <div class="Bulleted">The target subtype is not an unconstrained composite 
 subtype.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I5382"></A><A NAME="I5383"></A>S and the 
+<div class="Bulleted"><A NAME="I5638"></A><A NAME="I5639"></A>S and the 
 target subtype both have a contiguous representation.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted">The representation of S is a representation of 
@@ -101,17 +101,17 @@ not include its bounds, the bounds should not be part of the converted
 data.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Normal">The implementation should not generate unnecessary 
-run-time checks to ensure that the representation of S is a representation 
+runtime checks to ensure that the representation of S is a representation 
 of the target type. It should take advantage of the permission to return 
 by reference when possible. Restrictions on unchecked conversions should 
 be avoided unless required by the target environment.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5384"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5640"></A>The 
 recommended level of support for unchecked conversions is:&nbsp;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Bulleted">Unchecked conversions should be supported and should 
-be reversible in the cases where this subclause defines the result.<A NAME="I5385"></A> 
-<A NAME="I5386"></A>To enable meaningful use of unchecked conversion, 
+be reversible in the cases where this subclause defines the result.<A NAME="I5641"></A> 
+<A NAME="I5642"></A>To enable meaningful use of unchecked conversion, 
 a contiguous representation should be used for elementary subtypes, for 
 statically constrained array subtypes whose component subtype is one 
 of the subtypes described in this paragraph, and for record subtypes 
@@ -120,7 +120,7 @@ paragraph.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

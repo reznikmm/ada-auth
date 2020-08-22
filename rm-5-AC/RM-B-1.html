@@ -37,9 +37,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -50,14 +50,14 @@
 <div class="paranum"><a name="p0.1">0.1/3</a></div>
 <div class="Normal">&nbsp;<span class="insert3">An <I>interfacing</I> aspect 
 is a representation aspect that is one of the aspects Import, Export, 
-Link_Name, External_Name, or Convention.<A NAME="I7964"></A><A NAME="I7965"></A></span></div>
+Link_Name, External_Name, or Convention.<A NAME="I8501"></A><A NAME="I8502"></A></span></div>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I7966"></A><A NAME="I7967"></A>Specifying 
+<div class="Normal"><span class="insert3"><A NAME="I8503"></A><A NAME="I8504"></A>Specifying 
 the</span><span class="delete3">&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Import <span class="insert3">aspect  to have the value True&nbsp;</span>is 
 used to import an entity defined in a foreign language into an Ada program, 
 thus allowing a foreign-language subprogram to be called from Ada, or 
-a foreign-language variable to be accessed from Ada. In contrast, <span class="insert3"><A NAME="I7968"></A><A NAME="I7969"></A>specifying 
+a foreign-language variable to be accessed from Ada. In contrast, <span class="insert3"><A NAME="I8505"></A><A NAME="I8506"></A>specifying 
 the</span><span class="delete3">&nbsp;a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Export <span class="insert3">aspect to have the value True&nbsp;</span>is 
 used to export an Ada entity to a foreign language, thus allowing an 
@@ -68,12 +68,12 @@ for objects and subprograms, although implementations are allowed to
 support other entities.<span class="insert3">&nbsp;The Link_Name and External_Name 
 aspects are used to specify the link name and external name, respectively, 
 to be used to identify imported or exported entities in the external 
-environment.<A NAME="I7970"></A><A NAME="I7971"></A><A NAME="I7972"></A><A NAME="I7973"></A> 
-<A NAME="I7974"></A><A NAME="I7975"></A><A NAME="I7976"></A><A NAME="I7977"></A><A NAME="I7978"></A></span></div>
+environment.<A NAME="I8507"></A><A NAME="I8508"></A><A NAME="I8509"></A><A NAME="I8510"></A> 
+<A NAME="I8511"></A><A NAME="I8512"></A><A NAME="I8513"></A><A NAME="I8514"></A><A NAME="I8515"></A></span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal"><span class="insert3">The</span><span class="delete3">&nbsp;A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
-Convention <span class="insert3">aspect<A NAME="I7979"></A><A NAME="I7980"></A> 
+Convention <span class="insert3">aspect<A NAME="I8516"></A><A NAME="I8517"></A> 
 </span>is used to <span class="insert3">indicate</span><span class="delete3">&nbsp;specify</span> 
 that an Ada entity should use the conventions of another language. It 
 is intended primarily for types and &ldquo;callback&rdquo; subprograms. 
@@ -91,7 +91,7 @@ when a given compilation unit is included in a partition.</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em"><span class="insert3">The 
-form of a</span><span class="delete3"><A NAME="I7981"></A> <A NAME="I7982"></A><A NAME="I7983"></A><A NAME="I7984"></A><A NAME="I7985"></A><A NAME="I7986"></A><A NAME="I7987"></A><A NAME="I7988"></A>An 
+form of a</span><span class="delete3"><A NAME="I8518"></A> <A NAME="I8519"></A><A NAME="I8520"></A><A NAME="I8521"></A><A NAME="I8522"></A><A NAME="I8523"></A><A NAME="I8524"></A><A NAME="I8525"></A>An 
 <I>interfacing pragma</I> is a representation <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 that is one of the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
 Import, Export, or Convention. Their forms, together with that of the 
@@ -103,25 +103,25 @@ are</span> as follows:&nbsp;</div>
 Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I7989"></A><A NAME="I7990"></A>Import(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I7991"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
-[Entity =&gt;] <A NAME="I7992"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN><BR>
-&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I7993"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>] 
-[, [Link_Name =&gt;] <I>string_</I><A NAME="I7994"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>]);</span></div>
+<A NAME="I8526"></A><A NAME="I8527"></A>Import(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I8528"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I8529"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I8530"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I8531"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]);</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I7995"></A><A NAME="I7996"></A>Export(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I7997"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
-[Entity =&gt;] <A NAME="I7998"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN><BR>
-&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I7999"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>] 
-[, [Link_Name =&gt;] <I>string_</I><A NAME="I8000"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>]);</span></div>
+<A NAME="I8532"></A><A NAME="I8533"></A>Export(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I8534"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I8535"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I8536"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I8537"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]);</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I8001"></A><A NAME="I8002"></A>Convention([Convention =&gt;] 
-<I>convention_</I><A NAME="I8003"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>,[Entity 
-=&gt;] <A NAME="I8004"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></div>
+<A NAME="I8538"></A><A NAME="I8539"></A>Convention([Convention =&gt;] 
+<I>convention_</I><A NAME="I8540"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>,[Entity 
+=&gt;] <A NAME="I8541"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8005"></A><A NAME="I8006"></A>Linker_Options(<I>string_</I><A NAME="I8007"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8542"></A><A NAME="I8543"></A>Linker_Options(<I>string_</I><A NAME="I8544"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options is allowed only at the place of a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0087">declarative_item</A></SPAN>.</div>
@@ -141,17 +141,17 @@ are of type Boolean.</span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">The <span class="insert3">Link_Name and External_Name 
 aspects are of</span><span class="delete3">&nbsp;expected</span> type <span class="delete3">for 
-a <I>string_</I><A NAME="I8008"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN><A NAME="I8009"></A> 
+a <I>string_</I><A NAME="I8545"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><A NAME="I8546"></A> 
 in an interfacing pragma or in pragma Linker_Options is&nbsp;</span>String. 
 </div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I8010"></A>The expected 
-type for the <I>string_</I><A NAME="I8011"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I8547"></A>The expected 
+type for the <I>string_</I><A NAME="I8548"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 in pragma Linker_Options is String.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I8012"></A>The <span class="insert3">aspect 
+<div class="Normal"><A NAME="I8549"></A>The <span class="insert3">aspect 
 Convention shall be specified by a&nbsp;</span><I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 <span class="insert3">which</span><span class="delete3">&nbsp;of an interfacing 
 pragma</span> shall be the name of a <I>convention</I>. The convention 
@@ -159,10 +159,10 @@ names are implementation defined, except for certain language-defined
 ones, such as Ada and Intrinsic, as explained in <A HREF="RM-6-3-1.html">6.3.1</A>, 
 &ldquo;<A HREF="RM-6-3-1.html">Conformance Rules</A>&rdquo;. Additional 
 convention names generally represent the calling conventions of foreign 
-languages, language implementations, or specific run-time models. <A NAME="I8013"></A>The 
+languages, language implementations, or specific run-time models. <A NAME="I8550"></A>The 
 convention of a callable entity is its <I>calling convention</I>.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8014"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8551"></A>If 
 <I>L</I> is a <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 for a language, then a type T is said to be <I>compatible with convention 
 L</I>, (alternatively, is said to be an <I>L-compatible type</I>) if 
@@ -173,7 +173,7 @@ to <I>L</I> and is defined to be <I>L</I>-compatible (see <A HREF="RM-B-3.html">
 <A HREF="RM-B-3-1.html">B.3.1</A>, <A HREF="RM-B-3-2.html">B.3.2</A>, 
 <A HREF="RM-B-4.html">B.4</A>, <A HREF="RM-B-5.html">B.5</A>),</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I8015"></A>Convention 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I8552"></A>Convention 
 <I>L</I> has been specified for T<span class="delete3">&nbsp;in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Convention</span>, and T is <I>eligible for convention L</I>; that is: 
 </div>
@@ -218,7 +218,7 @@ If convention <I>L</I> is specified for an object that has an anonymous
 access type, the convention of the anonymous access type is <I>L</I>.</span></div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal"><span class="delete3">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-Import shall be the completion of a declaration.</span><A NAME="I8016"></A> 
+Import shall be the completion of a declaration.</span><A NAME="I8553"></A> 
 Notwithstanding any rule to the contrary, <span class="insert3">a declaration 
 with a True</span><span class="delete3">&nbsp;a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Import <span class="insert3">aspect shall not have a</span><span class="delete3">&nbsp;may 
@@ -226,17 +226,17 @@ serve as the</span> completion<span class="delete3">&nbsp;of any kind of (explic
 declaration if supported by an implementation for that kind of declaration. 
 If a completion is a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Import, then it shall appear in the same <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN> 
-as the declaration. For a library unit, it shall appear in the same <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN>, 
-before any subsequent <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0251">protected_definition</A></SPAN> 
+as the declaration. For a library unit, it shall appear in the same <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN>, 
+before any subsequent <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>s 
 other than <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s. 
-If the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+If the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 denotes more than one entity, then the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Import is the completion of all of them</span>.&nbsp;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
-<div class="Normal"><A NAME="I8017"></A> <A NAME="I8018"></A>An entity 
+<div class="Normal"><A NAME="I8554"></A> <A NAME="I8555"></A>An entity 
 <span class="insert3">with a True</span><span class="delete3">&nbsp;specified 
 as the Entity argument to a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Import<span class="insert3">&nbsp;aspect</span> (or <span class="delete3"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
@@ -259,14 +259,14 @@ and parameter types shall each be compatible with the <span class="insert3">spec
 Convention aspect, if any</span><span class="delete3">&nbsp;convention specified 
 in the corresponding pragma</span>.</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 (if any) used to directly specify an</span><span class="delete3">&nbsp;The 
-external name and link name <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>s 
+external name and link name <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Import<span class="insert3">,</span><span class="delete3">&nbsp;or</span> 
 Export, <span class="insert3">External_Name, or Link_Name aspect shall 
 be a static expression. The</span><span class="delete3">&nbsp;and the</span> 
-<I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options<span class="delete3">,</span> shall be static.<span class="insert3">&nbsp;An External_Name or Link_Name aspect shall be specified only for an entity 
 that is either imported or exported.</span></div>
@@ -275,21 +275,21 @@ that is either imported or exported.</span></div>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 28 and 29 were deleted.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal"><span class="delete3"><A NAME="I8019"></A><A NAME="I8020"></A><A NAME="I8021"></A><A NAME="I8022"></A><A NAME="I8023"></A><A NAME="I8024"></A><A NAME="I8025"></A><A NAME="I8026"></A>Import, 
+<div class="Normal"><span class="delete3"><A NAME="I8556"></A><A NAME="I8557"></A><A NAME="I8558"></A><A NAME="I8559"></A><A NAME="I8560"></A><A NAME="I8561"></A><A NAME="I8562"></A><A NAME="I8563"></A>Import, 
 Export, and Convention <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
 are representation pragmas that specify the <I>convention</I> aspect 
-of representation. <A NAME="I8027"></A><A NAME="I8028"></A><A NAME="I8029"></A><A NAME="I8030"></A>In 
+of representation. <A NAME="I8564"></A><A NAME="I8565"></A><A NAME="I8566"></A><A NAME="I8567"></A>In 
 addition, Import and Export <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
 specify the <I>imported</I> and <I>exported</I> aspects of representation, 
 respectively.</span></div>
 <div class="paranum"><a name="p29">29/3</a></div>
-<div class="Normal"><span class="delete3"><A NAME="I8031"></A><A NAME="I8032"></A><A NAME="I8033"></A><A NAME="I8034"></A><A NAME="I8035"></A><A NAME="I8036"></A>An 
+<div class="Normal"><span class="delete3"><A NAME="I8568"></A><A NAME="I8569"></A><A NAME="I8570"></A><A NAME="I8571"></A><A NAME="I8572"></A><A NAME="I8573"></A>An 
 interfacing pragma is a program unit pragma when applied to a program 
 unit (see <A HREF="RM-10-1-5.html">10.1.5</A>).</span></div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="delete3">An 
 interfacing pragma defines the convention of the entity denoted by the 
-<SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>. 
+<SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>. 
 </span>The <span class="insert3">Convention aspect</span><span class="delete3">&nbsp;convention</span> 
 represents the calling convention or representation convention of the 
 entity. For an access-to-subprogram type, it represents the calling convention 
@@ -310,12 +310,12 @@ is never inherited; if not directly specified, the Export aspect is False.</span
 Import or Export <span class="insert3">aspect, an</span><span class="delete3">&nbsp;optionally 
 specifies an entity's</span> external name, link name, or both<span class="insert3">&nbsp;may also be specified</span>.&nbsp;</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Normal"><A NAME="I8037"></A>An <I>external name</I> is a 
+<div class="Normal"><A NAME="I8574"></A>An <I>external name</I> is a 
 string value for the name used by a foreign language program either for 
 an entity that an Ada program imports, or for referring to an entity 
 that an Ada program exports.</div>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Normal"><A NAME="I8038"></A>A <I>link name</I> is a string 
+<div class="Normal"><A NAME="I8575"></A>A <I>link name</I> is a string 
 value for the name of an exported or imported entity, based on the conventions 
 of the foreign language's compiler in interfacing with the system's linker 
 tool.</div>
@@ -334,10 +334,10 @@ combined, is implementation defined.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p38">38/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I8039"></A></span><span class="delete3"><A NAME="I8040"></A></span><A NAME="I8041"></A>Notwithstanding 
+<div class="Normal"><span class="insert3"><A NAME="I8576"></A></span><span class="delete3"><A NAME="I8577"></A></span><A NAME="I8578"></A>Notwithstanding 
 what this International Standard says elsewhere, the elaboration of a 
 declaration <span class="insert3">with a True Import aspect</span><span class="delete3">&nbsp;denoted 
-by the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+by the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Import</span> does not create the entity. Such an elaboration has no 
 other effect than to allow the defining name to denote the external entity. 
@@ -345,7 +345,7 @@ other effect than to allow the defining name to denote the external entity.
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p38.1">38.1/5</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I8042"></A>It is 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I8579"></A>It is 
 the programmer's responsibility to ensure that the use of interfacing 
 </span><span class="insert3">aspects</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragmas</span></span><span class="insert2">&nbsp;does not violate Ada semantics; otherwise, program execution is erroneous.</span><span class="insert5">&nbsp;For example, passing an object with mode <B>in</B> to imported code that 
 modifies it causes erroneous execution. Similarly, calling an imported 
@@ -364,7 +364,7 @@ the recommended mechanism is to provide two subprograms whose link names
 are &quot;adainit&quot; and &quot;adafinal&quot;. Adainit should contain 
 the elaboration code for library units. Adafinal should contain the finalization 
 code. These subprograms should have no effect the second and subsequent 
-time they are called. <span class="insert1"><A NAME="I8043"></A><A NAME="I8044"></A><A NAME="I8045"></A><A NAME="I8046"></A></span></div>
+time they are called. <span class="insert1"><A NAME="I8580"></A><A NAME="I8581"></A><A NAME="I8582"></A><A NAME="I8583"></A></span></div>
 <div class="paranum"><a name="p40">40/3</a></div>
 <div class="Normal">Automatic elaboration of preelaborated packages should 
 be provided when <span class="insert3">specifying the</span><span class="delete3"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
@@ -409,7 +409,7 @@ for the access-to-subprogram type and the specific subprogram(s) to which
 <div class="Notes">4&nbsp;&nbsp;<span class="delete3">It is illegal to 
 specify more than one of Import, Export, or Convention for a given entity.</span></div>
 <div class="paranum"><a name="p46">46/3</a></div>
-<div class="Notes">5&nbsp;&nbsp;<span class="delete3">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+<div class="Notes">5&nbsp;&nbsp;<span class="delete3">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 in an interfacing pragma can denote more than one entity in the case 
 of overloading. Such a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 applies to all of the denoted entities.</span></div>
@@ -446,7 +446,7 @@ pragma might result in an effect that violates Ada semantics.</span>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -32,9 +32,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -44,7 +44,7 @@
 <H1>6.8 <span class="insert3">Expression Functions</span><span class="delete3"></span></H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<span class="insert3">An <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+<span class="insert3">An <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 provides a shorthand to declare a function whose body consists of a single 
 return statement.</span>&nbsp;</div>
 
@@ -52,24 +52,24 @@ return statement.</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00177.TXT">AI95-0177-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">expression_function_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4187"></A><A NAME="S0206"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;[<A NAME="I4188"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4189"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0183">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I4190"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4191"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</span><span class="insert4"><BR>
-&nbsp;|&nbsp;[<A NAME="I4192"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4193"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0183">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4194"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4195"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</span><span class="insert3"></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">expression_function_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4400"></A><A NAME="S0228"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I4401"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4402"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I4403"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4404"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</span><span class="insert4"><BR>
+&nbsp;|&nbsp;[<A NAME="I4405"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4406"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4407"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4408"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</span><span class="insert3"></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
-<span class="insert3">The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<span class="insert3">The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 </span><span class="insert4">or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
-</span><span class="insert3">of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-is the result type (see <A HREF="AA-6-5.html">6.5</A>) of the function.<A NAME="I4196"></A></span> 
+</span><span class="insert3">of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+is the result type (see <A HREF="AA-6-5.html">6.5</A>) of the function.<A NAME="I4409"></A></span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -78,19 +78,19 @@ is the result type (see <A HREF="AA-6-5.html">6.5</A>) of the function.<A NAME="
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
-<span class="insert5">An <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-declares an <I>expression function</I>.<A NAME="I4197"></A><A NAME="I4198"></A> 
-The <I>return expression</I><A NAME="I4199"></A> of an expression function 
-is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<span class="insert5">An <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+declares an <I>expression function</I>.<A NAME="I4410"></A><A NAME="I4411"></A> 
+The <I>return expression</I><A NAME="I4412"></A> of an expression function 
+is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN>. 
-A completion is not allowed for an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN>; 
-however, an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN>. 
+A completion is not allowed for an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN>; 
+however, an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 can complete a previous declaration.</span></div>
 <div class="paranum"><a name="p3.2">3.2/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
 <span class="insert5">A <I>potentially static expression</I> is defined 
-in the same way as a static expression except that<A NAME="I4200"></A></span></div>
+in the same way as a static expression except that<A NAME="I4413"></A></span></div>
 <div class="paranum"><a name="p3.3">3.3/5</a></div>
 <div class="Bulleted"><span class="insert5">a name denoting a formal 
 parameter of an expression function is a potentially static expression; 
@@ -115,8 +115,8 @@ may be specified for an expression function:</span></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert5">Static</span></div><div class="WideHanging-Body">
 <span class="insert5">The type of aspect Static is Boolean. When aspect 
 Static is True for an expression function, the function is a <I>static 
-expression function</I>. If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
-shall be a static<A NAME="I4201"></A><A NAME="I4202"></A> expression.<A NAME="I4203"></A><A NAME="I4204"></A></span></div>
+expression function</I>. If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
+shall be a static<A NAME="I4414"></A><A NAME="I4415"></A> expression.<A NAME="I4416"></A><A NAME="I4417"></A></span></div>
 <div class="paranum"><a name="p3.b">3.b/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert5"><B>Static:&nbsp;</B></span><span class="insert5">Specifies 
@@ -135,24 +135,24 @@ see <A HREF="AA-4-9.html">4.9</A>.]</span>&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<span class="insert3">If an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>. 
-The profile of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-that completes a declaration shall conform fully to that of the declaration.<A NAME="I4205"></A></span></div>
+<span class="insert3">If an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>. 
+The profile of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+that completes a declaration shall conform fully to that of the declaration.<A NAME="I4418"></A></span></div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
 <span class="insert3">If the result subtype has one or more unconstrained 
 access discriminants, the accessibility level of the anonymous access 
-type of each access discriminant, as determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+type of each access discriminant, as determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 </span><span class="insert4">or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
-</span><span class="insert3">of the&nbsp;</span><span class="insert4"><SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;expression 
+</span><span class="insert3">of the&nbsp;</span><span class="insert4"><SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;expression 
 function</span></span><span class="insert3">, shall not be statically 
-deeper than that of the master that elaborated the <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN>.</span></div>
+deeper than that of the master that elaborated the <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN>.</span></div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
-can only fail if the discriminant is an access to a part of a non-aliased 
+can only fail if the discriminant is an access to a part of a nonaliased 
 parameter, as there can be no local declarations here.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/4</a></div>
 <div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
@@ -165,11 +165,11 @@ in an expression function.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
 <span class="insert5">Aspect Static shall be specified to have the value 
-True only if the associated <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN>:</span></div>
+True only if the associated <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN>:</span></div>
 <div class="paranum"><a name="p5.2">5.2/5</a></div>
 <div class="Bulleted"><span class="insert5">is not a completion;</span></div>
 <div class="paranum"><a name="p5.3">5.3/5</a></div>
-<div class="Bulleted"><span class="insert5">has an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted"><span class="insert5">has an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 that is a potentially static expression;</span></div>
 <div class="paranum"><a name="p5.4">5.4/5</a></div>
 <div class="Bulleted"><span class="insert5">contains no calls to itself;</span></div>
@@ -183,8 +183,12 @@ is a static subtype;</span></div>
 <div class="Bulleted"><span class="insert5">has no applicable precondition 
 or postcondition expression; and</span></div>
 <div class="paranum"><a name="p5.8">5.8/5</a></div>
-<div class="Bulleted"><span class="insert5">is not type-invariant preserving 
-for any type (see <A HREF="AA-7-3-2.html">7.3.2</A>).</span>&nbsp;</div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0191-1.TXT">AI12-0191-1</A></I>} 
+<span class="insert5">for result type <I>R</I>, if the function is a 
+boundary entity for type <I>R</I> (see <A HREF="AA-7-3-2.html">7.3.2</A>), 
+no type invariant applies to type <I>R</I>; if <I>R</I> has a component 
+type <I>C</I>, a similar rule applies to <I>C</I>.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.c">5.c/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>Since 
 a string subtype can be static, this allows an expression function of 
@@ -199,15 +203,15 @@ a string type to be static.</span>&nbsp;</div>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
 <span class="insert3"></span><span class="insert3"><span class="delete5">An 
-<SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-declares an <I>expression function</I>.<A NAME="I4206"></A><A NAME="I4207"></A> 
+<SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+declares an <I>expression function</I>.<A NAME="I4419"></A><A NAME="I4420"></A> 
 </span></span><span class="insert4"><span class="delete5">The <I>return 
-expression</I><A NAME="I4208"></A> of an expression function is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+expression</I><A NAME="I4421"></A> of an expression function is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN>. 
+of the <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN>. 
 </span></span><span class="insert3"><span class="delete5">A completion 
-is not allowed for an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN>; 
-however, an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+is not allowed for an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN>; 
+however, an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 can complete a previous declaration.</span></span><span class="insert3"></span> 
 </div>
 
@@ -218,9 +222,9 @@ can complete a previous declaration.</span></span><span class="insert3"></span>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
 <span class="insert3">&nbsp;The execution of an expression function is invoked 
 by a subprogram call. For the execution of a subprogram call on an expression 
-function, the execution of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
-executes an implicit function body containing only a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+function, the execution of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
+executes an implicit function body containing only a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is&nbsp;</span><span class="insert4">the return expression</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;that</span></span><span class="insert3">&nbsp;of the expression function.</span></div>
 <div class="paranum"><a name="p7.a">7.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>The 
@@ -228,7 +232,7 @@ last sentence effectively means that all of the dynamic wording in <A HREF="AA-6
 applies as needed, and we don't have to repeat it here.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<span class="insert3"><A NAME="I4209"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+<span class="insert3"><A NAME="I4422"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 has no other effect than to establish that the expression function can 
 be called without failing the Elaboration_Check.</span>&nbsp;</div>
 
@@ -241,13 +245,13 @@ be called without failing the Elaboration_Check.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<span class="insert3"><A NAME="I4210"></A>Expression functions are new 
+<span class="insert3"><A NAME="I4423"></A>Expression functions are new 
 in Ada 2012.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p9.b">9.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
-<span class="insert4"><A NAME="I4211"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+<span class="insert4"><A NAME="I4424"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 can directly be the return expression of an expression function. This 
 eliminates the double parentheses that otherwise would be necessary.</span></div>
 <div class="paranum"><a name="p9.c">9.c/5</a></div>
@@ -257,7 +261,7 @@ expression functions in static expressions.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

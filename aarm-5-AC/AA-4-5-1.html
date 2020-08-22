@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,12 +41,12 @@
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3140"></A><A NAME="I3141"></A><A NAME="I3142"></A>An 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-consisting of two <SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>s 
+<div class="Normal"><A NAME="I3215"></A><A NAME="I3216"></A><A NAME="I3217"></A>An 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+consisting of two <SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>s 
 connected by <B>and then</B> or <B>or else</B> (a <I>short-circuit control 
-form</I>) shall resolve to be of some boolean type; <A NAME="I3143"></A>the 
-expected type for both <SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>s 
+form</I>) shall resolve to be of some boolean type; <A NAME="I3218"></A>the 
+expected type for both <SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>s 
 is that same boolean type.&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This rule is written this way 
@@ -57,10 +57,10 @@ help.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3144"></A><A NAME="I3145"></A><A NAME="I3146"></A><A NAME="I3147"></A><A NAME="I3148"></A><A NAME="I3149"></A><A NAME="I3150"></A><A NAME="I3151"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3219"></A><A NAME="I3220"></A><A NAME="I3221"></A><A NAME="I3222"></A><A NAME="I3223"></A><A NAME="I3224"></A><A NAME="I3225"></A><A NAME="I3226"></A>The 
 following logical operators are predefined for every boolean type <I>T</I>, 
 for every modular type <I>T</I>, and for every one-dimensional array 
-type <I>T</I> whose component type is a boolean type: <A NAME="I3152"></A></div>
+type <I>T</I> whose component type is a boolean type: <A NAME="I3227"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>and</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
 <B>function</B>&nbsp;&quot;<B>or</B>&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
@@ -78,7 +78,7 @@ without any (interesting) subtype, and not some subtype with a constraint
 or exclusion. Since it's possible that there is no name for the &ldquo;uninteresting&rdquo; 
 subtype, we denote the type with an italicized <I>T</I>. This applies 
 to the italicized <I>T</I> in many other predefined operators and attributes 
-as well.<A NAME="I3153"></A></span></div>
+as well.<A NAME="I3228"></A></span></div>
 <div class="paranum"><a name="p3.c">3.c/2</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00145.TXT">AI95-00145-01</A></I>} 
 <span class="insert2">In many cases, there is a subtype with the correct 
@@ -127,17 +127,17 @@ array are those of the left operand.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I3154"></A>The short-circuit control forms 
+<div class="Normal"><A NAME="I3229"></A>The short-circuit control forms 
 <B>and then</B> and <B>or else</B> deliver the same result as the corresponding 
 predefined <B>and</B> and <B>or</B> operators for boolean types, except 
 that the left operand is always evaluated first, and the right operand 
 is not evaluated if the value of the left operand determines the result.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3155"></A><A NAME="I3156"></A>For the logical 
+<div class="Normal"><A NAME="I3230"></A><A NAME="I3231"></A>For the logical 
 operators on arrays, a check is made that for each component of the left 
 operand there is a matching component of the right operand, and vice 
-versa. <A NAME="I3157"></A><A NAME="I3158"></A>Also, a check is made 
-that each component of the result belongs to the component subtype. <A NAME="I3159"></A>The 
+versa. <A NAME="I3232"></A><A NAME="I3233"></A>Also, a check is made 
+that each component of the result belongs to the component subtype. <A NAME="I3234"></A>The 
 exception Constraint_Error is raised if either of the above checks fails. 
 </div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
@@ -172,7 +172,7 @@ N&nbsp;=&nbsp;0&nbsp;<B>or</B>&nbsp;<B>else</B>&nbsp;A(N)&nbsp;=&nbsp;Hit_Value<
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -30,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,19 +51,19 @@ generic library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Attribute&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;Initial_Value&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
 <B>package</B>&nbsp;Ada.Task_Attributes<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8389"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8944"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8390"></A>Attribute_Handle&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Attribute;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8945"></A>Attribute_Handle&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Attribute;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8391"></A>Value(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8946"></A>Value(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8392"></A>Reference(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8947"></A>Reference(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute_Handle;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8393"></A>Set_Value(Val&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8948"></A>Set_Value(Val&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8394"></A>Reinitialize(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);</div>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8949"></A>Reinitialize(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Task_Attributes;</div>
 
@@ -93,10 +93,9 @@ on the old value of the attribute of T and assigns Val to that attribute
 as Set_Value where the Val parameter is replaced with Initial_Value. 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I8395"></A>For all the operations declared 
-in this package, Tasking_Error is raised if the task identified by T 
-is terminated. <A NAME="I8396"></A>Program_Error is raised if the value 
-of T is Null_Task_Id.</div>
+<div class="Normal">For all the operations declared in this package, 
+Tasking_Error is raised if the task identified by T is terminated. Program_Error 
+is raised if the value of T is Null_Task_Id.</div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert2">After a task has terminated, 
 all of its attributes are finalized, unless they have been finalized 
@@ -106,7 +105,7 @@ it has been finalized earlier.</span>&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p13.2">13.2/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1"><A NAME="I8397"></A>If the 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1"><A NAME="I8950"></A>If the 
 package Ada.Task_Attributes is instantiated with a controlled type and 
 the controlled type has user-defined Adjust or Finalize operations that 
 in turn access task attributes by any of the above operations, then a 
@@ -117,17 +116,17 @@ calling task and subsequently some or all tasks of the partition.</span>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I8398"></A>It is erroneous to dereference 
+<div class="Normal"><A NAME="I8951"></A>It is erroneous to dereference 
 the access value returned by a given call on Reference after a subsequent 
 call on Reinitialize for the same task attribute, or after the associated 
 task terminates.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I8399"></A>If a value of Task_Id is passed 
+<div class="Normal"><A NAME="I8952"></A>If a value of Task_Id is passed 
 as a parameter to any of the operations declared in this package and 
 the corresponding task object no longer exists, the execution of the 
 program is erroneous.</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1"><A NAME="I8400"></A></span><span class="insert2">An 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1"><A NAME="I8953"></A></span><span class="insert2">An 
 access</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;Accesses</span></span><span class="insert1">&nbsp;to&nbsp;</span><span class="insert2">a&nbsp;</span><span class="insert1">task&nbsp;</span><span class="insert2">attribute</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;attributes</span></span><span class="insert1">&nbsp;via a value of type Attribute_Handle&nbsp;</span><span class="insert2">is</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;are</span></span><span class="insert1">&nbsp;erroneous if executed concurrently with&nbsp;</span><span class="insert2">another 
 such access</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;each 
 other</span></span><span class="insert1">&nbsp;or&nbsp;</span><span class="insert2">a 
@@ -253,7 +252,7 @@ the execution of the program is erroneous.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

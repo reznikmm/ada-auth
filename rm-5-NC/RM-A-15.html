@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,21 +43,21 @@ on normal termination.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Ada.Command_Line has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Command_Line<A NAME="I6891"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Command_Line<A NAME="I7179"></A><BR>
 &nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6892"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7180"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6893"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7181"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6894"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7182"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6895"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7183"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I6896"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
-&nbsp;&nbsp;<A NAME="I6897"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I7184"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
+&nbsp;&nbsp;<A NAME="I7185"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6898"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7186"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -77,9 +77,8 @@ is implementation defined.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">If the external 
 execution environment supports passing arguments to a program, then Argument 
 returns an implementation-defined value with lower bound 1 corresponding 
-to the argument at relative position Number. <A NAME="I6899"></A>If Number 
-is outside the range 1..Argument_Count, then Constraint_Error is propagated. 
-</div>
+to the argument at relative position Number. If Number is outside the 
+range 1..Argument_Count, then Constraint_Error is propagated.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Examples"><B>function</B>&nbsp;Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p16">16/5</a></div>
@@ -123,7 +122,7 @@ respectively.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

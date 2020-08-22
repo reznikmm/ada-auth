@@ -24,6 +24,7 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
@@ -31,9 +32,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -47,8 +48,8 @@ packages Containers.Hashed_Sets and Containers.Ordered_Sets provide private
 types Set and Cursor, and a set of operations for each type. A set container 
 allows elements of an arbitrary type to be stored without duplication. 
 A hashed set uses a hash function to organize elements, while an ordered 
-set orders its element per a specified relation.<A NAME="I7587"></A> 
-<A NAME="I7588"></A></span></div>
+set orders its element per a specified relation.<A NAME="I8023"></A> 
+<A NAME="I8024"></A></span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal"><span class="insert2">This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;section</span></span><span class="insert2">&nbsp;describes the declarations that are common to both kinds of sets. See 
 <A HREF="RM-A-18-8.html">A.18.8</A> for a description of the semantics 
@@ -65,18 +66,18 @@ result value each time it is called with a particular pair of values.
 If it behaves in some other manner, the function &quot;=&quot; on set 
 values returns an unspecified value. The exact arguments and number of 
 calls of this generic formal function by the function &quot;=&quot; on 
-set values are unspecified.<A NAME="I7589"></A></span></div>
+set values are unspecified.<A NAME="I8025"></A></span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal"><span class="insert2">The type Set is used to represent 
-sets. The type Set needs finalization<A NAME="I7590"></A> (see <A HREF="RM-7-6.html">7.6</A>).</span></div>
+sets. The type Set needs finalization<A NAME="I8026"></A> (see <A HREF="RM-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal"><span class="insert2">A set contains elements. Set 
 cursors designate elements. There exists an equivalence relation on elements, 
 whose definition is different for hashed sets and ordered sets. A set 
 never contains two or more equivalent elements. The <I>length</I> of 
-a set is the number of elements it contains.<A NAME="I7591"></A></span></div>
+a set is the number of elements it contains.<A NAME="I8027"></A></span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I7592"></A><A NAME="I7593"></A><A NAME="I7594"></A>Each 
+<div class="Normal"><span class="insert2"><A NAME="I8028"></A><A NAME="I8029"></A><A NAME="I8030"></A>Each 
 nonempty set has two particular elements called the <I>first element</I> 
 and the <I>last element</I> (which may be the same). Each element except 
 for the last element has a <I>successor element</I>. If there are no 
@@ -84,43 +85,53 @@ other intervening operations, starting with the first element and repeatedly
 going to the successor element will visit each element in the set exactly 
 once until the last element is reached. The exact definition of these 
 terms is different for hashed sets and ordered sets.</span></div>
-<div class="paranum"><a name="p7">7/2</a></div>
-<div class="Normal"><span class="insert2">Some operations of these generic 
-packages have access-to-subprogram parameters. To ensure such operations 
-are well-defined, they guard against certain actions by the designated 
-subprogram. In particular, some operations check for &ldquo;tampering 
-with cursors&rdquo; of a container because they depend on the set of 
-elements of the container remaining constant, and others check for &ldquo;tampering 
-with elements&rdquo; of a container because they depend on elements of 
-the container not being replaced.</span></div>
-<div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7595"></A>A 
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal"><span class="insert2">Some operations&nbsp;</span><span class="insert5"><A NAME="I8031"></A><A NAME="I8032"></A></span><span class="insert2"></span><span class="insert2"><span class="delete5">of 
+these generic packages have access-to-subprogram parameters. To ensure 
+such operations are well-defined, they guard against certain actions 
+by the designated subprogram. In particular, some operations</span></span><span class="insert2">&nbsp;check for &ldquo;tampering with cursors&rdquo; of a container because 
+they depend on the set of elements of the container remaining constant</span><span class="insert5">&nbsp;and&nbsp;</span><span class="insert2"></span><span class="insert2"><span class="delete5">, 
+and others check for &ldquo;tampering with elements&rdquo; of a container 
+because they depend</span></span><span class="insert2">&nbsp;on elements of 
+the container not being replaced.</span><span class="insert5">&nbsp;When tampering 
+with cursors is <I>prohibited</I><A NAME="I8033"></A> <A NAME="I8034"></A>for 
+a particular set object <I>M</I>, Program_Error is propagated by the 
+finalization of <I>M</I>, as well as by a call that passes <I>M</I> to 
+certain of the operations of this package, as indicated by the precondition 
+of such an operation.</span><span class="insert2"></span></div>
+<div class="Normal"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+8 through 14 are removed as preconditions now describe these rules.</I></SPAN></span> 
+</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"></span><span class="insert2"><span class="delete5"><A NAME="I8035"></A>A 
 subprogram is said to <I>tamper with cursors</I> of a set object <I>S</I> 
-if:</span></div>
-<div class="paranum"><a name="p9">9/2</a></div>
-<div class="Bulleted"><span class="insert2">it inserts or deletes elements 
-of <I>S</I>, that is, it calls the Insert, Include, Clear, Delete, Exclude, 
-or Replace_Element procedures with <I>S</I> as a parameter; or</span></div>
-<div class="paranum"><a name="p10">10/2</a></div>
-<div class="Bulleted"><span class="insert2">it finalizes <I>S</I>; or</span></div>
-<div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Bulleted"><span class="insert3">it calls the Assign procedure 
-with <I>S</I> as the Target parameter; or</span></div>
-<div class="paranum"><a name="p11">11/2</a></div>
-<div class="Bulleted"><span class="insert2">it calls the Move procedure 
-with <I>S</I> as a parameter; or</span></div>
-<div class="paranum"><a name="p12">12/2</a></div>
-<div class="Bulleted"><span class="insert2">it calls one of the operations 
-defined to tamper with cursors of <I>S</I>.</span></div>
-<div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7596"></A>A 
+if:</span></span><span class="delete5"></span>&nbsp;</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">it 
+inserts or deletes elements of <I>S</I>, that is, it calls the Insert, 
+Include, Clear, Delete, Exclude, or Replace_Element procedures with <I>S</I> 
+as a parameter; or</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">it 
+finalizes <I>S</I>; or</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p10.1">10.1/5</a></div>
+<div class="Bulleted"><span class="insert3"></span><span class="insert3"><span class="delete5">it 
+calls the Assign procedure with <I>S</I> as the Target parameter; or</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">it 
+calls the Move procedure with <I>S</I> as a parameter; or</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">it 
+calls one of the operations defined to tamper with the cursors of <I>S</I>.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"></span><span class="insert2"><span class="delete5"><A NAME="I8036"></A>A 
 subprogram is said to <I>tamper with elements</I> of a set object <I>S</I> 
-if:</span></div>
-<div class="paranum"><a name="p14">14/2</a></div>
-<div class="Bulleted"><span class="insert2">it tampers with cursors of 
-<I>S</I>.</span></div>
-<div class="paranum"><a name="p14.1">14.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I7597"></A><A NAME="I7598"></A>When 
+if:</span></span><span class="delete5"></span></div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">it 
+tampers with cursors of <I>S</I>.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p14.1">14.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I8037"></A><A NAME="I8038"></A>When 
 tampering with cursors is <I>prohibited</I> for a particular set object 
 <I>S</I>, Program_Error is propagated by a call of any language-defined 
 subprogram that is defined to tamper with the cursors of <I>S</I>, leaving 
@@ -128,9 +139,9 @@ subprogram that is defined to tamper with the cursors of <I>S</I>, leaving
 for a particular set object <I>S</I>, Program_Error is propagated by 
 a call of any language-defined subprogram that is defined to tamper with 
 the elements of <I>S</I> (or tamper with the cursors of <I>S</I>), leaving 
-<I>S</I> unmodified.</span><span class="insert4">&nbsp;These checks are made 
-before any other defined behavior of the body of the language-defined 
-subprogram.</span><span class="insert3"></span>&nbsp;</div>
+<I>S</I> unmodified.</span></span><span class="insert4"><span class="delete5">&nbsp;These checks are made before any other defined behavior of the body of 
+the language-defined subprogram.</span></span><span class="insert3"><span class="delete5"></span></span><span class="insert3"></span> 
+</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal"><span class="insert2">Empty_Set represents the empty 
 Set object. It has a length of 0. If an object of type Set is not otherwise 
@@ -155,11 +166,20 @@ also may write additional information about the set.</span></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert3">Set'Read reads the representation 
 of a set from the stream, and assigns to <I>Item</I> a set with the same 
 length and elements as was written by Set'Write.</span></div>
-<div class="paranum"><a name="p18.3">18.3/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p18.3">18.3/5</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p18.4">18.4/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
 True if Position designates an element, and returns False otherwise.</span></div>
+<div class="paranum"><a name="p18.5">18.5/5</a></div>
+<div class="Examples"><span class="insert5"><B>function</B>&nbsp;Has_Element&nbsp;(Container&nbsp;:&nbsp;Set;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</span></div>
+<div class="paranum"><a name="p18.6">18.6/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert5">Returns 
+True if Position designates an element in Container, and returns False 
+otherwise.</span></div>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Examples"><span class="insert2"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p20">20/2</a></div>
@@ -182,96 +202,171 @@ False if an element equivalent to <I>E</I> is not present in Right. If
 the function has not returned a result after checking all of the elements, 
 it returns True. Any exception raised during evaluation of element equivalence 
 is propagated.</span></div>
-<div class="paranum"><a name="p23">23/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;To_Set&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Set;</span></div>
+<div class="paranum"><a name="p22.1">22.1/5</a></div>
+<div class="Examples"><span class="insert5"><B>function</B>&nbsp;Tampering_With_Cursors_Prohibited<BR>
+&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</span></div>
+<div class="paranum"><a name="p22.2">22.2/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert5">Returns 
+True if tampering with cursors is currently prohibited for Container, 
+and returns False otherwise.</span></div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;To_Set&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(To_Set'Result)&nbsp;=&nbsp;1&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_with_Cursors_Prohibited&nbsp;(To_Set'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p24">24/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
 a set containing the single element New_Item.</span></div>
-<div class="paranum"><a name="p25">25/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Length&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Length&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Count_Type</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p26">26/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
 the number of elements in Container.</span></div>
-<div class="paranum"><a name="p27">27/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
-<div class="paranum"><a name="p28">28/2</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
-to Length (Container) = 0.</span></div>
-<div class="paranum"><a name="p29">29/2</a></div>
-<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set);</span></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Boolean</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Is_Empty'Result&nbsp;=&nbsp;(Length&nbsp;(Container)&nbsp;=&nbsp;0)</span><span class="insert2">;</span></div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert5">Returns 
+True if Container is empty</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;Equivalent 
+to Length (Container) = 0</span></span><span class="insert2">.</span></div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;0</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p30">30/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Removes 
 all the elements from Container.</span></div>
-<div class="paranum"><a name="p31">31/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
-<div class="paranum"><a name="p32">32/2</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use</B>&nbsp;Element_Type)</span><span class="insert2">;</span></div>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert2"><span class="delete5">If 
 Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
-Element returns the element designated by Position.</span></div>
-<div class="paranum"><a name="p33">33/2</a></div>
+</span></span><span class="insert2">Element returns the element designated 
+by Position.</span></div>
+<div class="paranum"><a name="p32.1">32.1/5</a></div>
+<div class="Examples"><span class="insert5"><B>function</B>&nbsp;Element&nbsp;(Container&nbsp;:&nbsp;Set;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p32.2">32.2/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert5">Element 
+returns the element designated by Position.</span></div>
+<div class="paranum"><a name="p33">33/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p34">34/5</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert2"><span class="delete5">If 
 Position equals No_Element, then Constraint_Error is propagated; if Position 
 does not designate an element in Container, then Program_Error is propagated. 
 If an element equivalent to New_Item is already present in Container 
-at a position other than Position, Program_Error is propagated. Otherwise, 
-Replace_Element assigns New_Item to the element designated by Position. 
-Any exception raised by the assignment is propagated.</span><span class="insert5">&nbsp;For the purposes of determining whether the parameters overlap in a call 
-to Replace_Element, the Container parameter is not considered to overlap 
-with any object (including itself).</span><span class="insert2"></span></div>
-<div class="paranum"><a name="p35">35/2</a></div>
+at a position other than Position, Program_Error is propagated. Otherwise</span></span><span class="insert3"><span class="delete5">,</span></span><span class="insert2"><span class="delete5">&nbsp;</span></span><span class="insert2">Replace_Element assigns New_Item 
+to the element designated by Position. Any exception raised by the assignment 
+is propagated.</span><span class="insert5">&nbsp;For the purposes of determining 
+whether the parameters overlap in a call to Replace_Element, the Container 
+parameter is not considered to overlap with any object (including itself).</span><span class="insert2"></span></div>
+<div class="paranum"><a name="p35">35/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Query_Element<BR>
 &nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
-&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
-<div class="paranum"><a name="p36">36/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span><span class="insert2">;</span></div>
+<div class="paranum"><a name="p36">36/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert2"><span class="delete5">If 
 Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
-Query_Element calls Process.<B>all</B> with the element designated by 
-Position as the argument.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+</span></span><span class="insert2">Query_Element calls Process.<B>all</B> 
+with the element designated by Position as the argument.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
 is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of&nbsp;</span><span class="insert3">the set that contains 
 the element designated by Position is prohibited during the execution 
 of the call on Process.<B>all</B></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Container</span></span><span class="insert2">. 
 Any exception raised by Process.<B>all</B> is propagated.</span></div>
-<div class="paranum"><a name="p36.1">36.1/3</a></div>
+<div class="paranum"><a name="p36.1">36.1/5</a></div>
+<div class="Examples"><span class="insert5"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Set;<BR>
+&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</span></div>
+<div class="paranum"><a name="p36.2">36.2/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert5">Query_Element 
+calls Process.<B>all</B> with the key and element from the node designated 
+by Position as the arguments. Tampering with the elements of Container 
+is prohibited during the execution of the call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p36.3">36.3/5</a></div>
 <div class="Examples"><span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
-<div class="paranum"><a name="p36.2">36.2/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">The 
-type Constant_Reference_Type needs finalization.<A NAME="I7599"></A></span></div>
-<div class="paranum"><a name="p36.3">36.3/3</a></div>
-<div class="Indented2"><span class="insert3">The default initialization 
-of an object of type Constant_Reference_Type propagates Program_Error.</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element</span><span class="insert5">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p36.4">36.4/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">The 
+type Constant_Reference_Type needs finalization.<A NAME="I8039"></A></span></div>
+<div class="paranum"><a name="p36.5">36.5/5</a></div>
+<div class="Indented2"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;The 
+default initialization of an object of type Constant_Reference_Type propagates 
+Program_Error.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p36.6">36.6/5</a></div>
 <div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
-<div class="paranum"><a name="p36.5">36.5/3</a></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+<div class="paranum"><a name="p36.7">36.7/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
 function (combined with the Constant_Indexing and Implicit_Dereference 
 aspects) provides a convenient way to gain read access to an individual 
 element of a set given a cursor.</span></div>
-<div class="paranum"><a name="p36.6">36.6/3</a></div>
-<div class="Indented2"><span class="insert3">If Position equals No_Element, 
-then Constraint_Error is propagated; if Position does not designate an 
-element in Container, then Program_Error is propagated. Otherwise, Constant_Reference 
-returns an object whose discriminant is an access value that designates 
-the element designated by Position. Tampering with the elements of Container 
-is prohibited while the object returned by Constant_Reference exists 
-and has not been finalized.</span></div>
-<div class="paranum"><a name="p36.7">36.7/3</a></div>
-<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Set);</span></div>
-<div class="paranum"><a name="p36.8">36.8/3</a></div>
+<div class="paranum"><a name="p36.8">36.8/5</a></div>
+<div class="Indented2"><span class="insert3"></span><span class="insert3"><span class="delete5">If 
+Position equals No_Element, then Constraint_Error is propagated; if Position 
+does not designate an element in Container, then Program_Error is propagated. 
+Otherwise,&nbsp;</span></span><span class="insert3">Constant_Reference returns 
+an object whose discriminant is an access value that designates the element 
+designated by Position. Tampering with the&nbsp;</span><span class="insert5">cursors</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;elements</span></span><span class="insert3">&nbsp;of Container is prohibited while the object returned by Constant_Reference 
+exists and has not been finalized.</span></div>
+<div class="paranum"><a name="p36.9">36.9/5</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Set)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;Length&nbsp;(Target)</span><span class="insert3">;</span></div>
+<div class="paranum"><a name="p36.10">36.10/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
 Target denotes the same object as Source, the operation has no effect. 
-Otherwise, the elements of Source are copied to Target as for an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+Otherwise, the elements of Source are copied to Target as for an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
 assigning Source to Target.</span>&nbsp;</div>
-<div class="paranum"><a name="p37">37/2</a></div>
+<div class="paranum"><a name="p37">37/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Source)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Target&nbsp;=&nbsp;Source&nbsp;<B>then</B>&nbsp;True<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Target)&nbsp;=&nbsp;Length&nbsp;(Source'Old)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;0)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p38">38/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
 Target denotes the same object as Source, then&nbsp;</span><span class="insert3">the 
@@ -280,11 +375,24 @@ is equivalent to Assign (Target, Source) followed by Clear (Source)</span><span 
 first clears Target. Then, each element from Source is removed from Source 
 and inserted into Target. The length of Source is 0 after a successful 
 call to Move</span></span><span class="insert2">.</span></div>
-<div class="paranum"><a name="p39">39/2</a></div>
+<div class="paranum"><a name="p39">39/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserted&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserted&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Container)&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Original_Length&nbsp;:&nbsp;<B>constant</B>&nbsp;Count_Type&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)'Old;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>if</B>&nbsp;Inserted&nbsp;then<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Original_Length&nbsp;+&nbsp;1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Original_Length))</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p40">40/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Insert 
 checks if an element equivalent to New_Item is already present in Container. 
@@ -293,105 +401,162 @@ the matching element. Otherwise, Insert adds New_Item to Container; Inserted
 is set to True and Position designates the newly-inserted element. Any 
 exception raised during allocation is propagated and Container is not 
 modified.</span></div>
-<div class="paranum"><a name="p41">41/2</a></div>
+<div class="paranum"><a name="p41">41/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Container)&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;+&nbsp;1</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p42">42/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Insert 
 inserts New_Item into Container as per the four-parameter Insert, with 
 the difference that if an element equivalent to New_Item is already in 
 the set, then Constraint_Error is propagated.</span></div>
-<div class="paranum"><a name="p43">43/2</a></div>
+<div class="paranum"><a name="p43">43/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Include&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Container)&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Original_Length&nbsp;:&nbsp;<B>constant</B>&nbsp;Count_Type&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)'Old;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>in</B>&nbsp;Original_Length&nbsp;|&nbsp;Original_Length&nbsp;+&nbsp;1)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p44">44/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Include 
 inserts New_Item into Container as per the four-parameter Insert, with 
 the difference that if an element equivalent to New_Item is already in 
 the set, then it is replaced. Any exception raised during assignment 
 is propagated.</span></div>
-<div class="paranum"><a name="p45">45/2</a></div>
+<div class="paranum"><a name="p45">45/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Replace&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p46">46/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Replace 
 checks if an element equivalent to New_Item is already in the set. If 
 a match is found, that element is replaced with New_Item; otherwise, 
 Constraint_Error is propagated.</span></div>
-<div class="paranum"><a name="p47">47/2</a></div>
+<div class="paranum"><a name="p47">47/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Exclude&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Original_Length&nbsp;:&nbsp;<B>constant</B>&nbsp;Count_Type&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)'Old;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)&nbsp;<B>in</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Original_Length&nbsp;-&nbsp;1&nbsp;|&nbsp;Original_Length)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p48">48/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Exclude 
 checks if an element equivalent to Item is present in Container. If a 
 match is found, Exclude removes the element from the set.</span></div>
-<div class="paranum"><a name="p49">49/2</a></div>
+<div class="paranum"><a name="p49">49/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;-&nbsp;1</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p50">50/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Delete 
 checks if an element equivalent to Item is present in Container. If a 
 match is found, Delete removes the element from the set; otherwise, Constraint_Error 
 is propagated.</span></div>
-<div class="paranum"><a name="p51">51/2</a></div>
+<div class="paranum"><a name="p51">51/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
-<div class="paranum"><a name="p52">52/2</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;-&nbsp;1&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;No_Element</span><span class="insert2">;</span></div>
+<div class="paranum"><a name="p52">52/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert2"><span class="delete5">If 
 Position equals No_Element, then Constraint_Error is propagated. If Position 
 does not designate an element in Container, then Program_Error is propagated. 
-Otherwise, Delete removes the element designated by Position from the 
-set. Position is set to No_Element on return.</span></div>
-<div class="paranum"><a name="p53">53/2</a></div>
+Otherwise,&nbsp;</span></span><span class="insert2">Delete removes the element 
+designated by Position from the set.</span><span class="insert2"><span class="delete5">&nbsp;Position is set to No_Element on return.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p53">53/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Union&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p54">54/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Union 
 inserts into Target the elements of Source that are not equivalent to 
 some element already in Target.</span></div>
-<div class="paranum"><a name="p55">55/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Union&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set;</span></div>
+<div class="paranum"><a name="p55">55/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Union&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Union'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Union'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p56">56/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
 a set comprising all of the elements of Left, and the elements of Right 
 that are not equivalent to some element of Left.</span></div>
-<div class="paranum"><a name="p57">57/2</a></div>
+<div class="paranum"><a name="p57">57/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Intersection&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p58">58/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert3">Intersection</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Union</span></span><span class="insert2">&nbsp;deletes from Target the elements of Target that are not equivalent to 
 some element of Source.</span></div>
-<div class="paranum"><a name="p59">59/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Intersection&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set;</span></div>
+<div class="paranum"><a name="p59">59/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Intersection&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Intersection'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Intersection'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p60">60/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
 a set comprising all the elements of Left that are equivalent to the 
 some element of Right.</span></div>
-<div class="paranum"><a name="p61">61/2</a></div>
+<div class="paranum"><a name="p61">61/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Difference&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p62">62/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
 Target denotes the same object as Source, then Difference clears Target. 
 Otherwise, it deletes from Target the elements that are equivalent to 
 some element of Source.</span></div>
-<div class="paranum"><a name="p63">63/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set;</span></div>
+<div class="paranum"><a name="p63">63/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Difference'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Difference'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p64">64/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
 a set comprising the elements of Left that are not equivalent to some 
 element of Right.</span></div>
-<div class="paranum"><a name="p65">65/2</a></div>
+<div class="paranum"><a name="p65">65/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Symmetric_Difference&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p66">66/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
 Target denotes the same object as Source, then Symmetric_Difference clears 
 Target. Otherwise, it deletes from Target the elements that are equivalent 
 to some element of Source, and inserts into Target the elements of Source 
 that are not equivalent to some element of Target.</span></div>
-<div class="paranum"><a name="p67">67/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Symmetric_Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set;</span></div>
+<div class="paranum"><a name="p67">67/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Symmetric_Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Symmetric_Difference'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Symmetric_Difference'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p68">68/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
 a set comprising the elements of Left that are not equivalent to some 
@@ -410,31 +575,68 @@ returns True. Otherwise</span><span class="insert3">,</span><span class="insert2
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
 an element of Subset is not equivalent to some element of Of_Set, then 
 Is_Subset returns False. Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns True.</span></div>
-<div class="paranum"><a name="p73">73/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;First&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p73">73/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;First&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Cursor</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Is_Empty&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;First'Result)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;First'Result&nbsp;=&nbsp;No_Element)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p74">74/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
 Length (Container) = 0, then First returns No_Element. Otherwise, First 
 returns a cursor that designates the first element in Container.</span></div>
-<div class="paranum"><a name="p75">75/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Next&nbsp;(Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p75">75/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;True)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p76">76/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
 a cursor that designates the successor of the element designated by Position. 
 If Position designates the last element, then No_Element is returned. 
 If Position equals No_Element, then No_Element is returned.</span></div>
-<div class="paranum"><a name="p77">77/2</a></div>
-<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Next&nbsp;(Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p76.1">76.1/5</a></div>
+<div class="Examples"><span class="insert5"><B>function</B>&nbsp;Next&nbsp;(Container&nbsp;:&nbsp;Set;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;Last&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Next'Result));</span></div>
+<div class="paranum"><a name="p76.2">76.2/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert5">Returns 
+a cursor designating the successor of the node designated by Position 
+in Container.</span></div>
+<div class="paranum"><a name="p77">77/5</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p78">78/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
 to Position := Next (Position).</span></div>
+<div class="paranum"><a name="p78.1">78.1/5</a></div>
+<div class="Examples"><span class="insert5"><B>procedure</B>&nbsp;Next&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;/=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Position));</span></div>
+<div class="paranum"><a name="p78.2">78.2/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert5">Equivalent 
+to Position := Next (Container, Position).</span></div>
 <div class="paranum"><a name="p79">79/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><SPAN STYLE="font-size: 80%"><I>This 
 paragraph was deleted.</I></SPAN><span class="delete3"></span><span class="insert2"><span class="delete3">Equivalent 
 to Find (Container, Item) /= No_Element.</span></span><span class="delete3"></span></div>
-<div class="paranum"><a name="p80">80/2</a></div>
+<div class="paranum"><a name="p80">80/5</a></div>
 <div class="Examples"><span class="insert2"><B>function</B>&nbsp;Find&nbsp;(Container&nbsp;:&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Cursor</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Find'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;True<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Find'Result))</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p81">81/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
 Length (Container) equals 0, then Find returns No_Element. Otherwise, 
@@ -454,10 +656,11 @@ to Find (Container, Item) /= No_Element.</span></div>
 True if Position designates an element, and returns False otherwise.</span></span><span class="insert2"></span></div>
 <div class="Indented2"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 83 and 84 were moved above.</I></SPAN></span>&nbsp;</div>
-<div class="paranum"><a name="p85">85/2</a></div>
+<div class="paranum"><a name="p85">85/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Iterate<BR>
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor))</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Allows_Exit</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p86">86/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Iterate 
 calls Process.<B>all</B> with a cursor that designates each element in 
@@ -474,46 +677,66 @@ which provides operations that allow set manipulation in terms of a key
 formal function Key of Generic_Keys extracts a key value from an element. 
 It is expected to return the same value each time it is called with a 
 particular element. The behavior of Generic_Keys is unspecified if Key 
-behaves in some other manner.<A NAME="I7600"></A></span></div>
+behaves in some other manner.<A NAME="I8040"></A></span></div>
 <div class="paranum"><a name="p88">88/2</a></div>
 <div class="Normal"><span class="insert2">A key is expected to unambiguously 
 determine a single equivalence class for elements. The behavior of Generic_Keys 
 is unspecified if the formal parameters of this package behave in some 
-other manner.<A NAME="I7601"></A></span></div>
-<div class="paranum"><a name="p89">89/2</a></div>
-<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type;</span></div>
+other manner.<A NAME="I8041"></A></span></div>
+<div class="paranum"><a name="p89">89/5</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p90">90/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
-to Key (Element (Position)).</span>&nbsp;</div>
+to Key (Element (Position)).</span></div>
+<div class="paranum"><a name="p90.1">90.1/5</a></div>
+<div class="Examples"><span class="insert5"><B>function</B>&nbsp;Key&nbsp;(Container&nbsp;:&nbsp;Set;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</span></div>
+<div class="paranum"><a name="p90.2">90.2/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert5">Equivalent 
+to Key (Element (Container, Position)).</span></div>
 <div class="paranum"><a name="p91">91/2</a></div>
 <div class="Normal"><span class="insert2">The subprograms in package 
 Generic_Keys named Contains, Find, Element, Delete, and Exclude, are 
 equivalent to the corresponding subprograms in the parent package, with 
 the difference that the Key parameter is used to locate an element in 
 the set.</span></div>
-<div class="paranum"><a name="p92">92/2</a></div>
+<div class="paranum"><a name="p92">92/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Replace&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p93">93/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
 to Replace_Element (Container, Find (Container, Key), New_Item).</span></div>
-<div class="paranum"><a name="p94">94/2</a></div>
+<div class="paranum"><a name="p94">94/5</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Update_Element_Preserving_Key<BR>
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
-<div class="paranum"><a name="p95">95/3</a></div>
-<div class="Indented2"><span class="insert2">If Position equals No_Element, 
-then Constraint_Error is propagated; if Position does not designate an 
-element in Container, then Program_Error is propagated. Otherwise, Update_Element_Preserving_Key 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type))</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</span><span class="insert2">;</span></div>
+<div class="paranum"><a name="p95">95/5</a></div>
+<div class="Indented2"><span class="insert2"></span><span class="insert2"><span class="delete5">If 
+Position equals No_Element, then Constraint_Error is propagated; if Position 
+does not designate an element in Container, then Program_Error is propagated. 
+Otherwise,&nbsp;</span></span><span class="insert2">Update_Element_Preserving_Key 
 uses Key to save the key value <I>K</I> of the element designated by 
 Position. Update_Element_Preserving_Key then calls Process.<B>all</B> 
 with that element as the argument.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
-is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of Container</span><span class="insert3">&nbsp;is prohibited 
-during the execution of the call on Process.<B>all</B></span><span class="insert2">. 
-Any exception raised by Process.<B>all</B> is propagated. After Process.<B>all</B> 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the&nbsp;</span><span class="insert5">cursors</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;elements</span></span><span class="insert2">&nbsp;of Container</span><span class="insert3">&nbsp;is prohibited during the execution 
+of the call on Process.<B>all</B></span><span class="insert2">. Any exception 
+raised by Process.<B>all</B> is propagated. After Process.<B>all</B> 
 returns, Update_Element_Preserving_Key checks if <I>K</I> determines 
 the same equivalence class as that for the new element; if not, the element 
 is removed from the set and Program_Error is propagated.</span></div>
@@ -521,40 +744,51 @@ is removed from the set and Program_Error is propagated.</span></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
 Element_Type is unconstrained and definite, then the actual Element parameter 
 of Process.<B>all</B> shall be unconstrained.</span></div>
-<div class="paranum"><a name="p96.1">96.1/3</a></div>
+<div class="paranum"><a name="p96.1">96.1/5</a></div>
 <div class="Examples"><span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element</span><span class="insert5">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.2">96.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">The 
-type Reference_Type needs finalization.<A NAME="I7602"></A></span></div>
-<div class="paranum"><a name="p96.3">96.3/3</a></div>
-<div class="Indented2"><span class="insert3">The default initialization 
-of an object of type Reference_Type propagates Program_Error.</span></div>
-<div class="paranum"><a name="p96.4">96.4/3</a></div>
+type Reference_Type needs finalization.<A NAME="I8042"></A></span></div>
+<div class="paranum"><a name="p96.3">96.3/5</a></div>
+<div class="Indented2"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;The 
+default initialization of an object of type Reference_Type propagates 
+Program_Error.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p96.4">96.4/5</a></div>
 <div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference_Preserving_Key&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.5">96.5/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
 function (combined with the Implicit_Dereference aspect) provides a convenient 
 way to gain read and write access to an individual element of a set given 
 a cursor.</span></div>
-<div class="paranum"><a name="p96.6">96.6/3</a></div>
-<div class="Indented2"><span class="insert3">If Position equals No_Element, 
-then Constraint_Error is propagated; if Position does not designate an 
-element in Container, then Program_Error is propagated. Otherwise, Reference_Preserving_Key 
+<div class="paranum"><a name="p96.6">96.6/5</a></div>
+<div class="Indented2"><span class="insert3"></span><span class="insert3"><span class="delete5">If 
+Position equals No_Element, then Constraint_Error is propagated; if Position 
+does not designate an element in Container, then Program_Error is propagated. 
+Otherwise,&nbsp;</span></span><span class="insert3">Reference_Preserving_Key 
 uses Key to save the key value <I>K</I>; then returns an object whose 
 discriminant is an access value that designates the element designated 
-by Position. Tampering with the elements of Container is prohibited while 
-the object returned by Reference_Preserving_Key exists and has not been 
-finalized. When the object returned by Reference_Preserving_Key is finalized, 
-a check is made if <I>K</I> determines the same equivalence class as 
-that for the new element; if not, the element is removed from the set 
-and Program_Error is propagated.</span></div>
-<div class="paranum"><a name="p96.7">96.7/3</a></div>
+by Position. Tampering with the&nbsp;</span><span class="insert5">cursors</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;elements</span></span><span class="insert3">&nbsp;of Container is prohibited while the object returned by Reference_Preserving_Key 
+exists and has not been finalized. When the object returned by Reference_Preserving_Key 
+is finalized, a check is made if <I>K</I> determines the same equivalence 
+class as that for the new element; if not, the element is removed from 
+the set and Program_Error is propagated.</span></div>
+<div class="paranum"><a name="p96.7">96.7/5</a></div>
 <div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.8">96.8/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
 function (combined with the Implicit_Dereference aspect) provides a convenient 
@@ -563,10 +797,12 @@ value.</span></div>
 <div class="paranum"><a name="p96.9">96.9/3</a></div>
 <div class="Indented2"><span class="insert3">Equivalent to Constant_Reference 
 (Container, Find (Container, Key)).</span></div>
-<div class="paranum"><a name="p96.10">96.10/3</a></div>
+<div class="paranum"><a name="p96.10">96.10/5</a></div>
 <div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference_Preserving_Key&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.11">96.11/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
 function (combined with the Implicit_Dereference aspect) provides a convenient 
@@ -575,37 +811,74 @@ a key value.</span></div>
 <div class="paranum"><a name="p96.12">96.12/3</a></div>
 <div class="Indented2"><span class="insert3">Equivalent to Reference_Preserving_Key 
 (Container, Find (Container, Key)).</span>&nbsp;</div>
+<div class="paranum"><a name="p96.13">96.13/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5">The nested package Stable 
+provides a type Stable.Set that represents a <I>stable</I> set,<A NAME="I8043"></A> 
+which is one that cannot grow and shrink. Such a list can be created 
+by calling the Copy function, or by establishing a <I>stabilized view</I> 
+of a regular set.<A NAME="I8044"></A></span></div>
+<div class="paranum"><a name="p96.14">96.14/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert5">The 
+subprograms of the set package that have a parameter or result of type 
+Set are included in the nested package Stable with the same specification, 
+except that the following are omitted:</span></div>
+<div class="paranum"><a name="p96.15">96.15/5</a></div>
+<div class="Indented1"><span class="insert5">Tampering_With_Cursors_Prohibited, 
+Assign, Move, Insert, Include, Clear, Delete, Exclude, Replace, Replace_Element, 
+procedures Union, Intersection, Difference, and Symmetric_Difference, 
+(for Ordered_sets) Delete_First and Delete_Last, and (for Hashed_sets) 
+Reserve_Capacity</span>&nbsp;</div>
+<div class="paranum"><a name="p96.16">96.16/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5">The operations of this package 
+are equivalent to those for regular sets, except that the calls to Tampering_With_Cursors_Prohibited 
+that occur in preconditions are replaced by False, and any that occur 
+in postconditions are replaced by True.</span></div>
+<div class="paranum"><a name="p96.17">96.17/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5">If a stable set is declared 
+with the Base discriminant designating a pre-existing regular set, the 
+stable set represents a stabilized view of the underlying regular set, 
+and any operation on the stable set is reflected on the underlying regular 
+set. While a stabilized view exists, any operation that tampers with 
+cursors performed on the underlying set is prohibited. The finalization 
+of a stable set that provides such a view removes this restriction on 
+the underlying regular set (though some other restriction might exist 
+due to other concurrent iterations or stabilized views).</span></div>
+<div class="paranum"><a name="p96.18">96.18/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5">If a stable set is declared 
+without specifying Base, the object must be initialized. The initializing 
+expression of the stable set, typically a call on Copy, determines the 
+Length of the set. The Length of a stable set never changes after initialization.</span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
-<div class="paranum"><a name="p96.13">96.13/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I7603"></A>It is 
+<div class="paranum"><a name="p96.19">96.19/3</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I8045"></A>It is 
 a bounded error for the actual function associated with a generic formal 
 subprogram, when called as part of an operation of a set package, to 
 tamper with elements of any set parameter of the operation. Either Program_Error 
 is raised, or the operation works as defined on the value of the set 
 either prior to, or subsequent to, some or all of the modifications to 
-the set.</span></div>
-<div class="paranum"><a name="p96.14">96.14/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I7604"></A>It is 
+the set.<A NAME="I8046"></A></span></div>
+<div class="paranum"><a name="p96.20">96.20/3</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I8047"></A>It is 
 a bounded error to call any subprogram declared in the visible part of 
 a set package when the associated container has been finalized. If the 
 operation takes Container as an <B>in out</B> parameter, then it raises 
 Constraint_Error or Program_Error. Otherwise, the operation either proceeds 
-as it would for an empty container, or it raises Constraint_Error or 
-Program_Error.</span>&nbsp;</div>
+as it would for an empty container, or it raises Constraint_Error or<A NAME="I8048"></A> 
+Program_Error.<A NAME="I8049"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p97">97/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">A 
 Cursor value is <I>invalid</I> if any of the following have occurred 
-since it was created:<A NAME="I7605"></A> <A NAME="I7606"></A></span></div>
+since it was created:<A NAME="I8050"></A> <A NAME="I8051"></A></span></div>
 <div class="paranum"><a name="p98">98/2</a></div>
 <div class="Bulleted"><span class="insert2">The set that contains the 
 element it designates has been finalized;</span></div>
 <div class="paranum"><a name="p98.1">98.1/3</a></div>
 <div class="Bulleted"><span class="insert3">The set that contains the 
 element it designates has been used as the Target of a call to Assign, 
-or as the target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>;</span></div>
+or as the target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN>;</span></div>
 <div class="paranum"><a name="p99">99/2</a></div>
 <div class="Bulleted"><span class="insert2">The set that contains the 
 element it designates has been used as the Source or Target of a call 
@@ -617,9 +890,9 @@ element</span><span class="insert2">.</span>&nbsp;</div>
 <div class="paranum"><a name="p101">101/2</a></div>
 <div class="Normal">&nbsp;<span class="insert2">The result of &quot;=&quot; 
 or Has_Element is unspecified if these functions are called with an invalid 
-cursor parameter.<A NAME="I7607"></A> Execution is erroneous if any other 
+cursor parameter.<A NAME="I8052"></A> Execution is erroneous if any other 
 subprogram declared in Containers.Hashed_Sets or Containers.Ordered_Sets 
-is called with an invalid cursor parameter.<A NAME="I7608"></A></span></div>
+is called with an invalid cursor parameter.<A NAME="I8053"></A></span></div>
 <div class="paranum"><a name="p101.1">101.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Execution is erroneous if 
 the set associated with the result of a call to Reference or Constant_Reference 
@@ -631,7 +904,7 @@ or Constant_Reference is finalized.</span>&nbsp;</div>
 <div class="Normal">&nbsp;<span class="insert2">No storage associated with 
 a Set object shall be lost upon assignment or scope exit.</span></div>
 <div class="paranum"><a name="p103">103/3</a></div>
-<div class="Normal">&nbsp;<span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+<div class="Normal">&nbsp;<span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
 for a set shall have the effect of copying the elements from the source 
 set object to the target set object</span><span class="insert3">&nbsp;and 
 changing the length of the target object to that of the source object</span><span class="insert2">.</span></div>
@@ -647,7 +920,7 @@ from a set unless specified by the operation.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

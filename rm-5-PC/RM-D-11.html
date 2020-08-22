@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -47,17 +47,17 @@ priority</I> value to represent the task's <I>held</I> state.&nbsp;</div>
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
-<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8315"></A><BR>
+<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8893"></A><BR>
 &nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Asynchronous_Task_Control);</span><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8316"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8317"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8318"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8894"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8895"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8896"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Asynchronous_Task_Control;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><A NAME="I8319"></A><A NAME="I8320"></A><A NAME="I8321"></A>After 
+<div class="Normal"><A NAME="I8897"></A><A NAME="I8898"></A><A NAME="I8899"></A>After 
 the Hold operation has been applied to a task, the task becomes <I>held</I>. 
 For each processor there is a conceptual <I>idle task</I>, which is always 
 ready. The base priority of the idle task is below System.Any_Priority'First. 
@@ -79,13 +79,12 @@ policy associated with its base priority.</div>
 T is in the held state.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">As part of these operations, a check is made that 
-the task identified by T is not terminated. <A NAME="I8322"></A>Tasking_Error 
-is raised if the check fails. <A NAME="I8323"></A>Program_Error is raised 
-if the value of T is Null_Task_Id.</div>
+the task identified by T is not terminated. Tasking_Error is raised if 
+the check fails. Program_Error is raised if the value of T is Null_Task_Id.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8324"></A>If any operation in this package 
+<div class="Normal"><A NAME="I8900"></A>If any operation in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 
@@ -124,9 +123,9 @@ executing the corresponding construct.</div>
 accepting task is not affected.</div>
 <div class="paranum"><a name="p18">18/1</a></div>
 <div class="Indented2SmallBulleted">If a task becomes held while waiting 
-in a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0248">selective_accept</A></SPAN>, 
+in a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0270">selective_accept</A></SPAN>, 
 and an entry call is issued to one of the open entries, the corresponding 
-<SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0251">accept_alternative</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0273">accept_alternative</A></SPAN> 
 executes. When the rendezvous completes, the active priority of the accepting 
 task is lowered to the held priority (unless it is still inheriting from 
 other sources), and the task does not execute until another Continue.</div>
@@ -137,7 +136,7 @@ The corresponding entry body executes.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

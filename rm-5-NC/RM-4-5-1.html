@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,20 +37,20 @@
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2794"></A><A NAME="I2795"></A><A NAME="I2796"></A>An 
-<SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-consisting of two <SPAN Class="swiss"><A HREF="RM-4-4.html#S0125">relation</A></SPAN>s 
+<div class="Normal"><A NAME="I2853"></A><A NAME="I2854"></A><A NAME="I2855"></A>An 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+consisting of two <SPAN Class="swiss"><A HREF="RM-4-4.html#S0135">relation</A></SPAN>s 
 connected by <B>and then</B> or <B>or else</B> (a <I>short-circuit control 
-form</I>) shall resolve to be of some boolean type; <A NAME="I2797"></A>the 
-expected type for both <SPAN Class="swiss"><A HREF="RM-4-4.html#S0125">relation</A></SPAN>s 
+form</I>) shall resolve to be of some boolean type; <A NAME="I2856"></A>the 
+expected type for both <SPAN Class="swiss"><A HREF="RM-4-4.html#S0135">relation</A></SPAN>s 
 is that same boolean type.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2798"></A><A NAME="I2799"></A><A NAME="I2800"></A><A NAME="I2801"></A><A NAME="I2802"></A><A NAME="I2803"></A><A NAME="I2804"></A><A NAME="I2805"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2857"></A><A NAME="I2858"></A><A NAME="I2859"></A><A NAME="I2860"></A><A NAME="I2861"></A><A NAME="I2862"></A><A NAME="I2863"></A><A NAME="I2864"></A>The 
 following logical operators are predefined for every boolean type <I>T</I>, 
 for every modular type <I>T</I>, and for every one-dimensional array 
-type <I>T</I> whose component type is a boolean type: <A NAME="I2806"></A></div>
+type <I>T</I> whose component type is a boolean type: <A NAME="I2865"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>and</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
 <B>function</B>&nbsp;&quot;<B>or</B>&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
@@ -75,17 +75,17 @@ array are those of the left operand.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2807"></A>The short-circuit control forms 
+<div class="Normal"><A NAME="I2866"></A>The short-circuit control forms 
 <B>and then</B> and <B>or else</B> deliver the same result as the corresponding 
 predefined <B>and</B> and <B>or</B> operators for boolean types, except 
 that the left operand is always evaluated first, and the right operand 
 is not evaluated if the value of the left operand determines the result.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2808"></A><A NAME="I2809"></A>For the logical 
+<div class="Normal"><A NAME="I2867"></A><A NAME="I2868"></A>For the logical 
 operators on arrays, a check is made that for each component of the left 
 operand there is a matching component of the right operand, and vice 
-versa. <A NAME="I2810"></A><A NAME="I2811"></A>Also, a check is made 
-that each component of the result belongs to the component subtype. <A NAME="I2812"></A>The 
+versa. <A NAME="I2869"></A><A NAME="I2870"></A>Also, a check is made 
+that each component of the result belongs to the component subtype. <A NAME="I2871"></A>The 
 exception Constraint_Error is raised if either of the above checks fails. 
 </div>
 <div class="NotesHeader">NOTES</div>
@@ -117,7 +117,7 @@ N&nbsp;=&nbsp;0&nbsp;<B>or</B>&nbsp;<B>else</B>&nbsp;A(N)&nbsp;=&nbsp;Hit_Value<
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

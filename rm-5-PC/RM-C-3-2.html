@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,50 +40,50 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 packages exist:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><B>with</B>&nbsp;System;<A NAME="I7971"></A><BR>
+<div class="Examples"><B>with</B>&nbsp;System;<A NAME="I8510"></A><BR>
 <B>with</B>&nbsp;System.Multiprocessors;<BR>
 <B>package</B>&nbsp;Ada.Interrupts<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;</span><B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7972"></A>Interrupt_Id&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7973"></A>Parameterless_Handler&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8511"></A>Interrupt_Id&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8512"></A>Parameterless_Handler&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;<B>protected</B>&nbsp;<B>procedure</B><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p3">3/1</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7974"></A>Is_Reserved&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8513"></A>Is_Reserved&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7975"></A>Is_Attached&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8514"></A>Is_Attached&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7976"></A>Current_Handler&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8515"></A>Current_Handler&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Parameterless_Handler;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7977"></A>Attach_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8516"></A>Attach_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(New_Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupt&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7978"></A>Exchange_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8517"></A>Exchange_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Old_Handler&nbsp;:&nbsp;<B>out</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupt&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7979"></A>Detach_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8518"></A>Detach_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Interrupt&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7980"></A>Reference&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8519"></A>Reference&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Address;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7981"></A>Get_CPU&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8520"></A>Get_CPU&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Multiprocessors.CPU_Range;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Interrupts;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Interrupts.Names&nbsp;<B>is</B><A NAME="I7982"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Interrupts.Names&nbsp;<B>is</B><A NAME="I8521"></A><BR>
 &nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;Interrupt_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;.&nbsp;.<BR>
@@ -109,10 +109,10 @@ handler is attached to the interrupt, Current_Handler returns <B>null</B>.</div>
 <div class="Normal">The Attach_Handler procedure attaches the specified 
 handler to the interrupt, overriding any existing treatment (including 
 a user handler) in effect for that interrupt. If New_Handler is <B>null</B>, 
-the default treatment is restored. <A NAME="I7983"></A>If New_Handler 
-designates a protected procedure for which the aspect Interrupt_Handler 
-is False, Program_Error is raised. In this case, the operation does not 
-modify the existing interrupt treatment.</div>
+the default treatment is restored. If New_Handler designates a protected 
+procedure for which the aspect Interrupt_Handler is False, Program_Error 
+is raised. In this case, the operation does not modify the existing interrupt 
+treatment.</div>
 <div class="paranum"><a name="p18">18/1</a></div>
 <div class="Normal">The Exchange_Handler procedure operates in the same 
 manner as Attach_Handler with the addition that the value returned in 
@@ -126,18 +126,18 @@ treatment for the specified interrupt.</div>
 <div class="Normal">For all operations defined in this package that take 
 a parameter of type Interrupt_Id, with the exception of Is_Reserved and 
 Reference, a check is made that the specified interrupt is not reserved. 
-<A NAME="I7984"></A>Program_Error is raised if this check fails.</div>
+<A NAME="I8522"></A>Program_Error is raised if this check fails.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal">If, by using the Attach_Handler, Detach_Handler, 
 or Exchange_Handler procedures, an attempt is made to detach a handler 
 that was attached statically (using the aspect Attach_Handler), the handler 
-is not detached and Program_Error is raised. <A NAME="I7985"></A></div>
+is not detached and Program_Error is raised.</div>
 <div class="paranum"><a name="p22">22/2</a></div>
 <div class="Normal">The Reference function returns a value of type System.Address 
 that can be used to attach a task entry via an address clause (see <A HREF="RM-J-7-1.html">J.7.1</A>) 
 to the interrupt specified by Interrupt. This function raises Program_Error 
 if attaching task entries to interrupts (or to this particular interrupt) 
-is not supported. <A NAME="I7986"></A></div>
+is not supported.</div>
 <div class="paranum"><a name="p22.1">22.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;The function Get_CPU returns the processor on which 
 the handler for Interrupt is executed. If the handler can execute on 
@@ -150,9 +150,10 @@ is returned.</div>
 shall the current handler of the corresponding interrupt be undefined.</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
-<div class="paranum"><a name="p24">24/3</a></div>
-<div class="Normal">If the Ceiling_Locking policy (see <A HREF="RM-D-3.html">D.3</A>) 
-is in effect, the implementation shall document the default ceiling priority 
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Normal"><span class="insert5">The implementation shall document, 
+when</span><span class="delete5">&nbsp;If</span> the Ceiling_Locking policy 
+(see <A HREF="RM-D-3.html">D.3</A>) is in effect,<span class="delete5">&nbsp;the implementation shall document</span> the default ceiling priority 
 assigned to a protected object that contains a protected procedure that 
 specifies either the Attach_Handler or Interrupt_Handler aspects, but 
 does not specify the Interrupt_Priority aspect. This default need not 
@@ -194,7 +195,7 @@ Device_5_Driver&nbsp;:&nbsp;Device_Interface(5);<BR>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

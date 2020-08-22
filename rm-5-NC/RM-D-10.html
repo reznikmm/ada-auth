@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,14 +43,14 @@ queues.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Task_Control<A NAME="I8274"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Task_Control<A NAME="I8806"></A><BR>
 &nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8275"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8276"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8277"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8278"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8279"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8807"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8808"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8809"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8810"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8811"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -63,8 +63,8 @@ package exists:&nbsp;</div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>package</B>&nbsp;Ada.Synchronous_Task_Control.EDF<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><A NAME="I8280"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8281"></A>Suspend_Until_True_And_Set_Deadline<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><A NAME="I8812"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8813"></A>Suspend_Until_True_And_Set_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(S&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Suspension_Object;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Span)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;<BR>
@@ -103,7 +103,8 @@ waiting on that suspension object.&nbsp;</div>
 call Suspend_Until_True on the same Suspension_Object concurrently. For 
 each task, Program_Error might be raised, the task might proceed without 
 suspending, or the task might suspend, potentially indefinitely. The 
-state of the suspension object might end up either True or False.&nbsp;</div>
+state of the suspension object might end up either True or False.<A NAME="I8814"></A> 
+</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p12">12</a></div>
@@ -112,13 +113,13 @@ of Set_False and Set_True during any protected action, even one that
 has its ceiling priority in the Interrupt_Priority range.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Notes">37&nbsp;&nbsp;More complex schemes, such as setting 
+<div class="Notes">36&nbsp;&nbsp;More complex schemes, such as setting 
 the deadline relative to when Set_True is called, can be programmed using 
 a protected object.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

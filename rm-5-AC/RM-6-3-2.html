@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -47,14 +47,14 @@ Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><span class="delete3"><A NAME="I3716"></A><A NAME="I3717"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><span class="delete3"><A NAME="I3921"></A><A NAME="I3922"></A>The 
 form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Inline, which is a program unit pragma (see <A HREF="RM-10-1-5.html">10.1.5</A>), 
 is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I3718"></A><A NAME="I3719"></A>Inline(<A NAME="I3720"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-{, <A NAME="I3721"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</span> 
+<A NAME="I3923"></A><A NAME="I3924"></A>Inline(<A NAME="I3925"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+{, <A NAME="I3926"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</span> 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -80,10 +80,10 @@ of that generic subprogram.</span></div>
 Inline is True for a callable entity, inline expansion is desired for 
 all calls to that entity. When aspect Inline is True for a generic subprogram, 
 inline expansion is desired for all calls to all instances of that generic 
-subprogram.<A NAME="I3722"></A><A NAME="I3723"></A></span></div>
+subprogram.<A NAME="I3927"></A><A NAME="I3928"></A></span></div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
 <div class="WideHanging-Body"><span class="insert3">If directly specified, 
-the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. This aspect is never inherited; if not 
 directly specified, the aspect is False.</span></div>
 
@@ -97,12 +97,12 @@ by the <span class="insert3">Inline aspect</span><span class="delete3"><SPAN Cla
 <div class="Normal">&nbsp;<span class="delete3"></span><span class="insert2"><span class="delete3">An 
 implementation may allow a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Inline that has an argument which is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
-denoting a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN> 
+denoting a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
 of the same <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>.</span></span><span class="delete3"></span> 
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Notes">9&nbsp;&nbsp;<span class="delete3">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Notes">11&nbsp;&nbsp;<span class="delete3">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Inline can denote more than one entity in the case of overloading. Such 
 a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> applies 
@@ -110,7 +110,7 @@ to all of the denoted entities.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

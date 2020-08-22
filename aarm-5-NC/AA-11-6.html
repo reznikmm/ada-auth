@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-11-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,14 +39,14 @@
 <H1>11.6 Exceptions and Optimization</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-[<A NAME="I5314"></A> <A NAME="I5315"></A><A NAME="I5316"></A><A NAME="I5317"></A><A NAME="I5318"></A><A NAME="I5319"></A>This 
+[<A NAME="I5549"></A> <A NAME="I5550"></A><A NAME="I5551"></A><A NAME="I5552"></A><A NAME="I5553"></A><A NAME="I5554"></A>This 
 subclause gives permission to the implementation to perform certain &ldquo;optimizations&rdquo; 
 that do not necessarily preserve the canonical semantics.]&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I5320"></A>The rest of this International Standard (outside 
+<A NAME="I5555"></A>The rest of this International Standard (outside 
 this subclause) defines the <I>canonical semantics</I> of the language. 
 [The canonical semantics of a given (legal) program determines a set 
 of possible external effects that can result from the execution of the 
@@ -95,7 +95,7 @@ not be any constraints on the machine code executed in those circumstances.
 <div class="Normal" style="margin-bottom: 0.4em">The following additional 
 permissions are granted to the implementation:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted"><A NAME="I5321"></A><A NAME="I5322"></A>An implementation 
+<div class="Bulleted"><A NAME="I5556"></A><A NAME="I5557"></A>An implementation 
 need not always raise an exception when a language-defined check fails. 
 Instead, the operation that failed the check can simply yield an <I>undefined 
 result</I>. The exception need be raised by the implementation only if, 
@@ -158,19 +158,19 @@ if the code to evaluate 'Last always yields 10 by presuming that X.all
 belongs to the subtype Str10, without even &quot;looking.&quot;&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I5323"></A>If an exception is raised due to the failure of a 
-language-defined check, then upon reaching the corresponding <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN> 
+<A NAME="I5558"></A>If an exception is raised due to the failure of a 
+language-defined check, then upon reaching the corresponding <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN> 
 (or the termination of the task, if none), the external interactions 
 that have occurred need reflect only that the exception was raised somewhere 
-within the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-with the handler (or the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>), 
+within the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+with the handler (or the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>), 
 possibly earlier (or later if the interactions are independent of the 
 result of the checked operation) than that defined by the canonical semantics, 
 but not within the execution of some abort-deferred operation or <I>independent</I> 
 subprogram that does not dynamically enclose the execution of the construct 
-whose check failed. <A NAME="I5324"></A>An independent subprogram is 
+whose check failed. <A NAME="I5559"></A>An independent subprogram is 
 one that is defined outside the library unit containing the construct 
-whose check failed, and for which the Inline aspect is False. <A NAME="I5325"></A><A NAME="I5326"></A><A NAME="I5327"></A>Any 
+whose check failed, and for which the Inline aspect is False. <A NAME="I5560"></A><A NAME="I5561"></A><A NAME="I5562"></A>Any 
 assignment that occurred outside of such abort-deferred operations or 
 independent subprograms can be disrupted by the raising of the exception, 
 causing the object or its parts to become abnormal, and certain subsequent 
@@ -280,7 +280,7 @@ in Clause <A HREF="AA-11.html">11</A>).&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-11-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

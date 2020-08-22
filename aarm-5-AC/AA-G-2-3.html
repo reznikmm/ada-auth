@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -28,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-G-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -68,10 +70,10 @@ the attribute T'Round may be used to imply explicit conversion with rounding
 (see <A HREF="AA-3-5-10.html">3.5.10</A>).</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">When the result type is a floating point type, the 
-accuracy is as given in <A HREF="AA-G-2-1.html">G.2.1</A>. <A NAME="I9919"></A>For 
+accuracy is as given in <A HREF="AA-G-2-1.html">G.2.1</A>. <A NAME="I10534"></A>For 
 some combinations of the operand and result types in the remaining cases, 
 the result is required to belong to a small set of values called the 
-<I>perfect result set</I>; <A NAME="I9920"></A>for other combinations, 
+<I>perfect result set</I>; <A NAME="I10535"></A>for other combinations, 
 it is required merely to belong to a generally larger and implementation-defined 
 set of values called the <I>close result set</I>. When the result type 
 is a decimal fixed point type, the perfect result set contains a single 
@@ -196,15 +198,20 @@ to the close result set.&nbsp;</div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Conditions on 
 a <I>universal_real</I> operand of a fixed point multiplication or division 
 for which the result shall be in the <I>perfect result set</I>.</div>
-<div class="paranum"><a name="p23">23</a></div>
-<div class="Normal">A multiplication P * Q of an operand of a fixed point 
-type F by an operand of an integer type I, or vice-versa, and a division 
-P / Q of an operand of a fixed point type F by an operand of an integer 
-type I, are also allowed. In these cases, the result has a type of F; 
-explicit conversion of the result is never required. The accuracy required 
-in these cases is the same as that required for a multiplication F(P 
-* Q) or a division F(P / Q) obtained by interpreting the operand of the 
-integer type to have a fixed point type with a <I>small</I> of 1.0.</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0300-1.TXT">AI12-0300-1</A></I>} 
+A multiplication P * Q of an operand of a fixed point type F by an operand 
+of <span class="insert5">type Integer</span><span class="delete5">&nbsp;an 
+integer type I</span>, or vice<span class="insert5">&nbsp;</span><span class="delete5">-</span>versa, 
+and a division P / Q of an operand of a fixed point type F by an operand 
+of <span class="insert5">type Integer</span><span class="delete5">&nbsp;an 
+integer type I</span>, are also allowed. In these cases, the result has 
+<span class="insert5">the</span><span class="delete5">&nbsp;a</span> type 
+of F; explicit conversion of the result is never required. The accuracy 
+required in these cases is the same as that required for a multiplication 
+F(P * Q) or a division F(P / Q) obtained by interpreting the operand 
+of the integer type to have a fixed point type with a <I>small</I> of 
+1.0.</div>
 <div class="paranum"><a name="p24">24</a></div>
 <div class="Normal">The accuracy of the result of a conversion from an 
 integer or fixed point type to a fixed point type, or from a fixed point 
@@ -218,13 +225,13 @@ operand to a fixed point type shall belong to the perfect result set.</div>
 <div class="Normal">The possibility of overflow in the result of a predefined 
 arithmetic operation or conversion yielding a result of a fixed point 
 type T is analogous to that for floating point types, except for being 
-related to the base range instead of the safe range. <A NAME="I9921"></A><A NAME="I9922"></A>If 
+related to the base range instead of the safe range. <A NAME="I10536"></A><A NAME="I10537"></A>If 
 all of the permitted results belong to the base range of T, then the 
 implementation shall deliver one of the permitted results; otherwise, 
 </div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Bulleted"><A NAME="I9923"></A>if T'Machine_Overflows is True, 
-the implementation shall either deliver one of the permitted results 
+<div class="Bulleted"><A NAME="I10538"></A>if T'Machine_Overflows is 
+True, the implementation shall either deliver one of the permitted results 
 or raise Constraint_Error;</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Bulleted">if T'Machine_Overflows is False, the result is 
@@ -236,7 +243,7 @@ attribute of the result type is False.</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p27.b">27.b</a></div>
-<div class="Annotations"><A NAME="I9924"></A>Since the values of a fixed 
+<div class="Annotations"><A NAME="I10539"></A>Since the values of a fixed 
 point type are now just the integer multiples of its <I>small</I>, the 
 possibility of using extra bits available in the chosen representation 
 for extra accuracy rather than for increasing the base range would appear 
@@ -270,9 +277,17 @@ those adjacent values is allowed);</div>
 <div class="SmallBulleted">a case where the accuracy is not specified 
 by the language.&nbsp;</div>
 
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p27.g">27.g/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0300-1.TXT">AI12-0300-1</A></I>} 
+<span class="insert5"><B>Correction:</B> Reworded the fixed*integer accuracy 
+requirements to clarify that the only allowed integer type in such operations 
+is Standard.Integer. We make this correction as readers of the Standard 
+have been confused on this point.</span>&nbsp;</div>
+
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-G-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

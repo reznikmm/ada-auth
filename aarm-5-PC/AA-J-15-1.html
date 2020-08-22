@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-J-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,11 +40,11 @@
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Inline, which is a program unit pragma (see <A HREF="AA-10-1-5.html">10.1.5</A>), 
-is as follows:<A NAME="I9704"></A> <A NAME="I9705"></A></div>
+is as follows:<A NAME="I10365"></A> <A NAME="I10366"></A></div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9706"></A><A NAME="I9707"></A>Inline 
-(<A NAME="I9708"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>{, 
-<A NAME="I9709"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>}); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10367"></A><A NAME="I10368"></A>Inline 
+(<A NAME="I10369"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>{, 
+<A NAME="I10370"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>}); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -92,7 +92,7 @@ of several overloaded subprograms as follows:</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 An implementation may allow a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Inline that has an argument which is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
-denoting a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+denoting a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 of the same <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>.</div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is allowed for Ada 83 compatibility. 
@@ -117,7 +117,7 @@ to all of the denoted entities.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00309.TXT">AI95-00309-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9710"></A>A pragma Inline cannot refer to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+<A NAME="I10371"></A>A pragma Inline cannot refer to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 outside of that body. The pragma can be given inside of the subprogram 
 body. Ada 2005 adds an Implementation Permission to allow this usage 
 for compatibility (and Ada 95 implementations also can use this permission), 
@@ -127,18 +127,18 @@ but implementations do not have to allow such <SPAN Class="swiss"><A HREF="AA-2-
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9711"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Inline is allowed inside a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
-if there is no corresponding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>. 
+<A NAME="I10372"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Inline is allowed inside a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
+if there is no corresponding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>. 
 This is for uniformity with other program unit pragmas.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p6.c">6.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00309.TXT">AI95-00309-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9712"></A><B>Amendment Correction:</B> Implementations are 
+<A NAME="I10373"></A><B>Amendment Correction:</B> Implementations are 
 allowed to let <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
-Inline apply to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>. 
+Inline apply to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -150,7 +150,7 @@ aspect Inline lives there now.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-J-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

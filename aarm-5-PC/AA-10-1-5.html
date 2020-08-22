@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-10-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,17 +36,17 @@
 <H1>10.1.5 Pragmas and Program Units</H1>
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">[This subclause discusses pragmas related to program 
-units, library units, and <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>s.] 
+units, library units, and <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN>s.] 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I5065"></A><A NAME="I5066"></A>Certain <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
-are defined to be <I>program unit pragmas</I>. <A NAME="I5067"></A>A 
+<div class="Normal"><A NAME="I5307"></A><A NAME="I5308"></A>Certain <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+are defined to be <I>program unit pragmas</I>. <A NAME="I5309"></A>A 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> given 
 as the argument of a program unit pragma shall resolve to denote the 
 declarations or renamings of one or more program units that occur immediately 
-within the declarative region or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
+within the declarative region or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN> 
 in which the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 immediately occurs, or it shall resolve to denote the declaration of 
 the immediately enclosing program unit (if any); the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -63,20 +63,20 @@ will not apply to declarations from outer declarative regions.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">A program unit pragma 
 shall appear in one of these places:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted">At the place of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>, 
+<div class="Bulleted">At the place of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>, 
 in which case the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-shall immediately follow in the same <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
+shall immediately follow in the same <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN> 
 (except for other <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s) 
-a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0266">library_unit_declaration</A></SPAN> 
-that is a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0288">library_unit_declaration</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
 and the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 shall have an argument that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting that declaration.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-has to denote the immediately preceding <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0266">library_unit_declaration</A></SPAN>. 
+has to denote the immediately preceding <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0288">library_unit_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p5">5/1</a></div>
 <div class="Bulleted">{<I><A HREF="defect1.html#8652/0033">8652/0033</A></I>} 
@@ -93,31 +93,31 @@ in this case.&nbsp;</div>
 of a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 or program unit declaration, in which case the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 shall have an argument, which shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
-that denotes one or more of the following (and nothing else): a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>, 
-or a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
+that denotes one or more of the following (and nothing else): a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
 of the same <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 or program unit declaration.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If you want to denote a 
-<SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
-that is not a completion, or a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
+that is not a completion, or a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0229">package_declaration</A></SPAN>, 
 for example, you have to put the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 inside.&nbsp;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0132-1.TXT">AI05-0132-1</A></I>} 
-<A NAME="I5068"></A><A NAME="I5069"></A><A NAME="I5070"></A><A NAME="I5071"></A>Certain 
+<A NAME="I5310"></A><A NAME="I5311"></A><A NAME="I5312"></A><A NAME="I5313"></A>Certain 
 program unit pragmas are defined to be <I>library unit pragmas</I>. If 
 a library unit pragma applies to a program unit, the program unit shall 
 be a library unit.&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This, together with the 
 rules for program unit pragmas above, implies that if a library unit 
-pragma applies to a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
-(and similar things), it has to appear immediately after the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>, 
+pragma applies to a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN> 
+(and similar things), it has to appear immediately after the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>, 
 whereas if the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-applies to a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+applies to a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0229">package_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 that is not a completion (and similar things), it has to appear inside, 
 as the first <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN>. 
 </div>
@@ -132,15 +132,15 @@ its instances, unless a specific rule for the pragma specifies the contrary.
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I5072"></A><A NAME="I5073"></A>Certain <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+<div class="Normal"><A NAME="I5314"></A><A NAME="I5315"></A>Certain <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 are defined to be <I>configuration pragmas</I>; they shall appear before 
-the first <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>. 
+the first <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN>. 
 [They are generally used to select a partition-wide or system-wide option.] 
 The <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-applies to all <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
-appearing in the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>, 
-unless there are none, in which case it applies to all future <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
+applies to all <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>s 
+appearing in the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN>, 
+unless there are none, in which case it applies to all future <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>s 
 compiled into the same environment.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
@@ -148,7 +148,7 @@ compiled into the same environment.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00212.TXT">AI95-00212-01</A></I>} 
 An implementation may require that configuration pragmas that select 
 partition-wide or system-wide options be compiled when the environment 
-contains no <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s 
+contains no <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN>s 
 other than those of the predefined environment. In this case, the implementation 
 shall still accept configuration pragmas in individual compilations that 
 confirm the initially selected partition-wide or system-wide options.</div>
@@ -200,7 +200,7 @@ unit, even if no name is given in the pragma.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-10-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

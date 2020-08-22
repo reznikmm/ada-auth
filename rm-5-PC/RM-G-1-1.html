@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,52 +43,52 @@
 package Numerics.Generic_Complex_Types has the following declaration: 
 </div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><B>generic</B><A NAME="I8587"></A><BR>
+<div class="Examples"><B>generic</B><A NAME="I9161"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Real&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
 <B>package</B>&nbsp;Ada.Numerics.Generic_Complex_Types<span class="delete5">&nbsp;<B>is</B></span><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Pure<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Generic_Complex_Types);</span></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8588"></A>Complex&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9162"></A>Complex&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re,&nbsp;Im&nbsp;:&nbsp;Real'Base;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8589"></A>Imaginary&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9163"></A>Imaginary&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Imaginary);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8590"></A>i&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8591"></A>j&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I9164"></A>i&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9165"></A>j&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8592"></A>Re&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8593"></A>Im&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8594"></A>Im&nbsp;(X&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9166"></A>Re&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9167"></A>Im&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9168"></A>Im&nbsp;(X&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8595"></A>Set_Re&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Complex;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9169"></A>Set_Re&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real'Base);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8596"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9170"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Im&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real'Base);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8597"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9171"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Imaginary;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Im&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real'Base);</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8598"></A>Compose_From_Cartesian&nbsp;(Re,&nbsp;Im&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8599"></A>Compose_From_Cartesian&nbsp;(Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8600"></A>Compose_From_Cartesian&nbsp;(Im&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9172"></A>Compose_From_Cartesian&nbsp;(Re,&nbsp;Im&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9173"></A>Compose_From_Cartesian&nbsp;(Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9174"></A>Compose_From_Cartesian&nbsp;(Im&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8601"></A>Modulus&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9175"></A>Modulus&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>abs</B>&quot;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Real'Base&nbsp;<B>renames</B>&nbsp;Modulus;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8602"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8603"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9176"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9177"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8604"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9178"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8605"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument,&nbsp;Cycle&nbsp;:&nbsp;Real'Base)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9179"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument,&nbsp;Cycle&nbsp;:&nbsp;Real'Base)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8606"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9180"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
@@ -99,7 +99,7 @@ package Numerics.Generic_Complex_Types has the following declaration:
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8607"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;&quot;-&quot;;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9181"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;&quot;-&quot;;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>abs</B>&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
@@ -149,7 +149,7 @@ package Numerics.Generic_Complex_Types has the following declaration:
 <div class="paranum"><a name="p24">24</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Complex_Types;</div>
 <div class="paranum"><a name="p25">25/1</a></div>
-<div class="Normal"><A NAME="I8608"></A>The library package Numerics.Complex_Types 
+<div class="Normal"><A NAME="I9182"></A>The library package Numerics.Complex_Types 
 is declared pure and defines the same types, constants, and subprograms 
 as Numerics.Generic_Complex_Types, except that the predefined type Float 
 is systematically substituted for Real'Base throughout. Nongeneric equivalents 
@@ -227,12 +227,12 @@ the Argument and Compose_From_Polar functions with specified cycle, signaling
 a parameter value outside the domain of the corresponding mathematical 
 function, when the value of the parameter Cycle is zero or negative.</div>
 <div class="paranum"><a name="p40">40</a></div>
-<div class="Normal"><A NAME="I8609"></A><A NAME="I8610"></A><A NAME="I8611"></A>The 
+<div class="Normal"><A NAME="I9183"></A><A NAME="I9184"></A><A NAME="I9185"></A>The 
 exception Constraint_Error is raised by the division operator when the 
 value of the right operand is zero, and by the exponentiation operator 
 when the value of the left operand is zero and the value of the exponent 
 is negative, provided that Real'Machine_Overflows is True; when Real'Machine_Overflows 
-is False, the result is unspecified. <A NAME="I8612"></A>Constraint_Error 
+is False, the result is unspecified. <A NAME="I9186"></A>Constraint_Error 
 can also be raised when a finite result overflows (see <A HREF="RM-G-2-6.html">G.2.6</A>). 
 </div>
 
@@ -243,7 +243,7 @@ the range of intermediate values allowed during the calculation of a
 final result shall not be affected by any range constraint of the subtype 
 Real.&nbsp;</div>
 <div class="paranum"><a name="p42">42</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8613"></A>In 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I9187"></A>In 
 the following cases, evaluation of a complex arithmetic operation shall 
 yield the <I>prescribed result</I>, provided that the preceding rules 
 do not call for an exception to be raised:&nbsp;</div>
@@ -360,7 +360,7 @@ has a nonnegative (resp., negative) value.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

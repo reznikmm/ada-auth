@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,7 +43,7 @@
 The library function Strings.Equal_Case_Insensitive has the following 
 declaration:</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Examples"><B>function</B>&nbsp;Ada.Strings.Equal_Case_Insensitive&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;String)<A NAME="I6921"></A><BR>
+<div class="Examples"><B>function</B>&nbsp;Ada.Strings.Equal_Case_Insensitive&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;String)<A NAME="I7181"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>pragma</B>&nbsp;Pure(Ada.Strings.Equal_Case_Insensitive);</div>
 <div class="paranum"><a name="p3">3/5</a></div>
@@ -70,8 +70,8 @@ case.</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0263-1.TXT">AI12-0263-1</A></I>} 
 <span class="insert5">The &ldquo;documents referenced&rdquo; means Unicode, 
 Chapter 4 (specifically, section 4.2 &mdash; Case). See the Implementation 
-Notes in <A HREF="AA-2-3.html">2.3</A> for a source for machine-readable 
-definitions of this properties.</span>&nbsp;</div>
+Notes in subclause <A HREF="AA-2-3.html">2.3</A> for a source for machine-readable 
+definitions of these properties.</span>&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
@@ -80,7 +80,7 @@ The library function Strings.Fixed.Equal_Case_Insensitive has the following
 declaration:</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Strings.Equal_Case_Insensitive;<BR>
-<B>function</B>&nbsp;Ada.Strings.Fixed.Equal_Case_Insensitive<A NAME="I6922"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Fixed.Equal_Case_Insensitive<A NAME="I7182"></A><BR>
 &nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Strings.Equal_Case_Insensitive;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
@@ -94,7 +94,7 @@ the following declaration:</div>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
-<B>function</B>&nbsp;Ada.Strings.Bounded.Equal_Case_Insensitive<A NAME="I6923"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Bounded.Equal_Case_Insensitive<A NAME="I7183"></A><BR>
 &nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Bounded.Bounded_String)&nbsp;<B>return</B>&nbsp;Boolean<span class="delete5">;</span><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking</span><span class="delete5">(Ada.Strings.Bounded.Equal_Case_Insensitive)</span>;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
@@ -108,7 +108,7 @@ The library function Strings.Unbounded.Equal_Case_Insensitive has the
 following declaration:</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>function</B>&nbsp;Ada.Strings.Unbounded.Equal_Case_Insensitive<A NAME="I6924"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Unbounded.Equal_Case_Insensitive<A NAME="I7184"></A><BR>
 &nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;Boolean<span class="delete5">;</span><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking</span><span class="delete5">(Ada.Strings.Unbounded.Equal_Case_Insensitive)</span>;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -120,7 +120,7 @@ following declaration:</div>
 The library function Strings.Less_Case_Insensitive has the following 
 declaration:</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples"><B>function</B>&nbsp;Ada.Strings.Less_Case_Insensitive&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;String)<A NAME="I6925"></A><BR>
+<div class="Examples"><B>function</B>&nbsp;Ada.Strings.Less_Case_Insensitive&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;String)<A NAME="I7185"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>pragma</B>&nbsp;Pure(Ada.Strings.Less_Case_Insensitive);</div>
 <div class="paranum"><a name="p14">14/3</a></div>
@@ -134,7 +134,7 @@ The library function Strings.Fixed.Less_Case_Insensitive has the following
 declaration:</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Strings.Less_Case_Insensitive;<BR>
-<B>function</B>&nbsp;Ada.Strings.Fixed.Less_Case_Insensitive<A NAME="I6926"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Fixed.Less_Case_Insensitive<A NAME="I7186"></A><BR>
 &nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Strings.Less_Case_Insensitive;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
@@ -148,7 +148,7 @@ the following declaration:</div>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
-<B>function</B>&nbsp;Ada.Strings.Bounded.Less_Case_Insensitive<A NAME="I6927"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Bounded.Less_Case_Insensitive<A NAME="I7187"></A><BR>
 &nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Bounded.Bounded_String)&nbsp;<B>return</B>&nbsp;Boolean<span class="delete5">;</span><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking</span><span class="delete5">(Ada.Strings.Bounded.Less_Case_Insensitive)</span>;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
@@ -162,7 +162,7 @@ The library function Strings.Unbounded.Less_Case_Insensitive has the
 following declaration:</div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>function</B>&nbsp;Ada.Strings.Unbounded.Less_Case_Insensitive<A NAME="I6928"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Unbounded.Less_Case_Insensitive<A NAME="I7188"></A><BR>
 &nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;Boolean<span class="delete5">;</span><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking</span><span class="delete5">(Ada.Strings.Unbounded.Less_Case_Insensitive)</span>;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
@@ -173,14 +173,14 @@ following declaration:</div>
 <div class="paranum"><a name="p22.a">22.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0286-1.TXT">AI05-0286-1</A></I>} 
-<A NAME="I6929"></A>The Strings.Equal_Case_Insensitive, Strings.Fixed.Equal_Case_Insensitive, 
+<A NAME="I7189"></A>The Strings.Equal_Case_Insensitive, Strings.Fixed.Equal_Case_Insensitive, 
 Strings.Bounded.Equal_Case_Insensitive, Strings.Unbounded.Equal_Case_Insensitive, 
 Strings.Less_Case_Insensitive, Strings.Fixed.Less_Case_Insensitive, Strings.Bounded.Less_Case_Insensitive, 
 Strings.Unbounded.Less_Case_Insensitive functions are new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-9-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,7 +36,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><A NAME="I4499"></A><A NAME="I4500"></A>If two different 
+<div class="Normal"><A NAME="I4722"></A><A NAME="I4723"></A>If two different 
 objects, including nonoverlapping parts of the same object, are <I>independently 
 addressable</I>, they can be manipulated concurrently by two different 
 <span class="insert5">logical threads of control</span><span class="delete5">&nbsp;tasks</span> 
@@ -47,7 +47,7 @@ are independently addressable except when they are both parts of a composite
 object for which a nonconfirming value is specified for any of the following 
 representation aspects: (record) Layout, Component_Size, Pack, Atomic, 
 or Convention; in this case it is unspecified whether the parts are independently 
-addressable.<A NAME="I4501"></A>&nbsp;</div>
+addressable.<A NAME="I4724"></A>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
@@ -61,7 +61,7 @@ of variables shared between <span class="insert5">them</span><span class="delete
 tasks</span>. The actions of two different <span class="insert5">logical 
 threads of control</span><span class="delete5">&nbsp;tasks</span> are synchronized 
 in this sense when an action of one <span class="delete5">task&nbsp;</span><I>signals</I> 
-an action of the other<span class="delete5">&nbsp;task</span>; <A NAME="I4502"></A>an 
+an action of the other<span class="delete5">&nbsp;task</span>; <A NAME="I4725"></A>an 
 action A1 is defined to signal an action A2 under the following circumstances: 
 </div>
 <div class="paranum"><a name="p3">3</a></div>
@@ -84,28 +84,34 @@ or a call to Ada.Task_Identification.Is_Terminated with an actual parameter
 that identifies T and a result of True (see <A HREF="RM-C-7-1.html">C.7.1</A>);</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Bulleted">If A1 is the action of issuing an entry call, and 
-A2 is part of the corresponding execution of the appropriate <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN>; 
+A2 is part of the corresponding execution of the appropriate <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN>; 
 </div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Bulleted">If A1 is part of the execution of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN>, 
+<div class="Bulleted">If A1 is part of the execution of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN>, 
 and A2 is the action of returning from the corresponding entry call;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Bulleted">If A1 is part of the execution of a protected procedure 
-body or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
+body or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN> 
 for a given protected object, and A2 is part of a later execution of 
-an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN> 
 for the same protected object;&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">If A1 signals some 
 action that in turn signals A2.&nbsp;</div>
+<div class="paranum"><a name="p10.1">10.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">Action A1 is defined to <I>potentially 
+signal</I> action A2 if A1 signals A2, if action A1 and A2 occur as part 
+of the execution of the same logical thread of control, and the language 
+rules permit action A1 to precede action A2, or if action A1 potentially 
+signals some action that in turn potentially signals A2.<A NAME="I4726"></A></span></div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"><A NAME="I4503"></A>Given 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"><A NAME="I4727"></A>Given 
 an action of assigning to an object, and an action of reading or updating 
 a part of the same object (or of a neighboring object if the two are 
 not independently addressable), then the execution of the actions is 
-erroneous unless the actions are <I>sequential</I>.</span><A NAME="I4504"></A><A NAME="I4505"></A> 
+erroneous unless the actions are <I>sequential</I>.</span><A NAME="I4728"></A><A NAME="I4729"></A> 
 Two actions <span class="insert5">are defined to be <I>sequential</I></span><span class="delete5">&nbsp;are 
 sequential</span> if one of the following is true:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -126,22 +132,23 @@ be specified to ensure that certain reads and updates are sequential
 &mdash; see <A HREF="RM-C-6.html">C.6</A>.&nbsp;</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal"><span class="insert5">Two actions that are not sequential 
-are defined to be <I>concurrent</I> actions.<A NAME="I4506"></A><A NAME="I4507"></A></span></div>
+are defined to be <I>concurrent</I> actions.<A NAME="I4730"></A><A NAME="I4731"></A></span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Normal"><span class="insert5">Two actions are defined to 
-<I>conflict</I> if one action<A NAME="I4508"></A><A NAME="I4509"></A> 
+<I>conflict</I> if one action<A NAME="I4732"></A><A NAME="I4733"></A> 
 assigns to an object, and the other action reads or assigns to a part 
 of the same object (or of a neighboring object if the two are not independently 
 addressable).  The action comprising a call on a subprogram or an entry 
 is defined to <I>potentially conflict</I> with another action if the 
 Global aspect (or Global'Class aspect in the case of a dispatching call) 
-of the called subprogram or entry is such that a conflicting action would 
-be possible during the execution of the call. Similarly two calls are 
-considered to potentially conflict if they each have Global (or Global'Class 
+of the called subprogram or entry is such that a conflicting action<A NAME="I4734"></A><A NAME="I4735"></A><A NAME="I4736"></A> 
+would be possible during the execution of the call. Similarly, two calls 
+are considered to potentially conflict if they each have Global (or Global'Class 
 in the case of a dispatching call) aspects such that conflicting actions 
-would be possible during the execution of the calls.<A NAME="I4510"></A><A NAME="I4511"></A><A NAME="I4512"></A></span></div>
+would be possible during the execution of the calls. Finally, two actions 
+that conflict are also considered to potentially conflict.</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
-<div class="Normal"><span class="insert5">A <I>synchronized</I> object<A NAME="I4513"></A> 
+<div class="Normal"><span class="insert5">A <I>synchronized</I> object<A NAME="I4737"></A> 
 is an object of a task or protected type, an atomic object (see <A HREF="RM-C-6.html">C.6</A>), 
 a suspension object (see <A HREF="RM-D-10.html">D.10</A>), or a synchronous 
 barrier (see <A HREF="RM-D-10-1.html">D.10.1</A>). Operations on such 
@@ -151,13 +158,13 @@ are never considered to conflict.</span></div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="Normal"><span class="insert5">The execution of two concurrent 
-actions is erroneous<A NAME="I4514"></A> if the actions make conflicting 
+actions is erroneous<A NAME="I4738"></A> if the actions make conflicting 
 uses of a shared variable (or neighboring variables that are not independently 
 addressable).</span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-9-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

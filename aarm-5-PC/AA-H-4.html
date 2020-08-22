@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -21,6 +23,8 @@
     DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
@@ -28,9 +32,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-H-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -67,25 +71,25 @@ are language defined:</div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Tasking-related 
 restriction:</B></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9612"></A><A NAME="I9613"></A>No_Protected_Types 
+<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I10231"></A><A NAME="I10232"></A>No_Protected_Types 
 </div><div class="WideHanging-Body"><br clear="left">
 There are no declarations of protected types or protected objects.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Memory-management 
 related restrictions:</B></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I9614"></A><A NAME="I9615"></A>No_Allocators 
+<div class="WideHanging-Term"><A NAME="I10233"></A><A NAME="I10234"></A>No_Allocators 
 </div><div class="WideHanging-Body">
-There are no occurrences of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>.</div>
+There are no occurrences of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>.</div>
 <div class="paranum"><a name="p8">8/1</a></div>
 <div class="WideHanging-Term">{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130</A></I>} 
-<A NAME="I9616"></A><A NAME="I9617"></A>No_Local_Allocators&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-<SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">Allocator</A></SPAN>s 
+<A NAME="I10235"></A><A NAME="I10236"></A>No_Local_Allocators&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">Allocator</A></SPAN>s 
 are prohibited in subprograms, generic subprograms, tasks, and entry 
 bodies.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>Thus <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+<div class="Annotations"><B>Ramification:&nbsp;</B>Thus <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 are permitted only in expressions whose evaluation can only be performed 
 before the main subprogram is invoked.&nbsp;</div>
 <div class="paranum"><a name="p8.b">8.b/1</a></div>
@@ -96,18 +100,18 @@ was deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>}
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0152-1.TXT">AI05-0152-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<A NAME="I9618"></A><A NAME="I9619"></A>No_Anonymous_Allocators&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+<A NAME="I10237"></A><A NAME="I10238"></A>No_Anonymous_Allocators&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 of anonymous access types.</div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
-<A NAME="I9620"></A><A NAME="I9621"></A>No_Coextensions&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I10239"></A><A NAME="I10240"></A>No_Coextensions&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 There are no coextensions. See <A HREF="AA-3-10-2.html">3.10.2</A>.</div>
 <div class="paranum"><a name="p8.3">8.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
-<A NAME="I9622"></A><A NAME="I9623"></A>No_Access_Parameter_Allocators 
+<A NAME="I10241"></A><A NAME="I10242"></A>No_Access_Parameter_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-<SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">Allocator</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">Allocator</A></SPAN>s 
 are not permitted as the actual parameter to an access parameter. See 
 <A HREF="AA-6-1.html">6.1</A>.</div>
 <div class="paranum"><a name="p9">9/2</a></div>
@@ -119,10 +123,10 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 <div class="paranum"><a name="p10">10</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.9em">Immediate_Reclamation 
 </div><div class="WideHanging-Body"><br clear="left">
-Except for storage occupied by objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+Except for storage occupied by objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 and not deallocated via unchecked deallocation, any storage reserved 
 at run time for an object is immediately reclaimed when the object no 
-longer exists. <A NAME="I9624"></A><A NAME="I9625"></A></div>
+longer exists. <A NAME="I10243"></A><A NAME="I10244"></A></div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Immediate reclamation would 
 apply to storage created by the compiler, such as for a return value 
@@ -131,12 +135,12 @@ from a function whose size is not known at the call site.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Exception-related 
 restriction:</B></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9626"></A><A NAME="I9627"></A>No_Exceptions 
+<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I10245"></A><A NAME="I10246"></A>No_Exceptions 
 </div><div class="WideHanging-Body">
-<SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">Raise_statement</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>s 
-are not allowed. No language-defined run-time checks are generated; however, 
-a run-time check performed automatically by the hardware is permitted. 
+<SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">Raise_statement</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN>s 
+are not allowed. No language-defined runtime checks are generated; however, 
+a runtime check performed automatically by the hardware is permitted. 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This restriction mirrors 
@@ -150,7 +154,7 @@ is similar to programming at the assembler level.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Other restrictions:</B></div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="WideHanging-Term"><A NAME="I9628"></A><A NAME="I9629"></A>No_Floating_Point 
+<div class="WideHanging-Term"><A NAME="I10247"></A><A NAME="I10248"></A>No_Floating_Point 
 </div><div class="WideHanging-Body"><br clear="left">
 Uses of predefined floating point types and operations, and declarations 
 of new floating point types, are not allowed.&nbsp;</div>
@@ -165,13 +169,13 @@ and hence not be allowed. This restriction could be used to inform a
 compiler that a variant of the architecture is being used which does 
 not have floating point instructions.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="WideHanging-Term"><A NAME="I9630"></A><A NAME="I9631"></A>No_Fixed_Point 
+<div class="WideHanging-Term"><A NAME="I10249"></A><A NAME="I10250"></A>No_Fixed_Point 
 </div><div class="WideHanging-Body"><br clear="left">
 Uses of predefined fixed point types and operations, and declarations 
 of new fixed point types, are not allowed.&nbsp;</div>
 <div class="paranum"><a name="p15.a">15.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This restriction would have 
-the side effect of prohibiting the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN>. 
+the side effect of prohibiting the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0268">delay_relative_statement</A></SPAN>. 
 As with the No_Floating_Point restriction, this might be used to avoid 
 any question of rounding errors. Unless an Ada run-time is written in 
 Ada, it seems hard to rule out implicit use of fixed point, since at 
@@ -184,7 +188,7 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 <div class="Annotations"></div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="WideHanging-Term">No_Access_Subprograms&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-The declaration of access-to-subprogram types is not allowed. <A NAME="I9632"></A><A NAME="I9633"></A></div>
+The declaration of access-to-subprogram types is not allowed. <A NAME="I10251"></A><A NAME="I10252"></A></div>
 <div class="paranum"><a name="p17.a.1">17.a.1/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Most critical applications 
 would require some restrictions or additional validation checks on uses 
@@ -194,20 +198,21 @@ design requirement has been satisfied. The same applies to several of
 the following restrictions, and to restriction No_Dependence =&gt; Ada.Unchecked_Conversion. 
 </div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="WideHanging-Term"><A NAME="I9634"></A><A NAME="I9635"></A>No_Unchecked_Access 
+<div class="WideHanging-Term"><A NAME="I10253"></A><A NAME="I10254"></A>No_Unchecked_Access 
 </div><div class="WideHanging-Body"><br clear="left">
-The <A NAME="I9636"></A><A NAME="I9637"></A>Unchecked_Access attribute 
+The <A NAME="I10255"></A><A NAME="I10256"></A>Unchecked_Access attribute 
 is not allowed.</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="WideHanging-Term"><A NAME="I9638"></A><A NAME="I9639"></A>No_Dispatch 
+<div class="WideHanging-Term"><A NAME="I10257"></A><A NAME="I10258"></A>No_Dispatch 
 </div><div class="WideHanging-Body">
 Occurrences of T'Class are not allowed, for any (tagged) subtype T.</div>
-<div class="paranum"><a name="p20">20/2</a></div>
+<div class="paranum"><a name="p20">20/5</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<A NAME="I9640"></A><A NAME="I9641"></A>No_IO&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0318-1.TXT">AI12-0318-1</A></I>} 
+<A NAME="I10259"></A><A NAME="I10260"></A>No_IO&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Semantic dependence on any of the library units Sequential_IO, Direct_IO, 
-Text_IO, Wide_Text_IO, Wide_Wide_Text_IO, or Stream_IO is not allowed. 
-</div>
+Text_IO, Wide_Text_IO, Wide_Wide_Text_IO, <span class="delete5">or&nbsp;</span>Stream_IO<span class="insert5">, 
+or Directories</span> is not allowed.&nbsp;</div>
 <div class="paranum"><a name="p20.a">20.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Excluding the input-output 
 facilities of an implementation may be needed in those environments which 
@@ -215,69 +220,164 @@ cannot support the supplied functionality. A program in such an environment
 is likely to require some low level facilities or a call on a non-Ada 
 feature.</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="WideHanging-Term"><A NAME="I9642"></A><A NAME="I9643"></A>No_Delay 
+<div class="WideHanging-Term"><A NAME="I10261"></A><A NAME="I10262"></A>No_Delay 
 </div><div class="WideHanging-Body">
-<SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">Delay_Statement</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">Delay_Statement</A></SPAN>s 
 and semantic dependence on package Calendar are not allowed.&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>This implies that <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>s 
-in a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN> 
+<div class="Annotations"><B>Ramification:&nbsp;</B>This implies that <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0274">delay_alternative</A></SPAN>s 
+in a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0269">select_statement</A></SPAN> 
 are prohibited.</div>
 <div class="paranum"><a name="p21.b">21.b</a></div>
 <div class="Annotations">The purpose of this restriction is to avoid 
 the need for timing facilities within the run-time system.</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="WideHanging-Term"><A NAME="I9644"></A><A NAME="I9645"></A>No_Recursion 
+<div class="WideHanging-Term"><A NAME="I10263"></A><A NAME="I10264"></A>No_Recursion 
 </div><div class="WideHanging-Body">
 As part of the execution of a subprogram, the same subprogram is not 
 invoked.</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="WideHanging-Term"><A NAME="I9646"></A><A NAME="I9647"></A>No_Reentrancy 
+<div class="WideHanging-Term"><A NAME="I10265"></A><A NAME="I10266"></A>No_Reentrancy 
 </div><div class="WideHanging-Body">
 During the execution of a subprogram by a task, no other task invokes 
 the same subprogram.</div>
+<div class="paranum"><a name="p23.1">23.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
+<span class="insert5"><A NAME="I10267"></A><A NAME="I10268"></A>No_Unspecified_Globals</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">No library-level entity shall have a Global aspect 
+of Unspecified, either explicitly or by default. No library-level entity 
+shall have a Global'Class aspect of Unspecified, explicitly or by default, 
+if it is used as part of a dispatching call.</span></div>
+<div class="paranum"><a name="p23.a">23.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>Global'Class 
+need not be specified on an operation if there are no dispatching calls 
+to the operation, or if all of the dispatching calls are covered by <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN>s 
+for operations with such calls (see <A HREF="AA-H-7.html">H.7</A>).</span> 
+</div>
+<div class="paranum"><a name="p23.2">23.2/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
+<span class="insert5"><A NAME="I10269"></A><A NAME="I10270"></A>No_Hidden_Indirect_Globals</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">When within a context where the applicable Global 
+aspect is neither Unspecified nor <B>in out all</B>, any execution within 
+such a context does neither of the following:</span></div>
+<div class="paranum"><a name="p23.3">23.3/5</a></div>
+<div class="Indented4Bulleted"><span class="insert5">Update a variable 
+that is reachable via a sequence of zero or more dereferences of access-to-object 
+values from a formal parameter of mode <B>in</B> (after any <B>overriding</B> 
+&ndash; see <A HREF="AA-H-7.html">H.7</A>), or from a global that is 
+not within the applicable global variable set, or has mode <B>in</B>;</span></div>
+<div class="paranum"><a name="p23.4">23.4/5</a></div>
+<div class="Indented4Bulleted"><span class="insert5">Read a variable 
+that is updatable via a sequence of zero or more dereferences of access-to-object 
+values from a global that is not within the applicable global variable 
+set.</span>&nbsp;</div>
+<div class="paranum"><a name="p23.b">23.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>The 
+above two rules specify that any indirect references are covered by the 
+Global or formal parameter modes that apply, and are <I>not</I> subject 
+to alternative paths of access (such as aliasing) that could result in 
+conflicts.</span>&nbsp;</div>
+<div class="paranum"><a name="p23.5">23.5/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">For the purposes 
+of the above rules, if an applicable global variable set includes a package 
+name, and the collection of some pool-specific access type (see <A HREF="AA-7-6-1.html">7.6.1</A>) 
+is implicitly declared in a part of the declarative region of the package 
+included within the global variable set, then all objects allocated from 
+that collection are considered included within the global variable set.</span></div>
+<div class="paranum"><a name="p23.6">23.6/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">The consequences 
+of violating the No_Hidden_Indirect_Globals restriction is implementation-defined. 
+Any aspects or other means for identifying such violations prior to or 
+during execution are implementation-defined.</span>&nbsp;</div>
+<div class="paranum"><a name="p23.b.1">23.b.1/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation defined: 
+</B></span><span class="insert5">The consequences of violating No_Hidden_Indirect_Globals.</span></div>
+<div class="paranum"><a name="p23.c">23.c/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B>We 
+do not make violations automatically erroneous, because if the implementation 
+chooses to never fully trust it, there is nothing erroneous that can 
+happen. If an implementation chooses to trust the restriction, and performs 
+some optimization as a result of the restriction, the implementation 
+would define such a violation as erroneous. Such an implementation might 
+also endeavor to detect most violations, perhaps by providing additional 
+aspects, thereby reducing the situations which result in erroneous execution. 
+Implementations might detect some but not all violations of the restrictions. 
+Implementations that completely ignore the restriction should treat the 
+restriction as an unsupported capability of <A HREF="AA-H.html">Annex 
+H</A>, &ldquo;<A HREF="AA-H.html">High Integrity Systems</A>&rdquo;.</span> 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p23.7">23.7/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+<span class="insert5">The following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+is language defined:</span></div>
+<div class="paranum"><a name="p23.8">23.8/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5"><A NAME="I10271"></A><A NAME="I10272"></A>Max_Image_Length</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Specifies the maximum length for the result of 
+an Image, Wide_Image, or Wide_Wide_Image attribute. Violation of this 
+restriction results in the raising of Program_Error at the point of the 
+invocation of an image attribute.<A NAME="I10273"></A> <A NAME="I10274"></A><A NAME="I10275"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
-<div class="paranum"><a name="p23.1">23.1/2</a></div>
+<div class="paranum"><a name="p23.9">23.9/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00394.TXT">AI95-00394-01</A></I>} 
 An implementation of this Annex shall support:&nbsp;</div>
-<div class="paranum"><a name="p23.2">23.2/2</a></div>
+<div class="paranum"><a name="p23.10">23.10/5</a></div>
 <div class="Bulleted">the restrictions defined in this subclause; and</div>
-<div class="paranum"><a name="p23.3">23.3/3</a></div>
+<div class="paranum"><a name="p23.11">23.11/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
 the following restrictions defined in <A HREF="AA-D-7.html">D.7</A>: 
 No_Task_Hierarchy, No_Abort_Statement, No_Implicit_Heap_Allocation, No_Standard_Allocators_After_Elaboration; 
 and</div>
-<div class="paranum"><a name="p23.4">23.4/2</a></div>
+<div class="paranum"><a name="p23.12">23.12/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00347.TXT">AI95-00347-01</A></I>} 
 the <B>pragma</B> Profile(Ravenscar); and&nbsp;</div>
-<div class="paranum"><a name="p23.a">23.a/2</a></div>
+<div class="paranum"><a name="p23.d">23.d/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00347.TXT">AI95-00347-01</A></I>} 
 The reference to pragma Profile(Ravenscar) is intended to show that properly 
 restricted tasking is appropriate for use in high integrity systems. 
 The Ada 95 Annex seemed to suggest that tasking was inappropriate for 
 such systems.&nbsp;</div>
-<div class="paranum"><a name="p23.5">23.5/2</a></div>
+<div class="paranum"><a name="p23.13">23.13/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">the following uses 
 of <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
 defined in <A HREF="AA-D-7.html">D.7</A>[, which are checked prior to 
 program execution]:&nbsp;</div>
-<div class="paranum"><a name="p23.6">23.6/2</a></div>
+<div class="paranum"><a name="p23.14">23.14/5</a></div>
 <div class="Indented2NestedBulleted">Max_Task_Entries =&gt; 0,</div>
-<div class="paranum"><a name="p23.7">23.7/2</a></div>
+<div class="paranum"><a name="p23.15">23.15/5</a></div>
 <div class="Indented2NestedBulleted">Max_Asynchronous_Select_Nesting 
 =&gt; 0, and</div>
-<div class="paranum"><a name="p23.8">23.8/2</a></div>
+<div class="paranum"><a name="p23.16">23.16/5</a></div>
 <div class="Indented2NestedBulleted">Max_Tasks =&gt; 0.&nbsp;</div>
-<div class="paranum"><a name="p24">24/3</a></div>
+<div class="paranum"><a name="p23.17">23.17/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+<span class="insert5">If a Max_Image_Length restriction applies to any 
+compilation unit in the partition, then for any subtype S, S'Image, S'Wide_Image, 
+and S'Wide_Wide_Image shall be implemented within that partition without 
+any dynamic allocation.</span></div>
+<div class="paranum"><a name="p23.e">23.e/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+<span class="insert5">Assuming the Implementation Advice is followed, 
+this can be accomplished by using an object of the Text_Buffers.Bounded.Buffer_Type 
+with the maximum characters as specified in the Max_Image_Length restriction.</span> 
+</div>
+<div class="paranum"><a name="p24">24/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0263-1.TXT">AI05-0263-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0308-1.TXT">AI12-0308-1</A></I>} 
 If an implementation supports <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Restrictions for a particular argument, then except for the restrictions 
-No_Unchecked_Deallocation, No_Unchecked_Conversion, No_Access_Subprograms, 
-No_Unchecked_Access, No_Specification_of_Aspect, No_Use_of_Attribute, 
-No_Use_of_Pragma, and the equivalent use of No_Dependence, the associated 
-restriction applies to the run-time system.&nbsp;</div>
+<span class="delete5">No_Unchecked_Deallocation, No_Unchecked_Conversion, 
+</span>No_Access_Subprograms, No_Unchecked_Access, No_Specification_of_Aspect, 
+No_Use_of_Attribute, No_Use_of_Pragma, <span class="insert5">No_Dependence 
+=&gt; Ada.Unchecked_Conversion,&nbsp;</span>and <span class="delete5">the 
+equivalent use of</span> No_Dependence<span class="insert5">&nbsp;=&gt; Ada.Unchecked_Deallocation</span>, 
+the associated restriction applies to the run-time system.&nbsp;</div>
 <div class="paranum"><a name="p24.a">24.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Permission is granted for the 
 run-time system to use the specified otherwise-restricted features, since 
@@ -301,10 +401,12 @@ dependencies could be envisaged.</div>
 <div class="paranum"><a name="p24.d">24.d</a></div>
 <div class="Annotations">If the run-time system is not written in Ada, 
 then the wording needs to be applied in an appropriate fashion.</div>
-<div class="paranum"><a name="p24.e">24.e/3</a></div>
+<div class="paranum"><a name="p24.e">24.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0263-1.TXT">AI05-0263-1</A></I>} 
-&quot;the equivalent use of No_Dependence&quot; refers to <TT>No_Dependence 
-=&gt; Ada.Unchecked_Conversion</TT> and the like, not all uses of No_Dependence.</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0308-1.TXT">AI12-0308-1</A></I>} 
+<span class="delete5">&quot;the equivalent use of No_Dependence&quot; 
+refers to <TT>No_Dependence =&gt; Ada.Unchecked_Conversion</TT> and the 
+like, not all uses of No_Dependence.</span></div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p25">25</a></div>
@@ -331,16 +433,16 @@ it would not be necessary to have the memory access trap mechanism enabled.</div
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Normal"><A NAME="I9648"></A>Program execution is erroneous 
+<div class="Normal"><A NAME="I10276"></A>Program execution is erroneous 
 if pragma Restrictions(No_Exceptions) has been specified and the conditions 
-arise under which a generated language-defined run-time check would fail. 
+arise under which a generated language-defined runtime check would fail. 
 </div>
 <div class="paranum"><a name="p26.a">26.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The situation here is very 
 similar to the application of pragma Suppress. Since users are removing 
 some of the protection the language provides, they had better be careful!</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I9649"></A>Program execution is erroneous 
+<div class="Normal"><A NAME="I10277"></A>Program execution is erroneous 
 if pragma Restrictions(No_Recursion) has been specified and a subprogram 
 is invoked as part of its own execution, or if pragma Restrictions(No_Reentrancy) 
 has been specified and during the execution of a subprogram by a task, 
@@ -376,8 +478,8 @@ of a dangling pointer can therefore be avoided.&nbsp;</div>
 <div class="paranum"><a name="p28.c">28.c/2</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
-<A NAME="I9650"></A>No_Local_Allocators no longer prohibits generic instantiations. 
-</div>
+<A NAME="I10278"></A>No_Local_Allocators no longer prohibits generic 
+instantiations.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
 <div class="paranum"><a name="p28.d">28.d/2</a></div>
@@ -401,7 +503,7 @@ can explain the meaning of) is banished.&nbsp;</div>
 <div class="paranum"><a name="p28.h">28.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0152-1.TXT">AI05-0152-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
-<A NAME="I9651"></A>Restrictions No_Anonymous_Allocators, No_Coextensions, 
+<A NAME="I10279"></A>Restrictions No_Anonymous_Allocators, No_Coextensions, 
 and No_Access_Parameter_Allocators are new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -422,9 +524,30 @@ instance, attempting to write a run-time system for Linux that does not
 use the Import aspect would be very difficult and probably is not what 
 the user is trying to prevent anyway.&nbsp;</div>
 
+<H4 Class="centered">Incompatibilities With Ada 2012</H4>
+<div class="paranum"><a name="p28.l">28.l/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0318-1.TXT">AI12-0318-1</A></I>} 
+<span class="insert5"><A NAME="I10280"></A><B>Correction:</B> Restriction 
+No_IO now excludes use of Ada.Directories. If a program using No_IO used 
+Ada.Directories, it would be legal in Ada 2012 and illegal in Ada 202x. 
+However, given the role of Ada.Directories as a support package for the 
+other packages that are excluded by No_IO, it seems unlikely that any 
+use of the restriction would use this package (and it's possible that 
+implementations wouldn't support its use with No_IO anyway).</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p28.m">28.m/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+<span class="insert5"><A NAME="I10281"></A>Restriction Max_Image_Length 
+is new.</span></div>
+<div class="paranum"><a name="p28.n">28.n/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
+<span class="insert5">Restrictions No_Unspecified_Globals and No_Hidden_Indirect_Globals 
+are new.</span>&nbsp;</div>
+
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-H-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

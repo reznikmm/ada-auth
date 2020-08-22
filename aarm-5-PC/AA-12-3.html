@@ -32,9 +32,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-12-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,24 +43,25 @@
 <HR>
 <H1>12.3 Generic Instantiation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I5382"></A> An instance of a generic unit 
-is declared by a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>.] 
+<div class="Normal">[<A NAME="I5635"></A> An instance of a generic unit 
+is declared by a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>.] 
 </div>
 
 <H4 Class="centered">Language Design Principles</H4>
-<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="paranum"><a name="p1.a">1.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I5383"></A><A NAME="I5384"></A>The legality of an instance should 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0300-1.TXT">AI12-0300-1</A></I>} 
+<A NAME="I5636"></A><A NAME="I5637"></A>The legality of an instance should 
 be determinable without looking at the generic body. Likewise, the legality 
 of a generic body should be determinable without looking at any instances. 
-Thus, the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN> 
+Thus, the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN> 
 forms a contract between the body and the instances; if each obeys the 
-rules with respect to the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN>, 
+rules with respect to the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN>, 
 then no legality problems will arise. This is really a special case of 
 the &ldquo;legality determinable via semantic dependences&rdquo; Language 
 Design Principle (see Clause <A HREF="AA-10.html">10</A>), given that 
-a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
-does not depend semantically upon the generic body, nor vice-versa.</div>
+a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
+does not depend semantically upon the generic body, nor vice<span class="insert5">&nbsp;</span><span class="delete5">-</span>versa.</div>
 <div class="paranum"><a name="p1.b">1.b</a></div>
 <div class="Annotations">Run-time issues are another story. For example, 
 whether parameter passing is by copy or by reference is determined in 
@@ -72,50 +73,60 @@ not apply to Post-Compilation Rules.&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">generic_instantiation</SPAN><A NAME="I5385"></A><A NAME="S0293"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I5386"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I5387"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I5388"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0294">generic_actual_part</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5389"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;[<A NAME="I5390"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5391"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_procedure_</I><A NAME="I5392"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I5393"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0294">generic_actual_part</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5394"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;[<A NAME="I5395"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5396"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0185">defining_designator</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_function_</I><A NAME="I5397"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I5398"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0294">generic_actual_part</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5399"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">generic_instantiation</SPAN><A NAME="I5638"></A><A NAME="S0315"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I5639"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I5640"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I5641"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0316">generic_actual_part</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5642"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;[<A NAME="I5643"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5644"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_procedure_</I><A NAME="I5645"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I5646"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0316">generic_actual_part</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5647"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;[<A NAME="I5648"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5649"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0200">defining_designator</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_function_</I><A NAME="I5650"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I5651"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0316">generic_actual_part</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5652"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_actual_part</SPAN><A NAME="I5400"></A><A NAME="S0294"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;(<A NAME="I5401"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I5402"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">generic_actual_part</SPAN><A NAME="I5653"></A><A NAME="S0316"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I5654"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I5655"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN>})</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_association</SPAN><A NAME="I5403"></A><A NAME="S0295"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<I>generic_formal_parameter_</I><A NAME="I5404"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I5405"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0296">explicit_generic_actual_parameter</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generic_association</SPAN><A NAME="I5656"></A><A NAME="S0317"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>generic_formal_parameter_</I><A NAME="I5657"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I5658"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0318">explicit_generic_actual_parameter</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">explicit_generic_actual_parameter</SPAN><A NAME="I5406"></A><A NAME="S0296"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5407"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I5408"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>subprogram_</I><A NAME="I5409"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<I>entry_</I><A NAME="I5410"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5411"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>package_instance_</I><A NAME="I5412"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">explicit_generic_actual_parameter</SPAN><A NAME="I5659"></A><A NAME="S0318"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5660"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I5661"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>subprogram_</I><A NAME="I5662"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<I>entry_</I><A NAME="I5663"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5664"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>package_instance_</I><A NAME="I5665"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><A NAME="I5413"></A><A NAME="I5414"></A>A <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
+<div class="Indented1"><A NAME="I5666"></A><A NAME="I5667"></A>A <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
 is <I>named</I> or <I>positional</I> according to whether or not the 
 <I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 is specified. Any positional associations shall precede any named associations. 
 </div>
-<div class="paranum"><a name="p7">7/3</a></div>
+<div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<A NAME="I5415"></A><A NAME="I5416"></A><A NAME="I5417"></A>The <I>generic 
-actual parameter</I> is either the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0296">explicit_generic_actual_parameter</A></SPAN> 
-given in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
-for each formal, or the corresponding <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0317">default_name</A></SPAN> 
-if no <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0205-1.TXT">AI12-0205-1</A></I>} 
+<A NAME="I5668"></A><A NAME="I5669"></A><A NAME="I5670"></A>The <I>generic 
+actual parameter</I> is either the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0318">explicit_generic_actual_parameter</A></SPAN> 
+given in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
+for each formal, or the corresponding <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN><span class="insert5">, 
+<I>default_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>,</span> 
+or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0339">default_name</A></SPAN> 
+if no <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
 is given for the formal. When the meaning is clear from context, the 
-term &ldquo;generic actual,&rdquo; or simply &ldquo;actual,&rdquo; is 
-used as a synonym for &ldquo;generic actual parameter&rdquo; and also 
-for the view denoted by one, or the value of one.&nbsp;</div>
+term &ldquo;generic actual<span class="delete5">,</span>&rdquo;<span class="insert5">,</span> 
+or simply &ldquo;actual<span class="delete5">,</span>&rdquo;<span class="insert5">,</span> 
+is used as a synonym for &ldquo;generic actual parameter&rdquo; and also 
+for the view denoted by one, or the value of one.</div>
+<div class="paranum"><a name="p7.a">7.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0205-1.TXT">AI12-0205-1</A></I>} 
+<span class="insert5">Any matching or other Legality Rules that apply 
+to a a generic actual are applied to any <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
+<I>default_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0339">default_name</A></SPAN> 
+that are used as an actual.</span>&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal">In a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
+<div class="Normal">In a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
 for a particular kind of program unit [(package, procedure, or function)], 
 the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> shall 
 denote a generic unit of the corresponding kind [(generic package, generic 
@@ -123,28 +134,30 @@ procedure, or generic function, respectively)].</div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0118-1.TXT">AI05-0118-1</A></I>} 
 The <I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
-of a named <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
-shall denote a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
+of a named <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
+shall denote a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
 of the generic unit being instantiated. If two or more formal subprograms 
 have the same defining name, then named associations are not allowed 
 for the corresponding actuals.</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0118-1.TXT">AI05-0118-1</A></I>} 
-The <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
-for a positional <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
-is the parameter with the corresponding position in the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN> 
+The <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
+for a positional <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
+is the parameter with the corresponding position in the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN> 
 of the generic unit being instantiated.</div>
-<div class="paranum"><a name="p10">10</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
-shall contain at most one <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
-for each formal. Each formal without an association shall have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0316">subprogram_default</A></SPAN>.</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0205-1.TXT">AI12-0205-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
+shall contain at most one <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
+for each formal. Each formal without an association shall have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN><span class="insert5">, 
+<I>default_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>,</span> 
+or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0338">subprogram_default</A></SPAN>.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal">In a generic unit Legality Rules are enforced at 
-compile time of the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN> 
+compile time of the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN> 
 and generic body, given the properties of the formals. In the visible 
 part and formal part of an instance, Legality Rules are enforced at compile 
-time of the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
+time of the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
 given the properties of the actuals. In other parts of an instance, Legality 
 Rules are not enforced; this rule does not apply when a given rule explicitly 
 specifies otherwise.&nbsp;</div>
@@ -203,7 +216,7 @@ subprogram does not provide an applicable index constraint.</div>
 <div class="paranum"><a name="p11.j">11.j/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
 The profile of a formal subprogram is not subtype conformant with any 
-other profile. <A NAME="I5418"></A></div>
+other profile. <A NAME="I5671"></A></div>
 <div class="paranum"><a name="p11.k">11.k</a></div>
 <div class="SmallBulleted">A generic formal function is not static.&nbsp;</div>
 <div class="paranum"><a name="p11.l">11.l</a></div>
@@ -247,17 +260,17 @@ and the Amendment added many more. There doesn't seem to be much value
 in repeating all of these rules here (as of this writing, there are roughly 
 33 such rules). As noted below, all such rules are indexed in the AARM.</div>
 <div class="paranum"><a name="p11.s">11.s</a></div>
-<div class="SmallBulleted"><A NAME="I5419"></A>For the accessibility 
+<div class="SmallBulleted"><A NAME="I5672"></A>For the accessibility 
 rules, the formals have nothing to say about the property in question. 
 Like the above rules, these rules are checked in the generic declaration, 
 and then again in both the visible and private parts of the instance. 
 In the generic body, we have explicit rules that essentially assume the 
 worst (in the cases of type extensions and access-to-subprogram types), 
-and we have run-time checks (in the case of access-to-object types). 
-See <A HREF="AA-3-9-1.html">3.9.1</A>, <A HREF="AA-3-10-2.html">3.10.2</A>, 
+and we have runtime checks (in the case of access-to-object types). See 
+<A HREF="AA-3-9-1.html">3.9.1</A>, <A HREF="AA-3-10-2.html">3.10.2</A>, 
 and <A HREF="AA-4-6.html">4.6</A>.</div>
 <div class="paranum"><a name="p11.t">11.t</a></div>
-<div class="SmallBulleted-NoPrefix">We considered run-time checks for 
+<div class="SmallBulleted-NoPrefix">We considered runtime checks for 
 access-to-subprogram types as well. However, this would present difficulties 
 for implementations that share generic bodies.</div>
 <div class="paranum"><a name="p11.u">11.u</a></div>
@@ -274,11 +287,11 @@ extension that appears in the visible part of an instance.</div>
 <div class="SmallBulleted" style="margin-bottom: 0.3em">Some rules do 
 not apply at all in an instance, not even in the visible part:&nbsp;</div>
 <div class="paranum"><a name="p11.x">11.x</a></div>
-<div class="Indented4SmallNestedBulleted"><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">Body_stub</A></SPAN>s 
+<div class="Indented4SmallNestedBulleted"><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0297">Body_stub</A></SPAN>s 
 are not normally allowed to be multiply nested, but they can be in instances. 
 </div>
 <div class="paranum"><a name="p11.y">11.y</a></div>
-<div class="Annotations"><A NAME="I5420"></A>Each rule that is an exception 
+<div class="Annotations"><A NAME="I5673"></A>Each rule that is an exception 
 is marked with &ldquo;generic contract issue;&rdquo; look that up in 
 the index to find them all.&nbsp;</div>
 <div class="paranum"><a name="p11.z">11.z</a></div>
@@ -350,10 +363,10 @@ component type is limited, so this instantiation is illegal.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
 declares an instance; it is equivalent to the instance declaration (a 
-<SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>) 
+<SPAN Class="swiss"><A HREF="AA-7-1.html#S0229">package_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>) 
 immediately followed by the instance body, both at the place of the instantiation. 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
@@ -363,10 +376,10 @@ sense, even though you can't see them in the program text. Nor are declarations
 within an instance &ldquo;implicit&rdquo; (unless they are implicit by 
 other rules). This is necessary because implicit declarations have special 
 semantics that should not be attached to instances. For a generic subprogram, 
-the profile of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
+the profile of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
 is that of the instance declaration, by the stated equivalence.&nbsp;</div>
 <div class="paranum"><a name="p12.b">12.b</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I5421"></A><A NAME="I5422"></A>The 
+<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I5674"></A><A NAME="I5675"></A>The 
 visible and private parts of a package instance are defined in <A HREF="AA-7-1.html">7.1</A>, 
 &ldquo;<A HREF="AA-7-1.html">Package Specifications and Declarations</A>&rdquo; 
 and <A HREF="AA-12-7.html">12.7</A>, &ldquo;<A HREF="AA-12-7.html">Formal 
@@ -376,13 +389,13 @@ of Declarations</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">The instance is a copy of the text of the template. 
 [Each use of a formal parameter becomes (in the copy) a use of the actual, 
-as explained below.] <A NAME="I5423"></A><A NAME="I5424"></A><A NAME="I5425"></A><A NAME="I5426"></A><A NAME="I5427"></A><A NAME="I5428"></A><A NAME="I5429"></A><A NAME="I5430"></A>An 
+as explained below.] <A NAME="I5676"></A><A NAME="I5677"></A><A NAME="I5678"></A><A NAME="I5679"></A><A NAME="I5680"></A><A NAME="I5681"></A><A NAME="I5682"></A><A NAME="I5683"></A>An 
 instance of a generic package is a package, that of a generic procedure 
 is a procedure, and that of a generic function is a function.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>An instance is a package 
 or subprogram (because we say so), even though it contains a copy of 
-the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN>, 
 and therefore doesn't look like one. This is strange, but it's OK, since 
 the syntax rules are overloading rules, and therefore do not apply in 
 an instance.&nbsp;</div>
@@ -402,9 +415,9 @@ the template, and not on each copy.</div>
 <div class="Annotations">We describe the substitution of generic actual 
 parameters by saying (in most cases) that the copy of each generic formal 
 parameter declares a view of the actual. Suppose a name in a generic 
-unit denotes a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>. 
-The copy of that name in an instance will denote the copy of that <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
-in the instance. Since the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
+unit denotes a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>. 
+The copy of that name in an instance will denote the copy of that <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
+in the instance. Since the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
 in the instance declares a view of the actual, the name will denote a 
 view of the actual.</div>
 <div class="paranum"><a name="p13.d">13.d/2</a></div>
@@ -414,10 +427,10 @@ which types belong) are recalculated for each instance; this is implied
 by the fact that it's a copy.</div>
 <div class="paranum"><a name="p13.e">13.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-Although the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN> 
-is included in an instance, the declarations in the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN> 
+Although the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN> 
+is included in an instance, the declarations in the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN> 
 are only visible outside the instance in the case of a generic formal 
-package whose <SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN> 
+package whose <SPAN Class="swiss"><A HREF="AA-12-7.html#S0341">formal_package_actual_part</A></SPAN> 
 includes one or more &lt;&gt; indicators &mdash; see <A HREF="AA-12-7.html">12.7</A>. 
 </div>
 <div class="paranum"><a name="p14">14</a></div>
@@ -425,7 +438,7 @@ includes one or more &lt;&gt; indicators &mdash; see <A HREF="AA-12-7.html">12.7
 declaration or body is determined using the overloading rules when that 
 generic declaration or body is compiled. In an instance, the interpretation 
 of each (copied) construct is the same, except in the case of a name 
-that denotes the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN> 
+that denotes the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN> 
 or some declaration within the generic unit; the corresponding name in 
 the instance then denotes the corresponding copy of the denoted declaration. 
 The overloading rules do not apply in the instance.&nbsp;</div>
@@ -435,7 +448,7 @@ The overloading rules do not apply in the instance.&nbsp;</div>
 for definitions of &ldquo;interpretation&rdquo; and &ldquo;overloading 
 rule.&rdquo;</div>
 <div class="paranum"><a name="p14.b">14.b</a></div>
-<div class="Annotations">Even the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>s 
+<div class="Annotations">Even the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>s 
 have corresponding declarations in the instance, which declare views 
 of the actuals.</div>
 <div class="paranum"><a name="p14.c">14.c</a></div>
@@ -449,11 +462,12 @@ when the staticness depends on some generic formal.</div>
 <div class="Annotations">This rule is partly a ramification of the &ldquo;current 
 instance&rdquo; rule in <A HREF="AA-8-6.html">8.6</A>, &ldquo;<A HREF="AA-8-6.html">The 
 Context of Overload Resolution</A>&rdquo;. Note that that rule doesn't 
-cover the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN>.</div>
-<div class="paranum"><a name="p14.e">14.e</a></div>
-<div class="Annotations">Although the overloading rules are not observed 
-in the instance, they are, of course, observed in the <SPAN Class="swiss">_instantiation</SPAN> 
-in order to determine the interpretation of the constituents of the <SPAN Class="swiss">_instantiation</SPAN>.</div>
+cover the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN>.</div>
+<div class="paranum"><a name="p14.e">14.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0347-1.TXT">AI12-0347-1</A></I>} 
+Although the overloading rules are not observed in the instance, they 
+are, of course, observed in the <span class="insert5"><SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN></span><span class="delete5"><SPAN Class="swiss">&nbsp;_instantiation</SPAN></span> 
+in order to determine the interpretation of the constituents of the <span class="insert5"><SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN></span><span class="delete5"><SPAN Class="swiss">&nbsp;_instantiation</SPAN></span>.</div>
 <div class="paranum"><a name="p14.f">14.f</a></div>
 <div class="Annotations">Since children are considered to occur within 
 their parent's declarative region, the above rule applies to a name that 
@@ -461,15 +475,15 @@ denotes a child of a generic unit, or a declaration inside such a child.</div>
 <div class="paranum"><a name="p14.g">14.g</a></div>
 <div class="Annotations">Since the Syntax Rules are overloading rules, 
 it is possible (legal) to violate them in an instance. For example, it 
-is possible for an instance body to occur in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
-even though the Syntax Rules forbid bodies in <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>s. 
+is possible for an instance body to occur in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>, 
+even though the Syntax Rules forbid bodies in <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal">In an instance, a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
+<div class="Normal">In an instance, a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
 declares a view whose properties are identical to those of the actual, 
 except as specified in <A HREF="AA-12-4.html">12.4</A>, &ldquo;<A HREF="AA-12-4.html">Formal 
 Objects</A>&rdquo; and <A HREF="AA-12-6.html">12.6</A>, &ldquo;<A HREF="AA-12-6.html">Formal 
-Subprograms</A>&rdquo;. Similarly, for a declaration within a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>, 
+Subprograms</A>&rdquo;. Similarly, for a declaration within a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>, 
 the corresponding declaration in an instance declares a view whose properties 
 are identical to the corresponding declaration within the declaration 
 of the actual.&nbsp;</div>
@@ -492,11 +506,11 @@ could pass an object declared in the instance specification to one of
 the additional operations of the deeper type.</div>
 <div class="paranum"><a name="p15.c">15.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-12-5.html#S0298">formal_type_declaration</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-12-5.html#S0320">formal_type_declaration</A></SPAN> 
 can contain <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>s, 
-a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0313">formal_subprogram_declaration</A></SPAN> 
-can contain <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>s, 
-and a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0318">formal_package_declaration</A></SPAN> 
+a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
+can contain <SPAN Class="swiss"><A HREF="AA-6-1.html#S0207">parameter_specification</A></SPAN>s, 
+and a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0340">formal_package_declaration</A></SPAN> 
 can contain many kinds of declarations. These are all inside the generic 
 unit, and have corresponding declarations in the instance.</div>
 <div class="paranum"><a name="p15.d">15.d</a></div>
@@ -505,7 +519,7 @@ in a generic unit is a subtype of a generic formal subtype, then the
 corresponding subtype in the instance is a subtype of the corresponding 
 actual subtype.</div>
 <div class="paranum"><a name="p15.e">15.e</a></div>
-<div class="Annotations">For a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
+<div class="Annotations">For a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
 if a generic actual is a static [(scalar or string)] subtype, then each 
 use of the corresponding formal parameter within the specification of 
 the instance is considered to be static. (See AI83-00409.)</div>
@@ -522,9 +536,10 @@ the copy of that subprogram in an instance to override a subprogram inherited
 from the actual. For example:&nbsp;</div>
 <div class="paranum"><a name="p15.h">15.h</a></div>
 <div class="SmallExamples"><B>type</B>&nbsp;T1&nbsp;<B>is</B>&nbsp;<B>tagged</B>&nbsp;<B>record</B>&nbsp;...&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
-<div class="paranum"><a name="p15.i">15.i</a></div>
-<div class="SmallExamples"><B>generic</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Formal&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;T1;<BR>
+<div class="paranum"><a name="p15.i">15.i/5</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Formal&nbsp;<B>is&nbsp;new</B>&nbsp;T1<span class="insert5">&nbsp;<B>with&nbsp;private</B></span>;<BR>
 <B>package</B>&nbsp;G&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Derived_From_Formal&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Formal&nbsp;<B>with</B>&nbsp;<B>record</B>&nbsp;...&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Foo(X&nbsp;:&nbsp;<B>in</B>&nbsp;Derived_From_Formal);&nbsp;--<SPAN Class="roman"><I>&nbsp;Does&nbsp;not&nbsp;override&nbsp;anything.</I></SPAN><BR>
@@ -542,7 +557,7 @@ for Derived_From_Formal overrides the Foo inherited from T2.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
 For formal types, an implementation that shares the code among multiple 
 instances of the same generic unit needs to beware that things like parameter 
-passing mechanisms (by-copy vs. by-reference) and <SPAN Class="swiss"><A HREF="AA-13-1.html#S0321">aspect_clause</A></SPAN>s 
+passing mechanisms (by-copy vs. by-reference) and <SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN>s 
 are determined by the actual.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Normal">[Implicit declarations are also copied, and a name 
@@ -556,7 +571,7 @@ type in the generic is derived from a formal private type, then in the
 instance the type will inherit subprograms from the corresponding actual 
 type.</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I5431"></A>These new implicit declarations 
+<div class="Normal"><A NAME="I5684"></A>These new implicit declarations 
 occur immediately after the type declaration in the instance, and override 
 the copied ones. The copied ones can be called only from within the instance; 
 the new ones can be called only from outside the instance, although for 
@@ -628,11 +643,11 @@ described in <A HREF="AA-8-3.html">8.3</A>.&nbsp;</div>
 Actual's P, whereas the copy of Q at (2) does not override anything; 
 in implementation terms, it occupies a separate slot in the type descriptor. 
 </div>
-<div class="paranum"><a name="p18.g">18.g</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>The reason for this rule is so 
-a programmer writing an <SPAN Class="swiss">_instantiation</SPAN> need 
-not look at the private part of the generic in order to determine which 
-subprograms will be overridden.&nbsp;</div>
+<div class="paranum"><a name="p18.g">18.g/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0347-1.TXT">AI12-0347-1</A></I>} 
+The reason for this rule is so a programmer writing an <span class="insert5"><SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN></span><span class="delete5"><SPAN Class="swiss">&nbsp;_instantiation</SPAN></span> 
+need not look at the private part of the generic in order to determine 
+which subprograms will be overridden.&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p19">19</a></div>
@@ -651,20 +666,20 @@ to check the rule at link time.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal"><A NAME="I5432"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
-each <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
-is first evaluated. If a default is used, an implicit <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
+<div class="Normal"><A NAME="I5685"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
+each <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
+is first evaluated. If a default is used, an implicit <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
 is assumed for this rule. These evaluations are done in an arbitrary 
 order, except that the evaluation for a default actual takes place after 
 the evaluation for another actual if the default includes a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that denotes the other one.<A NAME="I5433"></A> Finally, the instance 
+that denotes the other one.<A NAME="I5686"></A> Finally, the instance 
 declaration and body are elaborated.&nbsp;</div>
 <div class="paranum"><a name="p20.a">20.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that if the evaluation 
 of a default depends on some side effect of some other evaluation, the 
 order is still arbitrary.&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal"><A NAME="I5434"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN> 
+<div class="Normal"><A NAME="I5687"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
 the generic actual parameter is evaluated. Additional actions are performed 
 in the case of a formal object of mode <B>in</B> (see <A HREF="AA-12-4.html">12.4</A>). 
 </div>
@@ -702,12 +717,14 @@ ambiguous. For example:&nbsp;</div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
 </B>The following example illustrates some of the subtleties of the substitution 
 of formals and actuals:&nbsp;</div>
-<div class="paranum"><a name="p22.e">22.e</a></div>
-<div class="SmallExamples"><B>generic</B><BR>
+<div class="paranum"><a name="p22.e">22.e/5</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T1&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;A&nbsp;predefined&nbsp;&quot;=&quot;&nbsp;operator&nbsp;is&nbsp;implicitly&nbsp;declared&nbsp;here:</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;function&nbsp;&quot;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;T1)&nbsp;return&nbsp;Boolean;</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Call&nbsp;this&nbsp;&quot;=&quot;</I><SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>1</I></SPAN></SPAN></SUB><I>.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Call&nbsp;this&nbsp;&quot;=&quot;</I><SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>1</I></SPAN></SPAN></SUB><I>.</I></SPAN><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...</span><BR>
 <B>package</B>&nbsp;G&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;S1&nbsp;<B>is</B>&nbsp;T1;&nbsp;--<SPAN Class="roman"><I>&nbsp;So&nbsp;we&nbsp;can&nbsp;get&nbsp;our&nbsp;hands&nbsp;on&nbsp;the&nbsp;type&nbsp;from</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;outside&nbsp;an&nbsp;instance.</I></SPAN><BR>
@@ -723,8 +740,9 @@ of formals and actuals:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;Bool_2&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;T2_Obj&nbsp;=&nbsp;T2_Obj;<BR>
 <B>end</B>&nbsp;G;<BR>
 ...</div>
-<div class="paranum"><a name="p22.h">22.h</a></div>
-<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+<div class="paranum"><a name="p22.h">22.h/5</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;My_Int&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Integer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;A&nbsp;predefined&nbsp;&quot;=&quot;&nbsp;operator&nbsp;is&nbsp;implicitly&nbsp;declared&nbsp;here:</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;function&nbsp;&quot;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;My_Int)&nbsp;return&nbsp;Boolean;</I></SPAN><BR>
@@ -736,7 +754,7 @@ of formals and actuals:&nbsp;</div>
 <B>end</B>&nbsp;P;<BR>
 <B>use</B>&nbsp;P;<BR>
 ...<BR>
-<B>package</B>&nbsp;I&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;G(T1&nbsp;=&gt;&nbsp;My_Int);&nbsp;--<SPAN Class="roman"><I>&nbsp;&quot;=&quot;</I><SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>5</I></SPAN></SPAN></SUB><I>&nbsp;is&nbsp;declared&nbsp;in&nbsp;I&nbsp;(see&nbsp;below).</I></SPAN><BR>
+<B>package</B>&nbsp;I&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;G(T1&nbsp;=&gt;&nbsp;My_Int<span class="insert5">,&nbsp;...</span>);&nbsp;--<SPAN Class="roman"><I>&nbsp;&quot;=&quot;</I><SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>5</I></SPAN></SPAN></SUB><I>&nbsp;is&nbsp;declared&nbsp;in&nbsp;I&nbsp;(see&nbsp;below).</I></SPAN><BR>
 <B>use</B>&nbsp;I;</div>
 <div class="paranum"><a name="p22.i">22.i</a></div>
 <div class="SmallExamples">Another_T1_Obj&nbsp;:&nbsp;S1&nbsp;:=&nbsp;13;&nbsp;--<SPAN Class="roman"><I>&nbsp;Can't&nbsp;denote&nbsp;T1,&nbsp;but&nbsp;S1&nbsp;will&nbsp;do.</I></SPAN><BR>
@@ -805,14 +823,14 @@ M&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;Sigma(T);&nbsp;&nbsp;--<SPAN Class="roman"><I
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p29.a">29.a</a></div>
-<div class="Annotations"><A NAME="I5435"></A>In Ada 83, all explicit 
+<div class="Annotations"><A NAME="I5688"></A>In Ada 83, all explicit 
 actuals are evaluated before all defaults, and the defaults are evaluated 
 in the order of the formal declarations. This ordering requirement is 
 relaxed in Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p29.b">29.b</a></div>
-<div class="Annotations"><A NAME="I5436"></A>We have attempted to remove 
+<div class="Annotations"><A NAME="I5689"></A>We have attempted to remove 
 every violation of the contract model. Any remaining contract model violations 
 should be considered bugs in the RM95. The unfortunate property of reverting 
 to the predefined operators of the actual types is retained for upward 
@@ -821,7 +839,7 @@ rules.) However, tagged types do not revert in this sense.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p29.c">29.c</a></div>
-<div class="Annotations"><A NAME="I5437"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-12-3.html#S0296">explicit_generic_actual_parameter</A></SPAN> 
+<div class="Annotations"><A NAME="I5690"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-12-3.html#S0318">explicit_generic_actual_parameter</A></SPAN> 
 is modified to allow a <I>package_instance_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 </div>
 
@@ -833,7 +851,7 @@ material, because it is a ramification of other rules, and because it
 is not of interest to the average user.</div>
 <div class="paranum"><a name="p29.e">29.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
-The rule that &ldquo;An explicit <SPAN Class="swiss"><A HREF="AA-12-3.html#S0296">explicit_generic_actual_parameter</A></SPAN> 
+The rule that &ldquo;An explicit <SPAN Class="swiss"><A HREF="AA-12-3.html#S0318">explicit_generic_actual_parameter</A></SPAN> 
 shall not be supplied more than once for a given generic formal parameter&rdquo; 
 seems to be missing from RM83, although it was clearly the intent.</div>
 <div class="paranum"><a name="p29.f">29.f</a></div>
@@ -851,7 +869,7 @@ with the addition of generic formal packages, and the declarations that
 occur therein.</div>
 <div class="paranum"><a name="p29.g">29.g</a></div>
 <div class="Annotations">We have corrected the definition of the elaboration 
-of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
 (RM83-12.3(17)); we don't elaborate entities, and the instance is not 
 &ldquo;implicit.&rdquo;</div>
 <div class="paranum"><a name="p29.h">29.h</a></div>
@@ -867,15 +885,15 @@ generic parameters.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p29.i">29.i/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
-<A NAME="I5438"></A>An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN> 
+<A NAME="I5691"></A>An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN> 
 (see <A HREF="AA-8-3-1.html">8.3.1</A>) is allowed on a subprogram instantiation. 
 </div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p29.j">29.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I5439"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>. 
+<A NAME="I5692"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -884,9 +902,16 @@ This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 <B>Correction:</B> Added a definition for positional parameters, as this 
 is missing from Ada 95 and Ada 2005.&nbsp;</div>
 
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p29.l">29.l/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0205-1.TXT">AI12-0205-1</A></I>} 
+<span class="insert5">Added uses of <I>default_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
+so formal types can have defaults (see <A HREF="AA-12-5.html">12.5</A>).</span> 
+</div>
+
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-12-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

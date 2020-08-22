@@ -18,14 +18,16 @@
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
     DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
     DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,34 +38,45 @@
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 This subclause determines what checks are performed relating to possible 
-concurrent conflicting actions (see <A HREF="AA-9-10.html">9.10</A>).</div>
+concurrent conflicting actions (see <A HREF="AA-9-10.html">9.10</A>).<A NAME="I5127"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0298-1.TXT">AI12-0298-1</A></I>} 
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Conflict_Check_Policy is as follows:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4913"></A><A NAME="I4914"></A>Conflict_Check_Policy 
-(<I>policy_</I><A NAME="I4915"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5128"></A><A NAME="I5129"></A>Conflict_Check_Policy 
+(<I>policy_</I><A NAME="I5130"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>[, 
+<I>policy_</I><A NAME="I5131"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>]);</div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Conflict_Check_Policy 
 is allowed only immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>, 
 or as a configuration pragma.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
-The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-shall be one of Unchecked, Known_Conflict_Checks, Parallel_Conflict_Checks, 
-All_Conflict_Checks, or an implementation-defined conflict check policy.</div>
+Each <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall be one of No_Parallel_Conflict_Checks, Known_Parallel_Conflict_Checks, 
+All_Parallel_Conflict_Checks, No_Tasking_Conflict_Checks, Known_Tasking_Conflict_Checks, 
+All_Tasking_Conflict_Checks, No_Conflict_Checks, Known_Conflict_Checks, 
+All_Conflict_Checks, or an implementation-defined conflict check policy. 
+If two <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+are given, one shall include the word Parallel and one shall include 
+the word Tasking. If only one <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+is given, it shall not include the word Parallel or Tasking.</div>
+<div class="paranum"><a name="p5.a.1">5.a.1/5</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+conflict check policies.</div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Conflict_Check_Policy 
 given in a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-or immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN> 
+or immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN> 
 applies from the place of the pragma to the end of the innermost enclosing 
 declarative region. The region for a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Conflict_Check_Policy given as a configuration pragma is the declarative 
@@ -71,16 +84,18 @@ region for the entire compilation unit (or units) to which it applies.</div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 If a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Conflict_Check_Policy applies to a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
+Conflict_Check_Policy applies to a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Conflict_Check_Policy applies to the entire instance.</div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0298-1.TXT">AI12-0298-1</A></I>} 
 If multiple Conflict_Check_Policy pragmas apply to a given construct, 
 the conflict check policy is determined by the one in the innermost enclosing 
 region. If no Conflict_Check_Policy pragma applies to a construct, the 
-policy is Parallel_Conflict_Checks (see below).</div>
+policy is (All_Parallel_Conflict_Checks, No_Tasking_Conflict_Checks) 
+(see below).</div>
 <div class="paranum"><a name="p8.a">8.a/5</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
 The region mentioned in this rule is the region to which the policy pragma 
@@ -89,59 +104,129 @@ This distinction matters when there are multiple policy pragmas in a
 single declarative region.&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0298-1.TXT">AI12-0298-1</A></I>} 
 Certain potentially conflicting actions are disallowed according to which 
 conflict check policies apply at the place where the action or actions 
 occur, as follows:</div>
 <div class="paranum"><a name="p10">10/5</a></div>
-<div class="WideHanging-Term">Unchecked</div><div class="WideHanging-Body">
-This policy imposes no restrictions.</div>
+<div class="WideHanging-Term">No_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
+This policy imposes no restrictions on concurrent actions arising from 
+<A NAME="I5132"></A>parallel constructs.</div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="WideHanging-Term">Known_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-If this policy applies to two concurrent actions occuring within the 
-same compilation unit, they are disallowed if they are known to denote 
-the same object (see <A HREF="AA-6-4-1.html">6.4.1</A>) with uses that 
-potentially conflict. For the purposes of this check, any parallel loop 
-may be presumed to involve multiple concurrent iterations, and any named 
-task type may be presumed to have multiple instances.</div>
+<div class="WideHanging-Term">No_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
+This policy imposes no restrictions on concurrent actions arising from 
+tasking <A NAME="I5133"></A>constructs.</div>
 <div class="paranum"><a name="p12">12/5</a></div>
-<div class="WideHanging-Term">Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-This policy includes the restrictions imposed by the Known_Conflict_Checks 
-policy, and in addition disallows a parallel construct from reading or 
-updating a variable that is global to the construct, unless it is a synchronized 
-object, or unless the construct is a parallel loop, and the global variable 
-is a part of a component of an array denoted by an indexed component 
-with at least one index expression that statically denotes the loop parameter 
-of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
-or the chunk parameter of the parallel loop.</div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">Known_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
+If this policy applies to two concurrent actions appearing within parallel 
+constructs, <A NAME="I5134"></A>they are disallowed if they are known 
+to denote the same object (see <A HREF="AA-6-4-1.html">6.4.1</A>) with 
+uses that conflict. For the purposes of this check, any parallel loop 
+may be presumed to involve multiple concurrent iterations. Also, for 
+the purposes of deciding whether two actions are concurrent, it is enough 
+for the logical threads of control in which they occur to be concurrent 
+at any point in their execution, unless all of the following are true:</div>
 <div class="paranum"><a name="p13">13/5</a></div>
-<div class="WideHanging-Term">All_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-This policy includes the restrictions imposed by the Parallel_Conflict_Checks 
-policy, and in addition disallows a task body from reading or updating 
-a variable that is global to the task body, unless it is a synchronized 
+<div class="Indented4Bulleted">the shared object is volatile;</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Indented4Bulleted">the two logical threads of control are 
+both known to also refer to a shared synchronized object; and</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Indented4Bulleted">each thread whose potentially conflicting 
+action updates the shared volatile object, also updates this shared synchronized 
 object.</div>
+<div class="paranum"><a name="p15.a">15.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>To properly synchronize two actions 
+to prevent concurrency, a thread that does an update of a volatile object 
+must update a synchronized object afterward to indicate it has completed 
+its update, and the other thread needs to test the value of the synchronized 
+object before it reads the updated volatile object. In a parallel construct, 
+&ldquo;signaling&rdquo; cannot be used to prevent concurrency, since 
+that generally requires some blocking, so testing the value of the synchronized 
+object would probably need to use a busy-wait loop.&nbsp;</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">Known_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
+If this policy applies to two concurrent actions appearing within <A NAME="I5135"></A>the 
+same compilation unit, at least one of which appears within a task body 
+but not within a parallel construct, they are disallowed if they are 
+known to denote the same object (see <A HREF="AA-6-4-1.html">6.4.1</A>) 
+with uses that conflict, and neither potentially signals the other (see 
+<A HREF="AA-9-10.html">9.10</A>). For the purposes of this check, any 
+named task type may be presumed to have multiple instances. Also, for 
+the purposes of deciding whether two actions are concurrent, it is enough 
+for the tasks in which they occur to be concurrent at any point in their 
+execution, unless all of the following are true:</div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Indented4Bulleted">the shared object is volatile;</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Indented4Bulleted">the two tasks are both known to also refer 
+to a shared synchronized object; and</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Indented4Bulleted">each task whose potentially conflicting 
+action updates the shared volatile object, also updates this shared synchronized 
+object.</div>
+<div class="paranum"><a name="p19.a">19.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>To properly synchronize two actions 
+to prevent concurrency, a task that does an update of a <I>non</I>volatile 
+object must use signaling via a synchronized object to indicate it has 
+completed its update, and the other task needs to be signaled by this 
+action on the synchronized object before it reads the updated nonvolatile 
+object. In other words, to synchronize communication via a nonvolatile 
+object, signaling must be used. To synchronize communication via a volatile 
+object, an update of a shared synchronized object followed by a read 
+of the synchronized object in the other task can be sufficient.&nbsp;</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="WideHanging-Term">All_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
+This policy includes the restrictions imposed by the Known_Parallel_Conflict_Checks 
+policy, and in <A NAME="I5136"></A>addition disallows a parallel construct 
+from reading or updating a variable that is global to the construct, 
+unless it is a synchronized object, or unless the construct is a parallel 
+loop, and the global variable is a part of a component of an array denoted 
+by an indexed component with at least one index expression that statically 
+denotes the loop parameter of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+or the chunk parameter of the parallel loop.</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="WideHanging-Term">All_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
+This policy includes <A NAME="I5137"></A>the restrictions imposed by 
+the Known_Tasking_Conflict_Checks policy, and in addition disallows a 
+task body from reading or updating a variable that is global to the task 
+body, unless it is a synchronized object.</div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="WideHanging-Term">No_Conflict_Checks, Known_Conflict_Checks, 
+All_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
+These are short hands for (No_Parallel_Conflict_Checks, <A NAME="I5138"></A>No_Tasking_Conflict_Checks), 
+(Known_Parallel_Conflict_Checks, <A NAME="I5139"></A>Known_Tasking_Conflict_Checks), 
+and (All_Parallel_Conflict_Checks, <A NAME="I5140"></A>All_Tasking_Conflict_Checks), 
+respectively.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
-<div class="paranum"><a name="p14">14/5</a></div>
+<div class="paranum"><a name="p23">23/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
-When the applicable conflict check policy is Known_Conflict_Checks, the 
-implementation may disallow two concurrent actions if the implementation 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0298-1.TXT">AI12-0298-1</A></I>} 
+When the conflict check policy Known_Parallel_Conflict_Checks applies, 
+the implementation may disallow two concurrent actions appearing within 
+parallel constructs if the implementation can prove they will at run-time 
+denote the same object with uses that conflict. Similarly, when the conflict 
+check policy Known_Tasking_Conflict_Checks applies, the implementation 
+may disallow two concurrent actions, at least one of which appears within 
+a task body but not within a parallel construct, if the implementation 
 can prove they will at run-time denote the same object with uses that 
-potentially conflict.</div>
-<div class="paranum"><a name="p14.a">14.a/5</a></div>
+conflict.</div>
+<div class="paranum"><a name="p23.a">23.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This permission allows 
 additional enforcement in instance bodies (where Legality Rules aren't 
 usually enforced), in subunits and their parents, and across compilation 
 units, if the implementation wishes.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p14.b">14.b/5</a></div>
+<div class="paranum"><a name="p23.b">23.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
-<A NAME="I4916"></A>Conflict check policies (and the associated checks) 
+<A NAME="I5141"></A>Conflict check policies (and the associated checks) 
 are new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

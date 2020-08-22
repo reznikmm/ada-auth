@@ -17,9 +17,12 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
@@ -27,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-24.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,7 +42,7 @@
 <H1>A.18.25 <span class="insert3">The Generic Package Containers.Bounded_Multiway_Trees</span><span class="delete3"></span></H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-<span class="insert3">The language-defined generic package Containers.Bounded_Multiway_Trees<A NAME="I8639"></A> 
+<span class="insert3">The language-defined generic package Containers.Bounded_Multiway_Trees<A NAME="I9209"></A> 
 provides a private type Tree and a set of operations. It provides the 
 same operations as the package Containers.Multiway_Trees (see <A HREF="AA-A-18-10.html">A.18.10</A>), 
 with the difference that the maximum storage is bounded.</span></div>
@@ -50,16 +53,16 @@ with the difference that the maximum storage is bounded.</span></div>
 <span class="insert3">The declaration of the generic library package 
 Containers.Bounded_Multiway_Trees has the same contents and semantics 
 as Containers.Multiway_Trees except:</span></div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Bulleted"><span class="insert3">The <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Preelaborate is replaced with <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Pure.</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert3">The&nbsp;</span><span class="insert5">aspect</span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span></span><span class="insert3">&nbsp;Preelaborate is replaced with&nbsp;</span><span class="insert5">aspect</span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span></span><span class="insert3">&nbsp;Pure.</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">The 
 type Tree is declared with a discriminant that specifies the capacity 
 (maximum number of elements) as follows:</span>&nbsp;</div>
-<div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;<B>type</B>&nbsp;Tree&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>is&nbsp;tagged&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;<B>type</B>&nbsp;Tree&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>is&nbsp;tagged&nbsp;private</B></span><span class="insert5">...</span><span class="insert3"></span><span class="insert3"><span class="delete5">;</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted"><span class="insert3">The type Tree needs finalization 
 if and only if type Element_Type needs finalization.</span></div>
@@ -71,49 +74,136 @@ unless the element type depends on that package. The objects returned
 from the Iterator and Reference functions probably do depend on package 
 Ada.Finalization. Restricted environments may need to avoid use of those 
 functions and their associated types.</span>&nbsp;</div>
-<div class="paranum"><a name="p7">7/3</a></div>
-<div class="Bulleted"><span class="insert3">The allocation of internal 
-storage includes a check that the capacity is not exceeded, and Capacity_Error 
-is raised if this check fails.</span></div>
-<div class="paranum"><a name="p8">8/3</a></div>
-<div class="Bulleted"><span class="insert3">In procedure Assign, if Source 
-length is greater than Target capacity, then Capacity_Error is propagated.</span></div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
+<span class="insert5">The function Empty is replaced by:</span></div>
+<div class="paranum"><a name="p6.2">6.2/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Empty&nbsp;(Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty'Result.Capacity&nbsp;=&nbsp;Capacity&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Empty'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Empty'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Empty'Result)&nbsp;=&nbsp;1;</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5"></span><span class="insert3"></span><span class="insert5">For 
+procedures Insert_Child, Prepend_Child, and Append_Child, the initial 
+subexpression of the precondition is replaced with:</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;The 
+allocation of internal storage includes a check that the capacity is 
+not exceeded, and Capacity_Error is raised if this check fails.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Container)&nbsp;-&nbsp;1&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;Count<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5"></span><span class="insert3">In procedure Assign, 
+</span><span class="insert5">the precondition is altered to:</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;if 
+Source length is greater than Target capacity, then Capacity_Error is 
+propagated.</span></span><span class="insert3"></span>&nbsp;</div>
+<div class="paranum"><a name="p8.1">8.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Source)&nbsp;-&nbsp;1&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">Function 
 Copy is declared as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
 <span class="insert3">&nbsp;&nbsp;<B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Tree;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;</span><span class="insert4">Tree</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;List</span></span><span class="insert3">;</span></div>
-<div class="paranum"><a name="p11">11/3</a></div>
-<div class="Bulleted-NoPrefix"><span class="insert3">If Capacity is 0, 
-then the tree capacity is the count of Source; if Capacity is equal to 
-or greater than Source.Count, the tree capacity equals the value of the 
-Capacity parameter; otherwise, the operation propagates Capacity_Error.</span></div>
-<div class="paranum"><a name="p12">12/3</a></div>
-<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">In the five-parameter procedure Splice_Subtree, 
-if Source is not the same object as Target, and if the sum of Target.Count 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;</span><span class="insert4">Tree</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;List</span></span><span class="insert3"></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Node_Count&nbsp;(Source)&nbsp;-&nbsp;1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Node_Count&nbsp;(Copy'Result)&nbsp;=&nbsp;Node_Count&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Source)&nbsp;-&nbsp;1&nbsp;<B>else</B>&nbsp;Capacity)</span><span class="insert3">;</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Indented2"><span class="insert3"></span><span class="insert5">Returns 
+a list whose elements have the same values as the elements of Source.</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;If 
+Capacity is 0, then the tree capacity is the count of Source; if Capacity 
+is equal to or greater than Source.Count, the tree capacity equals the 
+value of the Capacity parameter; otherwise, the operation propagates 
+Capacity_Error.</span></span><span class="insert3"></span>&nbsp;</div>
+<div class="paranum"><a name="p11.1">11.1/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">In the four-parameter procedure Copy_Subtree, the 
+last <B>or else</B> of the precondition is replaced by:</span></div>
+<div class="paranum"><a name="p11.2">11.2/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Is_Root&nbsp;(Source)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+&nbsp;Subtree_Node_Count&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+<div class="paranum"><a name="p11.3">11.3/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">In the five-parameter procedure Copy_Subtree, the 
+last <B>or else</B> of the precondition is replaced by:</span></div>
+<div class="paranum"><a name="p11.4">11.4/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Is_Root&nbsp;(Source,&nbsp;Subtree)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subtree_Node_Count&nbsp;(Source,&nbsp;Subtree)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+<div class="paranum"><a name="p11.5">11.5/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">In Copy_Local_Subtree, the last <B>or else</B> 
+of the precondition is replaced by:</span></div>
+<div class="paranum"><a name="p11.6">11.6/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Is_Root&nbsp;(Source,&nbsp;Subtree)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subtree_Node_Count&nbsp;(Target,&nbsp;Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5"></span><span class="insert3">In the five-parameter 
+procedure Splice_Subtree,&nbsp;</span><span class="insert5">the penultimate 
+<B>or else</B> of the precondition is replaced by:</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;if 
+Source is not the same object as Target, and if the sum of Target.Count 
 and Subtree_Node_Count (Position) is greater than Target.Capacity, then 
-Splice_Subtree propagates Capacity_Error.</span></div>
-<div class="paranum"><a name="p13">13/3</a></div>
-<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">In the five-parameter procedure Splice_Children, 
-if Source is not the same object as Target, and if the sum of Target.Count 
+Splice_Subtree propagates Capacity_Error.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p12.1">12.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Source,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Same_Object&nbsp;(Target,&nbsp;Source)&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subtree_Node_Count&nbsp;(Source,&nbsp;Position)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)&nbsp;<B>and&nbsp;then</B></span></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5"></span><span class="insert3">In the five-parameter 
+procedure Splice_Children,&nbsp;</span><span class="insert5">the penultimate 
+<B>elsif</B> of the precondition is replaced by:</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;if 
+Source is not the same object as Target, and if the sum of Target.Count 
 and Subtree_Node_Count (Source_Parent)-1 is greater than Target.Capacity, 
-then Splice_Children propagates Capacity_Error.</span>&nbsp;</div>
+then Splice_Children propagates Capacity_Error.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Before&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;(Target,&nbsp;Before)&nbsp;/=&nbsp;Target_Parent<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Same_Object&nbsp;(Target,&nbsp;Source)&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Child_Count&nbsp;(Source,&nbsp;Source_Parent)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)&nbsp;<B>and&nbsp;then</B></span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3"><A NAME="I8640"></A>It is a bounded error to assign 
+<span class="insert3"><A NAME="I9210"></A>It is a bounded error to assign 
 from a bounded tree object while tampering with elements [or cursors] 
 of that object is prohibited. Either Program_Error is raised by the assignment, 
 execution proceeds with the target object prohibiting tampering with 
-elements [or cursors], or execution proceeds normally.</span>&nbsp;</div>
+elements [or cursors], or execution proceeds normally.<A NAME="I9211"></A></span> 
+</div>
 <div class="paranum"><a name="p14.a">14.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Proof:&nbsp;</B>Tampering 
 with elements includes tampering with cursors, so we only really need 
@@ -125,7 +215,7 @@ to talk about tampering with elements here; we mention cursors for clarity.</spa
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 <span class="insert3">When a bounded tree object <I>T</I> is finalized, 
 if tampering with cursors is prohibited for <I>T</I> other than due to 
-an assignment from another tree, then execution is erroneous. <A NAME="I8641"></A></span></div>
+an assignment from another tree, then execution is erroneous. <A NAME="I9212"></A></span></div>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This is 
 a tampering event, but since the implementation is not allowed to use 
@@ -181,12 +271,22 @@ Move to minimize copying does not apply to bounded trees.</span></div>
 <div class="paranum"><a name="p20.a">20.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0184-1.TXT">AI05-0184-1</A></I>} 
-<span class="insert3"><A NAME="I8642"></A>The generic package Containers.Bounded_Multiway_Trees 
+<span class="insert3"><A NAME="I9213"></A>The generic package Containers.Bounded_Multiway_Trees 
 is new.</span>&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 2012</H4>
+<div class="paranum"><a name="p20.b">20.b/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+<span class="insert5"><A NAME="I9214"></A><B>Corrigendum:</B> Tampering 
+with elements is now defined to be equivalent to tampering with cursors 
+for bounded containers. If a program requires tampering detection to 
+work, it might fail in Ada 202x. Needless to say, this shouldn't happen 
+outside of test programs. See Inconsistencies With Ada 2012 in <A HREF="AA-A-18-2.html">A.18.2</A> 
+for more details.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-24.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

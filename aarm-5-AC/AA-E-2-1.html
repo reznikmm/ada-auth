@@ -21,6 +21,8 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -28,12 +30,14 @@
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-E-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -58,18 +62,18 @@ separate run-time systems.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9655"></A><A NAME="I9656"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I10274"></A><A NAME="I10275"></A>The 
 form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Shared_Passive is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9657"></A><A NAME="I9658"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I9659"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10276"></A><A NAME="I10277"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I10278"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<A NAME="I9660"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I10279"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Shared_Passive is used to specify that a library unit is a</span> <I>shared 
-passive library unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which a</span> Shared_Passive <span class="insert3">aspect<A NAME="I9661"></A><A NAME="I9662"></A> 
+passive library unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which a</span> Shared_Passive <span class="insert3">aspect<A NAME="I10280"></A><A NAME="I10281"></A> 
 of the library unit is True</span><span class="delete3">&nbsp;pragma applies</span>. 
 The following restrictions apply to such a library unit:</div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
@@ -91,7 +95,7 @@ a pointer from a passive partition back to a task in some active partition.
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
 it shall depend semantically only upon declared pure or shared passive 
-<span class="insert3"><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s</span><span class="delete3">&nbsp;library 
+<span class="insert3"><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN>s</span><span class="delete3">&nbsp;library 
 units</span>;&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Shared passive packages cannot 
@@ -100,34 +104,45 @@ an access type declared in a remote types package refer to the local
 heap of the active partition including the remote types package.&nbsp;</div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<span class="insert3">We say <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN> 
+<span class="insert3">We say <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN> 
 here, so that limited views are allowed; those are not library units, 
-but they are <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>.</span> 
+but they are <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN>.</span> 
 </div>
-<div class="paranum"><a name="p7">7/4</a></div>
-<div class="Bulleted">{<I><A HREF="defect1.html#8652/0080">8652/0080</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00003.TXT">AI95-00003-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0038-1.TXT">AI12-0038-1</A></I>} 
-it shall not contain a library-level declaration of an access type that 
-designates a class-wide type,<span class="insert4">&nbsp;nor a type with a 
-part that is of a</span> task type<span class="delete4">,</span> or protected 
-type with <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>s<span class="insert4">;</span><span class="delete4"></span><span class="delete1">; 
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="defect1.html#8652/0080">8652/0080</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00003.TXT">AI95-00003-01</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0038-1.TXT">AI12-0038-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<span class="insert5"></span>it shall not contain a library-level declaration<span class="insert5">:</span><span class="delete5">&nbsp;of an access type that designates a class-wide type,</span><span class="insert4"><span class="delete5">&nbsp;nor a type with a part that is of a</span></span><span class="delete5">&nbsp;task type</span><span class="delete4">,</span><span class="delete5">&nbsp;or protected type with <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>s</span><span class="insert4"><span class="delete5">;</span></span><span class="delete5"></span><span class="delete4"></span><span class="delete1">; 
 if the shared passive library unit is generic, it shall not contain a 
 declaration for such an access type unless the declaration is nested 
-within a body other than a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN></span><span class="delete4">.</span> 
-</div>
+within a body other than a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN></span><span class="delete4">.</span><span class="delete5"></span></div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<span class="insert5">of an access type that designates a class-wide 
+type;</span>&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>These kinds of access types are 
 disallowed because the object designated by an access value of such a 
 type could contain an implicit reference back to the active partition 
 on whose behalf the designated object was created.&nbsp;</div>
-<div class="paranum"><a name="p7.1">7.1/4</a></div>
-<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0038-1.TXT">AI12-0038-1</A></I>} 
-<span class="insert4">it shall not contain a library-level declaration 
-that contains a name that denotes a type declared within a declared-pure 
-package, if that type has a part that is of an access type; for the purposes 
-of this rule, the parts considered include those of the full views of 
-any private types or private extensions.</span></div>
+<div class="paranum"><a name="p7.2">7.2/5</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<span class="insert5">of a type with a part that is of a task type;</span></div>
+<div class="paranum"><a name="p7.3">7.3/5</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<span class="insert5">of a type with a part that is of a protected type 
+with <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>s; 
+nor</span></div>
+<div class="paranum"><a name="p7.4">7.4/5</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0038-1.TXT">AI12-0038-1</A></I>} 
+<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<span class="insert4"></span><span class="insert4"><span class="delete5">it 
+shall not contain a library-level declaration&nbsp;</span></span><span class="insert4">that 
+contains a name that denotes a type declared within a declared-pure package, 
+if that type has a part that is of an access type; for the purposes of 
+this rule, the parts considered include those of the full views of any 
+private types or private extensions.</span></div>
 <div class="paranum"><a name="p7.b">7.b/4</a></div>
 <div class="Annotations"><span class="insert4"><B>Reason:&nbsp;</B>This rule 
 breaks privacy by looking into the full views of private types. Avoiding 
@@ -135,7 +150,7 @@ privacy breakage here would have required disallowing the use in a shared
 passive package of any private type declared in a declared-pure package, 
 which would have been severely incompatible.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I9663"></A><A NAME="I9664"></A>Notwithstanding 
+<div class="Normal"><A NAME="I10282"></A><A NAME="I10283"></A>Notwithstanding 
 the definition of accessibility given in <A HREF="AA-3-10-2.html">3.10.2</A>, 
 the declaration of a library unit P1 is not accessible from within the 
 declarative region of a shared passive library unit P2, unless the shared 
@@ -154,7 +169,7 @@ of such pragmas.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I9665"></A>A shared passive library unit 
+<div class="Normal"><A NAME="I10284"></A>A shared passive library unit 
 is preelaborated.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
@@ -162,32 +177,53 @@ is preelaborated.</div>
 <div class="Normal">A shared passive library unit shall be assigned to 
 at most one partition within a given program.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9666"></A><A NAME="I9667"></A><A NAME="I9668"></A>Notwithstanding 
+<div class="Normal"><A NAME="I10285"></A><A NAME="I10286"></A><A NAME="I10287"></A>Notwithstanding 
 the rule given in <A HREF="AA-10-2.html">10.2</A>, a compilation unit 
 in a given partition does not <I>need</I> (in the sense of <A HREF="AA-10-2.html">10.2</A>) 
 the shared passive library units on which it depends semantically to 
 be included in that same partition; they will typically reside in separate 
 passive partitions.</div>
+<div class="paranum"><a name="p11.a">11.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0359-1.TXT">AI12-0359-1</A></I>} 
+<span class="insert5">This rule is necessary so that the shared data 
+of a shared passive partition is not duplicated in each partition. It 
+does not imply a particular implementation; in particular, code can be 
+replicated in each active partition.</span>&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0359-1.TXT">AI12-0359-1</A></I>} 
+<span class="insert5">One possible implementation for a shared passive 
+partition is as a shared library that is mapped into the address space 
+of of each active partition. In such case, both the code and the data 
+of the passive partition would be mapped into the active partitions and 
+directly called/accessed from each active partition. For instance, on 
+Microsoft Windows a DLL has the correct semantics.</span></div>
+<div class="paranum"><a name="p11.c">11.c/5</a></div>
+<div class="Annotations"><span class="insert5">Alternatively, the shared 
+data can be represented as a file or persistent memory, with the shared 
+code being replicated in each active partition. Code replication is an 
+as-if optimization; it should be impossible to tell where the code lives 
+since no elaboration is necessary.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
-<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="paranum"><a name="p11.d">11.d/2</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0080">8652/0080</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00003.TXT">AI95-00003-01</A></I>} 
 <span class="insert2"><B>Corrigendum:</B> Corrected the wording to allow 
 access types in blocks in shared passive generic packages.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
-<div class="paranum"><a name="p11.b">11.b/3</a></div>
+<div class="paranum"><a name="p11.e">11.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<span class="insert3"><A NAME="I9669"></A>Shared_Passive is now a categorization 
-aspect, so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+<span class="insert3"><A NAME="I10288"></A>Shared_Passive is now a categorization 
+aspect, so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 &mdash; although the pragma is still preferred by the Standard.</span> 
 </div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
-<div class="paranum"><a name="p11.c">11.c/4</a></div>
+<div class="paranum"><a name="p11.f">11.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0038-1.TXT">AI12-0038-1</A></I>} 
-<span class="insert4"><A NAME="I9670"></A><B>Corrigendum:</B> Uses of 
+<span class="insert4"><A NAME="I10289"></A><B>Corrigendum:</B> Uses of 
 access types declared in declared-pure units are not allowed in library-level 
 shared passive packages. These were allowed by Ada 2005 and Ada 2012, 
 but it is unlikely that they work properly, as active partitions could 
@@ -196,7 +232,7 @@ are more likely to catch bugs than to cause them.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-E-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

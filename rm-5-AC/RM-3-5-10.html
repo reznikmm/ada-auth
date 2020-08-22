@@ -17,6 +17,8 @@
     SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -31,9 +33,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-5-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,21 +48,21 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following attributes 
 are defined for every fixed point subtype S:&nbsp;</div>
-<div class="paranum"><a name="p2">2/1</a></div>
-<div class="WideHanging-Term"><span class="insert1">S'Small</span></div><div class="WideHanging-Body">
-<span class="insert1"><A NAME="I1950"></A><A NAME="I1951"></A></span>S'Small denotes the <I>small</I> 
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">S'Small</span></div><div class="WideHanging-Body">
+<span class="insert5"><A NAME="I1952"></A><A NAME="I1953"></A></span>S'Small denotes the <I>small</I> 
 of the type of S. The value of this attribute is of the type <I>universal_real</I>. 
-<A NAME="I1952"></A><A NAME="I1953"></A>Small may be specified for nonderived<span class="insert1">&nbsp;ordinary</span> fixed point types via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+<A NAME="I1954"></A><A NAME="I1955"></A>Small may be specified for nonderived<span class="insert1">&nbsp;ordinary</span> fixed point types via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 (see <A HREF="RM-13-3.html">13.3</A>); the expression of such a clause 
-shall be static.<span class="insert3"><A NAME="I1954"></A><A NAME="I1955"></A></span></div>
+shall be static<span class="insert5">&nbsp;and positive</span>.<span class="insert3"><A NAME="I1956"></A><A NAME="I1957"></A></span></div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">S'Delta</div><div class="WideHanging-Body">
-<A NAME="I1956"></A><A NAME="I1957"></A>S'Delta denotes the <I>delta</I> 
+<A NAME="I1958"></A><A NAME="I1959"></A>S'Delta denotes the <I>delta</I> 
 of the fixed point subtype S. The value of this attribute is of the type 
 <I>universal_real</I>.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">S'Fore</div><div class="WideHanging-Body">
-<A NAME="I1958"></A><A NAME="I1959"></A>S'Fore yields the minimum number 
+<A NAME="I1960"></A><A NAME="I1961"></A>S'Fore yields the minimum number 
 of characters needed before the decimal point for the decimal representation 
 of any value of the subtype S, assuming that the representation does 
 not include an exponent, but includes a one-character prefix that is 
@@ -69,7 +71,7 @@ superfluous zeros or underlines, and is at least 2.) The value of this
 attribute is of the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term">S'Aft</div><div class="WideHanging-Body">
-<A NAME="I1960"></A><A NAME="I1961"></A>S'Aft yields the number of decimal 
+<A NAME="I1962"></A><A NAME="I1963"></A>S'Aft yields the number of decimal 
 digits needed after the decimal point to accommodate the <I>delta</I> 
 of the subtype S, unless the <I>delta</I> of the subtype S is greater 
 than 0.1, in which case the attribute yields the value one. (S'Aft is 
@@ -81,11 +83,11 @@ than or equal to one.) The value of this attribute is of the type <I>universal_i
 attributes are defined for every decimal fixed point subtype S:&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="WideHanging-Term">S'Digits</div><div class="WideHanging-Body">
-<A NAME="I1962"></A><A NAME="I1963"></A>S'Digits denotes the <I>digits</I> 
+<A NAME="I1964"></A><A NAME="I1965"></A>S'Digits denotes the <I>digits</I> 
 of the decimal fixed point subtype S, which corresponds to the number 
 of decimal digits that are representable in objects of the subtype. The 
 value of this attribute is of the type <I>universal_integer</I>. Its 
-value is determined as follows: <A NAME="I1964"></A></div>
+value is determined as follows: <A NAME="I1966"></A></div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Indented4Bulleted">For a first subtype or a subtype defined 
 by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
@@ -106,14 +108,14 @@ integer <I>D</I> such that the range &ndash;(10**<I>D</I>&ndash;1)*<I>delta</I>
 of the type.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="WideHanging-Term">S'Scale</div><div class="WideHanging-Body">
-<A NAME="I1965"></A><A NAME="I1966"></A>S'Scale denotes the <I>scale</I> 
+<A NAME="I1967"></A><A NAME="I1968"></A>S'Scale denotes the <I>scale</I> 
 of the subtype S, defined as the value N such that S'Delta = 10.0**(&ndash;N). 
-<A NAME="I1967"></A>The scale indicates the position of the point relative 
+<A NAME="I1969"></A>The scale indicates the position of the point relative 
 to the rightmost significant digits of values of subtype S. The value 
 of this attribute is of the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Round</div><div class="WideHanging-Body">
-<A NAME="I1968"></A><A NAME="I1969"></A>S'Round denotes a function with 
+<A NAME="I1970"></A><A NAME="I1971"></A>S'Round denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Round(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_real</I></SPAN>)<BR>
@@ -125,14 +127,14 @@ type of S).&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Notes">45&nbsp;&nbsp;All subtypes of a fixed point type will 
-have the same value for the Delta attribute, in the absence of <SPAN Class="swiss"><A HREF="RM-J-3.html#S0339">delta_constraint</A></SPAN>s 
+have the same value for the Delta attribute, in the absence of <SPAN Class="swiss"><A HREF="RM-J-3.html#S0370">delta_constraint</A></SPAN>s 
 (see <A HREF="RM-J-3.html">J.3</A>).</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Notes">46&nbsp;&nbsp;S'Scale is not always the same as S'Aft 
 for a decimal subtype; for example, if S'Delta = 1.0 then S'Aft is 1 
 while S'Scale is 0.</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Notes">47&nbsp;&nbsp;<A NAME="I1970"></A>The predefined operations 
+<div class="Notes">47&nbsp;&nbsp;<A NAME="I1972"></A>The predefined operations 
 of a fixed point type include the assignment operation, qualification, 
 the membership tests, and explicit conversion to and from other numeric 
 types. They also include the relational operators and the following predefined 
@@ -146,7 +148,7 @@ Other attributes of fixed point types are defined in <A HREF="RM-A-5-4.html">A.5
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-5-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

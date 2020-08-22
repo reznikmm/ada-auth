@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-8-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,59 +39,60 @@
 <HR>
 <H1>8.5.4 Subprogram Renaming Declarations</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
-can serve as the completion of a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0180">subprogram_declaration</A></SPAN>; 
-<A NAME="I3992"></A>such a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0216">renaming_declaration</A></SPAN> 
-is called a <I>renaming-as-body</I>. <A NAME="I3993"></A>A <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
+can serve as the completion of a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_declaration</A></SPAN>; 
+<A NAME="I4198"></A>such a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0238">renaming_declaration</A></SPAN> 
+is called a <I>renaming-as-body</I>. <A NAME="I4199"></A>A <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 that is not a completion is called a <I>renaming-as-declaration</I>, 
 and is used to rename a subprogram (possibly an enumeration literal) 
 or an entry.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">subprogram_renaming_declaration</SPAN><A NAME="I3994"></A><A NAME="S0220"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3995"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3996"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0181">subprogram_specification</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>callable_entity_</I><A NAME="I3997"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3998"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">subprogram_renaming_declaration</SPAN><A NAME="I4200"></A><A NAME="S0242"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4201"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4202"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>callable_entity_</I><A NAME="I4203"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4204"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3999"></A>The expected profile for the 
+<div class="Normal"><A NAME="I4205"></A>The expected profile for the 
 <I>callable_entity_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is the profile given in the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0181">subprogram_specification</A></SPAN>. 
+is the profile given in the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p4">4/3</a></div>
+<div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">The profile of a renaming-as-declaration shall be 
-mode conformant, with that of the renamed callable entity. <A NAME="I4000"></A></div>
+mode conformant<span class="delete5">,</span> with that of the renamed 
+callable entity. <A NAME="I4206"></A></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a parameter or 
-result subtype of the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0181">subprogram_specification</A></SPAN> 
+result subtype of the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN> 
 that has an explicit <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>:</div>
 <div class="paranum"><a name="p4.2">4.2/5</a></div>
 <div class="Bulleted">if the <I>callable_entity_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 <span class="insert5">statically&nbsp;</span>denotes a generic formal subprogram 
-of a generic unit <I>G</I>, and the <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
+of a generic unit <I>G</I>, and the <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 occurs within the body of a generic unit <I>G</I> or within the body 
 of a generic unit declared within the declarative region of the generic 
 unit <I>G</I>, then the corresponding parameter or result subtype of 
 the formal subprogram of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>;</div>
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
 <div class="Bulleted">otherwise, the subtype of the corresponding parameter 
-or result type of the renamed callable entity shall exclude null. <A NAME="I4001"></A>In 
+or result type of the renamed callable entity shall exclude null. <A NAME="I4207"></A>In 
 addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">The profile of a renaming-as-body shall conform fully 
-to that of the declaration it completes. <A NAME="I4002"></A>If the renaming-as-body 
+to that of the declaration it completes. <A NAME="I4208"></A>If the renaming-as-body 
 completes that declaration before the subprogram it declares is frozen, 
-the profile shall be mode conformant <A NAME="I4003"></A>with that of 
+the profile shall be mode conformant <A NAME="I4209"></A>with that of 
 the renamed callable entity and the subprogram it declares takes its 
 convention from the renamed subprogram; otherwise, the profile shall 
 be subtype conformant with that of the renamed callable entity and the 
-convention of the renamed subprogram shall not be Intrinsic. <A NAME="I4004"></A>A 
+convention of the renamed subprogram shall not be Intrinsic. <A NAME="I4210"></A>A 
 renaming-as-body is illegal if the declaration occurs before the subprogram 
 whose declaration it completes is frozen, and the renaming renames the 
 subprogram itself, through one or more subprogram renaming declarations, 
@@ -109,7 +110,7 @@ of a renaming is a prefixed view, the prefix of that view shall denote
 an object for which renaming is allowed.</span></div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes a formal parameter of the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0181">subprogram_specification</A></SPAN> 
+that denotes a formal parameter of the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN> 
 is not allowed within the <I>callable_entity_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>. 
 </div>
 
@@ -120,14 +121,14 @@ the renamed entity. The profile of this new view takes its subtypes,
 parameter modes, and calling convention from the original profile of 
 the callable entity, while taking the formal parameter <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
-from the profile given in the <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN>. 
+from the profile given in the <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN>. 
 The new view is a function or procedure, never an entry.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7.1">7.1/1</a></div>
 <div class="Normal">&nbsp;For a call to a subprogram whose body is given as 
 a renaming-as-body, the execution of the renaming-as-body is equivalent 
-to the execution of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN> 
+to the execution of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
 that simply calls the renamed subprogram with its formal parameters as 
 the actual parameters and, if it is a function, returns the value of 
 the call.&nbsp;</div>
@@ -142,21 +143,20 @@ an untagged record type.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p8.1">8.1/1</a></div>
-<div class="Normal">&nbsp;<A NAME="I4005"></A><A NAME="I4006"></A>If a subprogram 
-directly or indirectly renames itself, then it is a bounded error to 
-call that subprogram. Possible consequences are that Program_Error or 
-Storage_Error is raised, or that the call results in infinite recursion. 
-</div>
+<div class="Normal">&nbsp;If a subprogram directly or indirectly renames itself, 
+then it is a bounded error to call that subprogram. Possible consequences 
+are that Program_Error or Storage_Error is raised, or that the call results 
+in infinite recursion. <A NAME="I4211"></A><A NAME="I4212"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Notes">12&nbsp;&nbsp;A procedure can only be renamed as a 
-procedure. A function whose <SPAN Class="swiss"><A HREF="RM-6-1.html#S0185">defining_designator</A></SPAN> 
+procedure. A function whose <SPAN Class="swiss"><A HREF="RM-6-1.html#S0200">defining_designator</A></SPAN> 
 is either an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0187">operator_symbol</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0202">operator_symbol</A></SPAN> 
 can be renamed with either an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0187">operator_symbol</A></SPAN>; 
+or an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0202">operator_symbol</A></SPAN>; 
 for renaming as an operator, the subprogram specification given in the 
-<SPAN Class="swiss"><A HREF="RM-8-5.html#S0216">renaming_declaration</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-8-5.html#S0238">renaming_declaration</A></SPAN> 
 is subject to the rules given in <A HREF="RM-6-6.html">6.6</A> for operator 
 declarations. Enumeration literals can be renamed as functions; similarly, 
 <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
@@ -174,10 +174,10 @@ certain attributes, such as Pos.</div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN><span class="delete5">14&nbsp;&nbsp;Calls with the 
 new <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> of 
-a renamed entry are <SPAN Class="swiss"><A HREF="RM-6-4.html#S0195">procedure_call_statement</A></SPAN>s 
-and are not allowed at places where the syntax requires an <SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0242">entry_call_statement</A></SPAN> 
-in <SPAN Class="swiss">conditional_</SPAN> and <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0254">timed_entry_call</A></SPAN>s, 
-nor in an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN>; 
+a renamed entry are <SPAN Class="swiss"><A HREF="RM-6-4.html#S0217">procedure_call_statement</A></SPAN>s 
+and are not allowed at places where the syntax requires an <SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0264">entry_call_statement</A></SPAN> 
+in <SPAN Class="swiss">conditional_</SPAN> and <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0276">timed_entry_call</A></SPAN>s, 
+nor in an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN>; 
 similarly, the Count attribute is not available for the new <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>.</span></div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">15&nbsp;&nbsp;The primitiveness of a renaming-as-declaration 
@@ -215,7 +215,7 @@ subprogram renaming declaration with a new default expression:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-8-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

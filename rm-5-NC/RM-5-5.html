@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,121 +36,158 @@
 <HR>
 <H1>5.5 Loop Statements</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-includes a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+includes a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 that is to be executed repeatedly, zero or more times with the iterations 
 running sequentially or concurrently with one another.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">loop_statement</SPAN><A NAME="I3264"></A><A NAME="S0164"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<I>loop_</I><A NAME="I3265"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0158">statement_identifier</A></SPAN>:]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3266"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN>]&nbsp;<B>loop</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3267"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>&nbsp;[<I>loop_</I><A NAME="I3268"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">loop_statement</SPAN><A NAME="I3377"></A><A NAME="S0178"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>loop_</I><A NAME="I3378"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0172">statement_identifier</A></SPAN>:]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3379"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN>]&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3380"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>&nbsp;[<I>loop_</I><A NAME="I3381"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">iteration_scheme</SPAN><A NAME="I3269"></A><A NAME="S0165"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>while</B>&nbsp;<A NAME="I3270"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3271"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3272"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3273"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0170">procedural_iterator</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<B>parallel</B>&nbsp;[(<A NAME="I3274"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN>)]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I3275"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">iteration_scheme</SPAN><A NAME="I3382"></A><A NAME="S0179"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>while</B>&nbsp;<A NAME="I3383"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3384"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3385"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;[<B>parallel</B>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I3386"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>parallel</B>&nbsp;[(<A NAME="I3387"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>)]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I3388"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>parallel</B>&nbsp;[(<A NAME="I3389"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>)]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I3390"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN></div>
 <div class="paranum"><a name="p3.1">3.1/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">chunk_specification</SPAN><A NAME="I3276"></A><A NAME="S0166"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>integer_</I><A NAME="I3277"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3278"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;<A NAME="I3279"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN></div>
-<div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">loop_parameter_specification</SPAN><A NAME="I3280"></A><A NAME="S0167"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3281"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<A NAME="I3282"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">chunk_specification</SPAN><A NAME="I3391"></A><A NAME="S0180"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>integer_</I><A NAME="I3392"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3393"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;<A NAME="I3394"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Indented1"><SPAN Class="swiss">loop_parameter_specification</SPAN><A NAME="I3395"></A><A NAME="S0181"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3396"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<A NAME="I3397"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3398"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN>]</div>
+<div class="paranum"><a name="p4.1">4.1/5</a></div>
+<div class="Indented1"><SPAN Class="swiss">iterator_filter</SPAN><A NAME="I3399"></A><A NAME="S0182"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>when</B>&nbsp;<A NAME="I3400"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1">If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-has a <I>loop_</I><SPAN Class="swiss"><A HREF="RM-5-1.html#S0158">statement_identifier</A></SPAN>, 
+<div class="Indented1">If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+has a <I>loop_</I><SPAN Class="swiss"><A HREF="RM-5-1.html#S0172">statement_identifier</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 shall be repeated after the <B>end loop</B>; otherwise, there shall not 
 be an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 after the <B>end loop</B>.</div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
-<div class="Indented1">An <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN> 
+<div class="Indented1">An <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
 that begins with the reserved word <B>parallel</B> shall not have the 
-reserved word <B>reverse</B> in its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN>. 
+reserved word <B>reverse</B> in its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5.2">5.2/5</a></div>
-<div class="Normal">&nbsp;In a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN> 
-that is an <I>integer_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN>, 
-the <I>integer_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
+<div class="Normal">&nbsp;In a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN> 
+that is an <I>integer_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN>, 
+the <I>integer_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN> 
 is expected to be of any integer type.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Normal"><A NAME="I3283"></A>A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
+<div class="Normal"><A NAME="I3401"></A>A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
 declares a <I>loop parameter</I>, which is an object whose subtype (and 
 nominal subtype) is that defined by the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>. 
-<A NAME="I3284"></A></div>
+<A NAME="I3402"></A></div>
 <div class="paranum"><a name="p6.1">6.1/5</a></div>
-<div class="Normal">&nbsp;In a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN> 
+<div class="Normal">&nbsp;In a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN> 
 that has a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN> 
-declares a <I>chunk parameter</I> object<A NAME="I3285"></A> whose subtype 
+the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN> 
+declares a <I>chunk parameter</I> object<A NAME="I3403"></A> whose subtype 
 (and nominal subtype) is that defined by the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6.2">6.2/5</a></div>
+<div class="Normal">&nbsp;The <I>filter</I> of an <I>iterator construct</I> 
+<A NAME="I3404"></A><A NAME="I3405"></A> (a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN>) 
+is defined to be <I>satisfied</I><A NAME="I3406"></A> when there is no 
+<SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN> 
+for the iterator construct, or when the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN> 
+evaluates to True for a given iteration of the iterator construct.<A NAME="I3407"></A></div>
+<div class="paranum"><a name="p6.3">6.3/5</a></div>
+<div class="Normal">&nbsp;If a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with an iterator construct is said to be <I>conditionally executed</I>,<A NAME="I3408"></A> 
+then the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0167">statement</A></SPAN>s 
+are executed only when the filter of the iterator construct is satisfied.</div>
+<div class="paranum"><a name="p6.4">6.4/5</a></div>
+<div class="Normal">&nbsp;The loop iterators <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+can also be used in contexts other than <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN>s 
+(for example, see <A HREF="RM-4-3-5.html">4.3.5</A> and <A HREF="RM-4-5-8.html">4.5.8</A>). 
+In such a context, the iterator <I>conditionally produces</I><A NAME="I3409"></A> 
+values in the order specified for the associated construct below or in 
+<A HREF="RM-5-5-2.html">5.5.2</A>. The values produced are the values 
+given to the loop parameter when the filter of the iterator construct 
+is satisfied for that value. No value is produced when the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN> 
+evaluates to False.</div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Normal"><A NAME="I3286"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-is executed zero or more times, until the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-is complete. The <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3410"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+is executed zero or more times, until the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+is complete. The <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
 is complete when a transfer of control occurs that transfers control 
-out of the loop, or, in the case of an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN>, 
+out of the loop, or, in the case of an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN>, 
 as specified below.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3287"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-with a <B>while</B> <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN>, 
-the condition is evaluated before each execution of the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN>; 
-if the value of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
-is True, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-is executed; if False, the execution of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3411"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with a <B>while</B> <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN>, 
+the condition is evaluated before each execution of the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN>; 
+if the value of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
+is True, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+is executed; if False, the execution of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
 is complete.</div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Normal">&nbsp;If the reserved word <B>parallel</B> is present 
-in a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-(a <I>parallel loop</I>),<A NAME="I3288"></A><A NAME="I3289"></A> the 
-iterations are partitioned into one or more <A NAME="I3290"></A><I>chunks</I>, 
+in the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+(a <I>parallel loop</I>),<A NAME="I3412"></A><A NAME="I3413"></A> the 
+iterations are partitioned into one or more <A NAME="I3414"></A><I>chunks</I>, 
 each with its own separate logical thread of control (see clause <A HREF="RM-9.html">9</A>). 
-If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN> 
+If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN> 
 is present in a parallel loop, it is elaborated first, and the result 
 of the elaboration determines the maximum number of chunks used for the 
-parallel loop. <A NAME="I3291"></A>If the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN> 
-is an <I>integer_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN>, 
+parallel loop. <A NAME="I3415"></A>If the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN> 
+is an <I>integer_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN>, 
 the elaboration evaluates the expression, and the value of the expression 
 determines the maximum number of chunks. If a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 is present, the elaboration elaborates the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>, 
 which defines the subtype of the chunk parameter, and the number of values 
 in this subtype determines the maximum number of chunks. After elaborating 
-the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>, 
 a check is made that the determined maximum number of chunks is greater 
-than zero. If this check fails, Program_Error is raised. <A NAME="I3292"></A></div>
+than zero. If this check fails, Program_Error is raised.<A NAME="I3416"></A><A NAME="I3417"></A> 
+<A NAME="I3418"></A></div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal"><A NAME="I3293"></A><A NAME="I3294"></A>For the execution 
-of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-that has an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN> 
-including a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN>, 
-after elaborating the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN>, 
-if any, the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
-is elaborated. This elaboration elaborates the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>, 
+<div class="Normal"><A NAME="I3419"></A><A NAME="I3420"></A>For the execution 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+that has an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+including a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>, 
+after elaborating the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>, 
+if any, the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+is elaborated. This elaborates the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>, 
 which defines the subtype of the loop parameter. If the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
-defines a subtype with a null range, the execution of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-is complete. Otherwise, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-is executed once for each value of the discrete subtype defined by the 
-<SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+defines a subtype with a null range, the execution of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+is complete. Otherwise, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+is conditionally executed once for each value of the discrete subtype 
+defined by the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 that satisfies the predicates of the subtype (or until the loop is left 
-as a consequence of a transfer of control). <A NAME="I3295"></A>Prior 
+as a consequence of a transfer of control). <A NAME="I3421"></A>Prior 
 to each such iteration, the corresponding value of the discrete subtype 
 is assigned to the loop parameter associated with the given iteration. 
 If the loop is a parallel loop, each chunk has its own logical thread 
 of control with its own copy of the loop parameter; otherwise (a <I>sequential 
-loop</I>)<A NAME="I3296"></A><A NAME="I3297"></A>, a single logical thread 
+loop</I>)<A NAME="I3422"></A><A NAME="I3423"></A>, a single logical thread 
 of control performs the loop, and there is a single copy of the loop 
 parameter. Each logical thread of control handles a distinct subrange 
 of the values of the subtype of the loop parameter such that all values 
@@ -159,7 +196,7 @@ the values are assigned to the loop parameter in increasing order unless
 the reserved word <B>reverse</B> is present, in which case the values 
 are assigned in decreasing order.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/5</a></div>
-<div class="Normal">&nbsp;If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN> 
+<div class="Normal">&nbsp;If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 is present, then the logical thread of control associated with a given 
 chunk has its own copy of the chunk parameter initialized with a distinct 
@@ -168,33 +205,34 @@ The values of the chunk parameters are assigned such that they increase
 with increasing values of the ranges covered by the corresponding loop 
 parameters.</div>
 <div class="paranum"><a name="p9.2">9.2/5</a></div>
-<div class="Normal">&nbsp;Whether or not a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0166">chunk_specification</A></SPAN> 
+<div class="Normal">&nbsp;Whether or not a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN> 
 is present in a parallel loop, the total number of iterations of the 
 loop represents an upper bound on the number of logical threads of control 
 devoted to the loop.</div>
 <div class="paranum"><a name="p9.3">9.3/5</a></div>
-<div class="Normal">&nbsp;For details about the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-with the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN> 
-being <B>for</B> <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
-see <A HREF="RM-5-5-2.html">5.5.2</A>.</div>
+<div class="Normal">&nbsp;For details about the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+including an <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>, 
+see <A HREF="RM-5-5-2.html">5.5.2</A>. For details relating to a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN>, 
+see <A HREF="RM-5-5-3.html">5.5.3</A>.</div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p10">10</a></div>
-<div class="Notes">5&nbsp;&nbsp;A loop parameter is a constant; it cannot 
-be updated within the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Notes">5&nbsp;&nbsp;A loop parameter declared by a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+is a constant; it cannot be updated within the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 of the loop (see <A HREF="RM-3-3.html">3.3</A>).</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Notes">6&nbsp;&nbsp;An <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
 should not be given for a loop parameter, since the loop parameter is 
-automatically declared by the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN>. 
-The scope of a loop parameter extends from the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
-to the end of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN>, 
+automatically declared by the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>. 
+The scope of a loop parameter extends from the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+to the end of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN>, 
 and the visibility rules are such that a loop parameter is only visible 
-within the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+within the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 of the loop.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">7&nbsp;&nbsp;The <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 of a for loop is elaborated just once. Use of the reserved word <B>reverse</B> 
-does not alter the discrete subtype defined, so that the following <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN>s 
+does not alter the discrete subtype defined, so that the following <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN>s 
 are not equivalent; the first has a null range.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="SmallIndented2Examples"><B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;<B>reverse</B>&nbsp;1&nbsp;..&nbsp;0<BR>
@@ -237,16 +275,48 @@ loop statement with a name:</I>&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>&nbsp;Summation;</div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
-parallel loop:</I>&nbsp;</div>
+simple parallel loop:</I>&nbsp;</div>
 <div class="paranum"><a name="p23">23/5</a></div>
 <div class="Examples">--&nbsp;<SPAN Class="roman"><I>see&nbsp;<A HREF="RM-3-6.html">3.6</A></I></SPAN><BR>
-<B>parallel&nbsp;for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;Grid'Range(1)&nbsp;<B>loop</B><BR>
+<B>parallel</B><BR>
+<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;Grid'Range(1)&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;Grid(I,&nbsp;1)&nbsp;:=&nbsp;(<B>for&nbsp;all</B>&nbsp;J&nbsp;<B>in</B>&nbsp;Grid'Range(2)&nbsp;=&gt;&nbsp;Grid(I,J)&nbsp;=&nbsp;True);<BR>
 <B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+parallel loop with a chunk specification:</I>&nbsp;</div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Examples"><B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Chunk_Number&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;8;</div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Partial_Sum,<BR>
+&nbsp;&nbsp;&nbsp;Partial_Max&nbsp;:&nbsp;<B>array</B>&nbsp;(Chunk_Number)&nbsp;<B>of</B>&nbsp;Natural&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;0);<BR>
+&nbsp;&nbsp;&nbsp;Partial_Min&nbsp;:&nbsp;<B>array</B>&nbsp;(Chunk_Number)&nbsp;<B>of</B>&nbsp;Natural&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;Natural'Last);</div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Examples"><B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;<B>parallel</B>&nbsp;(Chunk&nbsp;<B>in</B>&nbsp;Chunk_Number)<BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;Grid'Range(1)&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True_Count&nbsp;:&nbsp;<B>constant</B>&nbsp;Natural&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;Grid'Range(2)&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Grid&nbsp;(I,&nbsp;J)&nbsp;<B>then</B>&nbsp;1&nbsp;<B>else</B>&nbsp;0)]'Reduce(&quot;+&quot;,0);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial_Sum&nbsp;(Chunk)&nbsp;:=&nbsp;@&nbsp;+&nbsp;True_Count;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial_Min&nbsp;(Chunk)&nbsp;:=&nbsp;Natural'Min(@,&nbsp;True_Count);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial_Max&nbsp;(Chunk)&nbsp;:=&nbsp;Natural'Max(@,&nbsp;True_Count);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Put_Line(&quot;Total=&quot;&nbsp;&amp;&nbsp;Partial_Sum'Reduce(&quot;+&quot;,&nbsp;0)&nbsp;&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;,&nbsp;Min=&quot;&nbsp;&amp;&nbsp;Partial_Min'Reduce(Natural'Min,&nbsp;Natural'Last)&nbsp;&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;,&nbsp;Max=&quot;&nbsp;&amp;&nbsp;Partial_Max'Reduce(Natural'Max,&nbsp;0));<BR>
+<B>end</B>;</div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="WideAbove"><I>For an example of an</I> <SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN><I>, 
+see <A HREF="RM-4-5-8.html">4.5.8</A>.</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

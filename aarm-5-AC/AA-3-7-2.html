@@ -30,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -55,7 +55,7 @@ A that is of a discriminated type [(after any implicit dereference)],
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="WideHanging-Term">A'Constrained</div><div class="WideHanging-Body">
-<A NAME="I2255"></A><A NAME="I2256"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
+<A NAME="I2254"></A><A NAME="I2255"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0183-1.TXT">AI12-0183-1</A></I>} 
 Yields the value True if A denotes a constant, a value, <span class="insert3">a 
 tagged object,&nbsp;</span>or a constrained variable, and False otherwise.<span class="insert5">&nbsp;The value of this attribute is of the predefined type Boolean.</span> 
@@ -97,7 +97,7 @@ True or False depending on the nature of the object.</span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I2257"></A>The execution of a construct 
+<div class="Normal"><A NAME="I2256"></A>The execution of a construct 
 is erroneous if the construct has a constituent that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting a subcomponent that depends on discriminants, and the value 
 of any of these discriminants is changed by this execution between evaluating 
@@ -105,18 +105,18 @@ the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> and
 the last use (within this execution) of the subcomponent denoted by the 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>This rule applies to <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s, 
+<div class="Annotations"><B>Ramification:&nbsp;</B>This rule applies to <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>s, 
 calls (except when the discriminant-dependent subcomponent is an <B>in</B> 
 parameter passed by copy), <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>s, 
 and <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>s. 
 Ada 83 only covered the first two cases. AI83-00585 pointed out the situation 
-with the last two cases. The cases of <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN>s 
+with the last two cases. The cases of <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0239">object_renaming_declaration</A></SPAN>s 
 and generic formal <B>in out</B> objects are handled differently, by 
 disallowing the situation at compile time.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p4.b">4.b/1</a></div>
-<div class="Annotations"><A NAME="I2258"></A>For consistency with other 
+<div class="Annotations"><A NAME="I2257"></A>For consistency with other 
 attributes, we are allowing the <span class="insert1"><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
 of Constrained to be a value as well as an object of a discriminated 
 type, and also an implicit dereference. These extensions are not important 
@@ -136,7 +136,7 @@ range changes the value of a discriminant.&nbsp;</div>
 <div class="Annotations">We have moved all discussion of erroneous use 
 of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s that 
 denote discriminant-dependent subcomponents to this subclause. In Ada 
-83, it used to appear separately under <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s 
+83, it used to appear separately under <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>s 
 and subprogram calls.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -149,7 +149,7 @@ unnecessary overhead for limited tagged parameters.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

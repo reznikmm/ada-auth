@@ -30,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -56,12 +56,12 @@ form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>
 Pack is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I5362"></A><A NAME="I5363"></A>Pack(<I>first_subtype_</I><A NAME="I5364"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span> 
+<A NAME="I5614"></A><A NAME="I5615"></A>Pack(<I>first_subtype_</I><A NAME="I5616"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span> 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><span class="delete3">The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+<div class="Normal"><span class="delete3">The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Pack shall denote a composite subtype.</span>&nbsp;</div>
 
@@ -69,8 +69,8 @@ Pack shall denote a composite subtype.</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><span class="insert3">For 
 a full type declaration of a composite type, the following language-defined 
-representation aspect may be specified:</span><span class="delete3"><A NAME="I5365"></A> 
-<A NAME="I5366"></A></span><span class="insert3"><span class="delete3"><A NAME="I5367"></A></span></span><span class="delete3"><A NAME="I5368"></A><A NAME="I5369"></A><A NAME="I5370"></A>A 
+representation aspect may be specified:</span><span class="delete3"><A NAME="I5617"></A> 
+<A NAME="I5618"></A></span><span class="insert3"><span class="delete3"><A NAME="I5619"></A></span></span><span class="delete3"><A NAME="I5620"></A><A NAME="I5621"></A><A NAME="I5622"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Pack 
 specifies the <I>packing</I> aspect of representation; the type (or the 
 extension part) is said to be <I>packed</I>. For a type extension, the 
@@ -82,10 +82,10 @@ Pack causes packing only of the extension part.</span></div>
 Pack is True for a type, the type (or the extension part) is said to 
 be <I>packed</I>. For a type extension, the parent part is packed as 
 for the parent type, and specifying Pack causes packing only of the extension 
-part. <A NAME="I5371"></A><A NAME="I5372"></A><A NAME="I5373"></A></span></div>
+part. <A NAME="I5623"></A><A NAME="I5624"></A><A NAME="I5625"></A></span></div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
 <div class="WideHanging-Body"><span class="insert3">If directly specified, 
-the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
 the aspect is False.</span>&nbsp;</div>
 
@@ -103,7 +103,7 @@ has no aliased part, then such a component need not be aligned according
 to the Alignment of its subtype; in particular it need not be allocated 
 on a storage element boundary.</span></span><span class="delete4"></span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"><A NAME="I5374"></A></span><span class="delete3"><A NAME="I5375"></A></span>The 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"><A NAME="I5626"></A></span><span class="delete3"><A NAME="I5627"></A></span>The 
 recommended level of support for <span class="insert3">the</span><span class="delete3"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
 Pack<span class="insert3">&nbsp;aspect</span> is:&nbsp;</div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
@@ -115,7 +115,7 @@ to the alignment of its subtype.</span></div>
 <div class="Bulleted">For a packed record type, the components should 
 be packed as tightly as possible subject to <span class="insert4">the 
 above alignment requirements,&nbsp;</span>the Sizes of the component subtypes, 
-and <span class="delete4">subject to&nbsp;</span>any <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+and <span class="delete4">subject to&nbsp;</span>any <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 that applies to the type; the implementation may, but need not, reorder 
 components or cross aligned word boundaries to improve the packing. A 
 component whose Size is greater than the word size may be allocated an 
@@ -131,7 +131,7 @@ the above alignment requirements</span>.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

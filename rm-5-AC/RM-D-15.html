@@ -30,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-14-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,25 +51,25 @@ task or a delay statement.</span>&nbsp;</div>
 following language-defined library package exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><span class="insert2"><B>package</B>&nbsp;Ada.Real_Time.Timing_Events</span><span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">&nbsp;<B>is</B><A NAME="I8774"></A></span></div>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">&nbsp;<B>is</B><A NAME="I9347"></A></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8775"></A>Timing_Event&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
-&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8776"></A>Timing_Event_Handler<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9348"></A>Timing_Event&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9349"></A>Timing_Event_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B>&nbsp;(Event&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8777"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9350"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timing_Event_Handler);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8778"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9351"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timing_Event_Handler);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8779"></A>Current_Handler&nbsp;(Event&nbsp;:&nbsp;Timing_Event)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9352"></A>Current_Handler&nbsp;(Event&nbsp;:&nbsp;Timing_Event)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Timing_Event_Handler;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8780"></A>Cancel_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9353"></A>Cancel_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8781"></A>Time_Of_Event&nbsp;(Event&nbsp;:&nbsp;Timing_Event)&nbsp;<B>return</B>&nbsp;Time;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9354"></A>Time_Of_Event&nbsp;(Event&nbsp;:&nbsp;Timing_Event)&nbsp;<B>return</B>&nbsp;Time;</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples"><span class="insert2"><B>private</B><BR>
 &nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -77,17 +77,17 @@ following language-defined library package exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal"><span class="insert2">The type Timing_Event represents 
 a time in the future when an event is to occur. The type Timing_Event 
-needs finalization<A NAME="I8782"></A> (see <A HREF="RM-7-6.html">7.6</A>).</span></div>
+needs finalization<A NAME="I9355"></A> (see <A HREF="RM-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal"><span class="insert2">An object of type Timing_Event 
 is said to be <I>set</I> if it is associated with a nonnull value of 
 type Timing_Event_Handler and <I>cleared</I> otherwise. All Timing_Event 
-objects are initially cleared. <A NAME="I8783"></A><A NAME="I8784"></A></span></div>
+objects are initially cleared. <A NAME="I9356"></A><A NAME="I9357"></A></span></div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal"><span class="insert2">The type Timing_Event_Handler 
 identifies a protected procedure to be executed by the implementation 
 when the timing event occurs. Such a protected procedure is called a 
-<I>handler</I>. <A NAME="I8785"></A></span></div>
+<I>handler</I>. <A NAME="I9358"></A></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -174,7 +174,7 @@ can be associated with several Timing_Event objects.</span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-14-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

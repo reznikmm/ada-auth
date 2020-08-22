@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,51 +41,51 @@ packages exist:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>with</B>&nbsp;System;<A NAME="I8703"></A><BR>
+<B>with</B>&nbsp;System;<A NAME="I9239"></A><BR>
 <B>with</B>&nbsp;System.Multiprocessors;<BR>
 <B>package</B>&nbsp;Ada.Interrupts<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8704"></A>Interrupt_Id&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8705"></A>Parameterless_Handler&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9240"></A>Interrupt_Id&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9241"></A>Parameterless_Handler&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;<B>protected</B>&nbsp;<B>procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;</div>
 <div class="paranum"><a name="p3">3/1</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8706"></A>Is_Reserved&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9242"></A>Is_Reserved&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8707"></A>Is_Attached&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9243"></A>Is_Attached&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8708"></A>Current_Handler&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9244"></A>Current_Handler&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Parameterless_Handler;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8709"></A>Attach_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9245"></A>Attach_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(New_Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupt&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8710"></A>Exchange_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9246"></A>Exchange_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Old_Handler&nbsp;:&nbsp;<B>out</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupt&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8711"></A>Detach_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9247"></A>Detach_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Interrupt&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8712"></A>Reference&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9248"></A>Reference&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Address;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8713"></A>Get_CPU&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9249"></A>Get_CPU&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Multiprocessors.CPU_Range;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Interrupts;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Interrupts.Names&nbsp;<B>is</B><A NAME="I8714"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Interrupts.Names&nbsp;<B>is</B><A NAME="I9250"></A><BR>
 &nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;Interrupt_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;.&nbsp;.<BR>
@@ -114,10 +114,9 @@ interrupt, Current_Handler returns <B>null</B>.</div>
 The Attach_Handler procedure attaches the specified handler to the interrupt, 
 overriding any existing treatment (including a user handler) in effect 
 for that interrupt. If New_Handler is <B>null</B>, the default treatment 
-is restored. <A NAME="I8715"></A>If New_Handler designates a protected 
-procedure for which the aspect Interrupt_Handler is False, Program_Error 
-is raised. In this case, the operation does not modify the existing interrupt 
-treatment.</div>
+is restored. If New_Handler designates a protected procedure for which 
+the aspect Interrupt_Handler is False, Program_Error is raised. In this 
+case, the operation does not modify the existing interrupt treatment.</div>
 <div class="paranum"><a name="p18">18/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0069">8652/0069</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00166.TXT">AI95-00166-01</A></I>} 
@@ -146,20 +145,20 @@ treatment for the specified interrupt.</div>
 <div class="Normal">For all operations defined in this package that take 
 a parameter of type Interrupt_Id, with the exception of Is_Reserved and 
 Reference, a check is made that the specified interrupt is not reserved. 
-<A NAME="I8716"></A>Program_Error is raised if this check fails.</div>
+<A NAME="I9251"></A>Program_Error is raised if this check fails.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 If, by using the Attach_Handler, Detach_Handler, or Exchange_Handler 
 procedures, an attempt is made to detach a handler that was attached 
 statically (using the aspect Attach_Handler), the handler is not detached 
-and Program_Error is raised. <A NAME="I8717"></A></div>
+and Program_Error is raised.</div>
 <div class="paranum"><a name="p22">22/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
 The Reference function returns a value of type System.Address that can 
 be used to attach a task entry via an address clause (see <A HREF="AA-J-7-1.html">J.7.1</A>) 
 to the interrupt specified by Interrupt. This function raises Program_Error 
 if attaching task entries to interrupts (or to this particular interrupt) 
-is not supported. <A NAME="I8718"></A></div>
+is not supported.</div>
 <div class="paranum"><a name="p22.1">22.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
 The function Get_CPU returns the processor on which the handler for Interrupt 
@@ -172,11 +171,12 @@ value System.Multiprocessors.Not_A_Specific_CPU is returned.</div>
 shall the current handler of the corresponding interrupt be undefined.</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
-<div class="paranum"><a name="p24">24/3</a></div>
+<div class="paranum"><a name="p24">24/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-If the Ceiling_Locking policy (see <A HREF="AA-D-3.html">D.3</A>) is 
-in effect, the implementation shall document the default ceiling priority 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+The implementation shall document, when the Ceiling_Locking policy (see 
+<A HREF="AA-D-3.html">D.3</A>) is in effect, the default ceiling priority 
 assigned to a protected object that contains a protected procedure that 
 specifies either the Attach_Handler or Interrupt_Handler aspects, but 
 does not specify the Interrupt_Priority aspect. [This default need not 
@@ -238,16 +238,16 @@ and Exchange_Handler for the default treatment is null.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p28.b">28.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<A NAME="I8719"></A>Function Get_CPU is added to Interrupts. If Interrupts 
-is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+<A NAME="I9252"></A>Function Get_CPU is added to Interrupts. If Interrupts 
+is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
-of Get_CPU is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+of Get_CPU is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
 This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

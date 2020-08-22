@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -47,36 +47,36 @@ declares a subtype of some previously declared type, as defined by a
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">subtype_declaration</SPAN><A NAME="I1459"></A><A NAME="S0026"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I1460"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<A NAME="I1461"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1462"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;</div>
+<div class="Indented1"><SPAN Class="swiss">subtype_declaration</SPAN><A NAME="I1457"></A><A NAME="S0026"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I1458"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<A NAME="I1459"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1460"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">subtype_indication</SPAN><A NAME="I1463"></A><A NAME="S0027"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<span class="insert2">[<A NAME="I1464"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I1465"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[<A NAME="I1466"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">subtype_indication</SPAN><A NAME="I1461"></A><A NAME="S0027"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<span class="insert2">[<A NAME="I1462"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I1463"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[<A NAME="I1464"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>]</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">subtype_mark</SPAN><A NAME="I1467"></A><A NAME="S0028"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>subtype_</I><A NAME="I1468"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">subtype_mark</SPAN><A NAME="I1465"></A><A NAME="S0028"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>subtype_</I><A NAME="I1466"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">constraint</SPAN><A NAME="I1469"></A><A NAME="S0029"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1470"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0030">scalar_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1471"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">constraint</SPAN><A NAME="I1467"></A><A NAME="S0029"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1468"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0030">scalar_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1469"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">scalar_constraint</SPAN><A NAME="I1472"></A><A NAME="S0030"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1473"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1474"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1475"></A><SPAN Class="swiss"><A HREF="RM-J-3.html#S0339">delta_constraint</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">scalar_constraint</SPAN><A NAME="I1470"></A><A NAME="S0030"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1471"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1472"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1473"></A><SPAN Class="swiss"><A HREF="RM-J-3.html#S0370">delta_constraint</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">composite_constraint</SPAN><A NAME="I1476"></A><A NAME="S0031"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1477"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1478"></A><SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">composite_constraint</SPAN><A NAME="I1474"></A><A NAME="S0031"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1475"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1476"></A><SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-shall resolve to denote a subtype. <A NAME="I1479"></A>The type <I>determined 
+shall resolve to denote a subtype. <A NAME="I1477"></A>The type <I>determined 
 by</I> a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 is the type of the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1480"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1478"></A>The 
 elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
-<A NAME="I1481"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<A NAME="I1479"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 creates a new subtype. If the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 does not include a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>, 
 the new subtype has the same (possibly null) constraint as that denoted 
@@ -88,20 +88,20 @@ proceeds as follows:&nbsp;</div>
 <div class="Bulleted">The <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 is first elaborated.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Bulleted"><A NAME="I1482"></A><A NAME="I1483"></A>A check 
+<div class="Bulleted"><A NAME="I1480"></A><A NAME="I1481"></A>A check 
 is then made that the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 is <I>compatible</I> with the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">The condition imposed by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 is the condition obtained after elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>. 
-<A NAME="I1484"></A>The rules defining compatibility are given for each 
+<A NAME="I1482"></A>The rules defining compatibility are given for each 
 form of <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 in the appropriate subclause. These rules are such that if a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 is <I>compatible</I> with a subtype, then the condition imposed by the 
 <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 cannot contradict any condition already imposed by the subtype on its 
-values. <A NAME="I1485"></A>The exception Constraint_Error is raised 
+values. <A NAME="I1483"></A>The exception Constraint_Error is raised 
 if any check of compatibility fails.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13</a></div>
@@ -129,7 +129,7 @@ declarations:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -24,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-11-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,37 +40,39 @@
 <div class="Normal">This subclause defines a package to support the partitioning 
 of a storage pool into subpools. A subpool may be specified as the default 
 to be used for allocation from the associated storage pool, or a particular 
-subpool may be specified as part of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+subpool may be specified as part of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 (see <A HREF="RM-4-8.html">4.8</A>).&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">The following language-defined library package exists:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><A NAME="I5482"></A><B>package</B>&nbsp;System.Storage_Pools.Subpools&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I5736"></A><B>package</B>&nbsp;System.Storage_Pools.Subpools&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate&nbsp;(Subpools);</div>
-<div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5483"></A>Root_Storage_Pool_With_Subpools&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>abstract&nbsp;new</B>&nbsp;Root_Storage_Pool&nbsp;<B>with&nbsp;private</B>;</div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5737"></A>Root_Storage_Pool_With_Subpools&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>abstract&nbsp;new</B>&nbsp;Root_Storage_Pool&nbsp;<B>with&nbsp;private</B>;<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Root_Storage_Pool_With_Subpools);</span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5484"></A>Root_Subpool&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5738"></A>Root_Subpool&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Root_Subpool);</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5485"></A>Subpool_Handle&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Root_Subpool'Class;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5739"></A>Subpool_Handle&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Root_Subpool'Class;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Subpool_Handle'Storage_Size&nbsp;<B>use</B>&nbsp;0;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5486"></A>Create_Subpool&nbsp;(Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5740"></A>Create_Subpool&nbsp;(Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;following&nbsp;operations&nbsp;are&nbsp;intended&nbsp;for&nbsp;pool&nbsp;implementers:</I></SPAN></div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5487"></A>Pool_of_Subpool&nbsp;(Subpool&nbsp;:&nbsp;<B>not&nbsp;null</B>&nbsp;Subpool_Handle)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5741"></A>Pool_of_Subpool&nbsp;(Subpool&nbsp;:&nbsp;<B>not&nbsp;null</B>&nbsp;Subpool_Handle)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;access</B>&nbsp;Root_Storage_Pool_With_Subpools'Class;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5488"></A>Set_Pool_of_Subpool&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5742"></A>Set_Pool_of_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools'Class);</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5489"></A>Allocate_From_Subpool&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5743"></A>Allocate_From_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>out</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
@@ -76,31 +80,31 @@ subpool may be specified as part of an <SPAN Class="swiss"><A HREF="RM-4-8.html#
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;=&gt;&nbsp;Pool_of_Subpool(Subpool)&nbsp;=&nbsp;Pool'Access;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5490"></A>Deallocate_Subpool&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5744"></A>Deallocate_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Subpool_Handle)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;=&gt;&nbsp;Pool_of_Subpool(Subpool)&nbsp;=&nbsp;Pool'Access;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5491"></A>Default_Subpool_for_Pool&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5745"></A>Default_Subpool_for_Pool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5492"></A>Allocate&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5746"></A>Allocate&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>out</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count);</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5493"></A>Deallocate&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5747"></A>Deallocate&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>in</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count)&nbsp;<B>is&nbsp;null</B>;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5494"></A>Storage_Size&nbsp;(Pool&nbsp;:&nbsp;Root_Storage_Pool_With_Subpools)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5748"></A>Storage_Size&nbsp;(Pool&nbsp;:&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Storage_Elements.Storage_Count<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Storage_Elements.Storage_Count'Last);</div>
 <div class="paranum"><a name="p17">17/3</a></div>
@@ -108,7 +112,7 @@ subpool may be specified as part of an <SPAN Class="swiss"><A HREF="RM-4-8.html#
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 end&nbsp;System.Storage_Pools.Subpools;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal"><A NAME="I5495"></A><A NAME="I5496"></A><A NAME="I5497"></A><A NAME="I5498"></A><A NAME="I5499"></A>A 
+<div class="Normal"><A NAME="I5749"></A><A NAME="I5750"></A><A NAME="I5751"></A><A NAME="I5752"></A><A NAME="I5753"></A>A 
 <I>subpool</I> is a separately reclaimable portion of a storage pool, 
 identified by an object of type Subpool_Handle (a <I>subpool handle</I>). 
 A subpool handle also identifies the enclosing storage pool, a <I>storage 
@@ -123,7 +127,7 @@ storage pool; only the handles need be exposed to clients of the storage
 pool. Subpool objects are designated by subpool handles, and are the 
 run-time representation of a subpool.</div>
 <div class="paranum"><a name="p20">20/4</a></div>
-<div class="Normal">Each subpool <I>belongs</I><A NAME="I5500"></A> to 
+<div class="Normal">Each subpool <I>belongs</I><A NAME="I5754"></A> to 
 a single storage pool (which will always be a pool that supports subpools). 
 An access to the pool that a subpool belongs to can be obtained by calling 
 Pool_of_Subpool with the subpool handle. Set_Pool_of_Subpool causes the 
@@ -133,12 +137,12 @@ propagates Program_Error if the subpool already belongs to a pool. If
 Set_Pool_of_Subpool has not yet been called for a subpool, Pool_of_Subpool 
 returns <B>null</B>.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">When an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">When an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 for a type whose storage pool supports subpools is evaluated, a call 
 is made on Allocate_From_Subpool passing in a Subpool_Handle, in addition 
 to the parameters as defined for calls on Allocate (see <A HREF="RM-13-11.html">13.11</A>). 
 The subpool designated by the <I>subpool_handle_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is used, if specified in an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>. 
+is used, if specified in an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>. 
 Otherwise, Default_Subpool_for_Pool of the Pool is used to provide a 
 subpool handle. All requirements on the Allocate procedure also apply 
 to Allocate_from_Subpool.</div>
@@ -147,7 +151,7 @@ to Allocate_from_Subpool.</div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal">If a storage pool that supports subpools is specified 
 as the Storage_Pool for an access type, the access type is called a <I>subpool 
-access type</I>.<A NAME="I5501"></A><A NAME="I5502"></A> A subpool access 
+access type</I>.<A NAME="I5755"></A><A NAME="I5756"></A> A subpool access 
 type shall be a pool-specific access type.</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Normal">The accessibility level of a subpool access type 
@@ -156,7 +160,7 @@ If the specified storage pool object is a storage pool that supports
 subpools, then the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes the object shall not denote part of a formal parameter, 
 nor shall it denote part of a dereference of a value of a non-library-level 
-general access type. <A NAME="I5503"></A>In addition to the places where 
+general access type. <A NAME="I5757"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -171,14 +175,14 @@ supports subpools, the following checks are made:</div>
 <div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 used to specify the storage pool object does not denote part of a formal 
 parameter nor part of a dereference of a value of a non-library-level 
-general access type; and<A NAME="I5504"></A><A NAME="I5505"></A></div>
+general access type; and<A NAME="I5758"></A><A NAME="I5759"></A></div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="Bulleted">the accessibility level of the access type is not 
-deeper than that of the storage pool object.<A NAME="I5506"></A><A NAME="I5507"></A> 
+deeper than that of the storage pool object.<A NAME="I5760"></A><A NAME="I5761"></A> 
 </div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Normal" style="margin-bottom: 0.9em">Program_Error is raised 
-if either of these checks fail.<A NAME="I5508"></A></div>
+if either of these checks fail.<A NAME="I5762"></A></div>
 <div class="paranum"><a name="p28">28/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A call to Subpools.Allocate(P, 
 Addr, Size, Align) does the following:</div>
@@ -189,16 +193,16 @@ Addr, Size, Align) does the following:</div>
 &nbsp;&nbsp;&nbsp;Subpool&nbsp;=&gt;&nbsp;Default_Subpool_for_Pool<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Root_Storage_Pool_With_Subpools'Class(P)));</div>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 that allocates in a subpool raises Program_Error if the allocated object 
-has task parts.<A NAME="I5509"></A><A NAME="I5510"></A><A NAME="I5511"></A></div>
+has task parts.<A NAME="I5763"></A><A NAME="I5764"></A><A NAME="I5765"></A></div>
 <div class="paranum"><a name="p31">31/3</a></div>
 <div class="Normal">Unless overridden, Default_Subpool_for_Pool propagates 
 Program_Error.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p31.1">31.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I5512"></A>If Allocate_From_Subpool does 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I5766"></A>If Allocate_From_Subpool does 
 not meet one or more of the requirements on the Allocate procedure as 
 given in the Erroneous Execution rules of <A HREF="RM-13-11.html">13.11</A>, 
 then the program execution is erroneous.&nbsp;</div>
@@ -238,7 +242,7 @@ with each subpool provided by Create_Subpool.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-11-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

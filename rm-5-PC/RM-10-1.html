@@ -19,9 +19,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -30,39 +30,39 @@
 <HR>
 <H1>10.1 Separate Compilation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4522"></A><A NAME="I4523"></A><A NAME="I4524"></A>A 
+<div class="Normal"><A NAME="I4757"></A><A NAME="I4758"></A><A NAME="I4759"></A>A 
 <I>program unit</I> is either a package, a task unit, a protected unit, 
 a protected entry, a generic unit, or an explicitly declared subprogram 
 other than an enumeration literal. Certain kinds of program units can 
 be separately compiled. Alternatively, they can appear physically nested 
 within other program units.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4525"></A>The text of a program can be 
-submitted to the compiler in one or more <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN>s. 
-Each <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN> 
-is a succession of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN>s. 
-A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN> 
+<div class="Normal"><A NAME="I4760"></A>The text of a program can be 
+submitted to the compiler in one or more <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN>s. 
+Each <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN> 
+is a succession of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>s. 
+A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN> 
 contains either the declaration, the body, or a renaming of a program 
-unit. The representation for a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN> 
+unit. The representation for a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN> 
 is implementation-defined.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4526"></A>A library unit is a separately 
+<div class="Normal"><A NAME="I4761"></A>A library unit is a separately 
 compiled program unit, and is always a package, subprogram, or generic 
 unit. Library units may have other (logically nested) library units as 
 children, and may have other program units physically nested within them. 
-<A NAME="I4527"></A>A root library unit, together with its children and 
+<A NAME="I4762"></A>A root library unit, together with its children and 
 grandchildren and so on, form a <I>subsystem</I>.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Normal">An implementation may impose implementation-defined 
-restrictions on <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN>s 
-that contain multiple <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN>s. 
+restrictions on <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN>s 
+that contain multiple <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>s. 
 </div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

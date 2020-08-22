@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -57,8 +57,8 @@ No_Return, which is a representation pragma (see <A HREF="RM-13-1.html">13.1</A>
 is as follows:</span></span><span class="insert2"></span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert2"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
-<A NAME="I3834"></A><A NAME="I3835"></A>No_Return(<I>procedure_</I><A NAME="I3836"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>{, 
-<I>procedure_</I><A NAME="I3837"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>});</span></span><span class="insert2"></span> 
+<A NAME="I4042"></A><A NAME="I4043"></A>No_Return(<I>procedure_</I><A NAME="I4044"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>{, 
+<I>procedure_</I><A NAME="I4045"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>});</span></span><span class="insert2"></span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -70,10 +70,10 @@ the following language-defined representation aspect may be specified:</span>
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">No_Return</span></div><div class="WideHanging-Body">
 <span class="insert3">The type of aspect No_Return is Boolean. When aspect 
-No_Return is True for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I3838"></A><A NAME="I3839"></A><A NAME="I3840"></A></span></div>
+No_Return is True for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I4046"></A><A NAME="I4047"></A><A NAME="I4048"></A></span></div>
 <div class="paranum"><a name="p3.3">3.3/3</a></div>
 <div class="WideHanging-Body"><span class="insert3">If directly specified, 
-the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. This aspect is never inherited; if not 
 directly specified, the aspect is False.</span></div>
 <div class="paranum"><a name="p3.4">3.4/5</a></div>
@@ -83,23 +83,23 @@ copies of that&nbsp;</span><span class="insert5">subprogram</span><span class="i
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal"><span class="insert2"></span><span class="insert3">Aspect 
-No_Return</span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I3841"></A> Each 
-<I>procedure_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+No_Return</span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I4049"></A> Each 
+<I>procedure_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 shall denote one or more procedures or generic procedures; the denoted 
-entities are <I>nonreturning</I>. The <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN></span></span><span class="insert2">&nbsp;shall not&nbsp;</span><span class="insert3">be specified for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;denote</span></span><span class="insert2">&nbsp;a null procedure nor an instance of a generic unit.</span></div>
+entities are <I>nonreturning</I>. The <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN></span></span><span class="insert2">&nbsp;shall not&nbsp;</span><span class="insert3">be specified for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;denote</span></span><span class="insert2">&nbsp;a null procedure nor an instance of a generic unit.</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal"><span class="insert2">A return statement shall not 
 apply to a nonreturning procedure or generic procedure.</span></div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Normal">&nbsp;<span class="insert5">Any return statement that 
-applies to a nonreturning function or generic function shall be a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0200">simple_return_statement</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-that is a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0287">raise_expression</A></SPAN>, 
-a call on a nonreturning function, or a parenthesized <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+applies to a nonreturning function or generic function shall be a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0222">simple_return_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0309">raise_expression</A></SPAN>, 
+a call on a nonreturning function, or a parenthesized <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of one of these.</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal"><span class="insert2">A&nbsp;</span><span class="insert5">subprogram</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;procedure</span></span><span class="insert2">&nbsp;shall be nonreturning if it overrides a dispatching nonreturning&nbsp;</span><span class="insert5">subprogram</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;procedure</span></span><span class="insert2">. 
-<A NAME="I3842"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4050"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), this rule applies also in 
 the private part of an instance of a generic unit.</span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
@@ -120,7 +120,7 @@ the corresponding copies of that procedure in instances.</span></span><span clas
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal"><span class="insert2">If the body of a nonreturning 
 procedure completes normally, Program_Error is raised at the point of 
-the call. <A NAME="I3843"></A></span></div>
+the call. <A NAME="I4051"></A></span></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
@@ -130,7 +130,7 @@ the call. <A NAME="I3843"></A></span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

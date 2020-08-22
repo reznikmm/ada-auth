@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,15 +45,16 @@ of highly efficient tasking run-time systems.]&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0290-1.TXT">AI12-0290-1</A></I>} 
-<A NAME="I8952"></A>A scalar <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0369-1.TXT">AI12-0369-1</A></I>} 
+<A NAME="I9531"></A>A scalar <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 within a protected unit is said to be <I>pure-barrier-eligible</I> if 
 it is one of the following:&nbsp;</div>
 <div class="paranum"><a name="p1.2">1.2/5</a></div>
 <div class="Bulleted">a static expression;</div>
 <div class="paranum"><a name="p1.3">1.3/5</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that statically denotes a scalar component of the immediately enclosing 
-protected unit;</div>
+that statically names (see <A HREF="AA-4-9.html">4.9</A>) a scalar subcomponent 
+of the immediately enclosing protected unit;</div>
 <div class="paranum"><a name="p1.4">1.4/5</a></div>
 <div class="Bulleted">a Count <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -64,20 +65,20 @@ unit;</div>
 logical operator (<B>and</B>, <B>or</B>, <B>xor</B>, <B>not</B>), where 
 each operand is pure-barrier-eligible;</div>
 <div class="paranum"><a name="p1.6">1.6/5</a></div>
-<div class="Bulleted">a membership test whose <I>tested_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN> 
-is pure-barrier-eligible, and whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">membership_choice_list</A></SPAN> 
+<div class="Bulleted">a membership test whose <I>tested_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN> 
+is pure-barrier-eligible, and whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0136">membership_choice_list</A></SPAN> 
 meets the requirements for a static membership test (see <A HREF="AA-4-9.html">4.9</A>);</div>
 <div class="paranum"><a name="p1.7">1.7/5</a></div>
 <div class="Bulleted">a short-circuit control form both of whose operands 
 are pure-barrier-eligible;</div>
 <div class="paranum"><a name="p1.8">1.8/5</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN> 
-all of whose <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s, 
-<I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s, 
-and <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN> 
+all of whose <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>s, 
+<I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s, 
+and <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
 are pure-barrier-eligible; or</div>
 <div class="paranum"><a name="p1.9">1.9/5</a></div>
-<div class="Bulleted">a pure-barrier-eligible <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted">a pure-barrier-eligible <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 enclosed in parentheses.&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
@@ -85,7 +86,7 @@ are language defined:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0216-1.TXT">AI05-0216-1</A></I>} 
-<A NAME="I8953"></A><A NAME="I8954"></A>No_Task_Hierarchy&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9532"></A><A NAME="I9533"></A>No_Task_Hierarchy&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 No task depends on a master other than the library-level master.</div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0216-1.TXT">AI05-0216-1</A></I>} 
@@ -104,13 +105,13 @@ is disallowed by this restriction.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
-<A NAME="I8955"></A><A NAME="I8956"></A>No_Nested_Finalization&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9534"></A><A NAME="I9535"></A>No_Nested_Finalization&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Objects of a type that needs finalization (see <A HREF="AA-7-6.html">7.6</A>) 
 are declared only at library level. If an access type does not have library-level 
-accessibility, then there are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+accessibility, then there are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 of the type where the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 needs finalization.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a/1</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
@@ -127,29 +128,29 @@ not necessarily known if the coextension type needs finalization (it
 could be a limited view).&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0211-1.TXT">AI05-0211-1</A></I>} 
-<A NAME="I8957"></A><A NAME="I8958"></A>No_Abort_Statements&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-9-8.html#S0262">abort_statement</A></SPAN>s, 
+<A NAME="I9536"></A><A NAME="I9537"></A>No_Abort_Statements&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There are no <SPAN Class="swiss"><A HREF="AA-9-8.html#S0284">abort_statement</A></SPAN>s, 
 and there is no use of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting Task_Identification.Abort_Task.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Term"><A NAME="I8959"></A><A NAME="I8960"></A>No_Terminate_Alternatives 
+<div class="WideHanging-Term"><A NAME="I9538"></A><A NAME="I9539"></A>No_Terminate_Alternatives 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN>s 
-with <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN>s.</div>
+There are no <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0270">selective_accept</A></SPAN>s 
+with <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0275">terminate_alternative</A></SPAN>s.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I8961"></A><A NAME="I8962"></A>No_Task_Allocators 
+<div class="WideHanging-Term"><A NAME="I9540"></A><A NAME="I9541"></A>No_Task_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+There are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 for task types or types containing task subcomponents.</div>
 <div class="paranum"><a name="p7.1">7.1/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0224-1.TXT">AI05-0224-1</A></I>} 
-In the case of an initialized <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+In the case of an initialized <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 of an access type whose designated type is class-wide and limited, a 
 check is made that the specific type of the allocated object has no task 
-subcomponents. Program_Error is raised if this check fails.<A NAME="I8963"></A> 
+subcomponents. Program_Error is raised if this check fails.<A NAME="I9542"></A> 
 </div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="WideHanging-Term"><A NAME="I8964"></A><A NAME="I8965"></A>No_Implicit_Heap_Allocations 
+<div class="WideHanging-Term"><A NAME="I9543"></A><A NAME="I9544"></A>No_Implicit_Heap_Allocations 
 </div><div class="WideHanging-Body"><br clear="left">
 There are no operations that implicitly require heap storage allocation 
 to be performed by the implementation. The operations that implicitly 
@@ -161,13 +162,13 @@ that implicitly require heap storage allocation.</div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
 No_Dynamic_Priorities&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 There are no semantic dependences on the package Dynamic_Priorities, 
-and no occurrences of the attribute Priority. <A NAME="I8966"></A><A NAME="I8967"></A></div>
+and no occurrences of the attribute Priority. <A NAME="I9545"></A><A NAME="I9546"></A></div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00394.TXT">AI95-00394-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0211-1.TXT">AI05-0211-1</A></I>} 
-<A NAME="I8968"></A><A NAME="I8969"></A>No_Dynamic_Attachment&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9547"></A><A NAME="I9548"></A>No_Dynamic_Attachment&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 There is no use of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting any of the operations defined in package Interrupts (Is_Reserved, 
 Is_Attached, Current_Handler, Attach_Handler, Exchange_Handler, Detach_Handler, 
@@ -178,7 +179,7 @@ This includes 'Access and 'Address of any of these operations, as well
 as inherited versions of these operations.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0055-1.TXT">AI12-0055-1</A></I>} 
-<A NAME="I8970"></A><A NAME="I8971"></A>No_Dynamic_CPU_Assignment&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9549"></A><A NAME="I9550"></A>No_Dynamic_CPU_Assignment&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 No task has the CPU aspect specified to be a non-static expression. Each 
 task (including the environment task) that has the CPU aspect specified 
 as Not_A_Specific_CPU will be assigned to a particular implementation-defined 
@@ -205,53 +206,53 @@ a task with a CPU value of a Not_A_Specific_CPU will execute.</div>
 <div class="paranum"><a name="p10.2">10.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
-<A NAME="I8972"></A><A NAME="I8973"></A>No_Local_Protected_Objects&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9551"></A><A NAME="I9552"></A>No_Local_Protected_Objects&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Protected objects are declared only at library level.</div>
 <div class="paranum"><a name="p10.3">10.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00297.TXT">AI95-00297-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
-<A NAME="I8974"></A><A NAME="I8975"></A>No_Local_Timing_Events&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9553"></A><A NAME="I9554"></A>No_Local_Timing_Events&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Timing_Events are declared only at library level.</div>
 <div class="paranum"><a name="p10.4">10.4/2</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<A NAME="I8976"></A><A NAME="I8977"></A>No_Protected_Type_Allocators 
+<A NAME="I9555"></A><A NAME="I9556"></A>No_Protected_Type_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+There are no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 for protected types or types containing protected type subcomponents.</div>
 <div class="paranum"><a name="p10.5">10.5/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0224-1.TXT">AI05-0224-1</A></I>} 
-In the case of an initialized <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+In the case of an initialized <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 of an access type whose designated type is class-wide and limited, a 
 check is made that the specific type of the allocated object has no protected 
-subcomponents. Program_Error is raised if this check fails.<A NAME="I8978"></A> 
+subcomponents. Program_Error is raised if this check fails.<A NAME="I9557"></A> 
 </div>
 <div class="paranum"><a name="p10.6">10.6/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0211-1.TXT">AI05-0211-1</A></I>} 
-<A NAME="I8979"></A><A NAME="I8980"></A>No_Relative_Delay&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN>s, 
+<A NAME="I9558"></A><A NAME="I9559"></A>No_Relative_Delay&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There are no <SPAN Class="swiss"><A HREF="AA-9-6.html#S0268">delay_relative_statement</A></SPAN>s, 
 and there is no use of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes the Timing_Events.Set_Handler subprogram that has a Time_Span 
 parameter.</div>
 <div class="paranum"><a name="p10.7">10.7/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<A NAME="I8981"></A><A NAME="I8982"></A>No_Requeue_Statements&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN>s.</div>
+<A NAME="I9560"></A><A NAME="I9561"></A>No_Requeue_Statements&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There are no <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN>s.</div>
 <div class="paranum"><a name="p10.8">10.8/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<A NAME="I8983"></A><A NAME="I8984"></A>No_Select_Statements&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN>s.</div>
+<A NAME="I9562"></A><A NAME="I9563"></A>No_Select_Statements&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There are no <SPAN Class="swiss"><A HREF="AA-9-7.html#S0269">select_statement</A></SPAN>s.</div>
 <div class="paranum"><a name="p10.9">10.9/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00394.TXT">AI95-00394-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0211-1.TXT">AI05-0211-1</A></I>} 
-<A NAME="I8985"></A><A NAME="I8986"></A>No_Specific_Termination_Handlers 
+<A NAME="I9564"></A><A NAME="I9565"></A>No_Specific_Termination_Handlers 
 </div><div class="WideHanging-Body"><br clear="left">
 There is no use of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting the Set_Specific_Handler and Specific_Handler subprograms in 
 Task_Termination.</div>
 <div class="paranum"><a name="p10.10">10.10/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0117-1.TXT">AI12-0117-1</A></I>} 
-<A NAME="I8987"></A><A NAME="I8988"></A>No_Tasks_Unassigned_To_CPU&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9566"></A><A NAME="I9567"></A>No_Tasks_Unassigned_To_CPU&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 The CPU aspect is specified for the environment task. No CPU aspect is 
 specified to be statically equal to Not_A_Specific_CPU. If aspect CPU 
 is specified (dynamically) to the value Not_A_Specific_CPU, then Program_Error 
@@ -266,25 +267,26 @@ If the restriction is used with the Ravenscar profile, no runtime checks
 are needed.&nbsp;</div>
 <div class="paranum"><a name="p10.11">10.11/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0290-1.TXT">AI12-0290-1</A></I>} 
-<A NAME="I8989"></A><A NAME="I8990"></A>Pure_Barriers&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9568"></A><A NAME="I9569"></A>Pure_Barriers&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 The Boolean expression in each protected entry barrier is pure-barrier-eligible.</div>
 <div class="paranum"><a name="p10.12">10.12/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0290-1.TXT">AI12-0290-1</A></I>} 
-<A NAME="I8991"></A><A NAME="I8992"></A>Simple_Barriers&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0369-1.TXT">AI12-0369-1</A></I>} 
+<A NAME="I9570"></A><A NAME="I9571"></A>Simple_Barriers&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 The Boolean expression in each entry barrier is either a static expression 
-or a name that statically denotes a component of the enclosing protected 
-object.</div>
+or a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that statically names (see <A HREF="AA-4-9.html">4.9</A>) a subcomponent 
+of the enclosing protected object.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
 are language defined:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="WideHanging-Term"><A NAME="I8993"></A><A NAME="I8994"></A>Max_Select_Alternatives 
+<div class="WideHanging-Term"><A NAME="I9572"></A><A NAME="I9573"></A>Max_Select_Alternatives 
 </div><div class="WideHanging-Body"><br clear="left">
-Specifies the maximum number of alternatives in a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN>.</div>
+Specifies the maximum number of alternatives in a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0270">selective_accept</A></SPAN>.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="WideHanging-Term"><A NAME="I8995"></A><A NAME="I8996"></A>Max_Task_Entries 
+<div class="WideHanging-Term"><A NAME="I9574"></A><A NAME="I9575"></A>Max_Task_Entries 
 </div><div class="WideHanging-Body"><br clear="left">
 Specifies the maximum number of entries per task. The bounds of every 
 entry family of a task unit shall be static, or shall be defined by a 
@@ -295,7 +297,7 @@ of zero indicates that no rendezvous are possible.]</div>
 Specifies the maximum number of entries per protected type. The bounds 
 of every entry family of a protected unit shall be static, or shall be 
 defined by a discriminant of a subtype whose corresponding bound is static. 
-<A NAME="I8997"></A><A NAME="I8998"></A></div>
+<A NAME="I9576"></A><A NAME="I9577"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
@@ -307,7 +309,7 @@ is language defined:</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00394.TXT">AI95-00394-01</A></I>} 
-<A NAME="I8999"></A><A NAME="I9000"></A>No_Task_Termination&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9578"></A><A NAME="I9579"></A>No_Task_Termination&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 All tasks are nonterminating. It is implementation-defined what happens 
 if a task attempts to terminate. If there is a fall-back handler (see 
 C.7.3) set for the partition it should be called when the first task 
@@ -322,11 +324,11 @@ are language defined:&nbsp;</div>
 <div class="paranum"><a name="p17">17/1</a></div>
 <div class="WideHanging-Term">{<I><A HREF="defect1.html#8652/0076">8652/0076</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00067.TXT">AI95-00067-01</A></I>} 
-<A NAME="I9001"></A><A NAME="I9002"></A>Max_Storage_At_Blocking&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9580"></A><A NAME="I9581"></A>Max_Storage_At_Blocking&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Specifies the maximum portion [(in storage elements)] of a task's Storage_Size 
 that can be retained by a blocked task. If an implementation chooses 
 to detect a violation of this restriction, Storage_Error should be raised; 
-<A NAME="I9003"></A><A NAME="I9004"></A><A NAME="I9005"></A>otherwise, 
+<A NAME="I9582"></A><A NAME="I9583"></A><A NAME="I9584"></A>otherwise, 
 the behavior is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p17.a.1">17.a.1/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The behavior 
@@ -334,14 +336,14 @@ when restriction Max_Storage_At_Blocking is violated.</div>
 <div class="paranum"><a name="p18">18/1</a></div>
 <div class="WideHanging-Term">{<I><A HREF="defect1.html#8652/0076">8652/0076</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00067.TXT">AI95-00067-01</A></I>} 
-<A NAME="I9006"></A><A NAME="I9007"></A>Max_Asynchronous_Select_Nesting 
+<A NAME="I9585"></A><A NAME="I9586"></A>Max_Asynchronous_Select_Nesting 
 </div><div class="WideHanging-Body"><br clear="left">
-Specifies the maximum dynamic nesting level of <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN>s. 
-A value of zero prevents the use of any <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
-and, if a program contains an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN>, 
+Specifies the maximum dynamic nesting level of <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN>s. 
+A value of zero prevents the use of any <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
+and, if a program contains an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN>, 
 it is illegal. If an implementation chooses to detect a violation of 
 this restriction for values other than zero, Storage_Error should be 
-raised; <A NAME="I9008"></A><A NAME="I9009"></A><A NAME="I9010"></A>otherwise, 
+raised; <A NAME="I9587"></A><A NAME="I9588"></A><A NAME="I9589"></A>otherwise, 
 the behavior is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p18.a.1">18.a.1/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The behavior 
@@ -349,12 +351,12 @@ when restriction Max_Asynchronous_Select_Nesting is violated.</div>
 <div class="paranum"><a name="p19">19/1</a></div>
 <div class="WideHanging-Term">{<I><A HREF="defect1.html#8652/0076">8652/0076</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00067.TXT">AI95-00067-01</A></I>} 
-<A NAME="I9011"></A><A NAME="I9012"></A>Max_Tasks&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9590"></A><A NAME="I9591"></A>Max_Tasks&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Specifies the maximum number of task creations that may be executed over 
 the lifetime of a partition, not counting the creation of the environment 
 task. A value of zero prevents any task creation and, if a program contains 
 a task creation, it is illegal. If an implementation chooses to detect 
-a violation of this restriction, Storage_Error should be raised; <A NAME="I9013"></A><A NAME="I9014"></A><A NAME="I9015"></A>otherwise, 
+a violation of this restriction, Storage_Error should be raised; <A NAME="I9592"></A><A NAME="I9593"></A><A NAME="I9594"></A>otherwise, 
 the behavior is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that this is not a 
@@ -369,28 +371,28 @@ and never reuses table elements.&nbsp;</div>
 when restriction Max_Tasks is violated.</div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<A NAME="I9016"></A><A NAME="I9017"></A>Max_Entry_Queue_Length&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I9595"></A><A NAME="I9596"></A>Max_Entry_Queue_Length&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Max_Entry_Queue_Length defines the maximum number of calls that are queued 
 on an entry. Violation of this restriction results in the raising of 
-Program_Error at the point of the call or requeue.<A NAME="I9018"></A></div>
+Program_Error at the point of the call or requeue.<A NAME="I9597"></A></div>
 <div class="paranum"><a name="p19.2">19.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-<A NAME="I9019"></A><A NAME="I9020"></A>No_Standard_Allocators_After_Elaboration 
+<A NAME="I9598"></A><A NAME="I9599"></A>No_Standard_Allocators_After_Elaboration 
 </div><div class="WideHanging-Body"><br clear="left">
-Specifies that an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+Specifies that an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 using a standard storage pool (see <A HREF="AA-13-11.html">13.11</A>) 
 shall not occur within a parameterless library subprogram, nor within 
-the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
-of a task body. For the purposes of this rule, an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
+of a task body. For the purposes of this rule, an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 of a type derived from a formal access type does not use a standard storage 
 pool.</div>
 <div class="paranum"><a name="p19.3">19.3/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-At run time, Storage_Error is raised if an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+At run time, Storage_Error is raised if an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 using a standard storage pool is evaluated after the elaboration of the 
-<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s 
-of the partition has completed.<A NAME="I9021"></A>&nbsp;</div>
+<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN>s 
+of the partition has completed.<A NAME="I9600"></A>&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Normal">It is implementation defined whether the use of pragma 
 Restrictions results in a reduction in executable program size, storage 
@@ -411,13 +413,13 @@ of the specified restrictions to produce a more efficient implementation.</div>
 specified restrictions should be used to produce a more efficient implementation.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Notes">34&nbsp;&nbsp;The above Storage_Checks can be suppressed 
+<div class="Notes">33&nbsp;&nbsp;The above Storage_Checks can be suppressed 
 with pragma Suppress.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p22.a">22.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
-<A NAME="I9022"></A><B>Amendment Correction:</B> The No_Nested_Finalization 
+<A NAME="I9601"></A><B>Amendment Correction:</B> The No_Nested_Finalization 
 is now defined in terms of types that need finalization. These types 
 include a variety of language-defined types that <I>might</I> be implemented 
 with a controlled type. If the restriction No_Nested_Finalization (see 
@@ -432,7 +434,7 @@ a controlled part, and thus would be illegal under the restriction.&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00297.TXT">AI95-00297-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00394.TXT">AI95-00394-01</A></I>} 
-<A NAME="I9023"></A>Restrictions No_Dynamic_Attachment, No_Local_Protected_Objects, 
+<A NAME="I9602"></A>Restrictions No_Dynamic_Attachment, No_Local_Protected_Objects, 
 No_Protected_Type_Allocators, No_Local_Timing_Events, No_Relative_Delay, 
 No_Requeue_Statement, No_Select_Statements, No_Specific_Termination_Handlers, 
 No_Task_Termination, Max_Entry_Queue_Length, and Simple_Barriers are 
@@ -459,9 +461,9 @@ Restriction No_Asynchronous_Control is now obsolescent.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p22.g">22.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
-<A NAME="I9024"></A><B>Correction:</B> Changed so that coextensions of 
+<A NAME="I9603"></A><B>Correction:</B> Changed so that coextensions of 
 types that require nested finalization are also prohibited; this is done 
-by prohibiting <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+by prohibiting <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 rather than objects of specific access types. It seems unlikely that 
 any program depending on this restriction would violate it in this blatant 
 manner, so it is expected that very few programs will be affected by 
@@ -492,7 +494,7 @@ will be affected by this change.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p22.j">22.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-<A NAME="I9025"></A>Restriction No_Standard_Allocators_After_Elaboration 
+<A NAME="I9604"></A>Restriction No_Standard_Allocators_After_Elaboration 
 is newly added to Ada.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -512,7 +514,7 @@ now a runtime check).&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p22.m">22.m/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0055-1.TXT">AI12-0055-1</A></I>} 
-<A NAME="I9026"></A><B>Corrigendum:</B> Restriction No_Dynamic_CPU_Assignment 
+<A NAME="I9605"></A><B>Corrigendum:</B> Restriction No_Dynamic_CPU_Assignment 
 is newly added to Ada, for use as part of the Ravenscar profile (see 
 <A HREF="AA-D-13.html">D.13</A>).</div>
 <div class="paranum"><a name="p22.n">22.n/4</a></div>
@@ -522,14 +524,20 @@ to Ada; it ensures that no task is running on an implementation-defined
 CPU so that task scheduling can be analyzed.</div>
 <div class="paranum"><a name="p22.o">22.o/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0290-1.TXT">AI12-0290-1</A></I>} 
-<B>Corrigendum:</B> Restriction Pure_Barriers is newly added to Ada; 
-it allows the Jorvik profile to use more expressive barriers than the 
-Ravenscar profile without having to worry about exceptions or side-effects. 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0369-1.TXT">AI12-0369-1</A></I>} 
+Restriction Pure_Barriers is newly added to Ada; it allows the Jorvik 
+profile to use more expressive barriers than the Ravenscar profile without 
+having to worry about exceptions or side-effects.</div>
+<div class="paranum"><a name="p22.p">22.p/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0369-1.TXT">AI12-0369-1</A></I>} 
+Restriction Simple_Barriers (which is part of the Ravenscar profile) 
+is extended to allow statically named record and array subcomponents; 
+this allows common static analysis patterns to be used with Ravenscar. 
 </div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

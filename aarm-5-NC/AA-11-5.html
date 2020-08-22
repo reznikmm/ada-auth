@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-11-4-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,23 +40,29 @@
 <H1>11.5 Suppressing Checks</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00224.TXT">AI95-00224-01</A></I>} 
-<I>Checking pragmas</I><A NAME="I5270"></A> give instructions to an implementation 
+<I>Checking pragmas</I><A NAME="I5495"></A> give instructions to an implementation 
 on handling language-defined checks. A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Suppress gives permission to an implementation to omit certain language-defined 
 checks, while a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Unsuppress revokes the permission to omit checks..</div>
+<div class="paranum"><a name="p1.a.1">1.a.1/5</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A request to the implementation 
+to disable a run-time check for a portion of the text of a program.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I5271"></A><A NAME="I5272"></A><A NAME="I5273"></A><A NAME="I5274"></A><A NAME="I5275"></A>A 
+<A NAME="I5496"></A><A NAME="I5497"></A><A NAME="I5498"></A><A NAME="I5499"></A><A NAME="I5500"></A>A 
 <I>language-defined check</I> (or simply, a &ldquo;check&rdquo;) is one 
 of the situations defined by this International Standard that requires 
 a check to be made at run time to determine whether some condition is 
-true. <A NAME="I5276"></A>A check <I>fails</I> when the condition being 
+true. <A NAME="I5501"></A>A check <I>fails</I> when the condition being 
 checked is False, causing an exception to be raised.&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>All such checks are defined 
 under &ldquo;Dynamic Semantics&rdquo; in clauses and subclauses throughout 
 the standard.&nbsp;</div>
+<div class="paranum"><a name="p2.a.1">2.a.1/5</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A test made during execution 
+to determine whether a language rule has been violated.</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -64,15 +70,15 @@ the standard.&nbsp;</div>
 The forms of checking pragmas are as follows:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00224.TXT">AI95-00224-01</A></I>} 
-&nbsp;&nbsp;<B>pragma</B> <A NAME="I5277"></A><A NAME="I5278"></A>Suppress(<A NAME="I5279"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+&nbsp;&nbsp;<B>pragma</B> <A NAME="I5502"></A><A NAME="I5503"></A>Suppress(<A NAME="I5504"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00224.TXT">AI95-00224-01</A></I>} 
-&nbsp;&nbsp;<B>pragma</B> <A NAME="I5280"></A><A NAME="I5281"></A>Unsuppress(<A NAME="I5282"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+&nbsp;&nbsp;<B>pragma</B> <A NAME="I5505"></A><A NAME="I5506"></A>Unsuppress(<A NAME="I5507"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00224.TXT">AI95-00224-01</A></I>} 
-<A NAME="I5283"></A><A NAME="I5284"></A><A NAME="I5285"></A><A NAME="I5286"></A>A 
+<A NAME="I5508"></A><A NAME="I5509"></A><A NAME="I5510"></A><A NAME="I5511"></A>A 
 checking pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
-immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
+immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>, 
 or as a configuration pragma.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -91,7 +97,7 @@ deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/A
 A checking pragma applies to the named check in a specific region, and 
 applies to all entities in that region. A checking pragma given in a 
 <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-or immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN> 
+or immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN> 
 applies from the place of the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 to the end of the innermost enclosing declarative region. The region 
 for a checking pragma given as a configuration pragma is the declarative 
@@ -100,7 +106,7 @@ region for the entire compilation unit (or units) to which it applies.</div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00224.TXT">AI95-00224-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-If a checking pragma applies to a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
+If a checking pragma applies to a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>, 
 then the checking pragma also applies to the entire instance.&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
@@ -113,11 +119,11 @@ within the given instance.&nbsp;</div>
 A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Suppress 
 gives permission to an implementation to omit the named check (or every 
 check in the case of All_Checks) for any entities to which it applies. 
-<A NAME="I5287"></A>If permission has been given to suppress a given 
+<A NAME="I5512"></A>If permission has been given to suppress a given 
 check, the check is said to be <I>suppressed</I>.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A check is suppressed even 
-if the implementation chooses not to actually generate better code. <A NAME="I5288"></A>This 
+if the implementation chooses not to actually generate better code. <A NAME="I5513"></A>This 
 allows the implementation to raise Program_Error, for example, if the 
 erroneousness is detected.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
@@ -135,32 +141,33 @@ Suppress can renew the permission.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following are the 
 language-defined checks:&nbsp;</div>
-<div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted"><A NAME="I5289"></A>[The following checks correspond 
-to situations in which the exception Constraint_Error is raised upon 
-failure.]</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+<A NAME="I5514"></A>[The following checks correspond to situations in 
+which the exception Constraint_Error is raised upon failure of a language-defined 
+check.]</div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Hanging_in_Bulleted-Term" style="margin-bottom: 0.3em">{<I><A HREF="defect1.html#8652/0036">8652/0036</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00176.TXT">AI95-00176-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<A NAME="I5290"></A>Access_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<A NAME="I5515"></A>Access_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 When evaluating a dereference (explicit or implicit), check that the 
 value of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is not <B>null</B>. When converting to a subtype that excludes null, 
 check that the converted value is not <B>null</B>.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I5291"></A>Discriminant_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I5516"></A>Discriminant_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that the discriminants of a composite value have the values imposed 
 by a discriminant constraint. Also, when accessing a record component, 
 check that it exists for the current discriminant values.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
-<A NAME="I5292"></A>Division_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<A NAME="I5517"></A>Division_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that the second operand is not zero for the operations /, <B>rem</B> 
 and <B>mod</B>.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I5293"></A>Index_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I5518"></A>Index_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that the bounds of an array value are equal to the corresponding 
 bounds of an index constraint. Also, when accessing a component of an 
@@ -169,19 +176,19 @@ to the range defined by the bounds of the array object. Also, when accessing
 a slice of an array object, check that the given discrete range is compatible 
 with the range defined by the bounds of the array object.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I5294"></A>Length_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I5519"></A>Length_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that two arrays have matching components, in the case of array 
 subtype conversions, and logical operators for arrays of boolean components.</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I5295"></A>Overflow_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I5520"></A>Overflow_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that a scalar value is within the base range of its type, in cases 
 where the implementation chooses to raise an exception instead of returning 
 the correct mathematical result.</div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0244-1.TXT">AI12-0244-1</A></I>} 
-<A NAME="I5296"></A>Range_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<A NAME="I5521"></A>Range_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that a scalar value satisfies a range constraint. Also, for the 
 elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 check that the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
@@ -195,89 +202,156 @@ given string has the appropriate syntax and value for the base subtype
 of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>.</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I5297"></A>Tag_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<div class="Hanging_in_Bulleted-Term"><A NAME="I5522"></A>Tag_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that operand tags in a dispatching call are all equal. Check for 
-the correct tag on tagged type conversions, for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>, 
+the correct tag on tagged type conversions, for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>, 
 and when returning a tagged limited object from a function.&nbsp;</div>
-<div class="paranum"><a name="p19">19</a></div>
-<div class="Bulleted"><A NAME="I5298"></A>[The following checks correspond 
-to situations in which the exception Program_Error is raised upon failure.] 
-</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+<A NAME="I5523"></A>[The following checks correspond to situations in 
+which the exception Program_Error is raised upon failure of a language-defined 
+check.]&nbsp;</div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
 <div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00280.TXT">AI95-00280</A></I>} 
-<A NAME="I5299"></A>Accessibility_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<A NAME="I5524"></A>Accessibility_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check the accessibility level of an entity or view.</div>
 <div class="paranum"><a name="p19.2">19.2/2</a></div>
 <div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00280.TXT">AI95-00280</A></I>} 
-<A NAME="I5300"></A>Allocation_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
-For an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
-check that the master of any tasks to be created by the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+<A NAME="I5525"></A>Allocation_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+For an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
+check that the master of any tasks to be created by the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 is not yet completed or some dependents have not yet terminated, and 
 that the finalization of the collection has not started.</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I5301"></A>Elaboration_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I5526"></A>Elaboration_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 When a subprogram or protected entry is called, a task activation is 
 accomplished, or a generic instantiation is elaborated, check that the 
 body of the corresponding unit has already been elaborated.</div>
-<div class="paranum"><a name="p21">21/2</a></div>
-<div class="Hanging_in_Bulleted-Term"></div><div class="Hanging_in_Bulleted-Body">
-<SPAN STYLE="font-size: 80%"><I>This paragraph was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00280.TXT">AI95-00280</A></I>} 
-</div>
-<div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em">[The following check 
-corresponds to situations in which the exception Storage_Error is raised 
-upon failure.]&nbsp;</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00280.TXT">AI95-00280</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+<A NAME="I5527"></A>Program_Error_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Other language-defined checks that raise Program_Error: that subtypes 
+with predicates are not used to index an array in a generic unit; that 
+the maximum number of chunks is greater than zero; that the default value 
+of an out parameter is convertible; that there is no misuse of functions 
+in a generic with a class-wide actual type; that there are not colliding 
+External_Tag values; that there is no misuse of operations of unchecked 
+union types.&nbsp;</div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+[The following check corresponds to situations in which the exception 
+Storage_Error is raised upon failure of a language-defined check.]&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I5302"></A><A NAME="I5303"></A>Storage_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I5528"></A><A NAME="I5529"></A>Storage_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
-Check that evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+Check that evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 does not require more space than is available for a storage pool. Check 
 that the space available for a task or subprogram has not been exceeded. 
 </div>
 <div class="paranum"><a name="p23.a">23.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We considered splitting this 
-out into three categories: Pool_Check (for <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s), 
+out into three categories: Pool_Check (for <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s), 
 Stack_Check (for stack usage), and Heap_Check (for implicit use of the 
-heap &mdash; use of the heap other than through an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>). 
+heap &mdash; use of the heap other than through an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>). 
 Storage_Check would then represent the union of these three. However, 
 there seems to be no compelling reason to do this, given that it is not 
 feasible to split Storage_Error.&nbsp;</div>
 <div class="paranum"><a name="p23.1">23.1/5</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
 [The following check corresponds to situations in which the exception 
-Assertion_Error is raised upon failure.]</div>
+Tasking_Error is raised upon failure of a language-defined check.]<A NAME="I5530"></A></div>
 <div class="paranum"><a name="p23.2">23.2/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+<A NAME="I5531"></A>Tasking_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+ Check that all tasks activated successfully. Check that a called task 
+has not yet terminated.</div>
+<div class="paranum"><a name="p23.3">23.3/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+[The following checks correspond to situations in which the exception 
+Assertion_Error is raised upon failure of a language-defined check.]<A NAME="I5532"></A> 
+For a language-defined unit <I>U</I> associated with one of these checks 
+in the list below, the check refers to performance of checks associated 
+with the Pre, Static_Predicate, and Dynamic_Predicate aspects associated 
+with any entity declared in a descendant of <I>U</I>, or in an instance 
+of a generic unit which is, or is declared in, a descendant of <I>U</I>. 
+Each check is associated with one or more units:</div>
+<div class="paranum"><a name="p23.4">23.4/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5533"></A>Calendar_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Calendar.</div>
+<div class="paranum"><a name="p23.5">23.5/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5534"></A>Characters_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Characters, Wide_Characters, and Wide_Wide_Characters.</div>
+<div class="paranum"><a name="p23.6">23.6/5</a></div>
 <div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<A NAME="I5304"></A><A NAME="I5305"></A>Container_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
-Check the precondition of a routine declared in a descendant unit of 
-Containers or in an instance of a generic unit that is declared in, or 
-is, a descendant unit of Containers.&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5535"></A>Containers_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Containers.</div>
+<div class="paranum"><a name="p23.7">23.7/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5536"></A>Interfaces_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Interfaces.</div>
+<div class="paranum"><a name="p23.8">23.8/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5537"></A>IO_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Sequential_IO, Direct_IO, Text_IO, Wide_Text_IO, Wide_Wide_Text_IO, Storage_IO, 
+Streams.Stream_IO, and Directories.</div>
+<div class="paranum"><a name="p23.9">23.9/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5538"></A>Numerics_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Numerics.</div>
+<div class="paranum"><a name="p23.10">23.10/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5539"></A>Strings_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+Strings.</div>
+<div class="paranum"><a name="p23.11">23.11/5</a></div>
+<div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5540"></A>System_Assertion_Check</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+System.</div>
 <div class="paranum"><a name="p23.b">23.b/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+Any unit <I>U</I> is a descendant of itself.&nbsp;</div>
+<div class="paranum"><a name="p23.c">23.c/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 One could use <B>pragma</B> Assertion_Policy to eliminate such checks, 
-but that would require recompiling the Ada.Containers packages (the assertion 
-policy that determines whether the checks are made is that used to compile 
-the unit). In addition, we do not want to specify the behavior of the 
-Ada.Containers operations if the precondition fails; that is different 
-than the usual behavior of Assertion_Policy. By using Suppress for this 
-purpose, we make it clear that a failed check that is suppressed means 
-erroneous execution.&nbsp;</div>
-<div class="paranum"><a name="p24">24</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em">[The following check 
-corresponds to all situations in which any predefined exception is raised.] 
-</div>
+but that would require recompiling the language defined packages (the 
+assertion policy that determines whether the assertion checks are made 
+is that used to compile the unit). In addition, we do not want to specify 
+the behavior of language-defined operations if the precondition fails; 
+that is different than the usual behavior of Assertion_Policy. By using 
+Suppress for this purpose, we make it clear that a failed check that 
+is suppressed means erroneous execution.&nbsp;</div>
+<div class="paranum"><a name="p23.d">23.d/5</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+The preceding rule about an instance of a generic where the generic is 
+declared in <I>U</I> really extends recursively to handle the case of 
+a generic package <TT>G1</TT> which declares another generic package 
+<TT>G1.G2</TT>,  which declares another generic package <TT>G1.G2.G3</TT>, 
+and so on. So if <TT>G1</TT> is declared in some predefined unit <I>U</I> 
+then, for purposes of defining these checks, <TT>Some_Instance_Of_G1.G2</TT> 
+is also considered to be declared in <I>U</I>.&nbsp;</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+[The following check corresponds to all situations in which any predefined 
+exception is raised upon failure of a check.]&nbsp;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
 <div class="Hanging_in_Bulleted-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-<A NAME="I5306"></A>All_Checks&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<A NAME="I5541"></A>All_Checks&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Represents the union of all checks; suppressing All_Checks suppresses 
 all checks other than those associated with assertions. In addition, 
 an implementation is allowed (but not required) to behave as if a pragma 
 Assertion_Policy(Ignore) applies to any region to which pragma Suppress(All_Checks) 
 applies.</div>
-<div class="paranum"><a name="p25.a">25.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>All_Checks includes both 
-language-defined and implementation-defined checks.&nbsp;</div>
+<div class="paranum"><a name="p25.a">25.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+All_Checks may include implementation-defined checks. It does not include, 
+however, explicit raises of predefined exceptions (including those mandated 
+for language constructs), nor those propagated from language-defined 
+subprograms.&nbsp;</div>
 <div class="paranum"><a name="p25.b">25.b/3</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 There are additional checks defined in various Specialized Needs Annexes 
@@ -295,7 +369,8 @@ above rule and then handled with an implicit Ignore policy.&nbsp;</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p26">26/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<A NAME="I5307"></A>If a given check has been suppressed, and the corresponding 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5542"></A>If a given check has been suppressed, and the corresponding 
 error situation occurs, the execution of the program is erroneous. Similarly, 
 if a precondition check has been suppressed and the evaluation of the 
 precondition would have raised an exception, execution is erroneous.</div>
@@ -315,7 +390,7 @@ An implementation is allowed to place restrictions on checking pragmas,
 subject only to the requirement that <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Unsuppress shall allow any check names supported by <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Suppress. An implementation is allowed to add additional check names, 
-with implementation-defined semantics. <A NAME="I5308"></A>When Overflow_Check 
+with implementation-defined semantics. <A NAME="I5543"></A>When Overflow_Check 
 has been suppressed, an implementation may also suppress an unspecified 
 subset of the Range_Checks.&nbsp;</div>
 <div class="paranum"><a name="p27.a">27.a/2</a></div>
@@ -357,7 +432,7 @@ the implementation detects the failure at compile time and provides a
 warning message, there is no need to actually suppress the check.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Notes">5&nbsp;&nbsp;<A NAME="I5309"></A><A NAME="I5310"></A>There 
+<div class="Notes">5&nbsp;&nbsp;<A NAME="I5544"></A><A NAME="I5545"></A>There 
 is no guarantee that a suppressed check is actually removed; hence a 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Suppress 
 should be used only for efficiency reasons.</div>
@@ -383,10 +458,10 @@ in an inner declarative region.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p31.a">31.a</a></div>
-<div class="Annotations"><A NAME="I5311"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Annotations"><A NAME="I5546"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Suppress is allowed as a configuration pragma. A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Suppress without a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is allowed in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>.</div>
+is allowed in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>.</div>
 <div class="paranum"><a name="p31.b">31.b</a></div>
 <div class="Annotations">Additional check names are added. We allow implementations 
 to define their own checks.&nbsp;</div>
@@ -424,10 +499,10 @@ in RM83.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p31.g">31.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00224.TXT">AI95-00224-01</A></I>} 
-<A NAME="I5312"></A>Pragma Unsuppress is new.</div>
+<A NAME="I5547"></A>Pragma Unsuppress is new.</div>
 <div class="paranum"><a name="p31.h">31.h/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00280.TXT">AI95-00280-01</A></I>} 
-Allocation_Check was added to support suppressing the new check on <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+Allocation_Check was added to support suppressing the new check on <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 (see <A HREF="AA-4-8.html">4.8</A>).&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -470,17 +545,23 @@ assertion policies and suppress work the same way for inlining.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p31.m">31.m/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<A NAME="I5313"></A>Container_Check is new.&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0311-1.TXT">AI12-0311-1</A></I>} 
+<A NAME="I5548"></A>The various assertion checks for language-defined 
+packages are new.</div>
+<div class="paranum"><a name="p31.n">31.n/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0309-1.TXT">AI12-0309-1</A></I>} 
+Program_Error_Check and Tasking_Check are new; all core language-defined 
+checks are now covered with check names.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p31.n">31.n/5</a></div>
+<div class="paranum"><a name="p31.o">31.o/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0244-1.TXT">AI12-0244-1</A></I>} 
 <B>Correction</B>: Range_Check is defined to include checks associated 
 with the Value and related attributes.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-11-4-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

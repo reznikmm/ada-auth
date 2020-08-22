@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -44,12 +44,12 @@
 The following language-defined library packages exist:</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<A NAME="I4776"></A><B>package</B>&nbsp;Ada.Calendar.Time_Zones&nbsp;<span class="insert5"><BR>
+<A NAME="I5002"></A><B>package</B>&nbsp;Ada.Calendar.Time_Zones&nbsp;<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;</span><B>is</B></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Time&nbsp;zone&nbsp;manipulation:</I></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4777"></A>Time_Offset&nbsp;<B>is&nbsp;range</B>&nbsp;-28*60&nbsp;..&nbsp;28*60;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5003"></A>Time_Offset&nbsp;<B>is&nbsp;range</B>&nbsp;-28*60&nbsp;..&nbsp;28*60;</div>
 <div class="paranum"><a name="p4.a">4.a/4</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 We want to be able to specify the difference between any two arbitrary 
@@ -61,25 +61,30 @@ in the northern and southern hemispheres &ndash; and even greater differences
 are possible. We know of cases of a 26 hours difference, so we err on 
 the safe side by selecting 28 hours as the limit.&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I4778"></A>Unknown_Zone_Error&nbsp;:&nbsp;<B>exception</B>;</div>
-<div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4779"></A>UTC_Time_Offset&nbsp;(Date&nbsp;:&nbsp;Time&nbsp;:=&nbsp;Clock)&nbsp;<B>return</B>&nbsp;Time_Offset;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5004"></A>Unknown_Zone_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<span class="insert5"><A NAME="I5005"></A>Local_Time_Offset</span><span class="delete5"><A NAME="I5006"></A> UTC_Time_Offset</span>&nbsp;(Date&nbsp;:&nbsp;Time&nbsp;:=&nbsp;Clock)&nbsp;<B>return</B>&nbsp;Time_Offset;</div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5007"></A>UTC_Time_Offset&nbsp;(Date&nbsp;:&nbsp;Time&nbsp;:=&nbsp;Clock)&nbsp;<B>return</B>&nbsp;Time_Offset<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Local_Time_Offset;</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Calendar.Time_Zones;</div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<A NAME="I4780"></A><BR>
+<A NAME="I5008"></A><BR>
 <B>package</B>&nbsp;Ada.Calendar.Arithmetic&nbsp;<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;</span><B>is</B></div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Arithmetic&nbsp;on&nbsp;days:</I></SPAN></div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4781"></A>Day_Count&nbsp;<B>is&nbsp;range</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5009"></A>Day_Count&nbsp;<B>is&nbsp;range</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-366*(1+Year_Number'Last&nbsp;-&nbsp;Year_Number'First)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;366*(1+Year_Number'Last&nbsp;-&nbsp;Year_Number'First);</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4782"></A>Leap_Seconds_Count&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;-2047&nbsp;..&nbsp;2047;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5010"></A>Leap_Seconds_Count&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;-2047&nbsp;..&nbsp;2047;</div>
 <div class="paranum"><a name="p11.a">11.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The maximum number of leap seconds 
 is likely to be much less than this, but we don't want to reach the limit 
@@ -87,7 +92,7 @@ too soon if the earth's behavior suddenly changes. We believe that the
 maximum number is 1612, based on the current rules, but that number is 
 too weird to use here.&nbsp;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4783"></A>Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5011"></A>Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Days&nbsp;:&nbsp;<B>out</B>&nbsp;Day_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seconds&nbsp;:&nbsp;<B>out</B>&nbsp;Duration;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leap_Seconds&nbsp;:&nbsp;<B>out</B>&nbsp;Leap_Seconds_Count);</div>
@@ -100,64 +105,64 @@ too weird to use here.&nbsp;</div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Calendar.Arithmetic;</div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<A NAME="I4784"></A><BR>
+<A NAME="I5012"></A><BR>
 <B>with</B>&nbsp;Ada.Calendar.Time_Zones;<BR>
 <B>package</B>&nbsp;Ada.Calendar.Formatting&nbsp;<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;</span><B>is</B></div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Day&nbsp;of&nbsp;the&nbsp;week:</I></SPAN></div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4785"></A>Day_Name&nbsp;<B>is</B>&nbsp;(<A NAME="I4786"></A>Monday,&nbsp;<A NAME="I4787"></A>Tuesday,&nbsp;<A NAME="I4788"></A>Wednesday,&nbsp;<A NAME="I4789"></A>Thursday,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4790"></A>Friday,&nbsp;<A NAME="I4791"></A>Saturday,&nbsp;<A NAME="I4792"></A>Sunday);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5013"></A>Day_Name&nbsp;<B>is</B>&nbsp;(<A NAME="I5014"></A>Monday,&nbsp;<A NAME="I5015"></A>Tuesday,&nbsp;<A NAME="I5016"></A>Wednesday,&nbsp;<A NAME="I5017"></A>Thursday,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5018"></A>Friday,&nbsp;<A NAME="I5019"></A>Saturday,&nbsp;<A NAME="I5020"></A>Sunday);</div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4793"></A>Day_of_Week&nbsp;(Date&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Day_Name;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5021"></A>Day_of_Week&nbsp;(Date&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Day_Name;</div>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Hours:Minutes:Seconds&nbsp;access:</I></SPAN></div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4794"></A>Hour_Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;23;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4795"></A>Minute_Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;59;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4796"></A>Second_Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;59;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4797"></A>Second_Duration&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Day_Duration&nbsp;<B>range</B>&nbsp;0.0&nbsp;..&nbsp;1.0;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5022"></A>Hour_Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;23;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5023"></A>Minute_Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;59;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5024"></A>Second_Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Natural&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;59;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5025"></A>Second_Duration&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Day_Duration&nbsp;<B>range</B>&nbsp;0.0&nbsp;..&nbsp;1.0;</div>
 <div class="paranum"><a name="p21">21/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4798"></A>Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5026"></A>Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Year_Number;</div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4799"></A>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5027"></A>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Month_Number;</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4800"></A>Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5028"></A>Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Day_Number;</div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4801"></A>Hour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5029"></A>Hour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Hour_Number;</div>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4802"></A>Minute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5030"></A>Minute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Minute_Number;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4803"></A>Second&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5031"></A>Second&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Second_Number;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4804"></A>Sub_Second&nbsp;(Date&nbsp;:&nbsp;Time)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5032"></A>Sub_Second&nbsp;(Date&nbsp;:&nbsp;Time)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Second_Duration;</div>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4805"></A>Seconds_Of&nbsp;(Hour&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Hour_Number;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5033"></A>Seconds_Of&nbsp;(Hour&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;Hour_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minute&nbsp;:&nbsp;Minute_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second&nbsp;:&nbsp;Second_Number&nbsp;:=&nbsp;0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub_Second&nbsp;:&nbsp;Second_Duration&nbsp;:=&nbsp;0.0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Day_Duration;</div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4806"></A>Split&nbsp;(Seconds&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Day_Duration;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5034"></A>Split&nbsp;(Seconds&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Day_Duration;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Hour_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Minute_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Second_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub_Second&nbsp;:&nbsp;<B>out</B>&nbsp;Second_Duration);</div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4807"></A>Time_Of&nbsp;(Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Year_Number;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5035"></A>Time_Of&nbsp;(Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Year_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Month_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Day_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Hour_Number;<BR>
@@ -168,7 +173,7 @@ too weird to use here.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Time;</div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4808"></A>Time_Of&nbsp;(Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Year_Number;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5036"></A>Time_Of&nbsp;(Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Year_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Month_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Day_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seconds&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Day_Duration&nbsp;:=&nbsp;0.0;<BR>
@@ -176,7 +181,7 @@ too weird to use here.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Time;</div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4809"></A>Split&nbsp;(Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5037"></A>Split&nbsp;(Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Year_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Month_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Day_Number;<BR>
@@ -186,7 +191,7 @@ too weird to use here.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub_Second&nbsp;:&nbsp;<B>out</B>&nbsp;Second_Duration;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0);</div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4810"></A>Split&nbsp;(Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5038"></A>Split&nbsp;(Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Year_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Month_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Day_Number;<BR>
@@ -197,7 +202,7 @@ too weird to use here.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leap_Second:&nbsp;<B>out</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0);</div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4811"></A>Split&nbsp;(Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5039"></A>Split&nbsp;(Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Year_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Month_Number;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Day_Number;<BR>
@@ -206,43 +211,56 @@ too weird to use here.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0);</div>
 <div class="paranum"><a name="p35">35/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Simple&nbsp;image&nbsp;and&nbsp;value:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4812"></A>Image&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5040"></A>Image&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Include_Time_Fraction&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p35.1">35.1/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0347-1.TXT">AI12-0347-1</A></I>} 
+<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5041"></A>Local_Image&nbsp;(Date&nbsp;:&nbsp;Time;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Include_Time_Fraction&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;String&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Image&nbsp;(Date,&nbsp;Include_Time_Fraction,&nbsp;Time_Zones.Local_Time_Offset&nbsp;(Date)));</span></div>
 <div class="paranum"><a name="p36">36/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4813"></A>Value&nbsp;(Date&nbsp;:&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5042"></A>Value&nbsp;(Date&nbsp;:&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zone&nbsp;&nbsp;:&nbsp;Time_Zones.Time_Offset&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;Time;</div>
 <div class="paranum"><a name="p37">37/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4814"></A>Image&nbsp;(Elapsed_Time&nbsp;:&nbsp;Duration;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5043"></A>Image&nbsp;(Elapsed_Time&nbsp;:&nbsp;Duration;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Include_Time_Fraction&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p38">38/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4815"></A>Value&nbsp;(Elapsed_Time&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Duration;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5044"></A>Value&nbsp;(Elapsed_Time&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Duration;</div>
 <div class="paranum"><a name="p39">39/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Calendar.Formatting;</div>
-<div class="paranum"><a name="p40">40/2</a></div>
+<div class="paranum"><a name="p40">40/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00351.TXT">AI95-00351-01</A></I>} 
-Type Time_Offset represents the number of minutes difference between 
-the implementation-defined time zone used by Calendar and another time 
-zone.</div>
-<div class="paranum"><a name="p41">41/2</a></div>
-<div class="Examples"><B>function</B>&nbsp;UTC_Time_Offset&nbsp;(Date&nbsp;:&nbsp;Time&nbsp;:=&nbsp;Clock)&nbsp;<B>return</B>&nbsp;Time_Offset;</div>
-<div class="paranum"><a name="p42">42/3</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+Type Time_Offset represents <span class="insert5">for a given locality 
+at a given moment&nbsp;</span> the number of minutes <span class="insert5">the 
+local time is, at that moment, ahead (+) or behind (-) Coordinated Universal 
+Time (abbreviated UTC).[ The Time_Offset for UTC is zero]</span><span class="delete5">&nbsp;difference 
+between the implementation-defined time zone used by Calendar and another 
+time zone</span>.</div>
+<div class="paranum"><a name="p41">41/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+<B>function</B>&nbsp;<span class="insert5">Local_Time_Offset</span><span class="delete5">&nbsp;UTC_Time_Offset</span>&nbsp;(Date&nbsp;:&nbsp;Time&nbsp;:=&nbsp;Clock)&nbsp;<B>return</B>&nbsp;Time_Offset;</div>
+<div class="paranum"><a name="p42">42/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00351.TXT">AI95-00351-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0119-1.TXT">AI05-0119-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-Returns, as a number of minutes, the result of subtracting the implementation-defined 
-time zone of Calendar from UTC time, at the time Date. If the time zone 
-of the Calendar implementation is unknown, then Unknown_Zone_Error is 
-raised.&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+Returns, as a number of minutes, the <span class="insert5">Time_Offset 
+of</span><span class="delete5">&nbsp;result of subtracting</span> the implementation-defined 
+time zone of Calendar<span class="delete5">&nbsp;from UTC time</span>, at 
+the time Date. If the time zone of the Calendar implementation is unknown, 
+then Unknown_Zone_Error is raised.&nbsp;</div>
 <div class="paranum"><a name="p42.a.1">42.a.1/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0119-1.TXT">AI05-0119-1</A></I>} 
 In North America, the result will be negative; in Europe, the result 
 will be zero or positive.&nbsp;</div>
-<div class="paranum"><a name="p42.a">42.a/2</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>The Date parameter is needed 
-to take into account time differences caused by daylight-savings time 
-and other time changes. This parameter is measured in the time zone of 
-Calendar, if any, not necessarily the UTC time zone.</div>
+<div class="paranum"><a name="p42.a">42.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+The Date parameter is needed to take into account time differences caused 
+by daylight-savings time and other time changes.<span class="delete5">&nbsp;This parameter is measured in the time zone of Calendar, if any, not 
+necessarily the UTC time zone.</span></div>
 <div class="paranum"><a name="p42.b">42.b/2</a></div>
 <div class="Annotations">Other time zones can be supported with a child 
 package. We don't define one because of the lack of agreement on the 
@@ -606,13 +624,15 @@ permission to not support leap seconds on target systems that don't support
 leap seconds. Implementers should use the needs of their customers to 
 determine whether or not support leap seconds on such targets.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p90">90/2</a></div>
+<div class="paranum"><a name="p90">90/5</a></div>
 <div class="Notes">38&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00351.TXT">AI95-00351-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
 The implementation-defined time zone of package Calendar may, but need 
-not, be the local time zone. UTC_Time_Offset always returns the difference 
-relative to the implementation-defined time zone of package Calendar. 
-If UTC_Time_Offset does not raise Unknown_Zone_Error, UTC time can be 
-safely calculated (within the accuracy of the underlying time-base).</div>
+not, be the local time zone. <span class="insert5">Local_Time_Offset</span><span class="delete5">&nbsp;UTC_Time_Offset</span> 
+always returns the difference relative to the implementation-defined 
+time zone of package Calendar. If <span class="insert5">Local_Time_Offset</span><span class="delete5">&nbsp;UTC_Time_Offset</span> 
+does not raise Unknown_Zone_Error, UTC time can be safely calculated 
+(within the accuracy of the underlying time-base).</div>
 <div class="paranum"><a name="p90.a">90.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00351.TXT">AI95-00351-01</A></I>} 
 The time in the time zone known as Greenwich Mean Time (GMT) is generally 
@@ -622,15 +642,17 @@ on atomic clocks, with leap seconds periodically inserted to realign
 with GMT (because most human activities depend on the rotation of the 
 Earth). At any point in time, there will be a sub-second difference between 
 GMT and UTC.&nbsp;</div>
-<div class="paranum"><a name="p91">91/2</a></div>
+<div class="paranum"><a name="p91">91/5</a></div>
 <div class="Notes">39&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00351.TXT">AI95-00351-01</A></I>} 
-Calling Split on the results of subtracting Duration(UTC_Time_Offset*60) 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+Calling Split on the results of subtracting Duration(<span class="insert5">Local_Time_Offset</span><span class="delete5">&nbsp;UTC_Time_Offset</span>*60) 
 from Clock provides the components (hours, minutes, and so on) of the 
-UTC time. In the United States, for example, UTC_Time_Offset will generally 
-be negative.&nbsp;</div>
-<div class="paranum"><a name="p91.a">91.a/2</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>This is an illustration to 
-help specify the value of UTC_Time_Offset. A user should pass UTC_Time_Offset 
+UTC time. In the United States, for example, <span class="insert5">Local_Time_Offset</span><span class="delete5">&nbsp;UTC_Time_Offset</span> 
+will generally be negative.&nbsp;</div>
+<div class="paranum"><a name="p91.a">91.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+This is an illustration to help specify the value of <span class="insert5">Local_Time_Offset</span><span class="delete5">&nbsp;UTC_Time_Offset</span>. 
+A user should pass <span class="insert5">zero</span><span class="delete5">&nbsp;UTC_Time_Offset</span> 
 as the Time_Zone parameter of Split, rather than trying to make the above 
 calculation.&nbsp;</div>
 
@@ -638,13 +660,13 @@ calculation.&nbsp;</div>
 <div class="paranum"><a name="p91.b">91.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00351.TXT">AI95-00351-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00428.TXT">AI95-00428-01</A></I>} 
-<A NAME="I4816"></A>Packages Calendar.Time_Zones, Calendar.Arithmetic, 
+<A NAME="I5045"></A>Packages Calendar.Time_Zones, Calendar.Arithmetic, 
 and Calendar.Formatting are new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p91.c">91.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0238-1.TXT">AI05-0238-1</A></I>} 
-<A NAME="I4817"></A><B>Correction:</B> Defined that Split for Seconds 
+<A NAME="I5046"></A><B>Correction:</B> Defined that Split for Seconds 
 raises Time_Error for a value of exactly 86400.0, rather than breaking 
 some invariant or raising some other exception. Ada 2005 left this unspecified; 
 a program that depended on what some implementation does might break, 
@@ -655,9 +677,19 @@ but such a program is not portable anyway.&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0119-1.TXT">AI05-0119-1</A></I>} 
 <B>Correction:</B> Clarified the sign of UTC_Time_Offset.&nbsp;</div>
 
+<H4 Class="centered">Inconsistencies With Ada 2012</H4>
+<div class="paranum"><a name="p91.e">91.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0336-1.TXT">AI12-0336-1</A></I>} 
+<A NAME="I5047"></A><B>Correction:</B> Changed the definition of Time_Offset 
+to be compatible with most compilers. Also added Local_Time_Offset and 
+Local_Image to better describe the intent. A program that expects the 
+Ada 2012 definition of Time_Offset would get incorrect answers. However, 
+most compilers tested use the revised definition, so the likelihood of 
+a program breaking is quite low.&nbsp;</div>
+
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

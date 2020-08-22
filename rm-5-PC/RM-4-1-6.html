@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-1-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,7 +51,7 @@ that denotes one or more functions declared immediately within the same
 declaration list in which <I>T</I> is declared. All such functions shall 
 have at least two parameters, the first of which is of type <I>T</I> 
 or <I>T</I>'Class, or is an access-to-constant parameter with designated 
-type <I>T</I> or <I>T</I>'Class.<A NAME="I2475"></A><A NAME="I2476"></A></div>
+type <I>T</I> or <I>T</I>'Class.<A NAME="I2483"></A><A NAME="I2484"></A></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="WideHanging-Term">Variable_Indexing</div><div class="WideHanging-Body"><br clear="left">
 This aspect shall be specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
@@ -61,7 +61,7 @@ have at least two parameters, the first of which is of type <I>T</I>
 or <I>T</I>'Class, or is an access parameter with designated type <I>T</I> 
 or <I>T</I>'Class. All such functions shall have a return type that is 
 a reference type (see <A HREF="RM-4-1-5.html">4.1.5</A>), whose reference 
-discriminant is of an access-to-variable type.<A NAME="I2477"></A><A NAME="I2478"></A> 
+discriminant is of an access-to-variable type.<A NAME="I2485"></A><A NAME="I2486"></A> 
 </div>
 <div class="paranum"><a name="p4">4/4</a></div>
 <div class="Normal">These aspects are inherited by descendants of <I>T</I> 
@@ -69,8 +69,8 @@ discriminant is of an access-to-variable type.<A NAME="I2477"></A><A NAME="I2478
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">An <I>indexable container type</I> is (a view of) 
 a tagged type with at least one of the aspects Constant_Indexing or Variable_Indexing 
-specified.<A NAME="I2479"></A> An <I>indexable container object</I> is 
-an object of an indexable container type.<A NAME="I2480"></A> A <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+specified.<A NAME="I2487"></A> An <I>indexable container object</I> is 
+an object of an indexable container type.<A NAME="I2488"></A> A <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes the result of calling a function named by a Constant_Indexing 
 or Variable_Indexing aspect.</div>
@@ -95,7 +95,7 @@ shall match the inherited aspect (see <A HREF="RM-13-1-1.html">13.1.1</A>).</spa
 <div class="Normal"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 7 through 8 were deleted.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal"><span class="insert5"><A NAME="I2481"></A>In addition 
+<div class="Normal"><span class="insert5"><A NAME="I2489"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span></div>
@@ -106,19 +106,19 @@ is illegal if the equivalent prefixed view (see below) is illegal.</span>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">generalized_indexing</SPAN><A NAME="I2482"></A><A NAME="S0105"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>indexable_container_object_</I><A NAME="I2483"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I2484"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generalized_indexing</SPAN><A NAME="I2490"></A><A NAME="S0105"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>indexable_container_object_</I><A NAME="I2491"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I2492"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0219">actual_parameter_part</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">The expected type for the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is any indexable container type.<A NAME="I2485"></A></div>
+is any indexable container type.<A NAME="I2493"></A></div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">If the Constant_Indexing 
 aspect is specified for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is interpreted as a <I>constant indexing</I> under the following circumstances:<A NAME="I2486"></A><A NAME="I2487"></A></div>
+is interpreted as a <I>constant indexing</I> under the following circumstances:<A NAME="I2494"></A><A NAME="I2495"></A></div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Bulleted">when the Variable_Indexing aspect is not specified 
 for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>;</div>
@@ -127,18 +127,18 @@ for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HRE
 denotes a constant;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Bulleted">when the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is used within a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0131">primary</A></SPAN> 
+is used within a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0141">primary</A></SPAN> 
 where a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denoting a constant is permitted.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">Otherwise, the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is interpreted as a <I>variable indexing</I>.<A NAME="I2488"></A><A NAME="I2489"></A></div>
+is interpreted as a <I>variable indexing</I>.<A NAME="I2496"></A><A NAME="I2497"></A></div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal">When a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is interpreted as a constant (or variable) indexing, it is equivalent 
 to a call on a prefixed view of one of the functions named by the Constant_Indexing 
 (or Variable_Indexing) aspect of the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-with the given <SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN>, 
+with the given <SPAN Class="swiss"><A HREF="RM-6-4.html#S0219">actual_parameter_part</A></SPAN>, 
 and with the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 as the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of the prefixed view.</div>
@@ -170,7 +170,7 @@ IB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&quot;pear&quot;).Data.<B>all</B>&nbsp;:=
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-1-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

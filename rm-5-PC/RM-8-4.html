@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-8-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,63 +35,63 @@
 <HR>
 <H1>8.4 Use Clauses</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-8-4.html#S0236">use_package_clause</A></SPAN> 
 achieves direct visibility of declarations that appear in the visible 
-part of a package; a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN> 
+part of a package; a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0237">use_type_clause</A></SPAN> 
 achieves direct visibility of the primitive operators of a type.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_clause</SPAN><A NAME="I3944"></A><A NAME="S0213"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3945"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I3946"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">use_clause</SPAN><A NAME="I4150"></A><A NAME="S0235"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4151"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0236">use_package_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4152"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0237">use_type_clause</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_package_clause</SPAN><A NAME="I3947"></A><A NAME="S0214"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<I>package_</I><A NAME="I3948"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>package_</I><A NAME="I3949"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">use_package_clause</SPAN><A NAME="I4153"></A><A NAME="S0236"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<I>package_</I><A NAME="I4154"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>package_</I><A NAME="I4155"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_type_clause</SPAN><A NAME="I3950"></A><A NAME="S0215"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;[<B>all</B>]&nbsp;<B>type</B>&nbsp;<A NAME="I3951"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3952"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">use_type_clause</SPAN><A NAME="I4156"></A><A NAME="S0237"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;[<B>all</B>]&nbsp;<B>type</B>&nbsp;<A NAME="I4157"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{,&nbsp;<A NAME="I4158"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>};</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">A <I>package_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0236">use_package_clause</A></SPAN> 
 shall denote a nonlimited view of a package.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3953"></A>For each <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>, 
-there is a certain region of text called the <I>scope</I> of the <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>. 
-For a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
-within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0266">library_unit_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0267">library_unit_renaming_declaration</A></SPAN>, 
+<div class="Normal"><A NAME="I4159"></A>For each <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN>, 
+there is a certain region of text called the <I>scope</I> of the <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN>. 
+For a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
+within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0288">library_unit_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0289">library_unit_renaming_declaration</A></SPAN>, 
 the scope is the entire declarative region of the declaration. For a 
-<SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
-within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
+within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN> 
 of a body, the scope is the entire body and any subunits (including multiply 
-nested subunits). The scope does not include <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN>s 
+nested subunits). The scope does not include <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>s 
 themselves.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
+<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
 immediately within a declarative region, the scope is the portion of 
-the declarative region starting just after the <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
+the declarative region starting just after the <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
 and extending to the end of the declarative region. However, the scope 
-of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
 in the private part of a library unit does not include the visible part 
 of any public descendant of that library unit.&nbsp;</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
-<div class="Normal">&nbsp;A package is <I>named</I> in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN> 
+<div class="Normal">&nbsp;A package is <I>named</I> in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0236">use_package_clause</A></SPAN> 
 if it is denoted by a <I>package_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-of that clause. A type is <I>named</I> in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN> 
+of that clause. A type is <I>named</I> in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0237">use_type_clause</A></SPAN> 
 if it is determined by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-of that clause.<A NAME="I3954"></A></div>
+of that clause.<A NAME="I4160"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3955"></A>For 
-each package named in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4161"></A>For 
+each package named in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0236">use_package_clause</A></SPAN> 
 whose scope encloses a place, each declaration that occurs immediately 
 within the declarative region of the package is <I>potentially use-visible</I> 
 at this place if the declaration is visible at this place. For each type 
-<I>T</I> or <I>T</I>'Class named in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN> 
+<I>T</I> or <I>T</I>'Class named in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0237">use_type_clause</A></SPAN> 
 whose scope encloses a place, the declaration of each primitive operator 
 of type <I>T</I> is potentially use-visible at this place if its declaration 
-is visible at this place. If a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN> 
+is visible at this place. If a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0237">use_type_clause</A></SPAN> 
 whose scope encloses a place includes the reserved word <B>all</B>, then 
 the following entities are also potentially use-visible at this place 
 if the declaration of the entity is visible at this place:&nbsp;</div>
@@ -106,7 +106,7 @@ and that operates on a class-wide type that covers <I>T</I>.&nbsp;</div>
 <div class="Normal">&nbsp;Certain implicit declarations may become potentially 
 use-visible in certain contexts as described in <A HREF="RM-12-6.html">12.6</A>.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3956"></A><A NAME="I3957"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4162"></A><A NAME="I4163"></A>A 
 declaration is <I>use-visible</I> if it is potentially use-visible, except 
 in these naming-conflict cases:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -121,7 +121,7 @@ are not use-visible unless each of them is an overloadable declaration.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I3958"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
+<div class="Normal"><A NAME="I4164"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
 has no effect.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
@@ -139,7 +139,7 @@ Two_Thirds:&nbsp;Rational_Numbers.Rational&nbsp;:=&nbsp;2/3;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-8-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

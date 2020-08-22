@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,28 +38,28 @@
 <HR>
 <H1>7.3.4 <span class="insert5">Stable Properties of a Type</span><span class="delete5"></span></H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><span class="insert5">It is usual that some of the 
-characteristics of a data type are unchanged by most of the primitive 
-operations on the type. Such characteristics are called <I>stable properties</I> 
-of the type.<A NAME="I3792"></A><A NAME="I3793"></A></span>&nbsp;</div>
+<div class="Normal"><span class="insert5">Certain characteristics of 
+an object of a given type are unchanged by most of the primitive operations 
+of the type. Such characteristics are called <I>stable properties</I> 
+of the type.<A NAME="I3998"></A><A NAME="I3999"></A></span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal"><span class="insert5">A <I>property function</I> 
 of type <I>T</I> is a function with a single parameter of type <I>T</I> 
-or of a class-wide type that covers <I>T</I>.<A NAME="I3794"></A><A NAME="I3795"></A></span></div>
+or of a class-wide type that covers <I>T</I>.<A NAME="I4000"></A><A NAME="I4001"></A></span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal"><span class="insert5">A <I>type property aspect definition</I> 
-is <A NAME="I3796"></A>a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
+is <A NAME="I4002"></A>a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 written in the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>. 
-A <I>subprogram property aspect definition</I><A NAME="I3797"></A> is 
+A <I>subprogram property aspect definition</I><A NAME="I4003"></A> is 
 a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
-preceded by an optional <B>not</B> written in the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</span></div>
+preceded by an optional <B>not</B>, also written in the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
 a nonformal private type, nonformal private extension, or full type that 
 does not have a partial view, the following language-defined aspects 
-may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):</span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Stable_Properties</span></div><div class="WideHanging-Body"><br clear="left">
@@ -67,7 +67,7 @@ may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspe
 aspect definition; each <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 shall statically denote a single property function of the type. This 
 aspect defines the <I>stable property functions</I> of the associated 
-type.<A NAME="I3798"></A><A NAME="I3799"></A> <A NAME="I3800"></A><A NAME="I3801"></A><A NAME="I3802"></A></span></div>
+type.<A NAME="I4004"></A><A NAME="I4005"></A> <A NAME="I4006"></A><A NAME="I4007"></A><A NAME="I4008"></A></span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Stable_Properties'Class</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">This aspect shall be specified by a type property 
@@ -76,11 +76,11 @@ shall statically denote a single property function of the type. This
 aspect defines the <I>class-wide stable property functions</I> of the 
 associated type. Unlike most class-wide aspects, Stable_Properties'Class 
 is not inherited by descendant types and subprograms, but the enhanced 
-class-wide postconditions are inherited in the normal manner.<A NAME="I3803"></A><A NAME="I3804"></A><A NAME="I3805"></A><A NAME="I3806"></A></span></div>
+class-wide postconditions are inherited in the normal manner.<A NAME="I4009"></A><A NAME="I4010"></A><A NAME="I4011"></A><A NAME="I4012"></A></span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
 a primitive subprogram, the following language-defined aspects may be 
-specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Stable_Properties</span></div><div class="WideHanging-Body"><br clear="left">
@@ -126,7 +126,7 @@ after <B>not</B> shall be a stable property function of a type for which
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
 a primitive subprogram <I>S</I> of a type <I>T</I>, the stable property 
-functions for <I>S</I> for type <I>T</I> are:</span></div>
+functions of <I>S</I> for type <I>T</I> are:</span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Bulleted"><span class="insert5">if <I>S</I> has an aspect 
 Stable_Properties specified that does not include <B>not</B>, those functions 
@@ -147,46 +147,46 @@ for class-wide stable property functions by replacing aspect Stable_Properties
 with aspect Stable_Properties'Class in the above definition.</span></div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="Normal"><span class="insert5">The <I>explicit</I> specific 
-postcondition expression for a subprogram <I>S</I> is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+postcondition expression for a subprogram <I>S</I> is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 directly specified for <I>S</I> with the Post aspect. Similarly, the 
 <I>explicit</I> class-wide postcondition expression for a subprogram 
-<I>S</I> is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I3807"></A><A NAME="I3808"></A><A NAME="I3809"></A></span></div>
+<I>S</I> is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I4013"></A><A NAME="I4014"></A><A NAME="I4015"></A></span></div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Normal"><span class="insert5">For every primitive subprogram 
 <I>S</I> of a type <I>T</I> that is not a stable property function of 
 <I>T</I>, the specific postcondition expression of <I>S</I> is modified 
 to include expressions of the form <TT><I>F</I>(<I>P</I>) = <I>F</I>(<I>P</I>)'Old</TT>, 
 all <B>and</B>ed with each other and any explicit specific postcondition 
-expression, where <I>F</I> is each stable property function of <I>S</I> 
-for type <I>T</I> that does not occur in the explicit specific postcondition 
-expression of <I>S</I>, and <I>P</I> is each parameter of <I>S</I> that 
-has type <I>T</I>. The resulting specific postcondition expression of 
-<I>S</I> is used in place of the explicit specific postcondition expression 
-of <I>S</I> when interpreting the meaning of the postcondition as defined 
-in <A HREF="RM-6-1-1.html">6.1.1</A>.</span></div>
+expression, with one such equality included for each stable property 
+function <I>F</I> of <I>S</I> for type <I>T</I> that does not occur in 
+the explicit specific postcondition expression of <I>S</I>, and <I>P</I> 
+is each parameter of <I>S</I> that has type <I>T</I>. The resulting specific 
+postcondition expression of <I>S</I> is used in place of the explicit 
+specific postcondition expression of <I>S</I> when interpreting the meaning 
+of the postcondition as defined in <A HREF="RM-6-1-1.html">6.1.1</A>.</span></div>
 <div class="paranum"><a name="p23">23/5</a></div>
 <div class="Normal"><span class="insert5">For every primitive subprogram 
 <I>S</I> of a type <I>T</I> that is not a stable property function of 
 <I>T</I>, the class-wide postcondition expression of <I>S</I> is modified 
 to include expressions of the form <TT><I>F</I>(<I>P</I>) = <I>F</I>(<I>P</I>)'Old</TT>, 
 all <B>and</B>ed with each other and any explicit class-wide postcondition 
-expression, where <I>F</I> is each class-wide stable property function 
-of <I>S</I> for type <I>T</I> that does not occur in any class-wide postcondition 
-expression that applies to <I>S</I>, and <I>P</I> is each parameter of 
-<I>S</I> that has type <I>T</I>. The resulting class-wide postcondition 
-expression of <I>S</I> is used in place of the explicit class-wide postcondition 
-expression of <I>S</I> when interpreting the meaning of the postcondition 
-as defined in <A HREF="RM-6-1-1.html">6.1.1</A>.</span></div>
+expression, with one such equality included for each class-wide stable 
+property function <I>F</I> of <I>S</I> for type <I>T</I> that does not 
+occur in any class-wide postcondition expression that applies to <I>S</I>, 
+and <I>P</I> is each parameter of <I>S</I> that has type <I>T</I>. The 
+resulting class-wide postcondition expression of <I>S</I> is used in 
+place of the explicit class-wide postcondition expression of <I>S</I> 
+when interpreting the meaning of the postcondition as defined in <A HREF="RM-6-1-1.html">6.1.1</A>.</span></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p24">24/5</a></div>
-<div class="Notes">14&nbsp;&nbsp;<span class="insert5">For an example 
+<div class="Notes">15&nbsp;&nbsp;<span class="insert5">For an example 
 of the use of these aspects, see the Vector container definition in <A HREF="RM-A-18-2.html">A.18.2</A>.</span> 
 </div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

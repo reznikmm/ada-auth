@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-16-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 <HR>
 <H1>A.17 <span class="insert2">The Package Environment_Variables</span><span class="delete2"></span></H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I7261"></A>The package 
+<div class="Normal"><span class="insert2"><A NAME="I7563"></A>The package 
 Environment_Variables allows a program to read or modify environment 
 variables. Environment variables are name-value pairs, where both the 
 name and value are strings. The definition of what constitutes an <I>environment 
@@ -53,21 +53,21 @@ defined.</span>&nbsp;</div>
 library package Environment_Variables has the following declaration:</span> 
 </div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><span class="insert2"><B>package</B>&nbsp;Ada.Environment_Variables</span><span class="insert2"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert2"><A NAME="I7262"></A><BR>
+<div class="Examples"><span class="insert2"><B>package</B>&nbsp;Ada.Environment_Variables</span><span class="insert2"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert2"><A NAME="I7564"></A><BR>
 &nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Environment_Variables);</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7263"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7565"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
 <div class="paranum"><a name="p4.1">4.1/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7264"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Default&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7566"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Default&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7265"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7567"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7266"></A>Set&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7568"></A>Set&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7267"></A>Clear&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7268"></A>Clear;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7569"></A>Clear&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7570"></A>Clear;</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7269"></A>Iterate</span><span class="insert2"><span class="delete3">&nbsp;(</span></span><span class="insert2"><BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7571"></A>Iterate</span><span class="insert2"><span class="delete3">&nbsp;(</span></span><span class="insert2"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert3">(</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;</span></span><span class="insert2">Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Name,&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String))</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Allows_Exit</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
@@ -138,7 +138,7 @@ exist that have the same name, Process is called once for each such variable.</s
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7270"></A>It 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7572"></A>It 
 is a bounded error to call Value if more than one environment variable 
 exists with the given name; the possible outcomes are that:</span>&nbsp;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
@@ -151,7 +151,7 @@ changes to the environment; or</span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I7271"></A>Making 
+<div class="Normal"><span class="insert2"><A NAME="I7573"></A>Making 
 calls to the procedures Set or Clear concurrently with calls to any subprogram 
 of package Environment_Variables, or to any instantiation of Iterate, 
 results in erroneous execution.</span></div>
@@ -193,7 +193,7 @@ not perform any buffering of the environment variables.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-16-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

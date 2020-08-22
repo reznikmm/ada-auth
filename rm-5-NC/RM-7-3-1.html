@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <div class="Normal">For a type declared in the visible part of a package 
 or generic package, certain operations on the type do not become visible 
 until later in the package &mdash; either in the private part or the 
-body. <A NAME="I3747"></A>Such <I>private operations</I> are available 
+body. <A NAME="I3938"></A>Such <I>private operations</I> are available 
 only inside the declarative region of the package or generic package. 
 </div>
 
@@ -69,7 +69,7 @@ if there is a place immediately within the declarative region in which
 the type is declared where additional characteristics of its parent type 
 become visible.</div>
 <div class="paranum"><a name="p5">5/1</a></div>
-<div class="Normal"><A NAME="I3748"></A><A NAME="I3749"></A><A NAME="I3750"></A>For 
+<div class="Normal"><A NAME="I3939"></A><A NAME="I3940"></A><A NAME="I3941"></A>For 
 example, an array type whose component type is limited private becomes 
 nonlimited if the full view of the component type is nonlimited and visible 
 at some later place immediately within the declarative region in which 
@@ -84,7 +84,7 @@ is determined by the view of the designated subtype that is visible at
 that place, rather than the view at the place where the access type is 
 declared.</div>
 <div class="paranum"><a name="p5.2">5.2/5</a></div>
-<div class="Normal">&nbsp;A type is a <I>descendant</I><A NAME="I3751"></A> 
+<div class="Normal">&nbsp;A type is a <I>descendant</I><A NAME="I3942"></A> 
 of the full view of some ancestor of its parent type only if the current 
 view it has of its parent is a descendant of the full view of that ancestor. 
 More generally, at any given place, a type is descended from the same 
@@ -116,8 +116,8 @@ is no such place, then the inherited subprogram is not declared at all,
 but it still exists. For a tagged type, it is possible to dispatch to 
 an inherited subprogram that is not declared at all.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
-each inherited subprogram is declared immediately after the <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
+each inherited subprogram is declared immediately after the <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 if the corresponding declaration from the ancestor is visible at that 
 place. Otherwise, the inherited subprogram is not declared for the private 
 extension, though it might be for the full type.&nbsp;</div>
@@ -128,7 +128,7 @@ for every subtype S of an untagged private type whose full view is tagged,
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">S'Class</div><div class="WideHanging-Body">
-<A NAME="I3752"></A><A NAME="I3753"></A>Denotes the class-wide subtype 
+<A NAME="I3943"></A><A NAME="I3944"></A>Denotes the class-wide subtype 
 corresponding to the full view of S. This attribute is allowed only from 
 the beginning of the private part in which the full view is declared, 
 until the declaration of the full view. After the full view, the Class 
@@ -154,7 +154,7 @@ view; task dependence rules still apply to components that are task objects.</di
 <div class="Notes">10&nbsp;&nbsp;Partial views provide initialization, 
 membership tests, selected components for the selection of discriminants 
 and inherited components, qualification, and explicit conversion. Nonlimited 
-partial views also allow use of <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>s.</div>
+partial views also allow use of <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN>s.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Notes">11&nbsp;&nbsp;For a subtype S of a partial view, S'Size 
 is defined (see <A HREF="RM-13-3.html">13.3</A>). For an object A of 
@@ -214,7 +214,7 @@ package body, remains unchanged between calls of the procedure Get_Key.
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

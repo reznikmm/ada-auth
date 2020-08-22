@@ -34,9 +34,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -49,47 +49,47 @@
 a&nbsp;</span><span class="insert4">noninstance&nbsp;</span><span class="insert3">subprogram</span><span class="insert5">&nbsp;(including a generic formal subprogram)</span><span class="insert3"></span><span class="insert4">, 
 a generic subprogram,</span><span class="insert3">&nbsp;</span><span class="insert3"><span class="delete5">or 
 </span></span><span class="insert3"></span><span class="insert4">an&nbsp;</span><span class="insert3">entry,</span><span class="insert5">&nbsp;or an access-to-subprogram type,</span><span class="insert3">&nbsp;the following 
-language-defined aspects may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+language-defined aspects may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):</span></div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="WideHanging-Term"><span class="insert3">Pre</span></div><div class="WideHanging-Body">
 <span class="insert3">This aspect specifies a specific precondition for 
 a callable entity</span><span class="insert5">&nbsp;or an access-to-subprogram 
-type</span><span class="insert3">; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-called a <I>specific precondition expression</I>.<A NAME="I3613"></A><A NAME="I3614"></A> 
+type</span><span class="insert3">; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+called a <I>specific precondition expression</I>.<A NAME="I3784"></A><A NAME="I3785"></A> 
 If not specified for an entity, the specific precondition expression 
-for the entity is the enumeration literal True.<A NAME="I3615"></A><A NAME="I3616"></A></span></div>
+for the entity is the enumeration literal True.<A NAME="I3786"></A><A NAME="I3787"></A></span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="WideHanging-Term"><span class="insert3">Pre'Class</span></div><div class="WideHanging-Body">
 <span class="insert3">This aspect specifies a class-wide precondition 
 for an operation of a tagged type and its descendants; it shall be specified 
-by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-called a <I>class-wide precondition expression</I>.<A NAME="I3617"></A><A NAME="I3618"></A> 
+by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+called a <I>class-wide precondition expression</I>.<A NAME="I3788"></A><A NAME="I3789"></A> 
 If not specified for an entity, then if no other class-wide precondition 
 applies to the entity, the class-wide precondition expression for the 
-entity is the enumeration literal True.<A NAME="I3619"></A><A NAME="I3620"></A></span></div>
+entity is the enumeration literal True.<A NAME="I3790"></A><A NAME="I3791"></A></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="WideHanging-Term"><span class="insert3">Post</span></div><div class="WideHanging-Body">
 <span class="insert3">This aspect specifies a specific postcondition 
 for a callable entity</span><span class="insert5">&nbsp;or an access-to-subprogram 
-type</span><span class="insert3">; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-called a <I>specific postcondition expression</I>.<A NAME="I3621"></A><A NAME="I3622"></A> 
+type</span><span class="insert3">; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+called a <I>specific postcondition expression</I>.<A NAME="I3792"></A><A NAME="I3793"></A> 
 If not specified for an entity, the specific postcondition expression 
-for the entity is the enumeration literal True.<A NAME="I3623"></A><A NAME="I3624"></A></span></div>
+for the entity is the enumeration literal True.<A NAME="I3794"></A><A NAME="I3795"></A></span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="WideHanging-Term"><span class="insert3">Post'Class</span></div><div class="WideHanging-Body">
 <span class="insert3">This aspect specifies a class-wide postcondition 
 for an operation of a tagged type and its descendants; it shall be specified 
-by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-called a <I>class-wide postcondition expression</I>.<A NAME="I3625"></A><A NAME="I3626"></A> 
+by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+called a <I>class-wide postcondition expression</I>.<A NAME="I3796"></A><A NAME="I3797"></A> 
 If not specified for an entity, the class-wide postcondition expression 
-for the entity is the enumeration literal True.<A NAME="I3627"></A><A NAME="I3628"></A></span> 
+for the entity is the enumeration literal True.<A NAME="I3798"></A><A NAME="I3799"></A></span> 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal"><span class="insert3">The expected type for a precondition 
-or postcondition expression is any boolean type.<A NAME="I3629"></A><A NAME="I3630"></A></span></div>
+or postcondition expression is any boolean type.<A NAME="I3800"></A><A NAME="I3801"></A></span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal"><span class="insert3">Within the expression for a 
 Pre'Class or Post'Class aspect for a primitive subprogram&nbsp;</span><span class="insert4"><I>S</I> 
@@ -145,7 +145,7 @@ the implicitly declared subprogram <I>P</I> is <I>abstract</I>.</span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Bulleted"><span class="insert3">Otherwise, the subprogram 
 <I>P</I> <I>requires overriding</I> and shall be overridden with a nonabstract 
-subprogram.<A NAME="I3631"></A></span></div>
+subprogram.<A NAME="I3802"></A></span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal"><span class="insert3">If a renaming of a subprogram 
 or entry <I>S1</I> overrides an inherited subprogram <I>S2</I>, then 
@@ -160,7 +160,7 @@ for an overriding primitive subprogram of a tagged type <I>T</I> unless
 the Pre'Class aspect is specified for the corresponding primitive subprogram 
 of some ancestor of <I>T</I>.</span></div>
 <div class="paranum"><a name="p17.2">17.2/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4"><A NAME="I3632"></A>In addition 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4"><A NAME="I3803"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -176,7 +176,7 @@ corresponding</span><span class="insert3"></span><span class="insert3"><span cla
 associated</span></span><span class="insert3">&nbsp;expression also applies 
 to the corresponding primitive subprogram&nbsp;</span><span class="insert4"><I>S</I> 
 </span><span class="insert3">of each descendant of <I>T</I></span><span class="insert5">&nbsp;(including <I>T</I> itself)</span><span class="insert3">.</span><span class="insert4">&nbsp;The <I>corresponding expression</I> is constructed from the associated 
-expression as follows:<A NAME="I3633"></A> <A NAME="I3634"></A></span><span class="insert3"></span></div>
+expression as follows:<A NAME="I3804"></A> <A NAME="I3805"></A></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p18.1">18.1/4</a></div>
 <div class="Bulleted"><span class="insert4">References to formal parameters 
 of <I>S</I> (or to <I>S</I> itself) are replaced with references to the 
@@ -191,65 +191,138 @@ for a Pre'Class or Post'Class aspect would be illegal.</span></div>
 by the Pre, Pre'Class, Post, or Post'Class assertion policies (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
 in effect at the point of a corresponding aspect specification applicable 
 to a given subprogram</span><span class="insert5">,</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;or</span></span><span class="insert3">&nbsp;entry,</span><span class="insert5">&nbsp;or access-to-subprogram type,</span><span class="insert3">&nbsp;then the respective 
-precondition or postcondition expressions are considered <I>enabled</I>.<A NAME="I3635"></A><A NAME="I3636"></A></span></div>
-<div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">An 
-<SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-is <I>potentially unevaluated</I> if it occurs within:<A NAME="I3637"></A></span></div>
-<div class="paranum"><a name="p21">21/3</a></div>
-<div class="Bulleted"><span class="insert3">any part of an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0139">if_expression</A></SPAN> 
-other than the first <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>;</span></div>
-<div class="paranum"><a name="p22">22/3</a></div>
-<div class="Bulleted"><span class="insert3">a <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0141">case_expression</A></SPAN>;</span></div>
-<div class="paranum"><a name="p22.1">22.1/4</a></div>
-<div class="Bulleted"><span class="insert4">a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN>;</span></div>
+precondition or postcondition expressions are considered <I>enabled</I>.<A NAME="I3806"></A><A NAME="I3807"></A></span></div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><span class="insert5">A 
+subexpression of a postcondition expression is <I>known on entry</I> 
+if it is any of:<A NAME="I3808"></A></span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;An 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is <I>potentially unevaluated</I> if it occurs within:<A NAME="I3809"></A></span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Bulleted"><span class="insert3"></span><span class="insert5">a 
+static subexpression (see <A HREF="RM-4-9.html">4.9</A>)</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;any 
+part of an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN> 
+other than the first <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN></span></span><span class="insert3">;</span></div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Bulleted"><span class="insert3"></span><span class="insert5">a 
+literal whose type does not have any Integer_Literal, Real_Literal, or 
+String_Literal aspect specified, or the function specified by such an 
+attribute has aspect Global specified to be <B>null</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;a 
+<I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN></span></span><span class="insert3">;</span></div>
+<div class="paranum"><a name="p22.1">22.1/5</a></div>
+<div class="Bulleted"><span class="insert4"></span><span class="insert5">a 
+name statically denoting a full constant declaration of a type for which 
+all views are constant (see <A HREF="RM-3-3.html">3.3</A>)</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;a 
+<SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN></span></span><span class="insert4">;</span></div>
 <div class="paranum"><a name="p22.2">22.2/5</a></div>
-<div class="Bulleted"><span class="insert5">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association</A></SPAN>, 
-if the associated choice is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> that 
-defines a nonstatic or null range, or is an <B>others</B> choice and 
-the applicable index constraint is nonstatic or null;</span></div>
-<div class="paranum"><a name="p23">23/3</a></div>
-<div class="Bulleted"><span class="insert3">the right operand of a short-circuit 
-control form; or</span></div>
-<div class="paranum"><a name="p24">24/3</a></div>
-<div class="Bulleted"><span class="insert3">a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0127">membership_choice</A></SPAN> 
-other than the first of a membership operation.</span>&nbsp;</div>
+<div class="Bulleted"><span class="insert5">a name statically denoting 
+a nonaliased <B>in</B> parameter of an elementary type;</span></div>
+<div class="paranum"><a name="p22.3">22.3/5</a></div>
+<div class="Bulleted"><span class="insert5">an Old <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>;</span></div>
+<div class="paranum"><a name="p22.4">22.4/5</a></div>
+<div class="Bulleted"><span class="insert5">an invocation of a predefined 
+operator where all of the operands are known on entry;</span></div>
+<div class="paranum"><a name="p22.5">22.5/5</a></div>
+<div class="Bulleted"><span class="insert5">a function call where the 
+function has aspect Global =&gt; <B>null</B> where all of the actual 
+parameters are known on entry;</span></div>
+<div class="paranum"><a name="p22.6">22.6/5</a></div>
+<div class="Bulleted"><span class="insert5">a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN> 
+of a known-on-entry <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>;</span></div>
+<div class="paranum"><a name="p22.7">22.7/5</a></div>
+<div class="Bulleted"><span class="insert5">an <SPAN Class="swiss"><A HREF="RM-4-1-1.html#S0096">indexed_component</A></SPAN> 
+of a known-on-entry <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+where all index <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
+are known on entry;</span></div>
+<div class="paranum"><a name="p22.8">22.8/5</a></div>
+<div class="Bulleted"><span class="insert5">a parenthesized known-on-entry 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>;</span></div>
+<div class="paranum"><a name="p22.9">22.9/5</a></div>
+<div class="Bulleted"><span class="insert5">a <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
+whose operand is a known-on-entry expression;</span></div>
+<div class="paranum"><a name="p22.10">22.10/5</a></div>
+<div class="Bulleted"><span class="insert5">a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
+where all of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>s, 
+<I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s, 
+and <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
+are known on entry.</span></div>
+<div class="paranum"><a name="p22.11">22.11/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert5">A 
+subexpression of a postcondition expression is <I>unconditionally evaluated</I>,<A NAME="I3810"></A> 
+conditionally evaluated, or <I>repeatedly evaluated</I>.<A NAME="I3811"></A> 
+The following subexpressions are repeatedly evaluated:</span></div>
+<div class="paranum"><a name="p22.12">22.12/5</a></div>
+<div class="Bulleted"><span class="insert5">A subexpression of a predicate 
+of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN>;</span></div>
+<div class="paranum"><a name="p22.13">22.13/5</a></div>
+<div class="Bulleted"><span class="insert5">A subexpression of the expression 
+of an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN>;</span></div>
+<div class="paranum"><a name="p22.14">22.14/5</a></div>
+<div class="Bulleted"><span class="insert5">A subexpression of the expression 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0128">container_element_association</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p22.15">22.15/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert5">If 
+a subexpression is not repeatedly evaluated, and not evaluated unconditionally, 
+then it is <I>conditionally evaluated</I>,<A NAME="I3812"></A> and there 
+is a set of <I>determining expressions</I><A NAME="I3813"></A> that determine 
+whether the subexpression is actually evaluated at run time. Such subexpressions 
+and their determining expressions are as follows:</span></div>
+<div class="paranum"><a name="p22.16">22.16/5</a></div>
+<div class="Bulleted"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN> 
+that is not repeatedly evaluated, a subexpression of any part other than 
+the first condition is conditionally evaluated, and its determining expressions 
+include all <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN> 
+that precede the subexpression textually;</span></div>
+<div class="paranum"><a name="p22.17">22.17/5</a></div>
+<div class="Bulleted"><span class="insert5">For a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN> 
+that is not repeatedly evaluated, a subexpression of any <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is conditionally evaluated, and its determining expressions include the 
+<I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN>;</span></div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Bulleted"><span class="insert3"></span><span class="insert5">For</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;the 
+right operand of</span></span><span class="insert3">&nbsp;a short-circuit 
+control form</span><span class="insert5">&nbsp;that is not repeatedly evaluated, 
+a subexpression of the right-hand operand is conditionally evaluated, 
+and its determining expressions include the left-hand operand of the 
+short-circuit control form;</span><span class="insert3"></span><span class="insert3"><span class="delete5">; 
+or</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Bulleted"><span class="insert3"></span><span class="insert5">For 
+a membership test that is not repeatedly evaluated, a subexpression of 
+</span><span class="insert3">a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0137">membership_choice</A></SPAN> 
+other than the first&nbsp;</span><span class="insert5">is conditionally evaluated, 
+and its determining expressions include the <I>tested_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN> 
+and the preceding <SPAN Class="swiss"><A HREF="RM-4-4.html#S0137">membership_choice</A></SPAN>s 
+of the membership test</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;of 
+a membership operation</span></span><span class="insert3">.</span>&nbsp;</div>
 <div class="paranum"><a name="p24.1">24.1/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5">A 
-<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> <I>statically 
-names</I> an object if it:<A NAME="I3638"></A></span>&nbsp;</div>
-<div class="paranum"><a name="p24.2">24.2/5</a></div>
-<div class="Bulleted"><span class="insert5">statically denotes the declaration 
-of an object (possibly through one or more renames);</span>&nbsp;</div>
-<div class="paranum"><a name="p24.3">24.3/5</a></div>
-<div class="Bulleted"><span class="insert5">is a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN> 
-whose prefix statically names an object, there is no implicit dereference 
-of the prefix, and the <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
-names a component that does not depend on a discriminant; or</span>&nbsp;</div>
-<div class="paranum"><a name="p24.4">24.4/5</a></div>
-<div class="Bulleted"><span class="insert5">is an <SPAN Class="swiss"><A HREF="RM-4-1-1.html#S0096">indexed_component</A></SPAN> 
-whose prefix statically names an object, the object is statically constrained, 
-and the index expressions of the object are static and have values that 
-are within the range of the index constraint.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">A conditionally evaluated 
+subexpression is <I>determined to be unevaluated</I> at run time if its 
+set of determining expressions are all known on entry, and when evaluated 
+on entry their values are such that the given subexpression is not evaluated.<A NAME="I3814"></A> 
+<A NAME="I3815"></A></span></div>
 <div class="paranum"><a name="p25">25/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">For 
 a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> X 
 that denotes an object of a nonlimited type, the following attribute 
 is defined:</span>&nbsp;</div>
-<div class="paranum"><a name="p26">26/4</a></div>
+<div class="paranum"><a name="p26">26/5</a></div>
 <div class="WideHanging-Term"><span class="insert3">X'Old</span></div><div class="WideHanging-Body">
-<span class="insert3"><A NAME="I3639"></A><A NAME="I3640"></A></span><span class="insert3"></span><span class="insert4">Each</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;For 
+<span class="insert3"><A NAME="I3816"></A><A NAME="I3817"></A></span><span class="insert3"></span><span class="insert4">Each</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;For 
 each</span></span><span class="insert3">&nbsp;X'Old in a postcondition expression 
-that is enabled</span><span class="insert4">&nbsp;denotes</span><span class="insert3"></span><span class="insert3"><span class="delete4">,</span></span><span class="insert3">&nbsp;a constant&nbsp;</span><span class="insert4">that&nbsp;</span><span class="insert3">is 
+that is enabled</span><span class="insert5">, other than those that occur 
+in subexpressions that are determined to be unevaluated,</span><span class="insert3"></span><span class="insert4">&nbsp;denotes</span><span class="insert3"></span><span class="insert3"><span class="delete4">,</span></span><span class="insert3">&nbsp;a constant&nbsp;</span><span class="insert4">that&nbsp;</span><span class="insert3">is 
 implicitly declared at the beginning of the subprogram&nbsp;</span><span class="insert4">body,</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;or</span></span><span class="insert3">&nbsp;entry</span><span class="insert4">&nbsp;body, or accept statement</span><span class="insert3">.</span><span class="insert3"><span class="delete4">&nbsp;The constant is of the type of X and is initialized to the result of 
 evaluating X (as an expression) at the point of the constant declaration. 
 The value of X'Old in the postcondition expression is the value of this 
 constant; the type of X'Old is the type of X. These implicit constant 
-declarations occur in an arbitrary order.<A NAME="I3641"></A></span></span><span class="insert3"></span></div>
+declarations occur in an arbitrary order.<A NAME="I3818"></A></span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p26.1">26.1/4</a></div>
 <div class="WideHanging-Body" style="margin-bottom: 0.4em"><span class="insert4">The 
 implicitly declared entity denoted by each occurrence of X'Old is declared 
@@ -292,10 +365,14 @@ shall not contain a Result <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">att
 nor an Old <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>, 
 nor a use of an entity declared within the postcondition expression but 
 not within <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-itself (for example, the loop parameter of an enclosing <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN>). 
+itself (for example, the loop parameter of an enclosing <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN>). 
 The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of an Old <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
-that is potentially unevaluated shall statically&nbsp;</span><span class="insert5">name</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;denote</span></span><span class="insert3">&nbsp;an entity.</span></div>
+</span><span class="insert3"><span class="delete5">that is potentially 
+unevaluated&nbsp;</span></span><span class="insert3">shall statically&nbsp;</span><span class="insert5">name 
+(see <A HREF="RM-4-9.html">4.9</A>)</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;denote</span></span><span class="insert3">&nbsp;an entity</span><span class="insert5">, unless the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+is unconditionally evaluated, or is conditionally evaluated where all 
+of the determining expressions are known on entry</span><span class="insert3">.</span></div>
 <div class="paranum"><a name="p28">28/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">For 
 a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> F 
@@ -304,7 +381,7 @@ access-to-function type</span><span class="insert3">, the following attribute
 is defined:</span>&nbsp;</div>
 <div class="paranum"><a name="p29">29/5</a></div>
 <div class="WideHanging-Term"><span class="insert3">F'Result</span></div><div class="WideHanging-Body">
-<span class="insert3"><A NAME="I3642"></A><A NAME="I3643"></A></span><span class="insert3">Within 
+<span class="insert3"><A NAME="I3819"></A><A NAME="I3820"></A></span><span class="insert3">Within 
 a postcondition expression for&nbsp;</span><span class="insert3"><span class="delete5">function 
 </span></span><span class="insert3">F, denotes the&nbsp;</span><span class="insert5">return</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;result</span></span><span class="insert3">&nbsp;object of the function</span><span class="insert5">&nbsp;call for which the 
 postcondition expression is evaluated</span><span class="insert3">. The 
@@ -328,7 +405,7 @@ that denotes an entry declaration of an entry family (see <A HREF="RM-9-5-2.html
 the following attribute is defined:</span>&nbsp;</div>
 <div class="paranum"><a name="p30.2">30.2/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">E'Index</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I3644"></A><A NAME="I3645"></A></span><span class="insert5">Within 
+<span class="insert5"><A NAME="I3821"></A><A NAME="I3822"></A></span><span class="insert5">Within 
 a precondition or postcondition expression for entry family E, denotes 
 the value of the entry index for the call of E. The nominal subtype of 
 this attribute is the entry index subtype.</span></div>
@@ -347,13 +424,13 @@ precondition checks are performed as follows:</span></div>
 check begins with the evaluation of the specific precondition expression 
 that applies to the subprogram or entry, if it is enabled; if the expression 
 evaluates to False, Assertions.Assertion_Error is raised; if the expression 
-is not enabled, the check succeeds.<A NAME="I3646"></A><A NAME="I3647"></A><A NAME="I3648"></A></span></div>
+is not enabled, the check succeeds.<A NAME="I3823"></A><A NAME="I3824"></A><A NAME="I3825"></A></span></div>
 <div class="paranum"><a name="p33">33/3</a></div>
 <div class="Bulleted"><span class="insert3">The class-wide precondition 
 check begins with the evaluation of any enabled class-wide precondition 
 expressions that apply to the subprogram or entry. If and only if all 
 the class-wide precondition expressions evaluate to False, Assertions.Assertion_Error 
-is raised.<A NAME="I3649"></A><A NAME="I3650"></A><A NAME="I3651"></A></span></div>
+is raised.<A NAME="I3826"></A><A NAME="I3827"></A><A NAME="I3828"></A></span></div>
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="Normal"><span class="insert3">The precondition checks are 
 performed in an arbitrary order, and if any of the class-wide precondition 
@@ -365,7 +442,7 @@ is not specified whether in</span></span><span class="insert3">&nbsp;a call
 on a protected operation, the checks are performed before&nbsp;</span><span class="insert3"><span class="delete5">or 
 after&nbsp;</span></span><span class="insert3">starting the protected action. 
 For an entry call, the checks are performed prior to checking whether 
-the entry is open.<A NAME="I3652"></A><A NAME="I3653"></A></span></div>
+the entry is open.<A NAME="I3829"></A><A NAME="I3830"></A></span></div>
 <div class="paranum"><a name="p35">35/3</a></div>
 <div class="Normal"><span class="insert3">Upon successful return from 
 a call of the subprogram or entry, prior to copying back any by-copy 
@@ -378,7 +455,7 @@ order, and if any postcondition expression evaluates to False, it is
 not specified whether any other postcondition expressions are evaluated. 
 The postcondition check, and any constraint or predicate checks associated 
 with <B>in out</B> or <B>out</B> parameters are performed in an arbitrary 
-order.<A NAME="I3654"></A><A NAME="I3655"></A><A NAME="I3656"></A><A NAME="I3657"></A><A NAME="I3658"></A></span></div>
+order.<A NAME="I3831"></A><A NAME="I3832"></A><A NAME="I3833"></A><A NAME="I3834"></A><A NAME="I3835"></A></span></div>
 <div class="paranum"><a name="p35.1">35.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert4">For a call to a task entry, 
 the postcondition check is performed before the end of the rendezvous; 
@@ -446,16 +523,27 @@ subprogram, precondition and postcondition checks performed are as determined
 by the subprogram or entry denoted by the actual subprogram, along with 
 any specific precondition and specific postcondition of the formal subprogram 
 itself.</span></div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p41">41/5</a></div>
+<div class="Normal"><span class="insert5">An implementation may evaluate 
+a known-on-entry subexpression of a postcondition expression of an entity 
+at the place where X'Old constants are created for the entity, with the 
+normal evaluation of the postcondition expression, or both.</span></div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p41">41/3</a></div>
+<div class="paranum"><a name="p42">42/3</a></div>
 <div class="Notes">5&nbsp;&nbsp;<span class="insert3">A precondition 
 is checked just before the call. If another task can change any value 
 that the precondition expression depends on, the precondition need not 
-hold within the subprogram or entry body.</span>&nbsp;</div>
+hold within the subprogram or entry body.</span></div>
+<div class="paranum"><a name="p43">43/5</a></div>
+<div class="Notes">6&nbsp;&nbsp;<span class="insert5">For an example 
+of the use of these aspects and attributes, see the Streams Subsystem 
+definitions in <A HREF="RM-13-13-1.html">13.13.1</A>.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

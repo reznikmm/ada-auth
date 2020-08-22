@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,15 +35,15 @@
 </div>
 <HR>
 <H1>E.4 Remote Subprogram Calls</H1>
-<div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I8507"></A><A NAME="I8508"></A><A NAME="I8509"></A><A NAME="I8510"></A><A NAME="I8511"></A>A 
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><A NAME="I9081"></A><A NAME="I9082"></A><A NAME="I9083"></A><A NAME="I9084"></A><A NAME="I9085"></A>A 
 <I>remote subprogram call</I> is a subprogram call that invokes the execution 
-of a subprogram in another partition. The partition that originates the 
-remote subprogram call is the <I>calling partition</I>, and the partition 
-that executes the corresponding subprogram body is the <I>called partition</I>. 
-Some remote procedure calls are allowed to return prior to the completion 
-of subprogram execution. These are called <I>asynchronous remote procedure 
-calls</I>.</div>
+of a subprogram in another <span class="insert5">(active)&nbsp;</span>partition. 
+The partition that originates the remote subprogram call is the <I>calling 
+partition</I>, and the partition that executes the corresponding subprogram 
+body is the <I>called partition</I>. Some remote procedure calls are 
+allowed to return prior to the completion of subprogram execution. These 
+are called <I>asynchronous remote procedure calls</I>.</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">There are three different 
 ways of performing a remote subprogram call:&nbsp;</div>
@@ -80,7 +80,7 @@ by a value of a remote access-to-class-wide type.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8512"></A><A NAME="I8513"></A><A NAME="I8514"></A>For 
+<div class="Normal"><A NAME="I9086"></A><A NAME="I9087"></A><A NAME="I9088"></A>For 
 the execution of a remote subprogram call, subprogram parameters (and 
 later the results, if any) are passed using a stream-oriented representation 
 (see <A HREF="RM-13-13-1.html">13.13.1</A>) which is suitable for transmission 
@@ -92,14 +92,14 @@ is done in the called partition. After the remote subprogram completes,
 marshalling is performed in the called partition, and finally unmarshalling 
 is done in the calling partition.</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I8515"></A><A NAME="I8516"></A>A <I>calling 
+<div class="Normal"><A NAME="I9089"></A><A NAME="I9090"></A>A <I>calling 
 stub</I> is the sequence of code that replaces the subprogram body of 
 a remotely called subprogram in the calling partition. A <I>receiving 
 stub</I> is the sequence of code (the &ldquo;wrapper&rdquo;) that receives 
 a remote subprogram call on the called partition and invokes the appropriate 
 subprogram body.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I8517"></A>Remote subprogram calls are executed 
+<div class="Normal"><A NAME="I9091"></A>Remote subprogram calls are executed 
 at most once, that is, if the subprogram call returns normally, then 
 the called subprogram's body was executed exactly once.</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -108,7 +108,7 @@ until the subprogram in the called partition returns, unless the call
 is asynchronous. For an asynchronous remote procedure call, the calling 
 task can become ready before the procedure in the called partition returns.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I8518"></A>If a construct containing a remote 
+<div class="Normal"><A NAME="I9092"></A>If a construct containing a remote 
 call is aborted, the remote subprogram call is <I>cancelled</I>. Whether 
 the execution of the remote subprogram is immediately aborted as a result 
 of the cancellation is implementation defined.&nbsp;</div>
@@ -128,25 +128,25 @@ completion of the remotely called subprogram, any exception is lost.</div>
 is raised if a remote call cannot be completed due to difficulties in 
 communicating with the called partition.</div>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Normal"><A NAME="I8519"></A><A NAME="I8520"></A>All forms 
+<div class="Normal"><A NAME="I9093"></A><A NAME="I9094"></A>All forms 
 of remote subprogram calls are potentially blocking operations (see <span class="insert5"><A HREF="RM-9-5.html">9.5</A></span><span class="delete5"><A HREF="RM-9-5-1.html">&nbsp;9.5.1</A></span>). 
 </div>
 <div class="paranum"><a name="p18">18/1</a></div>
-<div class="Normal"><A NAME="I8521"></A><A NAME="I8522"></A>In a remote 
+<div class="Normal"><A NAME="I9095"></A><A NAME="I9096"></A>In a remote 
 subprogram call with a formal parameter of a class-wide type, a check 
 is made that the tag of the actual parameter identifies a tagged type 
 declared in a declared-pure or shared passive library unit, or in the 
 visible part of a remote types or remote call interface library unit. 
-<A NAME="I8523"></A>Program_Error is raised if this check fails. In a 
+<A NAME="I9097"></A>Program_Error is raised if this check fails. In a 
 remote function call which returns a class-wide type, the same check 
 is made on the function result.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal"><A NAME="I8524"></A><A NAME="I8525"></A>In a dispatching 
+<div class="Normal"><A NAME="I9098"></A><A NAME="I9099"></A>In a dispatching 
 call with two or more controlling operands that are designated by values 
 of a remote access-to-class-wide type, a check is made (in addition to 
 the normal Tag_Check &mdash; see <A HREF="RM-11-5.html">11.5</A>) that 
 all the remote access-to-class-wide values originated from Access <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
-that were evaluated by tasks of the same active partition. <A NAME="I8526"></A>Constraint_Error 
+that were evaluated by tasks of the same active partition. <A NAME="I9100"></A>Constraint_Error 
 is raised if this check fails.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -178,7 +178,7 @@ be propagated to and handled by a third partition.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3214"></A><A NAME="I3215"></A><A NAME="I3216"></A><A NAME="I3217"></A><A NAME="I3218"></A><A NAME="I3219"></A><A NAME="I3220"></A><A NAME="I3221"></A><A NAME="I3222"></A><A NAME="I3223"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3290"></A><A NAME="I3291"></A><A NAME="I3292"></A><A NAME="I3293"></A><A NAME="I3294"></A><A NAME="I3295"></A><A NAME="I3296"></A><A NAME="I3297"></A><A NAME="I3298"></A><A NAME="I3299"></A>The 
 binary adding operators + (addition) and &ndash; (subtraction) are predefined 
 for every specific numeric type <I>T</I> with their conventional meaning. 
 They have the following specifications:&nbsp;</div>
@@ -47,7 +47,7 @@ They have the following specifications:&nbsp;</div>
 <div class="Examples"><B>function</B>&nbsp;&quot;+&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
 <B>function</B>&nbsp;&quot;-&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3224"></A><A NAME="I3225"></A><A NAME="I3226"></A><A NAME="I3227"></A><A NAME="I3228"></A><A NAME="I3229"></A><A NAME="I3230"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3300"></A><A NAME="I3301"></A><A NAME="I3302"></A><A NAME="I3303"></A><A NAME="I3304"></A><A NAME="I3305"></A><A NAME="I3306"></A>The 
 concatenation operators &amp; are predefined for every nonlimited, one-dimensional 
 array type <I>T</I> with component type <I>C</I>. They have the following 
 specifications:&nbsp;</div>
@@ -59,7 +59,7 @@ specifications:&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3231"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3307"></A>For 
 the evaluation of a concatenation with result type <I>T</I>, if both 
 operands are of type <I>T</I>, the result of the concatenation is a one-dimensional 
 array whose length is the sum of the lengths of its operands, and whose 
@@ -81,23 +81,23 @@ defined by an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0052">unconstrained_arra
 then the lower bound of the result is that of the left operand.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">[The upper bound is determined by the lower bound 
-and the length.] <A NAME="I3232"></A><A NAME="I3233"></A>A check is made 
+and the length.] <A NAME="I3308"></A><A NAME="I3309"></A>A check is made 
 that the upper bound of the result of the concatenation belongs to the 
-range of the index subtype, unless the result is a null array. <A NAME="I3234"></A>Constraint_Error 
+range of the index subtype, unless the result is a null array. <A NAME="I3310"></A>Constraint_Error 
 is raised if this check fails.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">If either operand is of the component type <I>C</I>, 
 the result of the concatenation is given by the above rules, using in 
 place of such an operand an array having this operand as its only component 
 (converted to the component subtype) and having the lower bound of the 
-index subtype of the array type as its lower bound. <A NAME="I3235"></A></div>
+index subtype of the array type as its lower bound. <A NAME="I3311"></A></div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The conversion might raise 
 Constraint_Error. The conversion provides &ldquo;sliding&rdquo; for the 
 component in the case of an array-of-arrays, consistent with the normal 
 Ada 95 rules that allow sliding during parameter passing.&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I3236"></A>The result of a concatenation 
+<div class="Normal"><A NAME="I3312"></A>The result of a concatenation 
 is defined in terms of an assignment to an anonymous object, as for any 
 function call (see <A HREF="AA-6-5.html">6.5</A>).&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
@@ -135,7 +135,7 @@ involving binary adding operators:</I>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><A NAME="I3237"></A>The lower bound of the result 
+<div class="Annotations"><A NAME="I3313"></A>The lower bound of the result 
 of concatenation, for a type whose first subtype is constrained, is now 
 that of the index subtype. This is inconsistent with Ada 83, but generally 
 only for Ada 83 programs that raise Constraint_Error. For example, the 
@@ -152,7 +152,7 @@ in Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p14.d">14.d</a></div>
-<div class="Annotations"><A NAME="I3238"></A>Concatenation is now useful 
+<div class="Annotations"><A NAME="I3314"></A>Concatenation is now useful 
 for array types whose first subtype is constrained. When the result type 
 of a concatenation is such an array type, Constraint_Error is avoided 
 by effectively first sliding the left operand (if nonnull) so that its 
@@ -160,7 +160,7 @@ lower bound is that of the index subtype.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

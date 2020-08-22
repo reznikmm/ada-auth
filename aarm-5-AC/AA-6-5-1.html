@@ -30,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -50,7 +50,7 @@
 that a&nbsp;</span><span class="insert5">subprogram</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;procedure</span></span><span class="insert2">&nbsp;cannot return normally[; it may propagate an exception or loop forever].</span> 
 </div>
 <div class="paranum"><a name="p1.a">1.a/5</a></div>
-<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span><span class="insert3">Aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;Pragma</A></SPAN></span></span><span class="insert2">&nbsp;No_Deposit<A NAME="I4157"></A> will have to wait for Ada&nbsp;</span><span class="insert3"></span><span class="insert5">2028</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;2020</span></span><span class="insert3"></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;2017</span></span><span class="insert2">. 
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span><span class="insert3">Aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;Pragma</A></SPAN></span></span><span class="insert2">&nbsp;No_Deposit<A NAME="I4370"></A> will have to wait for Ada&nbsp;</span><span class="insert3"></span><span class="insert5">2028</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;2020</span></span><span class="insert3"></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;2017</span></span><span class="insert2">. 
 :-)</span>&nbsp;</div>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 2 and 3 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
@@ -67,8 +67,8 @@ No_Return, which is a representation pragma (see <A HREF="AA-13-1.html">13.1</A>
 is as follows:</span></span><span class="insert2"></span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert2"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
-<A NAME="I4158"></A><A NAME="I4159"></A>No_Return(<I>procedure_</I><A NAME="I4160"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>{, 
-<I>procedure_</I><A NAME="I4161"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>});</span></span><span class="insert2"></span> 
+<A NAME="I4371"></A><A NAME="I4372"></A>No_Return(<I>procedure_</I><A NAME="I4373"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>{, 
+<I>procedure_</I><A NAME="I4374"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>});</span></span><span class="insert2"></span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -81,10 +81,10 @@ the following language-defined representation aspect may be specified:</span>
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">No_Return</span></div><div class="WideHanging-Body">
 <span class="insert3">The type of aspect No_Return is Boolean. When aspect 
-No_Return is True for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I4162"></A><A NAME="I4163"></A><A NAME="I4164"></A></span></div>
+No_Return is True for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I4375"></A><A NAME="I4376"></A><A NAME="I4377"></A></span></div>
 <div class="paranum"><a name="p3.3">3.3/3</a></div>
 <div class="WideHanging-Body"><span class="insert3">If directly specified, 
-the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. [This aspect is never inherited;] if not 
 directly specified, the aspect is False.</span></div>
 <div class="paranum"><a name="p3.a">3.a/5</a></div>
@@ -101,10 +101,10 @@ copies of that&nbsp;</span><span class="insert5">subprogram</span><span class="i
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert2"></span><span class="insert3">Aspect No_Return</span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I4165"></A> Each 
-<I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
+<span class="insert2"></span><span class="insert3">Aspect No_Return</span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I4378"></A> Each 
+<I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN> 
 shall denote one or more procedures or generic procedures; the denoted 
-entities are <I>nonreturning</I>. The <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span></span><span class="insert2">&nbsp;shall not&nbsp;</span><span class="insert3">be specified for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;denote</span></span><span class="insert2">&nbsp;a null procedure nor an instance of a generic unit.</span></div>
+entities are <I>nonreturning</I>. The <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN></span></span><span class="insert2">&nbsp;shall not&nbsp;</span><span class="insert3">be specified for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;denote</span></span><span class="insert2">&nbsp;a null procedure nor an instance of a generic unit.</span></div>
 <div class="paranum"><a name="p4.a">4.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>A null 
 procedure cannot have the appropriate nonreturning semantics, as it does 
@@ -112,7 +112,7 @@ not raise an exception or loop forever.</span>&nbsp;</div>
 <div class="paranum"><a name="p4.b">4.b/5</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
-<span class="insert2">The procedure can be abstract.</span><span class="insert2"><span class="delete3">&nbsp;The denoted declaration can be a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
+<span class="insert2">The procedure can be abstract.</span><span class="insert2"><span class="delete3">&nbsp;The denoted declaration can be a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
 if it obeys the usual rules for representation pragmas: the renaming 
 has to occur immediately within the same declarative region as the renamed 
 subprogram.</span></span><span class="insert2">&nbsp;If a nonreturning&nbsp;</span><span class="insert5">subprogram</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;procedure</span></span><span class="insert2">&nbsp;is renamed (anywhere) calls through the new name still have the nonreturning 
@@ -125,10 +125,10 @@ procedure or generic procedure.</span></div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
 <span class="insert5">Any return statement that applies to a nonreturning 
-function or generic function shall be a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-that is a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN>, 
-a call on a nonreturning function, or a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+function or generic function shall be a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN>, 
+a call on a nonreturning function, or a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of one of these.</span></div>
 <div class="paranum"><a name="p5.a">5.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>We 
@@ -139,7 +139,7 @@ that all such return statements don't actually return a value.</span>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
 <span class="insert2">A&nbsp;</span><span class="insert5">subprogram</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;procedure</span></span><span class="insert2">&nbsp;shall be nonreturning if it overrides a dispatching nonreturning&nbsp;</span><span class="insert5">subprogram</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;procedure</span></span><span class="insert2">. 
-<A NAME="I4166"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4379"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), this rule applies also in 
 the private part of an instance of a generic unit.</span></div>
 <div class="paranum"><a name="p6.a">6.a/5</a></div>
@@ -173,7 +173,7 @@ the corresponding copies of that procedure in instances.</span></span><span clas
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
 <span class="insert2">If the body of a nonreturning procedure completes 
-normally, Program_Error is raised at the point of the call. <A NAME="I4167"></A></span></div>
+normally, Program_Error is raised at the point of the call. <A NAME="I4380"></A></span></div>
 <div class="paranum"><a name="p9.a">9.a/5</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
 <span class="insert2">Note that there is no name for suppressing this 
@@ -214,24 +214,24 @@ raise-in-body solution deals with this neatly.</span>&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
-<span class="insert2"><A NAME="I4168"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+<span class="insert2"><A NAME="I4381"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
 No_Return is new.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p10.b">10.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I4169"></A>Aspect No_Return is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<span class="insert3"><A NAME="I4382"></A>Aspect No_Return is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 No_Return is now obsolescent.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p10.c">10.c/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
-<span class="insert5"><A NAME="I4170"></A>Aspect No_Return can now be 
+<span class="insert5"><A NAME="I4383"></A>Aspect No_Return can now be 
 applied to functions as well as procedures.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

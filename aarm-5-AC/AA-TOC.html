@@ -18,18 +18,16 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>Table of Contents</H1>
-<div class="Normal"><A HREF="AA-0-1.html">Foreword to this version of 
-the Ada Reference Manual</A></div>
-<div class="Normal"><A HREF="AA-0-2.html">Foreword</A></div>
-<div class="Normal"><A HREF="AA-0-3.html">Introduction</A></div>
+<div class="Normal"><A HREF="AA-0-1.html">Foreword</A></div>
+<div class="Normal"><A HREF="AA-0-2.html">Introduction</A></div>
 <div class="Normal">1. <A HREF="AA-1.html">General</A><BR>
     1.1&nbsp;<A HREF="AA-1-1.html">Scope</A><BR>
         1.1.1&nbsp;<A HREF="AA-1-1-1.html">Extent</A><BR>
@@ -117,6 +115,7 @@ Tagged Types</A><BR>
         4.3.2&nbsp;<A HREF="AA-4-3-2.html">Extension Aggregates</A><BR>
         4.3.3&nbsp;<A HREF="AA-4-3-3.html">Array Aggregates</A><BR>
         4.3.4&nbsp;<A HREF="AA-4-3-4.html">Delta Aggregates</A><BR>
+        4.3.5&nbsp;<A HREF="AA-4-3-5.html">Container Aggregates</A><BR>
     4.4&nbsp;<A HREF="AA-4-4.html">Expressions</A><BR>
     4.5&nbsp;<A HREF="AA-4-5.html">Operators and Expression Evaluation</A><BR>
         4.5.1&nbsp;<A HREF="AA-4-5-1.html">Logical Operators and Short-circuit 
@@ -129,13 +128,15 @@ Tests</A><BR>
         4.5.6&nbsp;<A HREF="AA-4-5-6.html">Highest Precedence Operators</A><BR>
         4.5.7&nbsp;<A HREF="AA-4-5-7.html">Conditional Expressions</A><BR>
         4.5.8&nbsp;<A HREF="AA-4-5-8.html">Quantified Expressions</A><BR>
-        4.5.9&nbsp;<A HREF="AA-4-5-9.html">Anonymous Functions</A><BR>
+        4.5.9&nbsp;<A HREF="AA-4-5-9.html">Declare Expressions</A><BR>
+        4.5.10&nbsp;<A HREF="AA-4-5-10.html">Reduction Expressions</A><BR>
     4.6&nbsp;<A HREF="AA-4-6.html">Type Conversions</A><BR>
     4.7&nbsp;<A HREF="AA-4-7.html">Qualified Expressions</A><BR>
     4.8&nbsp;<A HREF="AA-4-8.html">Allocators</A><BR>
     4.9&nbsp;<A HREF="AA-4-9.html">Static Expressions and Static Subtypes</A><BR>
         4.9.1&nbsp;<A HREF="AA-4-9-1.html">Statically Matching Constraints 
-and Subtypes</A></div>
+and Subtypes</A><BR>
+    4.10&nbsp;<A HREF="AA-4-10.html">Image Attributes</A></div>
 <div class="Normal">5. <A HREF="AA-5.html">Statements</A><BR>
     5.1&nbsp;<A HREF="AA-5-1.html">Simple and Compound Statements - Sequences 
 of Statements</A><BR>
@@ -287,10 +288,10 @@ Profile</A><BR>
         13.12.1&nbsp;<A HREF="AA-13-12-1.html">Language-Defined Restrictions 
 and Profiles</A><BR>
     13.13&nbsp;<A HREF="AA-13-13.html">Streams</A><BR>
-        13.13.1&nbsp;<A HREF="AA-13-13-1.html">The Package Streams</A><BR>
+        13.13.1&nbsp;<A HREF="AA-13-13-1.html">The Streams Subsystem</A><BR>
         13.13.2&nbsp;<A HREF="AA-13-13-2.html">Stream-Oriented Attributes</A><BR>
     13.14&nbsp;<A HREF="AA-13-14.html">Freezing Rules</A></div>
-<div class="Normal"><A HREF="AA-0-4.html">The Standard Libraries</A></div>
+<div class="Normal"><A HREF="AA-0-3.html">The Standard Libraries</A></div>
 <div class="Normal">A. <A HREF="AA-A.html">Predefined Language Environment</A><BR>
     A.1&nbsp;<A HREF="AA-A-1.html">The Package Standard</A><BR>
     A.2&nbsp;<A HREF="AA-A-2.html">The Package Ada</A><BR>
@@ -314,6 +315,7 @@ and Wide_Wide_Characters</A><BR>
         A.4.9&nbsp;<A HREF="AA-A-4-9.html">String Hashing</A><BR>
         A.4.10&nbsp;<A HREF="AA-A-4-10.html">String Comparison</A><BR>
         A.4.11&nbsp;<A HREF="AA-A-4-11.html">String Encoding</A><BR>
+        A.4.12&nbsp;<A HREF="AA-A-4-12.html">Universal Text Buffers</A><BR>
     A.5&nbsp;<A HREF="AA-A-5.html">The Numerics Packages</A><BR>
         A.5.1&nbsp;<A HREF="AA-A-5-1.html">Elementary Functions</A><BR>
         A.5.2&nbsp;<A HREF="AA-A-5-2.html">Random Number Generation</A><BR>
@@ -321,6 +323,9 @@ and Wide_Wide_Characters</A><BR>
 Types</A><BR>
         A.5.4&nbsp;<A HREF="AA-A-5-4.html">Attributes of Fixed Point 
 Types</A><BR>
+        A.5.5&nbsp;<A HREF="AA-A-5-5.html">Big Numbers</A><BR>
+        A.5.6&nbsp;<A HREF="AA-A-5-6.html">Big Integers</A><BR>
+        A.5.7&nbsp;<A HREF="AA-A-5-7.html">Big Reals</A><BR>
     A.6&nbsp;<A HREF="AA-A-6.html">Input-Output</A><BR>
     A.7&nbsp;<A HREF="AA-A-7.html">External Files and File Objects</A><BR>
     A.8&nbsp;<A HREF="AA-A-8.html">Sequential and Direct Files</A><BR>
@@ -423,6 +428,11 @@ and Wide_Wide_Environment_Variables</A><BR>
     C.4&nbsp;<A HREF="AA-C-4.html">Preelaboration Requirements</A><BR>
     C.5&nbsp;<A HREF="AA-C-5.html">Aspect Discard_Names</A><BR>
     C.6&nbsp;<A HREF="AA-C-6.html">Shared Variable Control</A><BR>
+        C.6.1&nbsp;<A HREF="AA-C-6-1.html">The Package System.Atomic_Operations</A><BR>
+        C.6.2&nbsp;<A HREF="AA-C-6-2.html">The Package System.Atomic_Operations.Exchange</A><BR>
+        C.6.3&nbsp;<A HREF="AA-C-6-3.html">The Package System.Atomic_Operations.Test_and_Set</A><BR>
+        C.6.4&nbsp;<A HREF="AA-C-6-4.html">The Package System.Atomic_Operations.Integer_Arithmetic</A><BR>
+        C.6.5&nbsp;<A HREF="AA-C-6-5.html">The Package System.Atomic_Operations.Modular_Arithmetic</A><BR>
     C.7&nbsp;<A HREF="AA-C-7.html">Task Information</A><BR>
         C.7.1&nbsp;<A HREF="AA-C-7-1.html">The Package Task_Identification</A><BR>
         C.7.2&nbsp;<A HREF="AA-C-7-2.html">The Package Task_Attributes</A><BR>
@@ -515,7 +525,9 @@ Complex Arithmetic</A><BR>
     H.4&nbsp;<A HREF="AA-H-4.html">High Integrity Restrictions</A><BR>
         H.4.1&nbsp;<A HREF="AA-H-4-1.html">Aspect No_Controlled_Parts</A><BR>
     H.5&nbsp;<A HREF="AA-H-5.html">Pragma Detect_Blocking</A><BR>
-    H.6&nbsp;<A HREF="AA-H-6.html">Pragma Partition_Elaboration_Policy</A></div>
+    H.6&nbsp;<A HREF="AA-H-6.html">Pragma Partition_Elaboration_Policy</A><BR>
+    H.7&nbsp;<A HREF="AA-H-7.html">Extensions to Global and Global'Class 
+Aspects</A></div>
 <div class="Normal">J. <A HREF="AA-J.html">Obsolescent Features</A><BR>
     J.1&nbsp;<A HREF="AA-J-1.html">Renamings of Library Units</A><BR>
     J.2&nbsp;<A HREF="AA-J-2.html">Allowed Replacements of Characters</A><BR>
@@ -566,11 +578,11 @@ Attributes</A><BR>
     Q.3&nbsp;<A HREF="AA-Q-3.html">Language-Defined Subprograms</A><BR>
     Q.4&nbsp;<A HREF="AA-Q-4.html">Language-Defined Exceptions</A><BR>
     Q.5&nbsp;<A HREF="AA-Q-5.html">Language-Defined Objects</A></div>
-<div class="Normal"><A HREF="AA-0-5.html">Index</A></div>
+<div class="Normal"><A HREF="AA-0-4.html">Index</A></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 </div>

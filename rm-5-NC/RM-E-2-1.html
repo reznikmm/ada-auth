@@ -19,12 +19,14 @@
     DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,18 +43,18 @@ implicit in objects declared in the shared passive library unit.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8421"></A><A NAME="I8422"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8952"></A><A NAME="I8953"></A>The 
 form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Shared_Passive is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8423"></A><A NAME="I8424"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I8425"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8954"></A><A NAME="I8955"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I8956"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8426"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8957"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Shared_Passive 
 is used to specify that a library unit is a <I>shared passive library 
-unit</I>, namely that the Shared_Passive aspect<A NAME="I8427"></A><A NAME="I8428"></A> 
+unit</I>, namely that the Shared_Passive aspect<A NAME="I8958"></A><A NAME="I8959"></A> 
 of the library unit is True. The following restrictions apply to such 
 a library unit:</div>
 <div class="paranum"><a name="p5">5</a></div>
@@ -60,21 +62,28 @@ a library unit:</div>
 </div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted">it shall depend semantically only upon declared 
-pure or shared passive <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s; 
+pure or shared passive <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s; 
 </div>
-<div class="paranum"><a name="p7">7/4</a></div>
-<div class="Bulleted">it shall not contain a library-level declaration 
-of an access type that designates a class-wide type, nor a type with 
-a part that is of a task type or protected type with <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN>s; 
-</div>
-<div class="paranum"><a name="p7.1">7.1/4</a></div>
-<div class="Bulleted">it shall not contain a library-level declaration 
-that contains a name that denotes a type declared within a declared-pure 
-package, if that type has a part that is of an access type; for the purposes 
-of this rule, the parts considered include those of the full views of 
-any private types or private extensions.</div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">it shall not contain 
+a library-level declaration:</div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Indented2Bulleted">of an access type that designates a class-wide 
+type;&nbsp;</div>
+<div class="paranum"><a name="p7.2">7.2/5</a></div>
+<div class="Indented2Bulleted">of a type with a part that is of a task 
+type;</div>
+<div class="paranum"><a name="p7.3">7.3/5</a></div>
+<div class="Indented2Bulleted">of a type with a part that is of a protected 
+type with <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declaration</A></SPAN>s; 
+nor</div>
+<div class="paranum"><a name="p7.4">7.4/5</a></div>
+<div class="Indented2Bulleted">that contains a name that denotes a type 
+declared within a declared-pure package, if that type has a part that 
+is of an access type; for the purposes of this rule, the parts considered 
+include those of the full views of any private types or private extensions.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I8429"></A><A NAME="I8430"></A>Notwithstanding 
+<div class="Normal"><A NAME="I8960"></A><A NAME="I8961"></A>Notwithstanding 
 the definition of accessibility given in <A HREF="RM-3-10-2.html">3.10.2</A>, 
 the declaration of a library unit P1 is not accessible from within the 
 declarative region of a shared passive library unit P2, unless the shared 
@@ -82,7 +91,7 @@ passive library unit P2 depends semantically on P1.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8431"></A>A shared passive library unit 
+<div class="Normal"><A NAME="I8962"></A>A shared passive library unit 
 is preelaborated.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
@@ -90,7 +99,7 @@ is preelaborated.</div>
 <div class="Normal">A shared passive library unit shall be assigned to 
 at most one partition within a given program.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I8432"></A><A NAME="I8433"></A><A NAME="I8434"></A>Notwithstanding 
+<div class="Normal"><A NAME="I8963"></A><A NAME="I8964"></A><A NAME="I8965"></A>Notwithstanding 
 the rule given in <A HREF="RM-10-2.html">10.2</A>, a compilation unit 
 in a given partition does not <I>need</I> (in the sense of <A HREF="RM-10-2.html">10.2</A>) 
 the shared passive library units on which it depends semantically to 
@@ -99,7 +108,7 @@ passive partitions.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

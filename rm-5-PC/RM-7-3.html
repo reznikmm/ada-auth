@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,24 +43,24 @@ characteristics that can be used directly by outside program units (that
 is, the logical properties) from other characteristics whose direct use 
 is confined to the package (the details of the definition of the type 
 itself). See <A HREF="RM-3-9-1.html">3.9.1</A> for an overview of type 
-extensions. <A NAME="I3738"></A><A NAME="I3739"></A><A NAME="I3740"></A><A NAME="I3741"></A><A NAME="I3742"></A></div>
+extensions. <A NAME="I3945"></A><A NAME="I3946"></A><A NAME="I3947"></A><A NAME="I3948"></A><A NAME="I3949"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">private_type_declaration</SPAN><A NAME="I3743"></A><A NAME="S0210"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3744"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3745"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3746"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">private_type_declaration</SPAN><A NAME="I3950"></A><A NAME="S0232"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3951"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3952"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3953"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">private_extension_declaration</SPAN><A NAME="I3747"></A><A NAME="S0211"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3748"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3749"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<I>ancestor_</I><A NAME="I3750"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>and</B>&nbsp;<A NAME="I3751"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;<B>with&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3752"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">private_extension_declaration</SPAN><A NAME="I3954"></A><A NAME="S0233"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3955"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3956"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<I>ancestor_</I><A NAME="I3957"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>and</B>&nbsp;<A NAME="I3958"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;<B>with&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3959"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I3753"></A><A NAME="I3754"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I3960"></A><A NAME="I3961"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0232">private_type_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 declares a <I>partial view</I> of the type; such a declaration is allowed 
 only as a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0087">declarative_item</A></SPAN> 
 of the visible part of a package, and it requires a completion, which 
@@ -74,10 +74,10 @@ formal private extension is also a partial view.&nbsp;</div>
 <div class="Normal">A type shall be completely defined before it is frozen 
 (see <A HREF="RM-3-11-1.html">3.11.1</A> and <A HREF="RM-13-14.html">13.14</A>). 
 Thus, neither the declaration of a variable of a partial view of a type, 
-nor the creation by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+nor the creation by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 of an object of the partial view are allowed before the full declaration 
 of the type. Similarly, before the full declaration, the name of the 
-partial view cannot be used in a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0293">generic_instantiation</A></SPAN> 
+partial view cannot be used in a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0315">generic_instantiation</A></SPAN> 
 or in a representation item.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">A private type is limited if its declaration includes 
@@ -107,27 +107,27 @@ type is a synchronized tagged type;</div>
 type (see 3.9.4) if and only if the full type is a descendant of the 
 interface type.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3755"></A>The <I>ancestor subtype</I> of 
-a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I3962"></A>The <I>ancestor subtype</I> of 
+a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 is the subtype defined by the <I>ancestor_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>; 
 the ancestor type shall be a specific tagged type. The full view of a 
 private extension shall be derived (directly or indirectly) from the 
 ancestor type. In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), the requirement that the 
 ancestor be specific applies also in the private part of an instance 
-of a generic unit.<A NAME="I3756"></A>&nbsp;</div>
+of a generic unit.<A NAME="I3963"></A>&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Normal">&nbsp;If the reserved word <B>limited</B> appears in a 
-<SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
 the ancestor type shall be a limited type. If the reserved word <B>synchronized</B> 
-appears in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
+appears in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
 the ancestor type shall be a limited interface.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">If the declaration of a partial view includes a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 shall have a fully conforming (explicit) <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 (see <A HREF="RM-6-3-1.html">6.3.1</A>, &ldquo;<A HREF="RM-6-3-1.html">Conformance 
-Rules</A>&rdquo;). <A NAME="I3757"></A>The ancestor subtype may be unconstrained; 
+Rules</A>&rdquo;). <A NAME="I3964"></A>The ancestor subtype may be unconstrained; 
 the parent subtype of the full view is required to be constrained (see 
 <A HREF="RM-3-7.html">3.7</A>).&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -140,7 +140,7 @@ constrained.&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 for a private extension includes a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 then the reserved word <B>limited</B> shall appear in the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-if and only if it also appears in the <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>. 
+if and only if it also appears in the <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal">If a partial view has unknown discriminants, then 
@@ -153,13 +153,13 @@ shall define a definite subtype.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">If the ancestor subtype of a private extension has 
 constrained discriminants, then the parent subtype of the full view shall 
-impose a statically matching constraint on those discriminants. <A NAME="I3758"></A></div>
+impose a statically matching constraint on those discriminants. <A NAME="I3965"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I3759"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN> 
-declares a private type and its first subtype. <A NAME="I3760"></A>Similarly, 
-a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I3966"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0232">private_type_declaration</A></SPAN> 
+declares a private type and its first subtype. <A NAME="I3967"></A>Similarly, 
+a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 declares a private extension and its first subtype.&nbsp;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal">A declaration of a partial view and the corresponding 
@@ -186,15 +186,15 @@ and <A HREF="RM-7-3-1.html">7.3.1</A>).&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I3761"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN> 
-creates a partial view of a type. <A NAME="I3762"></A>The elaboration 
-of a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I3968"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0232">private_type_declaration</A></SPAN> 
+creates a partial view of a type. <A NAME="I3969"></A>The elaboration 
+of a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 elaborates the <I>ancestor_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 and creates a partial view of a type.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Notes">5&nbsp;&nbsp;The partial view of a type as declared 
-by a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN> 
+by a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0232">private_type_declaration</A></SPAN> 
 is defined to be a composite view (in <A HREF="RM-3-2.html">3.2</A>). 
 The full view of the type might or might not be composite. A private 
 extension is also composite, as is its full view.</div>
@@ -204,7 +204,7 @@ is a way of preventing clients from creating uninitialized objects of
 the type; they are then forced to initialize each object by calling some 
 operation declared in the visible part of the package.&nbsp;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Notes">7&nbsp;&nbsp;The ancestor type specified in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Notes">7&nbsp;&nbsp;The ancestor type specified in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 and the parent type specified in the corresponding declaration of a record 
 extension given in the private part need not be the same. If the ancestor 
 type is not an interface type, the parent type of the full view can be 
@@ -215,10 +215,10 @@ primitive subprogram of the specified ancestor type, while the body comes
 from the corresponding primitive subprogram of the parent type of the 
 full view. See <A HREF="RM-3-9-2.html">3.9.2</A>.</div>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
-<div class="Notes">8&nbsp;&nbsp;If the ancestor type specified in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Notes">8&nbsp;&nbsp;If the ancestor type specified in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 is an interface type, the parent type can be any type so long as the 
 full view is a descendant of the ancestor type. The progenitor types 
-specified in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+specified in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 and the progenitor types specified in the corresponding declaration of 
 a record extension given in the private part need not be the same &mdash; 
 the only requirement is that the private extension and the record extension 
@@ -239,7 +239,7 @@ private extension declaration:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,27 +45,27 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>package</B>&nbsp;Ada.Task_Identification<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8781"></A><BR>
+<B>package</B>&nbsp;Ada.Task_Identification<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9383"></A><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Task_Identification);</span><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8782"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9384"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Task_Id);<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8783"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9385"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="defect1.html#8652/0070">8652/0070</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00101.TXT">AI95-00101-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8784"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8785"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8786"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8787"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I9386"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I9387"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I9388"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9389"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8788"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8789"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8790"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I9390"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I9391"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I9392"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Task_Identification;</div>
@@ -88,12 +88,20 @@ the Task_Identification.Image attribute.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The function Current_Task returns a value that identifies 
 the calling task.</div>
+<div class="paranum"><a name="p8.a.1">8.a.1/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<span class="insert5">The logical threads of control associated with 
+the execution of a given parallel construct all execute as part of the 
+execution of one task (see <A HREF="AA-9.html">9</A>, &ldquo;<A HREF="AA-9.html">Tasks 
+and Synchronization</A>&rdquo;). Thus, the result returned by a call 
+to Task_Identification.Current_Task is independent of whether the call 
+takes place during the execution of a parallel construct.</span>&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
 The function Environment_Task returns a value that identifies the environment 
 task.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">The effect of Abort_Task is the same as the <SPAN Class="swiss"><A HREF="AA-9-8.html#S0262">abort_statement</A></SPAN> 
+<div class="Normal">The effect of Abort_Task is the same as the <SPAN Class="swiss"><A HREF="AA-9-8.html#S0284">abort_statement</A></SPAN> 
 for the task identified by T. [In addition, if T identifies the environment 
 task, the entire partition is aborted, See <A HREF="AA-E-1.html">E.1</A>.]</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -113,7 +121,7 @@ to determine if the main subprogram has completed.&nbsp;</div>
 The function Activation_Is_Complete returns True if the task identified 
 by T has completed its activation (whether successfully or not). It returns 
 False otherwise. If T identifies the environment task, Activation_Is_Complete 
-returns True after the elaboration of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s 
+returns True after the elaboration of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN>s 
 of the partition has completed.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -121,31 +129,31 @@ T that is of a task type [(after any implicit dereference)], the following
 attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideHanging-Term">T'Identity</div><div class="WideHanging-Body">
-<A NAME="I8791"></A><A NAME="I8792"></A>Yields a value of the type Task_Id 
+<A NAME="I9393"></A><A NAME="I9394"></A>Yields a value of the type Task_Id 
 that identifies the task denoted by T.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-E that denotes an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>, 
+E that denotes an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>, 
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="WideHanging-Term">E'Caller</div><div class="WideHanging-Body">
-<A NAME="I8793"></A><A NAME="I8794"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<A NAME="I9395"></A><A NAME="I9396"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 Yields a value of the type Task_Id that identifies the task whose call 
 is now being serviced. Use of this attribute is allowed only inside an 
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
-after the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0240">entry_barrier</A></SPAN>, 
-corresponding to the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0260">entry_body</A></SPAN> 
+after the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0262">entry_barrier</A></SPAN>, 
+corresponding to the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN> 
 denoted by E.&nbsp;</div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0231-1.TXT">AI12-0231-1</A></I>} 
-<A NAME="I8795"></A>Program_Error is raised if a value of Null_Task_Id 
-is passed as a parameter to Abort_Task, <span class="insert5">Activation_Is_Complete, 
-</span>Is_Terminated, and Is_Callable.</div>
+Program_Error is raised if a value of Null_Task_Id is passed as a parameter 
+to Abort_Task, <span class="insert5">Activation_Is_Complete,&nbsp;</span>Is_Terminated, 
+and Is_Callable.</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN><span class="delete5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="delete5"><A NAME="I8796"></A><A NAME="I8797"></A>Abort_Task 
+<span class="delete5"><A NAME="I9397"></A><A NAME="I9398"></A>Abort_Task 
 is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).</span> 
 </div>
 
@@ -153,11 +161,11 @@ is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).</sp
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<A NAME="I8798"></A>It is a bounded error to call the Current_Task function 
-from an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
-interrupt handler, or finalization of a task attribute. <A NAME="I8799"></A>Program_Error 
+<A NAME="I9399"></A>It is a bounded error to call the Current_Task function 
+from an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0260">entry_body</A></SPAN>, 
+interrupt handler, or finalization of a task attribute. Program_Error 
 is raised, or an implementation-defined value of the type Task_Id is 
-returned.&nbsp;</div>
+returned.<A NAME="I9400"></A>&nbsp;</div>
 <div class="paranum"><a name="p17.a">17.a/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
 Current_Task when in a protected entry, interrupt handler, or finalization 
@@ -168,13 +176,13 @@ be Null_Task_Id, or the ID of some user task, or that of an internal
 task created by the implementation.&nbsp;</div>
 <div class="paranum"><a name="p17.c">17.c/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
-An entry barrier is syntactically part of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
+An entry barrier is syntactically part of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0260">entry_body</A></SPAN>, 
 so a call to Current_Task from an entry barrier is also covered by this 
 rule.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8800"></A>If a value of Task_Id is passed 
+<div class="Normal"><A NAME="I9401"></A>If a value of Task_Id is passed 
 as a parameter to any of the operations declared in this package (or 
 any language-defined child of this package), and the corresponding task 
 object no longer exists, the execution of the program is erroneous.&nbsp;</div>
@@ -220,12 +228,12 @@ operations.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p21.d">21.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-<A NAME="I8801"></A>Functions Environment_Task and Activation_Is_Complete 
+<A NAME="I9402"></A>Functions Environment_Task and Activation_Is_Complete 
 are added to Task_Identification. If Task_Identification is referenced 
-in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 of Environment_Task or Activation_Is_Complete is defined in a package 
-that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
 This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
@@ -237,7 +245,7 @@ is passed to Activation_Is_Complete.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

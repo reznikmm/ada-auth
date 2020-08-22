@@ -20,12 +20,12 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
@@ -33,11 +33,11 @@
 <H2>(normative)</H2>
 <H1>Predefined Language Environment</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5650"></A><A NAME="I5651"></A>This 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5886"></A><A NAME="I5887"></A>This 
 Annex contains the specifications of library units that shall be provided 
 by every implementation. There are three root library units: Ada, Interfaces, 
 and System; other library units are children of these:</div>
-<div class="paranum"><a name="p2">2/3</a></div>
+<div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<BR>
 &nbsp;</div>
 <div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;&mdash;&nbsp;<A HREF="RM-A-1.html">A.1</A><BR>
@@ -59,6 +59,7 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-20.html">A.18.20</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Hashed_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-21.html">A.18.21</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Hashed_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-23.html">A.18.23</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Indefinite_Holders&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-32.html">A.18.32</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-25.html">A.18.25</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-22.html">A.18.22</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-24.html">A.18.24</A><BR>
@@ -80,10 +81,11 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Holders&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-18.html">A.18.18</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-17.html">A.18.17</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-14.html">A.18.14</A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-16.html">A.18.16</A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Vectors&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-11.html">A.18.11</A></SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-16.html">A.18.16</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
 &nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Containers&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Vectors&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-11.html">A.18.11</A></SPAN><SPAN STYLE="font-size: 80%"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-10.html">A.18.10</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-6.html">A.18.6</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-9.html">A.18.9</A><BR>
@@ -121,10 +123,13 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names&nbsp;&mdash;&nbsp;<A HREF="RM-C-3-2.html">C.3.2</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;IO_Exceptions&nbsp;&mdash;&nbsp;<A HREF="RM-A-13.html">A.13</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Iterator_Interfaces&nbsp;&mdash;&nbsp;<A HREF="RM-5-5-1.html">5.5.1</A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;Locales&nbsp;&mdash;&nbsp;<A HREF="RM-A-19.html">A.19</A><BR>
-</SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Locales&nbsp;&mdash;&nbsp;<A HREF="RM-A-19.html">A.19</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
 &nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Numerics&nbsp;&mdash;&nbsp;<A HREF="RM-A-5.html">A.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big_Numbers&nbsp;&mdash;&nbsp;<A HREF="RM-A-5-5.html">A.5.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big_Integers&nbsp;&mdash;&nbsp;<A HREF="RM-A-5-6.html">A.5.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big_Reals&nbsp;&mdash;&nbsp;<A HREF="RM-A-5-7.html">A.5.7</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Arrays&nbsp;&mdash;&nbsp;<A HREF="RM-G-3-2.html">G.3.2</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Elementary_Functions&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-2.html">G.1.2</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Types&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-1.html">G.1.1</A><BR>
@@ -143,6 +148,9 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;Sequential_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-8-1.html">A.8.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Storage_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-9.html">A.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Streams&nbsp;&mdash;&nbsp;<A HREF="RM-13-13-1.html">13.13.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Streams&nbsp;&mdash;&nbsp;<A HREF="RM-13-13-1.html">13.13.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_FIFO_Streams&nbsp;&mdash;&nbsp;<A HREF="RM-13-13-1.html">13.13.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FIFO_Streams&nbsp;&mdash;&nbsp;<A HREF="RM-13-13-1.html">13.13.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-12-1.html">A.12.1</A><BR>
 </SPAN><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-1.html">A.4.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-4.html">A.4.4</A><BR>
@@ -150,17 +158,23 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-3.html">A.4.3</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-2.html">A.4.2</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-6.html">A.4.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Buffers&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-12.html">A.4.12</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-12.html">A.4.12</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-12.html">A.4.12</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;(<I>...continued</I>)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-5.html">A.4.5</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
@@ -171,10 +185,7 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
-</SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
-&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;(<I>...continued</I>)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Bounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Bounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
@@ -218,13 +229,13 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Synchronous_Barriers&nbsp;&mdash;&nbsp;<A HREF="RM-D-10-1.html">D.10.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Synchronous_Task_Control&nbsp;&mdash;&nbsp;<A HREF="RM-D-10.html">D.10</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDF&nbsp;&mdash;&nbsp;<A HREF="RM-D-10.html">D.10</A><BR>
-</SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
-&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;Tags&nbsp;&mdash;&nbsp;<A HREF="RM-3-9.html">3.9</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Tags&nbsp;&mdash;&nbsp;<A HREF="RM-3-9.html">3.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Dispatching_Constructor&nbsp;&mdash;&nbsp;<A HREF="RM-3-9.html">3.9</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Task_Attributes&nbsp;&mdash;&nbsp;<A HREF="RM-C-7-2.html">C.7.2</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Task_Identification&nbsp;&mdash;&nbsp;<A HREF="RM-C-7-1.html">C.7.1</A><BR>
@@ -240,14 +251,23 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;Unchecked_Deallocation&nbsp;&mdash;&nbsp;<A HREF="RM-13-11-2.html">13.11.2</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Wide_Characters&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-1.html">A.3.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-5.html">A.3.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Command_Line&nbsp;&mdash;&nbsp;<A HREF="RM-A-15-1.html">A.15.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Directories&nbsp;&mdash;&nbsp;<A HREF="RM-A-16-2.html">A.16.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Environment_Variables&nbsp;&mdash;&nbsp;<A HREF="RM-A-17-1.html">A.17.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-4.html">G.1.4</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="RM-F-3-4.html">F.3.4</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Streams&nbsp;&mdash;&nbsp;<A HREF="RM-A-12-3.html">A.12.3</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Bounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Characters&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-1.html">A.3.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-6.html">A.3.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Command_Line&nbsp;&mdash;&nbsp;<A HREF="RM-A-15-1.html">A.15.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Directories&nbsp;&mdash;&nbsp;<A HREF="RM-A-16-2.html">A.16.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Environment_Variables&nbsp;&mdash;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="RM-A-17-1.html">A.17.1</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-5.html">G.1.5</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="RM-F-3-5.html">F.3.5</A><BR>
@@ -262,6 +282,11 @@ and System; other library units are children of these:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;Fortran&nbsp;&mdash;&nbsp;<A HREF="RM-B-5.html">B.5</A></SPAN></div>
 <div class="Indented1"><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;System&nbsp;&mdash;&nbsp;<A HREF="RM-13-7.html">13.7</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Address_To_Access_Conversions&nbsp;&mdash;&nbsp;<A HREF="RM-13-7-2.html">13.7.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Atomic_Operations&nbsp;&mdash;&nbsp;<A HREF="RM-C-6-1.html">C.6.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;&mdash;&nbsp;<A HREF="RM-C-6-2.html">C.6.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer_Arithmetic&nbsp;&mdash;&nbsp;<A HREF="RM-C-6-4.html">C.6.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modular_Arithmetic&nbsp;&mdash;&nbsp;<A HREF="RM-C-6-5.html">C.6.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test_And_Set&nbsp;&mdash;&nbsp;<A HREF="RM-C-6-3.html">C.6.3</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Machine_Code&nbsp;&mdash;&nbsp;<A HREF="RM-13-8.html">13.8</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Multiprocessors&nbsp;&mdash;&nbsp;<A HREF="RM-D-16.html">D.16</A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dispatching_Domains&nbsp;&mdash;&nbsp;<A HREF="RM-D-16-1.html">D.16.1</A><BR>
@@ -304,10 +329,10 @@ that is not declared pure or has a global specification of <B>null</B>.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">

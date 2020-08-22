@@ -21,9 +21,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -49,16 +49,16 @@ they are also used to explain the meaning of a user-declared floating
 point type declaration. The model numbers of a derived type are those 
 of the parent type; the model numbers of a subtype are those of its type.</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I9054"></A>The <I>model numbers</I> of a 
+<div class="Normal"><A NAME="I9622"></A>The <I>model numbers</I> of a 
 floating point type T are zero and all the values expressible in the 
 canonical form (for the type T), in which <I>mantissa</I> has T'Model_Mantissa 
 digits and <I>exponent</I> has a value greater than or equal to T'Model_Emin. 
 (These attributes are defined in <A HREF="RM-G-2-2.html">G.2.2</A>.) 
 </div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I9055"></A>A <I>model interval</I> of a 
+<div class="Normal"><A NAME="I9623"></A>A <I>model interval</I> of a 
 floating point type is any interval whose bounds are model numbers of 
-the type. <A NAME="I9056"></A>The <I>model interval</I> of a type T <I>associated 
+the type. <A NAME="I9624"></A>The <I>model interval</I> of a type T <I>associated 
 with a value</I> <I>v</I> is the smallest model interval of T that includes 
 <I>v</I>. (The model interval associated with a model number of a type 
 consists of that number only.)&nbsp;</div>
@@ -68,7 +68,7 @@ consists of that number only.)&nbsp;</div>
 <div class="Normal">The accuracy requirements for the evaluation of certain 
 predefined operations of floating point types are as follows.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I9057"></A>An <I>operand interval</I> is 
+<div class="Normal"><A NAME="I9625"></A>An <I>operand interval</I> is 
 the model interval, of the type specified for the operand of an operation, 
 associated with the value of the operand.</div>
 <div class="paranum"><a name="p7">7</a></div>
@@ -78,7 +78,7 @@ the required bounds on the result are given by a model interval of T
 (called the <I>result interval</I>) defined in terms of the operand values 
 as follows:&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Bulleted"><A NAME="I9058"></A>The result interval is the 
+<div class="Bulleted"><A NAME="I9626"></A>The result interval is the 
 smallest model interval of T that includes the minimum and the maximum 
 of all the values obtained by applying the (exact) mathematical operation 
 to values arbitrarily selected from the respective operand intervals. 
@@ -97,13 +97,13 @@ or is a fixed point multiplication or division either of whose operands
 has a <I>small</I> that is not a power of T'Machine_Radix; in these cases, 
 the result interval is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9059"></A><A NAME="I9060"></A>For any of 
+<div class="Normal"><A NAME="I9627"></A><A NAME="I9628"></A>For any of 
 the foregoing operations, the implementation shall deliver a value that 
 belongs to the result interval when both bounds of the result interval 
 are in the safe range of the result type T, as determined by the values 
 of T'Safe_First and T'Safe_Last; otherwise,&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Bulleted"><A NAME="I9061"></A>if T'Machine_Overflows is True, 
+<div class="Bulleted"><A NAME="I9629"></A>if T'Machine_Overflows is True, 
 the implementation shall either deliver a value that belongs to the result 
 interval or raise Constraint_Error;</div>
 <div class="paranum"><a name="p13">13</a></div>
@@ -129,7 +129,7 @@ division as multiplication by a reciprocal, the result interval for division
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

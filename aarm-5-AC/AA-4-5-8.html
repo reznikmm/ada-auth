@@ -17,6 +17,8 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -28,9 +30,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,92 +43,101 @@
 <div class="paranum"><a name="p0.1">0.1/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0158-1.TXT">AI12-0158-1</A></I>} 
 <span class="insert4">Quantified expressions provide a way to write universally 
-and existentially quantified predicates over containers and arrays.</span></div>
+and existentially quantified predicates over containers and arrays.<A NAME="I3401"></A><A NAME="I3402"></A></span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">quantified_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3322"></A><A NAME="S0143"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><B>for</B>&nbsp;<A NAME="I3323"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0144">quantifier</A></SPAN>&nbsp;<A NAME="I3324"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0167">loop_parameter_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3325"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3326"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0144">quantifier</A></SPAN>&nbsp;<A NAME="I3327"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3328"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">quantified_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3403"></A><A NAME="S0153"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><B>for</B>&nbsp;<A NAME="I3404"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3405"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0181">loop_parameter_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3406"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3407"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3408"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3409"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN></span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">quantifier</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3329"></A><A NAME="S0144"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><B>all</B>&nbsp;|&nbsp;<B>some</B></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">quantifier</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3410"></A><A NAME="S0154"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><B>all</B>&nbsp;|&nbsp;<B>some</B></span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">predicate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3330"></A><A NAME="S0145"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>boolean_</I><A NAME="I3331"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">predicate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3411"></A><A NAME="S0155"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>boolean_</I><A NAME="I3412"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-<span class="insert3">Wherever the Syntax Rules allow an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-may be used in place of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+<span class="insert3">Wherever the Syntax Rules allow an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+may be used in place of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
 so long as it is immediately surrounded by parentheses.</span></div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>The 
-syntactic category <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-appears only as a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
+syntactic category <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+appears only as a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
 that is parenthesized. The above rule allows it to additionally be used 
 in other contexts where it would be directly surrounded by parentheses. 
-This is the same rule that is used for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN>s; 
+This is the same rule that is used for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN>s; 
 see <A HREF="AA-4-5-7.html">4.5.7</A> for a detailed discussion of the 
 meaning and effects of this rule.</span>&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-<span class="insert3"><A NAME="I3332"></A>The expected type of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-is any Boolean type. The <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
-in a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-is expected to be of the same type.<A NAME="I3333"></A></span>&nbsp;</div>
+<span class="insert3"><A NAME="I3413"></A>The expected type of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+is any Boolean type. The <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+is expected to be of the same type.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p6">6/4</a></div>
+<div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0158-1.TXT">AI12-0158-1</A></I>} 
-<span class="insert3">For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-is first elaborated. The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-then evaluates the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
-for&nbsp;</span><span class="insert4">the values</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;each 
-value</span></span><span class="insert3">&nbsp;of the loop parameter</span><span class="insert3"><span class="delete4">. 
-These values are examined</span></span><span class="insert3">&nbsp;in the 
-order specified by the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
-(see <A HREF="AA-5-5.html">5.5</A>) or <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-(see <A HREF="AA-5-5-2.html">5.5.2</A>).<A NAME="I3334"></A></span></div>
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0327-1.TXT">AI12-0327-1</A></I>} 
+<span class="insert3">For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+is first elaborated. The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+then&nbsp;</span><span class="insert5">performs an iteration, and&nbsp;</span><span class="insert3">evaluates 
+the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
+for&nbsp;</span><span class="insert5">each value conditionally produced by 
+the iteration</span><span class="insert3"></span><span class="insert3"><span class="delete5"></span></span><span class="insert4"><span class="delete5">&nbsp;the 
+values</span></span><span class="insert3"><span class="delete5"></span></span><span class="insert3"><span class="delete4">&nbsp;each 
+value</span></span><span class="insert3"><span class="delete5">&nbsp;of the 
+loop parameter</span></span><span class="insert3"><span class="delete4">. 
+These values are examined</span></span><span class="insert3"><span class="delete5">&nbsp;in the order specified by the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0181">loop_parameter_specification</A></SPAN></span></span><span class="insert3">&nbsp;(see <A HREF="AA-5-5.html">5.5</A></span><span class="insert5">&nbsp;and</span><span class="insert3"></span><span class="insert3"><span class="delete5">) 
+or <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+(see</span></span><span class="insert3">&nbsp;<A HREF="AA-5-5-2.html">5.5.2</A>).<A NAME="I3414"></A></span></div>
+<div class="paranum"><a name="p6.a">6.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0327-1.TXT">AI12-0327-1</A></I>} 
+<span class="insert5">The order of evaluation of the predicates is that 
+in which the values are produced, as specified in <A HREF="AA-5-5.html">5.5</A> 
+or <A HREF="AA-5-5-2.html">5.5.2</A>.</span>&nbsp;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-<span class="insert3">The value of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
+<span class="insert3">The value of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 is determined as follows:</span></div>
 <div class="paranum"><a name="p8">8/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0158-1.TXT">AI12-0158-1</A></I>} 
-<span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0144">quantifier</A></SPAN> 
-is <B>all</B>, the expression is&nbsp;</span><span class="insert4">False</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;True</span></span><span class="insert3">&nbsp;if the evaluation of&nbsp;</span><span class="insert4">any</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;the</span></span><span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
-yields&nbsp;</span><span class="insert4">False; evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
+<span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0154">quantifier</A></SPAN> 
+is <B>all</B>, the expression is&nbsp;</span><span class="insert4">False</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;True</span></span><span class="insert3">&nbsp;if the evaluation of&nbsp;</span><span class="insert4">any</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;the</span></span><span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
+yields&nbsp;</span><span class="insert4">False; evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 stops at that point. Otherwise (every predicate has been evaluated and 
 yielded True), the expression is True</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;True 
 for each value of the loop parameter. It is False otherwise. Evaluation 
-of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-stops when all values of the domain have been examined, or when the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+stops when all values of the domain have been examined, or when the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
 yields False for a given value</span></span><span class="insert3">. Any 
-exception raised by evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
+exception raised by evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
 is propagated.</span></div>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is True if the domain contains no values.</span>&nbsp;</div>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0158-1.TXT">AI12-0158-1</A></I>} 
-<span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0144">quantifier</A></SPAN> 
-is <B>some</B>, the expression is True if the evaluation of&nbsp;</span><span class="insert4">any</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;the</span></span><span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
-yields True</span><span class="insert4">; evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
+<span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0154">quantifier</A></SPAN> 
+is <B>some</B>, the expression is True if the evaluation of&nbsp;</span><span class="insert4">any</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;the</span></span><span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
+yields True</span><span class="insert4">; evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 stops at that point. Otherwise (every predicate has been evaluated and 
 yielded False), the expression is False</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;for some value of the loop parameter. It is False otherwise. Evaluation 
-of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-stops when all values of the domain have been examined, or when the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+stops when all values of the domain have been examined, or when the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
 yields True for a given value</span></span><span class="insert3">. Any 
-exception raised by evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
+exception raised by evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0155">predicate</A></SPAN> 
 is propagated.</span></div>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is False if the domain contains no values.</span>&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
@@ -141,13 +152,15 @@ A with an index subtype T can be written:</span></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
 <span class="insert3">The assertion that a positive number is composite 
 (as opposed to prime) can be written:</span></div>
-<div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples"><span class="insert3"><B>pragma</B>&nbsp;Assert&nbsp;(<B>for&nbsp;some</B>&nbsp;X&nbsp;<B>in</B>&nbsp;2&nbsp;..&nbsp;N&nbsp;/&nbsp;2&nbsp;=&gt;&nbsp;N&nbsp;<B>mod</B>&nbsp;X&nbsp;=&nbsp;0);</span></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0312-1.TXT">AI12-0312-1</A></I>} 
+<span class="insert3"><B>pragma</B>&nbsp;Assert&nbsp;(<B>for&nbsp;some</B>&nbsp;X&nbsp;<B>in</B>&nbsp;2&nbsp;..&nbsp;N&nbsp;</span><span class="insert5"><B>when</B>&nbsp;X&nbsp;*&nbsp;X&nbsp;&lt;=&nbsp;N</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;/&nbsp;2</span></span><span class="insert3">&nbsp;=&gt;&nbsp;N&nbsp;<B>mod</B>&nbsp;X&nbsp;=&nbsp;0);</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-5-5.html#S0182">iterator_filter</A></SPAN><SPAN Class="roman"><I>&nbsp;in&nbsp;<A HREF="AA-5-5.html">5.5</A></I></SPAN></span><span class="insert3"></span></div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p13.a">13.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-<span class="insert3"><A NAME="I3335"></A>Quantified expressions are 
+<span class="insert3"><A NAME="I3415"></A>Quantified expressions are 
 new.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
@@ -159,7 +172,7 @@ when there are no values for the loop parameter.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

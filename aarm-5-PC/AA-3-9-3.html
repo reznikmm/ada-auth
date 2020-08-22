@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -27,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-9-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,10 +41,10 @@
 <H1>3.9.3 Abstract Types and Subprograms</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-[<A NAME="I2357"></A> <A NAME="I2358"></A><A NAME="I2359"></A><A NAME="I2360"></A>An 
+[<A NAME="I2362"></A> <A NAME="I2363"></A><A NAME="I2364"></A><A NAME="I2365"></A>An 
 <I>abstract type</I> is a tagged type intended for use as an ancestor 
 of other types, but which is not allowed to have objects of its own. 
-<A NAME="I2361"></A><A NAME="I2362"></A>An <I>abstract subprogram</I> 
+<A NAME="I2366"></A><A NAME="I2367"></A>An <I>abstract subprogram</I> 
 is a subprogram that has no body, but is intended to be overridden at 
 some point when inherited. Because objects of an abstract type cannot 
 be created, a dispatching call to an abstract subprogram always dispatches 
@@ -69,15 +71,15 @@ calls on abstract subprograms (dispatching calls will never reach them).
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">abstract_subprogram_declaration</SPAN><A NAME="I2363"></A><A NAME="S0076"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2364"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2365"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2366"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">abstract_subprogram_declaration</SPAN><A NAME="I2368"></A><A NAME="S0076"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2369"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2370"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2371"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.2">1.2/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I2367"></A><A NAME="I2368"></A>Interface types (see <A HREF="AA-3-9-4.html">3.9.4</A>) 
+<A NAME="I2372"></A><A NAME="I2373"></A>Interface types (see <A HREF="AA-3-9-4.html">3.9.4</A>) 
 are abstract types. In addition, a tagged type that has the reserved 
 word <B>abstract</B> in its declaration is an abstract type. The class-wide 
 type (see <A HREF="AA-3-4-1.html">3.4.1</A>) rooted at an abstract type 
@@ -102,8 +104,8 @@ be different from T'Tag.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I2369"></A><A NAME="I2370"></A>A subprogram declared by an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+<A NAME="I2374"></A><A NAME="I2375"></A>A subprogram declared by an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 (see <A HREF="AA-12-6.html">12.6</A>) is an <I>abstract subprogram</I>. 
 If it is a primitive subprogram of a tagged type, then the tagged type 
 shall be abstract.&nbsp;</div>
@@ -215,7 +217,7 @@ or, in the case of a private extension inheriting a nonabstract function
 with a controlling result, have a full type that is a null extension[; 
 for a type declared in the visible part of a package, the overriding 
 may be either in the visible or the private part]. Such a subprogram 
-is said to <I>require overriding</I>.<A NAME="I2371"></A> However, if 
+is said to <I>require overriding</I>.<A NAME="I2376"></A> However, if 
 the type is a generic formal type, the subprogram need not be overridden 
 for the formal type itself; [a nonabstract version will necessarily be 
 provided by the actual type.]&nbsp;</div>
@@ -290,18 +292,27 @@ If an abstract subprogram is not a dispatching operation of some tagged
 type, then it cannot be called at all. In Ada 2005, such subprograms 
 are not even considered by name resolution (see <A HREF="AA-6-4.html">6.4</A>). 
 </div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0292-1.TXT">AI12-0292-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+<span class="insert5">If the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+given in an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+(see <A HREF="AA-5-5-3.html">5.5.3</A>) denotes an abstract subprogram, 
+the subprogram shall be a dispatching subprogram.</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0203-1.TXT">AI05-0203-1</A></I>} 
 The type of an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
 or of an object created by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
+or an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
 or a generic formal object of mode <B>in</B>, shall not be abstract. 
 The type of the target of an assignment operation (see <A HREF="AA-5-2.html">5.2</A>) 
 shall not be abstract. The type of a component shall not be abstract. 
 If the result type of a function is abstract, then the function shall 
 be abstract. If a function has an access result type designating an abstract 
-type, then the function shall be abstract. The type denoted by a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
+type, then the function shall be abstract. The type denoted by a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0226">return_subtype_indication</A></SPAN> 
 (see <A HREF="AA-6-5.html">6.5</A>) shall not be abstract. A generic 
 function shall not have an abstract result type or an access result type 
 designating an abstract type.&nbsp;</div>
@@ -408,14 +419,14 @@ would be legal as is.&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 A generic actual subprogram shall not be an abstract subprogram unless 
-the generic formal subprogram is declared by a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN>. 
+the generic formal subprogram is declared by a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN>. 
 The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 for the Access, Unchecked_Access, or Address attributes shall not denote 
 an abstract subprogram.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>An <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
-is not syntactically a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>. 
+is not syntactically a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>. 
 Nonetheless, an abstract subprogram is a subprogram, and an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 is a declaration of a subprogram.</div>
 <div class="paranum"><a name="p11.b">11.b/2</a></div>
@@ -427,7 +438,7 @@ Of course, an abstract formal subprogram's actual subprogram can be abstract.
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I2372"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+<A NAME="I2377"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -497,7 +508,7 @@ but then clients of the package would not have visibility to T.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p16.d">16.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00391.TXT">AI95-00391-01</A></I>} 
-<A NAME="I2373"></A>It is not necessary to override functions with a 
+<A NAME="I2378"></A>It is not necessary to override functions with a 
 controlling result for a null extension. This makes it easier to derive 
 a tagged type to complete a private type.&nbsp;</div>
 
@@ -527,7 +538,7 @@ to understand.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p16.j">16.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
-<A NAME="I2374"></A><B>Correction:</B> Added rules to eliminate holes 
+<A NAME="I2379"></A><B>Correction:</B> Added rules to eliminate holes 
 with controlling access results and generic functions that return abstract 
 types. While these changes are technically incompatible, it is unlikely 
 that they could be used in a program without violating some other rule 
@@ -542,7 +553,7 @@ exist in user code.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p16.l">16.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I2375"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+<A NAME="I2380"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
@@ -562,7 +573,7 @@ class-wide type better opened a hole which has now been plugged.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-9-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

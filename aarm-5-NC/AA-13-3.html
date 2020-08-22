@@ -37,9 +37,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -50,38 +50,38 @@
 <div class="paranum"><a name="p1">1/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-[<A NAME="I5664"></A> <A NAME="I5665"></A>The values of certain implementation-dependent 
+[<A NAME="I5907"></A> <A NAME="I5908"></A>The values of certain implementation-dependent 
 characteristics can be obtained by interrogating appropriate operational 
-or representation attributes. <A NAME="I5666"></A>Some of these attributes 
-are specifiable via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>.] 
+or representation attributes. <A NAME="I5909"></A>Some of these attributes 
+are specifiable via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>.] 
 </div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations">In general, the meaning of a given attribute 
-should not depend on whether the attribute was specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>, 
+should not depend on whether the attribute was specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>, 
 or chosen by default by the implementation.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">attribute_definition_clause</SPAN><A NAME="I5667"></A><A NAME="S0327"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I5668"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>'<A NAME="I5669"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5670"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I5671"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>'<A NAME="I5672"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5673"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">attribute_definition_clause</SPAN><A NAME="I5910"></A><A NAME="S0349"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I5911"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>'<A NAME="I5912"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5913"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I5914"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>'<A NAME="I5915"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5916"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal">For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
-that specifies an attribute that denotes a value, the form with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a value, the form with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 shall be used. Otherwise, the form with a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 shall be used.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5674"></A>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+<div class="Normal"><A NAME="I5917"></A>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 that specifies an attribute that denotes a value or an object, the expected 
 type for the expression or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is that of the attribute. <A NAME="I5675"></A>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+is that of the attribute. <A NAME="I5918"></A>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 that specifies an attribute that denotes a subprogram, the expected profile 
 for the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is the profile required for the attribute. For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+is the profile required for the attribute. For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 that specifies an attribute that denotes some other kind of entity, the 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> shall 
 resolve to denote an entity of the appropriate kind.&nbsp;</div>
@@ -96,7 +96,7 @@ subprograms, the required profile is indicated separately for the individual
 attributes.&nbsp;</div>
 <div class="paranum"><a name="p4.c">4.c</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
-</B>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+</B>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> need 
 not statically denote the entity it denotes. For example, the following 
@@ -110,16 +110,16 @@ kinds of things are allowed:&nbsp;</div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I5676"></A><A NAME="I5677"></A>An <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
-is allowed in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+<A NAME="I5919"></A><A NAME="I5920"></A>An <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is allowed in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 only if this International Standard explicitly allows it, or for an implementation-defined 
-attribute if the implementation allows it. <A NAME="I5678"></A>Each specifiable 
-attribute constitutes an <A NAME="I5679"></A>operational aspect or aspect 
+attribute if the implementation allows it. <A NAME="I5921"></A>Each specifiable 
+attribute constitutes an <A NAME="I5922"></A>operational aspect or aspect 
 of representation; the name of the aspect is that of the attribute.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For each specifiable attribute, 
 we generally say something like, &ldquo;The ... attribute may be specified 
-for ... via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>.&rdquo;</div>
+for ... via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>.&rdquo;</div>
 <div class="paranum"><a name="p5.b">5.b</a></div>
 <div class="Annotations">The above wording allows for T'Class'Alignment, 
 T'Class'Size, T'Class'Input, and T'Class'Output to be specifiable.</div>
@@ -130,11 +130,11 @@ to ask T'Component_Size for an array subtype T, but &ldquo;<B>for</B>
 T'Component_Size <B>use</B> ...&rdquo; is only allowed if T is a first 
 subtype, because Component_Size is a type-related aspect.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal">For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+<div class="Normal">For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 that specifies an attribute that denotes a subprogram, the profile shall 
 be mode conformant with the one required for the attribute, and the convention 
 shall be Ada. Additional requirements are defined for particular attributes. 
-<A NAME="I5680"></A></div>
+<A NAME="I5923"></A></div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
 </B>This implies, for example, that if one writes:&nbsp;</div>
@@ -148,19 +148,19 @@ with the appropriate subtypes and modes as shown in <A HREF="AA-13-13-2.html">13
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
-<A NAME="I5681"></A><A NAME="I5682"></A><A NAME="I5683"></A><A NAME="I5684"></A><A NAME="I5685"></A><A NAME="I5686"></A><A NAME="I5687"></A><A NAME="I5688"></A><A NAME="I5689"></A><A NAME="I5690"></A><A NAME="I5691"></A><A NAME="I5692"></A><A NAME="I5693"></A><A NAME="I5694"></A><A NAME="I5695"></A>A 
-<I>Size clause</I> is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+<A NAME="I5924"></A><A NAME="I5925"></A><A NAME="I5926"></A><A NAME="I5927"></A><A NAME="I5928"></A><A NAME="I5929"></A><A NAME="I5930"></A><A NAME="I5931"></A><A NAME="I5932"></A><A NAME="I5933"></A><A NAME="I5934"></A><A NAME="I5935"></A><A NAME="I5936"></A><A NAME="I5937"></A><A NAME="I5938"></A>A 
+<I>Size clause</I> is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 is Size. Similar definitions apply to the other specifiable attributes. 
 </div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5696"></A><A NAME="I5697"></A>An 
-<SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5939"></A><A NAME="I5940"></A>An 
+<SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 is type-related or subtype-specific if the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 denotes a type-related or subtype-specific attribute, respectively.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I5698"></A><A NAME="I5699"></A>A <I>storage 
-element</I> is an addressable element of storage in the machine. <A NAME="I5700"></A>A 
+<div class="Normal"><A NAME="I5941"></A><A NAME="I5942"></A>A <I>storage 
+element</I> is an addressable element of storage in the machine. <A NAME="I5943"></A>A 
 <I>word</I> is the largest amount of storage that can be conveniently 
 and efficiently manipulated by the hardware, given the implementation's 
 run-time model. A word consists of an integral number of storage elements. 
@@ -191,12 +191,12 @@ Variables</A>&rdquo;). Words are expected to be independently addressable.
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
-<A NAME="I5701"></A>A <I>machine scalar</I> is an amount of storage that 
+<A NAME="I5944"></A>A <I>machine scalar</I> is an amount of storage that 
 can be conveniently and efficiently loaded, stored, or operated upon 
 by the hardware. Machine scalars consist of an integral number of storage 
 elements. The set of machine scalars is implementation defined, but includes 
 at least the storage element and the word. Machine scalars are used to 
-interpret <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>s 
+interpret <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>s 
 when the nondefault bit ordering applies.&nbsp;</div>
 <div class="paranum"><a name="p8.e.1">8.e.1/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The set of machine 
@@ -221,10 +221,10 @@ Overlaps_Storage.</div>
 X that denotes an object, program unit, or label:&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="WideHanging-Term">X'Address</div><div class="WideHanging-Body">
-<A NAME="I5702"></A><A NAME="I5703"></A>Denotes the address of the first 
+<A NAME="I5945"></A><A NAME="I5946"></A>Denotes the address of the first 
 of the storage elements allocated to X. For a program unit or label, 
 this value refers to the machine code associated with the corresponding 
-body or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>. 
+body or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>. 
 The value of this attribute is of type System.Address.</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Here, the &ldquo;first 
@@ -234,11 +234,11 @@ address; the endianness of the machine doesn't matter.&nbsp;</div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0095-1.TXT">AI05-0095-1</A></I>} 
 The prefix of X'Address shall not statically denote a subprogram that 
 has convention Intrinsic. X'Address raises Program_Error if X denotes 
-a subprogram that has convention Intrinsic.</div>
+a subprogram that has convention Intrinsic.<A NAME="I5947"></A>]}</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="WideHanging-Body"><A NAME="I5704"></A><A NAME="I5705"></A>Address 
+<div class="WideHanging-Body"><A NAME="I5948"></A><A NAME="I5949"></A>Address 
 may be specified for stand-alone objects and for program units via an 
-<SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>.<A NAME="I5706"></A><A NAME="I5707"></A> 
+<SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>.<A NAME="I5950"></A><A NAME="I5951"></A> 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Address is not allowed 
@@ -264,7 +264,7 @@ done in the foreign language).</div>
 <div class="Annotations">Any compilation unit containing an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 of a given type depends semantically on the declaration of the package 
 in which the type is declared, even if not mentioned in an applicable 
-<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 &mdash; see <A HREF="AA-10-1-1.html">10.1.1</A>. In this case, it means 
 that if a compilation unit contains X'Address, then it depends on the 
 declaration of System. Otherwise, the fact that the value of Address 
@@ -290,7 +290,7 @@ address of an entity.</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0009-1.TXT">AI05-0009-1</A></I>} 
-<A NAME="I5708"></A>If an Address is specified, it is the programmer's 
+<A NAME="I5952"></A>If an Address is specified, it is the programmer's 
 responsibility to ensure that the address is valid and appropriate for 
 the entity and its use; otherwise, program execution is erroneous.</div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
@@ -318,7 +318,7 @@ the address points at them is not specified by the language. If discriminants
 are stored separately, then the Position of a discriminant might be negative, 
 or might raise an exception.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I5709"></A>The recommended level of support 
+<div class="Normal"><A NAME="I5953"></A>The recommended level of support 
 for the Address attribute is:&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">X'Address should 
@@ -370,11 +370,11 @@ the bits of X.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p21.a">21.a</a></div>
 <div class="Annotations">The intended meaning of the various attributes, 
-and their <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>s, 
+and their <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>s, 
 is more explicit.</div>
 <div class="paranum"><a name="p21.b">21.b</a></div>
 <div class="Annotations">The <SPAN Class="swiss">address_clause</SPAN> 
-has been renamed to <SPAN Class="swiss"><A HREF="AA-J-7.html#S0340">at_clause</A></SPAN> 
+has been renamed to <SPAN Class="swiss"><A HREF="AA-J-7.html#S0371">at_clause</A></SPAN> 
 and moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
 Features</A>&rdquo;. One can use an Address clause (&ldquo;for T'Address 
 <B>use</B> ...;&rdquo;) instead.</div>
@@ -387,7 +387,7 @@ and <A HREF="AA-A-5-4.html">A.5.4</A>.&nbsp;</div>
 <div class="paranum"><a name="p21.c.1">21.c.1/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 Defined that the names of aspects are the same as the name of the attribute; 
-that gives a name to use in <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s 
+that gives a name to use in <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>s 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>).&nbsp;</div>
 
 <H4 Class="centered">Language Design Principles</H4>
@@ -416,7 +416,7 @@ For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>
 X that denotes an object:&nbsp;</div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="WideHanging-Term">X'Alignment</div><div class="WideHanging-Body">
-<A NAME="I5710"></A><A NAME="I5711"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+<A NAME="I5954"></A><A NAME="I5955"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
 The value of this attribute is of type <I>universal_integer</I>, and 
 nonnegative; zero means that the object is not necessarily aligned on 
 a storage element boundary. If X'Alignment is not zero, then X is aligned 
@@ -428,7 +428,7 @@ on a storage unit boundary and X'Address is an integral multiple of X'Alignment
 </div>
 <div class="paranum"><a name="p24.a">24.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The Alignment is passed 
-by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 to the Allocate operation; the implementation has to choose a value such 
 that if the address returned by Allocate is aligned as requested, the 
 generated code can correctly access the object.</div>
@@ -439,8 +439,8 @@ if X <B>mod</B> N = 0, then X is by definition aligned on an N-storage-element
 boundary.&nbsp;</div>
 <div class="paranum"><a name="p25">25/2</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<A NAME="I5712"></A><A NAME="I5713"></A>Alignment may be specified for 
-[stand-alone] objects via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
+<A NAME="I5956"></A><A NAME="I5957"></A>Alignment may be specified for 
+[stand-alone] objects via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
 the expression of such a clause shall be static, and its value nonnegative.</div>
 <div class="paranum"><a name="p25.a">25.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Alignment (object): 
@@ -454,7 +454,7 @@ the expression of such a clause shall be static, and its value nonnegative.</div
 For every subtype S:&nbsp;</div>
 <div class="paranum"><a name="p26.2">26.2/2</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;S'Alignment</div><div class="WideHanging-Body">
-<A NAME="I5714"></A><A NAME="I5715"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+<A NAME="I5958"></A><A NAME="I5959"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
 The value of this attribute is of type <I>universal_integer</I>, and 
 nonnegative.</div>
 <div class="paranum"><a name="p26.3">26.3/2</a></div>
@@ -465,16 +465,16 @@ is a nonzero integral multiple of S'Alignment unless specified otherwise
 by a representation item.</div>
 <div class="paranum"><a name="p26.4">26.4/2</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<A NAME="I5716"></A><A NAME="I5717"></A>Alignment may be specified for 
-first subtypes via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static, and its value nonnegative.<A NAME="I5718"></A><A NAME="I5719"></A></div>
+<A NAME="I5960"></A><A NAME="I5961"></A>Alignment may be specified for 
+first subtypes via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.<A NAME="I5962"></A><A NAME="I5963"></A></div>
 <div class="paranum"><a name="p26.a">26.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Alignment (subtype): 
 </B>Alignment of a subtype.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I5720"></A>Program execution is erroneous 
+<div class="Normal"><A NAME="I5964"></A>Program execution is erroneous 
 if an Address clause is given that conflicts with the Alignment.&nbsp;</div>
 <div class="paranum"><a name="p27.a">27.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The user has to either 
@@ -483,7 +483,7 @@ will choose by default.&nbsp;</div>
 <div class="paranum"><a name="p28">28/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<A NAME="I5721"></A>For an object that is not allocated under control 
+<A NAME="I5965"></A>For an object that is not allocated under control 
 of the implementation, execution is erroneous if the object is not aligned 
 according to its Alignment.</div>
 
@@ -508,7 +508,7 @@ value for T'Class'Alignment.&nbsp;</div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>For any tagged 
 specific subtype <I>S</I>, <I>S</I>'Class'Alignment should equal <I>S</I>'Alignment.</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Normal"><A NAME="I5722"></A>The recommended level of support 
+<div class="Normal"><A NAME="I5966"></A>The recommended level of support 
 for the Alignment attribute for subtypes is:&nbsp;</div>
 <div class="paranum"><a name="p30">30/2</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
@@ -547,7 +547,7 @@ This is unlikely to work if alignment has any effect on code selection.
 Similar issues arise for untagged derived types whose parameters are 
 passed by reference.&nbsp;</div>
 <div class="paranum"><a name="p33">33</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5723"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5967"></A>The 
 recommended level of support for the Alignment attribute for objects 
 is:&nbsp;</div>
 <div class="paranum"><a name="p34">34/2</a></div>
@@ -585,7 +585,7 @@ was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p38">38/3</a></div>
 <div class="Notes">5&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>, 
+A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>, 
 Component_Size clause, or specifying the Pack aspect as True can override 
 a specified Alignment.&nbsp;</div>
 <div class="paranum"><a name="p38.a">38.a</a></div>
@@ -626,7 +626,7 @@ only on a machine that had atomic test-bit and set-bit instructions.)</div>
 <div class="Annotations">If the machine has no particular natural alignments, 
 then all subtype Alignments will probably be 1 by default.</div>
 <div class="paranum"><a name="p38.f">38.f</a></div>
-<div class="Annotations">Specifying an Alignment of 0 in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+<div class="Annotations">Specifying an Alignment of 0 in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 does not require the implementation to do anything (except return 0 when 
 the Alignment is queried). However, it might be taken as advice on some 
 implementations.</div>
@@ -634,7 +634,7 @@ implementations.</div>
 <div class="Annotations">It is an error for an Address clause to disobey 
 the object's Alignment. The error cannot be detected at compile time, 
 in general, because the Address is not necessarily known at compile time 
-(and is almost certainly not static). We do not require a run-time check, 
+(and is almost certainly not static). We do not require a runtime check, 
 since efficiency seems paramount here, and Address clauses are treading 
 on thin ice anyway. Hence, this misuse of Address clauses is just like 
 any other misuse of Address clauses &mdash; it's erroneous.</div>
@@ -676,7 +676,7 @@ for any Size.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p38.l">38.l</a></div>
 <div class="Annotations">The nonnegative part is missing from RM83 (for 
-<SPAN Class="swiss"><A HREF="AA-J-8.html#S0341">mod_clause</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-J-8.html#S0372">mod_clause</A></SPAN>s, 
 nee <SPAN Class="swiss">alignment_clause</SPAN>s, which are an obsolete 
 version of Alignment clauses).&nbsp;</div>
 
@@ -686,7 +686,7 @@ version of Alignment clauses).&nbsp;</div>
 X that denotes an object:&nbsp;</div>
 <div class="paranum"><a name="p40">40</a></div>
 <div class="WideHanging-Term">X'Size</div><div class="WideHanging-Body">
-<A NAME="I5724"></A><A NAME="I5725"></A>Denotes the size in bits of the 
+<A NAME="I5968"></A><A NAME="I5969"></A>Denotes the size in bits of the 
 representation of the object. The value of this attribute is of the type 
 <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p40.a">40.a</a></div>
@@ -694,9 +694,9 @@ representation of the object. The value of this attribute is of the type
 even if Machine_Radix is 10. Each decimal digit (and the sign) is presumably 
 represented as some number of bits.&nbsp;</div>
 <div class="paranum"><a name="p41">41</a></div>
-<div class="WideHanging-Body"><A NAME="I5726"></A><A NAME="I5727"></A>Size 
-may be specified for [stand-alone] objects via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static and its value nonnegative.<A NAME="I5728"></A><A NAME="I5729"></A></div>
+<div class="WideHanging-Body"><A NAME="I5970"></A><A NAME="I5971"></A>Size 
+may be specified for [stand-alone] objects via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static and its value nonnegative.<A NAME="I5972"></A><A NAME="I5973"></A></div>
 <div class="paranum"><a name="p41.a">41.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Size (object): 
 </B>Size in bits of an object.</div>
@@ -711,7 +711,7 @@ array object should not include its bounds.</div>
 <div class="paranum"><a name="p42">42/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<A NAME="I5730"></A>The recommended level of support for the Size attribute 
+<A NAME="I5974"></A>The recommended level of support for the Size attribute 
 of objects is the same as for subtypes (see below), except that only 
 a confirming Size clause need be supported for an aliased elementary 
 object.&nbsp;</div>
@@ -726,7 +726,7 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 </div>
 <div class="paranum"><a name="p45">45</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Size</div><div class="WideHanging-Body">
-<A NAME="I5731"></A><A NAME="I5732"></A>If S is definite, denotes the 
+<A NAME="I5975"></A><A NAME="I5976"></A>If S is definite, denotes the 
 size [(in bits)] that the implementation would choose for the following 
 objects of subtype S:&nbsp;</div>
 <div class="paranum"><a name="p46">46</a></div>
@@ -739,11 +739,11 @@ Unchecked_Conversion that converts from subtype S to some other subtype.
 <div class="paranum"><a name="p48">48</a></div>
 <div class="WideHanging-Body">If S is indefinite, the meaning is implementation 
 defined. The value of this attribute is of the type <I>universal_integer</I>. 
-<A NAME="I5733"></A><A NAME="I5734"></A>The Size of an object is at least 
+<A NAME="I5977"></A><A NAME="I5978"></A>The Size of an object is at least 
 as large as that of its subtype, unless the object's Size is determined 
 by a Size clause, a component_clause, or a Component_Size clause. Size 
-may be specified for first subtypes via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static and its value nonnegative.<A NAME="I5735"></A><A NAME="I5736"></A> 
+may be specified for first subtypes via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static and its value nonnegative.<A NAME="I5979"></A><A NAME="I5980"></A> 
 </div>
 <div class="paranum"><a name="p48.a">48.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The meaning of 
@@ -761,11 +761,11 @@ as to override the specified Size of a component's subtype.</div>
 <div class="SmallBulleted">Assuming the Implementation Advice is obeyed, 
 if the specified Size allows independent addressability, then the Size 
 of certain objects of the subtype should be equal to the subtype's Size. 
-This applies to stand-alone objects and to components (unless a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+This applies to stand-alone objects and to components (unless a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
 or a Component_Size clause applies).&nbsp;</div>
 <div class="paranum"><a name="p48.f">48.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
 or a Component_Size clause can cause an object to be smaller than its 
 subtype's specified size. The aspect Pack cannot; if a component subtype's 
 size is specified, this limits how tightly the composite object can be 
@@ -849,7 +849,7 @@ their Size may be rounded up to the nearest factor of the word size.
 </div>
 <div class="paranum"><a name="p52.d">52.d/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<A NAME="I5737"></A>On most machines, arrays don't contain gaps between 
+<A NAME="I5981"></A>On most machines, arrays don't contain gaps between 
 elementary components; if the Component_Size is greater than the Size 
 of the component subtype, the extra bits are generally considered part 
 of each component, rather than gaps between components. On the other 
@@ -881,10 +881,10 @@ the internal layout of components.&nbsp;</div>
 on a composite subtype should not affect the internal layout of components.</div>
 <div class="paranum"><a name="p53.a">53.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-That's what Pack aspects, <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>s, 
+That's what Pack aspects, <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>s, 
 and Component_Size clauses are for.&nbsp;</div>
 <div class="paranum"><a name="p54">54</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5738"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5982"></A>The 
 recommended level of support for the Size attribute of subtypes is:&nbsp;</div>
 <div class="paranum"><a name="p55">55</a></div>
 <div class="Bulleted">The Size (if not specified) of a static discrete 
@@ -952,13 +952,13 @@ when converting a stand-alone object, as one would expect.</div>
 <div class="paranum"><a name="p55.i">55.i</a></div>
 <div class="Annotations">Another reason for making the Size of an object 
 bigger than its subtype's Size is to support the run-time detection of 
-uninitialized variables. <A NAME="I5739"></A>The implementation might 
+uninitialized variables. <A NAME="I5983"></A>The implementation might 
 add an extra value to a discrete subtype that represents the uninitialized 
 state, and check for this value on use. In some cases, the extra value 
 will require an extra bit in the representation of the object. Such detection 
 is not required by the language. If it is provided, the implementation 
 has to be able to turn it off. For example, if the programmer gives a 
-<SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 or Component_Size clause that makes a component too small to allow the 
 extra bit, then the implementation will not be able to perform the checking 
 (not using this method, anyway).</div>
@@ -1068,14 +1068,14 @@ requires support for confirming Size clauses for all types.&nbsp;</div>
 <div class="Notes">6&nbsp;&nbsp;Size is a subtype-specific attribute.</div>
 <div class="paranum"><a name="p58">58/3</a></div>
 <div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
 or Component_Size clause can override a specified Size. Aspect Pack cannot. 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p58.a.1">58.a.1/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
-<A NAME="I5740"></A>We specify the meaning of Size in much more detail 
+<A NAME="I5984"></A>We specify the meaning of Size in much more detail 
 than Ada 83. This is not technically an inconsistency, but it is in practice, 
 as most Ada 83 compilers use a different definition for Size than is 
 required here. This should have been documented more explicitly during 
@@ -1094,14 +1094,14 @@ define their meaning.&nbsp;</div>
 For every subtype S:&nbsp;</div>
 <div class="paranum"><a name="p58.2">58.2/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;S'Object_Size</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5741"></A><A NAME="I5742"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0059-1.TXT">AI12-0059-1</A></I>} 
+<A NAME="I5985"></A><A NAME="I5986"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0059-1.TXT">AI12-0059-1</A></I>} 
 If S is definite, denotes the size (in bits) of a stand-alone aliased 
-object, or a component of subtype S in the absence of an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+object, or a component of subtype S in the absence of an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 or representation item that specifies the size of the object or component. 
 If S is indefinite, the meaning is implementation-defined. The value 
 of this attribute is of the type <I>universal_integer</I>. If not specified 
 otherwise, the Object_Size of a subtype is at least as large as the Size 
-of the subtype. Object_Size may be specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
+of the subtype. Object_Size may be specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
 the expression of such a clause shall be static and its value nonnegative. 
 All aliased objects with nominal subtype S have the size S'Object_Size. 
 In the absence of an explicit specification, the Object_Size of a subtype 
@@ -1163,7 +1163,7 @@ equal S'Object_Size, unless:&nbsp;</div>
 <div class="paranum"><a name="p58.6">58.6/5</a></div>
 <div class="Bulleted">X is a nonaliased stand-alone object; or</div>
 <div class="paranum"><a name="p58.7">58.7/5</a></div>
-<div class="Bulleted">The size of X is determined by a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+<div class="Bulleted">The size of X is determined by a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
 or Component_Size clause; or</div>
 <div class="paranum"><a name="p58.8">58.8/5</a></div>
 <div class="Bulleted">The type containing component X is packed.&nbsp;</div>
@@ -1216,7 +1216,7 @@ level of support for the Object_Size attribute should be followed.</div>
 T that denotes a task object [(after any implicit dereference)]:&nbsp;</div>
 <div class="paranum"><a name="p60">60/3</a></div>
 <div class="WideHanging-Term">T'Storage_Size</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5743"></A><A NAME="I5744"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<A NAME="I5987"></A><A NAME="I5988"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 Denotes the number of storage elements reserved for the task. The value 
 of this attribute is of the type <I>universal_integer</I>. The Storage_Size 
 includes the size of the task's stack, if any. The language does not 
@@ -1253,12 +1253,12 @@ Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p65.1">65.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-For a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0223">single_task_declaration</A></SPAN>), 
+For a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0245">single_task_declaration</A></SPAN>), 
 the following language-defined representation aspect may be specified:</div>
 <div class="paranum"><a name="p65.2">65.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;Storage_Size</div><div class="WideHanging-Body"><br clear="left">
-The Storage_Size aspect is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
-which shall be of any integer type.<A NAME="I5745"></A><A NAME="I5746"></A></div>
+The Storage_Size aspect is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+which shall be of any integer type.<A NAME="I5989"></A><A NAME="I5990"></A></div>
 <div class="paranum"><a name="p65.a">65.a/3</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>This definition somewhat 
 conflicts with the &quot;automatic&quot; one for the obsolescent attribute 
@@ -1267,9 +1267,9 @@ given expression is evaluated. We intend for the above definition to
 supersede that &quot;automatic&quot; definition for this attribute.&nbsp;</div>
 <div class="paranum"><a name="p65.b">65.b/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that the value of 
-the Storage_Size aspect <I>is</I> an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>; 
-it is not the <I>value</I> of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>. 
-The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+the Storage_Size aspect <I>is</I> an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>; 
+it is not the <I>value</I> of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>. 
+The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is evaluated for each object of the type (see below).&nbsp;</div>
 <div class="paranum"><a name="p65.c">65.c/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Storage_Size 
@@ -1285,10 +1285,10 @@ The Storage_Size aspect shall not be specified for a task interface type.
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p66">66/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-When a task object is created, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+When a task object is created, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 (if any) associated with the Storage_Size aspect of its type is evaluated; 
 the Storage_Size attribute of the newly created task object is at least 
-the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>.</div>
+the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>.</div>
 <div class="paranum"><a name="p66.a">66.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The implementation is allowed 
 to round up a specified Storage_Size amount. For example, if the implementation 
@@ -1300,7 +1300,7 @@ has to normalize this to 0, or perhaps to a positive number.</div>
 If the Storage_Size aspect is not specified for the type of the task 
 object, the value of the Storage_Size attribute is unspecified.&nbsp;</div>
 <div class="paranum"><a name="p67">67</a></div>
-<div class="Normal"><A NAME="I5747"></A><A NAME="I5748"></A><A NAME="I5749"></A>At 
+<div class="Normal"><A NAME="I5991"></A><A NAME="I5992"></A><A NAME="I5993"></A>At 
 the point of task object creation, or upon task activation, Storage_Error 
 is raised if there is insufficient free storage to accommodate the requested 
 Storage_Size.&nbsp;</div>
@@ -1312,13 +1312,13 @@ X that denotes an array subtype or array object [(after any implicit
 dereference)]:&nbsp;</div>
 <div class="paranum"><a name="p69">69</a></div>
 <div class="WideHanging-Term">X'Component_Size</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5750"></A><A NAME="I5751"></A>Denotes the size in bits of components 
+<A NAME="I5994"></A><A NAME="I5995"></A>Denotes the size in bits of components 
 of the type of X. The value of this attribute is of type <I>universal_integer</I>. 
 </div>
 <div class="paranum"><a name="p70">70</a></div>
-<div class="WideHanging-Body"><A NAME="I5752"></A><A NAME="I5753"></A>Component_Size 
-may be specified for array types via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static, and its value nonnegative.<A NAME="I5754"></A><A NAME="I5755"></A></div>
+<div class="WideHanging-Body"><A NAME="I5996"></A><A NAME="I5997"></A>Component_Size 
+may be specified for array types via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.<A NAME="I5998"></A><A NAME="I5999"></A></div>
 <div class="paranum"><a name="p70.a">70.a</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>The intent is that 
 the value of X'Component_Size is always nonnegative. If the array is 
@@ -1333,7 +1333,7 @@ A'Component_Size = A(I)'Size for any index I.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p71">71</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5756"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6000"></A>The 
 recommended level of support for the Component_Size attribute is:&nbsp;</div>
 <div class="paranum"><a name="p72">72</a></div>
 <div class="Bulleted">An implementation need not support specified Component_Sizes 
@@ -1367,7 +1367,7 @@ For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>
 X that denotes an object:&nbsp;</div>
 <div class="paranum"><a name="p73.2">73.2/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;X'Has_Same_Storage</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5757"></A><A NAME="I5758"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+<A NAME="I6001"></A><A NAME="I6002"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
 X'Has_Same_Storage denotes a function with the following specification:</div>
 <div class="paranum"><a name="p73.3">73.3/3</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;X'Has_Same_Storage&nbsp;(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>any_type</I></SPAN>)<BR>
@@ -1392,7 +1392,7 @@ For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>
 X that denotes an object:&nbsp;</div>
 <div class="paranum"><a name="p73.6">73.6/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;X'Overlaps_Storage</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5759"></A><A NAME="I5760"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+<A NAME="I6003"></A><A NAME="I6004"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
 X'Overlaps_Storage denotes a function with the following specification:</div>
 <div class="paranum"><a name="p73.7">73.7/3</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;X'Overlaps_Storage&nbsp;(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>any_type</I></SPAN>)<BR>
@@ -1427,13 +1427,13 @@ The following type-related operational attribute is defined: External_Tag.</div>
 For every subtype S of a tagged type <I>T</I> (specific or class-wide):</div>
 <div class="paranum"><a name="p75">75/3</a></div>
 <div class="WideHanging-Term">S'External_Tag</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5761"></A><A NAME="I5762"></A>{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+<A NAME="I6005"></A><A NAME="I6006"></A>{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
-<A NAME="I5763"></A><A NAME="I5764"></A>S'External_Tag denotes an external 
+<A NAME="I6007"></A><A NAME="I6008"></A>S'External_Tag denotes an external 
 string representation for S'Tag; it is of the predefined type String. 
-External_Tag may be specified for a specific tagged type via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static.<A NAME="I5765"></A><A NAME="I5766"></A> 
+External_Tag may be specified for a specific tagged type via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static.<A NAME="I6009"></A><A NAME="I6010"></A> 
 The default external tag representation is implementation defined. See 
 <A HREF="AA-13-13-2.html">13.13.2</A>. The value of External_Tag is never 
 inherited[; the default value is always used unless a new value is directly 
@@ -1450,7 +1450,7 @@ representation for a type tag.</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0113-1.TXT">AI05-0113-1</A></I>} 
 If a user-specified external tag S'External_Tag is the same as T'External_Tag 
 for some other tagged type declared by a different declaration in the 
-partition, Program_Error is raised by the elaboration of the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>.</div>
+partition, Program_Error is raised by the elaboration of the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>.<A NAME="I6011"></A><A NAME="I6012"></A><A NAME="I6013"></A></div>
 <div class="paranum"><a name="p75.c">75.c/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This rule does not depend 
 on the visibility of the other tagged type, but it does depend on the 
@@ -1467,10 +1467,11 @@ declared in a generic body), Tag_Error might be raised by Descendant_Tag
 if multiple types are identified.</div>
 <div class="paranum"><a name="p75.e">75.e/3</a></div>
 <div class="Annotations">Note that while there is a race condition inherent 
-in this definition (which attribute_definition_clause raises Program_Error 
-depends on the order of elaboration), it doesn't matter as a program 
-with two such clauses is simply wrong. Two types that both come from 
-the same declaration are allowed, as noted previously.&nbsp;</div>
+in this definition (which <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
+raises Program_Error depends on the order of elaboration), it doesn't 
+matter as a program with two such clauses is simply wrong. Two types 
+that both come from the same declaration are allowed, as noted previously. 
+</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p76">76</a></div>
@@ -1576,19 +1577,19 @@ type definition requires Short'Small &lt;= 2**(&ndash;7).&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p85.a">85.a</a></div>
-<div class="Annotations"><A NAME="I5767"></A>The syntax rule for <SPAN Class="swiss">length_clause</SPAN> 
-is replaced with the new syntax rule for <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>, 
+<div class="Annotations"><A NAME="I6014"></A>The syntax rule for <SPAN Class="swiss">length_clause</SPAN> 
+is replaced with the new syntax rule for <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>, 
 and it is modified to allow a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (as well as an expression).&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p85.b">85.b</a></div>
-<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
-now requires that the prefix of the attribute be a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>; 
+<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
+now requires that the prefix of the attribute be a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>; 
 in Ada 83 this rule was stated in the text.</div>
 <div class="paranum"><a name="p85.c">85.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
-In Ada 83, the relationship between a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0321">aspect_clause</A></SPAN> 
+In Ada 83, the relationship between a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN> 
 specifying a certain aspect and an attribute that queried that aspect 
 was unclear. In Ada 95, they are the same, except for certain explicit 
 exceptions.&nbsp;</div>
@@ -1640,7 +1641,7 @@ to objects, which applied to subtypes, and which applied to both.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p85.l">85.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00095.TXT">AI95-0095-1</A></I>} 
-<A NAME="I5768"></A><B>Correction:</B> An address attribute with a prefix 
+<A NAME="I6015"></A><B>Correction:</B> An address attribute with a prefix 
 of a generic formal subprogram whose actual parameter has convention 
 Intrinsic now raises Program_Error. Since it is unlikely that such an 
 attribute would have done anything useful (a subprogram with convention 
@@ -1659,7 +1660,7 @@ Such programs should be rare.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p85.n">85.n/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0095-1.TXT">AI05-0095-1</A></I>} 
-<A NAME="I5769"></A><B>Correction:</B> An address attribute with a prefix 
+<A NAME="I6016"></A><B>Correction:</B> An address attribute with a prefix 
 of a subprogram with convention Intrinsic is now illegal. Such attributes 
 are very unlikely to have provided a useful answer (the intended meaning 
 of convention Intrinsic is that there is no actual subprogram body for 
@@ -1669,7 +1670,7 @@ unless they have a hidden bug.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p85.o">85.o/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
-<A NAME="I5770"></A>Attributes Has_Same_Storage and Overlaps_Storage 
+<A NAME="I6017"></A>Attributes Has_Same_Storage and Overlaps_Storage 
 are new.</div>
 <div class="paranum"><a name="p85.p">85.p/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -1691,7 +1692,7 @@ types.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p85.s">85.s/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0059-1.TXT">AI12-0059-1</A></I>} 
-<A NAME="I5771"></A>Attribute Object_Size is new.&nbsp;</div>
+<A NAME="I6018"></A>Attribute Object_Size is new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p85.t">85.t/4</a></div>
@@ -1701,7 +1702,7 @@ types.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,33 +41,33 @@ calls) between active partitions.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8475"></A><A NAME="I8476"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9050"></A><A NAME="I9051"></A>The 
 form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Remote_Call_Interface is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8477"></A><A NAME="I8478"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I8479"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9052"></A><A NAME="I9053"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I9054"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 All_Calls_Remote is as follows:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8480"></A><A NAME="I8481"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I8482"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9055"></A><A NAME="I9056"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I9057"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><A NAME="I8483"></A><A NAME="I8484"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Indented1"><A NAME="I9058"></A><A NAME="I9059"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 All_Calls_Remote is a library unit pragma.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal"><A NAME="I8485"></A><A NAME="I8486"></A><A NAME="I8487"></A><A NAME="I8488"></A><A NAME="I8489"></A>A 
+<div class="Normal"><A NAME="I9060"></A><A NAME="I9061"></A><A NAME="I9062"></A><A NAME="I9063"></A><A NAME="I9064"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Remote_Call_Interface 
 is used to specify that a library unit is a <I>remote call interface 
-(RCI)</I>, namely that the Remote_Call_Interface aspect<A NAME="I8490"></A><A NAME="I8491"></A> 
+(RCI)</I>, namely that the Remote_Call_Interface aspect<A NAME="I9065"></A><A NAME="I9066"></A> 
 of the library unit is True. A subprogram declared in the visible part 
 of such a library unit, or declared by such a library unit, is called 
 a <I>remote subprogram</I>.</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">The declaration of an RCI library unit shall be preelaborable 
 (see <A HREF="RM-10-2-1.html">10.2.1</A>), and shall depend semantically 
-only upon declared pure <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s, 
+only upon declared pure <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s, 
 shared passive library units, remote types library units, other remote 
 call interface library units, or preelaborated normal library units that 
 are mentioned only in private with clauses.</div>
@@ -81,7 +81,7 @@ of a variable;&nbsp;</div>
 <div class="Bulleted">its visible part shall not contain the declaration 
 of a limited type;&nbsp;</div>
 <div class="paranum"><a name="p12">12/1</a></div>
-<div class="Bulleted">its visible part shall not contain a nested <SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN>; 
+<div class="Bulleted">its visible part shall not contain a nested <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN>; 
 </div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Bulleted">it shall not be, nor shall its visible part contain, 
@@ -103,10 +103,10 @@ remote call interface library unit.&nbsp;</div>
 attribute is illegal in the specification of a remote call interface 
 library unit. In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), this rule applies also in 
-the private part of an instance of a generic unit.<A NAME="I8492"></A></span></div>
+the private part of an instance of a generic unit.<A NAME="I9067"></A></span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">A pragma All_Calls_Remote sets the All_Calls_Remote 
-representation aspect of <A NAME="I8493"></A><A NAME="I8494"></A>the 
+representation aspect of <A NAME="I9068"></A><A NAME="I9069"></A>the 
 library unit to which the pragma applies to the value True. If the All_Calls_Remote 
 aspect of a library unit is True, the library unit shall be a remote 
 call interface.</div>
@@ -118,7 +118,7 @@ to at most one partition of a given program. A remote call interface
 library unit whose parent is also an RCI library unit shall be assigned 
 only to the same partition as its parent.&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8495"></A><A NAME="I8496"></A><A NAME="I8497"></A>Notwithstanding 
+<div class="Normal"><A NAME="I9070"></A><A NAME="I9071"></A><A NAME="I9072"></A>Notwithstanding 
 the rule given in <A HREF="RM-10-2.html">10.2</A>, a compilation unit 
 in a given partition that semantically depends on the declaration of 
 an RCI library unit, <I>needs</I> (in the sense of <A HREF="RM-10-2.html">10.2</A>) 
@@ -153,7 +153,7 @@ to RPC.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

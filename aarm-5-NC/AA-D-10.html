@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,15 +46,15 @@ package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>package</B>&nbsp;Ada.Synchronous_Task_Control<A NAME="I9060"></A><BR>
+<B>package</B>&nbsp;Ada.Synchronous_Task_Control<A NAME="I9639"></A><BR>
 &nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9061"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9062"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9063"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9064"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9065"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9640"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9641"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9642"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9643"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9644"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -73,8 +73,8 @@ The following language-defined package exists:&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
 <B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>package</B>&nbsp;Ada.Synchronous_Task_Control.EDF<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><A NAME="I9066"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9067"></A>Suspend_Until_True_And_Set_Deadline<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><A NAME="I9645"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9646"></A>Suspend_Until_True_And_Set_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(S&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Suspension_Object;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Span)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;<BR>
@@ -127,7 +127,7 @@ It is a bounded error for two or more tasks to call Suspend_Until_True
 on the same Suspension_Object concurrently. For each task, Program_Error 
 might be raised, the task might proceed without suspending, or the task 
 might suspend, potentially indefinitely. The state of the suspension 
-object might end up either True or False.&nbsp;</div>
+object might end up either True or False.<A NAME="I9647"></A>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p12">12</a></div>
@@ -136,20 +136,20 @@ of Set_False and Set_True during any protected action, even one that
 has its ceiling priority in the Interrupt_Priority range.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Notes">37&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0168-1.TXT">AI05-0168-1</A></I>} 
+<div class="Notes">36&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0168-1.TXT">AI05-0168-1</A></I>} 
 More complex schemes, such as setting the deadline relative to when Set_True 
 is called, can be programmed using a protected object.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I9068"></A>Synchronous_Task_Control is now Preelaborated, so 
+<A NAME="I9648"></A>Synchronous_Task_Control is now Preelaborated, so 
 it can be used in preelaborated units.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p13.b">13.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0168-1.TXT">AI05-0168-1</A></I>} 
-<A NAME="I9069"></A>Child package Ada.Synchronous_Task_Control.EDF is 
+<A NAME="I9649"></A>Child package Ada.Synchronous_Task_Control.EDF is 
 new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
@@ -160,7 +160,7 @@ from a single task, and what happens if that is violated.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

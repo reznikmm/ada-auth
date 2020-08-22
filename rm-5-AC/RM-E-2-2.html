@@ -34,9 +34,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,24 +51,24 @@ of types intended for use in communication between active partitions.
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8852"></A><A NAME="I8853"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9424"></A><A NAME="I9425"></A>The 
 form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Remote_Types is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8854"></A><A NAME="I8855"></A>Remote_Types[(<I>library_unit_</I><A NAME="I8856"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9426"></A><A NAME="I9427"></A>Remote_Types[(<I>library_unit_</I><A NAME="I9428"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8857"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Remote_Types 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I9429"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Remote_Types 
 is used to specify that a library unit is a</span> <I>remote types library 
-unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Types <span class="insert3">aspect<A NAME="I8858"></A><A NAME="I8859"></A> 
+unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Types <span class="insert3">aspect<A NAME="I9430"></A><A NAME="I9431"></A> 
 of the library unit is True</span><span class="delete3">&nbsp;applies</span>. 
 The following restrictions apply to the declaration of such a library 
 unit:</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Bulleted">it shall be preelaborable;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Bulleted">it shall depend semantically only on declared pure<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s</span>, 
+<div class="Bulleted">it shall depend semantically only on declared pure<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s</span>, 
 shared passive<span class="insert3">&nbsp;library units</span>, <span class="delete3">or 
 </span>other remote types library units<span class="insert3">, or preelaborated 
 normal library units that are mentioned only in private with clauses</span>;</div>
@@ -85,10 +85,10 @@ a part that is of a nonremote access type, then that access type, or
 the type of some part that includes the access type subcomponent, shall 
 have user-specified Read and Write attributes</span>.&nbsp;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert1"></span><A NAME="I8860"></A><span class="insert3">A 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert1"></span><A NAME="I9432"></A><span class="insert3">A 
 named</span><span class="delete3">&nbsp;An</span> access type declared in 
 the visible part of a remote types or remote call interface library unit 
-is called a <I>remote access type</I>. <A NAME="I8861"></A><A NAME="I8862"></A>Such 
+is called a <I>remote access type</I>. <A NAME="I9433"></A><A NAME="I9434"></A>Such 
 a type shall be<span class="insert1">:</span><span class="delete1">&nbsp;either 
 an access-to-subprogram type or a general access type that designates 
 a class-wide limited private type.</span></div>
@@ -139,11 +139,11 @@ external streaming (see <A HREF="RM-13-13-2.html">13.13.2</A>);</span><span clas
 </span><span class="insert1"><span class="delete2">either a nonlimited 
 type or a type with</span></span><span class="delete2">&nbsp;Read and Write 
 attributes</span><span class="insert1"><span class="delete2">&nbsp;specified 
-via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN>;</span></span><span class="delete2"></span><span class="delete1">.</span><span class="delete2"></span></div>
+via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN>;</span></span><span class="delete2"></span><span class="delete1">.</span><span class="delete2"></span></div>
 <div class="paranum"><a name="p14.1">14.1/3</a></div>
 <div class="Bulleted"><span class="insert3">The corresponding specific 
 type shall not have a primitive procedure with the Synchronization aspect 
-specified unless the <SPAN Class="swiss"><A HREF="RM-9-5.html#S0234">synchronization_kind</A></SPAN> 
+specified unless the <SPAN Class="swiss"><A HREF="RM-9-5.html#S0256">synchronization_kind</A></SPAN> 
 is Optional (see <A HREF="RM-9-5.html">9.5</A>);</span></div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Bulleted">A value of a remote access-to-class-wide type shall 
@@ -166,12 +166,12 @@ operand of the call;</span></div>
 is</span><span class="delete2">&nbsp;and Storage_Size attributes are</span> 
 not defined for<span class="insert2">&nbsp;a</span> remote access-to-class-wide 
 <span class="insert2">type</span><span class="delete2">&nbsp;types</span>; 
-the expected type for an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+the expected type for an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 shall not be a remote access-to-class-wide type<span class="insert2">. 
 A</span><span class="delete2">; a</span> remote access-to-class-wide 
 type shall not be an actual parameter for a generic formal access type<span class="insert1">.</span><span class="delete1">;</span><span class="insert2">&nbsp;The Storage_Size attribute of a remote access-to-class-wide type yields 
 0</span><span class="insert2"><span class="delete4">; it is not allowed 
-in an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN></span></span><span class="insert2">.</span><span class="insert4">&nbsp; The Storage_Pool and Storage_Size aspects shall not be specified for 
+in an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN></span></span><span class="insert2">.</span><span class="insert4">&nbsp; The Storage_Pool and Storage_Size aspects shall not be specified for 
 a remote access-to-class-wide type.</span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
@@ -199,7 +199,7 @@ type.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

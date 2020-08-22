@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -49,16 +49,16 @@ The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p1.2">1.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>package</B>&nbsp;Ada.Dispatching<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8847"></A><BR>
+<B>package</B>&nbsp;Ada.Dispatching<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9446"></A><BR>
 &nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Dispatching);</span></div>
 <div class="paranum"><a name="p1.3">1.3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8848"></A>Yield<span class="insert5"><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9447"></A>Yield<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p1.4">1.4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-&nbsp;&nbsp;<A NAME="I8849"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;<A NAME="I9448"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
 <B>end</B>&nbsp;Ada.Dispatching;</div>
 <div class="paranum"><a name="p1.5">1.5/2</a></div>
 <div class="Normal">&nbsp;Dispatching serves as the parent of other language-defined 
@@ -67,18 +67,18 @@ library units concerned with task dispatching.</div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0279-1.TXT">AI12-0279-1</A></I>} 
 <span class="insert5">For a noninstance subprogram (including a generic 
 formal subprogram), a generic subprogram, or an entry, the following 
-language-defined aspect may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+language-defined aspect may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):</span></div>
 <div class="paranum"><a name="p1.7">1.7/5</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert5">Yield</span></div><div class="WideHanging-Body">
-<span class="insert5">The type of aspect Yield is Boolean.<A NAME="I8850"></A><A NAME="I8851"></A></span></div>
+<span class="insert5">The type of aspect Yield is Boolean.<A NAME="I9449"></A><A NAME="I9450"></A></span></div>
 <div class="paranum"><a name="p1.a">1.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert5"><B>Yield:&nbsp;</B></span><span class="insert5">Ensures 
 that a callable entity includes a task dispatching point.</span></div>
 <div class="paranum"><a name="p1.8">1.8/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">If directly specified, 
-the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
 the aspect is False.</span></div>
 <div class="paranum"><a name="p1.9">1.9/5</a></div>
@@ -94,10 +94,7 @@ by the corresponding primitive subprogram of each descendant of <I>T</I>.</span>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0279-1.TXT">AI12-0279-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
 <span class="insert5">If the Yield aspect is specified for a dispatching 
-subprogram that inherits the aspect, the specified value shall be confirming. 
-If the Nonblocking aspect (see <A HREF="AA-9-5.html">9.5</A>) of the 
-associated callable entity is statically True, the Yield aspect shall 
-not be specified as True.</span></div>
+subprogram that inherits the aspect, the specified value shall be confirming.</span></div>
 <div class="paranum"><a name="p1.11">1.11/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0279-1.TXT">AI12-0279-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
@@ -118,7 +115,7 @@ True if given an appropriate actual entity.</span>&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
 <span class="insert5">In addition to the places where Legality Rules 
 normally apply (see <A HREF="AA-12-3.html">12.3</A>), these rules also 
-apply in the private part of an instance of a generic unit.<A NAME="I8852"></A></span> 
+apply in the private part of an instance of a generic unit.<A NAME="I9451"></A></span> 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -138,7 +135,7 @@ keeps its processor busy.</div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
-<A NAME="I8853"></A><A NAME="I8854"></A><A NAME="I8855"></A><A NAME="I8856"></A><I>Task 
+<A NAME="I9452"></A><A NAME="I9453"></A><A NAME="I9454"></A><A NAME="I9455"></A><I>Task 
 dispatching</I> is the process by which <span class="insert5">a logical 
 thread of control associated with a</span><span class="delete5">&nbsp;one</span> 
 ready task is selected for execution on a processor. This selection is 
@@ -159,7 +156,7 @@ more than one task can be chosen, at the same time, for execution on
 more than one processor, as explained below.&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<A NAME="I8857"></A><A NAME="I8858"></A><A NAME="I8859"></A><A NAME="I8860"></A><A NAME="I8861"></A><A NAME="I8862"></A><I>Task 
+<A NAME="I9456"></A><A NAME="I9457"></A><A NAME="I9458"></A><A NAME="I9459"></A><A NAME="I9460"></A><A NAME="I9461"></A><I>Task 
 dispatching policies</I> are specified in terms of conceptual <I>ready 
 queues</I> and task states. A ready queue is an ordered list of ready 
 tasks. The first position in a queue is called the <I>head of the queue</I>, 
@@ -178,7 +175,7 @@ a ready task as one that is not blocked. Here we refine this definition
 and talk about ready queues.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<A NAME="I8863"></A>Each processor also has one <I>running task</I>, 
+<A NAME="I9462"></A>Each processor also has one <I>running task</I>, 
 which is the task currently being executed by that processor. Whenever 
 a task running on a processor reaches a task dispatching point it goes 
 back to one or more ready queues; a task (possibly the same task) is 
@@ -192,9 +189,9 @@ one task to run, if we count the idle task.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-A call of Yield is a task dispatching point.<span class="delete5">&nbsp;Yield 
-is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).</span> 
-</div>
+A call of Yield <span class="insert5">and a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN> 
+are</span><span class="delete5">&nbsp;is a</span> task dispatching <span class="insert5">points 
+for all language-defined policies</span><span class="delete5">&nbsp;point</span>.<span class="delete5">&nbsp;Yield is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).</span></div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
@@ -202,10 +199,10 @@ was deleted.</I></SPAN></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0279-1.TXT">AI12-0279-1</A></I>} 
 <span class="insert5">If the Yield aspect has the value True, then a 
-call to Yield is included within the body of the associated callable 
-entity, and invoked immediately prior to returning from the body if and 
-only if no other task dispatching points were encountered during the 
-execution of the body.</span>&nbsp;</div>
+call to procedure Yield is included within the body of the associated 
+callable entity, and invoked immediately prior to returning from the 
+body if and only if no other task dispatching points were encountered 
+during the execution of the body.</span>&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
@@ -230,18 +227,33 @@ For example, on some operating systems, it might be necessary to disallow
 them altogether. This permission applies to tasks whose priority is set 
 to interrupt level for any reason: via an aspect, via a call to Dynamic_Priorities.Set_Priority, 
 or via priority inheritance.&nbsp;</div>
-<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="paranum"><a name="p10.1">10.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-[For optimization purposes,] an implementation may alter the points at 
-which task dispatching occurs, in an implementation-defined manner. However, 
-a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
-always corresponds to at least one task dispatching point.</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0299-1.TXT">AI12-0299-1</A></I>} 
+<span class="insert5">Unless otherwise specified for a task dispatching 
+policy,</span><span class="delete5">&nbsp;[For optimization purposes,]</span> 
+an implementation may <span class="insert5">add additional</span><span class="delete5">&nbsp;alter 
+the</span> points at which task dispatching <span class="insert5">may 
+occur</span><span class="delete5">&nbsp;occurs</span>, in an implementation-defined 
+manner.<span class="delete5">&nbsp;However, a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN> 
+always corresponds to at least one task dispatching point.</span></div>
+<div class="paranum"><a name="p10.b">10.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0299-1.TXT">AI12-0299-1</A></I>} 
+<span class="insert5">This permission is intended to allow the implementation 
+of Ada tasks in terms of target system threads, which may have additional 
+conditions that cause task dispatching. For instance, for Linux threads, 
+page faults are task dispatching points.</span>&nbsp;</div>
+<div class="paranum"><a name="p10.c">10.c/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0299-1.TXT">AI12-0299-1</A></I>} 
+<span class="insert5">The Non_Preemptive_FIFO_Within_Priorities task 
+dispatching policy (see <A HREF="AA-D-2-4.html">D.2.4</A>) does not allow 
+additional task dispatching points.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 Clause <A HREF="AA-9.html">9</A> specifies under which circumstances 
 a task becomes ready. The ready state is affected by the rules for task 
-activation and termination, delay statements, and entry calls. <A NAME="I8864"></A>When 
+activation and termination, delay statements, and entry calls. <A NAME="I9463"></A>When 
 a task is not ready, it is said to be blocked.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">8&nbsp;&nbsp;An example of a possible implementation-defined 
@@ -287,10 +299,10 @@ not involve preemption).&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p17.b">17.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-<A NAME="I8865"></A>Procedure Yield is added to Dispatching. If Dispatching 
-is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+<A NAME="I9464"></A>Procedure Yield is added to Dispatching. If Dispatching 
+is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
-of Yield is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+of Yield is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
 This should be rare and is easily fixed if it does occur.</div>
 <div class="paranum"><a name="p17.c">17.c/4</a></div>
@@ -302,15 +314,27 @@ be depended upon from a Pure package. This should happen rarely in practice
 as the only contents was the exception Dispatching_Policy_Error and none 
 of the child packages that could raise that exception are pure.&nbsp;</div>
 
-<H4 Class="centered">Extensions to Ada 2012</H4>
+<H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p17.d">17.d/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0299-1.TXT">AI12-0299-1</A></I>} 
+<span class="insert5"><A NAME="I9465"></A><B>Correction:</B> Substantially 
+reduced the Implementation Permission that used to allow &ldquo;altering&rdquo; 
+task dispatching points to only allow adding task dispatching points. 
+If an implementation was using this permission to remove task dispatching 
+points, and a program depended on that behavior to work, it could fail 
+when used with Ada 202x. We are not aware of any such implementations, 
+and such behavior was never portable to other implementations, so we 
+do not expect this to matter in practice.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p17.e">17.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0279-1.TXT">AI12-0279-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
-<span class="insert5"><A NAME="I8866"></A>Aspect Yield is new.</span> 
+<span class="insert5"><A NAME="I9466"></A>Aspect Yield is new.</span> 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p17.e">17.e/5</a></div>
+<div class="paranum"><a name="p17.f">17.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
 <span class="insert5">Redid the description of task dispatching to include 
 the separate threads of control that can be started by a parallel construct.</span> 
@@ -318,7 +342,7 @@ the separate threads of control that can be started by a parallel construct.</sp
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

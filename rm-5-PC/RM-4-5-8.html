@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -23,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,57 +37,60 @@
 <H1>4.5.8 Quantified Expressions</H1>
 <div class="paranum"><a name="p0.1">0.1/4</a></div>
 <div class="Normal">&nbsp;Quantified expressions provide a way to write universally 
-and existentially quantified predicates over containers and arrays.</div>
+and existentially quantified predicates over containers and arrays.<A NAME="I3048"></A><A NAME="I3049"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">quantified_expression</SPAN><A NAME="I2971"></A><A NAME="S0143"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I2972"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0144">quantifier</A></SPAN>&nbsp;<A NAME="I2973"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2974"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I2975"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0144">quantifier</A></SPAN>&nbsp;<A NAME="I2976"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2977"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">quantified_expression</SPAN><A NAME="I3050"></A><A NAME="S0153"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I3051"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3052"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3053"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3054"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3055"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3056"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN></div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">quantifier</SPAN><A NAME="I2978"></A><A NAME="S0144"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>some</B></div>
+<div class="Indented1"><SPAN Class="swiss">quantifier</SPAN><A NAME="I3057"></A><A NAME="S0154"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>some</B></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">predicate</SPAN><A NAME="I2979"></A><A NAME="S0145"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>boolean_</I><A NAME="I2980"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">predicate</SPAN><A NAME="I3058"></A><A NAME="S0155"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>boolean_</I><A NAME="I3059"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1">Wherever the Syntax Rules allow an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-may be used in place of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
+<div class="Indented1">Wherever the Syntax Rules allow an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+may be used in place of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
 so long as it is immediately surrounded by parentheses.</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal"><A NAME="I2981"></A>The expected type of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-is any Boolean type. The <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN> 
-in a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-is expected to be of the same type.<A NAME="I2982"></A>&nbsp;</div>
+<div class="Normal"><A NAME="I3060"></A>The expected type of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+is any Boolean type. The <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+is expected to be of the same type.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p6">6/4</a></div>
-<div class="Normal">For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-is first elaborated. The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-then evaluates the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN> 
-for the values of the loop parameter in the order specified by the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0167">loop_parameter_specification</A></SPAN> 
-(see <A HREF="RM-5-5.html">5.5</A>) or <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-(see <A HREF="RM-5-5-2.html">5.5.2</A>).<A NAME="I2983"></A></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Normal">For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+is first elaborated. The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+then <span class="insert5">performs an iteration, and&nbsp;</span>evaluates 
+the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
+for <span class="insert5">each value conditionally produced by the iteration</span><span class="delete5">&nbsp;the 
+values of the loop parameter in the order specified by the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN></span> 
+(see <A HREF="RM-5-5.html">5.5</A><span class="insert5">&nbsp;and</span><span class="delete5">) 
+or <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+(see</span> <A HREF="RM-5-5-2.html">5.5.2</A>).<A NAME="I3061"></A></div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">The value of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">The value of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 is determined as follows:</div>
 <div class="paranum"><a name="p8">8/4</a></div>
-<div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0144">quantifier</A></SPAN> 
-is <B>all</B>, the expression is False if the evaluation of any <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN> 
-yields False; evaluation of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN> 
+<div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN> 
+is <B>all</B>, the expression is False if the evaluation of any <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
+yields False; evaluation of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 stops at that point. Otherwise (every predicate has been evaluated and 
 yielded True), the expression is True. Any exception raised by evaluation 
-of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
 is propagated.</div>
 <div class="paranum"><a name="p9">9/4</a></div>
-<div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0144">quantifier</A></SPAN> 
-is <B>some</B>, the expression is True if the evaluation of any <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN> 
-yields True; evaluation of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0143">quantified_expression</A></SPAN> 
+<div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN> 
+is <B>some</B>, the expression is True if the evaluation of any <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
+yields True; evaluation of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 stops at that point. Otherwise (every predicate has been evaluated and 
 yielded False), the expression is False. Any exception raised by evaluation 
-of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0145">predicate</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
 is propagated.</div>
 
 <H4 Class="centered">Examples</H4>
@@ -98,12 +103,13 @@ a sorting routine on an array A with an index subtype T can be written:</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The assertion that 
 a positive number is composite (as opposed to prime) can be written:</div>
-<div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples"><B>pragma</B>&nbsp;Assert&nbsp;(<B>for&nbsp;some</B>&nbsp;X&nbsp;<B>in</B>&nbsp;2&nbsp;..&nbsp;N&nbsp;/&nbsp;2&nbsp;=&gt;&nbsp;N&nbsp;<B>mod</B>&nbsp;X&nbsp;=&nbsp;0);</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Examples"><B>pragma</B>&nbsp;Assert&nbsp;(<B>for&nbsp;some</B>&nbsp;X&nbsp;<B>in</B>&nbsp;2&nbsp;..&nbsp;N&nbsp;<span class="insert5"><B>when</B>&nbsp;X&nbsp;*&nbsp;X&nbsp;&lt;=&nbsp;N</span><span class="delete5">&nbsp;/&nbsp;2</span>&nbsp;=&gt;&nbsp;N&nbsp;<B>mod</B>&nbsp;X&nbsp;=&nbsp;0);<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN><SPAN Class="roman"><I>&nbsp;in&nbsp;<A HREF="RM-5-5.html">5.5</A></I></SPAN></span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

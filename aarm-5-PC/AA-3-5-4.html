@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -52,7 +52,7 @@ such a type corresponds to an unsigned type with wrap-around semantics.
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Indented1"><SPAN Class="swiss">integer_type_definition</SPAN><A NAME="I1847"></A><A NAME="S0041"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1848"></A><SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1849"></A><SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">signed_integer_type_definition</SPAN><A NAME="I1850"></A><A NAME="S0042"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>range</B>&nbsp;<I>static_</I><A NAME="I1851"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>&nbsp;..&nbsp;<I>static_</I><A NAME="I1852"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">signed_integer_type_definition</SPAN><A NAME="I1850"></A><A NAME="S0042"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>range</B>&nbsp;<I>static_</I><A NAME="I1851"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>&nbsp;..&nbsp;<I>static_</I><A NAME="I1852"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN></div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We don't call this a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>, 
 because it is rather different &mdash; not only is it required to be 
@@ -65,26 +65,26 @@ and <SPAN Class="swiss">modular_range_specification</SPAN> loses the
 fact that they are defining different classes of types, which is important 
 for the generic type matching rules.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">modular_type_definition</SPAN><A NAME="I1853"></A><A NAME="S0043"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>mod</B>&nbsp;<I>static_</I><A NAME="I1854"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">modular_type_definition</SPAN><A NAME="I1853"></A><A NAME="S0043"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>mod</B>&nbsp;<I>static_</I><A NAME="I1854"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I1855"></A>Each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN> 
+<div class="Normal"><A NAME="I1855"></A>Each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
 is expected to be of any integer type; they need not be of the same type. 
-<A NAME="I1856"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<A NAME="I1856"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN> 
 is likewise expected to be of any integer type.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
 shall be static, and their values shall be in the range System.Min_Int 
 .. System.Max_Int.</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal"><A NAME="I1857"></A><A NAME="I1858"></A><A NAME="I1859"></A>The 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN> 
 shall be static, and its value (the <I>modulus</I>) shall be positive, 
 and shall be no greater than System.Max_Binary_Modulus if a power of 
@@ -106,11 +106,11 @@ than the modulus, inclusive.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal"><A NAME="I1860"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
 defines an integer type whose base range includes at least the values 
-of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>s 
 and is symmetric about zero, excepting possibly an extra negative value. 
 <A NAME="I1861"></A><A NAME="I1862"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
 also defines a constrained first subtype of the type, with a range whose 
-bounds are given by the values of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s, 
+bounds are given by the values of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>s, 
 converted to the type being defined.&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
@@ -183,7 +183,7 @@ all integer types to be descendants of <I>root_integer</I>.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00152.TXT">AI95-00152-01</A></I>} 
 Note that this derivation does not imply any inheritance of subprograms. 
 Subprograms are inherited only for types derived by a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
-(see <A HREF="AA-3-4.html">3.4</A>), or a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+(see <A HREF="AA-3-4.html">3.4</A>), or a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 (see <A HREF="AA-7-3.html">7.3</A>, <A HREF="AA-7-3-1.html">7.3.1</A>, 
 and <A HREF="AA-12-5-1.html">12.5.1</A>).&nbsp;</div>
 <div class="paranum"><a name="p14.b">14.b</a></div>
@@ -285,7 +285,7 @@ nonstandard. An implementation may place arbitrary restrictions on the
 use of such types; it is implementation defined whether operators that 
 are predefined for &ldquo;any integer type&rdquo; are defined for a particular 
 nonstandard integer type. [In any case, such types are not permitted 
-as <SPAN Class="swiss"><A HREF="AA-12-3.html#S0296">explicit_generic_actual_parameter</A></SPAN>s 
+as <SPAN Class="swiss"><A HREF="AA-12-3.html#S0318">explicit_generic_actual_parameter</A></SPAN>s 
 for formal scalar types &mdash; see <A HREF="AA-12-5-2.html">12.5.2</A>.] 
 </div>
 <div class="paranum"><a name="p26.a">26.a</a></div>
@@ -380,7 +380,7 @@ operators are predefined, plus bit-wise logical operators (<B>and</B>,
 types declared in the language-defined package Interfaces (see <A HREF="AA-B-2.html">B.2</A>), 
 functions are defined that provide bit-wise shifting and rotating.</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Notes">35&nbsp;&nbsp;Modular types match a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
+<div class="Notes">35&nbsp;&nbsp;Modular types match a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
 of the form &quot;<B>type</B> T <B>is mod</B> &lt;&gt;;&quot;; signed 
 integer types match &quot;<B>type</B> T <B>is range</B> &lt;&gt;;&quot; 
 (see <A HREF="AA-12-5-2.html">12.5.2</A>).&nbsp;</div>
@@ -468,7 +468,7 @@ one's complement machines.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

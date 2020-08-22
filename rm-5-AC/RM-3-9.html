@@ -34,9 +34,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-8-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,14 +45,14 @@
 <HR>
 <H1>3.9 Tagged Types and Type Extensions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2170"></A><A NAME="I2171"></A><A NAME="I2172"></A><A NAME="I2173"></A><A NAME="I2174"></A>Tagged 
+<div class="Normal"><A NAME="I2174"></A><A NAME="I2175"></A><A NAME="I2176"></A><A NAME="I2177"></A><A NAME="I2178"></A>Tagged 
 types and type extensions support object-oriented programming, based 
 on inheritance with extension and run-time polymorphism via <I>dispatching 
-operations</I>. <A NAME="I2175"></A><A NAME="I2176"></A><A NAME="I2177"></A></div>
+operations</I>. <A NAME="I2179"></A><A NAME="I2180"></A><A NAME="I2181"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Normal"><A NAME="I2178"></A>A record type or private type 
+<div class="Normal"><A NAME="I2182"></A>A record type or private type 
 that has the reserved word <B>tagged</B> in its declaration is called 
 a <I>tagged</I> type.<span class="insert2">&nbsp;In addition, an interface 
 type is a tagged type, as is a task or protected type derived from an 
@@ -60,10 +60,10 @@ interface (see <A HREF="RM-3-9-4.html">3.9.4</A>).</span> When deriving
 from a tagged type, <span class="insert2">as</span><span class="delete2">&nbsp;additional 
 components may be defined. As</span> for any derived type, additional 
 primitive subprograms may be defined, and inherited primitive subprograms 
-may be overridden. <A NAME="I2179"></A><A NAME="I2180"></A>The derived 
+may be overridden. <A NAME="I2183"></A><A NAME="I2184"></A>The derived 
 type is called an <I>extension</I> of <span class="insert2">its</span><span class="delete2">&nbsp;the</span> 
 ancestor <span class="insert2">types</span><span class="delete2">&nbsp;type</span>, 
-or simply a <I>type extension</I>.<span class="delete2">&nbsp;<A NAME="I2181"></A><A NAME="I2182"></A><A NAME="I2183"></A>Every 
+or simply a <I>type extension</I>.<span class="delete2">&nbsp;<A NAME="I2185"></A><A NAME="I2186"></A><A NAME="I2187"></A>Every 
 type extension is also a tagged type, and is either a <I>record extension</I> 
 or a <I>private extension</I> of some other tagged type. A record extension 
 is defined by a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN> 
@@ -72,7 +72,7 @@ A private extension, which is a partial view of a record extension, can
 be declared in the visible part of a package (see <A HREF="RM-7-3.html">7.3</A>) 
 or in a generic formal part (see <A HREF="RM-12-5-1.html">12.5.1</A>).</span></div>
 <div class="paranum"><a name="p2.1">2.1/2</a></div>
-<div class="Normal">&nbsp;<span class="insert2"><A NAME="I2184"></A><A NAME="I2185"></A><A NAME="I2186"></A>Every 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I2188"></A><A NAME="I2189"></A><A NAME="I2190"></A>Every 
 type extension is also a tagged type, and is a <I>record extension</I> 
 or a <I>private extension</I> of some other tagged type, or a noninterface 
 synchronized tagged type (see <A HREF="RM-3-9-4.html">3.9.4</A>). A record 
@@ -85,56 +85,56 @@ in the visible part of a package (see <A HREF="RM-7-3.html">7.3</A>)
 or in a generic formal part (see <A HREF="RM-12-5-1.html">12.5.1</A>).</span> 
 </div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I2187"></A>An object of a tagged type has 
+<div class="Normal"><A NAME="I2191"></A>An object of a tagged type has 
 an associated (run-time) <I>tag</I> that identifies the specific tagged 
 type used to create the object originally. The tag of an operand of a 
 class-wide tagged type <I>T</I>'Class controls which subprogram body 
 is to be executed when a primitive subprogram of type <I>T</I> is applied 
-to the operand (see <A HREF="RM-3-9-2.html">3.9.2</A>); <A NAME="I2188"></A>using 
+to the operand (see <A HREF="RM-3-9-2.html">3.9.2</A>); <A NAME="I2192"></A>using 
 a tag to control which body to execute is called <I>dispatching</I>. 
-<A NAME="I2189"></A><A NAME="I2190"></A><A NAME="I2191"></A><A NAME="I2192"></A></div>
+<A NAME="I2193"></A><A NAME="I2194"></A><A NAME="I2195"></A><A NAME="I2196"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">The tag of a specific tagged type identifies the 
 <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 of the type<span class="insert2">, and for a type extension, is sufficient 
 to uniquely identify the type among all descendants of the same ancestor</span>. 
-If a declaration for a tagged type occurs within a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0290">generic_package_declaration</A></SPAN>, 
+If a declaration for a tagged type occurs within a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0312">generic_package_declaration</A></SPAN>, 
 then the corresponding type declarations in distinct instances of the 
 generic package are associated with distinct tags. For a tagged type 
 that is local to a generic package body<span class="insert2">&nbsp;and with 
 all of its ancestors (if any) also local to the generic body</span>, 
 the language does not specify whether repeated instantiations of the 
-generic body result in distinct tags.<A NAME="I2193"></A>&nbsp;</div>
+generic body result in distinct tags.<A NAME="I2197"></A>&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples"><A NAME="I2194"></A><B>package</B>&nbsp;Ada.Tags&nbsp;<span class="delete5">&nbsp;<B>is</B></span><BR>
+<div class="Examples"><A NAME="I2198"></A><B>package</B>&nbsp;Ada.Tags&nbsp;<span class="delete5">&nbsp;<B>is</B></span><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2"></span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Tag);</span></span><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><B>type</B>&nbsp;<A NAME="I2195"></A>Tag&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><B>type</B>&nbsp;<A NAME="I2199"></A>Tag&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Tag);</span></div>
 <div class="paranum"><a name="p6.1">6.1/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2196"></A>No_Tag&nbsp;:&nbsp;<B>constant</B>&nbsp;Tag;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2200"></A>No_Tag&nbsp;:&nbsp;<B>constant</B>&nbsp;Tag;</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2197"></A>Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2198"></A>Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2199"></A>Wide_Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</span><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2200"></A>External_Tag(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2201"></A>Internal_Tag(External&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Tag;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2201"></A>Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2202"></A>Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2203"></A>Wide_Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</span><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2204"></A>External_Tag(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2205"></A>Internal_Tag(External&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Tag;</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2202"></A>Descendant_Tag(External&nbsp;:&nbsp;String;&nbsp;Ancestor&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2203"></A>Is_Descendant_At_Same_Level(Descendant,&nbsp;Ancestor&nbsp;:&nbsp;Tag)<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2206"></A>Descendant_Tag(External&nbsp;:&nbsp;String;&nbsp;Ancestor&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2207"></A>Is_Descendant_At_Same_Level(Descendant,&nbsp;Ancestor&nbsp;:&nbsp;Tag)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p7.2">7.2/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2204"></A>Parent_Tag&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2208"></A>Parent_Tag&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;</span></div>
 <div class="paranum"><a name="p7.3">7.3/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I2205"></A>Tag_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Tag;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I2209"></A>Tag_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Tag;</span></div>
 <div class="paranum"><a name="p7.4">7.4/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2206"></A>Interface_Ancestor_Tags&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag_Array;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2210"></A>Interface_Ancestor_Tags&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag_Array;</span></div>
 <div class="paranum"><a name="p7.5">7.5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2207"></A>Is_Abstract&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2211"></A>Is_Abstract&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2208"></A>Tag_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2212"></A>Tag_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -147,7 +147,7 @@ value of type Tag.</span>&nbsp;</div>
 returns the full expanded name of the first subtype of the specific type 
 identified by the tag, in upper case, starting with a root library unit. 
 The result is implementation defined if the type is declared within an 
-unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0176">block_statement</A></SPAN>. 
+unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0191">block_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert2">The function Expanded_Name 
@@ -194,7 +194,7 @@ semantics of functions Descendant_Tag and Is_Descendant_At_Same_Level,
 a tagged type T2 is a <I>descendant</I> of a type T1 if it is the same 
 as T1, or if its parent type or one of its progenitor types is a descendant 
 of type T1 by this rule, even if at the point of the declaration of T2, 
-one of the derivations in the chain is not visible.<A NAME="I2209"></A></span></div>
+one of the derivations in the chain is not visible.<A NAME="I2213"></A></span></div>
 <div class="paranum"><a name="p12.4">12.4/4</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert2">The function Parent_Tag returns 
 the tag of the parent type of the type whose tag is T. If the type does 
@@ -206,7 +206,7 @@ returns an array containing the tag of each interface ancestor type of
 the type whose tag is T, other than T itself. The lower bound of the 
 returned array is 1, and the order of the returned tags is unspecified. 
 Each tag appears in the result exactly once. If the type whose tag is 
-T has no interface ancestors, a null array is returned.</span><A NAME="I2210"></A></div>
+T has no interface ancestors, a null array is returned.</span><A NAME="I2214"></A></div>
 <div class="paranum"><a name="p12.6">12.6/3</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert3">The function Is_Abstract 
 returns True if the type whose tag is T is abstract, and False otherwise.</span></div>
@@ -215,18 +215,18 @@ returns True if the type whose tag is T is abstract, and False otherwise.</span>
 or class-wide), the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="WideHanging-Term">S'Class</div><div class="WideHanging-Body">
-<A NAME="I2211"></A><A NAME="I2212"></A>S'Class denotes a subtype of 
+<A NAME="I2215"></A><A NAME="I2216"></A>S'Class denotes a subtype of 
 the class-wide type (called <I>T</I>'Class in this International Standard) 
 for the class rooted at <I>T</I> (or if S already denotes a class-wide 
 subtype, then S'Class is the same as S).</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="WideHanging-Body"><A NAME="I2213"></A><A NAME="I2214"></A>S'Class 
+<div class="WideHanging-Body"><A NAME="I2217"></A><A NAME="I2218"></A>S'Class 
 is unconstrained. However, if S is constrained, then the values of S'Class 
 are only those that when converted to the type <I>T</I> belong to S. 
 </div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="WideHanging-Term">S'Tag</div><div class="WideHanging-Body">
-<A NAME="I2215"></A><A NAME="I2216"></A>S'Tag denotes the tag of the 
+<A NAME="I2219"></A><A NAME="I2220"></A>S'Tag denotes the tag of the 
 type <I>T</I> (or if <I>T</I> is class-wide, the tag of the root type 
 of the corresponding class). The value of this attribute is of type Tag. 
 </div>
@@ -236,13 +236,13 @@ X that is of a class-wide tagged type (after any implicit dereference),
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="WideHanging-Term">X'Tag</div><div class="WideHanging-Body">
-<A NAME="I2217"></A><A NAME="I2218"></A>X'Tag denotes the tag of X. The 
+<A NAME="I2221"></A><A NAME="I2222"></A>X'Tag denotes the tag of X. The 
 value of this attribute is of type Tag.&nbsp;</div>
 <div class="paranum"><a name="p18.1">18.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">The 
 following language-defined generic function exists:</span></div>
 <div class="paranum"><a name="p18.2">18.2/5</a></div>
-<div class="Examples"><span class="insert2"><A NAME="I2219"></A><B>generic</B><BR>
+<div class="Examples"><span class="insert2"><A NAME="I2223"></A><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Parameters&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Constructor&nbsp;(Params&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Parameters)<BR>
@@ -265,26 +265,26 @@ object given a reference to an object of type Parameters.</span></div>
 <div class="Normal" style="margin-bottom: 0.4em">The tag associated 
 with an object of a tagged type is determined as follows:&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Bulleted"><A NAME="I2220"></A>The tag of a stand-alone object, 
+<div class="Bulleted"><A NAME="I2224"></A>The tag of a stand-alone object, 
 a component, or an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
 of a specific tagged type <I>T</I> identifies <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Bulleted"><A NAME="I2221"></A>The tag of an object created 
+<div class="Bulleted"><A NAME="I2225"></A>The tag of an object created 
 by an allocator for an access type with a specific designated tagged 
 type <I>T</I>, identifies <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted"><A NAME="I2222"></A>The tag of an object of a class-wide 
+<div class="Bulleted"><A NAME="I2226"></A>The tag of an object of a class-wide 
 tagged type is that of its initialization expression.&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Bulleted"><A NAME="I2223"></A>The tag of the result returned 
+<div class="Bulleted"><A NAME="I2227"></A>The tag of the result returned 
 by a function whose result type is a specific tagged type <I>T</I> identifies 
 <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Bulleted"><A NAME="I2224"></A>The tag of the result returned 
+<div class="Bulleted"><A NAME="I2228"></A>The tag of the result returned 
 by a function with a class-wide result type is that of the return <span class="insert2">object</span><span class="delete2">&nbsp;expression</span>. 
 </div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Normal"><A NAME="I2225"></A>The tag is preserved by type 
+<div class="Normal"><A NAME="I2229"></A>The tag is preserved by type 
 conversion and by parameter passing. The tag of a value is the tag of 
 the associated object (see <A HREF="RM-6-2.html">6.2</A>).</div>
 <div class="paranum"><a name="p25.1">25.1/3</a></div>
@@ -303,7 +303,7 @@ Any exception raised by the function is propagated.</span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p25.3">25.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I2226"></A>If an 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I2230"></A>If an 
 internal tag provided to an instance of Tags.Generic_Dispatching_Constructor 
 or to any subprogram declared in package Tags identifies either a type 
 that is not library-level and whose tag has not been created (see <A HREF="RM-13-14.html">13.14</A>), 
@@ -327,7 +327,7 @@ the tag of a type</span><span class="insert3">, if one exists,</span><span class
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Notes">70&nbsp;&nbsp;A type declared with the reserved word 
-<B>tagged</B> should normally be declared in a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>, 
+<B>tagged</B> should normally be declared in a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>, 
 so that new primitive subprograms can be declared for it.</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Notes">71&nbsp;&nbsp;Once an object has been created, its 
@@ -337,14 +337,14 @@ tag never changes.</div>
 unknown discriminants (see <A HREF="RM-3-7.html">3.7</A>). This means 
 that objects of a class-wide type have to be explicitly initialized (whether 
 created by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>), 
+or an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>), 
 and that <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>s 
 have to be explicitly qualified with a specific type when their expected 
 type is class-wide.</div>
 <div class="paranum"><a name="p30">30/2</a></div>
 <div class="Notes">73&nbsp;&nbsp;<span class="insert2">The capability 
 provided by Tags.Generic_Dispatching_Constructor is sometimes known as 
-a <I>factory</I>.<A NAME="I2227"></A><A NAME="I2228"></A></span><span class="delete2">&nbsp;If 
+a <I>factory</I>.<A NAME="I2231"></A><A NAME="I2232"></A></span><span class="delete2">&nbsp;If 
 S denotes an untagged private type whose full type is tagged, then S'Class 
 is also allowed before the full type definition, but only in the private 
 part of the package in which the type is declared (see <A HREF="RM-7-3-1.html">7.3.1</A>). 
@@ -367,7 +367,7 @@ record types:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-8-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -18,14 +18,14 @@
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-11-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -44,29 +44,38 @@ A subpool may be explicitly deallocated using Unchecked_Deallocate_Subpool.
 The following language-defined library procedure exists:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;System.Storage_Pools.Subpools;<BR>
-<A NAME="I6060"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
+<A NAME="I6307"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
 &nbsp;&nbsp;&nbsp;(Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;System.Storage_Pools.Subpools.Subpool_Handle);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 If Subpool is <B>null</B>, a call on Unchecked_Deallocate_Subpool has 
 no effect. Otherwise, the subpool is finalized, and Subpool is set to 
 <B>null</B>.</div>
-<div class="paranum"><a name="p5">5/3</a></div>
+<div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-Finalization of a subpool has the following effects:</div>
-<div class="paranum"><a name="p6">6/3</a></div>
-<div class="Bulleted">The subpool no longer belongs to any pool;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0331-1.TXT">AI12-0331-1</A></I>} 
+Finalization of a subpool has the following effects in the given order:</div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Enumerated-Term"></div><div class="Enumerated-Body">
+<SPAN STYLE="font-size: 80%"><I>This paragraph was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0331-1.TXT">AI12-0331-1</A></I>} 
+</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Bulleted">Any of the objects allocated from the subpool that 
-still exist are finalized in an arbitrary order;<A NAME="I6061"></A></div>
+<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+Any of the objects allocated from the subpool that still exist are finalized 
+in an arbitrary order;<A NAME="I6308"></A></div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
-<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
-All of the objects allocated from the subpool cease to exist;<A NAME="I6062"></A></div>
+<div class="Enumerated-Term">&nbsp;2.</div><div class="Enumerated-Body">
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
+All of the objects allocated from the subpool cease to exist;<A NAME="I6309"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em">The following [dispatching] 
-call is then made:&nbsp;</div>
+<div class="Enumerated-Term" style="margin-bottom: 0.3em">3.</div><div class="Enumerated-Body">
+The following [dispatching] call is then made:&nbsp;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;Deallocate_Subpool(Pool_of_Subpool(Subpool).<B>all</B>,&nbsp;Subpool);</div>
+<div class="paranum"><a name="p9.1">9.1/5</a></div>
+<div class="Enumerated-Term">&nbsp;4.</div><div class="Enumerated-Body">
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0331-1.TXT">AI12-0331-1</A></I>} 
+The subpool ceases to belong to any pool.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 Finalization of a Root_Storage_Pool_With_Subpools object finalizes all 
@@ -97,7 +106,7 @@ be finalized when the Pool_With_Subpools is finalized (by permission
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p10.f">10.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<A NAME="I6063"></A>Unchecked_Deallocate_Subpool is new.&nbsp;</div>
+<A NAME="I6310"></A>Unchecked_Deallocate_Subpool is new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p10.g">10.g/4</a></div>
@@ -106,12 +115,17 @@ be finalized when the Pool_With_Subpools is finalized (by permission
 to exist after the completion of finalization. This is formally an inconsistency 
 (it would be possible to depend on the fact that objects finalized by 
 Unchecked_Deallocate_Subpool still exist), but that violates every sane 
-expectation for a procedure called &quot;Deallocate&quot; something. 
-</div>
+expectation for a procedure called &quot;Deallocate&quot; something.</div>
+<div class="paranum"><a name="p10.h">10.h/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0331-1.TXT">AI12-0331-1</A></I>} 
+Clarified that the steps of deallocating a subpool occur in a specific 
+order. This shouldn't change any implementation; no implementation is 
+going to finalize deallocated objects or implement Unchecked_Deallocate_Subpool 
+so it is certain to raise Constraint_Error.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-11-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

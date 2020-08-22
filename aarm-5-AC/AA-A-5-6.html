@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Big Integers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.5.6 <span class="insert5">Big Integers</span><span class="delete5"></span></H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
+<span class="insert5">The library package Numerics.Big_Numbers.Big_Integers 
+has the following declaration:</span></div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Examples"><span class="insert5"><B>with</B>&nbsp;Ada.Strings.Text_Buffers;<BR>
+<B>package</B>&nbsp;Ada.Numerics.Big_Numbers.Big_Integers<A NAME="I7700"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>&nbsp;<B>is</B></span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7701"></A>Big_Integer&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Integer_Literal&nbsp;=&gt;&nbsp;From_String,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Image&nbsp;=&gt;&nbsp;Put_Image;</span></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7702"></A>Is_Valid&nbsp;(Arg&nbsp;:&nbsp;Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7703"></A>Valid_Big_Integer&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;Is_Valid&nbsp;(Valid_Big_Integer),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</span></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;=&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7704"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7705"></A>Big_Positive&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Valid&nbsp;(Big_Positive)&nbsp;<B>then</B>&nbsp;Big_Positive&nbsp;&gt;&nbsp;0),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Constraint_Error);</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7706"></A>Big_Natural&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Valid&nbsp;(Big_Natural)&nbsp;<B>then</B>&nbsp;Big_Natural&nbsp;=&gt;&nbsp;0),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Constraint_Error);</span></div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7707"></A>In_Range&nbsp;(Arg,&nbsp;Low,&nbsp;High&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Low&nbsp;&lt;=&nbsp;Arg&nbsp;<B>and</B>&nbsp;Arg&nbsp;&lt;=&nbsp;High);</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7708"></A>To_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;In_Range&nbsp;(Arg,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Integer'First),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Integer'Last))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error;</span></div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Int&nbsp;<B>is&nbsp;range</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7709"></A>Signed_Conversions&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7710"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Int)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7711"></A>From_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Int<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;In_Range&nbsp;(Arg,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'First),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'Last))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Signed_Conversions;</span></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Int&nbsp;<B>is&nbsp;mod</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7712"></A>Unsigned_Conversions&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7713"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Int)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7714"></A>From_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Int<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;In_Range&nbsp;(Arg,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'First),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'Last))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Unsigned_Conversions;</span></div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7715"></A>To_String&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;Number_Base&nbsp;:=&nbsp;10)&nbsp;<B>return</B>&nbsp;String<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;To_String'Result'First&nbsp;=&nbsp;1;</span></div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7716"></A>From_String&nbsp;(Arg&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7717"></A>Put_Image<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arg&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Valid_Big_Integer);</span></div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(L&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(L&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;abs&quot;&nbsp;(L&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;mod&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;rem&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;(L&nbsp;:&nbsp;Valid_Big_Integer;&nbsp;R&nbsp;:&nbsp;Natural)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7718"></A>Min&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7719"></A>Max&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7720"></A>Greatest_Common_Divisor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Big_Positive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;(L&nbsp;/=&nbsp;0&nbsp;<B>and</B>&nbsp;R&nbsp;/=&nbsp;0)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error;</span></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Examples"><span class="insert5"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Numerics.Big_Numbers.Big_Integers;</span></div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
+<span class="insert5">To_String and From_String behave analogously to 
+the Put and Get procedures defined in Text_IO.Integer_IO (in particular, 
+with respect to the interpretation of the Width and Base parameters) 
+except that Constraint_Error, not Data_Error, is propagated in error 
+cases and the result of a call To_String with a Width parameter of 0 
+and a nonnegative Arg parameter does not include a leading blank. Put_Image 
+calls To_String (passing in the default values for the Width and Base 
+parameters), prepends a leading blank if the argument is nonnegative, 
+and writes the resulting value to the buffer using Text_Buffers.Put.</span></div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5">The other functions have their usual mathematical 
+meanings.</span></div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
+<span class="insert5">The type Big_Integer needs finalization<A NAME="I7721"></A> 
+(see <A HREF="AA-7-6.html">7.6</A>).</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
+<span class="insert5">For purposes of determining whether predicate checks 
+are performed as part of default initialization, the type Big_Integer 
+is considered to have a subcomponent that has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>.</span></div>
+<div class="paranum"><a name="p23.a">23.a/5</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert5"><B>Ramification: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5">This means that the elaboration of</span>&nbsp;</div>
+<div class="paranum"><a name="p23.b">23.b/5</a></div>
+<div class="SmallExamples"><span class="insert5">Default_Initialized_Object&nbsp;:&nbsp;Valid_Big_Integer;</span></div>
+<div class="paranum"><a name="p23.c">23.c/5</a></div>
+<div class="Annotations"><span class="insert5">is required to propagate 
+Program_Error.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
+<span class="insert5">No storage associated with a Big_Integer object 
+shall be lost upon assignment or scope exit.</span></div>
+<div class="paranum"><a name="p24.a">24.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5">The &ldquo;No storage ... shall be lost&rdquo; 
+requirement does not preclude implementation techniques such as caching 
+or unique number tables.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p24.b">24.b/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
+<span class="insert5"><A NAME="I7722"></A>The package Numerics.Big_Numbers.Big_Integers 
+is new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

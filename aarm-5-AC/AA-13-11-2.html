@@ -36,9 +36,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-11-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -47,7 +47,7 @@
 <HR>
 <H1>13.11.2 Unchecked Storage Deallocation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I6265"></A> <A NAME="I6266"></A><A NAME="I6267"></A><A NAME="I6268"></A><A NAME="I6269"></A>Unchecked 
+<div class="Normal">[<A NAME="I6531"></A> <A NAME="I6532"></A><A NAME="I6533"></A><A NAME="I6534"></A><A NAME="I6535"></A>Unchecked 
 storage deallocation of an object designated by a value of an access 
 type is achieved by a call to an instance of the generic procedure Unchecked_Deallocation.] 
 </div>
@@ -59,11 +59,14 @@ generic library procedure exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Name&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;&nbsp;Object;<BR>
-<A NAME="I6270"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocation(X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Name)<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;</span><span class="insert5">Preelaborate,&nbsp;Nonblocking,&nbsp;</span><span class="insert3">Convention&nbsp;=&gt;&nbsp;Intrinsic;</span><span class="delete3">;<BR>
+<A NAME="I6536"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocation(X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Name)<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;</span><span class="insert5">Preelaborate,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Object'Nonblocking&nbsp;<B>and</B>&nbsp;Name'Storage_Pool'Nonblocking,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert3">Convention&nbsp;=&gt;&nbsp;Intrinsic;</span><span class="delete3">;<BR>
 <B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;Ada.Unchecked_Deallocation);</span><span class="delete5"><BR>
 <B>pragma</B>&nbsp;Preelaborate(Ada.Unchecked_Deallocation);</span></div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
@@ -78,13 +81,13 @@ of Unchecked_Deallocation.&nbsp;</div>
 <span class="insert3">A call on an instance of Unchecked_Deallocation 
 is illegal if the actual access type of the instance is a type for which 
 the Storage_Size has been specified by a static expression with value 
-zero or is defined by the language to be zero. <A NAME="I6271"></A>In 
+zero or is defined by the language to be zero. <A NAME="I6537"></A>In 
 addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span></div>
 <div class="paranum"><a name="p3.b">3.b/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>This 
-rule is the same as the rule for <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s. 
+rule is the same as the rule for <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s. 
 We could have left the last sentence out, as a call to Unchecked_Deallocation 
 cannot occur in a specification as it is a procedure call, but we left 
 it for consistency and to avoid future maintenance hazards.</span>&nbsp;</div>
@@ -127,14 +130,14 @@ tasks, the object might not be deallocated.&nbsp;</div>
 Free calls only the specified Deallocate procedure to do deallocation.<span class="delete3">&nbsp;For any given object deallocation, the number of calls to Free (usually 
 one) will be equal to the number of Allocate calls it took to allocate 
 the object. We do not define the relative order of multiple calls used 
-to deallocate the same object &mdash; that is, if the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+to deallocate the same object &mdash; that is, if the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 allocated two pieces <I>x</I> and <I>y</I>, then Free might deallocate 
 <I>x</I> and then <I>y</I>, or it might deallocate <I>y</I> and then 
 <I>x</I>.</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
-<A NAME="I6272"></A><A NAME="I6273"></A><A NAME="I6274"></A><A NAME="I6275"></A>After 
+<A NAME="I6538"></A><A NAME="I6539"></A><A NAME="I6540"></A><A NAME="I6541"></A>After 
 <span class="insert4">the finalization step of&nbsp;</span>Free(X), the object 
 designated by X, and any subcomponents <span class="insert2">(and coextensions) 
 </span>thereof, no longer exist; their storage can be reused for other 
@@ -142,7 +145,7 @@ purposes.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6276"></A>It 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6542"></A>It 
 is a bounded error to free a discriminated, unterminated task object. 
 The possible consequences are:&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
@@ -152,12 +155,11 @@ deallocated by freeing the task object.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Bulleted">No exception is raised.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted"><A NAME="I6277"></A><A NAME="I6278"></A>Program_Error 
-or Tasking_Error is raised at the point of the deallocation.</div>
+<div class="Bulleted">Program_Error or Tasking_Error is raised at the 
+point of the deallocation.<A NAME="I6543"></A> <A NAME="I6544"></A></div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Bulleted"><A NAME="I6279"></A><A NAME="I6280"></A>Program_Error 
-or Tasking_Error is raised in the task the next time it references any 
-of the discriminants.&nbsp;</div>
+<div class="Bulleted">Program_Error or Tasking_Error is raised in the 
+task the next time it references any of the discriminants.&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>This last case presumes 
 an implementation where the task references its discriminants indirectly, 
@@ -172,7 +174,7 @@ be reclaimed.&nbsp;</div>
 <div class="paranum"><a name="p15.1">15.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
 <span class="insert4">An access value that designates a nonexistent object 
-is called a <I>dangling reference</I>.<A NAME="I6281"></A><A NAME="I6282"></A></span></div>
+is called a <I>dangling reference</I>.<A NAME="I6545"></A><A NAME="I6546"></A></span></div>
 <div class="paranum"><a name="p15.b">15.b/4</a></div>
 <div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B>These 
 can result from use of Unchecked_Deallocation, Unchecked_Deallocate_Subpool, 
@@ -183,9 +185,9 @@ which is stronger and thus takes precedence.</span>&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
 <span class="insert4">[If a dangling reference is dereferenced (implicitly 
 or explicitly), execution is erroneous (see below).] If there is no explicit 
-or implicit dereference, then it is a bounded error <A NAME="I6283"></A>to 
+or implicit dereference, then it is a bounded error <A NAME="I6547"></A>to 
 evaluate an expression whose result is a dangling reference. If the error 
-is detected, either Constraint_Error or Program_Error is raised. <A NAME="I6284"></A><A NAME="I6285"></A>Otherwise, 
+is detected, either Constraint_Error or Program_Error is raised. <A NAME="I6548"></A><A NAME="I6549"></A>Otherwise, 
 execution proceeds normally, but with the possibility that the access 
 value designates some other existing object.</span></div>
 <div class="paranum"><a name="p15.c">15.c/4</a></div>
@@ -227,11 +229,11 @@ are handled (see <A HREF="AA-13-9-1.html">13.9.1</A>).</span>&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<A NAME="I6286"></A><A NAME="I6287"></A>Evaluating a name that denotes 
+<A NAME="I6550"></A><A NAME="I6551"></A>Evaluating a name that denotes 
 a nonexistent object<span class="insert3">, or a protected subprogram 
 or subprogram renaming whose associated object (if any) is nonexistent, 
 </span>is erroneous. The execution of a call to an instance of Unchecked_Deallocation 
-is erroneous if the object was created other than by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+is erroneous if the object was created other than by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 for an access type whose pool is Name'Storage_Pool.</div>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
@@ -316,14 +318,14 @@ calls to Allocate and Deallocate together.</span></div>
 <div class="paranum"><a name="p19.d">19.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0157-1.TXT">AI05-0157-1</A></I>} 
 <span class="insert3"><B>Correction:</B> Added wording so that calling 
-an instance of Unchecked_Deallocation is treated similarly to <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
-for access types where <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
+an instance of Unchecked_Deallocation is treated similarly to <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
+for access types where <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 would be banned.</span>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p19.e">19.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
-<span class="insert4"><A NAME="I6288"></A><B>Corrigendum:</B> Defined 
+<span class="insert4"><A NAME="I6552"></A><B>Corrigendum:</B> Defined 
 a &quot;dangling reference&quot;, and specified that a dangling reference 
 might designate some other existing object. This allows simple implementations 
 of access values and reuse of object memory after deallocation. In prior 
@@ -356,7 +358,7 @@ the end of finalization and the end of the call to the instance of Unchecked_Dea
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-11-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

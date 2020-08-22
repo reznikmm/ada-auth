@@ -20,9 +20,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,15 +36,15 @@
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Interrupt_Handler is as follows:&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8920"></A><A NAME="I8921"></A>Interrupt_Handler 
-(<I>handler_</I><A NAME="I8922"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9530"></A><A NAME="I9531"></A>Interrupt_Handler 
+(<I>handler_</I><A NAME="I9532"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>);</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Attach_Handler is as follows:&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8923"></A><A NAME="I8924"></A>Attach_Handler 
-(<I>handler_</I><A NAME="I8925"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
-<A NAME="I8926"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9533"></A><A NAME="I9534"></A>Attach_Handler 
+(<I>handler_</I><A NAME="I9535"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
+<A NAME="I9536"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
@@ -55,16 +55,16 @@ shall resolve to denote a protected procedure with a parameterless profile.</div
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">For the Attach_Handler pragma, the expected type 
 for the expression is Interrupts.Interrupt_Id (see <A HREF="RM-C-3-2.html">C.3.2</A>). 
-<A NAME="I8927"></A></div>
+<A NAME="I9537"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">The Attach_Handler and Interrupt_Handler pragmas 
-are only allowed immediately within the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN> 
-where the corresponding subprogram is declared. The corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0227">protected_type_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0228">single_protected_declaration</A></SPAN> 
+are only allowed immediately within the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0251">protected_definition</A></SPAN> 
+where the corresponding subprogram is declared. The corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0249">protected_type_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0250">single_protected_declaration</A></SPAN> 
 shall be a library-level declaration, and shall not be declared within 
-a generic body. <A NAME="I8928"></A>In addition to the places where Legality 
+a generic body. <A NAME="I9538"></A>In addition to the places where Legality 
 Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), these rules 
 also apply in the private part of an instance of a generic unit.&nbsp;</div>
 
@@ -76,12 +76,12 @@ for the protected procedure <I>handler_</I><SPAN Class="swiss"><A HREF="RM-4-1.h
 to have the value True. For an implementation that supports Annex C, 
 a pragma Attach_Handler specifies the Attach_Handler aspect (see <A HREF="RM-C-3-1.html">C.3.1</A>) 
 for the protected procedure <I>handler_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-to have the value of the given <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+to have the value of the given <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 as evaluated at object creation time.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

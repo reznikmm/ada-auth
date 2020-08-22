@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,29 +51,29 @@ is defined:</div>
 <div class="Normal" style="margin-bottom: 0.4em">For any task entry 
 X:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term"><A NAME="I8807"></A>X'<A NAME="I8808"></A><A NAME="I8809"></A>Address 
+<div class="WideHanging-Term"><A NAME="I9373"></A>X'<A NAME="I9374"></A><A NAME="I9375"></A>Address 
 </div><div class="WideHanging-Body">
 For a task entry whose address is specified (an <I>interrupt entry</I>), 
 the value refers to the corresponding hardware interrupt. For such an 
 entry, as for any other task entry, the meaning of this value is implementation 
 defined. The value of this attribute is of the type of the subtype System.Address.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Body"><A NAME="I8810"></A>Address may be specified 
-for single entries via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN>. 
+<div class="WideHanging-Body"><A NAME="I9376"></A>Address may be specified 
+for single entries via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I8811"></A>As part of the initialization 
+<div class="Normal"><A NAME="I9377"></A>As part of the initialization 
 of a task object, the address clause for an interrupt entry is elaborated, 
-which evaluates the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+which evaluates the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of the address clause. A check is made that the address specified is 
 associated with some interrupt to which a task entry may be attached. 
-<A NAME="I8812"></A>If this check fails, Program_Error is raised. Otherwise, 
+<A NAME="I9378"></A>If this check fails, Program_Error is raised. Otherwise, 
 the interrupt entry is attached to the interrupt associated with the 
 specified address.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I8813"></A>Upon finalization of the task 
+<div class="Normal"><A NAME="I9379"></A>Upon finalization of the task 
 object, the interrupt entry, if any, is detached from the corresponding 
 interrupt and the default treatment is restored.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -89,8 +89,8 @@ on the specific interrupt.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I8814"></A>It is a bounded error to evaluate 
-E'Caller (see <A HREF="RM-C-7-1.html">C.7.1</A>) in an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN> 
+<div class="Normal"><A NAME="I9380"></A>It is a bounded error to evaluate 
+E'Caller (see <A HREF="RM-C-7-1.html">C.7.1</A>) in an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN> 
 for an interrupt entry. The possible effects are the same as for calling 
 Current_Task from an entry body.&nbsp;</div>
 
@@ -114,7 +114,7 @@ of program execution; that is, not just when they have an interrupt entry
 attached to them.</div>
 <div class="paranum"><a name="p16">16/1</a></div>
 <div class="Normal">Interrupt entry calls may be implemented by having 
-the hardware execute directly the appropriate <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN>. 
+the hardware execute directly the appropriate <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN>. 
 Alternatively, the implementation is allowed to provide an internal interrupt 
 handler to simulate the effect of a normal task calling the entry.</div>
 <div class="paranum"><a name="p17">17</a></div>
@@ -124,18 +124,18 @@ on the specifications and bodies of tasks that have interrupt entries.</div>
 <div class="Normal">It is implementation defined whether direct calls 
 (from the program) to interrupt entries are allowed.</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal">If a <SPAN Class="swiss"><A HREF="RM-9-7.html#S0247">select_statement</A></SPAN> 
-contains both a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
-and an <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0251">accept_alternative</A></SPAN> 
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="RM-9-7.html#S0269">select_statement</A></SPAN> 
+contains both a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0275">terminate_alternative</A></SPAN> 
+and an <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0273">accept_alternative</A></SPAN> 
 for an interrupt entry, then an implementation is allowed to impose further 
-requirements for the selection of the <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
+requirements for the selection of the <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0275">terminate_alternative</A></SPAN> 
 in addition to those given in <A HREF="RM-9-3.html">9.3</A>.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p20">20/1</a></div>
 <div class="Notes">1&nbsp;&nbsp;Queued interrupts correspond to ordinary 
 entry calls. Interrupts that are lost if not immediately processed correspond 
 to conditional entry calls. It is a consequence of the priority rules 
-that an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN> 
+that an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN> 
 executed in response to an interrupt can be executed with the active 
 priority at which the hardware generates the interrupt, taking precedence 
 over lower priority tasks, without a scheduling action.</div>
@@ -156,7 +156,7 @@ entry:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

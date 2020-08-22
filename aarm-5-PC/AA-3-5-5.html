@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -119,9 +119,9 @@ and there is no predicate.&nbsp;</div>
 <div class="Normal">For the evaluation of a call on S'Pos for an enumeration 
 subtype, if the value of the operand does not correspond to the internal 
 code for any enumeration literal of its type [(perhaps due to an uninitialized 
-variable)], then the implementation should raise Program_Error. <A NAME="I1911"></A>This 
+variable)], then the implementation should raise Program_Error. This 
 is particularly important for enumeration types with noncontiguous internal 
-codes specified by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0328">enumeration_representation_clause</A></SPAN>. 
+codes specified by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p8.a.1">8.a.1/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>Program_Error 
@@ -140,7 +140,7 @@ features such as Unchecked_Conversion.)&nbsp;</div>
 of discrete types.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Notes">37&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I1912"></A>The predefined operations of a discrete type include 
+<A NAME="I1911"></A>The predefined operations of a discrete type include 
 the assignment operation, qualification, the membership tests, and the 
 relational operators; for a boolean type they include the short-circuit 
 control forms and the logical operators; for an integer type they include 
@@ -178,7 +178,7 @@ of discrete subtypes:&nbsp;</I></div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p17.a">17.a</a></div>
-<div class="Annotations"><A NAME="I1913"></A>The attributes S'Succ, S'Pred, 
+<div class="Annotations"><A NAME="I1912"></A>The attributes S'Succ, S'Pred, 
 S'Width, S'Image, and S'Value have been generalized to apply to real 
 types as well (see <A HREF="AA-3-5.html">3.5</A>, &ldquo;<A HREF="AA-3-5.html">Scalar 
 Types</A>&rdquo;).&nbsp;</div>
@@ -186,7 +186,7 @@ Types</A>&rdquo;).&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p17.b">17.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0297-1.TXT">AI05-0297-1</A></I>} 
-<A NAME="I1914"></A>The attributes S'First_Valid and S'Last_Valid are 
+<A NAME="I1913"></A>The attributes S'First_Valid and S'Last_Valid are 
 new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
@@ -198,7 +198,7 @@ S'Last_Valid to use the new term &quot;satisfies the predicates&quot;
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -26,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-23.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,7 +40,7 @@
 <H1>A.18.24 <span class="insert3">The Generic Package Containers.Bounded_Ordered_Sets</span><span class="delete3"></span></H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">The language-defined generic package Containers.Bounded_Ordered_Sets<A NAME="I8634"></A> 
+<span class="insert3">The language-defined generic package Containers.Bounded_Ordered_Sets<A NAME="I9203"></A> 
 provides a private type Set and a set of operations. It provides the 
 same operations as the package Containers.Ordered_Sets (see <A HREF="AA-A-18-9.html">A.18.9</A>), 
 with the difference that the maximum storage is bounded.</span></div>
@@ -49,16 +51,16 @@ with the difference that the maximum storage is bounded.</span></div>
 <span class="insert3">The declaration of the generic library package 
 Containers.Bounded_Ordered_Sets has the same contents and semantics as 
 Containers.Ordered_Sets except:</span></div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Bulleted"><span class="insert3">The <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Preelaborate is replaced with <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Pure.</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert3">The&nbsp;</span><span class="insert5">aspect</span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span></span><span class="insert3">&nbsp;Preelaborate is replaced with&nbsp;</span><span class="insert5">aspect</span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span></span><span class="insert3">&nbsp;Pure.</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">The 
 type Set is declared with a discriminant that specifies the capacity 
 (maximum number of elements) as follows:</span>&nbsp;</div>
-<div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;<B>type</B>&nbsp;Set&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>is&nbsp;tagged&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;<B>type</B>&nbsp;Set&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>is&nbsp;tagged&nbsp;private</B></span><span class="insert5">...</span><span class="insert3"></span><span class="insert3"><span class="delete5">;</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted"><span class="insert3">The type Set needs finalization 
 if and only if type Element_Type needs finalization.</span></div>
@@ -70,35 +72,75 @@ unless the element type depends on that package. The objects returned
 from the Iterator and Reference functions probably do depend on package 
 Ada.Finalization. Restricted environments may need to avoid use of those 
 functions and their associated types.</span>&nbsp;</div>
-<div class="paranum"><a name="p7">7/3</a></div>
-<div class="Bulleted"><span class="insert3">If Insert (or Include) adds 
-an element, a check is made that the capacity is not exceeded, and Capacity_Error 
-is raised if this check fails.</span></div>
-<div class="paranum"><a name="p8">8/3</a></div>
-<div class="Bulleted"><span class="insert3">In procedure Assign, if Source 
-length is greater than Target capacity, then Capacity_Error is propagated.</span></div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
+<span class="insert5">The function Empty is replaced by:</span></div>
+<div class="paranum"><a name="p6.2">6.2/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Empty&nbsp;(Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Set<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty'Result.Capacity&nbsp;=&nbsp;Capacity&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Empty'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Empty'Result)&nbsp;=&nbsp;0;</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5"></span><span class="insert3"></span><span class="insert5">For 
+procedures Insert and Include, the part of the precondition reading:</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;If 
+Insert (or Include) adds an element, a check is made that the capacity 
+is not exceeded, and Capacity_Error is raised if this check fails.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</span></div>
+<div class="paranum"><a name="p7.2">7.2/5</a></div>
+<div class="Bulleted-NoPrefix" style="margin-bottom: 0.3em"><span class="insert5">is 
+replaced by:</span></div>
+<div class="paranum"><a name="p7.3">7.3/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5"></span><span class="insert3">In procedure Assign, 
+</span><span class="insert5">the precondition is altered to:</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;if 
+Source length is greater than Target capacity, then Capacity_Error is 
+propagated.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p8.1">8.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">The 
 function Copy is replaced with:</span>&nbsp;</div>
-<div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8635"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Set;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;Set;</span></div>
-<div class="paranum"><a name="p11">11/3</a></div>
-<div class="Indented2"><span class="insert3">Returns a set whose elements 
-are initialized from the values in Source. If Capacity is 0, then the 
-set capacity is the length of Source; if Capacity is equal to or greater 
-than the length of Source, the set capacity is the specified value; otherwise, 
-the operation propagates Capacity_Error.</span>&nbsp;</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9204"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Set;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;Map</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Length&nbsp;(Source)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;<B>else</B>&nbsp;Capacity)</span><span class="insert3">;</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert3">Returns a set with key/element pairs initialized 
+from the values in Source.</span><span class="insert3"><span class="delete5">&nbsp;If Capacity is 0, then the set capacity is the length of Source; if Capacity 
+is equal to or greater than the length of Source, the set capacity is 
+the specified value; otherwise, the operation propagates Capacity_Error.</span></span><span class="insert3"></span> 
+</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3"><A NAME="I8636"></A>It is a bounded error to assign 
+<span class="insert3"><A NAME="I9205"></A>It is a bounded error to assign 
 from a bounded set object while tampering with elements [or cursors] 
 of that object is prohibited. Either Program_Error is raised by the assignment, 
 execution proceeds with the target object prohibiting tampering with 
-elements [or cursors], or execution proceeds normally.</span>&nbsp;</div>
+elements [or cursors], or execution proceeds normally.<A NAME="I9206"></A></span> 
+</div>
 <div class="paranum"><a name="p12.a">12.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Proof:&nbsp;</B>Tampering 
 with elements includes tampering with cursors, so we only really need 
@@ -110,7 +152,7 @@ to talk about tampering with elements here; we mention cursors for clarity.</spa
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 <span class="insert3">When a bounded set object <I>S</I> is finalized, 
 if tampering with cursors is prohibited for <I>S</I> other than due to 
-an assignment from another set, then execution is erroneous. <A NAME="I8637"></A></span></div>
+an assignment from another set, then execution is erroneous. <A NAME="I9207"></A></span></div>
 <div class="paranum"><a name="p13.a">13.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This is 
 a tampering event, but since the implementation is not allowed to use 
@@ -168,12 +210,12 @@ Move to minimize copying does not apply to bounded ordered sets.</span></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0184-1.TXT">AI05-0184-1</A></I>} 
-<span class="insert3"><A NAME="I8638"></A> The generic package Containers.Bounded_Ordered_Sets 
+<span class="insert3"><A NAME="I9208"></A> The generic package Containers.Bounded_Ordered_Sets 
 is new.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-23.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

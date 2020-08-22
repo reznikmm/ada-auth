@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,7 +43,7 @@ Round_Robin_Within_Priorities and the package Round_Robin.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">The <I>policy</I>_<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-Round_Robin_Within_Priorities is a task dispatching policy.<A NAME="I8126"></A><A NAME="I8127"></A></div>
+Round_Robin_Within_Priorities is a task dispatching policy.<A NAME="I8682"></A><A NAME="I8683"></A></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
@@ -51,16 +51,16 @@ library package exists:&nbsp;</div>
 <div class="Examples"><B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>package</B>&nbsp;Ada.Dispatching.Round_Robin<span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8128"></A><BR>
-&nbsp;&nbsp;<A NAME="I8129"></A>Default_Quantum&nbsp;:&nbsp;<B>constant</B>&nbsp;Ada.Real_Time.Time_Span&nbsp;:=<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8684"></A><BR>
+&nbsp;&nbsp;<A NAME="I8685"></A>Default_Quantum&nbsp;:&nbsp;<B>constant</B>&nbsp;Ada.Real_Time.Time_Span&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8130"></A>Set_Quantum&nbsp;(Pri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8686"></A>Set_Quantum&nbsp;(Pri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8131"></A>Set_Quantum&nbsp;(Low,&nbsp;High&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8687"></A>Set_Quantum&nbsp;(Low,&nbsp;High&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8132"></A>Actual_Quantum&nbsp;(Pri&nbsp;:&nbsp;System.Priority)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8688"></A>Actual_Quantum&nbsp;(Pri&nbsp;:&nbsp;System.Priority)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Real_Time.Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8133"></A>Is_Round_Robin&nbsp;(Pri&nbsp;:&nbsp;System.Priority)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8689"></A>Is_Round_Robin&nbsp;(Pri&nbsp;:&nbsp;System.Priority)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Dispatching.Round_Robin;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">When task dispatching policy Round_Robin_Within_Priorities 
@@ -135,7 +135,7 @@ an inherited priority will not be subject to round robin dispatching.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

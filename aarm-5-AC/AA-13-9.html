@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 <HR>
 <H1>13.9 Unchecked Type Conversions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I6180"></A> <A NAME="I6181"></A><A NAME="I6182"></A><A NAME="I6183"></A><A NAME="I6184"></A>An 
+<div class="Normal">[<A NAME="I6446"></A> <A NAME="I6447"></A><A NAME="I6448"></A><A NAME="I6449"></A><A NAME="I6450"></A>An 
 unchecked type conversion can be achieved by a call to an instance of 
 the generic function Unchecked_Conversion.]&nbsp;</div>
 
@@ -54,7 +54,7 @@ generic library function exists:&nbsp;</div>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Source(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Target(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-<A NAME="I6185"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<span class="insert3"><BR>
+<A NAME="I6451"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<span class="insert3"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;</span><span class="insert5">Pure,&nbsp;Nonblocking,&nbsp;</span><span class="insert3">Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<span class="delete3"><BR>
 <B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;Ada.Unchecked_Conversion);</span><span class="delete5"><BR>
 <B>pragma</B>&nbsp;Pure(Ada.Unchecked_Conversion);</span></div>
@@ -89,7 +89,7 @@ Target'Alignment<span class="insert3">&nbsp;or Target'Alignment is zero</span>.<
 <div class="Bulleted">The target subtype is not an unconstrained composite 
 subtype.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I6186"></A><A NAME="I6187"></A>S and the 
+<div class="Bulleted"><A NAME="I6452"></A><A NAME="I6453"></A>S and the 
 target subtype both have a contiguous representation.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted">The representation of S is a representation of 
@@ -171,32 +171,32 @@ data in an instance of Unchecked_Conversion.</span></div>
 no advice to offer about discriminants and tag fields.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Normal">The implementation should not generate unnecessary 
-run-time checks to ensure that the representation of S is a representation 
+runtime checks to ensure that the representation of S is a representation 
 of the target type. It should take advantage of the permission to return 
 by reference when possible. Restrictions on unchecked conversions should 
 be avoided unless required by the target environment.&nbsp;</div>
 <div class="paranum"><a name="p15.a.1">15.a.1/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Implementation Advice: 
-</B></span><span class="insert2">There should not be unnecessary run-time 
+</B></span><span class="insert2">There should not be unnecessary runtime 
 checks on the result of an Unchecked_Conversion; the result should be 
 returned by reference when possible. Restrictions on Unchecked_Conversions 
 should be avoided.</span></div>
 <div class="paranum"><a name="p15.a">15.a</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>As an example of 
-an unnecessary run-time check, consider a record type with gaps between 
+an unnecessary runtime check, consider a record type with gaps between 
 components. The compiler might assume that such gaps are always zero 
 bits. If a value is produced that does not obey that assumption, then 
 the program might misbehave. The implementation should not generate extra 
 code to check for zero bits (except, perhaps, in a special error-checking 
 mode).&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6188"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6454"></A>The 
 recommended level of support for unchecked conversions is:&nbsp;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 Unchecked conversions should be supported and should be reversible in 
 the cases where this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-defines the result.<A NAME="I6189"></A> <A NAME="I6190"></A>To enable 
+defines the result.<A NAME="I6455"></A> <A NAME="I6456"></A>To enable 
 meaningful use of unchecked conversion, a contiguous representation should 
 be used for elementary subtypes, for statically constrained array subtypes 
 whose component subtype is one of the subtypes described in this paragraph, 
@@ -226,7 +226,7 @@ slightly, giving a defined result in more cases.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

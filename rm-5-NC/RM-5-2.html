@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,77 +37,77 @@
 <HR>
 <H1>5.2 Assignment Statements</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
 replaces the current value of a variable with the result of evaluating 
-an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>. 
+an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">assignment_statement</SPAN><A NAME="I3220"></A><A NAME="S0159"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<I>variable_</I><A NAME="I3221"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;:=&nbsp;<A NAME="I3222"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">assignment_statement</SPAN><A NAME="I3335"></A><A NAME="S0173"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<I>variable_</I><A NAME="I3336"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;:=&nbsp;<A NAME="I3337"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
-includes the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-and the <I>assignment</I> of the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-into the <I>target</I>. <A NAME="I3223"></A><A NAME="I3224"></A>An assignment 
-operation (as opposed to an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>) 
+<div class="Normal">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
+includes the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+and the <I>assignment</I> of the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+into the <I>target</I>. <A NAME="I3338"></A><A NAME="I3339"></A>An assignment 
+operation (as opposed to an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN>) 
 is performed in other contexts as well, including object initialization 
-and by-copy parameter passing. <A NAME="I3225"></A><A NAME="I3226"></A>The 
+and by-copy parameter passing. <A NAME="I3340"></A><A NAME="I3341"></A>The 
 <I>target</I> of an assignment operation is the view of the object to 
-which a value is being assigned; the target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+which a value is being assigned; the target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
 is the variable denoted by the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><A NAME="I3227"></A>The <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
-is expected to be of any type. <A NAME="I3228"></A>The expected type 
-for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal"><A NAME="I3342"></A>The <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
+is expected to be of any type. <A NAME="I3343"></A>The expected type 
+for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is the type of the target.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">The target denoted by the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-shall be a variable of a nonlimited type.<A NAME="I3229"></A><A NAME="I3230"></A></div>
+shall be a variable of a nonlimited type.<A NAME="I3344"></A><A NAME="I3345"></A></div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">If the target is of a tagged class-wide type <I>T</I>'Class, 
-then the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+then the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 shall either be dynamically tagged, or of type <I>T</I> and tag-indeterminate 
 (see <A HREF="RM-3-9-2.html">3.9.2</A>).&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I3231"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I3346"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN>, 
 the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-and the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-are first evaluated in an arbitrary order.<A NAME="I3232"></A>&nbsp;</div>
+and the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+are first evaluated in an arbitrary order.<A NAME="I3347"></A>&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">When the type of the 
 target is class-wide:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I3233"></A>If the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted"><A NAME="I3348"></A>If the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is tag-indeterminate (see <A HREF="RM-3-9-2.html">3.9.2</A>), then the 
-controlling tag value for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+controlling tag value for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is the tag of the target;&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted"><A NAME="I3234"></A><A NAME="I3235"></A><A NAME="I3236"></A>Otherwise 
-(the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted"><A NAME="I3349"></A><A NAME="I3350"></A><A NAME="I3351"></A>Otherwise 
+(the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is dynamically tagged), a check is made that the tag of the value of 
-the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is the same as that of the target; if this check fails, Constraint_Error 
 is raised.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal">The value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">The value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is converted to the subtype of the target. The conversion might raise 
-an exception (see <A HREF="RM-4-6.html">4.6</A>). <A NAME="I3237"></A></div>
+an exception (see <A HREF="RM-4-6.html">4.6</A>). <A NAME="I3352"></A></div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">In cases involving controlled types, the target is 
 finalized, and an anonymous object might be used as an intermediate in 
 the assignment, as described in <A HREF="RM-7-6-1.html">7.6.1</A>, &ldquo;<A HREF="RM-7-6-1.html">Completion 
-and Finalization</A>&rdquo;. <A NAME="I3238"></A><A NAME="I3239"></A>In 
-any case, the converted value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+and Finalization</A>&rdquo;. <A NAME="I3353"></A><A NAME="I3354"></A>In 
+any case, the converted value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is then <I>assigned</I> to the target, which consists of the following 
 two steps:&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
@@ -115,11 +115,11 @@ two steps:&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Bulleted">If any part of the target is controlled, its value 
 is adjusted as explained in subclause <A HREF="RM-7-6.html">7.6</A>. 
-<A NAME="I3240"></A></div>
+<A NAME="I3355"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Notes">2&nbsp;&nbsp;The tag of an object never changes; in 
-particular, an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+particular, an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
 does not change the tag of the target.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
@@ -163,17 +163,17 @@ B&nbsp;:&nbsp;String(3&nbsp;..&nbsp;33);<BR>
 A(4&nbsp;..&nbsp;12)&nbsp;:=&nbsp;A(1&nbsp;..&nbsp;9);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;A(1&nbsp;..&nbsp;12)&nbsp;=&nbsp;&quot;tartar&nbsp;sauce&quot;</I></SPAN></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Notes">3&nbsp;&nbsp;<I>Notes on the examples:</I> <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">Assignment_statement</A></SPAN>s 
+<div class="Notes">3&nbsp;&nbsp;<I>Notes on the examples:</I> <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">Assignment_statement</A></SPAN>s 
 are allowed even in the case of overlapping slices of the same array, 
 because the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 are both evaluated before copying the value into the variable. In the 
 above example, an implementation yielding A(1 .. 12) = &quot;tartartartar&quot; 
 would be incorrect.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

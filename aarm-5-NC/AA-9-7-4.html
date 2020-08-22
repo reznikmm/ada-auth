@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -34,32 +34,32 @@
 <HR>
 <H1>9.7.4 Asynchronous Transfer of Control</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[An asynchronous <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN> 
+<div class="Normal">[An asynchronous <SPAN Class="swiss"><A HREF="AA-9-7.html#S0269">select_statement</A></SPAN> 
 provides asynchronous transfer of control upon completion of an entry 
 call or the expiration of a delay.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">asynchronous_select</SPAN><A NAME="I4846"></A><A NAME="S0258"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">asynchronous_select</SPAN><A NAME="I5059"></A><A NAME="S0280"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4847"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0259">triggering_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5060"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>then&nbsp;abort</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4848"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5061"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN><BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">triggering_alternative</SPAN><A NAME="I4849"></A><A NAME="S0259"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4850"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN>&nbsp;[<A NAME="I4851"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">triggering_alternative</SPAN><A NAME="I5062"></A><A NAME="S0281"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5063"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN>&nbsp;[<A NAME="I5064"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>]</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<SPAN Class="swiss">triggering_statement</SPAN><A NAME="I4852"></A><A NAME="S0260"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4853"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0256">procedure_or_entry_call</A></SPAN>&nbsp;|&nbsp;<A NAME="I4854"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN></div>
+<SPAN Class="swiss">triggering_statement</SPAN><A NAME="I5065"></A><A NAME="S0282"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5066"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN>&nbsp;|&nbsp;<A NAME="I5067"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">abortable_part</SPAN><A NAME="I4855"></A><A NAME="S0261"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4856"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">abortable_part</SPAN><A NAME="I5068"></A><A NAME="S0283"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5069"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I4857"></A><A NAME="I4858"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN> 
-is a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0256">procedure_or_entry_call</A></SPAN>, 
+<A NAME="I5070"></A><A NAME="I5071"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN>, 
 the <I>entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 or <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>, 
@@ -67,51 +67,51 @@ and actual parameters are evaluated as for a simple entry call (see <A HREF="AA-
 or procedure call (see <A HREF="AA-6-4.html">6.4</A>). If the call is 
 an entry call or a call on a procedure implemented by an entry, the entry 
 call is issued. If the entry call is queued (or requeued-with-abort), 
-then the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
+then the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is executed. [If the entry call is selected immediately, and never requeued-with-abort, 
-then the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
+then the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is never started.] If the call is on a procedure that is not implemented 
 by an entry, the call proceeds as described in <A HREF="AA-6-4.html">6.4</A>, 
-followed by the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0259">triggering_alternative</A></SPAN>[; 
-the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
+followed by the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative</A></SPAN>[; 
+the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is never started].</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4859"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN> 
-is a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN>, 
-the <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-is evaluated and the expiration time is determined, as for a normal <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN>. 
-If the expiration time has not already passed, the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
+<div class="Normal"><A NAME="I5072"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN>, 
+the <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+is evaluated and the expiration time is determined, as for a normal <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN>. 
+If the expiration time has not already passed, the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is executed.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal">If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
-completes and is left prior to completion of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN>, 
-an attempt to cancel the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN> 
+<div class="Normal">If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
+completes and is left prior to completion of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN>, 
+an attempt to cancel the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
 is made. If the attempt to cancel succeeds (see <A HREF="AA-9-5-3.html">9.5.3</A> 
-and <A HREF="AA-9-6.html">9.6</A>), the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
+and <A HREF="AA-9-6.html">9.6</A>), the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
 is complete.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN> 
-completes other than due to cancellation, the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
+<div class="Normal">If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
+completes other than due to cancellation, the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is aborted (if started but not yet completed &mdash; see <A HREF="AA-9-8.html">9.8</A>). 
-If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN> 
-completes normally, the optional <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0259">triggering_alternative</A></SPAN> 
-is executed after the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
+If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
+completes normally, the optional <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative</A></SPAN> 
+is executed after the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is left.&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We currently don't specify 
 when the by-copy [<B>in</B>] <B>out</B> parameters are assigned back 
-into the actuals. We considered requiring that to happen after the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN> 
+into the actuals. We considered requiring that to happen after the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is left. However, that doesn't seem useful enough to justify possibly 
 overspecifying the implementation approach, since some of the parameters 
 are passed by reference anyway.</div>
 <div class="paranum"><a name="p9.b">9.b</a></div>
 <div class="Annotations">In an earlier description, we required that 
-the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0259">triggering_alternative</A></SPAN> 
-execute after aborting the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative</A></SPAN> 
+execute after aborting the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN>, 
 but before waiting for it to complete and finalize, to provide more rapid 
 response to the triggering event in case the finalization was unbounded. 
 However, various reviewers felt that this created unnecessary complexity 
@@ -121,13 +121,13 @@ more deterministic semantics, but anticipate that further discussion
 of this issue might be appropriate during subsequent reviews. One possibility 
 is to leave this area implementation defined, so as to encourage experimentation. 
 The user would then have to assume the worst about what kinds of actions 
-are appropriate for the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0259">triggering_alternative</A></SPAN> 
+are appropriate for the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative</A></SPAN> 
 to achieve portability.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4860"></A><A NAME="I4861"></A><A NAME="I4862"></A><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5073"></A><A NAME="I5074"></A><A NAME="I5075"></A><I>Example 
 of a main command loop for a command interpreter:</I>&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>loop</B><BR>
@@ -143,7 +143,7 @@ of a main command loop for a command interpreter:</I>&nbsp;</div>
 <B>end</B>&nbsp;<B>loop</B>;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
-time-limited calculation:</I> <A NAME="I4863"></A><A NAME="I4864"></A><A NAME="I4865"></A><A NAME="I4866"></A><A NAME="I4867"></A></div>
+time-limited calculation:</I> <A NAME="I5076"></A><A NAME="I5077"></A><A NAME="I5078"></A><A NAME="I5079"></A><A NAME="I5080"></A></div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Examples"><B>select</B><BR>
 &nbsp;&nbsp;&nbsp;<B>delay</B>&nbsp;5.0;<BR>
@@ -156,24 +156,24 @@ time-limited calculation:</I> <A NAME="I4863"></A><A NAME="I4864"></A><A NAME="I
 <div class="paranum"><a name="p14">14/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0098-1.TXT">AI12-0098-1</A></I>} 
 Note that these examples presume that there are abort completion points 
-within the execution of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN>. 
+within the execution of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><A NAME="I4868"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">Asynchronous_select</A></SPAN> 
+<div class="Annotations"><A NAME="I5081"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">Asynchronous_select</A></SPAN> 
 is new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p14.b">14.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I4869"></A>A procedure can be used as the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN>, 
+<A NAME="I5082"></A>A procedure can be used as the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN>, 
 if the procedure might actually be an entry.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

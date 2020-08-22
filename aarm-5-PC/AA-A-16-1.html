@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-16.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,31 +51,31 @@ has the following declaration:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
 <B>package</B>&nbsp;Ada.Directories.Hierarchical_File_Names<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I7638"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I7957"></A></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7639"></A>Is_Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7958"></A>Is_Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7640"></A>Is_Root_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7959"></A>Is_Root_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7641"></A>Is_Parent_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7960"></A>Is_Parent_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7642"></A>Is_Current_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7961"></A>Is_Current_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7643"></A>Is_Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7962"></A>Is_Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7644"></A>Is_Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7963"></A>Is_Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7645"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7964"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Directories.Simple_Name;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7646"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7965"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Directories.Containing_Directory;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7647"></A>Initial_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7966"></A>Initial_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7648"></A>Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7967"></A>Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7649"></A>Compose&nbsp;(Directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7968"></A>Compose&nbsp;(Directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relative_Name&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
@@ -92,15 +92,22 @@ additional capabilities for hierarchical file names.</div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Indented2">Returns True if Name is a simple name, and returns 
 False otherwise.</div>
+<div class="paranum"><a name="p18.a">18.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0337-1.TXT">AI12-0337-1</A></I>} 
+<span class="insert5">Root directories are considered simple names, so 
+this function will return True if Name represents a root. Use Is_Root_Directory 
+if it is necessary to distinguish roots and other simple names.</span> 
+</div>
 <div class="paranum"><a name="p19">19/3</a></div>
 <div class="Examples"><B>function</B>&nbsp;Is_Root_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
 <div class="Indented2">Returns True if Name is syntactically a root (a 
 directory that cannot be decomposed further), and returns False otherwise.</div>
-<div class="paranum"><a name="p20.a">20.a/3</a></div>
-<div class="Annotations"><B>Implementation Note:&nbsp;</B>For Unix and Unix-like 
-systems, &quot;/&quot; is the root. For Windows, &quot;C:\&quot; and 
-&quot;\\Computer\Share&quot; are roots.&nbsp;</div>
+<div class="paranum"><a name="p20.a">20.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0337-1.TXT">AI12-0337-1</A></I>} 
+<span class="delete5">For Unix and Unix-like systems, &quot;/&quot; is 
+the root. For Windows&reg;, &quot;C:\&quot; and &quot;\\Computer\Share&quot; 
+are roots.</span>&nbsp;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Examples"><B>function</B>&nbsp;Is_Parent_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
@@ -109,7 +116,7 @@ the parent directory of any directory, and returns False otherwise.</div>
 <div class="paranum"><a name="p22.a">22.a/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>Is_Parent_Directory_Name 
 returns True if and only if Name is &quot;..&quot; for both Unix and 
-Windows.&nbsp;</div>
+Windows&reg;.&nbsp;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Examples"><B>function</B>&nbsp;Is_Current_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p24">24/3</a></div>
@@ -117,7 +124,7 @@ Windows.&nbsp;</div>
 the directory itself for any directory, and returns False otherwise.</div>
 <div class="paranum"><a name="p24.a">24.a/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>Is_Current_Directory_Name 
-returns True if and only if Name is &quot;.&quot; for both Unix and Windows. 
+returns True if and only if Name is &quot;.&quot; for both Unix and Windows&reg;. 
 </div>
 <div class="paranum"><a name="p25">25/3</a></div>
 <div class="Examples"><B>function</B>&nbsp;Is_Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
@@ -132,10 +139,11 @@ Name is a root, and returns False otherwise.</div>
 Returns True if Name allows the identification of an external file (including 
 directories and special files) but is not a full name, and returns False 
 otherwise.</div>
-<div class="paranum"><a name="p28.a">28.a/3</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>Relative names include 
-simple names as a special case. This function returns False if the syntax 
-of the name is incorrect.&nbsp;</div>
+<div class="paranum"><a name="p28.a">28.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0337-1.TXT">AI12-0337-1</A></I>} 
+Relative names include simple names <span class="insert5">other than 
+root directories&nbsp;</span>as a special case. This function returns False 
+if the syntax of the name is incorrect.&nbsp;</div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Examples"><B>function</B>&nbsp;Initial_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p30">30/3</a></div>
@@ -185,25 +193,27 @@ is often used to navigate outside of an intended root directory. We considered
 attempting to prevent that case by having Compose detect it and raise 
 an exception. But the extra rules necessary were more confusing than 
 helpful.</div>
-<div class="paranum"><a name="p35.c">35.c/3</a></div>
-<div class="Annotations">We can say more about the details of these operations 
-by adopting the notation of a subscript to specify how many path fragments 
-a particular result has. Then, we can abbreviate &quot;Full Name&quot; 
-as &quot;Full&quot; and &quot;Relative Name&quot; as &quot;Rel&quot;. 
-In this notation, Unix file name &quot;a/b&quot; is a Rel(2), &quot;../c/d&quot; 
-is a Rel(3), and &quot;/a/b&quot; is a Full(2). Rel(1) is equivalent 
-to a simple name; thus we don't have to describe that separately.</div>
+<div class="paranum"><a name="p35.c">35.c/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0337-1.TXT">AI12-0337-1</A></I>} 
+We can say more about the details of these operations by adopting the 
+notation of a subscript to specify how many path fragments a particular 
+result has. Then, we can abbreviate &quot;Full Name&quot; as &quot;Full&quot; 
+and &quot;Relative Name&quot; as &quot;Rel&quot;. In this notation, Unix 
+file name &quot;a/b&quot; is a Rel(2), &quot;../c/d&quot; is a Rel(3), 
+and &quot;/a/b&quot; is a Full(2). Rel(1) is equivalent to a simple name<span class="insert5">&nbsp;that is not a root</span>; thus we don't have to describe that separately.</div>
 <div class="paranum"><a name="p35.d">35.d/3</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">In this notation, 
 </div>
 <div class="paranum"><a name="p35.e">35.e/3</a></div>
-<div class="SmallExamples">For&nbsp;N&gt;1,<BR>
+<div class="SmallExamples">&nbsp;&nbsp;<BR>
+For&nbsp;N&gt;1,<BR>
 Containing_Directory(Rel(N))&nbsp;=&nbsp;Leftmost&nbsp;Rel(N-1),<BR>
 Containing_Directory(Full(N))&nbsp;=&nbsp;Leftmost&nbsp;Full(N-1),<BR>
-Else&nbsp;if&nbsp;N&nbsp;=&nbsp;1,&nbsp;raise&nbsp;Name_Error.<BR>
+Else&nbsp;if&nbsp;N&nbsp;=&nbsp;1,&nbsp;raise&nbsp;<span class="insert5">Use_Error</span><span class="delete5">&nbsp;Name_Error</span>.<BR>
 &nbsp;&nbsp;</div>
 <div class="paranum"><a name="p35.f">35.f/3</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em">Similarly,&nbsp;</div>
+<div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0337-1.TXT">AI12-0337-1</A></I>} 
+Similarly,&nbsp;</div>
 <div class="paranum"><a name="p35.g">35.g/3</a></div>
 <div class="SmallExamples">For&nbsp;N&gt;1,<BR>
 Relative_Name(Rel(N))&nbsp;=&nbsp;Rightmost&nbsp;Rel(N-1),<BR>
@@ -261,12 +271,12 @@ be to expand any shorthands used before calling Containing_Directory.
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p38.b">38.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<A NAME="I7650"></A>Package Ada.Directories.Hierarchical_File_Names is 
+<A NAME="I7969"></A>Package Ada.Directories.Hierarchical_File_Names is 
 new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-16.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

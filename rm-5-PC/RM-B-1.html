@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -42,13 +42,13 @@
 <div class="paranum"><a name="p0.1">0.1/3</a></div>
 <div class="Normal">&nbsp;An <I>interfacing</I> aspect is a representation 
 aspect that is one of the aspects Import, Export, Link_Name, External_Name, 
-or Convention.<A NAME="I7690"></A><A NAME="I7691"></A></div>
+or Convention.<A NAME="I8230"></A><A NAME="I8231"></A></div>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><A NAME="I7692"></A><A NAME="I7693"></A>Specifying 
+<div class="Normal"><A NAME="I8232"></A><A NAME="I8233"></A>Specifying 
 the Import aspect  to have the value True is used to import an entity 
 defined in a foreign language into an Ada program, thus allowing a foreign-language 
 subprogram to be called from Ada, or a foreign-language variable to be 
-accessed from Ada. In contrast, <A NAME="I7694"></A><A NAME="I7695"></A>specifying 
+accessed from Ada. In contrast, <A NAME="I8234"></A><A NAME="I8235"></A>specifying 
 the Export aspect to have the value True is used to export an Ada entity 
 to a foreign language, thus allowing an Ada subprogram to be called from 
 a foreign language, or an Ada object to be accessed from a foreign language. 
@@ -56,10 +56,10 @@ The Import and Export aspects are intended primarily for objects and
 subprograms, although implementations are allowed to support other entities. 
 The Link_Name and External_Name aspects are used to specify the link 
 name and external name, respectively, to be used to identify imported 
-or exported entities in the external environment.<A NAME="I7696"></A><A NAME="I7697"></A><A NAME="I7698"></A><A NAME="I7699"></A> 
-<A NAME="I7700"></A><A NAME="I7701"></A><A NAME="I7702"></A><A NAME="I7703"></A><A NAME="I7704"></A></div>
+or exported entities in the external environment.<A NAME="I8236"></A><A NAME="I8237"></A><A NAME="I8238"></A><A NAME="I8239"></A> 
+<A NAME="I8240"></A><A NAME="I8241"></A><A NAME="I8242"></A><A NAME="I8243"></A><A NAME="I8244"></A></div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal">The Convention aspect<A NAME="I7705"></A><A NAME="I7706"></A> 
+<div class="Normal">The Convention aspect<A NAME="I8245"></A><A NAME="I8246"></A> 
 is used to indicate that an Ada entity should use the conventions of 
 another language. It is intended primarily for types and &ldquo;callback&rdquo; 
 subprograms. For example, &ldquo;<B>with</B> Convention =&gt; Fortran&rdquo; 
@@ -85,7 +85,7 @@ Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented1"></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7707"></A><A NAME="I7708"></A>Linker_Options(<I>string_</I><A NAME="I7709"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8247"></A><A NAME="I8248"></A>Linker_Options(<I>string_</I><A NAME="I8249"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options is allowed only at the place of a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0087">declarative_item</A></SPAN>.</div>
@@ -100,22 +100,22 @@ was deleted.</I></SPAN></div>
 <div class="Normal">The Link_Name and External_Name aspects are of type 
 String.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7710"></A>The expected type for the <I>string_</I><A NAME="I7711"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I8250"></A>The expected type for the <I>string_</I><A NAME="I8251"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 in pragma Linker_Options is String.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I7712"></A>The aspect Convention shall be 
+<div class="Normal"><A NAME="I8252"></A>The aspect Convention shall be 
 specified by a <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 which shall be the name of a <I>convention</I>. The convention names 
 are implementation defined, except for certain language-defined ones, 
 such as Ada and Intrinsic, as explained in <A HREF="RM-6-3-1.html">6.3.1</A>, 
 &ldquo;<A HREF="RM-6-3-1.html">Conformance Rules</A>&rdquo;. Additional 
 convention names generally represent the calling conventions of foreign 
-languages, language implementations, or specific run-time models. <A NAME="I7713"></A>The 
+languages, language implementations, or specific run-time models. <A NAME="I8253"></A>The 
 convention of a callable entity is its <I>calling convention</I>.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7714"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8254"></A>If 
 <I>L</I> is a <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 for a language, then a type T is said to be <I>compatible with convention 
 L</I>, (alternatively, is said to be an <I>L-compatible type</I>) if 
@@ -126,7 +126,7 @@ to <I>L</I> and is defined to be <I>L</I>-compatible (see <A HREF="RM-B-3.html">
 <A HREF="RM-B-3-1.html">B.3.1</A>, <A HREF="RM-B-3-2.html">B.3.2</A>, 
 <A HREF="RM-B-4.html">B.4</A>, <A HREF="RM-B-5.html">B.5</A>),</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I7715"></A>Convention 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I8255"></A>Convention 
 <I>L</I> has been specified for T, and T is <I>eligible for convention 
 L</I>; that is:&nbsp;</div>
 <div class="paranum"><a name="p14.1">14.1/4</a></div>
@@ -169,11 +169,11 @@ access type, the convention of the anonymous access type is <I>L</I>.
 If convention <I>L</I> is specified for an object that has an anonymous 
 access type, the convention of the anonymous access type is <I>L</I>.</span></div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Normal"><A NAME="I7716"></A>Notwithstanding any rule to the 
+<div class="Normal"><A NAME="I8256"></A>Notwithstanding any rule to the 
 contrary, a declaration with a True Import aspect shall not have a completion. 
 </div>
 <div class="paranum"><a name="p23">23/3</a></div>
-<div class="Normal"><A NAME="I7717"></A> <A NAME="I7718"></A>An entity 
+<div class="Normal"><A NAME="I8257"></A> <A NAME="I8258"></A>An entity 
 with a True Import aspect (or Export aspect) is said to be <I>imported</I> 
 (respectively, <I>exported</I>). An entity shall not be both imported 
 and exported.</div>
@@ -189,9 +189,9 @@ be compatible with the specified Convention aspect, if any.&nbsp;</div>
 and parameter types shall each be compatible with the specified Convention 
 aspect, if any.</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 (if any) used to directly specify an Import, Export, External_Name, or 
-Link_Name aspect shall be a static expression. The <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+Link_Name aspect shall be a static expression. The <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options shall be static. An External_Name or Link_Name aspect 
 shall be specified only for an entity that is either imported or exported.</div>
@@ -220,12 +220,12 @@ the Export aspect is False.</div>
 <div class="Bulleted">For an entity with a True Import or Export aspect, 
 an external name, link name, or both may also be specified.&nbsp;</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Normal"><A NAME="I7719"></A>An <I>external name</I> is a 
+<div class="Normal"><A NAME="I8259"></A>An <I>external name</I> is a 
 string value for the name used by a foreign language program either for 
 an entity that an Ada program imports, or for referring to an entity 
 that an Ada program exports.</div>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Normal"><A NAME="I7720"></A>A <I>link name</I> is a string 
+<div class="Normal"><A NAME="I8260"></A>A <I>link name</I> is a string 
 value for the name of an exported or imported entity, based on the conventions 
 of the foreign language's compiler in interfacing with the system's linker 
 tool.</div>
@@ -244,7 +244,7 @@ combined, is implementation defined.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p38">38/3</a></div>
-<div class="Normal"><A NAME="I7721"></A><A NAME="I7722"></A>Notwithstanding 
+<div class="Normal"><A NAME="I8261"></A><A NAME="I8262"></A>Notwithstanding 
 what this International Standard says elsewhere, the elaboration of a 
 declaration with a True Import aspect does not create the entity. Such 
 an elaboration has no other effect than to allow the defining name to 
@@ -252,7 +252,7 @@ denote the external entity.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p38.1">38.1/5</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7723"></A>It is the programmer's responsibility 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I8263"></A>It is the programmer's responsibility 
 to ensure that the use of interfacing aspects does not violate Ada semantics; 
 otherwise, program execution is erroneous.<span class="insert5">&nbsp;For 
 example, passing an object with mode <B>in</B> to imported code that 
@@ -271,7 +271,7 @@ mechanism is to provide two subprograms whose link names are &quot;adainit&quot;
 and &quot;adafinal&quot;. Adainit should contain the elaboration code 
 for library units. Adafinal should contain the finalization code. These 
 subprograms should have no effect the second and subsequent time they 
-are called. <A NAME="I7724"></A><A NAME="I7725"></A><A NAME="I7726"></A><A NAME="I7727"></A></div>
+are called. <A NAME="I8264"></A><A NAME="I8265"></A><A NAME="I8266"></A><A NAME="I8267"></A></div>
 <div class="paranum"><a name="p40">40/3</a></div>
 <div class="Normal">Automatic elaboration of preelaborated packages should 
 be provided when specifying the Export aspect as True is supported.&nbsp;</div>
@@ -334,7 +334,7 @@ aspects:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

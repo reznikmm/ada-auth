@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2860"></A><A NAME="I2861"></A><A NAME="I2862"></A><A NAME="I2863"></A><A NAME="I2864"></A><A NAME="I2865"></A><A NAME="I2866"></A><A NAME="I2867"></A><A NAME="I2868"></A><A NAME="I2869"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2919"></A><A NAME="I2920"></A><A NAME="I2921"></A><A NAME="I2922"></A><A NAME="I2923"></A><A NAME="I2924"></A><A NAME="I2925"></A><A NAME="I2926"></A><A NAME="I2927"></A><A NAME="I2928"></A>The 
 binary adding operators + (addition) and &ndash; (subtraction) are predefined 
 for every specific numeric type <I>T</I> with their conventional meaning. 
 They have the following specifications:&nbsp;</div>
@@ -45,7 +45,7 @@ They have the following specifications:&nbsp;</div>
 <div class="Examples"><B>function</B>&nbsp;&quot;+&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
 <B>function</B>&nbsp;&quot;-&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2870"></A><A NAME="I2871"></A><A NAME="I2872"></A><A NAME="I2873"></A><A NAME="I2874"></A><A NAME="I2875"></A><A NAME="I2876"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2929"></A><A NAME="I2930"></A><A NAME="I2931"></A><A NAME="I2932"></A><A NAME="I2933"></A><A NAME="I2934"></A><A NAME="I2935"></A>The 
 concatenation operators &amp; are predefined for every nonlimited, one-dimensional 
 array type <I>T</I> with component type <I>C</I>. They have the following 
 specifications:&nbsp;</div>
@@ -57,7 +57,7 @@ specifications:&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2877"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2936"></A>For 
 the evaluation of a concatenation with result type <I>T</I>, if both 
 operands are of type <I>T</I>, the result of the concatenation is a one-dimensional 
 array whose length is the sum of the lengths of its operands, and whose 
@@ -75,18 +75,18 @@ defined by an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">unconstrained_arra
 then the lower bound of the result is that of the left operand.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The upper bound is determined by the lower bound 
-and the length. <A NAME="I2878"></A><A NAME="I2879"></A>A check is made 
+and the length. <A NAME="I2937"></A><A NAME="I2938"></A>A check is made 
 that the upper bound of the result of the concatenation belongs to the 
-range of the index subtype, unless the result is a null array. <A NAME="I2880"></A>Constraint_Error 
+range of the index subtype, unless the result is a null array. <A NAME="I2939"></A>Constraint_Error 
 is raised if this check fails.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">If either operand is of the component type <I>C</I>, 
 the result of the concatenation is given by the above rules, using in 
 place of such an operand an array having this operand as its only component 
 (converted to the component subtype) and having the lower bound of the 
-index subtype of the array type as its lower bound. <A NAME="I2881"></A></div>
+index subtype of the array type as its lower bound. <A NAME="I2940"></A></div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I2882"></A>The result of a concatenation 
+<div class="Normal"><A NAME="I2941"></A>The result of a concatenation 
 is defined in terms of an assignment to an anonymous object, as for any 
 function call (see <A HREF="RM-6-5.html">6.5</A>).&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
@@ -109,7 +109,7 @@ involving binary adding operators:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

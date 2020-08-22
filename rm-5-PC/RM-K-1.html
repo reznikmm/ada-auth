@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-K.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -34,13 +34,16 @@
 <HR>
 <H1>K.1 Language-Defined Aspects</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><A NAME="I8980"></A>This subclause summarizes the 
+<div class="Normal"><A NAME="I9590"></A>This subclause summarizes the 
 definitions given elsewhere of the language-defined aspects. Aspects 
 are properties of entities that can be specified by the Ada program; 
-unless otherwise specified below, aspects can be specified using an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>.</div>
+unless otherwise specified below, aspects can be specified using an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="WideHanging-Term">Address</div><div class="WideHanging-Body">
 Machine address of an entity. See <A HREF="RM-13-3.html">13.3</A>.</div>
+<div class="paranum"><a name="p2.1">2.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert5">Aggregate</span></div><div class="WideHanging-Body">
+<span class="insert5">Mechanism to define user-defined aggregates.</span><span class="insert5">&nbsp;See <A HREF="RM-4-3-5.html">4.3.5</A>.</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="WideHanging-Term">Alignment (object)</div><div class="WideHanging-Body"><br clear="left">
 Alignment of an object. See <A HREF="RM-13-3.html">13.3</A>.</div>
@@ -49,14 +52,13 @@ Alignment of an object. See <A HREF="RM-13-3.html">13.3</A>.</div>
 Alignment of a subtype. See <A HREF="RM-13-3.html">13.3</A>.</div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="WideHanging-Term">All_Calls_Remote</div><div class="WideHanging-Body"><br clear="left">
-All indirect or dispatching remote subprogram calls and all direct remote 
-subprogram calls should use the Partition Communication Subsystem. See 
+All indirect or dispatching remote subprogram calls, and all direct remote 
+subprogram calls, should use the Partition Communication Subsystem. See 
 <A HREF="RM-E-2-3.html">E.2.3</A>.</div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert5">Allows_Exit</span></div><div class="WideHanging-Body">
-<span class="insert5">An assertion that a subprogram will operate correctly 
-for arbitrary transfers of control.</span><span class="insert5">&nbsp;See 
-<A HREF="RM-5-5-3.html">5.5.3</A>.</span></div>
+<span class="insert5">An indication of whether a subprogram will operate 
+correctly for arbitrary transfers of control.</span><span class="insert5">&nbsp;See <A HREF="RM-5-5-3.html">5.5.3</A>.</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="WideHanging-Term">Asynchronous</div><div class="WideHanging-Body">
 Remote procedure calls are asynchronous; the caller continues without 
@@ -73,12 +75,12 @@ Declare that the components of an array type or object are atomic. See
 Protected procedure is attached to an interrupt. See <A HREF="RM-C-3-1.html">C.3.1</A>.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="WideHanging-Term">Bit_Order</div><div class="WideHanging-Body">
-Order of bit numbering in a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN>. 
+Order of bit numbering in a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN>. 
 See <A HREF="RM-13-5-3.html">13.5.3</A>.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="WideHanging-Term">Coding</div><div class="WideHanging-Body">
-Internal representation of enumeration literals. Specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0328">enumeration_representation_clause</A></SPAN>, 
-not by an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>. 
+Internal representation of enumeration literals. Specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0350">enumeration_representation_clause</A></SPAN>, 
+not by an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>. 
 See <A HREF="RM-13-4.html">13.4</A>.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="WideHanging-Term">Component_Size</div><div class="WideHanging-Body"><br clear="left">
@@ -91,9 +93,10 @@ See <A HREF="RM-4-1-6.html">4.1.6</A>.</div>
 <div class="WideHanging-Term">Convention</div><div class="WideHanging-Body">
 Calling convention or other convention used for interfacing to other 
 languages. See <A HREF="RM-B-1.html">B.1</A>.</div>
-<div class="paranum"><a name="p15">15/3</a></div>
+<div class="paranum"><a name="p15">15/5</a></div>
 <div class="WideHanging-Term">CPU</div><div class="WideHanging-Body">
-Processor on which a given task should run. See <A HREF="RM-D-16.html">D.16</A>.</div>
+Processor on which a given task<span class="insert5">, or calling task 
+for a protected operation,</span> should run. See <A HREF="RM-D-16.html">D.16</A>.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="WideHanging-Term">Default_Component_Value</div><div class="WideHanging-Body"><br clear="left">
 Default value for the components of an array-of-scalar subtype. See <A HREF="RM-3-6.html">3.6</A>.</div>
@@ -138,6 +141,12 @@ Name used to identify an imported or exported entity. See <A HREF="RM-B-1.html">
 <div class="paranum"><a name="p25">25/3</a></div>
 <div class="WideHanging-Term">External_Tag</div><div class="WideHanging-Body">
 Unique identifier for a tagged type in streams. See <A HREF="RM-13-3.html">13.3</A>.</div>
+<div class="paranum"><a name="p25.1">25.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Global</span></div><div class="WideHanging-Body">
+<span class="insert5">Global object usage contract.</span><span class="insert5">&nbsp;See <A HREF="RM-6-1-2.html">6.1.2</A>.</span></div>
+<div class="paranum"><a name="p25.2">25.2/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Global'Class</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Global object usage contract inherited on derivation.</span><span class="insert5">&nbsp;See <A HREF="RM-6-1-2.html">6.1.2</A>.</span></div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="WideHanging-Term">Implicit_Dereference</div><div class="WideHanging-Body"><br clear="left">
 Mechanism for user-defined implicit .<B>all</B>. See <A HREF="RM-4-1-5.html">4.1.5</A>.</div>
@@ -177,10 +186,14 @@ or type; the priority is in the interrupt range. See <A HREF="RM-D-1.html">D.1</
 <div class="paranum"><a name="p34">34/3</a></div>
 <div class="WideHanging-Term">Iterator_Element</div><div class="WideHanging-Body"><br clear="left">
 Element type to be used for user-defined iterators. See <A HREF="RM-5-5-1.html">5.5.1</A>.</div>
+<div class="paranum"><a name="p34.1">34.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Iterator_View</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">An alternative type to used for container element 
+iterators.</span><span class="insert5">&nbsp;See <A HREF="RM-5-5-1.html">5.5.1</A>.</span></div>
 <div class="paranum"><a name="p35">35/3</a></div>
 <div class="WideHanging-Term">Layout (record)</div><div class="WideHanging-Body"><br clear="left">
-Layout of record components. Specified by a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN>, 
-not by an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>. 
+Layout of record components. Specified by a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN>, 
+not by an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>. 
 See <A HREF="RM-13-5-1.html">13.5.1</A>.</div>
 <div class="paranum"><a name="p36">36/3</a></div>
 <div class="WideHanging-Term">Link_Name</div><div class="WideHanging-Body">
@@ -216,6 +229,10 @@ with a given type, including any bounds and discriminants. See <A HREF="RM-13-13
 <div class="paranum"><a name="p40">40/3</a></div>
 <div class="WideHanging-Term">Pack</div><div class="WideHanging-Body">
 Minimize storage when laying out records and arrays. See <A HREF="RM-13-2.html">13.2</A>.</div>
+<div class="paranum"><a name="p40.1">40.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Parallel_Iterator</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">An indication of whether a subprogram may use multiple 
+threads of control to invoke a loop body procedure.</span><span class="insert5">&nbsp;See <A HREF="RM-5-5-3.html">5.5.3</A>.</span></div>
 <div class="paranum"><a name="p41">41/3</a></div>
 <div class="WideHanging-Term">Post</div><div class="WideHanging-Body">
 Postcondition; a condition that must hold true after a call. See <A HREF="RM-6-1-1.html">6.1.1</A>.</div>
@@ -242,6 +259,9 @@ or type; the priority is not in the interrupt range. See <A HREF="RM-D-1.html">D
 <div class="paranum"><a name="p47">47/3</a></div>
 <div class="WideHanging-Term">Pure</div><div class="WideHanging-Body">
 Side effects are avoided in the subprograms of a given package. See <A HREF="RM-10-2-1.html">10.2.1</A>.</div>
+<div class="paranum"><a name="p47.1">47.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Put_Image</span></div><div class="WideHanging-Body">
+<span class="insert5">Procedure to define the image of a given type.</span><span class="insert5">&nbsp;See <A HREF="RM-4-10.html">4.10</A>.</span></div>
 <div class="paranum"><a name="p48">48/3</a></div>
 <div class="WideHanging-Term">Read</div><div class="WideHanging-Body">
 Procedure to read a value from a stream for a given type. See <A HREF="RM-13-13-2.html">13.13.2</A>.</div>
@@ -256,9 +276,10 @@ literals.</span><span class="insert5">&nbsp;See <A HREF="RM-4-2-1.html">4.2.1</A
 <div class="paranum"><a name="p49">49/3</a></div>
 <div class="WideHanging-Term">Record layout</div><div class="WideHanging-Body">
 See Layout. See <A HREF="RM-13-5-1.html">13.5.1</A>.</div>
-<div class="paranum"><a name="p50">50/3</a></div>
+<div class="paranum"><a name="p50">50/5</a></div>
 <div class="WideHanging-Term">Relative_Deadline</div><div class="WideHanging-Body"><br clear="left">
-Task parameter used in Earliest Deadline First Dispatching. See <A HREF="RM-D-2-6.html">D.2.6</A>.</div>
+Task <span class="insert5">or protected type&nbsp;</span>parameter used in 
+Earliest Deadline First Dispatching.<span class="insert5">&nbsp;See <A HREF="RM-D-2-6.html">D.2.6</A>.</span></div>
 <div class="paranum"><a name="p51">51/3</a></div>
 <div class="WideHanging-Term">Remote_Call_Interface</div><div class="WideHanging-Body"><br clear="left">
 Subprograms in a given package may be used in remote procedure calls. 
@@ -354,7 +375,7 @@ dispatching point.</span><span class="insert5">&nbsp;See <A HREF="RM-D-2-1.html"
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-K.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

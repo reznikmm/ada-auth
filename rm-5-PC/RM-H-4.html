@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -20,6 +22,8 @@
     DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
@@ -27,9 +31,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-H-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -54,35 +58,35 @@ are language defined:</div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Tasking-related 
 restriction:</B></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I8775"></A><A NAME="I8776"></A>No_Protected_Types 
+<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9346"></A><A NAME="I9347"></A>No_Protected_Types 
 </div><div class="WideHanging-Body"><br clear="left">
 There are no declarations of protected types or protected objects.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Memory-management 
 related restrictions:</B></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I8777"></A><A NAME="I8778"></A>No_Allocators 
+<div class="WideHanging-Term"><A NAME="I9348"></A><A NAME="I9349"></A>No_Allocators 
 </div><div class="WideHanging-Body">
-There are no occurrences of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>.</div>
+There are no occurrences of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>.</div>
 <div class="paranum"><a name="p8">8/1</a></div>
-<div class="WideHanging-Term"><A NAME="I8779"></A><A NAME="I8780"></A>No_Local_Allocators 
+<div class="WideHanging-Term"><A NAME="I9350"></A><A NAME="I9351"></A>No_Local_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-<SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">Allocator</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">Allocator</A></SPAN>s 
 are prohibited in subprograms, generic subprograms, tasks, and entry 
 bodies.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="WideHanging-Term">&nbsp;<A NAME="I8781"></A><A NAME="I8782"></A>No_Anonymous_Allocators 
+<div class="WideHanging-Term">&nbsp;<A NAME="I9352"></A><A NAME="I9353"></A>No_Anonymous_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>s 
+There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 of anonymous access types.</div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;<A NAME="I8783"></A><A NAME="I8784"></A>No_Coextensions 
+<div class="WideHanging-Term">&nbsp;<A NAME="I9354"></A><A NAME="I9355"></A>No_Coextensions 
 </div><div class="WideHanging-Body"><br clear="left">
 There are no coextensions. See <A HREF="RM-3-10-2.html">3.10.2</A>.</div>
 <div class="paranum"><a name="p8.3">8.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;<A NAME="I8785"></A><A NAME="I8786"></A>No_Access_Parameter_Allocators 
+<div class="WideHanging-Term">&nbsp;<A NAME="I9356"></A><A NAME="I9357"></A>No_Access_Parameter_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-<SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">Allocator</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">Allocator</A></SPAN>s 
 are not permitted as the actual parameter to an access parameter. See 
 <A HREF="RM-6-1.html">6.1</A>.</div>
 <div class="paranum"><a name="p9">9/2</a></div>
@@ -91,30 +95,30 @@ was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.9em">Immediate_Reclamation 
 </div><div class="WideHanging-Body"><br clear="left">
-Except for storage occupied by objects created by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>s 
+Except for storage occupied by objects created by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 and not deallocated via unchecked deallocation, any storage reserved 
 at run time for an object is immediately reclaimed when the object no 
-longer exists. <A NAME="I8787"></A><A NAME="I8788"></A></div>
+longer exists. <A NAME="I9358"></A><A NAME="I9359"></A></div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Exception-related 
 restriction:</B></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I8789"></A><A NAME="I8790"></A>No_Exceptions 
+<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9360"></A><A NAME="I9361"></A>No_Exceptions 
 </div><div class="WideHanging-Body">
-<SPAN Class="swiss"><A HREF="RM-11-3.html#S0286">Raise_statement</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="RM-11-2.html#S0283">exception_handler</A></SPAN>s 
-are not allowed. No language-defined run-time checks are generated; however, 
-a run-time check performed automatically by the hardware is permitted. 
+<SPAN Class="swiss"><A HREF="RM-11-3.html#S0308">Raise_statement</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="RM-11-2.html#S0305">exception_handler</A></SPAN>s 
+are not allowed. No language-defined runtime checks are generated; however, 
+a runtime check performed automatically by the hardware is permitted. 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Other restrictions:</B></div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="WideHanging-Term"><A NAME="I8791"></A><A NAME="I8792"></A>No_Floating_Point 
+<div class="WideHanging-Term"><A NAME="I9362"></A><A NAME="I9363"></A>No_Floating_Point 
 </div><div class="WideHanging-Body"><br clear="left">
 Uses of predefined floating point types and operations, and declarations 
 of new floating point types, are not allowed.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="WideHanging-Term"><A NAME="I8793"></A><A NAME="I8794"></A>No_Fixed_Point 
+<div class="WideHanging-Term"><A NAME="I9364"></A><A NAME="I9365"></A>No_Fixed_Point 
 </div><div class="WideHanging-Body"><br clear="left">
 Uses of predefined fixed point types and operations, and declarations 
 of new fixed point types, are not allowed.&nbsp;</div>
@@ -123,69 +127,122 @@ of new fixed point types, are not allowed.&nbsp;</div>
 was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="WideHanging-Term">No_Access_Subprograms&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-The declaration of access-to-subprogram types is not allowed. <A NAME="I8795"></A><A NAME="I8796"></A></div>
+The declaration of access-to-subprogram types is not allowed. <A NAME="I9366"></A><A NAME="I9367"></A></div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="WideHanging-Term"><A NAME="I8797"></A><A NAME="I8798"></A>No_Unchecked_Access 
+<div class="WideHanging-Term"><A NAME="I9368"></A><A NAME="I9369"></A>No_Unchecked_Access 
 </div><div class="WideHanging-Body"><br clear="left">
-The <A NAME="I8799"></A><A NAME="I8800"></A>Unchecked_Access attribute 
+The <A NAME="I9370"></A><A NAME="I9371"></A>Unchecked_Access attribute 
 is not allowed.</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="WideHanging-Term"><A NAME="I8801"></A><A NAME="I8802"></A>No_Dispatch 
+<div class="WideHanging-Term"><A NAME="I9372"></A><A NAME="I9373"></A>No_Dispatch 
 </div><div class="WideHanging-Body">
 Occurrences of T'Class are not allowed, for any (tagged) subtype T.</div>
-<div class="paranum"><a name="p20">20/2</a></div>
-<div class="WideHanging-Term"><A NAME="I8803"></A><A NAME="I8804"></A>No_IO 
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="WideHanging-Term"><A NAME="I9374"></A><A NAME="I9375"></A>No_IO 
 </div><div class="WideHanging-Body">
 Semantic dependence on any of the library units Sequential_IO, Direct_IO, 
-Text_IO, Wide_Text_IO, Wide_Wide_Text_IO, or Stream_IO is not allowed. 
-</div>
+Text_IO, Wide_Text_IO, Wide_Wide_Text_IO, <span class="delete5">or&nbsp;</span>Stream_IO<span class="insert5">, 
+or Directories</span> is not allowed.&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="WideHanging-Term"><A NAME="I8805"></A><A NAME="I8806"></A>No_Delay 
+<div class="WideHanging-Term"><A NAME="I9376"></A><A NAME="I9377"></A>No_Delay 
 </div><div class="WideHanging-Body">
-<SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">Delay_Statement</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="RM-9-6.html#S0266">Delay_Statement</A></SPAN>s 
 and semantic dependence on package Calendar are not allowed.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="WideHanging-Term"><A NAME="I8807"></A><A NAME="I8808"></A>No_Recursion 
+<div class="WideHanging-Term"><A NAME="I9378"></A><A NAME="I9379"></A>No_Recursion 
 </div><div class="WideHanging-Body">
 As part of the execution of a subprogram, the same subprogram is not 
 invoked.</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="WideHanging-Term"><A NAME="I8809"></A><A NAME="I8810"></A>No_Reentrancy 
+<div class="WideHanging-Term"><A NAME="I9380"></A><A NAME="I9381"></A>No_Reentrancy 
 </div><div class="WideHanging-Body">
 During the execution of a subprogram by a task, no other task invokes 
 the same subprogram.</div>
+<div class="paranum"><a name="p23.1">23.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5"><A NAME="I9382"></A><A NAME="I9383"></A>No_Unspecified_Globals</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">No library-level entity shall have a Global aspect 
+of Unspecified, either explicitly or by default. No library-level entity 
+shall have a Global'Class aspect of Unspecified, explicitly or by default, 
+if it is used as part of a dispatching call.</span></div>
+<div class="paranum"><a name="p23.2">23.2/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5"><A NAME="I9384"></A><A NAME="I9385"></A>No_Hidden_Indirect_Globals</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">When within a context where the applicable Global 
+aspect is neither Unspecified nor <B>in out all</B>, any execution within 
+such a context does neither of the following:</span></div>
+<div class="paranum"><a name="p23.3">23.3/5</a></div>
+<div class="Indented4Bulleted"><span class="insert5">Update a variable 
+that is reachable via a sequence of zero or more dereferences of access-to-object 
+values from a formal parameter of mode <B>in</B> (after any <B>overriding</B> 
+&ndash; see <A HREF="RM-H-7.html">H.7</A>), or from a global that is 
+not within the applicable global variable set, or has mode <B>in</B>;</span></div>
+<div class="paranum"><a name="p23.4">23.4/5</a></div>
+<div class="Indented4Bulleted"><span class="insert5">Read a variable 
+that is updatable via a sequence of zero or more dereferences of access-to-object 
+values from a global that is not within the applicable global variable 
+set.</span>&nbsp;</div>
+<div class="paranum"><a name="p23.5">23.5/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">For the purposes 
+of the above rules, if an applicable global variable set includes a package 
+name, and the collection of some pool-specific access type (see <A HREF="RM-7-6-1.html">7.6.1</A>) 
+is implicitly declared in a part of the declarative region of the package 
+included within the global variable set, then all objects allocated from 
+that collection are considered included within the global variable set.</span></div>
+<div class="paranum"><a name="p23.6">23.6/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">The consequences 
+of violating the No_Hidden_Indirect_Globals restriction is implementation-defined. 
+Any aspects or other means for identifying such violations prior to or 
+during execution are implementation-defined.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p23.7">23.7/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5">The 
+following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+is language defined:</span></div>
+<div class="paranum"><a name="p23.8">23.8/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5"><A NAME="I9386"></A><A NAME="I9387"></A>Max_Image_Length</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Specifies the maximum length for the result of 
+an Image, Wide_Image, or Wide_Wide_Image attribute. Violation of this 
+restriction results in the raising of Program_Error at the point of the 
+invocation of an image attribute.<A NAME="I9388"></A> <A NAME="I9389"></A><A NAME="I9390"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
-<div class="paranum"><a name="p23.1">23.1/2</a></div>
+<div class="paranum"><a name="p23.9">23.9/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;An implementation 
 of this Annex shall support:&nbsp;</div>
-<div class="paranum"><a name="p23.2">23.2/2</a></div>
+<div class="paranum"><a name="p23.10">23.10/5</a></div>
 <div class="Bulleted">the restrictions defined in this subclause; and</div>
-<div class="paranum"><a name="p23.3">23.3/3</a></div>
+<div class="paranum"><a name="p23.11">23.11/5</a></div>
 <div class="Bulleted">the following restrictions defined in <A HREF="RM-D-7.html">D.7</A>: 
 No_Task_Hierarchy, No_Abort_Statement, No_Implicit_Heap_Allocation, No_Standard_Allocators_After_Elaboration; 
 and</div>
-<div class="paranum"><a name="p23.4">23.4/2</a></div>
+<div class="paranum"><a name="p23.12">23.12/5</a></div>
 <div class="Bulleted">the <B>pragma</B> Profile(Ravenscar); and&nbsp;</div>
-<div class="paranum"><a name="p23.5">23.5/2</a></div>
+<div class="paranum"><a name="p23.13">23.13/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">the following uses 
 of <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 defined in <A HREF="RM-D-7.html">D.7</A>, which are checked prior to 
 program execution:&nbsp;</div>
-<div class="paranum"><a name="p23.6">23.6/2</a></div>
+<div class="paranum"><a name="p23.14">23.14/5</a></div>
 <div class="Indented2NestedBulleted">Max_Task_Entries =&gt; 0,</div>
-<div class="paranum"><a name="p23.7">23.7/2</a></div>
+<div class="paranum"><a name="p23.15">23.15/5</a></div>
 <div class="Indented2NestedBulleted">Max_Asynchronous_Select_Nesting 
 =&gt; 0, and</div>
-<div class="paranum"><a name="p23.8">23.8/2</a></div>
+<div class="paranum"><a name="p23.16">23.16/5</a></div>
 <div class="Indented2NestedBulleted">Max_Tasks =&gt; 0.&nbsp;</div>
-<div class="paranum"><a name="p24">24/3</a></div>
+<div class="paranum"><a name="p23.17">23.17/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5">If a Max_Image_Length restriction 
+applies to any compilation unit in the partition, then for any subtype 
+S, S'Image, S'Wide_Image, and S'Wide_Wide_Image shall be implemented 
+within that partition without any dynamic allocation.</span></div>
+<div class="paranum"><a name="p24">24/5</a></div>
 <div class="Normal">If an implementation supports <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Restrictions for a particular argument, then except for the restrictions 
-No_Unchecked_Deallocation, No_Unchecked_Conversion, No_Access_Subprograms, 
-No_Unchecked_Access, No_Specification_of_Aspect, No_Use_of_Attribute, 
-No_Use_of_Pragma, and the equivalent use of No_Dependence, the associated 
-restriction applies to the run-time system.&nbsp;</div>
+<span class="delete5">No_Unchecked_Deallocation, No_Unchecked_Conversion, 
+</span>No_Access_Subprograms, No_Unchecked_Access, No_Specification_of_Aspect, 
+No_Use_of_Attribute, No_Use_of_Pragma, <span class="insert5">No_Dependence 
+=&gt; Ada.Unchecked_Conversion,&nbsp;</span>and <span class="delete5">the 
+equivalent use of</span> No_Dependence<span class="insert5">&nbsp;=&gt; Ada.Unchecked_Deallocation</span>, 
+the associated restriction applies to the run-time system.&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p25">25</a></div>
@@ -196,12 +253,12 @@ an overflow check performed by the processor).&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Normal"><A NAME="I8811"></A>Program execution is erroneous 
+<div class="Normal"><A NAME="I9391"></A>Program execution is erroneous 
 if pragma Restrictions(No_Exceptions) has been specified and the conditions 
-arise under which a generated language-defined run-time check would fail. 
+arise under which a generated language-defined runtime check would fail. 
 </div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I8812"></A>Program execution is erroneous 
+<div class="Normal"><A NAME="I9392"></A>Program execution is erroneous 
 if pragma Restrictions(No_Recursion) has been specified and a subprogram 
 is invoked as part of its own execution, or if pragma Restrictions(No_Reentrancy) 
 has been specified and during the execution of a subprogram by a task, 
@@ -216,7 +273,7 @@ can also be appropriate for high-integrity systems.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-H-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

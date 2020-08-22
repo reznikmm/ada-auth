@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -49,42 +49,42 @@ package Numerics.Generic_Complex_Arrays has the following declaration:
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Complex_Types&nbsp;<B>is&nbsp;new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;(Real);<BR>
 &nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Complex_Types;<BR>
-<B>package</B>&nbsp;Ada.Numerics.Generic_Complex_Arrays<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8715"></A><BR>
+<B>package</B>&nbsp;Ada.Numerics.Generic_Complex_Arrays<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9286"></A><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Pure<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Generic_Complex_Arrays);</span></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Types</I></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8716"></A>Complex_Vector&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8717"></A>Complex_Matrix&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;,<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9287"></A>Complex_Vector&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9288"></A>Complex_Matrix&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Subprograms&nbsp;for&nbsp;Complex_Vector&nbsp;types</I></SPAN></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Complex_Vector&nbsp;selection,&nbsp;conversion&nbsp;and&nbsp;composition&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8718"></A>Re&nbsp;(X&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8719"></A>Im&nbsp;(X&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9289"></A>Re&nbsp;(X&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9290"></A>Im&nbsp;(X&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8720"></A>Set_Re&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Vector;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9291"></A>Set_Re&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Vector;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real_Vector);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8721"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Vector;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9292"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Vector;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Im&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real_Vector);</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8722"></A>Compose_From_Cartesian&nbsp;(Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real_Vector)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9293"></A>Compose_From_Cartesian&nbsp;(Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real_Vector)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Vector;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8723"></A>Compose_From_Cartesian&nbsp;(Re,&nbsp;Im&nbsp;:&nbsp;Real_Vector)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9294"></A>Compose_From_Cartesian&nbsp;(Re,&nbsp;Im&nbsp;:&nbsp;Real_Vector)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Vector;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8724"></A>Modulus&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9295"></A>Modulus&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>abs</B>&quot;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Modulus;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8725"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8726"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9296"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9297"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;:&nbsp;Real'Base)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8727"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Vector)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9298"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Vector)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Vector;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8728"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Vector;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9299"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Vector;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Vector;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
@@ -92,7 +92,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Complex_Vector;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Complex_Vector;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8729"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Complex_Vector;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9300"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Complex_Vector;</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Complex_Vector;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Complex_Vector;</div>
@@ -135,7 +135,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Other&nbsp;Complex_Vector&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8730"></A>Unit_Vector&nbsp;(Index&nbsp;:&nbsp;Integer;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9301"></A>Unit_Vector&nbsp;(Index&nbsp;:&nbsp;Integer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order&nbsp;:&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)&nbsp;<B>return</B>&nbsp;Complex_Vector;</div>
 <div class="paranum"><a name="p25">25/2</a></div>
@@ -143,30 +143,30 @@ package Numerics.Generic_Complex_Arrays has the following declaration:
 <div class="paranum"><a name="p26">26/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Complex_Matrix&nbsp;selection,&nbsp;conversion&nbsp;and&nbsp;composition&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8731"></A>Re&nbsp;(X&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8732"></A>Im&nbsp;(X&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9302"></A>Re&nbsp;(X&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9303"></A>Im&nbsp;(X&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;</div>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8733"></A>Set_Re&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Matrix;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9304"></A>Set_Re&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real_Matrix);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8734"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9305"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Complex_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Im&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real_Matrix);</div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8735"></A>Compose_From_Cartesian&nbsp;(Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real_Matrix)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9306"></A>Compose_From_Cartesian&nbsp;(Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real_Matrix)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8736"></A>Compose_From_Cartesian&nbsp;(Re,&nbsp;Im&nbsp;:&nbsp;Real_Matrix)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9307"></A>Compose_From_Cartesian&nbsp;(Re,&nbsp;Im&nbsp;:&nbsp;Real_Matrix)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Matrix;</div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8737"></A>Modulus&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9308"></A>Modulus&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>abs</B>&quot;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Modulus;</div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8738"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8739"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9309"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9310"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;:&nbsp;Real'Base)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real_Matrix;</div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8740"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Matrix)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9311"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Matrix)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8741"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9312"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;:&nbsp;Real_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Matrix;</div>
 <div class="paranum"><a name="p33">33/2</a></div>
@@ -174,8 +174,8 @@ package Numerics.Generic_Complex_Arrays has the following declaration:
 <div class="paranum"><a name="p34">34/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8742"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8743"></A>Transpose&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9313"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9314"></A>Transpose&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;</div>
 <div class="paranum"><a name="p35">35/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
@@ -235,29 +235,29 @@ package Numerics.Generic_Complex_Arrays has the following declaration:
 <div class="paranum"><a name="p45">45/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Complex_Matrix&nbsp;inversion&nbsp;and&nbsp;related&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p46">46/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8744"></A>Solve&nbsp;(A&nbsp;:&nbsp;Complex_Matrix;&nbsp;X&nbsp;:&nbsp;Complex_Vector)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9315"></A>Solve&nbsp;(A&nbsp;:&nbsp;Complex_Matrix;&nbsp;X&nbsp;:&nbsp;Complex_Vector)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Vector;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8745"></A>Solve&nbsp;(A,&nbsp;X&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8746"></A>Inverse&nbsp;(A&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8747"></A>Determinant&nbsp;(A&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9316"></A>Solve&nbsp;(A,&nbsp;X&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9317"></A>Inverse&nbsp;(A&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9318"></A>Determinant&nbsp;(A&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p47">47/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Eigenvalues&nbsp;and&nbsp;vectors&nbsp;of&nbsp;a&nbsp;Hermitian&nbsp;matrix</I></SPAN></div>
 <div class="paranum"><a name="p48">48/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8748"></A>Eigenvalues(A&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9319"></A>Eigenvalues(A&nbsp;:&nbsp;Complex_Matrix)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
 <div class="paranum"><a name="p49">49/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8749"></A>Eigensystem(A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Complex_Matrix;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9320"></A>Eigensystem(A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Complex_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Values&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Real_Vector;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectors&nbsp;:&nbsp;<B>out</B>&nbsp;Complex_Matrix);</div>
 <div class="paranum"><a name="p50">50/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Other&nbsp;Complex_Matrix&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p51">51/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8750"></A>Unit_Matrix&nbsp;(Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Positive;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9321"></A>Unit_Matrix&nbsp;(Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First_1,&nbsp;First_2&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Matrix;</div>
 <div class="paranum"><a name="p52">52/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Complex_Arrays;</div>
 <div class="paranum"><a name="p53">53/2</a></div>
-<div class="Normal"><A NAME="I8751"></A>The library package Numerics.Complex_Arrays 
+<div class="Normal"><A NAME="I9322"></A>The library package Numerics.Complex_Arrays 
 is declared pure and defines the same types and subprograms as Numerics.Generic_Complex_Arrays, 
 except that the predefined type Float is systematically substituted for 
 Real'Base, and the Real_Vector and Real_Matrix types exported by Numerics.Real_Arrays 
@@ -285,7 +285,7 @@ individual component are as defined for the scalar operation.</div>
 <div class="Normal">In the case of those operations which are defined 
 to <I>involve an inner product</I>, Constraint_Error may be raised if 
 an intermediate result has a component outside the range of Real'Base 
-even though the final mathematical result would not.<A NAME="I8752"></A></div>
+even though the final mathematical result would not.<A NAME="I9323"></A></div>
 <div class="paranum"><a name="p57">57/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;Re&nbsp;(X&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
 <B>function</B>&nbsp;Im&nbsp;(X&nbsp;:&nbsp;Complex_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
@@ -430,7 +430,7 @@ of the result is Left'Range.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order&nbsp;:&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)&nbsp;<B>return</B>&nbsp;Complex_Vector;</div>
 <div class="paranum"><a name="p90">90/2</a></div>
-<div class="Indented2">This function returns a <I>unit vector</I><A NAME="I8753"></A> 
+<div class="Indented2">This function returns a <I>unit vector</I><A NAME="I9324"></A> 
 with Order components and a lower bound of First. All components are 
 set to (0.0, 0.0) except for the Index component which is set to (1.0, 
 0.0). Constraint_Error is raised if Index &lt; First, Index &gt; First 
@@ -705,7 +705,7 @@ does not converge quickly enough.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First_1,&nbsp;First_2&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex_Matrix;</div>
 <div class="paranum"><a name="p148">148/2</a></div>
-<div class="Indented2">This function returns a square <I>unit matrix</I><A NAME="I8754"></A> 
+<div class="Indented2">This function returns a square <I>unit matrix</I><A NAME="I9325"></A> 
 with Order**2 components and lower bounds of First_1 and First_2 (for 
 the first and second index ranges respectively). All components are set 
 to (0.0, 0.0) except for the main diagonal, whose components are set 
@@ -784,7 +784,7 @@ to complex. See <A HREF="RM-G-1-1.html">G.1.1</A>.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

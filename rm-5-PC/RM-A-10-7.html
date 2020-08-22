@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-10-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -68,7 +68,7 @@ the given character to the file.</div>
 propagated if the file is not open. Mode_Error is propagated if the mode 
 of the file is not In_File. Sets End_Of_Line to True if at end of line, 
 including if at end of page or at end of file; in each of these cases 
-the value of Item is not specified. <A NAME="I6810"></A>Otherwise, End_Of_Line 
+the value of Item is not specified. <A NAME="I7115"></A>Otherwise, End_Of_Line 
 is set to False and Item is set to the next character (without consuming 
 it) from the file.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -93,7 +93,7 @@ for the file are not affected.</div>
 either control or graphic, is available from the specified File or the 
 default input file, then the character is read; Available is True and 
 Item contains the value of this character. If a character is not available, 
-then Available is False and the value of Item is not specified. <A NAME="I6811"></A>Status_Error 
+then Available is False and the value of Item is not specified. <A NAME="I7116"></A>Status_Error 
 is propagated if the file is not open. Mode_Error is propagated if the 
 mode of the file is not In_File. End_Error is propagated if at the end 
 of the file. The current column, line and page numbers for the file are 
@@ -131,7 +131,7 @@ is met; Skip_Line is then (in effect) called with a spacing of 1.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">Constraint_Error 
 is raised if the length of the line exceeds Positive'Last; in this case, 
 the line number and page number are unchanged, and the column number 
-is unspecified but no less than it was before the call.<A NAME="I6812"></A> 
+is unspecified but no less than it was before the call.<A NAME="I7117"></A> 
 The exception End_Error is propagated if an attempt is made to skip a 
 file terminator.</div>
 <div class="paranum"><a name="p18">18</a></div>
@@ -145,7 +145,7 @@ file terminator.</div>
 input file and assigns them to successive characters of the specified 
 string. Reading stops if the end of the string is met. Reading also stops 
 if the end of the line is met before meeting the end of the string; in 
-this case Skip_Line is (in effect) called with a spacing of 1. <A NAME="I6813"></A>The 
+this case Skip_Line is (in effect) called with a spacing of 1. <A NAME="I7118"></A>The 
 values of characters not assigned are not specified.</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">If characters are 
@@ -191,7 +191,7 @@ read.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-10-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

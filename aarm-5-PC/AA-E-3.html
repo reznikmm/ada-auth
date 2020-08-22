@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-E-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -52,23 +52,23 @@ P that statically denotes a program unit, the following attributes are
 defined:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">P'Version</div><div class="WideHanging-Body">
-<A NAME="I9315"></A><A NAME="I9316"></A>Yields a value of the predefined 
+<A NAME="I9938"></A><A NAME="I9939"></A>Yields a value of the predefined 
 type String that identifies the version of the compilation unit that 
 contains the declaration of the program unit.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">P'Body_Version</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I9317"></A><A NAME="I9318"></A>Yields a value of the predefined 
+<A NAME="I9940"></A><A NAME="I9941"></A>Yields a value of the predefined 
 type String that identifies the version of the compilation unit that 
 contains the body (but not any subunits) of the program unit.&nbsp;</div>
 <div class="paranum"><a name="p5">5/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0084">8652/0084</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00104.TXT">AI95-00104-01</A></I>} 
-<A NAME="I9319"></A>The <I>version</I> of a compilation unit changes 
+<A NAME="I9942"></A>The <I>version</I> of a compilation unit changes 
 whenever the compilation unit changes in a semantically significant way. 
 This International Standard does not define the exact meaning of &quot;semantically 
 significant&quot;. It is unspecified whether there are other events (such 
 as recompilation) that result in the version of a compilation unit changing. 
-<A NAME="I9320"></A></div>
+<A NAME="I9943"></A></div>
 <div class="paranum"><a name="p5.a">5.a/1</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
@@ -83,16 +83,15 @@ any version of P that has a completion.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I9321"></A><A NAME="I9322"></A>In a distributed 
+<div class="Normal"><A NAME="I9944"></A><A NAME="I9945"></A>In a distributed 
 program, a library unit is <I>consistent</I> if the same version of its 
 declaration is used throughout. It is a bounded error to elaborate a 
 partition of a distributed program that contains a compilation unit that 
 depends on a different version of the declaration of a shared passive 
 or RCI library unit than that included in the partition to which the 
-shared passive or RCI library unit was assigned. <A NAME="I9323"></A>As 
-a result of this error, Program_Error can be raised in one or both partitions 
-during elaboration; in any case, the partitions become inaccessible to 
-one another.&nbsp;</div>
+shared passive or RCI library unit was assigned. As a result of this 
+error, Program_Error can be raised in one or both partitions during elaboration; 
+in any case, the partitions become inaccessible to one another.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Because a version changes 
 if anything on which it depends undergoes a version change, requiring 
@@ -120,7 +119,7 @@ checks.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-E-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -19,13 +19,12 @@
     DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,79 +36,78 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
 @, known as the <I>target name</I> of an assignment statement, provides 
 an abbreviation to avoid repetition of potentially long names in assignment 
-statements.<A NAME="I3513"></A></div>
+statements.<A NAME="I3632"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<SPAN Class="swiss">target_name</SPAN><A NAME="I3514"></A><A NAME="S0160"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>@</div>
+<SPAN Class="swiss">target_name</SPAN><A NAME="I3633"></A><A NAME="S0174"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>@</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-[If a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
-occurs in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
+[If a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
+occurs in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
 <I>A</I>, the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 <I>V</I> of <I>A</I> is a complete context. The target name is a constant 
 view of <I>V</I>, having the nominal subtype of <I>V</I>.]</div>
 <div class="paranum"><a name="p3.a">3.a/5</a></div>
-<div class="Annotations"><B>Proof:&nbsp;</B>The complete context rule is formally 
-given in <A HREF="AA-8-6.html">8.6</A>. The constant view rule is formally 
-given in <A HREF="AA-3-3.html">3.3</A>; the nominal subtype follows from 
-the equivalence given below in Static Semantics.&nbsp;</div>
+<div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0322-1.TXT">AI12-0322-1</A></I>} 
+The complete context rule is formally given in <A HREF="AA-8-6.html">8.6</A>. 
+The constant view rule is formally given in <A HREF="AA-3-3.html">3.3</A>; 
+the nominal subtype is a property taken from the target object as described 
+below in Dynamic Semantics.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
-shall only appear in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>. 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0322-1.TXT">AI12-0322-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
+shall appear only in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>. 
 </div>
 
-<H4 Class="centered">Static Semantics</H4>
+<H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-[The <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is evaluated only once.] In particular, if a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
-with nominal subtype <I>S</I> appears in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
-<I>A</I>, then <I>A</I> is equivalent to a call on a local anonymous 
-procedure with the actual parameter being the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of <I>A</I>, where the local anonymous procedure has an <B>in out</B> 
-parameter with unique name <I>P</I> of subtype <I>S</I>, with a body 
-being <I>A</I> with the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-being replaced by <I>P</I>, and any <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN>s 
-being replaced by the qualified expression <I>S</I>'(<I>P</I>).</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0322-1.TXT">AI12-0322-1</A></I>} 
+For the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
+with one or more <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN>s 
+appearing in its <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<I>V</I> of the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
+is evaluated first to determine the object denoted by <I>V</I>, and then 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
+is evaluated with the evaluation of each <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
+yielding a constant view of the the target whose properties are otherwise 
+identical to those of the view provided by <I>V</I>. The remainder of 
+the execution of the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
+is as given in subclause <A HREF="AA-5-2.html">5.2</A>.</div>
 <div class="paranum"><a name="p5.a">5.a/5</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>This equivalence defines all 
-of the Dynamic Semantics for these assignment statements.&nbsp;</div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The properties here include 
+static properties like whether the <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
+is aliased and the nominal subtype of the <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN>. 
+It was too weird to give separate rules for static and dynamic properties 
+that said almost the same thing.&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/5</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
-</B>For example, the expression&nbsp;</div>
-<div class="paranum"><a name="p5.c">5.c/5</a></div>
-<div class="SmallExamples">My_Array(I)&nbsp;:=&nbsp;@*2&nbsp;+&nbsp;@/2;</div>
-<div class="paranum"><a name="p5.d">5.d/5</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em">would be equivalent 
-to&nbsp;</div>
-<div class="paranum"><a name="p5.e">5.e/5</a></div>
-<div class="SmallExamples"><B>declare</B><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;[Anon]&nbsp;([Target]&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;[Target_Subtype])&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Target]&nbsp;:=&nbsp;[Target_Subtype]'([Target])*2&nbsp;+<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Target_Subtype]'([Target])/2;<BR>
-&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[Anon];</div>
-<div class="paranum"><a name="p5.f">5.f/5</a></div>
-<div class="SmallExamples"><B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;[Anon]&nbsp;([Target]&nbsp;=&gt;&nbsp;My_Array(I));<BR>
-<B>end</B>;</div>
-<div class="paranum"><a name="p5.g">5.g/5</a></div>
-<div class="Annotations">where all of the identifiers in square brackets 
-are anonymous placeholders.&nbsp;</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0322-1.TXT">AI12-0322-1</A></I>} 
+Use of a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
+can be erroneous if the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<I>V</I> is a discriminant-dependent component, and some other constituent 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+modifies the discriminant governing the component <I>V</I>. The assignment 
+probably would be erroneous anyway, but the use of a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
+eliminates the possibility that a later evaluation of <I>V</I> raises 
+an exception before any erroneous execution occurs. See <A HREF="AA-3-7-2.html">3.7.2</A>. 
+</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-Board(1,&nbsp;1)&nbsp;:=&nbsp;@&nbsp;+&nbsp;1;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>An&nbsp;abbreviation&nbsp;for&nbsp;Board(1,&nbsp;1)&nbsp;:=&nbsp;Board(1,&nbsp;1)&nbsp;+&nbsp;1;</I></SPAN><BR>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0379-1.TXT">AI12-0379-1</A></I>} 
+Board(1,&nbsp;1)&nbsp;:=&nbsp;@&nbsp;+&nbsp;1.0;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>An&nbsp;abbreviation&nbsp;for&nbsp;Board(1,&nbsp;1)&nbsp;:=&nbsp;Board(1,&nbsp;1)&nbsp;+&nbsp;1.0;</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>(Board&nbsp;is&nbsp;declared&nbsp;in&nbsp;<A HREF="AA-3-6-1.html">3.6.1</A>).</I></SPAN></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
@@ -123,11 +121,12 @@ My_Complex_Array&nbsp;(Count)&nbsp;:=&nbsp;(Re&nbsp;=&gt;&nbsp;@.Re**2&nbsp;-&nb
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p7.a">7.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<A NAME="I3515"></A>The target name symbol @ is new.&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0322-1.TXT">AI12-0322-1</A></I>} 
+<A NAME="I3634"></A>The target name symbol @ is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

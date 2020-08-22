@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,20 +35,20 @@
 <HR>
 <H1>2.4.1 Decimal Literals</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1325"></A>A <SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0007">decimal_literal</A></SPAN> 
+<div class="Normal"><A NAME="I1321"></A>A <SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0007">decimal_literal</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN> 
 in the conventional decimal notation (that is, the base is ten).&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">decimal_literal</SPAN><A NAME="I1326"></A><A NAME="S0007"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1327"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>&nbsp;[.<A NAME="I1328"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>]&nbsp;[<A NAME="I1329"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">decimal_literal</SPAN><A NAME="I1322"></A><A NAME="S0007"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1323"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>&nbsp;[.<A NAME="I1324"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>]&nbsp;[<A NAME="I1325"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0009">exponent</A></SPAN>]</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">numeral</SPAN><A NAME="I1330"></A><A NAME="S0008"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1331"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0010">digit</A></SPAN>&nbsp;{[<A NAME="I1332"></A><SPAN Class="swiss">underline</SPAN>]&nbsp;<A NAME="I1333"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0010">digit</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">numeral</SPAN><A NAME="I1326"></A><A NAME="S0008"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1327"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0010">digit</A></SPAN>&nbsp;{[<A NAME="I1328"></A><SPAN Class="swiss">underline</SPAN>]&nbsp;<A NAME="I1329"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0010">digit</A></SPAN>}</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">exponent</SPAN><A NAME="I1334"></A><A NAME="S0009"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>E&nbsp;[+]&nbsp;<A NAME="I1335"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>&nbsp;|&nbsp;E&nbsp;&ndash;&nbsp;<A NAME="I1336"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">exponent</SPAN><A NAME="I1330"></A><A NAME="S0009"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>E&nbsp;[+]&nbsp;<A NAME="I1331"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>&nbsp;|&nbsp;E&nbsp;&ndash;&nbsp;<A NAME="I1332"></A><SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">digit</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I1337"></A><A NAME="S0010"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2">0&nbsp;|&nbsp;1&nbsp;|&nbsp;2&nbsp;|&nbsp;3&nbsp;|&nbsp;4&nbsp;|&nbsp;5&nbsp;|&nbsp;6&nbsp;|&nbsp;7&nbsp;|&nbsp;8&nbsp;|&nbsp;9</span></div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">digit</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I1333"></A><A NAME="S0010"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2">0&nbsp;|&nbsp;1&nbsp;|&nbsp;2&nbsp;|&nbsp;3&nbsp;|&nbsp;4&nbsp;|&nbsp;5&nbsp;|&nbsp;6&nbsp;|&nbsp;7&nbsp;|&nbsp;8&nbsp;|&nbsp;9</span></div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Indented1">An <SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0009">exponent</A></SPAN> 
 for an integer literal shall not have a minus sign.&nbsp;</div>
@@ -93,7 +93,7 @@ is different from a string.)&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

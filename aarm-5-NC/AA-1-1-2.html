@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-1-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -212,7 +212,7 @@ it sometimes makes no semantic difference whether a given rule is a Name
 Resolution Rule or a Legality Rule, and it is sometimes difficult to 
 decide which it should be. We generally make a given rule a Name Resolution 
 Rule only if it has to be. For example, &ldquo;The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-if any, in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
+if any, in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 shall be the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of an exception.&rdquo; is under &ldquo;Legality Rules.&rdquo;&nbsp;</div>
 
@@ -254,7 +254,7 @@ of the Post-Compilation Rules.&nbsp;</div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>It is not specified exactly 
 when these rules are checked, so long as they are checked for any given 
 partition before that partition starts running. An implementation may 
-choose to check some such rules at compile time, and reject <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
+choose to check some such rules at compile time, and reject <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>s 
 accordingly. Alternatively, an implementation may check such rules when 
 the partition is created (usually known as &ldquo;link time&rdquo;), 
 or when the partition is mapped to a particular piece of hardware (but 
@@ -266,8 +266,8 @@ before the partition starts running).&nbsp;</div>
 definition of the run-time effect of each construct.&nbsp;</div>
 <div class="paranum"><a name="p30.a">30.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This heading describes what 
-happens at run time. Run-time checks, which raise exceptions upon failure, 
-are described here. Each item that involves a run-time check is marked 
+happens at run time. runtime checks, which raise exceptions upon failure, 
+are described here. Each item that involves a runtime check is marked 
 with the name of the check &mdash; these are the same check names that 
 are used in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Suppress. Principle: Every check should have a name, usable in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -745,7 +745,7 @@ and does not appear in any version of the Ada RM.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-1-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,26 +41,26 @@ type, or protected type may have one or more interface types as ancestors.
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">interface_type_definition</SPAN><A NAME="I2200"></A><A NAME="S0077"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>task</B>&nbsp;|&nbsp;<B>protected</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>interface</B>&nbsp;[<B>and</B>&nbsp;<A NAME="I2201"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">interface_type_definition</SPAN><A NAME="I2191"></A><A NAME="S0077"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>task</B>&nbsp;|&nbsp;<B>protected</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>interface</B>&nbsp;[<B>and</B>&nbsp;<A NAME="I2192"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">interface_list</SPAN><A NAME="I2202"></A><A NAME="S0078"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>interface_</I><A NAME="I2203"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{<B>and</B>&nbsp;<I>interface_</I><A NAME="I2204"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">interface_list</SPAN><A NAME="I2193"></A><A NAME="S0078"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>interface_</I><A NAME="I2194"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{<B>and</B>&nbsp;<I>interface_</I><A NAME="I2195"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>}</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">An interface type (also called an <I>interface</I>) 
-is<A NAME="I2205"></A><A NAME="I2206"></A> a specific abstract tagged 
+is<A NAME="I2196"></A><A NAME="I2197"></A> a specific abstract tagged 
 type that is defined by an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0077">interface_type_definition</A></SPAN>.</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">An interface with the reserved word <B>limited</B>, 
 <B>task</B>, <B>protected</B>, or <B>synchronized</B> in its definition 
 is termed, respectively, a <I>limited interface</I>, a <I>task interface</I>, 
 a <I>protected interface</I>, or a <I>synchronized interface</I>. In 
-addition,<A NAME="I2207"></A> <A NAME="I2208"></A><A NAME="I2209"></A><A NAME="I2210"></A><A NAME="I2211"></A><A NAME="I2212"></A><A NAME="I2213"></A><A NAME="I2214"></A><A NAME="I2215"></A><A NAME="I2216"></A>all 
+addition,<A NAME="I2198"></A> <A NAME="I2199"></A><A NAME="I2200"></A><A NAME="I2201"></A><A NAME="I2202"></A><A NAME="I2203"></A><A NAME="I2204"></A><A NAME="I2205"></A><A NAME="I2206"></A><A NAME="I2207"></A>all 
 task and protected interfaces are synchronized interfaces, and all synchronized 
 interfaces are limited interfaces.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I2217"></A><A NAME="I2218"></A><A NAME="I2219"></A><A NAME="I2220"></A><A NAME="I2221"></A><A NAME="I2222"></A><A NAME="I2223"></A>A 
+<div class="Normal"><A NAME="I2208"></A><A NAME="I2209"></A><A NAME="I2210"></A><A NAME="I2211"></A><A NAME="I2212"></A><A NAME="I2213"></A><A NAME="I2214"></A>A 
 task or protected type derived from an interface is a tagged type. Such 
 a tagged type is called a <I>synchronized</I> tagged type, as are synchronized 
 interfaces and private extensions whose declaration includes the reserved 
@@ -71,7 +71,7 @@ interface is an abstract protected type.&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">An interface type has no components.&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Normal"><A NAME="I2224"></A><A NAME="I2225"></A>An <I>interface_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+<div class="Normal"><A NAME="I2215"></A><A NAME="I2216"></A>An <I>interface_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN> 
 names a <I>progenitor subtype</I>; its type is the <I>progenitor type</I>. 
 An interface type inherits user-defined primitive subprograms from each 
@@ -111,7 +111,7 @@ and a protected interface.</div>
 <div class="paranum"><a name="p17">17/2</a></div>
 <div class="Normal">In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), these rules apply also in 
-the private part of an instance of a generic unit.<A NAME="I2226"></A> 
+the private part of an instance of a generic unit.<A NAME="I2217"></A> 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -190,11 +190,11 @@ interface:</I></div>
 <div class="Examples">...</div>
 <div class="paranum"><a name="p31">31/2</a></div>
 <div class="Examples">Cashier,&nbsp;Counter&nbsp;:&nbsp;Fast_Food_Queue;</div>
-<div class="paranum"><a name="p32">32/2</a></div>
+<div class="paranum"><a name="p32">32/5</a></div>
 <div class="Examples">...<BR>
---&nbsp;<SPAN Class="roman"><I>Add&nbsp;George&nbsp;(see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A>)&nbsp;to&nbsp;the&nbsp;cashier's&nbsp;queue:</I></SPAN><BR>
-Append&nbsp;(Cashier,&nbsp;George);<BR>
---&nbsp;<SPAN Class="roman"><I>After&nbsp;payment,&nbsp;move&nbsp;George&nbsp;to&nbsp;the&nbsp;sandwich&nbsp;counter&nbsp;queue:</I></SPAN><BR>
+--<SPAN Class="roman"><I>&nbsp;Add&nbsp;Casey&nbsp;(see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A>)&nbsp;to&nbsp;the&nbsp;cashier's&nbsp;queue:</I></SPAN><BR>
+Append&nbsp;(Cashier,&nbsp;Casey);<BR>
+--<SPAN Class="roman"><I>&nbsp;After&nbsp;payment,&nbsp;move&nbsp;Casey&nbsp;to&nbsp;the&nbsp;sandwich&nbsp;counter&nbsp;queue:</I></SPAN><BR>
 Transfer&nbsp;(Cashier,&nbsp;Counter);<BR>
 ...</div>
 <div class="paranum"><a name="p33">33/2</a></div>
@@ -217,7 +217,7 @@ which are intended to be implemented by task entries (see 9.1).</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

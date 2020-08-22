@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
 <HEAD>
-    <TITLE>Anonymous Functions</TITLE>
+    <TITLE>Declare Expressions</TITLE>
     <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
     <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
@@ -19,75 +19,102 @@
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
     DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-4-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
-<H1>4.5.9 <span class="insert5">Anonymous Functions</span><span class="delete5"></span></H1>
+<H1>4.5.9 <span class="insert5">Declare Expressions</span><span class="delete5"></span></H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><span class="insert5">Anonymous functions provide 
-a way to define a function at a point where an access-to-function type 
-is the expected type, or in a generic instantiation as an actual parameter 
-corresponding to a formal subprogram parameter.</span>&nbsp;</div>
+<div class="Normal"><span class="insert5">Declare expressions<A NAME="I3165"></A><A NAME="I3166"></A> 
+provide a way to declare local constants and object renamings in an expression 
+context.</span>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">anonymous_function</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3086"></A><A NAME="S0146"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">(<B>function</B>&nbsp;[<A NAME="I3087"></A><SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN>]&nbsp;<B>return</B>&nbsp;<A NAME="I3088"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">declare_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3167"></A><A NAME="S0156"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>declare</B>&nbsp;{<A NAME="I3168"></A><SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0157">declare_item</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B>&nbsp;<I>body_</I><A NAME="I3169"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">function_formal_parameter_list</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3089"></A><A NAME="S0147"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I3090"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN>&nbsp;|&nbsp;(<A NAME="I3091"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3092"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>})</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">declare_item</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3170"></A><A NAME="S0157"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I3171"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I3172"></A><SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN></span></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Indented1"><span class="insert5">Wherever the Syntax Rules 
+allow an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN> 
+may be used in place of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+so long as it is immediately surrounded by parentheses.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0157">declare_item</A></SPAN> 
+that is an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+shall declare a constant of a nonlimited type.</span></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0157">declare_item</A></SPAN> 
+that is an <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
+(see <A HREF="RM-8-5-1.html">8.5.1</A>) shall not rename an object of 
+a limited type if any operative constituent of the <I>object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+is a value conversion or is newly constructed (see <A HREF="RM-4-4.html">4.4</A>).</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal"><span class="insert5">The following are not allowed 
+within a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN>: 
+a declaration containing the reserved word <B>aliased</B>; the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+Access or Unchecked_Access; or an anonymous access type.</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
-<div class="paranum"><a name="p4">4/5</a></div>
-<div class="Normal"><span class="insert5">In a context where there is 
-an expected type rather than an expected profile for a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>, 
-the expected type shall be a single access-to-function type, and the 
-profile of this type is considered the expected profile for the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>. 
-The result type of the expected profile of the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
-is the expected type for the expression of the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>. 
-If there is no <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN>, 
-the expected profile shall have no parameters. If the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN> 
-is a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN>, 
-then it shall be subtype conformant to the expected profile if there 
-is an expected type, or merely mode conformant otherwise. If the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN> 
-is a sequence of identifiers, the number of identifiers in the sequence 
-shall be the same as the number of formal parameters in the expected 
-profile.</span>&nbsp;</div>
-
-<H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p5">5/5</a></div>
-<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
-used in a context where there is an expected type is equivalent to a 
-local <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
-(see <A HREF="RM-6-8.html">6.8</A>), with the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
-replaced by an Access <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
-of this locally defined function; otherwise, the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
-is equivalent to such a local declaration with the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
-replaced by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-denoting this locally defined function. The profile of this locally defined 
-function has a result type determined by the expected profile, and a 
-formal part determined by the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN>, 
-if provided in the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>, 
-or by the formal part of the expected profile otherwise, but with the 
-name of each formal parameter of the expected profile replaced by the 
-corresponding identifier in the sequence of identifiers.  The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-of this locally defined expression function is that of the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>.</span> 
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal"><span class="insert5">If a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN> 
+is expected to be of a type <I>T</I>, then the <I>body_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is expected to be of type <I>T</I>. Similarly, if a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN> 
+is expected to be of some class of types, then the <I>body_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is subject to the same expectation. If a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN> 
+shall resolve to be of a type <I>T</I>, then the <I>body_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+shall resolve to be of type <I>T</I>.</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal"><span class="insert5">The type of a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN> 
+is the type of the <I>body_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>.</span> 
 </div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal"><span class="insert5">For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0157">declare_item</A></SPAN>s 
+are elaborated in order, and then the <I>body_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is evaluated. The value of the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN> 
+is that of the <I>body_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>.</span> 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
+postcondition for Ada.Containers.Vectors.&quot;&amp;&quot; (see <A HREF="RM-A-18-2.html">A.18.2</A>) 
+could have been written:</span></div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Examples" style="margin-bottom: 0.4em"><span class="insert5"><B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;(<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;<B>renames</B>&nbsp;Vectors.&quot;&amp;&quot;'Result;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;:&nbsp;<B>constant</B>&nbsp;Count_Type&nbsp;:=&nbsp;Left.Length&nbsp;+&nbsp;Right.Length;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result.Length&nbsp;=&nbsp;Length&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result.Capacity&nbsp;&gt;=&nbsp;Length)</span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-5-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-4-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

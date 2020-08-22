@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,21 +37,21 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6097"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6363"></A>For 
 a component C of a composite, non-array object R, the <I>storage place 
 attributes</I> are defined:&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The storage place attributes 
 are not (individually) specifiable, but the user may control their values 
-by giving a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>. 
+by giving a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="WideHanging-Term">R.C'Position</div><div class="WideHanging-Body">
-<A NAME="I6098"></A><A NAME="I6099"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<A NAME="I6364"></A><A NAME="I6365"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
 <span class="insert2">If the nondefault bit ordering applies to the composite 
-type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
-specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0332">position</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>; 
+type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0354">position</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>; 
 otherwise, denotes</span><span class="delete2">&nbsp;Denotes</span> the same 
 value as R.C'Address &ndash; R'Address. The value of this attribute is 
 of the type <I>universal_integer</I>.&nbsp;</div>
@@ -69,11 +69,11 @@ the &quot;&ndash;&quot; operator is the one in System.Storage_Elements
 that takes two Addresses and returns a Storage_Offset.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="WideHanging-Term">R.C'First_Bit</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6100"></A><A NAME="I6101"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<A NAME="I6366"></A><A NAME="I6367"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
 <span class="insert2">If the nondefault bit ordering applies to the composite 
-type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
-specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0333">first_bit</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>; 
+type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0355">first_bit</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>; 
 otherwise, denotes</span><span class="delete2">&nbsp;Denotes</span> the offset, 
 from the start of the first of the storage elements occupied by C, of 
 the first bit occupied by C. This offset is measured in bits. The first 
@@ -81,11 +81,11 @@ bit of a storage element is numbered zero. The value of this attribute
 is of the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="WideHanging-Term">R.C'Last_Bit</div><div class="WideHanging-Body">
-<A NAME="I6102"></A><A NAME="I6103"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<A NAME="I6368"></A><A NAME="I6369"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
 <span class="insert2">If the nondefault bit ordering applies to the composite 
-type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
-specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0334">last_bit</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>; 
+type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0356">last_bit</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>; 
 otherwise, denotes</span><span class="delete2">&nbsp;Denotes</span> the offset, 
 from the start of the first of the storage elements occupied by C, of 
 the last bit occupied by C. This offset is measured in bits. The value 
@@ -99,14 +99,14 @@ Ordering</A>&rdquo;.</div>
 <div class="Annotations">R.C'Size = R.C'Last_Bit &ndash; R.C'First_Bit 
 + 1. (Unless the implementation chooses an indirection representation.)</div>
 <div class="paranum"><a name="p4.c">4.c</a></div>
-<div class="Annotations">If a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+<div class="Annotations">If a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
 applies to a component, then that component will be at the same relative 
 storage place in all objects of the type. Otherwise, there is no such 
 requirement.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I6104"></A><A NAME="I6105"></A>If a component 
+<div class="Normal"><A NAME="I6370"></A><A NAME="I6371"></A>If a component 
 is represented using some form of pointer (such as an offset) to the 
 actual data of the component, and this data is contiguous with the rest 
 of the object, then the storage place attributes should reflect the place 
@@ -119,7 +119,7 @@ these attributes make no sense. For example, an implementation might
 allocate dynamic-sized components on the heap. For another example, an 
 implementation might allocate the discriminants separately from the other 
 components, so that multiple objects of the same subtype can share discriminants. 
-Such representations cannot happen if there is a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+Such representations cannot happen if there is a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN> 
 for that component.&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Implementation Advice: 
@@ -133,7 +133,7 @@ reference to one of its storage place attributes.</span></div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p5.c">5.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
-<span class="insert2"><A NAME="I6106"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I6372"></A><B>Amendment Correction:</B> 
 The meaning of the storage place attributes for the nondefault bit order 
 is now clearly defined, and can be different than that given by strictly 
 following the Ada 95 wording. Any code which depends on the original 
@@ -142,7 +142,7 @@ different will break.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -34,12 +34,12 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-4-5-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
@@ -50,25 +50,25 @@
 are allowed between closely related types as defined below. This subclause 
 also defines rules for value and view conversions to a particular subtype 
 of a type, both explicit ones and those implicit in other constructs. 
-<A NAME="I3237"></A><A NAME="I3238"></A><A NAME="I3239"></A><A NAME="I3240"></A>]<A NAME="I3241"></A><A NAME="I3242"></A></div>
+<A NAME="I3350"></A><A NAME="I3351"></A><A NAME="I3352"></A><A NAME="I3353"></A>]<A NAME="I3354"></A><A NAME="I3355"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">type_conversion</SPAN><A NAME="I3243"></A><A NAME="S0148"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3244"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3245"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>)<BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3246"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3247"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">type_conversion</SPAN><A NAME="I3356"></A><A NAME="S0162"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3357"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3358"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3359"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3360"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3248"></A>The <I>target subtype</I> of 
-a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Normal"><A NAME="I3361"></A>The <I>target subtype</I> of 
+a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
-<A NAME="I3249"></A>The <I>operand</I> of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
-is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<A NAME="I3362"></A>The <I>operand</I> of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
+is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> within 
-the parentheses; <A NAME="I3250"></A>its type is the <I>operand type</I>.</div>
+the parentheses; <A NAME="I3363"></A>its type is the <I>operand type</I>.</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I3251"></A>One type is <I>convertible</I> to a second type if 
-a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<A NAME="I3364"></A>One type is <I>convertible</I> to a second type if 
+a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 with the first type as operand type and the second type as target type 
 is legal according to the rules of this subclause. Two types are convertible 
 if each is convertible to the other.&nbsp;</div>
@@ -81,19 +81,19 @@ would raise an exception at run time is irrelevant to this definition.
 <div class="Normal">{<I><A HREF="defect1.html#8652/0017">8652/0017</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00184.TXT">AI95-00184-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00330.TXT">AI95-00330-01</A></I>} 
-<A NAME="I3252"></A><A NAME="I3253"></A>A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<A NAME="I3365"></A><A NAME="I3366"></A>A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 whose operand is the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of an object is called a <I>view conversion</I> if both its target type 
 and operand type are tagged, or if it appears in a call as an actual 
-parameter of mode <B>out</B> or <B>in out</B>; <A NAME="I3254"></A><A NAME="I3255"></A>other 
-<SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>s 
-are called <I>value conversions</I>. <A NAME="I3256"></A></div>
+parameter of mode <B>out</B> or <B>in out</B>; <A NAME="I3367"></A><A NAME="I3368"></A>other 
+<SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>s 
+are called <I>value conversions</I>. <A NAME="I3369"></A></div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A view conversion to a 
 tagged type can appear in any context that requires an object <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 including in an object renaming, the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>, 
-and if the operand is a variable, on the left side of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>. 
+and if the operand is a variable, on the left side of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>. 
 View conversions to other types only occur as actual parameters. Allowing 
 view conversions of untagged types in all contexts seemed to incur an 
 undue implementation burden.</div>
@@ -105,23 +105,24 @@ applies to subprogram calls, not instantiations.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3257"></A>The operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Normal"><A NAME="I3370"></A>The operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 is expected to be of any type.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This replaces the &quot;must 
 be determinable&quot; wording of Ada 83. This is equivalent to (but hopefully 
-more intuitive than) saying that the operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+more intuitive than) saying that the operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 is a &ldquo;complete context.&rdquo;&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">The operand of a view conversion is interpreted only 
 as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
-the operand of a value conversion is interpreted as an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>. 
+the operand of a value conversion is interpreted as an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>. 
 </div>
-<div class="paranum"><a name="p7.a">7.a/4</a></div>
+<div class="paranum"><a name="p7.a">7.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 This formally resolves the syntactic ambiguity between the two forms 
-of <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>. 
-This matters as an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>. 
+This matters <span class="insert5">because</span><span class="delete5">&nbsp;as</span> 
+an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is evaluated and represents a value while a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 by itself can be an object; we want a view conversion to be an object. 
@@ -220,13 +221,13 @@ nearly the entire section. The text of Ada 95 paragraphs 8 through 12,
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
-<A NAME="I3258"></A><A NAME="I3259"></A>If there is a type (other than 
+<A NAME="I3371"></A><A NAME="I3372"></A>If there is a type (other than 
 a root numeric type) that is an ancestor of both the target type and 
 the operand type, or both types are class-wide types, then at least one 
 of the following rules shall apply:&nbsp;</div>
 <div class="paranum"><a name="p21.1">21.1/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-<A NAME="I3260"></A><A NAME="I3261"></A>The target type shall be untagged; 
+<A NAME="I3373"></A><A NAME="I3374"></A>The target type shall be untagged; 
 or</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Bulleted">The operand type shall be covered by or descended 
@@ -262,7 +263,7 @@ class-wide type T'Class to or from a class-wide interface type even if
 the specific type T does not have an appropriate interface ancestor, 
 because some extension of T might have the needed ancestor. This is similar 
 to a conversion of a class-wide type toward the leaves of the tree, and 
-we need to be consistent. Of course, there is a run-time check that the 
+we need to be consistent. Of course, there is a runtime check that the 
 actual object has the needed interface.&nbsp;</div>
 <div class="paranum"><a name="p24">24/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
@@ -274,26 +275,26 @@ types, one of the following rules shall apply:&nbsp;</div>
 <div class="Annotations"></div>
 <div class="paranum"><a name="p24.1">24.1/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-<A NAME="I3262"></A><A NAME="I3263"></A>If the target type is a numeric 
+<A NAME="I3375"></A><A NAME="I3376"></A>If the target type is a numeric 
 type, then the operand type shall be a numeric type.</div>
 <div class="paranum"><a name="p24.2">24.2/2</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-<A NAME="I3264"></A><A NAME="I3265"></A>If the target type is an array 
+<A NAME="I3377"></A><A NAME="I3378"></A>If the target type is an array 
 type, then the operand type shall be an array type. Further:</div>
 <div class="paranum"><a name="p24.3">24.3/2</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 The types shall have the same dimensionality;</div>
 <div class="paranum"><a name="p24.4">24.4/2</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-Corresponding index types shall be convertible; <A NAME="I3266"></A></div>
+Corresponding index types shall be convertible; <A NAME="I3379"></A></div>
 <div class="paranum"><a name="p24.5">24.5/2</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-The component subtypes shall statically match; <A NAME="I3267"></A></div>
+The component subtypes shall statically match; <A NAME="I3380"></A></div>
 <div class="paranum"><a name="p24.6">24.6/2</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00392.TXT">AI95-00392-01</A></I>} 
 If the component types are anonymous access types, then the accessibility 
 level of the operand type shall not be statically deeper than that of 
-the target type; <A NAME="I3268"></A></div>
+the target type; <A NAME="I3381"></A></div>
 <div class="paranum"><a name="p24.b">24.b/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>For unrelated array types, the 
 component types could have different accessibility, and we had better 
@@ -346,15 +347,15 @@ be written explicitly, of course, but it can be implicit (see below).
 <div class="paranum"><a name="p24.11">24.11/2</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-<A NAME="I3269"></A><A NAME="I3270"></A>If the target type is a general 
+<A NAME="I3382"></A><A NAME="I3383"></A>If the target type is a general 
 access-to-object type, then the operand type shall be <I>universal_access</I> 
 or an access-to-object type. Further, if the operand type is not <I>universal_access</I>:</div>
 <div class="paranum"><a name="p24.h">24.h/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The Legality Rules and Dynamic 
-Semantics are worded so that a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+Semantics are worded so that a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 T(X) (where T is an access type) is (almost) equivalent to the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 X.<B>all</B>'Access, where the result is of type T. The only difference 
-is that the <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+is that the <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 accepts a null value, whereas the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 would raise Constraint_Error.&nbsp;</div>
 <div class="paranum"><a name="p24.12">24.12/2</a></div>
@@ -368,7 +369,7 @@ or access-to-variable.&nbsp;</div>
 <div class="paranum"><a name="p24.13">24.13/2</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 If the target designated type is tagged, then the operand designated 
-type shall be convertible to the target designated type; <A NAME="I3271"></A></div>
+type shall be convertible to the target designated type; <A NAME="I3384"></A></div>
 <div class="paranum"><a name="p24.14">24.14/2</a></div>
 <div class="Indented2NestedBulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
@@ -376,7 +377,7 @@ If the target designated type is not tagged, then the designated types
 shall be the same, and either:</div>
 <div class="paranum"><a name="p24.15">24.15/2</a></div>
 <div class="Indented3NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
-the designated subtypes shall statically match; or<A NAME="I3272"></A></div>
+the designated subtypes shall statically match; or<A NAME="I3385"></A></div>
 <div class="paranum"><a name="p24.16">24.16/2</a></div>
 <div class="Indented3NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00384.TXT">AI95-00384-01</A></I>} 
@@ -419,7 +420,7 @@ represents an access value as a single pointer.)&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0148-1.TXT">AI05-0148-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0027-1.TXT">AI12-0027-1</A></I>} 
-<A NAME="I3273"></A>The accessibility level of the operand type shall 
+<A NAME="I3386"></A>The accessibility level of the operand type shall 
 not be statically deeper than that of the target type, unless the target 
 type is an anonymous access type of a stand-alone object. If the target 
 type is that of such a stand-alone object, the accessibility level of 
@@ -427,7 +428,7 @@ the operand type shall not be statically deeper than that of the declaration
 of the stand-alone object.&nbsp;</div>
 <div class="paranum"><a name="p24.n">24.n/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0148-1.TXT">AI05-0148-1</A></I>} 
-The access parameter case is handled by a run-time check. Run-time checks 
+The access parameter case is handled by a run-time check. runtime checks 
 are also done in instance bodies, and for stand-alone objects of anonymous 
 access types.&nbsp;</div>
 <div class="paranum"><a name="p24.n.1">24.n.1/3</a></div>
@@ -437,7 +438,7 @@ to objects deeper than a stand-alone object of an anonymous access-to-object
 dangling accesses.&nbsp;</div>
 <div class="paranum"><a name="p24.18">24.18/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
-<A NAME="I3274"></A><A NAME="I3275"></A>If the target type is a pool-specific 
+<A NAME="I3387"></A><A NAME="I3388"></A>If the target type is a pool-specific 
 access-to-object type, then the operand type shall be <I>universal_access</I>. 
 </div>
 <div class="paranum"><a name="p24.o">24.o/2</a></div>
@@ -450,17 +451,17 @@ types.&nbsp;</div>
 <div class="paranum"><a name="p24.19">24.19/2</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-<A NAME="I3276"></A><A NAME="I3277"></A>If the target type is an access-to-subprogram 
+<A NAME="I3389"></A><A NAME="I3390"></A>If the target type is an access-to-subprogram 
 type, then the operand type shall be <I>universal_access</I> or an access-to-subprogram 
 type. Further, if the operand type is not <I>universal_access</I>:</div>
 <div class="paranum"><a name="p24.20">24.20/3</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
-The designated profiles shall be subtype conformant. <A NAME="I3278"></A></div>
+The designated profiles shall be subtype conformant. <A NAME="I3391"></A></div>
 <div class="paranum"><a name="p24.21">24.21/4</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0027-1.TXT">AI12-0027-1</A></I>} 
-<A NAME="I3279"></A>The accessibility level of the operand type shall 
+<A NAME="I3392"></A>The accessibility level of the operand type shall 
 not be statically deeper than that of the target type. If the operand 
 type is declared within a generic body, the target type shall be declared 
 within the generic body.</div>
@@ -479,46 +480,47 @@ the instantiation.&nbsp;</div>
 type shall be nonblocking.</span>&nbsp;</div>
 <div class="paranum"><a name="p24.23">24.23/5</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0027-1.TXT">AI12-0027-1</A></I>} 
-<A NAME="I3280"></A>In addition to the places where Legality Rules normally 
+<A NAME="I3393"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), these rules apply also in 
 the private part of an instance of a generic unit.&nbsp;</div>
-<div class="paranum"><a name="p24.q">24.q/4</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>This applies to <I>all</I> 
-of the Legality Rules in this section. It won't matter for the majority 
-of these rules, but in any case that it does, we want to apply the same 
-recheck in the private part. (Ada got the default wrong for these, as 
-there is only one known case where we don't want to recheck in the private 
-part, see derivations without record extensions in <A HREF="AA-3-4.html">3.4</A>.) 
+<div class="paranum"><a name="p24.q">24.q/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+This applies to <I>all</I> of the Legality Rules in this section. It 
+won't matter for the majority of these rules, but in any case that it 
+does, we want to apply the same <span class="insert5">rules</span><span class="delete5">&nbsp;recheck</span> 
+in the private part. (Ada got the default wrong for these, as there is 
+only one known case where we don't want to recheck in the private part, 
+see derivations without record extensions in <A HREF="AA-3-4.html">3.4</A>.) 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 that is a value conversion denotes the value that is the result of converting 
 the value of the operand to the target subtype.</div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 that is a view conversion denotes a view of the object denoted by the 
 operand. This view is a variable of the target type if the operand denotes 
 a variable; otherwise, it is a constant of the target type.</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I3281"></A>The nominal subtype of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Normal"><A NAME="I3394"></A>The nominal subtype of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 is its target subtype.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3282"></A><A NAME="I3283"></A><A NAME="I3284"></A>For 
-the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3395"></A><A NAME="I3396"></A><A NAME="I3397"></A>For 
+the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 that is a value conversion, the operand is evaluated, and then the value 
 of the operand is <I>converted</I> to a <I>corresponding</I> value of 
-the target type, if any. <A NAME="I3285"></A><A NAME="I3286"></A><A NAME="I3287"></A>If 
+the target type, if any. <A NAME="I3398"></A><A NAME="I3399"></A><A NAME="I3400"></A>If 
 there is no value of the target type that corresponds to the operand 
 value, Constraint_Error is raised[; this can only happen on conversion 
 to a modular type, and only when the operand value is outside the base 
 range of the modular type.] Additional rules follow:&nbsp;</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Bulleted"><A NAME="I3288"></A><A NAME="I3289"></A>Numeric 
+<div class="Bulleted"><A NAME="I3401"></A><A NAME="I3402"></A>Numeric 
 Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p30">30</a></div>
 <div class="Indented2NestedBulleted">If the target and the operand types 
@@ -529,7 +531,7 @@ that corresponds to the same mathematical integer as the operand.</div>
 fixed point type, then the result is truncated (toward 0) if the value 
 of the operand is not a multiple of the <I>small</I> of the target type.</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3290"></A>If the target 
+<div class="Indented2NestedBulleted"><A NAME="I3403"></A>If the target 
 type is some other real type, then the result is within the accuracy 
 of the target type (see <A HREF="AA-G-2.html">G.2</A>, &ldquo;<A HREF="AA-G-2.html">Numeric 
 Performance Requirements</A>&rdquo;, for implementations that support 
@@ -560,25 +562,25 @@ that require the highest possible performance. &ldquo;Deterministic&rdquo;
 rounding is required for static conversions to integer as well. See <A HREF="AA-4-9.html">4.9</A>. 
 </div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Bulleted"><A NAME="I3291"></A><A NAME="I3292"></A>Enumeration 
+<div class="Bulleted"><A NAME="I3404"></A><A NAME="I3405"></A>Enumeration 
 Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p35">35</a></div>
 <div class="Indented2NestedBulleted">The result is the value of the target 
 type with the same position number as that of the operand value.&nbsp;</div>
 <div class="paranum"><a name="p36">36</a></div>
-<div class="Bulleted"><A NAME="I3293"></A><A NAME="I3294"></A>Array Type 
+<div class="Bulleted"><A NAME="I3406"></A><A NAME="I3407"></A>Array Type 
 Conversion&nbsp;</div>
 <div class="paranum"><a name="p37">37</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3295"></A><A NAME="I3296"></A>If 
+<div class="Indented2NestedBulleted"><A NAME="I3408"></A><A NAME="I3409"></A>If 
 the target subtype is a constrained array subtype, then a check is made 
 that the length of each dimension of the value of the operand equals 
 the length of the corresponding dimension of the target subtype. The 
 bounds of the result are those of the target subtype.</div>
 <div class="paranum"><a name="p38">38</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3297"></A><A NAME="I3298"></A>If 
+<div class="Indented2NestedBulleted"><A NAME="I3410"></A><A NAME="I3411"></A>If 
 the target subtype is an unconstrained array subtype, then the bounds 
 of the result are obtained by converting each bound of the value of the 
-operand to the corresponding index type of the target type. <A NAME="I3299"></A>For 
+operand to the corresponding index type of the target type. <A NAME="I3412"></A>For 
 each nonnull index range, a check is made that the bounds of the range 
 belong to the corresponding index subtype.&nbsp;</div>
 <div class="paranum"><a name="p38.a">38.a</a></div>
@@ -595,14 +597,14 @@ not the component is initialized.&nbsp;</div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00392.TXT">AI95-00392-01</A></I>} 
 If the component types of the array types are anonymous access types, 
 then a check is made that the accessibility level of the operand type 
-is not deeper than that of the target type. <A NAME="I3300"></A><A NAME="I3301"></A></div>
+is not deeper than that of the target type. <A NAME="I3413"></A><A NAME="I3414"></A></div>
 <div class="paranum"><a name="p39.b">39.b/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 This check is needed for operands that are <span class="delete5">access 
 parameters and&nbsp;</span>in instance bodies. Other cases are handled by 
 the legality rule given previously.&nbsp;</div>
 <div class="paranum"><a name="p40">40</a></div>
-<div class="Bulleted"><A NAME="I3302"></A><A NAME="I3303"></A>Composite 
+<div class="Bulleted"><A NAME="I3415"></A><A NAME="I3416"></A>Composite 
 (Non-Array) Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p41">41</a></div>
 <div class="Indented2NestedBulleted">The value of each nondiscriminant 
@@ -613,7 +615,7 @@ value.&nbsp;</div>
 not the component is initialized.&nbsp;</div>
 <div class="paranum"><a name="p42">42</a></div>
 <div class="Indented2NestedBulleted">[The tag of the result is that of 
-the operand.] <A NAME="I3304"></A><A NAME="I3305"></A>If the operand 
+the operand.] <A NAME="I3417"></A><A NAME="I3418"></A>If the operand 
 type is class-wide, a check is made that the tag of the operand identifies 
 a (specific) type that is covered by or descended from the target type. 
 </div>
@@ -622,14 +624,14 @@ a (specific) type that is covered by or descended from the target type.
 succeed if the operand type is itself covered by or descended from the 
 target type.&nbsp;</div>
 <div class="paranum"><a name="p42.b">42.b</a></div>
-<div class="Annotations"><B>Proof:&nbsp;</B>The fact that a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Annotations"><B>Proof:&nbsp;</B>The fact that a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 preserves the tag is stated officially in <A HREF="AA-3-9.html">3.9</A>, 
 &ldquo;<A HREF="AA-3-9.html">Tagged Types and Type Extensions</A>&rdquo; 
 </div>
 <div class="paranum"><a name="p43">43</a></div>
 <div class="Indented2NestedBulleted">For each discriminant of the target 
 type that corresponds to a discriminant of the operand type, its value 
-is that of the corresponding discriminant of the operand value; <A NAME="I3306"></A><A NAME="I3307"></A>if 
+is that of the corresponding discriminant of the operand value; <A NAME="I3419"></A><A NAME="I3420"></A>if 
 it corresponds to more than one discriminant of the operand type, a check 
 is made that all these discriminants are equal in the operand value.</div>
 <div class="paranum"><a name="p44">44</a></div>
@@ -645,17 +647,17 @@ the rules for the discriminants of derived types that each discriminant
 of the result is covered either by this paragraph or the previous one. 
 See <A HREF="AA-3-7.html">3.7</A>.&nbsp;</div>
 <div class="paranum"><a name="p45">45</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3308"></A><A NAME="I3309"></A>For 
+<div class="Indented2NestedBulleted"><A NAME="I3421"></A><A NAME="I3422"></A>For 
 each discriminant of the operand type that corresponds to a discriminant 
 that is specified by the <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
 for some ancestor of the target type, a check is made that in the operand 
 value it equals the value specified for it.</div>
 <div class="paranum"><a name="p46">46</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3310"></A><A NAME="I3311"></A>For 
+<div class="Indented2NestedBulleted"><A NAME="I3423"></A><A NAME="I3424"></A>For 
 each discriminant of the result, a check is made that its value belongs 
 to its subtype.&nbsp;</div>
 <div class="paranum"><a name="p47">47</a></div>
-<div class="Bulleted"><A NAME="I3312"></A><A NAME="I3313"></A>Access 
+<div class="Bulleted"><A NAME="I3425"></A><A NAME="I3426"></A>Access 
 Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p48">48/3</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0148-1.TXT">AI05-0148-1</A></I>} 
@@ -667,7 +669,7 @@ If the target type is that of such a stand-alone object, a check is made
 that the accessibility level of the operand type is not deeper than that 
 of the declaration of the stand-alone object[; then if the check succeeds, 
 the accessibility level of the target type becomes that of the operand 
-type]. <A NAME="I3314"></A><A NAME="I3315"></A></div>
+type]. <A NAME="I3427"></A><A NAME="I3428"></A></div>
 <div class="paranum"><a name="p48.a">48.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0148-1.TXT">AI05-0148-1</A></I>} 
 This check is needed for operands that are access parameters, for stand-alone 
@@ -698,18 +700,20 @@ target designated subtype are performed.&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The checks are certain 
 to succeed if the target and operand designated subtypes statically match. 
 </div>
-<div class="paranum"><a name="p51">51/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
-<A NAME="I3316"></A><A NAME="I3317"></A><A NAME="I3318"></A><A NAME="I3319"></A><A NAME="I3320"></A><A NAME="I3321"></A><A NAME="I3322"></A><A NAME="I3323"></A>After 
+<div class="paranum"><a name="p51">51/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0333-1.TXT">AI12-0333-1</A></I>} 
+<span class="insert5"></span><A NAME="I3429"></A><A NAME="I3430"></A><A NAME="I3431"></A><A NAME="I3432"></A><A NAME="I3433"></A><A NAME="I3434"></A><A NAME="I3435"></A><A NAME="I3436"></A>After 
 conversion of the value to the target type, if the target subtype is 
 constrained, a check is performed that the value satisfies this constraint. 
 If the target subtype excludes null, then a check is made that the value 
 is not null. If predicate checks are enabled for the target subtype (see 
 <A HREF="AA-3-2-4.html">3.2.4</A>), a check is performed that the value 
-satisfies the predicates of the target subtype.<A NAME="I3324"></A><A NAME="I3325"></A> 
+satisfies the predicates of the target subtype<span class="insert5">, 
+unless the conversion is:</span>.<A NAME="I3437"></A><A NAME="I3438"></A> 
 </div>
 <div class="paranum"><a name="p51.a">51.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
@@ -718,11 +722,26 @@ or Index_Check for access subtypes, and a Discriminant_Check for discriminated
 subtypes. The Length_Check for an array conversion is performed as part 
 of the conversion to the target type. The check for exclusion of null 
 is an Access_Check.&nbsp;</div>
+<div class="paranum"><a name="p51.1">51.1/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0333-1.TXT">AI12-0333-1</A></I>} 
+<span class="insert5">a view conversion that is an actual parameter of 
+mode <B>out</B>; or</span></div>
+<div class="paranum"><a name="p51.2">51.2/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0333-1.TXT">AI12-0333-1</A></I>} 
+<span class="insert5">an implicit subtype conversion of an actual parameter 
+of mode <B>out</B> to the nominal subtype of its formal parameter.</span> 
+</div>
+<div class="paranum"><a name="p51.b">51.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0333-1.TXT">AI12-0333-1</A></I>} 
+<span class="insert5">The reverse conversion applied to by-copy <B>out</B> 
+parameters is <I>not</I> a view conversion and it is to the nominal subtype 
+of the <I>actual</I> parameter, therefore any enabled predicate checks 
+<I>are</I> performed.</span>&nbsp;</div>
 <div class="paranum"><a name="p52">52</a></div>
-<div class="Normal"><A NAME="I3326"></A>For the evaluation of a view 
+<div class="Normal"><A NAME="I3439"></A>For the evaluation of a view 
 conversion, the operand <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is evaluated, and a new view of the object denoted by the operand is 
-created, whose type is the target type; <A NAME="I3327"></A><A NAME="I3328"></A><A NAME="I3329"></A><A NAME="I3330"></A><A NAME="I3331"></A><A NAME="I3332"></A>if 
+created, whose type is the target type; <A NAME="I3440"></A><A NAME="I3441"></A><A NAME="I3442"></A><A NAME="I3443"></A><A NAME="I3444"></A><A NAME="I3445"></A>if 
 the target type is composite, checks are performed as above for a value 
 conversion.</div>
 <div class="paranum"><a name="p53">53</a></div>
@@ -743,7 +762,7 @@ that were not inherited from the target type;</div>
 to the view assigns to the corresponding part of the object denoted by 
 the operand; otherwise, an assignment to the view assigns to the object, 
 after converting the assigned value to the subtype of the object (which 
-might raise Constraint_Error); <A NAME="I3333"></A></div>
+might raise Constraint_Error); <A NAME="I3446"></A></div>
 <div class="paranum"><a name="p56">56/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
 Reading the value of the view yields the result of converting the value 
@@ -752,7 +771,7 @@ except if the object is of an elementary type and the view conversion
 is passed as an <B>out</B> parameter; in this latter case, the value 
 of the operand object may be used to initialize the formal parameter 
 without checking against any constraint of the target subtype (as described 
-more precisely in <A HREF="AA-6-4-1.html">6.4.1</A>). <A NAME="I3334"></A></div>
+more precisely in <A HREF="AA-6-4-1.html">6.4.1</A>). <A NAME="I3447"></A></div>
 <div class="paranum"><a name="p56.a">56.a/4</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
 This ensures that even an <B>out</B> parameter of an elementary type 
@@ -760,7 +779,7 @@ is initialized reasonably.&nbsp;</div>
 <div class="paranum"><a name="p57">57/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0096-1.TXT">AI12-0096-1</A></I>} 
-<A NAME="I3335"></A><A NAME="I3336"></A><A NAME="I3337"></A>If an Accessibility_Check 
+<A NAME="I3448"></A><A NAME="I3449"></A><A NAME="I3450"></A>If an Accessibility_Check 
 fails, Program_Error is raised. If a predicate check fails, the effect 
 is as defined in subclause <A HREF="AA-3-2-4.html">3.2.4</A>, &ldquo;<A HREF="AA-3-2-4.html">Subtype 
 Predicates</A>&rdquo;. Any other check associated with a conversion raises 
@@ -771,7 +790,7 @@ an unconstrained subtype of the type.&nbsp;</div>
 <div class="paranum"><a name="p58.a">58.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This definition is needed because 
 the semantics of various constructs involves converting to a type, whereas 
-an explicit <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+an explicit <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 actually converts to a subtype. For example, the evaluation of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
 is defined to convert the values of the expressions to the type of the 
 range.&nbsp;</div>
@@ -802,7 +821,7 @@ then a new object is created;</div>
 a new object is created;</span></div>
 <div class="paranum"><a name="p58.5">58.5/5</a></div>
 <div class="Bulleted">Otherwise, it is unspecified whether a new object 
-is created.<A NAME="I3338"></A>&nbsp;</div>
+is created.<A NAME="I3451"></A>&nbsp;</div>
 <div class="paranum"><a name="p58.6">58.6/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0027-1.TXT">AI12-0027-1</A></I>} 
 If a new object is created, then the initialization of that object is 
@@ -832,8 +851,8 @@ composite types (since there aren't any values of composite types separate
 from objects).</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p59">59</a></div>
-<div class="Notes">21&nbsp;&nbsp;<A NAME="I3339"></A>In addition to explicit 
-<SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>s, 
+<div class="Notes">21&nbsp;&nbsp;<A NAME="I3452"></A>In addition to explicit 
+<SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>s, 
 type conversions are performed implicitly in situations where the expected 
 type and the actual type of a construct differ, as is permitted by the 
 type resolution rules (see <A HREF="AA-8-6.html">8.6</A>). For example, 
@@ -842,7 +861,7 @@ converted when assigned to a target of some specific integer type. Similarly,
 an actual parameter of a specific tagged type is implicitly converted 
 when the corresponding formal parameter is of a class-wide type.</div>
 <div class="paranum"><a name="p60">60</a></div>
-<div class="Notes"><A NAME="I3340"></A><A NAME="I3341"></A>Even when 
+<div class="Notes"><A NAME="I3453"></A><A NAME="I3454"></A>Even when 
 the expected and actual types are the same, implicit subtype conversions 
 are performed to adjust the array bounds (if any) of an operand to match 
 the desired target subtype, or to raise Constraint_Error if the (possibly 
@@ -850,18 +869,18 @@ adjusted) value does not satisfy the constraints of the target subtype.</div>
 <div class="paranum"><a name="p61">61/2</a></div>
 <div class="Notes">22&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 A ramification of the overload resolution rules is that the operand of 
-an (explicit) <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
-cannot be an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
+an (explicit) <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
+cannot be an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
 an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
 or an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
-for an Access or Unchecked_Access attribute. Similarly, such an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-enclosed by parentheses is not allowed. A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
-(see <A HREF="AA-4-7.html">4.7</A>) can be used instead of such a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>.</div>
+for an Access or Unchecked_Access attribute. Similarly, such an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+enclosed by parentheses is not allowed. A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
+(see <A HREF="AA-4-7.html">4.7</A>) can be used instead of such a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>.</div>
 <div class="paranum"><a name="p62">62</a></div>
 <div class="Notes">23&nbsp;&nbsp;The constraint of the target subtype 
-has no effect for a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+has no effect for a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 of an elementary type passed as an <B>out</B> parameter. Hence, it is 
 recommended that the first subtype be specified as the target to minimize 
 confusion (a similar recommendation applies to renaming and generic formal 
@@ -900,8 +919,8 @@ Dozen(Ledger(31&nbsp;..&nbsp;42))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roma
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p71.a">71.a</a></div>
-<div class="Annotations"><A NAME="I3342"></A>A <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
-is not allowed as the operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>, 
+<div class="Annotations"><A NAME="I3455"></A>A <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+is not allowed as the operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>, 
 since there are now two character types in package Standard.</div>
 <div class="paranum"><a name="p71.b">71.b</a></div>
 <div class="Annotations">The component subtypes have to statically match 
@@ -915,16 +934,16 @@ result. This is likely to fix more bugs than it creates.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p71.d">71.d</a></div>
-<div class="Annotations"><A NAME="I3343"></A>A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Annotations"><A NAME="I3456"></A>A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 is considered the name of an object in certain circumstances (such a 
-<SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
-is called a view conversion). In particular, as in Ada 83, a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
+is called a view conversion). In particular, as in Ada 83, a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 can appear as an <B>in out</B> or <B>out</B> actual parameter. In addition, 
 if the target type is tagged and the operand is the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of an object, then so is the <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>, 
+of an object, then so is the <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>, 
 and it can be used as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 to a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>, 
-in an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN>, 
+in an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0239">object_renaming_declaration</A></SPAN>, 
 etc.</div>
 <div class="paranum"><a name="p71.e">71.e</a></div>
 <div class="Annotations">We no longer require type-mark conformance between 
@@ -940,7 +959,7 @@ two integers (rounding is away from zero in this case).</div>
 <div class="Annotations">&ldquo;Sliding&rdquo; of array bounds (which 
 is part of conversion to an array subtype) is performed in more cases 
 in Ada 95 than in Ada 83. Sliding is not performed on the operand of 
-a membership test, nor on the operand of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN>. 
+a membership test, nor on the operand of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>. 
 It wouldn't make sense on a membership test, and we wish to retain a 
 connection between subtype membership and subtype qualification. In general, 
 a subtype membership test returns True if and only if a corresponding 
@@ -950,7 +969,7 @@ that take arrays perform sliding.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p71.h">71.h</a></div>
 <div class="Annotations">We no longer explicitly list the kinds of things 
-that are not allowed as the operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>, 
+that are not allowed as the operand of a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>, 
 except in a NOTE.</div>
 <div class="paranum"><a name="p71.i">71.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
@@ -962,7 +981,7 @@ the use of a type conversion as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p71.j">71.j/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00246.TXT">AI95-00246-01</A></I>} 
-<A NAME="I3344"></A><B>Amendment Correction:</B> Conversions between 
+<A NAME="I3457"></A><B>Amendment Correction:</B> Conversions between 
 unrelated array types that are limited or (for view conversions) might 
 be by-reference types are now illegal. The representations of two such 
 arrays may differ, making the conversions impossible. We make the check 
@@ -983,7 +1002,7 @@ type. See <A HREF="AA-4-8.html">4.8</A> for more on this topic.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p71.l">71.l/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
-<A NAME="I3345"></A>Conversion rules for <I>universal_access</I> were 
+<A NAME="I3458"></A>Conversion rules for <I>universal_access</I> were 
 defined. These allow the use of anonymous access values in equality tests 
 (see <A HREF="AA-4-5-2.html">4.5.2</A>), and also allow the use of <B>null</B> 
 in type conversions and other contexts that do not provide a single expected 
@@ -1043,7 +1062,7 @@ dangling access values in the absence of such checks.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p71.u">71.u/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0148-1.TXT">AI05-0148-1</A></I>} 
-<A NAME="I3346"></A>A stand-alone object of an anonymous access-to-object 
+<A NAME="I3459"></A>A stand-alone object of an anonymous access-to-object 
 type now has dynamic accessibility. Normally, this will make programs 
 legal that were illegal in Ada 2005. However, it is possible that a program 
 that previously raised Program_Error now will not. It is very unlikely 
@@ -1061,52 +1080,66 @@ a common ancestor for a conversion.</div>
 Added rules so that predicate aspects (see <A HREF="AA-3-2-4.html">3.2.4</A>) 
 are enforced on subtype conversion.&nbsp;</div>
 
+<H4 Class="centered">Inconsistencies With Ada 2012</H4>
+<div class="paranum"><a name="p71.x">71.x/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0333-1.TXT">AI12-0333-1</A></I>} 
+<span class="insert5"><B>Correction:</B> Predicate checks are no longer 
+made on any <B>out</B> parameters before a call (they're still made when 
+the call returns). This was already true for elementary <B>out</B> parameters. 
+If a program depends on a predicate check failing on an inbound <B>out</B> 
+composite parameter, it will get an incorrect result. This seems quite 
+unlikely, as programs (outside of ACATS tests) that depend on the failure 
+of checks are very rare, and the predicate might be checking uninitialized 
+components (making check failure unreliable).</span>&nbsp;</div>
+
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
-<div class="paranum"><a name="p71.x">71.x/4</a></div>
+<div class="paranum"><a name="p71.y">71.y/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 <B>Corrigendum:</B> Because of a rule added in <A HREF="AA-12-5-1.html">12.5.1</A>, 
 the checks for the legality of an access type conversion in a generic 
-body were strengthened to use an assume the worst rule. This case is 
-rather unlikely as a formal private or derived type with discriminants 
-is required along with a conversion between two access types whose designated 
-types don't statically match, and any such programs were at risk having 
-objects disappear while valid access values still pointed at them.&nbsp;</div>
+body were strengthened to use an <span class="insert5">assume-the-worst</span><span class="delete5">&nbsp;assume 
+the worst</span> rule. This case is rather unlikely <span class="insert5">because</span><span class="delete5">&nbsp;as</span> 
+a formal private or derived type with discriminants is required along 
+with a conversion between two access types whose designated types don't 
+statically match, and any such programs were at risk having objects disappear 
+while valid access values still pointed at them.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p71.y">71.y/4</a></div>
+<div class="paranum"><a name="p71.z">71.z/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0027-1.TXT">AI12-0027-1</A></I>} 
 <B>Corrigendum:</B> Moved the generic boilerplate so that it covers all 
 Legality Rules in this subclause. This was always intended, but it is 
 not expected to change anything other than conversions between unrelated 
 arrays.</div>
-<div class="paranum"><a name="p71.z">71.z/4</a></div>
+<div class="paranum"><a name="p71.aa">71.aa/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0027-1.TXT">AI12-0027-1</A></I>} 
 <B>Corrigendum:</B> Added a formal definition of the copy potentially 
 created by a value conversion of a composite type, so properties like 
 finalization and accessibility are properly defined. This model was always 
 intended and expected (else <A HREF="AA-13-6.html">13.6</A> would not 
 work), but it was not previously formally defined.</div>
-<div class="paranum"><a name="p71.aa">71.aa/4</a></div>
+<div class="paranum"><a name="p71.bb">71.bb/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
 <B>Corrigendum:</B> Updated wording of type conversions to use the new 
 term &quot;satisfies the predicates&quot; (see <A HREF="AA-3-2-4.html">3.2.4</A>).</div>
-<div class="paranum"><a name="p71.bb">71.bb/4</a></div>
+<div class="paranum"><a name="p71.cc">71.cc/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
 <B>Corrigendum:</B> Clarified the wording describing the effect of view 
 conversions of <B>out</B> parameters such that it is clear that the detailed 
 effect is defined in <A HREF="AA-6-4-1.html">6.4.1</A>, not here.</div>
-<div class="paranum"><a name="p71.cc">71.cc/4</a></div>
+<div class="paranum"><a name="p71.dd">71.dd/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0096-1.TXT">AI12-0096-1</A></I>} 
 <B>Corrigendum:</B> Updated wording of type conversions so that the exception 
 raise or other effect of a failed predicate check is as defined in <A HREF="AA-3-2-4.html">3.2.4</A>; 
 we don't want to repeat those rules here. This doesn't change the behavior 
 for predicate checks possible in original Ada 2012, only ones using the 
 new aspect Predicate_Failure.</div>
-<div class="paranum"><a name="p71.dd">71.dd/5</a></div>
+<div class="paranum"><a name="p71.ee">71.ee/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 <span class="insert5">Required Nonblocking (see <A HREF="AA-9-5.html">9.5</A>) 
 matching for access-to-subprogram conversions.</span></div>
-<div class="paranum"><a name="p71.ee">71.ee/5</a></div>
+<div class="paranum"><a name="p71.ff">71.ff/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0226-1.TXT">AI12-0226-1</A></I>} 
 <span class="insert5">Described the objects associated with value conversions 
 of elementary types. This is necessary to support an extension documented 
@@ -1114,10 +1147,10 @@ in <A HREF="AA-3-3.html">3.3</A>.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-4-5-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">

@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,26 +37,26 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 [This subclause specifies the language-defined model for hardware interrupts 
-in addition to mechanisms for handling interrupts.] <A NAME="I8692"></A></div>
+in addition to mechanisms for handling interrupts.] <A NAME="I9268"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I8693"></A>[An <I>interrupt</I> represents 
+<div class="Normal"><A NAME="I9269"></A>[An <I>interrupt</I> represents 
 a class of events that are detected by the hardware or the system software.] 
-<A NAME="I8694"></A>Interrupts are said to occur. An <I>occurrence</I> 
-of an interrupt is separable into generation and delivery. <A NAME="I8695"></A><I>Generation</I> 
+<A NAME="I9270"></A>Interrupts are said to occur. An <I>occurrence</I> 
+of an interrupt is separable into generation and delivery. <A NAME="I9271"></A><I>Generation</I> 
 of an interrupt is the event in the underlying hardware or system that 
-makes the interrupt available to the program. <A NAME="I8696"></A><I>Delivery</I> 
+makes the interrupt available to the program. <A NAME="I9272"></A><I>Delivery</I> 
 is the action that invokes part of the program as response to the interrupt 
-occurrence. <A NAME="I8697"></A>Between generation and delivery, the 
-interrupt occurrence [(or interrupt)] is <I>pending</I>. <A NAME="I8698"></A>Some 
+occurrence. <A NAME="I9273"></A>Between generation and delivery, the 
+interrupt occurrence [(or interrupt)] is <I>pending</I>. <A NAME="I9274"></A>Some 
 or all interrupts may be <I>blocked</I>. When an interrupt is blocked, 
 all occurrences of that interrupt are prevented from being delivered. 
-<A NAME="I8699"></A><A NAME="I8700"></A>Certain interrupts are <I>reserved</I>. 
+<A NAME="I9275"></A><A NAME="I9276"></A>Certain interrupts are <I>reserved</I>. 
 The set of reserved interrupts is implementation defined. A reserved 
 interrupt is either an interrupt for which user-defined handlers are 
 not supported, or one which already has an attached handler by some other 
-implementation-defined means. <A NAME="I8701"></A><A NAME="I8702"></A>Program 
+implementation-defined means. <A NAME="I9277"></A><A NAME="I9278"></A>Program 
 units can be connected to nonreserved interrupts. While connected, the 
 program unit is said to be <I>attached</I> to that interrupt. The execution 
 of that program unit, the <I>interrupt handler</I>, is invoked upon delivery 
@@ -77,7 +77,7 @@ handler executes, the corresponding interrupt is blocked.</div>
 that interrupt are prevented from being delivered. Whether such occurrences 
 remain pending or are lost is implementation defined.</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8703"></A>Each interrupt has a <I>default 
+<div class="Normal"><A NAME="I9279"></A>Each interrupt has a <I>default 
 treatment</I> which determines the system's response to an occurrence 
 of that interrupt when no user-defined handler is attached. The set of 
 possible default treatments is implementation defined, as is the method 
@@ -240,7 +240,7 @@ exceptions propagated out of task bodies.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -31,20 +31,20 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>4.9.1 Statically Matching Constraints and Subtypes</H1>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I3305"></A>A constraint <I>statically matches</I> 
+<div class="Normal"><A NAME="I3417"></A>A constraint <I>statically matches</I> 
 another constraint if<span class="insert2">:</span><span class="delete2">&nbsp;both are null constraints, both are static and have equal corresponding 
 bounds or discriminant values, or both are nonstatic and result from 
 the same elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
@@ -66,10 +66,10 @@ of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition
 or</span></div>
 <div class="paranum"><a name="p1.4">1.4/2</a></div>
 <div class="Bulleted"><span class="insert2">both are nonstatic and come 
-from the same <SPAN Class="swiss"><A HREF="RM-12-5.html#S0298">formal_type_declaration</A></SPAN>.</span> 
+from the same <SPAN Class="swiss"><A HREF="RM-12-5.html#S0320">formal_type_declaration</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Normal"><A NAME="I3306"></A>A subtype <I>statically matches</I> 
+<div class="Normal"><A NAME="I3418"></A>A subtype <I>statically matches</I> 
 another subtype of the same type if they have statically matching constraints<span class="insert2">, 
 </span><span class="insert3">all predicate specifications that apply 
 to them come from the same declarations,&nbsp;</span><span class="insert5">Object_Size 
@@ -84,20 +84,20 @@ access-to-constant. Two anonymous access-to-subprogram subtypes statically
 match if their designated profiles are subtype conformant, and either 
 both or neither exclude null</span>.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3307"></A>Two ranges of the same type <I>statically 
+<div class="Normal"><A NAME="I3419"></A>Two ranges of the same type <I>statically 
 match</I> if both result from the same evaluation of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>, 
 or if both are static and have equal corresponding bounds.&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><A NAME="I3308"></A>A constraint is <I>statically 
+<div class="Normal"><A NAME="I3420"></A>A constraint is <I>statically 
 compatible</I> with a scalar subtype if it statically matches the constraint 
 of the subtype, or if both are static and the constraint is compatible 
-with the subtype. <A NAME="I3309"></A>A constraint is <I>statically compatible</I> 
+with the subtype. <A NAME="I3421"></A>A constraint is <I>statically compatible</I> 
 with an access or composite subtype if it statically matches the constraint 
-of the subtype, or if the subtype is unconstrained.<span class="delete3">&nbsp;<A NAME="I3310"></A>One subtype is <I>statically compatible</I> with 
+of the subtype, or if the subtype is unconstrained.<span class="delete3">&nbsp;<A NAME="I3422"></A>One subtype is <I>statically compatible</I> with 
 a second subtype if the constraint of the first is statically compatible 
 with the second subtype.</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"><A NAME="I3311"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"><A NAME="I3423"></A>Two 
 statically matching subtypes are statically compatible with each other. 
 In addition, a subtype <I>S1</I> is statically compatible with a subtype 
 <I>S2</I> if:</span>&nbsp;</div>
@@ -122,11 +122,11 @@ checks are not enabled for <I>S1</I>.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

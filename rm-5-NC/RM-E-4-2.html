@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -68,10 +68,13 @@ active partitions:</I>&nbsp;</div>
 <div class="Examples"><B>package</B>&nbsp;Tape_Driver&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Declarations&nbsp;are&nbsp;not&nbsp;shown,&nbsp;they&nbsp;are&nbsp;irrelevant&nbsp;here</I></SPAN><BR>
 <B>end</B>&nbsp;Tape_Driver;</div>
-<div class="paranum"><a name="p5">5</a></div>
+<div class="paranum"><a name="p5">5/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Tapes,&nbsp;Name_Server;<BR>
 <B>package&nbsp;body</B>&nbsp;Tape_Driver&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;New_Tape&nbsp;<B>is&nbsp;new</B>&nbsp;Tapes.Tape&nbsp;<B>with</B>&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Rewind&nbsp;(T&nbsp;:&nbsp;<B>access</B>&nbsp;New_Tape);<BR>
+&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Copy<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;(From,&nbsp;To&nbsp;:&nbsp;<B>access</B>&nbsp;New_Tape;&nbsp;Num_Recs:&nbsp;<B>in</B>&nbsp;Natural)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>begin</B><BR>
@@ -90,7 +93,7 @@ active partitions:</I>&nbsp;</div>
 <B>end</B>&nbsp;Tape_Driver;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Examples"><B>with</B>&nbsp;Tapes,&nbsp;Name_Server;<BR>
-<SPAN Class="roman"><I>--&nbsp;Tape_Driver&nbsp;is&nbsp;not&nbsp;needed&nbsp;and&nbsp;thus&nbsp;not&nbsp;mentioned&nbsp;in&nbsp;the&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="RM-10-1-2.html#S0272">with_clause</A></I></SPAN><SPAN Class="roman"><I></I></SPAN><BR>
+<SPAN Class="roman"><I>--&nbsp;Tape_Driver&nbsp;is&nbsp;not&nbsp;needed&nbsp;and&nbsp;thus&nbsp;not&nbsp;mentioned&nbsp;in&nbsp;the&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="RM-10-1-2.html#S0294">with_clause</A></I></SPAN><SPAN Class="roman"><I></I></SPAN><BR>
 <B>procedure</B>&nbsp;Tape_Client&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;T1,&nbsp;T2&nbsp;:&nbsp;Name_Server.Tape_Ptr;<BR>
 <B>begin</B><BR>
@@ -136,7 +139,7 @@ result from dereferencing the controlling operands T1 and T2.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-E-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

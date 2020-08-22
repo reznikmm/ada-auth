@@ -33,9 +33,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -48,12 +48,13 @@
 indication of the urgency of the task; it represents a point on an ideal 
 physical time line. The deadline might affect how resources are allocated 
 to the task.</span></div>
-<div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><span class="insert2">This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;defines a package for representing the deadline of a task and a dispatching 
-policy that defines Earliest Deadline First (EDF) dispatching.&nbsp;</span><span class="insert3">An 
-aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;A 
-pragma</span></span><span class="insert2">&nbsp;is defined to assign an initial 
-deadline to a task.</span></div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal"><span class="insert2">This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;</span><span class="insert5">presents Dispatching.EDF,</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;defines</span></span><span class="insert2">&nbsp;a package for representing the deadline of a task and a dispatching policy 
+that defines Earliest Deadline First (EDF) dispatching.&nbsp;</span><span class="insert5">The 
+Relative_Deadline aspect is provided</span><span class="insert2"></span><span class="insert2"><span class="delete5"></span></span><span class="insert3"><span class="delete5">&nbsp;An 
+aspect</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2"><span class="delete3">&nbsp;A 
+pragma</span></span><span class="insert2"><span class="delete5">&nbsp;is defined</span></span><span class="insert2">&nbsp;to assign an initial deadline to a task.</span><span class="insert5">&nbsp;A configuration pragma Generate_Deadlines is provided to specify that 
+a task's deadline is recomputed whenever it is made ready.</span><span class="insert2"></span></div>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 3 through 6 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
@@ -66,26 +67,26 @@ Relative_Deadline is as follows:</span></span><span class="delete3"></span>
 </div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
-<A NAME="I8503"></A><A NAME="I8504"></A>Relative_Deadline (<I>relative_deadline_</I><A NAME="I8505"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>);</span></span><span class="delete3"></span></div>
+<A NAME="I9056"></A><A NAME="I9057"></A>Relative_Deadline (<I>relative_deadline_</I><A NAME="I9058"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</span></span><span class="delete3"></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal"><span class="delete3"></span><span class="insert2"><span class="delete3">The 
-expected type for <I>relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+expected type for <I>relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is Real_Time.Time_Span.</span></span><span class="delete3"></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal"><span class="delete3"></span><span class="insert2"><span class="delete3">A 
-Relative_Deadline pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
+Relative_Deadline pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>. 
+of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>. 
 At most one such pragma shall appear within a given construct.</span></span><span class="delete3"></span></div>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p7">7/2</a></div>
+<div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal"><span class="insert2">The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-EDF_Across_Priorities is a task dispatching policy.</span><span class="insert3"><A NAME="I8506"></A><A NAME="I8507"></A></span><span class="insert2"></span></div>
+</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">&nbsp;is a task dispatching policy.</span><span class="insert3"></span><span class="insert5"><A NAME="I9059"></A><A NAME="I9060"></A></span><span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I9061"></A><A NAME="I9062"></A></span></span><span class="insert3"></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">The 
 following language-defined library package exists:</span>&nbsp;</div>
@@ -93,43 +94,74 @@ following language-defined library package exists:</span>&nbsp;</div>
 <div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>package</B>&nbsp;Ada.Dispatching.EDF</span><span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">&nbsp;<B>is</B><A NAME="I8508"></A><BR>
-&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8509"></A>Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time;<BR>
-&nbsp;&nbsp;<A NAME="I8510"></A>Default_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Deadline&nbsp;:=<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Last;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8511"></A>Set_Deadline&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Deadline;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8512"></A>Delay_Until_And_Set_Deadline&nbsp;(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delay_Until_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deadline_Offset&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span)</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span><span class="insert2">;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8513"></A>Get_Deadline&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">&nbsp;<B>is</B><A NAME="I9063"></A><BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9064"></A>Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time;</span><span class="insert5"><BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9065"></A>Relative_Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time_Span;</span><span class="insert2"><BR>
+&nbsp;&nbsp;<A NAME="I9066"></A>Default_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Deadline&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Last;</span><span class="insert5"><BR>
+&nbsp;&nbsp;<A NAME="I9067"></A>Default_Relative_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Relative_Deadline&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Span_Last;</span><span class="insert2"><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9068"></A>Set_Deadline</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert2">&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Deadline;<BR>
+</span><span class="insert2"><span class="delete5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+</span><span class="insert2"><span class="delete5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</span><span class="insert5"><BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9069"></A>Get_Deadline<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9070"></A>Set_Relative_Deadline<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Relative_Deadline;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9071"></A>Get_Relative_Deadline<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Relative_Deadline;</span><span class="insert2"><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9072"></A>Delay_Until_And_Set_Deadline</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">Delay_Until_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert2"><span class="delete5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">Deadline_Offset&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9073"></A>Get_Last_Release_Time<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Real_Time.Time;</span><span class="insert2"></span><span class="insert2"><span class="delete5">;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9074"></A>Get_Deadline&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;</span></span><span class="insert2"><BR>
 <B>end</B>&nbsp;Ada.Dispatching.EDF;</span></div>
-<div class="paranum"><a name="p9.1">9.1/3</a></div>
+<div class="paranum"><a name="p9.1">9.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
-a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0223">single_task_declaration</A></SPAN>) 
-or subprogram, the following language-defined representation aspect may 
-be specified:</span></div>
+</span><span class="insert5">a subprogram,&nbsp;</span><span class="insert3">a 
+task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0245">single_task_declaration</A></SPAN>)</span><span class="insert5">,</span><span class="insert3">&nbsp;or&nbsp;</span><span class="insert5">a protected type (including the anonymous 
+type of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0250">single_protected_declaration</A></SPAN>)</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;subprogram</span></span><span class="insert3">, 
+the following language-defined representation aspect may be specified:</span></div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Relative_Deadline</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">The aspect Relative_Deadline is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-which shall be of type Real_Time.Time_Span.<A NAME="I8514"></A><A NAME="I8515"></A></span></div>
+<span class="insert3">The aspect Relative_Deadline is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+which shall be of type Real_Time.Time_Span.<A NAME="I9075"></A><A NAME="I9076"></A></span></div>
+<div class="paranum"><a name="p9.3">9.3/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">The 
+form of <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Generate_Deadlines is as follows:</span></div>
+<div class="paranum"><a name="p9.4">9.4/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5"><B>pragma</B> 
+<A NAME="I9077"></A><A NAME="I9078"></A>Generate_Deadlines;</span></div>
+<div class="paranum"><a name="p9.5">9.5/5</a></div>
+<div class="Normal">&nbsp;<span class="insert5">The Generate_Deadlines <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+is a configuration pragma.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p9.3">9.3/3</a></div>
+<div class="paranum"><a name="p9.6">9.6/5</a></div>
 <div class="Normal">&nbsp;<span class="insert3">The Relative_Deadline aspect 
-shall not be specified on a task interface type.</span>&nbsp;</div>
+shall not be specified on a task&nbsp;</span><span class="insert5">or protected 
+</span><span class="insert3">interface type.</span><span class="insert5">&nbsp;If the Relative_Deadline aspect is specified for a subprogram, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
+shall be a static expression.</span><span class="insert3"></span></div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
-<div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal"><span class="insert2">If the EDF_Across_Priorities 
-policy is specified for a partition, then the Ceiling_Locking policy 
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal"><span class="insert2">If the&nbsp;</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">&nbsp;policy is specified for a partition, then the Ceiling_Locking policy 
 (see <A HREF="RM-D-3.html">D.3</A>) shall also be specified for the partition.</span></div>
-<div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal"><span class="insert2">If the EDF_Across_Priorities 
-policy appears in a Priority_Specific_Dispatching pragma (see <A HREF="RM-D-2-2.html">D.2.2</A>) 
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal"><span class="insert2">If the&nbsp;</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">&nbsp;policy appears in a Priority_Specific_Dispatching pragma (see <A HREF="RM-D-2-2.html">D.2.2</A>) 
 in a partition, then the Ceiling_Locking policy (see <A HREF="RM-D-3.html">D.3</A>) 
 shall also be specified for the partition.</span></div>
 
@@ -137,112 +169,161 @@ shall also be specified for the partition.</span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal"><span class="insert2"></span><span class="insert3">The</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;A</span></span><span class="insert2">&nbsp;Relative_Deadline&nbsp;</span><span class="insert3">aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragma</span></span><span class="insert2">&nbsp;has no effect if it&nbsp;</span><span class="insert3">is specified for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;occurs 
 in the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
 of</span></span><span class="insert2">&nbsp;a subprogram other than the main 
 subprogram.</span></div>
-<div class="paranum"><a name="p13">13/3</a></div>
+<div class="paranum"><a name="p12.1">12.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">If pragma Generate_Deadlines 
+is in effect, the deadline of a task is recomputed each time it becomes 
+ready. The new deadline is the value of Real_Time.Clock at the time the 
+task is added to a ready queue plus the value returned by Get_Relative_Deadline.</span></div>
+<div class="paranum"><a name="p13">13/5</a></div>
 <div class="Normal"><span class="insert2">The initial absolute deadline 
-of a task&nbsp;</span><span class="insert3">for which aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;containing 
-pragma</span></span><span class="insert2">&nbsp;Relative_Deadline</span><span class="insert3">&nbsp;is specified</span><span class="insert2">&nbsp;is the value of Real_Time.Clock 
-+&nbsp;</span><span class="insert3">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-that is the value of the aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3"><I>&nbsp;relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN></span></span><span class="insert2">, 
-where&nbsp;</span><span class="insert3">this entire expression, including 
-</span><span class="insert2">the call of Real_Time.Clock</span><span class="insert3">, 
-is evaluated</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;is made</span></span><span class="insert2">&nbsp;between task creation and 
+</span><span class="insert5">for</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;of</span></span><span class="insert2">&nbsp;a task&nbsp;</span><span class="insert5">with a specified</span><span class="insert2"></span><span class="insert2"><span class="delete5"></span></span><span class="insert3"><span class="delete5">&nbsp;for 
+which aspect</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2"><span class="delete3">&nbsp;containing 
+pragma</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2">&nbsp;Relative_Deadline</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;is specified</span></span><span class="insert3"></span><span class="insert2">&nbsp;is&nbsp;</span><span class="insert5">the result of adding&nbsp;</span><span class="insert2">the 
+value</span><span class="insert5">&nbsp;returned by a call</span><span class="insert2">&nbsp;of Real_Time.Clock&nbsp;</span><span class="insert5">to the value of</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;+</span></span><span class="insert2">&nbsp;</span><span class="insert3">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+</span><span class="insert5">specified as the Relative_Deadline</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;that 
+is the value of the</span></span><span class="insert3">&nbsp;aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3"><I>&nbsp;relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></span><span class="insert2">, 
+where&nbsp;</span><span class="insert3">this entire&nbsp;</span><span class="insert5">computation</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;expression</span></span><span class="insert3">, 
+including&nbsp;</span><span class="insert2">the call of Real_Time.Clock</span><span class="insert3">, 
+is&nbsp;</span><span class="insert5">performed</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;evaluated</span></span><span class="insert3"></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;is made</span></span><span class="insert2">&nbsp;between task creation and 
 the start of its activation. If&nbsp;</span><span class="insert3">the aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;there 
 is no</span></span><span class="insert2">&nbsp;Relative_Deadline&nbsp;</span><span class="insert3">is 
-not specified,</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragma</span></span><span class="insert2">&nbsp;then the initial absolute deadline of a task is the value of Default_Deadline. 
-The environment task is also given an initial deadline by this rule</span><span class="insert3">, 
+not specified,</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragma</span></span><span class="insert2">&nbsp;then the initial absolute deadline of a task is the value of Default_Deadline</span><span class="insert5">&nbsp;(Ada.Real_Time.Time_Last)</span><span class="insert2">. The environment 
+task is also given an initial deadline by this rule</span><span class="insert3">, 
 using the value of the Relative_Deadline aspect of the main subprogram 
 (if any)</span><span class="insert2">.</span></div>
-<div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><span class="insert2">The procedure Set_Deadline 
-changes the absolute deadline of the task to D. The function Get_Deadline 
-returns the absolute deadline of the task.</span></div>
-<div class="paranum"><a name="p15">15/2</a></div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">The effect of specifying 
+a Relative_Deadline aspect for a protected type or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0250">single_protected_declaration</A></SPAN> 
+is discussed in <A HREF="RM-D-3.html">D.3</A>.</span></div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal"><span class="insert2"></span><span class="insert5">A 
+task has both an <I>active</I><A NAME="I9079"></A><A NAME="I9080"></A><A NAME="I9081"></A> 
+and a <I>base</I><A NAME="I9082"></A><A NAME="I9083"></A><A NAME="I9084"></A> 
+absolute deadline. These are the same except when the task is inheriting 
+a relative deadline during activation or a rendezvous (see below) or 
+within a protected action (see <A HREF="RM-D-3.html">D.3</A>).&nbsp;</span><span class="insert2">The 
+procedure Set_Deadline changes the&nbsp;</span><span class="insert5">(base) 
+</span><span class="insert2">absolute deadline of the task to D. The 
+function Get_Deadline returns the&nbsp;</span><span class="insert5">(base) 
+</span><span class="insert2">absolute deadline of the task.</span></div>
+<div class="paranum"><a name="p14.1">14.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">The procedure Set_Relative_Deadline 
+changes the relative deadline of the task to D. The function Get_Relative_Deadline 
+returns the relative deadline of the task.</span></div>
+<div class="paranum"><a name="p14.2">14.2/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">The function Get_Last_Release_Time 
+returns the time, as provided by Real_Time.Clock, when the task was last 
+made ready (that is, was added to a ready queue).</span></div>
+<div class="paranum"><a name="p15">15/5</a></div>
 <div class="Normal"><span class="insert2">The procedure Delay_Until_And_Set_Deadline 
 delays the calling task until time Delay_Until_Time. When the task becomes 
-runnable again it will have deadline Delay_Until_Time + Deadline_Offset.</span></div>
-<div class="paranum"><a name="p16">16/2</a></div>
+</span><span class="insert5">ready</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;runnable</span></span><span class="insert2">&nbsp;again it will have deadline <TT>Delay_Until_Time + Deadline_Offset</TT>.</span></div>
+<div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal"><span class="insert2">On a system with a single processor, 
 the setting of the deadline of a task to the new value occurs immediately 
 at the first point that is outside the execution of a protected action. 
 If the task is currently on a ready queue it is removed and re-entered 
-on to the ready queue determined by the rules defined below.</span></div>
-<div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal"><span class="insert2">When EDF_Across_Priorities 
-is specified for priority range <I>Low</I>..<I>High</I> all ready queues 
-in this range are ordered by deadline. The task at the head of a queue 
-is the one with the earliest deadline.</span></div>
-<div class="paranum"><a name="p18">18/2</a></div>
+</span><span class="insert5">onto</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;on 
+to</span></span><span class="insert2">&nbsp;the ready queue determined by 
+the rules defined below.</span></div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal"><span class="insert2">When&nbsp;</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">&nbsp;is specified for&nbsp;</span><span class="insert5">a&nbsp;</span><span class="insert2">priority</span><span class="insert5">, 
+the</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;range <I>Low</I>..<I>High</I> all</span></span><span class="insert2">&nbsp;ready&nbsp;</span><span class="insert5">queue for that priority is</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;queues 
+in this range are</span></span><span class="insert2">&nbsp;ordered by deadline. 
+The task at the head of a queue is the one with the earliest deadline.</span></div>
+<div class="paranum"><a name="p18">18/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">A 
 task dispatching point occurs for the currently running task <I>T</I> 
-to which policy EDF_Across_Priorities applies:</span></div>
-<div class="paranum"><a name="p19">19/2</a></div>
-<div class="Bulleted"><span class="insert2">when a change to the deadline 
-of <I>T</I> occurs;</span></div>
-<div class="paranum"><a name="p20">20/2</a></div>
-<div class="Bulleted"><span class="insert2">there is a task on the ready 
-queue for the active priority of <I>T</I> with a deadline earlier than 
-the deadline of <I>T</I>; or</span></div>
-<div class="paranum"><a name="p21">21/2</a></div>
+to which policy&nbsp;</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">&nbsp;applies:</span></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Bulleted"><span class="insert2">when a change to the&nbsp;</span><span class="insert5">base 
+(absolute)&nbsp;</span><span class="insert2">deadline of <I>T</I> occurs;</span></div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;there 
+is a task on the ready queue for the active priority of <I>T</I> with 
+a deadline earlier than the deadline of <I>T</I>; or</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p21">21/5</a></div>
 <div class="Bulleted"><span class="insert2">there is a nonempty ready 
 queue for that processor with a higher priority than the active priority 
-of the running task.</span></div>
-<div class="paranum"><a name="p22">22/2</a></div>
+of the running task</span><span class="insert5">;</span><span class="insert2"></span><span class="insert2"><span class="delete5">.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p21.1">21.1/5</a></div>
+<div class="Bulleted"><span class="insert5">there is a ready task with 
+the same priority as <I>T</I> but with an earlier absolute deadline.</span></div>
+<div class="paranum"><a name="p22">22/5</a></div>
 <div class="Normal"><span class="insert2">In these cases, the currently 
 running task is said to be preempted and is returned to the ready queue 
-for its active priority.</span></div>
-<div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">For 
+for its active priority</span><span class="insert5">, at a position determined 
+by its active (absolute) deadline</span><span class="insert2">.</span></div>
+<div class="Normal"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+23 through 27 were deleted.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"></span><span class="insert2"><span class="delete5">For 
 a task <I>T</I> to which policy EDF_Across_Priorities applies, the base 
 priority is not a source of priority inheritance; the active priority 
 when first activated or while it is blocked is defined as the maximum 
-of the following:</span></div>
-<div class="paranum"><a name="p24">24/2</a></div>
-<div class="Bulleted"><span class="insert2">the lowest priority in the 
-range specified as EDF_Across_Priorities that includes the base priority 
-of <I>T</I>;</span></div>
-<div class="paranum"><a name="p25">25/2</a></div>
-<div class="Bulleted"><span class="insert2">the priorities, if any, currently 
-inherited by <I>T</I>;</span></div>
-<div class="paranum"><a name="p26">26/3</a></div>
-<div class="Bulleted"><span class="insert2">the highest priority <I>P</I>, 
-if any, less than the base priority of <I>T</I> such that one or more 
-tasks are executing within a protected object with ceiling priority <I>P</I> 
-and task <I>T</I> has an earlier deadline than all such tasks</span><span class="insert3">; 
+of the following:</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">the 
+lowest priority in the range specified as EDF_Across_Priorities that 
+includes the base priority of <I>T</I>;</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">the 
+priorities, if any, currently inherited by <I>T</I>;</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Bulleted"><span class="insert2"></span><span class="insert2"><span class="delete5">the 
+highest priority <I>P</I>, if any, less than the base priority of <I>T</I> 
+such that one or more tasks are executing within a protected object with 
+ceiling priority <I>P</I> and task <I>T</I> has an earlier deadline than 
+all such tasks</span></span><span class="insert3"><span class="delete5">; 
 and furthermore <I>T</I> has an earlier deadline than all other tasks 
 on ready queues with priorities in the given EDF_Across_Priorities range 
-that are strictly less than <I>P</I></span><span class="insert2">.</span> 
+that are strictly less than <I>P</I></span></span><span class="insert2"><span class="delete5">.</span></span><span class="insert2"></span> 
 </div>
-<div class="paranum"><a name="p27">27/2</a></div>
-<div class="Normal"><span class="insert2">When a task <I>T</I> is first 
-activated or becomes unblocked, it is added to the ready queue corresponding 
-to this active priority. Until it becomes blocked again, the active priority 
-of <I>T</I> remains no less than this value; it will exceed this value 
-only while it is inheriting a higher priority.</span></div>
-<div class="paranum"><a name="p28">28/2</a></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Normal"><span class="insert2"></span><span class="insert2"><span class="delete5">When 
+a task <I>T</I> is first activated or becomes unblocked, it is added 
+to the ready queue corresponding to this active priority. Until it becomes 
+blocked again, the active priority of <I>T</I> remains no less than this 
+value; it will exceed this value only while it is inheriting a higher 
+priority.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p28">28/5</a></div>
 <div class="Normal"><span class="insert2">When the setting of the base 
-priority of a ready task takes effect and the new priority is in a range 
-specified as EDF_Across_Priorities, the task is added to the ready queue 
-corresponding to its new active priority, as determined above.</span></div>
+priority of a ready task takes effect and the new priority is&nbsp;</span><span class="insert2"><span class="delete5">in 
+a range&nbsp;</span></span><span class="insert2">specified as&nbsp;</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">, 
+the task is added to the ready queue</span><span class="insert5">, at 
+a position determined by its active deadline</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;corresponding 
+to its new active priority, as determined above</span></span><span class="insert2">.</span></div>
 <div class="paranum"><a name="p29">29/2</a></div>
 <div class="Normal"><span class="insert2">For all the operations defined 
 in Dispatching.EDF, Tasking_Error is raised if the task identified by 
 T has terminated. Program_Error is raised if the value of T is Null_Task_Id.</span></div>
+<div class="paranum"><a name="p29.1">29.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">If two tasks with priority 
+designated as EDF_Within_Priorities rendezvous then the deadline for 
+the execution of the accept statement is the earlier of the deadlines 
+of the two tasks.</span></div>
+<div class="paranum"><a name="p29.2">29.2/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">During activation, a task 
+being activated inherits the deadline that its activator (see <A HREF="RM-9-2.html">9.2</A>) 
+had at the time the activation was initiated.</span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
-<div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I8516"></A>If EDF_Across_Priorities 
-is specified for priority range <I>Low</I>..<I>High</I>, it is a bounded 
-error to declare a protected object with ceiling priority <I>Low</I> 
-or to assign the value <I>Low</I> to attribute 'Priority. In either case 
-either Program_Error is raised or the ceiling of the protected object 
-is assigned the value <I>Low</I>+1.</span></div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span class="delete5"><A NAME="I9085"></A> If 
+EDF_Across_Priorities is specified for priority range <I>Low</I>..<I>High</I>, 
+it is a bounded error to declare a protected object with ceiling priority 
+<I>Low</I> or to assign the value <I>Low</I> to attribute 'Priority. 
+In either case either Program_Error is raised or the ceiling of the protected 
+object is assigned the value <I>Low</I>+1.<A NAME="I9086"></A></span></span><span class="insert2"></span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I8517"></A>If a value 
+<div class="Normal"><span class="insert2"><A NAME="I9087"></A>If a value 
 of Task_Id is passed as a parameter to any of the subprograms of this 
 package and the corresponding task object no longer exists, the execution 
 of the program is erroneous.</span></div>
@@ -254,22 +335,25 @@ shall document any conditions that cause the completion of the setting
 of the deadline of a task to be delayed later than what is specified 
 for a single processor.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p33">33/3</a></div>
-<div class="Notes">21&nbsp;&nbsp;<span class="insert2">If two adjacent 
-priority ranges, <I>A</I>..<I>B</I> and <I>B</I>+1..<I>C</I> are specified 
-to have policy EDF_Across_Priorities</span><span class="insert3">,</span><span class="insert2">&nbsp;then this is not equivalent to this policy being specified for the single 
-range, <I>A</I>..<I>C</I>.</span></div>
-<div class="paranum"><a name="p34">34/2</a></div>
-<div class="Notes">22&nbsp;&nbsp;<span class="insert2">The above rules 
-implement the preemption-level protocol (also called Stack Resource Policy 
-protocol) for resource sharing under EDF dispatching. The preemption-level 
-for a task is denoted by its base priority. The definition of a ceiling 
-preemption-level for a protected object follows the existing rules for 
-ceiling locking.</span></div>
+<div class="paranum"><a name="p33">33/5</a></div>
+<div class="Notes">21&nbsp;&nbsp;<span class="insert2">If two&nbsp;</span><span class="insert5">distinct 
+priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;adjacent 
+priority ranges, <I>A</I>..<I>B</I> and <I>B</I>+1..<I>C</I></span></span><span class="insert2">&nbsp;are specified to have policy&nbsp;</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2"></span><span class="insert3">,</span><span class="insert2">&nbsp;then&nbsp;</span><span class="insert5">tasks from the higher priority always 
+run before tasks of the lower priority, regardless of deadlines</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;this 
+is not equivalent to this policy being specified for the single range, 
+<I>A</I>..<I>C</I></span></span><span class="insert2">.</span></div>
+<div class="paranum"><a name="p34">34/5</a></div>
+<div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="insert2">22&nbsp;&nbsp;</span><span class="insert2"><span class="delete5">The 
+above rules implement the preemption-level protocol (also called Stack 
+Resource Policy protocol) for resource sharing under EDF dispatching. 
+The preemption-level for a task is denoted by its base priority. The 
+definition of a ceiling preemption-level for a protected object follows 
+the existing rules for ceiling locking.</span></span><span class="insert2"></span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

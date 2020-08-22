@@ -20,6 +20,7 @@
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
     DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
     DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
@@ -33,9 +34,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,30 +47,30 @@
 <div class="paranum"><a name="p1">1/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a private type, 
 private extension, or interface, the following language-defined aspects 
-may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="WideHanging-Term">Type_Invariant</div><div class="WideHanging-Body"><br clear="left">
-This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-called an <I>invariant expression</I>.<A NAME="I3770"></A> Type_Invariant 
-may be specified on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN>, 
-on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
+This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+called an <I>invariant expression</I>.<A NAME="I3977"></A> Type_Invariant 
+may be specified on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0232">private_type_declaration</A></SPAN>, 
+on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
 or on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-that declares the completion of a private type or private extension.<A NAME="I3771"></A><A NAME="I3772"></A></div>
+that declares the completion of a private type or private extension.<A NAME="I3978"></A><A NAME="I3979"></A></div>
 <div class="paranum"><a name="p3">3/4</a></div>
 <div class="WideHanging-Term">Type_Invariant'Class</div><div class="WideHanging-Body"><br clear="left">
-This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
+This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
 called an <I>invariant expression</I>. Type_Invariant'Class may be specified 
-on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
+on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0232">private_type_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
 or a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-for an interface type.<A NAME="I3773"></A><A NAME="I3774"></A> Type_Invariant'Class 
-determines a <I>class-wide type invariant</I> for a tagged type.<A NAME="I3775"></A><A NAME="I3776"></A><A NAME="I3777"></A></div>
+for an interface type.<A NAME="I3980"></A><A NAME="I3981"></A> Type_Invariant'Class 
+determines a <I>class-wide type invariant</I> for a tagged type.<A NAME="I3982"></A><A NAME="I3983"></A><A NAME="I3984"></A></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">The expected type for an invariant expression is 
-any boolean type.<A NAME="I3778"></A></div>
+any boolean type.<A NAME="I3985"></A></div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal">Within an invariant expression, the identifier of 
 the first subtype of the associated type denotes the current instance 
@@ -104,10 +105,10 @@ the Type_Invariant'Class aspect is specified for a tagged type <I>T</I>,
 then <span class="insert5">a <I>corresponding expression</I> also applies 
 to each nonabstract descendant <I>T1</I> of <I>T</I> (including <I>T</I> 
 itself if it is nonabstract). The corresponding expression is constructed 
-from the associated expression as follows:<A NAME="I3779"></A></span><span class="delete5">&nbsp;the 
+from the associated expression as follows:<A NAME="I3986"></A></span><span class="delete5">&nbsp;the 
 invariant expression applies to all descendants of <I>T</I>.</span></div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
-<div class="Bulleted"><span class="insert5">References to non-discriminant 
+<div class="Bulleted"><span class="insert5">References to nondiscriminant 
 components of <I>T</I> (or to <I>T</I> itself) are replaced with references 
 to the corresponding components of <I>T1</I> (or to <I>T1</I> as a whole).</span></div>
 <div class="paranum"><a name="p8.2">8.2/5</a></div>
@@ -118,62 +119,39 @@ discriminant is specified by the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035"
 for some type that is an ancestor of <I>T1</I> and a descendant of <I>T</I> 
 (see <A HREF="RM-3-7.html">3.7</A>).</span>&nbsp;</div>
 <div class="paranum"><a name="p8.3">8.3/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">If 
-one or more invariant expressions apply to a nonabstract type <I>T</I>, 
-then a subprogram or entry is said to be <I>type-invariant preserving</I> 
-for <I>T</I> if<A NAME="I3780"></A></span></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">For 
+a nonabstract type <I>T</I>, a callable entity is said to be a <I>boundary 
+entity</I><A NAME="I3987"></A> for <I>T</I> if it is declared within 
+the immediate scope of <I>T</I> (or by an instance of a generic unit, 
+and the generic is declared within the immediate scope of type <I>T</I>), 
+or is the Read or Input stream-oriented attribute of type <I>T</I>, and 
+either:</span></div>
 <div class="paranum"><a name="p8.4">8.4/5</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">it 
-is declared within the immediate scope of <I>T</I> (or by an instance 
-of a generic unit, and the generic is declared within the immediate scope 
-of type <I>T</I>), or is the Read or Input stream-oriented attribute 
-of type <I>T</I>, and either:</span></div>
+<div class="Bulleted"><span class="insert5"><I>T</I> is a private type 
+or a private extension and the callable entity is visible outside the 
+immediate scope of type T or overrides an inherited operation that is 
+visible outside the immediate scope of <I>T</I>; or</span></div>
 <div class="paranum"><a name="p8.5">8.5/5</a></div>
-<div class="Indented2NestedBulleted"><span class="insert5"><I>T</I> is 
-a private type or a private extension and the subprogram or entry is 
-visible outside the immediate scope of type <I>T</I> or overrides an 
-inherited operation that is visible outside the immediate scope of <I>T</I>; 
-or</span></div>
-<div class="paranum"><a name="p8.6">8.6/5</a></div>
-<div class="Indented2NestedBulleted"><span class="insert5"><I>T</I> is 
-a record extension, and the subprogram or entry is a primitive operation 
-visible outside the immediate scope of type <I>T</I> or overrides an 
-inherited operation that is visible outside the immediate scope of <I>T</I>.</span></div>
-<div class="paranum"><a name="p8.7">8.7/5</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">and 
-at least one of the following applies to the callable entity:</span></div>
-<div class="paranum"><a name="p8.8">8.8/5</a></div>
-<div class="Indented2NestedBulleted"><span class="insert5">has a result 
-with a part of type <I>T</I>;</span></div>
-<div class="paranum"><a name="p8.9">8.9/5</a></div>
-<div class="Indented2NestedBulleted"><span class="insert5">has one or 
-more <B>out</B> or <B>in out</B> parameters with a part of type <I>T</I>;</span></div>
-<div class="paranum"><a name="p8.10">8.10/5</a></div>
-<div class="Indented2NestedBulleted"><span class="insert5">has an access-to-object 
-parameter or result whose designated type has a part of type <I>T</I>; 
-or</span></div>
-<div class="paranum"><a name="p8.11">8.11/5</a></div>
-<div class="Indented2NestedBulleted"><span class="insert5">is a procedure 
-or entry that has an <B>in</B> parameter with a part of type <I>T</I>.</span></div>
-<div class="paranum"><a name="p8.12">8.12/5</a></div>
-<div class="Bulleted-NoPrefix"><span class="insert5">Each such part of 
-type <I>T</I> is said to be <I>subject to an invariant check</I> for 
-<I>T</I>.<A NAME="I3781"></A><A NAME="I3782"></A></span></div>
+<div class="Bulleted"><span class="insert5"><I>T</I> is a record extension, 
+and the callable entity is a primitive operation visible outside the 
+immediate scope of type <I>T</I> or overrides an inherited operation 
+that is visible outside the immediate scope of <I>T</I>.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">If one or more invariant 
 expressions apply to a nonabstract type <I>T</I>, then an invariant check 
-is performed at the following places, on the specified object(s):<A NAME="I3783"></A><A NAME="I3784"></A></div>
+is performed at the following places, on the specified object(s):<A NAME="I3988"></A></div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Bulleted">After successful initialization of an object of 
 type <I>T</I> by default (see <A HREF="RM-3-3-1.html">3.3.1</A>), the 
 check is performed on the new object unless the partial view of <I>T</I> 
 has unknown discriminants;</div>
-<div class="paranum"><a name="p10.1">10.1/4</a></div>
+<div class="paranum"><a name="p10.1">10.1/5</a></div>
 <div class="Bulleted">After successful explicit initialization of the 
-completion of a deferred constant with a part of type <I>T</I>, if the 
-completion is inside the immediate scope of the full view of <I>T</I>, 
+completion of a deferred constant <span class="insert5">whose nominal 
+type has</span><span class="delete5">&nbsp;with</span> a part of type <I>T</I>, 
+if the completion is inside the immediate scope of the full view of <I>T</I>, 
 and the deferred constant is visible outside the immediate scope of <I>T</I>, 
 the check is performed on the part(s) of type <I>T</I>;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -192,33 +170,39 @@ and</div>
 that passes the view conversion as an <B>in out</B> or <B>out</B> parameter. 
 </div>
 <div class="paranum"><a name="p15">15/5</a></div>
-<div class="Bulleted"><span class="insert5">Upon</span><span class="delete5">&nbsp;After 
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5"></span><span class="insert5">Upon</span><span class="delete5">&nbsp;After 
 a</span> successful <span class="insert5">return from a&nbsp;</span>call on 
-<span class="insert5">any subprogram or entry which is type-invariant 
-preserving for <I>T</I>, an invariant</span><span class="delete5">&nbsp;the 
-Read or Input stream-oriented attribute of the type <I>T</I>, the</span> 
-check is performed on <span class="insert5">each part of type <I>T</I> 
-which is subject to an invariant check for <I>T</I>. In the case of a 
-call to a protected operation, the check is performed before the end 
-of the protected action. In the case of a call to a task entry, the check 
-is performed before the end of the rendezvous</span><span class="delete5">&nbsp;the 
-object initialized by the attribute</span>;</div>
-<div class="Bulleted-NoPrefix"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
-16 through 20 were deleted.</I></SPAN></span>&nbsp;</div>
+<span class="insert5">any callable entity which is a boundary entity 
+for <I>T</I>, an invariant</span><span class="delete5">&nbsp;the Read or Input 
+stream-oriented attribute of the type <I>T</I>, the</span> check is performed 
+on <span class="insert5">each object which is subject to an invariant 
+check for <I>T</I>. In the case of a call to a protected operation, the 
+check is performed before the end of the protected action. In the case 
+of a call to a task entry, the check is performed before the end of the 
+rendezvous</span><span class="delete5">&nbsp;the object initialized by the 
+attribute</span><span class="insert5">. The following objects of a callable 
+entity are subject to an invariant check for <I>T</I>:</span><span class="delete5">;</span></div>
 <div class="paranum"><a name="p16">16/5</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><span class="delete5">An 
-invariant is checked upon successful return from a call on any subprogram 
-or entry that:</span>&nbsp;</div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><SPAN STYLE="font-size: 80%"><I>This 
+paragraph was deleted.</I></SPAN><span class="delete5">An invariant is 
+checked upon successful return from a call on any subprogram or entry 
+that:</span>&nbsp;</div>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Indented2Bulleted"><span class="delete5">is declared within 
-the immediate scope of type <I>T</I> (or by an instance of a generic 
-unit, and the generic is declared within the immediate scope of type 
-<I>T</I>),</span></div>
-<div class="paranum"><a name="p18">18/4</a></div>
-<div class="Indented2Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete5"></span></div>
+<div class="Indented2Bulleted"><span class="insert5">a result with a 
+nominal type that has a part</span><span class="delete5">&nbsp;is declared 
+within the immediate scope</span> of type <I>T</I><span class="insert5">;</span><span class="delete5">&nbsp;(or by an instance of a generic unit, and the generic is declared within 
+the immediate scope of type <I>T</I>),</span></div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">an <B>out</B> or 
+<B>in out</B> parameter whose nominal type has a part of type <I>T</I>;</span><span class="delete5"></span></div>
+<div class="paranum"><a name="p18.1">18.1/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">an access-to-object 
+parameter or result whose designated nominal type has a part of type 
+<I>T</I>; or</span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
-<div class="Indented2Bulleted"><span class="delete5">and either:</span></div>
+<div class="Indented2Bulleted"><span class="insert5">for a procedure 
+or entry, an <B>in</B> parameter whose nominal type has a part of type 
+<I>T</I>.</span><span class="delete5">&nbsp;and either:</span></div>
 <div class="paranum"><a name="p19.1">19.1/5</a></div>
 <div class="Indented3Bulleted"><span class="delete5">has a result with 
 a part of type <I>T</I>, or</span></div>
@@ -248,8 +232,14 @@ outside the immediate scope of type <I>T</I> or overrides an inherited
 operation that is visible outside the immediate scope of <I>T</I>.</span> 
 </div>
 <div class="paranum"><a name="p20">20/5</a></div>
-<div class="Bulleted-NoPrefix"><span class="delete5">The check is performed 
-on each such part of type <I>T</I>.</span></div>
+<div class="Bulleted-NoPrefix"><span class="insert5">If the nominal type 
+of a formal parameter (or the designated nominal type of an access-to-object 
+parameter or result) is incomplete at the point of the declaration of 
+the callable entity, and if the completion of that incomplete type does 
+not occur in the same declaration list as the incomplete declaration, 
+then  for purposes of the preceding rules the nominal type is considered 
+to have no parts</span><span class="delete5">&nbsp;The check is performed 
+on each such part</span> of type <I>T</I>.</div>
 <div class="paranum"><a name="p20.1">20.1/4</a></div>
 <div class="Bulleted">For a view conversion to a class-wide type occurring 
 within the immediate scope of <I>T</I>, from a specific type that is 
@@ -260,12 +250,12 @@ on the part of the object that is of type <I>T</I>.</div>
 or Type_Invariant'Class assertion policies (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
 in effect at the point of the corresponding aspect specification applicable 
 to a given type, then the respective invariant expression is considered 
-<I>enabled</I>.<A NAME="I3785"></A></div>
+<I>enabled</I>.<A NAME="I3989"></A></div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal">The invariant check consists of the evaluation of 
 each enabled invariant expression that applies to <I>T</I>, on each of 
 the objects specified above. If any of these evaluate to False, Assertions.Assertion_Error 
-is raised at the point of the object initialization, conversion, or call.<A NAME="I3786"></A> 
+is raised at the point of the object initialization, conversion, or call.<A NAME="I3990"></A><A NAME="I3991"></A> 
 If a given call requires more than one evaluation of an invariant expression, 
 either for multiple objects of a single type or for multiple types with 
 invariants, the evaluations are performed in an arbitrary order, and 
@@ -274,7 +264,7 @@ are evaluated. Any invariant check is performed prior to copying back
 any by-copy <B>in out</B> or <B>out</B> parameters. Invariant checks, 
 any postcondition check, and any constraint or predicate checks associated 
 with <B>in out</B> or <B>out</B> parameters are performed in an arbitrary 
-order.</div>
+order.]}</div>
 <div class="paranum"><a name="p22.1">22.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;For an invariant check on a value of type <I>T1</I> 
 based on a class-wide invariant expression inherited from an ancestor 
@@ -296,9 +286,70 @@ are performed. For a call of a primitive subprogram of type <I>NT</I>
 that is overridden for type <I>NT</I>, the specified checks of the specific 
 invariants of only type <I>NT</I> are performed.</div>
 
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Normal"><span class="insert5"><I>A work scheduler where only 
+urgent work can be scheduled for weekends:</I></span></div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Examples"><span class="insert5"><B>package</B>&nbsp;Work_Orders&nbsp;<B>is</B></span></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;See&nbsp;3.5.1&nbsp;for&nbsp;type&nbsp;declarations&nbsp;of&nbsp;Level,&nbsp;Day,&nbsp;and&nbsp;Weekday</I></SPAN></span></div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Work_Order&nbsp;<B>is&nbsp;private&nbsp;with</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type_Invariant&nbsp;=&gt;&nbsp;Day_Scheduled&nbsp;(Work_Order)&nbsp;<B>in</B>&nbsp;Weekday<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else</B>&nbsp;Priority&nbsp;(Work_Order)&nbsp;=&nbsp;Urgent;</span></div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Schedule_Work&nbsp;(Urgency&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Level;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To_Occur&nbsp;:&nbsp;<B>in</B>&nbsp;Day)&nbsp;<B>return</B>&nbsp;Work_Order<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;Urgency&nbsp;=&nbsp;Urgent&nbsp;<B>or&nbsp;else</B>&nbsp;To_Occur&nbsp;<B>in</B>&nbsp;Weekday;</span></div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Day_Scheduled&nbsp;(Order&nbsp;:&nbsp;<B>in</B>&nbsp;Work_Order)&nbsp;<B>return</B>&nbsp;Day;</span></div>
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Priority&nbsp;(Order&nbsp;:&nbsp;<B>in</B>&nbsp;Work_Order)&nbsp;<B>return</B>&nbsp;Level;</span></div>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Change_Priority&nbsp;(Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Work_Order;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Priority&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Level;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;&nbsp;&nbsp;&nbsp;Boolean)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Changed&nbsp;=&nbsp;(Day_Scheduled(Order)&nbsp;<B>in</B>&nbsp;Weekday<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else</B>&nbsp;Priority(Order)&nbsp;=&nbsp;Urgent);</span></div>
+<div class="paranum"><a name="p33">33/5</a></div>
+<div class="Examples"><span class="insert5"><B>private</B></span></div>
+<div class="paranum"><a name="p34">34/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Work_Order&nbsp;<B>is&nbsp;record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scheduled&nbsp;:&nbsp;Day;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Urgency&nbsp;&nbsp;&nbsp;:&nbsp;Level;<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;record</B>;</span></div>
+<div class="paranum"><a name="p35">35/5</a></div>
+<div class="Examples"><span class="insert5"><B>end</B>&nbsp;Work_Orders;</span></div>
+<div class="paranum"><a name="p36">36/5</a></div>
+<div class="Examples"><span class="insert5"><B>package&nbsp;body</B>&nbsp;Work_Orders&nbsp;<B>is</B></span></div>
+<div class="paranum"><a name="p37">37/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Schedule_Work&nbsp;(Urgency&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Level;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To_Occur&nbsp;:&nbsp;<B>in</B>&nbsp;Day)&nbsp;<B>return</B>&nbsp;Work_Order&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Scheduled&nbsp;=&gt;&nbsp;To_Occur,&nbsp;Urgency&nbsp;=&gt;&nbsp;Urgency);</span></div>
+<div class="paranum"><a name="p38">38/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Day_Scheduled&nbsp;(Order&nbsp;:&nbsp;<B>in</B>&nbsp;Work_Order)&nbsp;<B>return</B>&nbsp;Day&nbsp;<B>is</B>&nbsp;(Order.Scheduled);</span></div>
+<div class="paranum"><a name="p39">39/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Priority&nbsp;(Order&nbsp;:&nbsp;<B>in</B>&nbsp;Work_Order)&nbsp;<B>return</B>&nbsp;Level&nbsp;<B>is</B>&nbsp;(Order.Urgency);</span></div>
+<div class="paranum"><a name="p40">40/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Change_Priority&nbsp;(Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Work_Order;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Priority&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Level;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;&nbsp;&nbsp;&nbsp;Boolean)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Ensure&nbsp;type&nbsp;invariant&nbsp;is&nbsp;not&nbsp;violated</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Order.Urgency&nbsp;=&nbsp;Urgent&nbsp;<B>or&nbsp;else</B>&nbsp;(Order.Scheduled&nbsp;<B>in</B>&nbsp;Weekday)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changed&nbsp;:=&nbsp;True;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order.Urgency&nbsp;:=&nbsp;New_Priority;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changed&nbsp;:=&nbsp;False;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Change_Priority;</span></div>
+<div class="paranum"><a name="p41">41/5</a></div>
+<div class="Examples"><span class="insert5"><B>end</B>&nbsp;Work_Orders;</span></div>
+
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-7-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

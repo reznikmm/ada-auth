@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -44,21 +44,21 @@ into subranges that are assigned individual dispatching policies.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Task_Dispatching_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8099"></A><A NAME="I8100"></A>Task_Dispatching_Policy(<I>policy_</I><A NAME="I8101"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8655"></A><A NAME="I8656"></A>Task_Dispatching_Policy(<I>policy_</I><A NAME="I8657"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p3.1">3.1/2</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Priority_Specific_Dispatching is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3.2">3.2/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8102"></A><A NAME="I8103"></A>Priority_Specific_Dispatching 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8658"></A><A NAME="I8659"></A>Priority_Specific_Dispatching 
 (<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>policy_</I><A NAME="I8104"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
-<I>first_priority_</I><A NAME="I8105"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-<I>last_priority_</I><A NAME="I8106"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>policy_</I><A NAME="I8660"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+<I>first_priority_</I><A NAME="I8661"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+<I>last_priority_</I><A NAME="I8662"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3.3">3.3/2</a></div>
-<div class="Normal">&nbsp;The expected type for <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">&nbsp;The expected type for <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is Integer.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -73,10 +73,10 @@ used in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>
 Priority_Specific_Dispatching shall be the name of a task dispatching 
 policy.</div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
-<div class="Normal">&nbsp;Both <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-shall be static expressions in the range of System.Any_Priority; <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-shall have a value greater than or equal to <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>.</div>
+<div class="Normal">&nbsp;Both <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+shall be static expressions in the range of System.Any_Priority; <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+shall have a value greater than or equal to <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
@@ -98,9 +98,9 @@ pragmas is FIFO_Within_Priorities.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Normal"><A NAME="I8107"></A><A NAME="I8108"></A>A Task_Dispatching_Policy 
+<div class="Normal"><A NAME="I8663"></A><A NAME="I8664"></A>A Task_Dispatching_Policy 
 pragma is a configuration pragma. A Priority_Specific_Dispatching pragma 
-is a configuration pragma. <A NAME="I8109"></A><A NAME="I8110"></A></div>
+is a configuration pragma. <A NAME="I8665"></A><A NAME="I8666"></A></div>
 <div class="paranum"><a name="p5.1">5.1/2</a></div>
 <div class="Normal">&nbsp;The priority ranges specified in more than one Priority_Specific_Dispatching 
 pragma within the same partition shall not be overlapping.</div>
@@ -113,14 +113,14 @@ deleted.</I></SPAN></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Normal"><A NAME="I8111"></A>A <I>task dispatching policy</I> 
+<div class="Normal"><A NAME="I8667"></A>A <I>task dispatching policy</I> 
 specifies the details of task dispatching that are not covered by the 
 basic task dispatching model. These rules govern when tasks are inserted 
 into and deleted from the ready queues. A single task dispatching policy 
 is specified by a Task_Dispatching_Policy pragma. Pragma Priority_Specific_Dispatching 
 assigns distinct dispatching policies to subranges of System.Any_Priority.</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I8112"></A>If neither <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I8668"></A>If neither <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 applies to any of the program units comprising a partition, the task 
 dispatching policy for that partition is unspecified.</div>
 <div class="paranum"><a name="p7.2">7.2/3</a></div>
@@ -187,7 +187,7 @@ target environment.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

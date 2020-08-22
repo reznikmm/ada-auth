@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -25,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-18.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,7 +39,7 @@
 <H1>A.18.19 <span class="insert3">The Generic Package Containers.Bounded_Vectors</span><span class="delete3"></span></H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal"><span class="insert3">The language-defined generic 
-package Containers.Bounded_Vectors<A NAME="I7882"></A> provides a private 
+package Containers.Bounded_Vectors<A NAME="I8411"></A> provides a private 
 type Vector and a set of operations. It provides the same operations 
 as the package Containers.Vectors (see <A HREF="RM-A-18-2.html">A.18.2</A>), 
 with the difference that the maximum storage is bounded.</span></div>
@@ -47,46 +49,88 @@ with the difference that the maximum storage is bounded.</span></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
 declaration of the generic library package Containers.Bounded_Vectors 
 has the same contents and semantics as Containers.Vectors except:</span></div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Bulleted"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-Preelaborate is replaced with <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-Pure.</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Bulleted"><span class="insert3">The&nbsp;</span><span class="insert5">aspect</span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">&nbsp;pragma</A></SPAN></span></span><span class="insert3">&nbsp;Preelaborate is replaced with&nbsp;</span><span class="insert5">aspect</span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">&nbsp;pragma</A></SPAN></span></span><span class="insert3">&nbsp;Pure.</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">The 
 type Vector is declared with a discriminant that specifies the capacity:</span> 
 </div>
-<div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;<B>type</B>&nbsp;Vector&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>is&nbsp;tagged&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;<B>type</B>&nbsp;Vector&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>is&nbsp;tagged&nbsp;private</B></span><span class="insert5">...</span><span class="insert3"></span><span class="insert3"><span class="delete5">;</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted"><span class="insert3">The type Vector needs finalization 
 if and only if type Element_Type needs finalization.</span></div>
-<div class="paranum"><a name="p7">7/3</a></div>
-<div class="Bulleted"><span class="insert3">In function Copy, if the 
-Capacity parameter is equal to or greater than the length of Source, 
-the vector capacity exactly equals the value of the Capacity parameter.</span></div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
+<div class="Bulleted"><span class="insert5">Capacity is omitted from 
+the Stable_Properties of type Vector.</span></div>
+<div class="paranum"><a name="p6.2">6.2/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">In 
+function Empty, the postcondition is altered to:</span></div>
+<div class="paranum"><a name="p6.3">6.3/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty'Result.Capacity&nbsp;=&nbsp;Capacity&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Empty'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Empty'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Empty'Result)&nbsp;=&nbsp;0;</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5"></span><span class="insert3">In 
+function Copy,&nbsp;</span><span class="insert5">the postcondition is altered 
+to:</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;if 
+the Capacity parameter is equal to or greater than the length of Source, 
+the vector capacity exactly equals the value of the Capacity parameter.</span></span><span class="insert3"></span> 
+</div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;&gt;&nbsp;Length&nbsp;(Source)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Copy'Result.Capacity&nbsp;&gt;=&nbsp;Length&nbsp;(Source));</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">The 
-description of Reserve_Capacity is replaced with:</span>&nbsp;</div>
-<div class="paranum"><a name="p9">9/3</a></div>
-<div class="Indented2"><span class="insert3">If the specified Capacity 
-is larger than the capacity of Container, then Reserve_Capacity propagates 
-Capacity_Error. Otherwise, the operation has no effect.</span>&nbsp;</div>
+description of Reserve_Capacity is replaced with:</span></div>
+<div class="paranum"><a name="p8.1">8.1/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Reserve_Capacity&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;Capacity&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error;</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Indented2"><span class="insert3"></span><span class="insert5">This</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;If 
+the specified Capacity is larger than the capacity of Container, then 
+Reserve_Capacity propagates Capacity_Error. Otherwise, the</span></span><span class="insert3">&nbsp;operation has no effect</span><span class="insert5">, other than checking 
+the precondition</span><span class="insert3">.</span>&nbsp;</div>
+<div class="paranum"><a name="p9.1">9.1/5</a></div>
+<div class="Bulleted"><span class="insert5">The portion of the postcondition 
+checking the capacity is omitted from subprograms Set_Length, Assign, 
+Insert, Insert_Space, Prepend, Append, and Delete.</span></div>
+<div class="paranum"><a name="p9.2">9.2/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">For 
+procedures Insert, Insert_Space, Prepend, and Append, the part of the 
+precondition reading:</span></div>
+<div class="paranum"><a name="p9.3">9.3/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Maximum_Length&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</span></div>
+<div class="paranum"><a name="p9.4">9.4/5</a></div>
+<div class="Bulleted-NoPrefix" style="margin-bottom: 0.3em"><span class="insert5">is 
+replaced by:</span></div>
+<div class="paranum"><a name="p9.5">9.5/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Maximum_Length&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I7883"></A>It is a 
+<div class="Normal"><span class="insert3"><A NAME="I8412"></A>It is a 
 bounded error to assign from a bounded vector object while tampering 
 with elements or cursors of that object is prohibited. Either Program_Error 
 is raised by the assignment, execution proceeds with the target object 
 prohibiting tampering with elements or cursors, or execution proceeds 
-normally.</span>&nbsp;</div>
+normally.<A NAME="I8413"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal"><span class="insert3">When a bounded vector object 
 <I>V</I> is finalized, if tampering with cursors is prohibited for <I>V</I> 
 other than due to an assignment from another vector, then execution is 
-erroneous. <A NAME="I7884"></A></span></div>
+erroneous. <A NAME="I8414"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
@@ -120,7 +164,7 @@ procedure Move to minimize copying does not apply.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-18.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

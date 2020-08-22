@@ -1,0 +1,567 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Image Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.10 Image Attributes</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+An <I>image</I> of a value is a string representing the value in display 
+form.<A NAME="I3539"></A> The attributes Image, Wide_Image, and Wide_Wide_Image 
+are available to produce the image of a value as a String, Wide_String, 
+or Wide_Wide_String (respectively). User-defined images for a given type 
+can be implemented by overriding the default implementation of the attribute 
+Put_Image.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+For every subtype S of a type T other than <I>universal_real</I> or <I>universal_fixed</I>, 
+the following type-related operational attribute is defined:</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Put_Image</div><div class="WideHanging-Body">
+<A NAME="I3540"></A><A NAME="I3541"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+S'Put_Image denotes a procedure with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p3.1">3.1/5</a></div>
+<div class="Indented4Examples"><B>procedure</B>&nbsp;S'Put_Image<BR>
+&nbsp;&nbsp;&nbsp;(<SPAN Class="roman"><I>Buffer</I></SPAN>&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;T);</div>
+<div class="paranum"><a name="p3.2">3.2/5</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+The default implementation of S'Put_Image writes (using Wide_Wide_Put) 
+an <I>image</I> of the value of <I>Arg</I>.</div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+The Put_Image attribute may be specified for any specific type T either 
+via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
+or via an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+specifying the Put_Image aspect of the type.<A NAME="I3542"></A><A NAME="I3543"></A></div>
+<div class="paranum"><a name="p4.a">4.a/5</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Put_Image: 
+</B>Procedure to define the image of a given type.</div>
+<div class="paranum"><a name="p4.b">4.b/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In contrast, the Image, Wide_Image, 
+and Wide_Wide_Image attributes and their associated aspects can not be 
+specified. The behavior of any of these attributes is defined in terms 
+of calls to the corresponding Put_Image procedure, so changes in their 
+behavior may be accomplished via a Put_Image specification.</div>
+<div class="paranum"><a name="p4.c">4.c/5</a></div>
+<div class="Annotations">In earlier versions of Ada, Image and related 
+attributes were defined only for scalar types. The definition of these 
+attributes is now very different, but there should be no change in the 
+behavior of existing programs as a result of these changes.&nbsp;</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+The behavior of the default implementation of S'Put_Image depends on 
+the class of T. For an elementary type, the implementation is equivalent 
+to:&nbsp;</div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Scalar_Type'Put_Image<BR>
+&nbsp;&nbsp;(Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;Arg&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Scalar_Type)&nbsp;<B>is</B><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Buffer.Wide_Wide_Put&nbsp;(<I>&lt;described&nbsp;below&gt;</I>);<BR>
+<B>end</B>&nbsp;Scalar_Type'Put_Image;</div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">where the Wide_Wide_String 
+value written out to the stream is defined as follows:</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For an integer type, the image written out is the corresponding decimal 
+literal, without underlines, leading zeros, exponent, or trailing spaces, 
+but with a single leading character that is either a minus sign or a 
+space.</div>
+<div class="paranum"><a name="p8.a">8.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>If the machine supports 
+negative zeros for signed integer types, it is not specified whether 
+&quot; 0&quot; or &quot;-0&quot; should be returned for negative zero. 
+We don't have enough experience with such machines to know what is appropriate, 
+and what other languages do. In any case, the implementation should be 
+consistent.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We allow S'Put_Image when 
+S is <I>universal_integer</I> or <I>root_integer</I>, because the details 
+of the desired string do not depend on properties of an integer type. 
+While S'Put_Image cannot be called directly for these types (as they 
+cannot be named), it can be called as part of evaluating an Image attribute. 
+Note that other rules of the language ensure that an implementation can 
+evaluate any <I>universal_integer</I> attribute using type <I>root_integer</I>; 
+therefore, Constraint_Error could be raised by the evaluation of an Image 
+attribute if the value of the prefix is outside of the range of <I>root_integer</I>. 
+</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For an enumeration type, the image written out is either the corresponding 
+identifier in upper case or the corresponding character literal (including 
+the two apostrophes); neither leading nor trailing spaces are included. 
+For a <I>nongraphic character</I> (a value of a character type that has 
+no enumeration literal associated with it), the value is a corresponding 
+language-defined name in upper case (for example, the image of the nongraphic 
+character identified as <I>nul</I> is <TT>&quot;NUL&quot;</TT> &mdash; 
+the quotes are not part of the image).<A NAME="I3544"></A></div>
+<div class="paranum"><a name="p9.a">9.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>For an enumeration 
+type T that has &quot;holes&quot; (caused by an enumeration_representation_clause), 
+T'Put_Image should raise Program_Error if the value is one of the holes 
+(which is a bounded error anyway, since holes can be generated only via 
+uninitialized variables and similar things).&nbsp;</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For a floating point type, the image written out is a decimal real literal 
+best approximating the value (rounded away from zero if halfway between) 
+with a single leading character that is either a minus sign or a space, 
+a single digit (that is nonzero unless the value is zero), a decimal 
+point, S'Digits-1 (see <A HREF="AA-3-5-8.html">3.5.8</A>) digits  after 
+the decimal point (but one if S'Digits is one), an upper case E, the 
+sign of the exponent (either + or -), and two or more digits (with leading 
+zeros if necessary) representing the exponent. If S'Signed_Zeros is True, 
+then the leading character is a minus sign for a negatively signed zero.</div>
+<div class="paranum"><a name="p10.a">10.a/5</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>Leading zeros are present 
+in the exponent only if necessary to make the exponent at least two digits. 
+</div>
+<div class="paranum"><a name="p10.b">10.b/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This image is intended to conform 
+to that produced by Text_IO.Float_IO.Put in its default format.&nbsp;</div>
+<div class="paranum"><a name="p10.c">10.c/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The rounding direction 
+is specified here to ensure portability of output results.&nbsp;</div>
+<div class="paranum"><a name="p10.d">10.d/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+We do not allow S'Put_Image when S is <I>universal_real</I>, as the details 
+of the desired string depend on the properties of the (specific) type 
+of S. Specifically, <I>universal_real</I> does not have a defined value 
+for S'Digits.&nbsp;</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For a fixed point type, the image written out is a decimal real literal 
+best approximating the value (rounded away from zero if halfway between) 
+with a single leading character that is either a minus sign or a space, 
+one or more digits before the decimal point (with no redundant leading 
+zeros), a decimal point, and S'Aft (see <A HREF="AA-3-5-10.html">3.5.10</A>) 
+digits after the decimal point.</div>
+<div class="paranum"><a name="p11.a">11.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This image is intended to conform 
+to that produced by Text_IO.Fixed_IO.Put.&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The rounding direction 
+is specified here to ensure portability of output results.</div>
+<div class="paranum"><a name="p11.c">11.c/5</a></div>
+<div class="Annotations">For a machine that supports negative zeros, 
+it is not specified whether &quot; 0.000&quot; or &quot;-0.000&quot; 
+is returned. See corresponding comment above about integer types with 
+signed zeros.&nbsp;</div>
+<div class="paranum"><a name="p11.d">11.d/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+We do not allow S'Put_Image when S is <I>universal_fixed</I>, as the 
+details of the desired string depend on the properties of the (specific) 
+type of S. Specifically, <I>universal_fixed</I> does not have a defined 
+value for S'Aft.&nbsp;</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For an access type (named or anonymous), the image written out depends 
+on whether the value is <B>null</B>. If it is <B>null</B>, then the image 
+is <TT>&quot;NULL&quot;</TT>. Otherwise the image is a left parenthesis 
+followed by <TT>&quot;ACCESS&quot;</TT>, a space, and a sequence of graphic 
+characters, other than space or right parenthesis, representing the location 
+of the designated object, followed by a right parenthesis, as in <TT>&quot;(ACCESS 
+FF0012AC)&quot;</TT>.</div>
+<div class="paranum"><a name="p12.a">12.a/5</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+S'Put_Image is defined for <I>universal_access</I>, but it can never 
+be called (as no legal <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of Image has that type, and that type cannot be named preventing direct 
+calls).&nbsp;</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For an array type T, the default implementation of T'Put_Image generates 
+an image based on (named, not positional) array aggregate syntax (with 
+'[' and ']' as the delimiters) using calls to the Put_Image procedures 
+of the index type(s) and the element type to generate images for values 
+of those types.</div>
+<div class="paranum"><a name="p13.a">13.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In general, the default implementation 
+of T'Put_Image for a composite type will involve some sequence of calls 
+to Wide_Wide_String'Write and calls to the Put_Image procedures of component 
+types and, in the case of an array type, index types. The Wide_Wide_String'Write 
+calls may pass in either literal values (e.g., &quot;(&quot;, &quot;)&quot;, 
+&quot;'(&quot;, &quot; =&gt; &quot;, or &quot;, &quot;), or other things 
+(such as component names for record values, task_id images for tasks, 
+or the Wide_Wide_Expanded_Name of the tag in the class-wide case).&nbsp;</div>
+<div class="paranum"><a name="p13.b">13.b/5</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>An array type might generate an image such as:&nbsp;</div>
+<div class="paranum"><a name="p13.c">13.c/5</a></div>
+<div class="SmallExamples">[&nbsp;1&nbsp;=&gt;&nbsp;[&nbsp;1&nbsp;=&gt;&nbsp;[&nbsp;123&nbsp;=&gt;&nbsp;True,&nbsp;&nbsp;124&nbsp;=&gt;&nbsp;False]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;=&gt;&nbsp;[&nbsp;123&nbsp;=&gt;&nbsp;False,&nbsp;&nbsp;124&nbsp;=&gt;&nbsp;False]],<BR>
+&nbsp;&nbsp;2&nbsp;=&gt;&nbsp;[&nbsp;1&nbsp;=&gt;&nbsp;[&nbsp;123&nbsp;=&gt;&nbsp;True,&nbsp;&nbsp;124&nbsp;=&gt;&nbsp;True],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;=&gt;&nbsp;[&nbsp;123&nbsp;=&gt;&nbsp;True,&nbsp;&nbsp;124&nbsp;=&gt;&nbsp;False]]]</div>
+<div class="paranum"><a name="p13.d">13.d/5</a></div>
+<div class="Annotations">although perhaps with different white space 
+and/or line breaking.&nbsp;</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+The case of a null array is handled specially, using ranges for index 
+bounds and <TT>&quot;&lt;&gt;&quot;</TT> as a syntactic component-value 
+placeholder.</div>
+<div class="paranum"><a name="p14.a">14.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This might generate an image 
+such as <TT>&quot;[ 1 ..  3 =&gt; [ 1 ..  0 =&gt; [ 1 .. 5 =&gt; &lt;&gt;]]]&quot;</TT>, 
+where the use of &quot;&lt;&gt;&quot; (among other things) indicates 
+that the overall array is a null array and has no actual elements.&nbsp;</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+The order in which components are written for a composite type is the 
+same canonical order in which components of a composite type T are written 
+out by the default implementation of T'Write. [This is also the order 
+that is used in determining the meaning of a positional aggregate of 
+type T.]</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For a class-wide type, the default implementation of T'Put_Image generates 
+an image based on qualified expression syntax. Wide_Wide_String'Write 
+is called with Wide_Wide_Expanded_Name of <I>Arg</I>'Tag. Then S'Put_Image 
+is called, where S is the specific type identified by <I>Arg</I>'Tag.</div>
+<div class="paranum"><a name="p16.a">16.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This will typically 
+require a dispatching call.&nbsp;</div>
+<div class="paranum"><a name="p16.b">16.b/5</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>This might generate an image such as:&nbsp;</div>
+<div class="paranum"><a name="p16.c">16.c/5</a></div>
+<div class="SmallExamples">SOME_PACKAGE.SOME_TAGGED_TYPE'<BR>
+&nbsp;&nbsp;&nbsp;(COMPONENT_1&nbsp;=&gt;&nbsp;&nbsp;123,&nbsp;COMPONENT_2&nbsp;=&gt;&nbsp;456)</div>
+<div class="paranum"><a name="p16.d">16.d/5</a></div>
+<div class="Annotations">The parentheses in this case are generated by 
+the call to Some_Tagged_Type'Put_Image.&nbsp;</div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For a type extension, the default implementation of T'Put_Image depends 
+on whether there exists a noninterface ancestor of T (other than T itself) 
+for which the Put_Image aspect has been [explicitly] specified. If so, 
+then T'Put_Image will generate an image based on extension aggregate 
+syntax where the ancestor type of the extension aggregate is the nearest 
+ancestor type whose Put_Image aspect has been specified.</div>
+<div class="paranum"><a name="p17.a">17.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This might generate an image 
+such as <TT>&quot;(This Text Was User-Generated with C1 =&gt;  123, C2 
+=&gt;  456)&quot;</TT> where the &quot;This Text was User-Generated&quot; 
+portion of the text was generated by the call to the user-specified Put_Image 
+routine.&nbsp;</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+If no such ancestor exists, then the default implementation of T'Put_Image 
+is the same as described below for an untagged record type.</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For an untagged record type, a specific tagged record type other than 
+a type extension which meets the criteria described in the previous paragraph, 
+or a protected type, the default implementation of T'Put_Image generates 
+an image based on (named, not positional) record aggregate syntax (except 
+that for a protected type, the initial left parenthesis is followed by 
+<TT>&quot;PROTECTED with &quot;</TT>). Component names are displayed 
+in upper case, following the rules for the image of an enumeration value. 
+Component values are displayed via calls to the component type's Put_Image 
+procedure.</div>
+<div class="paranum"><a name="p19.a">19.a/5</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>This might generate an image such as:&nbsp;</div>
+<div class="paranum"><a name="p19.b">19.b/5</a></div>
+<div class="SmallExamples">&quot;(FOO&nbsp;=&gt;&nbsp;[1&nbsp;=&gt;&nbsp;'c',&nbsp;&nbsp;2&nbsp;=&gt;&nbsp;'a',&nbsp;&nbsp;3&nbsp;=&gt;&nbsp;'t'],&nbsp;BAR&nbsp;=&gt;&nbsp;TRUE)&quot;</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+The image written out for a record having no components (including any 
+interface type) is <TT>&quot;(NULL&nbsp;RECORD)&quot;</TT>. The image 
+written out for a componentless protected type is <TT>&quot;(PROTECTED&nbsp;NULL&nbsp;RECORD)&quot;</TT>. 
+In the case of a protected type T, a call to the default implementation 
+of T'Put_Image begins only one protected (read-only) action.</div>
+<div class="paranum"><a name="p20.a">20.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The expected, but 
+not required, implementation model for generating the image of a protected 
+record involves the compiler producing a &quot;helper&quot; protected 
+function which T'Put_Image would call. The result type of this function 
+might be a null record; it is only a function because it does not need 
+a write-lock, not because it returns a meaningful result.</div>
+<div class="paranum"><a name="p20.b">20.b/5</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">The assertion 
+in the following example should succeed:&nbsp;</div>
+<div class="paranum"><a name="p20.c">20.c/5</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;T1&nbsp;(D1,&nbsp;D2&nbsp;:&nbsp;Positive)&nbsp;<B>is&nbsp;record</B>&nbsp;...&nbsp;<B>end&nbsp;record</B>;&nbsp;--&nbsp;<SPAN Class="roman"><I>untagged</I></SPAN><BR>
+<B>type</B>&nbsp;T2&nbsp;(D&nbsp;:&nbsp;Positive)&nbsp;<B>is&nbsp;new</B>&nbsp;T1&nbsp;(D1&nbsp;=&gt;&nbsp;D,&nbsp;D2&nbsp;=&gt;&nbsp;D);<BR>
+X&nbsp;:&nbsp;T2&nbsp;(D&nbsp;=&gt;&nbsp;123)&nbsp;:=&nbsp;...&nbsp;;<BR>
+<B>pragma</B>&nbsp;Assert&nbsp;(X'Image&nbsp;/=&nbsp;T1(X)'Image);</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For an undiscriminated task type, the default implementation of T'Put_Image 
+generates an image of the form <TT>&quot;(TASK &lt;task_id_image&gt;)&quot;</TT> 
+where &lt;task_id_image&gt; is the result obtained by calling Task_Identification.Image 
+with the id of the given task and then passing that String to Characters.Conversions.To_Wide_Wide_String.</div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For a discriminated task type, the default implementation of T'Put_Image 
+also includes discriminant values, as in:&nbsp;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples">&quot;(TASK&nbsp;&lt;task_id_image&gt;&nbsp;with&nbsp;D1&nbsp;=&gt;&nbsp;&nbsp;123,&nbsp;D2&nbsp;=&gt;&nbsp;&nbsp;456)&quot;</div>
+<div class="paranum"><a name="p23.a">23.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If T is an unchecked union 
+type, then the default implementation of T'Put_Image will raise Program_Error. 
+</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+For every subtype S of a type T, the following attributes are defined:</div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I3545"></A><A NAME="I3546"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+S'Wide_Wide_Image denotes a function with the following specification: 
+</div>
+<div class="paranum"><a name="p25.1">25.1/5</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String</div>
+<div class="paranum"><a name="p25.2">25.2/5</a></div>
+<div class="WideHanging-Body">S'Wide_Wide_Image calls S'Put_Image passing 
+<I>Arg</I> (which will typically store a sequence of character values 
+in a text buffer) and then returns the result of retrieving the contents 
+of that buffer with Wide_Wide_Get. The lower bound of the result is one.</div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Image</div><div class="WideHanging-Body">
+<A NAME="I3547"></A><A NAME="I3548"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+S'Wide_Image denotes a function with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="WideHanging-Body">S'Wide_Image calls S'Put_Image passing 
+<I>Arg</I> (which will typically store a sequence of character values 
+in a text buffer) and then returns the result of retrieving the contents 
+of that buffer with Wide_Get. The lower bound of the result is one.</div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Image</div><div class="WideHanging-Body">
+<A NAME="I3549"></A><A NAME="I3550"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+S'Image denotes a function with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;String</div>
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="WideHanging-Body">S'Image calls S'Put_Image passing <I>Arg</I> 
+(which will typically store a sequence of character values in a text 
+buffer) and then returns the result of retrieving the contents of that 
+buffer with Get. The lower bound of the result is one.</div>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X of a type T other than <I>universal_real</I> or <I>universal_fixed</I>, 
+the following attributes are defined:</div>
+<div class="paranum"><a name="p33">33/5</a></div>
+<div class="WideHanging-Term">X'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I3551"></A><A NAME="I3552"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+X'Wide_Wide_Image denotes the result of calling function S'Wide_Wide_Image 
+with <I>Arg</I> being X, where S is the nominal subtype of X.</div>
+<div class="paranum"><a name="p34">34/5</a></div>
+<div class="WideHanging-Term">X'Wide_Image</div><div class="WideHanging-Body">
+<A NAME="I3553"></A><A NAME="I3554"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+X'Wide_Image denotes the result of calling function S'Wide_Image with 
+<I>Arg</I> being X, where S is the nominal subtype of X.</div>
+<div class="paranum"><a name="p35">35/5</a></div>
+<div class="WideHanging-Term">X'Image</div><div class="WideHanging-Body">
+<A NAME="I3555"></A><A NAME="I3556"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+X'Image denotes the result of calling function S'Image with <I>Arg</I> 
+being X, where S is the nominal subtype of X.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p36">36/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+An implementation may transform the image generated by the default implementation 
+of S'Put_Image for a composite subtype S in the following ways:</div>
+<div class="paranum"><a name="p37">37/5</a></div>
+<div class="Bulleted">If S is a composite subtype, the leading character 
+of the image of a component value or index value is a space, and the 
+immediately preceding character is an open parenthesis or bracket, then 
+the space may be omitted. The same transformation is also permitted if 
+the leading character of the component image is a space (in which case 
+one of the two spaces may be omitted).&nbsp;</div>
+<div class="paranum"><a name="p37.a">37.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This means that it is permitted 
+to generate <TT>&quot;[1 =&gt; 123, 2 =&gt; 456]&quot;</TT> instead of 
+<TT>&quot;[ 1 =&gt;  123,  2 =&gt;  456]&quot;</TT>.&nbsp;</div>
+<div class="paranum"><a name="p38">38/5</a></div>
+<div class="Bulleted">If S is an array subtype, the low bound of the 
+array in each dimension equals the low bound of the corresponding index 
+subtype, and the array value is not a null array value, then positional 
+array aggregate syntax may be used.</div>
+<div class="paranum"><a name="p38.a">38.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This means that it is permitted 
+to generate <TT>&quot;[TRUE, TRUE, FALSE]&quot;</TT> instead of <TT>&quot;[ 
+1 =&gt; TRUE,  2 =&gt; TRUE,  3 =&gt; FALSE]&quot;</TT> if the low bound 
+of the index subtype is one.&nbsp;</div>
+<div class="paranum"><a name="p39">39/5</a></div>
+<div class="Bulleted">If S is an array subtype and the given value can 
+be displayed using <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">named_array_aggregate</A></SPAN> 
+syntax where some <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+identifies more than one index value by identifying a sequence of one 
+or more ranges and values separated by vertical bars, then this image 
+may be generated instead; this may involve the reordering of component 
+values.</div>
+<div class="paranum"><a name="p39.a">39.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This means that it is permitted 
+to generate <TT>&quot;[ 1 ..  2 |  5 =&gt; TRUE,  3 ..  4 =&gt; FALSE]&quot;</TT> 
+instead of <TT>&quot;[ 1 =&gt; TRUE,  2 =&gt; TRUE,  3 =&gt; FALSE,  
+4 =&gt; FALSE,  5 =&gt; TRUE]&quot;</TT>.&nbsp;</div>
+<div class="paranum"><a name="p40">40/5</a></div>
+<div class="Bulleted">Similarly, if S is a record subtype (or a discriminated 
+type) and the given value can be displayed using named component association 
+syntax where the length of some component_choice_list is greater than 
+one, then this image may be generated instead; this may involve the reordering 
+of component values.</div>
+<div class="paranum"><a name="p40.a">40.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This means that it is permitted 
+to generate <TT>&quot;(F1 | F2 =&gt; TRUE)&quot;</TT> instead of <TT>&quot;(F1 
+=&gt; TRUE, F2 =&gt; TRUE)&quot;</TT>.&nbsp;</div>
+<div class="paranum"><a name="p41">41/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+Additional spaces (Wide_Wide_Characters with position 32), and calls 
+to the New_Line operation of a text buffer, may be inserted to improve 
+readability of the generated image.</div>
+<div class="paranum"><a name="p42">42/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0304-1.TXT">AI12-0304-1</A></I>} 
+For each language-defined nonscalar type T, T'Put_Image may be specified.</div>
+<div class="paranum"><a name="p42.a">42.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This permission applies, 
+in particular, to nonscalar types declared in language-defined generic 
+packages, and to any language-defined private type, even if an implementation 
+chooses to complete it as a scalar type.&nbsp;</div>
+<div class="paranum"><a name="p42.b">42.b/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For any language-defined 
+scalar type T, T'Put_Image should not be specified; the Image attribute 
+needs to return the language-defined image for such types. This is important 
+for compatibility: the Image attribute has been available for scalar 
+types for many Ada revisions, and programs can (and do!) depend on its 
+behavior.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p43">43/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0304-1.TXT">AI12-0304-1</A></I>} 
+For each language-defined container type T (that is, each of the Vector, 
+List, Map, Set, Tree, and Holder types defined in the various children 
+of Ada.Containers), T'Put_Image shall be specified so that T'Image produces 
+a result consistent with array aggregate syntax (using '[' and ']' as 
+delimiters) as follows:</div>
+<div class="paranum"><a name="p44">44/5</a></div>
+<div class="Bulleted">Vector images shall be consistent with the default 
+image of an array type with the same index and component types.</div>
+<div class="paranum"><a name="p44.a">44.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In particular, this means 
+that the format is 	that of a named array aggregate. We have no recommendation 
+on how to 	handle empty elements; if the implementation can identify 
+them, it may 	wish to display them specially, but otherwise, they're 
+just 	uninitialized elements.&nbsp;</div>
+<div class="paranum"><a name="p45">45/5</a></div>
+<div class="Bulleted">Map images shall be consistent with named array 
+aggregate syntax, using key value images in place of discrete choice 
+names. For example, <TT>[Key1 =&gt; Value1, Key2 =&gt; Value2]</TT>.</div>
+<div class="paranum"><a name="p45.a">45.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There is no recommendation 
+about the order in which key/element pairs occur within a map image. 
+In the case of multiple key values whose corresponding element values 
+have the same image, there is no recommendation about factoring (that 
+is, generating <TT>Key1 | Key2 =&gt; Some_Value</TT> instead of <TT>Key1 
+=&gt; Some_Value, Key2 =&gt; Some_Value</TT>).&nbsp;</div>
+<div class="paranum"><a name="p46">46/5</a></div>
+<div class="Bulleted">Set, List, and Holder images shall be consistent 
+with positional array aggregate syntax. List elements shall occur in 
+order within an image of a list. The image of an empty holder shall be 
+<TT>[]</TT>.</div>
+<div class="paranum"><a name="p46.a">46.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There is no recommendation 
+about the order in which set elements occur within the image of a set. 
+</div>
+<div class="paranum"><a name="p47">47/5</a></div>
+<div class="Bulleted">Tree images (and images of subtrees of trees) shall 
+be consistent with positional array aggregate syntax. For example, <TT>[[1, 
+2], [111, 222, 333]]</TT>.</div>
+<div class="paranum"><a name="p48">48/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0304-1.TXT">AI12-0304-1</A></I>} 
+For each language-defined nonscalar type T that has a primitive language-defined 
+Image function whose profile is type conformant with that of T'Image 
+(for example, Ada.Numerics.Float_Random.State has such an Image function), 
+T'Put_Image shall be specified so that T'Image yields the same result 
+as that Image function.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p49">49/5</a></div>
+<div class="Normal">For each language-defined private type T, T'Image 
+should generate an image that would be meaningful based only on the relevant 
+public interfaces, as opposed to requiring knowledge of the implementation 
+of the private type.</div>
+<div class="paranum"><a name="p49.a">49.a/5</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>each language-defined 
+private type T, T'Image should generate an image that would be meaningful 
+based only on the relevant public interfaces.</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p49.b">49.b/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+<A NAME="I3557"></A>Attribute Put_Image is new. Attributes Image, Wide_Image, 
+and Wide_Wide_Image now can be used with any type, and are defined in 
+terms of Put_Image so that they can be redefined.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

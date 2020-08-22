@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -48,7 +48,7 @@ be used to request a reduction in storage used for the names of <span class="del
 <div class="paranum"><a name="p1.1">1.1/4</a></div>
 <div class="Normal">&nbsp;<span class="insert4">An entity with <I>runtime 
 name text</I> is a nonderived enumeration first subtype, a tagged first 
-subtype, or an exception.<A NAME="I8318"></A><A NAME="I8319"></A></span></div>
+subtype, or an exception.<A NAME="I8851"></A><A NAME="I8852"></A></span></div>
 <div class="paranum"><a name="p1.2">1.2/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert4">For 
 an entity with runtime name text, the following language-defined representation 
@@ -56,32 +56,32 @@ aspect may be specified:</span></div>
 <div class="paranum"><a name="p1.3">1.3/4</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert4">Discard_Names</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert4">The type of aspect Discard_Names is Boolean. If 
-directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
-the aspect is False.<A NAME="I8320"></A><A NAME="I8321"></A></span></div>
+the aspect is False.<A NAME="I8853"></A><A NAME="I8854"></A></span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8322"></A><A NAME="I8323"></A>Discard_Names[([On 
-=&gt; ] <A NAME="I8324"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8855"></A><A NAME="I8856"></A>Discard_Names[([On 
+=&gt; ] <A NAME="I8857"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>)];</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
-immediately within a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>, 
-or as a configuration pragma. <A NAME="I8325"></A><A NAME="I8326"></A></div>
+immediately within a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>, 
+or as a configuration pragma. <A NAME="I8858"></A><A NAME="I8859"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/4</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 (if present) shall denote <span class="insert4">an entity with runtime 
 name text</span><span class="delete4">&nbsp;a nonderived enumeration first 
 subtype, a tagged first subtype, or an exception</span>. The pragma <span class="insert4">specifies 
 that the aspect Discard_Names for</span><span class="delete4">&nbsp;applies 
 to</span> the type or exception<span class="insert4">&nbsp;has the value True</span>. 
-Without a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>, 
+Without a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>, 
 the pragma <span class="insert4">specifies that</span><span class="delete4">&nbsp;applies 
 to</span> all <span class="delete4">such&nbsp;</span>entities<span class="insert4">&nbsp;with runtime name text</span> declared after the pragma, within the same 
 declarative region<span class="insert4">&nbsp;have the value True for aspect 
@@ -94,7 +94,7 @@ of the type</span>.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I8327"></A><A NAME="I8328"></A>If a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+<div class="Normal"><A NAME="I8860"></A><A NAME="I8861"></A>If a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 is given, then a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is a representation pragma.</div>
 <div class="paranum"><a name="p7">7/4</a></div>
@@ -127,7 +127,7 @@ for storing names associated with that entity.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

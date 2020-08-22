@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-9-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,30 +38,30 @@
 <HR>
 <H1>9.7.3 Conditional Entry Calls</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0257">conditional_entry_call</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0279">conditional_entry_call</A></SPAN> 
 issues an entry call that is then cancelled if it is not selected immediately 
 (or if a requeue-with-abort of the call is not selected immediately).<span class="insert2">&nbsp;A procedure call may appear rather than an entry call for cases where 
 the procedure might be implemented by an entry.</span>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">conditional_entry_call</SPAN><A NAME="I4632"></A><A NAME="S0257"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">conditional_entry_call</SPAN><A NAME="I4856"></A><A NAME="S0279"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4633"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0255">entry_call_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4857"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0277">entry_call_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>else</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4634"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4858"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN><BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4635"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0257">conditional_entry_call</A></SPAN> 
-is defined to be equivalent to the execution of a <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0254">timed_entry_call</A></SPAN> 
-with a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0252">delay_alternative</A></SPAN> 
-specifying an immediate expiration time and the same <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+<div class="Normal"><A NAME="I4859"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0279">conditional_entry_call</A></SPAN> 
+is defined to be equivalent to the execution of a <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0276">timed_entry_call</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0274">delay_alternative</A></SPAN> 
+specifying an immediate expiration time and the same <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 as given after the reserved word <B>else</B>.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Notes">41&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0257">conditional_entry_call</A></SPAN> 
+<div class="Notes">41&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0279">conditional_entry_call</A></SPAN> 
 may briefly increase the Count attribute of the entry, even if the conditional 
 call is not selected.</div>
 
@@ -84,7 +84,7 @@ entry call:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-9-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

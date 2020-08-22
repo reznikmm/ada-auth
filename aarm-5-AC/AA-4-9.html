@@ -36,9 +36,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -50,9 +50,9 @@
 <div class="Normal">Certain expressions of a scalar or string type are 
 defined to be static. Similarly, certain discrete ranges are defined 
 to be static, and certain scalar and string subtypes are defined to be 
-static subtypes. [<A NAME="I3549"></A> <I>Static</I> means determinable 
+static subtypes. [<A NAME="I3662"></A> <I>Static</I> means determinable 
 at compile time, using the declared properties or values of the program 
-entities.] <A NAME="I3550"></A></div>
+entities.] <A NAME="I3663"></A></div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>As opposed to more elaborate 
 data flow analysis, etc.&nbsp;</div>
@@ -76,7 +76,7 @@ are designed to maximize portability of static calculations.</div>
 <div class="paranum"><a name="p1.f">1.f/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0201-1.TXT">AI12-0201-1</A></I>} 
 <span class="insert5">We support static string expressions so that, for 
-example, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+example, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 for a Link_Name aspect can contain a concatenation. We don't support 
 static aggregates (even for string types) or non-string static nonscalar 
 types; we're trying to keep it cheap and simple (from the implementer's 
@@ -84,7 +84,7 @@ viewpoint).</span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3551"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3664"></A>A 
 static expression is [a scalar or string expression that is] one of the 
 following:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
@@ -112,10 +112,10 @@ that denotes the declaration of a named number or a static constant;
 </div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that enumeration literals 
-are covered by the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
+are covered by the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
 case.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
 whose <I>function_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <I>function_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 statically denotes a static function, and whose actual parameters, if 
@@ -123,7 +123,7 @@ any (whether given explicitly or by default), are all static expressions;
 </div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This includes uses of operators 
-that are equivalent to <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>s. 
+that are equivalent to <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
@@ -136,11 +136,12 @@ an attribute is not even an expression. See above for function <I>calls</I>.</di
 <div class="paranum"><a name="p7.b">7.b</a></div>
 <div class="Annotations">An implementation may define the staticness 
 and other properties of implementation-defined attributes.&nbsp;</div>
-<div class="paranum"><a name="p8">8</a></div>
-<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-statically denotes a statically constrained array object or array subtype, 
-and whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+statically <span class="insert5">names</span><span class="delete5">&nbsp;denotes</span> 
+a statically constrained array object or array subtype, and whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 is First, Last, or Length, with an optional dimension;</div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
@@ -151,12 +152,12 @@ and whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator
 is Nonblocking;</span></div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0201-1.TXT">AI12-0201-1</A></I>} 
-a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes a static <span class="insert5">[(scalar or string)]</span><span class="delete5">&nbsp;scalar</span> 
 subtype, and whose operand is a static expression;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes a static [(scalar or string)] subtype, and whose operand is a 
 static expression;&nbsp;</div>
@@ -170,10 +171,10 @@ shouldn't make it nonstatic, even for strings.&nbsp;</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
-a membership test whose <span class="insert4"><I>tested_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">&nbsp;simple_expression</A></SPAN></span> 
-is a static expression, and whose <span class="insert3"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">membership_choice_list</A></SPAN> 
-consists only of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">membership_choice</A></SPAN>s 
-that are either static&nbsp;</span><span class="insert4"><I>choice_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s</span><span class="insert3"></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">&nbsp;choice_expression</A></SPAN>s</span></span><span class="insert3">, 
+a membership test whose <span class="insert4"><I>tested_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">&nbsp;simple_expression</A></SPAN></span> 
+is a static expression, and whose <span class="insert3"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0136">membership_choice_list</A></SPAN> 
+consists only of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0137">membership_choice</A></SPAN>s 
+that are either static&nbsp;</span><span class="insert4"><I>choice_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>s</span><span class="insert3"></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0133">&nbsp;choice_expression</A></SPAN>s</span></span><span class="insert3">, 
 static <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>s, 
 or <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
 that denote</span><span class="delete3"><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">&nbsp;range</A></SPAN> 
@@ -181,23 +182,31 @@ is a static range or whose <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">sub
 denotes</span> a static [(scalar or string)] subtype;&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Clearly, we should allow membership 
-tests in exactly the same cases where we allow <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN>s. 
+tests in exactly the same cases where we allow <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Bulleted">a short-circuit control form both of whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>s 
+<div class="Bulleted">a short-circuit control form both of whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>s 
 are static expressions;</div>
 <div class="paranum"><a name="p12.1">12.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
-<span class="insert3">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN> 
-all of whose <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s, 
-<I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s, 
-and <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
+<span class="insert3">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN> 
+all of whose <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>s, 
+<I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s, 
+and <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
 are static expressions;</span></div>
+<div class="paranum"><a name="p12.2">12.2/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert5">a <SPAN Class="swiss"><A HREF="AA-4-5-9.html#S0156">declare_expression</A></SPAN> 
+whose <I>body_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+is static and each of whose declarations, if any, is either the declaration 
+of a static constant or is an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
+with an <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that statically names the renamed object;</span></div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Bulleted">a static expression enclosed in parentheses.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I3552"></A>Informally, 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I3665"></A>Informally, 
 we talk about a <I>static value</I>. When we do, we mean a value specified 
 by a static expression.&nbsp;</div>
 <div class="paranum"><a name="p13.b">13.b</a></div>
@@ -210,28 +219,72 @@ in a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPA
 or <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3553"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3666"></A>A 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> <I>statically 
 denotes</I> an entity if it denotes the entity and:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Bulleted">It is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>, 
 expanded name, or <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
-and it denotes a declaration other than a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN>; 
+and it denotes a declaration other than a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN>; 
 or</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Bulleted">It is an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 statically denotes some entity; or</div>
+<div class="paranum"><a name="p16.1">16.1/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0322-1.TXT">AI12-0322-1</A></I>} 
+<span class="insert5">It is a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
+(see <A HREF="AA-5-2-1.html">5.2.1</A>) in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
+whose <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+statically denotes some entity; or</span></div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Bulleted">It denotes a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
+<div class="Bulleted">It denotes a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that statically denotes the renamed entity.&nbsp;</div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">Selected_component</A></SPAN>s 
 that are not expanded names and <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>s 
 do not statically denote things.&nbsp;</div>
+<div class="paranum"><a name="p17.1">17.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert5">A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<I>statically names</I> an object if it:<A NAME="I3667"></A></span>&nbsp;</div>
+<div class="paranum"><a name="p17.2">17.2/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert5">statically denotes the declaration of an object 
+[(possibly through one or more renames)];</span>&nbsp;</div>
+<div class="paranum"><a name="p17.b">17.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Proof:&nbsp;</B>Follows 
+from the definition of statically denotes.</span>&nbsp;</div>
+<div class="paranum"><a name="p17.3">17.3/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0373-1.TXT">AI12-0373-1</A></I>} 
+<span class="insert5">is a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN> 
+whose prefix statically names an object, there is no implicit dereference 
+of the prefix, and the <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+does not denote a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
+occurring within a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>; 
+or</span>&nbsp;</div>
+<div class="paranum"><a name="p17.c">17.c/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>We disallow 
+components in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+so that no discriminant checks are needed to evaluate the <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>. 
+Note that other kinds of discriminant-dependent components do not need 
+any checks on access (only when they are changed).</span>&nbsp;</div>
+<div class="paranum"><a name="p17.4">17.4/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert5">is an <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
+whose prefix statically names an object, there is no implicit dereference 
+of the prefix, the object is statically constrained, and the index expressions 
+of the object are static and have values that are within the range of 
+the index constraint.</span>&nbsp;</div>
+<div class="paranum"><a name="p17.5">17.5/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert5">For an entity other than an object, a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+statically names an entity if the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+statically denotes the entity.</span></div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3554"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3668"></A>A 
 <I>static function</I> is one of the following:&nbsp;</div>
 <div class="paranum"><a name="p18.a">18.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>These are the functions 
@@ -262,8 +315,8 @@ are scalar.&nbsp;</div>
 static function.</div>
 <div class="paranum"><a name="p24">24/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0201-1.TXT">AI12-0201-1</A></I>} 
-<A NAME="I3555"></A>A <I>static constant</I> is a constant view declared 
-by a full constant declaration or an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+<A NAME="I3669"></A>A <I>static constant</I> is a constant view declared 
+by a full constant declaration or an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
 with a static nominal subtype, having a value defined by a static scalar 
 expression or by a static string expression<span class="delete5">&nbsp;whose 
 value has a length not exceeding the maximum length of a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
@@ -283,7 +336,7 @@ from <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>s,
 the length limit seems pretty natural. The reason for avoiding nonstring 
 types is also to save symbol table space. We're trying to keep it cheap 
 and simple (from the implementer's viewpoint), while still allowing, 
-for example, the&nbsp;</span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+for example, the&nbsp;</span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 for a Link_Name aspect</span></span><span class="delete5"></span><span class="delete3">&nbsp;link 
 name of a pragma Import</span><span class="delete5">&nbsp;to contain a concatenation.</span></div>
 <div class="paranum"><a name="p24.c">24.c/5</a></div>
@@ -294,34 +347,30 @@ of characters in the value represented by a <SPAN Class="swiss"><A HREF="AA-2-6.
 not the number of characters in the source representation; the quotes 
 don't count.</span>&nbsp;</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Normal"><A NAME="I3556"></A>A <I>static range</I> is a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+<div class="Normal"><A NAME="I3670"></A>A <I>static range</I> is a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
 whose bounds are static expressions, [or a <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
 that is equivalent to such a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>.] 
-<A NAME="I3557"></A>A <I>static&nbsp;</I><SPAN Class="swiss"><I><A HREF="AA-3-6-1.html#S0058">discrete_range</A></I></SPAN><I></I> 
+<A NAME="I3671"></A>A <I>static&nbsp;</I><SPAN Class="swiss"><I><A HREF="AA-3-6-1.html#S0058">discrete_range</A></I></SPAN><I></I> 
 is one that is a static range or is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 that defines a static scalar subtype. The base range of a scalar type 
 is a static range, unless the type is a descendant of a formal scalar 
 type.</div>
-<div class="paranum"><a name="p26">26/5</a></div>
+<div class="paranum"><a name="p26">26/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00263.TXT">AI95-00263-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0295-1.TXT">AI12-0295-1</A></I>} 
-<A NAME="I3558"></A>A <I>static subtype</I> is either a <I>static scalar 
-subtype</I> or a <I>static string subtype</I>. <A NAME="I3559"></A>A 
+<A NAME="I3672"></A>A <I>static subtype</I> is either a <I>static scalar 
+subtype</I> or a <I>static string subtype</I>. <A NAME="I3673"></A>A 
 static scalar subtype is an unconstrained scalar subtype whose type is 
 not a descendant of a formal <span class="delete2">scalar&nbsp;</span>type, 
 or a constrained scalar subtype formed by imposing a compatible static 
-constraint on a static scalar subtype. <A NAME="I3560"></A>A static string 
-subtype is <span class="insert5">a string subtype that does not have 
-a specified String_Literal aspect, and that is&nbsp;</span>an unconstrained 
-<span class="insert5">array</span><span class="delete5">&nbsp;string</span> 
-subtype whose index subtype and component subtype are static<span class="delete2">&nbsp;(and whose type is not a descendant of a formal array type)</span>, or 
-a constrained <span class="insert5">array</span><span class="delete5">&nbsp;string</span> 
-subtype formed by imposing a compatible static constraint on a static 
-string subtype. In any case, the subtype of a generic formal object of 
-mode <B>in out</B>, and the result subtype of a generic formal function, 
-are not static.<span class="insert3">&nbsp;Also, a subtype is not static if 
-any Dynamic_Predicate specifications apply to it.</span>&nbsp;</div>
+constraint on a static scalar subtype. <A NAME="I3674"></A>A static string 
+subtype is an unconstrained string subtype whose index subtype and component 
+subtype are static<span class="delete2">&nbsp;(and whose type is not a descendant 
+of a formal array type)</span>, or a constrained string subtype formed 
+by imposing a compatible static constraint on a static string subtype. 
+In any case, the subtype of a generic formal object of mode <B>in out</B>, 
+and the result subtype of a generic formal function, are not static.<span class="insert3">&nbsp;Also, a subtype is not static if any Dynamic_Predicate specifications 
+apply to it.</span>&nbsp;</div>
 <div class="paranum"><a name="p26.a">26.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>String subtypes are the 
 only composite subtypes that can be static.&nbsp;</div>
@@ -348,28 +397,28 @@ do with the subtype of the actual. For example:&nbsp;</div>
 <div class="SmallExamples">X&nbsp;:&nbsp;Integer&nbsp;<B>range</B>&nbsp;1..20;<BR>
 <B>procedure</B>&nbsp;I&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;G(F&nbsp;=&gt;&nbsp;X);&nbsp;--<SPAN Class="roman"><I>&nbsp;OK.</I></SPAN></div>
 <div class="paranum"><a name="p26.g">26.g</a></div>
-<div class="Annotations">The <SPAN Class="swiss"><A HREF="AA-5-4.html#S0162">case_statement</A></SPAN> 
+<div class="Annotations">The <SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN> 
 is illegal, because the subtype of F is not static, so the choices have 
 to cover all values of Integer, not just those in the range 1..10. A 
 similar issue arises for generic formal functions, now that function 
 calls are object names.&nbsp;</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3561"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3675"></A>The 
 different kinds of <I>static constraint</I> are defined as follows:&nbsp;</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Bulleted">A null constraint is always static;</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Bulleted"><A NAME="I3562"></A><A NAME="I3563"></A><A NAME="I3564"></A>A 
+<div class="Bulleted"><A NAME="I3676"></A><A NAME="I3677"></A><A NAME="I3678"></A>A 
 scalar constraint is static if it has no <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>, 
 or one with a static range;</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="Bulleted"><A NAME="I3565"></A>An index constraint is static 
+<div class="Bulleted"><A NAME="I3679"></A>An index constraint is static 
 if each <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
 is static, and each index subtype of the corresponding array type is 
 static;</div>
 <div class="paranum"><a name="p31">31</a></div>
-<div class="Bulleted"><A NAME="I3566"></A>A discriminant constraint is 
-static if each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted"><A NAME="I3680"></A>A discriminant constraint is 
+static if each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of the constraint is static, and the subtype of each discriminant is 
 static.&nbsp;</div>
 <div class="paranum"><a name="p31.1">31.1/2</a></div>
@@ -377,7 +426,7 @@ static.&nbsp;</div>
 <span class="insert2">In any case, the constraint of the first subtype 
 of a scalar formal type is neither static nor null.</span></div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Normal"><A NAME="I3567"></A>A subtype is <I>statically constrained</I> 
+<div class="Normal"><A NAME="I3681"></A>A subtype is <I>statically constrained</I> 
 if it is constrained, and its constraint is static. An object is <I>statically 
 constrained</I> if its nominal subtype is statically constrained, or 
 if it is a static string constant.&nbsp;</div>
@@ -386,7 +435,7 @@ if it is a static string constant.&nbsp;</div>
 <div class="paranum"><a name="p32.1">32.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 <span class="insert3">An expression is <I>statically unevaluated</I> 
-if it is part of:<A NAME="I3568"></A></span></div>
+if it is part of:<A NAME="I3682"></A></span></div>
 <div class="paranum"><a name="p32.2">32.2/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 <span class="insert3">the right operand of a static short-circuit control 
@@ -394,26 +443,26 @@ form whose value is determined by its left operand; or</span></div>
 <div class="paranum"><a name="p32.3">32.3/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
-<span class="insert3">a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN> 
-whose associated <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
+<span class="insert3">a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN> 
+whose associated <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
 is static and equals False; or</span></div>
 <div class="paranum"><a name="p32.4">32.4/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
-<span class="insert3">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
-or <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN> 
-where the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
-corresponding to at least one preceding <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN> 
+<span class="insert3">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
+or <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN> 
+where the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
+corresponding to at least one preceding <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN> 
 is static and equals True; or</span></div>
 <div class="paranum"><a name="p32.a">32.a/3</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Reason: 
-</B>We need this bullet so that only a single <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-is evaluated in a static <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN> 
-if there is more than one <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
-that evaluates to True. The part about <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s 
+</B>We need this bullet so that only a single <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+is evaluated in a static <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN> 
+if there is more than one <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
+that evaluates to True. The part about <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>s 
 makes</span>&nbsp;</div>
 <div class="paranum"><a name="p32.b">32.b/3</a></div>
 <div class="SmallExamples"><span class="insert3">(<B>if</B>&nbsp;N&nbsp;=&nbsp;0&nbsp;<B>then</B>&nbsp;Min&nbsp;<B>elsif</B>&nbsp;10_000/N&nbsp;&gt;&nbsp;Min&nbsp;<B>then</B>&nbsp;10_000/N&nbsp;<B>else</B>&nbsp;Min)</span></div>
@@ -423,29 +472,29 @@ static and N = 0.</span>&nbsp;</div>
 <div class="paranum"><a name="p32.d">32.d/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
-<span class="insert3">We need the &quot;of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN>&quot; 
-here so there is no confusion for nested <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN>s; 
-this rule only applies to the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s 
-and <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
-of a single <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN>. 
-Similar reasoning applies to the &quot;of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0141">case_expression</A></SPAN>&quot; 
+<span class="insert3">We need the &quot;of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN>&quot; 
+here so there is no confusion for nested <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN>s; 
+this rule only applies to the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>s 
+and <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
+of a single <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN>. 
+Similar reasoning applies to the &quot;of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0151">case_expression</A></SPAN>&quot; 
 of the last bullet.</span>&nbsp;</div>
 <div class="paranum"><a name="p32.5">32.5/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0141">case_expression</A></SPAN> 
-whose <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<span class="insert3">a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0151">case_expression</A></SPAN> 
+whose <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is static and whose value is not covered by the corresponding <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>; 
 or</span></div>
 <div class="paranum"><a name="p32.6">32.6/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
-<span class="insert3">a&nbsp;</span><span class="insert4"><I>choice_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">&nbsp;choice_expression</A></SPAN></span></span><span class="insert3">&nbsp;(or a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN> 
+<span class="insert3">a&nbsp;</span><span class="insert4"><I>choice_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0133">&nbsp;choice_expression</A></SPAN></span></span><span class="insert3">&nbsp;(or a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
-that occurs as a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">membership_choice</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">membership_choice_list</A></SPAN>) 
-of a static membership test that is preceded in the enclosing <SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">membership_choice_list</A></SPAN> 
+that occurs as a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0137">membership_choice</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0136">membership_choice_list</A></SPAN>) 
+of a static membership test that is preceded in the enclosing <SPAN Class="swiss"><A HREF="AA-4-4.html#S0136">membership_choice_list</A></SPAN> 
 by another item whose individual membership test (see <A HREF="AA-4-5-2.html">4.5.2</A>) 
 statically yields True.</span>&nbsp;</div>
 <div class="paranum"><a name="p33">33/3</a></div>
@@ -495,7 +544,7 @@ for a decimal type cannot have &ldquo;extra&rdquo; significant digits.
 so we have to exclude formal types from this check.</span>&nbsp;</div>
 <div class="paranum"><a name="p37">37/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00269.TXT">AI95-00269-01</A></I>} 
-<span class="insert2"><A NAME="I3569"></A>In addition to the places where 
+<span class="insert2"><A NAME="I3683"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 the above restrictions also apply in the private part of an instance 
 of a generic unit.</span><span class="delete2">&nbsp;The last two restrictions 
@@ -626,10 +675,10 @@ static: <SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A>
 <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>, <B>null</B>, 
 <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>. 
+<SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p40">40</a></div>
-<div class="Notes">31&nbsp;&nbsp;A static (or run-time) <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="Notes">31&nbsp;&nbsp;A static (or run-time) <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 from a real type to an integer type performs rounding. If the operand 
 value is exactly half-way between two integers, the rounding is performed 
 away from zero.&nbsp;</div>
@@ -664,7 +713,7 @@ Rad_To_Deg&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;1.0/Deg_To_Rad;&nbsp;<SPAN C
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p44.a">44.a</a></div>
-<div class="Annotations"><A NAME="I3570"></A>The rules for static expressions 
+<div class="Annotations"><A NAME="I3684"></A>The rules for static expressions 
 and static subtypes are generalized to allow more kinds of compile-time-known 
 expressions to be used where compile-time-known values are required, 
 as follows:&nbsp;</div>
@@ -678,12 +727,12 @@ array objects or subtypes are static.</div>
 <div class="SmallBulleted">The Range attribute of a statically constrained 
 array subtype or object gives a static range.</div>
 <div class="paranum"><a name="p44.e">44.e</a></div>
-<div class="SmallBulleted">A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+<div class="SmallBulleted">A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 is static if the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes a static scalar subtype and the operand is a static expression.</div>
 <div class="paranum"><a name="p44.f">44.f</a></div>
 <div class="SmallBulleted">All numeric literals are now static, even 
-if the expected type is a formal scalar type. This is useful in <SPAN Class="swiss"><A HREF="AA-5-4.html#S0162">case_statement</A></SPAN>s 
+if the expected type is a formal scalar type. This is useful in <SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>s, 
 which both now allow a value of a formal scalar type to control the selection, 
 to ease conversion of a package into a generic package. Similarly, named 
@@ -720,7 +769,7 @@ in an interfacing pragma, and to simplify the preelaborability rules.
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p44.m">44.m</a></div>
-<div class="Annotations"><A NAME="I3571"></A>An Ada 83 program that uses 
+<div class="Annotations"><A NAME="I3685"></A>An Ada 83 program that uses 
 an out-of-range static value is illegal in Ada 95, unless the expression 
 is part of a larger static expression, or the expression is not evaluated 
 due to being on the right-hand side of a short-circuit control form. 
@@ -757,14 +806,14 @@ is static, but there's a separate rule forbidding the exception raising.</div>
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p44.s">44.s/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00268.TXT">AI95-00268-01</A></I>} 
-<span class="insert2"><A NAME="I3572"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I3686"></A><B>Amendment Correction:</B> 
 Rounding of static real expressions is implementation-defined in Ada 
 2005, while it was specified as away from zero in (original) Ada 95. 
 This could make subtle differences in programs. However, the original 
 Ada 95 rule required rounding that (probably) differed from the target 
 processor, thus creating anomalies where the value of a static expression 
-was required to be different than the same expression evaluated at run-time.</span> 
-</div>
+was required to be different than the same expression evaluated at run 
+time.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
 <div class="paranum"><a name="p44.t">44.t/2</a></div>
@@ -793,8 +842,8 @@ type has a nonstatic, nonnull constraint.</span>&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
 <span class="insert3">Added wording to define staticness and the lack 
-of evaluation for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0141">case_expression</A></SPAN>s. 
+of evaluation for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0151">case_expression</A></SPAN>s. 
 These are new and defined elsewhere.</span></div>
 <div class="paranum"><a name="p44.x">44.x/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
@@ -803,13 +852,13 @@ predicates (see <A HREF="AA-3-2-4.html">3.2.4</A>) from being static.</span></di
 <div class="paranum"><a name="p44.y">44.y/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 <span class="insert3">Revised wording for membership tests to allow for 
-the new possibilities allowed by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">membership_choice_list</A></SPAN>.</span> 
+the new possibilities allowed by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0136">membership_choice_list</A></SPAN>.</span> 
 </div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p44.z">44.z/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0201-1.TXT">AI12-0201-1</A></I>} 
-<span class="insert5"><A NAME="I3573"></A>Added a missing exclusion for 
+<span class="insert5"><A NAME="I3687"></A>Added a missing exclusion for 
 concatenations of a string type descended from a formal array type. This 
 could potentially make some expression non-static; but as that could 
 only matter in a context where a static string is required (such as the 
@@ -818,7 +867,7 @@ Link_Name aspect), it is quite unlikely.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p44.aa">44.aa/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0201-1.TXT">AI12-0201-1</A></I>} 
-<span class="insert5"><A NAME="I3574"></A>Expressions involving string 
+<span class="insert5"><A NAME="I3688"></A>Expressions involving string 
 relational operators or string type conversions now can be static.</span> 
 </div>
 
@@ -833,16 +882,25 @@ relational operators or string type conversions now can be static.</span>
 correctly; this is documented as an extension in <A HREF="AA-6-8.html">6.8</A>.</span></div>
 <div class="paranum"><a name="p44.dd">44.dd/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
-<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0295-1.TXT">AI12-0295-1</A></I>} 
 <span class="insert5">A <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN> 
 can be non-static if they are defined by an Integer_Literal or Real_Literal 
-aspect (see <A HREF="AA-4-2-1.html">4.2.1</A>). Similarly, a string subtype 
-cannot be a static string subtype if the type has a String_Literal aspect.</span> 
-</div>
+aspect (see <A HREF="AA-4-2-1.html">4.2.1</A>).</span></div>
+<div class="paranum"><a name="p44.ee">44.ee/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0322-1.TXT">AI12-0322-1</A></I>} 
+<span class="insert5">Clarified that a target name symbol can statically 
+denote an entity if the associated <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+statically denotes an entity. This is necessary so that target names 
+participate in the anti-order-dependence checks of <A HREF="AA-6-4-1.html">6.4.1</A>.</span></div>
+<div class="paranum"><a name="p44.ff">44.ff/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0368-1.TXT">AI12-0368-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0373-1.TXT">AI12-0373-1</A></I>} 
+<span class="insert3">Added wording to define staticness for <SPAN Class="swiss"><A HREF="AA-4-5-9.html#S0156">declare_expression</A></SPAN>s. 
+Also moved &ldquo;statically names&rdquo; definition here and used it 
+in array attribute prefix wording.</span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

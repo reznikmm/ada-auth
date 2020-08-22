@@ -33,9 +33,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,12 +46,12 @@
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
-<A NAME="I1692"></A>A <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+<A NAME="I1694"></A>A <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
 defines a <span class="insert2"><I>derived type</I></span><span class="delete2">&nbsp;new 
 type</span> (and its first subtype) whose characteristics are <I>derived</I> 
 from those of a <span class="insert2">parent type, and possibly from 
 progenitor types</span><span class="delete2"><I>&nbsp;parent type</I></span>. 
-<A NAME="I1693"></A></div>
+<A NAME="I1695"></A></div>
 <div class="paranum"><a name="p1.a">1.a/2</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>A derived type is a type 
 defined in terms of <span class="insert2">one or more other types given 
@@ -64,7 +64,7 @@ A type together with the types derived from it (directly or indirectly)
 form a derivation class.</div>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
-<span class="insert2"><A NAME="I1694"></A><A NAME="I1695"></A>A <I>class 
+<span class="insert2"><A NAME="I1696"></A><A NAME="I1697"></A>A <I>class 
 of types</I> is a set of types that is closed under derivation; that 
 is, if the parent or a progenitor type of a derived type belongs to a 
 class, then so does the derived type. By saying that a particular group 
@@ -82,15 +82,15 @@ class of types is also a category of types.</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
-<SPAN Class="swiss">derived_type_definition</SPAN><A NAME="I1696"></A><A NAME="S0035"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span>[<B>abstract</B>]&nbsp;<span class="insert2">[<B>limited</B>]&nbsp;</span><B>new</B>&nbsp;<I>parent_</I><A NAME="I1697"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;[<span class="insert2">[<B>and</B>&nbsp;<A NAME="I1698"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;</span><A NAME="I1699"></A><SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN>]</div>
+<SPAN Class="swiss">derived_type_definition</SPAN><A NAME="I1698"></A><A NAME="S0035"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span>[<B>abstract</B>]&nbsp;<span class="insert2">[<B>limited</B>]&nbsp;</span><B>new</B>&nbsp;<I>parent_</I><A NAME="I1699"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;[<span class="insert2">[<B>and</B>&nbsp;<A NAME="I1700"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;</span><A NAME="I1701"></A><SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN>]</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
-<A NAME="I1700"></A><A NAME="I1701"></A>The <I>parent_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<A NAME="I1702"></A><A NAME="I1703"></A>The <I>parent_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 defines the <I>parent subtype</I>; its type is the <span class="insert2"><I>parent 
 type</I></span><span class="delete2">&nbsp;parent type</span>. <span class="insert2">The 
 <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
@@ -111,10 +111,10 @@ for the parent type and any of its subcomponents have to precede the
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This restriction does not 
 apply to the ancestor type of a private extension &mdash; see <A HREF="AA-7-3.html">7.3</A>; 
-such a type need not be completely defined prior to the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>. 
+such a type need not be completely defined prior to the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>. 
 However, the restriction does apply to record extensions, so the ancestor 
 type will have to be completely defined prior to the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-corresponding to the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>. 
+corresponding to the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p4.b">4.b</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We originally hoped we could 
@@ -123,7 +123,7 @@ rules for a type derived from an incompletely defined limited type that
 subsequently became nonlimited.&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
-<A NAME="I1702"></A>If there is a <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN>, 
+<A NAME="I1704"></A>If there is a <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN>, 
 the derived type is called a <I>record extension</I> of the parent type. 
 A <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN> 
 shall be provided if and only if the parent type is a tagged type.<span class="insert2">&nbsp;[An <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
@@ -177,7 +177,7 @@ a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></S
 the parent type shall be a limited type.</span><span class="insert3">&nbsp;If the parent type is a tagged formal type, then in addition to the places 
 where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
-unit.<A NAME="I1703"></A></span><span class="insert2"></span>&nbsp;</div>
+unit.<A NAME="I1705"></A></span><span class="insert2"></span>&nbsp;</div>
 <div class="paranum"><a name="p5.g">5.g/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>We allow 
 <B>limited</B> because we don't inherit limitedness from interfaces, 
@@ -208,10 +208,10 @@ body).</span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1704"></A><A NAME="I1705"></A>The first 
+<div class="Normal"><A NAME="I1706"></A><A NAME="I1707"></A>The first 
 subtype of the derived type is unconstrained if a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 is provided in the declaration of the derived type, or if the parent 
-subtype is unconstrained. <A NAME="I1706"></A>Otherwise, the constraint 
+subtype is unconstrained. <A NAME="I1708"></A>Otherwise, the constraint 
 of the first subtype <I>corresponds</I> to that of the parent subtype 
 in the following sense: it is the same as that of the parent subtype 
 except that for a range constraint (implicit or explicit), the value 
@@ -230,7 +230,7 @@ null (see <A HREF="AA-3-10.html">3.10</A>) if and only if the parent
 subtype excludes null.</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0110-1.TXT">AI05-0110-1</A></I>} 
-The <span class="insert3"><I>characteristics</I><A NAME="I1707"></A> 
+The <span class="insert3"><I>characteristics</I><A NAME="I1709"></A> 
 and implicitly declared primitive subprograms</span><span class="delete3">&nbsp;characteristics</span> 
 of the derived type are defined as follows:&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a/3</a></div>
@@ -286,13 +286,13 @@ that are declared for the derived type are as follows:&nbsp;</div>
 <div class="Indented2NestedBulleted">The discriminants specified by a 
 new <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
 if there is one; otherwise, each discriminant of the parent type (implicitly 
-declared in the same order with the same specifications) &mdash; <A NAME="I1708"></A><A NAME="I1709"></A>in 
+declared in the same order with the same specifications) &mdash; <A NAME="I1710"></A><A NAME="I1711"></A>in 
 the latter case, the discriminants are said to be <I>inherited</I>, or 
 if unknown in the parent, are also unknown in the derived type;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Indented2NestedBulleted">Each nondiscriminant component, 
 entry, and protected subprogram of the parent type, implicitly declared 
-in the same order with the same declarations; <A NAME="I1710"></A><A NAME="I1711"></A><A NAME="I1712"></A>these 
+in the same order with the same declarations; <A NAME="I1712"></A><A NAME="I1713"></A><A NAME="I1714"></A>these 
 components, entries, and protected subprograms are said to be <I>inherited</I>; 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
@@ -372,19 +372,19 @@ so they need to be well defined even if hidden by user-defined primitive
 subprograms.&nbsp;</div>
 <div class="paranum"><a name="p17">17/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
-<A NAME="I1713"></A>For each user-defined primitive subprogram (other 
+<A NAME="I1715"></A>For each user-defined primitive subprogram (other 
 than a user-defined equality operator &mdash; see below) of the parent 
 type<span class="insert2">&nbsp;or of a progenitor type</span> that already 
 exists at the place of the <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 there exists a corresponding <I>inherited</I> primitive subprogram of 
-the derived type with the same defining name. <A NAME="I1714"></A>Primitive 
+the derived type with the same defining name. <A NAME="I1716"></A>Primitive 
 user-defined equality operators of the parent type<span class="insert2">&nbsp;and any progenitor types</span> are also inherited by the derived type, 
 except when the derived type is a nonlimited record extension, and the 
 inherited operator would have a profile that is type conformant with 
 the profile of the corresponding predefined equality operator; in this 
 case, the user-defined equality operator is not inherited, but is rather 
 incorporated into the implementation of the predefined equality operator 
-of the record extension (see <A HREF="AA-4-5-2.html">4.5.2</A>). <A NAME="I1715"></A></div>
+of the record extension (see <A HREF="AA-4-5-2.html">4.5.2</A>). <A NAME="I1717"></A></div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>We say &ldquo;...already 
 exists...&rdquo; rather than &ldquo;is visible&rdquo; or &ldquo;has been 
@@ -427,7 +427,7 @@ primitive subprogram of the parent<span class="insert2">&nbsp;or progenitor</spa
 type, after systematic replacement of each subtype of its profile (see 
 <A HREF="AA-6-1.html">6.1</A>) that is of the parent<span class="insert2">&nbsp;or progenitor</span> type<span class="insert3">, other than those subtypes 
 found in the designated profile of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>,</span> 
-with a <I>corresponding subtype</I> of the derived type. <A NAME="I1716"></A>For 
+with a <I>corresponding subtype</I> of the derived type. <A NAME="I1718"></A>For 
 a given subtype of the parent<span class="insert2">&nbsp;or progenitor</span> 
 type, the corresponding subtype of the derived type is defined as follows: 
 </div>
@@ -446,7 +446,7 @@ derived type.</div>
 <div class="Indented2NestedBulleted">If the derived type has a new <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 but is not a record extension, then the corresponding subtype is constrained 
 to those values that when converted to the parent type belong to the 
-given subtype (see <A HREF="AA-4-6.html">4.6</A>). <A NAME="I1717"></A></div>
+given subtype (see <A HREF="AA-4-6.html">4.6</A>). <A NAME="I1719"></A></div>
 <div class="paranum"><a name="p21.a">21.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>An inherited subprogram of an 
 untagged type has an Intrinsic calling convention, which precludes the 
@@ -485,9 +485,9 @@ after the <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definitio
 Otherwise, the inherited subprogram is implicitly declared later or not 
 at all, as explained in <A HREF="AA-7-3-1.html">7.3.1</A>.</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Normal"><A NAME="I1718"></A>A derived type can also be defined 
-by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
-(see <A HREF="AA-7-3.html">7.3</A>) or a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0303">formal_derived_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1720"></A>A derived type can also be defined 
+by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
+(see <A HREF="AA-7-3.html">7.3</A>) or a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0325">formal_derived_type_definition</A></SPAN> 
 (see <A HREF="AA-12-5-1.html">12.5.1</A>). Such a derived type is a partial 
 view of the corresponding full or actual type.</div>
 <div class="paranum"><a name="p25">25</a></div>
@@ -497,7 +497,7 @@ and <A HREF="AA-3-5-6.html">3.5.6</A>).</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Normal"><A NAME="I1719"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1721"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
 creates the derived type and its first subtype, and consists of the elaboration 
 of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 and the <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN>, 
@@ -513,7 +513,7 @@ which aren't elaborated either.</span>&nbsp;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00391.TXT">AI95-00391-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
-<A NAME="I1720"></A>For the execution of a call on an inherited subprogram, 
+<A NAME="I1722"></A>For the execution of a call on an inherited subprogram, 
 a call on the corresponding primitive subprogram of the parent<span class="insert2">&nbsp;or progenitor</span> type is performed; the normal conversion of each 
 actual parameter to the subtype of the corresponding formal parameter 
 (see <A HREF="AA-6-4-1.html">6.4.1</A>) performs any necessary type conversion 
@@ -523,7 +523,7 @@ or in the case of a null extension, extended to the derived type using
 the equivalent of an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
 with the original result as the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 and <B>null record</B> as the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN></span>. 
-<A NAME="I1721"></A></div>
+<A NAME="I1723"></A></div>
 <div class="paranum"><a name="p27.a">27.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00391.TXT">AI95-00391-01</A></I>} 
 If an inherited function returns the derived type, and the type is a 
@@ -534,7 +534,7 @@ overridden) cannot be called except via a dispatching call<span class="insert2">
 See <A HREF="AA-3-9-3.html">3.9.3</A>.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Notes">16&nbsp;&nbsp;<A NAME="I1722"></A>Classes are closed 
+<div class="Notes">16&nbsp;&nbsp;<A NAME="I1724"></A>Classes are closed 
 under derivation &mdash; any class that contains a type also contains 
 its derivatives. Operations available for a given class of types are 
 available for the derived types in that class.</div>
@@ -542,7 +542,7 @@ available for the derived types in that class.</div>
 <div class="Notes">17&nbsp;&nbsp;Evaluating an inherited enumeration 
 literal is equivalent to evaluating the corresponding enumeration literal 
 of the parent type, and then converting the result to the derived type. 
-This follows from their equivalence to parameterless functions. <A NAME="I1723"></A></div>
+This follows from their equivalence to parameterless functions. <A NAME="I1725"></A></div>
 <div class="paranum"><a name="p30">30</a></div>
 <div class="Notes">18&nbsp;&nbsp;A generic subprogram is not a subprogram, 
 and hence cannot be a primitive subprogram and cannot be inherited by 
@@ -619,7 +619,7 @@ type declarations:</I>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p38.a">38.a</a></div>
-<div class="Annotations"><A NAME="I1724"></A>When deriving from a (nonprivate, 
+<div class="Annotations"><A NAME="I1726"></A>When deriving from a (nonprivate, 
 nonderived) type in the same visible part in which it is defined, if 
 a predefined operator had been overridden prior to the derivation, the 
 derived type will inherit the user-defined operator rather than the predefined 
@@ -629,7 +629,7 @@ of any predefined operators.</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p38.b">38.b</a></div>
-<div class="Annotations"><A NAME="I1725"></A>When deriving from a (nonprivate, 
+<div class="Annotations"><A NAME="I1727"></A>When deriving from a (nonprivate, 
 nonderived) type in the same visible part in which it is defined, a primitive 
 subprogram of the parent type declared before the derived type will be 
 inherited by the derived type. This can cause upward incompatibilities 
@@ -654,7 +654,7 @@ in cases like this:&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p38.d">38.d</a></div>
-<div class="Annotations"><A NAME="I1726"></A>The syntax for a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+<div class="Annotations"><A NAME="I1728"></A>The syntax for a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
 is amended to include an optional <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN> 
 (see <A HREF="AA-3-9-1.html">3.9.1</A>).</div>
 <div class="paranum"><a name="p38.e">38.e</a></div>
@@ -683,7 +683,7 @@ concepts are similar, but not the same.</span>&nbsp;</div>
 <div class="paranum"><a name="p38.j">38.j/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
-<span class="insert2"><A NAME="I1727"></A>A derived type may inherit 
+<span class="insert2"><A NAME="I1729"></A>A derived type may inherit 
 from multiple (interface) progenitors, as well as the parent type &mdash; 
 see <A HREF="AA-3-9-4.html">3.9.4</A>, &ldquo;<A HREF="AA-3-9-4.html">Interface 
 Types</A>&rdquo;.</span></div>
@@ -709,7 +709,7 @@ in Ada 95).</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p38.n">38.n/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0096-1.TXT">AI05-0096-1</A></I>} 
-<span class="insert3"><A NAME="I1728"></A><B>Correction:</B> Added a 
+<span class="insert3"><A NAME="I1730"></A><B>Correction:</B> Added a 
 (re)check that limited type extensions never are derived from nonlimited 
 types in generic private parts. This is disallowed as it would make it 
 possible to pass a limited object to a nonlimited class-wide type, which 
@@ -731,7 +731,7 @@ anonymous access-to-subprogram types don't get modified on derivation.</span>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

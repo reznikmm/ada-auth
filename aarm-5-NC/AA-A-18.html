@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-17-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -51,7 +51,7 @@ A variety of sequence and associative containers are provided. Each container
 includes a <I>cursor</I> type. A cursor is a reference to an element 
 within a container. Many operations on cursors are common to all of the 
 containers. A cursor referencing an element in a container is considered 
-to be overlapping only with the element itself.<A NAME="I7650"></A> <A NAME="I7651"></A></div>
+to be overlapping only with the element itself.<A NAME="I7952"></A> <A NAME="I7953"></A></div>
 <div class="paranum"><a name="p2.a">2.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
 The last sentence is intended to clarify that operations that just use 
@@ -64,6 +64,27 @@ A cursor is not considered to overlap with other elements of the associated
 container, thus parallel operations involving a set of cursors each operating 
 on mutually exclusive sets of elements from the same container are expected 
 to work.&nbsp;</div>
+<div class="paranum"><a name="p2.1">2.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+Some operations of the language-defined child units of Ada.Containers 
+have access-to-subprogram parameters. To ensure such operations are well-defined, 
+they guard against certain actions by the designated subprogram. An action 
+on a container that might add or remove an element is considered to <I>tamper 
+with cursors</I>,<A NAME="I7954"></A> and these are prohibited during 
+all such operations. An action on a container that might replace an element 
+with one of a different size is considered to <I>tamper with elements</I>, 
+and these are prohibited during certain of such operations.<A NAME="I7955"></A> 
+The details of the specific actions that are considered to tamper with 
+cursors or elements are defined for each child unit of Ada.Containers.</div>
+<div class="paranum"><a name="p2.2">2.2/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+Several of the language-defined child units of Ada.Containers include 
+a nested package named Stable, which provides a view of a container that 
+prohibits any operations that would tamper with elements. By using a 
+Stable view for manipulating a container, the number of tampering checks 
+performed while performing the operations can be reduced. The details 
+of the Stable subpackage are defined separately for each child unit of 
+Ada.Containers that includes such a nested package.</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Within this clause we provide Implementation Advice for the desired average 
@@ -72,7 +93,7 @@ advice is expressed using the Landau symbol <I>O</I>(X). Presuming f
 is some function of a length parameter N and t(N) is the time the operation 
 takes (on average or worst case, as specified) for the length N, a complexity 
 of <I>O</I>(f(N)) means that there exists a finite A such that for any 
-N, t(N)/f(N) &lt; A. <A NAME="I7652"></A><A NAME="I7653"></A></div>
+N, t(N)/f(N) &lt; A. <A NAME="I7956"></A><A NAME="I7957"></A></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Of course, an implementation 
 can do better than a specified <I>O</I>(f(N)): for example, <I>O</I>(1) 
@@ -80,7 +101,7 @@ meets the requirements for <I>O</I>(log N).</div>
 <div class="paranum"><a name="p3.b">3.b/2</a></div>
 <div class="Annotations">This concept seems to have as many names as 
 there are authors. We used &ldquo;Landau symbol&rdquo; because that's 
-what our reference does. But we'd also seen this referred as big-O notation<A NAME="I7654"></A> 
+what our reference does. But we'd also seen this referred as big-O notation<A NAME="I7958"></A> 
 (sometimes written as <I>big-oh</I>), and as Bachmann notation. Whatever 
 the name, it always has the above definition.&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
@@ -93,7 +114,7 @@ M, t(N)/f(N) &lt; D.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
 When a formal function is used to provide an ordering for a container, 
 it is generally required to define a strict weak ordering. A function 
-&quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7655"></A> 
+&quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7959"></A> 
 if it is irreflexive, asymmetric, transitive, and in addition, if <I>x</I> 
 &lt; <I>y</I> for any values <I>x</I> and <I>y</I>, then for all other 
 values <I>z</I>, (<I>x</I> &lt; <I>z</I>) or (<I>z</I> &lt; <I>y</I>).</div>
@@ -231,7 +252,7 @@ We don't try to state this formally in most cases, because it is hard
 to define precisely what is and is not allowed behavior.&nbsp;</div>
 <div class="paranum"><a name="p5.v">5.v/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>When this clause 
-says that the behavior of something is unspecified<A NAME="I7656"></A>, 
+says that the behavior of something is unspecified<A NAME="I7960"></A>, 
 we really mean that any result of executing Ada code short of erroneous 
 execution is allowed. We do not mean that memory not belonging to the 
 parameters of the operation can be trashed. When we mean to allow erroneous 
@@ -253,7 +274,7 @@ These subprograms are those corresponding (in the sense of the copying
 described in subclause <A HREF="AA-12-3.html">12.3</A>) to subprograms 
 that have formal parameters of a generic formal indefinite type and that 
 are identified as performing indefinite insertion in the subclause defining 
-the generic package.<A NAME="I7657"></A></div>
+the generic package.<A NAME="I7961"></A></div>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
 If a subprogram performs indefinite insertion, then certain run-time 
@@ -268,7 +289,7 @@ for a given parameter are those checks explicitly specified in subclause
 evaluation of an initialized allocator whose access type is declared 
 immediately within the instance, where:</div>
 <div class="paranum"><a name="p8">8/4</a></div>
-<div class="Bulleted">the value of the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+<div class="Bulleted">the value of the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 is that of the parameter; and</div>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Bulleted">the designated subtype of the access type is the 
@@ -329,34 +350,94 @@ the entire capacity of the container when it is created. There is no
 such restriction on the implementation of the &quot;normal&quot; containers; 
 these can be handled in any way convenient to the implementation &mdash; 
 in particular, node reuse is allowed.&nbsp;</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+For an instance <I>I</I> of a container package with a container type 
+<I>C</I>, the specific type <I>T</I> of the object returned from a function 
+that returns an object of an iterator interface, as well as the primitive 
+operations of <I>T</I>, shall be nonblocking. The Global aspect specified 
+for <I>T</I> and the primitive operations of <I>T</I> shall be <TT>(<B>in 
+all</B>, <B>out synchronized</B>)</TT> or a specification that allows 
+access to fewer global objects.</div>
+<div class="paranum"><a name="p12.a">12.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This requires that 
+the traversal and iteration operations of a container do not create, 
+destroy, or assign any objects of a formal type of <I>I</I>, nor call 
+any formal subprograms of <I>I</I>. Those objects and subprograms might 
+be blocking (depending on the actual parameters). We put similar requirements 
+on the individual traversal operations in the container package definitions. 
+</div>
+<div class="paranum"><a name="p12.b">12.b/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>These requirements allows users 
+to use container iterators inside of parallel constructs, regardless 
+of the actual parameters to the instantiation. If such an iterator allowed 
+blocking, it would be illegal inside of a parallel construct (see <A HREF="AA-9-5.html">9.5</A>). 
+If such an iterator allowed writing of unsynchronized global objects, 
+it would be illegal when the default conflict checking policy is in effect 
+(see <A HREF="AA-9-10-1.html">9.10.1</A>). These requirements include 
+sequential iterators; the iterator does not need to appear in a parallel 
+loop to trigger these requirements.&nbsp;</div>
+<div class="paranum"><a name="p12.c">12.c/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We have to give these requirements 
+as a text rule, as there is no place to declare suitable aspects. The 
+specific type of a container iterator is declared by the implementation 
+and is not part of the visible specification (iterator functions just 
+return a value of a class-wide type). The iterator interface itself cannot 
+impose such a requirement since it needs to be able to work with user-defined 
+types that do need to allow blocking. We give this as a global requirement 
+to avoid duplication.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
-<div class="paranum"><a name="p11.c">11.c/3</a></div>
+<div class="paranum"><a name="p12.d">12.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I7658"></A>This subclause is new. It just provides an introduction 
+<A NAME="I7962"></A>This subclause is new. It just provides an introduction 
 to the following subclauses.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
-<div class="paranum"><a name="p11.d">11.d/3</a></div>
+<div class="paranum"><a name="p12.e">12.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
 <B>Correction:</B> Added a definition of strict weak ordering.&nbsp;</div>
 
+<H4 Class="centered">Incompatibilities With Ada 2012</H4>
+<div class="paranum"><a name="p12.f">12.f/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
+<A NAME="I7963"></A>A number of new subprograms, types, and even a nested 
+package were added to Containers.Hashed_Maps to better support contracts 
+and stable views. If an instance of Containers.Hashed_Maps is referenced 
+in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
+and an entity <I>E</I> with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+as a new entity in Containers.Hashed_Maps is defined in a package that 
+is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
+the entity <I>E</I> may no longer be use-visible, resulting in errors. 
+This should be rare and is easily fixed if it does occur.&nbsp;</div>
+
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p11.e">11.e/5</a></div>
+<div class="paranum"><a name="p12.g">12.g/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
-<A NAME="I7659"></A><B>Correction:</B> We now say that a cursor only 
+<A NAME="I7964"></A><B>Correction:</B> We now say that a cursor only 
 overlaps with the element it designates, rather than with the whole container. 
 This allows some reading operations to operate on the container in parallel 
 without separate synchronization.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p11.f">11.f/4</a></div>
+<div class="paranum"><a name="p12.h">12.h/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0035-1.TXT">AI05-0035-1</A></I>} 
 <B>Corrigendum:</B> Added a definition of &ldquo;performs indefinite 
 insertion&rdquo;. This is used in other subclauses and any resulting 
 inconsistencies are documented there.</div>
-<div class="paranum"><a name="p11.g">11.g/5</a></div>
+<div class="paranum"><a name="p12.i">12.i/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+Moved the basic description of tampering checks here, to cut duplication 
+in description of the individual containers. Added a description of stable 
+views of containers.</div>
+<div class="paranum"><a name="p12.j">12.j/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+Added a global requirement that iterators returned from containers are 
+nonblocking if the instance is nonblocking.</div>
+<div class="paranum"><a name="p12.k">12.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0258-1.TXT">AI12-0258-1</A></I>} 
 <B>Correction:</B> Defined when objects are created and finalized for 
 Bounded and Indefinite containers, so that these can be used reliably 
@@ -366,7 +447,7 @@ was previously unspecified; code depending on specific behavior was wrong.
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-17-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

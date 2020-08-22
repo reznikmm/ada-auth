@@ -31,9 +31,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -42,131 +42,136 @@
 <HR>
 <H1>13.5.1 Record Representation Clauses</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 specifies the storage representation of records and record extensions, 
 that is, the order, position, and size of components (including discriminants, 
-if any). <A NAME="I5518"></A></div>
+if any). <A NAME="I5774"></A></div>
 
 <H4 Class="centered">Syntax</H4>
-<div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I5519"></A><A NAME="S0330"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5520"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>use</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I5521"></A><SPAN Class="swiss"><A HREF="RM-J-8.html#S0341">mod_clause</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I5522"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Indented1"><SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I5775"></A><A NAME="S0352"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5776"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>use</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I5777"></A><SPAN Class="swiss"><A HREF="RM-J-8.html#S0372">mod_clause</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I5778"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B><span class="insert5">&nbsp;[<A NAME="I5779"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I5523"></A><A NAME="S0331"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I5524"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I5525"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I5526"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I5527"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I5780"></A><A NAME="S0353"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I5781"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I5782"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I5783"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I5784"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I5528"></A><A NAME="S0332"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5529"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I5785"></A><A NAME="S0354"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5786"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I5530"></A><A NAME="S0333"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5531"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I5787"></A><A NAME="S0355"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5788"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I5532"></A><A NAME="S0334"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5533"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I5789"></A><A NAME="S0356"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5790"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN></div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
+<div class="Indented1"><span class="insert5">If a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
+appears at the end of the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN>, 
+it shall repeat the <I>first_subtype_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>.</span> 
+</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5534"></A><A NAME="I5535"></A><A NAME="I5536"></A><A NAME="I5537"></A>Each 
-<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>, 
-and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
+<div class="Normal"><A NAME="I5791"></A><A NAME="I5792"></A><A NAME="I5793"></A><A NAME="I5794"></A>Each 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
 is expected to be of any integer type.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal">The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+<div class="Normal">The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 shall denote a specific <span class="delete2">nonlimited&nbsp;</span>record 
 or record extension subtype.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">If the <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+<div class="Normal">If the <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 shall denote a component of the type. For a record extension, the component 
 shall not be inherited, and shall not be a discriminant that corresponds 
-to a discriminant of the parent type. If the <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+to a discriminant of the parent type. If the <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 has an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 shall denote either the declaration of the type or a component of the 
 type, and the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 shall denote an implementation-defined implicit component of the type.</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>, 
-and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
-shall be static expressions. The value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN> 
-shall be nonnegative. The value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
-shall be no less than <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN> 
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
+shall be static expressions. The value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN> 
+shall be nonnegative. The value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
+shall be no less than <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN> 
 &ndash; 1.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">If 
 the nondefault bit ordering applies to the type, then either:</span> 
 </div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
-<div class="Bulleted"><span class="insert2">the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
+<div class="Bulleted"><span class="insert2">the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
 shall be less than the size of the largest machine scalar; or</span></div>
 <div class="paranum"><a name="p10.3">10.3/2</a></div>
-<div class="Bulleted"><span class="insert2">the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN> 
-shall be zero and the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
+<div class="Bulleted"><span class="insert2">the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN> 
+shall be zero and the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
 + 1 shall be a multiple of System.Storage_Unit.</span>&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal">At most one <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN> 
+<div class="Normal">At most one <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 is allowed for each component of the type, including for each discriminant 
-(<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>s 
+(<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>s 
 may be given for some, all, or none of the components). Storage places 
 within a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN> 
 shall not overlap, unless they are for components in distinct <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0072">variant</A></SPAN>s 
 of the same <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN>.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">A name that denotes a component of a type is not 
-allowed within a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
-for the type, except as the <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>. 
+allowed within a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
+for the type, except as the <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
-(without the <SPAN Class="swiss"><A HREF="RM-J-8.html#S0341">mod_clause</A></SPAN>) 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
+(without the <SPAN Class="swiss"><A HREF="RM-J-8.html#S0372">mod_clause</A></SPAN>) 
 specifies the layout.<span class="delete2">&nbsp;The storage place attributes 
 (see <A HREF="RM-13-5-2.html">13.5.2</A>) are taken from the values of 
-the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>, 
-and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
-expressions after normalizing those values so that <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN> 
-is less than Storage_Unit.</span><span class="insert3"><span class="delete2"><A NAME="I5538"></A><A NAME="I5539"></A></span></span><span class="delete2"></span></div>
+the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
+expressions after normalizing those values so that <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN> 
+is less than Storage_Unit.</span><span class="insert3"><span class="delete2"><A NAME="I5795"></A><A NAME="I5796"></A></span></span><span class="delete2"></span></div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert2">If the default bit ordering 
-applies to the type, the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>, 
-and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
-of each <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN> 
+applies to the type, the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
+of each <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 directly specify the position and size of the corresponding component.</span></div>
 <div class="paranum"><a name="p13.2">13.2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">If 
 the nondefault bit ordering applies to the type</span><span class="insert3">,</span><span class="insert2">&nbsp;then the layout is determined as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p13.3">13.3/2</a></div>
-<div class="Bulleted"><span class="insert2">the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>s 
-for which the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
+<div class="Bulleted"><span class="insert2">the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>s 
+for which the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
 is greater than or equal to the size of the largest machine scalar directly 
 specify the position and size of the corresponding component;</span></div>
 <div class="paranum"><a name="p13.4">13.4/2</a></div>
-<div class="Bulleted"><span class="insert2">for other <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>s, 
-all of the components having the same value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN> 
+<div class="Bulleted"><span class="insert2">for other <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>s, 
+all of the components having the same value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN> 
 are considered to be part of a single machine scalar, located at that 
-<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>; 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN>; 
 this machine scalar has a size which is the smallest machine scalar size 
-larger than the largest <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
-for all <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>s 
-at that <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>; 
-the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
-of each <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN> 
+larger than the largest <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
+for all <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>s 
+at that <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
+of each <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 are then interpreted as bit offsets in this machine scalar.</span>&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 for a record extension does not override the layout of the parent part; 
 if the layout was specified for the parent type, it is inherited by the 
 record extension.&nbsp;</div>
@@ -178,21 +183,21 @@ components (for example, one containing the offset of another component).
 An implementation may generate names that denote such implementation-defined 
 components; such names shall be implementation-defined <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s. 
 An implementation may allow such implementation-defined names to be used 
-in <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN>s. 
-An implementation can restrict such <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>s 
+in <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN>s. 
+An implementation can restrict such <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>s 
 in any manner it sees fit.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal">If a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 is given for an untagged derived type, the storage place attributes for 
 all of the components of the derived type may differ from those of the 
 corresponding components of the parent type, even for components whose 
-storage place is not specified explicitly in the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN>. 
+storage place is not specified explicitly in the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5540"></A>The 
-recommended level of support for <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN>s 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5797"></A>The 
+recommended level of support for <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN>s 
 is:&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/2</a></div>
 <div class="Bulleted"><span class="insert2">An implementation should 
@@ -219,16 +224,16 @@ be supported.</div>
 the tag field of a tagged type, and disallow other components from overlapping 
 that place.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted">An implementation need not support a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN> 
+<div class="Bulleted">An implementation need not support a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 for a component of an extension part if the storage place is not after 
 the storage places of all components of the parent type, whether or not 
 those storage places had been specified.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Notes">15&nbsp;&nbsp;If no <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN> 
+<div class="Notes">15&nbsp;&nbsp;If no <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 is given for a component, then the choice of the storage place for the 
-component is left to the implementation. If <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>s 
-are given for all components, the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+component is left to the implementation. If <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>s 
+are given for all components, the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 completely specifies the representation of the type and will be obeyed 
 exactly by the implementation.&nbsp;</div>
 
@@ -274,7 +279,7 @@ the layout of a record type:</I>&nbsp;</div>
 <B>for</B>&nbsp;Program_Status_Word'Alignment&nbsp;<B>use</B>&nbsp;8;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p31">31</a></div>
-<div class="Notes">16&nbsp;&nbsp;<I>Note on the example:</I> The <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+<div class="Notes">16&nbsp;&nbsp;<I>Note on the example:</I> The <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 defines the record layout. The Size clause guarantees that (at least) 
 eight storage elements are used for objects of the type. The Alignment 
 clause guarantees that aliased, imported, or exported objects of the 
@@ -282,7 +287,7 @@ type will have addresses divisible by eight.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,7 +45,7 @@ characteristics that can be used directly by outside program units (that
 is, the logical properties) from other characteristics whose direct use 
 is confined to the package (the details of the definition of the type 
 itself). See <A HREF="AA-3-9-1.html">3.9.1</A> for an overview of type 
-extensions. <A NAME="I4049"></A><A NAME="I4050"></A><A NAME="I4051"></A><A NAME="I4052"></A><A NAME="I4053"></A>]</div>
+extensions. <A NAME="I4246"></A><A NAME="I4247"></A><A NAME="I4248"></A><A NAME="I4249"></A><A NAME="I4250"></A>]</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a</a></div>
@@ -62,24 +62,24 @@ be implemented in terms of dispatching).&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">private_type_declaration</SPAN><A NAME="I4054"></A><A NAME="S0210"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4055"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4056"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4057"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">private_type_declaration</SPAN><A NAME="I4251"></A><A NAME="S0232"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4252"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4253"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4254"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00443.TXT">AI95-00443-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">private_extension_declaration</SPAN><A NAME="I4058"></A><A NAME="S0211"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4059"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4060"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<I>ancestor_</I><A NAME="I4061"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>and</B>&nbsp;<A NAME="I4062"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;<B>with&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4063"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">private_extension_declaration</SPAN><A NAME="I4255"></A><A NAME="S0233"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4256"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4257"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<I>ancestor_</I><A NAME="I4258"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>and</B>&nbsp;<A NAME="I4259"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;<B>with&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4260"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I4064"></A><A NAME="I4065"></A>A <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I4261"></A><A NAME="I4262"></A>A <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 declares a <I>partial view</I> of the type; such a declaration is allowed 
 only as a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN> 
 of the visible part of a package, and it requires a completion, which 
@@ -106,10 +106,10 @@ Declarations</A>&rdquo;, as all types now have them.&nbsp;</div>
 <div class="Normal">[A type shall be completely defined before it is 
 frozen (see <A HREF="AA-3-11-1.html">3.11.1</A> and <A HREF="AA-13-14.html">13.14</A>). 
 Thus, neither the declaration of a variable of a partial view of a type, 
-nor the creation by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+nor the creation by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 of an object of the partial view are allowed before the full declaration 
 of the type. Similarly, before the full declaration, the name of the 
-partial view cannot be used in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
+partial view cannot be used in a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN> 
 or in a representation item.]&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>This rule is stated officially 
@@ -245,7 +245,7 @@ the parent:&nbsp;</div>
 This view is always untagged, so T'Class is illegal, it would be illegal 
 to extend T, and so forth. The component name X is never visible for 
 this view, although the component is still there &mdash; one can get 
-one's hands on it via a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>.</div>
+one's hands on it via a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>.</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00396.TXT">AI95-00396-01</A></I>} 
 If a full type has a partial view that is tagged, then:&nbsp;</div>
@@ -294,10 +294,11 @@ the following example:&nbsp;</div>
 <div class="SmallExamples"><B>with</B>&nbsp;P_Client;<BR>
 <B>package&nbsp;body</B>&nbsp;P&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;...</div>
-<div class="paranum"><a name="p7.w">7.w/2</a></div>
-<div class="SmallExamples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Bar&nbsp;(X&nbsp;:&nbsp;T1'Class)&nbsp;<B>is</B><BR>
+<div class="paranum"><a name="p7.w">7.w/5</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Bar&nbsp;(X&nbsp;:&nbsp;T1'Class)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pkg.Foo&nbsp;(X);&nbsp;--&nbsp;<SPAN Class="roman"><I>should&nbsp;call&nbsp;Foo&nbsp;#1&nbsp;or&nbsp;an&nbsp;override&nbsp;thereof</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pkg.Foo&nbsp;(Pkg.Ifc'Class&nbsp;(X));&nbsp;--&nbsp;<SPAN Class="roman"><I>should&nbsp;call&nbsp;Foo&nbsp;#1&nbsp;or&nbsp;an&nbsp;override&nbsp;thereof</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>;</div>
 <div class="paranum"><a name="p7.x">7.x/2</a></div>
 <div class="SmallExamples"><B>begin</B><BR>
@@ -348,33 +349,33 @@ to look in the private part to see if the type is an interface (remember
 that limitedness of interfaces is never inherited, while it is inherited 
 from other types).&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I4066"></A>The <I>ancestor subtype</I> of 
-a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I4263"></A>The <I>ancestor subtype</I> of 
+a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 is the subtype defined by the <I>ancestor_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>; 
 the ancestor type shall be a specific tagged type. The full view of a 
 private extension shall be derived (directly or indirectly) from the 
 ancestor type. In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), the requirement that the 
 ancestor be specific applies also in the private part of an instance 
-of a generic unit.<A NAME="I4067"></A>&nbsp;</div>
+of a generic unit.<A NAME="I4264"></A>&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This rule allows the full view 
 to be defined through several intermediate derivations, possibly from 
-a series of types produced by <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>s. 
+a series of types produced by <SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00443.TXT">AI95-00443-01</A></I>} 
-If the reserved word <B>limited</B> appears in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
+If the reserved word <B>limited</B> appears in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
 the ancestor type shall be a limited type. If the reserved word <B>synchronized</B> 
-appears in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
+appears in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>, 
 the ancestor type shall be a limited interface.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">If the declaration of a partial view includes a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 shall have a fully conforming [(explicit)] <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 [(see <A HREF="AA-6-3-1.html">6.3.1</A>, &ldquo;<A HREF="AA-6-3-1.html">Conformance 
-Rules</A>&rdquo;)]. <A NAME="I4068"></A>[The ancestor subtype may be 
+Rules</A>&rdquo;)]. <A NAME="I4265"></A>[The ancestor subtype may be 
 unconstrained; the parent subtype of the full view is required to be 
 constrained (see <A HREF="AA-3-7.html">3.7</A>).]&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
@@ -423,7 +424,7 @@ view in a way that conflicts with the constraint on the full view.&nbsp;</div>
 If the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 for a private extension includes a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 then the reserved word <B>limited</B> shall appear in the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-if and only if it also appears in the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>. 
+if and only if it also appears in the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p10.b">10.b/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
@@ -444,7 +445,7 @@ shall define a definite subtype.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">If the ancestor subtype of a private extension has 
 constrained discriminants, then the parent subtype of the full view shall 
-impose a statically matching constraint on those discriminants. <A NAME="I4069"></A></div>
+impose a statically matching constraint on those discriminants. <A NAME="I4266"></A></div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If the parent type of the 
 full view is not the ancestor type, but is rather some descendant thereof, 
@@ -487,15 +488,15 @@ on discriminants are not static.)</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I4070"></A>A <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN> 
-declares a private type and its first subtype. <A NAME="I4071"></A>Similarly, 
-a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I4267"></A>A <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN> 
+declares a private type and its first subtype. <A NAME="I4268"></A>Similarly, 
+a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 declares a private extension and its first subtype.&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I4072"></A>A <I>package-private 
-type</I> is one declared by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN>; 
-that is, a private type other than a generic formal private type. <A NAME="I4073"></A>Similarly, 
-a <I>package-private extension</I> is one declared by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>. 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I4269"></A>A <I>package-private 
+type</I> is one declared by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN>; 
+that is, a private type other than a generic formal private type. <A NAME="I4270"></A>Similarly, 
+a <I>package-private extension</I> is one declared by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>. 
 These terms are not used in the RM95 version of this document.&nbsp;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
@@ -530,15 +531,15 @@ record extensions than for nonabstract private extensions (see <A HREF="AA-3-9-3
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I4074"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN> 
-creates a partial view of a type. <A NAME="I4075"></A>The elaboration 
-of a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I4271"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN> 
+creates a partial view of a type. <A NAME="I4272"></A>The elaboration 
+of a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 elaborates the <I>ancestor_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 and creates a partial view of a type.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Notes">5&nbsp;&nbsp;The partial view of a type as declared 
-by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN> 
+by a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN> 
 is defined to be a composite view (in <A HREF="AA-3-2.html">3.2</A>). 
 The full view of the type might or might not be composite. A private 
 extension is also composite, as is its full view.</div>
@@ -549,7 +550,7 @@ is a way of preventing clients from creating uninitialized objects of
 the type; they are then forced to initialize each object by calling some 
 operation declared in the visible part of the package.&nbsp;</div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I4076"></A>Packages 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I4273"></A>Packages 
 with private types are analogous to generic packages with formal private 
 types, as follows: The declaration of a package-private type is like 
 the declaration of a formal private type. The visible part of the package 
@@ -579,14 +580,14 @@ private type.</div>
 <div class="paranum"><a name="p19.f">19.f</a></div>
 <div class="Annotations">This analogy breaks down in one respect: a generic 
 actual subtype is a subtype, whereas the full view for a private type 
-is always a new type. (We considered allowing the completion of a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN> 
+is always a new type. (We considered allowing the completion of a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN> 
 to be a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>, 
 but the semantics just won't work.) This difference is behind the fact 
 that a generic actual type can be class-wide, whereas the completion 
 of a private type always declares a specific type.&nbsp;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401</A></I>} 
-The ancestor type specified in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+The ancestor type specified in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 and the parent type specified in the corresponding declaration of a record 
 extension given in the private part need not be the same. If the ancestor 
 type is not an interface type, the parent type of the full view can be 
@@ -598,10 +599,10 @@ from the corresponding primitive subprogram of the parent type of the
 full view. See <A HREF="AA-3-9-2.html">3.9.2</A>.</div>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
 <div class="Notes">8&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401</A></I>} 
-If the ancestor type specified in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+If the ancestor type specified in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 is an interface type, the parent type can be any type so long as the 
 full view is a descendant of the ancestor type. The progenitor types 
-specified in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN> 
+specified in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN> 
 and the progenitor types specified in the corresponding declaration of 
 a record extension given in the private part need not be the same &mdash; 
 the only requirement is that the private extension and the record extension 
@@ -622,7 +623,7 @@ private extension declaration:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p24.a">24.a</a></div>
-<div class="Annotations"><A NAME="I4077"></A>The syntax for a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN> 
+<div class="Annotations"><A NAME="I4274"></A>The syntax for a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN> 
 is augmented to allow the reserved word <B>tagged</B>.</div>
 <div class="paranum"><a name="p24.b">24.b</a></div>
 <div class="Annotations">In Ada 83, a private type without discriminants 
@@ -654,7 +655,7 @@ is a private extension.&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00396.TXT">AI95-00396-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
-<A NAME="I4078"></A>Added <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
+<A NAME="I4275"></A>Added <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
 to private extensions to support interfaces and multiple inheritance 
 (see <A HREF="AA-3-9-4.html">3.9.4</A>).</div>
 <div class="paranum"><a name="p24.e">24.e/2</a></div>
@@ -672,9 +673,9 @@ as the ancestor of a synchronized type (we do not allow hiding of synchronizatio
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p24.g">24.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I4079"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN> 
-and a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>. 
+<A NAME="I4276"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0232">private_type_declaration</A></SPAN> 
+and a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0233">private_extension_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -686,7 +687,7 @@ inherit characteristics (see <A HREF="AA-12-5-1.html">12.5.1</A>).&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

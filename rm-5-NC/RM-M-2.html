@@ -21,9 +21,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-M-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -32,8 +32,8 @@
 <HR>
 <H1>M.2 Implementation-Defined Characteristics</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I9180"></A>The Ada language allows for certain 
-machine dependences in a controlled manner. <A NAME="I9181"></A>Each 
+<div class="Normal"><A NAME="I9737"></A>The Ada language allows for certain 
+machine dependences in a controlled manner. <A NAME="I9738"></A>Each 
 Ada implementation must document all implementation-defined characteristics: 
 </div>
 <div class="paranum"><a name="p2">2/2</a></div>
@@ -47,7 +47,7 @@ Advice</A>&rdquo; for a listing. See <A HREF="RM-1-1-2.html">1.1.2</A>(37).</div
 <div class="Bulleted">Variations from the standard that are impractical 
 to avoid given the implementation's execution environment. See <A HREF="RM-1-1-3.html">1.1.3</A>(6).</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted">Which <SPAN Class="swiss"><A HREF="RM-13-8.html#S0335">code_statement</A></SPAN>s 
+<div class="Bulleted">Which <SPAN Class="swiss"><A HREF="RM-13-8.html#S0357">code_statement</A></SPAN>s 
 cause external interactions. See <A HREF="RM-1-1-3.html">1.1.3</A>(10).</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Bulleted">The coded representation for the text of an Ada 
@@ -71,14 +71,6 @@ length. See <A HREF="RM-2-2.html">2.2</A>(14).</div>
 <div class="Bulleted">The message string associated with the Assertion_Error 
 exception raised by the failure of a predicate check if there is no applicable 
 Predicate_Failure aspect. See <A HREF="RM-3-2-4.html">3.2.4</A>(31).</div>
-<div class="paranum"><a name="p11.2">11.2/2</a></div>
-<div class="Bulleted">The sequence of characters of the value returned 
-by S'Wide_Image when some of the graphic characters of S'Wide_Wide_Image 
-are not defined in Wide_Character. See <A HREF="RM-3-5.html">3.5</A>(30/3).</div>
-<div class="paranum"><a name="p12">12/2</a></div>
-<div class="Bulleted">The sequence of characters of the value returned 
-by S'Image when some of the graphic characters of S'Wide_Wide_Image are 
-not defined in Character. See <A HREF="RM-3-5.html">3.5</A>(37/3).</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Bulleted">The predefined integer types declared in Standard. 
 See <A HREF="RM-3-5-4.html">3.5.4</A>(25).</div>
@@ -102,7 +94,7 @@ See <A HREF="RM-3-5-9.html">3.5.9</A>(8/2).</div>
 are supported for fixed point types. See <A HREF="RM-3-5-9.html">3.5.9</A>(10).</div>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Bulleted">The result of Tags.Wide_Wide_Expanded_Name for 
-types declared within an unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0176">block_statement</A></SPAN>. 
+types declared within an unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0191">block_statement</A></SPAN>. 
 See <A HREF="RM-3-9.html">3.9</A>(10).</div>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
 <div class="Bulleted">The sequence of characters of the value returned 
@@ -111,9 +103,28 @@ of the graphic characters of Tags.Wide_Wide_Expanded_Name are not defined
 in Character (respectively, Wide_Character). See <A HREF="RM-3-9.html">3.9</A>(10.1/2).</div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="Bulleted">Implementation-defined attributes. See <A HREF="RM-4-1-4.html">4.1.4</A>(12/1).</div>
-<div class="paranum"><a name="p21.1">21.1/2</a></div>
+<div class="paranum"><a name="p21.1">21.1/5</a></div>
+<div class="Bulleted">The value of the parameter to Empty for some <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0123">container_aggregate</A></SPAN>s. 
+See <A HREF="RM-4-3-5.html">4.3.5</A>(40).</div>
+<div class="paranum"><a name="p21.2">21.2/5</a></div>
+<div class="Bulleted">The maximum number of chunks for a parallel reduction 
+expression without a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>. 
+See <A HREF="RM-4-5-10.html">4.5.10</A>(22).</div>
+<div class="paranum"><a name="p21.3">21.3/2</a></div>
 <div class="Bulleted">Rounding of real static expressions which are exactly 
 half-way between two machine numbers. See <A HREF="RM-4-9.html">4.9</A>(38/2).</div>
+<div class="paranum"><a name="p21.4">21.4/5</a></div>
+<div class="Bulleted">The maximum number of chunks for a parallel generalized 
+iterator without a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>. 
+See <A HREF="RM-5-5-2.html">5.5.2</A>(10).</div>
+<div class="paranum"><a name="p21.5">21.5/5</a></div>
+<div class="Bulleted">The number of chunks for an array component iterator. 
+See <A HREF="RM-5-5-2.html">5.5.2</A>(11).</div>
+<div class="paranum"><a name="p21.6">21.6/5</a></div>
+<div class="Bulleted">Any extensions of the Global aspect. See <A HREF="RM-6-1-2.html">6.1.2</A>(41).</div>
+<div class="paranum"><a name="p21.7">21.7/5</a></div>
+<div class="Bulleted">Any extensions of the Default_Initial_Condition 
+aspect. See <A HREF="RM-7-3-3.html">7.3.3</A>(10).</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Bulleted">Any implementation-defined time types. See <A HREF="RM-9-6.html">9.6</A>(6/3).</div>
 <div class="paranum"><a name="p23">23</a></div>
@@ -125,8 +136,8 @@ See <A HREF="RM-9-6.html">9.6</A>(20).</div>
 <div class="Bulleted">The time zone used for package Calendar operations. 
 See <A HREF="RM-9-6.html">9.6</A>(24/2).</div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Bulleted">Any limit on <SPAN Class="swiss"><A HREF="RM-9-6.html#S0245">delay_until_statement</A></SPAN>s 
-of <SPAN Class="swiss"><A HREF="RM-9-7.html#S0247">select_statement</A></SPAN>s. 
+<div class="Bulleted">Any limit on <SPAN Class="swiss"><A HREF="RM-9-6.html#S0267">delay_until_statement</A></SPAN>s 
+of <SPAN Class="swiss"><A HREF="RM-9-7.html#S0269">select_statement</A></SPAN>s. 
 See <A HREF="RM-9-6.html">9.6</A>(29).</div>
 <div class="paranum"><a name="p26.1">26.1/2</a></div>
 <div class="Bulleted">The result of Calendar.Formating.Image if its argument 
@@ -134,19 +145,22 @@ represents more than 100 hours. See <A HREF="RM-9-6-1.html">9.6.1</A>(86/2).</di
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p27.1">27.1/5</a></div>
+<div class="Bulleted">Implementation-defined conflict check policies. 
+See <A HREF="RM-9-10-1.html">9.10.1</A>(5).</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Bulleted">The representation for a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN>. 
+<div class="Bulleted">The representation for a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN>. 
 See <A HREF="RM-10-1.html">10.1</A>(2).</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Bulleted">Any restrictions on <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN>s 
-that contain multiple <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN>s. 
+<div class="Bulleted">Any restrictions on <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN>s 
+that contain multiple <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>s. 
 See <A HREF="RM-10-1.html">10.1</A>(4).</div>
 <div class="paranum"><a name="p30">30</a></div>
 <div class="Bulleted">The mechanisms for creating an environment and 
 for adding and replacing compilation units. See <A HREF="RM-10-1-4.html">10.1.4</A>(3/2).</div>
 <div class="paranum"><a name="p30.1">30.1/2</a></div>
 <div class="Bulleted">The mechanisms for adding a compilation unit mentioned 
-in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0273">limited_with_clause</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0295">limited_with_clause</A></SPAN> 
 to an environment. See <A HREF="RM-10-1-4.html">10.1.4</A>(3/2).</div>
 <div class="paranum"><a name="p31">31</a></div>
 <div class="Bulleted">The manner of explicitly assigning library units 
@@ -158,7 +172,7 @@ which compilation units are needed by a given compilation unit. See <A HREF="RM-
 <div class="Bulleted">The manner of designating the main subprogram of 
 a partition. See <A HREF="RM-10-2.html">10.2</A>(7).</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Bulleted">The order of elaboration of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s. 
+<div class="Bulleted">The order of elaboration of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s. 
 See <A HREF="RM-10-2.html">10.2</A>(18).</div>
 <div class="paranum"><a name="p35">35</a></div>
 <div class="Bulleted">Parameter passing and function return for the main 
@@ -177,7 +191,7 @@ by the implementation. See <A HREF="RM-10-2.html">10.2</A>(28/3).</div>
 See <A HREF="RM-11-4-1.html">11.4.1</A>(10.1/4).</div>
 <div class="paranum"><a name="p40">40/2</a></div>
 <div class="Bulleted">The result of Exceptions.Wide_Wide_Exception_Name 
-for exceptions declared within an unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0176">block_statement</A></SPAN>. 
+for exceptions declared within an unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0191">block_statement</A></SPAN>. 
 See <A HREF="RM-11-4-1.html">11.4.1</A>(12).</div>
 <div class="paranum"><a name="p40.1">40.1/2</a></div>
 <div class="Bulleted">The sequence of characters of the value returned 
@@ -189,7 +203,7 @@ are not defined in Character (respectively, Wide_Character). See <A HREF="RM-11-
 See <A HREF="RM-11-4-1.html">11.4.1</A>(13/2).</div>
 <div class="paranum"><a name="p41.1">41.1/3</a></div>
 <div class="Bulleted">Implementation-defined <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
-and <I>assertion_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0325">aspect_mark</A></SPAN>s 
+and <I>assertion_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>s 
 allowed in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy. See <A HREF="RM-11-4-2.html">11.4.2</A>(9/3).</div>
 <div class="paranum"><a name="p41.2">41.2/2</a></div>
@@ -241,7 +255,7 @@ modulus of Storage_Elements.Storage_Element, and the declaration of Storage_Elem
 See <A HREF="RM-13-7-1.html">13.7.1</A>(11).</div>
 <div class="paranum"><a name="p51">51</a></div>
 <div class="Bulleted">The contents of the visible part of package System.Machine_Code, 
-and the meaning of <SPAN Class="swiss"><A HREF="RM-13-8.html#S0335">code_statement</A></SPAN>s. 
+and the meaning of <SPAN Class="swiss"><A HREF="RM-13-8.html#S0357">code_statement</A></SPAN>s. 
 See <A HREF="RM-13-8.html">13.8</A>(7).</div>
 <div class="paranum"><a name="p51.1">51.1/2</a></div>
 <div class="Bulleted">The result of unchecked conversion for instances 
@@ -289,6 +303,14 @@ by the Read and Write attributes of elementary types. See <A HREF="RM-13-13-2.ht
 declared in the visible part of package Standard. See <A HREF="RM-A-1.html">A.1</A>(3).</div>
 <div class="paranum"><a name="p60.1">60.1/2</a></div>
 <div class="Bulleted">The values returned by Strings.Hash. See <A HREF="RM-A-4-9.html">A.4.9</A>(3/2).</div>
+<div class="paranum"><a name="p60.2">60.2/5</a></div>
+<div class="Bulleted">The value returned by a call to a Text_Buffer Get 
+procedure if any character in the returned sequence is not defined in 
+Character. See <A HREF="RM-A-4-12.html">A.4.12</A>(29).</div>
+<div class="paranum"><a name="p60.3">60.3/5</a></div>
+<div class="Bulleted">The value returned by a call to a Text_Buffer Wide_Get 
+procedure if any character in the returned sequence is not defined in 
+Wide_Character. See <A HREF="RM-A-4-12.html">A.4.12</A>(29).</div>
 <div class="paranum"><a name="p61">61</a></div>
 <div class="Bulleted">The accuracy actually achieved by the elementary 
 functions. See <A HREF="RM-A-5-1.html">A.5.1</A>(1).</div>
@@ -411,6 +433,12 @@ was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p85">85/4</a></div>
 <div class="Bulleted">The semantics of some attributes and functions 
 of an entity for which aspect Discard_Names is True. See <A HREF="RM-C-5.html">C.5</A>(7).</div>
+<div class="paranum"><a name="p85.1">85.1/5</a></div>
+<div class="Bulleted">The modulus and size of Test_and_Set_Flag. See 
+<A HREF="RM-C-6-3.html">C.6.3</A>(8).</div>
+<div class="paranum"><a name="p85.2">85.2/5</a></div>
+<div class="Bulleted">The value used to represent the set value for Atomic_Test_and_Set. 
+See <A HREF="RM-C-6-3.html">C.6.3</A>(10).</div>
 <div class="paranum"><a name="p86">86</a></div>
 <div class="Bulleted">The result of the Task_Identification.Image attribute. 
 See <A HREF="RM-C-7-1.html">C.7.1</A>(7).</div>
@@ -454,7 +482,7 @@ See <A HREF="RM-D-2-2.html">D.2.2</A>(19).</div>
 <div class="Bulleted">The value of Default_Quantum in Dispatching.Round_Robin. 
 See <A HREF="RM-D-2-5.html">D.2.5</A>(4).</div>
 <div class="paranum"><a name="p98">98</a></div>
-<div class="Bulleted">Implementation-defined <I>policy_</I><A NAME="I9182"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
+<div class="Bulleted">Implementation-defined <I>policy_</I><A NAME="I9739"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 allowed in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy. See <A HREF="RM-D-3.html">D.3</A>(4).</div>
 <div class="paranum"><a name="p98.1">98.1/2</a></div>
@@ -464,9 +492,9 @@ applies to any unit of a partition. See <A HREF="RM-D-3.html">D.3</A>(6).</div>
 <div class="Bulleted">Default ceiling priorities. See <A HREF="RM-D-3.html">D.3</A>(10/4).</div>
 <div class="paranum"><a name="p100">100</a></div>
 <div class="Bulleted">The ceiling of any protected object used internally 
-by the implementation. See <A HREF="RM-D-3.html">D.3</A>(16).</div>
+by the implementation. See <A HREF="RM-D-3.html">D.3</A>(21).</div>
 <div class="paranum"><a name="p101">101</a></div>
-<div class="Bulleted">Implementation-defined queuing policies. See <A HREF="RM-D-4.html">D.4</A>(1/3).</div>
+<div class="Bulleted">Implementation-defined queuing policies. See <A HREF="RM-D-4.html">D.4</A>(1/5).</div>
 <div class="paranum"><a name="p101.1">101.1/5</a></div>
 <div class="Bulleted">Implementation-defined admission policies. See 
 <A HREF="RM-D-4-1.html">D.4.1</A>(1).</div>
@@ -628,6 +656,9 @@ was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p134">134/2</a></div>
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p134.1">134.1/5</a></div>
+<div class="Bulleted">The consequences of violating No_Hidden_Indirect_Globals. 
+See <A HREF="RM-H-4.html">H.4</A>(23.6/5).</div>
 <div class="paranum"><a name="p135">135/2</a></div>
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
@@ -641,7 +672,7 @@ Partition_Elaboration_Policy. See <A HREF="RM-H-6.html">H.6</A>(4/2).</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-M-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

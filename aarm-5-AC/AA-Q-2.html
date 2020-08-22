@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-Q-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,498 +37,559 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00440.TXT">AI95-00440-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert2">This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;lists all language-defined types and subtypes.<A NAME="I11641"></A><A NAME="I11642"></A></span> 
+<span class="insert2">This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;lists all language-defined types and subtypes.<A NAME="I12383"></A><A NAME="I12384"></A></span> 
 </div>
 <div class="Normal">&nbsp;</div>
 <div class="Index">Address<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6137">13.7(12)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6404">13.7(12)</A></div>
 <div class="Index">Alignment<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I6895">A.4.1(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I7158">A.4.1(6)</A></div>
 <div class="Index">Alphanumeric<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8949">B.4(16/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9522">B.4(16/3)</A></div>
 <div class="Index">Any_Priority <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6147">13.7(16)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6414">13.7(16)</A></div>
 <div class="Index">Attribute_Handle<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Attributes&nbsp;&nbsp; <A HREF="AA-C-7-2.html#I9163">C.7.2(3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Attributes&nbsp;&nbsp; <A HREF="AA-C-7-2.html#I9760">C.7.2(3)</A></div>
 <div class="Index">Barrier_Limit <I>subtype of</I> Positive<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Synchronous_Barriers&nbsp;&nbsp; <A HREF="AA-D-10-1.html#I9494">D.10.1(4/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Synchronous_Barriers&nbsp;&nbsp; <A HREF="AA-D-10-1.html#I10114">D.10.1(4/3)</A></div>
+<div class="Index">Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Integers&nbsp;&nbsp; 
+<A HREF="AA-A-5-6.html#I7701">A.5.6(3/5)</A></div>
+<div class="Index">Big_Natural <I>subtype of</I> Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Integers&nbsp;&nbsp; 
+<A HREF="AA-A-5-6.html#I7706">A.5.6(9/5)</A></div>
+<div class="Index">Big_Positive <I>subtype of</I> Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Integers&nbsp;&nbsp; 
+<A HREF="AA-A-5-6.html#I7705">A.5.6(8/5)</A></div>
+<div class="Index">Big_Real<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Reals&nbsp;&nbsp; 
+<A HREF="AA-A-5-7.html#I7724">A.5.7(3/5)</A></div>
 <div class="Index">Binary<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8940">B.4(10)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9513">B.4(10)</A></div>
 <div class="Index">Binary_Format<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8961">B.4(24)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9534">B.4(24)</A></div>
 <div class="Index">Bit_Order<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6143">13.7(15/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6410">13.7(15/2)</A></div>
 <div class="Index">Boolean<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6530">A.1(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6793">A.1(5)</A></div>
 <div class="Index">Bounded_String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Bounded&nbsp;&nbsp; <A HREF="AA-A-4-4.html#I6968">A.4.4(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Bounded&nbsp;&nbsp; <A HREF="AA-A-4-4.html#I7229">A.4.4(6)</A></div>
+<div class="Index">Buffer_Type<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Text_Buffers.Bounded&nbsp;&nbsp; 
+<A HREF="AA-A-4-12.html#I7520">A.4.12(23/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Text_Buffers.Unbounded&nbsp;&nbsp; 
+<A HREF="AA-A-4-12.html#I7518">A.4.12(19/5)</A></div>
 <div class="Index">Buffer_Type <I>subtype of</I> Storage_Array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Storage_IO&nbsp;&nbsp; <A HREF="AA-A-9.html#I7536">A.9(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Storage_IO&nbsp;&nbsp; <A HREF="AA-A-9.html#I7851">A.9(4)</A></div>
 <div class="Index">Byte<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8968">B.4(29/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9541">B.4(29/3)</A></div>
 <div class="Index">Byte_Array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8969">B.4(29/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9542">B.4(29/3)</A></div>
 <div class="Index">C_float<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8827">B.3(15)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9400">B.3(15)</A></div>
 <div class="Index">Cause_Of_Termination<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Termination&nbsp;&nbsp; <A HREF="AA-C-7-3.html#I9175">C.7.3(3/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Termination&nbsp;&nbsp; <A HREF="AA-C-7-3.html#I9770">C.7.3(3/2)</A></div>
 <div class="Index">char<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8830">B.3(19)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9403">B.3(19)</A></div>
 <div class="Index">char16_array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8854">B.3(39.5/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9427">B.3(39.5/3)</A></div>
 <div class="Index">char16_t<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8850">B.3(39.2/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9423">B.3(39.2/2)</A></div>
 <div class="Index">char32_array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8864">B.3(39.14/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9437">B.3(39.14/3)</A></div>
 <div class="Index">char32_t<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8860">B.3(39.11/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9433">B.3(39.11/2)</A></div>
 <div class="Index">char_array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8834">B.3(23/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9407">B.3(23/3)</A></div>
 <div class="Index">char_array_access<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Strings&nbsp;&nbsp; <A HREF="AA-B-3-1.html#I8881">B.3.1(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Strings&nbsp;&nbsp; <A HREF="AA-B-3-1.html#I9452">B.3.1(4)</A></div>
 <div class="Index">Character<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6535">A.1(35/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6798">A.1(35/3)</A></div>
 <div class="Index">Character_Mapping<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I6915">A.4.2(20/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I7178">A.4.2(20/2)</A></div>
 <div class="Index">Character_Mapping_Function<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I6921">A.4.2(25)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I7184">A.4.2(25)</A></div>
 <div class="Index">Character_Range<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I6904">A.4.2(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I7167">A.4.2(6)</A></div>
 <div class="Index">Character_Ranges<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I6905">A.4.2(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I7168">A.4.2(7)</A></div>
 <div class="Index">Character_Sequence <I>subtype of</I> String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I6911">A.4.2(16)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I7174">A.4.2(16)</A></div>
 <div class="Index">Character_Set<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I6902">A.4.2(4/2)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9004">B.5(11)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I7165">A.4.2(4/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9576">B.5(11)</A></div>
 <div class="Index">chars_ptr<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Strings&nbsp;&nbsp; <A HREF="AA-B-3-1.html#I8882">B.3.1(5/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Strings&nbsp;&nbsp; <A HREF="AA-B-3-1.html#I9453">B.3.1(5/2)</A></div>
 <div class="Index">chars_ptr_array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Strings&nbsp;&nbsp; <A HREF="AA-B-3-1.html#I8883">B.3.1(6/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Strings&nbsp;&nbsp; <A HREF="AA-B-3-1.html#I9454">B.3.1(6/2)</A></div>
+<div class="Index">Chunk_Index <I>subtype of</I> Positive<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Iterator_Interfaces&nbsp;&nbsp; <A HREF="AA-5-5-1.html#I3876">5.5.1(4.2/5)</A></div>
 <div class="Index">COBOL_Character<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8946">B.4(13)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9519">B.4(13)</A></div>
 <div class="Index">Complex<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Complex_Types&nbsp;&nbsp; 
-<A HREF="AA-G-1-1.html#I9817">G.1.1(3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I8997">B.5(9)</A></div>
+<A HREF="AA-G-1-1.html#I10435">G.1.1(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9569">B.5(9)</A></div>
 <div class="Index">Complex_Matrix<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Complex_Arrays&nbsp;&nbsp; 
-<A HREF="AA-G-3-2.html#I9957">G.3.2(4/2)</A></div>
+<A HREF="AA-G-3-2.html#I10572">G.3.2(4/2)</A></div>
 <div class="Index">Complex_Vector<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Complex_Arrays&nbsp;&nbsp; 
-<A HREF="AA-G-3-2.html#I9956">G.3.2(4/2)</A></div>
+<A HREF="AA-G-3-2.html#I10571">G.3.2(4/2)</A></div>
 <div class="Index">Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
+<A HREF="AA-A-18-3.html#I8513">A.18.3(50.10/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I8642">A.18.5(37.11/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I8849">A.18.8(58.10/5)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Indefinite_Holders&nbsp;&nbsp; 
-<A HREF="AA-A-18-18.html#I8591">A.18.18(16/3)</A><BR>
+<A HREF="AA-A-18-18.html#I9143">A.18.18(16/5)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Multiway_Trees&nbsp;&nbsp; 
-<A HREF="AA-A-18-10.html#I8502">A.18.10(28/3)</A></div>
+<A HREF="AA-A-18-10.html#I9080">A.18.10(70.10/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I8732">A.18.6(51.12/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I8948">A.18.9(74.10/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I8393">A.18.2(78.10/5)</A></div>
 <div class="Index">Controlled<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Finalization&nbsp;&nbsp; <A HREF="AA-7-6.html#I4359">7.6(5/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Finalization&nbsp;&nbsp; <A HREF="AA-7-6.html#I4571">7.6(5/2)</A></div>
 <div class="Index">Count<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7493">A.8.4(4)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I7777">A.12.1(7)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7558">A.10.1(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7808">A.8.4(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I8092">A.12.1(7)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7873">A.10.1(5)</A></div>
 <div class="Index">Count_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers&nbsp;&nbsp; <A HREF="AA-A-18-1.html#I7963">A.18.1(5/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers&nbsp;&nbsp; <A HREF="AA-A-18-1.html#I8281">A.18.1(5/2)</A></div>
 <div class="Index">Country_Code<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Locales&nbsp;&nbsp; <A HREF="AA-A-19.html#I8695">A.19(4/4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Locales&nbsp;&nbsp; <A HREF="AA-A-19.html#I9268">A.19(4/4)</A></div>
 <div class="Index">CPU <I>subtype of</I> CPU_Range<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Multiprocessors&nbsp;&nbsp; <A HREF="AA-D-16.html#I9601">D.16(4/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Multiprocessors&nbsp;&nbsp; <A HREF="AA-D-16.html#I10220">D.16(4/3)</A></div>
 <div class="Index">CPU_Range<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Multiprocessors&nbsp;&nbsp; <A HREF="AA-D-16.html#I9599">D.16(4/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Multiprocessors&nbsp;&nbsp; <A HREF="AA-D-16.html#I10218">D.16(4/3)</A></div>
 <div class="Index">CPU_Set<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> System.Multiprocessors.Dispatching_Domains&nbsp;&nbsp; 
-<A HREF="AA-D-16-1.html#I9613">D.16.1(9.1/4)</A></div>
+<A HREF="AA-D-16-1.html#I10233">D.16.1(9.1/4)</A></div>
 <div class="Index">CPU_Time<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time&nbsp;&nbsp; <A HREF="AA-D-14.html#I9521">D.14(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time&nbsp;&nbsp; <A HREF="AA-D-14.html#I10140">D.14(4/2)</A></div>
 <div class="Index">Cursor<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
-<A HREF="AA-A-18-3.html#I8077">A.18.3(7/2)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I8171">A.18.5(4/2)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I8313">A.18.8(4/2)</A><BR>
+<A HREF="AA-A-18-3.html#I8441">A.18.3(7/2)</A>, <A HREF="AA-A-18-3.html#I8506">A.18.3(50.3/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I8582">A.18.5(4/2)</A>, 
+<A HREF="AA-A-18-5.html#I8635">A.18.5(37.4/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I8782">A.18.8(4/2)</A>, 
+<A HREF="AA-A-18-8.html#I8842">A.18.8(58.3/5)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Multiway_Trees&nbsp;&nbsp; 
-<A HREF="AA-A-18-10.html#I8484">A.18.10(9/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I8228">A.18.6(5/2)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I8390">A.18.9(5/2)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I7976">A.18.2(9/2)</A></div>
+<A HREF="AA-A-18-10.html#I8978">A.18.10(9/3)</A>, <A HREF="AA-A-18-10.html#I9073">A.18.10(70.3/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I8661">A.18.6(5/2)</A>, 
+<A HREF="AA-A-18-6.html#I8725">A.18.6(51.5/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I8870">A.18.9(5/2)</A>, 
+<A HREF="AA-A-18-9.html#I8941">A.18.9(74.3/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I8294">A.18.2(9/2)</A>, 
+<A HREF="AA-A-18-2.html#I8386">A.18.2(78.3/5)</A></div>
 <div class="Index">Day_Count<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Arithmetic&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4978">9.6.1(10/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Arithmetic&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5206">9.6.1(10/2)</A></div>
 <div class="Index">Day_Duration <I>subtype of</I> Duration<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I4951">9.6(11/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I5177">9.6(11/2)</A></div>
 <div class="Index">Day_Name<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4982">9.6.1(17/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5210">9.6.1(17/2)</A></div>
 <div class="Index">Day_Number <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I4950">9.6(11/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I5176">9.6(11/2)</A></div>
 <div class="Index">Deadline <I>subtype of</I> Time<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Dispatching.EDF&nbsp;&nbsp; <A HREF="AA-D-2-6.html#I9293">D.2.6(9/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Dispatching.EDF&nbsp;&nbsp; <A HREF="AA-D-2-6.html#I9891">D.2.6(9/5)</A></div>
 <div class="Index">Decimal_Element<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8944">B.4(12/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9517">B.4(12/3)</A></div>
 <div class="Index">Direction<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I6898">A.4.1(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I7161">A.4.1(6)</A></div>
 <div class="Index">Directory_Entry_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I7885">A.16(29/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I8199">A.16(29/2)</A></div>
 <div class="Index">Dispatching_Domain<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> System.Multiprocessors.Dispatching_Domains&nbsp;&nbsp; 
-<A HREF="AA-D-16-1.html#I9608">D.16.1(5/3)</A></div>
+<A HREF="AA-D-16-1.html#I10228">D.16.1(5/3)</A></div>
 <div class="Index">Display_Format<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8955">B.4(22)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9528">B.4(22)</A></div>
 <div class="Index">double<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8828">B.3(16)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9401">B.3(16)</A></div>
 <div class="Index">Double_Complex<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9002">B.5(10.2/5)</A></div>
-<div class="Index">Double_Imaginary <I>subtype of</I> Double_Imaginary<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9003">B.5(10.3/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9574">B.5(10.2/5)</A></div>
+<div class="Index">Double_Imaginary <I>subtype of</I> Imaginary<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9575">B.5(10.3/5)</A></div>
 <div class="Index">Double_Precision<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I8994">B.5(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9566">B.5(6)</A></div>
 <div class="Index">Duration<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6543">A.1(43)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6806">A.1(43)</A></div>
 <div class="Index">Encoding_Scheme<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7202">A.4.11(4/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7461">A.4.11(4/3)</A></div>
 <div class="Index">Exception_Id<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Exceptions&nbsp;&nbsp; <A HREF="AA-11-4-1.html#I5444">11.4.1(2/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Exceptions&nbsp;&nbsp; <A HREF="AA-11-4-1.html#I5686">11.4.1(2/5)</A></div>
 <div class="Index">Exception_Occurrence<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Exceptions&nbsp;&nbsp; <A HREF="AA-11-4-1.html#I5449">11.4.1(3/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Exceptions&nbsp;&nbsp; <A HREF="AA-11-4-1.html#I5691">11.4.1(3/2)</A></div>
 <div class="Index">Exception_Occurrence_Access<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Exceptions&nbsp;&nbsp; <A HREF="AA-11-4-1.html#I5450">11.4.1(3/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Exceptions&nbsp;&nbsp; <A HREF="AA-11-4-1.html#I5692">11.4.1(3/2)</A></div>
 <div class="Index">Exit_Status<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Command_Line&nbsp;&nbsp; <A HREF="AA-A-15.html#I7851">A.15(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Command_Line&nbsp;&nbsp; <A HREF="AA-A-15.html#I8166">A.15(7)</A></div>
 <div class="Index">Extended_Index <I>subtype of</I> Index_Type'Base<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I7973">A.18.2(7/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I8291">A.18.2(7/2)</A></div>
 <div class="Index">Field <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7561">A.10.1(6)</A></div>
-<div class="Index">FIFO_Stream<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.FIFO_Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6407">13.13.1(13/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Integers&nbsp;&nbsp; 
+<A HREF="AA-A-5-5.html#I7697">A.5.5(3/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7876">A.10.1(6)</A></div>
 <div class="Index">File_Access<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7583">A.10.1(18)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7898">A.10.1(18)</A></div>
 <div class="Index">File_Kind<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I7879">A.16(22/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I8193">A.16(22/2)</A></div>
 <div class="Index">File_Mode<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7492">A.8.4(4)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="AA-A-8-1.html#I7454">A.8.1(4)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I7776">A.12.1(6)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7557">A.10.1(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7807">A.8.4(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="AA-A-8-1.html#I7769">A.8.1(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I8091">A.12.1(6)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7872">A.10.1(4)</A></div>
 <div class="Index">File_Size<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I7880">A.16(23/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I8194">A.16(23/2)</A></div>
 <div class="Index">File_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7491">A.8.4(3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="AA-A-8-1.html#I7453">A.8.1(3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I7775">A.12.1(5/4)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7556">A.10.1(3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7806">A.8.4(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="AA-A-8-1.html#I7768">A.8.1(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I8090">A.12.1(5/4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7871">A.10.1(3)</A></div>
 <div class="Index">Filter_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I7886">A.16(30/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I8200">A.16(30/2)</A></div>
 <div class="Index">Float<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6534">A.1(21)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6797">A.1(21)</A></div>
 <div class="Index">Floating<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8938">B.4(9)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9511">B.4(9)</A></div>
 <div class="Index">Fortran_Character<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9005">B.5(12/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9577">B.5(12/3)</A></div>
 <div class="Index">Fortran_Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I8992">B.5(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9564">B.5(5)</A></div>
 <div class="Index">Forward_Iterator<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Iterator_Interfaces&nbsp;&nbsp; <A HREF="AA-5-5-1.html#I3724">5.5.1(3/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Iterator_Interfaces&nbsp;&nbsp; <A HREF="AA-5-5-1.html#I3869">5.5.1(3/3)</A></div>
 <div class="Index">Generator<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Discrete_Random&nbsp;&nbsp; 
-<A HREF="AA-A-5-2.html#I7301">A.5.2(19)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Float_Random&nbsp;&nbsp; <A HREF="AA-A-5-2.html#I7288">A.5.2(7)</A></div>
+<A HREF="AA-A-5-2.html#I7575">A.5.2(19)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Float_Random&nbsp;&nbsp; <A HREF="AA-A-5-2.html#I7562">A.5.2(7)</A></div>
 <div class="Index">Group_Budget<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Group_Budgets&nbsp;&nbsp; 
-<A HREF="AA-D-14-2.html#I9555">D.14.2(4/3)</A></div>
+<A HREF="AA-D-14-2.html#I10174">D.14.2(4/3)</A></div>
 <div class="Index">Group_Budget_Handler<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Group_Budgets&nbsp;&nbsp; 
-<A HREF="AA-D-14-2.html#I9556">D.14.2(5/5)</A></div>
+<A HREF="AA-D-14-2.html#I10175">D.14.2(5/5)</A></div>
 <div class="Index">Hash_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers&nbsp;&nbsp; <A HREF="AA-A-18-1.html#I7962">A.18.1(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers&nbsp;&nbsp; <A HREF="AA-A-18-1.html#I8280">A.18.1(4/2)</A></div>
 <div class="Index">Holder<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Indefinite_Holders&nbsp;&nbsp; 
-<A HREF="AA-A-18-18.html#I8582">A.18.18(6/3)</A></div>
+<A HREF="AA-A-18-18.html#I9131">A.18.18(6/5)</A></div>
 <div class="Index">Hour_Number <I>subtype of</I> Natural<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4991">9.6.1(20/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5219">9.6.1(20/2)</A></div>
 <div class="Index">Imaginary<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Complex_Types&nbsp;&nbsp; 
-<A HREF="AA-G-1-1.html#I9818">G.1.1(4/2)</A></div>
+<A HREF="AA-G-1-1.html#I10436">G.1.1(4/2)</A></div>
 <div class="Index">Imaginary <I>subtype of</I> Imaginary<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I8998">B.5(10)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9570">B.5(10)</A></div>
 <div class="Index">int<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8816">B.3(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9389">B.3(7)</A></div>
 <div class="Index">Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6531">A.1(12)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6794">A.1(12)</A></div>
 <div class="Index">Integer_Address<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6160">13.7.1(10/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6427">13.7.1(10/3)</A></div>
 <div class="Index">Interrupt_Id<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Interrupts&nbsp;&nbsp; <A HREF="AA-C-3-2.html#I9068">C.3.2(2/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Interrupts&nbsp;&nbsp; <A HREF="AA-C-3-2.html#I9640">C.3.2(2/5)</A></div>
 <div class="Index">Interrupt_Priority <I>subtype of</I> Any_Priority<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6149">13.7(16)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6416">13.7(16)</A></div>
 <div class="Index">ISO_646 <I>subtype of</I> Character<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Handling&nbsp;&nbsp; <A HREF="AA-A-3-2.html#I6582">A.3.2(9)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Handling&nbsp;&nbsp; <A HREF="AA-A-3-2.html#I6845">A.3.2(9)</A></div>
 <div class="Index">Language_Code<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Locales&nbsp;&nbsp; <A HREF="AA-A-19.html#I8694">A.19(4/4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Locales&nbsp;&nbsp; <A HREF="AA-A-19.html#I9267">A.19(4/4)</A></div>
 <div class="Index">Leap_Seconds_Count <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Arithmetic&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4979">9.6.1(11/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Arithmetic&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5207">9.6.1(11/2)</A></div>
 <div class="Index">Length_Range <I>subtype of</I> Natural<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Bounded&nbsp;&nbsp; <A HREF="AA-A-4-4.html#I6970">A.4.4(8)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Bounded&nbsp;&nbsp; <A HREF="AA-A-4-4.html#I7231">A.4.4(8)</A></div>
 <div class="Index">Limited_Controlled<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Finalization&nbsp;&nbsp; <A HREF="AA-7-6.html#I4363">7.6(7/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Finalization&nbsp;&nbsp; <A HREF="AA-7-6.html#I4575">7.6(7/2)</A></div>
 <div class="Index">List<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
-<A HREF="AA-A-18-3.html#I8076">A.18.3(6/3)</A></div>
+<A HREF="AA-A-18-3.html#I8440">A.18.3(6/5)</A>, <A HREF="AA-A-18-3.html#I8505">A.18.3(50.2/5)</A></div>
 <div class="Index">Logical<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I8995">B.5(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9567">B.5(7)</A></div>
 <div class="Index">long<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8818">B.3(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9391">B.3(7)</A></div>
 <div class="Index">Long_Binary<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8941">B.4(10)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9514">B.4(10)</A></div>
 <div class="Index">long_double<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8829">B.3(17)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9402">B.3(17)</A></div>
 <div class="Index">Long_Floating<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8939">B.4(9)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9512">B.4(9)</A></div>
 <div class="Index">Map<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I8170">A.18.5(3/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I8227">A.18.6(4/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I8581">A.18.5(3/5)</A>, 
+<A HREF="AA-A-18-5.html#I8634">A.18.5(37.3/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I8660">A.18.6(4/5)</A>, 
+<A HREF="AA-A-18-6.html#I8724">A.18.6(51.4/5)</A></div>
 <div class="Index">Membership<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I6897">A.4.1(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I7160">A.4.1(6)</A></div>
 <div class="Index">Minute_Number <I>subtype of</I> Natural<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4992">9.6.1(20/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5220">9.6.1(20/2)</A></div>
 <div class="Index">Month_Number <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I4949">9.6(11/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I5175">9.6(11/2)</A></div>
 <div class="Index">Name<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6126">13.7(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6393">13.7(4)</A></div>
 <div class="Index">Name_Case_Kind<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I7877">A.16(20.1/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I8191">A.16(20.1/3)</A></div>
 <div class="Index">Natural <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6532">A.1(13)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6795">A.1(13)</A></div>
 <div class="Index">Number_Base <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7562">A.10.1(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Integers&nbsp;&nbsp; 
+<A HREF="AA-A-5-5.html#I7698">A.5.5(3/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7877">A.10.1(6)</A></div>
 <div class="Index">Numeric<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8954">B.4(20/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9527">B.4(20/3)</A></div>
 <div class="Index">Packed_Decimal<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8945">B.4(12/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9518">B.4(12/3)</A></div>
 <div class="Index">Packed_Format<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I8965">B.4(26)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I9538">B.4(26)</A></div>
+<div class="Index">Parallel_Iterator<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Iterator_Interfaces&nbsp;&nbsp; <A HREF="AA-5-5-1.html#I3875">5.5.1(4.1/5)</A></div>
+<div class="Index">Parallel_Reversible_Iterator<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Iterator_Interfaces&nbsp;&nbsp; <A HREF="AA-5-5-1.html#I3882">5.5.1(4.8/5)</A></div>
 <div class="Index">Parameterless_Handler<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Interrupts&nbsp;&nbsp; <A HREF="AA-C-3-2.html#I9069">C.3.2(2/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Interrupts&nbsp;&nbsp; <A HREF="AA-C-3-2.html#I9641">C.3.2(2/5)</A></div>
 <div class="Index">Params_Stream_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.RPC&nbsp;&nbsp; <A HREF="AA-E-5.html#I9761">E.5(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.RPC&nbsp;&nbsp; <A HREF="AA-E-5.html#I10379">E.5(6)</A></div>
 <div class="Index">Partition_Id<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.RPC&nbsp;&nbsp; <A HREF="AA-E-5.html#I9759">E.5(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.RPC&nbsp;&nbsp; <A HREF="AA-E-5.html#I10377">E.5(4)</A></div>
 <div class="Index">Picture<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="AA-F-3-3.html#I9791">F.3.3(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="AA-F-3-3.html#I10409">F.3.3(4)</A></div>
 <div class="Index">plain_char<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8824">B.3(11)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9397">B.3(11)</A></div>
 <div class="Index">Pointer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Pointers&nbsp;&nbsp; <A HREF="AA-B-3-2.html#I8905">B.3.2(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Pointers&nbsp;&nbsp; <A HREF="AA-B-3-2.html#I9476">B.3.2(5)</A></div>
 <div class="Index">Positive <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6533">A.1(13)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6796">A.1(13)</A></div>
 <div class="Index">Positive_Count <I>subtype of</I> Count<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7494">A.8.4(4)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I7778">A.12.1(7)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7559">A.10.1(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="AA-A-8-4.html#I7809">A.8.4(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I8093">A.12.1(7)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7874">A.10.1(5)</A></div>
 <div class="Index">Priority <I>subtype of</I> Any_Priority<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6148">13.7(16)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I6415">13.7(16)</A></div>
 <div class="Index">ptrdiff_t<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8825">B.3(12)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9398">B.3(12)</A></div>
 <div class="Index">Queue<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Bounded_Priority_Queues&nbsp;&nbsp; 
-<A HREF="AA-A-18-31.html#I8682">A.18.31(4/3)</A><BR>
+<A HREF="AA-A-18-31.html#I9254">A.18.31(4/3)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Bounded_Synchronized_Queues&nbsp;&nbsp; 
-<A HREF="AA-A-18-29.html#I8667">A.18.29(4/3)</A><BR>
+<A HREF="AA-A-18-29.html#I9239">A.18.29(4/3)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Synchronized_Queue_Interfaces&nbsp;&nbsp; 
-<A HREF="AA-A-18-27.html#I8652">A.18.27(4/3)</A><BR>
+<A HREF="AA-A-18-27.html#I9224">A.18.27(4/3)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Unbounded_Priority_Queues&nbsp;&nbsp; 
-<A HREF="AA-A-18-30.html#I8674">A.18.30(4/3)</A><BR>
+<A HREF="AA-A-18-30.html#I9246">A.18.30(4/3)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Unbounded_Synchronized_Queues&nbsp;&nbsp; 
-<A HREF="AA-A-18-28.html#I8660">A.18.28(4/3)</A></div>
+<A HREF="AA-A-18-28.html#I9232">A.18.28(4/3)</A></div>
 <div class="Index">Real<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I8993">B.5(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I9565">B.5(6)</A></div>
 <div class="Index">Real_Matrix<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Real_Arrays&nbsp;&nbsp; 
-<A HREF="AA-G-3-1.html#I9940">G.3.1(4/2)</A></div>
+<A HREF="AA-G-3-1.html#I10555">G.3.1(4/2)</A></div>
 <div class="Index">Real_Vector<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Real_Arrays&nbsp;&nbsp; 
-<A HREF="AA-G-3-1.html#I9939">G.3.1(4/2)</A></div>
+<A HREF="AA-G-3-1.html#I10554">G.3.1(4/2)</A></div>
 <div class="Index">Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
-<A HREF="AA-A-18-3.html#I8089">A.18.3(17.2/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I8186">A.18.5(17.2/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I8368">A.18.8(58.1/3)</A><BR>
+<A HREF="AA-A-18-3.html#I8459">A.18.3(17.2/5)</A>, <A HREF="AA-A-18-3.html#I8514">A.18.3(50.11/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I8604">A.18.5(17.2/5)</A>, 
+<A HREF="AA-A-18-5.html#I8643">A.18.5(37.12/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I8836">A.18.8(57.1/5)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Indefinite_Holders&nbsp;&nbsp; 
-<A HREF="AA-A-18-18.html#I8592">A.18.18(17/3)</A><BR>
+<A HREF="AA-A-18-18.html#I9144">A.18.18(17/5)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Multiway_Trees&nbsp;&nbsp; 
-<A HREF="AA-A-18-10.html#I8503">A.18.10(29/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I8241">A.18.6(16.2/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I8453">A.18.9(73.1/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I7999">A.18.2(34.2/3)</A></div>
+<A HREF="AA-A-18-10.html#I9010">A.18.10(29/5)</A>, <A HREF="AA-A-18-10.html#I9081">A.18.10(70.11/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I8681">A.18.6(16.2/5)</A>, 
+<A HREF="AA-A-18-6.html#I8733">A.18.6(51.13/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I8935">A.18.9(73.1/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I8326">A.18.2(34.2/5)</A>, 
+<A HREF="AA-A-18-2.html#I8394">A.18.2(78.11/5)</A></div>
+<div class="Index">Relative_Deadline <I>subtype of</I> Time_Span<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Dispatching.EDF&nbsp;&nbsp; <A HREF="AA-D-2-6.html#I9892">D.2.6(9/5)</A></div>
 <div class="Index">Reversible_Iterator<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Iterator_Interfaces&nbsp;&nbsp; <A HREF="AA-5-5-1.html#I3727">5.5.1(4/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Iterator_Interfaces&nbsp;&nbsp; <A HREF="AA-5-5-1.html#I3872">5.5.1(4/3)</A></div>
+<div class="Index">Root_Buffer_Type<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Text_Buffers&nbsp;&nbsp; <A HREF="AA-A-4-12.html#I7506">A.4.12(6/5)</A></div>
 <div class="Index">Root_Storage_Pool<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Pools&nbsp;&nbsp; <A HREF="AA-13-11.html#I6219">13.11(6/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Pools&nbsp;&nbsp; <A HREF="AA-13-11.html#I6485">13.11(6/2)</A></div>
 <div class="Index">Root_Storage_Pool_With_Subpools<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Pools.Subpools&nbsp;&nbsp; 
-<A HREF="AA-13-11-4.html#I6313">13.11.4(4/3)</A></div>
+<A HREF="AA-13-11-4.html#I6577">13.11.4(4/5)</A></div>
 <div class="Index">Root_Stream_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6399">13.13.1(3/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6663">13.13.1(3/2)</A></div>
 <div class="Index">Root_Subpool<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Pools.Subpools&nbsp;&nbsp; 
-<A HREF="AA-13-11-4.html#I6314">13.11.4(5/3)</A></div>
+<A HREF="AA-13-11-4.html#I6578">13.11.4(5/3)</A></div>
 <div class="Index">RPC_Receiver<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.RPC&nbsp;&nbsp; <A HREF="AA-E-5.html#I9766">E.5(11)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.RPC&nbsp;&nbsp; <A HREF="AA-E-5.html#I10384">E.5(11)</A></div>
 <div class="Index">Search_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I7887">A.16(31/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="AA-A-16.html#I8201">A.16(31/2)</A></div>
 <div class="Index">Second_Duration <I>subtype of</I> Day_Duration<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4994">9.6.1(20/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5222">9.6.1(20/2)</A></div>
 <div class="Index">Second_Number <I>subtype of</I> Natural<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4993">9.6.1(20/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5221">9.6.1(20/2)</A></div>
 <div class="Index">Seconds_Count<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I9466">D.8(15)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I10086">D.8(15)</A></div>
 <div class="Index">Set<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I8312">A.18.8(3/3)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I8389">A.18.9(4/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I8781">A.18.8(3/5)</A>, 
+<A HREF="AA-A-18-8.html#I8841">A.18.8(58.2/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I8869">A.18.9(4/5)</A>, 
+<A HREF="AA-A-18-9.html#I8940">A.18.9(74.2/5)</A></div>
 <div class="Index">short<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8817">B.3(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9390">B.3(7)</A></div>
 <div class="Index">signed_char<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8819">B.3(8)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9392">B.3(8)</A></div>
 <div class="Index">size_t<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8826">B.3(13)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9399">B.3(13)</A></div>
 <div class="Index">State<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Discrete_Random&nbsp;&nbsp; 
-<A HREF="AA-A-5-2.html#I7305">A.5.2(23)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Float_Random&nbsp;&nbsp; <A HREF="AA-A-5-2.html#I7293">A.5.2(11)</A></div>
+<A HREF="AA-A-5-2.html#I7579">A.5.2(23)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Float_Random&nbsp;&nbsp; <A HREF="AA-A-5-2.html#I7567">A.5.2(11)</A></div>
 <div class="Index">Storage_Array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6158">13.7.1(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6425">13.7.1(5)</A></div>
 <div class="Index">Storage_Count <I>subtype of</I> Storage_Offset<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6156">13.7.1(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6423">13.7.1(4)</A></div>
 <div class="Index">Storage_Element<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6157">13.7.1(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6424">13.7.1(5)</A></div>
 <div class="Index">Storage_Offset<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6155">13.7.1(3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Elements&nbsp;&nbsp; <A HREF="AA-13-7-1.html#I6422">13.7.1(3)</A></div>
+<div class="Index">Storage_Stream_Type<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Storage&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6671">13.13.1(13/5)</A></div>
 <div class="Index">Stream_Access<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I7774">A.12.1(4)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Text_Streams&nbsp;&nbsp; <A HREF="AA-A-12-2.html#I7825">A.12.2(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="AA-A-12-1.html#I8089">A.12.1(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Text_Streams&nbsp;&nbsp; <A HREF="AA-A-12-2.html#I8140">A.12.2(3)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Wide_Text_IO.Text_Streams&nbsp;&nbsp; 
-<A HREF="AA-A-12-3.html#I7828">A.12.3(3)</A><BR>
+<A HREF="AA-A-12-3.html#I8143">A.12.3(3)</A><BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Wide_Wide_Text_IO.Text_Streams&nbsp;&nbsp; 
-<A HREF="AA-A-12-4.html#I7831">A.12.4(3/2)</A></div>
+<A HREF="AA-A-12-4.html#I8146">A.12.4(3/2)</A></div>
 <div class="Index">Stream_Element<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6400">13.13.1(4/1)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6664">13.13.1(4/1)</A></div>
 <div class="Index">Stream_Element_Array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6403">13.13.1(4/1)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6667">13.13.1(4/1)</A></div>
 <div class="Index">Stream_Element_Count <I>subtype of</I> Stream_Element_Offset<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6402">13.13.1(4/1)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6666">13.13.1(4/1)</A></div>
 <div class="Index">Stream_Element_Offset<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6401">13.13.1(4/1)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6665">13.13.1(4/1)</A></div>
 <div class="Index">Stream_Type<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.FIFO_Streams.Bounded&nbsp;&nbsp; 
-<A HREF="AA-13-13-1.html#I6417">13.13.1(27/5)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.FIFO_Streams.Unbounded&nbsp;&nbsp; 
-<A HREF="AA-13-13-1.html#I6411">13.13.1(19/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Storage.Bounded&nbsp;&nbsp; <A HREF="AA-13-13-1.html#I6681">13.13.1(27/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Storage.Unbounded&nbsp;&nbsp; 
+<A HREF="AA-13-13-1.html#I6675">13.13.1(19/5)</A></div>
 <div class="Index">String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6540">A.1(37/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6803">A.1(37/3)</A></div>
 <div class="Index">String_Access<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Unbounded&nbsp;&nbsp; <A HREF="AA-A-4-5.html#I7031">A.4.5(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Unbounded&nbsp;&nbsp; <A HREF="AA-A-4-5.html#I7292">A.4.5(7)</A></div>
 <div class="Index">Subpool_Handle<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> System.Storage_Pools.Subpools&nbsp;&nbsp; 
-<A HREF="AA-13-11-4.html#I6315">13.11.4(6/3)</A></div>
+<A HREF="AA-13-11-4.html#I6579">13.11.4(6/3)</A></div>
 <div class="Index">Suspension_Object<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Synchronous_Task_Control&nbsp;&nbsp; 
-<A HREF="AA-D-10.html#I9481">D.10(4/5)</A></div>
+<A HREF="AA-D-10.html#I10101">D.10(4/5)</A></div>
 <div class="Index">Synchronous_Barrier<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Synchronous_Barriers&nbsp;&nbsp; <A HREF="AA-D-10-1.html#I9495">D.10.1(5/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Synchronous_Barriers&nbsp;&nbsp; <A HREF="AA-D-10-1.html#I10115">D.10.1(5/3)</A></div>
 <div class="Index">Tag<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Tags&nbsp;&nbsp; <A HREF="AA-3-9.html#I2353">3.9(6/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Tags&nbsp;&nbsp; <A HREF="AA-3-9.html#I2355">3.9(6/5)</A></div>
 <div class="Index">Tag_Array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Tags&nbsp;&nbsp; <A HREF="AA-3-9.html#I2363">3.9(7.3/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Tags&nbsp;&nbsp; <A HREF="AA-3-9.html#I2365">3.9(7.3/2)</A></div>
 <div class="Index">Task_Array<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Group_Budgets&nbsp;&nbsp; 
-<A HREF="AA-D-14-2.html#I9557">D.14.2(6/2)</A></div>
+<A HREF="AA-D-14-2.html#I10176">D.14.2(6/2)</A></div>
 <div class="Index">Task_Id<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Identification&nbsp;&nbsp; <A HREF="AA-C-7-1.html#I9142">C.7.1(2/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Identification&nbsp;&nbsp; <A HREF="AA-C-7-1.html#I9740">C.7.1(2/5)</A></div>
 <div class="Index">Termination_Handler<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Termination&nbsp;&nbsp; <A HREF="AA-C-7-3.html#I9176">C.7.3(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Task_Termination&nbsp;&nbsp; <A HREF="AA-C-7-3.html#I9771">C.7.3(4/2)</A></div>
+<div class="Index">Test_And_Set_Flag<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Atomic_Operations.Test_And_Set&nbsp;&nbsp; 
+<A HREF="AA-C-6-3.html#I9720">C.6.3(4/5)</A></div>
+<div class="Index">Text_Buffer_Count<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Text_Buffers&nbsp;&nbsp; <A HREF="AA-A-4-12.html#I7504">A.4.12(4/5)</A></div>
 <div class="Index">Time<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I4947">9.6(10/5)</A><BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I9448">D.8(4)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I5173">9.6(10/5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I10068">D.8(4)</A></div>
 <div class="Index">Time_Offset<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Time_Zones&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I4974">9.6.1(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Time_Zones&nbsp;&nbsp; <A HREF="AA-9-6-1.html#I5200">9.6.1(4/2)</A></div>
 <div class="Index">Time_Span<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I9452">D.8(5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I10072">D.8(5)</A></div>
 <div class="Index">Timer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Timers&nbsp;&nbsp; <A HREF="AA-D-14-1.html#I9539">D.14.1(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Timers&nbsp;&nbsp; <A HREF="AA-D-14-1.html#I10158">D.14.1(4/2)</A></div>
 <div class="Index">Timer_Handler<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Timers&nbsp;&nbsp; <A HREF="AA-D-14-1.html#I9540">D.14.1(5/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Timers&nbsp;&nbsp; <A HREF="AA-D-14-1.html#I10159">D.14.1(5/5)</A></div>
 <div class="Index">Timing_Event<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time.Timing_Events&nbsp;&nbsp; <A HREF="AA-D-15.html#I9586">D.15(4/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time.Timing_Events&nbsp;&nbsp; <A HREF="AA-D-15.html#I10205">D.15(4/5)</A></div>
 <div class="Index">Timing_Event_Handler<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time.Timing_Events&nbsp;&nbsp; <A HREF="AA-D-15.html#I9587">D.15(4/5)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time.Timing_Events&nbsp;&nbsp; <A HREF="AA-D-15.html#I10206">D.15(4/5)</A></div>
 <div class="Index">Tree<BR>
 &nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Multiway_Trees&nbsp;&nbsp; 
-<A HREF="AA-A-18-10.html#I8483">A.18.10(8/3)</A></div>
+<A HREF="AA-A-18-10.html#I8977">A.18.10(8/5)</A>, <A HREF="AA-A-18-10.html#I9072">A.18.10(70.2/5)</A></div>
 <div class="Index">Trim_End<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I6899">A.4.1(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I7162">A.4.1(6)</A></div>
 <div class="Index">Truncation<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I6896">A.4.1(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I7159">A.4.1(6)</A></div>
 <div class="Index">Type_Set<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7563">A.10.1(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I7878">A.10.1(7)</A></div>
 <div class="Index">Unbounded_String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Unbounded&nbsp;&nbsp; <A HREF="AA-A-4-5.html#I7028">A.4.5(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Unbounded&nbsp;&nbsp; <A HREF="AA-A-4-5.html#I7289">A.4.5(4/2)</A></div>
 <div class="Index">Uniformly_Distributed <I>subtype of</I> Float<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Float_Random&nbsp;&nbsp; <A HREF="AA-A-5-2.html#I7289">A.5.2(8)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Float_Random&nbsp;&nbsp; <A HREF="AA-A-5-2.html#I7563">A.5.2(8)</A></div>
 <div class="Index">unsigned<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8820">B.3(9)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9393">B.3(9)</A></div>
 <div class="Index">unsigned_char<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8823">B.3(10)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9396">B.3(10)</A></div>
 <div class="Index">unsigned_long<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8822">B.3(9)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9395">B.3(9)</A></div>
 <div class="Index">unsigned_short<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8821">B.3(9)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9394">B.3(9)</A></div>
 <div class="Index">UTF_16_Wide_String <I>subtype of</I> Wide_String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7205">A.4.11(7/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7464">A.4.11(7/3)</A></div>
 <div class="Index">UTF_8_String <I>subtype of</I> String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7204">A.4.11(6/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7463">A.4.11(6/3)</A></div>
 <div class="Index">UTF_String <I>subtype of</I> String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7203">A.4.11(5/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="AA-A-4-11.html#I7462">A.4.11(5/3)</A></div>
+<div class="Index">Valid_Big_Integer <I>subtype of</I> Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Integers&nbsp;&nbsp; 
+<A HREF="AA-A-5-6.html#I7703">A.5.6(5/5)</A></div>
+<div class="Index">Valid_Big_Real <I>subtype of</I> Big_Real<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Big_Numbers.Big_Reals&nbsp;&nbsp; 
+<A HREF="AA-A-5-7.html#I7726">A.5.7(5/5)</A></div>
 <div class="Index">Vector<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I7975">A.18.2(8/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I8293">A.18.2(8/5)</A>, 
+<A HREF="AA-A-18-2.html#I8385">A.18.2(78.2/5)</A></div>
 <div class="Index">wchar_array<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8844">B.3(33/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9417">B.3(33/3)</A></div>
 <div class="Index">wchar_t<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I8840">B.3(30/1)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I9413">B.3(30/1)</A></div>
 <div class="Index">Wide_Character<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6536">A.1(36.1/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6799">A.1(36.1/3)</A></div>
 <div class="Index">Wide_Character_Mapping<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7128">A.4.7(20/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7389">A.4.7(20/2)</A></div>
 <div class="Index">Wide_Character_Mapping_Function<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7134">A.4.7(26)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7395">A.4.7(26)</A></div>
 <div class="Index">Wide_Character_Range<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7117">A.4.7(6)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7378">A.4.7(6)</A></div>
 <div class="Index">Wide_Character_Ranges<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7118">A.4.7(7)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7379">A.4.7(7)</A></div>
 <div class="Index">Wide_Character_Sequence <I>subtype of</I> Wide_String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7124">A.4.7(16)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7385">A.4.7(16)</A></div>
 <div class="Index">Wide_Character_Set<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7115">A.4.7(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I7376">A.4.7(4/2)</A></div>
 <div class="Index">Wide_String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6541">A.1(41/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6804">A.1(41/3)</A></div>
 <div class="Index">Wide_Wide_Character<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6537">A.1(36.2/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6800">A.1(36.2/3)</A></div>
 <div class="Index">Wide_Wide_Character_Mapping<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7170">A.4.8(20/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7430">A.4.8(20/2)</A></div>
 <div class="Index">Wide_Wide_Character_Mapping_Function<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7176">A.4.8(26/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7436">A.4.8(26/2)</A></div>
 <div class="Index">Wide_Wide_Character_Range<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7159">A.4.8(6/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7419">A.4.8(6/2)</A></div>
 <div class="Index">Wide_Wide_Character_Ranges<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7160">A.4.8(7/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7420">A.4.8(7/2)</A></div>
 <div class="Index">Wide_Wide_Character_Sequence <I>subtype of</I> Wide_Wide_String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7166">A.4.8(16/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7426">A.4.8(16/2)</A></div>
 <div class="Index">Wide_Wide_Character_Set<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7157">A.4.8(4/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I7417">A.4.8(4/2)</A></div>
 <div class="Index">Wide_Wide_String<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6542">A.1(42.1/3)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="AA-A-1.html#I6805">A.1(42.1/3)</A></div>
 <div class="Index">Year_Number <I>subtype of</I> Integer<BR>
-&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I4948">9.6(11/2)</A></div>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="AA-9-6.html#I5174">9.6(11/2)</A></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-Q-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

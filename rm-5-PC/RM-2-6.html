@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,15 +37,15 @@
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 is formed by a sequence of graphic characters (possibly none) enclosed 
 between two quotation marks used as string brackets. They are used to 
-represent <SPAN Class="swiss"><A HREF="RM-6-1.html#S0187">operator_symbol</A></SPAN>s 
+represent <SPAN Class="swiss"><A HREF="RM-6-1.html#S0202">operator_symbol</A></SPAN>s 
 (see <A HREF="RM-6-1.html">6.1</A>), values of a string type (see <A HREF="RM-4-2.html">4.2</A>), 
-and array subaggregates (see <A HREF="RM-4-3-3.html">4.3.3</A>). <A NAME="I1257"></A></div>
+and array subaggregates (see <A HREF="RM-4-3-3.html">4.3.3</A>). <A NAME="I1255"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">string_literal</SPAN><A NAME="I1258"></A><A NAME="S0016"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&quot;{<A NAME="I1259"></A><SPAN Class="swiss"><A HREF="RM-2-6.html#S0017">string_element</A></SPAN>}&quot;</div>
+<div class="Indented1"><SPAN Class="swiss">string_literal</SPAN><A NAME="I1256"></A><A NAME="S0016"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&quot;{<A NAME="I1257"></A><SPAN Class="swiss"><A HREF="RM-2-6.html#S0017">string_element</A></SPAN>}&quot;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">string_element</SPAN><A NAME="I1260"></A><A NAME="S0017"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&quot;&quot;&nbsp;|&nbsp;<I>non_quotation_mark_</I><A NAME="I1261"></A><SPAN Class="swiss">graphic_character</SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">string_element</SPAN><A NAME="I1258"></A><A NAME="S0017"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&quot;&quot;&nbsp;|&nbsp;<I>non_quotation_mark_</I><A NAME="I1259"></A><SPAN Class="swiss">graphic_character</SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-6.html#S0017">string_element</A></SPAN> 
 is either a pair of quotation marks (&quot;&quot;), or a single <SPAN Class="swiss">graphic_character</SPAN> 
@@ -53,7 +53,7 @@ other than a quotation mark.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I1262"></A>The <I>sequence of characters</I> 
+<div class="Normal"><A NAME="I1260"></A>The <I>sequence of characters</I> 
 of a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 is formed from the sequence of <SPAN Class="swiss"><A HREF="RM-2-6.html#S0017">string_element</A></SPAN>s 
 between the bracketing quotation marks, in the given order, with a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0017">string_element</A></SPAN> 
@@ -61,7 +61,7 @@ that is &quot;&quot; becoming a single quotation mark in the sequence
 of characters, and any other <SPAN Class="swiss"><A HREF="RM-2-6.html#S0017">string_element</A></SPAN> 
 being reproduced in the sequence.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1263"></A>A <I>null string literal</I> 
+<div class="Normal"><A NAME="I1261"></A>A <I>null string literal</I> 
 is a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 with no <SPAN Class="swiss"><A HREF="RM-2-6.html#S0017">string_element</A></SPAN>s 
 between the quotation marks.</div>
@@ -89,7 +89,7 @@ literals:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

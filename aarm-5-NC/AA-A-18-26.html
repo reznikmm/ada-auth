@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-25.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -44,15 +44,23 @@ provide sorting on arbitrary array types.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The generic library procedure Containers.Generic_Array_Sort has the following 
 declaration:&nbsp;</div>
-<div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples"><B>generic</B><BR>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index_Type&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Array_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(Index_Type&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Array_Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type);<A NAME="I8334"></A><BR>
-<B>pragma</B>&nbsp;Pure(Ada.Containers.Generic_Array_Sort);</div>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Array_Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type)<A NAME="I8870"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>;</div>
+<div class="paranum"><a name="p3.a">3.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+Global =&gt; <B>null</B> means that the only global side-effects allowed 
+are associated with the actual generic parameters. Similarly, when Nonblocking 
+is set to True for a generic unit, the only blocking allowed is that 
+associated with the actual generic parameters.&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented2">Reorders the elements of Container such that the 
 elements are sorted smallest first as determined by the generic formal 
@@ -68,7 +76,7 @@ a strict weak ordering relationship (see <A HREF="AA-A-18.html">A.18</A>);
 it should not modify Container. If the actual for &quot;&lt;&quot; behaves 
 in some other manner, the behavior of the instance of Generic_Array_Sort 
 is unspecified. The number of times Generic_Array_Sort calls &quot;&lt;&quot; 
-is unspecified.<A NAME="I8335"></A></div>
+is unspecified.<A NAME="I8871"></A></div>
 <div class="paranum"><a name="p5.a">5.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This implies swapping the 
 elements, usually including an intermediate copy. This of course means 
@@ -87,16 +95,24 @@ in the element that provides the needed stability.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The generic library procedure Containers.Generic_Constrained_Array_Sort 
 has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples"><B>generic</B><BR>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index_Type&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Array_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(Index_Type)&nbsp;<B>of</B>&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Constrained_Array_Sort<A NAME="I8336"></A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type);<BR>
-<B>pragma</B>&nbsp;Pure(Ada.Containers.Generic_Constrained_Array_Sort);</div>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Constrained_Array_Sort<A NAME="I8872"></A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>;</div>
+<div class="paranum"><a name="p7.a">7.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+Global =&gt; <B>null</B> means that the only global side-effects allowed 
+are associated with the actual generic parameters. Similarly, when Nonblocking 
+is set to True for a generic unit, the only blocking allowed is that 
+associated with the actual generic parameters.&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Indented2">Reorders the elements of Container such that the 
 elements are sorted smallest first as determined by the generic formal 
@@ -112,20 +128,27 @@ define a strict weak ordering relationship (see <A HREF="AA-A-18.html">A.18</A>)
 it should not modify Container. If the actual for &quot;&lt;&quot; behaves 
 in some other manner, the behavior of the instance of Generic_Constrained_Array_Sort 
 is unspecified. The number of times Generic_Constrained_Array_Sort calls 
-&quot;&lt;&quot; is unspecified.<A NAME="I8337"></A></div>
+&quot;&lt;&quot; is unspecified.<A NAME="I8873"></A></div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 The generic library procedure Containers.Generic_Sort has the following 
 declaration:&nbsp;</div>
-<div class="paranum"><a name="p9.2">9.2/4</a></div>
+<div class="paranum"><a name="p9.2">9.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index_Type&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Before&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Index_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;procedure</B>&nbsp;Swap&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type);<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Sort<A NAME="I8338"></A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(First,&nbsp;Last&nbsp;:&nbsp;Index_Type'Base);<BR>
-<B>pragma</B>&nbsp;Pure(Ada.Containers.Generic_Sort);</div>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Sort<A NAME="I8874"></A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(First,&nbsp;Last&nbsp;:&nbsp;Index_Type'Base)<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>;</div>
+<div class="paranum"><a name="p9.a">9.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+Global =&gt; <B>null</B> means that the only global side-effects allowed 
+are associated with the actual generic parameters. Similarly, when Nonblocking 
+is set to True for a generic unit, the only blocking allowed is that 
+associated with the actual generic parameters.&nbsp;</div>
 <div class="paranum"><a name="p9.3">9.3/3</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
@@ -145,7 +168,7 @@ it should not modify the elements. The actual function for the generic
 formal Swap should exchange the values of the indicated elements. If 
 the actual for either Before or Swap behaves in some other manner, the 
 behavior of Generic_Sort is unspecified. The number of times the Generic_Sort 
-calls Before or Swap is unspecified.<A NAME="I8339"></A></div>
+calls Before or Swap is unspecified.<A NAME="I8875"></A></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
@@ -198,14 +221,14 @@ should minimize calls to the generic formal Swap.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I8340"></A>The generic procedures Containers.Generic_Array_Sort 
+<A NAME="I8876"></A>The generic procedures Containers.Generic_Array_Sort 
 and Containers.Generic_Constrained_Array_Sort are new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p13.b">13.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<A NAME="I8341"></A> The generic procedure Containers.Generic_Sort is 
+<A NAME="I8877"></A> The generic procedure Containers.Generic_Sort is 
 new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -215,9 +238,14 @@ new.&nbsp;</div>
 weak ordering; the old definition allowed indeterminant comparisons that 
 would not have worked in a sort.&nbsp;</div>
 
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p13.d">13.d/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+Added contracts to these procedures.&nbsp;</div>
+
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-25.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

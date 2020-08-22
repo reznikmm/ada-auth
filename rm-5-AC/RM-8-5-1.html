@@ -31,9 +31,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-8-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -42,16 +42,16 @@
 <HR>
 <H1>8.5.1 Object Renaming Declarations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
 is used to rename an object.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">object_renaming_declaration</SPAN><A NAME="I4147"></A><A NAME="S0217"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4148"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert5">[</span>:&nbsp;<span class="insert2">[<A NAME="I4149"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I4150"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert5">]</span>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4151"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4152"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;<span class="insert2"><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I4153"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;<A NAME="I4154"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4155"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4156"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
+<div class="Indented1"><SPAN Class="swiss">object_renaming_declaration</SPAN><A NAME="I4354"></A><A NAME="S0239"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4355"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert5">[</span>:&nbsp;<span class="insert2">[<A NAME="I4356"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I4357"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert5">]</span>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4358"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4359"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;<span class="insert2"><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4360"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;<A NAME="I4361"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4362"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4363"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
@@ -83,7 +83,7 @@ the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The renamed entity shall be an object.<A NAME="I4157"></A></div>
+<div class="Normal">The renamed entity shall be an object.<A NAME="I4364"></A></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">In 
 the case where the type is defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>, 
@@ -92,18 +92,18 @@ the type of the renamed object and the type defined by the <SPAN Class="swiss"><
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
 <div class="Bulleted"><span class="insert2">shall both be access-to-object 
 types with statically matching designated subtypes and with both or neither 
-being access-to-constant types; or <A NAME="I4158"></A></span></div>
+being access-to-constant types; or <A NAME="I4365"></A></span></div>
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
 <div class="Bulleted"><span class="insert2">shall both be access-to-subprogram 
-types with subtype conformant designated profiles. <A NAME="I4159"></A></span></div>
+types with subtype conformant designated profiles. <A NAME="I4366"></A></span></div>
 <div class="paranum"><a name="p4.4">4.4/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">For 
-an <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 that has a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN></span><span class="insert5">, 
 the subtype of the <I>object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-shall exclude null. In addition, if the <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+shall exclude null. In addition, if the <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
 occurs within the body of a generic unit <I>G</I> or within the body 
 of a generic unit declared within the declarative region of generic unit 
 <I>G</I>, then</span><span class="insert2">:</span></div>
@@ -113,7 +113,7 @@ of a generic unit declared within the declarative region of generic unit
 a generic formal object&nbsp;</span><span class="insert5">of mode <B>in out</B> 
 </span><span class="insert2">of&nbsp;</span><span class="insert2"><span class="delete5">a 
 generic unit&nbsp;</span></span><span class="insert2"><I>G</I>,&nbsp;</span><span class="insert2"><span class="delete5">and 
-the <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
 occurs within the body of <I>G</I> or within the body of a generic unit 
 declared within the declarative region of <I>G</I>,&nbsp;</span></span><span class="insert2">then 
 the declaration of&nbsp;</span><span class="insert5">that</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;the 
@@ -125,12 +125,12 @@ the subtype of</span></span><span class="insert2">&nbsp;the <I>object_</I><SPAN 
 </span><span class="insert5">statically denotes a call of a generic formal 
 function of <I>G</I>, then the declaration of the result of that function 
 shall have a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;shall 
-exclude null. <A NAME="I4160"></A>In addition to the places where Legality 
+exclude null. <A NAME="I4367"></A>In addition to the places where Legality 
 Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), this rule 
 applies also in the private part of an instance of a generic unit</span></span><span class="insert2">.</span> 
 </div>
 <div class="paranum"><a name="p4.7">4.7/5</a></div>
-<div class="Normal">&nbsp;<span class="insert5"><A NAME="I4161"></A>In addition 
+<div class="Normal">&nbsp;<span class="insert5"><A NAME="I4368"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span></div>
@@ -143,7 +143,7 @@ subtype is indefinite, or the variable is&nbsp;</span><span class="insert2"><spa
 by its initial value</span></span><span class="delete3"></span><span class="delete2">&nbsp;aliased</span><span class="delete3"></span>. 
 A <SPAN Class="swiss"><A HREF="RM-4-1-2.html#S0097">slice</A></SPAN> 
 of an array shall not be renamed if this restriction disallows renaming 
-of the array. <span class="insert1"><A NAME="I4162"></A>In addition to 
+of the array. <span class="insert1"><A NAME="I4369"></A>In addition to 
 the places where Legality Rules normally apply, these rules apply also 
 in the private part of an instance of a generic unit.</span><span class="insert1"><span class="delete3">&nbsp;These rules also apply for a renaming that appears in the body of a generic 
 unit, with the additional requirement that even if the nominal subtype 
@@ -152,16 +152,16 @@ an untagged generic formal derived type.</span></span><span class="insert1"></sp
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
 declares a new view of the renamed object whose properties are identical 
 to those of the renamed view. Thus, the properties of the renamed object 
-are not affected by the <SPAN Class="swiss"><A HREF="RM-8-5.html#S0216">renaming_declaration</A></SPAN>. 
+are not affected by the <SPAN Class="swiss"><A HREF="RM-8-5.html#S0238">renaming_declaration</A></SPAN>. 
 In particular, its value and whether or not it is a constant are unaffected; 
 similarly, the<span class="insert2">&nbsp;null exclusion or</span> constraints 
 that apply to an object are not affected by renaming (any constraint 
 implied by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 <span class="insert2">or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
-</span>of the <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+</span>of the <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN> 
 is ignored).&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
@@ -177,7 +177,7 @@ an object:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-8-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -34,7 +34,7 @@
 <H1>5.5.2 Generalized Loop Iteration</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-Generalized forms of loop iteration are provided by an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>. 
+Generalized forms of loop iteration are provided by an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
@@ -42,26 +42,35 @@ Generalized forms of loop iteration are provided by an <SPAN Class="swiss"><A HR
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0156-1.TXT">AI12-0156-1</A></I>} 
-<SPAN Class="swiss">iterator_specification</SPAN><A NAME="I3602"></A><A NAME="S0168"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3603"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[:&nbsp;<A NAME="I3604"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>]&nbsp;<B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterator_</I><A NAME="I3605"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3606"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[:&nbsp;<A NAME="I3607"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>]&nbsp;<B>of</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterable_</I><A NAME="I3608"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0250-1.TXT">AI12-0250-1</A></I>} 
+<SPAN Class="swiss">iterator_specification</SPAN><A NAME="I3747"></A><A NAME="S0183"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3748"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[:&nbsp;<A NAME="I3749"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN>]&nbsp;<B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterator_</I><A NAME="I3750"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3751"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0182">iterator_filter</A></SPAN>]<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3752"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[:&nbsp;<A NAME="I3753"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN>]&nbsp;<B>of</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterable_</I><A NAME="I3754"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3755"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0182">iterator_filter</A></SPAN>]</div>
 <div class="paranum"><a name="p2.1">2.1/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0156-1.TXT">AI12-0156-1</A></I>} 
-<SPAN Class="swiss">loop_parameter_subtype_indication</SPAN><A NAME="I3609"></A><A NAME="S0169"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3610"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I3611"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></div>
+<SPAN Class="swiss">loop_parameter_subtype_indication</SPAN><A NAME="I3756"></A><A NAME="S0184"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3757"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I3758"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></div>
+<div class="paranum"><a name="p2.2">2.2/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+If an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+is for a parallel construct, the reserved word <B>reverse</B> shall not 
+appear in the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>. 
+</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-For the first form of <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
-called a <I>generalized iterator</I>,<A NAME="I3612"></A><A NAME="I3613"></A> 
+For the first form of <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>, 
+called a <I>generalized iterator</I>,<A NAME="I3759"></A><A NAME="I3760"></A> 
 the expected type for the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is any iterator type.<A NAME="I3614"></A> For the second form of <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
+is any iterator type.<A NAME="I3761"></A> For the second form of <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>, 
 the expected type for the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is any array or iterable container type.<A NAME="I3615"></A> If the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-denotes an array object, the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-is called an <I>array component iterator</I>;<A NAME="I3616"></A><A NAME="I3617"></A> 
-otherwise it is called a <I>container element iterator</I>.<A NAME="I3618"></A><A NAME="I3619"></A> 
+is any array or iterable container type.<A NAME="I3762"></A> If the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+denotes an array object, the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+is called an <I>array component iterator</I>;<A NAME="I3763"></A><A NAME="I3764"></A> 
+otherwise it is called a <I>container element iterator</I>.<A NAME="I3765"></A><A NAME="I3766"></A> 
 </div>
 <div class="paranum"><a name="p3.a.1">3.a.1/3</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>An iterator is a construct 
@@ -70,26 +79,36 @@ may be user defined, and may perform arbitrary computations to access
 elements from a container.</div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p4">4/3</a></div>
+<div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-If the reserved word <B>reverse</B> appears, the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-is a <I>reverse iterator</I>;<A NAME="I3620"></A><A NAME="I3621"></A> 
-otherwise it is a <I>forward iterator</I>.<A NAME="I3622"></A><A NAME="I3623"></A> 
-In a reverse generalized iterator, the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-shall be of a reversible iterator type. In a reverse container element 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+If the reserved word <B>reverse</B> appears, the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+is a <A NAME="I3767"></A><A NAME="I3768"></A><I>reverse iterator</I>. 
+If the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+is for a parallel construct, the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+is a <I>parallel iterator</I>.<A NAME="I3769"></A><A NAME="I3770"></A> 
+Otherwise, it is a <I>forward iterator</I>.<A NAME="I3771"></A><A NAME="I3772"></A> 
+Forward and reverse iterators are collectively called <I>sequential</I> 
+iterators.<A NAME="I3773"></A><A NAME="I3774"></A> In a reverse generalized 
+iterator, the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall be of a reversible iterator type. In a parallel generalized iterator, 
+the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall be of a parallel iterator type. In a reverse container element 
 iterator, the default iterator type for the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-shall be a reversible iterator type.</div>
+shall be a reversible iterator type. In a parallel container element 
+iterator, the default iterator type for the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall be of a parallel iterator type.</div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0151-1.TXT">AI12-0151-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0156-1.TXT">AI12-0156-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0183-1.TXT">AI12-0183-1</A></I>} 
-The subtype defined by the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>, 
+The subtype defined by the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN>, 
 if any, of a generalized iterator shall statically match the iteration 
-cursor subtype. The subtype defined by the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>, 
+cursor subtype. The subtype defined by the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN>, 
 if any, of an array component iterator shall statically match the component 
 subtype of the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
-The subtype defined by the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>, 
+The subtype defined by the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN>, 
 if any, of a container element iterator shall statically match the default 
 element subtype for the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.</div>
 <div class="paranum"><a name="p6">6/3</a></div>
@@ -102,7 +121,7 @@ denotes a constant or the Variable_Indexing aspect is not specified for
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0047-1.TXT">AI12-0047-1</A></I>} 
 The <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
 shall not denote a subcomponent that depends on discriminants of an object 
 whose nominal subtype is unconstrained, unless the object is known to 
 be constrained.</div>
@@ -141,17 +160,17 @@ a type can change due to visibility.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0156-1.TXT">AI12-0156-1</A></I>} 
-An <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-declares a <I>loop parameter</I>.<A NAME="I3624"></A> In a generalized 
+An <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
+declares a <I>loop parameter</I>.<A NAME="I3775"></A> In a generalized 
 iterator, an array component iterator, or a container element iterator, 
-if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN> 
+if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN> 
 is present, it determines the nominal subtype of the loop parameter. 
-In a generalized iterator, if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN> 
+In a generalized iterator, if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN> 
 is not present, the nominal subtype of the loop parameter is the iteration 
-cursor subtype. In an array component iterator, if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN> 
+cursor subtype. In an array component iterator, if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN> 
 is not present, the nominal subtype of the loop parameter is the component 
 subtype of the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
-In a container element iterator, if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN> 
+In a container element iterator, if a <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN> 
 is not present, the nominal subtype of the loop parameter is the default 
 element subtype for the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.</div>
 <div class="paranum"><a name="p8">8/3</a></div>
@@ -179,33 +198,37 @@ the case of a variable indexing). Roughly speaking, the loop parameter
 has the accessibility level of a single iteration of the loop. More precisely, 
 the function result (or the generalized reference thereof) is considered 
 to be renamed in the declarative part of a notional block statement which 
-immediately encloses the loop's sequence_of_statements; the accessibility 
-of the loop parameter is that of the block statement.&nbsp;</div>
+immediately encloses the loop's <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>; 
+the accessibility of the loop parameter is that of the block statement. 
+</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
+For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN> 
 is first elaborated. This elaboration elaborates the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 if any.</div>
-<div class="paranum"><a name="p10">10/3</a></div>
+<div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-For a generalized iterator, the loop parameter is created, the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is evaluated, and the denoted iterator object becomes the <I>loop iterator</I>.<A NAME="I3625"></A> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0250-1.TXT">AI12-0250-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+For a sequential generalized iterator, the loop parameter is created, 
+the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is evaluated, and the denoted iterator object becomes the <I>loop iterator</I>.<A NAME="I3776"></A> 
 In a forward generalized iterator, the operation First of the iterator 
 type is called on the loop iterator, to produce the initial value for 
 the loop parameter. If the result of calling Has_Element on the initial 
-value is False, then the execution of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
-is complete. Otherwise, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-is executed and then the Next operation of the iterator type is called 
-with the loop iterator and the current value of the loop parameter to 
-produce the next value to be assigned to the loop parameter. This repeats 
-until the result of calling Has_Element on the loop parameter is False, 
-or the loop is left as a consequence of a transfer of control. For a 
-reverse generalized iterator, the operations Last and Previous are called 
-rather than First and Next.</div>
+value is False, then the execution of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN> 
+is complete. Otherwise, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+is conditionally executed and then the Next operation of the iterator 
+type is called with the loop iterator and the current value of the loop 
+parameter to produce the next value to be assigned to the loop parameter. 
+This repeats until the result of calling Has_Element on the loop parameter 
+is False, or the loop is left as a consequence of a transfer of control. 
+For a reverse generalized iterator, the operations Last and Previous 
+are called rather than First and Next.</div>
 <div class="paranum"><a name="p10.a">10.a/4</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0093-1.TXT">AI12-0093-1</A></I>} 
 The loop parameter of a generalized iterator is a variable of which the 
@@ -216,56 +239,147 @@ subtype is class-wide, the variable (like all variables) has the tag
 of the initial value. Constraint_Error may be raised by a subsequent 
 iteration if Next or Previous return an object with a different tag or 
 constraint.&nbsp;</div>
-<div class="paranum"><a name="p11">11/3</a></div>
+<div class="paranum"><a name="p10.1">10.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+For a parallel generalized iterator, the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN>, 
+if any, of the associated parallel construct, is first elaborated, to 
+determine the maximum number of chunks (see <A HREF="AA-5-5.html">5.5</A>), 
+and then the operation Split_Into_Chunks of the iterator type is called, 
+with the determined maximum passed as the Max_Chunks parameter, specifying 
+the upper bound for the number of loop parameter objects (and the number 
+of logical threads of control) to be associated with the iterator. In 
+the absence of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN>, 
+the maximum number of chunks is determined in an implementation-defined 
+manner.</div>
+<div class="paranum"><a name="p10.b">10.b/5</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The maximum number 
+of chunks for a parallel generalized iterator without a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN>.</div>
+<div class="paranum"><a name="p10.2">10.2/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0250-1.TXT">AI12-0250-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+Upon return from Split_Into_Chunks, the actual number of chunks for the 
+loop is determined by calling the Chunk_Count operation of the iterator, 
+at which point one logical thread of control is initiated for each chunk, 
+with an associated chunk index in the range from one to the actual number 
+of chunks. Within each logical thread of control, a loop parameter is 
+created. If a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+is present in the associated parallel construct, then a chunk parameter 
+is created, and initialized with a value from the discrete subtype defined 
+by the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>, 
+so that the order of the chosen chunk parameter values correspond to 
+the order of the chunk indices associated with the logical threads of 
+control. The operation First of the iterator type having a Chunk parameter 
+is called on the loop iterator, with Chunk initialized from the corresponding 
+chunk index, to produce the initial value for the loop parameter. If 
+the result of calling Has_Element on this initial value is False, then 
+the execution of the logical thread of control is complete. Otherwise, 
+the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+is conditionally executed and then the Next operation of the iterator 
+type having a Chunk parameter is called, with the loop iterator, the 
+current value of the loop parameter, and the corresponding chunk index, 
+to produce the next value to be assigned to the loop parameter. This 
+repeats until the result of calling Has_Element on the loop parameter 
+is False, or the associated parallel construct is left as a consequence 
+of a transfer of control. In the absence of a transfer of control, the 
+associated parallel construct of a parallel generalized iterator is complete 
+when all of its logical threads of control are complete.</div>
+<div class="paranum"><a name="p10.b.1">10.b.1/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The Max_Chunks parameter 
+of the Split_Into_Chunks procedure is an upper bound for the number of 
+chunks to be associated with a loop. A container implementation may opt 
+for a lower value for the number of chunks if a more optimal split can 
+be determined. For instance, a tree-based container might create the 
+split based on the number of branches at the top levels of the tree. 
+</div>
+<div class="paranum"><a name="p11">11/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-For an array component iterator, the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0250-1.TXT">AI12-0250-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+For an array component iterator, the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN> 
+of the associated parallel construct, if any, is first elaborated to 
+determine the maximum number of chunks (see <A HREF="AA-5-5.html">5.5</A>), 
+and then the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is evaluated and the denoted array object becomes the <I>array for the 
-loop</I>.<A NAME="I3626"></A> If the array for the loop is a null array, 
-then the execution of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
-is complete. Otherwise, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-is executed with the loop parameter denoting each component of the array 
-for the loop, using a <I>canonical</I> order of components,<A NAME="I3627"></A> 
+loop</I>.<A NAME="I3777"></A> If the array for the loop is a null array, 
+then the execution of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN> 
+is complete. Otherwise, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+is conditionally executed with the loop parameter denoting each component 
+of the array for the loop, using a <I>canonical</I> order of components,<A NAME="I3778"></A> 
 which is last dimension varying fastest (unless the array has convention 
 Fortran, in which case it is first dimension varying fastest). For a 
 forward array component iterator, the iteration starts with the component 
 whose index values are each the first in their index range, and continues 
 in the canonical order. For a reverse array component iterator, the iteration 
 starts with the component whose index values are each the last in their 
-index range, and continues in the reverse of the canonical order. The 
-loop iteration proceeds until the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-has been executed for each component of the array for the loop, or until 
-the loop is left as a consequence of a transfer of control.</div>
-<div class="paranum"><a name="p12">12/3</a></div>
+index range, and continues in the reverse of the canonical order. For 
+a parallel array component iterator, the iteration is broken up into 
+contiguous chunks of the canonical order, such that all components are 
+covered with no overlaps; each chunk has its own logical thread of control 
+with its own loop parameter and iteration within each chunk is in the 
+canonical order. The number of chunks is implementation defined, but 
+is limited in the presence of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN> 
+to the determined maximum. The loop iteration proceeds until the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+has been conditionally executed for each component of the array for the 
+loop, or until the loop is left as a consequence of a transfer of control.</div>
+<div class="paranum"><a name="p11.a">11.a/5</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The number of 
+chunks for an array component iterator.</div>
+<div class="paranum"><a name="p11.1">11.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+If a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+is present in the associated parallel construct, then the logical thread 
+of control associated with a given chunk has a chunk parameter initialized 
+with a distinct value from the discrete subtype defined by the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>. 
+The values of the chunk parameters are assigned such that they increase 
+in the canonical order of the starting array components for the chunks.</div>
+<div class="paranum"><a name="p12">12/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-For a container element iterator, the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is evaluated and the denoted iterable container object becomes the <I>iterable 
-container object for the loop</I>.<A NAME="I3628"></A> The default iterator 
-function for the type of the iterable container object for the loop is 
-called on the iterable container object and the result is the <I>loop 
-iterator</I>.<A NAME="I3629"></A> An object of the default cursor subtype 
-is created (the <I>loop cursor</I>).<A NAME="I3630"></A></div>
-<div class="paranum"><a name="p13">13/3</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+For a container element iterator, the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN> 
+of the associated parallel construct, if any, is first elaborated to 
+determine the maximum number of chunks (see <A HREF="AA-5-5.html">5.5</A>), 
+and then the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is evaluated. If the container type has Iterator_View specified, an object 
+of the Iterator_View type is created with the discriminant referencing 
+the iterable container object denoted by the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
+This is the <I>iterable container object for the loop</I>. Otherwise, 
+the iterable container object denoted by the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+becomes the iterable container object for the loop.<A NAME="I3779"></A> 
+The default iterator function for the type of the iterable container 
+object for the loop is called on the iterable container object and the 
+result is the <I>loop iterator</I>.<A NAME="I3780"></A> For a sequential 
+container element iterator, an object of the default cursor subtype is 
+created (the <I>loop cursor</I>).<A NAME="I3781"></A> For a parallel 
+container element iterator, each chunk of iterations will have its own 
+loop cursor, again of the default cursor subtype.</div>
+<div class="paranum"><a name="p12.a">12.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+If Iterator_View is specified, we add an extra object and use that object 
+for this iteration. This allows these iterators to automatically use 
+the stable view (defined in each of the language-defined containers) 
+to do the iteration. That eliminates the need to set and clear the tampering 
+with elements indication each time Reference is called; that eliminates 
+substantial overhead as finalization is typically used to implement the 
+tampering reset.&nbsp;</div>
+<div class="paranum"><a name="p13">13/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-For a forward container element iterator, the operation First of the 
-iterator type is called on the loop iterator, to produce the initial 
-value for the loop cursor. If the result of calling Has_Element on the 
-initial value is False, then the execution of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
-is complete. Otherwise, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-is executed with the loop parameter denoting an indexing (see <A HREF="AA-4-1-6.html">4.1.6</A>) 
-into the iterable container object for the loop, with the only parameter 
-to the indexing being the current value of the loop cursor; then the 
-Next operation of the iterator type is called with the loop iterator 
-and the loop cursor to produce the next value to be assigned to the loop 
-cursor. This repeats until the result of calling Has_Element on the loop 
-cursor is False, or until the loop is left as a consequence of a transfer 
-of control. For a reverse container element iterator, the operations 
-Last and Previous are called rather than First and Next. If the loop 
-parameter is a constant (see above), then the indexing uses the default 
-constant indexing function for the type of the iterable container object 
-for the loop; otherwise it uses the default variable indexing function.</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+A container element iterator then proceeds as described above for a generalized 
+iterator, except that each reference to a loop parameter is replaced 
+by a reference to the corresponding loop cursor. For a container element 
+iterator, the loop parameter for each iteration instead denotes an indexing 
+(see <A HREF="AA-4-1-6.html">4.1.6</A>) into the iterable container object 
+for the loop, with the only parameter to the indexing being the value 
+of the loop cursor for the given iteration. If the loop parameter is 
+a constant (see above), then the indexing uses the default constant indexing 
+function for the type of the iterable container object for the loop; 
+otherwise it uses the default variable indexing function.</div>
 <div class="paranum"><a name="p14">14/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
 Any exception propagated by the execution of a generalized iterator or 
@@ -278,9 +392,11 @@ as well as exceptions raised by the assignment to the loop parameter
 or cursor.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
-<div class="paranum"><a name="p15">15/3</a></div>
+<div class="paranum"><a name="p15">15/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
 --&nbsp;<SPAN Class="roman"><I>Array&nbsp;component&nbsp;iterator&nbsp;example:</I></SPAN><BR>
+<B>parallel</B><BR>
 <B>for</B>&nbsp;Element&nbsp;<B>of</B>&nbsp;Board&nbsp;<B>loop</B>&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>See&nbsp;<A HREF="AA-3-6-1.html">3.6.1</A>.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;Element&nbsp;:=&nbsp;Element&nbsp;*&nbsp;2.0;&nbsp;--&nbsp;<SPAN Class="roman"><I>Double&nbsp;each&nbsp;element&nbsp;of&nbsp;Board,&nbsp;a&nbsp;two-dimensional&nbsp;array.</I></SPAN><BR>
 <B>end&nbsp;loop</B>;</div>
@@ -293,12 +409,12 @@ and <A HREF="AA-A-18-3.html">A.18.3</A>.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<A NAME="I3631"></A>Generalized forms of loop iteration are new.&nbsp;</div>
+<A NAME="I3782"></A>Generalized forms of loop iteration are new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p16.b">16.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0047-1.TXT">AI12-0047-1</A></I>} 
-<A NAME="I3632"></A><B>Corrigendum:</B> Added a rule to ensure that the 
+<A NAME="I3783"></A><B>Corrigendum:</B> Added a rule to ensure that the 
 object being iterated cannot be a component that could disappear before 
 the loop completes. This could be incompatible by making a loop that 
 was legal (and worked correctly, so long as the enclosing object is not 
@@ -333,25 +449,37 @@ constraint.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p16.e">16.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0156-1.TXT">AI12-0156-1</A></I>} 
-<A NAME="I3633"></A>For consistency, we now allow a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<A NAME="I3784"></A>For consistency, we now allow a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 on a generalized iterator, and anonymous access types on all forms of 
-iterator. We introduced a new syntax non-terminal, <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN> 
-to simplfy the wording.&nbsp;</div>
+iterator. We introduced a new syntax non-terminal, <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0184">loop_parameter_subtype_indication</A></SPAN> 
+to simplfy the wording.</div>
+<div class="paranum"><a name="p16.f">16.f/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0250-1.TXT">AI12-0250-1</A></I>} 
+An <SPAN Class="swiss"><A HREF="AA-5-5.html#S0182">iterator_filter</A></SPAN> 
+is now allowed on <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>s. 
+This is mainly for consistency with aggregate and reduction iterators, 
+where it eliminates the need for temporary objects.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p16.f">16.f/4</a></div>
+<div class="paranum"><a name="p16.g">16.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
 <B>Corrigendum:</B> Added wording to specify that a loop propagates any 
 exceptions propagated by the execution of an iterator. Since that's what 
 naturally would happen from a macro-style expansion of the parts of an 
 iterator, and no other interpretation makes sense given the way the rest 
 of Ada works, we consider it so unlikely that any Ada 2012 implementation 
-ever did anything else that we don't document this as a possible inconsistency. 
-</div>
+ever did anything else that we don't document this as a possible inconsistency.</div>
+<div class="paranum"><a name="p16.h">16.h/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+Added wording to include the use of the iterator view in a container 
+element iterator.</div>
+<div class="paranum"><a name="p16.i">16.i/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+Added wording to describe the execution of parallel iterators.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

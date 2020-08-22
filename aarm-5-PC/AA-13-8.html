@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,45 +35,45 @@
 <HR>
 <H1>13.8 Machine Code Insertions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I5920"></A> A machine code insertion can 
-be achieved by a call to a subprogram whose <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-contains <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s.] 
+<div class="Normal">[<A NAME="I6186"></A> A machine code insertion can 
+be achieved by a call to a subprogram whose <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+contains <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN>s.] 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">code_statement</SPAN><A NAME="I5921"></A><A NAME="S0335"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5922"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">code_statement</SPAN><A NAME="I6187"></A><A NAME="S0357"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I6188"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN> 
-is only allowed in the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>. 
-If a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
-contains any <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s, 
-then within this <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
-the only allowed form of <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN> 
-is a <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN> 
+<div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN> 
+is only allowed in the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>. 
+If a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
+contains any <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN>s, 
+then within this <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
+the only allowed form of <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN> 
 (labeled or not), the only allowed <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN>s 
-are <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>s, 
-and no <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN> 
+are <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>s, 
+and no <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN> 
 is allowed (<SPAN Class="swiss"><A HREF="AA-2-7.html#S0018">comment</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 are allowed as usual).&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5923"></A>The <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+<div class="Normal"><A NAME="I6189"></A>The <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 is expected to be of any type.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 shall be of a type declared in package System.Machine_Code.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This includes types declared 
 in children of System.Machine_Code.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN> 
-shall appear only within the scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN> 
+shall appear only within the scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 that mentions package System.Machine_Code.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that this is not a 
@@ -83,10 +83,10 @@ compilation units which depend on System.Machine_Code only indirectly.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5924"></A><A NAME="I5925"></A>The contents 
+<div class="Normal"><A NAME="I6190"></A><A NAME="I6191"></A>The contents 
 of the library package System.Machine_Code (if provided) are implementation 
-defined. The meaning of <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s 
-is implementation defined. [Typically, each <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+defined. The meaning of <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN>s 
+is implementation defined. [Typically, each <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 represents a machine instruction or assembly directive.]&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For example, an instruction 
@@ -95,11 +95,11 @@ the operands.&nbsp;</div>
 <div class="paranum"><a name="p7.b">7.b</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The contents 
 of the visible part of package System.Machine_Code, and the meaning of 
-<SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s.</div>
+<SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN>s.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal">An implementation may place restrictions on <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s. 
+<div class="Normal">An implementation may place restrictions on <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN>s. 
 An implementation is not required to provide package System.Machine_Code. 
 </div>
 <div class="NotesHeader">NOTES</div>
@@ -109,7 +109,7 @@ pragmas specifying register conventions and calling conventions.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Notes">19&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 Machine code functions are exempt from the rule that a return statement 
-is required. In fact, return statements are forbidden, since only <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s 
+is required. In fact, return statements are forbidden, since only <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN>s 
 are allowed.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The idea is that the author 
@@ -143,20 +143,20 @@ M&nbsp;:&nbsp;Mask;<BR>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><A NAME="I5926"></A>Machine code functions are 
+<div class="Annotations"><A NAME="I6192"></A>Machine code functions are 
 allowed in Ada 95; in Ada 83, only procedures were allowed.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p14.b">14.b</a></div>
-<div class="Annotations">The syntax for <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN> 
-is changed to say &ldquo;<SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN>&rdquo; 
-instead of &ldquo;<A NAME="I5927"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I5928"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPAN>&rdquo;. 
+<div class="Annotations">The syntax for <SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN> 
+is changed to say &ldquo;<SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>&rdquo; 
+instead of &ldquo;<A NAME="I6193"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I6194"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPAN>&rdquo;. 
 Requiring the type of each instruction to be a record type is overspecification. 
 </div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

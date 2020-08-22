@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -25,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-1-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,13 +38,13 @@
 <HR>
 <H1>6.2 Formal Parameter Modes</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN> 
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0207">parameter_specification</A></SPAN> 
 declares a formal parameter of mode <B>in</B>, <B>in out</B>, or <B>out</B>.] 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I3809"></A><A NAME="I3810"></A><A NAME="I3811"></A><A NAME="I3812"></A><A NAME="I3813"></A><A NAME="I3814"></A>A 
+<div class="Normal"><A NAME="I4018"></A><A NAME="I4019"></A><A NAME="I4020"></A><A NAME="I4021"></A><A NAME="I4022"></A><A NAME="I4023"></A>A 
 parameter is passed either <I>by copy</I> or <I>by reference</I>. [When 
 a parameter is passed by copy, the formal parameter denotes a separate 
 object from the actual parameter, and any information transfer between 
@@ -53,12 +55,12 @@ the formal parameter directly reference the actual parameter object.]</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<A NAME="I3815"></A>A type is a <I>by-copy type</I> if it is an elementary 
+<A NAME="I4024"></A>A type is a <I>by-copy type</I> if it is an elementary 
 type, or if it is a descendant of a private type whose full type is a 
 by-copy type. A parameter of a by-copy type is passed by copy, unless 
 the formal parameter is explicitly aliased.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3816"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4025"></A>A 
 type is a <I>by-reference type</I> if it is a descendant of one of the 
 following:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
@@ -78,18 +80,24 @@ type;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Bulleted">a private type whose full type is a by-reference 
 type.&nbsp;</div>
-<div class="paranum"><a name="p10">10/4</a></div>
+<div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0027-1.TXT">AI12-0027-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0236-1.TXT">AI12-0236-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0317-1.TXT">AI12-0317-1</A></I>} 
 A parameter of a by-reference type is passed by reference, as is an explicitly 
-aliased parameter of any type. <A NAME="I3817"></A>Each value of a by-reference 
-type has an associated object. For a parenthesized expression, <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN>, 
-or view conversion, this object is the one associated with the operand. 
+aliased parameter of any type. <A NAME="I4026"></A>Each value of a by-reference 
+type has an associated object.<span class="delete5">&nbsp;For a parenthesized 
+expression, <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>, 
+or view conversion, this object is the one associated with the operand.</span> 
 For a value conversion, the associated object is the anonymous result 
 object if such an object is created (see <A HREF="AA-4-6.html">4.6</A>); 
-otherwise it is the associated object of the operand. For a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN>, 
-this object is the one associated with the evaluated <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>.</div>
+otherwise it is the associated object of the operand.<span class="insert5">&nbsp; In other cases, the object associated with the evaluated operative constituent 
+of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+(see <A HREF="AA-4-4.html">4.4</A>) determines its associated object.</span><span class="delete5">&nbsp;For a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN>, 
+this object is the one associated with the evaluated <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>.</span></div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>By-reference parameter 
 passing makes sense only if there is an object to reference; hence, we 
@@ -100,6 +108,13 @@ implies that every value of a tagged type has an associated object. This
 simplifies things, because we can define the tag to be a property of 
 the object, and not of the value of the object, which makes it clearer 
 that object tags never change.</div>
+<div class="paranum"><a name="p10.b.1">10.b.1/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0317-1.TXT">AI12-0317-1</A></I>} 
+<span class="insert5">A construct like parenthesized expression or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
+is ignored for the purposes of determining the associated object; for 
+a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN>, 
+it is relevant only in that it determines which <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+defines the associated object.</span></div>
 <div class="paranum"><a name="p10.c">10.c</a></div>
 <div class="Annotations">We considered simplifying things even more by 
 making every value (and therefore every expression) have an associated 
@@ -120,10 +135,10 @@ burden.</div>
 Variable Control</A>&rdquo; says that a composite type with an atomic 
 or volatile subcomponent is a by-reference type, among other things.</div>
 <div class="paranum"><a name="p10.f">10.f</a></div>
-<div class="Annotations"><A NAME="I3818"></A>Every value of a limited 
+<div class="Annotations"><A NAME="I4027"></A>Every value of a limited 
 by-reference type is the value of one and only one limited object. The 
 <I>associated object</I> of a value of a limited by-reference type is 
-the object whose value it represents. <A NAME="I3819"></A>Two values 
+the object whose value it represents. <A NAME="I4028"></A>Two values 
 of a limited by-reference type are the <I>same</I> if and only if they 
 represent the value of the same object.</div>
 <div class="paranum"><a name="p10.g">10.g</a></div>
@@ -132,7 +147,7 @@ these statements are not always true for limited private types whose
 underlying type is nonlimited (unfortunately).&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0240-1.TXT">AI05-0240-1</A></I>} 
-<A NAME="I3820"></A>For other parameters, it is unspecified whether the 
+<A NAME="I4029"></A>For other parameters, it is unspecified whether the 
 parameter is passed by copy or by reference.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
@@ -146,7 +161,7 @@ to return by reference (see <A HREF="AA-13-9.html">13.9</A>).&nbsp;</div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0240-1.TXT">AI05-0240-1</A></I>} 
-<A NAME="I3821"></A><A NAME="I3822"></A><A NAME="I3823"></A><A NAME="I3824"></A>If 
+<A NAME="I4030"></A><A NAME="I4031"></A><A NAME="I4032"></A><A NAME="I4033"></A>If 
 one <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> denotes 
 a part of a formal parameter, and a second <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denotes a part of a distinct formal parameter or an object that is not 
@@ -157,9 +172,9 @@ an explicitly aliased parameter, then it is a bounded error to assign
 to the object via one access path, and then read the value of the object 
 via a distinct access path, unless the first access path denotes a part 
 of a formal parameter that no longer exists at the point of the second 
-access [(due to leaving the corresponding callable construct).] <A NAME="I3825"></A>The 
-possible consequences are that Program_Error is raised, or the newly 
-assigned value is read, or some old value of the object is read.&nbsp;</div>
+access [(due to leaving the corresponding callable construct).] The possible 
+consequences are that Program_Error is raised, or the newly assigned 
+value is read, or some old value of the object is read. <A NAME="I4034"></A></div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For example, if we call &ldquo;P(X 
 =&gt; Global_Variable, Y =&gt; Global_Variable)&rdquo;, then within P, 
@@ -233,7 +248,7 @@ local copy is safe &mdash; it is known to have the old value. For example,
 the above-mentioned Move subprogram can be implemented by copying Source 
 into a local variable before assigning into Target.</div>
 <div class="paranum"><a name="p12.k">12.k</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em">For an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
+<div class="Annotations" style="margin-bottom: 0.4em">For an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN> 
 assigning one array parameter to another, the implementation has to check 
 which direction to copy at run time, in general, in case the actual parameters 
 are overlapping slices. For example:&nbsp;</div>
@@ -248,23 +263,23 @@ that X and Y do not overlap (unless, of course, it can prove otherwise).
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13/4</a></div>
-<div class="Notes">6&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
+<div class="Notes">8&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
 The mode of a formal parameter describes the direction of information 
-transfer to or from the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+transfer to or from the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 (see <A HREF="AA-6-1.html">6.1</A>).</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Notes">7&nbsp;&nbsp;A formal parameter of mode <B>in</B> 
+<div class="Notes">9&nbsp;&nbsp;A formal parameter of mode <B>in</B> 
 is a constant view (see <A HREF="AA-3-3.html">3.3</A>); it cannot be 
-updated within the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>.</div>
+updated within the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>.</div>
 <div class="paranum"><a name="p15">15/4</a></div>
-<div class="Notes">8&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
+<div class="Notes">10&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
 A formal parameter of mode <B>out</B> might be uninitialized at the start 
-of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 (see <A HREF="AA-6-4-1.html">6.4.1</A>).&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p15.a">15.a</a></div>
-<div class="Annotations"><A NAME="I3826"></A>The value of an <B>out</B> 
+<div class="Annotations"><A NAME="I4035"></A>The value of an <B>out</B> 
 parameter may be read. An <B>out</B> parameter is treated like a declared 
 variable without an explicit initial expression.&nbsp;</div>
 
@@ -301,7 +316,7 @@ types, and it is necessary just so the correct object is defined.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-1-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

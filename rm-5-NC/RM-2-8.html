@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-2-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,62 +36,63 @@
 <HR>
 <H1>2.8 Pragmas</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1261"></A>A pragma is a compiler directive. 
+<div class="Normal"><A NAME="I1259"></A>A pragma is a compiler directive. 
 There are language-defined pragmas that give instructions for optimization, 
 listing control, etc. An implementation may support additional (implementation-defined) 
 pragmas.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">pragma</SPAN><A NAME="I1262"></A><A NAME="S0019"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<A NAME="I1263"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;[(<A NAME="I1264"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1265"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>})];</div>
+<div class="Indented1"><SPAN Class="swiss">pragma</SPAN><A NAME="I1260"></A><A NAME="S0019"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<A NAME="I1261"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;[(<A NAME="I1262"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1263"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>})];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">pragma_argument_association</SPAN><A NAME="I1266"></A><A NAME="S0020"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<I>pragma_argument_</I><A NAME="I1267"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1268"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;[<I>pragma_argument_</I><A NAME="I1269"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1270"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1271"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0325">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1272"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1273"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0325">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1274"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">pragma_argument_association</SPAN><A NAME="I1264"></A><A NAME="S0020"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<I>pragma_argument_</I><A NAME="I1265"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1266"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;[<I>pragma_argument_</I><A NAME="I1267"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1268"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1269"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1270"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1271"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1272"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">In a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>, 
 any <SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>s 
 without a <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0325">aspect_mark</A></SPAN> 
+or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
 shall precede any associations with a <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0325">aspect_mark</A></SPAN>.</div>
+or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">Pragma</A></SPAN>s 
 are only allowed at the following places in a program:&nbsp;</div>
-<div class="paranum"><a name="p6">6</a></div>
+<div class="paranum"><a name="p6">6/5</a></div>
 <div class="Indented2Bulleted">After a semicolon delimiter, but not within 
-a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>.</div>
+a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0206">formal_part</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0156">declare_expression</A></SPAN>.</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented2Bulleted">At any place where the syntax rules allow 
 a construct defined by a syntactic category whose name ends with &ldquo;<SPAN Class="swiss">declaration</SPAN>&rdquo;, 
 &ldquo;<SPAN Class="swiss">item</SPAN>&rdquo;, &ldquo;<SPAN Class="swiss">statement</SPAN>&rdquo;, 
 &ldquo;<SPAN Class="swiss">clause</SPAN>&rdquo;, or &ldquo;<SPAN Class="swiss">alternative</SPAN>&rdquo;, 
 or one of the syntactic categories <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0072">variant</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-11-2.html#S0283">exception_handler</A></SPAN>; 
+or <SPAN Class="swiss"><A HREF="RM-11-2.html#S0305">exception_handler</A></SPAN>; 
 but not in place of such a construct if the construct is required, or 
 is part of a list that is required to have at least one such construct.</div>
 <div class="paranum"><a name="p7.1">7.1/3</a></div>
-<div class="Indented2Bulleted">In place of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0153">statement</A></SPAN> 
-in a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN>.</div>
+<div class="Indented2Bulleted">In place of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0167">statement</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN>.</div>
 <div class="paranum"><a name="p7.2">7.2/3</a></div>
-<div class="Indented2Bulleted">At any place where a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN> 
+<div class="Indented2Bulleted">At any place where a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN> 
 is allowed.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Indented1">Additional syntax rules and placement restrictions 
 exist for specific pragmas.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I1275"></A><A NAME="I1276"></A>The <I>name</I> 
+<div class="Normal"><A NAME="I1273"></A><A NAME="I1274"></A>The <I>name</I> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-is the identifier following the reserved word <B>pragma</B>. <A NAME="I1277"></A><A NAME="I1278"></A>The 
-<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> or <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+is the identifier following the reserved word <B>pragma</B>. <A NAME="I1275"></A><A NAME="I1276"></A>The 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> or <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN> 
 is a <I>pragma argument</I>.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><A NAME="I1279"></A><A NAME="I1280"></A>An <I>identifier 
+<div class="Normal"><A NAME="I1277"></A><A NAME="I1278"></A>An <I>identifier 
 specific to a pragma</I> is an identifier or reserved word that is used 
 in a pragma argument with special meaning for that pragma.&nbsp;</div>
 
@@ -105,10 +106,10 @@ only rules that apply are the Syntax Rules.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I1281"></A><A NAME="I1282"></A>Any <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal"><A NAME="I1279"></A><A NAME="I1280"></A>Any <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 that appears at the place of an executable construct is executed. Unless 
 otherwise specified for a particular pragma, this execution consists 
-of the evaluation of each evaluable pragma argument in an arbitrary order.<A NAME="I1283"></A> 
+of the evaluation of each evaluable pragma argument in an arbitrary order.<A NAME="I1281"></A> 
 </div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -142,7 +143,7 @@ as follows:&nbsp;</div>
 used to complete a declaration;</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Bulleted">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-used to configure the environment by adding, removing, or replacing <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s. 
+used to configure the environment by adding, removing, or replacing <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
@@ -151,11 +152,11 @@ used to configure the environment by adding, removing, or replacing <SPAN Class=
 Page, and Optimize <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
 are as follows:</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1284"></A><A NAME="I1285"></A>List(<A NAME="I1286"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1282"></A><A NAME="I1283"></A>List(<A NAME="I1284"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1287"></A><A NAME="I1288"></A>Page;</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1285"></A><A NAME="I1286"></A>Page;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1289"></A><A NAME="I1290"></A>Optimize(<A NAME="I1291"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1287"></A><A NAME="I1288"></A>Optimize(<A NAME="I1289"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p24">24</a></div>
 <div class="Indented1">Other pragmas are defined throughout this International 
 Standard, and are summarized in <A HREF="RM-L.html">Annex L</A>.&nbsp;</div>
@@ -183,8 +184,8 @@ Time, Space, or Off as the single argument. This <SPAN Class="swiss"><A HREF="RM
 is allowed anywhere a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 is allowed, and it applies until the end of the immediately enclosing 
 declarative region, or for a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-at the place of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0264">compilation_unit</A></SPAN>, 
-to the end of the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0263">compilation</A></SPAN>. 
+at the place of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>, 
+to the end of the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN>. 
 It gives advice to the implementation as to whether time or space is 
 the primary optimization criterion, or that optional optimizations should 
 be turned off. It is implementation defined how this advice is followed. 
@@ -203,7 +204,7 @@ be turned off. It is implementation defined how this advice is followed.
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-2-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

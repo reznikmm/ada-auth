@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,17 +45,17 @@ priority</I> value to represent the task's <I>held</I> state.&nbsp;</div>
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
-<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<A NAME="I8286"></A><BR>
+<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<A NAME="I8820"></A><BR>
 &nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8287"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8288"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8289"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8821"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8822"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8823"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Asynchronous_Task_Control;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><A NAME="I8290"></A><A NAME="I8291"></A><A NAME="I8292"></A>After 
+<div class="Normal"><A NAME="I8824"></A><A NAME="I8825"></A><A NAME="I8826"></A>After 
 the Hold operation has been applied to a task, the task becomes <I>held</I>. 
 For each processor there is a conceptual <I>idle task</I>, which is always 
 ready. The base priority of the idle task is below System.Any_Priority'First. 
@@ -77,13 +77,12 @@ policy associated with its base priority.</div>
 T is in the held state.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">As part of these operations, a check is made that 
-the task identified by T is not terminated. <A NAME="I8293"></A>Tasking_Error 
-is raised if the check fails. <A NAME="I8294"></A>Program_Error is raised 
-if the value of T is Null_Task_Id.</div>
+the task identified by T is not terminated. Tasking_Error is raised if 
+the check fails. Program_Error is raised if the value of T is Null_Task_Id.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8295"></A>If any operation in this package 
+<div class="Normal"><A NAME="I8827"></A>If any operation in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 
@@ -93,18 +92,18 @@ exists, the execution of the program is erroneous.&nbsp;</div>
 if it is infeasible to support it in the target environment.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Notes">38&nbsp;&nbsp;It is a consequence of the priority 
+<div class="Notes">37&nbsp;&nbsp;It is a consequence of the priority 
 rules that held tasks cannot be dispatched on any processor in a partition 
 (unless they are inheriting priorities) since their priorities are defined 
 to be below the priority of any idle task.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Notes">39&nbsp;&nbsp;The effect of calling Get_Priority and 
+<div class="Notes">38&nbsp;&nbsp;The effect of calling Get_Priority and 
 Set_Priority on a Held task is the same as on any other task.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Notes">40&nbsp;&nbsp;Calling Hold on a held task or Continue 
+<div class="Notes">39&nbsp;&nbsp;Calling Hold on a held task or Continue 
 on a non-held task has no effect.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Notes" style="margin-bottom: 0.4em">41&nbsp;&nbsp;The rules 
+<div class="Notes" style="margin-bottom: 0.4em">40&nbsp;&nbsp;The rules 
 affecting queuing are derived from the above rules, in addition to the 
 normal priority rules:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
@@ -122,9 +121,9 @@ executing the corresponding construct.</div>
 accepting task is not affected.</div>
 <div class="paranum"><a name="p18">18/1</a></div>
 <div class="Indented2SmallBulleted">If a task becomes held while waiting 
-in a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0248">selective_accept</A></SPAN>, 
+in a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0270">selective_accept</A></SPAN>, 
 and an entry call is issued to one of the open entries, the corresponding 
-<SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0251">accept_alternative</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0273">accept_alternative</A></SPAN> 
 executes. When the rendezvous completes, the active priority of the accepting 
 task is lowered to the held priority (unless it is still inheriting from 
 other sources), and the task does not execute until another Continue.</div>
@@ -135,7 +134,7 @@ The corresponding entry body executes.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

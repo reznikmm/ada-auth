@@ -20,9 +20,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,31 +38,31 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>with</B>&nbsp;Ada.Exceptions;<BR>
-<B>package</B>&nbsp;Ada.Task_Termination<A NAME="I8026"></A><BR>
+<B>package</B>&nbsp;Ada.Task_Termination<A NAME="I8542"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8027"></A>Cause_Of_Termination&nbsp;<B>is</B>&nbsp;(Normal,&nbsp;Abnormal,&nbsp;Unhandled_Exception);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8543"></A>Cause_Of_Termination&nbsp;<B>is</B>&nbsp;(Normal,&nbsp;Abnormal,&nbsp;Unhandled_Exception);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8028"></A>Termination_Handler&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8544"></A>Termination_Handler&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Cause&nbsp;:&nbsp;<B>in</B>&nbsp;Cause_Of_Termination;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Exceptions.Exception_Occurrence);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8029"></A>Set_Dependents_Fallback_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8545"></A>Set_Dependents_Fallback_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Handler:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8030"></A>Current_Task_Fallback_Handler&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8546"></A>Current_Task_Fallback_Handler&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8031"></A>Set_Specific_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8547"></A>Set_Specific_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8032"></A>Specific_Handler&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8548"></A>Specific_Handler&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Task_Termination;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><A NAME="I8033"></A><A NAME="I8034"></A>The type 
+<div class="Normal"><A NAME="I8549"></A><A NAME="I8550"></A>The type 
 Termination_Handler identifies a protected procedure to be executed by 
 the implementation when a task terminates. Such a protected procedure 
 is called a <I>handler</I>. In all cases T identifies the task that is 
@@ -72,14 +72,14 @@ the finalization of the task completes normally, then Cause is set to
 Normal and X is set to Null_Occurrence. If the task terminates because 
 it is being aborted, then Cause is set to Abnormal; X is set to Null_Occurrence 
 if the finalization of the task completes normally. If the task terminates 
-because of an exception raised by the execution of its <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>, 
+because of an exception raised by the execution of its <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>, 
 then Cause is set to Unhandled_Exception; X is set to the associated 
 exception occurrence if the finalization of the task completes normally. 
 Independent of how the task completes, if finalization of the task propagates 
 an exception, then Cause is either Unhandled_Exception or Abnormal, and 
 X is an exception occurrence that identifies the Program_Error exception.</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Normal"><A NAME="I8035"></A><A NAME="I8036"></A><A NAME="I8037"></A><A NAME="I8038"></A><A NAME="I8039"></A><A NAME="I8040"></A>Each 
+<div class="Normal"><A NAME="I8551"></A><A NAME="I8552"></A><A NAME="I8553"></A><A NAME="I8554"></A><A NAME="I8555"></A><A NAME="I8556"></A>Each 
 task has two termination handlers, a <I>fall-back handler</I> and a <I>specific 
 handler</I>. The specific handler applies only to the task itself, while 
 the fall-back handler applies only to the dependent tasks of the task. 
@@ -105,7 +105,7 @@ If a specific handler had previously been set it is replaced.</div>
 handler that is currently set for the task identified by T, if one is 
 set; otherwise, it returns <B>null</B>.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal">As part of the finalization of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>, 
+<div class="Normal">As part of the finalization of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>, 
 after performing the actions specified in <A HREF="RM-7-6.html">7.6</A> 
 for finalization of a master, the specific handler for the task, if one 
 is set, is executed. If the specific handler is cleared, a search for 
@@ -128,7 +128,7 @@ is erroneous.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-C-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

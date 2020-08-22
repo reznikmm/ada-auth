@@ -16,14 +16,15 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
     DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,64 +39,105 @@ as values of the type.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">The following nonoverridable, 
-type-related operational aspects may be specified for any type <I>T</I>:</div>
+<div class="Normal" style="margin-bottom: 0.4em">The following type-related 
+operational aspects (collectively known as <I>user-defined literal aspects</I>)<A NAME="I2493"></A> 
+<A NAME="I2494"></A>may be specified for any type <I>T</I>:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="WideHanging-Term">Integer_Literal</div><div class="WideHanging-Body"><br clear="left">
 This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes a primitive function of <I>T</I> with one parameter of type 
-String and a result type of <I>T</I>.<A NAME="I2498"></A><A NAME="I2499"></A></div>
+that statically denotes a function with a result type of <I>T</I> and 
+one <B>in</B> parameter that is of type String and is not explictly aliased.<A NAME="I2495"></A><A NAME="I2496"></A></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="WideHanging-Term">Real_Literal</div><div class="WideHanging-Body">
 This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes a primitive function of <I>T</I> with one parameter of type 
-String and a result type of <I>T</I>.<A NAME="I2500"></A><A NAME="I2501"></A></div>
+that statically denotes a function with a result type of <I>T</I> and 
+one <B>in</B> parameter that is of type String and is not explictly aliased.<A NAME="I2497"></A><A NAME="I2498"></A></div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="WideHanging-Term">String_Literal</div><div class="WideHanging-Body"><br clear="left">
 This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes a primitive function of <I>T</I> with one parameter of type 
-Wide_Wide_String and a result type of <I>T</I>.<A NAME="I2502"></A><A NAME="I2503"></A></div>
+that statically denotes a function with a result type of <I>T</I> and 
+one <B>in</B> parameter that is of type Wide_Wide_String and is not explictly 
+aliased.<A NAME="I2499"></A><A NAME="I2500"></A></div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="WideHanging-Body">A type with a specified String_Literal 
-aspect is considered a <I>string type</I>.<A NAME="I2504"></A></div>
+<div class="Normal">User-defined literal aspects are inherited according 
+to the rules given in <A HREF="RM-13-1.html">13.1</A>.</div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal">When a numeric literal is interpreted as a value 
+of a non-numeric type <I>T</I> or a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
+is interpreted a value of a type <I>T</I> that is not a string type (see 
+<A HREF="RM-4-2.html">4.2</A>), it is equivalent to a call to the subprogram 
+denoted by the corresponding aspect of <I>T</I>: the Integer_Literal 
+aspect for an integer literal, the Real_Literal aspect for a real literal, 
+and the String_Literal aspect for a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN>. 
+The actual parameter of this notional call is a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
+having the textual representation of the original (numeric or string) 
+literal.</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal">Such a literal is said to be a <I>user-defined literal</I>.<A NAME="I2501"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p7">7/5</a></div>
+<div class="paranum"><a name="p9">9/5</a></div>
 <div class="Normal">The Integer_Literal or Real_Literal aspect shall 
 not be specified for a type <I>T</I> if the full view of <I>T</I> is 
 a numeric type. The String_Literal aspect shall not be specified for 
-a type <I>T</I> if the full view of <I>T</I> is a string type (in the 
-absence of the String_Literal aspect specification). <A NAME="I2505"></A>In 
-addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
-these rules also apply in the private part of an instance of a generic 
-unit.&nbsp;</div>
-
-<H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p8">8/5</a></div>
-<div class="Normal">For the evaluation of an integer (or real) literal 
-with expected type having an Integer_Literal (or Real_Literal) aspect 
-specified, the value is the result of a call on the function specified 
-by the aspect, with the parameter being a string with lower bound one 
-whose value corresponds to the textual representation of the integer 
-(or real) literal.</div>
-<div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal">For the evaluation of a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
-with expected type having a String_Literal aspect specified, the value 
-is the result of a call on the function specified by the aspect, with 
-the parameter being the Wide_Wide_String with lower bound one that corresponds 
-to the literal.&nbsp;</div>
+a type <I>T</I> if the full view of <I>T</I> is a string type.</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">For a nonabstract type, the function directly specified 
+for a user-defined literal aspect shall not be abstract.</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal">For a tagged type with a partial view, a user-defined 
+literal aspect shall not be directly specified on the full type.</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal">If a nonabstract tagged type inherits any user-defined 
+literal aspect, then each inherited aspect shall be directly specified 
+as a nonabstract function for the type unless the inherited aspect denotes 
+a nonabstract function and the type is a null extension.</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal">In addition to the places where Legality Rules normally 
+apply (see <A HREF="RM-12-3.html">12.3</A>), these rules also apply in 
+the private part of an instance of a generic unit.<A NAME="I2502"></A></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
-<div class="paranum"><a name="p10">10/5</a></div>
-<div class="Normal">It is a bounded error if the evaluation of a literal 
-with expected type having a corresponding _Literal aspect specified, 
-propagates an exception. The possible effect is that an error is reported 
-prior to run time, or Program_Error or the exception propagated by the 
-evaluation is raised at the point of use of the value of the literal.</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal"><A NAME="I2503"></A>It is a bounded error if the 
+evaluation of a literal that has an expected type with a specified user-defined 
+literal aspect propagates an exception. Either Program_Error or the exception 
+propagated by the evaluation is raised at the point of use of the value 
+of the literal. If it is recognized prior to run time that evaluation 
+of such a literal will inevitably (if executed) result in such a bounded 
+error, then this may be reported as an error prior to run time.<A NAME="I2504"></A></div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Examples"><B>subtype</B>&nbsp;Roman_Character&nbsp;<B>is</B>&nbsp;Character<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Static_Predicate&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Roman_Character&nbsp;<B>in</B>&nbsp;'I'&nbsp;|&nbsp;'V'&nbsp;|&nbsp;'X'&nbsp;|&nbsp;'L'&nbsp;|&nbsp;'C'&nbsp;|&nbsp;'D'&nbsp;|&nbsp;'M';</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Examples">Max_Roman_Number&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;3_999;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;MMMCMXCIX</I></SPAN></div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Examples"><B>type</B>&nbsp;Roman_Number&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Max_Roman_Number<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;String_Literal&nbsp;=&gt;&nbsp;To_Roman_Number;</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Examples"><B>function</B>&nbsp;To_Roman_Number&nbsp;(S&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Roman_Number<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;S'Length&nbsp;&gt;&nbsp;0&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>for&nbsp;all</B>&nbsp;Char&nbsp;<B>of</B>&nbsp;S&nbsp;=&gt;&nbsp;Char&nbsp;<B>in</B>&nbsp;Roman_Character);</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Examples"><B>function</B>&nbsp;To_Roman_Number&nbsp;(S&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Roman_Number&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;(<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R&nbsp;:&nbsp;<B>constant&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Integer&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>for</B>&nbsp;D&nbsp;<B>in</B>&nbsp;S'Range&nbsp;=&gt;&nbsp;Roman_Digit'Enum_Rep<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Roman_Digit'Value&nbsp;('''&nbsp;&amp;&nbsp;S(D)&nbsp;&amp;&nbsp;''')));&nbsp;--<SPAN Class="roman"><I>&nbsp;See&nbsp;<A HREF="RM-3-5-2.html">3.5.2</A>&nbsp;and&nbsp;<A HREF="RM-13-4.html">13.4</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;R'Range&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>if</B>&nbsp;I&nbsp;&lt;&nbsp;R'Last&nbsp;<B>and&nbsp;then</B>&nbsp;R(I)&nbsp;&lt;&nbsp;R(I&nbsp;+&nbsp;1)&nbsp;<B>then</B>&nbsp;-1&nbsp;<B>else</B>&nbsp;1)&nbsp;*&nbsp;R(I))]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Reduce(&quot;+&quot;,&nbsp;0)<BR>
+&nbsp;&nbsp;&nbsp;);</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Examples">X&nbsp;:&nbsp;Roman_Number&nbsp;:=&nbsp;&quot;III&quot;&nbsp;*&nbsp;&quot;IV&quot;&nbsp;*&nbsp;&quot;XII&quot;;&nbsp;--<SPAN Class="roman"><I>&nbsp;144&nbsp;(that&nbsp;is,&nbsp;CXLIV)</I></SPAN></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

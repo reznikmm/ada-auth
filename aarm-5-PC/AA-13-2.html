@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -90,12 +90,12 @@ representation aspect may be specified:</div>
 The type of aspect Pack is Boolean. When aspect Pack is True for a type, 
 the type (or the extension part) is said to be <I>packed</I>. For a type 
 extension, the parent part is packed as for the parent type, and specifying 
-Pack causes packing only of the extension part. <A NAME="I5681"></A><A NAME="I5682"></A><A NAME="I5683"></A></div>
+Pack causes packing only of the extension part. <A NAME="I5941"></A><A NAME="I5942"></A><A NAME="I5943"></A></div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Pack:&nbsp;</B>Minimize 
 storage when laying out records and arrays.</div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
-<div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+<div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
 the aspect is False.&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/3</a></div>
@@ -117,7 +117,7 @@ to objects of a packed type should be minimized.</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 Specifying the Pack aspect is for gaining space efficiency, possibly 
 at the expense of time. If more explicit control over representation 
-is desired, then a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>, 
+is desired, then a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>, 
 a Component_Size clause, or a Size clause should be used instead of, 
 or in addition to, the Pack aspect.&nbsp;</div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
@@ -127,7 +127,7 @@ deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/A
 </div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I5684"></A>The recommended level of support for the Pack aspect 
+<A NAME="I5944"></A>The recommended level of support for the Pack aspect 
 is:&nbsp;</div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
@@ -146,7 +146,7 @@ Level of Support will require the alignment to be ignored.&nbsp;</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
 For a packed record type, the components should be packed as tightly 
 as possible subject to the above alignment requirements, the Sizes of 
-the component subtypes, and any <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
+the component subtypes, and any <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 that applies to the type; the implementation may, but need not, reorder 
 components or cross aligned word boundaries to improve the packing. A 
 component whose Size is greater than the word size may be allocated an 
@@ -185,7 +185,7 @@ intended, but there was no wording to that effect.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p9.d">9.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I5685"></A>Aspect Pack is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I5945"></A>Aspect Pack is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Pack is now obsolescent.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -208,7 +208,7 @@ from the Standard.)&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-13-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

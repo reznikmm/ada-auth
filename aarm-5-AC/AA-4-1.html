@@ -31,9 +31,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,8 +46,8 @@
 can denote declared entities, whether declared explicitly or implicitly 
 (see <A HREF="AA-3-1.html">3.1</A>). <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">Name</A></SPAN>s 
 can also denote objects or subprograms designated by access values; the 
-results of <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>s 
-or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>s; 
+results of <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>s 
+or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s; 
 subcomponents and slices of objects and values; protected subprograms, 
 single entries, entry families, and entries in families of entries. Finally, 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s can 
@@ -58,16 +58,16 @@ denote attributes of any of the foregoing.]&nbsp;</div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<SPAN Class="swiss">name</SPAN><A NAME="I2660"></A><A NAME="S0091"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2661"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2662"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2663"></A><SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2664"></A><SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2665"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2666"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2667"></A><SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>&nbsp;|&nbsp;<A NAME="I2668"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2669"></A><SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN><span class="insert3">&nbsp;|&nbsp;<A NAME="I2670"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2671"></A><SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN>&nbsp;|&nbsp;<A NAME="I2672"></A><SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2673"></A><SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN></span><span class="insert3"></span></div>
+<SPAN Class="swiss">name</SPAN><A NAME="I2666"></A><A NAME="S0091"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2667"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2668"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2669"></A><SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2670"></A><SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2671"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2672"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2673"></A><SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>&nbsp;|&nbsp;<A NAME="I2674"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2675"></A><SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN><span class="insert3">&nbsp;|&nbsp;<A NAME="I2676"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2677"></A><SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN>&nbsp;|&nbsp;<A NAME="I2678"></A><SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2679"></A><SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">direct_name</SPAN><A NAME="I2674"></A><A NAME="S0092"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2675"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I2676"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">direct_name</SPAN><A NAME="I2680"></A><A NAME="S0092"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2681"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I2682"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
 <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
@@ -77,11 +77,11 @@ are usable even when the corresponding <span class="insert2">enumeration
 type declaration</span><span class="delete2"><SPAN Class="swiss">&nbsp;enumeration_type_declaration</SPAN></span> 
 is not visible. See <A HREF="AA-4-2.html">4.2</A>.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">prefix</SPAN><A NAME="I2677"></A><A NAME="S0093"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2678"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2679"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">prefix</SPAN><A NAME="I2683"></A><A NAME="S0093"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2684"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2685"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">explicit_dereference</SPAN><A NAME="I2680"></A><A NAME="S0094"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2681"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.<B>all</B></div>
+<div class="Indented1"><SPAN Class="swiss">explicit_dereference</SPAN><A NAME="I2686"></A><A NAME="S0094"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2687"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.<B>all</B></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">implicit_dereference</SPAN><A NAME="I2682"></A><A NAME="S0095"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2683"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">implicit_dereference</SPAN><A NAME="I2688"></A><A NAME="S0095"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2689"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
 [Certain forms of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -96,7 +96,7 @@ of an access value that designates some related entity.]&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2684"></A><A NAME="I2685"></A>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I2690"></A><A NAME="I2691"></A>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in a <I>dereference</I> (either an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN>) 
 is expected to be of any access type.&nbsp;</div>
@@ -104,7 +104,7 @@ is expected to be of any access type.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<A NAME="I2686"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<A NAME="I2692"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in a dereference is some access-to-object type <I>T</I>, then the dereference 
 denotes a view of an object, the <I>nominal subtype</I> of the view being 
 the designated subtype of <I>T</I>.<span class="insert3">&nbsp;If the designated 
@@ -120,7 +120,7 @@ view created as part of the conversion. The nominal subtype of the view
 is not necessarily the same as that used to create the designated object. 
 See <A HREF="AA-4-6.html">4.6</A>.&nbsp;</div>
 <div class="paranum"><a name="p9.b">9.b</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I2687"></A>We 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I2693"></A>We 
 sometimes refer to the nominal subtype of a particular kind of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 rather than the nominal subtype of the view denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (presuming the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -148,7 +148,7 @@ object is constrained, it is not necessary to include a constrained bit
 in every object that could be designated by a general access type.</span> 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I2688"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I2694"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in a dereference is some access-to-subprogram type <I>S</I>, then the 
 dereference denotes a view of a subprogram, the <I>profile</I> of the 
 view being the designated profile of <I>S</I>.&nbsp;</div>
@@ -164,29 +164,29 @@ since 'Access requires only subtype conformance, not full conformance.
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00415.TXT">AI95-00415-01</A></I>} 
-<A NAME="I2689"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<A NAME="I2695"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 determines the entity denoted by the <span class="insert2"><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></span><span class="delete2">&nbsp;name</span>. 
 This evaluation has no other effect for a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I2690"></A>[The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I2696"></A>[The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that has a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 includes the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>.] 
-<A NAME="I2691"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+<A NAME="I2697"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN>. 
 The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 denotes the entity denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN>.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I2692"></A>The evaluation of a dereference 
+<div class="Normal"><A NAME="I2698"></A>The evaluation of a dereference 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 and the determination of the object or subprogram that is designated 
 by the value of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
-<A NAME="I2693"></A><A NAME="I2694"></A>A check is made that the value 
+<A NAME="I2699"></A><A NAME="I2700"></A>A check is made that the value 
 of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is not the null access value. <A NAME="I2695"></A>Constraint_Error is 
+is not the null access value. <A NAME="I2701"></A>Constraint_Error is 
 raised if this check fails. The dereference denotes the object or subprogram 
 designated by the value of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 </div>
@@ -214,7 +214,7 @@ Next_Car.Owner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p17.a">17.a</a></div>
-<div class="Annotations"><A NAME="I2696"></A>Type conversions and function 
+<div class="Annotations"><A NAME="I2702"></A>Type conversions and function 
 calls are now considered names that denote the result of the operation. 
 In the case of a type conversion used as an actual parameter or that 
 is of a tagged type, the type conversion is considered a variable if 
@@ -229,7 +229,7 @@ a constant, and can be used anywhere such a name is permitted. See <A HREF="AA-6
 <div class="paranum"><a name="p17.b">17.b/1</a></div>
 <div class="Annotations">Type conversions of a tagged type are permitted 
 anywhere their operand is permitted. That is, if the operand is a variable, 
-then the type conversion can appear on the left-hand side of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>. 
+then the type conversion can appear on the left-hand side of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>. 
 If the operand is an object, then the type conversion can appear in an 
 object renaming or as a <span class="insert1"><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span>. 
 See <A HREF="AA-4-6.html">4.6</A>.&nbsp;</div>
@@ -252,7 +252,7 @@ is partly just a wording change, and partly an extension of functionality
 is new. It is used in places where direct visibility is required. It's 
 kind of like Ada 83's <SPAN Class="swiss">simple_name</SPAN>, but <SPAN Class="swiss">simple_name</SPAN> 
 applied to both direct visibility and visibility by selection, and furthermore, 
-it didn't work right for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>s. 
+it didn't work right for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN>s. 
 The syntax rule for <SPAN Class="swiss">simple_name</SPAN> is removed, 
 since its use is covered by a combination of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>. 
@@ -260,12 +260,12 @@ The syntactic categories <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_
 and <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 are similar; it's mainly the visibility rules that distinguish the two. 
 The introduction of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
-requires the insertion of one new explicit textual rule: to forbid <SPAN Class="swiss"><A HREF="AA-5-1.html#S0158">statement_identifier</A></SPAN>s 
-from being <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>s. 
+requires the insertion of one new explicit textual rule: to forbid <SPAN Class="swiss"><A HREF="AA-5-1.html#S0172">statement_identifier</A></SPAN>s 
+from being <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN>s. 
 This is the only case where the explicit rule is needed, because this 
 is the only case where the declaration of the entity is implicit. For 
 example, there is no need to syntactically forbid (say) &ldquo;X: &quot;Rem&quot;;&rdquo;, 
-because it is impossible to declare a type whose name is an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
+because it is impossible to declare a type whose name is an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN> 
 in the first place.</div>
 <div class="paranum"><a name="p17.e">17.e</a></div>
 <div class="Annotations">The syntax rules for <SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN> 
@@ -280,7 +280,7 @@ that function calls are now names, so we don't need to use prefix to
 allow functions calls in front of .<B>all</B>.&nbsp;</div>
 <div class="paranum"><a name="p17.f">17.f</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Actually, it would be reasonable 
-to allow any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
+to allow any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
 in front of .<B>all</B>, since only the value is needed, but that would 
 be a bit radical.&nbsp;</div>
 <div class="paranum"><a name="p17.g">17.g</a></div>
@@ -291,15 +291,15 @@ implicit dereference.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p17.h">17.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
-<span class="insert3"><A NAME="I2697"></A>A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+<span class="insert3"><A NAME="I2703"></A>A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 is now a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting a constant view; this allows them to be used as a prefix and 
 to be renamed as an object. They are often used to remove ambiguity from 
 function calls, and there may be no other way to do that. Interestingly, 
-a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 is already legal in these contexts, so this change mainly reduces clutter 
-by eliminating an otherwise unneeded <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+by eliminating an otherwise unneeded <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
 from some expressions.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -321,13 +321,13 @@ these are documented as extensions in the appropriate subclauses.</span>
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p17.k">17.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<span class="insert5">Added a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
+<span class="insert5">Added a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN> 
 (see <A HREF="AA-5-2-1.html">5.2.1</A>) to the syntax of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.</span> 
 </div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

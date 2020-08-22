@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-8-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,21 +39,26 @@
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
-<A NAME="I4434"></A>The execution of an Ada program consists of the execution 
-of one or more <I>tasks</I>. <A NAME="I4435"></A><A NAME="I4436"></A>Each 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0330-1.TXT">AI12-0330-1</A></I>} 
+<A NAME="I4646"></A>The execution of an Ada program consists of the execution 
+of one or more <I>tasks</I>. <A NAME="I4647"></A><A NAME="I4648"></A>Each 
 task represents a <span class="insert5">separable activity</span><span class="delete5">&nbsp;separate 
 thread of control</span> that proceeds independently and concurrently 
 between the points where it <I>interacts</I> with other tasks. <span class="insert5">A 
 single task, when within the context of a parallel construct, can represent 
-multiple logical threads of control which can proceed in parallel; in 
-other contexts, each task represents one logical thread of control.</span><span class="delete5">&nbsp;The 
+multiple <I>logical threads of control</I> which can proceed in parallel; 
+in other contexts, each task represents one logical thread of control.<A NAME="I4649"></A><A NAME="I4650"></A></span><span class="delete5">&nbsp;The 
 various forms of task interaction are described in this clause, and include:</span> 
-<A NAME="I4437"></A><A NAME="I4438"></A><A NAME="I4439"></A><A NAME="I4440"></A></div>
+<A NAME="I4651"></A><A NAME="I4652"></A><A NAME="I4653"></A><A NAME="I4654"></A></div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The execution of an Ada 
 program consists of the execution of one or more partitions (see <A HREF="AA-10-2.html">10.2</A>), 
 each of which in turn consists of the execution of an environment task 
 and zero or more subtasks.&nbsp;</div>
+<div class="paranum"><a name="p1.a.1">1.a.1/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Glossary entry:&nbsp;</B>An 
+activity within the execution of a program that can proceed in parallel 
+with other activities of the same task, or of separate tasks.</span></div>
 <div class="paranum"><a name="p1.1">1.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
 <span class="insert5">The various forms of task interaction are described 
@@ -61,7 +66,7 @@ in this clause, and include:</span></div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Bulleted">the activation and termination of a task;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Bulleted"><A NAME="I4441"></A>a call on a protected subprogram 
+<div class="Bulleted"><A NAME="I4655"></A>a call on a protected subprogram 
 of a <I>protected object</I>, providing exclusive read-write access, 
 or concurrent read-only access to shared data;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -88,24 +93,24 @@ is properly synchronized through some other kind of task interaction.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I4442"></A>The properties of a task are 
-defined by a corresponding task declaration and <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>, 
+<div class="Normal"><A NAME="I4656"></A>The properties of a task are 
+defined by a corresponding task declaration and <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>, 
 which together define a program unit called a <I>task unit</I>.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
-Over time, tasks proceed through various <I>states</I>. <A NAME="I4443"></A><A NAME="I4444"></A><A NAME="I4445"></A><A NAME="I4446"></A><A NAME="I4447"></A><A NAME="I4448"></A><A NAME="I4449"></A><A NAME="I4450"></A>A 
+Over time, tasks proceed through various <I>states</I>. <A NAME="I4657"></A><A NAME="I4658"></A><A NAME="I4659"></A><A NAME="I4660"></A><A NAME="I4661"></A><A NAME="I4662"></A><A NAME="I4663"></A><A NAME="I4664"></A>A 
 task is initially <I>inactive</I>; upon activation, and prior to its 
 <I>termination</I> it is either <I>blocked</I> (as part of some task 
-interaction) or <I>ready</I> to run. <A NAME="I4451"></A>While ready, 
+interaction) or <I>ready</I> to run. <A NAME="I4665"></A>While ready, 
 a task competes for the available <I>execution resources</I> that it 
 requires to run.<span class="insert5">&nbsp;In the context of a parallel construct, 
 a single task can utilize multiple processing resources simultaneously.</span> 
 </div>
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I4452"></A><A NAME="I4453"></A>The means for selecting which 
+<A NAME="I4666"></A><A NAME="I4667"></A>The means for selecting which 
 of the ready tasks to run, given the currently available execution resources, 
 is determined by the <I>task dispatching policy</I> in effect, which 
 is generally implementation defined, but may be controlled by aspects, 
@@ -141,7 +146,7 @@ of control can be generated by parallel constructs as well as tasks.</span>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-8-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

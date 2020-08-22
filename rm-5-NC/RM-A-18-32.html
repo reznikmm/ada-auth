@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-31.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -33,12 +33,11 @@
 <HR>
 <H1>A.18.32 The Generic Package Containers.Bounded_Indefinite_Holders</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal">For each instance of The language-defined generic 
-package Containers.Bounded_Indefinite_Holders<A NAME="I7651"></A> provides 
-a private type Holder and a set of operations for that type. It provides 
-the same operations as the package Containers.Indefinite_Holders (see 
-<A HREF="RM-A-18-18.html">A.18.18</A>), with the difference that the 
-maximum storage is bounded.&nbsp;</div>
+<div class="Normal">The language-defined generic package Containers.Bounded_Indefinite_Holders<A NAME="I8150"></A> 
+provides a private type Holder and a set of operations for that type. 
+It provides the same operations as the package Containers.Indefinite_Holders 
+(see <A HREF="RM-A-18-18.html">A.18.18</A>), with the difference that 
+the maximum storage is bounded.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
@@ -58,17 +57,17 @@ parameter follows Element_Type:</div>
 <div class="Bulleted" style="margin-bottom: 0.3em">Add to the precondition 
 of To_Holder and Replace_Element:</div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>and&nbsp;then</B>&nbsp;(<B>if</B>&nbsp;New_Item'Size&nbsp;&gt;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>and&nbsp;then</B>&nbsp;(New_Item'Size&nbsp;&lt;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max_Element_Size_in_Storage_Elements&nbsp;*&nbsp;System.Storage_Unit<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Program_Error)</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal"><A NAME="I7652"></A>It is a bounded error to assign 
+<div class="Normal"><A NAME="I8151"></A>It is a bounded error to assign 
 from a bounded holder object while tampering with elements of that object 
 is prohibited. Either Program_Error is raised by the assignment, execution 
 proceeds with the target object prohibiting tampering with elements, 
-or execution proceeds normally.&nbsp;</div>
+or execution proceeds normally.<A NAME="I8152"></A>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p10">10/5</a></div>
@@ -92,10 +91,14 @@ parameters).&nbsp;</div>
 <div class="Normal">Bounded holder objects should be implemented without 
 dynamic allocation and any finalization should be trivial unless Element_Type 
 needs finalization.&nbsp;</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal">The Implementation Advice about the Move and Swap 
+operations is deleted for bounded holders; these operations can copy 
+elements as needed.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-31.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

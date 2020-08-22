@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Image Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.10 <span class="insert5">Image Attributes</span><span class="delete5"></span></H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><span class="insert5">An <I>image</I> of a value 
+is a string representing the value in display form.<A NAME="I3424"></A> 
+The attributes Image, Wide_Image, and Wide_Wide_Image are available to 
+produce the image of a value as a String, Wide_String, or Wide_Wide_String 
+(respectively). User-defined images for a given type can be implemented 
+by overriding the default implementation of the attribute Put_Image.</span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+every subtype S of a type T other than <I>universal_real</I> or <I>universal_fixed</I>, 
+the following type-related operational attribute is defined:</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em"><span class="insert5">S'Put_Image</span></div><div class="WideHanging-Body">
+<span class="insert5"><A NAME="I3425"></A><A NAME="I3426"></A></span><span class="insert5">S'Put_Image 
+denotes a procedure with the following specification:</span>&nbsp;</div>
+<div class="paranum"><a name="p3.1">3.1/5</a></div>
+<div class="Indented4Examples"><span class="insert5"><B>procedure</B>&nbsp;S'Put_Image<BR>
+&nbsp;&nbsp;&nbsp;(<SPAN Class="roman"><I>Buffer</I></SPAN>&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;T);</span></div>
+<div class="paranum"><a name="p3.2">3.2/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">The default implementation 
+of S'Put_Image writes (using Wide_Wide_Put) an <I>image</I> of the value 
+of <I>Arg</I>.</span></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Normal"><span class="insert5">The Put_Image attribute may 
+be specified for any specific type T either via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
+or via an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+specifying the Put_Image aspect of the type.<A NAME="I3427"></A><A NAME="I3428"></A></span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
+behavior of the default implementation of S'Put_Image depends on the 
+class of T. For an elementary type, the implementation is equivalent 
+to:</span>&nbsp;</div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Examples"><span class="insert5"><B>procedure</B>&nbsp;Scalar_Type'Put_Image<BR>
+&nbsp;&nbsp;(Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;Arg&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Scalar_Type)&nbsp;<B>is</B><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Buffer.Wide_Wide_Put&nbsp;(<I>&lt;described&nbsp;below&gt;</I>);<BR>
+<B>end</B>&nbsp;Scalar_Type'Put_Image;</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">where 
+the Wide_Wide_String value written out to the stream is defined as follows:</span></div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal"><span class="insert5">For an integer type, the image 
+written out is the corresponding decimal literal, without underlines, 
+leading zeros, exponent, or trailing spaces, but with a single leading 
+character that is either a minus sign or a space.</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal"><span class="insert5">For an enumeration type, the 
+image written out is either the corresponding identifier in upper case 
+or the corresponding character literal (including the two apostrophes); 
+neither leading nor trailing spaces are included. For a <I>nongraphic 
+character</I> (a value of a character type that has no enumeration literal 
+associated with it), the value is a corresponding language-defined name 
+in upper case (for example, the image of the nongraphic character identified 
+as <I>nul</I> is <TT>&quot;NUL&quot;</TT> &mdash; the quotes are not 
+part of the image).<A NAME="I3429"></A></span></div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal"><span class="insert5">For a floating point type, 
+the image written out is a decimal real literal best approximating the 
+value (rounded away from zero if halfway between) with a single leading 
+character that is either a minus sign or a space, a single digit (that 
+is nonzero unless the value is zero), a decimal point, S'Digits-1 (see 
+<A HREF="RM-3-5-8.html">3.5.8</A>) digits  after the decimal point (but 
+one if S'Digits is one), an upper case E, the sign of the exponent (either 
++ or -), and two or more digits (with leading zeros if necessary) representing 
+the exponent. If S'Signed_Zeros is True, then the leading character is 
+a minus sign for a negatively signed zero.</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal"><span class="insert5">For a fixed point type, the 
+image written out is a decimal real literal best approximating the value 
+(rounded away from zero if halfway between) with a single leading character 
+that is either a minus sign or a space, one or more digits before the 
+decimal point (with no redundant leading zeros), a decimal point, and 
+S'Aft (see <A HREF="RM-3-5-10.html">3.5.10</A>) digits after the decimal 
+point.</span></div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal"><span class="insert5">For an access type (named or 
+anonymous), the image written out depends on whether the value is <B>null</B>. 
+If it is <B>null</B>, then the image is <TT>&quot;NULL&quot;</TT>. Otherwise 
+the image is a left parenthesis followed by <TT>&quot;ACCESS&quot;</TT>, 
+a space, and a sequence of graphic characters, other than space or right 
+parenthesis, representing the location of the designated object, followed 
+by a right parenthesis, as in <TT>&quot;(ACCESS FF0012AC)&quot;</TT>.</span></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal"><span class="insert5">For an array type T, the default 
+implementation of T'Put_Image generates an image based on (named, not 
+positional) array aggregate syntax (with '[' and ']' as the delimiters) 
+using calls to the Put_Image procedures of the index type(s) and the 
+element type to generate images for values of those types.</span></div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal"><span class="insert5">The case of a null array is 
+handled specially, using ranges for index bounds and <TT>&quot;&lt;&gt;&quot;</TT> 
+as a syntactic component-value placeholder.</span></div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal"><span class="insert5">The order in which components 
+are written for a composite type is the same canonical order in which 
+components of a composite type T are written out by the default implementation 
+of T'Write. This is also the order that is used in determining the meaning 
+of a positional aggregate of type T.</span></div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal"><span class="insert5">For a class-wide type, the 
+default implementation of T'Put_Image generates an image based on qualified 
+expression syntax. Wide_Wide_String'Write is called with Wide_Wide_Expanded_Name 
+of <I>Arg</I>'Tag. Then S'Put_Image is called, where S is the specific 
+type identified by <I>Arg</I>'Tag.</span></div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal"><span class="insert5">For a type extension, the default 
+implementation of T'Put_Image depends on whether there exists a noninterface 
+ancestor of T (other than T itself) for which the Put_Image aspect has 
+been explicitly specified. If so, then T'Put_Image will generate an image 
+based on extension aggregate syntax where the ancestor type of the extension 
+aggregate is the nearest ancestor type whose Put_Image aspect has been 
+specified.</span></div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Normal"><span class="insert5">If no such ancestor exists, 
+then the default implementation of T'Put_Image is the same as described 
+below for an untagged record type.</span></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Normal"><span class="insert5">For an untagged record type, 
+a specific tagged record type other than a type extension which meets 
+the criteria described in the previous paragraph, or a protected type, 
+the default implementation of T'Put_Image generates an image based on 
+(named, not positional) record aggregate syntax (except that for a protected 
+type, the initial left parenthesis is followed by <TT>&quot;PROTECTED 
+with &quot;</TT>). Component names are displayed in upper case, following 
+the rules for the image of an enumeration value. Component values are 
+displayed via calls to the component type's Put_Image procedure.</span></div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Normal"><span class="insert5">The image written out for a 
+record having no components (including any interface type) is <TT>&quot;(NULL&nbsp;RECORD)&quot;</TT>. 
+The image written out for a componentless protected type is <TT>&quot;(PROTECTED&nbsp;NULL&nbsp;RECORD)&quot;</TT>. 
+In the case of a protected type T, a call to the default implementation 
+of T'Put_Image begins only one protected (read-only) action.</span></div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Normal"><span class="insert5">For an undiscriminated task 
+type, the default implementation of T'Put_Image generates an image of 
+the form <TT>&quot;(TASK &lt;task_id_image&gt;)&quot;</TT> where &lt;task_id_image&gt; 
+is the result obtained by calling Task_Identification.Image with the 
+id of the given task and then passing that String to Characters.Conversions.To_Wide_Wide_String.</span></div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+a discriminated task type, the default implementation of T'Put_Image 
+also includes discriminant values, as in:</span>&nbsp;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples"><span class="insert5">&quot;(TASK&nbsp;&lt;task_id_image&gt;&nbsp;with&nbsp;D1&nbsp;=&gt;&nbsp;&nbsp;123,&nbsp;D2&nbsp;=&gt;&nbsp;&nbsp;456)&quot;</span></div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+every subtype S of a type T, the following attributes are defined:</span></div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em"><span class="insert2">S'Wide_Wide_Image</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert2"><A NAME="I3430"></A><A NAME="I3431"></A></span><span class="insert5">S'Wide_Wide_Image 
+denotes a function with the following specification:</span>&nbsp;</div>
+<div class="paranum"><a name="p25.1">25.1/5</a></div>
+<div class="Indented4Examples"><span class="insert5"><B>function</B>&nbsp;S'Wide_Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String</span></div>
+<div class="paranum"><a name="p25.2">25.2/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">S'Wide_Wide_Image 
+calls S'Put_Image passing <I>Arg</I> (which will typically store a sequence 
+of character values in a text buffer) and then returns the result of 
+retrieving the contents of that buffer with Wide_Wide_Get.</span> <span class="insert5">The 
+lower bound of the result is one.</span></div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Image</div><div class="WideHanging-Body">
+<A NAME="I3432"></A><A NAME="I3433"></A><span class="insert5">S'Wide_Image 
+denotes a function with the following specification:</span>&nbsp;</div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Indented4Examples"><span class="insert5"><B>function</B>&nbsp;S'Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String</span></div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">S'Wide_Image calls 
+S'Put_Image passing <I>Arg</I> (which will typically store a sequence 
+of character values in a text buffer) and then returns the result of 
+retrieving the contents of that buffer with Wide_Get.</span> <span class="insert5">The 
+lower bound of the result is one.</span></div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Image</div><div class="WideHanging-Body">
+<A NAME="I3434"></A><A NAME="I3435"></A><span class="insert5">S'Image 
+denotes a function with the following specification:</span>&nbsp;</div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Indented4Examples"><span class="insert5"><B>function</B>&nbsp;S'Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;String</span></div>
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">S'Image calls S'Put_Image 
+passing <I>Arg</I> (which will typically store a sequence of character 
+values in a text buffer) and then returns the result of retrieving the 
+contents of that buffer with Get.</span> <span class="insert5">The lower 
+bound of the result is one.</span></div>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> X 
+of a type T other than <I>universal_real</I> or <I>universal_fixed</I>, 
+the following attributes are defined:</span></div>
+<div class="paranum"><a name="p33">33/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">X'Wide_Wide_Image</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5"><A NAME="I3436"></A><A NAME="I3437"></A></span><span class="insert5">X'Wide_Wide_Image 
+denotes the result of calling function S'Wide_Wide_Image with <I>Arg</I> 
+being X, where S is the nominal subtype of X.</span></div>
+<div class="paranum"><a name="p34">34/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">X'Wide_Image</span></div><div class="WideHanging-Body">
+<span class="insert5"><A NAME="I3438"></A><A NAME="I3439"></A></span><span class="insert5">X'Wide_Image 
+denotes the result of calling function S'Wide_Image with <I>Arg</I> being 
+X, where S is the nominal subtype of X.</span></div>
+<div class="paranum"><a name="p35">35/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">X'Image</span></div><div class="WideHanging-Body">
+<span class="insert5"><A NAME="I3440"></A><A NAME="I3441"></A></span><span class="insert5">X'Image 
+denotes the result of calling function S'Image with <I>Arg</I> being 
+X, where S is the nominal subtype of X.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p36">36/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">An 
+implementation may transform the image generated by the default implementation 
+of S'Put_Image for a composite subtype S in the following ways:</span></div>
+<div class="paranum"><a name="p37">37/5</a></div>
+<div class="Bulleted"><span class="insert5">If S is a composite subtype, 
+the leading character of the image of a component value or index value 
+is a space, and the immediately preceding character is an open parenthesis 
+or bracket, then the space may be omitted. The same transformation is 
+also permitted if the leading character of the component image is a space 
+(in which case one of the two spaces may be omitted).</span>&nbsp;</div>
+<div class="paranum"><a name="p38">38/5</a></div>
+<div class="Bulleted"><span class="insert5">If S is an array subtype, 
+the low bound of the array in each dimension equals the low bound of 
+the corresponding index subtype, and the array value is not a null array 
+value, then positional array aggregate syntax may be used.</span></div>
+<div class="paranum"><a name="p39">39/5</a></div>
+<div class="Bulleted"><span class="insert5">If S is an array subtype 
+and the given value can be displayed using <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0116">named_array_aggregate</A></SPAN> 
+syntax where some <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+identifies more than one index value by identifying a sequence of one 
+or more ranges and values separated by vertical bars, then this image 
+may be generated instead; this may involve the reordering of component 
+values.</span></div>
+<div class="paranum"><a name="p40">40/5</a></div>
+<div class="Bulleted"><span class="insert5">Similarly, if S is a record 
+subtype (or a discriminated type) and the given value can be displayed 
+using named component association syntax where the length of some component_choice_list 
+is greater than one, then this image may be generated instead; this may 
+involve the reordering of component values.</span></div>
+<div class="paranum"><a name="p41">41/5</a></div>
+<div class="Bulleted"><span class="insert5">Additional spaces (Wide_Wide_Characters 
+with position 32), and calls to the New_Line operation of a text buffer, 
+may be inserted to improve readability of the generated image.</span></div>
+<div class="paranum"><a name="p42">42/5</a></div>
+<div class="Normal"><span class="insert5">For each language-defined nonscalar 
+type T, T'Put_Image may be specified.</span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p43">43/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+each language-defined container type T (that is, each of the Vector, 
+List, Map, Set, Tree, and Holder types defined in the various children 
+of Ada.Containers), T'Put_Image shall be specified so that T'Image produces 
+a result consistent with array aggregate syntax (using '[' and ']' as 
+delimiters) as follows:</span></div>
+<div class="paranum"><a name="p44">44/5</a></div>
+<div class="Bulleted"><span class="insert5">Vector images shall be consistent 
+with the default image of an array type with the same index and component 
+types.</span></div>
+<div class="paranum"><a name="p45">45/5</a></div>
+<div class="Bulleted"><span class="insert5">Map images shall be consistent 
+with named array aggregate syntax, using key value images in place of 
+discrete choice names. For example, <TT>[Key1 =&gt; Value1, Key2 =&gt; 
+Value2]</TT>.</span></div>
+<div class="paranum"><a name="p46">46/5</a></div>
+<div class="Bulleted"><span class="insert5">Set, List, and Holder images 
+shall be consistent with positional array aggregate syntax. List elements 
+shall occur in order within an image of a list. The image of an empty 
+holder shall be <TT>[]</TT>.</span></div>
+<div class="paranum"><a name="p47">47/5</a></div>
+<div class="Bulleted"><span class="insert5">Tree images (and images of 
+subtrees of trees) shall be consistent with positional array aggregate 
+syntax. For example, <TT>[[1, 2], [111, 222, 333]]</TT>.</span></div>
+<div class="paranum"><a name="p48">48/5</a></div>
+<div class="Normal"><span class="insert5">For each language-defined nonscalar 
+type T that has a primitive language-defined Image function whose profile 
+is type conformant with that of T'Image (for example, Ada.Numerics.Float_Random.State 
+has such an Image function), T'Put_Image shall be specified so that T'Image 
+yields the same result as that Image function.</span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p49">49/5</a></div>
+<div class="Normal"><span class="insert5">For each language-defined private 
+type T, T'Image should generate an image that would be meaningful based 
+only on the relevant public interfaces, as opposed to requiring knowledge 
+of the implementation of the private type.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

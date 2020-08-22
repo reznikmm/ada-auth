@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -47,7 +47,7 @@
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
 <span class="insert2">The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-FIFO_Within_Priorities is a task dispatching policy.</span><span class="insert3"><A NAME="I9263"></A><A NAME="I9264"></A></span><span class="insert2"></span></div>
+FIFO_Within_Priorities is a task dispatching policy.</span><span class="insert3"><A NAME="I9859"></A><A NAME="I9860"></A></span><span class="insert2"></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -71,7 +71,7 @@ is added at the head of the ready queue for its new active priority.</span></div
 priority of a running task takes effect, the task is added to the tail 
 of the ready queue for its active priority.</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Bulleted"><span class="insert2">When a task executes a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
+<div class="Bulleted"><span class="insert2">When a task executes a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN> 
 that does not result in blocking, it is added to the tail of the ready 
 queue for its active priority.</span>&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
@@ -80,7 +80,7 @@ the delay does result in blocking, the task moves to the &ldquo;delay
 queue&rdquo;, not to the ready queue.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<span class="insert2"><A NAME="I9265"></A><A NAME="I9266"></A>Each of 
+<span class="insert2"><A NAME="I9861"></A><A NAME="I9862"></A>Each of 
 the events specified above is a task dispatching point (see <A HREF="AA-D-2-1.html">D.2.1</A>).</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
@@ -88,7 +88,7 @@ the events specified above is a task dispatching point (see <A HREF="AA-D-2-1.ht
 running task of a processor whenever there is a nonempty ready queue 
 for that processor with a higher priority than the priority of the running 
 task. The currently running task is said to be <I>preempted</I> and it 
-is added at the head of the ready queue for its active priority.<A NAME="I9267"></A></span></div>
+is added at the head of the ready queue for its active priority.<A NAME="I9863"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
@@ -105,7 +105,7 @@ locking policy, and we want that combination to be portable.</span>&nbsp;</div>
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<span class="insert2"><A NAME="I9268"></A><I>Priority inversion</I> is 
+<span class="insert2"><A NAME="I9864"></A><I>Priority inversion</I> is 
 the duration for which a task remains at the head of the highest priority 
 nonempty ready queue while the processor executes a lower priority task. 
 The implementation shall document:</span></div>
@@ -157,7 +157,7 @@ be a task dispatching policy.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

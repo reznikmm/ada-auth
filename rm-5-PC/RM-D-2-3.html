@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@ policy.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-FIFO_Within_Priorities is a task dispatching policy.<A NAME="I8113"></A><A NAME="I8114"></A></div>
+FIFO_Within_Priorities is a task dispatching policy.<A NAME="I8669"></A><A NAME="I8670"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -62,18 +62,18 @@ the ready queue for its new active priority.</div>
 task takes effect, the task is added to the tail of the ready queue for 
 its active priority.</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Bulleted">When a task executes a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN> 
+<div class="Bulleted">When a task executes a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0266">delay_statement</A></SPAN> 
 that does not result in blocking, it is added to the tail of the ready 
 queue for its active priority.&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I8115"></A><A NAME="I8116"></A>Each of the 
+<div class="Normal"><A NAME="I8671"></A><A NAME="I8672"></A>Each of the 
 events specified above is a task dispatching point (see <A HREF="RM-D-2-1.html">D.2.1</A>).</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">A task dispatching point occurs for the currently 
 running task of a processor whenever there is a nonempty ready queue 
 for that processor with a higher priority than the priority of the running 
 task. The currently running task is said to be <I>preempted</I> and it 
-is added at the head of the ready queue for its active priority.<A NAME="I8117"></A></div>
+is added at the head of the ready queue for its active priority.<A NAME="I8673"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
@@ -84,7 +84,7 @@ specified as Ceiling_Locking.&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8118"></A><I>Priority 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8674"></A><I>Priority 
 inversion</I> is the duration for which a task remains at the head of 
 the highest priority nonempty ready queue while the processor executes 
 a lower priority task. The implementation shall document:</div>
@@ -111,7 +111,7 @@ changes.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

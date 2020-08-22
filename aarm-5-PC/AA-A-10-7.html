@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-10-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -70,7 +70,7 @@ the given character to the file.</div>
 Status_Error is propagated if the file is not open. Mode_Error is propagated 
 if the mode of the file is not In_File. Sets End_Of_Line to True if at 
 end of line, including if at end of page or at end of file; in each of 
-these cases the value of Item is not specified. <A NAME="I7453"></A>Otherwise, 
+these cases the value of Item is not specified. <A NAME="I7772"></A>Otherwise, 
 End_Of_Line is set to False and Item is set to the next character (without 
 consuming it) from the file.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -96,7 +96,7 @@ If a character, either control or graphic, is available from the specified
 File or the default input file, then the character is read; Available 
 is True and Item contains the value of this character. If a character 
 is not available, then Available is False and the value of Item is not 
-specified. <A NAME="I7454"></A>Status_Error is propagated if the file 
+specified. <A NAME="I7773"></A>Status_Error is propagated if the file 
 is not open. Mode_Error is propagated if the mode of the file is not 
 In_File. End_Error is propagated if at the end of the file. The current 
 column, line and page numbers for the file are not affected.</div>
@@ -134,7 +134,7 @@ of 1.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
 Constraint_Error is raised if the length of the line exceeds Positive'Last; 
 in this case, the line number and page number are unchanged, and the 
-column number is unspecified but no less than it was before the call.<A NAME="I7455"></A> 
+column number is unspecified but no less than it was before the call.<A NAME="I7774"></A> 
 The exception End_Error is propagated if an attempt is made to skip a 
 file terminator.</div>
 <div class="paranum"><a name="p17.a">17.a/2</a></div>
@@ -155,7 +155,7 @@ scheme makes sense. But the line terminator is not skipped in this case.
 input file and assigns them to successive characters of the specified 
 string. Reading stops if the end of the string is met. Reading also stops 
 if the end of the line is met before meeting the end of the string; in 
-this case Skip_Line is (in effect) called with a spacing of 1. <A NAME="I7456"></A>The 
+this case Skip_Line is (in effect) called with a spacing of 1. <A NAME="I7775"></A>The 
 values of characters not assigned are not specified.</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">If characters are 
@@ -207,17 +207,17 @@ read.&nbsp;</div>
 <div class="paranum"><a name="p26.a">26.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<A NAME="I7457"></A>The Get_Line functions are added to Ada.Text_IO. 
-If Ada.Text_IO is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+<A NAME="I7776"></A>The Get_Line functions are added to Ada.Text_IO. 
+If Ada.Text_IO is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and a function Get_Line is defined in a package that is also referenced 
-in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 the user-defined Get_Line may no longer be use-visible, resulting in 
 errors. This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p26.b">26.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<A NAME="I7458"></A>The Text_IO.Get_Line functions are new.&nbsp;</div>
+<A NAME="I7777"></A>The Text_IO.Get_Line functions are new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p26.c">26.c/3</a></div>
@@ -227,7 +227,7 @@ Look_Ahead and Get_Immediate.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-10-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-10-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,16 +36,16 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 [This <span class="insert3">clause</span><span class="delete3">&nbsp;section</span> 
 defines the facilities for dealing with errors or other exceptional situations 
-that arise during program execution.] <A NAME="I5371"></A><A NAME="I5372"></A><A NAME="I5373"></A><A NAME="I5374"></A><A NAME="I5375"></A><A NAME="I5376"></A>An 
+that arise during program execution.] <A NAME="I5613"></A><A NAME="I5614"></A><A NAME="I5615"></A><A NAME="I5616"></A><A NAME="I5617"></A><A NAME="I5618"></A>An 
 <I>exception</I> represents a kind of exceptional situation; an occurrence 
 of such a situation (at run time) is called an <I>exception occurrence</I>. 
-[<A NAME="I5377"></A> To <I>raise</I> an exception is to abandon normal 
+[<A NAME="I5619"></A> To <I>raise</I> an exception is to abandon normal 
 program execution so as to draw attention to the fact that the corresponding 
-situation has arisen. <A NAME="I5378"></A>Performing some actions in 
+situation has arisen. <A NAME="I5620"></A>Performing some actions in 
 response to the arising of an exception is called <I>handling</I> the 
 exception. ]</div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5379"></A>...or 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5621"></A>...or 
 handling the exception occurrence.&nbsp;</div>
 <div class="paranum"><a name="p1.b">1.b</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For example, an exception 
@@ -53,21 +53,21 @@ End_Error might represent error situations in which an attempt is made
 to read beyond end-of-file. During the execution of a partition, there 
 might be numerous occurrences of this exception.&nbsp;</div>
 <div class="paranum"><a name="p1.c">1.c</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5380"></A>When 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5622"></A>When 
 the meaning is clear from the context, we sometimes use &ldquo;<I>occurrence</I>&rdquo; 
 as a short-hand for &ldquo;exception occurrence.&rdquo;&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0043-1.TXT">AI05-0043-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0258-1.TXT">AI05-0258-1</A></I>} 
-[An <SPAN Class="swiss"><A HREF="AA-11-1.html#S0281">exception_declaration</A></SPAN> 
+[An <SPAN Class="swiss"><A HREF="AA-11-1.html#S0303">exception_declaration</A></SPAN> 
 declares a name for an exception. An exception <span class="insert3">can 
 be</span><span class="delete3">&nbsp;is</span> raised <span class="insert3">explicitly 
 (for example,</span><span class="delete3">&nbsp;initially either</span> by 
-a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN><span class="insert3">)</span> 
+a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN><span class="insert3">)</span> 
 or<span class="insert3">&nbsp;implicitly (for example,</span> by the failure 
 of a language-defined check<span class="insert3">)</span>. When an exception 
-arises, control can be transferred to a user-provided <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN> 
-at the end of a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>, 
+arises, control can be transferred to a user-provided <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN> 
+at the end of a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN>, 
 or it can be propagated to a dynamically enclosing execution.]&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
@@ -90,7 +90,7 @@ to cover all of the cases.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-10-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,14 +36,14 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3165"></A><A NAME="I3166"></A><A NAME="I3167"></A><A NAME="I3168"></A><A NAME="I3169"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3241"></A><A NAME="I3242"></A><A NAME="I3243"></A><A NAME="I3244"></A><A NAME="I3245"></A>The 
 highest precedence unary operator <B>abs</B> (absolute value) is predefined 
 for every specific numeric type <I>T</I>, with the following specification: 
 </div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>abs</B>&quot;(Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3170"></A><A NAME="I3171"></A><A NAME="I3172"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3246"></A><A NAME="I3247"></A><A NAME="I3248"></A>The 
 highest precedence unary operator <B>not</B> (logical negation) is predefined 
 for every boolean type <I>T</I>, every modular type <I>T</I>, and for 
 every one-dimensional array type <I>T</I> whose components are of a boolean 
@@ -61,7 +61,7 @@ of the value of the operand.]</div>
 array of boolean components yields a one-dimensional boolean array with 
 the same bounds; each component of the result is obtained by logical 
 negation of the corresponding component of the operand (that is, the 
-component that has the same index value). <A NAME="I3173"></A><A NAME="I3174"></A><A NAME="I3175"></A>A 
+component that has the same index value). <A NAME="I3249"></A><A NAME="I3250"></A><A NAME="I3251"></A>A 
 check is made that each component of the result belongs to the component 
 subtype; the exception Constraint_Error is raised if this check fails. 
 </div>
@@ -69,7 +69,7 @@ subtype; the exception Constraint_Error is raised if this check fails.
 <div class="Annotations"><B>Discussion:&nbsp;</B>The check against the component 
 subtype is per AI83-00535.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3176"></A><A NAME="I3177"></A><A NAME="I3178"></A><A NAME="I3179"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3252"></A><A NAME="I3253"></A><A NAME="I3254"></A><A NAME="I3255"></A>The 
 highest precedence <I>exponentiation</I> operator ** is predefined for 
 every specific integer type <I>T</I> with the following specification: 
 </div>
@@ -84,7 +84,7 @@ or the floating point type):&nbsp;</div>
 <div class="Examples"><B>function</B>&nbsp;&quot;**&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Integer'Base)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0088-1.TXT">AI05-0088-1</A></I>} 
-<A NAME="I3180"></A>The right operand of an exponentiation is the <I>exponent</I>. 
+<A NAME="I3256"></A>The right operand of an exponentiation is the <I>exponent</I>. 
 The value of X**N with the value of the exponent N positive is the same 
 as the value of X*X*...X (with N&ndash;1 multiplications) except that 
 the multiplications are associated in an arbitrary order. With N equal 
@@ -99,24 +99,24 @@ the particular association order chosen.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I3181"></A>The implementation of exponentiation 
-for the case of a negative exponent is allowed to raise Constraint_Error 
-if the intermediate result of the repeated multiplications is outside 
-the safe range of the type, even though the final result (after taking 
-the reciprocal) would not be. (The best machine approximation to the 
-final result in this case would generally be 0.0.)&nbsp;</div>
+<div class="Normal">The implementation of exponentiation for the case 
+of a negative exponent is allowed to raise Constraint_Error if the intermediate 
+result of the repeated multiplications is outside the safe range of the 
+type, even though the final result (after taking the reciprocal) would 
+not be. (The best machine approximation to the final result in this case 
+would generally be 0.0.)&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Notes">20&nbsp;&nbsp;<A NAME="I3182"></A><A NAME="I3183"></A>As 
+<div class="Notes">20&nbsp;&nbsp;<A NAME="I3257"></A><A NAME="I3258"></A>As 
 implied by the specification given above for exponentiation of an integer 
-type, a check is made that the exponent is not negative. <A NAME="I3184"></A>Constraint_Error 
+type, a check is made that the exponent is not negative. <A NAME="I3259"></A>Constraint_Error 
 is raised if this check fails.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p13.a.1">13.a.1/1</a></div>
 <div class="Annotations">{<I><A HREF="defect2.html#8652/0100">8652/0100</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00018.TXT">AI95-00018-01</A></I>} 
-<A NAME="I3185"></A>The definition of &quot;**&quot; allows arbitrary 
+<A NAME="I3260"></A>The definition of &quot;**&quot; allows arbitrary 
 association of the multiplications which make up the result. Ada 83 required 
 left-to-right associations (confirmed by AI83-00137). Thus it is possible 
 that &quot;**&quot; would provide a slightly different (and more potentially 
@@ -138,7 +138,7 @@ times.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

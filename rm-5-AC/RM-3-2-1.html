@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -44,22 +44,22 @@ declares a type and its first subtype.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">type_declaration</SPAN><A NAME="I1427"></A><A NAME="S0023"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1428"></A><SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1429"></A><SPAN Class="swiss"><A HREF="RM-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1430"></A><SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1431"></A><SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">type_declaration</SPAN><A NAME="I1425"></A><A NAME="S0023"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1426"></A><SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1427"></A><SPAN Class="swiss"><A HREF="RM-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1428"></A><SPAN Class="swiss"><A HREF="RM-7-3.html#S0232">private_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1429"></A><SPAN Class="swiss"><A HREF="RM-7-3.html#S0233">private_extension_declaration</A></SPAN></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">full_type_declaration</SPAN><A NAME="I1432"></A><A NAME="S0024"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I1433"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I1434"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I1435"></A><SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0025">type_definition</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1436"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1437"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0222">task_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1438"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0227">protected_type_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">full_type_declaration</SPAN><A NAME="I1430"></A><A NAME="S0024"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I1431"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I1432"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I1433"></A><SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0025">type_definition</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1434"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1435"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0244">task_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1436"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0249">protected_type_declaration</A></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">type_definition</SPAN><A NAME="I1439"></A><A NAME="S0025"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1440"></A><SPAN Class="swiss"><A HREF="RM-3-5-1.html#S0038">enumeration_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1441"></A><SPAN Class="swiss"><A HREF="RM-3-5-4.html#S0041">integer_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1442"></A><SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1443"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1444"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1445"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0079">access_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1446"></A><SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN><span class="insert2">&nbsp;|&nbsp;<A NAME="I1447"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0077">interface_type_definition</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss">type_definition</SPAN><A NAME="I1437"></A><A NAME="S0025"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1438"></A><SPAN Class="swiss"><A HREF="RM-3-5-1.html#S0038">enumeration_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1439"></A><SPAN Class="swiss"><A HREF="RM-3-5-4.html#S0041">integer_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1440"></A><SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1441"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1442"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1443"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0079">access_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1444"></A><SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN><span class="insert2">&nbsp;|&nbsp;<A NAME="I1445"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0077">interface_type_definition</A></SPAN></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
@@ -68,7 +68,7 @@ type is the given type itself.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1448"></A>The <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
+<div class="Normal"><A NAME="I1446"></A>The <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
 denotes the <I>first subtype</I> of the type. The <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
 if any, defines the discriminants of the type (see <A HREF="RM-3-7.html">3.7</A>, 
@@ -76,12 +76,12 @@ if any, defines the discriminants of the type (see <A HREF="RM-3-7.html">3.7</A>
 of the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
 defines the remaining characteristics of (the view of) the type.</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Normal"><A NAME="I1449"></A>A type defined by a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I1447"></A>A type defined by a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
 is a <I>named</I> type; such a type has one or more nameable subtypes. 
-<A NAME="I1450"></A>Certain other forms of declaration also include type 
+<A NAME="I1448"></A>Certain other forms of declaration also include type 
 definitions as part of the declaration for an object<span class="delete2">&nbsp;(including a parameter or a discriminant)</span>. The type defined by 
 such a declaration is <I>anonymous</I> &mdash; it has no nameable subtypes. 
-<A NAME="I1451"></A>For explanatory purposes, this International Standard 
+<A NAME="I1449"></A>For explanatory purposes, this International Standard 
 sometimes refers to an anonymous type by a pseudo-name, written in italics, 
 and uses such pseudo-names at places where the syntax normally requires 
 an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
@@ -89,28 +89,28 @@ For a named type whose first subtype is T, this International Standard
 sometimes refers to the type of T as simply &ldquo;the type T&rdquo;. 
 </div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I1452"></A>A named type that is declared 
+<div class="Normal"><A NAME="I1450"></A>A named type that is declared 
 by a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
 or an anonymous type that is defined <span class="insert2">by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 or&nbsp;</span>as part of declaring an object of the type, is called a <I>full 
-type</I>.<A NAME="I1453"></A> <span class="insert2">The declaration of 
-a full type also declares the <I>full view</I> of the type.<A NAME="I1454"></A> 
+type</I>.<A NAME="I1451"></A> <span class="insert2">The declaration of 
+a full type also declares the <I>full view</I> of the type.<A NAME="I1452"></A> 
 </span>The <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0025">type_definition</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-4.html#S0251">protected_definition</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 that defines a full type is called a <I>full type definition</I>. Types 
 declared by other forms of <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
 are not separate types; they are partial or incomplete views of some 
 full type.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I1455"></A>The definition of a type implicitly 
+<div class="Normal"><A NAME="I1453"></A>The definition of a type implicitly 
 declares certain <I>predefined operators</I> that operate on the type, 
 according to what classes the type belongs, as specified in <A HREF="RM-4-5.html">4.5</A>, 
 &ldquo;<A HREF="RM-4-5.html">Operators and Expression Evaluation</A>&rdquo;. 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1456"></A>The <I>predefined types</I> (for 
+<div class="Normal"><A NAME="I1454"></A>The <I>predefined types</I> (for 
 example the types Boolean, Wide_Character, Integer, <I>root_integer</I>, 
 and <I>universal_integer</I>) are the types that are defined in a predefined 
 library package called Standard; this package also includes the (implicit) 
@@ -119,8 +119,8 @@ in <A HREF="RM-A-1.html">A.1</A>.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I1457"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-consists of the elaboration of the full type definition. <A NAME="I1458"></A>Each 
+<div class="Normal"><A NAME="I1455"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+consists of the elaboration of the full type definition. <A NAME="I1456"></A>Each 
 elaboration of a full type definition creates a distinct type and its 
 first subtype.&nbsp;</div>
 
@@ -154,7 +154,7 @@ no nameable subtypes.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

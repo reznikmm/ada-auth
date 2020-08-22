@@ -19,15 +19,17 @@
     DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-4-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
@@ -36,76 +38,76 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-<A NAME="I2863"></A>An <I>expression</I> is a formula that defines the 
+<A NAME="I2917"></A>An <I>expression</I> is a formula that defines the 
 computation or retrieval of a value. In this International Standard, 
 the term &ldquo;expression&rdquo; refers to a construct of the syntactic 
-category <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-or of any of the following categories: <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">choice_expression</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0129">term</A></SPAN>, <SPAN Class="swiss"><A HREF="AA-4-4.html#S0130">factor</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>, <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN>. 
-<A NAME="I2864"></A><A NAME="I2865"></A><A NAME="I2866"></A><A NAME="I2867"></A><A NAME="I2868"></A><A NAME="I2869"></A><A NAME="I2870"></A><A NAME="I2871"></A><A NAME="I2872"></A><A NAME="I2873"></A><A NAME="I2874"></A><A NAME="I2875"></A><A NAME="I2876"></A><A NAME="I2877"></A><A NAME="I2878"></A><A NAME="I2879"></A><A NAME="I2880"></A><A NAME="I2881"></A><A NAME="I2882"></A><A NAME="I2883"></A><A NAME="I2884"></A><A NAME="I2885"></A><A NAME="I2886"></A><A NAME="I2887"></A><A NAME="I2888"></A><A NAME="I2889"></A><A NAME="I2890"></A><A NAME="I2891"></A><A NAME="I2892"></A><A NAME="I2893"></A><A NAME="I2894"></A><A NAME="I2895"></A><A NAME="I2896"></A><A NAME="I2897"></A><A NAME="I2898"></A><A NAME="I2899"></A><A NAME="I2900"></A><A NAME="I2901"></A><A NAME="I2902"></A><A NAME="I2903"></A><A NAME="I2904"></A><A NAME="I2905"></A><A NAME="I2906"></A><A NAME="I2907"></A><A NAME="I2908"></A><A NAME="I2909"></A><A NAME="I2910"></A><A NAME="I2911"></A><A NAME="I2912"></A><A NAME="I2913"></A><A NAME="I2914"></A><A NAME="I2915"></A><A NAME="I2916"></A><A NAME="I2917"></A><A NAME="I2918"></A><A NAME="I2919"></A><A NAME="I2920"></A><A NAME="I2921"></A><A NAME="I2922"></A><A NAME="I2923"></A><A NAME="I2924"></A><A NAME="I2925"></A><A NAME="I2926"></A><A NAME="I2927"></A><A NAME="I2928"></A><A NAME="I2929"></A><A NAME="I2930"></A><A NAME="I2931"></A><A NAME="I2932"></A><A NAME="I2933"></A><A NAME="I2934"></A><A NAME="I2935"></A></div>
+category <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+or of any of the following categories: <SPAN Class="swiss"><A HREF="AA-4-4.html#S0133">choice_expression</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0139">term</A></SPAN>, <SPAN Class="swiss"><A HREF="AA-4-4.html#S0140">factor</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>, <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN>. 
+<A NAME="I2918"></A><A NAME="I2919"></A><A NAME="I2920"></A><A NAME="I2921"></A><A NAME="I2922"></A><A NAME="I2923"></A><A NAME="I2924"></A><A NAME="I2925"></A><A NAME="I2926"></A><A NAME="I2927"></A><A NAME="I2928"></A><A NAME="I2929"></A><A NAME="I2930"></A><A NAME="I2931"></A><A NAME="I2932"></A><A NAME="I2933"></A><A NAME="I2934"></A><A NAME="I2935"></A><A NAME="I2936"></A><A NAME="I2937"></A><A NAME="I2938"></A><A NAME="I2939"></A><A NAME="I2940"></A><A NAME="I2941"></A><A NAME="I2942"></A><A NAME="I2943"></A><A NAME="I2944"></A><A NAME="I2945"></A><A NAME="I2946"></A><A NAME="I2947"></A><A NAME="I2948"></A><A NAME="I2949"></A><A NAME="I2950"></A><A NAME="I2951"></A><A NAME="I2952"></A><A NAME="I2953"></A><A NAME="I2954"></A><A NAME="I2955"></A><A NAME="I2956"></A><A NAME="I2957"></A><A NAME="I2958"></A><A NAME="I2959"></A><A NAME="I2960"></A><A NAME="I2961"></A><A NAME="I2962"></A><A NAME="I2963"></A><A NAME="I2964"></A><A NAME="I2965"></A><A NAME="I2966"></A><A NAME="I2967"></A><A NAME="I2968"></A><A NAME="I2969"></A><A NAME="I2970"></A><A NAME="I2971"></A><A NAME="I2972"></A><A NAME="I2973"></A><A NAME="I2974"></A><A NAME="I2975"></A><A NAME="I2976"></A><A NAME="I2977"></A><A NAME="I2978"></A><A NAME="I2979"></A><A NAME="I2980"></A><A NAME="I2981"></A><A NAME="I2982"></A><A NAME="I2983"></A><A NAME="I2984"></A><A NAME="I2985"></A><A NAME="I2986"></A><A NAME="I2987"></A><A NAME="I2988"></A><A NAME="I2989"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">expression</SPAN><A NAME="I2936"></A><A NAME="S0122"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2937"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>&nbsp;{<B>and</B>&nbsp;<A NAME="I2938"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>}&nbsp;&nbsp;|&nbsp;<A NAME="I2939"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>&nbsp;{<B>and</B>&nbsp;<B>then</B>&nbsp;<A NAME="I2940"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2941"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>&nbsp;{<B>or</B>&nbsp;<A NAME="I2942"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>}&nbsp;&nbsp;|&nbsp;<A NAME="I2943"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>&nbsp;{<B>or</B>&nbsp;<B>else</B>&nbsp;<A NAME="I2944"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2945"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>&nbsp;{<B>xor</B>&nbsp;<A NAME="I2946"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0125">relation</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">expression</SPAN><A NAME="I2990"></A><A NAME="S0132"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2991"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>&nbsp;{<B>and</B>&nbsp;<A NAME="I2992"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>}&nbsp;&nbsp;|&nbsp;<A NAME="I2993"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>&nbsp;{<B>and</B>&nbsp;<B>then</B>&nbsp;<A NAME="I2994"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2995"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>&nbsp;{<B>or</B>&nbsp;<A NAME="I2996"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>}&nbsp;&nbsp;|&nbsp;<A NAME="I2997"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>&nbsp;{<B>or</B>&nbsp;<B>else</B>&nbsp;<A NAME="I2998"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2999"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>&nbsp;{<B>xor</B>&nbsp;<A NAME="I3000"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0135">relation</A></SPAN>}</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
-<SPAN Class="swiss">choice_expression</SPAN><A NAME="I2947"></A><A NAME="S0123"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2948"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>&nbsp;{<B>and</B>&nbsp;<A NAME="I2949"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2950"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>&nbsp;{<B>or</B>&nbsp;<A NAME="I2951"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2952"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>&nbsp;{<B>xor</B>&nbsp;<A NAME="I2953"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2954"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>&nbsp;{<B>and&nbsp;then</B>&nbsp;<A NAME="I2955"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2956"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>&nbsp;{<B>or&nbsp;else</B>&nbsp;<A NAME="I2957"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN>}</div>
+<SPAN Class="swiss">choice_expression</SPAN><A NAME="I3001"></A><A NAME="S0133"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3002"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>&nbsp;{<B>and</B>&nbsp;<A NAME="I3003"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3004"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>&nbsp;{<B>or</B>&nbsp;<A NAME="I3005"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3006"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>&nbsp;{<B>xor</B>&nbsp;<A NAME="I3007"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3008"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>&nbsp;{<B>and&nbsp;then</B>&nbsp;<A NAME="I3009"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3010"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>&nbsp;{<B>or&nbsp;else</B>&nbsp;<A NAME="I3011"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0134">choice_relation</A></SPAN>}</div>
 <div class="paranum"><a name="p2.2">2.2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
-<SPAN Class="swiss">choice_relation</SPAN><A NAME="I2958"></A><A NAME="S0124"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2959"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>&nbsp;[<A NAME="I2960"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0133">relational_operator</A></SPAN>&nbsp;<A NAME="I2961"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>]</div>
+<SPAN Class="swiss">choice_relation</SPAN><A NAME="I3012"></A><A NAME="S0134"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3013"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>&nbsp;[<A NAME="I3014"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0143">relational_operator</A></SPAN>&nbsp;<A NAME="I3015"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>]</div>
 <div class="paranum"><a name="p3">3/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
-<SPAN Class="swiss">relation</SPAN><A NAME="I2962"></A><A NAME="S0125"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2963"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>&nbsp;[<A NAME="I2964"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0133">relational_operator</A></SPAN>&nbsp;<A NAME="I2965"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>tested_</I><A NAME="I2966"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>&nbsp;[<B>not</B>]&nbsp;<B>in</B>&nbsp;<A NAME="I2967"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">membership_choice_list</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2968"></A><SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN></div>
-<div class="paranum"><a name="p4">4/5</a></div>
+<SPAN Class="swiss">relation</SPAN><A NAME="I3016"></A><A NAME="S0135"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3017"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>&nbsp;[<A NAME="I3018"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0143">relational_operator</A></SPAN>&nbsp;<A NAME="I3019"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>tested_</I><A NAME="I3020"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>&nbsp;[<B>not</B>]&nbsp;<B>in</B>&nbsp;<A NAME="I3021"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0136">membership_choice_list</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3022"></A><SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN></div>
+<div class="paranum"><a name="p3.1">3.1/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
-<SPAN Class="swiss">membership_choice_list</SPAN><A NAME="I2969"></A><A NAME="S0126"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2970"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">membership_choice</A></SPAN>&nbsp;{'|'&nbsp;<A NAME="I2971"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">membership_choice</A></SPAN>}</div>
-<div class="paranum"><a name="p4.1">4.1/4</a></div>
+<SPAN Class="swiss">membership_choice_list</SPAN><A NAME="I3023"></A><A NAME="S0136"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3024"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0137">membership_choice</A></SPAN>&nbsp;{'|'&nbsp;<A NAME="I3025"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0137">membership_choice</A></SPAN>}</div>
+<div class="paranum"><a name="p3.2">3.2/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
-<SPAN Class="swiss">membership_choice</SPAN><A NAME="I2972"></A><A NAME="S0127"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>choice_</I><A NAME="I2973"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I2974"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>&nbsp;|&nbsp;<A NAME="I2975"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN></div>
+<SPAN Class="swiss">membership_choice</SPAN><A NAME="I3026"></A><A NAME="S0137"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>choice_</I><A NAME="I3027"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I3028"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>&nbsp;|&nbsp;<A NAME="I3029"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">simple_expression</SPAN><A NAME="I3030"></A><A NAME="S0138"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I3031"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0145">unary_adding_operator</A></SPAN>]&nbsp;<A NAME="I3032"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0139">term</A></SPAN>&nbsp;{<A NAME="I3033"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0144">binary_adding_operator</A></SPAN>&nbsp;<A NAME="I3034"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0139">term</A></SPAN>}</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">simple_expression</SPAN><A NAME="I2976"></A><A NAME="S0128"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I2977"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0135">unary_adding_operator</A></SPAN>]&nbsp;<A NAME="I2978"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0129">term</A></SPAN>&nbsp;{<A NAME="I2979"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0134">binary_adding_operator</A></SPAN>&nbsp;<A NAME="I2980"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0129">term</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">term</SPAN><A NAME="I3035"></A><A NAME="S0139"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3036"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0140">factor</A></SPAN>&nbsp;{<A NAME="I3037"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0146">multiplying_operator</A></SPAN>&nbsp;<A NAME="I3038"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0140">factor</A></SPAN>}</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">term</SPAN><A NAME="I2981"></A><A NAME="S0129"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2982"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0130">factor</A></SPAN>&nbsp;{<A NAME="I2983"></A><SPAN Class="swiss"><A HREF="AA-4-5.html#S0136">multiplying_operator</A></SPAN>&nbsp;<A NAME="I2984"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0130">factor</A></SPAN>}</div>
-<div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">factor</SPAN><A NAME="I2985"></A><A NAME="S0130"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2986"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>&nbsp;[**&nbsp;<A NAME="I2987"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>]&nbsp;|&nbsp;<B>abs</B>&nbsp;<A NAME="I2988"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>&nbsp;|&nbsp;<B>not</B>&nbsp;<A NAME="I2989"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN></div>
-<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Indented1"><SPAN Class="swiss">factor</SPAN><A NAME="I3039"></A><A NAME="S0140"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3040"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>&nbsp;[**&nbsp;<A NAME="I3041"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>]&nbsp;|&nbsp;<B>abs</B>&nbsp;<A NAME="I3042"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>&nbsp;|&nbsp;<B>not</B>&nbsp;<A NAME="I3043"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN></div>
+<div class="paranum"><a name="p7">7/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0190-1.TXT">AI12-0190-1</A></I>} 
-<SPAN Class="swiss">primary</SPAN><A NAME="I2990"></A><A NAME="S0131"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I2991"></A><SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN>&nbsp;|&nbsp;<B>null</B>&nbsp;|&nbsp;<A NAME="I2992"></A><SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>&nbsp;|&nbsp;<A NAME="I2993"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN><BR>
-&nbsp;|&nbsp;<A NAME="I2994"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2995"></A><SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>&nbsp;|&nbsp;(<A NAME="I2996"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>)<BR>
-&nbsp;|&nbsp;(<A NAME="I2997"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN>)&nbsp;|&nbsp;(<A NAME="I2998"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN>)<BR>
-&nbsp;|&nbsp;<A NAME="I2999"></A><SPAN Class="swiss"><A HREF="AA-4-5-9.html#S0146">anonymous_function</A></SPAN></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0236-1.TXT">AI12-0236-1</A></I>} 
+<SPAN Class="swiss">primary</SPAN><A NAME="I3044"></A><A NAME="S0141"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3045"></A><SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN>&nbsp;|&nbsp;<B>null</B>&nbsp;|&nbsp;<A NAME="I3046"></A><SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>&nbsp;|&nbsp;<A NAME="I3047"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3048"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I3049"></A><SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>&nbsp;|&nbsp;(<A NAME="I3050"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I3051"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN>)&nbsp;|&nbsp;(<A NAME="I3052"></A><SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I3053"></A><SPAN Class="swiss"><A HREF="AA-4-5-9.html#S0156">declare_expression</A></SPAN>)</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
-<div class="paranum"><a name="p9">9</a></div>
+<div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-used as a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
+used as a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
 shall resolve to denote an object or a value.&nbsp;</div>
-<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This replaces RM83-4.4(3). 
 We don't need to mention named numbers explicitly, because the name of 
 a named number denotes a value. We don't need to mention attributes explicitly, 
@@ -113,57 +115,103 @@ because attributes now denote (rather than yield) values in general.
 Also, the new wording allows attributes that denote objects, which should 
 always have been allowed (in case the implementation chose to have such 
 a thing).&nbsp;</div>
-<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>It might seem odd that this is 
 an overload resolution rule, but it is relevant during overload resolution. 
-For example, it helps ensure that a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
+For example, it helps ensure that a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
 that consists of only the identifier of a parameterless function is interpreted 
-as a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
+as a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
 rather than directly as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p10">10</a></div>
+<div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">Each expression has a type; it specifies the computation 
-or retrieval of a value of that type.&nbsp;</div>
+or retrieval of a value of that type.</div>
+<div class="paranum"><a name="p9.1">9.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0317-1.TXT">AI12-0317-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
+that is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+surrounded by ( and ) is known as a <I>parenthesized expression</I>.<A NAME="I3054"></A><A NAME="I3055"></A></div>
+<div class="paranum"><a name="p9.2">9.2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0317-1.TXT">AI12-0317-1</A></I>} 
+Every <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+consists of one or more <I>operative constituent</I> <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s, 
+only one of which is evaluated as part of evaluating the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+(the <I>evaluated operative constituent</I>). The operative constituents 
+are determined as follows, according to the form of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+(or<A NAME="I3056"></A><A NAME="I3057"></A> <A NAME="I3058"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>):</div>
+<div class="paranum"><a name="p9.3">9.3/5</a></div>
+<div class="Bulleted">if the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN>, 
+the operative constituents of its <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s;</div>
+<div class="paranum"><a name="p9.4">9.4/5</a></div>
+<div class="Bulleted">if the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+(or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>) 
+is a parenthesized expression, a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>, 
+or a view conversion, the operative constituent(s) of its operand;</div>
+<div class="paranum"><a name="p9.5">9.5/5</a></div>
+<div class="Bulleted">if the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-4-5-9.html#S0156">declare_expression</A></SPAN>, 
+the operative constituent(s) of its <I>body_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>;</div>
+<div class="paranum"><a name="p9.6">9.6/5</a></div>
+<div class="Bulleted">otherwise, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+(or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>) 
+itself.&nbsp;</div>
+<div class="paranum"><a name="p9.7">9.7/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0317-1.TXT">AI12-0317-1</A></I>} 
+In certain contexts, we specify that an operative constituent shall (or 
+shall not) be <I>newly constructed</I>.<A NAME="I3059"></A> This means 
+the operative constituent shall (or shall not) be an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>; 
+in either case, a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
+is permitted.</div>
+<div class="paranum"><a name="p9.a">9.a/5</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>If an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0149">if_expression</A></SPAN> 
+does not have an <B>else</B> clause, &quot;True&quot; is a opertive constituent 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+and it can be the evaluated operative constituent.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I3000"></A>The value of a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I3060"></A>The value of a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting an object is the value of the object.</div>
-<div class="paranum"><a name="p11.1">11.1/5</a></div>
+<div class="paranum"><a name="p10.1">10.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0227-1.TXT">AI12-0227-1</A></I>} 
 An expression of a numeric universal type is evaluated as if it has type 
 <I>root_integer</I> (for <I>universal_integer</I>) or <I>root_real</I> 
 (otherwise) unless the context identifies a specific type (in which case 
 that type is used).</div>
-<div class="paranum"><a name="p11.a">11.a/5</a></div>
+<div class="paranum"><a name="p10.a">10.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This has no effect for 
 a static expression; its value may be arbitrarily small or large since 
 no specific type is expected for any expression for which this rule specifies 
 one of the root types. The only effect of this rule is to allow Constraint_Error 
 to be raised if the value is outside of the base range of <I>root_integer</I> 
 or <I>root_real</I> when the expression is not static.&nbsp;</div>
-<div class="paranum"><a name="p11.b">11.b/5</a></div>
+<div class="paranum"><a name="p10.b">10.b/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This rule means that implementations 
-don't have to support unlimited range math at runtime for universal expressions. 
-Note that universal expressions for which the context doesn't specify 
-a specific type are quite rare; attribute prefixes and results are the 
-only known cases. (For operators, <A HREF="AA-8-6.html">8.6</A> already 
-specifies that the operator of a root type get used, which provides a 
-specific type.)&nbsp;</div>
+don't have to support unlimited range math at run time for universal 
+expressions. Note that universal expressions for which the context doesn't 
+specify a specific type are quite rare; attribute prefixes and results 
+are the only known cases. (For operators, <A HREF="AA-8-6.html">8.6</A> 
+already specifies that the operator of a root type be used, which provides 
+a specific type.)&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
-<div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I3001"></A><A NAME="I3002"></A><A NAME="I3003"></A>For 
-the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I3061"></A><A NAME="I3062"></A><A NAME="I3063"></A>For 
+the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting an object of an unconstrained numeric subtype, if the value 
 of the object is outside the base range of its type, the implementation 
 may either raise Constraint_Error or return the value of the object. 
 </div>
-<div class="paranum"><a name="p12.a">12.a/3</a></div>
+<div class="paranum"><a name="p11.a">11.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 This means that if extra-range intermediates are used to hold the value 
 of an object of an unconstrained numeric subtype, a Constraint_Error 
@@ -174,23 +222,23 @@ no side effects other than failing an Overflow_Check are possible). This
 permission is over and above that provided by subclause <A HREF="AA-11-6.html">11.6</A>, 
 since this allows the Constraint_Error to move to a different handler. 
 </div>
-<div class="paranum"><a name="p12.b">12.b</a></div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This permission is intended to 
 allow extra-range registers to be used efficiently to hold parameters 
 and local variables, even if they might need to be transferred into smaller 
 registers for performing certain predefined operations.&nbsp;</div>
-<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="paranum"><a name="p11.c">11.c</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>There is no need to mention 
-other kinds of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>s, 
+other kinds of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>s, 
 since any Constraint_Error to be raised can be &ldquo;charged&rdquo; 
-to the evaluation of the particular kind of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>. 
+to the evaluation of the particular kind of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Examples</H4>
-<div class="paranum"><a name="p13">13</a></div>
+<div class="paranum"><a name="p12">12</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><I>Examples of primaries:</I> 
 </div>
-<div class="paranum"><a name="p14">14</a></div>
+<div class="paranum"><a name="p13">13</a></div>
 <div class="Examples" style="margin-bottom: 0.9em">4.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;real&nbsp;literal</I></SPAN><BR>
 Pi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;named&nbsp;number</I></SPAN><BR>
 (1&nbsp;..&nbsp;10&nbsp;=&gt;&nbsp;0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;array&nbsp;aggregate</I></SPAN><BR>
@@ -200,10 +248,10 @@ Sine(X)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-
 Color'(Blue)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;qualified&nbsp;expression</I></SPAN><BR>
 Real(M*N)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;conversion</I></SPAN><BR>
 (Line_Count&nbsp;+&nbsp;10)&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;parenthesized&nbsp;expression&nbsp;</I></SPAN></div>
-<div class="paranum"><a name="p15">15</a></div>
+<div class="paranum"><a name="p14">14</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><I>Examples of expressions:</I> 
 </div>
-<div class="paranum"><a name="p16">16/2</a></div>
+<div class="paranum"><a name="p15">15/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
 Volume&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;primary</I></SPAN><BR>
 <B>not</B>&nbsp;Destroyed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;factor</I></SPAN><BR>
@@ -220,49 +268,49 @@ Index&nbsp;=&nbsp;0&nbsp;<B>or</B>&nbsp;Item_Hit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 A**(B**C)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;expression&nbsp;(parentheses&nbsp;are&nbsp;required)</I></SPAN></div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
-<div class="paranum"><a name="p16.a">16.a</a></div>
-<div class="Annotations"><A NAME="I3004"></A>In Ada 83, <B>out</B> parameters 
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><A NAME="I3064"></A>In Ada 83, <B>out</B> parameters 
 and their nondiscriminant subcomponents are not allowed as <SPAN Class="swiss">primaries</SPAN>. 
 These restrictions are eliminated in Ada 95.</div>
-<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="paranum"><a name="p15.b">15.b</a></div>
 <div class="Annotations">In various contexts throughout the language 
-where Ada 83 syntax rules had <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>, 
-the corresponding Ada 95 syntax rule has <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+where Ada 83 syntax rules had <SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>, 
+the corresponding Ada 95 syntax rule has <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 instead. This reflects the inclusion of modular integer types, which 
 makes the logical operators &quot;<B>and</B>&quot;, &quot;<B>or</B>&quot;, 
 and &quot;<B>xor</B>&quot; more useful in expressions of an integer type. 
 Requiring parentheses to use these operators in such contexts seemed 
 unnecessary and potentially confusing. Note that the bounds of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
-still have to be specified by <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s, 
-since otherwise <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
+still have to be specified by <SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>s, 
+since otherwise <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
 involving membership tests might be ambiguous. Essentially, the operation 
 &quot;..&quot; is of higher precedence than the logical operators, and 
 hence uses of logical operators still have to be parenthesized when used 
 in a bound of a range.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
-<div class="paranum"><a name="p16.c">16.c/3</a></div>
+<div class="paranum"><a name="p15.c">15.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
-Moved <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
-from <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
+Moved <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
+from <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN> 
 to <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> (see 
-<A HREF="AA-4-1.html">4.1</A>). This allows the use of <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN>s 
+<A HREF="AA-4-1.html">4.1</A>). This allows the use of <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>s 
 in more places.</div>
-<div class="paranum"><a name="p16.d">16.d/3</a></div>
+<div class="paranum"><a name="p15.d">15.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0176-1.TXT">AI05-0176-1</A></I>} 
-Added <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN> 
-to <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>.</div>
-<div class="paranum"><a name="p16.e">16.e/3</a></div>
+Added <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+to <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>.</div>
+<div class="paranum"><a name="p15.e">15.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
 Expanded membership test syntax (see <A HREF="AA-4-5-2.html">4.5.2</A>). 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
-<div class="paranum"><a name="p16.f">16.f/4</a></div>
+<div class="paranum"><a name="p15.f">15.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
-<A NAME="I3005"></A><B>Corrigendum:</B> Revised membership syntax to 
+<A NAME="I3065"></A><B>Corrigendum:</B> Revised membership syntax to 
 eliminate ambiguities. In some cases, previously ambiguous membership 
 expressions will now have an unambiguous meaning. If an Ada 2012 implementation 
 chose the &quot;wrong&quot; meaning, the expression could silently change 
@@ -278,10 +326,10 @@ be extremely rare as membership operations on Boolean types are unlikely
 (and this can happen only in code written for Ada 2012).&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
-<div class="paranum"><a name="p16.g">16.g/4</a></div>
+<div class="paranum"><a name="p15.g">15.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
-<A NAME="I3006"></A><B>Corrigendum:</B> The revised membership syntax 
-will require parentheses in <SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">membership_choice_list</A></SPAN>s 
+<A NAME="I3066"></A><B>Corrigendum:</B> The revised membership syntax 
+will require parentheses in <SPAN Class="swiss"><A HREF="AA-4-4.html#S0136">membership_choice_list</A></SPAN>s 
 in some cases where the Ada 2012 grammar did not require them. For instance, 
 <TT>A <B>in</B> B <B>in</B> C | D</TT> is now illegal. However, such 
 expressions can be interpreted in multiple ways (either <TT>A <B>in</B> 
@@ -292,27 +340,36 @@ all such expressions occur only in Ada 2012 syntax; so they should be
 rare.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p16.h">16.h/5</a></div>
+<div class="paranum"><a name="p15.h">15.h/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0227-1.TXT">AI12-0227-1</A></I>} 
 <B>Correction:</B> Added wording so that universal expressions evaluated 
-at runtime can raise Constraint_Error if the value is outside of the 
+at run time can raise Constraint_Error if the value is outside of the 
 range of <I>root_integer</I> or <I>root_real</I>. We don't document this 
-as an inconsistency as the rule requires no implementation to change 
+as an inconsistency because the rule requires no implementation to change 
 (as Constraint_Error is not required); it just allows implementations 
 that already raise Constraint_Error (which is all of them surveyed) to 
 be considered correct.</div>
-<div class="paranum"><a name="p16.i">16.i/5</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0190-1.TXT">AI12-0190-1</A></I>} 
-Added <SPAN Class="swiss"><A HREF="AA-4-5-9.html#S0146">anonymous_function</A></SPAN> 
-to <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>. 
-</div>
+<div class="paranum"><a name="p15.i">15.i/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0236-1.TXT">AI12-0236-1</A></I>} 
+Added <SPAN Class="swiss"><A HREF="AA-4-5-9.html#S0156">declare_expression</A></SPAN> 
+to <SPAN Class="swiss"><A HREF="AA-4-4.html#S0141">primary</A></SPAN>. 
+It shares the rules about parentheses with <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0148">conditional_expression</A></SPAN>s.</div>
+<div class="paranum"><a name="p15.j">15.j/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0317-1.TXT">AI12-0317-1</A></I>} 
+Added the definitions of &ldquo;operative constituent&rdquo; and &ldquo;newly 
+constructed&rdquo; to centralize definitions that are needed for various 
+rules and definitions across the Standard. In particular, <I>operative 
+constituent</I> is often used when we want the semantics or legality 
+to be unchanged by the presence of parens, qualification, or view conversions. 
+Examples are found in <A HREF="AA-4-3-2.html">4.3.2</A>, <A HREF="AA-6-2.html">6.2</A>, 
+and <A HREF="AA-7-5.html">7.5</A>.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-4-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">

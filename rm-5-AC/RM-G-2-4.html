@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -42,7 +42,7 @@ shall be as specified here.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I9080"></A><A NAME="I9081"></A>When an exception 
+<div class="Normal"><A NAME="I9648"></A><A NAME="I9649"></A>When an exception 
 is not raised, the result of evaluating a function in an instance <I>EF</I> 
 of Numerics.Generic_Elementary_Functions belongs to a <I>result interval</I>, 
 defined as the smallest model interval of <I>EF</I>.Float_Type that contains 
@@ -51,12 +51,12 @@ all the values of the form <SPAN Class="roman"><I>f</I></SPAN> &middot;
 is the exact value of the corresponding mathematical function at the 
 given parameter values, <SPAN Class="roman"><I>d</I></SPAN> is a real 
 number, and |<SPAN Class="roman"><I>d</I></SPAN>| is less than or equal 
-to the function's <I>maximum relative error</I>. <A NAME="I9082"></A><A NAME="I9083"></A>The 
+to the function's <I>maximum relative error</I>. <A NAME="I9650"></A><A NAME="I9651"></A>The 
 function delivers a value that belongs to the result interval when both 
 of its bounds belong to the safe range of <I>EF</I>.Float_Type; otherwise, 
 </div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Bulleted"><A NAME="I9084"></A>if <I>EF</I>.Float_Type'Machine_Overflows 
+<div class="Bulleted"><A NAME="I9652"></A>if <I>EF</I>.Float_Type'Machine_Overflows 
 is True, the function either delivers a value that belongs to the result 
 interval or raises Constraint_Error, signaling overflow;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -82,7 +82,7 @@ operator, which depends on the values of the operands, is (4.0 + |<SPAN Class="r
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">The maximum relative error given above applies throughout 
 the domain of the forward trigonometric functions when the Cycle parameter 
-is specified. <A NAME="I9085"></A>When the Cycle parameter is omitted, 
+is specified. <A NAME="I9653"></A>When the Cycle parameter is omitted, 
 the maximum relative error given above applies only when the absolute 
 value of the angle parameter X is less than or equal to some implementation-defined 
 <I>angle threshold</I>, which shall be at least <SPAN Class="roman"><I>EF</I></SPAN><SPAN Class="roman">.Float_Type'Machine_Radix</SPAN> 
@@ -166,7 +166,7 @@ of Numerics.e.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-G-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

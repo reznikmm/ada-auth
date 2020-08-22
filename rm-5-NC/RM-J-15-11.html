@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,34 +38,34 @@
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Priority is as follows:&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8933"></A><A NAME="I8934"></A>Priority 
-(<SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9499"></A><A NAME="I9500"></A>Priority 
+(<SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Interrupt_Priority is as follows:&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8935"></A><A NAME="I8936"></A>Interrupt_Priority 
-[(<SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>);]</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9501"></A><A NAME="I9502"></A>Interrupt_Priority 
+[(<SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);]</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal">The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-in a Priority or Interrupt_Priority pragma is Integer.<A NAME="I8937"></A> 
-<A NAME="I8938"></A></div>
+<div class="Normal">The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+in a Priority or Interrupt_Priority pragma is Integer.<A NAME="I9503"></A> 
+<A NAME="I9504"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">A Priority pragma is allowed only immediately within 
-a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0251">protected_definition</A></SPAN>, 
 or the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>. 
-An Interrupt_Priority pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>.</div>
+of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>. 
+An Interrupt_Priority pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0251">protected_definition</A></SPAN>.</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">For a Priority pragma that appears in the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 shall be static, and its value shall be in the range of System.Priority. 
 </div>
 
@@ -79,30 +79,30 @@ Interrupt_Priority specifies the value of the Interrupt_Priority aspect
 as follows:</div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-appears in a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-is associated with the aspect for the task type or <SPAN Class="swiss"><A HREF="RM-9-1.html#S0223">single_task_declaration</A></SPAN> 
+appears in a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is associated with the aspect for the task type or <SPAN Class="swiss"><A HREF="RM-9-1.html#S0245">single_task_declaration</A></SPAN> 
 that contains the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-appears in a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-is associated with the aspect for the protected type or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0228">single_protected_declaration</A></SPAN> 
+appears in a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0251">protected_definition</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is associated with the aspect for the protected type or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0250">single_protected_declaration</A></SPAN> 
 that contains the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 appears in the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is associated with the aspect for the subprogram that contains the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">If there is no <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">If there is no <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 in an Interrupt_Priority pragma, the Interrupt_Priority aspect has the 
 value Interrupt_Priority'Last.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

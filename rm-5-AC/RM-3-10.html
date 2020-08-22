@@ -34,9 +34,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-9-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,101 +45,101 @@
 <HR>
 <H1>3.10 Access Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2319"></A><A NAME="I2320"></A><A NAME="I2321"></A>A 
+<div class="Normal"><A NAME="I2326"></A><A NAME="I2327"></A><A NAME="I2328"></A>A 
 value of an access type (an <I>access value</I>) provides indirect access 
 to the object or subprogram it <I>designates</I>. Depending on its type, 
 an access value can designate either subprograms, objects created by 
 allocators (see <A HREF="RM-4-8.html">4.8</A>), or more generally <I>aliased</I> 
-objects of an appropriate type. <A NAME="I2322"></A><A NAME="I2323"></A></div>
+objects of an appropriate type. <A NAME="I2329"></A><A NAME="I2330"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">access_type_definition</SPAN><A NAME="I2324"></A><A NAME="S0079"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2">[<A NAME="I2325"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2326"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0080">access_to_object_definition</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<span class="insert2">[<A NAME="I2327"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2328"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0082">access_to_subprogram_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">access_type_definition</SPAN><A NAME="I2331"></A><A NAME="S0079"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2">[<A NAME="I2332"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2333"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0080">access_to_object_definition</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<span class="insert2">[<A NAME="I2334"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2335"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0082">access_to_subprogram_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">access_to_object_definition</SPAN><A NAME="I2329"></A><A NAME="S0080"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<A NAME="I2330"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0081">general_access_modifier</A></SPAN>]&nbsp;<A NAME="I2331"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">access_to_object_definition</SPAN><A NAME="I2336"></A><A NAME="S0080"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<A NAME="I2337"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0081">general_access_modifier</A></SPAN>]&nbsp;<A NAME="I2338"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">general_access_modifier</SPAN><A NAME="I2332"></A><A NAME="S0081"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>constant</B></div>
+<div class="Indented1"><SPAN Class="swiss">general_access_modifier</SPAN><A NAME="I2339"></A><A NAME="S0081"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>constant</B></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">access_to_subprogram_definition</SPAN><A NAME="I2333"></A><A NAME="S0082"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2334"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0189">parameter_profile</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I2335"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0190">parameter_and_result_profile</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">access_to_subprogram_definition</SPAN><A NAME="I2340"></A><A NAME="S0082"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2341"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0204">parameter_profile</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I2342"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0205">parameter_and_result_profile</A></SPAN></div>
 <div class="paranum"><a name="p5.1">5.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">null_exclusion</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2336"></A><A NAME="S0083"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>not</B>&nbsp;<B>null</B></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">null_exclusion</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2343"></A><A NAME="S0083"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>not</B>&nbsp;<B>null</B></span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">access_definition</SPAN><A NAME="I2337"></A><A NAME="S0084"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2338"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>constant</B>]&nbsp;<A NAME="I2339"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;[<A NAME="I2340"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2341"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0189">parameter_profile</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;[<A NAME="I2342"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;<A NAME="I2343"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0190">parameter_and_result_profile</A></SPAN></span><span class="delete2"><B>&nbsp;access</B>&nbsp;<A NAME="I2344"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss">access_definition</SPAN><A NAME="I2344"></A><A NAME="S0084"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2345"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>constant</B>]&nbsp;<A NAME="I2346"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I2347"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2348"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0204">parameter_profile</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I2349"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;<A NAME="I2350"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0205">parameter_and_result_profile</A></SPAN></span><span class="delete2"><B>&nbsp;access</B>&nbsp;<A NAME="I2351"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN></span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7/1</a></div>
-<div class="Normal"><A NAME="I2345"></A><A NAME="I2346"></A><A NAME="I2347"></A><A NAME="I2348"></A>There 
+<div class="Normal"><A NAME="I2352"></A><A NAME="I2353"></A><A NAME="I2354"></A><A NAME="I2355"></A>There 
 are two kinds of access types, <I>access-to-object</I> types, whose values 
 designate objects, and <I>access-to-subprogram</I> types, whose values 
-designate subprograms. <A NAME="I2349"></A>Associated with an access-to-object 
+designate subprograms. <A NAME="I2356"></A>Associated with an access-to-object 
 type is a <I>storage pool</I>; several access types may share the same 
 storage pool. <span class="insert1">All descendants of an access type 
-share the same storage pool.</span> <A NAME="I2350"></A>A storage pool 
+share the same storage pool.</span> <A NAME="I2357"></A>A storage pool 
 is an area of storage used to hold dynamically allocated objects (called 
 <I>pool elements</I>) created by allocators; storage pools are described 
 further in <A HREF="RM-13-11.html">13.11</A>, &ldquo;<A HREF="RM-13-11.html">Storage 
 Management</A>&rdquo;.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2351"></A><A NAME="I2352"></A>Access-to-object 
+<div class="Normal"><A NAME="I2358"></A><A NAME="I2359"></A>Access-to-object 
 types are further subdivided into <I>pool-specific</I> access types, 
 whose values can designate only the elements of their associated storage 
 pool, and <I>general</I> access types, whose values can designate the 
 elements of any storage pool, as well as aliased objects created by declarations 
 rather than allocators, and aliased subcomponents of other objects.&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal"><A NAME="I2353"></A>A view of an object is defined 
+<div class="Normal"><A NAME="I2360"></A>A view of an object is defined 
 to be <I>aliased</I> if it is defined by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN><span class="insert3">,</span><span class="delete3">&nbsp;or</span> <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN><span class="insert3">, 
-<SPAN Class="swiss"><A HREF="RM-6-1.html#S0192">parameter_specification</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="RM-6-5.html#S0202">extended_return_object_declaration</A></SPAN></span> 
+<SPAN Class="swiss"><A HREF="RM-6-1.html#S0207">parameter_specification</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-6-5.html#S0224">extended_return_object_declaration</A></SPAN></span> 
 with the reserved word <B>aliased</B>, or by a renaming of an aliased 
 view. In addition, the dereference of an access-to-object value denotes 
 an aliased view, as does a view conversion (see <A HREF="RM-4-6.html">4.6</A>) 
-of an aliased view.<span class="insert5">&nbsp;A <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
-is an aliased view when the operand denotes an aliased view.</span> <span class="insert2">The</span><span class="delete2">&nbsp;Finally, 
-the</span> current instance of <span class="insert3">an immutably limited 
-type (see <A HREF="RM-7-5.html">7.5</A>) is</span><span class="delete3">&nbsp;a 
-limited</span><span class="insert2"><span class="delete3">&nbsp;tagged</span></span><span class="delete3">&nbsp;type,&nbsp;</span><span class="insert2"><span class="delete3">a protected 
-type, a task type, or a type that has the reserved word <B>limited</B> 
+of an aliased view.<span class="insert5">&nbsp;A <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+denotes an aliased view when the operand denotes an aliased view.</span> 
+<span class="insert2">The</span><span class="delete2">&nbsp;Finally, the</span> 
+current instance of <span class="insert3">an immutably limited type (see 
+<A HREF="RM-7-5.html">7.5</A>) is</span><span class="delete3">&nbsp;a limited</span><span class="insert2"><span class="delete3">&nbsp;tagged</span></span><span class="delete3">&nbsp;type,&nbsp;</span><span class="insert2"><span class="delete3">a 
+protected type, a task type, or a type that has the reserved word <B>limited</B> 
 in its full definition is also</span></span><span class="delete3"></span> 
 <span class="insert2">defined to be aliased. Finally,</span><span class="delete2">&nbsp;and</span> 
 a formal parameter or generic formal object of a tagged type <span class="insert2">is</span><span class="delete2">&nbsp;are</span> 
 defined to be aliased. Aliased views are the ones that can be designated 
-by an access value. <span class="delete2"><A NAME="I2354"></A><A NAME="I2355"></A><A NAME="I2356"></A>If 
+by an access value. <span class="delete2"><A NAME="I2361"></A><A NAME="I2362"></A><A NAME="I2363"></A>If 
 the view defined by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
 is aliased, and the type of the object has discriminants, then the object 
 is constrained; if its nominal subtype is unconstrained, then the object 
 is constrained by its initial value. Similarly, if the object created 
-by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 has discriminants, the object is constrained, either by the designated 
 subtype, or by its initial value.</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">An <SPAN Class="swiss"><A HREF="RM-3-10.html#S0080">access_to_object_definition</A></SPAN> 
-defines an access-to-object type and its first subtype; <A NAME="I2357"></A><A NAME="I2358"></A>the 
+defines an access-to-object type and its first subtype; <A NAME="I2364"></A><A NAME="I2365"></A>the 
 <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 defines the <I>designated subtype</I> of the access type. If a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0081">general_access_modifier</A></SPAN> 
-appears, then the access type is a general access type. <A NAME="I2359"></A>If 
+appears, then the access type is a general access type. <A NAME="I2366"></A>If 
 the modifier is the reserved word <B>constant</B>, then the type is an 
 <I>access-to-constant type</I>; a designated object cannot be updated 
-through a value of such a type. <A NAME="I2360"></A>If the modifier is 
+through a value of such a type. <A NAME="I2367"></A>If the modifier is 
 the reserved word <B>all</B>, then the type is an <I>access-to-variable 
 type</I>; a designated object can be both read and updated through a 
 value of such a type. If no <SPAN Class="swiss"><A HREF="RM-3-10.html#S0081">general_access_modifier</A></SPAN> 
 appears in the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0080">access_to_object_definition</A></SPAN>, 
 the access type is a pool-specific access-to-variable type.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I2361"></A>An <SPAN Class="swiss"><A HREF="RM-3-10.html#S0082">access_to_subprogram_definition</A></SPAN> 
-defines an access-to-subprogram type and its first subtype; <A NAME="I2362"></A>the 
-<SPAN Class="swiss"><A HREF="RM-6-1.html#S0189">parameter_profile</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0190">parameter_and_result_profile</A></SPAN> 
-defines the <I>designated profile</I> of the access type. <A NAME="I2363"></A>There 
+<div class="Normal"><A NAME="I2368"></A>An <SPAN Class="swiss"><A HREF="RM-3-10.html#S0082">access_to_subprogram_definition</A></SPAN> 
+defines an access-to-subprogram type and its first subtype; <A NAME="I2369"></A>the 
+<SPAN Class="swiss"><A HREF="RM-6-1.html#S0204">parameter_profile</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0205">parameter_and_result_profile</A></SPAN> 
+defines the <I>designated profile</I> of the access type. <A NAME="I2370"></A>There 
 is a <I>calling convention</I> associated with the designated profile; 
 only subprograms with this calling convention can be designated by values 
 of the access type. By default, the calling convention is &ldquo;<I>protected</I>&rdquo; 
@@ -147,21 +147,21 @@ if the reserved word <B>protected</B> appears, and &ldquo;Ada&rdquo;
 otherwise. See <A HREF="RM-B.html">Annex B</A> for how to override this 
 default.&nbsp;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><A NAME="I2364"></A><A NAME="I2365"></A><A NAME="I2366"></A>An 
+<div class="Normal"><A NAME="I2371"></A><A NAME="I2372"></A><A NAME="I2373"></A>An 
 <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 defines an anonymous general <span class="insert2">access type or an 
 anonymous access-to-subprogram type. For a general access type,</span><span class="delete2">&nbsp;access-to-variable 
 type;</span> the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes its <I>designated subtype</I><span class="insert2">; if the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0081">general_access_modifier</A></SPAN> 
 <B>constant</B> appears, the type is an access-to-constant type; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is an access-to-variable type. For an access-to-subprogram type, the 
-<SPAN Class="swiss"><A HREF="RM-6-1.html#S0189">parameter_profile</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0190">parameter_and_result_profile</A></SPAN> 
-denotes its <I>designated profile</I>.<A NAME="I2367"></A></span><span class="delete2">. 
+<SPAN Class="swiss"><A HREF="RM-6-1.html#S0204">parameter_profile</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0205">parameter_and_result_profile</A></SPAN> 
+denotes its <I>designated profile</I>.<A NAME="I2374"></A></span><span class="delete2">. 
 An <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 is used in the specification of an access discriminant (see <A HREF="RM-3-7.html">3.7</A>) 
 or an access parameter (see <A HREF="RM-6-1.html">6.1</A>).</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal"><A NAME="I2368"></A>For each <span class="delete2">(named) 
+<div class="Normal"><A NAME="I2375"></A>For each <span class="delete2">(named) 
 </span>access type, there is <span class="delete2">a literal <B>null</B> 
 which has&nbsp;</span>a null access value designating no entity at all<span class="insert2">, 
 which can be obtained by (implicitly) converting the literal <B>null</B> 
@@ -171,7 +171,7 @@ values of an access<span class="insert2">-to-object</span> type are obtained
 by evaluating <span class="delete2">an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 for the Access or Unchecked_Access attribute of an aliased view of an 
 object or nonintrinsic subprogram, or, in the case of a named access-to-object 
-type,</span> an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>, 
+type,</span> an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>, 
 which returns an access value designating a newly created object (see 
 <A HREF="RM-3-10-2.html">3.10.2</A>)<span class="insert2">, or in the 
 case of a general access-to-object type, evaluating an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
@@ -180,7 +180,7 @@ object. Nonnull values of an access-to-subprogram type are obtained by
 evaluating an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 for the Access attribute of a nonintrinsic subprogram</span>.</div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I2369"></A>A <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I2376"></A>A <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN> 
 in a construct specifies that the null value does not belong to the access 
 subtype defined by the construct, that is, the access subtype <I>excludes 
 null</I>. In addition, the anonymous access subtype defined by the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
@@ -192,7 +192,7 @@ excludes null if and only if the subtype denoted by the <SPAN Class="swiss"><A H
 in the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 excludes null.</span>&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><A NAME="I2370"></A><A NAME="I2371"></A>All subtypes 
+<div class="Normal"><A NAME="I2377"></A><A NAME="I2378"></A>All subtypes 
 of an access-to-subprogram type are constrained. The first subtype of 
 a type defined by an <span class="insert1"><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN></span><span class="delete1"><SPAN Class="swiss"><A HREF="RM-3-10.html#S0079">&nbsp;access_type_definition</A></SPAN></span> 
 or an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0080">access_to_object_definition</A></SPAN> 
@@ -204,10 +204,10 @@ otherwise<span class="insert3">,</span> it is constrained.&nbsp;</div>
 <div class="paranum"><a name="p14.1">14.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert2">If a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-6-1.html#S0192">parameter_specification</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-6-1.html#S0190">parameter_and_result_profile</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="RM-12-4.html#S0297">formal_object_declaration</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-6-1.html#S0207">parameter_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-6-1.html#S0205">parameter_and_result_profile</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0239">object_renaming_declaration</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-12-4.html#S0319">formal_object_declaration</A></SPAN> 
 has a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 in that construct shall denote an access subtype that does not exclude 
@@ -215,21 +215,21 @@ null.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><A NAME="I2372"></A>A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I2379"></A>A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN> 
 is <I>compatible</I> with an unconstrained access subtype if it is compatible 
 with the designated subtype.<span class="insert2">&nbsp;A <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN> 
 is compatible with any access subtype that does not exclude null.</span> 
-<A NAME="I2373"></A>An access value <I>satisfies</I> a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN> 
+<A NAME="I2380"></A>An access value <I>satisfies</I> a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN> 
 of an access subtype if it equals the null value of its type or if it 
 designates an object whose value satisfies the constraint.<span class="insert2">&nbsp;An access value satisfies an exclusion of the null value if it does not 
 equal the null value of its type.</span></div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I2374"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0079">access_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I2381"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0079">access_type_definition</A></SPAN> 
 creates the access type and its first subtype. For an access-to-object 
 type, this elaboration includes the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 which creates the designated subtype.</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal"><A NAME="I2375"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
+<div class="Normal"><A NAME="I2382"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 creates an anonymous<span class="delete2">&nbsp;general</span> access<span class="delete2">-to-variable</span> 
 type<span class="delete2">&nbsp;(this happens as part of the initialization 
 of an access parameter or access discriminant)</span>.&nbsp;</div>
@@ -240,7 +240,7 @@ or &ldquo;references&rdquo; in some other languages.</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Notes">87&nbsp;&nbsp;Each access-to-object type has an associated 
 storage pool; several access types can share the same pool. An object 
-can be created in the storage pool of an access type by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+can be created in the storage pool of an access type by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 (see <A HREF="RM-4-8.html">4.8</A>) for the access type. A storage pool 
 (roughly) corresponds to what some other languages call a &ldquo;heap.&rdquo; 
 See <A HREF="RM-13-11.html">13.11</A> for a discussion of pools.</div>
@@ -281,7 +281,7 @@ Give_Message.<B>all</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-9-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

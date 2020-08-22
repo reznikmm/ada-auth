@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -24,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-26.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,58 +47,95 @@ Interface Queue specifies a first-in, first-out queue.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
 The generic library package Containers.Synchronized_Queue_Interfaces 
 has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><B>generic</B><BR>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
-<B>package</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;<B>is</B><A NAME="I8366"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Synchronized_Queue_Interfaces);</div>
+<B>package</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8942"></A><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>&nbsp;<B>is</B></span><span class="delete5"><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Synchronized_Queue_Interfaces);</span></div>
+<div class="paranum"><a name="p3.a">3.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">Global =&gt; <B>null</B> means that the only global 
+side-effects allowed are associated with the actual generic parameters. 
+Similarly, when Nonblocking is set to True for a generic unit, the only 
+blocking allowed is that associated with the actual generic parameters.</span> 
+</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8367"></A>Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface</B>;</div>
-<div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8368"></A>Enqueue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8943"></A>Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface</B>;</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8944"></A>Enqueue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</div>
-<div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8369"></A>Dequeue<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry<span class="insert5">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global'Class=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>;</div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8945"></A>Dequeue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</div>
-<div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8370"></A>Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8371"></A>Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry<span class="insert5">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global'Class=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>;</div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8946"></A>Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global'Class&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8947"></A>Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global'Class&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post'Class&nbsp;=&gt;&nbsp;Peak_Use'Result&nbsp;&gt;=&nbsp;Current_Use&nbsp;(Container)</span>;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces;</div>
-<div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples"><B>procedure</B>&nbsp;Enqueue<BR>
+<div class="paranum"><a name="p8.1">8.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">The subprogram behavior descriptions given below 
+are the semantics for the corresponding callable entities found in the 
+language-defined generic packages that have a formal package named Queue_Interfaces.</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<B>procedure</B>&nbsp;Enqueue<BR>
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
-&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B>;</div>
+&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global'Class=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 A queue type that implements this interface is allowed to have a bounded 
-<I>capacity</I><A NAME="I8372"></A>. If the queue object has a bounded 
+<I>capacity</I><A NAME="I8948"></A>. If the queue object has a bounded 
 capacity, and the number of existing elements equals the capacity, then 
 Enqueue blocks until storage becomes available; otherwise, Enqueue does 
 not block. In any case, it then copies New_Item onto the queue.</div>
-<div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples"><B>procedure</B>&nbsp;Dequeue<BR>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<B>procedure</B>&nbsp;Dequeue<BR>
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
-&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B>;</div>
+&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global'Class=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0251-1.TXT">AI05-0251-1</A></I>} 
 If the queue is empty, then Dequeue blocks until an item becomes available. 
 In any case, it then assigns the element at the head of the queue to 
 Element, and removes it from the queue.</div>
-<div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples"><B>function</B>&nbsp;Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<B>function</B>&nbsp;Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global'Class=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span>;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
 Returns the number of elements currently in the queue.</div>
-<div class="paranum"><a name="p15">15/3</a></div>
-<div class="Examples"><B>function</B>&nbsp;Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<B>function</B>&nbsp;Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global'Class=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post'Class&nbsp;=&gt;&nbsp;Peak_Use'Result&nbsp;&gt;=&nbsp;Current_Use&nbsp;(Container)</span>;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
 Returns the maximum number of elements that have been in the queue at 
@@ -125,12 +164,12 @@ would be raised), and that is rarely going to be possible.&nbsp;</div>
 <div class="paranum"><a name="p17.b">17.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0251-1.TXT">AI05-0251-1</A></I>} 
-<A NAME="I8373"></A> The generic package Containers.Synchronized_Queue_Interfaces 
+<A NAME="I8949"></A> The generic package Containers.Synchronized_Queue_Interfaces 
 is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-26.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

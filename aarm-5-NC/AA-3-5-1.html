@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,17 +35,17 @@
 <HR>
 <H1>3.5.1 Enumeration Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I1797"></A> An <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0038">enumeration_type_definition</A></SPAN> 
+<div class="Normal">[<A NAME="I1782"></A> An <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0038">enumeration_type_definition</A></SPAN> 
 defines an enumeration type.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_type_definition</SPAN><A NAME="I1798"></A><A NAME="S0038"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;(<A NAME="I1799"></A><SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1800"></A><SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_type_definition</SPAN><A NAME="I1783"></A><A NAME="S0038"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I1784"></A><SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1785"></A><SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>})</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_literal_specification</SPAN><A NAME="I1801"></A><A NAME="S0039"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1802"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I1803"></A><SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_literal_specification</SPAN><A NAME="I1786"></A><A NAME="S0039"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1787"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I1788"></A><SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">defining_character_literal</SPAN><A NAME="I1804"></A><A NAME="S0040"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1805"></A><SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">defining_character_literal</SPAN><A NAME="I1789"></A><A NAME="S0040"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1790"></A><SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
@@ -68,7 +68,7 @@ all enumeration literals have distinct images.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0006-1.TXT">AI05-0006-1</A></I>} 
-<A NAME="I1806"></A>Each <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN> 
+<A NAME="I1791"></A>Each <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN> 
 is the explicit declaration of the corresponding <I>enumeration literal</I>: 
 it declares a parameterless function, whose defining name is the <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN>, 
@@ -86,12 +86,12 @@ when called.&nbsp;</div>
 <div class="paranum"><a name="p6.c">6.c/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0006-1.TXT">AI05-0006-1</A></I>} 
 The result subtype is primarily a concern when an enumeration literal 
-is used as the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is used as the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of a case statement, due to the full coverage requirement based on the 
 nominal subtype.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">Each enumeration literal corresponds to a distinct 
-value of the enumeration type, and to a distinct position number. <A NAME="I1807"></A>The 
+value of the enumeration type, and to a distinct position number. <A NAME="I1792"></A>The 
 position number of the value of the first listed enumeration literal 
 is zero; the position number of the value of each subsequent enumeration 
 literal is one more than that of its predecessor in the list.</div>
@@ -99,7 +99,7 @@ literal is one more than that of its predecessor in the list.</div>
 <div class="Normal">[The predefined order relations between values of 
 the enumeration type follow the order of corresponding position numbers.]</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">[<A NAME="I1808"></A> If the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+<div class="Normal">[<A NAME="I1793"></A> If the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN> 
 is specified in more than one <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0038">enumeration_type_definition</A></SPAN>, 
 the corresponding enumeration literals are said to be <I>overloaded</I>. 
@@ -109,7 +109,7 @@ from the context (see <A HREF="AA-8-6.html">8.6</A>).]&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1809"></A><A NAME="I1810"></A><A NAME="I1811"></A>The 
+<div class="Normal"><A NAME="I1794"></A><A NAME="I1795"></A><A NAME="I1796"></A>The 
 elaboration of an <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0038">enumeration_type_definition</A></SPAN> 
 creates the enumeration type and its first subtype, which is constrained 
 to the base range of the type.&nbsp;</div>
@@ -162,7 +162,7 @@ denotes a function, which is called to produce a value.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p16.c">16.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
-<A NAME="I1812"></A><B>Correction:</B> Required that all enumeration 
+<A NAME="I1797"></A><B>Correction:</B> Required that all enumeration 
 literals in a type have distinct images; this might not be the case since 
 upper case conversion can map distinct characters to the same upper case 
 character. This can only happen for identifiers using Unicode characters 
@@ -180,7 +180,7 @@ to close a minor language hole.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

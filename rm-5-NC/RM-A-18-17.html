@@ -16,15 +16,16 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-16.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,7 +42,7 @@ the generic formal Element_Type is indefinite.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The declaration of 
-the generic library package Containers.Indefinite_Multiway_Trees<A NAME="I7557"></A> 
+the generic library package Containers.Indefinite_Multiway_Trees<A NAME="I8042"></A> 
 has the same contents and semantics as Containers.Multiway_Trees except:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Bulleted">The generic formal Element_Type is indefinite.</div>
@@ -64,10 +65,23 @@ unconstrained.</div>
 <div class="Bulleted">The operations Append_Child, Insert_Child, Prepend_Child, 
 and Replace_Element that have a formal parameter of type Element_Type 
 perform indefinite insertion (see <A HREF="RM-A-18.html">A.18</A>).</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">The description of 
+Tampering_With_Elements_Prohibited is replaced by:</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Indented2">Returns True if tampering with elements is prohibited 
+for Container, and False otherwise.&nbsp;</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Bulleted">Tampering_With_Cursors_Prohibited is replaced by 
+Tampering_With_Elements_Prohibited in the postcondition for the operations 
+Reference and Constant_Reference.</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Bulleted">The operations Replace_Element and Swap are omitted 
+from the nested package Stable.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-18-16.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

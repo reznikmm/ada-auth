@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -33,20 +33,20 @@
 <HR>
 <H1>5.3 If Statements</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN> 
+<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-5-3.html#S0175">if_statement</A></SPAN> 
 selects for execution at most one of the enclosed <SPAN Class="swiss">sequences_of_statements</SPAN>, 
-depending on the (truth) value of one or more corresponding <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s.] 
+depending on the (truth) value of one or more corresponding <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>s.] 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">if_statement</SPAN><A NAME="I3516"></A><A NAME="S0161"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;<A NAME="I3517"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3518"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<A NAME="I3519"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3520"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">if_statement</SPAN><A NAME="I3635"></A><A NAME="S0175"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;<A NAME="I3636"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3637"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<A NAME="I3638"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3639"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;[<B>else</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3521"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3640"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>]<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 3 and 
 4 were deleted.</I></SPAN>&nbsp;</div>
@@ -54,14 +54,14 @@ depending on the (truth) value of one or more corresponding <SPAN Class="swiss">
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I3522"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
-specified after <B>if</B>, and any <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s 
+<A NAME="I3641"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0175">if_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
+specified after <B>if</B>, and any <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>s 
 specified after <B>elsif</B>, are evaluated in succession (treating a 
 final <B>else</B> as <B>elsif</B> True <B>then</B>), until one evaluates 
-to True or all <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s 
-are evaluated and yield False. If a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
-evaluates to True, then the corresponding <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+to True or all <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>s 
+are evaluated and yield False. If a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
+evaluates to True, then the corresponding <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 is executed; otherwise, none of them is executed.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The part about all evaluating 
@@ -95,13 +95,13 @@ considered equivalent to <B>elsif</B> True <B>then</B>.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
-Moved definition of <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
+Moved definition of <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
 to <A HREF="AA-4-5-7.html">4.5.7</A> in order to eliminate a forward 
 reference.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

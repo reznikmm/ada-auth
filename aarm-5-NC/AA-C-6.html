@@ -26,13 +26,13 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-C-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-C-6-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>C.6 Shared Variable Control</H1>
@@ -46,70 +46,75 @@ shared variables.]&nbsp;</div>
 Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0282-1.TXT">AI12-0282-1</A></I>} 
 For an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>, 
-or a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="AA-12-5.html#S0321">formal_complete_type_declaration</A></SPAN>, 
 the following representation aspects may be specified:</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;Atomic</div><div class="WideHanging-Body">
-The type of aspect Atomic is Boolean.<A NAME="I8733"></A><A NAME="I8734"></A></div>
+The type of aspect Atomic is Boolean.<A NAME="I9266"></A><A NAME="I9267"></A></div>
 <div class="paranum"><a name="p6.a">6.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Atomic:&nbsp;</B>Declare 
 that a type, object, or component is atomic.</div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;Independent</div><div class="WideHanging-Body">
-The type of aspect Independent is Boolean.<A NAME="I8735"></A><A NAME="I8736"></A></div>
+The type of aspect Independent is Boolean.<A NAME="I9268"></A><A NAME="I9269"></A></div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Independent: 
 </B>Declare that a type, object, or component is independently addressable.</div>
 <div class="paranum"><a name="p6.4">6.4/3</a></div>
 <div class="WideHanging-Term">&nbsp;Volatile</div><div class="WideHanging-Body">
-The type of aspect Volatile is Boolean.<A NAME="I8737"></A><A NAME="I8738"></A></div>
+The type of aspect Volatile is Boolean.<A NAME="I9270"></A><A NAME="I9271"></A></div>
 <div class="paranum"><a name="p6.c">6.c/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Volatile:&nbsp;</B>Declare 
 that a type, object, or component is volatile.</div>
-<div class="paranum"><a name="p6.5">6.5/3</a></div>
+<div class="paranum"><a name="p6.5">6.5/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0282-1.TXT">AI12-0282-1</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-of an array type (including the anonymous type of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-of an anonymous array object), the following representation aspects may 
-be specified:</div>
+of an array type, an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+for an object of an anonymous array type, or the <SPAN Class="swiss"><A HREF="AA-12-5.html#S0321">formal_complete_type_declaration</A></SPAN> 
+of a formal array type, the following representation aspects may be specified:</div>
 <div class="paranum"><a name="p6.6">6.6/3</a></div>
 <div class="WideHanging-Term">&nbsp;Atomic_Components</div><div class="WideHanging-Body"><br clear="left">
-The type of aspect Atomic_Components is Boolean.<A NAME="I8739"></A><A NAME="I8740"></A></div>
+The type of aspect Atomic_Components is Boolean.<A NAME="I9272"></A><A NAME="I9273"></A></div>
 <div class="paranum"><a name="p6.d">6.d/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Atomic_Components: 
 </B>Declare that the components of an array type or object are atomic.</div>
 <div class="paranum"><a name="p6.7">6.7/3</a></div>
 <div class="WideHanging-Term">&nbsp;Volatile_Components</div><div class="WideHanging-Body"><br clear="left">
-The type of aspect Volatile_Components is Boolean.<A NAME="I8741"></A><A NAME="I8742"></A></div>
+The type of aspect Volatile_Components is Boolean.<A NAME="I9274"></A><A NAME="I9275"></A></div>
 <div class="paranum"><a name="p6.e">6.e/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Volatile_Components: 
 </B>Declare that the components of an array type or object are volatile.</div>
-<div class="paranum"><a name="p6.8">6.8/3</a></div>
+<div class="paranum"><a name="p6.8">6.8/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0282-1.TXT">AI12-0282-1</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-(including the anonymous type of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-of an anonymous array object), the following representation aspect may 
-be specified:</div>
+of a composite type, an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+for an object of an anonymous composite type, or the <SPAN Class="swiss"><A HREF="AA-12-5.html#S0321">formal_complete_type_declaration</A></SPAN> 
+of a formal composite type, the following representation aspect may be 
+specified:</div>
 <div class="paranum"><a name="p6.9">6.9/3</a></div>
 <div class="WideHanging-Term">&nbsp;Independent_Components</div><div class="WideHanging-Body"><br clear="left">
-The type of aspect Independent_Components is Boolean.<A NAME="I8743"></A><A NAME="I8744"></A></div>
+The type of aspect Independent_Components is Boolean.<A NAME="I9276"></A><A NAME="I9277"></A></div>
 <div class="paranum"><a name="p6.f">6.f/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Independent_Components: 
 </B>Declare that the components of an array or record type, or an array 
 object, are independently addressable.</div>
 <div class="paranum"><a name="p6.10">6.10/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-If any of these aspects are directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+If any of these aspects are directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
 each of these aspects is False.</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00272.TXT">AI95-00272-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8745"></A>An <I>atomic</I> type is one for which the aspect 
+<A NAME="I9278"></A>An <I>atomic</I> type is one for which the aspect 
 Atomic is True. An <I>atomic</I> object (including a component) is one 
 for which the aspect Atomic is True, or a component of an array for which 
 the aspect Atomic_Components is True for the associated type, or any 
@@ -122,7 +127,7 @@ as executing a read or write of a dynamic number of components in a single
 instruction is not possible on many targets.&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8746"></A>A <I>volatile</I> type is one for which the aspect 
+<A NAME="I9279"></A>A <I>volatile</I> type is one for which the aspect 
 Volatile is True. A <I>volatile</I> object (including a component) is 
 one for which the aspect Volatile is True, or a component of an array 
 for which the aspect Volatile_Components is True for the associated type, 
@@ -137,7 +142,7 @@ When True, the aspects Independent and Independent_Components <I>specify
 as independently addressable</I> the named object or component(s), or 
 in the case of a type, all objects or components of that type. All atomic 
 objects and aliased objects are considered to be specified as independently 
-addressable.<A NAME="I8747"></A><A NAME="I8748"></A></div>
+addressable.<A NAME="I9280"></A><A NAME="I9281"></A></div>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If the compiler cannot 
 guarantee that an object (including a component) for which aspect Independent 
@@ -162,7 +167,7 @@ the declaration shall be that of an array or record type.</div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
-<A NAME="I8749"></A>It is illegal to specify either of the aspects Atomic 
+<A NAME="I9282"></A>It is illegal to specify either of the aspects Atomic 
 or Atomic_Components to have the value True for an object or type if 
 the implementation cannot support the indivisible and independent reads 
 and updates required by the aspect (see below).</div>
@@ -173,9 +178,10 @@ Component_Size attribute for an array type with atomic components, or
 the layout attributes of an atomic component, in a way that prevents 
 the implementation from performing the required indivisible and independent 
 reads and updates.</div>
-<div class="paranum"><a name="p12">12/3</a></div>
+<div class="paranum"><a name="p12">12/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0218-1.TXT">AI05-0218-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0282-1.TXT">AI12-0282-1</A></I>} 
 If an atomic object is passed as a parameter, then the formal parameter 
 shall either have an atomic type or allow pass by copy. If an atomic 
 object is used as an actual for a generic formal object of mode <B>in 
@@ -184,18 +190,22 @@ If the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>
 of an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 for an Access attribute denotes an atomic object [(including a component)], 
 then the designated type of the resulting access type shall be atomic. 
-If an atomic type is used as an actual for a generic formal derived type, 
-then the ancestor of the formal type shall be atomic. Corresponding rules 
-apply to volatile objects and types.</div>
+Corresponding rules apply to volatile objects.</div>
 <div class="paranum"><a name="p12.a">12.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
 A formal parameter allows pass by copy if it is not <B>aliased</B> and 
 it is of a type that allows pass by copy (that is, is not a by-reference 
 type).&nbsp;</div>
-<div class="paranum"><a name="p12.1">12.1/3</a></div>
+<div class="paranum"><a name="p12.1">12.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0218-1.TXT">AI05-0218-1</A></I>} 
-If a volatile type is used as an actual for a generic formal array type, 
-then the element type of the formal type shall be volatile.</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0282-1.TXT">AI12-0282-1</A></I>} 
+If the Atomic, Atomic_Components, Volatile, Volatile_Components, Independent, 
+or Independent_Components aspect is True for a generic formal type, then 
+that aspect shall be True for the actual type. If a volatile type is 
+used as an actual for a generic formal array type, then the element type 
+of the formal type shall be volatile. If an atomic type is used as an 
+actual for a generic formal derived type, then the ancestor of the formal 
+type shall be atomic. A corresponding rule applies to volatile types.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 If an aspect Volatile, Volatile_Components, Atomic, or Atomic_Components 
@@ -286,11 +296,11 @@ a sequential order between the actions of those tasks, implementations
 may be required to emit memory barriers around such updates or use atomic 
 instructions that imply such barriers.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I8750"></A>Two actions are sequential (see 
+<div class="Normal"><A NAME="I9283"></A>Two actions are sequential (see 
 <A HREF="AA-9-10.html">9.10</A>) if each is the read or update of the 
 same atomic object.</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8751"></A>If a type is atomic or volatile 
+<div class="Normal"><A NAME="I9284"></A>If a type is atomic or volatile 
 and it is not a by-copy type, then the type is defined to be a by-reference 
 type. If any subcomponent of a type is atomic or volatile, then the type 
 is defined to be a by-reference type.</div>
@@ -314,8 +324,9 @@ parameter passing rules involving atomic and volatile types and objects.
 </div>
 <div class="paranum"><a name="p19.1">19.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0128-1.TXT">AI12-0128-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0347-1.TXT">AI12-0347-1</A></I>} 
 All reads of or writes to any nonatomic subcomponent of an atomic object 
-shall be implemented by reading and/or writing all of the nearest enclosing 
+are performed by reading and/or writing all of the nearest enclosing 
 atomic object.</div>
 <div class="paranum"><a name="p19.c">19.c/5</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>For example, if 
@@ -332,7 +343,7 @@ This rule is needed in some cases for memory-mapped device registers.
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0128-1.TXT">AI12-0128-1</A></I>} 
-<A NAME="I8752"></A>The external effect of a program (see <A HREF="AA-1-1-3.html">1.1.3</A>) 
+<A NAME="I9285"></A>The external effect of a program (see <A HREF="AA-1-1-3.html">1.1.3</A>) 
 is defined to include each read and update of a volatile or atomic object. 
 The implementation shall not generate any memory reads or updates of 
 atomic or volatile objects other than those specified by the program. 
@@ -390,6 +401,17 @@ deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s
 was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0009-1.TXT">AI05-0009-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
 </div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p21.1">21.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0282-1.TXT">AI12-0282-1</A></I>} 
+Within the body of an instance of a generic unit that has a formal type 
+<I>T</I> that is not atomic and an actual type that is atomic, if an 
+object <I>O</I> of type <I>T</I> is declared and explicitly specified 
+as atomic, the implementation may introduce an additional copy on passing 
+<I>O</I> to a subprogram with a parameter of type <I>T</I> that is normally 
+passed by reference. A corresponding permission applies to volatile parameter 
+passing.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p22">22/5</a></div>
@@ -451,7 +473,7 @@ the hardware supports that), those also need to be declared atomic.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p26.b">26.b</a></div>
-<div class="Annotations"><A NAME="I8753"></A>Pragma Atomic replaces Ada 
+<div class="Annotations"><A NAME="I9286"></A>Pragma Atomic replaces Ada 
 83's pragma Shared. The name &ldquo;Shared&rdquo; was confusing, because 
 the pragma was not used to mark variables as shared.&nbsp;</div>
 
@@ -471,7 +493,7 @@ atomic.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p26.e">26.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0218-1.TXT">AI05-0218-1</A></I>} 
-<A NAME="I8754"></A><B>Correction:</B> Plugged a hole involving volatile 
+<A NAME="I9287"></A><B>Correction:</B> Plugged a hole involving volatile 
 components of formal types when the formal type's component has a nonvolatile 
 type. This was done by making certain actual types illegal for formal 
 derived and formal array types; these types were allowed for Ada 95 and 
@@ -481,7 +503,7 @@ Ada 2005.&nbsp;</div>
 <div class="paranum"><a name="p26.f">26.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0009-1.TXT">AI05-0009-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8755"></A>Aspects Independent and Independent_Components are 
+<A NAME="I9288"></A>Aspects Independent and Independent_Components are 
 new; they eliminate ambiguity about independent addressability.</div>
 <div class="paranum"><a name="p26.g">26.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -508,7 +530,7 @@ and atomic objects.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p26.j">26.j/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0128-1.TXT">AI12-0128-1</A></I>} 
-<A NAME="I8756"></A> Required that nonatomic components of a atomic object 
+<A NAME="I9289"></A> Required that nonatomic components of a atomic object 
 use a read-modify-write cycle, as well as clarifying that such a cycle 
 is allowed for volatile objects that aren't exactly the size of a machine 
 scalar. That can introduce a read-modify-write cycle where one was not 
@@ -518,8 +540,14 @@ access to hardware than it will cause them. If this is an issue, declaring
 the components themselves as atomic will restore the previous behavior. 
 </div>
 
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p26.k">26.k/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0282-1.TXT">AI12-0282-1</A></I>} 
+<A NAME="I9290"></A>These aspects now can be specified for generic formal 
+types.&nbsp;</div>
+
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p26.k">26.k/4</a></div>
+<div class="paranum"><a name="p26.l">26.l/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
 <B>Corrigendum:</B> Clarified that aliased objects are considered to 
 be specified as independently addressable, and also eliminated an unnecessary 
@@ -527,11 +555,11 @@ rule.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-C-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-C-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-C-6-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

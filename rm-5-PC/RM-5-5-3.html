@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,167 +36,241 @@
 <HR>
 <H1>5.5.3 <span class="insert5">Procedural Iterators</span><span class="delete5"></span></H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
 invokes a user-defined procedure, passing in the body of the enclosing 
-<SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
 as a parameter of an anonymous access-to-procedure type, to allow the 
 loop body to be executed repeatedly as part of the invocation of the 
 user-defined procedure.</span>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">procedural_iterator</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3365"></A><A NAME="S0170"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3366"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN>&nbsp;<B>of</B>&nbsp;<A NAME="I3367"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0172">iterator_procedure_call</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">procedural_iterator</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3526"></A><A NAME="S0185"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3527"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0186">iterator_parameter_specification</A></SPAN>&nbsp;<B>of</B>&nbsp;<A NAME="I3528"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3529"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0182">iterator_filter</A></SPAN>]</span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_parameter_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3368"></A><A NAME="S0171"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3369"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;(<A NAME="I3370"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>{,&nbsp;<A NAME="I3371"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>})</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_parameter_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3530"></A><A NAME="S0186"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3531"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0206">formal_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;(<A NAME="I3532"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>{,&nbsp;<A NAME="I3533"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>})</span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_procedure_call</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3372"></A><A NAME="S0172"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3373"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3374"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3375"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_procedure_call</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3534"></A><A NAME="S0187"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3535"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3536"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3537"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0188">iterator_actual_parameter_part</A></SPAN></span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_actual_parameter_part</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3376"></A><A NAME="S0173"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3377"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0174">iterator_parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3378"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0174">iterator_parameter_association</A></SPAN>})</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_actual_parameter_part</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3538"></A><A NAME="S0188"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3539"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0189">iterator_parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3540"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0189">iterator_parameter_association</A></SPAN>})</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_parameter_association</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3379"></A><A NAME="S0174"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3380"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3381"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0175">parameter_association_with_box</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterator_parameter_association</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3541"></A><A NAME="S0189"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3542"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0220">parameter_association</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3543"></A><SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0190">parameter_association_with_box</A></SPAN></span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">parameter_association_with_box</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3382"></A><A NAME="S0175"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;[&nbsp;<I>formal_parameter_</I><A NAME="I3383"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;]&nbsp;&lt;&gt;</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">parameter_association_with_box</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3544"></A><A NAME="S0190"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;[&nbsp;<I>formal_parameter_</I><A NAME="I3545"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;]&nbsp;&lt;&gt;</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Indented1"><span class="insert5">At most one <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0174">iterator_parameter_association</A></SPAN> 
-within an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN> 
-shall be a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0175">parameter_association_with_box</A></SPAN>.</span> 
+<div class="Indented1"><span class="insert5">At most one <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0189">iterator_parameter_association</A></SPAN> 
+within an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0188">iterator_actual_parameter_part</A></SPAN> 
+shall be a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0190">parameter_association_with_box</A></SPAN>.</span> 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Normal"><span class="insert5">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-given in an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
-shall resolve to denote a callable entity <I>C</I> that is a procedure, 
-or an entry renamed as (viewed as) a procedure. When there is an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN>, 
+given in an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+shall resolve to denote a callable entity <I>C</I> (the <I>iterating 
+procedure</I><A NAME="I3546"></A>) that is a procedure, or an entry renamed 
+as (viewed as) a procedure. When there is an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0188">iterator_actual_parameter_part</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 can be an <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN> 
 of an access-to-subprogram value.</span></div>
 <div class="paranum"><a name="p10">10/5</a></div>
-<div class="Normal"><span class="insert5">An <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
-without a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
-is equivalent to one with an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN> 
-with an additional <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
+<div class="Normal"><span class="insert5">An <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+without a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0190">parameter_association_with_box</A></SPAN> 
+is equivalent to one with an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0188">iterator_actual_parameter_part</A></SPAN> 
+with an additional <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0190">parameter_association_with_box</A></SPAN> 
 at the end, with the <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
 identifying the last formal parameter of the callable entity denoted 
 by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>.</span></div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal"><span class="insert5">An <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
-shall contain at most one <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0174">iterator_parameter_association</A></SPAN> 
+<div class="Normal"><span class="insert5">An <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+shall contain at most one <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0189">iterator_parameter_association</A></SPAN> 
 for each formal parameter of the callable entity <I>C</I>. Each formal 
-parameter without an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0174">iterator_parameter_association</A></SPAN> 
+parameter without an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0189">iterator_parameter_association</A></SPAN> 
 shall have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 (in the profile of the view of <I>C</I> denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>). 
-This rule is an overloading rule (see <A HREF="RM-8-6.html">8.6</A>).</span></div>
+or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>).</span> ]</div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="Normal"><span class="insert5">The formal parameter of the 
-callable entity <I>C</I> associated with the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
+callable entity <I>C</I> associated with the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0190">parameter_association_with_box</A></SPAN> 
 shall be of an anonymous access-to-procedure type <I>A</I>.</span>&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Normal"><span class="insert5">The anonymous access-to-procedure 
 type <I>A</I> shall have at least one formal parameter in its parameter 
-profile. If the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN> 
-is a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN>, 
-then this <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN> 
-shall be mode conformant with that of <I>A</I>. If the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN> 
-is a list of <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s, 
+profile. If the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0186">iterator_parameter_specification</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0206">formal_part</A></SPAN>, 
+then this <SPAN Class="swiss"><A HREF="RM-6-1.html#S0206">formal_part</A></SPAN> 
+shall be mode conformant with that of <I>A</I>. If the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0186">iterator_parameter_specification</A></SPAN> 
+is a list of <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>s, 
 the number of formal parameters of <I>A</I> shall be the same as the 
 length of this list.</span></div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Normal"><span class="insert5">If the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-given in an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
+given in an <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
 denotes an abstract subprogram, the subprogram shall be a dispatching 
 subprogram.</span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p15">15/5</a></div>
-<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN> 
-that has a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
-is equivalent to a local declaration of a procedure P followed by a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0195">procedure_call_statement</A></SPAN> 
-that is formed from the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
-by replacing the &lt;&gt; of the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
-with P'Access. The <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN> 
-of the locally declared procedure P is formed from the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN> 
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+that has a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
+is equivalent to a local declaration of a procedure P followed by a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0217">procedure_call_statement</A></SPAN> 
+that is formed from the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+by replacing the &lt;&gt; of the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0190">parameter_association_with_box</A></SPAN> 
+with P'Access. The <SPAN Class="swiss"><A HREF="RM-6-1.html#S0206">formal_part</A></SPAN> 
+of the locally declared procedure P is formed from the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0206">formal_part</A></SPAN> 
 of the anonymous access-to-procedure type <I>A</I>, by replacing the 
 <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-of each formal parameter of this <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN> 
+of each formal parameter of this <SPAN Class="swiss"><A HREF="RM-6-1.html#S0206">formal_part</A></SPAN> 
 with the <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-of the corresponding formal parameter or element of the list of <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
-given in the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN>.</span></div>
+of the corresponding formal parameter or element of the list of <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>s 
+given in the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0186">iterator_parameter_specification</A></SPAN>. 
+The body of <I>P</I> consists of the conditionally executed <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN>. 
+The procedure P is called the <I>loop body procedure</I>.<A NAME="I3547"></A></span></div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
-following aspect may be specified for a subprogram or entry S that has 
-at least one formal parameter of an anonymous access-to-subprogram type:</span></div>
+following aspects may be specified for a callable entity <I>S</I> that 
+has at least one formal parameter of an anonymous access-to-subprogram 
+type:</span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Allows_Exit</span></div><div class="WideHanging-Body">
 <span class="insert5">The Allows_Exit aspect is of type Boolean. The 
-specified value shall be static. The Allows_Exit of an inherited primitive 
-subprogram is True if Allows_Exit is True either for the corresponding 
+specified value shall be static. The Allows_Exit aspect of an inherited 
+primitive subprogram is True if Allows_Exit is True either for the corresponding 
 subprogram of the progenitor type or for any other inherited subprogram 
 that it overrides. If not specified or inherited as True, the Allows_Exit 
-aspect of a subprogram or entry is False.</span></div>
+aspect of a callable entity is False. For an entry, only a confirming 
+specification of False is permitted for the Allows_Exit aspect.</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">Specifying the Allows_Exit 
-aspect True for a subprogram asserts that the subprogram is prepared 
-to be completed by arbitrary transfers of control from the subprogram 
-represented by the access-to-subprogram value, including propagation 
-of exceptions. A subprogram for which Allows_Exit is True should use 
-finalization for any necessary cleanup, and in particular should not 
-use exception handling to implement cleanup.</span></div>
+aspect to be True for a subprogram indicates that the subprogram <I>allows 
+exit</I>,<A NAME="I3548"></A><A NAME="I3549"></A> meaning that it is 
+prepared to be completed by arbitrary transfers of control from the loop 
+body procedure, including propagation of exceptions. A subprogram for 
+which Allows_Exit is True should use finalization as appropriate rather 
+than exception handling to recover resources and make any necessary final 
+updates to data structures.</span></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">Parallel_Iterator</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">The Parallel_Iterator aspect is of type Boolean. 
+The specified value shall be static. The Parallel_Iterator aspect of 
+an inherited primitive subprogram is True if Parallel_Iterator is True 
+either for the corresponding subprogram of the progenitor type or for 
+any other inherited subprogram that it overrides. If not specified or 
+inherited as True, the Parallel_Iterator aspect of a callable entity 
+is False.</span></div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">Specifying the Parallel_Iterator 
+aspect to be True for a callable entity indicates that the entity might 
+invoke the loop body procedure from multiple distinct logical threads 
+of control. The Parallel_Iterator aspect for a subprogram shall be statically 
+False if the subprogram allows exit.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p19">19/5</a></div>
-<div class="Normal"><span class="insert5">If a subprogram or entry overrides 
-an inherited dispatching subprogram that has a True Allows_Exit aspect, 
-only a confirming specification of True is permitted for the aspect on 
-the overriding declaration.</span></div>
-<div class="paranum"><a name="p20">20/5</a></div>
-<div class="Normal"><span class="insert5">The <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-with a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
-as its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN> 
-shall contain an <SPAN Class="swiss"><A HREF="RM-5-7.html#S0178">exit_statement</A></SPAN>, 
-return statement, <SPAN Class="swiss"><A HREF="RM-5-8.html#S0179">goto_statement</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0243">requeue_statement</A></SPAN> 
-that leaves the loop only if the callable entity <I>C</I> associated 
-with the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
-has an Allows_Exit aspect specified True.</span></div>
 <div class="paranum"><a name="p21">21/5</a></div>
-<div class="Normal"><span class="insert5">The <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
-with a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
-as its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0165">iteration_scheme</A></SPAN> 
-shall not contain an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN> 
-occurs outside the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN>.</span></div>
+<div class="Normal"><span class="insert5">If a callable entity overrides 
+an inherited dispatching subprogram that allows exit, the overriding 
+callable entity also shall allow exit. If a callable entity overrides 
+an inherited dispatching subprogram that has a True Parallel_Iterator 
+aspect, the overriding callable entity also shall have a True Parallel_Iterator 
+aspect.</span></div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
+as its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+shall begin with the reserved word <B>parallel</B> if and only if the 
+callable entity identified in the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+has a Parallel_iterator aspect of True.</span></div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal"><span class="insert5">The <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
+as its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+shall contain an <SPAN Class="swiss"><A HREF="RM-5-7.html#S0193">exit_statement</A></SPAN>, 
+return statement, <SPAN Class="swiss"><A HREF="RM-5-8.html#S0194">goto_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN> 
+that leaves the loop only if the callable entity associated with the 
+<SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
+allows exit.</span></div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Normal"><span class="insert5">The <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
+as its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+shall not contain an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declaration</A></SPAN> 
+occurs outside the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN>.</span></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Normal"><span class="insert5">For the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+that has a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN>, 
+the procedure denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+(the <I>iterating procedure</I>)<A NAME="I3550"></A> is invoked, passing 
+an access value designating the loop body procedure as a parameter. The 
+iterating procedure then calls the loop body procedure zero or more times 
+and returns, whereupon the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+is complete. If the <B>parallel</B> reserved word is present, the iterating 
+procedure might invoke the loop body procedure from multiple distinct 
+logical threads of control.</span></div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Normal"><span class="insert5"><A NAME="I3551"></A>If the 
+callable entity identified in the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0187">iterator_procedure_call</A></SPAN> 
+allows exit, then it is a bounded error for a call of the loop body procedure 
+to be performed from within an abort-deferred operation (see <A HREF="RM-9-8.html">9.8</A>), 
+unless the entire <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+was within the same abort-deferred operation. If detected, Program_Error 
+is raised at the point of the call; otherwise, a transfer of control 
+from the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+might not terminate the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN>, 
+and the loop body procedure might be called again.<A NAME="I3552"></A></span></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Normal"><span class="insert5">If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN> 
+with the <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
+as its <SPAN Class="swiss"><A HREF="RM-5-5.html#S0179">iteration_scheme</A></SPAN> 
+(see <A HREF="RM-5-5.html">5.5</A>) does not begin with the reserved 
+word <B>parallel</B>, it is a bounded error if the loop body procedure 
+is invoked from a different logical thread of control than the one that 
+initiates the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN>. 
+If detected, Program_Error is raised; otherwise, conflicts associated 
+with concurrent executions of the loop body procedure can occur without 
+being detected by the applicable conflict check policy (see <A HREF="RM-9-10-1.html">9.10.1</A>). 
+Furthermore, propagating an exception or making an attempt to exit in 
+the presence of multiple threads of control might not terminate the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0178">loop_statement</A></SPAN>, 
+deadlock might occur, or the loop body procedure might be called again.<A NAME="I3553"></A></span></div>
 
 <H4 Class="centered">Examples</H4>
-<div class="paranum"><a name="p22">22/5</a></div>
+<div class="paranum"><a name="p28">28/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">Example 
 of iterating over a map from My_Key_Type to My_Element_Type (see <A HREF="RM-A-18-4.html">A.18.4</A>):</span></div>
-<div class="paranum"><a name="p23">23/5</a></div>
+<div class="paranum"><a name="p29">29/5</a></div>
 <div class="Examples"><span class="insert5"><B>for</B>&nbsp;(C&nbsp;:&nbsp;Cursor)&nbsp;<B>of</B>&nbsp;My_Map.Iterate&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;Put_Line&nbsp;(My_Key_Type'Image&nbsp;(Key&nbsp;(C))&nbsp;&amp;&nbsp;&quot;&nbsp;=&gt;&nbsp;&quot;&nbsp;&amp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My_Element_Type'Image&nbsp;(Element&nbsp;(C)));<BR>
 <B>end&nbsp;loop</B>;</span></div>
-<div class="paranum"><a name="p24">24/5</a></div>
+<div class="paranum"><a name="p30">30/5</a></div>
 <div class="Examples"><span class="insert5">--<SPAN Class="roman"><I>&nbsp;The&nbsp;above&nbsp;is&nbsp;equivalent&nbsp;to:</I></SPAN></span></div>
-<div class="paranum"><a name="p25">25/5</a></div>
+<div class="paranum"><a name="p31">31/5</a></div>
 <div class="Examples"><span class="insert5"><B>declare</B><BR>
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;P&nbsp;(C&nbsp;:&nbsp;Cursor)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>begin</B><BR>
@@ -204,19 +278,19 @@ of iterating over a map from My_Key_Type to My_Element_Type (see <A HREF="RM-A-1
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My_Element_Type'Image&nbsp;(Element&nbsp;(C)));<BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;P;<BR>
 <B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;My_Map.Iterator&nbsp;(P'Access);<BR>
+&nbsp;&nbsp;&nbsp;My_Map.Iterate&nbsp;(P'Access);<BR>
 <B>end</B>;</span></div>
-<div class="paranum"><a name="p26">26/5</a></div>
+<div class="paranum"><a name="p32">32/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">Example 
 of iterating over the environment variables (see <A HREF="RM-A-17.html">A.17</A>):</span></div>
-<div class="paranum"><a name="p27">27/5</a></div>
+<div class="paranum"><a name="p33">33/5</a></div>
 <div class="Examples"><span class="insert5"><B>for</B>&nbsp;(Name,&nbsp;Val)&nbsp;<B>of</B>&nbsp;Ada.Environment_Variables.Iterate(&lt;&gt;)&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&quot;(&lt;&gt;)&quot;&nbsp;is&nbsp;optional&nbsp;because&nbsp;it&nbsp;is&nbsp;the&nbsp;last&nbsp;parameter</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;Put_Line&nbsp;(Name&nbsp;&amp;&nbsp;&quot;&nbsp;=&gt;&nbsp;&quot;&nbsp;&amp;&nbsp;Val);<BR>
 <B>end&nbsp;loop</B>;</span></div>
-<div class="paranum"><a name="p28">28/5</a></div>
+<div class="paranum"><a name="p34">34/5</a></div>
 <div class="Examples"><span class="insert5">--<SPAN Class="roman"><I>&nbsp;The&nbsp;above&nbsp;is&nbsp;equivalent&nbsp;to:</I></SPAN></span></div>
-<div class="paranum"><a name="p29">29/5</a></div>
+<div class="paranum"><a name="p35">35/5</a></div>
 <div class="Examples"><span class="insert5"><B>declare</B><BR>
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;P&nbsp;(Name&nbsp;:&nbsp;String;&nbsp;Val&nbsp;:&nbsp;String)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>begin</B><BR>
@@ -228,7 +302,7 @@ of iterating over the environment variables (see <A HREF="RM-A-17.html">A.17</A>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

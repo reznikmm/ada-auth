@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,20 +40,20 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Examples"><A NAME="I5594"></A><B>package</B>&nbsp;System.Storage_Elements&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I5852"></A><B>package</B>&nbsp;System.Storage_Elements&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<span class="insert2">Pure(</span><span class="delete2">&nbsp;Preelaborate(System.</span>Storage_Elements);</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5595"></A>Storage_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5853"></A>Storage_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5596"></A>Storage_Count&nbsp;<B>is</B>&nbsp;Storage_Offset&nbsp;<B>range</B>&nbsp;0..Storage_Offset'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5854"></A>Storage_Count&nbsp;<B>is</B>&nbsp;Storage_Offset&nbsp;<B>range</B>&nbsp;0..Storage_Offset'Last;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5597"></A>Storage_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5855"></A>Storage_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Storage_Element'Size&nbsp;<B>use</B>&nbsp;Storage_Unit;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5598"></A>Storage_Array&nbsp;<B>is</B>&nbsp;<B>array</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5856"></A>Storage_Array&nbsp;<B>is</B>&nbsp;<B>array</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Storage_Offset&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;Storage_Element;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Storage_Array'Component_Size&nbsp;<B>use</B>&nbsp;Storage_Unit;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5599"></A>Address&nbsp;Arithmetic:</I></SPAN></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5857"></A>Address&nbsp;Arithmetic:</I></SPAN></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;(Left&nbsp;:&nbsp;Address;&nbsp;Right&nbsp;:&nbsp;Storage_Offset)<span class="delete3"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<B>return</B>&nbsp;Address<span class="insert3"><BR>
@@ -74,10 +74,10 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Conversion&nbsp;to/from&nbsp;integers:</I></SPAN></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5600"></A>Integer_Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5601"></A>To_Address(Value&nbsp;:&nbsp;Integer_Address)&nbsp;<B>return</B>&nbsp;Address<span class="insert3"><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5858"></A>Integer_Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5859"></A>To_Address(Value&nbsp;:&nbsp;Integer_Address)&nbsp;<B>return</B>&nbsp;Address<span class="insert3"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5602"></A>To_Integer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Integer_Address<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5860"></A>To_Integer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Integer_Address<span class="insert3"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Examples"><span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;&quot;+&quot;);<BR>
@@ -86,7 +86,7 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">Storage_Element represents a storage element. Storage_Offset 
 represents an offset in storage elements. Storage_Count represents a 
-number of storage elements. <A NAME="I5603"></A><A NAME="I5604"></A>Storage_Array 
+number of storage elements. <A NAME="I5861"></A><A NAME="I5862"></A>Storage_Array 
 represents a contiguous sequence of storage elements.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">Integer_Address is a (signed or modular) integer 
@@ -112,12 +112,12 @@ may be declared pure.</span>&nbsp;</div>
 <div class="Normal">Operations in System and its children should reflect 
 the target environment semantics as closely as is reasonable. For example, 
 on most machines, it makes sense for address arithmetic to &ldquo;wrap 
-around.&rdquo; <A NAME="I5605"></A>Operations that do not make sense 
-should raise Program_Error.&nbsp;</div>
+around.&rdquo; Operations that do not make sense should raise Program_Error. 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-13-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

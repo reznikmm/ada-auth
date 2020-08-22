@@ -15,8 +15,6 @@
     DT {display: compact}
     SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
-    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
-    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -28,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-6-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,12 +38,9 @@
 <H1>3.6.3 String Types</H1>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0295-1.TXT">AI12-0295-1</A></I>} 
-<A NAME="I2185"></A>A one-dimensional array type whose component type 
-is a character type is called a <span class="insert5"><I>string type</I>, 
-as is a type with a specified String_Literal aspect (see <A HREF="AA-4-2-1.html">4.2.1</A>)</span><span class="delete5"><I>&nbsp;string</I> 
-type</span>.</div>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I2184"></A>A one-dimensional array type 
+whose component type is a character type is called a <I>string type</I>.</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 [There are <span class="insert2">three</span><span class="delete2">&nbsp;two</span> 
@@ -85,14 +80,14 @@ Ninety_Six&nbsp;:&nbsp;<B>constant</B>&nbsp;Roman&nbsp;&nbsp;&nbsp;:=&nbsp;&quot
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p8.a">8.a</a></div>
-<div class="Annotations"><A NAME="I2186"></A>The declaration of Wide_String 
+<div class="Annotations"><A NAME="I2185"></A>The declaration of Wide_String 
 in Standard hides a use-visible declaration with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>. 
 In rare cases, this might result in an inconsistency between Ada 83 and 
 Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p8.b">8.b</a></div>
-<div class="Annotations"><A NAME="I2187"></A>Because both String and 
+<div class="Annotations"><A NAME="I2186"></A>Because both String and 
 Wide_String are always directly visible, an expression like&nbsp;</div>
 <div class="paranum"><a name="p8.c">8.c</a></div>
 <div class="SmallExamples">&quot;a&quot;&nbsp;&lt;&nbsp;&quot;bc&quot;</div>
@@ -102,7 +97,7 @@ literals could be resolved to type String.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p8.e">8.e</a></div>
-<div class="Annotations"><A NAME="I2188"></A>The type Wide_String is 
+<div class="Annotations"><A NAME="I2187"></A>The type Wide_String is 
 new (though it was approved by ARG for Ada 83 compilers as well).&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
@@ -113,7 +108,7 @@ analogy to the term <I>character type</I>.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p8.g">8.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<span class="insert2"><A NAME="I2189"></A>The declaration of Wide_Wide_String 
+<span class="insert2"><A NAME="I2188"></A>The declaration of Wide_Wide_String 
 in Standard hides a use-visible declaration with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>. 
 In the (very) unlikely event that an Ada 95 program had depended on such 
 a use-visible declaration, and the program remains legal after the substitution 
@@ -123,12 +118,12 @@ of Standard.Wide_Wide_String, the meaning of the program will be different.</spa
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p8.h">8.h/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<span class="insert2"><A NAME="I2190"></A>The type Wide_Wide_String is 
+<span class="insert2"><A NAME="I2189"></A>The type Wide_Wide_String is 
 new.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-6-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,55 +45,55 @@ for classifying Wide_Characters and case folding for Wide_Characters.
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Wide_Characters.Handling has the following declaration:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Wide_Characters.Handling&nbsp;<B>is</B><A NAME="I5991"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Wide_Characters.Handling&nbsp;<B>is</B><A NAME="I6244"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Handling);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5992"></A>Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6245"></A>Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5993"></A>Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6246"></A>Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5994"></A>Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6247"></A>Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5995"></A>Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6248"></A>Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5996"></A>Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6249"></A>Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5997"></A>Is_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6250"></A>Is_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5998"></A>Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6251"></A>Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5999"></A>Is_Decimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6252"></A>Is_Decimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Is_Digit;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6000"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6253"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6001"></A>Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6254"></A>Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6002"></A>Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6255"></A>Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6003"></A>Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6256"></A>Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6004"></A>Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6257"></A>Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6005"></A>Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6258"></A>Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6006"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6259"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6007"></A>Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6260"></A>Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p18.1">18.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6008"></A>Is_NFKC&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6261"></A>Is_NFKC&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6009"></A>Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6262"></A>Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6010"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6011"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6263"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6264"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p20.1">20.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6012"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6265"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</span></div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6013"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6014"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6266"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6267"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p21.1">21.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6015"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6268"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Wide_Characters.Handling;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
@@ -282,7 +282,7 @@ Comparison</A>&rdquo; are also available for wide strings (see <A HREF="RM-A-4-7
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

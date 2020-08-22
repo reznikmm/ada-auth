@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,60 +46,60 @@ The library package Wide_Characters.Handling has the following declaration:</div
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0185-1.TXT">AI05-0185-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
-<B>package</B>&nbsp;Ada.Wide_Characters.Handling&nbsp;<B>is</B><A NAME="I6563"></A><BR>
+<B>package</B>&nbsp;Ada.Wide_Characters.Handling&nbsp;<B>is</B><A NAME="I6809"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Handling);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6564"></A>Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6810"></A>Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6565"></A>Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6811"></A>Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6566"></A>Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6812"></A>Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6567"></A>Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6813"></A>Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6568"></A>Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6814"></A>Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0260-1.TXT">AI12-0260-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6569"></A>Is_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6815"></A>Is_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6570"></A>Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6816"></A>Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6571"></A>Is_Decimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6817"></A>Is_Decimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Is_Digit;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6572"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6818"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6573"></A>Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6819"></A>Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6574"></A>Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6820"></A>Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6575"></A>Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6821"></A>Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6576"></A>Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6822"></A>Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6577"></A>Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6823"></A>Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6578"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6824"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6579"></A>Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6825"></A>Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p18.1">18.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6580"></A>Is_NFKC&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6826"></A>Is_NFKC&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6581"></A>Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6827"></A>Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6582"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6583"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6828"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6829"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p20.1">20.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0260-1.TXT">AI12-0260-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6584"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6830"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6585"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6586"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6831"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6832"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p21.1">21.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0260-1.TXT">AI12-0260-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6587"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6833"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Wide_Characters.Handling;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
@@ -263,8 +263,8 @@ designated by Item, then the value of Item is returned.</div>
 The &ldquo;documents referenced&rdquo; means Unicode, Chapter 4 (specifically, 
 section 4.2 &mdash; Case). The case mappings come from Unicode as ISO/IEC 
 10646:2017 does not include complete case mappings. See the Implementation 
-Notes in <A HREF="AA-1-1-4.html">1.1.4</A> for machine-readable versions 
-of both Uppercase and Lowercase mappings.&nbsp;</div>
+Notes in subclause <A HREF="AA-1-1-4.html">1.1.4</A> for machine-readable 
+versions of both Uppercase and Lowercase mappings.&nbsp;</div>
 <div class="paranum"><a name="p56">56/3</a></div>
 <div class="Examples"><B>function</B>&nbsp;To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p57">57/3</a></div>
@@ -344,23 +344,23 @@ available for wide strings (see <A HREF="AA-A-4-7.html">A.4.7</A>).&nbsp;</div>
 <div class="paranum"><a name="p64.a">64.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0185-1.TXT">AI05-0185-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
-<A NAME="I6588"></A>The package Wide_Characters.Handling is new.&nbsp;</div>
+<A NAME="I6834"></A>The package Wide_Characters.Handling is new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p64.b">64.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0260-1.TXT">AI12-0260-1</A></I>} 
-<A NAME="I6589"></A>Added additional classification routines Is_Basic 
+<A NAME="I6835"></A>Added additional classification routines Is_Basic 
 and Is_NFKC, and additional conversion routine To_Basic. If Wide_Characters.Handling 
-is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with one of these <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>s 
-is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
+is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
 This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

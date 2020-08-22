@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-5-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 <HR>
 <H1>3.6 Array Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1890"></A><A NAME="I1891"></A>An <I>array</I> 
+<div class="Normal"><A NAME="I1876"></A><A NAME="I1877"></A>An <I>array</I> 
 object is a composite object consisting of components which all have 
 the same subtype. The name for a component of an array uses one or more 
 index values belonging to specified discrete types. The value of an array 
@@ -48,26 +48,26 @@ object is a composite value consisting of the values of the components.
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">array_type_definition</SPAN><A NAME="I1892"></A><A NAME="S0051"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I1893"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">unconstrained_array_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1894"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0054">constrained_array_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">array_type_definition</SPAN><A NAME="I1878"></A><A NAME="S0051"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I1879"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">unconstrained_array_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1880"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0054">constrained_array_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">unconstrained_array_definition</SPAN><A NAME="I1895"></A><A NAME="S0052"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>array</B>(<A NAME="I1896"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1897"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN>})&nbsp;<B>of</B>&nbsp;<A NAME="I1898"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">unconstrained_array_definition</SPAN><A NAME="I1881"></A><A NAME="S0052"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>array</B>(<A NAME="I1882"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1883"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN>})&nbsp;<B>of</B>&nbsp;<A NAME="I1884"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">index_subtype_definition</SPAN><A NAME="I1899"></A><A NAME="S0053"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1900"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;<B>range</B>&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">index_subtype_definition</SPAN><A NAME="I1885"></A><A NAME="S0053"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1886"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;<B>range</B>&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">constrained_array_definition</SPAN><A NAME="I1901"></A><A NAME="S0054"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>array</B>&nbsp;(<A NAME="I1902"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1903"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>})&nbsp;<B>of</B>&nbsp;<A NAME="I1904"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">constrained_array_definition</SPAN><A NAME="I1887"></A><A NAME="S0054"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>array</B>&nbsp;(<A NAME="I1888"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1889"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>})&nbsp;<B>of</B>&nbsp;<A NAME="I1890"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">discrete_subtype_definition</SPAN><A NAME="I1905"></A><A NAME="S0055"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>discrete_</I><A NAME="I1906"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I1907"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">discrete_subtype_definition</SPAN><A NAME="I1891"></A><A NAME="S0055"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>discrete_</I><A NAME="I1892"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I1893"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_definition</SPAN><A NAME="I1908"></A><A NAME="S0056"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<B>aliased</B>]&nbsp;<A NAME="I1909"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
-&nbsp;|&nbsp;[<B>aliased</B>]&nbsp;<A NAME="I1910"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">component_definition</SPAN><A NAME="I1894"></A><A NAME="S0056"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<B>aliased</B>]&nbsp;<A NAME="I1895"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
+&nbsp;|&nbsp;[<B>aliased</B>]&nbsp;<A NAME="I1896"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I1911"></A>For a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1897"></A>For a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
 shall resolve to be of some specific discrete type; which discrete type 
@@ -78,13 +78,13 @@ itself (plus the preference for <I>root_integer</I> &mdash; see <A HREF="RM-8-6.
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I1912"></A>Each <SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1898"></A>Each <SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN> 
-defines an <I>index subtype</I>; <A NAME="I1913"></A>its type (the <I>index 
+defines an <I>index subtype</I>; <A NAME="I1899"></A>its type (the <I>index 
 type</I>) shall be discrete.&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1914"></A>The subtype defined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<div class="Normal"><A NAME="I1900"></A>The subtype defined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
 (the <I>component subtype</I>) shall be a definite subtype.&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
@@ -93,7 +93,7 @@ deleted.</I></SPAN></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I1915"></A><A NAME="I1916"></A><A NAME="I1917"></A>An 
+<div class="Normal"><A NAME="I1901"></A><A NAME="I1902"></A><A NAME="I1903"></A>An 
 array is characterized by the number of indices (the <I>dimensionality</I> 
 of the array), the type and position of each index, the lower and upper 
 bounds for each index, and the subtype of the components. The order of 
@@ -104,11 +104,11 @@ for each possible index value. A multidimensional array has a distinct
 component for each possible sequence of index values that can be formed 
 by selecting one value for each index position (in the given order). 
 The possible values for a given index are all the values between the 
-lower and upper bounds, inclusive; <A NAME="I1918"></A>this range of 
-values is called the <I>index range</I>. <A NAME="I1919"></A>The <I>bounds</I> 
-of an array are the bounds of its index ranges. <A NAME="I1920"></A>The 
+lower and upper bounds, inclusive; <A NAME="I1904"></A>this range of 
+values is called the <I>index range</I>. <A NAME="I1905"></A>The <I>bounds</I> 
+of an array are the bounds of its index ranges. <A NAME="I1906"></A>The 
 <I>length</I> of a dimension of an array is the number of values of the 
-index range of the dimension (zero for a null range). <A NAME="I1921"></A>The 
+index range of the dimension (zero for a null range). <A NAME="I1907"></A>The 
 <I>length</I> of a one-dimensional array is the length of its only dimension.</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Normal">An <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN> 
@@ -118,19 +118,19 @@ and the subtype of the components are as in the type definition; the
 values of the lower and upper bounds for each index belong to the corresponding 
 index subtype of its type, except for null arrays (see <A HREF="RM-3-6-1.html">3.6.1</A>).</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I1922"></A><A NAME="I1923"></A>An <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">unconstrained_array_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1908"></A><A NAME="I1909"></A>An <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">unconstrained_array_definition</A></SPAN> 
 defines an array type with an unconstrained first subtype. Each <SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN> 
 defines the corresponding index subtype to be the subtype denoted by 
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
-<A NAME="I1924"></A>The compound delimiter &lt;&gt; (called a <I>box</I>) 
+<A NAME="I1910"></A>The compound delimiter &lt;&gt; (called a <I>box</I>) 
 of an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0053">index_subtype_definition</A></SPAN> 
 stands for an undefined range (different objects of the type need not 
 have the same bounds).</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I1925"></A><A NAME="I1926"></A>A <SPAN Class="swiss"><A HREF="RM-3-6.html#S0054">constrained_array_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1911"></A><A NAME="I1912"></A>A <SPAN Class="swiss"><A HREF="RM-3-6.html#S0054">constrained_array_definition</A></SPAN> 
 defines an array type with a constrained first subtype. Each <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 defines the corresponding index subtype, as well as the corresponding 
-index range for the constrained first subtype. <A NAME="I1927"></A>The 
+index range for the constrained first subtype. <A NAME="I1913"></A>The 
 <I>constraint</I> of the first subtype consists of the bounds of the 
 index ranges.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
@@ -144,14 +144,14 @@ as follows:&nbsp;</div>
 resolves to <I>root_integer</I>, then the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 defines a subtype of the predefined type Integer with bounds given by 
 a conversion to Integer of the bounds of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>; 
-<A NAME="I1928"></A></div>
+<A NAME="I1914"></A></div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Bulleted">Otherwise, the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 defines a subtype of the type of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>, 
 with the bounds given by the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal"><A NAME="I1929"></A>The <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1915"></A>The <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN> 
 defines the nominal subtype of the components. If the reserved word <B>aliased</B> 
 appears in the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN>, 
@@ -160,36 +160,36 @@ then each component of the array is aliased (see <A HREF="RM-3-10.html">3.10</A>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal"><A NAME="I1930"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1916"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN> 
 creates the array type and its first subtype, and consists of the elaboration 
 of any <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
 and the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN>.</div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal"><A NAME="I1931"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1917"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 that does not contain any per-object expressions creates the discrete 
 subtype, and consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or the evaluation of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
 The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 that contains one or more per-object expressions is defined in <A HREF="RM-3-8.html">3.8</A>. 
-<A NAME="I1932"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
+<A NAME="I1918"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>. 
 The elaboration of any <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
 and the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
-are performed in an arbitrary order.<A NAME="I1933"></A>&nbsp;</div>
+are performed in an arbitrary order.<A NAME="I1919"></A>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p22.1">22.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For an array type 
 with a scalar component type, the following language-defined representation 
-aspect may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+aspect may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):&nbsp;</div>
 <div class="paranum"><a name="p22.2">22.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;Default_Component_Value</div><div class="WideHanging-Body"><br clear="left">
 This aspect shall be specified by a static expression, and that expression 
 shall be explicit, even if the aspect has a boolean type. Default_Component_Value 
-shall be specified only on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>.<A NAME="I1934"></A><A NAME="I1935"></A> 
+shall be specified only on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>.<A NAME="I1920"></A><A NAME="I1921"></A> 
 </div>
 <div class="paranum"><a name="p22.3">22.3/3</a></div>
 <div class="Normal">&nbsp;&nbsp;If a derived type with no primitive subprograms 
@@ -198,10 +198,10 @@ specified to have any value for the derived type.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p22.4">22.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 specified for the Default_Component_Value aspect is the component type 
 of the array type defined by the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-on which it appears.<A NAME="I1936"></A>&nbsp;</div>
+on which it appears.<A NAME="I1922"></A>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p23">23</a></div>
 <div class="Notes">49&nbsp;&nbsp;All components of an array have the 
@@ -246,7 +246,7 @@ Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>array</B>(Positive&nbsp;<B>ran
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-5-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

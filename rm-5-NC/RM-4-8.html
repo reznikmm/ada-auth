@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,111 +36,111 @@
 <HR>
 <H1>4.8 Allocators</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">The evaluation of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">The evaluation of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 creates an object and yields an access value that designates the object. 
-<A NAME="I3102"></A><A NAME="I3103"></A><A NAME="I3104"></A></div>
+<A NAME="I3197"></A><A NAME="I3198"></A><A NAME="I3199"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">allocator</SPAN><A NAME="I3105"></A><A NAME="S0150"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;[<A NAME="I3106"></A><SPAN Class="swiss"><A HREF="RM-4-8.html#S0151">subpool_specification</A></SPAN>]&nbsp;<A NAME="I3107"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
-&nbsp;|&nbsp;<B>new</B>&nbsp;[<A NAME="I3108"></A><SPAN Class="swiss"><A HREF="RM-4-8.html#S0151">subpool_specification</A></SPAN>]&nbsp;<A NAME="I3109"></A><SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">allocator</SPAN><A NAME="I3200"></A><A NAME="S0164"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;[<A NAME="I3201"></A><SPAN Class="swiss"><A HREF="RM-4-8.html#S0165">subpool_specification</A></SPAN>]&nbsp;<A NAME="I3202"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
+&nbsp;|&nbsp;<B>new</B>&nbsp;[<A NAME="I3203"></A><SPAN Class="swiss"><A HREF="RM-4-8.html#S0165">subpool_specification</A></SPAN>]&nbsp;<A NAME="I3204"></A><SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN></div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">subpool_specification</SPAN><A NAME="I3110"></A><A NAME="S0151"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(<I>subpool_handle_</I><A NAME="I3111"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">subpool_specification</SPAN><A NAME="I3205"></A><A NAME="S0165"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(<I>subpool_handle_</I><A NAME="I3206"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)</div>
 <div class="paranum"><a name="p2.2">2.2/3</a></div>
-<div class="Indented1">For an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Indented1">For an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 shall not specify a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>.</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal"><A NAME="I3112"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal"><A NAME="I3207"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 shall be a single access-to-object type with designated type <I>D</I> 
 such that either <I>D</I> covers the type determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN>, 
 or the expected type is anonymous and the determined type is <I>D</I>'Class. 
 A <I>subpool_handle_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is expected to be of any type descended from Subpool_Handle, which is 
 the type used to identify a subpool, declared in package System.Storage_Pools.Subpools 
-(see <A HREF="RM-13-11-4.html">13.11.4</A>).<A NAME="I3113"></A>&nbsp;</div>
+(see <A HREF="RM-13-11-4.html">13.11.4</A>).<A NAME="I3208"></A>&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I3114"></A>An <I>initialized</I> allocator 
-is an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
-with a <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN>. 
-<A NAME="I3115"></A>An <I>uninitialized</I> allocator is one with a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+<div class="Normal"><A NAME="I3209"></A>An <I>initialized</I> allocator 
+is an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN>. 
+<A NAME="I3210"></A>An <I>uninitialized</I> allocator is one with a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
 In the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 of an uninitialized allocator, a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 is permitted only if the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes an unconstrained composite subtype; if there is no <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-shall denote a definite subtype. <A NAME="I3116"></A></div>
+shall denote a definite subtype. <A NAME="I3211"></A></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Normal">If the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
-is an access-to-constant type, the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">If the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
+is an access-to-constant type, the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 shall be an initialized allocator.&nbsp;</div>
 <div class="paranum"><a name="p5.1">5.1/3</a></div>
-<div class="Normal">&nbsp;If a <SPAN Class="swiss"><A HREF="RM-4-8.html#S0151">subpool_specification</A></SPAN> 
+<div class="Normal">&nbsp;If a <SPAN Class="swiss"><A HREF="RM-4-8.html#S0165">subpool_specification</A></SPAN> 
 is given, the type of the storage pool of the access type shall be a 
 descendant of Root_Storage_Pool_With_Subpools.</div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
-<div class="Normal">&nbsp;If the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">&nbsp;If the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 is class-wide, the accessibility level of the type determined by the 
 <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
-shall not be statically deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>. 
+or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+shall not be statically deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p5.3">5.3/3</a></div>
 <div class="Normal">&nbsp;If the subtype determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 has one or more access discriminants, then the accessibility level of 
 the anonymous access type of each access discriminant shall not be statically 
-deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 (see <A HREF="RM-3-10-2.html">3.10.2</A>).&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/3</a></div>
-<div class="Normal">&nbsp;An <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">&nbsp;An <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 shall not be of an access type for which the Storage_Size has been specified 
 by a static expression with value zero or is defined by the language 
 to be zero.&nbsp;</div>
 <div class="paranum"><a name="p5.5">5.5/3</a></div>
-<div class="Normal">&nbsp;If the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
-is limited, then the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">&nbsp;If the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
+is limited, then the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 shall not be used to define the value of an access discriminant, unless 
 the discriminated type is immutably limited (see <A HREF="RM-7-5.html">7.5</A>).</div>
 <div class="paranum"><a name="p5.6">5.6/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I3117"></A>In addition to the places where 
+<div class="Normal">&nbsp;<A NAME="I3212"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
 unit.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Normal">If the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">If the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 is elementary, then the subtype of the created object is the designated 
 subtype. If the designated type is composite, then the subtype of the 
 created object is the designated subtype when the designated subtype 
 is constrained or there is an ancestor of the designated type that has 
 a constrained partial view; otherwise, the created object is constrained 
 by its initial value (even if the designated subtype is unconstrained 
-with defaults). <A NAME="I3118"></A></div>
+with defaults). <A NAME="I3213"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Normal"><A NAME="I3119"></A>For the evaluation of an initialized 
-allocator, the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
-is performed first. <A NAME="I3120"></A><A NAME="I3121"></A>An object 
-of the designated type is created and the value of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
-is converted to the designated subtype and assigned to the object. <A NAME="I3122"></A></div>
+<div class="Normal"><A NAME="I3214"></A>For the evaluation of an initialized 
+allocator, the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+is performed first. <A NAME="I3215"></A><A NAME="I3216"></A>An object 
+of the designated type is created and the value of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+is converted to the designated subtype and assigned to the object. <A NAME="I3217"></A></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3123"></A>For the evaluation of an uninitialized 
+<div class="Normal"><A NAME="I3218"></A>For the evaluation of an uninitialized 
 allocator, the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 is performed first. Then:&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3124"></A>If 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3219"></A>If 
 the designated type is elementary, an object of the designated subtype 
 is created and any implicit initial value is assigned;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
@@ -150,46 +150,46 @@ of the designated type is created with tag, if any, determined by the
 of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
 This object is then initialized by default (see <A HREF="RM-3-3-1.html">3.3.1</A>) 
 using the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-to determine its nominal subtype. <A NAME="I3125"></A><A NAME="I3126"></A><A NAME="I3127"></A><A NAME="I3128"></A>A 
+to determine its nominal subtype. <A NAME="I3220"></A><A NAME="I3221"></A><A NAME="I3222"></A><A NAME="I3223"></A>A 
 check is made that the value of the object belongs to the designated 
-subtype. <A NAME="I3129"></A>Constraint_Error is raised if this check 
+subtype. <A NAME="I3224"></A>Constraint_Error is raised if this check 
 fails. This check and the initialization of the object are performed 
-in an arbitrary order.<A NAME="I3130"></A></div>
+in an arbitrary order.<A NAME="I3225"></A></div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;For any <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>, 
-if the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;For any <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>, 
+if the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 is class-wide, then a check is made that the master of the type determined 
 by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
-or by the tag of the value of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN>, 
-includes the elaboration of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>. 
+or by the tag of the value of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN>, 
+includes the elaboration of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>. 
 If any part of the subtype determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
-(or by the tag of the value if the type of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
+(or by the tag of the value if the type of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
 is class-wide) has one or more access discriminants, then a check is 
 made that the accessibility level of the anonymous access type of each 
-access discriminant is not deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>. 
-Program_Error is raised if either such check fails.<A NAME="I3131"></A><A NAME="I3132"></A> 
-<A NAME="I3133"></A></div>
+access discriminant is not deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>. 
+Program_Error is raised if either such check fails.<A NAME="I3226"></A><A NAME="I3227"></A> 
+<A NAME="I3228"></A></div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;If the object to be created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;If the object to be created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 has a controlled or protected part, and the finalization of the collection 
-of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 (see <A HREF="RM-7-6-1.html">7.6.1</A>) has started, Program_Error is 
-raised.<A NAME="I3134"></A><A NAME="I3135"></A> <A NAME="I3136"></A></div>
+raised.<A NAME="I3229"></A><A NAME="I3230"></A> <A NAME="I3231"></A></div>
 <div class="paranum"><a name="p10.3">10.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;If the object to be created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
-contains any tasks, and the master of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;If the object to be created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
+contains any tasks, and the master of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 is completed, and all of the dependent tasks of the master are terminated 
-(see <A HREF="RM-9-3.html">9.3</A>), then Program_Error is raised.<A NAME="I3137"></A><A NAME="I3138"></A> 
-<A NAME="I3139"></A></div>
+(see <A HREF="RM-9-3.html">9.3</A>), then Program_Error is raised.<A NAME="I3232"></A><A NAME="I3233"></A> 
+<A NAME="I3234"></A></div>
 <div class="paranum"><a name="p10.4">10.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 includes a <I>subpool_handle_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
 Constraint_Error is raised if the subpool handle is <B>null</B>. Program_Error 
 is raised if the subpool does not <I>belong</I> (see <A HREF="RM-13-11-4.html">13.11.4</A>) 
-to the storage pool of the access type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>.<A NAME="I3140"></A><A NAME="I3141"></A><A NAME="I3142"></A><A NAME="I3143"></A> 
-<A NAME="I3144"></A><A NAME="I3145"></A></div>
+to the storage pool of the access type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>.<A NAME="I3235"></A><A NAME="I3236"></A><A NAME="I3237"></A><A NAME="I3238"></A> 
+<A NAME="I3239"></A><A NAME="I3240"></A></div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal">If the created object contains any tasks, they are 
 activated (see <A HREF="RM-9-2.html">9.2</A>). Finally, an access value 
@@ -197,11 +197,11 @@ that designates the created object is returned.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I3146"></A> It is a bounded error if the 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I3241"></A> It is a bounded error if the 
 finalization of the collection of the type (see <A HREF="RM-7-6-1.html">7.6.1</A>) 
-of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 has started. If the error is detected, Program_Error is raised. Otherwise, 
-the allocation proceeds normally.&nbsp;</div>
+the allocation proceeds normally.<A NAME="I3242"></A>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">25&nbsp;&nbsp;Allocators cannot create objects of 
@@ -213,9 +213,9 @@ or Adjust procedures. See <A HREF="RM-7-6.html">7.6</A>.</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Notes">27&nbsp;&nbsp;As explained in <A HREF="RM-13-11.html">13.11</A>, 
 &ldquo;<A HREF="RM-13-11.html">Storage Management</A>&rdquo;, the storage 
-for an object allocated by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
-comes from a storage pool (possibly user defined). <A NAME="I3147"></A>The 
-exception Storage_Error is raised by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+for an object allocated by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
+comes from a storage pool (possibly user defined). The exception Storage_Error 
+is raised by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 if there is not enough storage. Instances of Unchecked_Deallocation may 
 be used to explicitly reclaim storage.</div>
 <div class="paranum"><a name="p15">15/3</a></div>
@@ -242,7 +242,7 @@ Expr_Ptr'(<B>new</B>&nbsp;Literal'(Expression&nbsp;<B>with</B>&nbsp;3.5))&nbsp;&
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

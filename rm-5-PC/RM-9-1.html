@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,47 +37,47 @@
 <HR>
 <H1>9.1 Task Units and Task Objects</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4064"></A>A task unit is declared by a 
-<I>task declaration</I>, which has a corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>. 
-A task declaration may be a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0222">task_type_declaration</A></SPAN>, 
+<div class="Normal"><A NAME="I4272"></A>A task unit is declared by a 
+<I>task declaration</I>, which has a corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>. 
+A task declaration may be a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0244">task_type_declaration</A></SPAN>, 
 in which case it declares a named task type; alternatively, it may be 
-a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0223">single_task_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0245">single_task_declaration</A></SPAN>, 
 in which case it defines an anonymous task type, as well as declaring 
 a named task object of that type.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">task_type_declaration</SPAN><A NAME="I4065"></A><A NAME="S0222"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>type</B>&nbsp;<A NAME="I4066"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4067"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4068"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;[<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4069"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4070"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">task_type_declaration</SPAN><A NAME="I4273"></A><A NAME="S0244"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>type</B>&nbsp;<A NAME="I4274"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4275"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4276"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;[<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4277"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4278"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">single_task_declaration</SPAN><A NAME="I4071"></A><A NAME="S0223"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<A NAME="I4072"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4073"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>][<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4074"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4075"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">single_task_declaration</SPAN><A NAME="I4279"></A><A NAME="S0245"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<A NAME="I4280"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4281"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>][<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4282"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4283"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>];</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">task_definition</SPAN><A NAME="I4076"></A><A NAME="S0224"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4077"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0225">task_item</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">task_definition</SPAN><A NAME="I4284"></A><A NAME="S0246"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4285"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0247">task_item</A></SPAN>}<BR>
 &nbsp;&nbsp;[&nbsp;<B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4078"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0225">task_item</A></SPAN>}]<BR>
-&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4079"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4286"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0247">task_item</A></SPAN>}]<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4287"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]</div>
 <div class="paranum"><a name="p5">5/1</a></div>
-<div class="Indented1"><SPAN Class="swiss">task_item</SPAN><A NAME="I4080"></A><A NAME="S0225"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4081"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4082"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">task_item</SPAN><A NAME="I4288"></A><A NAME="S0247"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4289"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4290"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0343">aspect_clause</A></SPAN></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">task_body</SPAN><A NAME="I4083"></A><A NAME="S0226"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4084"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4085"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4086"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">task_body</SPAN><A NAME="I4291"></A><A NAME="S0248"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4292"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4293"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4294"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4087"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0282">handled_sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4088"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4295"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4296"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Indented1">If a <I>task_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-appears at the end of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>, 
+appears at the end of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>, 
 it shall repeat the <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>. 
 </div>
 
@@ -89,19 +89,19 @@ it shall repeat the <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_ide
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
-defines a task type and its first subtype. <A NAME="I4089"></A>The first 
-list of <SPAN Class="swiss"><A HREF="RM-9-1.html#S0225">task_item</A></SPAN>s 
-of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>, 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
+defines a task type and its first subtype. <A NAME="I4297"></A>The first 
+list of <SPAN Class="swiss"><A HREF="RM-9-1.html#S0247">task_item</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>, 
 together with the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
-if any, is called the visible part of the task unit. <A NAME="I4090"></A>The 
-optional list of <SPAN Class="swiss"><A HREF="RM-9-1.html#S0225">task_item</A></SPAN>s 
+if any, is called the visible part of the task unit. <A NAME="I4298"></A>The 
+optional list of <SPAN Class="swiss"><A HREF="RM-9-1.html#S0247">task_item</A></SPAN>s 
 after the reserved word <B>private</B> is called the private part of 
 the task unit.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/1</a></div>
-<div class="Normal">&nbsp;For a task declaration without a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
-without <SPAN Class="swiss"><A HREF="RM-9-1.html#S0225">task_item</A></SPAN>s 
+<div class="Normal">&nbsp;For a task declaration without a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
+without <SPAN Class="swiss"><A HREF="RM-9-1.html#S0247">task_item</A></SPAN>s 
 is assumed.</div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
 <div class="Normal">&nbsp;For a task declaration with an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>, 
@@ -110,20 +110,20 @@ type (see <A HREF="RM-3-9-4.html">3.9.4</A>), in the same way that a
 derived type inherits user-defined primitive subprograms from its progenitor 
 types (see <A HREF="RM-3-4.html">3.4</A>). If the first parameter of 
 a primitive inherited subprogram is of the task type or an access parameter 
-designating the task type, and there is an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN> 
+designating the task type, and there is an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declaration</A></SPAN> 
 for a single entry with the same identifier within the task declaration, 
 whose profile is type conformant with the prefixed view profile of the 
 inherited subprogram, the inherited subprogram is said to be <I>implemented</I> 
 by the conforming task entry using an implicitly declared nonabstract 
 subprogram which has the same profile as the inherited subprogram and 
-which overrides it<A NAME="I4091"></A>.<A NAME="I4092"></A><A NAME="I4093"></A> 
+which overrides it<A NAME="I4299"></A>.<A NAME="I4300"></A><A NAME="I4301"></A> 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9.3">9.3/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I4094"></A>A task declaration requires 
-a completion, which shall be a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>, 
-and every <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I4302"></A>A task declaration requires 
+a completion, which shall be a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>, 
+and every <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN> 
 shall be the completion of some task declaration.&nbsp;</div>
 <div class="paranum"><a name="p9.4">9.4/2</a></div>
 <div class="Normal">&nbsp;Each <I>interface_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
@@ -135,7 +135,7 @@ type that is not a protected interface.&nbsp;</div>
 primitive subprogram of a tagged task type shall not be type conformant 
 with any entry of the task type, if the subprogram has the same defining 
 name as the entry and the first parameter of the subprogram is of the 
-task type or is an access parameter designating the task type.<A NAME="I4095"></A> 
+task type or is an access parameter designating the task type.<A NAME="I4303"></A> 
 </div>
 <div class="paranum"><a name="p9.6">9.6/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For each primitive 
@@ -145,41 +145,41 @@ one of the following shall apply:</div>
 <div class="Bulleted">the inherited subprogram is overridden with a primitive 
 subprogram of the task type, in which case the overriding subprogram 
 shall be subtype conformant with the inherited subprogram and not abstract; 
-or<A NAME="I4096"></A></div>
+or<A NAME="I4304"></A></div>
 <div class="paranum"><a name="p9.8">9.8/2</a></div>
 <div class="Bulleted">the inherited subprogram is implemented by a single 
 entry of the task type; in which case its prefixed view profile shall 
-be subtype conformant with that of the task entry. <A NAME="I4097"></A></div>
+be subtype conformant with that of the task entry. <A NAME="I4305"></A></div>
 <div class="paranum"><a name="p9.9">9.9/2</a></div>
 <div class="Normal">&nbsp;If neither applies, the inherited subprogram shall 
-be a null procedure. <A NAME="I4098"></A>In addition to the places where 
+be a null procedure. <A NAME="I4306"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I4099"></A>The elaboration of a task declaration 
-elaborates the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>. 
-<A NAME="I4100"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0223">single_task_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I4307"></A>The elaboration of a task declaration 
+elaborates the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>. 
+<A NAME="I4308"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0245">single_task_declaration</A></SPAN> 
 also creates an object of an (anonymous) task type.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I4101"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
+<div class="Normal"><A NAME="I4309"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
 creates the task type and its first subtype; it also includes the elaboration 
-of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declaration</A></SPAN>s 
 in the given order.</div>
 <div class="paranum"><a name="p12">12/1</a></div>
-<div class="Normal"><A NAME="I4102"></A>As part of the initialization 
-of a task object, any <SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN>s 
-and any per-object constraints associated with <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN>s 
-of the corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
+<div class="Normal"><A NAME="I4310"></A>As part of the initialization 
+of a task object, any <SPAN Class="swiss"><A HREF="RM-13-1.html#S0343">aspect_clause</A></SPAN>s 
+and any per-object constraints associated with <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declaration</A></SPAN>s 
+of the corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
 are elaborated in the given order.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I4103"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN> 
+<div class="Normal"><A NAME="I4311"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN> 
 has no effect other than to establish that tasks of the type can from 
 then on be activated without failing the Elaboration_Check.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal">The execution of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN> 
+<div class="Normal">The execution of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN> 
 is invoked by the activation of a task of the corresponding type (see 
 <A HREF="RM-9-2.html">9.2</A>).</div>
 <div class="paranum"><a name="p15">15</a></div>
@@ -209,7 +209,7 @@ Within a task unit, the name of a discriminant of the task type denotes
 the corresponding discriminant of the current instance of the unit.</div>
 <div class="paranum"><a name="p21">21/2</a></div>
 <div class="Notes">4&nbsp;&nbsp;A task type is a limited type (see <A HREF="RM-7-5.html">7.5</A>), 
-and hence precludes use of <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>s 
+and hence precludes use of <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN>s 
 and predefined equality operators. If an application needs to store and 
 exchange task identities, it can do so by defining an access type designating 
 the corresponding task objects and by using access values for identification 
@@ -263,7 +263,7 @@ Terminal&nbsp;:&nbsp;Keyboard&nbsp;:=&nbsp;<B>new</B>&nbsp;Keyboard_Driver(Term_
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

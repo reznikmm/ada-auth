@@ -13,9 +13,12 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
@@ -23,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-13.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -44,7 +47,7 @@ generic formal types Key_Type and Element_Type are indefinite.&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
-The declaration of the generic library package Containers.Indefinite_Ordered_Maps<A NAME="I8283"></A> 
+The declaration of the generic library package Containers.Indefinite_Ordered_Maps<A NAME="I8836"></A> 
 has the same contents and semantics as Containers.Ordered_Maps except:</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Bulleted">The generic formal Key_Type is indefinite.</div>
@@ -83,25 +86,57 @@ a formal parameter of type Element_Type perform indefinite insertion
 also have a formal of the indefinite formal type Key_Type and perform 
 indefinite insertion using that value, but it is sufficient to mention 
 the formal of type Element_Type to cover those.&nbsp;</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">The description of Tampering_With_Elements_Prohibited 
+is replaced by:</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Indented2"><span class="insert5">Returns True if tampering 
+with elements is prohibited for Container, and False otherwise.</span> 
+</div>
+<div class="paranum"><a name="p11.a">11.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>Complete 
+replacement of an element can cause its memory to be deallocated while 
+another operation is holding onto a reference to it. That can't be allowed. 
+However, a simple modification of (part of) an element is not a problem.</span> 
+</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">Tampering_With_Cursors_Prohibited is replaced by 
+Tampering_With_Elements_Prohibited in the postcondition for the operations 
+Reference and Constant_Reference.</span></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+<span class="insert5">The operations Replace and Replace_Element are 
+omitted from the nested package Stable.</span></div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
-<div class="paranum"><a name="p9.b">9.b/2</a></div>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I8284"></A>The generic package Containers.Indefinite_Ordered_Maps 
+<A NAME="I8837"></A>The generic package Containers.Indefinite_Ordered_Maps 
 is new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
-<div class="paranum"><a name="p9.c">9.c/4</a></div>
+<div class="paranum"><a name="p13.b">13.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
-<A NAME="I8285"></A><B>Corrigendum:</B> Defined some routines to &ldquo;perform 
+<A NAME="I8838"></A><B>Corrigendum:</B> Defined some routines to &ldquo;perform 
 indefinite insertion&rdquo;. This could mean that some calls to those 
 routines would now raise Program_Error where they previously worked. 
 However, this is extremely unlikely; see Inconsistencies With Ada 2012 
-in <A HREF="AA-A-18-11.html">A.18.11</A> for details.&nbsp;</div>
+in <A HREF="AA-A-18-11.html">A.18.11</A> for details.</div>
+<div class="paranum"><a name="p13.c">13.c/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
+<span class="insert5">Defined the Iterator_View aspect, so that the stable 
+view is used for container element iterators. This leads to a rare situation 
+where Program_Error will be raised in Ada 202x for code that would have 
+worked in Ada 2012. See Inconsistencies With Ada 2012 in <A HREF="AA-A-18-11.html">A.18.11</A> 
+for details.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-13.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

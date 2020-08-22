@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I7160"></A><A NAME="I7161"></A><A NAME="I7162"></A>Values 
+<div class="Normal"><A NAME="I7481"></A><A NAME="I7482"></A><A NAME="I7483"></A>Values 
 input from the external environment of the program, or output to the 
 external environment, are considered to occupy <I>external files</I>. 
 An external file can be anything external to the program that can produce 
@@ -48,7 +48,7 @@ with the file, such as the physical organization or access rights. The
 conventions governing the interpretation of such strings shall be documented.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I7163"></A>Input and output operations are expressed as operations 
+<A NAME="I7484"></A>Input and output operations are expressed as operations 
 on objects of some <I>file type</I>, rather than directly in terms of 
 the external files. In the remainder of this clause, the term <I>file</I> 
 is always used to refer to a file object; the term <I>external file</I> 
@@ -79,10 +79,10 @@ and otherwise the file is said to be <I>closed</I>.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">The language does not define what happens to external 
 files after the completion of the main program and all the library tasks 
-(in particular, if corresponding files have not been closed). <A NAME="I7164"></A><A NAME="I7165"></A><A NAME="I7166"></A>The 
+(in particular, if corresponding files have not been closed). <A NAME="I7485"></A><A NAME="I7486"></A><A NAME="I7487"></A>The 
 effect of input-output for access types is unspecified.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7167"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7488"></A>An 
 open file has a <I>current mode</I>, which is a value of one of the following 
 enumeration types:&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
@@ -114,10 +114,10 @@ The exceptions that can be propagated by the execution of an input-output
 subprogram are defined in the package IO_Exceptions; the situations in 
 which they can be propagated are described following the description 
 of the subprogram (and in subclause <A HREF="AA-A-13.html">A.13</A>). 
-<A NAME="I7168"></A><A NAME="I7169"></A>The exceptions Storage_Error 
-and Program_Error may be propagated. (Program_Error can only be propagated 
-due to errors made by the caller of the subprogram.) Finally, exceptions 
-can be propagated in certain implementation-defined situations.&nbsp;</div>
+The exceptions Storage_Error and Program_Error may be propagated. (Program_Error 
+can only be propagated due to errors made by the caller of the subprogram.) 
+Finally, exceptions can be propagated in certain implementation-defined 
+situations.&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
@@ -146,7 +146,7 @@ Included package Wide_Wide_Text_IO in this description.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

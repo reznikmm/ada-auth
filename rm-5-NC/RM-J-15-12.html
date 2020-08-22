@@ -20,9 +20,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,20 +36,20 @@
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Relative_Deadline is as follows:&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8939"></A><A NAME="I8940"></A>Relative_Deadline 
-(<I>relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9505"></A><A NAME="I9506"></A>Relative_Deadline 
+(<I>relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal">The expected type for a <I>relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-is Real_Time.Time_Span.<A NAME="I8941"></A>&nbsp;</div>
+<div class="Normal">The expected type for a <I>relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is Real_Time.Time_Span.<A NAME="I9507"></A>&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">A Relative_Deadline pragma is allowed only immediately 
-within a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN> 
+within a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>. 
+of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -57,17 +57,17 @@ of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>.
 <div class="Normal">For an implementation that supports Annex D, a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Relative_Deadline specifies the value of the Relative_Deadline aspect 
 (see <A HREF="RM-D-2-6.html">D.2.6</A>). If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-appears in a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0224">task_definition</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-is associated with the aspect for the task type or <SPAN Class="swiss"><A HREF="RM-9-1.html#S0223">single_task_declaration</A></SPAN> 
+appears in a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0246">task_definition</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+is associated with the aspect for the task type or <SPAN Class="swiss"><A HREF="RM-9-1.html#S0245">single_task_declaration</A></SPAN> 
 that contains the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>; 
-otherwise, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+otherwise, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is associated with the aspect for the subprogram that contains the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>. 
 </div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

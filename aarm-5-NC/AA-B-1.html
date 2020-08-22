@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,15 +41,15 @@
 <div class="paranum"><a name="p0.1">0.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 An <I>interfacing</I> aspect is a representation aspect that is one of 
-the aspects Import, Export, Link_Name, External_Name, or Convention.<A NAME="I8399"></A><A NAME="I8400"></A></div>
+the aspects Import, Export, Link_Name, External_Name, or Convention.<A NAME="I8936"></A><A NAME="I8937"></A></div>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<A NAME="I8401"></A><A NAME="I8402"></A>Specifying the Import aspect 
+<A NAME="I8938"></A><A NAME="I8939"></A>Specifying the Import aspect 
  to have the value True is used to import an entity defined in a foreign 
 language into an Ada program, thus allowing a foreign-language subprogram 
 to be called from Ada, or a foreign-language variable to be accessed 
-from Ada. In contrast, <A NAME="I8403"></A><A NAME="I8404"></A>specifying 
+from Ada. In contrast, <A NAME="I8940"></A><A NAME="I8941"></A>specifying 
 the Export aspect to have the value True is used to export an Ada entity 
 to a foreign language, thus allowing an Ada subprogram to be called from 
 a foreign language, or an Ada object to be accessed from a foreign language. 
@@ -57,8 +57,8 @@ The Import and Export aspects are intended primarily for objects and
 subprograms, although implementations are allowed to support other entities. 
 The Link_Name and External_Name aspects are used to specify the link 
 name and external name, respectively, to be used to identify imported 
-or exported entities in the external environment.<A NAME="I8405"></A><A NAME="I8406"></A><A NAME="I8407"></A><A NAME="I8408"></A> 
-<A NAME="I8409"></A><A NAME="I8410"></A><A NAME="I8411"></A><A NAME="I8412"></A><A NAME="I8413"></A></div>
+or exported entities in the external environment.<A NAME="I8942"></A><A NAME="I8943"></A><A NAME="I8944"></A><A NAME="I8945"></A> 
+<A NAME="I8946"></A><A NAME="I8947"></A><A NAME="I8948"></A><A NAME="I8949"></A><A NAME="I8950"></A></div>
 <div class="paranum"><a name="p1.a">1.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Import:&nbsp;</B>Entity 
 is imported from another language.</div>
@@ -73,7 +73,7 @@ is exported to another language.</div>
 </B>Linker symbol used to identify an imported or exported entity.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-The Convention aspect<A NAME="I8414"></A><A NAME="I8415"></A> is used 
+The Convention aspect<A NAME="I8951"></A><A NAME="I8952"></A> is used 
 to indicate that an Ada entity should use the conventions of another 
 language. It is intended primarily for types and &ldquo;callback&rdquo; 
 subprograms. For example, &ldquo;<B>with</B> Convention =&gt; Fortran&rdquo; 
@@ -98,7 +98,7 @@ Linker_Options is as follows:&nbsp;</div>
 7 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8416"></A><A NAME="I8417"></A>Linker_Options(<I>string_</I><A NAME="I8418"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8953"></A><A NAME="I8954"></A>Linker_Options(<I>string_</I><A NAME="I8955"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>);</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options is allowed only at the place of a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN>.</div>
@@ -120,23 +120,23 @@ The Link_Name and External_Name aspects are of type String.&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>There is no language-defined 
 support for external or link names of type Wide_String, or of other string 
 types. Implementations may, of course, have additional aspects for that 
-purpose. Note that allowing both String and Wide_String in the same <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+purpose. Note that allowing both String and Wide_String in the same <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 would cause ambiguities.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8419"></A>The expected type for the <I>string_</I><A NAME="I8420"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<A NAME="I8956"></A>The expected type for the <I>string_</I><A NAME="I8957"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 in pragma Linker_Options is String.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8421"></A>The aspect Convention shall be specified by a <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+<A NAME="I8958"></A>The aspect Convention shall be specified by a <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 which shall be the name of a <I>convention</I>. The convention names 
 are implementation defined, except for certain language-defined ones, 
 such as Ada and Intrinsic, as explained in <A HREF="AA-6-3-1.html">6.3.1</A>, 
 &ldquo;<A HREF="AA-6-3-1.html">Conformance Rules</A>&rdquo;. [Additional 
 convention names generally represent the calling conventions of foreign 
-languages, language implementations, or specific run-time models.] <A NAME="I8422"></A>The 
+languages, language implementations, or specific run-time models.] <A NAME="I8959"></A>The 
 convention of a callable entity is its <I>calling convention</I>.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
@@ -151,7 +151,7 @@ do this because it seems to introduce extra complexity, and because the
 list of available languages is better represented as the list of children 
 of package Interfaces &mdash; a more open-ended sort of list.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8423"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8960"></A>If 
 <I>L</I> is a <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 for a language, then a type T is said to be <I>compatible with convention 
 L</I>, (alternatively, is said to be an <I>L-compatible type</I>) if 
@@ -163,7 +163,7 @@ to <I>L</I> and is defined to be <I>L</I>-compatible (see <A HREF="AA-B-3.html">
 <A HREF="AA-B-4.html">B.4</A>, <A HREF="AA-B-5.html">B.5</A>),</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8424"></A>Convention <I>L</I> has been specified for T, and 
+<A NAME="I8961"></A>Convention <I>L</I> has been specified for T, and 
 T is <I>eligible for convention L</I>; that is:&nbsp;</div>
 <div class="paranum"><a name="p14.1">14.1/4</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0135-1.TXT">AI12-0135-1</A></I>} 
@@ -239,7 +239,7 @@ type is <I>L</I>.</div>
 access-to-object and anonymous access-to-subprogram types.&nbsp;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8425"></A>Notwithstanding any rule to the contrary, a declaration 
+<A NAME="I8962"></A>Notwithstanding any rule to the contrary, a declaration 
 with a True Import aspect shall not have a completion.&nbsp;</div>
 <div class="paranum"><a name="p22.a">22.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -253,7 +253,7 @@ so, and the normal completion is then not allowed for that declaration.
 </div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8426"></A> <A NAME="I8427"></A>An entity with a True Import 
+<A NAME="I8963"></A> <A NAME="I8964"></A>An entity with a True Import 
 aspect (or Export aspect) is said to be <I>imported</I> (respectively, 
 <I>exported</I>). An entity shall not be both imported and exported.</div>
 <div class="paranum"><a name="p24">24</a></div>
@@ -277,9 +277,9 @@ For an imported or exported subprogram, the result and parameter types
 shall each be compatible with the specified Convention aspect, if any.</div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 (if any) used to directly specify an Import, Export, External_Name, or 
-Link_Name aspect shall be a static expression. The <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+Link_Name aspect shall be a static expression. The <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options shall be static. An External_Name or Link_Name aspect 
 shall be specified only for an entity that is either imported or exported.</div>
@@ -304,12 +304,12 @@ the Export aspect is False.</div>
 <div class="Bulleted">For an entity with a True Import or Export aspect, 
 an external name, link name, or both may also be specified.&nbsp;</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Normal"><A NAME="I8428"></A>An <I>external name</I> is a 
+<div class="Normal"><A NAME="I8965"></A>An <I>external name</I> is a 
 string value for the name used by a foreign language program either for 
 an entity that an Ada program imports, or for referring to an entity 
 that an Ada program exports.</div>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Normal"><A NAME="I8429"></A>A <I>link name</I> is a string 
+<div class="Normal"><A NAME="I8966"></A>A <I>link name</I> is a string 
 value for the name of an exported or imported entity, based on the conventions 
 of the foreign language's compiler in interfacing with the system's linker 
 tool.</div>
@@ -346,7 +346,7 @@ pragma Linker_Options.</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p38">38/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8430"></A><A NAME="I8431"></A>Notwithstanding what this International 
+<A NAME="I8967"></A><A NAME="I8968"></A>Notwithstanding what this International 
 Standard says elsewhere, the elaboration of a declaration with a True 
 Import aspect does not create the entity. Such an elaboration has no 
 other effect than to allow the defining name to denote the external entity. 
@@ -370,7 +370,7 @@ we recognize the contradiction, and this rule takes precedence.&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00320.TXT">AI95-00320-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0219-1.TXT">AI12-0219-1</A></I>} 
-<A NAME="I8432"></A>It is the programmer's responsibility to ensure that 
+<A NAME="I8969"></A>It is the programmer's responsibility to ensure that 
 the use of interfacing aspects does not violate Ada semantics; otherwise, 
 program execution is erroneous. For example, passing an object with mode 
 <B>in</B> to imported code that modifies it causes erroneous execution. 
@@ -389,7 +389,7 @@ provide two subprograms whose link names are &quot;adainit&quot; and
 &quot;adafinal&quot;. Adainit should contain the elaboration code for 
 library units. Adafinal should contain the finalization code. These subprograms 
 should have no effect the second and subsequent time they are called. 
-<A NAME="I8433"></A><A NAME="I8434"></A><A NAME="I8435"></A><A NAME="I8436"></A></div>
+<A NAME="I8970"></A><A NAME="I8971"></A><A NAME="I8972"></A><A NAME="I8973"></A></div>
 <div class="paranum"><a name="p39.a.1">39.a.1/3</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>If  Export is 
 supported for a language, the main program should be able to be written 
@@ -515,7 +515,7 @@ deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/A
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p51.a">51.a</a></div>
-<div class="Annotations"><A NAME="I8437"></A>Interfacing pragmas are 
+<div class="Annotations"><A NAME="I8974"></A>Interfacing pragmas are 
 new to Ada 95. Pragma Import replaces Ada 83's pragma Interface. Existing 
 implementations can continue to support pragma Interface for upward compatibility. 
 </div>
@@ -535,7 +535,7 @@ the semantics promised by the Ada specifications.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p51.d">51.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0002-1.TXT">AI05-0002-1</A></I>} 
-<A NAME="I8438"></A><B>Correction:</B> Access types that designate unconstrained 
+<A NAME="I8975"></A><B>Correction:</B> Access types that designate unconstrained 
 arrays are no longer defined to be <I>L</I>-compatible. Such access-to-arrays 
 require bounds information, which is likely to be incompatible with a 
 foreign language. The change will allow (but not require) compilers to 
@@ -549,14 +549,14 @@ so formally).&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p51.e">51.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8439"></A>Aspects Convention, Import, Export, Link_Name, and 
+<A NAME="I8976"></A>Aspects Convention, Import, Export, Link_Name, and 
 External_Name are new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 Convention, Import, and Export are now obsolescent.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p51.f">51.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0207-1.TXT">AI12-0207-1</A></I>} 
-<A NAME="I8440"></A><B>Correction:</B> The convention of anonymous access 
+<A NAME="I8977"></A><B>Correction:</B> The convention of anonymous access 
 components is that of the enclosing type (in Ada 2012, it was Ada). Similarly, 
 the convention of the anonymous access type of an object is that of the 
 object (again, in Ada 2012 it was Ada). While this is formally incompatible, 
@@ -569,7 +569,7 @@ code was not portable, as this was not required in Ada 2012.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p51.g">51.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0135-1.TXT">AI12-0135-1</A></I>} 
-<A NAME="I8441"></A><B>Corrigendum:</B> Added a suggestion that convention 
+<A NAME="I8978"></A><B>Corrigendum:</B> Added a suggestion that convention 
 be supported for enumeration types. This will make the use of enumeration 
 types portable for implementations that support interfacing to a particular 
 language.&nbsp;</div>
@@ -584,7 +584,7 @@ that provided interfacing declarations reflect the actual foreign code.
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

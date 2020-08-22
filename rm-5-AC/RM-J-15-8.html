@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,35 +41,35 @@ Atomic, Volatile, Independent, Atomic_Components, and Volatile_Components,
 and Independent_Components is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> 
-<A NAME="I9325"></A><A NAME="I9326"></A>Atomic (<A NAME="I9327"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></div>
+<A NAME="I9932"></A><A NAME="I9933"></A>Atomic (<A NAME="I9934"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> 
-<A NAME="I9328"></A><A NAME="I9329"></A>Volatile (<A NAME="I9330"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></div>
+<A NAME="I9935"></A><A NAME="I9936"></A>Volatile (<A NAME="I9937"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> 
-<A NAME="I9331"></A><A NAME="I9332"></A>Independent (<I>component_</I><A NAME="I9333"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></div>
+<A NAME="I9938"></A><A NAME="I9939"></A>Independent (<I>component_</I><A NAME="I9940"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> 
-<A NAME="I9334"></A><A NAME="I9335"></A>Atomic_Components (<I>array_</I><A NAME="I9336"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></div>
+<A NAME="I9941"></A><A NAME="I9942"></A>Atomic_Components (<I>array_</I><A NAME="I9943"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> 
-<A NAME="I9337"></A><A NAME="I9338"></A>Volatile_Components (<I>array_</I><A NAME="I9339"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></div>
+<A NAME="I9944"></A><A NAME="I9945"></A>Volatile_Components (<I>array_</I><A NAME="I9946"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> 
-<A NAME="I9340"></A><A NAME="I9341"></A>Independent_Components (<A NAME="I9342"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></div>
+<A NAME="I9947"></A><A NAME="I9948"></A>Independent_Components (<A NAME="I9949"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 in an Atomic or Volatile pragma shall resolve to denote either an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN>, 
 a noninherited <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>, 
 or a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
-The <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+The <I>component_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 in an Independent pragma shall resolve to denote a noninherited <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>. 
-The <I>array_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+The <I>array_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 in an Atomic_Components or Volatile_Components pragma shall resolve to 
 denote the declaration of an array type or an array object of an anonymous 
-type. The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+type. The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 in an Independent_Components pragma shall resolve to denote the declaration 
 of an array or record type or an array object of an anonymous type.</span> 
 </div>
@@ -80,18 +80,18 @@ of an array or record type or an array object of an anonymous type.</span>
 are representation pragmas (see <A HREF="RM-13-1.html">13.1</A>). Each 
 of these <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
 specifies that the similarly named aspect (see <A HREF="RM-C-6.html">C.6</A>) 
-of the type, object, or component denoted by its argument is True. <A NAME="I9343"></A><A NAME="I9344"></A><A NAME="I9345"></A><A NAME="I9346"></A><A NAME="I9347"></A><A NAME="I9348"></A><A NAME="I9349"></A><A NAME="I9350"></A><A NAME="I9351"></A><A NAME="I9352"></A><A NAME="I9353"></A><A NAME="I9354"></A></span></div>
+of the type, object, or component denoted by its argument is True. <A NAME="I9950"></A><A NAME="I9951"></A><A NAME="I9952"></A><A NAME="I9953"></A><A NAME="I9954"></A><A NAME="I9955"></A><A NAME="I9956"></A><A NAME="I9957"></A><A NAME="I9958"></A><A NAME="I9959"></A><A NAME="I9960"></A><A NAME="I9961"></A></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 of each of these <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
 shall denote a declaration that may have the similarly named aspect specified.</span> 
 </div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-J-15-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

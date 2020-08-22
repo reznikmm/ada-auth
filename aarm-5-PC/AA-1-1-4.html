@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-1-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -48,7 +48,7 @@ expressed by narrative rules.</div>
 of narrative rules defining both the effects of each construct and the 
 composition rules for constructs.</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1086"></A><A NAME="I1087"></A><A NAME="I1088"></A><A NAME="I1089"></A><A NAME="I1090"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1085"></A><A NAME="I1086"></A><A NAME="I1087"></A><A NAME="I1088"></A><A NAME="I1089"></A>The 
 context-free syntax of the language is described using a simple variant 
 of Backus-Naur Form. In particular:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -56,7 +56,7 @@ of Backus-Naur Form. In particular:&nbsp;</div>
 in a sans-serif font, some containing embedded underlines, are used to 
 denote syntactic categories, for example:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented2"><SPAN Class="swiss"><A HREF="AA-5-4.html#S0162">case_statement</A></SPAN></div>
+<div class="Indented2"><SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">Boldface words are 
 used to denote reserved words, for example:&nbsp;</div>
@@ -67,21 +67,22 @@ used to denote reserved words, for example:&nbsp;</div>
 optional items. Thus the two following rules are equivalent.&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
-<SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN>&nbsp;::=&nbsp;<B>return</B>&nbsp;[<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>];<BR>
-<SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN>&nbsp;::=&nbsp;<B>return</B>;&nbsp;|&nbsp;<B>return</B>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>;</div>
+<SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN>&nbsp;::=&nbsp;<B>return</B>&nbsp;[<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>];<BR>
+<SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN>&nbsp;::=&nbsp;<B>return</B>;&nbsp;|&nbsp;<B>return</B>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">Curly brackets enclose 
 a repeated item. The item may appear zero or more times; the repetitions 
 occur from left to right as with an equivalent left-recursive rule. Thus 
 the two following rules are equivalent.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Indented2"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0129">term</A></SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0130">factor</A></SPAN>&nbsp;{<SPAN Class="swiss"><A HREF="AA-4-5.html#S0136">multiplying_operator</A></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0130">factor</A></SPAN>}<BR>
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0129">term</A></SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0130">factor</A></SPAN>&nbsp;|&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0129">term</A></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5.html#S0136">multiplying_operator</A></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0130">factor</A></SPAN></div>
+<div class="Indented2"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0139">term</A></SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0140">factor</A></SPAN>&nbsp;{<SPAN Class="swiss"><A HREF="AA-4-5.html#S0146">multiplying_operator</A></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0140">factor</A></SPAN>}<BR>
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0139">term</A></SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0140">factor</A></SPAN>&nbsp;|&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0139">term</A></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5.html#S0146">multiplying_operator</A></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0140">factor</A></SPAN></div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
-A vertical line separates alternative items<span class="delete5">&nbsp;unless 
-it occurs immediately after an opening curly bracket, in which case it 
-stands for itself</span>:&nbsp;</div>
+A vertical line separates alternative items<span class="insert5">, for 
+example</span><span class="delete5">&nbsp;unless it occurs immediately after 
+an opening curly bracket, in which case it stands for itself</span>: 
+</div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
 <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0030">scalar_constraint</A></SPAN>&nbsp;|&nbsp;<SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0031">composite_constraint</A></SPAN><span class="delete5"><BR>
@@ -90,13 +91,13 @@ stands for itself</span>:&nbsp;</div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
 <span class="insert5">For symbols used in this notation (square brackets, 
 curly brackets, and the vertical line), the symbols when surrounded by 
-' represent themselves:</span>&nbsp;</div>
+' represent themselves, for example:</span>&nbsp;</div>
 <div class="paranum"><a name="p13.2">13.2/5</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
 <span class="insert5"><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>&nbsp;{'|'&nbsp;<SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>}<BR>
-<SPAN Class="swiss">named_container_aggregate</SPAN>&nbsp;::=&nbsp;'['&nbsp;<SPAN Class="swiss">container_element_association_list</SPAN>&nbsp;']'</span></div>
+<SPAN Class="swiss"><A HREF="AA-4-3-5.html#S0126">named_container_aggregate</A></SPAN>&nbsp;::=&nbsp;'['&nbsp;<SPAN Class="swiss"><A HREF="AA-4-3-5.html#S0127">container_element_association_list</A></SPAN>&nbsp;']'</span></div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Bulleted"><A NAME="I1091"></A>If the name of any syntactic 
+<div class="Bulleted"><A NAME="I1090"></A>If the name of any syntactic 
 category starts with an italicized part, it is equivalent to the category 
 name without the italicized part. The italicized part is intended to 
 convey some semantic information. For example <I>subtype_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -104,7 +105,7 @@ and <I>task_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>
 are both equivalent to <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 alone.&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I1092"></A><A NAME="I1093"></A><A NAME="I1094"></A><A NAME="I1095"></A>The 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I1091"></A><A NAME="I1092"></A><A NAME="I1093"></A><A NAME="I1094"></A>The 
 grammar given in this International Standard is not LR(1). In fact, it 
 is ambiguous; the ambiguities are resolved by the overload resolution 
 rules (see <A HREF="AA-8-6.html">8.6</A>).</div>
@@ -132,8 +133,8 @@ since the name &ldquo;of&rdquo; something also has another meaning.)</div>
 entity (for example, Duration), we mean the language-defined entity even 
 in programs where the declaration of the language-defined entity is hidden 
 by another declaration. For example, when we say that the expected type 
-for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN> 
+for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0268">delay_relative_statement</A></SPAN> 
 is Duration, we mean the language-defined type Duration that is declared 
 in Standard, not some type Duration the user might have declared.&nbsp;</div>
 <div class="paranum"><a name="p14.1">14.1/3</a></div>
@@ -181,16 +182,16 @@ counts from 0); the Simple Lowercase Mapping is the 13th field in this
 file. In both cases, if no character is present in the field, the character 
 maps to itself.</span>&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="WideAbove"><A NAME="I1096"></A>A <I>syntactic category</I> 
+<div class="WideAbove"><A NAME="I1095"></A>A <I>syntactic category</I> 
 is a nonterminal in the grammar defined in BNF under &ldquo;Syntax.&rdquo; 
 Names of syntactic categories are set in a different font, <SPAN Class="swiss">like_this</SPAN>. 
 </div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I1097"></A>A <I>construct</I> is a piece 
+<div class="Normal"><A NAME="I1096"></A>A <I>construct</I> is a piece 
 of text (explicit or implicit) that is an instance of a syntactic category 
 defined under &ldquo;Syntax&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p16.a">16.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>For example, an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is a construct. A declaration is a construct, whereas the thing declared 
 by a declaration is an &ldquo;entity.&rdquo;&nbsp;</div>
 <div class="paranum"><a name="p16.b">16.b</a></div>
@@ -201,18 +202,18 @@ it does not appear explicitly (in the nontechnical sense) in the program
 text, and even though its meaning is not defined entirely in terms of 
 that text.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I1098"></A>A <I>constituent</I> of a construct 
+<div class="Normal"><A NAME="I1097"></A>A <I>constituent</I> of a construct 
 is the construct itself, or any construct appearing within it.</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I1099"></A>Whenever the run-time semantics 
+<div class="Normal"><A NAME="I1098"></A>Whenever the run-time semantics 
 defines certain actions to happen in an <I>arbitrary order</I>, this 
 means that the implementation shall arrange for these actions to occur 
 in a way that is equivalent to some sequential order, following the rules 
 that result from that sequential order. When evaluations are defined 
 to happen in an arbitrary order, with conversion of the results to some 
-subtypes, or with some run-time checks, the evaluations, conversions, 
+subtypes, or with some runtime checks, the evaluations, conversions, 
 and checks may be arbitrarily interspersed, so long as each expression 
-is evaluated before converting or checking its value. <A NAME="I1100"></A><A NAME="I1101"></A>[Note 
+is evaluated before converting or checking its value. <A NAME="I1099"></A><A NAME="I1100"></A>[Note 
 that the effect of a program can depend on the order chosen by the implementation. 
 This can happen, for example, if two actual parameters of a given call 
 have side effects.]&nbsp;</div>
@@ -243,16 +244,16 @@ sequential order.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Notes">3&nbsp;&nbsp;The syntax rules describing structured 
 constructs are presented in a form that corresponds to the recommended 
-paragraphing. For example, an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN> 
+paragraphing. For example, an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0175">if_statement</A></SPAN> 
 is defined as:&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="SmallIndented2Examples"><SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN>&nbsp;::=<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>}<BR>
+<div class="SmallIndented2Examples"><SPAN Class="swiss"><A HREF="AA-5-3.html#S0175">if_statement</A></SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;[<B>else</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>]<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;</div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="Notes">4&nbsp;&nbsp;The line breaks and indentation in the 
@@ -289,11 +290,12 @@ case.&nbsp;</div>
 <span class="insert5">Changed the syntax description to quote symbols 
 used in the notation when they appear as themselves. We made this change 
 to allow square brackets in Ada syntax, but the change also allowed us 
-to get rid of an old hack for vertical lines.</span>&nbsp;</div>
+to get rid of an old hack which allowed vertical lines to stand for themselves 
+in limited circumstances.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-1-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

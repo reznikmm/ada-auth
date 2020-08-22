@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,13 +40,13 @@
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4689"></A>The execution of a task of a 
-given task type consists of the execution of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>. 
-<A NAME="I4690"></A><A NAME="I4691"></A><A NAME="I4692"></A><A NAME="I4693"></A>The 
+<div class="Normal"><A NAME="I4903"></A>The execution of a task of a 
+given task type consists of the execution of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>. 
+<A NAME="I4904"></A><A NAME="I4905"></A><A NAME="I4906"></A><A NAME="I4907"></A>The 
 initial part of this execution is called the <I>activation</I> of the 
 task; it consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>. 
-<A NAME="I4694"></A>Should an exception be propagated by the elaboration 
+of the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>. 
+<A NAME="I4908"></A>Should an exception be propagated by the elaboration 
 of its <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 the activation of the task is defined to have <I>failed</I>, and it becomes 
 a completed task.</div>
@@ -56,27 +56,27 @@ A task object (which represents one task) can be <span class="insert2">a
 part of a stand-alone object, of an object created by</span><span class="delete2">&nbsp;created 
 either as part of the elaboration of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 occurring immediately within some declarative region, or as part of the 
-evaluation of</span> an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN><span class="insert2">, 
+evaluation of</span> an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN><span class="insert2">, 
 or of an anonymous object of a limited type, or a coextension of one 
 of these</span>. All tasks<span class="insert2">&nbsp;that are part or coextensions 
 of any of the stand-alone objects</span> created by the elaboration of 
-<SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>s<span class="insert2">&nbsp;(or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>s<span class="insert2">&nbsp;(or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN>s 
 of formal objects of mode <B>in</B>)</span> of a single declarative region<span class="delete2">&nbsp;(including subcomponents of the declared objects)</span> are activated 
 together. <span class="insert2">All tasks that are part or coextensions 
 of a single object that is not a stand-alone object are activated together.</span><span class="delete2">&nbsp;Similarly, 
-all tasks created by the evaluation of a single <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+all tasks created by the evaluation of a single <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 are activated together. The activation of a task is associated with the 
-innermost <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+innermost <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 that is responsible for its creation.</span>&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The initialization of an 
 <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 can indirectly include the creation of other objects that contain tasks. 
 For example, the default expression for a subcomponent of an object created 
-by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
-might call a function that evaluates a completely different <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>. 
+by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
+might call a function that evaluates a completely different <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>. 
 Tasks created by the two allocators are <I>not</I> activated together. 
 </div>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -84,16 +84,16 @@ Tasks created by the two allocators are <I>not</I> activated together.
 For <span class="insert2">the&nbsp;</span>tasks<span class="delete2">&nbsp;created 
 by the elaboration of <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>s</span> 
 of a given declarative region, the activations are initiated within the 
-context of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
-(and its associated <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>s 
+context of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
+(and its associated <SPAN Class="swiss"><A HREF="AA-11-2.html#S0305">exception_handler</A></SPAN>s 
 if any &mdash; see <A HREF="AA-11-2.html">11.2</A>), just prior to executing 
-the statements of the <span class="insert2"><SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;_sequence</SPAN></span>. 
-[For a package without an explicit body or an explicit <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>, 
-an implicit body or an implicit <SPAN Class="swiss"><A HREF="AA-5-1.html#S0156">null_statement</A></SPAN> 
+the statements of the <span class="insert2"><SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;_sequence</SPAN></span>. 
+[For a package without an explicit body or an explicit <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN>, 
+an implicit body or an implicit <SPAN Class="swiss"><A HREF="AA-5-1.html#S0170">null_statement</A></SPAN> 
 is assumed, as defined in <A HREF="AA-7-2.html">7.2</A>.]&nbsp;</div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If Tasking_Error is raised, 
-it can be handled by handlers of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>. 
+it can be handled by handlers of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
@@ -102,10 +102,10 @@ object that is not a stand-alone object, activations are initiated after
 completing any initialization of the outermost object enclosing these 
 tasks, prior to performing any other operation on the outermost object. 
 In particular, for tasks that are part or coextensions of the object 
-</span>created by the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
-the activations are initiated as the last step of evaluating the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
+</span>created by the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
+the activations are initiated as the last step of evaluating the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
 <span class="delete2">after completing any initialization for the object 
-created by the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
+created by the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
 and&nbsp;</span>prior to returning the new access value.<span class="insert2">&nbsp;For tasks that are part or coextensions of an object that is the result 
 of a function call, the activations are not initiated until after the 
 function returns.</span></div>
@@ -119,19 +119,19 @@ together. Each such &ldquo;whole&rdquo; object has its own task activation
 sequence, involving the activating task being suspended until all the 
 new tasks complete their activation.</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4695"></A><A NAME="I4696"></A>The task 
-that created the new tasks and initiated their activations (the <I>activator</I>) 
-is blocked until all of these activations complete (successfully or not). 
-<A NAME="I4697"></A>Once all of these activations are complete, if the 
-activation of any of the tasks has failed [(due to the propagation of 
-an exception)], Tasking_Error is raised in the activator, at the place 
-at which it initiated the activations. Otherwise, the activator proceeds 
-with its execution normally. Any tasks that are aborted prior to completing 
-their activation are ignored when determining whether to raise Tasking_Error. 
-</div>
+<div class="Normal"><A NAME="I4909"></A><A NAME="I4910"></A><A NAME="I4911"></A><A NAME="I4912"></A>The 
+task that created the new tasks and initiated their activations (the 
+<I>activator</I>) is blocked until all of these activations complete 
+(successfully or not). <A NAME="I4913"></A>Once all of these activations 
+are complete, if the activation of any of the tasks has failed [(due 
+to the propagation of an exception)], Tasking_Error is raised in the 
+activator, at the place at which it initiated the activations. Otherwise, 
+the activator proceeds with its execution normally. Any tasks that are 
+aborted prior to completing their activation are ignored when determining 
+whether to raise Tasking_Error.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that a task created 
-by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 does not necessarily depend on its activator; in such a case the activator's 
 termination can precede the termination of the newly created task.&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b</a></div>
@@ -166,7 +166,7 @@ point.</span></div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0045-1.TXT">AI05-0045-1</A></I>} 
 <span class="insert3">The second case can happen with an exception being 
-raised in a return statement, by an exit or goto from an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
+raised in a return statement, by an exit or goto from an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0225">extended_return_statement</A></SPAN>, 
 or by a return statement being aborted. Any tasks created for the return 
 object of such a return statement are never activated.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
@@ -225,7 +225,7 @@ return are never activated.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

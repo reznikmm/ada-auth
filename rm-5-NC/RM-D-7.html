@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -43,16 +43,16 @@ facilitate the construction of highly efficient tasking run-time systems.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<A NAME="I8172"></A>A 
-scalar <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<A NAME="I8704"></A>A 
+scalar <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 within a protected unit is said to be <I>pure-barrier-eligible</I> if 
 it is one of the following:&nbsp;</div>
 <div class="paranum"><a name="p1.2">1.2/5</a></div>
 <div class="Bulleted">a static expression;</div>
 <div class="paranum"><a name="p1.3">1.3/5</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that statically denotes a scalar component of the immediately enclosing 
-protected unit;</div>
+that statically names (see <A HREF="RM-4-9.html">4.9</A>) a scalar subcomponent 
+of the immediately enclosing protected unit;</div>
 <div class="paranum"><a name="p1.4">1.4/5</a></div>
 <div class="Bulleted">a Count <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
@@ -63,62 +63,62 @@ unit;</div>
 logical operator (<B>and</B>, <B>or</B>, <B>xor</B>, <B>not</B>), where 
 each operand is pure-barrier-eligible;</div>
 <div class="paranum"><a name="p1.6">1.6/5</a></div>
-<div class="Bulleted">a membership test whose <I>tested_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
-is pure-barrier-eligible, and whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0126">membership_choice_list</A></SPAN> 
+<div class="Bulleted">a membership test whose <I>tested_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN> 
+is pure-barrier-eligible, and whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0136">membership_choice_list</A></SPAN> 
 meets the requirements for a static membership test (see <A HREF="RM-4-9.html">4.9</A>);</div>
 <div class="paranum"><a name="p1.7">1.7/5</a></div>
 <div class="Bulleted">a short-circuit control form both of whose operands 
 are pure-barrier-eligible;</div>
 <div class="paranum"><a name="p1.8">1.8/5</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0138">conditional_expression</A></SPAN> 
-all of whose <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>s, 
-<I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>s, 
-and <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>s 
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
+all of whose <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>s, 
+<I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s, 
+and <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
 are pure-barrier-eligible; or</div>
 <div class="paranum"><a name="p1.9">1.9/5</a></div>
-<div class="Bulleted">a pure-barrier-eligible <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted">a pure-barrier-eligible <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 enclosed in parentheses.&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 are language defined:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="WideHanging-Term"><A NAME="I8173"></A><A NAME="I8174"></A>No_Task_Hierarchy 
+<div class="WideHanging-Term"><A NAME="I8705"></A><A NAME="I8706"></A>No_Task_Hierarchy 
 </div><div class="WideHanging-Body"><br clear="left">
 No task depends on a master other than the library-level master.</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="WideHanging-Term"><A NAME="I8175"></A><A NAME="I8176"></A>No_Nested_Finalization 
+<div class="WideHanging-Term"><A NAME="I8707"></A><A NAME="I8708"></A>No_Nested_Finalization 
 </div><div class="WideHanging-Body"><br clear="left">
 Objects of a type that needs finalization (see <A HREF="RM-7-6.html">7.6</A>) 
 are declared only at library level. If an access type does not have library-level 
-accessibility, then there are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>s 
+accessibility, then there are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 of the type where the type determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
 needs finalization.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="WideHanging-Term"><A NAME="I8177"></A><A NAME="I8178"></A>No_Abort_Statements 
+<div class="WideHanging-Term"><A NAME="I8709"></A><A NAME="I8710"></A>No_Abort_Statements 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-9-8.html#S0262">abort_statement</A></SPAN>s, 
+There are no <SPAN Class="swiss"><A HREF="RM-9-8.html#S0284">abort_statement</A></SPAN>s, 
 and there is no use of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denoting Task_Identification.Abort_Task.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Term"><A NAME="I8179"></A><A NAME="I8180"></A>No_Terminate_Alternatives 
+<div class="WideHanging-Term"><A NAME="I8711"></A><A NAME="I8712"></A>No_Terminate_Alternatives 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0248">selective_accept</A></SPAN>s 
-with <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0253">terminate_alternative</A></SPAN>s.</div>
+There are no <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0270">selective_accept</A></SPAN>s 
+with <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0275">terminate_alternative</A></SPAN>s.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I8181"></A><A NAME="I8182"></A>No_Task_Allocators 
+<div class="WideHanging-Term"><A NAME="I8713"></A><A NAME="I8714"></A>No_Task_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>s 
+There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 for task types or types containing task subcomponents.</div>
 <div class="paranum"><a name="p7.1">7.1/3</a></div>
-<div class="WideHanging-Body">In the case of an initialized <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="WideHanging-Body">In the case of an initialized <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 of an access type whose designated type is class-wide and limited, a 
 check is made that the specific type of the allocated object has no task 
-subcomponents. Program_Error is raised if this check fails.<A NAME="I8183"></A> 
+subcomponents. Program_Error is raised if this check fails.<A NAME="I8715"></A> 
 </div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="WideHanging-Term"><A NAME="I8184"></A><A NAME="I8185"></A>No_Implicit_Heap_Allocations 
+<div class="WideHanging-Term"><A NAME="I8716"></A><A NAME="I8717"></A>No_Implicit_Heap_Allocations 
 </div><div class="WideHanging-Body"><br clear="left">
 There are no operations that implicitly require heap storage allocation 
 to be performed by the implementation. The operations that implicitly 
@@ -126,16 +126,16 @@ require heap storage allocation are implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="WideHanging-Term">No_Dynamic_Priorities&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 There are no semantic dependences on the package Dynamic_Priorities, 
-and no occurrences of the attribute Priority. <A NAME="I8186"></A><A NAME="I8187"></A></div>
+and no occurrences of the attribute Priority. <A NAME="I8718"></A><A NAME="I8719"></A></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="WideHanging-Term"><A NAME="I8188"></A><A NAME="I8189"></A>No_Dynamic_Attachment 
+<div class="WideHanging-Term"><A NAME="I8720"></A><A NAME="I8721"></A>No_Dynamic_Attachment 
 </div><div class="WideHanging-Body"><br clear="left">
 There is no use of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denoting any of the operations defined in package Interrupts (Is_Reserved, 
 Is_Attached, Current_Handler, Attach_Handler, Exchange_Handler, Detach_Handler, 
 and Reference).&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8190"></A><A NAME="I8191"></A>No_Dynamic_CPU_Assignment 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8722"></A><A NAME="I8723"></A>No_Dynamic_CPU_Assignment 
 </div><div class="WideHanging-Body"><br clear="left">
 No task has the CPU aspect specified to be a non-static expression. Each 
 task (including the environment task) that has the CPU aspect specified 
@@ -144,47 +144,47 @@ CPU. The same is true for the environment task when the CPU aspect is
 not specified. Any other task without a CPU aspect will activate and 
 execute on the same processor as its activating task.&nbsp;</div>
 <div class="paranum"><a name="p10.2">10.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8192"></A><A NAME="I8193"></A>No_Local_Protected_Objects 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8724"></A><A NAME="I8725"></A>No_Local_Protected_Objects 
 </div><div class="WideHanging-Body"><br clear="left">
 Protected objects are declared only at library level.</div>
 <div class="paranum"><a name="p10.3">10.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8194"></A><A NAME="I8195"></A>No_Local_Timing_Events 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8726"></A><A NAME="I8727"></A>No_Local_Timing_Events 
 </div><div class="WideHanging-Body"><br clear="left">
 Timing_Events are declared only at library level.</div>
 <div class="paranum"><a name="p10.4">10.4/2</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8196"></A><A NAME="I8197"></A>No_Protected_Type_Allocators 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8728"></A><A NAME="I8729"></A>No_Protected_Type_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>s 
+There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 for protected types or types containing protected type subcomponents.</div>
 <div class="paranum"><a name="p10.5">10.5/3</a></div>
-<div class="WideHanging-Body">In the case of an initialized <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+<div class="WideHanging-Body">In the case of an initialized <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 of an access type whose designated type is class-wide and limited, a 
 check is made that the specific type of the allocated object has no protected 
-subcomponents. Program_Error is raised if this check fails.<A NAME="I8198"></A> 
+subcomponents. Program_Error is raised if this check fails.<A NAME="I8730"></A> 
 </div>
 <div class="paranum"><a name="p10.6">10.6/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8199"></A><A NAME="I8200"></A>No_Relative_Delay 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8731"></A><A NAME="I8732"></A>No_Relative_Delay 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-9-6.html#S0246">delay_relative_statement</A></SPAN>s, 
+There are no <SPAN Class="swiss"><A HREF="RM-9-6.html#S0268">delay_relative_statement</A></SPAN>s, 
 and there is no use of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes the Timing_Events.Set_Handler subprogram that has a Time_Span 
 parameter.</div>
 <div class="paranum"><a name="p10.7">10.7/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8201"></A><A NAME="I8202"></A>No_Requeue_Statements 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8733"></A><A NAME="I8734"></A>No_Requeue_Statements 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0243">requeue_statement</A></SPAN>s.</div>
+There are no <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN>s.</div>
 <div class="paranum"><a name="p10.8">10.8/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8203"></A><A NAME="I8204"></A>No_Select_Statements 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8735"></A><A NAME="I8736"></A>No_Select_Statements 
 </div><div class="WideHanging-Body"><br clear="left">
-There are no <SPAN Class="swiss"><A HREF="RM-9-7.html#S0247">select_statement</A></SPAN>s.</div>
+There are no <SPAN Class="swiss"><A HREF="RM-9-7.html#S0269">select_statement</A></SPAN>s.</div>
 <div class="paranum"><a name="p10.9">10.9/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8205"></A><A NAME="I8206"></A>No_Specific_Termination_Handlers 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8737"></A><A NAME="I8738"></A>No_Specific_Termination_Handlers 
 </div><div class="WideHanging-Body"><br clear="left">
 There is no use of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denoting the Set_Specific_Handler and Specific_Handler subprograms in 
 Task_Termination.</div>
 <div class="paranum"><a name="p10.10">10.10/4</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<A NAME="I8207"></A><A NAME="I8208"></A>No_Tasks_Unassigned_To_CPU 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<A NAME="I8739"></A><A NAME="I8740"></A>No_Tasks_Unassigned_To_CPU 
 </div><div class="WideHanging-Body"><br clear="left">
 The CPU aspect is specified for the environment task. No CPU aspect is 
 specified to be statically equal to Not_A_Specific_CPU. If aspect CPU 
@@ -193,24 +193,25 @@ is raised. If Set_CPU or Delay_Until_And_Set_CPU are called with the
 CPU parameter equal to Not_A_Specific_CPU, then Program_Error is raised. 
 </div>
 <div class="paranum"><a name="p10.11">10.11/5</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<A NAME="I8209"></A><A NAME="I8210"></A>Pure_Barriers 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<A NAME="I8741"></A><A NAME="I8742"></A>Pure_Barriers 
 </div><div class="WideHanging-Body"><br clear="left">
 The Boolean expression in each protected entry barrier is pure-barrier-eligible.</div>
 <div class="paranum"><a name="p10.12">10.12/5</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<A NAME="I8211"></A><A NAME="I8212"></A>Simple_Barriers 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<A NAME="I8743"></A><A NAME="I8744"></A>Simple_Barriers 
 </div><div class="WideHanging-Body"><br clear="left">
 The Boolean expression in each entry barrier is either a static expression 
-or a name that statically denotes a component of the enclosing protected 
-object.</div>
+or a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that statically names (see <A HREF="RM-4-9.html">4.9</A>) a subcomponent 
+of the enclosing protected object.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 are language defined:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="WideHanging-Term"><A NAME="I8213"></A><A NAME="I8214"></A>Max_Select_Alternatives 
+<div class="WideHanging-Term"><A NAME="I8745"></A><A NAME="I8746"></A>Max_Select_Alternatives 
 </div><div class="WideHanging-Body"><br clear="left">
-Specifies the maximum number of alternatives in a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0248">selective_accept</A></SPAN>.</div>
+Specifies the maximum number of alternatives in a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0270">selective_accept</A></SPAN>.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="WideHanging-Term"><A NAME="I8215"></A><A NAME="I8216"></A>Max_Task_Entries 
+<div class="WideHanging-Term"><A NAME="I8747"></A><A NAME="I8748"></A>Max_Task_Entries 
 </div><div class="WideHanging-Body"><br clear="left">
 Specifies the maximum number of entries per task. The bounds of every 
 entry family of a task unit shall be static, or shall be defined by a 
@@ -221,14 +222,14 @@ of zero indicates that no rendezvous are possible.</div>
 Specifies the maximum number of entries per protected type. The bounds 
 of every entry family of a protected unit shall be static, or shall be 
 defined by a discriminant of a subtype whose corresponding bound is static. 
-<A NAME="I8217"></A><A NAME="I8218"></A></div>
+<A NAME="I8749"></A><A NAME="I8750"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 is language defined:</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8219"></A><A NAME="I8220"></A>No_Task_Termination 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8751"></A><A NAME="I8752"></A>No_Task_Termination 
 </div><div class="WideHanging-Body"><br clear="left">
 All tasks are nonterminating. It is implementation-defined what happens 
 if a task attempts to terminate. If there is a fall-back handler (see 
@@ -238,54 +239,54 @@ attempts to terminate.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 are language defined:&nbsp;</div>
 <div class="paranum"><a name="p17">17/1</a></div>
-<div class="WideHanging-Term"><A NAME="I8221"></A><A NAME="I8222"></A>Max_Storage_At_Blocking 
+<div class="WideHanging-Term"><A NAME="I8753"></A><A NAME="I8754"></A>Max_Storage_At_Blocking 
 </div><div class="WideHanging-Body"><br clear="left">
 Specifies the maximum portion (in storage elements) of a task's Storage_Size 
 that can be retained by a blocked task. If an implementation chooses 
 to detect a violation of this restriction, Storage_Error should be raised; 
-<A NAME="I8223"></A><A NAME="I8224"></A><A NAME="I8225"></A>otherwise, 
+<A NAME="I8755"></A><A NAME="I8756"></A><A NAME="I8757"></A>otherwise, 
 the behavior is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p18">18/1</a></div>
-<div class="WideHanging-Term"><A NAME="I8226"></A><A NAME="I8227"></A>Max_Asynchronous_Select_Nesting 
+<div class="WideHanging-Term"><A NAME="I8758"></A><A NAME="I8759"></A>Max_Asynchronous_Select_Nesting 
 </div><div class="WideHanging-Body"><br clear="left">
-Specifies the maximum dynamic nesting level of <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN>s. 
-A value of zero prevents the use of any <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
-and, if a program contains an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN>, 
+Specifies the maximum dynamic nesting level of <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN>s. 
+A value of zero prevents the use of any <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
+and, if a program contains an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0280">asynchronous_select</A></SPAN>, 
 it is illegal. If an implementation chooses to detect a violation of 
 this restriction for values other than zero, Storage_Error should be 
-raised; <A NAME="I8228"></A><A NAME="I8229"></A><A NAME="I8230"></A>otherwise, 
+raised; <A NAME="I8760"></A><A NAME="I8761"></A><A NAME="I8762"></A>otherwise, 
 the behavior is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p19">19/1</a></div>
-<div class="WideHanging-Term"><A NAME="I8231"></A><A NAME="I8232"></A>Max_Tasks 
+<div class="WideHanging-Term"><A NAME="I8763"></A><A NAME="I8764"></A>Max_Tasks 
 </div><div class="WideHanging-Body">
 Specifies the maximum number of task creations that may be executed over 
 the lifetime of a partition, not counting the creation of the environment 
 task. A value of zero prevents any task creation and, if a program contains 
 a task creation, it is illegal. If an implementation chooses to detect 
-a violation of this restriction, Storage_Error should be raised; <A NAME="I8233"></A><A NAME="I8234"></A><A NAME="I8235"></A>otherwise, 
+a violation of this restriction, Storage_Error should be raised; <A NAME="I8765"></A><A NAME="I8766"></A><A NAME="I8767"></A>otherwise, 
 the behavior is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8236"></A><A NAME="I8237"></A>Max_Entry_Queue_Length 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8768"></A><A NAME="I8769"></A>Max_Entry_Queue_Length 
 </div><div class="WideHanging-Body"><br clear="left">
 Max_Entry_Queue_Length defines the maximum number of calls that are queued 
 on an entry. Violation of this restriction results in the raising of 
-Program_Error at the point of the call or requeue.<A NAME="I8238"></A></div>
+Program_Error at the point of the call or requeue.<A NAME="I8770"></A></div>
 <div class="paranum"><a name="p19.2">19.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8239"></A><A NAME="I8240"></A>No_Standard_Allocators_After_Elaboration 
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I8771"></A><A NAME="I8772"></A>No_Standard_Allocators_After_Elaboration 
 </div><div class="WideHanging-Body"><br clear="left">
-Specifies that an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+Specifies that an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 using a standard storage pool (see <A HREF="RM-13-11.html">13.11</A>) 
 shall not occur within a parameterless library subprogram, nor within 
-the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
-of a task body. For the purposes of this rule, an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
+of a task body. For the purposes of this rule, an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 of a type derived from a formal access type does not use a standard storage 
 pool.</div>
 <div class="paranum"><a name="p19.3">19.3/3</a></div>
 <div class="WideHanging-Body">At run time, Storage_Error is raised if 
-an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 using a standard storage pool is evaluated after the elaboration of the 
-<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s 
-of the partition has completed.<A NAME="I8241"></A>&nbsp;</div>
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s 
+of the partition has completed.<A NAME="I8773"></A>&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Normal">It is implementation defined whether the use of pragma 
 Restrictions results in a reduction in executable program size, storage 
@@ -299,12 +300,12 @@ provide quantitative descriptions of such effects for each restriction.
 of the specified restrictions to produce a more efficient implementation.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Notes">34&nbsp;&nbsp;The above Storage_Checks can be suppressed 
+<div class="Notes">33&nbsp;&nbsp;The above Storage_Checks can be suppressed 
 with pragma Suppress.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

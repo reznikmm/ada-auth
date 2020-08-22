@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-8-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -46,23 +46,23 @@ package Storage_IO has the following declaration:&nbsp;</div>
 <B>with</B>&nbsp;System.Storage_Elements;<BR>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
-<B>package</B>&nbsp;Ada.Storage_IO&nbsp;<B>is</B><A NAME="I6887"></A><BR>
+<B>package</B>&nbsp;Ada.Storage_IO&nbsp;<B>is</B><A NAME="I7189"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Storage_IO);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6888"></A>Buffer_Size&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Storage_Elements.Storage_Count&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7190"></A>Buffer_Size&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Storage_Elements.Storage_Count&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6889"></A>Buffer_Type&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7191"></A>Buffer_Type&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.Storage_Elements.Storage_Array(1..Buffer_Size);</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Input&nbsp;and&nbsp;output&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6890"></A>Read&nbsp;(Buffer&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Element_Type);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7192"></A>Read&nbsp;(Buffer&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Element_Type);</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6891"></A>Write(Buffer&nbsp;:&nbsp;<B>out</B>&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Element_Type);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7193"></A>Write(Buffer&nbsp;:&nbsp;<B>out</B>&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Element_Type);</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Exceptions</I></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6892"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Data_Error;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7194"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Data_Error;<BR>
 <B>end</B>&nbsp;Ada.Storage_IO;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">In each instance, the constant Buffer_Size has a 
@@ -81,7 +81,7 @@ of elements.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-8-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

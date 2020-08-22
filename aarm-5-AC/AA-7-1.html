@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,38 +40,38 @@
 <H1>7.1 Package Specifications and Declarations</H1>
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">[A package is generally provided in two parts: a 
-<SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN> 
-and a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN>. 
-Every package has a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
-but not all packages have a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN>.] 
+<SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN> 
+and a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN>. 
+Every package has a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>, 
+but not all packages have a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN>.] 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">package_declaration</SPAN><A NAME="I4217"></A><A NAME="S0207"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4218"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">package_declaration</SPAN><A NAME="I4430"></A><A NAME="S0229"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4431"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">package_specification</SPAN><A NAME="I4219"></A><A NAME="S0208"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I4220"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4221"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4222"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>}<BR>
+<SPAN Class="swiss">package_specification</SPAN><A NAME="I4432"></A><A NAME="S0230"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I4433"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4434"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4435"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;[<B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4223"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>}]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I4224"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>.]<A NAME="I4225"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>]</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4436"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>}]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I4437"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0291">parent_unit_name</A></SPAN>.]<A NAME="I4438"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>]</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1">If an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-appears at the end of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
-then this sequence of lexical elements shall repeat the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN>. 
+or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0291">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+appears at the end of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>, 
+then this sequence of lexical elements shall repeat the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
-<A NAME="I4226"></A><A NAME="I4227"></A>A <SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0290">generic_package_declaration</A></SPAN> 
+<A NAME="I4439"></A><A NAME="I4440"></A>A <SPAN Class="swiss"><A HREF="AA-7-1.html#S0229">package_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0312">generic_package_declaration</A></SPAN> 
 requires a completion [(a body)] if it contains any <span class="insert2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">&nbsp;declarative_item</A></SPAN></span> 
-that requires a completion, but whose completion is not in its <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>. 
+that requires a completion, but whose completion is not in its <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -83,16 +83,16 @@ in which case no explicit body is allowed</span>.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00420.TXT">AI95-00420-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
-<A NAME="I4228"></A>The first list of <span class="insert2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">&nbsp;declarative_item</A></SPAN>s</span> 
-of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN> 
+<A NAME="I4441"></A>The first list of <span class="insert2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">&nbsp;declarative_item</A></SPAN>s</span> 
+of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN> 
 of a package other than a generic formal package is called the <I>visible 
-part</I> of the package. [<A NAME="I4229"></A> The optional list of <span class="insert2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">&nbsp;declarative_item</A></SPAN>s</span> 
-after the reserved word <B>private</B> (of any <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>) 
+part</I> of the package. [<A NAME="I4442"></A> The optional list of <span class="insert2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">&nbsp;declarative_item</A></SPAN>s</span> 
+after the reserved word <B>private</B> (of any <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>) 
 is called the <I>private part</I> of the package. If the reserved word 
 <B>private</B> does not appear, the package has an implicit empty private 
 part.]<span class="insert2">&nbsp;Each list of <SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
-of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN> 
-forms a <I>declaration list</I> of the package.<A NAME="I4230"></A></span></div>
+of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN> 
+forms a <I>declaration list</I> of the package.<A NAME="I4443"></A></span></div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This definition of visible 
 part does not apply to generic formal packages &mdash; <A HREF="AA-12-7.html">12.7</A> 
@@ -110,13 +110,13 @@ is visible only within the declarative region of the package itself (including
 any child units &mdash; see <A HREF="AA-10-1-1.html">10.1.1</A>). In 
 contrast, expanded names denoting entities declared in the visible part 
 can be used even outside the package; furthermore, direct visibility 
-of such entities can be achieved by means of <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>s 
+of such entities can be achieved by means of <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>s 
 (see <A HREF="AA-4-1-3.html">4.1.3</A> and <A HREF="AA-8-4.html">8.4</A>).] 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I4231"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I4444"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0229">package_declaration</A></SPAN> 
 consists of the elaboration of its <SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
 in the given order.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
@@ -133,9 +133,9 @@ the body of the package.&nbsp;</div>
 <div class="Annotations"><B>Proof:&nbsp;</B>This follows from the fact that 
 the declaration and completion are required to occur immediately within 
 the same declarative region, and the fact that <SPAN Class="swiss">bodies</SPAN> 
-are disallowed (by the Syntax Rules) in <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>s. 
+are disallowed (by the Syntax Rules) in <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>s. 
 This does not apply to instances of generic units, whose bodies can occur 
-in <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>s. 
+in <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>s. 
 </div>
 
 <H4 Class="centered">Examples</H4>
@@ -167,7 +167,7 @@ A</A>).&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p17.a">17.a</a></div>
-<div class="Annotations"><A NAME="I4232"></A>In Ada 83, a library package 
+<div class="Annotations"><A NAME="I4445"></A>In Ada 83, a library package 
 is allowed to have a body even if it doesn't need one. In Ada 95, a library 
 package body is either required or forbidden &mdash; never optional. 
 The workaround is to add <B>pragma</B> Elaborate_Body, or something else 
@@ -183,7 +183,7 @@ from RM83-7.1, &ldquo;Package Structure&rdquo;, which we have removed.</div>
 <div class="paranum"><a name="p17.c">17.c</a></div>
 <div class="Annotations">RM83 was unclear on the rules about when a package 
 requires a body. For example, RM83-7.1(4) and RM83-7.1(8) clearly forgot 
-about the case of an incomplete type declared in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN> 
+about the case of an incomplete type declared in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0229">package_declaration</A></SPAN> 
 but completed in the body. In addition, RM83 forgot to make this rule 
 apply to a generic package. We have corrected these rules. Finally, since 
 we now allow a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -200,13 +200,13 @@ ambiguity in other rules as to whether packages are included.</span>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p17.e">17.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I4233"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>. 
+<span class="insert3"><A NAME="I4446"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

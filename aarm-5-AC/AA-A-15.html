@@ -32,9 +32,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -57,21 +57,21 @@ package Command_Line. The bounds of type Command_Line.Exit_Status</span>.</div>
 Ada.Command_Line has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>package</B>&nbsp;Ada.Command_Line<span class="delete5">&nbsp;<B>is</B></span><A NAME="I7847"></A><BR>
+<B>package</B>&nbsp;Ada.Command_Line<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8162"></A><BR>
 &nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Command_Line);</span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7848"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8163"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7849"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8164"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7850"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8165"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7851"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8166"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I7852"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
-&nbsp;&nbsp;<A NAME="I7853"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I8167"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
+&nbsp;&nbsp;<A NAME="I8168"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7854"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8169"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -92,8 +92,8 @@ defined.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0259-1.TXT">AI12-0259-1</A></I>} 
 If the external execution environment supports passing arguments to a 
 program, then Argument returns an implementation-defined value<span class="insert5">&nbsp;with lower bound 1</span> corresponding to the argument at relative position 
-Number. <A NAME="I7855"></A>If Number is outside the range 1..Argument_Count, 
-then Constraint_Error is propagated.&nbsp;</div>
+Number. If Number is outside the range 1..Argument_Count, then Constraint_Error 
+is propagated.&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If the external execution 
 environment does not support passing arguments to a program, then Argument(N) 
@@ -125,7 +125,7 @@ has been set, then the value Success. If a program terminates abnormally,
 the status set by Set_Exit_Status is ignored, and an implementation-defined 
 exit status value is set.</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Indented2"><span class="delete1"><A NAME="I7856"></A></span>If 
+<div class="Indented2"><span class="delete1"><A NAME="I8170"></A></span>If 
 the external execution environment does not support returning an exit 
 value from a program, then Set_Exit_Status does nothing.&nbsp;</div>
 
@@ -148,7 +148,7 @@ does not.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p22.b">22.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I7857"></A>This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+<A NAME="I8171"></A>This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 is new in Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
@@ -162,7 +162,7 @@ Thus we don't document it as an inconsistency.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-12-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -45,12 +45,12 @@ a capsule summary of what this subclause is about.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_access_type_definition</SPAN><A NAME="I5514"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5515"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">access_type_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">formal_access_type_definition</SPAN><A NAME="I5755"></A><A NAME="S0333"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5756"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">access_type_definition</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal">For a formal access-to-object type, the designated 
-subtypes of the formal and actual types shall statically match. <A NAME="I5516"></A></div>
+subtypes of the formal and actual types shall statically match. <A NAME="I5757"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 If and only if the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0081">general_access_modifier</A></SPAN> 
@@ -85,7 +85,7 @@ in the contract of the generic.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0288-1.TXT">AI05-0288-1</A></I>} 
 For a formal access-to-subprogram subtype, the designated profiles of 
-the formal and the actual shall be subtype conformant. <A NAME="I5517"></A></div>
+the formal and the actual shall be subtype conformant. <A NAME="I5758"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p6">6</a></div>
@@ -119,8 +119,8 @@ access types:</I>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p13.a">13.a</a></div>
-<div class="Annotations"><A NAME="I5518"></A>The check for matching of 
-designated subtypes is changed from a run-time check to a compile-time 
+<div class="Annotations"><A NAME="I5759"></A>The check for matching of 
+designated subtypes is changed from a runtime check to a compile-time 
 check. The Ada 83 rule that &ldquo;If the designated type is other than 
 a scalar type, then the designated subtypes shall be either both constrained 
 or both unconstrained&rdquo; is removed, since it is subsumed by static 
@@ -128,7 +128,7 @@ matching.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p13.b">13.b</a></div>
-<div class="Annotations"><A NAME="I5519"></A>Formal access-to-subprogram 
+<div class="Annotations"><A NAME="I5760"></A>Formal access-to-subprogram 
 subtypes and formal general access types are new concepts.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -144,7 +144,7 @@ We change to &ldquo;determines a category&rdquo; as that is the new terminology
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p13.e">13.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0288-1.TXT">AI05-0288-1</A></I>} 
-<A NAME="I5520"></A><B>Correction:</B> Matching of formal access-to-subprogram 
+<A NAME="I5761"></A><B>Correction:</B> Matching of formal access-to-subprogram 
 types now uses subtype conformance rather than mode conformance, which 
 is needed to plug a hole. This could cause some instantiations legal 
 in Ada 95 and Ada 2005 to be rejected in Ada 2012. We believe that formal 
@@ -156,7 +156,7 @@ so no code compiled with that compiler could have an incompatibility.)
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-12-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

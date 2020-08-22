@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,7 +35,7 @@
 <HR>
 <H1>4.1.2 Slices</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I2711"></A> A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+<div class="Normal">[<A NAME="I2717"></A> A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
 denotes a one-dimensional array formed by a sequence of consecutive components 
 of a one-dimensional array. A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
 of a variable is a variable; a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
@@ -44,7 +44,7 @@ of a value is a value.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">slice</SPAN><A NAME="I2712"></A><A NAME="S0097"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2713"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>(<A NAME="I2714"></A><SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">slice</SPAN><A NAME="I2718"></A><A NAME="S0097"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2719"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>(<A NAME="I2720"></A><SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>)</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
@@ -52,7 +52,7 @@ of a value is a value.&nbsp;</div>
 of a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
 shall resolve to denote a one-dimensional array (after any implicit dereference).</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I2715"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
+<div class="Normal"><A NAME="I2721"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
 is the index type of the array type.&nbsp;</div>
 
@@ -69,16 +69,16 @@ Its bounds are those defined by the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2716"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>, 
+<div class="Normal"><A NAME="I2722"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 and the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
-are evaluated in an arbitrary order.<A NAME="I2717"></A> <A NAME="I2718"></A><A NAME="I2719"></A><A NAME="I2720"></A>If 
+are evaluated in an arbitrary order.<A NAME="I2723"></A> <A NAME="I2724"></A><A NAME="I2725"></A><A NAME="I2726"></A>If 
 the <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
 is not a <I>null slice</I> (a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
 where the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
 is a null range), then a check is made that the bounds of the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
 belong to the index range of the array denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>. 
-<A NAME="I2721"></A>Constraint_Error is raised if this check fails.</div>
+<A NAME="I2727"></A>Constraint_Error is raised if this check fails.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Notes">2&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
@@ -116,7 +116,7 @@ and has the corresponding component type.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

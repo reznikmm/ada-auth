@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3142"></A><A NAME="I3143"></A><A NAME="I3144"></A><A NAME="I3145"></A><A NAME="I3146"></A><A NAME="I3147"></A><A NAME="I3148"></A><A NAME="I3149"></A><A NAME="I3150"></A><A NAME="I3151"></A><A NAME="I3152"></A><A NAME="I3153"></A><A NAME="I3154"></A><A NAME="I3155"></A><A NAME="I3156"></A><A NAME="I3157"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3218"></A><A NAME="I3219"></A><A NAME="I3220"></A><A NAME="I3221"></A><A NAME="I3222"></A><A NAME="I3223"></A><A NAME="I3224"></A><A NAME="I3225"></A><A NAME="I3226"></A><A NAME="I3227"></A><A NAME="I3228"></A><A NAME="I3229"></A><A NAME="I3230"></A><A NAME="I3231"></A><A NAME="I3232"></A><A NAME="I3233"></A>The 
 multiplying operators * (multiplication), / (division), <B>mod</B> (modulus), 
 and <B>rem</B> (remainder) are predefined for every specific integer 
 type <I>T</I>:&nbsp;</div>
@@ -203,9 +203,9 @@ the mathematical result is between two multiples of the <I>small</I>
 of the specific result type (possibly determined by context); for ordinary 
 fixed point types, if the mathematical result is between two multiples 
 of the <I>small</I>, it is unspecified which of the two is the result. 
-<A NAME="I3158"></A>]</div>
+<A NAME="I3234"></A>]</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Normal"><A NAME="I3159"></A><A NAME="I3160"></A><A NAME="I3161"></A>The 
+<div class="Normal"><A NAME="I3235"></A><A NAME="I3236"></A><A NAME="I3237"></A>The 
 exception Constraint_Error is raised by integer division, <B>rem</B>, 
 and <B>mod</B> if the right operand is zero. [Similarly, for a real type 
 <I>T</I> with <I>T'</I>Machine_Overflows True, division by zero raises 
@@ -280,7 +280,7 @@ G&nbsp;:&nbsp;Fraction&nbsp;:=&nbsp;0.5;</div>
 <div class="paranum"><a name="p35.a.1">35.a.1/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00364.TXT">AI95-00364-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00420.TXT">AI95-00420-01</A></I>} 
-<A NAME="I3162"></A>The universal fixed-fixed multiplying operators are 
+<A NAME="I3238"></A>The universal fixed-fixed multiplying operators are 
 now directly available (see below). Any attempt to use user-defined fixed-fixed 
 multiplying operators will be ambiguous with the universal ones. The 
 only way to use the user-defined operators is to fully qualify them in 
@@ -289,7 +289,7 @@ a prefix call. This problem was not documented during the design of Ada
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p35.a">35.a</a></div>
-<div class="Annotations"><A NAME="I3163"></A>Explicit conversion of the 
+<div class="Annotations"><A NAME="I3239"></A>Explicit conversion of the 
 result of multiplying or dividing two fixed point numbers is no longer 
 required, provided the context uniquely determines some specific fixed 
 point result type. This is to improve support for decimal fixed point, 
@@ -309,7 +309,7 @@ definition rather than a tabular format.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p35.d">35.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00364.TXT">AI95-00364-01</A></I>} 
-<A NAME="I3164"></A>We have changed the resolution rules for the universal 
+<A NAME="I3240"></A>We have changed the resolution rules for the universal 
 fixed-fixed multiplying operators to remove the incompatibility with 
 Ada 83 discussed above. The solution is to hide the universal operators 
 in some circumstances. As a result, some legal Ada 95 programs will require 
@@ -335,7 +335,7 @@ so that a result of 0 does not have to have &quot;the sign of B&quot;
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

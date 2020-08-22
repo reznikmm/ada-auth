@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -53,14 +53,14 @@ library package exists:&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
 <B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<SPAN Class="roman"><I>--&nbsp;See&nbsp;<A HREF="AA-C-7-1.html">C.7.1</A></I></SPAN><BR>
-<B>package</B>&nbsp;Ada.Dynamic_Priorities<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8967"></A><BR>
+<B>package</B>&nbsp;Ada.Dynamic_Priorities<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9590"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Dynamic_Priorities);</span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8968"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9591"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8969"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9592"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Any_Priority;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -73,15 +73,14 @@ of the specified task to the specified Priority value. Set_Priority has
 no effect if the task is terminated.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The function Get_Priority returns T's current base 
-priority. <A NAME="I8970"></A>Tasking_Error is raised if the task is 
-terminated.&nbsp;</div>
+priority. Tasking_Error is raised if the task is terminated.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>There is no harm in setting the 
 priority of a terminated task. A previous version of Ada 9X made this 
 a run-time error. However, there is little difference between setting 
 the priority of a terminated task, and setting the priority of a task 
 that is about to terminate very soon; neither case should be an error. 
-Furthermore, the run-time check is not necessarily feasible to implement 
+Furthermore, the runtime check is not necessarily feasible to implement 
 on all systems, since priority changes might be deferred due to inter-processor 
 communication overhead, so the error might not be detected until after 
 Set_Priority has returned.</div>
@@ -92,8 +91,8 @@ Therefore, we make Get_Priority of a terminated task raise an exception;
 the implementation need not continue to store the priority of a task 
 that has terminated.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8971"></A>Program_Error is raised by Set_Priority 
-and Get_Priority if T is equal to Null_Task_Id.</div>
+<div class="Normal">Program_Error is raised by Set_Priority and Get_Priority 
+if T is equal to Null_Task_Id.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
 On a system with a single processor, the setting of the base priority 
@@ -129,7 +128,7 @@ all systems, since priority changes might be deferred due to inter-processor
 communication overhead. The calling task would continue to execute without 
 finding out whether the operation succeeded or not.</div>
 <div class="paranum"><a name="p10.d">10.d</a></div>
-<div class="SmallBulleted">The run-time check would tend to cause intermittent 
+<div class="SmallBulleted">The runtime check would tend to cause intermittent 
 system failures &mdash; how is the caller supposed to know whether the 
 other task happens to have a queued call at any given time? Consider 
 for example an interrupt that needs to trigger a priority change in some 
@@ -151,7 +150,7 @@ deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I8972"></A>If any subprogram in this package 
+<div class="Normal"><A NAME="I9593"></A>If any subprogram in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
@@ -202,8 +201,8 @@ is blocked waiting for the call. That is, setting the base priority of
 a task causes the priority of a queued entry call from that task to be 
 updated and the call to be removed and then reinserted in the entry queue 
 at the new priority (see <A HREF="AA-D-4.html">D.4</A>), unless the call 
-originated from the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0260">triggering_statement</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN>.</div>
+originated from the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN>.</div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="Notes">28&nbsp;&nbsp;The effect of two or more Set_Priority 
 calls executed in parallel on the same task is defined as executing these 
@@ -232,7 +231,7 @@ tasks.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
-<A NAME="I8973"></A><B>Amendment Correction:</B> Priority changes are 
+<A NAME="I9594"></A><B>Amendment Correction:</B> Priority changes are 
 now required to be done immediately so long as the target task is not 
 on an entry queue.</div>
 <div class="paranum"><a name="p19.b">19.b/2</a></div>
@@ -258,7 +257,7 @@ so that it applies no matter how the situation arises.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -36,44 +36,46 @@
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal"><span class="insert5">@, known as the <I>target name</I> 
 of an assignment statement, provides an abbreviation to avoid repetition 
-of potentially long names in assignment statements.<A NAME="I3380"></A></span></div>
+of potentially long names in assignment statements.<A NAME="I3511"></A></span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">target_name</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3381"></A><A NAME="S0160"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">@</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">target_name</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3512"></A><A NAME="S0174"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">@</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Normal"><span class="insert5">If a <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0160">target_name</A></SPAN> 
-occurs in an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+<div class="Normal"><span class="insert5">If a <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0174">target_name</A></SPAN> 
+occurs in an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
 <I>A</I>, the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 <I>V</I> of <I>A</I> is a complete context. The target name is a constant 
 view of <I>V</I>, having the nominal subtype of <I>V</I>.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0160">target_name</A></SPAN> 
-shall only appear in the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>.</span> 
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0174">target_name</A></SPAN> 
+shall appear only in the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN>.</span> 
 </div>
 
-<H4 Class="centered">Static Semantics</H4>
+<H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Normal"><span class="insert5">The <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is evaluated only once. In particular, if a <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0160">target_name</A></SPAN> 
-with nominal subtype <I>S</I> appears in the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
-<I>A</I>, then <I>A</I> is equivalent to a call on a local anonymous 
-procedure with the actual parameter being the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-of <I>A</I>, where the local anonymous procedure has an <B>in out</B> 
-parameter with unique name <I>P</I> of subtype <I>S</I>, with a body 
-being <I>A</I> with the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-being replaced by <I>P</I>, and any <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0160">target_name</A></SPAN>s 
-being replaced by the qualified expression <I>S</I>'(<I>P</I>).</span></div>
+<div class="Normal"><span class="insert5">For the execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
+with one or more <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0174">target_name</A></SPAN>s 
+appearing in its <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+the <I>variable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<I>V</I> of the <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
+is evaluated first to determine the object denoted by <I>V</I>, and then 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
+is evaluated with the evaluation of each <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0174">target_name</A></SPAN> 
+yielding a constant view of the the target whose properties are otherwise 
+identical to those of the view provided by <I>V</I>. The remainder of 
+the execution of the <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN> 
+is as given in subclause <A HREF="RM-5-2.html">5.2</A>.</span></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples"><span class="insert5">Board(1,&nbsp;1)&nbsp;:=&nbsp;@&nbsp;+&nbsp;1;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>An&nbsp;abbreviation&nbsp;for&nbsp;Board(1,&nbsp;1)&nbsp;:=&nbsp;Board(1,&nbsp;1)&nbsp;+&nbsp;1;</I></SPAN><BR>
+<div class="Examples"><span class="insert5">Board(1,&nbsp;1)&nbsp;:=&nbsp;@&nbsp;+&nbsp;1.0;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>An&nbsp;abbreviation&nbsp;for&nbsp;Board(1,&nbsp;1)&nbsp;:=&nbsp;Board(1,&nbsp;1)&nbsp;+&nbsp;1.0;</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>(Board&nbsp;is&nbsp;declared&nbsp;in&nbsp;<A HREF="RM-3-6-1.html">3.6.1</A>).</I></SPAN></span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Examples"><span class="insert5">My_Complex_Array&nbsp;:&nbsp;<B>array</B>&nbsp;(1&nbsp;..&nbsp;Max)&nbsp;<B>of</B>&nbsp;Complex;&nbsp;--&nbsp;<SPAN Class="roman"><I>See&nbsp;<A HREF="RM-3-3-2.html">3.3.2</A>,&nbsp;<A HREF="RM-3-8.html">3.8</A>.</I></SPAN><BR>
@@ -85,7 +87,7 @@ My_Complex_Array&nbsp;(Count)&nbsp;:=&nbsp;(Re&nbsp;=&gt;&nbsp;@.Re**2&nbsp;-&nb
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -37,9 +37,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-8-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -49,10 +49,10 @@
 <H1>8.5.4 Subprogram Renaming Declarations</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
-can serve as the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>; 
-<A NAME="I4553"></A>such a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
-is called a <I>renaming-as-body</I>. <A NAME="I4554"></A>A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
+can serve as the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>; 
+<A NAME="I4765"></A>such a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
+is called a <I>renaming-as-body</I>. <A NAME="I4766"></A>A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 that is not a completion is called a <I>renaming-as-declaration</I>[, 
 and is used to rename a subprogram (possibly an enumeration literal) 
 or an entry].&nbsp;</div>
@@ -65,33 +65,34 @@ A renaming-as-body is a declaration, as defined in <span class="insert3">Clause<
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">subprogram_renaming_declaration</SPAN><A NAME="I4555"></A><A NAME="S0220"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4556"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4557"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>callable_entity_</I><A NAME="I4558"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4559"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">subprogram_renaming_declaration</SPAN><A NAME="I4767"></A><A NAME="S0242"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4768"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4769"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>callable_entity_</I><A NAME="I4770"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4771"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4560"></A>The expected profile for the 
+<div class="Normal"><A NAME="I4772"></A>The expected profile for the 
 <I>callable_entity_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is the profile given in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN>. 
+is the profile given in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p4">4/3</a></div>
+<div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0373-1.TXT">AI12-0373-1</A></I>} 
 The profile of a renaming-as-declaration shall be <span class="insert3">mode 
-conformant</span><span class="delete3">&nbsp;mode-conformant</span>, with 
-that of the renamed callable entity. <A NAME="I4561"></A></div>
+conformant</span><span class="insert3"><span class="delete5">,</span></span><span class="insert3"></span><span class="delete3">&nbsp;mode-conformant</span> 
+with that of the renamed callable entity. <A NAME="I4773"></A></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
-<span class="insert2">For a parameter or result subtype of the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN> 
+<span class="insert2">For a parameter or result subtype of the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN> 
 that has an explicit <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>:</span></div>
 <div class="paranum"><a name="p4.2">4.2/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
 <span class="insert2">if the <I>callable_entity_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 </span><span class="insert5">statically&nbsp;</span><span class="insert2">denotes 
-a generic formal subprogram of a generic unit <I>G</I>, and the <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
+a generic formal subprogram of a generic unit <I>G</I>, and the <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 occurs within the body of a generic unit <I>G</I> or within the body 
 of a generic unit declared within the declarative region of the generic 
 unit <I>G</I>, then the corresponding parameter or result subtype of 
@@ -99,7 +100,7 @@ the formal subprogram of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="AA-3
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
 <div class="Bulleted"><span class="insert2">otherwise, the subtype of 
 the corresponding parameter or result type of the renamed callable entity 
-shall exclude null. <A NAME="I4562"></A>In addition to the places where 
+shall exclude null. <A NAME="I4774"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -117,14 +118,14 @@ excludes null implicitly.</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
 The profile of a renaming-as-body <span class="delete1">shall be subtype-conformant 
 with that of the renamed callable entity, and&nbsp;</span>shall conform fully 
-to that of the declaration it completes. <A NAME="I4563"></A>If the renaming-as-body 
+to that of the declaration it completes. <A NAME="I4775"></A>If the renaming-as-body 
 completes that declaration before the subprogram it declares is frozen, 
 <span class="insert1">the profile shall be&nbsp;</span><span class="insert3">mode 
-conformant</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;mode-conformant</span></span><span class="insert1">&nbsp;<A NAME="I4564"></A>with that of the renamed callable entity and&nbsp;</span>the 
+conformant</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;mode-conformant</span></span><span class="insert1">&nbsp;<A NAME="I4776"></A>with that of the renamed callable entity and&nbsp;</span>the 
 subprogram it declares takes its convention from the renamed subprogram; 
 otherwise<span class="insert1">, the profile shall be&nbsp;</span><span class="insert3">subtype 
 conformant</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;subtype-conformant</span></span><span class="insert1">&nbsp;with that of the renamed callable entity and</span> the convention of 
-the renamed subprogram shall not be Intrinsic. <A NAME="I4565"></A><span class="insert1">A 
+the renamed subprogram shall not be Intrinsic. <A NAME="I4777"></A><span class="insert1">A 
 renaming-as-body is illegal if the declaration occurs before the subprogram 
 whose declaration it completes is frozen, and the renaming renames the 
 subprogram itself, through one or more subprogram renaming declarations, 
@@ -143,7 +144,7 @@ time, not at call time.)</div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0028">8652/0028</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00145.TXT">AI95-00145-01</A></I>} 
 <span class="insert1">The first part of the second sentence is intended 
-to allow renaming-as-body of predefined operators before the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
+to allow renaming-as-body of predefined operators before the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN> 
 is frozen. For some types (such as integer types), the parameter type 
 for operators is the base type, and it would be very strange for<BR>
 <TT>&nbsp;&nbsp;&nbsp;<B>function</B> Equal (A, B : <B>in</B> T) <B>return</B> 
@@ -151,17 +152,17 @@ Boolean;</TT><BR>
 <TT>&nbsp;&nbsp;&nbsp;<B>function</B> Equal (A, B : <B>in</B> T) <B>return</B> 
 Boolean <B>renames</B> &quot;=&quot;;</TT><BR>
 to be illegal. (Note that predefined operators cannot be renamed this 
-way after the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
+way after the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN> 
 is frozen, as they have convention Intrinsic.)</span></div>
 <div class="paranum"><a name="p5.b">5.b/1</a></div>
 <div class="Annotations">The <span class="delete1">second part of the 
-</span>first sentence is the normal rule for completions of <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>s. 
+</span>first sentence is the normal rule for completions of <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p5.c">5.c</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>An <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>, 
-unlike a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>, 
-cannot be completed with a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN>. 
-Nor can a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>.</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>An <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>, 
+unlike a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>, 
+cannot be completed with a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN>. 
+Nor can a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>.</div>
 <div class="paranum"><a name="p5.d">5.d</a></div>
 <div class="Annotations">The syntax rules prevent a protected subprogram 
 declaration from being completed by a renaming. This is fortunate, because 
@@ -210,7 +211,7 @@ legal to rename, that doesn't make sense (and allowing it might end up
 passing a nonexistent object to some calls).</span>&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that denotes a formal parameter of the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN> 
+that denotes a formal parameter of the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN> 
 is not allowed within the <I>callable_entity_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
@@ -231,7 +232,7 @@ the renamed entity. The profile of this new view takes its subtypes,
 parameter modes, and calling convention from the original profile of 
 the callable entity, while taking the formal parameter <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>s 
-from the profile given in the <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN>. 
+from the profile given in the <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN>. 
 The new view is a function or procedure, never an entry.&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>When renaming an entry 
@@ -240,8 +241,8 @@ procedure, but the run-time semantics of a call are that of an entry
 call.&nbsp;</div>
 <div class="paranum"><a name="p7.b">7.b</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For example, it is illegal 
-for the <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0242">entry_call_statement</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0254">timed_entry_call</A></SPAN> 
+for the <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">entry_call_statement</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0276">timed_entry_call</A></SPAN> 
 to call the new view. But what looks like a procedure call will do things 
 like barrier waiting.</div>
 <div class="paranum"><a name="p7.b.1">7.b.1/3</a></div>
@@ -264,7 +265,7 @@ are not program units, see <A HREF="AA-10-1.html">10.1</A>).</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00064.TXT">AI95-00064-01</A></I>} 
 <span class="insert1">For a call to a subprogram whose body is given 
 as a renaming-as-body, the execution of the renaming-as-body is equivalent 
-to the execution of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+to the execution of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 that simply calls the renamed subprogram with its formal parameters as 
 the actual parameters and, if it is a function, returns the value of 
 the call.</span>&nbsp;</div>
@@ -310,17 +311,16 @@ of P.</div>
 <div class="paranum"><a name="p8.g">8.g</a></div>
 <div class="Annotations">Thus a renaming allows one to squirrel away 
 a copy of an inherited or predefined subprogram before later overriding 
-it.<A NAME="I4566"></A>&nbsp;</div>
+it.<A NAME="I4778"></A>&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p8.1">8.1/1</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0027">8652/0027</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00135.TXT">AI95-00135-01</A></I>} 
-<span class="insert1"><A NAME="I4567"></A><A NAME="I4568"></A>If a subprogram 
-directly or indirectly renames itself, then it is a bounded error to 
-call that subprogram. Possible consequences are that Program_Error or 
-Storage_Error is raised, or that the call results in infinite recursion.</span> 
-</div>
+<span class="insert1">If a subprogram directly or indirectly renames 
+itself, then it is a bounded error to call that subprogram. Possible 
+consequences are that Program_Error or Storage_Error is raised, or that 
+the call results in infinite recursion. <A NAME="I4779"></A><A NAME="I4780"></A></span></div>
 <div class="paranum"><a name="p8.g.1">8.g.1/1</a></div>
 <div class="Annotations"><span class="insert1"><B>Reason:&nbsp;</B></span>{<I><A HREF="defect1.html#8652/0027">8652/0027</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00135.TXT">AI95-00135-01</A></I>} 
@@ -331,13 +331,13 @@ time.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Notes">12&nbsp;&nbsp;A procedure can only be renamed as a 
-procedure. A function whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0185">defining_designator</A></SPAN> 
+procedure. A function whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0200">defining_designator</A></SPAN> 
 is either an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN> 
 can be renamed with either an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>; 
+or an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN>; 
 for renaming as an operator, the subprogram specification given in the 
-<SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
 is subject to the rules given in <A HREF="AA-6-6.html">6.6</A> for operator 
 declarations. Enumeration literals can be renamed as functions; similarly, 
 <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
@@ -355,10 +355,10 @@ certain attributes, such as Pos.</div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN><span class="delete5">14&nbsp;&nbsp;</span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0292-1.TXT">AI12-0292-1</A></I>} 
 <span class="delete5">Calls with the new <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of a renamed entry are <SPAN Class="swiss"><A HREF="AA-6-4.html#S0195">procedure_call_statement</A></SPAN>s 
-and are not allowed at places where the syntax requires an <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0242">entry_call_statement</A></SPAN> 
-in <SPAN Class="swiss">conditional_</SPAN> and <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0254">timed_entry_call</A></SPAN>s, 
-nor in an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0258">asynchronous_select</A></SPAN>; 
+of a renamed entry are <SPAN Class="swiss"><A HREF="AA-6-4.html#S0217">procedure_call_statement</A></SPAN>s 
+and are not allowed at places where the syntax requires an <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">entry_call_statement</A></SPAN> 
+in <SPAN Class="swiss">conditional_</SPAN> and <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0276">timed_entry_call</A></SPAN>s, 
+nor in an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN>; 
 similarly, the Count attribute is not available for the new <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.</span></div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">15&nbsp;&nbsp;The primitiveness of a renaming-as-declaration 
@@ -368,7 +368,7 @@ view. In order to perform a dispatching call, the subprogram name has
 to denote a primitive subprogram, not a nonprimitive renaming of a primitive 
 subprogram.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
+<div class="Annotations"><B>Reason:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 could more properly be called <SPAN Class="swiss">renaming_as_subprogram_declaration</SPAN>, 
 since you're renaming something as a subprogram, but you're not necessarily 
 renaming a subprogram. But that's too much of a mouthful. Or, alternatively, 
@@ -407,12 +407,12 @@ subprogram renaming declaration with a new default expression:</I>&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a/2</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0028">8652/0028</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00145.TXT">AI95-00145-01</A></I>} 
-<span class="insert2"><A NAME="I4569"></A><B>Corrigendum:</B> Allowed 
+<span class="insert2"><A NAME="I4781"></A><B>Corrigendum:</B> Allowed 
 a renaming-as-body to be just mode conformant with the specification 
 if the subprogram is not yet frozen.</span></div>
 <div class="paranum"><a name="p21.b">21.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
-<span class="insert2"><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">Overriding_indicator</A></SPAN> 
+<span class="insert2"><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">Overriding_indicator</A></SPAN> 
 (see <A HREF="AA-8-3-1.html">8.3.1</A>) is optionally added to subprogram 
 renamings.</span>&nbsp;</div>
 
@@ -440,7 +440,7 @@ an abstract subprogram.</span></div>
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p21.f.1">21.f.1/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0123-1.TXT">AI05-0123-1</A></I>} 
-<span class="insert3"><A NAME="I4570"></A>Renaming of user-defined untagged 
+<span class="insert3"><A NAME="I4782"></A>Renaming of user-defined untagged 
 record equality is now defined to call the overridden body so long as 
 the overriding occurred before the renames. This could change the body 
 called in unusual cases; the change is necessary to preserve the principle 
@@ -453,14 +453,14 @@ likely will fix a bug.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p21.g">21.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I4571"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN>. 
+<span class="insert3"><A NAME="I4783"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p21.h">21.h/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0204-1.TXT">AI12-0204-1</A></I>} 
-<span class="insert5"><A NAME="I4572"></A><B>Correction:</B> Added a 
+<span class="insert5"><A NAME="I4784"></A><B>Correction:</B> Added a 
 rule to ensure that the prefix of a renaming of a prefixed view continues 
 to exist during the life of a renames. If the prefix is a subcomponent 
 that depends on discriminants, Ada 2005 and 2012 would have allowed the 
@@ -479,7 +479,7 @@ The alternative being nonsense, we treat this as a wording change.</span>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-8-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

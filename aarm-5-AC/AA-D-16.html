@@ -29,9 +29,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -52,61 +52,64 @@
 exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert3"><B>package</B>&nbsp;System.Multiprocessors</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I9598"></A><BR>
+<span class="insert3"><B>package</B>&nbsp;System.Multiprocessors</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I10217"></A><BR>
 &nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Multiprocessors);</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9599"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9600"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9601"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</span></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I10218"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I10219"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I10220"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</span></div>
 <div class="paranum"><a name="p4.a.1">4.a.1/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Implementation defined: 
 </B></span><span class="insert3">The value of CPU_Range'Last in System.Multiprocessors.</span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9602"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I10221"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
 <B>end</B>&nbsp;System.Multiprocessors;</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
 <span class="insert3">A call of Number_Of_CPUs returns the number of 
 processors available to the program. Within a given partition, each call 
 on Number_Of_CPUs will return the same value.</span></div>
-<div class="paranum"><a name="p7">7/3</a></div>
+<div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
 <span class="insert3">For a task type (including the anonymous type of 
-a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0223">single_task_declaration</A></SPAN>) 
-or subprogram, the following language-defined representation aspect may 
+a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0245">single_task_declaration</A></SPAN>)</span><span class="insert5">, 
+protected type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0250">single_protected_declaration</A></SPAN>),</span><span class="insert3">&nbsp;or subprogram, the following language-defined representation aspect may 
 be specified:</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="WideHanging-Term"><span class="insert3">CPU</span></div><div class="WideHanging-Body">
-<span class="insert3">The aspect CPU is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
-which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I9603"></A><A NAME="I9604"></A></span></div>
-<div class="paranum"><a name="p8.a">8.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert3"><B>CPU:&nbsp;</B></span><span class="insert3">Processor 
-on which a given task should run.</span></div>
+<span class="insert3">The aspect CPU is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I10222"></A><A NAME="I10223"></A></span></div>
+<div class="paranum"><a name="p8.a">8.a/5</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>CPU:&nbsp;</B><span class="insert3">Processor 
+on which a given task</span><span class="insert5">, or calling task for 
+a protected operation,</span><span class="insert3">&nbsp;should run.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3">If the CPU aspect is specified for a subprogram, 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 shall be static.</span></div>
-<div class="paranum"><a name="p10">10/3</a></div>
+<div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
 <span class="insert3">The CPU aspect shall not be specified on a task 
-interface type.</span></div>
+</span><span class="insert5">or protected&nbsp;</span><span class="insert3">interface 
+type.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p11">11/4</a></div>
+<div class="paranum"><a name="p11">11/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0081-1.TXT">AI12-0081-1</A></I>} 
-<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-specified for the CPU aspect of a task</span><span class="insert4">&nbsp;type</span><span class="insert3">&nbsp;is evaluated&nbsp;</span><span class="insert3"><span class="delete4">for&nbsp;</span></span><span class="insert3">each 
-</span><span class="insert4">time an</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;task</span></span><span class="insert3">&nbsp;object&nbsp;</span><span class="insert4">of the task type is created&nbsp;</span><span class="insert3">(see 
-<A HREF="AA-9-1.html">9.1</A>). The CPU value is then associated with 
-the task object</span><span class="insert3"><span class="delete4">&nbsp;whose 
-task declaration specifies the aspect</span></span><span class="insert3">.</span></div>
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
+<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+specified for the CPU aspect of a task</span><span class="insert4"></span><span class="insert5">&nbsp;or protected</span><span class="insert4">&nbsp;type</span><span class="insert3">&nbsp;is evaluated&nbsp;</span><span class="insert3"><span class="delete4">for&nbsp;</span></span><span class="insert3">each 
+</span><span class="insert4">time an</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;task</span></span><span class="insert3">&nbsp;object&nbsp;</span><span class="insert4">of the&nbsp;</span><span class="insert5">corresponding</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;task</span></span><span class="insert4">&nbsp;type is created&nbsp;</span><span class="insert3">(see <A HREF="AA-9-1.html">9.1</A></span><span class="insert5">&nbsp;and <A HREF="AA-9-4.html">9.4</A></span><span class="insert3">). The 
+CPU value is then associated with the&nbsp;</span><span class="insert3"><span class="delete5">task 
+</span></span><span class="insert3">object</span><span class="insert3"><span class="delete4">&nbsp;whose task declaration specifies the aspect</span></span><span class="insert3">.</span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -124,35 +127,69 @@ defined on which processor the environment task executes.</span>&nbsp;</div>
 <div class="Annotations"><span class="insert3"><B>Implementation defined: 
 </B></span><span class="insert3">The processor on which the environment 
 task executes in the absence of a value for the aspect CPU.</span></div>
-<div class="paranum"><a name="p14">14/3</a></div>
+<div class="paranum"><a name="p14">14/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<span class="insert3">The CPU value determines the processor on which 
-the task will activate and execute; the task is said to be assigned to 
-that processor. If the CPU value is Not_A_Specific_CPU, then the task 
-is not assigned to a processor. A task without a CPU aspect specified 
-will activate and execute on the same processor as its activating task 
-if the activating task is assigned a processor. If the CPU value is not 
-in the range of System.Multiprocessors.CPU_Range or is greater than Number_Of_CPUs 
-the task is defined to have failed, and it becomes a completed task (see 
-<A HREF="AA-9-2.html">9.2</A>).</span></div>
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
+<span class="insert3"></span><span class="insert5">For a task, the</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;The</span></span><span class="insert3">&nbsp;CPU value determines the processor on which the task will activate and 
+execute; the task is said to be assigned to that processor. If the CPU 
+value is Not_A_Specific_CPU, then the task is not assigned to a processor. 
+A task without a CPU aspect specified will activate and execute on the 
+same processor as its activating task if the activating task is assigned 
+a processor. If the CPU value is not in the range of System.Multiprocessors.CPU_Range 
+or is greater than Number_Of_CPUs the task is defined to have failed, 
+and it becomes a completed task (see <A HREF="AA-9-2.html">9.2</A>).</span></div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
+<span class="insert5">For a protected type, the CPU value determines 
+the processor on which calling tasks will execute; the protected object 
+is said to be assigned to that processor. If the CPU value is Not_A_Specific_CPU, 
+then the protected object is not assigned to a processor. A call to a 
+protected object that is assigned to a processor from a task that is 
+not assigned a processor or is assigned a different processor raises 
+Program_Error.</span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0323-1.TXT">AI12-0323-1</A></I>} 
+<span class="insert5">Starting a protected action on a protected object 
+statically assigned to a processor should be implemented without busy-waiting.</span></div>
+<div class="paranum"><a name="p16.a">16.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>Busy-waiting 
+is a form of lock and can be a source of deadlock. Busy-waiting is typically 
+needed for starting protected actions on multiprocessors, but if all 
+tasks calling a protected object execute on the same CPU, this locking 
+isn't needed and the source of deadlock and associated overhead can be 
+eliminated.</span>&nbsp;</div>
+<div class="paranum"><a name="p16.b">16.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Advice: 
+</B></span><span class="insert5">Starting a protected action on a protected 
+object statically assigned to a processor should not use busy-waiting.</span></div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
-<div class="paranum"><a name="p14.a">14.a/3</a></div>
+<div class="paranum"><a name="p16.c">16.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I9605"></A>The package System.Multiprocessors 
+<span class="insert3"><A NAME="I10224"></A>The package System.Multiprocessors 
 and the CPU aspect are new.</span>&nbsp;</div>
 
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p16.d">16.d/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
+<span class="insert5"><A NAME="I10225"></A>Aspect CPU can now be applied 
+to protected types, in order to avoid the overhead and deadlock potential 
+of multiprocessor execution.</span>&nbsp;</div>
+
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p14.b">14.b/4</a></div>
+<div class="paranum"><a name="p16.e">16.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0081-1.TXT">AI12-0081-1</A></I>} 
 <span class="insert4"><B>Corrigendum:</B> Clarified when the CPU aspect 
 expression is evaluated.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-D-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

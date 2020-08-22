@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,31 +38,36 @@
 <H1>7.3.4 Stable Properties of a Type</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
-It is usual that some of the characteristics of a data type are unchanged 
-by most of the primitive operations on the type. Such characteristics 
-are called <I>stable properties</I> of the type.<A NAME="I4114"></A><A NAME="I4115"></A> 
-</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
+Certain characteristics of an object of a given type are unchanged by 
+most of the primitive operations of the type. Such characteristics are 
+called <I>stable properties</I> of the type.<A NAME="I4310"></A><A NAME="I4311"></A></div>
+<div class="paranum"><a name="p1.a.1">1.a.1/5</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A characteristic associated 
+with objects of a given type that is preserved by many of the primitive 
+operations of the type.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 A <I>property function</I> of type <I>T</I> is a function with a single 
-parameter of type <I>T</I> or of a class-wide type that covers <I>T</I>.<A NAME="I4116"></A><A NAME="I4117"></A></div>
+parameter of type <I>T</I> or of a class-wide type that covers <I>T</I>.<A NAME="I4312"></A><A NAME="I4313"></A></div>
 <div class="paranum"><a name="p2.a">2.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This provides restrictions on 
 name resolution so overloaded functions can be used as a stable property 
 function.&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0285-1.TXT">AI12-0285-1</A></I>} 
-A <I>type property aspect definition</I> is <A NAME="I4118"></A>a list 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
+A <I>type property aspect definition</I> is <A NAME="I4314"></A>a list 
 of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s written 
 in the syntax of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>. 
-A <I>subprogram property aspect definition</I><A NAME="I4119"></A> is 
+A <I>subprogram property aspect definition</I><A NAME="I4315"></A> is 
 a list of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
-preceded by an optional <B>not</B> written in the syntax of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</div>
+preceded by an optional <B>not</B>, also written in the syntax of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</div>
 <div class="paranum"><a name="p3.a">3.a/5</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>A single <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-would technically be a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+would technically be a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 rather than an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>; 
 we mean to include that here. We say &quot;syntax of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>&quot; 
 to hopefully clarify that the specification is in no other way an actual 
@@ -73,7 +78,7 @@ to hopefully clarify that the specification is in no other way an actual
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
 For a nonformal private type, nonformal private extension, or full type 
 that does not have a partial view, the following language-defined aspects 
-may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
@@ -83,7 +88,7 @@ This aspect shall be specified by a type property aspect definition;
 each <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 shall statically denote a single property function of the type. This 
 aspect defines the <I>stable property functions</I> of the associated 
-type.<A NAME="I4120"></A><A NAME="I4121"></A> <A NAME="I4122"></A><A NAME="I4123"></A><A NAME="I4124"></A></div>
+type.<A NAME="I4316"></A><A NAME="I4317"></A> <A NAME="I4318"></A><A NAME="I4319"></A><A NAME="I4320"></A></div>
 <div class="paranum"><a name="p5.a">5.a/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We do not allow this aspect 
 on generic formal types, as it is only meaningful for primitive subprograms 
@@ -106,7 +111,7 @@ shall statically denote a single property function of the type. This
 aspect defines the <I>class-wide stable property functions</I> of the 
 associated type. [Unlike most class-wide aspects, Stable_Properties'Class 
 is not inherited by descendant types and subprograms, but the enhanced 
-class-wide postconditions are inherited in the normal manner.]<A NAME="I4125"></A><A NAME="I4126"></A><A NAME="I4127"></A><A NAME="I4128"></A></div>
+class-wide postconditions are inherited in the normal manner.]<A NAME="I4321"></A><A NAME="I4322"></A><A NAME="I4323"></A><A NAME="I4324"></A></div>
 <div class="paranum"><a name="p6.a">6.a/5</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>Class-wide inheritance has to 
 be explicitly defined. Here we are not making such a definition, so there 
@@ -129,7 +134,7 @@ for such a class.</div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 For a primitive subprogram, the following language-defined aspects may 
-be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
@@ -190,7 +195,7 @@ shall be a stable property function of a type for which <I>S</I> is primitive.
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 For a primitive subprogram <I>S</I> of a type <I>T</I>, the stable property 
-functions for <I>S</I> for type <I>T</I> are:</div>
+functions of <I>S</I> for type <I>T</I> are:</div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Bulleted">if <I>S</I> has an aspect Stable_Properties specified 
 that does not include <B>not</B>, those functions denoted in the aspect 
@@ -218,29 +223,31 @@ in the above definition.</div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 The <I>explicit</I> specific postcondition expression for a subprogram 
-<I>S</I> is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<I>S</I> is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 directly specified for <I>S</I> with the Post aspect. Similarly, the 
 <I>explicit</I> class-wide postcondition expression for a subprogram 
-<I>S</I> is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I4129"></A><A NAME="I4130"></A><A NAME="I4131"></A></div>
+<I>S</I> is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I4325"></A><A NAME="I4326"></A><A NAME="I4327"></A></div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
 For every primitive subprogram <I>S</I> of a type <I>T</I> that is not 
 a stable property function of <I>T</I>, the specific postcondition expression 
 of <I>S</I> is modified to include expressions of the form <TT><I>F</I>(<I>P</I>) 
 = <I>F</I>(<I>P</I>)'Old</TT>, all <B>and</B>ed with each other and any 
-explicit specific postcondition expression, where <I>F</I> is each stable 
-property function of <I>S</I> for type <I>T</I> that does not occur in 
-the explicit specific postcondition expression of <I>S</I>, and <I>P</I> 
-is each parameter of <I>S</I> that has type <I>T</I>. The resulting specific 
-postcondition expression of <I>S</I> is used in place of the explicit 
-specific postcondition expression of <I>S</I> [when interpreting the 
-meaning of the postcondition as defined in <A HREF="AA-6-1-1.html">6.1.1</A>].</div>
+explicit specific postcondition expression, with one such equality included 
+for each stable property function <I>F</I> of <I>S</I> for type <I>T</I> 
+that does not occur in the explicit specific postcondition expression 
+of <I>S</I>, and <I>P</I> is each parameter of <I>S</I> that has type 
+<I>T</I>. The resulting specific postcondition expression of <I>S</I> 
+is used in place of the explicit specific postcondition expression of 
+<I>S</I> [when interpreting the meaning of the postcondition as defined 
+in <A HREF="AA-6-1-1.html">6.1.1</A>].</div>
 <div class="paranum"><a name="p22.a">22.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>There is one <TT>F(P) = 
 F(P)'Old</TT> subexpression for every combination of a stable expression 
 function of type <I>T</I> and a parameter of type <I>T</I>. For instance, 
-if there is three stable property functions for type <I>T</I> and two 
+if there are three stable property functions for type <I>T</I> and two 
 parameters of type <I>T</I>, then there are six such subexpressions appended 
 to the postcondition.</div>
 <div class="paranum"><a name="p22.b">22.b/5</a></div>
@@ -250,18 +257,19 @@ can be smart enough to prove that many of these added postcondition subexpressio
 cannot fail, but that is not required here.&nbsp;</div>
 <div class="paranum"><a name="p23">23/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
 For every primitive subprogram <I>S</I> of a type <I>T</I> that is not 
 a stable property function of <I>T</I>, the class-wide postcondition 
 expression of <I>S</I> is modified to include expressions of the form 
 <TT><I>F</I>(<I>P</I>) = <I>F</I>(<I>P</I>)'Old</TT>, all <B>and</B>ed 
 with each other and any explicit class-wide postcondition expression, 
-where <I>F</I> is each class-wide stable property function of <I>S</I> 
-for type <I>T</I> that does not occur in any class-wide postcondition 
-expression that applies to <I>S</I>, and <I>P</I> is each parameter of 
-<I>S</I> that has type <I>T</I>. The resulting class-wide postcondition 
-expression of <I>S</I> is used in place of the explicit class-wide postcondition 
-expression of <I>S</I> [when interpreting the meaning of the postcondition 
-as defined in <A HREF="AA-6-1-1.html">6.1.1</A>].</div>
+with one such equality included for each class-wide stable property function 
+<I>F</I> of <I>S</I> for type <I>T</I> that does not occur in any class-wide 
+postcondition expression that applies to <I>S</I>, and <I>P</I> is each 
+parameter of <I>S</I> that has type <I>T</I>. The resulting class-wide 
+postcondition expression of <I>S</I> is used in place of the explicit 
+class-wide postcondition expression of <I>S</I> [when interpreting the 
+meaning of the postcondition as defined in <A HREF="AA-6-1-1.html">6.1.1</A>].</div>
 <div class="paranum"><a name="p23.a">23.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We suppress stable property expressions 
 if the property function appears in the explicit class-wide postcondition, 
@@ -276,7 +284,7 @@ postcondition for <I>S</I>, and therefore inherited postconditions include
 any stable property expressions for <I>S</I>.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p24">24/5</a></div>
-<div class="Notes">14&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<div class="Notes">15&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 For an example of the use of these aspects, see the Vector container 
 definition in <A HREF="AA-A-18-2.html">A.18.2</A>.&nbsp;</div>
 
@@ -284,11 +292,11 @@ definition in <A HREF="AA-A-18-2.html">A.18.2</A>.&nbsp;</div>
 <div class="paranum"><a name="p24.a">24.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0285-1.TXT">AI12-0285-1</A></I>} 
-<A NAME="I4132"></A>These aspects are new.&nbsp;</div>
+<A NAME="I4328"></A>These aspects are new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

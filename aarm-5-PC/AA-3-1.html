@@ -27,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,12 +37,24 @@
 </div>
 <HR>
 <H1>3.1 Declarations</H1>
-<div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1362"></A>The language defines several 
-kinds of named <I>entities</I> that are declared by declarations. <A NAME="I1363"></A>The 
-entity's <I>name</I> is defined by the declaration, usually by a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>, 
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0373-1.TXT">AI12-0373-1</A></I>} 
+<A NAME="I1358"></A>The language defines several kinds of named <I>entities</I> 
+that are declared by declarations. <A NAME="I1359"></A>The entity's <I>name</I> 
+is defined by the declaration, usually by a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>, 
 but sometimes by a <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0188">defining_operator_symbol</A></SPAN>.</div>
+or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0203">defining_operator_symbol</A></SPAN>.<span class="insert5">&nbsp;There are also entities that are not directly declared; some of these 
+are elements of other entities, or are allocated dynamically. Such entities 
+can be denoted using <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>, 
+or dereference <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+(see <A HREF="AA-4-1.html">4.1</A>).</span></div>
+<div class="paranum"><a name="p1.a">1.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0373-1.TXT">AI12-0373-1</A></I>} 
+<span class="insert5">Some entities are always anonymous. For instance, 
+a type is never named (the name represents the first subtype). We don't 
+mention those here as this paragraph is about <I>named</I> entities.</span> 
+</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">There are several forms of declaration. A <SPAN Class="swiss"><A HREF="AA-3-1.html#S0021">basic_declaration</A></SPAN> 
 is a form of declaration defined as follows.&nbsp;</div>
@@ -51,21 +63,21 @@ is a form of declaration defined as follows.&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<SPAN Class="swiss">basic_declaration</SPAN><A NAME="I1364"></A><A NAME="S0021"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1365"></A><SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1366"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1367"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1368"></A><SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1369"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1370"></A><SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1371"></A><SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1372"></A><SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1373"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1374"></A><SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1375"></A><SPAN Class="swiss"><A HREF="AA-11-1.html#S0281">exception_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1376"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1377"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN></div>
+<SPAN Class="swiss">basic_declaration</SPAN><A NAME="I1360"></A><A NAME="S0021"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1361"></A><SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1362"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1363"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1364"></A><SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1365"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1366"></A><SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1367"></A><SPAN Class="swiss"><A HREF="AA-6-7.html#S0227">null_procedure_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1368"></A><SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1369"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0229">package_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1370"></A><SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1371"></A><SPAN Class="swiss"><A HREF="AA-11-1.html#S0303">exception_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1372"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1373"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0315">generic_instantiation</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">defining_identifier</SPAN><A NAME="I1378"></A><A NAME="S0022"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1379"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">defining_identifier</SPAN><A NAME="I1374"></A><A NAME="S0022"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1375"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I1380"></A>A <I>declaration</I> is a language 
-construct that associates a name with (a view of) an entity. <A NAME="I1381"></A><A NAME="I1382"></A>A 
+<div class="Normal"><A NAME="I1376"></A>A <I>declaration</I> is a language 
+construct that associates a name with (a view of) an entity. <A NAME="I1377"></A><A NAME="I1378"></A>A 
 declaration may appear explicitly in the program text (an <I>explicit</I> 
 declaration), or may be supposed to occur at a given place in the text 
 as a consequence of the semantics of another construct (an <I>implicit</I> 
@@ -80,43 +92,47 @@ to override implicit declarations, as part of a type declaration.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0255-1.TXT">AI05-0255-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
-<A NAME="I1383"></A>Each of the following is defined to be a declaration: 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0308-1.TXT">AI12-0308-1</A></I>} 
+<A NAME="I1379"></A>Each of the following is defined to be a declaration: 
 any <SPAN Class="swiss"><A HREF="AA-3-1.html#S0021">basic_declaration</A></SPAN>; 
 an <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>; 
 a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>; 
-a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>;<span class="insert5">&nbsp;an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN>;</span> 
-a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0167">loop_parameter_specification</A></SPAN>; 
-an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>; 
-a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>; 
-a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>; 
-an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN>; 
-an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>; 
-an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0241">entry_index_specification</A></SPAN>; 
-a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0284">choice_parameter_specification</A></SPAN>; 
-a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>. 
+a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>;<span class="insert5">&nbsp;a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0119">iterated_component_association</A></SPAN>;</span> 
+a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0181">loop_parameter_specification</A></SPAN>;<span class="insert5">&nbsp;a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN>;</span> 
+an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0183">iterator_specification</A></SPAN>;<span class="insert5">&nbsp;a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0186">iterator_parameter_specification</A></SPAN>;</span> 
+a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0207">parameter_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>; 
+an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0224">extended_return_object_declaration</A></SPAN>; 
+an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>; 
+an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0263">entry_index_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0306">choice_parameter_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This list (when <SPAN Class="swiss"><A HREF="AA-3-1.html#S0021">basic_declaration</A></SPAN> 
 is expanded out) contains all syntactic categories that end in &quot;_declaration&quot; 
 or &quot;_specification&quot;, except for program unit _specifications. 
-Moreover, it contains <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>. 
-A <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+Moreover, it contains <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>. 
+A <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 is a declaration, whether or not it completes a previous declaration. 
-This is a bit strange, <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+This is a bit strange, <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 is not part of the syntax of <SPAN Class="swiss"><A HREF="AA-3-1.html#S0021">basic_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0266">library_unit_declaration</A></SPAN>. 
-A renaming-as-body is considered a declaration. An <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0288">library_unit_declaration</A></SPAN>. 
+A renaming-as-body is considered a declaration. An <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN> 
 is not considered a declaration. Completions are sometimes declarations, 
 and sometimes not.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I1384"></A><A NAME="I1385"></A>All declarations 
+<div class="Normal"><A NAME="I1380"></A><A NAME="I1381"></A>All declarations 
 contain a <I>definition</I> for a <I>view</I> of an entity. A view consists 
 of an identification of the entity (the entity <I>of</I> the view), plus 
 view-specific characteristics that affect the use of the entity through 
 that view (such as mode of access to an object, formal parameter names 
 and defaults for a subprogram, or visibility to components of a type). 
 In most cases, a declaration also contains the definition for the entity 
-itself (a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
+itself (a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
 is an example of a declaration that does not define a new entity, but 
 instead defines a view of an existing entity (see <A HREF="AA-8-5.html">8.5</A>)).</div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
@@ -136,7 +152,7 @@ unchanging (partial) view of its full type.&nbsp;</div>
 When it is clear from context, the term <I>object</I> is used in place 
 of <I>view of an object</I>. Similarly, the terms <I>type</I> and <I>subtype</I> 
 are used in place of <I>view of a type</I> and <I>view of a subtype</I>, 
-respectively.<A NAME="I1386"></A><A NAME="I1387"></A><A NAME="I1388"></A></div>
+respectively.<A NAME="I1382"></A><A NAME="I1383"></A><A NAME="I1384"></A></div>
 <div class="paranum"><a name="p7.c">7.c/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Rules interpreted at compile 
 time generally refer to views of entities, rather than the entities themselves. 
@@ -148,9 +164,19 @@ interpretation.</div>
 <div class="paranum"><a name="p7.d">7.d/3</a></div>
 <div class="Annotations">On the other hand, run-time rules can work either 
 way, so &ldquo;view of&rdquo; should not be assumed in Dynamic Semantics 
-rules.&nbsp;</div>
+rules.</div>
+<div class="paranum"><a name="p7.e">7.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0191-1.TXT">AI12-0191-1</A></I>} 
+<span class="insert5">For example, a reference to the components of an 
+object in a rule that is interpreted at compile-time would not apply 
+to components that are not visible. On the other hand, a reference to 
+the components of an object in a dynamic semantics rule would apply to 
+all components of the object, visible or not, including (for tagged objects) 
+components which are not components of the nominal type of the object 
+(see <A HREF="AA-3-9-1.html">3.9.1</A>). Other terms, such as &ldquo;subcomponent&rdquo; 
+and &ldquo;part&rdquo;, are interpreted analogously.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I1389"></A>For each declaration, the language 
+<div class="Normal"><A NAME="I1385"></A>For each declaration, the language 
 rules define a certain region of text called the <I>scope</I> of the 
 declaration (see <A HREF="AA-8-2.html">8.2</A>). Most declarations associate 
 an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
@@ -158,47 +184,47 @@ with a declared entity. Within its scope, and only there, there are places
 where it is possible to use the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 to refer to the declaration, the view it defines, and the associated 
 entity; these places are defined by the visibility rules (see <A HREF="AA-8-3.html">8.3</A>). 
-<A NAME="I1390"></A>At such places the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+<A NAME="I1386"></A>At such places the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 is said to be a <I>name</I> of the entity (the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>); 
-<A NAME="I1391"></A>the name is said to <I>denote</I> the declaration, 
+<A NAME="I1387"></A>the name is said to <I>denote</I> the declaration, 
 the view, and the associated entity (see <A HREF="AA-8-6.html">8.6</A>). 
-<A NAME="I1392"></A>The declaration is said to <I>declare</I> the name, 
+<A NAME="I1388"></A>The declaration is said to <I>declare</I> the name, 
 the view, and in most cases, the entity itself.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">As an alternative to an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
 an enumeration literal can be declared with a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
 as its name (see <A HREF="AA-3-5-1.html">3.5.1</A>), and a function can 
-be declared with an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
+be declared with an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN> 
 as its name (see <A HREF="AA-6-1.html">6.1</A>).</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1393"></A>The syntax rules use the terms 
+<div class="Normal"><A NAME="I1389"></A>The syntax rules use the terms 
 <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN>, 
-and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0188">defining_operator_symbol</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0203">defining_operator_symbol</A></SPAN> 
 for the defining occurrence of a name; these are collectively called 
-<I>defining names</I>. <A NAME="I1394"></A>The terms <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+<I>defining names</I>. <A NAME="I1390"></A>The terms <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 are used for usage occurrences of <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s, 
 <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>s, 
-and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>s. 
+and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN>s. 
 These are collectively called <I>usage names</I>.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The terms <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
-and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN> 
 are used directly in contexts where the normal visibility rules do not 
 apply (such as the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-that appears after the <B>end</B> of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>). 
-Analogous conventions apply to the use of <SPAN Class="swiss"><A HREF="AA-6-1.html#S0184">designator</A></SPAN>, 
+that appears after the <B>end</B> of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>). 
+Analogous conventions apply to the use of <SPAN Class="swiss"><A HREF="AA-6-1.html#S0199">designator</A></SPAN>, 
 which is the collective term for <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>. 
+and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I1395"></A>The process by which a construct 
-achieves its run-time effect is called <I>execution</I>. <A NAME="I1396"></A><A NAME="I1397"></A>This 
+<div class="Normal"><A NAME="I1391"></A>The process by which a construct 
+achieves its run-time effect is called <I>execution</I>. <A NAME="I1392"></A><A NAME="I1393"></A>This 
 process is also called <I>elaboration</I> for declarations and <I>evaluation</I> 
 for expressions. One of the terms execution, elaboration, or evaluation 
 is defined by this International Standard for each construct that has 
@@ -206,7 +232,7 @@ a run-time effect.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>The process by which 
 a construct achieves its run-time effect is called <I>execution</I>. 
-<A NAME="I1398"></A><A NAME="I1399"></A>Execution of a declaration is 
+<A NAME="I1394"></A><A NAME="I1395"></A>Execution of a declaration is 
 also called <I>elaboration</I>. Execution of an expression is also called 
 <I>evaluation</I>.</div>
 <div class="paranum"><a name="p11.b">11.b</a></div>
@@ -234,7 +260,7 @@ execution, including erroneous elaboration or evaluation.</div>
 for a construct, we are implicitly defining execution of that construct.</div>
 <div class="paranum"><a name="p11.f">11.f</a></div>
 <div class="Annotations">We also use the term &quot;execution&quot; for 
-things like <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>s, 
+things like <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>s, 
 which are executable, but neither elaborable nor evaluable. We considered 
 using the term &quot;execution&quot; only for nonelaborable, nonevaluable 
 constructs, and defining the term &quot;action&quot; to mean what we 
@@ -252,9 +278,9 @@ is one of the forms of execution.</div>
 an expression achieves its run-time effect is called evaluation. Evaluation 
 is one of the forms of execution.</div>
 <div class="paranum"><a name="p11.g">11.g</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I1400"></A>A construct 
-is <I>elaborable</I> if elaboration is defined for it. <A NAME="I1401"></A>A 
-construct is <I>evaluable</I> if evaluation is defined for it. <A NAME="I1402"></A>A 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I1396"></A>A construct 
+is <I>elaborable</I> if elaboration is defined for it. <A NAME="I1397"></A>A 
+construct is <I>evaluable</I> if evaluation is defined for it. <A NAME="I1398"></A>A 
 construct is <I>executable</I> if execution is defined for it.&nbsp;</div>
 <div class="paranum"><a name="p11.h">11.h</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Don't confuse &ldquo;elaborable&rdquo; 
@@ -264,7 +290,7 @@ with &ldquo;preelaborable&rdquo; (defined in <A HREF="AA-10-2-1.html">10.2.1</A>
 Evaluation of an evaluable construct produces a result that is either 
 a value, a denotation, or a range. The following are evaluable: expression; 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>; 
-<SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>; <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0241">entry_index_specification</A></SPAN>; 
+<SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>; <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0263">entry_index_specification</A></SPAN>; 
 and possibly <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>. 
 The last one is curious &mdash; RM83 uses the term &ldquo;evaluation 
 of a <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>,&rdquo; 
@@ -284,8 +310,8 @@ as a template for (generally) executable constructs in instances of the
 generic.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Notes">1&nbsp;&nbsp;<A NAME="I1403"></A>At compile time, 
-the declaration of an entity <I>declares</I> the entity. <A NAME="I1404"></A>At 
+<div class="Notes">1&nbsp;&nbsp;<A NAME="I1399"></A>At compile time, 
+the declaration of an entity <I>declares</I> the entity. <A NAME="I1400"></A>At 
 run time, the elaboration of the declaration <I>creates</I> the entity. 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
@@ -294,7 +320,7 @@ declarations are named either <I>entity_</I><SPAN Class="swiss">declaration</SPA
 (if they include a trailing semicolon) or <I>entity_</I><SPAN Class="swiss">specification</SPAN> 
 (if not).</div>
 <div class="paranum"><a name="p12.b">12.b</a></div>
-<div class="Annotations"><A NAME="I1405"></A>The various kinds of named 
+<div class="Annotations"><A NAME="I1401"></A>The various kinds of named 
 entities that can be declared are as follows: an object (including components 
 and parameters), a named number, a type (the name always refers to its 
 first subtype), a subtype, a subprogram (including enumeration literals 
@@ -314,13 +340,13 @@ Usage occurrences use the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct
 or <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 syntactic categories. Each occurrence of an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 (or <SPAN Class="swiss">simple_name</SPAN>), <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN> 
 in the Ada 83 syntax rules is handled as follows in Ada 95:&nbsp;</div>
 <div class="paranum"><a name="p12.e">12.e</a></div>
 <div class="SmallBulleted" style="margin-bottom: 0.3em">It becomes a 
 <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0188">defining_operator_symbol</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0203">defining_operator_symbol</A></SPAN> 
 (or some syntactic category composed of these), to indicate a defining 
 occurrence;</div>
 <div class="paranum"><a name="p12.f">12.f/3</a></div>
@@ -336,15 +362,15 @@ to be visible but not necessarily directly visible;</div>
 <div class="paranum"><a name="p12.h">12.h</a></div>
 <div class="SmallBulleted">It remains an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>, 
-in cases where the visibility rules do not apply (such as the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0184">designator</A></SPAN> 
-that appears after the <B>end</B> of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>). 
+or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN>, 
+in cases where the visibility rules do not apply (such as the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0199">designator</A></SPAN> 
+that appears after the <B>end</B> of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>). 
 </div>
 <div class="paranum"><a name="p12.i">12.i</a></div>
 <div class="Annotations">For declarations that come in &ldquo;two parts&rdquo; 
 (program unit declaration plus body, private or incomplete type plus 
 full type, deferred constant plus full constant), we consider both to 
-be defining occurrences. Thus, for example, the syntax for <SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN> 
+be defining occurrences. Thus, for example, the syntax for <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN> 
 uses <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 after the reserved word <B>body</B>, as opposed to <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>.</div>
 <div class="paranum"><a name="p12.j">12.j</a></div>
@@ -367,7 +393,7 @@ for details.)</div>
 <div class="paranum"><a name="p12.m">12.m</a></div>
 <div class="Annotations">We use the term &ldquo;declaration&rdquo; to 
 cover <SPAN Class="swiss">_specification</SPAN>s that declare (views 
-of) objects, such as <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>s. 
+of) objects, such as <SPAN Class="swiss"><A HREF="AA-6-1.html#S0207">parameter_specification</A></SPAN>s. 
 In Ada 83, these are referred to as a &ldquo;form of declaration,&rdquo; 
 but it is not entirely clear that they are considered simply &ldquo;declarations.&rdquo;</div>
 <div class="paranum"><a name="p12.n">12.n/3</a></div>
@@ -375,7 +401,7 @@ but it is not entirely clear that they are considered simply &ldquo;declarations
 RM83 contains an incomplete definition of &quot;elaborated&quot; in this 
 subclause: it defines &quot;elaborated&quot; for declarations, <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>s, 
 <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>s, 
 but &quot;elaboration&quot; is defined elsewhere for various other constructs. 
 To make matters worse, Ada 95 has a different set of elaborable constructs. 
 Instead of correcting the list, it is more maintainable to refer to the 
@@ -401,7 +427,7 @@ is doing the task creation.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 95</H4>
 <div class="paranum"><a name="p12.q">12.q/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-Added <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+Added <SPAN Class="swiss"><A HREF="AA-6-5.html#S0225">extended_return_statement</A></SPAN> 
 to the list of declarations.</div>
 <div class="paranum"><a name="p12.r">12.r/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
@@ -416,7 +442,7 @@ syntax.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

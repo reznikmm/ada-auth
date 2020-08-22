@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-12-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -34,24 +34,24 @@
 <H1>12.5.2 Formal Scalar Types</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">A <I>formal scalar type</I> is one defined by any 
-of the <SPAN Class="swiss"><A HREF="RM-12-5.html#S0301">formal_type_definition</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="RM-12-5.html#S0323">formal_type_definition</A></SPAN>s 
 in this subclause. The category determined for a formal scalar type is 
 the category of all discrete, signed integer, modular, floating point, 
 ordinary fixed point, or decimal types.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_discrete_type_definition</SPAN><A NAME="I5022"></A><A NAME="S0304"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(&lt;&gt;)</div>
+<div class="Indented1"><SPAN Class="swiss">formal_discrete_type_definition</SPAN><A NAME="I5272"></A><A NAME="S0326"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(&lt;&gt;)</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_signed_integer_type_definition</SPAN><A NAME="I5023"></A><A NAME="S0305"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>range</B>&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">formal_signed_integer_type_definition</SPAN><A NAME="I5273"></A><A NAME="S0327"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>range</B>&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_modular_type_definition</SPAN><A NAME="I5024"></A><A NAME="S0306"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>mod</B>&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">formal_modular_type_definition</SPAN><A NAME="I5274"></A><A NAME="S0328"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>mod</B>&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_floating_point_definition</SPAN><A NAME="I5025"></A><A NAME="S0307"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>digits</B>&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">formal_floating_point_definition</SPAN><A NAME="I5275"></A><A NAME="S0329"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>digits</B>&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_ordinary_fixed_point_definition</SPAN><A NAME="I5026"></A><A NAME="S0308"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delta</B>&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">formal_ordinary_fixed_point_definition</SPAN><A NAME="I5276"></A><A NAME="S0330"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delta</B>&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_decimal_fixed_point_definition</SPAN><A NAME="I5027"></A><A NAME="S0309"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">formal_decimal_fixed_point_definition</SPAN><A NAME="I5277"></A><A NAME="S0331"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
@@ -62,12 +62,12 @@ be a nonstandard numeric type.&nbsp;</div>
 <div class="Notes">12&nbsp;&nbsp;The actual type shall be in the class 
 of types implied by the syntactic category of the formal type definition 
 (see <A HREF="RM-12-5.html">12.5</A>, &ldquo;<A HREF="RM-12-5.html">Formal 
-Types</A>&rdquo;). For example, the actual for a <SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0306">formal_modular_type_definition</A></SPAN> 
+Types</A>&rdquo;). For example, the actual for a <SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0328">formal_modular_type_definition</A></SPAN> 
 shall be a modular type.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-12-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

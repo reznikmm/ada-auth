@@ -21,9 +21,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-4-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 Strings.Hash has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Hash&nbsp;(Key&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type;<A NAME="I6272"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Hash&nbsp;(Key&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type;<A NAME="I6505"></A><BR>
 <B>pragma</B>&nbsp;Pure(Ada.Strings.Hash);</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">Returns an implementation-defined 
@@ -57,7 +57,7 @@ Strings.Fixed.Hash has the following declaration:&nbsp;</div>
 function Strings.Bounded.Hash has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>generic</B><A NAME="I6273"></A><BR>
+<B>generic</B><A NAME="I6506"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
 <B>function</B>&nbsp;Ada.Strings.Bounded.Hash&nbsp;(Key&nbsp;:&nbsp;Bounded.Bounded_String)<BR>
@@ -71,7 +71,7 @@ function Strings.Bounded.Hash has the following declaration:&nbsp;</div>
 Strings.Unbounded.Hash has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash&nbsp;(Key&nbsp;:&nbsp;Unbounded_String)<A NAME="I6274"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash&nbsp;(Key&nbsp;:&nbsp;Unbounded_String)<A NAME="I6507"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -82,7 +82,7 @@ Strings.Unbounded.Hash has the following declaration:&nbsp;</div>
 Strings.Hash_Case_Insensitive has the following declaration:</div>
 <div class="paranum"><a name="p11.2">11.2/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I6275"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I6508"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type;<BR>
 <B>pragma</B>&nbsp;Pure(Ada.Strings.Hash_Case_Insensitive);</div>
 <div class="paranum"><a name="p11.3">11.3/3</a></div>
@@ -96,7 +96,7 @@ equals Hash_Case_Insensitive(B).&nbsp;</div>
 Strings.Fixed.Hash_Case_Insensitive has the following declaration:</div>
 <div class="paranum"><a name="p11.5">11.5/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Containers,&nbsp;Ada.Strings.Hash_Case_Insensitive;<BR>
-<B>function</B>&nbsp;Ada.Strings.Fixed.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I6276"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Fixed.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I6509"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type&nbsp;<B>renames</B>&nbsp;Ada.Strings.Hash_Case_Insensitive;</div>
 <div class="paranum"><a name="p11.6">11.6/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;The generic library 
@@ -106,7 +106,7 @@ function Strings.Bounded.Hash_Case_Insensitive has the following declaration:</d
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
-<B>function</B>&nbsp;Ada.Strings.Bounded.Hash_Case_Insensitive<A NAME="I6277"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Bounded.Hash_Case_Insensitive<A NAME="I6510"></A><BR>
 &nbsp;&nbsp;&nbsp;(Key&nbsp;:&nbsp;Bounded.Bounded_String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking;</div>
 <div class="paranum"><a name="p11.8">11.8/3</a></div>
@@ -117,7 +117,7 @@ function Strings.Bounded.Hash_Case_Insensitive has the following declaration:</d
 Strings.Unbounded.Hash_Case_Insensitive has the following declaration:</div>
 <div class="paranum"><a name="p11.10">11.10/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash_Case_Insensitive<A NAME="I6278"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash_Case_Insensitive<A NAME="I6511"></A><BR>
 &nbsp;&nbsp;&nbsp;(Key&nbsp;:&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking;</div>
 <div class="paranum"><a name="p11.11">11.11/3</a></div>
@@ -132,7 +132,7 @@ be unlikely for similar strings to return the same value.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-A-4-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

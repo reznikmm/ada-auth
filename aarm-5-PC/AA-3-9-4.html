@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -25,9 +27,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -67,25 +69,25 @@ the same thing.&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<SPAN Class="swiss">interface_type_definition</SPAN><A NAME="I2376"></A><A NAME="S0077"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>task</B>&nbsp;|&nbsp;<B>protected</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>interface</B>&nbsp;[<B>and</B>&nbsp;<A NAME="I2377"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]</div>
+<SPAN Class="swiss">interface_type_definition</SPAN><A NAME="I2381"></A><A NAME="S0077"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>task</B>&nbsp;|&nbsp;<B>protected</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>interface</B>&nbsp;[<B>and</B>&nbsp;<A NAME="I2382"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
-<SPAN Class="swiss">interface_list</SPAN><A NAME="I2378"></A><A NAME="S0078"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>interface_</I><A NAME="I2379"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{<B>and</B>&nbsp;<I>interface_</I><A NAME="I2380"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>}</div>
+<SPAN Class="swiss">interface_list</SPAN><A NAME="I2383"></A><A NAME="S0078"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>interface_</I><A NAME="I2384"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{<B>and</B>&nbsp;<I>interface_</I><A NAME="I2385"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>}</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-An interface type (also called an <I>interface</I>) is<A NAME="I2381"></A><A NAME="I2382"></A> 
+An interface type (also called an <I>interface</I>) is<A NAME="I2386"></A><A NAME="I2387"></A> 
 a specific abstract tagged type that is defined by an <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0077">interface_type_definition</A></SPAN>.</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 An interface with the reserved word <B>limited</B>, <B>task</B>, <B>protected</B>, 
 or <B>synchronized</B> in its definition is termed, respectively, a <I>limited 
 interface</I>, a <I>task interface</I>, a <I>protected interface</I>, 
-or a <I>synchronized interface</I>. In addition,<A NAME="I2383"></A> 
-<A NAME="I2384"></A><A NAME="I2385"></A><A NAME="I2386"></A><A NAME="I2387"></A><A NAME="I2388"></A><A NAME="I2389"></A><A NAME="I2390"></A><A NAME="I2391"></A><A NAME="I2392"></A>all 
+or a <I>synchronized interface</I>. In addition,<A NAME="I2388"></A> 
+<A NAME="I2389"></A><A NAME="I2390"></A><A NAME="I2391"></A><A NAME="I2392"></A><A NAME="I2393"></A><A NAME="I2394"></A><A NAME="I2395"></A><A NAME="I2396"></A><A NAME="I2397"></A>all 
 task and protected interfaces are synchronized interfaces, and all synchronized 
 interfaces are limited interfaces.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a/2</a></div>
@@ -96,7 +98,7 @@ or protected type is called a synchronized tagged type.</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00443.TXT">AI95-00443-01</A></I>} 
-<A NAME="I2393"></A><A NAME="I2394"></A><A NAME="I2395"></A><A NAME="I2396"></A><A NAME="I2397"></A><A NAME="I2398"></A><A NAME="I2399"></A>[A 
+<A NAME="I2398"></A><A NAME="I2399"></A><A NAME="I2400"></A><A NAME="I2401"></A><A NAME="I2402"></A><A NAME="I2403"></A><A NAME="I2404"></A>[A 
 task or protected type derived from an interface is a tagged type.] Such 
 a tagged type is called a <I>synchronized</I> tagged type, as are synchronized 
 interfaces and private extensions whose declaration includes the reserved 
@@ -140,7 +142,7 @@ type operations, we apply the same rule to protected interfaces for consistency.
 the fact that discriminants are not allowed for interface types.&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
-<A NAME="I2400"></A><A NAME="I2401"></A>An <I>interface_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+<A NAME="I2405"></A><A NAME="I2406"></A>An <I>interface_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
 names a <I>progenitor subtype</I>; its type is the <I>progenitor type</I>. 
 An interface type inherits user-defined primitive subprograms from each 
@@ -211,7 +213,7 @@ could be legal). This rule provides early detection of the errors.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 In addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
-unit.<A NAME="I2402"></A>&nbsp;</div>
+unit.<A NAME="I2407"></A>&nbsp;</div>
 <div class="paranum"><a name="p17.a">17.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 This paragraph is intended to apply to all of the Legality Rules in this 
@@ -309,11 +311,12 @@ or protected type, and as such ensures safe concurrent access.</div>
 <div class="Examples">...</div>
 <div class="paranum"><a name="p31">31/2</a></div>
 <div class="Examples">Cashier,&nbsp;Counter&nbsp;:&nbsp;Fast_Food_Queue;</div>
-<div class="paranum"><a name="p32">32/2</a></div>
-<div class="Examples">...<BR>
---&nbsp;<SPAN Class="roman"><I>Add&nbsp;George&nbsp;(see&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A>)&nbsp;to&nbsp;the&nbsp;cashier's&nbsp;queue:</I></SPAN><BR>
-Append&nbsp;(Cashier,&nbsp;George);<BR>
---&nbsp;<SPAN Class="roman"><I>After&nbsp;payment,&nbsp;move&nbsp;George&nbsp;to&nbsp;the&nbsp;sandwich&nbsp;counter&nbsp;queue:</I></SPAN><BR>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0312-1.TXT">AI12-0312-1</A></I>} 
+...<BR>
+--<SPAN Class="roman"><I>&nbsp;Add&nbsp;</I></SPAN><span class="insert5"><SPAN Class="roman"><I>Casey</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><span class="delete5"><SPAN Class="roman"><I>&nbsp;George</I></SPAN></span><SPAN Class="roman"><I>&nbsp;(see&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A>)&nbsp;to&nbsp;the&nbsp;cashier's&nbsp;queue:</I></SPAN><BR>
+Append&nbsp;(Cashier,&nbsp;<span class="insert5">Casey</span><span class="delete5">&nbsp;George</span>);<BR>
+--<SPAN Class="roman"><I>&nbsp;After&nbsp;payment,&nbsp;move&nbsp;</I></SPAN><span class="insert5"><SPAN Class="roman"><I>Casey</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><span class="delete5"><SPAN Class="roman"><I>&nbsp;George</I></SPAN></span><SPAN Class="roman"><I>&nbsp;to&nbsp;the&nbsp;sandwich&nbsp;counter&nbsp;queue:</I></SPAN><BR>
 Transfer&nbsp;(Cashier,&nbsp;Counter);<BR>
 ...</div>
 <div class="paranum"><a name="p33">33/2</a></div>
@@ -338,7 +341,7 @@ which are intended to be implemented by task entries (see 9.1).</div>
 <div class="paranum"><a name="p36.a">36.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I2403"></A>Interface types are new. They provide multiple inheritance 
+<A NAME="I2408"></A>Interface types are new. They provide multiple inheritance 
 of interfaces, similar to the facility provided in Java and other recent 
 language designs.&nbsp;</div>
 
@@ -350,7 +353,7 @@ to match that of other type definitions.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-3-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

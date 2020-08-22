@@ -22,9 +22,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,44 +41,46 @@ platforms to be configured.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;System.Multiprocessors<A NAME="I8369"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;System.Multiprocessors<A NAME="I8901"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8370"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8371"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8372"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8902"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8903"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8904"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8373"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8905"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
 <B>end</B>&nbsp;System.Multiprocessors;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">A call of Number_Of_CPUs returns the number of processors 
 available to the program. Within a given partition, each call on Number_Of_CPUs 
 will return the same value.</div>
-<div class="paranum"><a name="p7">7/3</a></div>
+<div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a task type (including 
-the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0223">single_task_declaration</A></SPAN>) 
+the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0245">single_task_declaration</A></SPAN>), 
+protected type (including the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0250">single_protected_declaration</A></SPAN>), 
 or subprogram, the following language-defined representation aspect may 
 be specified:</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="WideHanging-Term">CPU</div><div class="WideHanging-Body">
-The aspect CPU is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I8374"></A><A NAME="I8375"></A></div>
+The aspect CPU is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I8906"></A><A NAME="I8907"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">If the CPU aspect is specified for a subprogram, 
-the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 shall be static.</div>
-<div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">The CPU aspect shall not be specified on a task interface 
-type.</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">The CPU aspect shall not be specified on a task or 
+protected interface type.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p11">11/4</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-specified for the CPU aspect of a task type is evaluated each time an 
-object of the task type is created (see <A HREF="RM-9-1.html">9.1</A>). 
-The CPU value is then associated with the task object.</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+specified for the CPU aspect of a task or protected type is evaluated 
+each time an object of the corresponding type is created (see <A HREF="RM-9-1.html">9.1</A> 
+and <A HREF="RM-9-4.html">9.4</A>). The CPU value is then associated 
+with the object.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">The CPU aspect has no effect if it is specified for 
 a subprogram other than the main subprogram; the CPU value is not associated 
@@ -88,20 +90,33 @@ with any task.</div>
 task if the CPU aspect is specified for the main subprogram. If the CPU 
 aspect is not specified for the main subprogram it is implementation 
 defined on which processor the environment task executes.&nbsp;</div>
-<div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal">The CPU value determines the processor on which the 
-task will activate and execute; the task is said to be assigned to that 
-processor. If the CPU value is Not_A_Specific_CPU, then the task is not 
-assigned to a processor. A task without a CPU aspect specified will activate 
-and execute on the same processor as its activating task if the activating 
-task is assigned a processor. If the CPU value is not in the range of 
-System.Multiprocessors.CPU_Range or is greater than Number_Of_CPUs the 
-task is defined to have failed, and it becomes a completed task (see 
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal">For a task, the CPU value determines the processor 
+on which the task will activate and execute; the task is said to be assigned 
+to that processor. If the CPU value is Not_A_Specific_CPU, then the task 
+is not assigned to a processor. A task without a CPU aspect specified 
+will activate and execute on the same processor as its activating task 
+if the activating task is assigned a processor. If the CPU value is not 
+in the range of System.Multiprocessors.CPU_Range or is greater than Number_Of_CPUs 
+the task is defined to have failed, and it becomes a completed task (see 
 <A HREF="RM-9-2.html">9.2</A>).</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal">For a protected type, the CPU value determines the 
+processor on which calling tasks will execute; the protected object is 
+said to be assigned to that processor. If the CPU value is Not_A_Specific_CPU, 
+then the protected object is not assigned to a processor. A call to a 
+protected object that is assigned to a processor from a task that is 
+not assigned a processor or is assigned a different processor raises 
+Program_Error.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal">Starting a protected action on a protected object 
+statically assigned to a processor should be implemented without busy-waiting.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-D-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

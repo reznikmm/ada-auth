@@ -25,9 +25,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -41,18 +41,18 @@ declares a named number.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">number_declaration</SPAN><A NAME="I1590"></A><A NAME="S0034"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1591"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<I>static_</I><A NAME="I1592"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">number_declaration</SPAN><A NAME="I1593"></A><A NAME="S0034"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1594"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<I>static_</I><A NAME="I1595"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I1593"></A>The <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal"><A NAME="I1596"></A>The <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 given for a <SPAN Class="swiss"><A HREF="RM-3-3-2.html#S0034">number_declaration</A></SPAN> 
 is expected to be of any numeric type.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal">The <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">The <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 given for a number declaration shall be a static expression, as defined 
 by <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 <A HREF="RM-4-9.html">4.9</A>.&nbsp;</div>
@@ -60,18 +60,18 @@ by <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</spa
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">The named number denotes a value of type <I>universal_integer</I> 
-if the type of the <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+if the type of the <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is an integer type. The named number denotes a value of type <I>universal_real</I> 
-if the type of the <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+if the type of the <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is a real type.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">The value denoted by the named number is the value 
-of the <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-converted to the corresponding universal type. <A NAME="I1594"></A></div>
+of the <I>static_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
+converted to the corresponding universal type. <A NAME="I1597"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I1595"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-3-2.html#S0034">number_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I1598"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-3-2.html#S0034">number_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
@@ -88,7 +88,7 @@ One,&nbsp;Un,&nbsp;Eins&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;1;&nbsp;&nbsp;&
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-3-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

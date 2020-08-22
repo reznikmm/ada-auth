@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package System.Atomic_Operations.Exchange</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-6-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>C.6.2 The Package System.Atomic_Operations.Exchange</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The language-defined 
+generic package System.Atomic_Operations.Exchange provides the following 
+operations:</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Bulleted">To atomically compare the value of two atomic objects, 
+and update the first atomic object with a desired value if both objects 
+were found to be equal, or otherwise update the second object with the 
+value of the first object.</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Bulleted">To atomically update the value of an atomic object, 
+and then return the value that the atomic object had just prior to the 
+update.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The generic library 
+package System.Atomic_Operations.Exchange has the following declaration:</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Atomic_Type&nbsp;<B>is&nbsp;private&nbsp;with</B>&nbsp;Atomic;<BR>
+<B>package</B>&nbsp;System.Atomic_Operations.Exchange<A NAME="I8494"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8495"></A>Atomic_Exchange&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Atomic_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8496"></A>Atomic_Compare_And_Exchange&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prior&nbsp;&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desired&nbsp;:&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8497"></A>Is_Lock_Free&nbsp;(Item&nbsp;:&nbsp;<B>aliased</B>&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Examples"><B>end</B>&nbsp;System.Atomic_Operations.Exchange;</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">Atomic_Exchange atomically assigns the value of Value 
+to Item, and returns the previous value of Item.</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Atomic_Compare_And_Exchange 
+first evaluates the value of Prior. Atomic_Compare_And_Exchange then 
+performs the following steps as part of a single indivisible operation:</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Bulleted">evaluates the value of Item;</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Bulleted">compares the value of Item with the value of Prior;</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Bulleted">if equal, assigns Item the value of Desired;</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Bulleted">otherwise, makes no change to the value of Item.</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal">After these steps, if the value of Item and Prior 
+did not match, Prior is assigned the original value of Item, and the 
+function returns False. Otherwise, Prior is unaffected and the function 
+returns True.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a spin 
+lock using Atomic_Exchange:</I></div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Examples"><B>type</B>&nbsp;Atomic_Boolean&nbsp;<B>is&nbsp;new</B>&nbsp;Boolean&nbsp;<B>with</B>&nbsp;Atomic;<BR>
+<B>package</B>&nbsp;Exchange&nbsp;<B>is&nbsp;new</B><BR>
+&nbsp;&nbsp;&nbsp;Atomic_Operations.Exchange&nbsp;(Atomic_Type&nbsp;=&gt;&nbsp;Atomic_Boolean);</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Examples">Lock&nbsp;:&nbsp;<B>aliased</B>&nbsp;Atomic_Boolean&nbsp;:=&nbsp;False;</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Examples">...</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Examples"><B>begin</B>&nbsp;--&nbsp;<SPAN Class="roman"><I>Some&nbsp;critical&nbsp;section,&nbsp;trying&nbsp;to&nbsp;get&nbsp;the&nbsp;lock:</I></SPAN></div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Obtain&nbsp;the&nbsp;lock</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>while</B>&nbsp;Exchange.Atomic_Exchange&nbsp;(Item&nbsp;=&gt;&nbsp;Lock,&nbsp;Value&nbsp;=&gt;&nbsp;True)&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>null</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>Do&nbsp;stuff</I></SPAN></div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Lock&nbsp;:=&nbsp;False;&nbsp;--&nbsp;<SPAN Class="roman"><I>Release&nbsp;the&nbsp;lock</I></SPAN><BR>
+<B>end</B>;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-6-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

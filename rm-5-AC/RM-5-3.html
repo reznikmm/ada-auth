@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -34,41 +34,41 @@
 <HR>
 <H1>5.3 If Statements</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-5-3.html#S0161">if_statement</A></SPAN> 
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-5-3.html#S0175">if_statement</A></SPAN> 
 selects for execution at most one of the enclosed <SPAN Class="swiss">sequences_of_statements</SPAN>, 
-depending on the (truth) value of one or more corresponding <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>s. 
+depending on the (truth) value of one or more corresponding <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>s. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">if_statement</SPAN><A NAME="I3382"></A><A NAME="S0161"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;<A NAME="I3383"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3384"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<A NAME="I3385"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3386"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">if_statement</SPAN><A NAME="I3513"></A><A NAME="S0175"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;<A NAME="I3514"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3515"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<A NAME="I3516"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3517"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;[<B>else</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3387"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3518"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN>]<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="delete3"><SPAN Class="swiss">condition</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3388"></A><span class="delete3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="delete3"><I>boolean_</I><A NAME="I3389"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="delete3"><SPAN Class="swiss">condition</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3519"></A><span class="delete3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="delete3"><I>boolean_</I><A NAME="I3520"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><span class="delete3"><A NAME="I3390"></A>A <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
+<div class="Normal"><span class="delete3"><A NAME="I3521"></A>A <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
 is expected to be of any boolean type.</span>&nbsp;</div>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 3 and 4 were deleted.</I></SPAN></span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal"><A NAME="I3391"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-5-3.html#S0161">if_statement</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
-specified after <B>if</B>, and any <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>s 
+<div class="Normal"><A NAME="I3522"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-5-3.html#S0175">if_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
+specified after <B>if</B>, and any <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>s 
 specified after <B>elsif</B>, are evaluated in succession (treating a 
 final <B>else</B> as <B>elsif</B> True <B>then</B>), until one evaluates 
-to True or all <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>s 
-are evaluated and yield False. If a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
-evaluates to True, then the corresponding <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+to True or all <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>s 
+are evaluated and yield False. If a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
+evaluates to True, then the corresponding <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 is executed; otherwise<span class="insert3">,</span> none of them is 
 executed.&nbsp;</div>
 
@@ -98,7 +98,7 @@ executed.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-5-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

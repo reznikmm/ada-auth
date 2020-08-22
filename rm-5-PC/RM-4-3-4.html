@@ -25,111 +25,112 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>4.3.4 <span class="insert5">Delta Aggregates</span><span class="delete5"></span></H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><span class="insert5">A (record or array) delta aggregate 
-yields a composite value resulting from starting with a copy of another 
-value of the same type and then subsequently assigning to some (but typically 
-not all) components of the copy.<A NAME="I2626"></A></span>&nbsp;</div>
+<div class="Normal"><span class="insert5">Evaluating a (record or array) 
+delta aggregate yields a composite value that starts with a copy of another 
+value of the same type and then assigns to some (but typically not all) 
+components of the copy.<A NAME="I2646"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">delta_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2627"></A><A NAME="S0119"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I2628"></A><SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2629"></A><SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">delta_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2647"></A><A NAME="S0120"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I2648"></A><SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">record_delta_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2649"></A><SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN></span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">record_delta_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2630"></A><A NAME="S0120"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<I>base_</I><A NAME="I2631"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>&nbsp;<B>with</B>&nbsp;<B>delta</B>&nbsp;<A NAME="I2632"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">record_delta_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2650"></A><A NAME="S0121"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<I>base_</I><A NAME="I2651"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>with</B>&nbsp;<B>delta</B>&nbsp;<A NAME="I2652"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">array_delta_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2633"></A><A NAME="S0121"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<I>base_</I><A NAME="I2634"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>&nbsp;<B>with</B>&nbsp;<B>delta</B>&nbsp;<A NAME="I2635"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0116">array_component_association_list</A></SPAN>)</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">array_delta_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2653"></A><A NAME="S0122"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<I>base_</I><A NAME="I2654"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>with</B>&nbsp;<B>delta</B>&nbsp;<A NAME="I2655"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association_list</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;'['&nbsp;<I>base_</I><A NAME="I2656"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>with</B>&nbsp;<B>delta</B>&nbsp;<A NAME="I2657"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association_list</A></SPAN>&nbsp;']'</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Normal"><span class="insert5">The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
-shall be a single descendant of a record type or record extension.<A NAME="I2636"></A></span></div>
+<div class="Normal"><span class="insert5">The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">record_delta_aggregate</A></SPAN> 
+shall be a single descendant of a record type or record extension.<A NAME="I2658"></A></span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Normal"><span class="insert5">The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN> 
-shall be a single array type.<A NAME="I2637"></A></span></div>
+<div class="Normal"><span class="insert5">The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN> 
+shall be a single array type.<A NAME="I2659"></A></span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Normal"><span class="insert5">The expected type for the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-of any <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
-is the type of the enclosing <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN>.<A NAME="I2638"></A> 
-<A NAME="I2639"></A></span></div>
+<div class="Normal"><span class="insert5">The expected type for the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of any <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN> 
+is the type of the enclosing <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN>.<A NAME="I2660"></A> 
+<A NAME="I2661"></A></span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Normal"><span class="insert5">The Name Resolution Rules and 
 Legality Rules for each <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">record_delta_aggregate</A></SPAN> 
 are as defined in <A HREF="RM-4-3-1.html">4.3.1</A>.</span></div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
+<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN>, 
 the expected type for each <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
-in an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association</A></SPAN> 
-is the index type of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN>.</span></div>
+in an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN> 
+is the index type of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN>.</span></div>
 <div class="paranum"><a name="p10">10/5</a></div>
-<div class="Normal"><span class="insert5">The expected type of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-in an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association</A></SPAN> 
-is defined as for an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association</A></SPAN> 
+<div class="Normal"><span class="insert5">The expected type of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN> 
+is defined as for an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN> 
 occurring within an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
-of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN>.</span></div>
+of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN>.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association</A></SPAN> 
+<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN> 
 shall not use the box symbol &lt;&gt;, and the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 shall not be <B>others</B>.</span></div>
 <div class="paranum"><a name="p12">12/5</a></div>
-<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
-the dimensionality of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN>, 
+the dimensionality of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN> 
 shall be 1.</span></div>
 <div class="paranum"><a name="p13">13/5</a></div>
-<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
-the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-and each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-in every <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association</A></SPAN> 
+<div class="Normal"><span class="insert5">For an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN>, 
+the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+and each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+in every <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN> 
 shall be of a nonlimited type.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p14">14/5</a></div>
-<div class="Normal"><span class="insert5">The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
-begins with the evaluation of the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
-and using that value to create and initialize the anonymous object of 
-the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>. 
-The bounds of the anonymous object of an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN> 
-and the discriminants and tag (if any) of the anonymous object of a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
-are those of the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>.</span></div>
+<div class="Normal"><span class="insert5">The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN> 
+begins with the evaluation of the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN>; 
+then that value is used to create and initialize the anonymous object 
+of the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>. 
+The bounds of the anonymous object of an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN> 
+and the discriminants and tag (if any) of the anonymous object of a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">record_delta_aggregate</A></SPAN> 
+are those of the <I>base_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>.</span></div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
-a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">record_delta_aggregate</A></SPAN>, 
 for each component associated with each <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
 (in an unspecified order):</span>&nbsp;</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Bulleted"><span class="insert5">if the associated component 
 belongs to a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0072">variant</A></SPAN>, 
 a check is made that the values of the discriminants are such that the 
-anonymous object has this component. <A NAME="I2640"></A>The exception 
-Constraint_Error is raised if this check fails.<A NAME="I2641"></A><A NAME="I2642"></A></span></div>
+anonymous object has this component. <A NAME="I2662"></A>The exception 
+Constraint_Error is raised if this check fails.<A NAME="I2663"></A><A NAME="I2664"></A></span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Bulleted"><span class="insert5">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted"><span class="insert5">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
 is evaluated, converted to the nominal subtype of the associated component, 
 and assigned to the component of the anonymous object.</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
-an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0122">array_delta_aggregate</A></SPAN>, 
 for each <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
-of each <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association</A></SPAN> 
+of each <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN> 
 (in the order given in the enclosing <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0116">array_component_association_list</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association_list</A></SPAN>, 
 respectively) the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 is evaluated; for each represented index value (in ascending order, if 
 the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
@@ -141,9 +142,9 @@ to the index type of the array type.</span></div>
 <div class="Bulleted"><span class="insert5">a check is made that the 
 index value belongs to the index range of the anonymous object of the 
 <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>; 
-<A NAME="I2643"></A>Constraint_Error is raised if this check fails.<A NAME="I2644"></A><A NAME="I2645"></A></span></div>
+<A NAME="I2665"></A>Constraint_Error is raised if this check fails.<A NAME="I2666"></A><A NAME="I2667"></A></span></div>
 <div class="paranum"><a name="p21">21/5</a></div>
-<div class="Bulleted"><span class="insert5">the component <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted"><span class="insert5">the component <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is evaluated, converted to the array component subtype, and assigned 
 to the component of the anonymous object identified by the index value.</span> 
 </div>
@@ -162,10 +163,11 @@ use in a postcondition:</span></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
 base expression can be nontrivial:</span></div>
 <div class="paranum"><a name="p26">26/5</a></div>
-<div class="Examples"><span class="insert5">New_Cell&nbsp;:&nbsp;Cell&nbsp;:=&nbsp;(Min_Cell&nbsp;(Link)&nbsp;<B>with&nbsp;delta</B>&nbsp;Value&nbsp;=&gt;&nbsp;42);<BR>
-&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A>&nbsp;for&nbsp;Cell&nbsp;and&nbsp;Link;&nbsp;<A HREF="RM-6-1.html">6.1</A>&nbsp;for&nbsp;Min_Cell</I></SPAN></span></div>
+<div class="Examples"><span class="insert5">New_Cell&nbsp;:&nbsp;Cell&nbsp;:=&nbsp;(Min_Cell&nbsp;(Head)&nbsp;<B>with&nbsp;delta</B>&nbsp;Value&nbsp;=&gt;&nbsp;42);<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A>&nbsp;for&nbsp;Cell&nbsp;and&nbsp;Head;&nbsp;<A HREF="RM-6-1.html">6.1</A>&nbsp;for&nbsp;Min_Cell</I></SPAN></span></div>
 <div class="paranum"><a name="p27">27/5</a></div>
-<div class="Examples"><span class="insert5">A1&nbsp;:&nbsp;Vector&nbsp;:=&nbsp;((1.0,&nbsp;2.0,&nbsp;3.0)&nbsp;<B>with&nbsp;delta</B>&nbsp;Integer&nbsp;(Random&nbsp;*&nbsp;3.0)&nbsp;=&gt;&nbsp;14.2);<BR>
+<div class="Examples"><span class="insert5">A1&nbsp;:&nbsp;Vector&nbsp;:=&nbsp;((0&nbsp;=&gt;&nbsp;1.0,&nbsp;1&nbsp;=&gt;&nbsp;2.0,&nbsp;2&nbsp;=&gt;&nbsp;3.0)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with&nbsp;delta</B>&nbsp;Integer(Random&nbsp;*&nbsp;2.0)&nbsp;=&gt;&nbsp;14.2);<BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-6.html">3.6</A>&nbsp;for&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Vector</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-6-1.html">6.1</A>&nbsp;for&nbsp;declaration&nbsp;of&nbsp;Random</I></SPAN></span></div>
 <div class="paranum"><a name="p28">28/5</a></div>
@@ -174,17 +176,17 @@ base expression can be nontrivial:</span></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
 base expression may also be class-wide:</span></div>
 <div class="paranum"><a name="p30">30/5</a></div>
-<div class="Examples"><span class="insert5"><B>function</B>&nbsp;Translate&nbsp;(P&nbsp;:&nbsp;Point'Class;&nbsp;X,&nbsp;Y&nbsp;:&nbsp;Float)&nbsp;<B>return</B>&nbsp;Point'Class&nbsp;<B>is</B><BR>
+<div class="Examples"><span class="insert5"><B>function</B>&nbsp;Translate&nbsp;(P&nbsp;:&nbsp;Point'Class;&nbsp;X,&nbsp;Y&nbsp;:&nbsp;Real)&nbsp;<B>return</B>&nbsp;Point'Class&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;(P&nbsp;<B>with&nbsp;delta</B>&nbsp;X&nbsp;=&gt;&nbsp;P.X&nbsp;+&nbsp;X,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;=&gt;&nbsp;P.Y&nbsp;+&nbsp;Y);&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-9.html">3.9</A>&nbsp;for&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Point</I></SPAN></span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -34,56 +34,56 @@
 <HR>
 <H1>5.7 Exit Statements</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
-is used to complete the execution of an enclosing <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>; 
-the completion is conditional if the <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
-includes a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>.] 
+<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
+is used to complete the execution of an enclosing <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>; 
+the completion is conditional if the <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
+includes a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>.] 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">exit_statement</SPAN><A NAME="I3665"></A><A NAME="S0178"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>exit</B>&nbsp;[<I>loop_</I><A NAME="I3666"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>]&nbsp;[<B>when</B>&nbsp;<A NAME="I3667"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">exit_statement</SPAN><A NAME="I3825"></A><A NAME="S0193"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>exit</B>&nbsp;[<I>loop_</I><A NAME="I3826"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>]&nbsp;[<B>when</B>&nbsp;<A NAME="I3827"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal">The <I>loop_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-if any, in an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
-shall resolve to denote a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>. 
+if any, in an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
+shall resolve to denote a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I3668"></A>Each <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
-<I>applies to</I> a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>; 
-this is the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
-being exited. An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3828"></A>Each <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
+<I>applies to</I> a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>; 
+this is the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN> 
+being exited. An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is only allowed within the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+is only allowed within the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN> 
 denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-and applies to that <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>. 
-An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
+and applies to that <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>. 
+An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
 without a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is only allowed within a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>, 
-and applies to the innermost enclosing one. An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
-that applies to a given <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
-shall not appear within a body or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
-if this construct is itself enclosed by the given <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>. 
+is only allowed within a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>, 
+and applies to the innermost enclosing one. An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
+that applies to a given <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN> 
+shall not appear within a body or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN>, 
+if this construct is itself enclosed by the given <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I3669"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>, 
-if present, is first evaluated. If the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
-is True, or if there is no <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>, 
-a transfer of control is done to complete the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>. 
-If the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
+<div class="Normal"><A NAME="I3829"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>, 
+if present, is first evaluated. If the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
+is True, or if there is no <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>, 
+a transfer of control is done to complete the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>. 
+If the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
 is False, no transfer of control takes place.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Notes">8&nbsp;&nbsp;Several nested loops can be exited by 
-an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
 that names the outer loop.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
@@ -105,7 +105,7 @@ that names the outer loop.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-5-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

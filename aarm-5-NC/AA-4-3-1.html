@@ -28,9 +28,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -53,7 +53,7 @@ value, using either a named or a positional association.]&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 <SPAN Class="swiss">record_component_association</SPAN><A NAME="I2735"></A><A NAME="S0109"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2736"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0110">component_choice_list</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I2737"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2736"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0110">component_choice_list</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I2737"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2738"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0110">component_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
@@ -120,7 +120,7 @@ or <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SP
 shall denote a needed component [(including possibly a discriminant)]. 
 Each <I>component_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">record_delta_aggregate</A></SPAN> 
 (see <A HREF="AA-4-3-4.html">4.3.4</A>) shall denote a nondiscriminant 
 component of the type of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>.</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
@@ -142,15 +142,15 @@ are well defined, and that discriminants that govern <SPAN Class="swiss"><A HREF
 can be given by static expressions.&nbsp;</div>
 <div class="paranum"><a name="p9.c">9.c/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We don't define &ldquo;needed&rdquo; 
-for <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>s 
+for <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">record_delta_aggregate</A></SPAN>s 
 so that there is no completeness requirement. But that means that we 
 need to ensure that the rules using &ldquo;needed&rdquo; doesn't appear 
-to apply to <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>s, 
+to apply to <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">record_delta_aggregate</A></SPAN>s, 
 and we also need Legality Rules to prevent giving the same component 
 twice and giving components from two different variants.&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2746"></A>The 
-expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
 is the type of the <I>associated</I> component(s); <A NAME="I2747"></A>the 
 associated component(s) are as follows:&nbsp;</div>
@@ -213,7 +213,7 @@ each <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_associat
 other than an <B>others</B> choice with a &lt;&gt; shall have at least 
 one associated component, and each needed component shall be associated 
 with exactly one <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN>. 
-For a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>, 
+For a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">record_delta_aggregate</A></SPAN>, 
 each <I>component_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 of each <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0110">component_choice_list</A></SPAN> 
 shall denote a distinct nondiscriminant component of the type of the 
@@ -226,7 +226,7 @@ components or several components with different types.&nbsp;</div>
 <div class="paranum"><a name="p16.b">16.b/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 Without these rules, there would be no way to know what was the expected 
-type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of the association. Note that some of the rules do not apply to &lt;&gt; 
 associations, as we do not need to resolve anything. We allow <B>others</B> 
 =&gt; &lt;&gt; to match no components as this is similar to array aggregates. 
@@ -249,7 +249,7 @@ that no needed components are left out, nor specified twice.&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0046-1.TXT">AI12-0046-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
 If a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 has two or more associated components, all of them shall be of the same 
 type, or all of them shall be of anonymous access types whose subtypes 
 statically match. In addition, Legality Rules are enforced separately 
@@ -257,7 +257,7 @@ for each associated component.</div>
 <div class="paranum"><a name="p16.f">16.f/4</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
 </B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0046-1.TXT">AI12-0046-1</A></I>} 
-AI83-00244 also requires that the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+AI83-00244 also requires that the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 shall be legal for each associated component. Ada 95 omitted this wording, 
 as it was thought that all cases of difference had been eliminated. That 
 probably was true, but Ada 2005 reintroduced cases where the types match 
@@ -305,7 +305,7 @@ have a null range.&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
 for a discriminant without a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
-shall have an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+shall have an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 rather than &lt;&gt;.&nbsp;</div>
 <div class="paranum"><a name="p17.b">17.b/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>A discriminant must always have 
@@ -315,27 +315,27 @@ unless the component has a default value.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">record_delta_aggregate</A></SPAN> 
 shall not:</div>
 <div class="paranum"><a name="p17.3">17.3/5</a></div>
 <div class="Bulleted">use the compound delimiter &lt;&gt; (box) rather 
-than an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>;</div>
+than an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>;</div>
 <div class="paranum"><a name="p17.4">17.4/5</a></div>
-<div class="Bulleted">have an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<div class="Bulleted">have an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of a limited type;</div>
 <div class="paranum"><a name="p17.5">17.5/5</a></div>
 <div class="Bulleted">omit the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0110">component_choice_list</A></SPAN>; 
 or</div>
 <div class="paranum"><a name="p17.c">17.c/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">record_delta_aggregate</A></SPAN> 
 cannot use positional notation; all choices shall be named choices.&nbsp;</div>
 <div class="paranum"><a name="p17.6">17.6/5</a></div>
 <div class="Bulleted">have a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0110">component_choice_list</A></SPAN> 
 that is an <B>others</B> choice.&nbsp;</div>
 <div class="paranum"><a name="p17.7">17.7/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
-For a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>, 
+For a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">record_delta_aggregate</A></SPAN>, 
 no two <I>component_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>s 
 shall denote components declared within different <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>s 
 of the same <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>.</div>
@@ -348,19 +348,19 @@ consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S01
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0086-1.TXT">AI12-0086-1</A></I>} 
 <A NAME="I2749"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN>, 
 any per-object constraints (see <A HREF="AA-3-8.html">3.8</A>) for components 
-specified in the association list are elaborated and any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
+specified in the association list are elaborated and any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
 are evaluated and converted to the subtype of the associated component. 
-<A NAME="I2750"></A>Any constraint elaborations and <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<A NAME="I2750"></A>Any constraint elaborations and <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 evaluations (and conversions) occur in an arbitrary order, except that 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 for a discriminant is evaluated (and converted) prior to the elaboration 
 of any per-object constraint that depends on it, which in turn occurs 
-prior to the evaluation and conversion of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+prior to the evaluation and conversion of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 for the component with the per-object constraint.<A NAME="I2751"></A> 
 If the value of a discriminant that governs a selected <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
- <I>P</I> is given by a nonstatic <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
-and the evaluation of that <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
-yields a value that does not belong to the nominal subtype of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+ <I>P</I> is given by a nonstatic <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+and the evaluation of that <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+yields a value that does not belong to the nominal subtype of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
 then Constraint_Error is raised.<A NAME="I2752"></A></div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The conversion in the first 
@@ -380,8 +380,8 @@ it cannot be Suppressed.&nbsp;</div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 defines the value for the associated component(s). For a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
 with &lt;&gt;, if the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
 has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
@@ -390,7 +390,7 @@ defines the value for the associated component(s); otherwise, the associated
 component(s) are initialized by default as for a stand-alone object of 
 the component subtype (see <A HREF="AA-3-3-1.html">3.3.1</A>).</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
 is evaluated (and converted) once for each associated component.</div>
 <div class="paranum"><a name="p20.a">20.a/3</a></div>
@@ -461,7 +461,7 @@ disallow extra values in a record aggregate. Now we do.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p31.c">31.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I2754"></A>&lt;&gt; can be used in place of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+<A NAME="I2754"></A>&lt;&gt; can be used in place of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPAN>, 
 default initializing the component.&nbsp;</div>
 
@@ -517,11 +517,11 @@ to say that this was not necessary, and since we explicitly state this
 sort of thing for generic instances, it seemed better to be explicit.</div>
 <div class="paranum"><a name="p31.j">31.j/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
-Made wording changes for <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN>s.</div>
+Made wording changes for <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">delta_aggregate</A></SPAN>s.</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

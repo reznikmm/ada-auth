@@ -20,9 +20,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -31,20 +31,22 @@
 <HR>
 <H1>4.3 Aggregates</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2506"></A>An <I>aggregate</I> combines 
+<div class="Normal"><A NAME="I2505"></A>An <I>aggregate</I> combines 
 component values into a composite value of an array type, record type, 
-or record extension. <A NAME="I2507"></A></div>
+or record extension. <A NAME="I2506"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">aggregate</SPAN><A NAME="I2508"></A><A NAME="S0106"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2509"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2510"></A><SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2511"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2512"></A><SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">aggregate</SPAN><A NAME="I2507"></A><A NAME="S0106"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2508"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2509"></A><SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2510"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2511"></A><SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">delta_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2512"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0123">container_aggregate</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Normal"><A NAME="I2513"></A>The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
-shall be a single array type, or a single descendant of a record type 
-or of a record extension. The expected type for any other <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
-shall be a single array type, record type, or record extension.&nbsp;</div>
+<div class="Normal"><A NAME="I2513"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+shall be a single array type, a single type with the Aggregate aspect 
+specified, or a single descendant of a record type or of a record extension. 
+</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/5</a></div>
@@ -70,7 +72,7 @@ this check fails.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-4-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

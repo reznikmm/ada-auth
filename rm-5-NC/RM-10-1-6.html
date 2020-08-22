@@ -19,9 +19,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-10-1-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -31,60 +31,60 @@
 <H1>10.1.6 Environment-Level Visibility Rules</H1>
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">The normal visibility rules do not apply within a 
-<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>, 
 nor within a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 that appears at the place of a compilation unit. The special visibility 
 rules for those contexts are given here.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Normal"><A NAME="I4614"></A><A NAME="I4615"></A><A NAME="I4616"></A><A NAME="I4617"></A>Within 
-the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN> 
-at the beginning of an explicit <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>, 
-and within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0274">nonlimited_with_clause</A></SPAN>, 
-the only declarations that are visible are those that are explicit <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s 
+<div class="Normal"><A NAME="I4832"></A><A NAME="I4833"></A><A NAME="I4834"></A><A NAME="I4835"></A>Within 
+the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN> 
+at the beginning of an explicit <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>, 
+and within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0296">nonlimited_with_clause</A></SPAN>, 
+the only declarations that are visible are those that are explicit <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s 
 of the environment, and the only declarations that are directly visible 
-are those that are explicit root <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s 
-of the environment. Within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0273">limited_with_clause</A></SPAN>, 
+are those that are explicit root <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s 
+of the environment. Within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0295">limited_with_clause</A></SPAN>, 
 the only declarations that are visible are those that are the implicit 
 declaration of the limited view of a library package of the environment, 
 and the only declarations that are directly visible are those that are 
 the implicit declaration of the limited view of a root library package.</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4618"></A><A NAME="I4619"></A><A NAME="I4620"></A><A NAME="I4621"></A>Within 
-a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
+<div class="Normal"><A NAME="I4836"></A><A NAME="I4837"></A><A NAME="I4838"></A><A NAME="I4839"></A>Within 
+a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-that is within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN>, 
-each <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN> 
-mentioned in a previous <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN> 
-of the same <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN> 
-is visible, and each root <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN> 
-so mentioned is directly visible. In addition, within such a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>, 
+that is within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>, 
+each <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
+mentioned in a previous <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN> 
+of the same <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN> 
+is visible, and each root <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
+so mentioned is directly visible. In addition, within such a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN>, 
 if a given declaration is visible or directly visible, each declaration 
 that occurs immediately within the given declaration's visible part is 
 also visible. No other declarations are visible or directly visible. 
 </div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I4622"></A><A NAME="I4623"></A>Within the 
-<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN> 
-of a subunit, <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>s 
-are visible as they are in the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN>; 
-in addition, the declaration corresponding to each <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0275">body_stub</A></SPAN> 
+<div class="Normal"><A NAME="I4840"></A><A NAME="I4841"></A>Within the 
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN> 
+of a subunit, <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s 
+are visible as they are in the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>; 
+in addition, the declaration corresponding to each <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0297">body_stub</A></SPAN> 
 in the environment is also visible.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4624"></A><A NAME="I4625"></A>Within a 
+<div class="Normal"><A NAME="I4842"></A><A NAME="I4843"></A>Within a 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> that 
 appears at the place of a compilation unit, the immediately preceding 
-<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN> 
-and each of its ancestors is visible. The ancestor root <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN> 
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
+and each of its ancestors is visible. The ancestor root <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
 is directly visible.</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I4626"></A>Notwithstanding the rules of 
-<A HREF="RM-4-1-3.html">4.1.3</A>, an expanded name in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN>, 
+<div class="Normal"><A NAME="I4844"></A>Notwithstanding the rules of 
+<A HREF="RM-4-1-3.html">4.1.3</A>, an expanded name in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> in 
-a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>, 
 or a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 that appears at the place of a compilation unit may consist of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 that denotes a generic package and a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
@@ -93,7 +93,7 @@ a generic unit; see <A HREF="RM-10-1-1.html">10.1.1</A>.)&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-10-1-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

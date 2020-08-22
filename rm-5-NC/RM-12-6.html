@@ -26,9 +26,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-12-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -37,54 +37,54 @@
 <HR>
 <H1>12.6 Formal Subprograms</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5016"></A><A NAME="I5017"></A>Formal subprograms 
+<div class="Normal"><A NAME="I5249"></A><A NAME="I5250"></A>Formal subprograms 
 can be used to pass callable entities to a generic unit.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_subprogram_declaration</SPAN><A NAME="I5018"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5019"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0314">formal_concrete_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5020"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">formal_subprogram_declaration</SPAN><A NAME="I5251"></A><A NAME="S0335"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5252"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0336">formal_concrete_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5253"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN></div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_concrete_subprogram_declaration</SPAN><A NAME="I5021"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5022"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0181">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5023"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0316">subprogram_default</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5024"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">formal_concrete_subprogram_declaration</SPAN><A NAME="I5254"></A><A NAME="S0336"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5255"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5256"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5257"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p2.2">2.2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_abstract_subprogram_declaration</SPAN><A NAME="I5025"></A><A NAME="S0315"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5026"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0181">subprogram_specification</A></SPAN>&nbsp;<B>is&nbsp;abstract</B>&nbsp;[<A NAME="I5027"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0316">subprogram_default</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5028"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">formal_abstract_subprogram_declaration</SPAN><A NAME="I5258"></A><A NAME="S0337"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5259"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is&nbsp;abstract</B>&nbsp;[<A NAME="I5260"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5261"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">subprogram_default</SPAN><A NAME="I5029"></A><A NAME="S0316"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5030"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0317">default_name</A></SPAN>&nbsp;|&nbsp;&lt;&gt;&nbsp;|&nbsp;<B>null</B></div>
+<div class="Indented1"><SPAN Class="swiss">subprogram_default</SPAN><A NAME="I5262"></A><A NAME="S0338"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5263"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0339">default_name</A></SPAN>&nbsp;|&nbsp;&lt;&gt;&nbsp;|&nbsp;<B>null</B></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">default_name</SPAN><A NAME="I5031"></A><A NAME="S0317"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5032"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">default_name</SPAN><A NAME="I5264"></A><A NAME="S0339"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5265"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0316">subprogram_default</A></SPAN> 
+<div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN> 
 of <B>null</B> shall not be specified for a formal function or for a 
-<SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN>. 
+<SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5033"></A>The expected profile for the 
-<SPAN Class="swiss"><A HREF="RM-12-6.html#S0317">default_name</A></SPAN>, 
+<div class="Normal"><A NAME="I5266"></A>The expected profile for the 
+<SPAN Class="swiss"><A HREF="RM-12-6.html#S0339">default_name</A></SPAN>, 
 if any, is that of the formal subprogram.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I5034"></A>For a generic formal subprogram, 
+<div class="Normal"><A NAME="I5267"></A>For a generic formal subprogram, 
 the expected profile for the actual is that of the formal subprogram. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">The profiles of the formal and any named default 
-shall be mode conformant. <A NAME="I5035"></A></div>
+shall be mode conformant. <A NAME="I5268"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">The profiles of the formal and actual shall be mode 
-conformant. <A NAME="I5036"></A></div>
+conformant. <A NAME="I5269"></A></div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a parameter or 
-result subtype of a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN> 
+result subtype of a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
 that has an explicit <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>:</div>
 <div class="paranum"><a name="p8.2">8.2/5</a></div>
-<div class="Bulleted">if the actual matching the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN> 
+<div class="Bulleted">if the actual matching the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
 statically denotes a generic formal subprogram of another generic unit 
 <I>G</I>, and the instantiation containing the actual occurs within the 
 body of a generic unit <I>G</I> or within the body of a generic unit 
@@ -93,8 +93,8 @@ then the corresponding parameter or result type of the formal subprogram
 of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>;</div>
 <div class="paranum"><a name="p8.3">8.3/2</a></div>
 <div class="Bulleted">otherwise, the subtype of the corresponding parameter 
-or result type of the actual matching the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN> 
-shall exclude null. <A NAME="I5037"></A>In addition to the places where 
+or result type of the actual matching the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
+shall exclude null. <A NAME="I5270"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -105,19 +105,19 @@ allowed (see <A HREF="RM-8-5-1.html">8.5.1</A>). Similarly, if the actual
 subprogram in an instantiation is a prefixed view, the prefix of that 
 view shall denote an object for which renaming is allowed.</div>
 <div class="paranum"><a name="p8.5">8.5/5</a></div>
-<div class="Normal">&nbsp;If a formal parameter of a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+<div class="Normal">&nbsp;If a formal parameter of a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 is of a specific tagged type <I>T</I> or of an anonymous access type 
 designating a specific tagged type <I>T</I>, <I>T</I> is called a <I>controlling 
-type</I> of the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN>. 
-Similarly, if the result of a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+type</I> of the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN>. 
+Similarly, if the result of a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 for a function is of a specific tagged type <I>T</I> or of an anonymous 
 access type designating a specific tagged type <I>T</I>, <I>T</I> is 
-called a controlling type of the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN>. 
-A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+called a controlling type of the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN>. 
+A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 shall have exactly one controlling type, and that type shall not be incomplete. 
-<A NAME="I5038"></A></div>
+<A NAME="I5271"></A></div>
 <div class="paranum"><a name="p8.6">8.6/5</a></div>
-<div class="Normal">&nbsp;The actual subprogram for a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+<div class="Normal">&nbsp;The actual subprogram for a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 shall be:</div>
 <div class="paranum"><a name="p8.7">8.7/5</a></div>
 <div class="Bulleted">a dispatching operation of the controlling type; 
@@ -134,26 +134,26 @@ Static Semantics below).&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
 declares a generic formal subprogram. The types of the formal parameters 
 and result, if any, of the formal subprogram are those determined by 
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
-given in the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN>; 
+given in the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN>; 
 however, independent of the particular subtypes that are denoted by the 
 <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s, 
 the nominal subtypes of the formal parameters and result, if any, are 
 defined to be nonstatic, and unconstrained if of an array type (no applicable 
 index constraint is provided in a call on a formal subprogram). In an 
-instance, a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN> 
+instance, a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
 declares a view of the actual. The profile of this view takes its subtypes 
 and calling convention from the original profile of the actual entity, 
 while taking the formal parameter <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
-from the profile given in the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN>. 
+from the profile given in the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN>. 
 The view is a function or procedure, never an entry.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;If a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-in the profile of the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN> 
+in the profile of the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
 denotes a formal private or formal derived type and the actual type for 
 this formal type is a class-wide type <I>T</I>'Class, then for the purposes 
 of resolving the corresponding actual subprogram at the point of the 
@@ -167,26 +167,26 @@ subprogram with the same defining name, and having the same profile as
 the primitive subprogram except that <I>T</I> is systematically replaced 
 by <I>T</I>'Class in the types of its profile, is potentially use-visible. 
 The body of such a subprogram is as defined in <A HREF="RM-12-5-1.html">12.5.1</A> 
-for primitive subprograms of a formal type when the actual type is class-wide.<A NAME="I5039"></A> 
+for primitive subprograms of a formal type when the actual type is class-wide.<A NAME="I5272"></A> 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal">If a generic unit has a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0316">subprogram_default</A></SPAN> 
+<div class="Normal">If a generic unit has a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN> 
 specified by a box, and the corresponding actual parameter is omitted, 
 then it is equivalent to an explicit actual parameter that is a usage 
 name identical to the defining name of the formal.</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;If a generic unit has a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0316">subprogram_default</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;If a generic unit has a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN> 
 specified by the reserved word <B>null</B>, and the corresponding actual 
 parameter is omitted, then it is equivalent to an explicit actual parameter 
-that is a null procedure having the profile given in the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN>.</div>
+that is a null procedure having the profile given in the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN>.</div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The subprogram declared by a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;The subprogram declared by a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 with a controlling type <I>T</I> is a dispatching operation of type <I>T</I>. 
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Notes">13&nbsp;&nbsp;The matching rules for formal subprograms 
-state requirements that are similar to those applying to <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN>s 
+state requirements that are similar to those applying to <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN>s 
 (see <A HREF="RM-8-5-4.html">8.5.4</A>). In particular, the name of a 
 parameter of the formal subprogram need not be the same as that of the 
 corresponding parameter of the actual subprogram; similarly, for these 
@@ -204,26 +204,26 @@ of a first subtype be used in any declaration of a formal subprogram.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Notes">15&nbsp;&nbsp;The subtype specified for a formal parameter 
 of a generic formal subprogram can be any visible subtype, including 
-a generic formal subtype of the same <SPAN Class="swiss"><A HREF="RM-12-1.html#S0291">generic_formal_part</A></SPAN>.</div>
+a generic formal subtype of the same <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>.</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Notes">16&nbsp;&nbsp;A formal subprogram is matched by an 
 attribute of a type if the attribute is a function with a matching specification. 
 An enumeration literal of a given type matches a parameterless formal 
 function whose result type is the given type.</div>
-<div class="paranum"><a name="p15">15</a></div>
-<div class="Notes">17&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0317">default_name</A></SPAN> 
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Notes">17&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0339">default_name</A></SPAN> 
 denotes an entity that is visible or directly visible at the place of 
-the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN>; 
 a box used as a default is equivalent to a name that denotes an entity 
-that is directly visible at the place of the <SPAN Class="swiss">_instantiation</SPAN>. 
+that is directly visible at the place of the <SPAN Class="swiss"><A HREF="RM-12-3.html#S0315">generic_instantiation</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Notes">18&nbsp;&nbsp;The actual subprogram cannot be abstract 
-unless the formal subprogram is a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+unless the formal subprogram is a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 (see <A HREF="RM-3-9-3.html">3.9.3</A>).</div>
 <div class="paranum"><a name="p16.1">16.1/2</a></div>
-<div class="Notes">19&nbsp;&nbsp;The subprogram declared by a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
-is an abstract subprogram. All calls on a subprogram declared by a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN> 
+<div class="Notes">19&nbsp;&nbsp;The subprogram declared by a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
+is an abstract subprogram. All calls on a subprogram declared by a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 must be dispatching calls. See <A HREF="RM-3-9-3.html">3.9.3</A>.</div>
 <div class="paranum"><a name="p16.2">16.2/2</a></div>
 <div class="Notes">20&nbsp;&nbsp;A null procedure as a subprogram default 
@@ -259,7 +259,7 @@ formal subprograms:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-12-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

@@ -23,9 +23,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-31.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,7 +35,7 @@
 <H1>A.18.32 The Generic Package Containers.Bounded_Indefinite_Holders</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0254-1.TXT">AI12-0254-1</A></I>} 
-For each instance of The language-defined generic package Containers.Bounded_Indefinite_Holders<A NAME="I8380"></A> 
+The language-defined generic package Containers.Bounded_Indefinite_Holders<A NAME="I8916"></A> 
 provides a private type Holder and a set of operations for that type. 
 It provides the same operations as the package Containers.Indefinite_Holders 
 (see <A HREF="AA-A-18-18.html">A.18.18</A>), with the difference that 
@@ -70,9 +70,9 @@ to be different for different containers, so making it a discriminant
 <div class="Bulleted" style="margin-bottom: 0.3em">Add to the precondition 
 of To_Holder and Replace_Element:</div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>and&nbsp;then</B>&nbsp;(<B>if</B>&nbsp;New_Item'Size&nbsp;&gt;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>and&nbsp;then</B>&nbsp;(New_Item'Size&nbsp;&lt;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max_Element_Size_in_Storage_Elements&nbsp;*&nbsp;System.Storage_Unit<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Program_Error)</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</div>
 <div class="paranum"><a name="p8.a">8.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This ensures that an object that 
 won't fit is not inserted into the container.&nbsp;</div>
@@ -80,11 +80,11 @@ won't fit is not inserted into the container.&nbsp;</div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0254-1.TXT">AI12-0254-1</A></I>} 
-<A NAME="I8381"></A>It is a bounded error to assign from a bounded holder 
+<A NAME="I8917"></A>It is a bounded error to assign from a bounded holder 
 object while tampering with elements of that object is prohibited. Either 
 Program_Error is raised by the assignment, execution proceeds with the 
 target object prohibiting tampering with elements, or execution proceeds 
-normally.&nbsp;</div>
+normally.<A NAME="I8918"></A>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p10">10/5</a></div>
@@ -128,16 +128,27 @@ The storage pool implementation can assume that all Allocate calls occur
 together, and similarly for Deallocate calls, thus simplifying the pool 
 implementation so that allocation only occurs at a high-water mark location. 
 </div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0350-1.TXT">AI12-0350-1</A></I>} 
+The Implementation Advice about the Move and Swap operations is deleted 
+for bounded holders; these operations can copy elements as needed.</div>
+<div class="paranum"><a name="p14.a">14.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The memory of a bounded indefinite 
+holder belongs directly to the container, so it cannot be moved with 
+the element. If the element type contains any internal pointers, moving 
+it without calling Adjust would leave such pointers pointing to the wrong 
+holder object. Thus, a full copy is needed, including any associated 
+finalization and adjustments.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p13.c">13.c/5</a></div>
+<div class="paranum"><a name="p14.b">14.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0254-1.TXT">AI12-0254-1</A></I>} 
-<A NAME="I8382"></A> The generic package Containers.Bounded_Indefinite_Holders 
+<A NAME="I8919"></A> The generic package Containers.Bounded_Indefinite_Holders 
 is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-31.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;

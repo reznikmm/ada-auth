@@ -24,9 +24,9 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
@@ -35,80 +35,84 @@
 <HR>
 <H1>12.1 Generic Declarations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 declares a generic unit, which is either a generic subprogram or a generic 
-package. A <SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN> 
-includes a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0291">generic_formal_part</A></SPAN> 
+package. A <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
+includes a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN> 
 declaring any generic formal parameters. A generic formal parameter can 
 be an object; alternatively (unlike a parameter of a subprogram), it 
 can be a type, a subprogram, or a package.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_declaration</SPAN><A NAME="I4855"></A><A NAME="S0288"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4856"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4857"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0290">generic_package_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generic_declaration</SPAN><A NAME="I5083"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5084"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5085"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0312">generic_package_declaration</A></SPAN></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_subprogram_declaration</SPAN><A NAME="I4858"></A><A NAME="S0289"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4859"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0291">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I4860"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0181">subprogram_specification</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4861"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">generic_subprogram_declaration</SPAN><A NAME="I5086"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5087"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5088"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5089"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_package_declaration</SPAN><A NAME="I4862"></A><A NAME="S0290"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4863"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0291">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I4864"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">generic_package_declaration</SPAN><A NAME="I5090"></A><A NAME="S0312"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5091"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5092"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_formal_part</SPAN><A NAME="I4865"></A><A NAME="S0291"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>generic</B>&nbsp;{<A NAME="I4866"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4867"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_part</SPAN><A NAME="I5093"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>generic</B>&nbsp;{<A NAME="I5094"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5095"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN>}</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_formal_parameter_declaration</SPAN><A NAME="I4868"></A><A NAME="S0292"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4869"></A><SPAN Class="swiss"><A HREF="RM-12-4.html#S0297">formal_object_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4870"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0298">formal_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4871"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0313">formal_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4872"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0318">formal_package_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_parameter_declaration</SPAN><A NAME="I5096"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5097"></A><SPAN Class="swiss"><A HREF="RM-12-4.html#S0319">formal_object_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5098"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0320">formal_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5099"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5100"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0340">formal_package_declaration</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Indented1">The only form of <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-allowed within a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0291">generic_formal_part</A></SPAN> 
+allowed within a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 (that is, the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 shall not include an explicit <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>). 
 The defining name of a generic subprogram shall be an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-(not an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0187">operator_symbol</A></SPAN>). 
+(not an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0202">operator_symbol</A></SPAN>). 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I4873"></A><A NAME="I4874"></A><A NAME="I4875"></A><A NAME="I4876"></A>A 
-<SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I5101"></A><A NAME="I5102"></A><A NAME="I5103"></A><A NAME="I5104"></A>A 
+<SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 declares a generic unit &mdash; a generic package, generic procedure, 
 or generic function, as appropriate.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I4877"></A>An entity is a <I>generic formal</I> 
-entity if it is declared by a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>. 
+<div class="Normal"><A NAME="I5105"></A>An entity is a <I>generic formal</I> 
+entity if it is declared by a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>. 
 &ldquo;Generic formal,&rdquo; or simply &ldquo;formal,&rdquo; is used 
 as a prefix in referring to objects, subtypes (and types), functions, 
 procedures and packages, that are generic formal entities, as well as 
 to their respective declarations. Examples: &ldquo;generic formal procedure&rdquo; 
-or a &ldquo;formal integer type declaration.&rdquo;&nbsp;</div>
+or a &ldquo;formal integer type declaration.&rdquo;</div>
+<div class="paranum"><a name="p9.1">9.1/5</a></div>
+<div class="Normal">&nbsp;The list of <SPAN Class="swiss"><A HREF="RM-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN> 
+form a <I>declaration list</I> of the generic unit.<A NAME="I5106"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I4878"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I5107"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Notes">1&nbsp;&nbsp;Outside a generic unit a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN> 
+that denotes the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 denotes the generic unit. In contrast, within the declarative region 
 of the generic unit, a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0288">generic_declaration</A></SPAN> 
+that denotes the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 denotes the current instance.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Notes">2&nbsp;&nbsp;Within a generic <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>, 
+<div class="Notes">2&nbsp;&nbsp;Within a generic <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>, 
 the name of this program unit acts as the name of a subprogram. Hence 
 this name can be overloaded, and it can appear in a recursive call of 
 the current instance. For the same reason, this name cannot appear after 
-the reserved word <B>new</B> in a (recursive) <SPAN Class="swiss"><A HREF="RM-12-3.html#S0293">generic_instantiation</A></SPAN>.</div>
+the reserved word <B>new</B> in a (recursive) <SPAN Class="swiss"><A HREF="RM-12-3.html#S0315">generic_instantiation</A></SPAN>.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Notes">3&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-12-6.html#S0317">default_name</A></SPAN> 
-appearing in a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0291">generic_formal_part</A></SPAN> 
-is not evaluated during elaboration of the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0291">generic_formal_part</A></SPAN>; 
+or <SPAN Class="swiss"><A HREF="RM-12-6.html#S0339">default_name</A></SPAN> 
+appearing in a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN> 
+is not evaluated during elaboration of the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>; 
 instead, it is evaluated when used. (The usual visibility rules apply 
 to any <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 used in a default: the denoted declaration therefore has to be visible 
@@ -163,7 +167,7 @@ generic declaration declaring a generic package:</I>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
