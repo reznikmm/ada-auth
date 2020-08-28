@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1548,10 +1548,10 @@ Text=[@i{Example of a parallel loop with a chunk specification:}]}
       @key[end];
    @key[end loop];}}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   Put_Line("Total=" & Partial_Sum'Reduce("+", 0) &
-            ", Min=" & Partial_Min'Reduce(Natural'Min, Natural'Last) &
-            ", Max=" & Partial_Max'Reduce(Natural'Max, 0));
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0386-1]}
+@ChgAdded{Version=[5],Text=[   Put_Line ("Total=" & Partial_Sum'Reduce("+", 0)'Image &
+             ", Min=" & Partial_Min'Reduce(Natural'Min, Natural'Last)'Image &
+             ", Max=" & Partial_Max'Reduce(Natural'Max, 0)'Image);
 @key[end];]}
 
 @begin{WideAbove}
@@ -1893,6 +1893,25 @@ properties:]}
 
 @end{Legality}
 
+@begin{Erron}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0354-1]}
+@ChgAdded{Version=[5],Text=[A call on the First or Next operation on a given 
+Parallel_Iterator object with a given Chunk value, which does not propagate an
+exception, should return a Cursor value that either yields False when passed to
+Has_Element, or that identifies an element distinct from any Cursor value 
+returned by a call on a First or Next operation on the same Parallel_Iterator
+object with a different Chunk value. If the First or Next operations with a 
+Chunk parameter behave in any other manner, execution is erroneous.]}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This describes the expectations from a 
+  user-written parallel iterator. If the expectations are not met, execution
+  is erroneous so that implementations do not need to go to heroic efforts
+  to avoid problems caused by bad iterators. This is similar to the handling
+  of storage pools, see @RefSecNum{Storage Management}.]}
+@end{Reason}
+@end{Erron}
+
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}User-defined
@@ -1923,7 +1942,7 @@ properties:]}
   is new; it allows container element iterators to set the tampering state
   once rather than for each use of the element.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1],ARef=[AI12-0354-1]}
   @ChgAdded{Version=[5],Text=[Parallel iterator
   interfaces are new; they allow user-defined parallel loops to be defined.]}
 @end{Extend2012}
@@ -2579,9 +2598,15 @@ The body of @i<P> consists of the conditionally executed
 @end{Example}
 @end{ImplNote}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0326-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0344-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[In a procedural iterator, the 
+Parallel_Calls aspect (see @RefSecNum{Conflict Check Policies}) of
+the loop body procedure is True if the reserved word @key[parallel] occurs
+in the corresponding loop statement, and False otherwise.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0326-2],ARef=[AI12-0344-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following aspects may be specified
-for a callable entity @i<S> that has at least one formal parameter of an
+for a callable entity @i<S> that has exactly one formal parameter of an
 anonymous access-to-subprogram type:]}
 
 @begin{Description}
@@ -2683,6 +2708,13 @@ entity also shall have a True Parallel_Iterator aspect.]}
 shall begin with the reserved word @key[parallel] if and only if the callable
 entity identified in the @nt{iterator_procedure_call} has a Parallel_iterator
 aspect of True.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgAdded{Version=[5],Text=[If the actual parameter of an anonymous 
+access-to-subprogram type, passed in an explicit call of a subprogram for which
+the Parallel_Iterator aspect is True, is of the form @i<P>'Access, the
+designated subprogram @i<P> shall have a Parallel_Calls aspect True (see
+@RefSecNum{Conflict Check Policies}).]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0326-2]}
 @ChgAdded{Version=[5],Text=[The @nt{sequence_of_statements} of a
@@ -2837,7 +2869,7 @@ environment variables (see @RefSecNum{The Package Environment_Variables}):]}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],
-    ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0294-1],ARef=[AI12-0326-2]}
+    ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0294-1],ARef=[AI12-0326-2],ARef=[AI12-0344-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Procedural
   iterators, and the Allows_Exit and Parallel_Iterator aspects are
   new in Ada 202x.]}

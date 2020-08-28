@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @LabeledClause{Type Conversions}
 
@@ -658,6 +658,13 @@ the operand type is not @i<universal_@!access>:]}
     that's OK, because the compiler can know about them at compile time of
     the instantiation.]}
   @end{Reason}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0380-1]}
+  @ChgAdded{Version=[5],Text=[If the target type has a Global aspect other than
+  @key[in out all] or Unspecified, then each mode of the Global aspect of the 
+  operand type shall identify a subset of the variables identified by the
+  corresponding mode of the target type Global aspect, or by the @key[in out]
+  mode of the target type Global aspect.]}
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0064-2]}
   @ChgAdded{Version=[5],Text=[If the target type is nonblocking, the operand
@@ -1453,9 +1460,10 @@ as a @nt<name>.
   predicate checks possible in original Ada 2012, only ones using the new
   aspect Predicate_Failure.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
-  @ChgAdded{Version=[5],Text=[Required Nonblocking
-  (see @RefSecNum{Intertask Communication}) matching for
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0380-1]}
+  @ChgAdded{Version=[5],Text=[Required Global (see 
+  @RefSecNum{The Global and Global'Class Aspects}) and Nonblocking (see 
+  @RefSecNum{Intertask Communication}) aspect matching for
   access-to-subprogram conversions.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1]}
@@ -1505,7 +1513,7 @@ type that covers it.],Old=[]}
 @ChgAdded{Version=[3],Text=[@Redundant[If the operand of a @nt{qualified_expression}
 denotes an object, the @nt{qualified_expression} denotes a constant view
 of that object.] The nominal subtype of a @nt{qualified_expression}
-is the subtype denoted by the @nt{subtype_mark}.]}
+is the subtype denoted by the @nt{subtype_mark}.@Defn2{Term=[nominal subtype],Sec={of a qualified expression}}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
   @ChgAdded{Version=[3],Text=[This is stated in @RefSecNum{Objects and Named Numbers}.]}
@@ -2507,6 +2515,10 @@ a predefined concatenation operator whose result type is a string
 type@Chg{Version=[5],New=[ that is not a descendant of a formal array
 type],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0385-1]}
+@ChgAdded{Version=[5],Text=[a shifting or rotating function associated with
+a modular type declared in package Interfaces (see @RefSecNum{The Package Interfaces});]}
+
 an enumeration literal;
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
@@ -3133,6 +3145,13 @@ raising.
   a formal array type. This could potentially make some expression non-static;
   but as that could only matter in a context where a static string is required
   (such as the Link_Name aspect), it is quite unlikely.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0385-1]}
+  @ChgAdded{Version=[5],Text=[Shifting and rotating functions declared in
+  package Interfaces are now static. This could potentially make some expression
+  illegal that is legal if nonstatic (as in Ada 2012). While this can happen
+  especially in conditional code that is not in use, it is quite unlikely
+  given typical uses of shifting or rotating functions.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -3213,14 +3232,24 @@ of a @nt<discrete_@!subtype_@!definition>; or],Old=[]}
 @nt{formal_type_declaration}.],Old=[]}
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0374-2]}
+@ChgAdded{Version=[5],Text=[The Global or Global'Class aspects (see 
+@RefSecNum{The Global and Global'Class aspects}) of two entities @i{statically
+match}@Defn2{Term=[statically match],Sec=[for global aspects]} if both consist of 
+a single @nt{global_aspect_definition}
+where each is the reserved word @key[null], or each is of the form
+@ldquote@;@nt{global_mode} @nt{global_designator}@rdquote with the same 
+sequence of reserved words.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1],ARef=[AI12-0374-2]}
 @Defn2{Term=[statically matching], Sec=(for subtypes)}
 A subtype @i(statically matches) another subtype of the same type
 if they have statically matching constraints@Chg{Version=[2],New=[,
 @Chg{Version=[3],New=[all predicate specifications that apply to
-them come from the same declarations, @Chg{Version=[5],New=[Object_Size (see
+them come from the same declarations, @Chg{Version=[5],New=[Nonblocking aspects
+have the same value, global aspects statically match, Object_Size (see
 @RefSecNum{Operational and Representation Attributes}) has been specified to
 have a nonconfirming value for either both or neither, and the nonconfirming
 values, if any, are the same, ],Old=[]}],Old=[]}and, for

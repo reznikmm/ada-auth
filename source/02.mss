@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:50 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -811,8 +811,7 @@ signifies at least one end of line.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Leading@Defn{separator}
 @Redundant[In some cases an explicit @i(separator) is required
-to separate adjacent lexical elements.]
-A separator is
+to separate adjacent lexical elements.] A separator is
 any of a @Chg{Version=[2],New=[@ntf{separator_space}],Old=[space character]},
 a @Chg{Version=[2],New=[@ntf{format_effector}],Old=[format effector]},
 or the end of a line, as follows:

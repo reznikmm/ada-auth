@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.151 $}
+@Comment{$Revision: 1.152 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1793,7 +1793,10 @@ for an abstract type.]}
 @end{TheProof}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
-@ChgAdded{Version=[4],Text=[If a type extension occurs at a point where a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0382-1]}
+@ChgAdded{Version=[4],Text=[If a type extension occurs
+@Chg{Version=[5],New=[immediately within the visible part of
+a package specification,],Old=[]} at a point where a
 private operation of some ancestor is visible and inherited, and a
 Type_Invariant'Class expression applies to that ancestor, then the inherited
 operation shall be abstract or shall be overridden.]}
@@ -2473,12 +2476,15 @@ scheduled for weekends:}]}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0042-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0382-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatiblities with Ada 2012}
   @b<Corrigendum:> A private operation that is inherited in the visible
   part of a package to which a class-wide invariant applies now requires
   overriding. This is a very unlikely situation, and will prevent problems
   with invariant checks being added to routines that assume that they don't
-  have them.]}
+  have them.@Chg{Version=[5],New=[ Note: The original wording was missing
+  the restriction to the visible part of the package, this was added 
+  later for Ada 202x.],Old=[]}]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -2678,12 +2684,12 @@ with a single parameter of type @i<T> or of a class-wide type that covers
   overloaded functions can be used as a stable property function.]}
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0285-1],ARef=[AI12-0324-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0285-1],ARef=[AI12-0324-1],ARef=[AI12-0388-1]}
 @ChgAdded{Version=[5],Text=[A @i<type property aspect definition> is
 @Defn{type property aspect definition}a list of @nt{name}s written in the syntax
 of a @nt{positional_array_aggregate}. A @i<subprogram property aspect
-definition>@Defn{subprogram property aspect definition} is a list of @nt{name}s
-preceded by an optional @key[not], also written in the syntax of a
+definition>@Defn{subprogram property aspect definition} is a list of @nt{name}s,
+each optionally preceded by reserved word @key[not], also written in the syntax of a
 @nt{positional_array_aggregate}.]}
 
 @begin{Honest}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:38 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -997,9 +997,9 @@ in @RefSecNum(Edited Output Generation).
 @begin{StaticSem}
 @leading@;The library package Text_IO.Editing has the following declaration:
 @begin{Example}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key(package) Ada.Text_IO.Editing@Chg{Version=[5],New=[
-   @key(with) Nonblocking],Old=[]} @key(is)@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
+   @key(with) Nonblocking, Global => @key[in out synchronized]],Old=[]} @key(is)@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
 
    @key(type) @AdaTypeDefn{Picture} @key(is) @key(private);
 

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.149 $}
+@Comment{$Revision: 1.150 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -295,9 +295,9 @@ of the generic body result in distinct tags.@PDefn{Unspecified}
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @Chg{Version=[5],New=[],Old=[ @key[is]]}
-    @Chg{Version=[2],New=[@Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Tag);]}
+    @Chg{Version=[2],New=[@Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Tag);]}
     ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Tag);],Old=[]}
 
@@ -608,7 +608,7 @@ generic function exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_@!Dispatching_@!Constructor]}@key{generic}
     @key{type} T (<>) @key{is abstract tagged limited private};
     @key{type} Parameters (<>) @key{is limited private};
@@ -618,7 +618,7 @@ generic function exists:]}
    (The_Tag : Tag;
     Params  : @key{not null access} Parameters) @key{return} T'Class@Chg{Version=[3],New=[
    @key{with} @Chg{Version=[5],New=[Preelaborate, ],Old=[]}Convention => Intrinsic@Chg{Version=[5],New=[,
-        Nonblocking => Constructor'Nonblocking],Old=[]}],Old=[]};@Chg{Version=[5],New=[],Old=[
+        Nonblocking, Global => @key[in out synchronized]],Old=[]}],Old=[]};@Chg{Version=[5],New=[],Old=[
 @key{pragma} Preelaborate(Generic_Dispatching_Constructor);]}@Chg{Version=[3],New=[],Old=[
 @key{pragma} Convention(Intrinsic, Generic_Dispatching_Constructor);]}]}
 @end{Example}
@@ -4872,11 +4872,12 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   (even if the access result is of an access-to-subprogram type).]}
 
   @ChgRef{Version=[3],Kind=[Added]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0345-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0345-1],ARef=[AI12-0372-1]}
   @ChgAdded{Version=[3],Text=[If the call itself defines the result of a
-  function to which one of the above rules applies, @Chg{Version=[5],New=[or
-  has an accessibility level that is tied to the result of such a
-  function, ],Old=[]}these rules are applied recursively;]}
+  function @Chg{Version=[5],New=[@i<F>],Old=[to which one of the above rules 
+  applies]}, @Chg{Version=[5],New=[or has an accessibility level that is tied 
+  to the result of such a function @i<F>, then the master of the call is that of the master of the
+  call invoking @i<F>],Old=[these rules are applied recursively]};]}
 
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Text=[In other cases, the master of the call is that of
@@ -5338,15 +5339,21 @@ that is not explicitly aliased],Old=[the body of @i<F>]}.]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
-@ChgAdded{Version=[3],Text=[For determining whether a level is statically deeper
-than the level of the anonymous access type of an access result of a
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0372-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[When within a function body or the
+return expression of an expression function, the accessibility level of the master 
+representing an execution of the function],Old=[For determining whether a level]}
+is statically deeper than @Chg{Version=[5],New=[that of the master
+of the function call invoking that execution@Redundant[, independent
+of how the master of the function call is determined (see above)]],Old=[the 
+level of the anonymous access type of an access result of a
 function@Chg{Version=[4],New=[ or generic function @i<F>],Old=[]},
 when within a return statement that applies to
 @Chg{Version=[4],New=[@i<F> or the return expression of expression
 function @i<F>],Old=[the function]}, the level
 of the master of the call is presumed to be the same as that of the level
 of the master that elaborated the@Chg{Version=[4],New=[],Old=[ function]}
-body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
+body@Chg{Version=[4],New=[ of @i<F>],Old=[]}]}.]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
@@ -5356,9 +5363,8 @@ body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
   is of an explicitly aliased parameter).]}]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
-  @ChgAdded{Version=[5],Text=[For an expression function @i{F}, the
-    @ldquote@;body of @i{F}@rdquote is the
-    @nt{expression_function_declaration} of @i{F}.]}
+  @ChgAdded{Version=[5],Text=[@ldquote@;Function body@rdquote includes bodies
+  of generic functions.]}
 @end{Honest}
 
 
@@ -5978,6 +5984,14 @@ denotes an aliased view of an object}:
   @end(Ramification)
 @end(itemize)
 
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0363-1]}
+  @ChgAdded{Version=[5],Text=[Additional restrictions exist in the specialized 
+    needs annexes. For instance, @RefSecNum{Shared Variable Control} includes 
+    additional restrictions on atomic and volatile @nt{prefix}es of the Access
+    attribute.]}
+@end{Discussion}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0041-1]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[In addition to the places where
   @LegalityTitle normally apply
@@ -6541,6 +6555,14 @@ uses of anonymous access types.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0277-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the static level of
   explicitly aliased parameters.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0372-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Redefined the statically deeper
+  relationship for the master of a function call and locals of that call.
+  This might cause programs to be rejected that were previously legal, but
+  any such program should have failed a dynamic accessibility check.
+  Thus this is not an incompatibility as it is changing the detection of
+  an error from runtime to compile-time.]}
 @end{DiffWord2012}
 
 

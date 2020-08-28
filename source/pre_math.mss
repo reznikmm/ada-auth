@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:52 $}
+@Comment{$Date: 2020/08/28 03:34:22 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -433,20 +433,27 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @begin{StaticSem}
 @Leading@;The library package Numerics.Float_Random has the following declaration:
 @begin{Example}
-@key[package] Ada.Numerics.Float_Random @key[is]@ChildUnit{Parent=[Ada.Numerics],Child=[Float_@!Random]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@key[package] Ada.Numerics.Float_Random@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada.Numerics],Child=[Float_@!Random]}
 
    -- @RI{Basic facilities}
 
    @key[type] @AdaTypeDefn{Generator} @key[is] @key[limited] @key[private];
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[subtype] @AdaSubtypeDefn{Name=[Uniformly_Distributed],Of=[Float]} @key[is] Float @key[range] 0.0 .. 1.0;
-   @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Uniformly_Distributed;
+   @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Uniformly_Distributed@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator;
-                    Initiator : @key[in] Integer);
-   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator);
+                    Initiator : @key[in] Integer)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
+   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
    -- @RI{Advanced facilities}
@@ -454,10 +461,12 @@ sequences (for debugging) to unique sequences in each execution of a program.
    @key[type] @AdaTypeDefn{State} @key[is] @key[private];
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Save}  (Gen        : @key[in]  Generator;
                     To_State   : @key[out] State);
    @key[procedure] @AdaSubDefn{Reset} (Gen        : @key[in]  Generator;
-                    From_State : @key[in]  State);
+                    From_State : @key[in]  State)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
    @AdaObjDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
@@ -480,27 +489,34 @@ needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 The generic library package Numerics.Discrete_Random has the following
 declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Discrete_@!Random]}
-@key[generic]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@key[generic]@ChildUnit{Parent=[Ada.Numerics],Child=[Discrete_@!Random]}
    @key[type] Result_Subtype @key[is] (<>);
-@key[package] Ada.Numerics.Discrete_Random @key[is]
+@key[package] Ada.Numerics.Discrete_Random@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]
 
    -- @RI{Basic facilities}
 
    @key[type] @AdaTypeDefn{Generator} @key[is] @key[limited] @key[private];
 
 
-   @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Result_Subtype;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Result_Subtype@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0144-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0144-1],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[5],Text=[   @key[function] Random (Gen   : Generator;
                     First : Result_Subtype;
                     Last  : Result_Subtype) @key[return] Result_Subtype
-      @key[with] Post => Random'Result @key[in] First .. Last;]}
+      @key[with] Post => Random'Result @key[in] First .. Last
+           Global => @key[overriding in out] Gen;]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator;
-                    Initiator : @key[in] Integer);
-   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator);
+                    Initiator : @key[in] Integer)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
+   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
    -- @RI{Advanced facilities}
@@ -508,10 +524,12 @@ declaration:
    @key[type] @AdaTypeDefn{State} @key[is] @key[private];
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Save}  (Gen        : @key[in]  Generator;
                     To_State   : @key[out] State);
    @key[procedure] @AdaSubDefn{Reset} (Gen        : @key[in]  Generator;
-                    From_State : @key[in]  State);
+                    From_State : @key[in]  State)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
    @AdaObjDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};

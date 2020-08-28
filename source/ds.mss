@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.83 $ $Date: 2020/06/03 00:09:01 $ $Author: randy $ }
+@comment{ $Revision: 1.84 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2020/06/03 00:09:01 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -2313,10 +2313,10 @@ and its acronym are more familiar.
 
 @leading@keepnext@;The following language-defined library package exists:
 @begin{example}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @b(with) Ada.Streams; -- @Examcom{see @RefSecNum[The Streams Subsystem]}
 @key(package) System.RPC@Chg{Version=[5],New=[
-   @key(with) Nonblocking => False],Old=[]} @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
+   @key(with) Nonblocking => False, Global => @key[in out synchronized]],Old=[]} @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
 
    @key(type) @AdaTypeDefn{Partition_Id} @key(is range) 0 .. @RI(implementation-defined);
 

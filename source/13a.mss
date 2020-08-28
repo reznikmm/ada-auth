@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.129 $}
+@Comment{$Revision: 1.130 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1950,13 +1950,13 @@ aspect of a boolean type, in which case it is equivalent to the
 subprogram of a tagged type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0194-1]}
-@ChgAdded{Version=[3],Text=[There are no language-defined aspects that
-may be specified on a @nt{renaming_declaration},
-@Chg{Version=[5],New=[],Old=[a @nt{generic_formal_parameter_declaration}, ]}a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0194-1],ARef=[AI12-0380-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[There are no 
+language-defined aspects that may be specified on a @nt{renaming_declaration},
+a @nt{generic_formal_parameter_declaration}, a
 @nt{subunit}, a @nt{package_body}, a @nt{task_body}, a @nt{protected_body},
-@Chg{Version=[5],New=[an @nt{entry_body}, ],Old=[]}or a @nt{body_stub} other
-than a @nt{subprogram_body_stub}.]}
+or a @nt{body_stub} other
+than a @nt{subprogram_body_stub}.]}]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2]}
@@ -1973,11 +1973,14 @@ than a @nt{subprogram_body_stub}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0105-1]}
-@ChgAdded{Version=[3],Text=[A language-defined aspect shall not be specified in
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0380-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[Unless specified otherwise,
+a],Old=[A]} language-defined aspect shall not be specified in
 an @nt{aspect_specification} given on a
 @Chg{Version=[4],New=[],Old=[@nt{subprogram_body} or
 @nt{subprogram_body_stub} that is a ]}completion of @Chg{Version=[4],New=[a
-subprogram or generic subprogram],Old=[another declaration]}.]}
+@Chg{Version=[5],New=[program unit],Old=[subprogram or generic 
+subprogram]}],Old=[another declaration]}.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1990,21 +1993,30 @@ subprogram or generic subprogram],Old=[another declaration]}.]}
     implementation-defined aspects, so implementers need to carefully define
     whether such aspects can be applied to bodies and stubs, and what happens
     if they are specified on both the declaration and body of a unit.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
+  @ChgAdded{Version=[5],Text=[In addition, the language does not define 
+    default aspect matching rules for generic formals; only the handful of 
+    aspects allowed on formals have such rules. (Most aspects are not
+    allowed on generic formal parameters, see @RefSecNum{Operational and Representation Aspects}.) 
+    Therefore, the implementation will need to define actual type matching 
+    rules for any aspects allowed on formal types.]}
 @end{Reason}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI12-0138-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0374-1]}
-@ChgAdded{Version=[4],Text=[If an aspect of a derived 
-type@Chg{Version=[5],New=[ (or its first subtype)],Old=[]} is inherited from
-an ancestor @Chg{Version=[5],New=[(sub)type],Old=[type]} and has the boolean 
-value True, the inherited value shall not be
-overridden to have the value False for the derived 
-type@Chg{Version=[5],New=[ (or its first subtype)],Old=[]}, unless otherwise
-specified in this International Standard.@Chg{Version=[5],New=[ If an aspect
-of a nonfirst subtype is inherited from the subtype in the 
-@nt{subtype_indication} that defines it, and has the value True, the 
-inherited value shall not be overridden to have the value False for the
-nonfirst subtype, unless otherwise specified in this International Standard.],Old=[]}]}
+@ChgAdded{Version=[4],Text=[If an aspect of a derived type is inherited from
+an ancestor type and has the boolean value True, the inherited value shall 
+not be overridden to have the value False for the derived type, unless 
+otherwise specified in this International Standard.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This definition leaves holes for Boolean aspects
+  that can be specified on non-first subtypes. Such aspects (for instance,
+  Nonblocking) must have their own rules (that is, "otherwise specify" rules)
+  that define the effects of inheriting from subtypes (both first subtypes
+  and nonfirst subtypes).]}
+@end{Discussion}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}

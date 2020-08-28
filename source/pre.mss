@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:01 $}
+@Comment{$Date: 2020/08/28 03:34:23 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.61 $}
+@comment{$Revision: 1.62 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -412,45 +412,15 @@ it has to be a package, and it has to contain at least
 the following declarations: ...@rquotes@;.
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
-@ChgAdded{Version=[5],Text=[The implementation may add specifications of
-synchronized entities of implementation-defined packages to the global
-specification (see  @RefSecNum{The Global and Global'Class aspects}) for
-any language-defined entity that is not declared pure or has a global
-specification of @key[null].]}
-
-@begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Ada runtime libraries often use
-  implementation-defined helper packages to implement the language-defined
-  units. For instance, it is common to use a common low-level package to
-  implement I/O; if that package includes support for Current Input and Current
-  Output, then it is likely to have state that needs to be reflected in the
-  packages that use it such as Ada.Text_IO.]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[We want to allow such packages, so we have defined
-  this permission to allow them to include state if necessary. We require that
-  any such state is synchronized to ensure that appropriate use (as defined
-  above) is allowed in parallel operations.]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[We exclude units that are declared pure from this
-  permission since this is a declaration that the unit doesn't have any global
-  state, so specifying otherwise would defeat the purpose. Similarly, entities
-  that explicitly specify Global as @key[null] are supposed to have no
-  side-effects, and we don't want implementations to add any.]}
-@end{Reason}
-
 @begin{Ramification}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Implementations are of course allowed to make
-  other changes to the specifications of language-defined units, so long as
-  those changes are semantically neutral (that is, no program could change
-  legality or effect because of the changes). In particular, an implementation
-  would need to add implementation-defined units to the context clause in order
-  to use the previous permission; this is allowed and does not need a separate
-  permission.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Implementations are of course allowed to make 
+  changes to the specifications of language-defined units, so long as those 
+  changes are semantically neutral (that is, no program could change legality
+  or effect because of the changes). In particular, an implementation can 
+  @key[with] additional units (especially implementation-defined units) so
+  long as those units do not change the elaboration of the language-defined 
+  unit.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[Similarly, an implementation can add
@@ -508,12 +478,11 @@ The order and lettering of the annexes has been changed.
   this might change behavior of some programs, it would do so by eliminating
   erroneous execution, so we don't consider this an inconsistency.]}
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
-  @ChgAdded{Version=[5],Text=[Added an @ImplPermTitle to allow
-  implementation-defined units to appear in most language-defined global
-  specifications.]}
-
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0200-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> The rules requiring concurrent
   access of language-defined subprograms were clarified further.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1],ARef=[AI12-0208-1],ARef=[AI12-0234-1],ARef=[AI12-0254-1],ARef=[AI12-0293-1],ARef=[AI12-0321-1],ARef=[AI12-0340-1]}
+  @ChgAdded{Version=[5],Text=[Added various new units to the
+  list of predefined units.]}
 @end{DiffWord2012}

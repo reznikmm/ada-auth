@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:01 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -268,10 +268,12 @@ a property of a file object, not of an external file.
 @begin{StaticSem}
 @Leading@;The generic library package Sequential_IO has the following declaration:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[with] Ada.IO_Exceptions;
 @key[generic]
    @key[type] Element_Type(<>) @key[is] @key[private];
-@key[package] Ada.Sequential_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Sequential_IO]}
+@key[package] Ada.Sequential_IO@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada],Child=[Sequential_IO]}
 
    @key[type] @AdaTypeDefn{File_Type} @key[is] @key[limited] @key[private];
 
@@ -301,12 +303,17 @@ a property of a file object, not of an external file.
    @key[function] @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0130-1]}
-@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type);]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0302-1]}
+@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type))@Chg{Version=[5],New=[
+       @key[with] Global => @key[overriding in out] File],Old=[]};]}
 
    --@RI{ Input and output operations}
 
-   @key[procedure] @AdaSubDefn{Read}  (File : @key[in] File_Type; Item : @key[out] Element_Type);
-   @key[procedure] @AdaSubDefn{Write} (File : @key[in] File_Type; Item : @key[in] Element_Type);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Read}  (File : @key[in] File_Type; Item : @key[out] Element_Type)@Chg{Version=[5],New=[
+       @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Write} (File : @key[in] File_Type; Item : @key[in] Element_Type)@Chg{Version=[5],New=[
+       @key[with] Global => @key[overriding in out] File],Old=[]};
 
    @key[function] @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
 
@@ -781,10 +788,12 @@ The exception Mode_Error is propagated if the mode is not In_File.
 @begin{StaticSem}
 @Leading@;The generic library package Direct_IO has the following declaration:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[with] Ada.IO_Exceptions;
 @key[generic]
    @key[type] Element_Type @key[is] @key[private];
-@key[package] Ada.Direct_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Direct_IO]}
+@key[package] Ada.Direct_IO@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada],Child=[Direct_IO]}
 
    @key[type] @AdaTypeDefn{File_Type} @key[is] @key[limited] @key[private];
 
@@ -816,19 +825,29 @@ The exception Mode_Error is propagated if the mode is not In_File.
    @key[function] @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0130-1]}
-@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type);]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0302-1]}
+@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};]}
 
    --@RI{ Input and output operations}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Read} (File : @key[in] File_Type; Item : @key[out] Element_Type;
-                                        From : @key[in] Positive_Count);
-   @key[procedure] @AdaSubDefn{Read} (File : @key[in] File_Type; Item : @key[out] Element_Type);
+                                        From : @key[in] Positive_Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Read} (File : @key[in] File_Type; Item : @key[out] Element_Type)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Write}(File : @key[in] File_Type; Item : @key[in]  Element_Type;
-                                        To   : @key[in] Positive_Count);
-   @key[procedure] @AdaSubDefn{Write}(File : @key[in] File_Type; Item : @key[in] Element_Type);
+                                        To   : @key[in] Positive_Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Write}(File : @key[in] File_Type; Item : @key[in] Element_Type)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
 
-   @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
 
    @key[function] @AdaSubDefn{Index}(File : @key[in] File_Type) @key[return] Positive_Count;
    @key[function] @AdaSubDefn{Size} (File : @key[in] File_Type) @key[return] Count;
@@ -1069,12 +1088,14 @@ the construction of user-defined input-output packages.
 @begin{StaticSem}
 @Leading@;The generic library package Storage_IO has the following declaration:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[with] Ada.IO_Exceptions;
 @key[with] System.Storage_Elements;
 @key[generic]
    @key[type] Element_Type @key[is] @key[private];
-@key[package] Ada.Storage_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Storage_IO]}
-   @key[pragma] Preelaborate(Storage_IO);
+@key[package] Ada.Storage_IO@Chg{Version=[5],New=[
+   @key[with] Preelaborate, Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada],Child=[Storage_IO]}@Chg{Version=[5],New=[],Old=[
+   @key[pragma] Preelaborate(Storage_IO);]}
 
    @AdaObjDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count :=
       @RI(implementation-defined);
@@ -1278,8 +1299,10 @@ Append_File is new in Ada 95.
 @begin{StaticSem}
 @Leading@;The library package Text_IO has the following declaration:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[with] Ada.IO_Exceptions;
-@key[package] Ada.Text_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Text_IO]}
+@key[package] Ada.Text_IO@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada],Child=[Text_IO]}
 
    @key[type] @AdaTypeDefn{File_Type} @key[is] @key[limited] @key[private];
 
@@ -1343,108 +1366,180 @@ Append_File is new in Ada 95.
 
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051],ARef=[AI95-00057-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 --@RI{Buffer control}
-   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] @Chg{New=[],Old=[@key[out] ]}File_Type);
-   @key[procedure] @AdaSubDefn{Flush};
+   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] @Chg{New=[],Old=[@key[out] ]}File_Type)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Flush}@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
 
    --@RI{ Specification of line and page lengths}
 
-   @key[procedure] @AdaSubDefn{Set_Line_Length}(File : @key[in] File_Type; To : @key[in] Count);
-   @key[procedure] @AdaSubDefn{Set_Line_Length}(To   : @key[in] Count);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Set_Line_Length}(File : @key[in] File_Type; To : @key[in] Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Set_Line_Length}(To   : @key[in] Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
-   @key[procedure] @AdaSubDefn{Set_Page_Length}(File : @key[in] File_Type; To : @key[in] Count);
-   @key[procedure] @AdaSubDefn{Set_Page_Length}(To   : @key[in] Count);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Set_Page_Length}(File : @key[in] File_Type; To : @key[in] Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Set_Page_Length}(To   : @key[in] Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function]  @AdaSubDefn{Line_Length}(File : @key[in] File_Type) @key[return] Count;
-   @key[function]  @AdaSubDefn{Line_Length} @key[return] Count;
+   @key[function]  @AdaSubDefn{Line_Length} @key[return] Count@Chg{Version=[5],New=[
+      @key[with] Global => @key[in all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function]  @AdaSubDefn{Page_Length}(File : @key[in] File_Type) @key[return] Count;
-   @key[function]  @AdaSubDefn{Page_Length} @key[return] Count;
+   @key[function]  @AdaSubDefn{Page_Length} @key[return] Count@Chg{Version=[5],New=[
+      @key[with] Global => @key[in all]],Old=[]};
 
    --@RI{ Column, Line, and Page Control}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{New_Line}   (File    : @key[in] File_Type;
-                         Spacing : @key[in] Positive_Count := 1);
-   @key[procedure] @AdaSubDefn{New_Line}   (Spacing : @key[in] Positive_Count := 1);
+                         Spacing : @key[in] Positive_Count := 1)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{New_Line}   (Spacing : @key[in] Positive_Count := 1)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Skip_Line}  (File    : @key[in] File_Type;
-                         Spacing : @key[in] Positive_Count := 1);
-   @key[procedure] @AdaSubDefn{Skip_Line}  (Spacing : @key[in] Positive_Count := 1);
+                         Spacing : @key[in] Positive_Count := 1)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Skip_Line}  (Spacing : @key[in] Positive_Count := 1)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function]  @AdaSubDefn{End_Of_Line}(File : @key[in] File_Type) @key[return] Boolean;
    @key[function]  @AdaSubDefn{End_Of_Line} @key[return] Boolean;
 
-   @key[procedure] @AdaSubDefn{New_Page}   (File : @key[in] File_Type);
-   @key[procedure] @AdaSubDefn{New_Page};
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{New_Page}   (File : @key[in] File_Type)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{New_Page}@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
-   @key[procedure] @AdaSubDefn{Skip_Page}  (File : @key[in] File_Type);
-   @key[procedure] @AdaSubDefn{Skip_Page};
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Skip_Page}  (File : @key[in] File_Type)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Skip_Page}@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function]  @AdaSubDefn{End_Of_Page}(File : @key[in] File_Type) @key[return] Boolean;
-   @key[function]  @AdaSubDefn{End_Of_Page} @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_Page} @key[return] Boolean@Chg{Version=[5],New=[
+      @key[with] Global => @key[in all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function]  @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
-   @key[function]  @AdaSubDefn{End_Of_File} @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_File} @key[return] Boolean@Chg{Version=[5],New=[
+      @key[with] Global => @key[in all]],Old=[]};
 
-   @key[procedure] @AdaSubDefn{Set_Col} (File : @key[in] File_Type; To : @key[in] Positive_Count);
-   @key[procedure] @AdaSubDefn{Set_Col} (To   : @key[in] Positive_Count);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Set_Col} (File : @key[in] File_Type; To : @key[in] Positive_Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Set_Col} (To   : @key[in] Positive_Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
-   @key[procedure] @AdaSubDefn{Set_Line}(File : @key[in] File_Type; To : @key[in] Positive_Count);
-   @key[procedure] @AdaSubDefn{Set_Line}(To   : @key[in] Positive_Count);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Set_Line}(File : @key[in] File_Type; To : @key[in] Positive_Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Set_Line}(To   : @key[in] Positive_Count)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function] @AdaSubDefn{Col} (File : @key[in] File_Type) @key[return] Positive_Count;
-   @key[function] @AdaSubDefn{Col}  @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Col}  @key[return] Positive_Count@Chg{Version=[5],New=[
+      @key[with] Global => @key[in all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function] @AdaSubDefn{Line}(File : @key[in] File_Type) @key[return] Positive_Count;
-   @key[function] @AdaSubDefn{Line} @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Line} @key[return] Positive_Count@Chg{Version=[5],New=[
+      @key[with] Global => @key[in all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[function] @AdaSubDefn{Page}(File : @key[in] File_Type) @key[return] Positive_Count;
-   @key[function] @AdaSubDefn{Page} @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Page} @key[return] Positive_Count@Chg{Version=[5],New=[
+      @key[with] Global => @key[in all]],Old=[]};
 
    --@RI{ Character Input-Output}
 
-   @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] Character);
-   @key[procedure] @AdaSubDefn{Get}(Item : @key[out] Character);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] Character)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Get}(Item : @key[out] Character)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
-   @key[procedure] @AdaSubDefn{Put}(File : @key[in]  File_Type; Item : @key[in] Character);
-   @key[procedure] @AdaSubDefn{Put}(Item : @key[in]  Character);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Put}(File : @key[in]  File_Type; Item : @key[in] Character)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Put}(Item : @key[in]  Character)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Look_Ahead} (File        : @key[in]  File_Type;
                          Item        : @key[out] Character;
-                         End_Of_Line : @key[out] Boolean);
+                         End_Of_Line : @key[out] Boolean)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
    @key[procedure] @AdaSubDefn{Look_Ahead} (Item        : @key[out] Character;
-                         End_Of_Line : @key[out] Boolean);
+                         End_Of_Line : @key[out] Boolean)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Get_Immediate}(File      : @key[in]  File_Type;
-                           Item      : @key[out] Character);
-   @key[procedure] @AdaSubDefn{Get_Immediate}(Item      : @key[out] Character);
+                           Item      : @key[out] Character)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Get_Immediate}(Item      : @key[out] Character)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Get_Immediate}(File      : @key[in]  File_Type;
                            Item      : @key[out] Character;
-                           Available : @key[out] Boolean);
+                           Available : @key[out] Boolean)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
    @key[procedure] @AdaSubDefn{Get_Immediate}(Item      : @key[out] Character;
-                           Available : @key[out] Boolean);
+                           Available : @key[out] Boolean)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
    --@RI{ String Input-Output}
 
-   @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] String);
-   @key[procedure] @AdaSubDefn{Get}(Item : @key[out] String);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] String)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Get}(Item : @key[out] String)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
-   @key[procedure] @AdaSubDefn{Put}(File : @key[in]  File_Type; Item : @key[in] String);
-   @key[procedure] @AdaSubDefn{Put}(Item : @key[in]  String);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Put}(File : @key[in]  File_Type; Item : @key[in] String)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Put}(Item : @key[in]  String)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Get_Line}(File : @key[in]  File_Type;
                       Item : @key[out] String;
-                      Last : @key[out] Natural);
-   @key[procedure] @AdaSubDefn{Get_Line}(Item : @key[out] String; Last : @key[out] Natural);
+                      Last : @key[out] Natural)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Get_Line}(Item : @key[out] String; Last : @key[out] Natural)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Get_Line}(File : @key[in]  File_Type) @key[return] String;
-   @key[function] @AdaSubDefn{Get_Line} @key[return] String;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0302-1]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Get_Line}(File : @key[in]  File_Type) @key[return] String@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[function] @AdaSubDefn{Get_Line} @key[return] String@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};]}
 
-   @key[procedure] @AdaSubDefn{Put_Line}(File : @key[in]  File_Type; Item : @key[in] String);
-   @key[procedure] @AdaSubDefn{Put_Line}(Item : @key[in]  String);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+   @key[procedure] @AdaSubDefn{Put_Line}(File : @key[in]  File_Type; Item : @key[in] String)@Chg{Version=[5],New=[
+      @key[with] Global => @key[overriding in out] File],Old=[]};
+   @key[procedure] @AdaSubDefn{Put_Line}(Item : @key[in]  String)@Chg{Version=[5],New=[
+      @key[with] Global => @key[in out all]],Old=[]};
 
 --@RI{ Generic packages for Input-Output of Integer Types}
 
@@ -1455,20 +1550,25 @@ Append_File is new in Ada 95.
       @AdaObjDefn{Default_Width} : Field := Num'Width;
       @AdaObjDefn{Default_Base}  : Number_Base := 10;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
-                    Width : @key[in] Field := 0);
+                    Width : @key[in] Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
-                    Base  : @key[in] Number_Base := Default_Base);
+                    Base  : @key[in] Number_Base := Default_Base)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
-                    Base  : @key[in] Number_Base := Default_Base);
+                    Base  : @key[in] Number_Base := Default_Base)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
                     Last : @key[out] Positive)@Chg{Version=[5],New=[
@@ -1487,20 +1587,25 @@ Append_File is new in Ada 95.
       @AdaObjDefn{Default_Width} : Field := Num'Width;
       @AdaObjDefn{Default_Base}  : Number_Base := 10;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
-                    Width : @key[in] Field := 0);
+                    Width : @key[in] Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
-                    Base  : @key[in] Number_Base := Default_Base);
+                    Base  : @key[in] Number_Base := Default_Base)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
-                    Base  : @key[in] Number_Base := Default_Base);
+                    Base  : @key[in] Number_Base := Default_Base)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
                     Last : @key[out] Positive)@Chg{Version=[5],New=[
@@ -1522,21 +1627,27 @@ Append_File is new in Ada 95.
       @AdaObjDefn{Default_Aft}  : Field := Num'Digits-1;
       @AdaObjDefn{Default_Exp}  : Field := 3;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Put}(File : @key[in] File_Type;
                     Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in] String;
@@ -1558,21 +1669,27 @@ Append_File is new in Ada 95.
       @AdaObjDefn{Default_Aft}  : Field := Num'Aft;
       @AdaObjDefn{Default_Exp}  : Field := 0;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Put}(File : @key[in] File_Type;
                     Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
@@ -1594,21 +1711,27 @@ Append_File is new in Ada 95.
       @AdaObjDefn{Default_Aft}  : Field := Num'Aft;
       @AdaObjDefn{Default_Exp}  : Field := 0;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
-                    Width : @key[in]  Field := 0);
+                    Width : @key[in]  Field := 0)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Put}(File : @key[in] File_Type;
                     Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
@@ -1631,17 +1754,23 @@ Append_File is new in Ada 95.
       @AdaObjDefn{Default_Width}   : Field := 0;
       @AdaObjDefn{Default_Setting} : Type_Set := Upper_Case;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type;
-                    Item : @key[out] Enum);
-      @key[procedure] @AdaSubDefn{Get}(Item : @key[out] Enum);
+                    Item : @key[out] Enum)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
+      @key[procedure] @AdaSubDefn{Get}(Item : @key[out] Enum)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
       @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Enum;
                     Width : @key[in] Field    := Default_Width;
-                    Set   : @key[in] Type_Set := Default_Setting);
+                    Set   : @key[in] Type_Set := Default_Setting)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] File],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(Item  : @key[in] Enum;
                     Width : @key[in] Field    := Default_Width;
-                    Set   : @key[in] Type_Set := Default_Setting);
+                    Set   : @key[in] Type_Set := Default_Setting)@Chg{Version=[5],New=[
+         @key[with] Global => @key[in out all]],Old=[]};
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
@@ -3264,11 +3393,13 @@ package Text_IO.Bounded_IO has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Strings.Bounded;
 @key{generic}
    @key{with package} Bounded @key{is}
                      @key{new} Ada.Strings.Bounded.Generic_Bounded_Length (<>);
-@key{package} Ada.Text_IO.Bounded_IO @key{is}@ChildUnit{Parent=[Ada.Text_IO],Child=[Bounded_IO]}]}
+@key{package} Ada.Text_IO.Bounded_IO@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Text_IO],Child=[Bounded_IO]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put}
@@ -3422,7 +3553,9 @@ Text_IO.Unbounded_IO has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Strings.Unbounded;
-@key{package} Ada.Text_IO.Unbounded_IO @key{is}@ChildUnit{Parent=[Ada.Text_IO],Child=[Unbounded_IO]}]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@key{package} Ada.Text_IO.Unbounded_IO@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Text_IO],Child=[Unbounded_IO]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put}
@@ -3739,9 +3872,11 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @Leading@;The library package Streams.Stream_IO has the following declaration:
 @begin(example)
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0283-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key(with) Ada.IO_Exceptions;@ChildUnit{Parent=[Ada.Streams],Child=[Stream_@!IO]}
-@key(package) Ada.Streams.Stream_IO @key(is)@Chg{Version=[3],New=[
-    @key(pragma) Preelaborate(Stream_IO);],Old=[]}
+@key(package) Ada.Streams.Stream_IO@Chg{Version=[5],New=[
+   @key(with) Preelaborate, Global => @key(in out synchronized)],Old=[]} @key(is)@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[
+    @key(pragma) Preelaborate(Stream_IO);]}],Old=[]}
 
     @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Root_Stream_Type'Class;
 
@@ -3783,33 +3918,43 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
     -- @RI(Read array of stream elements from file)
     @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
                     Item : @key(out) Stream_Element_Array;
                     Last : @key(out) Stream_Element_Offset;
-                    From : @key(in)  Positive_Count);
+                    From : @key(in)  Positive_Count)@Chg{Version=[5],New=[
+        @key(with) Global => @key(overriding in out) File],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
     @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
                     Item : @key(out) Stream_Element_Array;
-                    Last : @key(out) Stream_Element_Offset);
+                    Last : @key(out) Stream_Element_Offset))@Chg{Version=[5],New=[
+        @key(with) Global => @key(overriding in out) File],Old=[]};
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
     -- @RI(Write array of stream elements into file)
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
                      Item : @key(in) Stream_Element_Array;
-                     To   : @key(in) Positive_Count);
+                     To   : @key(in) Positive_Count))@Chg{Version=[5],New=[
+        @key(with) Global => @key(overriding in out) File],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
-                     Item : @key(in) Stream_Element_Array);
+                     Item : @key(in) Stream_Element_Array))@Chg{Version=[5],New=[
+        @key(with) Global => @key(overriding in out) File],Old=[]};
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
     -- @RI(Operations on position within file)
 
-    @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+    @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count))@Chg{Version=[5],New=[
+        @key(with) Global => @key(overriding in out) File],Old=[]};
 
     @key[function] @AdaSubDefn{Index}(File : @key[in] File_Type) @key[return] Positive_Count;
     @key[function] @AdaSubDefn{Size} (File : @key[in] File_Type) @key[return] Count;
@@ -4164,8 +4309,10 @@ a text file as a stream.
 @begin{StaticSem}
 @Leading@;The library package Text_IO.Text_Streams has the following declaration:
 @begin{example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[with] Ada.Streams;@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_@!Streams]}
-@key[package] Ada.Text_IO.Text_Streams @key[is]
+@key[package] Ada.Text_IO.Text_Streams@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]
    @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
    @key[function] @AdaSubDefn{Stream} (File : @key[in] File_Type) @key[return] Stream_Access;
@@ -4196,8 +4343,10 @@ a wide text file as a stream.
 @Leading@;The library package Wide_Text_IO.Text_Streams
 has the following declaration:
 @begin{example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[with] Ada.Streams;@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Text_@!Streams]}
-@key[package] Ada.Wide_Text_IO.Text_Streams @key[is]
+@key[package] Ada.Wide_Text_IO.Text_Streams@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]
    @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
    @key[function] @AdaSubDefn{Stream} (File : @key[in] File_Type) @key[return] Stream_Access;
@@ -4223,8 +4372,10 @@ a function for treating a wide wide text file as a stream.]}
 Wide_Wide_Text_IO.Text_Streams has the following declaration:]}
 @begin{example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@key[with] Ada.Streams;@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Text_@!Streams]}
-@key[package] Ada.Wide_Wide_Text_IO.Text_Streams @key[is]
+@key[package] Ada.Wide_Wide_Text_IO.Text_Streams@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]
    @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

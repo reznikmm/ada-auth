@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.74 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
+@comment{ $Revision: 1.75 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:52 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1021,12 +1021,13 @@ Text_IO.Complex_IO has the following declaration:
   part of Text_IO are directly visible within it.
 @end{Ramification}
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[with] Ada.Numerics.Generic_Complex_Types;
 @key[generic]@ChildUnit{Parent=[Ada.Text_IO],Child=[Complex_IO]}
    @key[with] @key[package] Complex_Types @key[is]
          @key[new] Ada.Numerics.Generic_Complex_Types (<>);
-@key[package] Ada.Text_IO.Complex_IO @key[is]
-
+@key[package] Ada.Text_IO.Complex_IO@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]
 
    @key[use] Complex_Types;
 

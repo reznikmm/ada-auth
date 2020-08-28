@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -509,11 +509,11 @@ converts from that record type to type Address.
 
 @Leading@;The following language-defined generic library package exists:
 @begin{Example}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @ChildUnit{Parent=[System],Child=[Address_@!To_@!Access_@!Conversions]}@key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
 @key[package] System.Address_To_Access_Conversions @Chg{Version=[5],New=[],Old=[ @key[is]]}
-   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Address_To_Access_Conversions);]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Address_To_Access_Conversions);]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] Object_Pointer @key[is] @key[access] @key[all] Object;
@@ -2539,12 +2539,12 @@ the generic procedure Unchecked_Deallocation.]
 @leading@keepnext@;The following language-defined generic library procedure exists:
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0319-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1],ARef=[AI12-0319-1]}
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
 @SubChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name)@Chg{Version=[3],New=[
-   @key(with) @Chg{Version=[5],New=[Preelaborate,
+   @key(with) @Chg{Version=[5],New=[Preelaborate, Global => @key[in out synchronized],
         Nonblocking => Object'Nonblocking @key(and) Name'Storage_Pool'Nonblocking,
         ],Old=[]}Convention => Intrinsic;],Old=[;
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);]}@Chg{Version=[5],New=[],Old=[
@@ -3357,8 +3357,9 @@ exists:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[System.Storage_Pools],Child=[Subpools]}@key[package] System.Storage_Pools.Subpools @key[is]
-   @key[pragma] Preelaborate (Subpools);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[System.Storage_Pools],Child=[Subpools]}@key[package] System.Storage_Pools.Subpools@Chg{Version=[5],New=[],Old=[ @key[is]]}
+    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Global => @key[in out synchronized] @key[is]],Old=[(Subpools);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0356-1]}
@@ -3386,18 +3387,22 @@ exists:]}
       @key[return access] Root_Storage_Pool_With_Subpools'Class;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_Pool_of_Subpool} (
       Subpool : @key[in not null] Subpool_Handle;
-      To : @key[in out] Root_Storage_Pool_With_Subpools'Class);]}
+      To : @key[in out] Root_Storage_Pool_With_Subpools'Class)@Chg{Version=[5],New=[
+         @key[with] Global => @key[overriding in out] Subpool],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Allocate_From_Subpool} (
       Pool : @key[in out] Root_Storage_Pool_With_Subpools;
       Storage_Address : @key[out] Address;
       Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
       Alignment : @key[in] Storage_Elements.Storage_Count;
       Subpool : @key[in not null] Subpool_Handle) @key[is abstract]
-         @key[with] Pre'Class => Pool_of_Subpool(Subpool) = Pool'Access;]}
+         @key[with] Pre'Class => Pool_of_Subpool(Subpool) = Pool'Access@Chg{Version=[5],New=[,
+              Global => @key[overriding in out] Subpool],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Deallocate_Subpool} (
@@ -3715,10 +3720,22 @@ library procedure exists:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[3],Text=[@key[with] System.Storage_Pools.Subpools;
 @SubChildUnit{Parent=[Ada],Child=[Ada.Unchecked_Deallocate_Subpool]}@key[procedure] Ada.Unchecked_Deallocate_Subpool
-   (Subpool : @key[in out] System.Storage_Pools.Subpools.Subpool_Handle);]}
+   (Subpool : @key[in out] System.Storage_Pools.Subpools.Subpool_Handle)@Chg{Version=[5],New=[
+   @key[with] Global => @key[in out all]],Old=[]};]}
 @end{Example}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0302-1]}
+  @ChgAdded{Version=[5],Text=[The Global specification for this routine needs
+  to account for the dispatching call to the user-defined Deallocate_Subpool 
+  routine. We can't use the @key[do] notation as that requires a statically
+  denoted dispatching argument (we have a function call here), so we have to
+  use @key[in out all] in order to allow the user-defined subprogram to do 
+  anything.]}
+@end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
 @ChgAdded{Version=[3],Text=[If Subpool is @key[null], a call on
@@ -4794,7 +4811,7 @@ Ada.Streams.Storage.Unbounded has the following declaration:]}
 @begin{example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Streams.Storage],Child=[Unbounded]}@key[package] Ada.Streams.Storage.Unbounded
-   @key[with] Prelaborated, Nonblocking @key[is]]}
+   @key[with] Prelaborated, Nonblocking, Global => @key[in out synchronized] @key[is]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Stream_Type} @key[is new] Storage_Stream_Type @key[with private]

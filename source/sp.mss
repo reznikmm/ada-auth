@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.91 $ $Date: 2020/06/03 00:09:01 $ $Author: randy $ }
+@comment{ $Revision: 1.92 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2020/06/03 00:09:01 $}
+@Comment{$Date: 2020/08/28 03:34:22 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -845,11 +845,11 @@ a protected procedure that is an interrupt handler.
 @Leading@Keepnext@;The following language-defined packages exist:
 @begin{example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0167-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key{with} System;@ChildUnit{Parent=[Ada],Child=[Interrupts]}@Chg{Version=[3],New=[
 @key{with} System.Multiprocessors;],Old=[]}
 @key[package] Ada.Interrupts@Chg{Version=[5],New=[
-   @key[with] Nonblocking ],Old=[]}@key[is]
+   @key[with] Nonblocking, Global => @key[in out synchronized] ],Old=[]}@key[is]
    @key[type] @AdaTypeDefn{Interrupt_Id} @key[is] @RI{implementation-defined};
    @key[type] @AdaTypeDefn{Parameterless_Handler} @key[is]
       @key[access] @key[protected] @key[procedure]@Chg{Version=[5],New=[
@@ -891,7 +891,9 @@ a protected procedure that is an interrupt handler.
 @key[end] Ada.Interrupts;
 
 
-@key[package] Ada.Interrupts.Names @key[is]@ChildUnit{Parent=[Ada.Interrupts],Child=[Names]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@key[package] Ada.Interrupts.Names @Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null] ],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Interrupts],Child=[Names]}
    @RI{implementation-defined} : @key[constant] Interrupt_Id :=
      @RI{implementation-defined};
       . . .
@@ -1505,6 +1507,14 @@ Boolean.@AspectDefn{Volatile}]}
     Text=[@ChgAdded{Version=[3],Text=[Declare that a type, object, or component
       is volatile.]}]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0363-1]}
+@ChgAdded{Version=[5],Text=[Full_Access_Only@\The type of aspect Full_Access_Only is
+Boolean.@AspectDefn{Full_Access_Only}]}
+
+  @ChgAspectDesc{Version=[5],Kind=[Added],Aspect=[Full_Access_Only],
+    Text=[@ChgAdded{Version=[5],Text=[Declare that a volatile type, object, or 
+      component is full access.]}]}
+
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
@@ -1558,9 +1568,31 @@ Independent_Components is Boolean.@AspectDefn{Independent_Components}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0363-1]}
 @ChgAdded{Version=[3],Text=[If any of these aspects are directly
 specified, the @nt{aspect_definition} shall be a static expression. If not
-specified (including by inheritance), each of these aspects is False.]}
+specified @Chg{Version=[5],New=[for a type ],Old=[]}(including by 
+inheritance), @Chg{Version=[5],New=[the Atomic, Atomic_Components, and
+Full_Access_Only],Old=[each of these]} aspects
+@Chg{Version=[5],New=[are],Old=[is]} False.@Chg{Version=[5],New=[ If any of 
+these aspects are specified True for a type, then the corresponding aspect 
+is True for all objects of the type. If the Atomic aspect is specified True,
+then the aspects Volatile, Independent, and Volatile_Component (if
+defined) are True; if the Atomic_Components aspect is specified True,
+then the aspects Volatile, Volatile_Components, and
+Independent_Components are True. If the Volatile aspect is specified
+True, then the Volatile_Components aspect (if defined) is True, and
+vice versa. When not determined by one of the other aspects, or for an
+object by its type, the Volatile, Volatile_Components, Independent,
+and Independent_Components aspects are False.],Old=[]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0363-1]}
+  @ChgAdded{Version=[5],Text=[Aspects Volatile and Volatile_Components (when
+    defined) are equivalent. We provide the Volatile_Components aspect
+    only to give symmetry with Atomic_Components and
+    Independent_Components aspects.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00272-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -1626,6 +1658,35 @@ be rejected, notwithstanding what this Standard says elsewhere (specifically,
 in the Recommended Level of Support).]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0363-1]}
+@ChgAdded{Version=[5],Text=[The Full_Access_Only aspect shall not be specified
+unless the associated type or object is volatile @Redundant[(or atomic)]. A
+@i<full access> type is any atomic type, or a volatile type for which the
+aspect Full_Access_Only is True.@Defn2{Term=[full access],Sec=[type]} A
+@i<full access> object (including a component) is any atomic object, or a
+volatile object for which the aspect Full_Access_Only is True for the 
+object@Redundant[ or its type].@Defn2{Term=[full access],Sec=[object]} A 
+Full_Access_Only aspect is illegal if any subcomponent of the object or type
+is a full access object or is of a generic formal type.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0363-1]}
+  @ChgAdded{Version=[5],Text=[This last rule breaks privacy, but that is
+    considered OK for representation clauses when there is no clear
+    alternative. Note that atomic objects may be nested, so long as the
+    outer atomic object does not have the Full_Access_Only aspect True.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0363-1]}
+  @ChgAdded{Version=[5],Text=[We disallow subcomponents of a generic formal type 
+    in a Full_Access_Only object or type as the actual to a formal
+    type can be a full access type. We could have had a less restrictive
+    rule, but such a use is unlikely as full access only objects are intended
+    to be used to access memory-mapped devices with access restrictions, and
+    those will need a concrete mapping not possible for generic formal types.]}
+@end{Reason}
+
 @Comment{Original: @end{Intro}, Replaced with below for Ada 2012}
 @end{StaticSem}
 
@@ -1674,7 +1735,7 @@ from performing the required indivisible
 @Chg{Version=[4],New=[and independent ],Old=[]}reads and updates.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0218-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0282-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0282-1],ARef=[AI12-0363-1]}
 If an atomic object is passed as a parameter, then
 @Chg{Version=[3],New=[],Old=[the type of ]}the formal
 parameter shall either @Chg{Version=[3],New=[have an],Old=[be]} atomic
@@ -1689,7 +1750,8 @@ the resulting access type shall be atomic.@Chg{Version=[5],New=[],Old=[ If an
 atomic type is used as an actual for a generic formal derived type,
 then the ancestor of the formal type 
 shall be atomic@Chg{Version=[3],New=[],Old=[ or allow pass by copy]}.]}
-Corresponding rules apply to volatile objects@Chg{Version=[5],New=[],Old=[ and types]}.
+Corresponding rules apply to volatile objects and @Chg{Version=[5],New=[to 
+full access objects],Old=[types]}.
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
@@ -1698,17 +1760,48 @@ Corresponding rules apply to volatile objects@Chg{Version=[5],New=[],Old=[ and t
   is, is not a by-reference type).]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0128-1],ARef=[AI12-0363-1]}
+@ChgAdded{Version=[5],Text=[If a nonatomic subcomponent of a full access
+object is passed as an actual parameter in a call then the formal parameter
+shall allow pass by copy (and, at run time, the parameter shall be passed 
+by copy). A nonatomic subcomponent of a full access object shall not be
+used as an actual for a generic formal of mode @key[in out]. The @nt{prefix}
+of an @nt{attribute_reference} for an Access attribute shall not denote 
+a nonatomic subcomponent of a full access object.]}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0218-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0282-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0282-1],ARef=[AI12-0363-1]}
 @ChgAdded{Version=[3],Text=[If @Chg{Version=[5],New=[the Atomic,
-Atomic_Components, Volatile, Volatile_Components, Independent, or
-Independent_Components aspect is True for a generic formal type, then that
-aspect shall be True for the actual type. If ],Old=[]}a volatile type is used 
-as an actual for a generic formal array type, then the element type of the 
-formal type shall be volatile.@Chg{Version=[5],New=[ If an
+Atomic_Components, Volatile, Volatile_Components, Independent, 
+Independent_Components, or Full_Access_Only aspect is True for a generic 
+formal type, then that aspect shall be True for the actual type. If an
 atomic type is used as an actual for a generic formal derived type,
 then the ancestor of the formal type shall be atomic. A corresponding
-rule applies to volatile types.],Old=[]}]}
+rule applies to volatile types and similarly 
+to full access types],Old=[a volatile type is used 
+as an actual for a generic formal array type, then the element type of the 
+formal type shall be volatile]}.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0363-1]}
+@ChgAdded{Version=[5],Text=[If a type with volatile components is used as 
+an actual for a generic formal array type, then the components of the formal
+type shall be volatile. Furthermore, if the actual type has atomic components
+and the formal array type has aliased components, then the
+components of the formal array type shall also be atomic. A corresponding 
+rule applies when the actual type has volatile full access components.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0363-1]}
+  @ChgAdded{Version=[5],Text=[The limitations on formal array types are 
+    separate for volatile and atomic because of the fact that only volatility
+    is carried down to all subcomponents of a volatile object, while
+    atomicity is not. The goal of both limitations is that we don't want
+    'Access for an access type to produce a value that designates an
+    object whose atomicity and volatility don't agree with that of the
+    designated type of the access type. The above rules ensure that
+    the generic @ldquote@;sees@rdquote the relevant volatility and 
+    atomicity.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 If @Chg{Version=[3],New=[an aspect],Old=[a pragma]} Volatile,
@@ -1750,15 +1843,6 @@ aspect (see @RefSecNum{Shared Variables}).]}
 a component, object or type for which the aspect Independent or
 Independent_Components is True, in a way that prevents the implementation from
 providing the independent addressability required by the aspect.]}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0128-1]}
-@ChgAdded{Version=[5],Text=[If a nonatomic subcomponent of an atomic object is
-passed as the actual parameter in a call then the formal parameter shall allow
-pass by copy (and, at run time, the parameter shall be passed by copy). A
-nonatomic subcomponent of an atomic object shall not be used as an actual for a
-generic formal of mode @key[in out]. A nonatomic subcomponent of an atomic type
-shall not be aliased. A nonatomic subcomponent of an atomic type or object shall
-not have components that are specified to be independently addressable.]}
 
 @end{Legality}
 
@@ -1856,9 +1940,9 @@ types and objects.
 @end{Reason}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0128-1],ARef=[AI12-0347-1]}
-@ChgAdded{Version=[5],Text=[All reads of or writes to any nonatomic subcomponent
-of an atomic object are performed by reading and/or writing all of the
-nearest enclosing atomic object.]}
+@ChgAdded{Version=[5],Text=[All reads of or writes to any nonatomic 
+subcomponent of a full access object are performed by reading and/or 
+writing all of the nearest enclosing full access object.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1872,6 +1956,15 @@ nearest enclosing atomic object.]}
   matter whether the store_byte instruction would have executed atomically.
   This rule is needed in some cases for memory-mapped device registers.]}
 @end{ImplNote}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The atomic reads and writes associated with 
+  accesses to nonatomic components of a full access object that is atomic are
+  normal atomic operations @em all of the rules that apply to other
+  atomic operations apply to these as well. In particular, these atomic
+  reads and writes are sequential if they apply to the same object.]}
+@end{Discussion}
 
 @end{RunTime}
 
@@ -2100,6 +2193,11 @@ because the pragma was not used to mark variables as shared.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0282-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   These aspects now can be specified for generic formal types.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0363-1]}
+  @ChgAdded{Version=[5],Text=[Aspect Full_Access_Only is new; it can
+  be used to guarentee access to a complete device register for any operation
+  even when the register is mapped to a number of components.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
@@ -2628,9 +2726,9 @@ termination procedures with a task or set of tasks is defined.],Old=[]}]
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key[package] Ada.Task_Identification@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Task_Identification]}@Chg{Version=[2],New=[
-   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Task_Identification);]}],Old=[]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Task_Identification);]}],Old=[]}
    @key[type] @AdaTypeDefn{Task_Id} @key[is] @key{private};@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization (Task_Id);],Old=[]}
    @AdaSubDefn{Null_Task_Id} : @key{constant} Task_Id;
@@ -2846,13 +2944,13 @@ Task_Id value that identifies the environment task.
 @begin{StaticSem}
 @Leading@Keepnext@;The following language-defined generic library package exists:
 @begin{example}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key{with} Ada.Task_Identification; @key{use} Ada.Task_Identification;
 @key{generic}
    @key{type} Attribute @key{is} @key{private};
    Initial_Value : @key[in] Attribute;
 @key{package} Ada.Task_Attributes@Chg{Version=[5],New=[
-   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada],Child=[Task_Attributes]}
+   @key{with} Nonblocking, Global => @key[in out synchronized]],Old=[]} @key{is}@ChildUnit{Parent=[Ada],Child=[Task_Attributes]}
 
    @key{type} @AdaTypeDefn{Attribute_Handle} @key{is} @key{access} @key{all} Attribute;
 
@@ -3184,11 +3282,11 @@ task, the execution of the program is erroneous.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Task_Identification;
 @key<with> Ada.Exceptions;
 @key<package> Ada.Task_Termination@Chg{Version=[5],New=[],Old=[ @key<is>]}@ChildUnit{Parent=[Ada],Child=[Task_Termination]}
-   @Chg{Version=[5],New=[@key<with>],Old=[@key<pragma>]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Task_Termination);]}]}
+   @Chg{Version=[5],New=[@key<with>],Old=[@key<pragma>]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Task_Termination);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Cause_Of_Termination} @key<is> (Normal, Abnormal, Unhandled_Exception);]}
