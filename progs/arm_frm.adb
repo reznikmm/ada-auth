@@ -1381,6 +1381,75 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	end Paragraph_String;
 
 
+        function Show_Leading_Text_for_Paragraph return Boolean is
+            -- Returns True if the leading text (note number,
+            -- annotation preface, etc.) should be shown for this paragraph.
+            -- We assume that the current paragraph has a version less than
+            -- or equal to the one that we're displaying.
+            -- ** Note: This is not quite right. If this
+            -- paragraph is deleted, but a following one needs the
+            -- leading item, this will still leave the item out.
+            -- We *do* have enough information for that, at least in the
+            -- case of annotations: they can be marked as deleted, in
+            -- which case we don't need them here. *But* that information
+            -- doesn't get here in the case that we're not showing deletions.
+            -- I can't think of a fix right now, and the note numbers need
+            -- fixing ASAP.
+        begin
+--Ada.Text_IO.Put_Line ("Show_Leading_Text, para kind: " &
+--ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Next_Paragraph_Change_Kind) &
+--"; version=" & Format_Object.Next_Paragraph_Version & "; on line " & Arm_Input.Line_String(Input_Object));
+            if (ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) and then
+                ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) and then
+                ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) and then
+                ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) then
+                -- Not a deleted paragraph.
+--Ada.Text_IO.Put_Line ("%% True - Not deleted");
+                return True;
+            end if;
+            case Format_Object.Changes is
+                when ARM_Format.Old_Only =>
+                    -- Display only the original version ('0').
+                    if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) or else
+                       ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
+--Ada.Text_IO.Put_Line ("%% True - Not original");
+                        return False; -- Not in the original document.
+                    else
+--Ada.Text_IO.Put_Line ("%% True - Original");
+                        return True; -- Probably in the original document.
+                        -- (If the paragraph numbers were "new" in a
+                        -- later version, we couldn't tell.)
+                    end if;
+            when ARM_Format.New_Only =>
+                -- Display only the version
+                -- Format_Object.Change_Version, no insertions or deletions.
+--Ada.Text_IO.Put_Line ("%% False - New only");
+                return False; -- This is always deleted.
+            when ARM_Format.Show_Changes |
+                 ARM_Format.New_Changes =>
+                -- Display only the the changes for versions
+                -- Format_Object.Base_Change_Version ..
+                -- Format_Object.Change_Version, older changes
+                -- are applied and newer changes are ignored.
+                -- (New_Changes shows deletions as a single
+                -- character for older versions of Word, but otherwise
+                -- is the same.)
+                if Format_Object.Next_Paragraph_Version <
+                   Format_Object.Base_Change_Version then
+                    -- Change version is older than we're displaying;
+                    -- no text will be shown.
+ --Ada.Text_IO.Put_Line ("%% False - show changes, old version");
+                    return False; -- This is always deleted.
+                else
+                    -- The correct version.
+--Ada.Text_IO.Put_Line ("%% True - show changes, new enough version");
+                    return True; -- Show the item, as the old text
+                         -- will be shown as deleted.
+                end if;
+            end case;
+        end Show_Leading_Text_for_Paragraph;
+
+
 	procedure Check_Paragraph is
 	    -- Open a paragraph if needed before outputting any text that needs
 	    -- one.
@@ -2036,83 +2105,20 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		end case;
 	    end Make_Annotation_Preface;
 
-
-	    function Show_Leading_Text_for_Paragraph return Boolean is
-		-- Returns True if the leading text (note number,
-		-- annotation preface, etc.) should be shown for this paragraph.
-		-- We assume that the current paragraph has a version less than
-		-- or equal to the one that we're displaying.
-		-- ** Note: This is not quite right. If this
-		-- paragraph is deleted, but a following one needs the
-		-- leading item, this will still lead the item out.
-		-- We *do* have enough information for that, at least in the
-		-- case of annotations: they can be marked as deleted, in
-		-- which case we don't need them here. *But* that information
-		-- doesn't get here in the case that we're not showing deletions.
-		-- I can't think of a fix right now, and the note numbers need
-		-- fixing ASAP.
-	    begin
---Ada.Text_IO.Put_Line ("Show_Leading_Text, para kind: " &
---ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Next_Paragraph_Change_Kind) &
---"; version=" & Format_Object.Next_Paragraph_Version & "; on line " & Arm_Input.Line_String(Input_Object));
-		if (ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) and then
-		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) and then
-		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) and then
-		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) then
-		    -- Not a deleted paragraph.
---Ada.Text_IO.Put_Line ("%% True - Not deleted");
-		    return True;
-		end if;
-	        case Format_Object.Changes is
-		    when ARM_Format.Old_Only =>
-		        -- Display only the original version ('0').
-			if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) or else
-			   ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
---Ada.Text_IO.Put_Line ("%% True - Not original");
-			    return False; -- Not in the original document.
-			else
---Ada.Text_IO.Put_Line ("%% True - Original");
-			    return True; -- Probably in the original document.
-				-- (If the paragraph numbers were "new" in a
-				-- later version, we couldn't tell.)
-			end if;
-		    when ARM_Format.New_Only =>
-		        -- Display only the version
-		        -- Format_Object.Change_Version, no insertions or deletions.
---Ada.Text_IO.Put_Line ("%% False - New only");
-			return False; -- This is always deleted.
-		    when ARM_Format.Show_Changes |
-		         ARM_Format.New_Changes =>
-		        -- Display only the the changes for versions
-		        -- Format_Object.Base_Change_Version ..
-			-- Format_Object.Change_Version, older changes
-		        -- are applied and newer changes are ignored.
-		        -- (New_Changes shows deletions as a single
-		        -- character for older versions of Word, but otherwise
-		        -- is the same.)
-		        if Format_Object.Next_Paragraph_Version <
-			   Format_Object.Base_Change_Version then
-			    -- Change version is older than we're displaying;
-			    -- no text will be shown.
---Ada.Text_IO.Put_Line ("%% False - show changes, old version");
-			    return False; -- This is always deleted.
-		        else
-			    -- The correct version.
---Ada.Text_IO.Put_Line ("%% True - show changes, new enough version");
-			    return True; -- Show the item, as the old text
-					 -- will be shown as deleted.
-		        end if;
-	        end case;
-	    end Show_Leading_Text_for_Paragraph;
-
 	begin
 	    if not Format_Object.In_Paragraph then
 		-- Output subheader, if needed.
+--Ada.Text_IO.Put_Line ("Check_Paragraph, not In_Paragraph, last para subhead: " &
+--Paragraph_Type'Image(Format_Object.Last_Paragraph_Subhead_Type) &
+--"; next para subhead: " & Paragraph_Type'Image(Format_Object.Last_Paragraph_Subhead_Type) & 
+--"; format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
+--"; on line " & Arm_Input.Line_String(Input_Object));
 		if Format_Object.Next_Paragraph_Subhead_Type /=
 		   Format_Object.Last_Paragraph_Subhead_Type then
 		    if (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) or else
 		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) and then
-		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+		       --ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+                       not Show_Leading_Text_for_Paragraph then
 			-- Nothing at all should be showm.
 			null;
 if Format_Object.Next_Paragraph_Subhead_Type /= Plain and then
@@ -2123,7 +2129,8 @@ end if;
 		          Format_Object.No_Para_Num) and then
 		       (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) or else
 		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number)) and then
-		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+		       --ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+                       not Show_Leading_Text_for_Paragraph then
 			-- Nothing at all should be showm.
 			null;
 if Format_Object.Next_Paragraph_Subhead_Type /= Plain and then
@@ -2150,7 +2157,8 @@ end if;
 		    -- ...and start the paragraph:
 		    if (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) or else
 		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) and then
-		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+		       --ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+                       not Show_Leading_Text_for_Paragraph then
 			-- Nothing at all should be showm.
 			-- ** Warning ** If we lie here, the program will crash!
 		        Format_Object.No_Start_Paragraph := True;
@@ -2230,7 +2238,8 @@ Ada.Text_IO.Put_Line ("       Skipped number " & Format_Object.Current_Paragraph
 		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) or else
 			ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) or else
 		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number)) and then
-		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+		       --ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+                       not Show_Leading_Text_for_Paragraph then
 			-- Nothing at all should be showm.
 			-- ** Warning ** If we lie here, the program will crash!
 		        Format_Object.No_Start_Paragraph := True;
@@ -8256,8 +8265,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    Format_Object.Next_Paragraph_Change_Kind := Kind;
 			    if (ARM_Database."=" (Kind, ARM_Database.Deleted_No_Delete_Message) or else
 			        ARM_Database."=" (Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) and then
-			       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
-			        -- In this case, display nothing, period.
+			       not Show_Leading_Text_for_Paragraph then
+			        -- In this case, display nothing, period. We're not
+                                -- going to show any leading text.
 				Display_It := False;
 				-- Check if any Ref's already exist; remove them
 				-- if they do. %% Ugly: This is needed if
@@ -8267,7 +8277,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				Dump_References (Format_Object.References);
 			    elsif (ARM_Database."=" (Kind, ARM_Database.Deleted) or else
 			        ARM_Database."=" (Kind, ARM_Database.Deleted_Inserted_Number)) and then
-			       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) and then
+			        (not Show_Leading_Text_for_Paragraph) and then
 				(not Format_Object.Number_Paragraphs) then
 			        -- No delete messages ever in this case, so
 				-- display nothing, period.
