@@ -29,10 +29,10 @@ I probably ought to add a style just for this purpose)
 @end{ISOOnly}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2019/04/09 04:56:50 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -777,6 +777,15 @@ This material is informative.
 Examples illustrate the possible forms of the constructs described.
 This material is informative.
 @begin{Discussion}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0386-1]}
+@ChgAdded{Version=[5],Text=[Names used in examples refer either to 
+language-defined entities or to entities declared in other @ExamplesName in this
+Standard. In the latter case, if the reference is to a later example, we
+use a cross-reference (@ExamCom{-- See <<some clause>>.}) to show the source
+of the declaration. In theory, one could combine all of the examples (excepting
+examples of fragments like identifiers or @nt{type_definition}s) in an
+appropriate unit and compile them all.]}
+
 @ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
 The next three headings list all language changes between Ada 83

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.85 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
+@comment{ $Revision: 1.86 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:41 $}
+@Comment{$Date: 2020/08/28 03:34:22 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2088,9 +2088,9 @@ is the type of the argument of the C function.
 @Leading@;The library package Interfaces.C.Strings has the following
 declaration:
 @begin{example}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key[package] Interfaces.C.Strings @Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Interfaces.C],Child=[Strings]}
-   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Strings);]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Strings);]}
 
    @key(type) @AdaTypeDefn{char_array_access} @key(is) @key(access) @key(all) char_array;
 
@@ -2425,14 +2425,14 @@ programmer needs to keep track of the length.
 @Leading@;The generic library package Interfaces.C.Pointers has the
 following declaration:
 @begin{Example}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key(generic)
    @key(type) Index @key(is) (<>);
    @key(type) Element @key(is) @key(private);
    @key(type) Element_Array @key(is) @key(array) (Index @key(range) <>) @key(of) @key(aliased) Element;
    Default_Terminator : Element;
 @key(package) Interfaces.C.Pointers @Chg{Version=[5],New=[],Old=[ @key(is)]}@ChildUnit{Parent=[Interfaces.C],Child=[Pointers]}
-   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Pointers);]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Pointers);]}
 
    @key(type) @AdaTypeDefn{Pointer} @key(is) @key(access) @key(all) Element;
 
@@ -3044,9 +3044,9 @@ either an internal or external COBOL representation
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Interfaces.COBOL has the following declaration:
 @begin{Example}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key[package] Interfaces.COBOL @Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Interfaces],Child=[COBOL]}
-   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(COBOL);]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(COBOL);]}
 
 @RI{-- Types and operations for internal data representations}
 

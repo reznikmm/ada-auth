@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.155 $}
+@Comment{$Revision: 1.156 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1196,9 +1196,9 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   @end{Itemize}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0185-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0185-1],ARef=[AI12-0388-1]}
   @ChgAdded{Version=[4],NoPrefix=[T],Text=[The @Chg{Version=[5],New=[type
-  and ],Old=[]}nominal subtype of X'Old is as
+  and ],Old=[]}nominal subtype of X'Old @Chg{Version=[5],New=[are],Old=[is]} as
   implied by the above definitions.@Chg{Version=[5],New=[],Old=[ The expected
   type of the prefix of an Old
   attribute is that of the attribute. Similarly, if an Old attribute shall
@@ -1264,22 +1264,36 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
-  @ChgAdded{Version=[3],Text=[Since the @nt{prefix} is evaluated unconditionally
-  when the subprogram is called, we cannot allow it to include values that do
-  not exist at that time (like 'Result and loop parameters of @nt{quantified_expression}s).
-  We also do not allow it to include 'Old references, as those would be
-  redundant (the entire @nt{prefix} is evaluated when the subprogram is called),
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0280-2]}
+  @ChgAdded{Version=[3],Text=[Since the @nt{prefix} @Chg{Version=[5],New=[of an Old attribute ],Old=[]}is
+  evaluated @Chg{Version=[5],New=[],Old=[unconditionally ]}when the subprogram
+  is called@Chg{Version=[5],New=[ (if it is evaluated at all)],Old=[]}, we
+  cannot allow it to include values that do not exist at that time (like
+  'Result and loop parameters of @nt{quantified_expression}s).
+  We also do not allow @Chg{Version=[5],New=[the @nt{prefix} itself],Old=[it]}
+  to include 'Old references, as those would be
+  redundant (@Chg{Version=[5],New=[because the evaluation of the],Old=[the entire]}
+  @nt{prefix}@Chg{Version=[5],New=[, if it occurs, already happens on
+  entry to],Old=[ is evaluated when]} the subprogram @Chg{Version=[5],New=[],Old=[ is called]}),
   and allowing them would require some sort of order to the implicit constant
   declarations (because in A(I'Old)'Old, we surely would want the value of
   I'Old evaluated before the A(I'Old) is evaluated).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[In addition, we only allow simple names as the
-  @nt{prefix} of the Old attribute if the @nt{attribute_reference} might not
-  be evaluated when the postcondition expression is evaluated. This is necessary because
-  the Old @nt{prefix}es have to be unconditionally evaluated when the subprogram
-  is called; the compiler cannot in general know whether they will be needed
-  in the postcondition expression. To see the problem, consider:]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0280-2]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[An
+   additional rule applies when it cannot be determined on entry to the subprogram
+   whether the Old @nt<attribute_reference> will or will not be evaluated
+   when the overall postcondition expression is evaluated. In such cases],Old=[In addition]},
+   we @Chg{Version=[5],New=[require that],Old=[only allow simple names as]} the
+   @nt{prefix} of the Old attribute @Chg{Version=[5],New=[to statically name
+   some object],Old=[if the @nt{attribute_reference} might not
+   be evaluated when the postcondition expression is evaluated]}. This is
+   necessary because the Old @nt{prefix}es have to be
+   @Chg{Version=[5],New=[],Old=[unconditionally ]}evaluated when the subprogram
+   is called@Chg{Version=[5],New=[ if there is any possibility that they might
+   be needed],Old=[]}; the compiler cannot in general know whether they will be needed
+   in the postcondition expression. To see the problem, consider:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1291,7 +1305,8 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[In this example, the compiler
-  cannot know the value of I when the subprogram returns (since the subprogram
+  cannot know @Chg{Version=[5],New=[on entry what will be ],Old=[]}the value of
+  I when the subprogram returns (since the subprogram
   execution can change it), and thus it does not know whether Table(I)'Old will
   be needed then. Thus it has to always create an implicit constant
   and evaluate Table(I) when Bar is called (because not having the value when
@@ -1302,8 +1317,8 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   of an access type. This would be mystifying (since the point of the short
   circuit is to eliminate this possibility, but it cannot do so). Therefore, we
   require the @nt{prefix} of any Old attribute in such a context to statically
-  denote an object, which eliminates anything that could change
-  @Chg{Version=[5],New=[],Old=[at ]}during execution.]}
+  Chg{Version=[5],New=[name],Old=[denote]} an object, which eliminates anything
+  that could change @Chg{Version=[5],New=[],Old=[at ]}during execution.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[It is easy to work around most errors that occur
@@ -1371,7 +1386,7 @@ type],Old=[]}}, the following attribute is defined:]}
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2],
-  ARef=[AI05-0262-1], ARef=[AI12-0185-1], ARef=[AI12-0220-1],
+  ARef=[AI05-0262-1], ARef=[AI12-0185-1], ARef=[AI12-0220-1], ARef=[AI12-0388-1],
   InitialVersion=[3],
   Text=[@Chg{Version=[3],New=[Within a postcondition expression for
   @Chg{Version=[5],New=[],Old=[function ]}F,
@@ -1383,7 +1398,7 @@ type],Old=[]}}, the following attribute is defined:]}
   within a Post'Class postcondition expression for
   a function with a controlling result or with a controlling access
   result@Chg{Version=[5],New=[; in those cases the type of the attribute was
-  described previously],Old=[. For
+  described above as part of the @ResolutionTitle for Post'Class],Old=[. For
   a controlling result, the type of the attribute is @i<T>'Class, where @i<T> is
   the function result type. For a controlling access result, the type of the
   attribute is an anonymous access type whose designated type is @i<T>'Class,
@@ -1717,9 +1732,9 @@ itself.]]}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0371-1]}
-  @ChgAdded{Version=[5],Text=[The specific precondition and postcondition that 
-  apply to a generic formal subprogram also apply to any renaming of that 
-  subprogram, even if that renaming is visible in the instance and called from 
+  @ChgAdded{Version=[5],Text=[The specific precondition and postcondition that
+  apply to a generic formal subprogram also apply to any renaming of that
+  subprogram, even if that renaming is visible in the instance and called from
   outside of the generic instance.]}
 @end{Honest}
 
@@ -1908,20 +1923,20 @@ the following language-defined aspect may be specified with an
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Global],
   Text=[@ChgAdded{Version=[5],Text=[Global object usage contract.]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0380-1]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_aspect_definition>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
     @key[null]
   | Unspecified
   | @Syn2{global_mode} @Syn2{global_designator}
-  | (@Syn2{global_aspect_element}{, @Syn2{global_aspect_element}})
-  | @Syn2{extended_global_aspect_definition}>,Old=<>}"}
+  | (@Syn2{global_aspect_element}{; @Syn2{global_aspect_element}})>,Old=<>}"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0380-1]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_aspect_element>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
     @Syn2{global_mode} @Syn2{global_set}
-  | @Syn2{extended_global_aspect_element}>,Old=<>}"}
+  | @Syn2{global_mode} @key[all]
+  | @Syn2{global_mode} @key[synchronized]>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_mode>,Old=<>}>,
@@ -1946,21 +1961,21 @@ rhs="@Chg{Version=[5],New=<@key[all] | @key[synchronized] | @Syn2[global_name]>,
 rhs="@Chg{Version=[5],New=<@SynI{object_}@Syn2{name} | @SynI{package_}@Syn2{name}>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[The Global aspect identifies the set 
-of variables (which, for the purposes of this clause includes all constants 
+@ChgAdded{Version=[5],Noprefix=[T],Text=[The Global aspect identifies the set
+of variables (which, for the purposes of this clause includes all constants
 with some part being immutably limited, or of a controlled type, private
 type, or private extension) that are global to a callable entity
-or task body, and that are read or updated as part of the execution 
-of the callable entity or task body. If specified for a protected 
-unit, it refers to all of the protected operations of the protected 
+or task body, and that are read or updated as part of the execution
+of the callable entity or task body. If specified for a protected
+unit, it refers to all of the protected operations of the protected
 unit. Constants of any type may also be mentioned in a Global aspect.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[If not specified or otherwise defined 
-below, the aspect defaults to the Global aspect for the enclosing library unit 
-if the entity is declared at library level, and to Unspecified otherwise. If 
-not specified for a library unit, the aspect defaults to 
-@exam[Global => @key{null}] for a library unit that is declared Pure, and 
+@ChgAdded{Version=[5],Noprefix=[T],Text=[If not specified or otherwise defined
+below, the aspect defaults to the Global aspect for the enclosing library unit
+if the entity is declared at library level, and to Unspecified otherwise. If
+not specified for a library unit, the aspect defaults to
+@exam[Global => @key{null}] for a library unit that is declared Pure, and
 to @exam[Global => Unspecified] otherwise.]}
 @end{Description}
 
@@ -1972,7 +1987,7 @@ specified with an
 
 @begin{Description}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[Global'Class@\The syntax for
    the @nt{aspect_definition} used to define a Global'Class
    aspect is the same as that defined above for @nt{global_aspect_definition}.
@@ -1987,6 +2002,10 @@ specified with an
   on derivation.]}]}
 
 @end{Description}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
+@ChgAdded{Version=[5],Text=[Together, we refer to the Global and Global'Class
+aspects as @i{global} aspects.@Defn{global aspect}]}
 
 @begin{Resolution}
 
@@ -2009,45 +2028,55 @@ descendant of type @i{T}.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[The Global aspect for a callable entity defines the
-global variables that might be referenced as part of a call on the entity, 
-including any assertion expressions that might be evaluated as part of the 
+global variables that might be referenced as part of a call on the entity,
+including any assertion expressions that might be evaluated as part of the
 call, including preconditions, postconditions, predicates, and type
 invariants.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[The Global aspect for an access-to-subprogram 
-object (or subtype) identifies the global variables that might be referenced 
-when calling via the object (or any object of that subtype) including 
+@ChgAdded{Version=[5],Text=[The Global aspect for an access-to-subprogram
+object (or subtype) identifies the global variables that might be referenced
+when calling via the object (or any object of that subtype) including
 assertion expressions that apply.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[For a predefined operator of an elementary type, 
-or the function representing an enumeration literal, the Global aspect is 
-@key{null}. For a predefined operator of a composite type, the Global aspect 
+@ChgAdded{Version=[5],Text=[For a predefined operator of an elementary type,
+or the function representing an enumeration literal, the Global aspect is
+@key{null}. For a predefined operator of a composite type, the Global aspect
 of the operator defaults to that of the enclosing library unit (unless a Global
-aspect is specified for the type @em see 
+aspect is specified for the type @em see
 @RefSecNum{Extensions to Global and Global'Class Aspects}).]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[The following is defined in terms of operations; the
-rules apply to all of the above kinds of entities.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0380-1]}
+@ChgAdded{Version=[5],Text=[The following is defined in terms of operations
+that are performed by or on behalf of an entity. The rules on operations apply
+to the entity(s) associated with those operations.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
+  @ChgAdded{Version=[5],Text=[The operations performed by a callable entity
+    are those associated with the body of the entity. For other kinds of
+    entities (such as subtypes, see
+    @RefSecNum{Extensions to Global and Global'Class Aspects}), we explicitly
+    list the associated operations.]}
+@end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[The global variables associated with any 
+@ChgAdded{Version=[5],Text=[The global variables associated with any
 @nt{global_mode} can be read as a side effect of an operation. The @key[in out]
-and @key[out] @nt{global_mode}s together identify the set of global variables 
-that can be updated as a side effect of an operation. Creating an 
-access-to-variable value that designates an object is considered an update 
-of the designated object, and creating an access-to-constant value that 
+and @key[out] @nt{global_mode}s together identify the set of global variables
+that can be updated as a side effect of an operation. Creating an
+access-to-variable value that designates an object is considered an update
+of the designated object, and creating an access-to-constant value that
 designates an object is considered a read of the designated object.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[The overall set of objects associated with each 
-@nt{global_mode} includes all objects identified for the mode in the 
+@ChgAdded{Version=[5],Text=[The overall set of objects associated with each
+@nt{global_mode} includes all objects identified for the mode in the
 @nt{global_aspect_definition}.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{global_set} identifies a 
+@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{global_set} identifies a
 @i{global variable set} as follows:@Defn{global variable set}]}
 
 @begin{Itemize}
@@ -2057,7 +2086,7 @@ designates an object is considered a read of the designated object.]}
     variables;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[@key[synchronized] identifies the set of all 
+  @ChgAdded{Version=[5],Text=[@key[synchronized] identifies the set of all
     synchronized variables (see @RefSecNum{Shared Variables}),
     as well as variables of a composite type all of whose
     non-discriminant subcomponents are synchronized;]}
@@ -2074,7 +2103,7 @@ designates an object is considered a read of the designated object.]}
        specified global variable (or constant);]}
 
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[@Syni{package_}@nt{name} identifies the set 
+    @ChgAdded{Version=[5],Text=[@Syni{package_}@nt{name} identifies the set
      of all variables declared in the private part or body of the package, or
      anywhere within a private descendant of the package.]}
 @end{Itemize}
@@ -2091,7 +2120,7 @@ given @nt{global_mode} shall be specified at most once. Similarly, within a
 once by a @nt{global_name}.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[If an entity (other than a library 
+@ChgAdded{Version=[5],Type=[Leading],Text=[If an entity (other than a library
 package or generic library package) has a Global aspect other than Unspecified
 or @key[in out all], then the
 associated operation(s) shall read only those variables global to the
@@ -2111,27 +2140,27 @@ calls:]}
   @ChgAdded{Version=[5],Text=[calls to formal subprograms;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[calls associated with operations on 
+  @ChgAdded{Version=[5],Text=[calls associated with operations on
     formal subtypes;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[calls through formal objects of 
+  @ChgAdded{Version=[5],Text=[calls through formal objects of
     an access-to-subprogram type;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[calls through access-to-subprogram parameters;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[calls on operations with Global aspect 
+  @ChgAdded{Version=[5],Text=[calls on operations with Global aspect
     Unspecified.]}
 
 @end{Itemize}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[The possible Global effects of these excluded 
-calls (other than those that are Unspecified) are taken into account by the 
-caller of the original operation, by presuming they occur at least once 
-during its execution. For calls that are not excluded, the possible Global 
+@ChgAdded{Version=[5],Text=[The possible Global effects of these excluded
+calls (other than those that are Unspecified) are taken into account by the
+caller of the original operation, by presuming they occur at least once
+during its execution. For calls that are not excluded, the possible Global
 effects of the call are those permitted by the Global aspect of the associated
 entity, or by its Global'Class aspect if a dispatching call.]}
 
@@ -2147,12 +2176,12 @@ entity, or by its Global'Class aspect if a dispatching call.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[If a Global aspect other than Unspecified or
 @key[in out all] applies to an access-to-subprogram type, then the @nt{prefix}
-of an Access @nt{attribute_reference} producing a value of such a type shall denote 
-a subprogram whose Global aspect is not Unspecified and is 
-@i<covered>@Defn{Term=[covered],Sec=(global aspect)} by that of the result 
+of an Access @nt{attribute_reference} producing a value of such a type shall denote
+a subprogram whose Global aspect is not Unspecified and is
+@i<covered>@Defn{Term=[covered],Sec=(global aspect)} by that of the result
 type, where a global aspect @i<G1> is @i<covered> by a global aspect @i<G2>
 if the set of variables that @i<G1> identifies as readable or updatable is
-a subset of the corresponding set for @i<G2>. Similarly on a conversion to 
+a subset of the corresponding set for @i<G2>. Similarly on a conversion to
 such a type, the operand shall be of a named access-to-subprogram type whose
 Global aspect is covered by that of the target type.]}
 
@@ -2177,8 +2206,8 @@ ancestor of @i<T>, unless the aspect of that ancestor is Unspecified.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[Implementations need not require that references to
-a constant object that are considered variables in the above rules, be 
-accounted for by the Global or Global'Class aspect, if the implementation can 
+a constant object that are considered variables in the above rules, be
+accounted for by the Global or Global'Class aspect, if the implementation can
 determine that the constant object is immutable.]}
 
 @begin{Ramification}
@@ -2189,23 +2218,23 @@ determine that the constant object is immutable.]}
 @end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[Implementations may perform additional checks on 
-calls to operations with an Unspecified Global aspect to ensure that they 
+@ChgAdded{Version=[5],Text=[Implementations may perform additional checks on
+calls to operations with an Unspecified Global aspect to ensure that they
 do not violate any limitations associated with the point of call.]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[In this sense, @exam{Global => Unspecified}
-  is not permission to violate the caller's Global restrictions. It is rather 
+  is not permission to violate the caller's Global restrictions. It is rather
   that the implementor of the subprogram is presuming other means are being
   used to ensure safety. Note the No_Unspecified_Globals Restriction
-  (@RefSecNum{High Integrity Restrictions}), which prevents the use of 
+  (@RefSecNum{High Integrity Restrictions}), which prevents the use of
   Unspecified with the Global aspect in a given partition.]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[Implementations may extend the syntax or semantics
-of the Global aspect in an implementation-defined manner@Redundant[; for 
+of the Global aspect in an implementation-defined manner@Redundant[; for
 example, supporting additional @nt{global_mode}s].]}
 
 @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
@@ -3910,18 +3939,29 @@ Print(3); --@RI{ Ambiguous!}
 @end{Reason}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0377-1]}
 @ChgAdded{Version=[4],Text=[If the mode is @key[out], the actual parameter is a
-view conversion, and the type of the formal parameter is an access type or
-a scalar type that has the Default_Value aspect specified, then]}
+view conversion, and the type of the formal parameter is @Chg{Version=[5],New=[],Old=[an
+access type or ]}a scalar type@Chg{Version=[5],New=[],Old=[ that has the Default_Value
+aspect specified]}, then]}
   @begin{Itemize}
     @ChgRef{Version=[4],Kind=[Added]}
-    @ChgAdded{Version=[4],Text=[there shall exist a type (other than a root
-      numeric type) that is an ancestor of both the target type and the operand
-      type; and]}
+    @ChgRef{Version=[5],Kind=[RevisedAdded]}
+    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[there shall exist
+      a type (other than a root numeric type) that is an ancestor of both ]}the
+      target @Chg{Version=[5],New=[],Old=[type ]} and
+      @Chg{Version=[5],New=[],Old=[the ]}operand type@Chg{Version=[5],New=[ both
+      do not have the Default_Value aspect specified],Old=[]};
+      @Chg{Version=[5],New=[or],Old=[and]}]}
 
     @ChgRef{Version=[4],Kind=[Added]}
-    @ChgAdded{Version=[4],Text=[in the case of a scalar type, the type of the
-      operand of the conversion shall have the Default_Value aspect specified.]}
+    @ChgRef{Version=[5],Kind=[RevisedAdded]}
+    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[the target and],Old=[in the
+      case of a scalar type, the type of the]} operand @Chg{Version=[5],New=[type
+      both],Old=[of the conversion shall]} have the Default_Value aspect
+      specified@Chg{Version=[5],New=[, and there shall exist a type (other
+      than a root numeric type) that is an ancestor of both the target type and
+      the operand type],Old=[]}.]}
   @end{Itemize}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
@@ -3935,7 +3975,6 @@ these rules also apply in the private part of an instance of a generic unit.]}
   @ChgAdded{Version=[4],Text=[These rules are needed in order to ensure that a
     well-defined parameter value is passed.]}
 @end{Reason}
-
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0102-1],ARef=[AI05-0142-4]}
@@ -4352,38 +4391,92 @@ The conversion mentioned here is a value conversion.
 the formal parameter object is created, and:
 @begin(itemize)
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0196-1]}
-  For an access type, the formal parameter is initialized
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0378-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{For conditional leading.}
+  For an access type@Chg{Version=[5],New=[:],Old=[, the formal parameter is
+  initialized
   from the value of the actual, without @Chg{Version=[3],New=[checking that the
   value satisfies any constraint, any predicate, or any exclusion of the null
-  value],Old=[a constraint check]};
+  value],Old=[a constraint check]};]}
+
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
+@ChgAdded{Version=[5],Text=[if the designated type of the actual is a
+  class-wide type @i<T>'Class and the designated type of the formal is
+  neither an ancestor of @i<T>, nor a class-wide type that covers @i<T>, then
+  the formal parameter is initialized to the null value of the formal type;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
+@ChgAdded{Version=[5],Text=[if the actual is a stand-alone object of an
+  anonymous access type, and the accessibility level of the formal type is not
+  library level, then the formal parameter is initialized to the null value
+  of the formal type;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
+@ChgAdded{Version=[5],Text=[if the call is within the body of an instance of
+  a generic unit, the actual or the formal type is descended from a generic
+  formal access type of the generic unit, and the actual and formal types
+  neither share an ancestor nor is the formal type accessibility at
+  library level, then the formal parameter is initialized to the null
+  value of the formal type;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
+@ChgAdded{Version=[5],Text=[otherwise, the formal parameter
+  is initialized to the value of the actual parameter, without checking that
+  the value satisfies any constraint.]}
+
+@end{Itemize}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[In all of the above cases, no check is
+performed for any predicate or exclusion of the null value that might apply to
+the formal type.]}
+
 @begin{Reason}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0378-1]}
   This preserves the @MetaRulesName that an object of an access type
-  is always initialized with a @lquotes@;reasonable@rquotes@; value.
+  is always initialized with a @lquotes@;reasonable@rquotes@; value.@Chg{Version=[5],New=[
+  When no reasonable value is available, we pass @key[null] instead. All such
+  cases require a view conversion of unrelated access types.],Old=[]}
 @end{Reason}
+
+@begin{ImplNote}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0378-1]}
+@ChgAdded{Version=[5],Text=[This rule means that any tag checks
+   and accessibility checks can be assumed to pass for an @key[out]
+   parameter, but constraints, null exclusions, and predicates cannot
+   be assumed unless the compiler can prove that the parameter has been
+   previously written within the subprogram.]}
+@end{ImplNote}
+
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0228-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
-@ChgAdded{Version=[4],Type=[Leading],Text=[]}@Comment{To add conditional leading}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0377-1]}
+@Comment{We'd like conditional leading only for version 4 but we don't have a way to do that}
 @ChgAdded{Version=[3],Text=[For a scalar type that has the Default_Value aspect
 specified, the formal parameter is initialized from the value of the actual,
 without checking that the value satisfies any constraint or any
-predicate@Chg{Version=[4],New=[. Furthermore, if the actual
-parameter is a view conversion and either],Old=[;]}]}
+predicate@Chg{Version=[4],New=[@Chg{Version=[5],New=[;],Old=[. Furthermore,
+if the actual parameter is a view conversion and either]}],Old=[;]}]}
 
   @begin{Itemize}
     @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
-    @ChgAdded{Version=[4],Text=[there exists no type (other than a root
-    numeric type) that is an ancestor of both the target type and the type
-    of the operand of the conversion; or]}
+    @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0377-1]}
+    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[there exists no type
+      (other than a root numeric type) that is an ancestor of both the target type
+      and the type of the operand of the conversion; or]}]}
 
     @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
-    @ChgAdded{Version=[4],Text=[the Default_Value aspect is unspecified for
-    the type of the operand of the conversion]}
+    @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0377-1]}
+    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[the Default_Value
+      aspect is unspecified for the type of the operand of the conversion]}]}
   @end{Itemize}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
-@ChgAdded{Version=[4],NoPrefix=[T],Text=[then Program_Error@IndexCheck{Program_Error_Check}
-is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0377-1]}
+@ChgAdded{Version=[4],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[then
+Program_Error@IndexCheck{Program_Error_Check}
+is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4404,10 +4497,12 @@ is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[The Program_Error case can only occur in the
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[The Program_Error
+  case can only occur in the
   body of an instance of a generic unit. @LegalityTitle will catch all other
   cases. Implementations that macro-expand generics
-  can always detect this case when the enclosing instance body is expanded.]}
+  can always detect this case when the enclosing instance body is expanded.]}]}
 @end{Discussion}
 
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0333-1]}
@@ -4449,15 +4544,32 @@ is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]
   don't match between an actual and a formal array parameter,
   the Constraint_Error is raised before the call, rather than after.
 @end{Ramification}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0377-1]}
+  @ChgAdded{Version=[5],Text=[Furthermore, if the type is a scalar type,
+  and the actual parameter is a view conversion, then Program_Error is
+  raised if either the target or the operand type has the Default_Value
+  aspect specified, unless they both have the Default_Value aspect
+  specified, and there is a type (other than a root numeric type) that is
+  an ancestor of both the target type and the operand type.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This can only occur in the
+  body of an instance of a generic unit. @LegalityTitle will catch all other
+  cases. Implementations that macro-expand generics
+  can always detect this case when the enclosing instance body is expanded.]}
+@end{Discussion}
 @end(itemize)
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Previous insertion changes this paragraph number}
 @ChgAdded{Version=[3],Text=[In a function call, for each explicitly aliased
 parameter, a check is made that the accessibility level of the master of the
 actual object is not deeper than that of the  master of the call
 (see @RefSecNum{Operations of Access Types}).]}
 @begin{Ramification}
-  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If the actual object to a call @i<C> is a formal
   parameter of some function call @i<F>, no dynamic check against the master of
   the actual parameter of @i<F> is necessary. Any case which could fail the
@@ -4525,6 +4637,15 @@ call is erroneous if the value of any discriminant of the actual is changed
 while the formal parameter exists (that is, before leaving the corresponding
 callable construct).]}
 @end{Erron}
+
+@begin{ImplPerm}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0378-1]}
+  @ChgAdded{Version=[5],Text=[For an @key[out] parameter of an access type, if
+  the representation of the actual type and the formal type differ, and there
+  are values of the actual type that cannot be represented as values of the
+  formal type, the implementation may initialize the formal parameter with
+  the null value of the formal type.]}
+@end{ImplPerm}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
@@ -4600,18 +4721,38 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
   Thus they've been banned.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0378-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Added rules so that value passed into an @key[out] parameter for access
+  types is well-defined in the case of a view conversion. @key[Null] will be
+  passed in for conversions that may have problematic accessibility or tags. If
+  the accessibility or tag check(s) would have passed, and the @key[out]
+  parameter is read before it is written (perhaps to read a bound or
+  discriminant), Constraint_Error may be raised by Ada 202x when it would not
+  have been in Ada 2012. Additionally, if the called subprogram does not write
+  the @key[out] parameter at all, the actual object will be overwritten with
+  @key[null] (and possibly raise Constraint_Error if the object is null
+  excluding), while the object would be unchanged in Ada 2012. Such cases are
+  thought to be rare, as most @key[out] parameters of access types are
+  overwritten before being read. In addition, at least one widely-used Ada
+  compiler already passes @key[null] in these cases.]}
+@end{Inconsistent2012}
+
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2005}@b<Corrigendum:>
-  Added rules to ensure that the value passed into a @key[out] parameter
-  for elementary types is well-defined in the case of a view conversion.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0377-1],ARef=[AI12-0378-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
+  Added rules to ensure that the value passed into @Chg{Version=[5],New=[an],Old=[a]}
+  @key[out] parameter for @Chg{Version=[5],New=[scalar],Old=[elementary]} types is
+  well-defined in the case of a view conversion.
   The new rules can be incompatible. For a view conversion to an unrelated type
   with the Default_Value aspect specified, the aspect is new in Ada 2012 so it
-  should be unlikely to occur in existing code. For a view conversion to an
-  unrelated access type, the incompatibility is possible as this could be
-  written in Ada 95, but such a view conversion is thought to be rare. In both
-  cases, declaring and passing a temporary rather than a view conversion
-  will eliminate the problem.]}
+  should be unlikely to occur in existing code.@Chg{Version=[5],New=[Declaring],Old=[ For
+  a view conversion to an unrelated access type, the incompatibility is possible
+  as this could be written in Ada 95, but such a view conversion is thought
+  to be rare. In both cases, declaring]} and passing a temporary rather than a
+  view conversion will eliminate the problem.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Because of a rule added in

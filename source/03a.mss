@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.146 $}
+@Comment{$Revision: 1.147 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -5704,7 +5704,8 @@ of the corresponding @i(enumeration literal): it declares
 a parameterless function,
 whose defining name is the @nt<defining_@!identifier>
 or @nt<defining_@!character_@!literal>, and whose result
-@Chg{Version=[3],New=[subtype is the base subtype of],Old=[type
+@Chg{Version=[3],New=[subtype@Defn2{Term=[nominal subtype],Sec=[of an enumeration literal]}
+is the base subtype of],Old=[type
 is]} the enumeration type.
 @begin{Reason}
   This rule defines the profile of the enumeration literal,
@@ -5774,19 +5775,22 @@ the ambiguity (see @RefSecNum(Qualified Expressions)).
 @begin{Examples}
 @Leading@keepnext@i(Examples of enumeration types and subtypes: )
 @begin(Example)
-@key(type) Day    @key(is) (Mon, Tue, Wed, Thu, Fri, Sat, Sun);
-@key(type) Suit   @key(is) (Clubs, Diamonds, Hearts, Spades);
-@key(type) Gender @key(is) (M, F);
-@key(type) Level  @key(is) (Low, Medium, Urgent);
-@key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
-@key(type) Light  @key(is) (Red, Amber, Green); --@RI[ Red and Green are overloaded]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0386-1]}
+@key(type) Day        @key(is) (Mon, Tue, Wed, Thu, Fri, Sat, Sun);@Chg{Version=[5],New=[
+@key(type) Month_Name @key(is) (January, February, March, April, May, June, July,
+                    August, September, October, November, December);],Old=[]}
+@key(type) Suit       @key(is) (Clubs, Diamonds, Hearts, Spades);
+@key(type) Gender     @key(is) (M, F);
+@key(type) Level      @key(is) (Low, Medium, Urgent);
+@key(type) Color      @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
+@key(type) Light      @key(is) (Red, Amber, Green); --@Examcom[ Red and Green are overloaded]
 
-@key(type) Hexa   @key(is) ('A', 'B', 'C', 'D', 'E', 'F');
-@key(type) Mixed  @key(is) ('A', 'B', '*', B, None, '?', '%');
+@key(type) Hexa       @key(is) ('A', 'B', 'C', 'D', 'E', 'F');
+@key(type) Mixed      @key(is) ('A', 'B', '*', B, None, '?', '%');
 
 @key(subtype) Weekday @key(is) Day   @key(range) Mon .. Fri;
 @key(subtype) Major   @key(is) Suit  @key(range) Hearts .. Spades;
-@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;  --@RI[  the Color Red, not the Light]
+@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;  --@Examcom[  the Color Red, not the Light]
 @end(Example)
 @end{Examples}
 
@@ -7668,7 +7672,7 @@ evaluation rules.]}
      via an @nt{attribute_@!definition_@!clause}
      (see @RefSecNum{Operational and Representation Attributes});
      the expression of such a clause shall be
-     static@Chg{Version=[5],New=[ and 
+     static@Chg{Version=[5],New=[ and
      positive],Old=[]}.@Chg{Version=[3],New=[@AspectDefn{Small}],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Small],

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2019/01/12 03:52:47 $ $Author: randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -24,9 +24,9 @@ definition and meaning of an environment variable.],Old=[]}]}
 Environment_Variables has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Environment_Variables@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada],Child=[Environment_Variables]}
-   @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key{is}],Old=[(Environment_Variables);]}]}
+   @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key{is}],Old=[(Environment_Variables);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Value} (Name : @key{in} String) @key{return} String;]}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_big.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2020/06/03 00:09:01 $ $Author: randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
 @Part(predefbignum, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:01 $}
+@Comment{$Date: 2020/08/28 03:34:22 $}
 
 @LabeledAddedSubclause{Version=[5],Name=[Big Numbers]}
 
@@ -48,7 +48,7 @@ Numerics.Big_Numbers.Big_Integers has the following declaration:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key{with} Ada.Strings.Text_Buffers;
 @key{package} Ada.Numerics.Big_Numbers.Big_Integers@ChildUnit{Parent=[Ada.Numerics.Big_Numbers],Child=[Big_Integers]}
-   @key{with} Preelaborate, Nonblocking, Global => @key{null} @key{is}]}
+   @key{with} Preelaborate, Nonblocking, Global => @key{in out synchronized} @key{is}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{type} @AdaTypeDefn{Big_Integer} @key{is private}
@@ -76,12 +76,14 @@ Numerics.Big_Numbers.Big_Integers has the following declaration:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{subtype} @AdaSubtypeDefn{Name=[Big_Positive],Of=[Big_Integer]} @key{is} Big_Integer
-      @key{with} Dynamic_Predicate => (@key{if} Is_Valid (Big_Positive) @key{then} Big_Positive > 0),
+      @key{with} Dynamic_Predicate => (@key{if} Is_Valid (Big_Positive)
+                                 @key{then} Big_Positive > 0),
            Predicate_Failure => (@key{raise} Constraint_Error);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{subtype} @AdaSubtypeDefn{Name=[Big_Natural],Of=[Big_Integer]} @key{is} Big_Integer
-      @key{with} Dynamic_Predicate => (@key{if} Is_Valid (Big_Natural) @key{then} Big_Natural => 0),
+      @key{with} Dynamic_Predicate => (@key{if} Is_Valid (Big_Natural)
+                                 @key{then} Big_Natural >= 0),
            Predicate_Failure => (@key{raise} Constraint_Error);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -168,7 +170,7 @@ Constraint_Error, not Data_Error, is propagated in error cases and the result of
 a call To_String with a Width parameter of 0 and a nonnegative Arg parameter
 does not include a leading blank. Put_Image calls To_String (passing in the
 default values for the Width and Base parameters), prepends a leading blank if
-the argument is nonnegative, and writes the resulting value to the buffer using 
+the argument is nonnegative, and writes the resulting value to the buffer using
 Text_Buffers.Put.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1]}
@@ -234,7 +236,7 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
    @key{use all type} Big_Integers.Big_Integer;
 @key{with} Ada.Strings.Text_Buffers;
 @key{package} Ada.Numerics.Big_Numbers.Big_Reals@ChildUnit{Parent=[Ada.Numerics.Big_Numbers],Child=[Big_Reals]}
-   @key{with} Preelaborate, Nonblocking, Global => @key{null} @key{is}]}
+   @key{with} Preelaborate, Nonblocking, Global => @key{in out synchronized} @key{is}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{type} @AdaTypeDefn{Big_Real} @key{is private}
@@ -251,7 +253,7 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
            Predicate_Failure => @key{raise} Program_Error;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key{function} "/" (Num, Den : Big_Integers.Valid_Big_Integer) 
+@ChgAdded{Version=[5],Text=[   @key{function} "/" (Num, Den : Big_Integers.Valid_Big_Integer)
       @key{return} Valid_Big_Real
       @key{with} Pre => Den /= 0
                    @key{or else raise} Constraint_Error;]}
@@ -265,16 +267,16 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
    @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],Text=[The postcondition of Numerator cannot be complete
    as it cannot mention Denominator. Since the postcondition of Denominator uses
-   Numerator, we would get an infinite mutual recursion if both postconditions 
+   Numerator, we would get an infinite mutual recursion if both postconditions
    are enabled. The postcondition of Denominator serves as the postcondition for
    Numerator as well unless Arg = 0.0.]}
 @end{Reason}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Denominator} (Arg : Valid_Big_Real) 
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Denominator} (Arg : Valid_Big_Real)
       @key{return} Big_Integers.Big_Positive
       @key{with} Post =>
-        (@key{if} Arg = 0.0 @key{then} Denominator'Result = 1 
+        (@key{if} Arg = 0.0 @key{then} Denominator'Result = 1
          @key{else} Big_Integers.Greatest_Common_Divisor
                 (Numerator (Arg), Denominator'Result) = 1);]}
 

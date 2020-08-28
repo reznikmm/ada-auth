@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2085,7 +2085,9 @@ irrelevant, since failing these tests is highly unlikely.
 @LabeledSubClause{Object Renaming Declarations}
 
 @begin{Intro}
-@redundant[An @nt{object_renaming_declaration} is used to rename an object.]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0383-1]}
+@redundant[An @nt{object_renaming_declaration} is used to rename an 
+object@Chg{Version=[5],New=[ or value],Old=[]}.]
 @end{Intro}
 
 @begin{Syntax}
@@ -2158,13 +2160,16 @@ That makes the rule different for @key[in] vs. @key[in out].
 @end{Resolution}
 
 @begin{Legality}
-The renamed entity shall be an object.@Defn2{Term=[object],Sec=(required)}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0383-1]}
+The renamed entity shall be an object@Chg{Version=[5],New=[ or 
+value.],Old=[.@Defn2{Term=[object],Sec=(required)}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0383-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[In the case
 where the type is defined by an @nt{access_definition},
-the type of the renamed object and the type defined by the
-@nt{access_definition}:]}
+the type of the renamed @Chg{Version=[5],New=[entity],Old=[object]} and the 
+type defined by the @nt{access_definition}:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[shall both be access-to-object types with
@@ -2353,14 +2358,18 @@ appropriate.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00409-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0383-1]}
 An @nt{object_renaming_declaration} declares a new view
-@Redundant{of the renamed object} whose
+@Redundant[of the renamed @Chg{Version=[5],New=[entity],Old=[object]}] whose
 properties are identical to those of the renamed view.
-@Redundant[Thus, the properties of the renamed object are not affected by the
-@nt{renaming_declaration}.
-In particular, its value and whether or not it is a constant
-are unaffected; similarly, the@Chg{Version=[2],New=[ null exclusion or],Old=[]}
-constraints that apply to an object are
+@Redundant[Thus, the properties of the renamed @Chg{Version=[5],New=[entity],Old=[object]}
+are not affected by the @nt{renaming_declaration}.
+In particular, @Chg{Version=[5],New=[its nominal subtype, whether it is a 
+value or an object, ],Old=[]}its value @Chg{Version=[5],New=[if it is 
+an object, ],Old=[]}and whether or not it is a constant@Chg{Version=[5],New=[,],Old=[]}
+are unaffected; similarly, the@Chg{Version=[2],New=[@Chg{Version=[5],New=[],Old=[ null 
+exclusion or]}],Old=[]} constraints @Chg{Version=[5],New=[and 
+other properties of its nominal subtype],Old=[that apply to an object]} are
 not affected by renaming (any constraint implied by the
 @nt{subtype_mark} @Chg{Version=[2],New=[or @nt{access_definition} ],Old=[]}of
 the @nt{object_renaming_declaration} is ignored).]
@@ -2384,10 +2393,18 @@ renamed entity, inheriting the original properties.]}
 @leading@keepnext@i{Example of renaming an object:}
 @begin{Example}
 @key[declare]
-   L : Person @key[renames] Leftmost_Person; --@RI{ see @RefSecNum{Incomplete Type Declarations}}
+   L : Person @key[renames] Leftmost_Person; --@Examcom{ see @RefSecNum{Incomplete Type Declarations}}
 @key[begin]
    L.Age := L.Age + 1;
 @key[end];
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0383-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Example of renaming a value:]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0383-1]}
+@begin{Example}
+Uno @key[renames] One;  --@Examcom{ see @RefSecNum{Number Declarations}}
 @end{Example}
 @end{Examples}
 
@@ -2480,6 +2497,11 @@ using the type T2 of the previous example:]}
   as the subtype information it provides is not trustworthy anyway
   (that comes from the renamed object and there is no requirement that
   it is the same as that of the object).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0383-1]}
+  @ChgAdded{Version=[5],Text=[An object renaming can now rename values,
+  such as named numbers. The renamed entity still has to be a @nt{name},
+  but an arbitrary @nt{expression} can be renamed by qualifying it.]}
 @end{Extend2012}
 
 

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/08/28 03:34:20 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.158 $}
+@Comment{$Revision: 1.159 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -931,7 +931,7 @@ its type is scalar, then its nominal subtype is the base subtype of
 the type; if its type is tagged, its nominal subtype is the first
 subtype of the type; otherwise, its nominal subtype is a subtype of the type
 without any constraint@Chg{Version=[4],New=[,],Old=[ or]}
-@nt{null_exclusion}@Chg{Version=[4],New=[, or predicate],Old=[]}.
+@nt{null_exclusion}@Chg{Version=[4],New=[, or predicate],Old=[]}.@Defn2{Term=[nominal subtype],Sec=[of an attribute reference]}
 Similarly, unless explicitly specified otherwise, for an
 @nt{attribute_reference} that denotes a function, when its result
 type is scalar, its result subtype is the base subtype of the type,
@@ -998,11 +998,14 @@ evaluation of a @nt{reduction_attribute_reference} is defined in
 
 @begin{ImplPerm}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0015],ARef=[AI95-00093-01]}
-An implementation may provide implementation-defined attributes;
-the @nt{identifier} for an implementation-defined
-attribute shall differ from those of the language-defined
-attributes@Chg{New=[ unless supplied for compatibility with a previous edition of
-this International Standard],Old=[]}.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0362-2]}
+An implementation may provide implementation-defined attributes; the 
+@nt{identifier} for @Chg{Version=[5],New=[such ],Old=[]}an
+implementation-defined attribute shall differ from those of the 
+language-defined
+attributes@Chg{New=[@Chg{Version=[5],New=[],Old=[ unless supplied for 
+compatibility with a previous edition of
+this International Standard]}],Old=[]}.
 @ImplDef{Implementation-defined attributes.}
 @begin{Ramification}
 They cannot be reserved words because reserved words are not legal
@@ -1012,12 +1015,32 @@ The semantics of implementation-defined attributes,
 and any associated rules, are, of course, implementation defined.
 For example, the implementation defines whether a given
 implementation-defined attribute can be used in a static expression.
+@end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0015],ARef=[AI95-00093-01]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0362-2]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[An implementation may extend the
+definition of a language-defined attribute by accepting uses of that 
+attribute that would otherwise be illegal in the following cases:]}
+@begin{itemize}
+   @ChgRef{Version=[5],Kind=[Added]}
+   @ChgAdded{Version=[5],Text=[in order to support compatibility with a 
+     previous edition of of this International Standard; or]}
+
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0015],ARef=[AI95-00093-01]}
 @Chg{New=[Implementations are allowed to support the Small attribute for
 floating types, as this was defined in Ada 83, even though the name would
 conflict with a language-defined attribute.],Old=[]}
 @end{Ramification}
+
+   @ChgRef{Version=[5],Kind=[Added]}
+   @ChgAdded{Version=[5],Text=[in the case of a language-defined attribute 
+     whose @nt{prefix} is required by this International Standard to be a 
+    floating point subtype, an implementation may accept an 
+    @nt{attribute_reference} whose @nt{prefix} is a fixed point 
+    subtype@Redundant[; the semantics of such an @nt{attribute_reference} are 
+    implementation defined.]]}
+@end{itemize}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -1147,6 +1170,11 @@ The Ada 83 rule said that the
   @ChgAdded{Version=[5],Text=[Added @nt{reduction_attribute_reference} and
   cleaned up the rules here to avoid trampling the definition of those in
   @RefSecNum{Reduction Expressions}.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0362-2]}
+  @ChgAdded{Version=[5],Text=[Added a permission to support fixed point
+  versions of float attributes, such as the rounding attributes found in
+  @RefSecNum{Attributes of Floating Point Types}.]}
 @end{DiffWord2012}
 
 
@@ -1702,14 +1730,14 @@ In either case, the @nt{character_literal} denotes the
 @PDefn2{Term=[expected type],Sec=(string_literal)}
 The expected type for a @nt{primary} that is a @nt<string_literal>
 shall be a single string type@Chg{Version=[5],New=[ or a type with a
-specified String_Literal aspect (see @RefSecNum{User-Defined Literals}). 
-In either case, the @nt{string_literal} is interpreted to be of its 
-expected type. If the expected type of an integer literal is a type with a 
-specified Integer_Literal aspect (see @RefSecNum{User-Defined Literals}), 
+specified String_Literal aspect (see @RefSecNum{User-Defined Literals}).
+In either case, the @nt{string_literal} is interpreted to be of its
+expected type. If the expected type of an integer literal is a type with a
+specified Integer_Literal aspect (see @RefSecNum{User-Defined Literals}),
 the literal is interpreted to@PDefn2{Term=[expected type],Sec=(integer_literal)}
-be of its expected type; otherwise it is interpreted to be of type 
-@i<universal_integer>. If the expected type of a real literal is a type with 
-a specified Real_Literal aspect (see @RefSecNum{User-Defined Literals}), 
+be of its expected type; otherwise it is interpreted to be of type
+@i<universal_integer>. If the expected type of a real literal is a type with
+a specified Real_Literal aspect (see @RefSecNum{User-Defined Literals}),
 it is interpreted to be of its@PDefn2{Term=[expected type],Sec=(real_literal)}
 expected type; otherwise, it is interpreted to be of type @i<universal_real>.],Old=[]}.
 @end{Resolution}
@@ -1889,7 +1917,7 @@ may be specified for any type @i<T>:]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[5],Text=[Integer_Literal@\This aspect is specified by a
 @SynI{function_}@nt{name} that statically denotes a function with a result type
-of @i<T> and one @key[in] parameter that is of type String and is 
+of @i<T> and one @key[in] parameter that is of type String and is
 not explictly aliased.@AspectDefn{Integer_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Integer_Literal],
@@ -1898,7 +1926,7 @@ not explictly aliased.@AspectDefn{Integer_Literal}]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[5],Text=[Real_Literal@\This aspect is specified by a
 @SynI{function_}@nt{name} that statically denotes a function with a result type
-of @i<T> and one @key[in] parameter that is of type String and is 
+of @i<T> and one @key[in] parameter that is of type String and is
 not explictly aliased.@AspectDefn{Real_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Real_Literal],
@@ -1907,7 +1935,7 @@ not explictly aliased.@AspectDefn{Real_Literal}]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1],ARef=[AI12-0342-1],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[5],Text=[String_Literal@\This aspect is specified by a
 @SynI{function_}@nt{name} that statically denotes a function with a result type
-of @i<T> and one @key[in] parameter that is of type Wide_Wide_String and is 
+of @i<T> and one @key[in] parameter that is of type Wide_Wide_String and is
 not explictly aliased.@AspectDefn{String_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[String_Literal],
@@ -2086,15 +2114,15 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
    @key[with] Pre => S'Length > 0 @key[and then]
       (@key[for all] Char @key[of] S => Char @key[in] Roman_Character);]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1],ARef=[AI12-0386-1]}
 @ChgAdded{Version=[5],Text={@key[function] To_Roman_Number (S : String) @key[return] Roman_Number @key[is]
    (@key[declare]
-      R : @key[constant array] (Integer @key[range] <>) @key[of] Integer :=
+      R : @key[constant array] (Integer @key[range] <>) @key[of] Roman_Number :=
          (@key[for] D @key[in] S'Range => Roman_Digit'Enum_Rep
              (Roman_Digit'Value (''' & S(D) & '''))); --@Examcom{ See @RefSecNum{Character Types} and @RefSecNum{Enumeration Representation Clauses}}
     @key[begin]
       [@key[for] I @key[in] R'Range =>
-         (@key[if] I < R'Last @key[and then] R(I) < R(I + 1) @key[then] -1 @key[else] 1) * R(I))]
+         (@key[if] I < R'Last @key[and then] R(I) < R(I + 1) @key[then] -1 @key[else] 1) * R(I)]
             'Reduce("+", 0)
    );}}
 
@@ -2621,9 +2649,11 @@ for each associated component.]}
 @key[end record];]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
-@ChgAdded{Version=[4],Text=[...
-X : @key[aliased] Integer;
-R : Rec := (D | F => X'Access); -- @examcom<Legal for D, illegal for F>]}
+@ChgRef{Version=[5],Kind=[Revised]}
+@ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[@key[begin]
+   @key[declare]
+      ],Old=[]}X : @key[aliased] Integer;
+@Chg{Version=[5],New=[      ],Old=[]}R : Rec := (D | F => X'Access); -- @examcom<Legal for D, illegal for F>]}
 @end{Example}
 
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -4065,14 +4095,16 @@ every @nt{array_component_association} shall be of a nonlimited type.]}
 
 @begin{Runtime}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1],ARef=[AI12-0381-1]}
 @ChgAdded{Version=[5],Text=[The evaluation of a @nt{delta_aggregate} begins with
 the evaluation of the @SynI<base_>@nt{expression} of the @nt{delta_aggregate};
 then that value is used to create and initialize the anonymous object of
 the @nt{aggregate}. The bounds of the anonymous object of an
-@nt{array_delta_aggregate} and the discriminants and tag (if any) of the
+@nt{array_delta_aggregate} and the discriminants (if any) of the
 anonymous object of a @nt{record_delta_aggregate} are those of the
-@SynI{base_}@nt{expression}.]}
+@SynI{base_}@nt{expression}. If a @nt{record_delta_aggregate} is of a 
+specific tagged type, its tag is that of the specific type; if it is of
+a class-wide type, its tag is that of the @SynI{base_}@nt{expression}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4081,11 +4113,10 @@ anonymous object of a @nt{record_delta_aggregate} are those of the
   to be built in place.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[This requires that the underlying tag (if any)
-  associated with the @nt{delta_aggregate} is that of the
-  @SynI{base_}@nt{expression} in the @nt{delta_aggregate} and not that of the
-  nominal type of the @SynI{base_}@nt{expression} in the
-  @nt{delta_aggregate}.]}
+  @ChgAdded{Version=[5],Text=[For a specific tagged type, any extension 
+  components that the actual object underlying the @SynI{base_}@nt{expression}
+  might have are not used to initialize the anonymous object, which is 
+  critical if the aggregate is required to be built-in-place.]}
 @end{Ramification}
 
 @begin{Honest}
@@ -4171,11 +4202,12 @@ postcondition:]}
    @key[with] Post => D = (D'Old @key[with delta] Day => 12);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[@key[procedure] The_Answer (V : @key[in out] Vector; A, B : @key[in] Integer) --@Examcom{ see @RefSecNum{Array Types} for type Vector}
+@ChgAdded{Version=[5],Text=[@key[procedure] The_Answer (V : @key[in out] Vector; 
+                      A, B : @key[in] Integer) --@Examcom{ see @RefSecNum{Array Types} for type Vector}
    @key[with] Post => V = (V'Old @key[with delta] A .. B => 42.0, V'First => 0.0);]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1],ARef=[AI12-0379-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1],ARef=[AI12-0379-1],ARef=[AI12-0386-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression can
 be nontrivial:]}
 
@@ -4191,7 +4223,8 @@ be nontrivial:]}
    --@Examcom{ see @RefSecNum{Subprogram Declarations} for declaration of Random}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[Tomorrow := ((Yesterday @key[with delta] Day => 12) @key[with delta] Month => Apr); --@Examcom{ see @RefSecNum{Record Types}}]}
+@ChgAdded{Version=[5],Text=[Tomorrow := ((Yesterday @key[with delta] Day => 12) 
+                  @key[with delta] Month => April); --@Examcom{ see @RefSecNum{Record Types}}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0379-1]}
@@ -4341,8 +4374,9 @@ type.]}
 
 
 @begin{StaticSem}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
-@ChgAdded{Version=[5],Text=[The Aggregate aspect is nonoverridable.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0388-1]}
+@ChgAdded{Version=[5],Text=[The Aggregate aspect is nonoverridable (see 
+@RefSecNum{Aspect Specifications}).]}
 @end{StaticSem}
 
 @begin{Syntax}
@@ -4726,7 +4760,10 @@ Set_Type, Map_Type, and Vector_Type:]}
                           Add_Named => Add_To_Map);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] Add_To_Map (M : @key[in out] Map_Type; Key : @key[in] Integer; Value : @key[in] String);]}
+@ChgAdded{Version=[5],Text=[
+   @key[procedure] Add_To_Map (M : @key[in out] Map_Type; 
+                         Key : @key[in] Integer; 
+                         Value : @key[in] String);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   Empty_Map : @key[constant] Map_Type;]}
@@ -7944,7 +7981,8 @@ is either subtype conformant with the following specification:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] Reducer(Accumulator : @i<Accum_Type>; Value : @i<Value_Type>) @key[return] @i<Accum_Type>;]}
+@ChgAdded{Version=[5],Text=[   @key[function] Reducer(Accumulator : @i<Accum_Type>; 
+                    Value : @i<Value_Type>) @key[return] @i<Accum_Type>;]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -7953,7 +7991,8 @@ subtype conformant with the following specification:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] Reducer(Accumulator : @key[in out] @i<Accum_Type>; Value : @key[in] @i<Value_Type>);]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] Reducer(Accumulator : @key[in out] @i<Accum_Type>; 
+                     Value : @key[in] @i<Value_Type>);]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
@@ -8230,8 +8269,8 @@ the Sine of X using a Taylor expansion:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={@key[function] Sine (X : Float; Num_Terms : Positive := 5) @key[return] Float @key[is]
-   ([@key[for] I @key[in] 1..Num_Terms => (-1.0)**(I-1) * X**(2*I-1)/Float(Factorial(2*I-1))]
-      'Reduce("+", 0.0));}}
+   ([@key[for] I @key[in] 1..Num_Terms => 
+      (-1.0)**(I-1) * X**(2*I-1)/Float(Factorial(2*I-1))]'Reduce("+", 0.0));}}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1]}
@@ -8254,7 +8293,7 @@ value of Pi:]}
 @key[function] Pi (Number_Of_Steps : Natural := 10_000) @key[return] Real @key[is]
   (1.0 / Real (Number_Of_Steps) *
     [@key[for] I @key[in] 1 .. Number_Of_Steps =>
-        (4.0 / (1.0 + ((Real (I) - 0.5) * 
+        (4.0 / (1.0 + ((Real (I) - 0.5) *
            (1.0 / Real (Number_Of_Steps)))**2))]
               'Reduce("+", 0.0));}}
 @end{Example}

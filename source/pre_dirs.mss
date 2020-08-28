@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2020/01/30 01:09:45 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/08/28 03:34:21 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -31,9 +31,11 @@ other versions that use the Win32 API.]}
 Directories has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.IO_Exceptions;
 @key{with} Ada.Calendar;
-@key{package} Ada.Directories @key{is}@ChildUnit{Parent=[Ada],Child=[Directories]}]}
+@key{package} Ada.Directories @Chg{Version=[5],New=[
+   @key{with} Global => @key{in out synchronized} ],Old=[]}@key{is}@ChildUnit{Parent=[Ada],Child=[Directories]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Directory and file operations:]]}
@@ -986,7 +988,9 @@ Directories.Information should contain at least the following routines:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @key{is}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @Chg{Version=[5],New=[
+   @key{with} Global => @key{in out synchronized} ],Old=[]}@key{is}
     -- @RI[System-specific directory information.]
     -- @RI[Version for the Microsoft@latin1(174) Windows@latin1(174) operating system.]]}
 
@@ -1081,7 +1085,9 @@ following routines:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @key{is}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @Chg{Version=[5],New=[
+   @key{with} Global => @key{in out synchronized} ],Old=[]}@key{is}
     -- @RI[System-specific directory information.]
     -- @RI[Unix and similar systems version.]]}
 
@@ -1336,9 +1342,9 @@ Directories.Hierarchical_File_Names has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[3],Text=[@key[package] Ada.Directories.Hierarchical_File_Names@Chg{Version=[5],New=[
-   @key[with] Nonblocking],Old=[]} @key[is]@ChildUnit{Parent=[Ada.Directories],Child=[Hierarchical_File_Names]}]}
+   @key[with] Nonblocking, Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada.Directories],Child=[Hierarchical_File_Names]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Simple_Name} (Name : @key{in} String) @key{return} Boolean;]}
