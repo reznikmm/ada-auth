@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,34 +39,34 @@
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
 is a compilation unit that is the declaration, body, or renaming of a 
 library unit. Each library unit (except Standard) has a <I>parent unit</I>, 
-which is a library package or generic library package. <A NAME="I4725"></A>A 
+which is a library package or generic library package. <A NAME="I4716"></A>A 
 library unit is a <I>child</I> of its parent unit. The <I>root</I> library 
 units are the children of the predefined library package Standard.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">compilation</SPAN><A NAME="I4726"></A><A NAME="S0285"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4727"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">compilation</SPAN><A NAME="I4717"></A><A NAME="S0285"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4718"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>}</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">compilation_unit</SPAN><A NAME="I4728"></A><A NAME="S0286"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4729"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>&nbsp;<A NAME="I4730"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I4731"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>&nbsp;<A NAME="I4732"></A><SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0302">subunit</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">compilation_unit</SPAN><A NAME="I4719"></A><A NAME="S0286"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4720"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>&nbsp;<A NAME="I4721"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4722"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>&nbsp;<A NAME="I4723"></A><SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0302">subunit</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">library_item</SPAN><A NAME="I4733"></A><A NAME="S0287"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<A NAME="I4734"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0288">library_unit_declaration</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I4735"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0290">library_unit_body</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;[<B>private</B>]&nbsp;<A NAME="I4736"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0289">library_unit_renaming_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">library_item</SPAN><A NAME="I4724"></A><A NAME="S0287"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<A NAME="I4725"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0288">library_unit_declaration</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4726"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0290">library_unit_body</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;[<B>private</B>]&nbsp;<A NAME="I4727"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0289">library_unit_renaming_declaration</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">library_unit_declaration</SPAN><A NAME="I4737"></A><A NAME="S0288"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4738"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4739"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0229">package_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4740"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4741"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0315">generic_instantiation</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_declaration</SPAN><A NAME="I4728"></A><A NAME="S0288"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4729"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4730"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0229">package_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4731"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4732"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0315">generic_instantiation</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">library_unit_renaming_declaration</SPAN><A NAME="I4742"></A><A NAME="S0289"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4743"></A><SPAN Class="swiss"><A HREF="RM-8-5-3.html#S0241">package_renaming_declaration</A></SPAN><BR>
-&nbsp;|&nbsp;<A NAME="I4744"></A><SPAN Class="swiss"><A HREF="RM-8-5-5.html#S0243">generic_renaming_declaration</A></SPAN><BR>
-&nbsp;|&nbsp;<A NAME="I4745"></A><SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_renaming_declaration</SPAN><A NAME="I4733"></A><A NAME="S0289"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4734"></A><SPAN Class="swiss"><A HREF="RM-8-5-3.html#S0241">package_renaming_declaration</A></SPAN><BR>
+&nbsp;|&nbsp;<A NAME="I4735"></A><SPAN Class="swiss"><A HREF="RM-8-5-5.html#S0243">generic_renaming_declaration</A></SPAN><BR>
+&nbsp;|&nbsp;<A NAME="I4736"></A><SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">library_unit_body</SPAN><A NAME="I4746"></A><A NAME="S0290"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4747"></A><SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>&nbsp;|&nbsp;<A NAME="I4748"></A><SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_body</SPAN><A NAME="I4737"></A><A NAME="S0290"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4738"></A><SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>&nbsp;|&nbsp;<A NAME="I4739"></A><SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1"><SPAN Class="swiss">parent_unit_name</SPAN><A NAME="I4749"></A><A NAME="S0291"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4750"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">parent_unit_name</SPAN><A NAME="I4740"></A><A NAME="S0291"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4741"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Indented1">An <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0234">overriding_indicator</A></SPAN> 
 is not allowed in a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_declaration</A></SPAN>, 
@@ -74,13 +74,13 @@ is not allowed in a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_d
 or <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 that declares a library unit.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I4751"></A><A NAME="I4752"></A><A NAME="I4753"></A><A NAME="I4754"></A><A NAME="I4755"></A>A 
+<div class="Normal"><A NAME="I4742"></A><A NAME="I4743"></A><A NAME="I4744"></A><A NAME="I4745"></A><A NAME="I4746"></A>A 
 <I>library unit</I> is a program unit that is declared by a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>. 
 When a program unit is a library unit, the prefix &ldquo;library&rdquo; 
 is used to refer to it (or &ldquo;generic library&rdquo; if generic), 
 as well as to its declaration and body, as in &ldquo;library procedure&rdquo;, 
 &ldquo;library <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN>&rdquo;, 
-or &ldquo;generic library package&rdquo;. <A NAME="I4756"></A>The term 
+or &ldquo;generic library package&rdquo;. <A NAME="I4747"></A>The term 
 <I>compilation unit</I> is used to refer to a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0286">compilation_unit</A></SPAN>. 
 When the meaning is clear from context, the term is also used to refer 
 to the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
@@ -92,40 +92,40 @@ without the <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A
 and the <B>separate</B> (<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>)). 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I4757"></A><A NAME="I4758"></A>The <I>parent 
+<div class="Normal"><A NAME="I4748"></A><A NAME="I4749"></A>The <I>parent 
 declaration</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
 (and of the library unit) is the declaration denoted by the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>, 
 if any, of the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0201">defining_program_unit_name</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>. 
-<A NAME="I4759"></A>If there is no <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>, 
+<A NAME="I4750"></A>If there is no <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>, 
 the parent declaration is the declaration of Standard, the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
 is a <I>root</I> <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>, 
 and the library unit (renaming) is a <I>root</I> library unit (renaming). 
 The declaration and body of Standard itself have no parent declaration. 
-<A NAME="I4760"></A>The <I>parent unit</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
+<A NAME="I4751"></A>The <I>parent unit</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
 or library unit is the library unit declared by its parent declaration. 
 </div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal">The children of a library unit occur immediately 
 within the declarative region of the declaration of the library unit. 
-<A NAME="I4761"></A>The <I>ancestors</I> of a library unit are itself, 
+<A NAME="I4752"></A>The <I>ancestors</I> of a library unit are itself, 
 its parent, its parent's parent, and so on. (Standard is an ancestor 
-of every library unit.) <A NAME="I4762"></A>The <I>descendant</I> relation 
+of every library unit.) <A NAME="I4753"></A>The <I>descendant</I> relation 
 is the inverse of the ancestor relation.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I4763"></A><A NAME="I4764"></A><A NAME="I4765"></A><A NAME="I4766"></A>A 
+<div class="Normal"><A NAME="I4754"></A><A NAME="I4755"></A><A NAME="I4756"></A><A NAME="I4757"></A>A 
 <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0288">library_unit_declaration</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0289">library_unit_renaming_declaration</A></SPAN> 
 is <I>private</I> if the declaration is immediately preceded by the reserved 
 word <B>private</B>; it is otherwise <I>public</I>. A library unit is 
-private or public according to its declaration. <A NAME="I4767"></A>The 
+private or public according to its declaration. <A NAME="I4758"></A>The 
 <I>public descendants</I> of a library unit are the library unit itself, 
-and the public descendants of its public children. <A NAME="I4768"></A>Its 
+and the public descendants of its public children. <A NAME="I4759"></A>Its 
 other descendants are <I>private descendants</I>.&nbsp;</div>
 <div class="paranum"><a name="p12.1">12.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;For each library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0229">package_declaration</A></SPAN> 
 in the environment, there is an implicit declaration of a <I>limited 
-view</I> of that library package.<A NAME="I4769"></A> The limited view 
+view</I> of that library package.<A NAME="I4760"></A> The limited view 
 of a package contains:</div>
 <div class="paranum"><a name="p12.2">12.2/3</a></div>
 <div class="Bulleted">For each <SPAN Class="swiss"><A HREF="RM-7-1.html#S0229">package_declaration</A></SPAN> 
@@ -225,7 +225,7 @@ on the semantic dependences.</div>
 determine the order of elaboration of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal"><A NAME="I4770"></A><A NAME="I4771"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
+<div class="Normal"><A NAME="I4761"></A><A NAME="I4762"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
 depends semantically upon its parent declaration. A subunit depends semantically 
 upon its parent body. A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0290">library_unit_body</A></SPAN> 
 depends semantically upon the corresponding <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0288">library_unit_declaration</A></SPAN>, 

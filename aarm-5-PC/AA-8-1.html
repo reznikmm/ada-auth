@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,7 +43,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4448"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4454"></A>For 
 each of the following constructs, there is a portion of the program text 
 called its <I>declarative region</I>, [within which nested declarations 
 can occur]:&nbsp;</div>
@@ -126,7 +126,7 @@ not include <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0291">parent_unit_name<
 not include <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0292">context_clause</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I4449"></A><A NAME="I4450"></A><A NAME="I4451"></A><A NAME="I4452"></A><A NAME="I4453"></A>A 
+<div class="Normal"><A NAME="I4455"></A><A NAME="I4456"></A><A NAME="I4457"></A><A NAME="I4458"></A><A NAME="I4459"></A>A 
 declaration occurs <I>immediately within</I> a declarative region if 
 this region is the innermost declarative region that encloses the declaration 
 (the <I>immediately enclosing</I> declarative region), not counting the 
@@ -136,7 +136,7 @@ declarative region (if any) associated with the declaration itself.&nbsp;</div>
 region of a declaration with the declarative region in which it immediately 
 occurs.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal">[<A NAME="I4454"></A> A declaration is <I>local</I> 
+<div class="Normal">[<A NAME="I4460"></A> A declaration is <I>local</I> 
 to a declarative region if the declaration occurs immediately within 
 the declarative region.] [An entity is <I>local</I> to a declarative 
 region if the entity is declared by a declaration that is local to the 
@@ -152,7 +152,7 @@ only applies to declarations. We use this term only informally; for cases
 where precision is required, we use the term &quot;occurs immediately 
 within&quot;, since it is less likely to cause confusion.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I4455"></A>A declaration is <I>global</I> 
+<div class="Normal"><A NAME="I4461"></A>A declaration is <I>global</I> 
 to a declarative region if the declaration occurs immediately within 
 another declarative region that encloses the declarative region. An entity 
 is <I>global</I> to a declarative region if the entity is declared by 
@@ -281,7 +281,7 @@ that have a declarative region.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p18.r">18.r/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0094-1.TXT">AI12-0094-1</A></I>} 
-<A NAME="I4456"></A><B>Corrigendum:</B> <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+<A NAME="I4462"></A><B>Corrigendum:</B> <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 is added to the list of constructs that have a declarative region. This 
 allows parameter names declared in anonymous access type subprogram types 
 to be the same as other names declared outside. For instance:&nbsp;</div>

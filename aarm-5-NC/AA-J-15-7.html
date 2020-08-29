@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,16 +38,16 @@
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Interrupt_Handler is as follows:&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10351"></A><A NAME="I10352"></A>Interrupt_Handler 
-(<I>handler_</I><A NAME="I10353"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10372"></A><A NAME="I10373"></A>Interrupt_Handler 
+(<I>handler_</I><A NAME="I10374"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>);</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Attach_Handler is as follows:&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10354"></A><A NAME="I10355"></A>Attach_Handler 
-(<I>handler_</I><A NAME="I10356"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-<A NAME="I10357"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10375"></A><A NAME="I10376"></A>Attach_Handler 
+(<I>handler_</I><A NAME="I10377"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+<A NAME="I10378"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
@@ -58,7 +58,7 @@ shall resolve to denote a protected procedure with a parameterless profile.</div
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 For the Attach_Handler pragma, the expected type for the expression is 
-Interrupts.Interrupt_Id (see <A HREF="AA-C-3-2.html">C.3.2</A>). <A NAME="I10358"></A></div>
+Interrupts.Interrupt_Id (see <A HREF="AA-C-3-2.html">C.3.2</A>). <A NAME="I10379"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
@@ -69,7 +69,7 @@ within the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0251">protected_definition<
 where the corresponding subprogram is declared. The corresponding <SPAN Class="swiss"><A HREF="AA-9-4.html#S0249">protected_type_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0250">single_protected_declaration</A></SPAN> 
 shall be a library-level declaration, and shall not be declared within 
-a generic body. <A NAME="I10359"></A>In addition to the places where 
+a generic body. <A NAME="I10380"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -102,7 +102,7 @@ as evaluated at object creation time].&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
-<A NAME="I10360"></A><B>Correction:</B> Added missing generic contract 
+<A NAME="I10381"></A><B>Correction:</B> Added missing generic contract 
 wording for the pragma Attach_Handler and Interrupt_Handler. This means 
 that nested instances with these pragmas in the private part are now 
 illegal. This is not likely to occur in practice.&nbsp;</div>

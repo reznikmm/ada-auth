@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -53,7 +53,7 @@ an indefinite type.</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3">A holder container may be <I>empty</I>. An empty 
-holder does not contain an element.<A NAME="I9129"></A></span>&nbsp;</div>
+holder does not contain an element.<A NAME="I9147"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
@@ -69,7 +69,7 @@ has the following declaration:</span>&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
 <B>package</B>&nbsp;Ada.Containers.Indefinite_Holders</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Remote_Types,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3"><B>&nbsp;is</B><A NAME="I9130"></A></span><span class="insert3"><span class="delete5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert3"><B>&nbsp;is</B><A NAME="I9148"></A></span><span class="insert3"><span class="delete5"><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Indefinite_Holders);<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Indefinite_Holders);</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p5.a">5.a/5</a></div>
@@ -81,60 +81,60 @@ of the Containers.Vectors package (see <A HREF="AA-A-18-2.html">A.18.2</A>).</sp
 </div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9131"></A>Holder&nbsp;<B>is&nbsp;tagged&nbsp;private</B>&nbsp;</span><span class="insert5"><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9149"></A>Holder&nbsp;<B>is&nbsp;tagged&nbsp;private</B>&nbsp;</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Stable_Properties&nbsp;=&gt;&nbsp;(Is_Empty,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tampering_With_The_Element_Prohibited),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;Is_Empty&nbsp;(Holder)</span><span class="insert3">;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Holder);</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I9132"></A>Empty_Holder&nbsp;:&nbsp;<B>constant</B>&nbsp;Holder;</span></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I9150"></A>Empty_Holder&nbsp;:&nbsp;<B>constant</B>&nbsp;Holder;</span></div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9133"></A>Equal_Element&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9151"></A>Equal_Element&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;&quot;=&quot;;</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9134"></A>Tampering_With_The_Element_Prohibited<BR>
+<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9152"></A>Tampering_With_The_Element_Prohibited<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</span></div>
 <div class="paranum"><a name="p8.2">8.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
-<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9135"></A>Empty&nbsp;<B>return</B>&nbsp;Holder<BR>
+<span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9153"></A>Empty&nbsp;<B>return</B>&nbsp;Holder<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Empty_Holder)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Empty'Result)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>and&nbsp;then</B>&nbsp;Is_Empty&nbsp;(Empty'Result);</span></div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9136"></A>To_Holder&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Holder</span><span class="insert5"><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9154"></A>To_Holder&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Holder</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(To_Holder'Result)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9137"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9155"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9138"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)</span><span class="insert5"><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9156"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Is_Empty&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9139"></A>Element&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Element_Type</span><span class="insert5"><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9157"></A>Element&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Element_Type</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Element_Type)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9140"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9158"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9141"></A>Query_Element<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9159"></A>Query_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Holder;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error</span><span class="insert3">;</span></div>
@@ -142,14 +142,14 @@ of the Containers.Vectors package (see <A HREF="AA-A-18-2.html">A.18.2</A>).</sp
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9142"></A>Update_Element<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9160"></A>Update_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type))</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9143"></A>Constant_Reference_Type<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9161"></A>Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element</span><span class="insert5">,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
@@ -157,7 +157,7 @@ of the Containers.Vectors package (see <A HREF="AA-A-18-2.html">A.18.2</A>).</sp
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9144"></A>Reference_Type<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9162"></A>Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element</span><span class="insert5">,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
@@ -165,44 +165,46 @@ of the Containers.Vectors package (see <A HREF="AA-A-18-2.html">A.18.2</A>).</sp
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9145"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Holder)<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9163"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Holder)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9146"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Holder)<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9164"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Holder)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9147"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Holder)</span><span class="insert5"><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9165"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Holder)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;(Is_Empty&nbsp;(Source)&nbsp;=&nbsp;Is_Empty&nbsp;(Target))</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9148"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Holder</span><span class="insert5"><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9166"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Holder</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;(Is_Empty&nbsp;(Source)&nbsp;=&nbsp;Is_Empty&nbsp;(Copy'Result))</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9149"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)</span><span class="insert5"><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9167"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Source)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Target&nbsp;/=&nbsp;Source&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is_Empty&nbsp;(Source)&nbsp;<B>and&nbsp;then</B>&nbsp;(<B>not</B>&nbsp;Is_Empty&nbsp;(Target)))</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Target'Has_Same_Storage&nbsp;(Source)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is_Empty&nbsp;(Source)&nbsp;<B>and&nbsp;then</B>&nbsp;(<B>not</B>&nbsp;Is_Empty&nbsp;(Target)))</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p22.1">22.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9150"></A>Swap&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9168"></A>Swap&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Left)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Right)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Is_Empty&nbsp;(Left)&nbsp;=&nbsp;Is_Empty&nbsp;(Right)'Old&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is_Empty&nbsp;(Right)&nbsp;=&nbsp;Is_Empty&nbsp;(Left)'Old;</span></div>
 <div class="paranum"><a name="p23">23/3</a></div>
@@ -233,7 +235,7 @@ is bad.</span>&nbsp;</div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3">The type Holder is used to represent holder containers. 
-The type Holder needs finalization<A NAME="I9151"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
+The type Holder needs finalization<A NAME="I9169"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p28">28/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3">Empty_Holder represents an empty holder object. 
@@ -247,9 +249,9 @@ to the same value as Empty_Holder.</span></div>
 this generic package have access-to-subprogram parameters. To ensure 
 such operations are well-defined, they guard against certain actions 
 by the designated subprogram. In particular, some operations</span></span><span class="insert3">&nbsp;check for &ldquo;tampering with the element&rdquo; of a container because 
-they depend <A NAME="I9152"></A>on the element of the container not being 
+they depend <A NAME="I9170"></A>on the element of the container not being 
 replaced.]</span><span class="insert5">&nbsp;When tampering with the element 
-is <I>prohibited</I><A NAME="I9153"></A> <A NAME="I9154"></A>for a particular 
+is <I>prohibited</I><A NAME="I9171"></A> <A NAME="I9172"></A>for a particular 
 holder object <I>H</I>, Program_Error is propagated by the finalization 
 of <I>H</I>[, as well as by a call that passes <I>H</I> to certain of 
 the operations of this package, as indicated by the precondition of such 
@@ -261,7 +263,7 @@ an operation].</span><span class="insert3"></span></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I9155"></A>A 
+<span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I9173"></A>A 
 subprogram is said to <I>tamper with the element</I> of a holder object 
 <I>H</I> if:</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p31">31/5</a></div>
@@ -288,7 +290,7 @@ so Update_Element does not cause a problem.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I9156"></A><A NAME="I9157"></A>When 
+<span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I9174"></A><A NAME="I9175"></A>When 
 tampering with the element is <I>prohibited</I> for a particular holder 
 object <I>H</I>, Program_Error is propagated by a call of any language-defined 
 subprogram that is defined to tamper with the element of <I>H</I>, leaving 
@@ -313,7 +315,7 @@ answer can be determined without doing so.</span>&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5"><B>function</B>&nbsp;Tampering_With_The_Element_Prohibited<BR>
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</span></div>
 <div class="paranum"><a name="p37.2">37.2/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">Returns True if tampering with the element is currently 
@@ -331,7 +333,7 @@ indefinite insertion (see <A HREF="AA-A-18.html">A.18</A>).</span><span class="i
 <div class="paranum"><a name="p40">40/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert3"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p41">41/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3">Returns True if Container is empty, and False if 
@@ -350,7 +352,7 @@ it contains an element.</span></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert3"><B>function</B>&nbsp;Element&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Element_Type</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Element_Type)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p45">45/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
@@ -376,7 +378,7 @@ Replace_Element performs indefinite insertion (see <A HREF="AA-A-18.html">A.18</
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Holder;<BR>
 &nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p49">49/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
@@ -437,7 +439,7 @@ if Element_Type is unconstrained.</span>&nbsp;</div>
 <div class="paranum"><a name="p54">54/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3">The types Constant_Reference_Type and Reference_Type 
-need finalization.<A NAME="I9158"></A></span></div>
+need finalization.<A NAME="I9176"></A></span></div>
 <div class="paranum"><a name="p55">55/5</a></div>
 <div class="Indented2"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="insert3"></span> {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
@@ -458,9 +460,9 @@ exception.</span>&nbsp;</div>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Holder)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p57">57/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3">This function (combined with the Implicit_Dereference 
@@ -482,9 +484,9 @@ finalized.</span></div>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Holder)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Container),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p60">60/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3">This function (combined with the Implicit_Dereference 
@@ -528,11 +530,11 @@ otherwise, returns To_Holder (Element (Source)).</span></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert3"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Source)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Target&nbsp;/=&nbsp;Source&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is_Empty&nbsp;(Source)&nbsp;<B>and&nbsp;then</B>&nbsp;(<B>not</B>&nbsp;Is_Empty&nbsp;(Target)))</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Target'Has_Same_Storage&nbsp;(Source)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is_Empty&nbsp;(Source)&nbsp;<B>and&nbsp;then</B>&nbsp;(<B>not</B>&nbsp;Is_Empty&nbsp;(Target)))</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p67">67/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
@@ -544,9 +546,9 @@ preexisting content.</span><span class="insert3"><span class="delete5">&nbsp;Sou
 <div class="paranum"><a name="p67.1">67.1/5</a></div>
 <div class="Examples"><span class="insert5"><B>procedure</B>&nbsp;Swap&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder)<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Left)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_The_Element_Prohibited&nbsp;(Right)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Is_Empty&nbsp;(Left)&nbsp;=&nbsp;Is_Empty&nbsp;(Right)'Old&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is_Empty&nbsp;(Right)&nbsp;=&nbsp;Is_Empty&nbsp;(Left)'Old;</span></div>
 <div class="paranum"><a name="p67.2">67.2/5</a></div>
@@ -561,22 +563,22 @@ the operation has no effect. Otherwise, operation exchanges the elements
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3"><A NAME="I9159"></A>It is a bounded error for the 
+<span class="insert3"><A NAME="I9177"></A>It is a bounded error for the 
 actual function associated with a generic formal subprogram, when called 
 as part of an operation of this package, to tamper with the element of 
 any Holder parameter of the operation. Either Program_Error is raised, 
 or the operation works as defined on the value of the Holder either prior 
-to, or subsequent to, some or all of the modifications to the Holder.<A NAME="I9160"></A></span></div>
+to, or subsequent to, some or all of the modifications to the Holder.<A NAME="I9178"></A></span></div>
 <div class="paranum"><a name="p69">69/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
-<span class="insert3"><A NAME="I9161"></A>It is a bounded error to call 
+<span class="insert3"><A NAME="I9179"></A>It is a bounded error to call 
 any subprogram declared in the visible part of Containers.Indefinite_Holders 
 when the associated container has been finalized. If the operation takes 
 Container as an <B>in out</B> parameter, then it raises Constraint_Error 
 or Program_Error. Otherwise, the operation either proceeds as it would 
-for an empty container, or it raises Constraint_Error or<A NAME="I9162"></A> 
-Program_Error.<A NAME="I9163"></A></span>&nbsp;</div>
+for an empty container, or it raises Constraint_Error or<A NAME="I9180"></A> 
+Program_Error.<A NAME="I9181"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p70">70/3</a></div>
@@ -585,7 +587,7 @@ Program_Error.<A NAME="I9163"></A></span>&nbsp;</div>
 <span class="insert3">Execution is erroneous if the holder container 
 associated with the result of a call to Reference or Constant_Reference 
 is finalized before the result object returned by the call to Reference 
-or Constant_Reference is finalized.<A NAME="I9164"></A></span></div>
+or Constant_Reference is finalized.<A NAME="I9182"></A></span></div>
 <div class="paranum"><a name="p70.a">70.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3">Each object of Reference_Type and Constant_Reference_Type 
@@ -663,13 +665,13 @@ where this can't be accomplished.</span>&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0084-1.TXT">AI05-0084-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3"><A NAME="I9165"></A> The generic package Containers.Indefinite_Holders 
+<span class="insert3"><A NAME="I9183"></A> The generic package Containers.Indefinite_Holders 
 is new.</span>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p74.c">74.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
-<span class="insert4"><A NAME="I9166"></A><B>Corrigendum:</B> Defined 
+<span class="insert4"><A NAME="I9184"></A><B>Corrigendum:</B> Defined 
 some routines to &ldquo;perform indefinite insertion&rdquo;. This could 
 mean that some calls to those routines would now raise Program_Error 
 where they previously worked. However, this is extremely unlikely; see 
@@ -681,7 +683,7 @@ for details.</span>&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0350-1.TXT">AI12-0350-1</A></I>} 
-<span class="insert5"><A NAME="I9167"></A>A number of new subprograms 
+<span class="insert5"><A NAME="I9185"></A>A number of new subprograms 
 and types were added to Containers.Indefinite_Holders to better support 
 contracts and provide additional functionality. If an instance of Containers.Indefinite_Holders 
 is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 

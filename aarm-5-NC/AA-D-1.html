@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -55,7 +55,7 @@ may be specified:</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;Priority</div><div class="WideHanging-Body">
 The aspect Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I9366"></A><A NAME="I9367"></A></div>
+which shall be of type Integer.<A NAME="I9384"></A><A NAME="I9385"></A></div>
 <div class="paranum"><a name="p6.a">6.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Priority:&nbsp;</B>Priority 
 of a task object or type, or priority of a protected object or type; 
@@ -63,7 +63,7 @@ the priority is not in the interrupt range.</div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;Interrupt_Priority</div><div class="WideHanging-Body"><br clear="left">
 The aspect Interrupt_Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I9368"></A><A NAME="I9369"></A></div>
+which shall be of type Integer.<A NAME="I9386"></A><A NAME="I9387"></A></div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Interrupt_Priority: 
 </B>Priority of a task object or type, or priority of a protected object 
@@ -130,7 +130,7 @@ The Priority aspect has no effect if it is specified for a subprogram
 other than the main subprogram; the Priority value is not associated 
 with any task.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I9370"></A><A NAME="I9371"></A><A NAME="I9372"></A><A NAME="I9373"></A><A NAME="I9374"></A>A 
+<div class="Normal"><A NAME="I9388"></A><A NAME="I9389"></A><A NAME="I9390"></A><A NAME="I9391"></A><A NAME="I9392"></A>A 
 <I>task priority</I> is an integer value that indicates a degree of urgency 
 and is the basis for resolving competing demands of tasks for resources. 
 Unless otherwise specified, whenever tasks compete for processors or 
@@ -154,13 +154,13 @@ is discussed in <A HREF="AA-D-3.html">D.3</A>.</div>
 <div class="paranum"><a name="p17">17/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0081-1.TXT">AI12-0081-1</A></I>} 
-<A NAME="I9375"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+<A NAME="I9393"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 specified for the Priority or Interrupt_Priority aspect of a task type 
 is evaluated each time an object of the task type is created (see <A HREF="AA-9-1.html">9.1</A>). 
 For the Priority aspect, the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is converted to the subtype Priority; for the Interrupt_Priority aspect, 
 this value is converted to the subtype Any_Priority. The priority value 
-is then associated with the task object. <A NAME="I9376"></A><A NAME="I9377"></A></div>
+is then associated with the task object. <A NAME="I9394"></A><A NAME="I9395"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 Likewise, the priority value is associated with the environment task 
@@ -251,7 +251,7 @@ for the enclosing <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p29.b">29.b</a></div>
-<div class="Annotations"><A NAME="I9378"></A>The priority of a task is 
+<div class="Annotations"><A NAME="I9396"></A>The priority of a task is 
 per-object and not per-type.</div>
 <div class="paranum"><a name="p29.c">29.c</a></div>
 <div class="Annotations">Priorities need not be static anymore (except 
@@ -277,7 +277,7 @@ the differences between the existing and new dispatching policies.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p29.g">29.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9379"></A>Aspects Priority and Interrupt_Priority are new; 
+<A NAME="I9397"></A>Aspects Priority and Interrupt_Priority are new; 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s Priority 
 and Interrupt_Priority are now obsolescent.&nbsp;</div>
 

@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,7 +36,7 @@
 <H1>A.18.21 The Generic Package Containers.Bounded_Hashed_Maps</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-The language-defined generic package Containers.Bounded_Hashed_Maps<A NAME="I8836"></A> 
+The language-defined generic package Containers.Bounded_Hashed_Maps<A NAME="I8850"></A> 
 provides a private type Map and a set of operations. It provides the 
 same operations as the package Containers.Hashed_Maps (see <A HREF="AA-A-18-5.html">A.18.5</A>), 
 with the difference that the maximum storage is bounded.</div>
@@ -48,7 +48,8 @@ The declaration of the generic library package Containers.Bounded_Hashed_Maps
 has the same contents and semantics as Containers.Hashed_Maps except:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-The aspect Preelaborate is replaced with aspect Pure.</div>
+The aspect Preelaborate is replaced with aspect Pure. Aspect Global is 
+deleted.</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The type Map is declared 
 with discriminants that specify both the capacity (number of elements) 
@@ -85,7 +86,8 @@ Reserve_Capacity is replaced with:</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Reserve_Capacity&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;Capacity&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;Capacity&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error;</div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 This operation has no effect, [other than checking the precondition]. 
@@ -94,7 +96,7 @@ This operation has no effect, [other than checking the precondition].
 <div class="Bulleted" style="margin-bottom: 0.3em">An additional operation 
 is added immediately following Reserve_Capacity:&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8837"></A>Default_Modulus&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Hash_Type;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8851"></A>Default_Modulus&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Hash_Type;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Indented2">Default_Modulus returns an implementation-defined 
 value for the number of distinct hash values to be used for the given 
@@ -104,40 +106,41 @@ capacity (maximum number of elements).&nbsp;</div>
 For procedures Insert and Include, the part of the precondition reading:</div>
 <div class="paranum"><a name="p11.2">11.2/5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</div>
 <div class="paranum"><a name="p11.3">11.3/5</a></div>
 <div class="Bulleted-NoPrefix" style="margin-bottom: 0.3em">is replaced 
 by:</div>
 <div class="paranum"><a name="p11.4">11.4/5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&gt;&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&gt;&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</div>
 <div class="paranum"><a name="p11.5">11.5/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 In procedure Assign, the precondition is altered to:&nbsp;</div>
 <div class="paranum"><a name="p11.6">11.6/5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The function Copy 
 is replaced with:&nbsp;</div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8838"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8852"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modulus&nbsp;&nbsp;:&nbsp;Hash_Type&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Length&nbsp;(Source)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;<B>else</B>&nbsp;Capacity)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Modulus&nbsp;=&nbsp;(<B>if</B>&nbsp;Modulus&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Modulus&nbsp;(Capacity)&nbsp;<B>else</B>&nbsp;Modulus);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;<B>else</B>&nbsp;Capacity)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Modulus&nbsp;=&nbsp;(<B>if</B>&nbsp;Modulus&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Modulus&nbsp;(Capacity)&nbsp;<B>else</B>&nbsp;Modulus);</div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 Returns a map with key/element pairs initialized from the values in Source. 
@@ -147,11 +150,11 @@ Returns a map with key/element pairs initialized from the values in Source.
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<A NAME="I8839"></A>It is a bounded error to assign from a bounded map 
+<A NAME="I8853"></A>It is a bounded error to assign from a bounded map 
 object while tampering with elements [or cursors] of that object is prohibited. 
 Either Program_Error is raised by the assignment, execution proceeds 
 with the target object prohibiting tampering with elements [or cursors], 
-or execution proceeds normally.<A NAME="I8840"></A>&nbsp;</div>
+or execution proceeds normally.<A NAME="I8854"></A>&nbsp;</div>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>Tampering with elements includes 
 tampering with cursors, so we only really need to talk about tampering 
@@ -162,7 +165,7 @@ with elements here; we mention cursors for clarity.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 When a bounded map object <I>M</I> is finalized, if tampering with cursors 
 is prohibited for <I>M</I> other than due to an assignment from another 
-map, then execution is erroneous. <A NAME="I8841"></A></div>
+map, then execution is erroneous. <A NAME="I8855"></A></div>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is a tampering event, but 
 since the implementation is not allowed to use Ada.Finalization, it is 
@@ -222,13 +225,13 @@ hashed maps.</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0184-1.TXT">AI05-0184-1</A></I>} 
-<A NAME="I8842"></A> The generic package Containers.Bounded_Hashed_Maps 
+<A NAME="I8856"></A> The generic package Containers.Bounded_Hashed_Maps 
 is new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p22.b">22.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
-<A NAME="I8843"></A><B>Corrigendum:</B> Tampering with elements is now 
+<A NAME="I8857"></A><B>Corrigendum:</B> Tampering with elements is now 
 defined to be equivalent to tampering with cursors for bounded containers. 
 If a program requires tampering detection to work, it might fail in Ada 
 202x. Needless to say, this shouldn't happen outside of test programs. 

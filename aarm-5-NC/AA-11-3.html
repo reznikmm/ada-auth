@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,12 +44,12 @@ raises an exception.]&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
-<SPAN Class="swiss">raise_statement</SPAN><A NAME="I5416"></A><A NAME="S0308"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I5417"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5418"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>];</div>
+<SPAN Class="swiss">raise_statement</SPAN><A NAME="I5408"></A><A NAME="S0308"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I5409"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5410"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>];</div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<SPAN Class="swiss">raise_expression</SPAN><A NAME="I5419"></A><A NAME="S0309"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>&nbsp;<I>exception_</I><A NAME="I5420"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5421"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>]</div>
+<SPAN Class="swiss">raise_expression</SPAN><A NAME="I5411"></A><A NAME="S0309"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>&nbsp;<I>exception_</I><A NAME="I5412"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5413"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>]</div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
 If a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
@@ -162,7 +162,7 @@ unambiguous syntax in these cases.&nbsp;</div>
 The <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 if any, of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
-shall denote an exception. <A NAME="I5422"></A>A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
+shall denote an exception. <A NAME="I5414"></A>A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 with no <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (that is, a <I>re-raise statement</I>) shall be within a handler, but 
 not within a body enclosed by that handler.&nbsp;</div>
@@ -188,15 +188,15 @@ shall be any single type.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<A NAME="I5423"></A>To <I>raise an exception</I> is to raise a new occurrence 
+<A NAME="I5415"></A>To <I>raise an exception</I> is to raise a new occurrence 
 of that exception[, as explained in <A HREF="AA-11-4.html">11.4</A>]. 
-<A NAME="I5424"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
+<A NAME="I5416"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 with an <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 the named exception is raised. Similarly, for the evaluation of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN>, 
 the named exception is raised. [In both of these cases, if a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN> 
 is present, the expression is evaluated and its value is associated with 
-the exception occurrence.] <A NAME="I5425"></A>For the execution of a 
+the exception occurrence.] <A NAME="I5417"></A>For the execution of a 
 re-raise statement, the exception occurrence that caused transfer of 
 control to the innermost enclosing handler is raised [again].&nbsp;</div>
 <div class="paranum"><a name="p4.a.1">4.a.1/2</a></div>
@@ -249,7 +249,7 @@ parts of the syntax any force.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p8.b">8.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
-<A NAME="I5426"></A>The syntax of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
+<A NAME="I5418"></A>The syntax of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 is extended to include a string message. This is more convenient than 
 calling Exceptions.Exception_Message (<I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>'Identity, 
 <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>), 
@@ -261,7 +261,7 @@ and should encourage the use of message strings when raising exceptions.
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<A NAME="I5427"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
+<A NAME="I5419"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
 is new. This construct is necessary to allow conversion of existing specifications 
 to use preconditions and predicates without changing the exceptions raised. 
 It is considered important enough to be added to Ada 2012 rather than 

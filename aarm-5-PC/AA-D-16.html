@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,17 +47,18 @@ be configured.&nbsp;</div>
 The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>package</B>&nbsp;System.Multiprocessors<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9821"></A><BR>
-&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Multiprocessors);</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<B>package</B>&nbsp;System.Multiprocessors<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9843"></A><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Multiprocessors);</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9822"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9823"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9824"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9844"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9845"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9846"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
 <div class="paranum"><a name="p4.a.1">4.a.1/3</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
 CPU_Range'Last in System.Multiprocessors.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9825"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9847"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
 <B>end</B>&nbsp;System.Multiprocessors;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
@@ -74,7 +75,7 @@ be specified:</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="WideHanging-Term">CPU</div><div class="WideHanging-Body">
 The aspect CPU is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I9826"></A><A NAME="I9827"></A></div>
+which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I9848"></A><A NAME="I9849"></A></div>
 <div class="paranum"><a name="p8.a">8.a/5</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>CPU:&nbsp;</B>Processor 
 on which a given task<span class="insert5">, or calling task for a protected 
@@ -164,13 +165,13 @@ object statically assigned to a processor should not use busy-waiting.</span></d
 <div class="paranum"><a name="p16.c">16.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0171-1.TXT">AI05-0171-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9828"></A>The package System.Multiprocessors and the CPU aspect 
+<A NAME="I9850"></A>The package System.Multiprocessors and the CPU aspect 
 are new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p16.d">16.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0281-1.TXT">AI12-0281-1</A></I>} 
-<span class="insert5"><A NAME="I9829"></A>Aspect CPU can now be applied 
+<span class="insert5"><A NAME="I9851"></A>Aspect CPU can now be applied 
 to protected types, in order to avoid the overhead and deadlock potential 
 of multiprocessor execution.</span>&nbsp;</div>
 

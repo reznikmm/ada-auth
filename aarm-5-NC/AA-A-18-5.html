@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -52,9 +52,9 @@ declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>package</B>&nbsp;Ada.Containers.Hashed_Maps<A NAME="I8252"></A><BR>
+<B>package</B>&nbsp;Ada.Containers.Hashed_Maps<A NAME="I8244"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Remote_Types,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p2.a">2.a/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 For discussion on the reasons and meaning of the specifications of the 
@@ -67,7 +67,7 @@ package (see <A HREF="AA-A-18-2.html">A.18.2</A>).&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8253"></A>Map&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8245"></A>Map&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Iterator&nbsp;&nbsp;=&gt;&nbsp;Iterate,<BR>
@@ -93,41 +93,41 @@ have approached the sharing of definitions differently so that we could
 avoid issues like this, but a major reorganization of this existing material 
 would be too much change.&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8254"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8246"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8255"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8247"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8256"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8248"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p6.1">6.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8257"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8249"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
 <div class="paranum"><a name="p6.2">6.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8258"></A>Has_Element&nbsp;(Container&nbsp;:&nbsp;Map;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8250"></A>Has_Element&nbsp;(Container&nbsp;:&nbsp;Map;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p6.3">6.3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8259"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8251"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8260"></A>Tampering_With_Cursors_Prohibited<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8252"></A>Tampering_With_Cursors_Prohibited<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p7.2">7.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8261"></A>Tampering_With_Elements_Prohibited<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8253"></A>Tampering_With_Elements_Prohibited<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p7.3">7.3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8262"></A>Empty&nbsp;(Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8254"></A>Empty&nbsp;(Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;(Empty'Result)&nbsp;&gt;=&nbsp;Capacity&nbsp;<B>and&nbsp;then</B><BR>
@@ -136,102 +136,104 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Empty'Result)&nbsp;=&nbsp;0;</div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8263"></A>Capacity&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8255"></A>Capacity&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8264"></A>Reserve_Capacity&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8256"></A>Reserve_Capacity&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Container.Capacity&nbsp;&gt;=&nbsp;Capacity;</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8265"></A>Length&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8257"></A>Length&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8266"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8258"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Is_Empty'Result&nbsp;=&nbsp;(Length&nbsp;(Container)&nbsp;=&nbsp;0);</div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8267"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8259"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Capacity&nbsp;(Container)&nbsp;=&nbsp;Capacity&nbsp;(Container)'Old&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;0;</div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8268"></A>Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8260"></A>Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Key_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use</B>&nbsp;Key_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Key_Type);</div>
 <div class="paranum"><a name="p13.1">13.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8269"></A>Key&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8261"></A>Key&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Key_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Key_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Key_Type;</div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8270"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8262"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use</B>&nbsp;Element_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p14.1">14.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8271"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8263"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Element_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8272"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8264"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8273"></A>Query_Element<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8265"></A>Query_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>;</div>
 <div class="paranum"><a name="p16.1">16.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8274"></A>Query_Element<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8266"></A>Query_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8275"></A>Update_Element<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8267"></A>Update_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type))<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p17.1">17.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
@@ -243,56 +245,58 @@ would be too much change.&nbsp;</div>
 <div class="paranum"><a name="p17.2">17.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8276"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8268"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p17.3">17.3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8277"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8269"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p17.4">17.4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8278"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8270"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p17.5">17.5/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8279"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8271"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p17.6">17.6/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8280"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8272"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p17.7">17.7/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8281"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8273"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;Length&nbsp;(Target)&nbsp;<B>and&nbsp;then</B><BR>
@@ -300,7 +304,7 @@ would be too much change.&nbsp;</div>
 <div class="paranum"><a name="p17.8">17.8/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8282"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Map;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8274"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Map;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Length&nbsp;(Source)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
@@ -312,27 +316,26 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;else&nbsp;Capacity);</div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8283"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8275"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Source)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Target&nbsp;=&nbsp;Source&nbsp;<B>then</B>&nbsp;True<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Target)&nbsp;=&nbsp;Length&nbsp;(Source'Old)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;0);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Target'Has_Same_Storage&nbsp;(Source)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Target)&nbsp;=&nbsp;Length&nbsp;(Source'Old)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;0);</div>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8284"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8276"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserted&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Container)&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;1<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>declare</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Original_Length&nbsp;:&nbsp;<B>constant</B>&nbsp;Count_Type&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)'Old;<BR>
@@ -345,7 +348,7 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;(Container)&nbsp;&gt;=&nbsp;Length&nbsp;(Container);</div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8285"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8277"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserted&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean)<BR>
@@ -365,7 +368,7 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;(Container)&nbsp;&gt;=&nbsp;Length&nbsp;(Container);</div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8286"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8278"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
@@ -376,7 +379,7 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;(Container)&nbsp;&gt;=&nbsp;Length&nbsp;(Container);</div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8287"></A>Include&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8279"></A>Include&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
@@ -392,7 +395,7 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;(Container)&nbsp;&gt;=&nbsp;Length&nbsp;(Container);</div>
 <div class="paranum"><a name="p23">23/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8288"></A>Replace&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8280"></A>Replace&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
@@ -400,7 +403,7 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old;</div>
 <div class="paranum"><a name="p24">24/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8289"></A>Exclude&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8281"></A>Exclude&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
@@ -412,75 +415,75 @@ would be too much change.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>in</B>&nbsp;Original_Length&nbsp;-&nbsp;1&nbsp;|&nbsp;Original_Length);</div>
 <div class="paranum"><a name="p25">25/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8290"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8282"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;-&nbsp;1;</div>
 <div class="paranum"><a name="p26">26/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8291"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8283"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;-&nbsp;1&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;No_Element;</div>
 <div class="paranum"><a name="p27">27/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8292"></A>First&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8284"></A>First&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Is_Empty&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;First'Result)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;First'Result&nbsp;=&nbsp;No_Element);</div>
 <div class="paranum"><a name="p28">28/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8293"></A>Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8285"></A>Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;True);</div>
 <div class="paranum"><a name="p28.1">28.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8294"></A>Next&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8286"></A>Next&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;Last&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;Last&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Next'Result));</div>
 <div class="paranum"><a name="p29">29/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8295"></A>Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8287"></A>Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p29.1">29.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8296"></A>Next&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8288"></A>Next&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Position));</div>
 <div class="paranum"><a name="p30">30/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8297"></A>Find&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8289"></A>Find&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Find'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;True<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Find'Result));</div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8298"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8290"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8299"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8291"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p33">33/3</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
@@ -488,28 +491,28 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 </div>
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8300"></A>Equivalent_Keys&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8292"></A>Equivalent_Keys&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;(Left&nbsp;=/&nbsp;No_Element&nbsp;<B>and&nbsp;then</B>&nbsp;Right&nbsp;/=&nbsp;No_Element)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>;</div>
 <div class="paranum"><a name="p35">35/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8301"></A>Equivalent_Keys&nbsp;(Left&nbsp;&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8293"></A>Equivalent_Keys&nbsp;(Left&nbsp;&nbsp;:&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Left&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>;</div>
 <div class="paranum"><a name="p36">36/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8302"></A>Equivalent_Keys&nbsp;(Left&nbsp;&nbsp;:&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8294"></A>Equivalent_Keys&nbsp;(Left&nbsp;&nbsp;:&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Right&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>;</div>
 <div class="paranum"><a name="p37">37/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8303"></A>Iterate<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8295"></A>Iterate<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor))<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Allows_Exit;</div>
@@ -522,11 +525,11 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container);</div>
 <div class="paranum"><a name="p37.2">37.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8304"></A>Stable&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8296"></A>Stable&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p37.3">37.3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8305"></A>Map&nbsp;(Base&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Hashed_Maps.Map)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8297"></A>Map&nbsp;(Base&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Hashed_Maps.Map)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>tagged&nbsp;limited&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
@@ -540,44 +543,44 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Map);</div>
 <div class="paranum"><a name="p37.4">37.4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8306"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8298"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</div>
 <div class="paranum"><a name="p37.5">37.5/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I8307"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I8299"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
 <div class="paranum"><a name="p37.6">37.6/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I8308"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I8300"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p37.7">37.7/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8309"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8301"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p37.8">37.8/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8310"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8302"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</div>
 <div class="paranum"><a name="p37.9">37.9/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8311"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Hashed_Maps.Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8303"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Hashed_Maps.Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;Length&nbsp;(Target);</div>
 <div class="paranum"><a name="p37.10">37.10/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8312"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Hashed_Maps.Map)&nbsp;<B>return</B>&nbsp;Map<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8304"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Hashed_Maps.Map)&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source);</div>
 <div class="paranum"><a name="p37.11">37.11/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8313"></A>Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8305"></A>Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p37.12">37.12/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8314"></A>Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8306"></A>Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p37.13">37.13/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-1.TXT">AI05-0111-1</A></I>} 
@@ -603,7 +606,7 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 An object of type Map contains an expandable hash table, which is used 
 to provide direct access to nodes. The <I>capacity</I> of an object of 
 type Map is the maximum number of nodes that can be inserted into the 
-hash table prior to it being automatically expanded.<A NAME="I8315"></A></div>
+hash table prior to it being automatically expanded.<A NAME="I8307"></A></div>
 <div class="paranum"><a name="p41.a">41.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>The expected implementation 
 for a Map uses a hash table which is grown when it is too small, with 
@@ -619,7 +622,7 @@ in a hashed map. Typically, iteration will return elements in the order
 that they are hashed in.&nbsp;</div>
 <div class="paranum"><a name="p42">42/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I8316"></A>Two keys <I>K1</I> and <I>K2</I> are defined to be 
+<A NAME="I8308"></A>Two keys <I>K1</I> and <I>K2</I> are defined to be 
 <I>equivalent</I> if Equivalent_Keys (<I>K1</I>, <I>K2</I>) returns True.</div>
 <div class="paranum"><a name="p43">43/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -628,7 +631,7 @@ to return the same value each time it is called with a particular key
 value. For any two equivalent key values, the actual for Hash is expected 
 to return the same value. If the actual for Hash behaves in some other 
 manner, the behavior of this package is unspecified. Which subprograms 
-of this package call Hash, and how many times they call it, is unspecified.<A NAME="I8317"></A></div>
+of this package call Hash, and how many times they call it, is unspecified.<A NAME="I8309"></A></div>
 <div class="paranum"><a name="p43.a">43.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>The implementation 
 is not required to protect against Hash raising an exception, or returning 
@@ -647,7 +650,7 @@ called with a particular pair of key values. It should define an equivalence
 relationship, that is, be reflexive, symmetric, and transitive. If the 
 actual for Equivalent_Keys behaves in some other manner, the behavior 
 of this package is unspecified. Which subprograms of this package call 
-Equivalent_Keys, and how many times they call it, is unspecified.<A NAME="I8318"></A></div>
+Equivalent_Keys, and how many times they call it, is unspecified.<A NAME="I8310"></A></div>
 <div class="paranum"><a name="p44.a">44.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>As with Hash, the 
 implementation is not required to protect against Equivalent_Keys raising 
@@ -659,7 +662,7 @@ the same (this is a logically pure function), or the behavior is unspecified.
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 If the value of a key stored in a node of a map is changed other than 
 by an operation in this package such that at least one of Hash or Equivalent_Keys 
-give different results, the behavior of this package is unspecified.<A NAME="I8319"></A></div>
+give different results, the behavior of this package is unspecified.<A NAME="I8311"></A></div>
 <div class="paranum"><a name="p45.a">45.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>The implementation 
 is not required to protect against changes to key values other than via 
@@ -679,10 +682,10 @@ a map. But we can't prevent this error anymore than we can prevent someone
 passing as Hash a random number generator.&nbsp;</div>
 <div class="paranum"><a name="p46">46/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I8320"></A><A NAME="I8321"></A><A NAME="I8322"></A>Which nodes 
+<A NAME="I8312"></A><A NAME="I8313"></A><A NAME="I8314"></A>Which nodes 
 are the first node and the last node of a map, and which node is the 
 successor of a given node, are unspecified, other than the general semantics 
-described in <A HREF="AA-A-18-4.html">A.18.4</A>.<A NAME="I8323"></A></div>
+described in <A HREF="AA-A-18-4.html">A.18.4</A>.<A NAME="I8315"></A></div>
 <div class="paranum"><a name="p46.a">46.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>Typically the first 
 node will be the first node in the first bucket, the last node will be 
@@ -703,7 +706,7 @@ Returns an empty map.</div>
 <div class="paranum"><a name="p47">47/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <B>function</B>&nbsp;Capacity&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p48">48/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Returns the capacity of Container.</div>
@@ -773,7 +776,7 @@ if the length of Source is greater than the capacity of Target, Reserve_Capacity
 <div class="Examples"><B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Map;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Length&nbsp;(Source)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
@@ -962,13 +965,13 @@ than the log factor, and we don't want to discourage innovative implementations.
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p62.c">62.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I8324"></A>The generic package Containers.Hashed_Maps is new. 
+<A NAME="I8316"></A>The generic package Containers.Hashed_Maps is new. 
 </div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p62.d">62.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<A NAME="I8325"></A>Subprograms Assign and Copy are added to Containers.Hashed_Maps. 
+<A NAME="I8317"></A>Subprograms Assign and Copy are added to Containers.Hashed_Maps. 
 If an instance of Containers.Hashed_Maps is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 as a new entity in Containers.Hashed_Maps is defined in a package that 
@@ -979,7 +982,7 @@ This should be rare and is easily fixed if it does occur.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p62.e">62.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<A NAME="I8326"></A>Added iterator and indexing support to make hashed 
+<A NAME="I8318"></A>Added iterator and indexing support to make hashed 
 map containers more convenient to use.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -993,7 +996,7 @@ be used in distributed programs.&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0339-1.TXT">AI12-0339-1</A></I>} 
-<A NAME="I8327"></A>A number of new subprograms, types, and even a nested 
+<A NAME="I8319"></A>A number of new subprograms, types, and even a nested 
 package were added to Containers.Hashed_Maps to better support contracts 
 and stable views. If an instance of Containers.Hashed_Maps is referenced 
 in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
@@ -1006,7 +1009,7 @@ This should be rare and is easily fixed if it does occur.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p62.h">62.h/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
-<A NAME="I8328"></A>Maps now support named container aggregates, so <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+<A NAME="I8320"></A>Maps now support named container aggregates, so <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 syntax can be used to create Maps.</div>
 <div class="paranum"><a name="p62.i">62.i/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 

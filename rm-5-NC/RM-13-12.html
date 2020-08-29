@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,17 +47,17 @@ simpler run-time environments.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Restrictions is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5731"></A><A NAME="I5732"></A>Restrictions(<A NAME="I5733"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0359">restriction</A></SPAN>{, 
-<A NAME="I5734"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0359">restriction</A></SPAN>});</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5722"></A><A NAME="I5723"></A>Restrictions(<A NAME="I5724"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0359">restriction</A></SPAN>{, 
+<A NAME="I5725"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0359">restriction</A></SPAN>});</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">restriction</SPAN><A NAME="I5735"></A><A NAME="S0359"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>restriction_</I><A NAME="I5736"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>restriction_parameter_</I><A NAME="I5737"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I5738"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0360">restriction_parameter_argument</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">restriction</SPAN><A NAME="I5726"></A><A NAME="S0359"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>restriction_</I><A NAME="I5727"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>restriction_parameter_</I><A NAME="I5728"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I5729"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0360">restriction_parameter_argument</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">restriction_parameter_argument</SPAN><A NAME="I5739"></A><A NAME="S0360"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5740"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5741"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">restriction_parameter_argument</SPAN><A NAME="I5730"></A><A NAME="S0360"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5731"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5732"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5742"></A>Unless otherwise specified for 
+<div class="Normal"><A NAME="I5733"></A>Unless otherwise specified for 
 a particular restriction, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is expected to be of any integer type.&nbsp;</div>
 
@@ -71,7 +71,7 @@ shall be static, and its value shall be nonnegative.&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5743"></A><A NAME="I5744"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5734"></A><A NAME="I5735"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Restrictions 
 is a configuration pragma. If a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Restrictions applies to any compilation unit included in the partition, 
@@ -131,9 +131,9 @@ that every execution of the partition would violate the restriction.
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Profile is as follows:&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5745"></A><A NAME="I5746"></A>Profile 
-(<I>profile_</I><A NAME="I5747"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-{, <I>profile_</I><A NAME="I5748"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>});</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5736"></A><A NAME="I5737"></A>Profile 
+(<I>profile_</I><A NAME="I5738"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+{, <I>profile_</I><A NAME="I5739"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>});</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
@@ -149,7 +149,7 @@ pragmas that is defined for each usage profile.&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><A NAME="I5749"></A><A NAME="I5750"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal"><A NAME="I5740"></A><A NAME="I5741"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Profile is a configuration pragma. There may be more than one <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Profile for a partition.&nbsp;</div>
 

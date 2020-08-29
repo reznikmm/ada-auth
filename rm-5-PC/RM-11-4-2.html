@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +44,7 @@ preconditions and postconditions (see <A HREF="RM-6-1-1.html">6.1.1</A>),
 <span class="delete5">&nbsp;and</span> type invariants (see <A HREF="RM-7-3-2.html">7.3.2</A>)<span class="insert5">, 
 and default initial conditions (see <A HREF="RM-7-3-3.html">7.3.3</A>)</span> 
 are collectively referred to as <I>assertions</I>; their boolean expressions 
-are referred to as <I>assertion expressions</I>.<A NAME="I5028"></A><A NAME="I5029"></A></div>
+are referred to as <I>assertion expressions</I>.<A NAME="I5023"></A><A NAME="I5024"></A></div>
 <div class="paranum"><a name="p1.2">1.2/3</a></div>
 <div class="Normal">&nbsp;Pragma Assertion_Policy is used to control whether 
 assertions are to be ignored by the implementation, checked at run time, 
@@ -55,9 +55,9 @@ or handled in some implementation-defined manner.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Assert is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5030"></A><A NAME="I5031"></A>Assert([Check 
-=&gt;] <I>boolean_</I><A NAME="I5032"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>[, 
-[Message =&gt;] <I>string_</I><A NAME="I5033"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5025"></A><A NAME="I5026"></A>Assert([Check 
+=&gt;] <I>boolean_</I><A NAME="I5027"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>[, 
+[Message =&gt;] <I>string_</I><A NAME="I5028"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Assert is allowed at the place where a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0087">declarative_item</A></SPAN> 
@@ -67,15 +67,15 @@ is allowed.</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5034"></A><A NAME="I5035"></A>Assertion_Policy(<I>policy_</I><A NAME="I5036"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5029"></A><A NAME="I5030"></A>Assertion_Policy(<I>policy_</I><A NAME="I5031"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5037"></A><A NAME="I5038"></A>Assertion_Policy(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I5039"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
-=&gt; <I>policy_</I><A NAME="I5040"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I5041"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
-=&gt; <I>policy_</I><A NAME="I5042"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>});</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5032"></A><A NAME="I5033"></A>Assertion_Policy(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I5034"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I5035"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I5036"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I5037"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>});</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Indented1"><A NAME="I5043"></A><A NAME="I5044"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Indented1"><A NAME="I5038"></A><A NAME="I5039"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
 immediately within a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>, 
 or as a configuration pragma.</div>
@@ -147,13 +147,13 @@ such Assertion_Policy pragma exists, the policy is implementation defined.</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Examples"><A NAME="I5045"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I5040"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Assertions);</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5046"></A>Assertion_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5041"></A>Assertion_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5047"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5048"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5042"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5043"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Assertions;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
@@ -171,7 +171,7 @@ policy in effect at the place of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S001
 Assert, the elaboration of the pragma consists of evaluating the boolean 
 expression, and if the result is False, evaluating the Message argument, 
 if any, and raising the exception Assertions.Assertion_Error, with a 
-message if the Message argument is provided.<A NAME="I5049"></A><A NAME="I5050"></A></div>
+message if the Message argument is provided.<A NAME="I5044"></A><A NAME="I5045"></A></div>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">Calling the procedure 
 Assertions.Assert without a Message parameter is equivalent to:</div>
@@ -198,7 +198,7 @@ of an assertion expression associated with a call on, or return from,
 a protected operation. If the bounded error is detected, Program_Error 
 is raised. If not detected, execution proceeds normally, but if it is 
 invoked within a protected action, it might result in deadlock or a (nested) 
-protected action.<A NAME="I5051"></A>&nbsp;</div>
+protected action.<A NAME="I5046"></A>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p23.2">23.2/5</a></div>

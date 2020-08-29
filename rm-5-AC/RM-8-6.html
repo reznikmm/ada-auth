@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,13 +44,13 @@
 <HR>
 <H1>8.6 The Context of Overload Resolution</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><A NAME="I4403"></A>Because declarations can be overloaded, 
+<div class="Normal"><A NAME="I4408"></A>Because declarations can be overloaded, 
 it is possible for an occurrence of a usage name to have more than one 
 possible interpretation; in most cases, ambiguity is disallowed. This 
 <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 describes how the possible interpretations resolve to the actual interpretation.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4404"></A>Certain rules of the language 
+<div class="Normal"><A NAME="I4409"></A>Certain rules of the language 
 (the Name Resolution Rules) are considered &ldquo;overloading rules&rdquo;. 
 If a possible interpretation violates an overloading rule, it is assumed 
 not to be the intended interpretation; some other possible interpretation 
@@ -60,7 +60,7 @@ instead, they cause the construct to be illegal. To be legal, there usually
 has to be exactly one acceptable interpretation of a construct that is 
 a &ldquo;complete context&rdquo;, not counting any nested complete contexts.</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4405"></A>The syntax rules of the language 
+<div class="Normal"><A NAME="I4410"></A>The syntax rules of the language 
 and the visibility rules given in <A HREF="RM-8-3.html">8.3</A> determine 
 the possible interpretations. Most type checking rules (rules that require 
 a particular type, or a particular class of types, for example) are overloading 
@@ -69,7 +69,7 @@ are overloading rules.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4406"></A>Overload 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4411"></A>Overload 
 resolution is applied separately to each <I>complete context</I>, not 
 counting inner complete contexts. Each of the following constructs is 
 a <I>complete context</I>:&nbsp;</div>
@@ -94,7 +94,7 @@ of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></
 of <I>A</I> contains one or more <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0174">target_name</A></SPAN>s.</span> 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4407"></A><A NAME="I4408"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4412"></A><A NAME="I4413"></A>An 
 (overall) <I>interpretation</I> of a complete context embodies its meaning, 
 and includes the following information about the constituents of the 
 complete context, not including constituents of inner complete contexts: 
@@ -111,26 +111,26 @@ which syntactic categories it belongs, and by which syntax rules; and
 whether or not it is a completion of a declaration, and (if so) which 
 declaration it completes.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I4409"></A>A <I>possible interpretation</I> 
-is one that obeys the syntax rules and the visibility rules. <A NAME="I4410"></A><A NAME="I4411"></A><A NAME="I4412"></A>An 
+<div class="Normal"><A NAME="I4414"></A>A <I>possible interpretation</I> 
+is one that obeys the syntax rules and the visibility rules. <A NAME="I4415"></A><A NAME="I4416"></A><A NAME="I4417"></A>An 
 <I>acceptable interpretation</I> is a possible interpretation that obeys 
 the <I>overloading rules</I>, that is, those rules that specify an expected 
 type or expected profile, or specify how a construct shall <I>resolve</I> 
 or be <I>interpreted</I>.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I4413"></A>The <I>interpretation</I> of 
+<div class="Normal"><A NAME="I4418"></A>The <I>interpretation</I> of 
 a constituent of a complete context is determined from the overall interpretation 
 of the complete context as a whole. Thus, for example, &ldquo;interpreted 
 as a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0218">function_call</A></SPAN>,&rdquo; 
 means that the construct's interpretation says that it belongs to the 
 syntactic category <SPAN Class="swiss"><A HREF="RM-6-4.html#S0218">function_call</A></SPAN>.</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4414"></A>Each 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4419"></A>Each 
 occurrence of a usage name <I>denotes</I> the declaration determined 
 by its interpretation. It also denotes the view declared by its denoted 
 declaration, except in the following cases:&nbsp;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Bulleted"><A NAME="I4415"></A>If a usage name appears within 
+<div class="Bulleted"><A NAME="I4420"></A>If a usage name appears within 
 the declarative region of a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
 and denotes that same <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN>, 
 then it denotes the <I>current instance</I> of the type (rather than 
@@ -154,7 +154,7 @@ prior to applying any predicate specified directly on the type or subtype.
 If the type or subtype is by-reference, the associated object&nbsp;</span><span class="insert5">of</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;with</span></span><span class="insert4">&nbsp;the value is the object associated (see <A HREF="RM-6-2.html">6.2</A>) 
 with the&nbsp;</span><span class="insert5">evaluation</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;execution</span></span><span class="insert4">&nbsp;of the usage name.</span></div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Bulleted"><A NAME="I4416"></A>If a usage name appears within 
+<div class="Bulleted"><A NAME="I4421"></A>If a usage name appears within 
 the declarative region of a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 (but not within its <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>) 
 and it denotes that same <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN>, 
@@ -165,22 +165,22 @@ than the generic unit itself). See also <A HREF="RM-12-3.html">12.3</A>.
 <div class="Normal">A usage name that denotes a view also denotes the 
 entity of that view.&nbsp;</div>
 <div class="paranum"><a name="p21">21/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4417"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4422"></A>The 
 <I>expected type</I> for a given <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, or other 
 construct determines, according to the <I>type resolution rules</I> given 
 below, the types considered for the construct during overload resolution. 
-<A NAME="I4418"></A>The type resolution rules provide support for class-wide 
+<A NAME="I4423"></A>The type resolution rules provide support for class-wide 
 programming, universal <span class="delete2">numeric&nbsp;</span>literals, 
 dispatching operations, and anonymous access types:&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted"><A NAME="I4419"></A><A NAME="I4420"></A>If a construct 
+<div class="Bulleted"><A NAME="I4424"></A><A NAME="I4425"></A>If a construct 
 is expected to be of any type in a class of types, or of the universal 
 or class-wide type for a class, then the type of the construct shall 
 resolve to a type in that class or to a universal type that covers the 
 class.&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I4421"></A>If 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I4426"></A>If 
 the expected type for a construct is a specific type <I>T</I>, then the 
 type of the construct shall resolve either to <I>T</I>, or:&nbsp;</div>
 <div class="paranum"><a name="p24">24</a></div>
@@ -206,17 +206,17 @@ is an anonymous access-to-subprogram type (see <A HREF="RM-3-10.html">3.10</A>),
 to an access-to-subprogram type whose designated profile is&nbsp;</span><span class="insert3">type 
 conformant</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;type-conformant</span></span><span class="insert2">&nbsp;with that of <I>T</I>.</span></div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I4422"></A>In certain contexts, such as 
+<div class="Normal"><A NAME="I4427"></A>In certain contexts, such as 
 in a <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN>, 
 the Name Resolution Rules define an <I>expected profile</I> for a given 
-<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>; <A NAME="I4423"></A>in 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>; <A NAME="I4428"></A>in 
 such cases, the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 shall resolve to the name of a callable entity whose profile is type 
-conformant with the expected profile. <A NAME="I4424"></A></div>
+conformant with the expected profile. <A NAME="I4429"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Normal"><A NAME="I4425"></A>When <span class="delete2">the 
+<div class="Normal"><A NAME="I4430"></A>When <span class="delete2">the 
 expected type for&nbsp;</span>a construct is <span class="insert2">one that 
 requires that its expected type</span><span class="delete2">&nbsp;required 
 to</span> be a <I>single</I> type in a given class, the type <span class="insert2">of</span><span class="delete2">&nbsp;expected 
@@ -232,7 +232,7 @@ not be the operand of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_con
 or <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is not the same as the actual type of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-the actual type shall be convertible to the expected type (see <A HREF="RM-4-6.html">4.6</A>);<A NAME="I4426"></A><A NAME="I4427"></A> 
+the actual type shall be convertible to the expected type (see <A HREF="RM-4-6.html">4.6</A>);<A NAME="I4431"></A><A NAME="I4432"></A> 
 further, if the expected type is a named access-to-object type with designated 
 type <I>D1</I> and the actual type is an anonymous access-to-object type 
 with designated type <I>D2</I>, then <I>D1</I> shall cover <I>D2</I>, 
@@ -245,7 +245,7 @@ parameter nor a stand-alone access object.</span></div>
 <div class="Normal">A complete context shall have at least one acceptable 
 interpretation; if there is exactly one, then that one is chosen.&nbsp;</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="Normal"><A NAME="I4428"></A>There is a <I>preference</I> 
+<div class="Normal"><A NAME="I4433"></A>There is a <I>preference</I> 
 for the primitive operators (and <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s) 
 of the root numeric types <I>root_integer</I> and <I>root_real</I>. In 
 particular, if two acceptable interpretations of a constituent of a complete 
@@ -259,13 +259,13 @@ for the equality operators of the <I>universal_access</I> type (see <A HREF="RM-
 If two acceptable interpretations of a constituent of a complete context 
 differ only in that one is for an equality operator of the <I>universal_access</I> 
 type, and the other is not, the interpretation using the equality operator 
-of the <I>universal_access</I> type is preferred.<A NAME="I4429"></A></span></div>
+of the <I>universal_access</I> type is preferred.<A NAME="I4434"></A></span></div>
 <div class="paranum"><a name="p31">31</a></div>
 <div class="Normal">For a complete context, if there is exactly one overall 
 acceptable interpretation where each constituent's interpretation is 
 the same as or preferred (in the above sense) over those in all other 
 overall acceptable interpretations, then that one overall acceptable 
-interpretation is chosen. <A NAME="I4430"></A>Otherwise, the complete 
+interpretation is chosen. <A NAME="I4435"></A>Otherwise, the complete 
 context is <I>ambiguous</I>.</div>
 <div class="paranum"><a name="p32">32</a></div>
 <div class="Normal">A complete context other than a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN> 
@@ -275,7 +275,7 @@ shall not be ambiguous.</div>
 is allowed to be ambiguous (unless otherwise specified for the particular 
 pragma), but only if every acceptable interpretation of the pragma argument 
 is as a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that statically denotes a callable entity. <A NAME="I4431"></A>Such a 
+that statically denotes a callable entity. <A NAME="I4436"></A>Such a 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> denotes 
 all of the declarations determined by its interpretations, and all of 
 the views declared by these declarations.&nbsp;</div>

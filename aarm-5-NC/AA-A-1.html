@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,12 +36,12 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 This subclause outlines the specification of the package Standard containing 
-all predefined identifiers in the language. <A NAME="I6485"></A>The corresponding 
+all predefined identifiers in the language. <A NAME="I6477"></A>The corresponding 
 package body is not specified by the language.</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">The operators that are predefined for the types declared 
 in the package Standard are given in comments since they are implicitly 
-declared. <A NAME="I6486"></A>Italics are used for pseudo-names of anonymous 
+declared. <A NAME="I6478"></A>Italics are used for pseudo-names of anonymous 
 types (such as <I>root_real</I>) and for undefined information (such 
 as <I>implementation-defined</I>).&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
@@ -57,10 +57,10 @@ Standard has the following declaration:&nbsp;</div>
 characteristics of the numeric subtypes declared in the visible part 
 of package Standard.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples"><A NAME="I6487"></A><B>package</B>&nbsp;Standard&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6479"></A><B>package</B>&nbsp;Standard&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Standard);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6488"></A>Boolean&nbsp;<B>is</B>&nbsp;(False,&nbsp;True);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6480"></A>Boolean&nbsp;<B>is</B>&nbsp;(False,&nbsp;True);</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;relational&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
 <div class="paranum"><a name="p7">7/1</a></div>
@@ -90,10 +90,10 @@ of package Standard.</div>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;integer&nbsp;type&nbsp;root_integer&nbsp;and&nbsp;the</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;corresponding&nbsp;universal&nbsp;type&nbsp;universal_integer&nbsp;are&nbsp;predefined.</I></SPAN></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6489"></A>Integer&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6481"></A>Integer&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6490"></A>Natural&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;Integer'Last;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6491"></A>Positive&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Integer'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6482"></A>Natural&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;Integer'Last;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6483"></A>Positive&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Integer'Last;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;type&nbsp;Integer&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
 <div class="paranum"><a name="p15">15</a></div>
@@ -129,7 +129,7 @@ of package Standard.</div>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;floating&nbsp;point&nbsp;type&nbsp;root_real&nbsp;and&nbsp;the</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;corresponding&nbsp;universal&nbsp;type&nbsp;universal_real&nbsp;are&nbsp;predefined.</I></SPAN></div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6492"></A>Float&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6484"></A>Float&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
 <div class="paranum"><a name="p23">23</a></div>
@@ -194,7 +194,7 @@ of package Standard.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;There&nbsp;are&nbsp;no&nbsp;character&nbsp;literals&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;positions&nbsp;for&nbsp;control&nbsp;characters.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;They&nbsp;are&nbsp;indicated&nbsp;in&nbsp;italics&nbsp;in&nbsp;this&nbsp;definition.&nbsp;See&nbsp;<A HREF="AA-3-5-2.html">3.5.2</A>.</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6493"></A>Character&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6485"></A>Character&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>,&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>stx</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>etx</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>eot</I></SPAN>,&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>enq</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>ack</I></SPAN>,&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>bel</I></SPAN>,&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>0&nbsp;(16#00#)&nbsp;..&nbsp;7&nbsp;(16#07#)</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>bs</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>ht</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>lf</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>vt</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>ff</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>cr</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>so</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>si</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>8&nbsp;(16#08#)&nbsp;..&nbsp;15&nbsp;(16#0F#)</I></SPAN><BR>
 <BR>
@@ -256,7 +256,7 @@ of package Standard.</div>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Wide_Character&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;standard&nbsp;ISO/IEC&nbsp;10646:2017&nbsp;BMP&nbsp;character</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;set.&nbsp;The&nbsp;first&nbsp;256&nbsp;positions&nbsp;have&nbsp;the&nbsp;same&nbsp;contents&nbsp;as&nbsp;type&nbsp;Character.&nbsp;See&nbsp;<A HREF="AA-3-5-2.html">3.5.2</A>.</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6494"></A>Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_0000FFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_0000FFFF</I></SPAN>);</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6486"></A>Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_0000FFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_0000FFFF</I></SPAN>);</div>
 <div class="paranum"><a name="p36.2">36.2/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
@@ -266,17 +266,17 @@ of package Standard.</div>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;ISO/IEC&nbsp;10646:2017&nbsp;character&nbsp;set.&nbsp;The&nbsp;first&nbsp;65536&nbsp;positions&nbsp;have&nbsp;the</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;same&nbsp;contents&nbsp;as&nbsp;type&nbsp;Wide_Character.&nbsp;See&nbsp;<A HREF="AA-3-5-2.html">3.5.2</A>.</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6495"></A>Wide_Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFF</I></SPAN>);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6487"></A>Wide_Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFF</I></SPAN>);<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Wide_Wide_Character'Size&nbsp;<B>use</B>&nbsp;32;</div>
 <div class="paranum"><a name="p36.3">36.3/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I6496"></A>ASCII&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;ASCII;&nbsp;&nbsp;--<SPAN Class="roman"><I>Obsolescent;&nbsp;see&nbsp;<A HREF="AA-J-5.html">J.5</A></I></SPAN><BR>
-<A NAME="I6497"></A><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I6488"></A>ASCII&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;ASCII;&nbsp;&nbsp;--<SPAN Class="roman"><I>Obsolescent;&nbsp;see&nbsp;<A HREF="AA-J-5.html">J.5</A></I></SPAN><BR>
+<A NAME="I6489"></A><BR>
 </div>
 <div class="paranum"><a name="p37">37/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Predefined&nbsp;string&nbsp;types:</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6498"></A>String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6490"></A>String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p38">38</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
@@ -294,31 +294,31 @@ of package Standard.</div>
 &nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left:&nbsp;Character;&nbsp;Right:&nbsp;Character)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p41">41/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6499"></A>Wide_String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Wide_Character<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6491"></A>Wide_String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Wide_Character<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p42">42</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;correspond&nbsp;to&nbsp;those&nbsp;for&nbsp;String.</I></SPAN></div>
 <div class="paranum"><a name="p42.1">42.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6500"></A>Wide_Wide_String&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6492"></A>Wide_Wide_String&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>of</B>&nbsp;Wide_Wide_Character<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p42.2">42.2/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;correspond&nbsp;to&nbsp;those&nbsp;for&nbsp;String.</I></SPAN></div>
 <div class="paranum"><a name="p43">43</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6501"></A>Duration&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6493"></A>Duration&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p44">44</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;the&nbsp;type&nbsp;Duration&nbsp;are&nbsp;the&nbsp;same&nbsp;as&nbsp;for</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;any&nbsp;fixed&nbsp;point&nbsp;type.</I></SPAN></div>
 <div class="paranum"><a name="p45">45</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;exceptions:</I></SPAN></div>
 <div class="paranum"><a name="p46">46</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6502"></A>Constraint_Error:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I6503"></A>Program_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I6504"></A>Storage_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I6505"></A>Tasking_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6494"></A>Constraint_Error:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6495"></A>Program_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6496"></A>Storage_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6497"></A>Tasking_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p47">47</a></div>
 <div class="Examples"><B>end</B>&nbsp;Standard;</div>
 <div class="paranum"><a name="p48">48</a></div>
@@ -341,7 +341,7 @@ refers to the hyphen character.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p50">50</a></div>
-<div class="Normal"><A NAME="I6506"></A>Elaboration of the body of Standard 
+<div class="Normal"><A NAME="I6498"></A>Elaboration of the body of Standard 
 has no effect.&nbsp;</div>
 <div class="paranum"><a name="p50.a">50.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Note that the language does 
@@ -425,7 +425,7 @@ them much later.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p56.d">56.d</a></div>
-<div class="Annotations"><A NAME="I6507"></A>Package Standard is declared 
+<div class="Annotations"><A NAME="I6499"></A>Package Standard is declared 
 to be pure.&nbsp;</div>
 <div class="paranum"><a name="p56.e">56.e</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The introduction of the types 
@@ -445,7 +445,7 @@ to move Positive, too &mdash; it just came along for the ride.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p56.h">56.h/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<A NAME="I6508"></A>Types Wide_Wide_Character and Wide_Wide_String are 
+<A NAME="I6500"></A>Types Wide_Wide_Character and Wide_Wide_String are 
 new.&nbsp;</div>
 <div class="paranum"><a name="p56.i">56.i/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The inconsistencies associated 

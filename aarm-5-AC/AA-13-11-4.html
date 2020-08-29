@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -56,61 +56,66 @@ pool, or a particular subpool may be specified as part of an <SPAN Class="swiss"
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 <span class="insert3">The following language-defined library package 
 exists:</span></div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><span class="insert3"><A NAME="I6576"></A><B>package</B>&nbsp;System.Storage_Pools.Subpools&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate&nbsp;(Subpools);</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert3"><A NAME="I6572"></A><B>package</B>&nbsp;System.Storage_Pools.Subpools</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Subpools);</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0356-1.TXT">AI12-0356-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6577"></A>Root_Storage_Pool_With_Subpools&nbsp;<B>is</B><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6573"></A>Root_Storage_Pool_With_Subpools&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>abstract&nbsp;new</B>&nbsp;Root_Storage_Pool&nbsp;<B>with&nbsp;private</B>;</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Root_Storage_Pool_With_Subpools);</span><span class="insert3"></span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6578"></A>Root_Subpool&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;</span><span class="insert5"><BR>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6574"></A>Root_Subpool&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Root_Subpool);</span><span class="insert3"></span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6579"></A>Subpool_Handle&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Root_Subpool'Class;<BR>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6575"></A>Subpool_Handle&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Root_Subpool'Class;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Subpool_Handle'Storage_Size&nbsp;<B>use</B>&nbsp;0;</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6580"></A>Create_Subpool&nbsp;(Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6576"></A>Create_Subpool&nbsp;(Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle&nbsp;<B>is&nbsp;abstract</B>;</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0252-1.TXT">AI05-0252-1</A></I>} 
 <span class="insert3">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;following&nbsp;operations&nbsp;are&nbsp;intended&nbsp;for&nbsp;pool&nbsp;implementers:</I></SPAN></span></div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6581"></A>Pool_of_Subpool&nbsp;(Subpool&nbsp;:&nbsp;<B>not&nbsp;null</B>&nbsp;Subpool_Handle)<BR>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6577"></A>Pool_of_Subpool&nbsp;(Subpool&nbsp;:&nbsp;<B>not&nbsp;null</B>&nbsp;Subpool_Handle)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;access</B>&nbsp;Root_Storage_Pool_With_Subpools'Class;</span></div>
-<div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6582"></A>Set_Pool_of_Subpool&nbsp;(<BR>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6578"></A>Set_Pool_of_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools'Class);</span></div>
-<div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6583"></A>Allocate_From_Subpool&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools'Class)</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Subpool</span><span class="insert3">;</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6579"></A>Allocate_From_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>out</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle)&nbsp;<B>is&nbsp;abstract</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;=&gt;&nbsp;Pool_of_Subpool(Subpool)&nbsp;=&nbsp;Pool'Access;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;=&gt;&nbsp;Pool_of_Subpool(Subpool)&nbsp;=&nbsp;Pool'Access</span><span class="insert5">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Subpool</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6584"></A>Deallocate_Subpool&nbsp;(<BR>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6580"></A>Deallocate_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Subpool_Handle)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;=&gt;&nbsp;Pool_of_Subpool(Subpool)&nbsp;=&nbsp;Pool'Access;</span></div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6585"></A>Default_Subpool_for_Pool&nbsp;(<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6581"></A>Default_Subpool_for_Pool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle;</span></div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6586"></A>Allocate&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6582"></A>Allocate&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>out</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count);</span></div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6587"></A>Deallocate&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6583"></A>Deallocate&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>in</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
@@ -118,7 +123,7 @@ exists:</span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
 <span class="insert3">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6588"></A>Storage_Size&nbsp;(Pool&nbsp;:&nbsp;Root_Storage_Pool_With_Subpools)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6584"></A>Storage_Size&nbsp;(Pool&nbsp;:&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Storage_Elements.Storage_Count<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Storage_Elements.Storage_Count'Last);</span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
@@ -127,7 +132,7 @@ exists:</span></div>
 end&nbsp;System.Storage_Pools.Subpools;</span></div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<span class="insert3"><A NAME="I6589"></A><A NAME="I6590"></A><A NAME="I6591"></A><A NAME="I6592"></A><A NAME="I6593"></A>A 
+<span class="insert3"><A NAME="I6585"></A><A NAME="I6586"></A><A NAME="I6587"></A><A NAME="I6588"></A><A NAME="I6589"></A>A 
 <I>subpool</I> is a separately reclaimable portion of a storage pool, 
 identified by an object of type Subpool_Handle (a <I>subpool handle</I>). 
 A subpool handle also identifies the enclosing storage pool, a <I>storage 
@@ -150,7 +155,7 @@ of Subpool_Handle says so.</span>&nbsp;</div>
 <div class="paranum"><a name="p20">20/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0145-1.TXT">AI12-0145-1</A></I>} 
-<span class="insert3">Each subpool <I>belongs</I><A NAME="I6594"></A> 
+<span class="insert3">Each subpool <I>belongs</I><A NAME="I6590"></A> 
 to a single storage pool [(which will always be a pool that supports 
 subpools)]. An access to the pool that a subpool belongs to can be obtained 
 by calling Pool_of_Subpool with the subpool handle. Set_Pool_of_Subpool 
@@ -191,7 +196,7 @@ rare cases).</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 <span class="insert3">If a storage pool that supports subpools is specified 
 as the Storage_Pool for an access type, the access type is called a <I>subpool 
-access type</I>.<A NAME="I6595"></A><A NAME="I6596"></A> A subpool access 
+access type</I>.<A NAME="I6591"></A><A NAME="I6592"></A> A subpool access 
 type shall be a pool-specific access type.</span></div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
@@ -202,7 +207,7 @@ If the specified storage pool object is a storage pool that supports
 subpools, then the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes the object shall not denote part of a formal parameter, 
 nor shall it denote part of a dereference of a value of a non-library-level 
-general access type. <A NAME="I6597"></A>In addition to the places where 
+general access type. <A NAME="I6593"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -219,15 +224,15 @@ the following checks are made:</span></div>
 <div class="Bulleted"><span class="insert3">the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 used to specify the storage pool object does not denote part of a formal 
 parameter nor part of a dereference of a value of a non-library-level 
-general access type; and<A NAME="I6598"></A><A NAME="I6599"></A></span></div>
+general access type; and<A NAME="I6594"></A><A NAME="I6595"></A></span></div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="Bulleted"><span class="insert3">the accessibility level of 
-the access type is not deeper than that of the storage pool object.<A NAME="I6600"></A><A NAME="I6601"></A></span> 
+the access type is not deeper than that of the storage pool object.<A NAME="I6596"></A><A NAME="I6597"></A></span> 
 </div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Normal" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0252-1.TXT">AI05-0252-1</A></I>} 
 <span class="insert3">Program_Error is raised if either of these checks 
-fail.<A NAME="I6602"></A></span></div>
+fail.<A NAME="I6598"></A></span></div>
 <div class="paranum"><a name="p27.a">27.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This check 
 (and its static counterpart) ensures that the type of the allocated objects 
@@ -257,7 +262,7 @@ does the following:</span></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 <span class="insert3">An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 that allocates in a subpool raises Program_Error if the allocated object 
-has task parts.<A NAME="I6603"></A><A NAME="I6604"></A><A NAME="I6605"></A></span></div>
+has task parts.<A NAME="I6599"></A><A NAME="I6600"></A><A NAME="I6601"></A></span></div>
 <div class="paranum"><a name="p30.a">30.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This is 
 to ease implementation. We envision relaxing this restriction in a future 
@@ -272,7 +277,7 @@ Program_Error.</span></div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p31.1">31.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0142-1.TXT">AI12-0142-1</A></I>} 
-<A NAME="I6606"></A><span class="insert4">If Allocate_From_Subpool does 
+<A NAME="I6602"></A><span class="insert4">If Allocate_From_Subpool does 
 not meet one or more of the requirements on the Allocate procedure as 
 given in the Erroneous Execution rules of <A HREF="AA-13-11.html">13.11</A>, 
 then the program execution is erroneous.</span>&nbsp;</div>
@@ -337,7 +342,7 @@ to carry additional information with each subpool provided by Create_Subpool.</s
 <div class="paranum"><a name="p35.a">35.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0252-1.TXT">AI05-0252-1</A></I>} 
-<span class="insert3"><A NAME="I6607"></A>Subpools and the package System.Storage_Pools.Subpools 
+<span class="insert3"><A NAME="I6603"></A>Subpools and the package System.Storage_Pools.Subpools 
 are new.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>

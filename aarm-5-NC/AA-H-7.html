@@ -21,13 +21,13 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-H-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-J.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-7-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>H.7 Extensions to Global and Global'Class Aspects</H1>
@@ -41,112 +41,36 @@ anonymous access-to-subprogram type.</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-The following additional syntax is provided for specifying Global and 
-Global'Class aspects, to more precisely describe the use of generic formal 
-parameters and dispatching calls within the execution of an operation:</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+The following additional syntax is provided to override the mode of a 
+formal parameter to reflect indirect effects on variables reachable from 
+the formal parameter by one or more access-value dereferences:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">extended_global_aspect_definition</SPAN><A NAME="I10223"></A><A NAME="S0361"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;<A NAME="I10224"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0364">formal_parameter_designator</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>do</B>&nbsp;<A NAME="I10225"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN></div>
-<div class="paranum"><a name="p4">4/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">extended_global_aspect_element</SPAN><A NAME="I10226"></A><A NAME="S0362"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;<A NAME="I10227"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0365">formal_parameter_set</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>do</B>&nbsp;<A NAME="I10228"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0368">dispatching_operation_set</A></SPAN></div>
-<div class="paranum"><a name="p5">5/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">extended_global_mode</SPAN><A NAME="I10229"></A><A NAME="S0363"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B>&nbsp;<A NAME="I10230"></A><SPAN Class="swiss"><A HREF="AA-6-1-2.html#S0212">basic_global_mode</A></SPAN></div>
-<div class="paranum"><a name="p6">6/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_parameter_designator</SPAN><A NAME="I10231"></A><A NAME="S0364"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I10232"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0366">formal_group_designator</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I10233"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0367">formal_parameter_name</A></SPAN></div>
-<div class="paranum"><a name="p7">7/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_parameter_set</SPAN><A NAME="I10234"></A><A NAME="S0365"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I10235"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0366">formal_group_designator</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I10236"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0367">formal_parameter_name</A></SPAN>{,&nbsp;<A NAME="I10237"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0367">formal_parameter_name</A></SPAN>}</div>
-<div class="paranum"><a name="p8">8/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_group_designator</SPAN><A NAME="I10238"></A><A NAME="S0366"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>null</B>&nbsp;|&nbsp;<B>all</B></div>
-<div class="paranum"><a name="p9">9/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_parameter_name</SPAN><A NAME="I10239"></A><A NAME="S0367"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>formal_</I><A NAME="I10240"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<I>formal_subprogram_</I><A NAME="I10241"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<I>formal_access_to_subprogram_object_</I><A NAME="I10242"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
-<div class="paranum"><a name="p10">10/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">dispatching_operation_set</SPAN><A NAME="I10243"></A><A NAME="S0368"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I10244"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN>{,&nbsp;<A NAME="I10245"></A><SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN>}</div>
-<div class="paranum"><a name="p11">11/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">dispatching_operation_specifier</SPAN><A NAME="I10246"></A><A NAME="S0369"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>dispatching_operation_</I><A NAME="I10247"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;(<I>object_</I><A NAME="I10248"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">extended_global_mode</SPAN><A NAME="I10246"></A><A NAME="S0361"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B>&nbsp;<A NAME="I10247"></A><SPAN Class="swiss"><A HREF="AA-6-1-2.html#S0212">basic_global_mode</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
-<div class="paranum"><a name="p12">12/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-H-7.html#S0367">formal_parameter_name</A></SPAN> 
-shall resolve to statically denote a formal subtype, a formal subprogram, 
-or a formal object of an anonymous access-to-subprogram type.</div>
-<div class="paranum"><a name="p13">13/5</a></div>
+<div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
 The <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that is associated with an <B>overriding</B> mode shall resolve to statically 
-denote a formal object, or a formal parameter of the associated entity.</div>
-<div class="paranum"><a name="p14">14/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-The <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN> 
-shall resolve to statically name an object (including possibly a formal 
-parameter) of a tagged class-wide type <I>T</I>'Class; the <I>dispatching_operation_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN> 
-shall resolve to statically denote a dispatching operation associated 
-with <I>T</I>.</div>
+denote a formal object, or a formal parameter of the associated entity. 
+</div>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p15">15/5</a></div>
+<div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
 The presence of the reserved word <B>overriding</B> in a global mode 
 indicates that the specification is overriding the mode of a formal parameter 
 with another mode to reflect the overall effect of an invocation of the 
 callable entity on the state associated with the corresponding actual 
 parameter.</div>
-<div class="paranum"><a name="p16">16/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-The <SPAN Class="swiss"><A HREF="AA-H-7.html#S0361">extended_global_aspect_definition</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="AA-H-7.html#S0362">extended_global_aspect_element</A></SPAN> 
-can be used to define as part of the Global aspect the <I>formal parameter 
-set</I><A NAME="I10249"></A> and the <I>dispatching operation set</I><A NAME="I10250"></A> 
-used within an operation. The formal parameter set is identified by a 
-set of formal parameter names after the reserved word <B>use</B>. Alternatively, 
-the reserved word <B>null</B> may be used to indicate none of the generic 
-formal parameters, or <B>all</B> to indicate all of the generic formal 
-parameters, of any enclosing generic unit (or visible formal package) 
-might be used within the execution of the operation. If there is no formal 
-parameter set specified for an operation declared within a generic unit, 
-it defaults to <B>use all</B>.</div>
-<div class="paranum"><a name="p17">17/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-The dispatching operation set is identified by a set of <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN>s 
-after the reserved word <B>do</B>. It indicates that the Global effects 
-of dispatching calls that <I>match</I><A NAME="I10251"></A> one of the 
-specifiers need not be accounted for by other elements of the Global 
-aspect, but are instead to be accounted for by the invoker of the operation. 
-A dispatching call <I>matches</I> a <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN> 
-if the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-of the call statically denotes the same operation(s) as that of the <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN>, 
-and at least one of the objects controlling the call is denoted by a 
-name that statically names the same object as that denoted by the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN>. 
-In the absence of any <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN>s, 
-all dispatching calls within the operation are presumed to have the effects 
-determined by the set of Global'Class aspects that apply to the invoked 
-dispatching operation.</div>
-<div class="paranum"><a name="p17.a">17.a/5</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>The object &ldquo;controlling 
-the call&rdquo; is not necessarily a controlling parameter of the call 
-if the call is a function with a controlling result or has parameters 
-that is such a function. It <I>is</I> one of the objects that provide 
-the dispatching tag used for the call; that could, for example, be a 
-parameter of a function used as a parameter to the call, or an object 
-being assigned to, or a parameter of an enclosing call.&nbsp;</div>
-<div class="paranum"><a name="p18">18/5</a></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+[As described in <A HREF="AA-6-1-2.html">6.1.2</A>, the following rules 
+are defined in terms of operations that are performed by or on behalf 
+of an entity.]</div>
+<div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
 The Global aspect for a subtype identifies the global variables that 
 might be referenced during default initialization, adjustment as part 
@@ -154,43 +78,33 @@ of assignment, finalization of an object of the subtype, or conversion
 to the subtype, including the evaluation of any assertion expressions 
 that apply. If not specified for the first subtype of a derived type, 
 the aspect defaults to that of the ancestor subtype; if not specified 
-for a nonderived first subtype the aspect defaults to that of the enclosing 
-library unit. If not specified for a nonfirst subtype <I>S</I>, the Global 
+for a nonderived composite first subtype the aspect defaults to that 
+of the enclosing library unit; if not specified for a nonderived elementary 
+first subtype (or scalar base subtype), the aspect defaults to <B>null</B> 
+in the absence of a predicate, and to that of the enclosing library unit 
+otherwise. If not specified for a nonfirst subtype <I>S</I>, the Global 
 aspect defaults to that of the subtype identified in the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 defining <I>S</I>.</div>
-<div class="paranum"><a name="p19">19/5</a></div>
+<div class="paranum"><a name="p8">8/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
 The Global'Class aspect may be specified for the first subtype of a tagged 
 type <I>T</I>, indicating an upper bound on the Global aspect of any 
-descendant of <I>T</I>. If not specified, it defaults to Unspecified.</div>
+descendant of <I>T</I>. If not specified, it defaults to Unspecified. 
+</div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p20">20/5</a></div>
+<div class="paranum"><a name="p9">9/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
 For a tagged subtype <I>T</I>, each mode of its Global aspect shall identify 
 a subset of the variables identified by the corresponding mode, or by 
 the <B>in out</B> mode, of the Global'Class aspect of the first subtype 
-of any ancestor of <I>T</I>.</div>
-<div class="paranum"><a name="p21">21/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-If the formal parameter set is anything but <B>all</B> in the Global 
-aspect for an operation declared within a generic unit, then the only 
-generic formal subtypes that may be used, the only formal subprograms 
-that may be called, and the only formal objects of an anonymous access-to-subprogram 
-type that may be dereferenced as part of a call or passed as the actual 
-for an access parameter, are those included in the formal parameter set.</div>
-<div class="paranum"><a name="p22">22/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-Any dispatching call occurring within the operation that does not match 
-a <SPAN Class="swiss"><A HREF="AA-H-7.html#S0369">dispatching_operation_specifier</A></SPAN> 
-is checked using the Global'Class aspect(s) applicable to the dispatching 
-operation; if there is a match, there is no checking against other elements 
-of the Global aspect(s) applicable at the point of call.</div>
+of any ancestor of <I>T</I>.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p22.a">22.a/5</a></div>
+<div class="paranum"><a name="p9.a">9.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
-<A NAME="I10252"></A>These extensions to the Global aspect are new.&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+<A NAME="I10248"></A>These extensions to the Global aspect are new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
@@ -198,7 +112,7 @@ of the Global aspect(s) applicable at the point of call.</div>
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-H-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-J.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-7-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,50 +38,51 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 packages exist:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><B>with</B>&nbsp;System;<A NAME="I8446"></A><BR>
+<div class="Examples"><B>with</B>&nbsp;System;<A NAME="I8459"></A><BR>
 <B>with</B>&nbsp;System.Multiprocessors;<BR>
 <B>package</B>&nbsp;Ada.Interrupts<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8447"></A>Interrupt_Id&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8448"></A>Parameterless_Handler&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8460"></A>Interrupt_Id&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8461"></A>Parameterless_Handler&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;<B>protected</B>&nbsp;<B>procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;</div>
 <div class="paranum"><a name="p3">3/1</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8449"></A>Is_Reserved&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8462"></A>Is_Reserved&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8450"></A>Is_Attached&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8463"></A>Is_Attached&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8451"></A>Current_Handler&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8464"></A>Current_Handler&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Parameterless_Handler;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8452"></A>Attach_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8465"></A>Attach_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(New_Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupt&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8453"></A>Exchange_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8466"></A>Exchange_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Old_Handler&nbsp;:&nbsp;<B>out</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Parameterless_Handler;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupt&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8454"></A>Detach_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8467"></A>Detach_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Interrupt&nbsp;:&nbsp;<B>in</B>&nbsp;Interrupt_Id);</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8455"></A>Reference&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8468"></A>Reference&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Address;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8456"></A>Get_CPU&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8469"></A>Get_CPU&nbsp;(Interrupt&nbsp;:&nbsp;Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Multiprocessors.CPU_Range;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Interrupts;</div>
-<div class="paranum"><a name="p12">12</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Interrupts.Names&nbsp;<B>is</B><A NAME="I8457"></A><BR>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Interrupts.Names&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>&nbsp;<B>is</B><A NAME="I8470"></A><BR>
 &nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;Interrupt_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;.&nbsp;.<BR>
@@ -124,7 +125,7 @@ treatment for the specified interrupt.</div>
 <div class="Normal">For all operations defined in this package that take 
 a parameter of type Interrupt_Id, with the exception of Is_Reserved and 
 Reference, a check is made that the specified interrupt is not reserved. 
-<A NAME="I8458"></A>Program_Error is raised if this check fails.</div>
+<A NAME="I8471"></A>Program_Error is raised if this check fails.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal">If, by using the Attach_Handler, Detach_Handler, 
 or Exchange_Handler procedures, an attempt is made to detach a handler 

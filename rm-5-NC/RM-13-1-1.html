@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,25 +37,25 @@
 an entity may be specified as part of its declaration using an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>, 
 rather than using a separate representation or operational item. The 
 declaration with the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
-is termed the <I>associated declaration</I>.<A NAME="I5333"></A>&nbsp;</div>
+is termed the <I>associated declaration</I>.<A NAME="I5324"></A>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">aspect_specification</SPAN><A NAME="I5334"></A><A NAME="S0346"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5335"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5336"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN>]&nbsp;{,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5337"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5338"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN>]&nbsp;}</div>
+<div class="Indented1"><SPAN Class="swiss">aspect_specification</SPAN><A NAME="I5325"></A><A NAME="S0346"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5326"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5327"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN>]&nbsp;{,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5328"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5329"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN>]&nbsp;}</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">aspect_mark</SPAN><A NAME="I5339"></A><A NAME="S0347"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>aspect_</I><A NAME="I5340"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>['Class]</div>
+<div class="Indented1"><SPAN Class="swiss">aspect_mark</SPAN><A NAME="I5330"></A><A NAME="S0347"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>aspect_</I><A NAME="I5331"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>['Class]</div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">aspect_definition</SPAN><A NAME="I5341"></A><A NAME="S0348"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5342"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5343"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I5344"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I5345"></A><SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I5346"></A><SPAN Class="swiss"><A HREF="RM-6-1-2.html#S0209">global_aspect_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">aspect_definition</SPAN><A NAME="I5332"></A><A NAME="S0348"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5333"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5334"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I5335"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I5336"></A><SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I5337"></A><SPAN Class="swiss"><A HREF="RM-6-1-2.html#S0209">global_aspect_definition</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">An <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
 identifies an aspect of the entity defined by the associated declaration 
-(the <I>associated entity</I><A NAME="I5347"></A>); the aspect denotes 
+(the <I>associated entity</I><A NAME="I5338"></A>); the aspect denotes 
 an object, a value, an expression, an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
 a subprogram, or some other kind of entity. If the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
 identifies:&nbsp;</div>
@@ -63,14 +63,14 @@ identifies:&nbsp;</div>
 <div class="Bulleted">an aspect that denotes an object, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>. 
 The expected type for the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is the type of the identified aspect of the associated entity;<A NAME="I5348"></A> 
-<A NAME="I5349"></A></div>
+is the type of the identified aspect of the associated entity;<A NAME="I5339"></A> 
+<A NAME="I5340"></A></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Bulleted">an aspect that is a value or an expression, the 
 <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>. 
 The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
-is the type of the identified aspect of the associated entity;<A NAME="I5350"></A><A NAME="I5351"></A></div>
+is the type of the identified aspect of the associated entity;<A NAME="I5341"></A><A NAME="I5342"></A></div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
 <div class="Bulleted">an aspect that is an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
 the aspect definition shall be an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
@@ -81,7 +81,7 @@ determined by the identified aspect;</div>
 <div class="Bulleted">an aspect that denotes a subprogram, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>; 
 the expected profile for the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is the profile required for the aspect of the associated entity;<A NAME="I5352"></A></div>
+is the profile required for the aspect of the associated entity;<A NAME="I5343"></A></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Bulleted">an aspect that denotes some other kind of entity, 
 the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
@@ -140,116 +140,100 @@ being specified as True.</div>
 includes 'Class, then the associated entity shall be a tagged type or 
 a primitive subprogram of a tagged type.</div>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Normal">There are no language-defined aspects that may be 
-specified on a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0238">renaming_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0302">subunit</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0254">protected_body</A></SPAN>, 
-an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN>, 
-or a <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0297">body_stub</A></SPAN> 
-other than a <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0298">subprogram_body_stub</A></SPAN>. 
-</div>
-<div class="paranum"><a name="p18">18/4</a></div>
-<div class="Normal">A language-defined aspect shall not be specified 
-in an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
-given on a completion of a subprogram or generic subprogram.</div>
-<div class="paranum"><a name="p18.1">18.1/5</a></div>
-<div class="Normal">&nbsp;&nbsp;If an aspect of a derived type (or its first subtype) 
-is inherited from an ancestor (sub)type and has the boolean value True, 
-the inherited value shall not be overridden to have the value False for 
-the derived type (or its first subtype), unless otherwise specified in 
-this International Standard. If an aspect of a nonfirst subtype is inherited 
-from the subtype in the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-that defines it, and has the value True, the inherited value shall not 
-be overridden to have the value False for the nonfirst subtype, unless 
-otherwise specified in this International Standard.</div>
-<div class="paranum"><a name="p18.2">18.2/5</a></div>
+<div class="Normal">Unless specified otherwise, a language-defined aspect 
+shall not be specified in an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+given on a completion of a program unit.</div>
+<div class="paranum"><a name="p17.1">17.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;If an aspect of a derived type is inherited from 
+an ancestor type and has the boolean value True, the inherited value 
+shall not be overridden to have the value False for the derived type, 
+unless otherwise specified in this International Standard.</div>
+<div class="paranum"><a name="p17.2">17.2/5</a></div>
 <div class="Normal">&nbsp;&nbsp;Certain type-related aspects are defined to be 
-<I>nonoverridable</I>.<A NAME="I5353"></A></div>
-<div class="paranum"><a name="p18.3">18.3/5</a></div>
+<I>nonoverridable</I>.<A NAME="I5344"></A></div>
+<div class="paranum"><a name="p17.3">17.3/5</a></div>
 <div class="Normal">&nbsp;&nbsp;If a nonoverridable aspect is directly specified 
 for a type <I>T</I>, then any explicit specification of that aspect for 
-any descendant of <I>T</I> (other than <I>T</I> itself) shall be <A NAME="I5354"></A><I>confirming</I>. 
+any descendant of <I>T</I> (other than <I>T</I> itself) shall be <A NAME="I5345"></A><I>confirming</I>. 
 In the case of an aspect whose value is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
 this means that the specified <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-shall <I>match</I><A NAME="I5355"></A> the inherited aspect in the sense 
+shall <I>match</I><A NAME="I5346"></A> the inherited aspect in the sense 
 that it shall denote the same declarations as would the inherited <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>.</div>
-<div class="paranum"><a name="p18.4">18.4/4</a></div>
+<div class="paranum"><a name="p17.4">17.4/4</a></div>
 <div class="Normal">&nbsp;&nbsp;If a full type has a partial view, and a given 
 nonoverridable aspect is allowed for both the full view and the partial 
 view, then the given aspect for the partial view and the full view shall 
 be the same: the aspect shall be directly specified only on the partial 
 view; if the full type inherits the aspect, then a matching definition 
 shall be specified (directly or by inheritance) for the partial view.</div>
-<div class="paranum"><a name="p18.5">18.5/5</a></div>
+<div class="paranum"><a name="p17.5">17.5/5</a></div>
 <div class="Normal">&nbsp;&nbsp;If a type inherits a nonoverridable aspect from 
 multiple ancestors, the value of the aspect inherited from any given 
 ancestor shall be confirming of the values inherited from all other ancestors.</div>
-<div class="paranum"><a name="p18.6">18.6/5</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I5356"></A>In addition to the places where 
+<div class="paranum"><a name="p17.6">17.6/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<A NAME="I5347"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules about nonoverridable aspects also apply in the private part 
 of an instance of a generic unit.</div>
-<div class="paranum"><a name="p18.7">18.7/5</a></div>
+<div class="paranum"><a name="p17.7">17.7/5</a></div>
 <div class="Normal">&nbsp;&nbsp;The Default_Iterator, Iterator_Element, Implicit_Dereference, 
 Constant_Indexing, Variable_Indexing, Aggregate, Max_Entry_Queue_Length, 
 and No_Controlled_Parts aspects are nonoverridable.</div>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p19">19/3</a></div>
+<div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">Depending on which 
 aspect is identified by the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN>, 
 an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 specifies:&nbsp;</div>
-<div class="paranum"><a name="p20">20/3</a></div>
+<div class="paranum"><a name="p19">19/3</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes a subprogram, object, or other kind of entity;</div>
-<div class="paranum"><a name="p21">21/3</a></div>
+<div class="paranum"><a name="p20">20/3</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
 which is either evaluated to produce a single value, or which (as in 
 a precondition) is to be evaluated at particular points during later 
 execution; or</div>
-<div class="paranum"><a name="p22">22/3</a></div>
+<div class="paranum"><a name="p21">21/3</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 specific to the aspect.&nbsp;</div>
-<div class="paranum"><a name="p23">23/3</a></div>
+<div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The identified aspect 
 of the associated entity, or in some cases, the view of the entity defined 
 by the declaration, is as specified by the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 (or by the default of True when boolean). Whether an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 <I>applies</I> to an entity or only to the particular view of the entity 
 defined by the declaration is determined by the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
-and the kind of entity. The following aspects are view specific:<A NAME="I5357"></A></div>
-<div class="paranum"><a name="p24">24/3</a></div>
+and the kind of entity. The following aspects are view specific:<A NAME="I5348"></A></div>
+<div class="paranum"><a name="p23">23/3</a></div>
 <div class="Bulleted">An aspect specified on an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN>;</div>
-<div class="paranum"><a name="p25">25/3</a></div>
+<div class="paranum"><a name="p24">24/3</a></div>
 <div class="Bulleted">An aspect specified on a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_declaration</A></SPAN>;</div>
-<div class="paranum"><a name="p26">26/3</a></div>
+<div class="paranum"><a name="p25">25/3</a></div>
 <div class="Bulleted">An aspect specified on a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0238">renaming_declaration</A></SPAN>.</div>
-<div class="paranum"><a name="p27">27/3</a></div>
+<div class="paranum"><a name="p26">26/3</a></div>
 <div class="Normal">All other <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>s 
 are associated with the entity, and <I>apply</I> to all views of the 
-entity, unless otherwise specified in this International Standard.<A NAME="I5358"></A></div>
-<div class="paranum"><a name="p28">28/4</a></div>
+entity, unless otherwise specified in this International Standard.<A NAME="I5349"></A></div>
+<div class="paranum"><a name="p27">27/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">If the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0347">aspect_mark</A></SPAN> 
-includes 'Class (a <I>class-wide aspect</I>)<A NAME="I5359"></A><A NAME="I5360"></A>, 
+includes 'Class (a <I>class-wide aspect</I>)<A NAME="I5350"></A><A NAME="I5351"></A>, 
 then, unless specified otherwise for a particular class-wide aspect: 
 </div>
-<div class="paranum"><a name="p29">29/3</a></div>
+<div class="paranum"><a name="p28">28/3</a></div>
 <div class="Bulleted">if the associated entity is a tagged type, the 
-specification <I>applies</I> to all descendants of the type;<A NAME="I5361"></A></div>
-<div class="paranum"><a name="p30">30/3</a></div>
+specification <I>applies</I> to all descendants of the type;<A NAME="I5352"></A></div>
+<div class="paranum"><a name="p29">29/3</a></div>
 <div class="Bulleted">if the associated entity is a primitive subprogram 
 of a tagged type <I>T</I>, the specification <I>applies</I> to the corresponding 
-primitive subprogram of all descendants of <I>T</I>.<A NAME="I5362"></A> 
+primitive subprogram of all descendants of <I>T</I>.<A NAME="I5353"></A> 
 </div>
-<div class="paranum"><a name="p31">31/3</a></div>
+<div class="paranum"><a name="p30">30/3</a></div>
 <div class="Normal">All specifiable operational and representation attributes 
 may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 instead of an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 (see <A HREF="RM-13-3.html">13.3</A>).</div>
-<div class="paranum"><a name="p32">32/4</a></div>
+<div class="paranum"><a name="p31">31/4</a></div>
 <div class="Normal">Any aspect specified by a representation pragma or 
 library unit pragma that has a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN> 
 as its single argument may be specified by an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>, 
@@ -259,29 +243,29 @@ is expected to be of type Boolean. The expression shall be static. Notwithstandi
 what this International Standard says elsewhere, the expression of an 
 aspect that can be specified by a library unit pragma is resolved and 
 evaluated at the point where it occurs in the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>, 
-rather than the first freezing point of the associated package.<A NAME="I5363"></A></div>
-<div class="paranum"><a name="p33">33/3</a></div>
+rather than the first freezing point of the associated package.<A NAME="I5354"></A></div>
+<div class="paranum"><a name="p32">32/3</a></div>
 <div class="Normal">In addition, other operational and representation 
 aspects not associated with specifiable attributes or representation 
 pragmas may be specified, as specified elsewhere in this International 
 Standard.</div>
-<div class="paranum"><a name="p34">34/4</a></div>
+<div class="paranum"><a name="p33">33/4</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN></div>
-<div class="paranum"><a name="p35">35/3</a></div>
+<div class="paranum"><a name="p34">34/3</a></div>
 <div class="Normal">If a Legality Rule or Static Semantics rule only 
 applies when a particular aspect has been specified, the aspect is considered 
 to have been specified only when the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 is visible (see <A HREF="RM-8-3.html">8.3</A>) at the point of the application 
 of the rule.</div>
-<div class="paranum"><a name="p36">36/3</a></div>
+<div class="paranum"><a name="p35">35/3</a></div>
 <div class="Normal">Alternative legality and semantics rules may apply 
 for particular aspects, as specified elsewhere in this International 
 Standard.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p37">37/3</a></div>
+<div class="paranum"><a name="p36">36/3</a></div>
 <div class="Normal">At the freezing point of the associated entity, the 
 <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 is elaborated. The elaboration of the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
@@ -294,7 +278,7 @@ execution as specified elsewhere in this International Standard for the
 particular aspect.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
-<div class="paranum"><a name="p38">38/3</a></div>
+<div class="paranum"><a name="p37">37/3</a></div>
 <div class="Normal">Implementations may support implementation-defined 
 aspects. The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 for an implementation-defined aspect may use an implementation-defined 

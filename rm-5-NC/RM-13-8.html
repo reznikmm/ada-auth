@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,14 +34,14 @@
 <HR>
 <H1>13.8 Machine Code Insertions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5587"></A>A machine code insertion can 
+<div class="Normal"><A NAME="I5578"></A>A machine code insertion can 
 be achieved by a call to a subprogram whose <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 contains <SPAN Class="swiss"><A HREF="RM-13-8.html#S0357">code_statement</A></SPAN>s. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">code_statement</SPAN><A NAME="I5588"></A><A NAME="S0357"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5589"></A><SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">code_statement</SPAN><A NAME="I5579"></A><A NAME="S0357"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5580"></A><SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-13-8.html#S0357">code_statement</A></SPAN> 
 is only allowed in the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
@@ -60,7 +60,7 @@ are allowed as usual).&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5590"></A>The <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
+<div class="Normal"><A NAME="I5581"></A>The <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 
 is expected to be of any type.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -74,7 +74,7 @@ that mentions package System.Machine_Code.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5591"></A><A NAME="I5592"></A>The contents 
+<div class="Normal"><A NAME="I5582"></A><A NAME="I5583"></A>The contents 
 of the library package System.Machine_Code (if provided) are implementation 
 defined. The meaning of <SPAN Class="swiss"><A HREF="RM-13-8.html#S0357">code_statement</A></SPAN>s 
 is implementation defined. Typically, each <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN> 

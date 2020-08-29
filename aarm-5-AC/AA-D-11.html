@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -57,19 +57,20 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>with</B>&nbsp;Ada.Task_Identification;<BR>
-<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I10119"></A><span class="insert2"><BR>
-&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Asynchronous_Task_Control);</span></span><span class="insert2"></span><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10120"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10121"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I10122"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I10141"></A><span class="insert2"><BR>
+&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Asynchronous_Task_Control);</span></span><span class="insert2"></span><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10142"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10143"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I10144"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Asynchronous_Task_Control;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
-<A NAME="I10123"></A><A NAME="I10124"></A><A NAME="I10125"></A>After 
+<A NAME="I10145"></A><A NAME="I10146"></A><A NAME="I10147"></A>After 
 the Hold operation has been applied to a task, the task becomes <I>held</I>. 
 For each processor there is a conceptual <I>idle task</I>, which is always 
 ready. The base priority of the idle task is below System.Any_Priority'First. 
@@ -125,7 +126,7 @@ the check fails. Program_Error is raised if the value of T is Null_Task_Id.</div
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I10126"></A>If any operation in this package 
+<div class="Normal"><A NAME="I10148"></A>If any operation in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 
@@ -190,7 +191,7 @@ The corresponding entry body executes.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<span class="insert2"><A NAME="I10127"></A>Asynchronous_Task_Control 
+<span class="insert2"><A NAME="I10149"></A>Asynchronous_Task_Control 
 is now Preelaborated, so it can be used in preelaborated units.</span> 
 </div>
 

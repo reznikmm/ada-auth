@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,14 +47,14 @@
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
 following language-defined library package exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><span class="insert3"><B>package</B>&nbsp;System.Multiprocessors</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I9359"></A><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Multiprocessors);</span></span><span class="insert3"></span></div>
+<div class="Examples"><span class="insert3"><B>package</B>&nbsp;System.Multiprocessors</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I9380"></A><BR>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Multiprocessors);</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9360"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9361"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9362"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</span></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9381"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9382"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9383"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9363"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9384"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
 <B>end</B>&nbsp;System.Multiprocessors;</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal"><span class="insert3">A call of Number_Of_CPUs returns 
@@ -68,7 +68,7 @@ be specified:</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="WideHanging-Term"><span class="insert3">CPU</span></div><div class="WideHanging-Body">
 <span class="insert3">The aspect CPU is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I9364"></A><A NAME="I9365"></A></span></div>
+which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I9385"></A><A NAME="I9386"></A></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9/3</a></div>

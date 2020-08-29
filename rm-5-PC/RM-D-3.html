@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,23 +47,23 @@ object.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8719"></A><A NAME="I8720"></A>Locking_Policy(<I>policy_</I><A NAME="I8721"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8740"></A><A NAME="I8741"></A>Locking_Policy(<I>policy_</I><A NAME="I8742"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The <I>policy_</I><A NAME="I8722"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-shall either be Ceiling_Locking or an implementation-defined <A NAME="I8723"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
+<div class="Normal">The <I>policy_</I><A NAME="I8743"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+shall either be Ceiling_Locking or an implementation-defined <A NAME="I8744"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8724"></A><A NAME="I8725"></A>A Locking_Policy 
+<div class="Normal"><A NAME="I8745"></A><A NAME="I8746"></A>A Locking_Policy 
 pragma is a configuration pragma.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I8726"></A>A locking policy specifies the 
+<div class="Normal"><A NAME="I8747"></A>A locking policy specifies the 
 details of protected object locking. All protected objects have a priority. 
 The locking policy specifies the meaning of the priority of a protected 
 object, and the relationships between these priorities and task priorities. 
@@ -74,7 +74,7 @@ implementation-defined locking policies, the meaning of the priority
 of a protected object is implementation defined. If no Locking_Policy 
 pragma applies to any of the program units comprising a partition, the 
 locking policy for that partition, as well as the meaning of the priority 
-of a protected object, are implementation defined. <A NAME="I8727"></A></div>
+of a protected object, are implementation defined. <A NAME="I8748"></A></div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 specified for the Priority or Interrupt_Priority aspect (see <A HREF="RM-D-1.html">D.1</A>) 
@@ -83,13 +83,13 @@ and converted to the subtype System.Any_Priority or System.Interrupt_Priority,
 respectively. The value of the expression is the initial priority of 
 the corresponding protected object. If no Priority or Interrupt_Priority 
 aspect is specified for a protected object, the initial priority is specified 
-by the locking policy. <A NAME="I8728"></A><A NAME="I8729"></A></div>
+by the locking policy. <A NAME="I8749"></A><A NAME="I8750"></A></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">There is one predefined 
-locking policy, Ceiling_Locking; this policy is defined as follows:<A NAME="I8730"></A><A NAME="I8731"></A> 
+locking policy, Ceiling_Locking; this policy is defined as follows:<A NAME="I8751"></A><A NAME="I8752"></A> 
 </div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Bulleted"><A NAME="I8732"></A>Every protected object has 
+<div class="Bulleted"><A NAME="I8753"></A>Every protected object has 
 a <I>ceiling priority</I>, which is determined by either a Priority or 
 Interrupt_Priority aspect as defined in <A HREF="RM-D-1.html">D.1</A>, 
 or by assignment to the Priority attribute as described in <A HREF="RM-D-5-2.html">D.5.2</A>. 
@@ -115,7 +115,7 @@ initial priority of the corresponding protected object is System.Priority'Last.<
 <div class="Bulleted">While a task executes a protected action, it inherits 
 the ceiling priority of the corresponding protected object.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted"><A NAME="I8733"></A><A NAME="I8734"></A><A NAME="I8735"></A>When 
+<div class="Bulleted"><A NAME="I8754"></A><A NAME="I8755"></A><A NAME="I8756"></A>When 
 a task calls a protected operation, a check is made that its active priority 
 is not higher than the ceiling of the corresponding protected object; 
 Program_Error is raised if this check fails.</div>
@@ -125,7 +125,7 @@ the ceiling priority of a protected object designates one with EDF_Within_Priori
 the following additional rules apply:</span></div>
 <div class="paranum"><a name="p13.2">13.2/5</a></div>
 <div class="Bulleted"><span class="insert5">Every protected object has 
-a <I>relative deadline</I>,<A NAME="I8736"></A><A NAME="I8737"></A> which 
+a <I>relative deadline</I>,<A NAME="I8757"></A><A NAME="I8758"></A> which 
 is determined by a Relative_Deadline aspect as defined in <A HREF="RM-D-2-6.html">D.2.6</A>, 
 or by assignment to the Relative_Deadline attribute as described in <A HREF="RM-D-5-2.html">D.5.2</A>. 
 The relative deadline of a protected object represents a lower bound 
@@ -145,19 +145,19 @@ object; 'now' is obtained via a call on Ada.Real_Time.Clock.</span></div>
 <div class="Bulleted"><span class="insert5">When a task calls a protected 
 operation, a check is made that its active deadline minus its last release 
 time is not less than the relative deadline of the corresponding protected 
-object; Program_Error is raised if this<A NAME="I8738"></A><A NAME="I8739"></A> 
-<A NAME="I8740"></A>check fails.</span>&nbsp;</div>
+object; Program_Error is raised if this<A NAME="I8759"></A><A NAME="I8760"></A> 
+<A NAME="I8761"></A>check fails.</span>&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">Following any change 
 of priority, it is a bounded error for the active priority of any task 
 with a call queued on an entry of a protected object to be higher than 
-the ceiling priority of the protected object. <A NAME="I8741"></A>In 
+the ceiling priority of the protected object. <A NAME="I8762"></A>In 
 this case one of the following applies:</div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Bulleted">at any time prior to executing the entry body Program_Error 
-is raised in the calling task;<A NAME="I8742"></A></div>
+is raised in the calling task;<A NAME="I8763"></A></div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Bulleted">when the entry is open the entry body is executed 
 at the ceiling priority of the protected object;</div>

@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 This subclause determines what checks are performed relating to possible 
-concurrent conflicting actions (see <A HREF="AA-9-10.html">9.10</A>).<A NAME="I5127"></A></div>
+concurrent conflicting actions (see <A HREF="AA-9-10.html">9.10</A>).<A NAME="I5117"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
@@ -47,9 +47,9 @@ concurrent conflicting actions (see <A HREF="AA-9-10.html">9.10</A>).<A NAME="I5
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Conflict_Check_Policy is as follows:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5128"></A><A NAME="I5129"></A>Conflict_Check_Policy 
-(<I>policy_</I><A NAME="I5130"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>[, 
-<I>policy_</I><A NAME="I5131"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>]);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5118"></A><A NAME="I5119"></A>Conflict_Check_Policy 
+(<I>policy_</I><A NAME="I5120"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>[, 
+<I>policy_</I><A NAME="I5121"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>]);</div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Conflict_Check_Policy 
@@ -111,15 +111,15 @@ occur, as follows:</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="WideHanging-Term">No_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 This policy imposes no restrictions on concurrent actions arising from 
-<A NAME="I5132"></A>parallel constructs.</div>
+<A NAME="I5122"></A>parallel constructs.</div>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="WideHanging-Term">No_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 This policy imposes no restrictions on concurrent actions arising from 
-tasking <A NAME="I5133"></A>constructs.</div>
+tasking <A NAME="I5123"></A>constructs.</div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">Known_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 If this policy applies to two concurrent actions appearing within parallel 
-constructs, <A NAME="I5134"></A>they are disallowed if they are known 
+constructs, <A NAME="I5124"></A>they are disallowed if they are known 
 to denote the same object (see <A HREF="AA-6-4-1.html">6.4.1</A>) with 
 uses that conflict. For the purposes of this check, any parallel loop 
 may be presumed to involve multiple concurrent iterations. Also, for 
@@ -146,7 +146,7 @@ that generally requires some blocking, so testing the value of the synchronized
 object would probably need to use a busy-wait loop.&nbsp;</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">Known_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-If this policy applies to two concurrent actions appearing within <A NAME="I5135"></A>the 
+If this policy applies to two concurrent actions appearing within <A NAME="I5125"></A>the 
 same compilation unit, at least one of which appears within a task body 
 but not within a parallel construct, they are disallowed if they are 
 known to denote the same object (see <A HREF="AA-6-4-1.html">6.4.1</A>) 
@@ -178,7 +178,7 @@ of the synchronized object in the other task can be sufficient.&nbsp;</div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="WideHanging-Term">All_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 This policy includes the restrictions imposed by the Known_Parallel_Conflict_Checks 
-policy, and in <A NAME="I5136"></A>addition disallows a parallel construct 
+policy, and in <A NAME="I5126"></A>addition disallows a parallel construct 
 from reading or updating a variable that is global to the construct, 
 unless it is a synchronized object, or unless the construct is a parallel 
 loop, and the global variable is a part of a component of an array denoted 
@@ -187,20 +187,45 @@ denotes the loop parameter of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0181
 or the chunk parameter of the parallel loop.</div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="WideHanging-Term">All_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-This policy includes <A NAME="I5137"></A>the restrictions imposed by 
+This policy includes <A NAME="I5127"></A>the restrictions imposed by 
 the Known_Tasking_Conflict_Checks policy, and in addition disallows a 
 task body from reading or updating a variable that is global to the task 
 body, unless it is a synchronized object.</div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="WideHanging-Term">No_Conflict_Checks, Known_Conflict_Checks, 
 All_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-These are short hands for (No_Parallel_Conflict_Checks, <A NAME="I5138"></A>No_Tasking_Conflict_Checks), 
-(Known_Parallel_Conflict_Checks, <A NAME="I5139"></A>Known_Tasking_Conflict_Checks), 
-and (All_Parallel_Conflict_Checks, <A NAME="I5140"></A>All_Tasking_Conflict_Checks), 
+These are short hands for (No_Parallel_Conflict_Checks, <A NAME="I5128"></A>No_Tasking_Conflict_Checks), 
+(Known_Parallel_Conflict_Checks, <A NAME="I5129"></A>Known_Tasking_Conflict_Checks), 
+and (All_Parallel_Conflict_Checks, <A NAME="I5130"></A>All_Tasking_Conflict_Checks), 
 respectively.</div>
 
-<H4 Class="centered">Implementation Permissions</H4>
+<H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0344-1.TXT">AI12-0344-1</A></I>} 
+For a subprogram, the following language-defined representation aspect 
+may be specified:</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="WideHanging-Term">Parallel_Calls</div><div class="WideHanging-Body"><br clear="left">
+The Parallel_Calls aspect is of type Boolean. The specified value shall 
+be static. The Parallel_Calls aspect<A NAME="I5131"></A><A NAME="I5132"></A> 
+of an inherited primitive subprogram is True if Parallel_Calls is True 
+either for the corresponding subprogram of the progenitor type or for 
+any other inherited subprogram that it overrides. If not specified or 
+inherited as True, the Parallel_Calls aspect of a subprogram is False.</div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="WideHanging-Body">Specifying the Parallel_Calls aspect to 
+be True for a subprogram indicates that the subprogram can be safely 
+called in parallel. Conflict checks (if required by the Conflict_Check_Policy 
+in effect) are made on the subprogram assuming that multiple concurrent 
+calls exist.[ Such checks need not be repeated at each call of the subprogram 
+in a parallel iteration context.]</div>
+<div class="paranum"><a name="p25.a">25.a/5</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Parallel_Calls: 
+</B>Specifies whether a given subprogram is expected to be called in 
+parallel.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p26">26/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0298-1.TXT">AI12-0298-1</A></I>} 
 When the conflict check policy Known_Parallel_Conflict_Checks applies, 
@@ -212,17 +237,20 @@ may disallow two concurrent actions, at least one of which appears within
 a task body but not within a parallel construct, if the implementation 
 can prove they will at run-time denote the same object with uses that 
 conflict.</div>
-<div class="paranum"><a name="p23.a">23.a/5</a></div>
+<div class="paranum"><a name="p26.a">26.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This permission allows 
 additional enforcement in instance bodies (where Legality Rules aren't 
 usually enforced), in subunits and their parents, and across compilation 
 units, if the implementation wishes.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p23.b">23.b/5</a></div>
+<div class="paranum"><a name="p26.b">26.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
-<A NAME="I5141"></A>Conflict check policies (and the associated checks) 
-are new.&nbsp;</div>
+<A NAME="I5133"></A>Conflict check policies (and the associated checks) 
+are new.</div>
+<div class="paranum"><a name="p26.c">26.c/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0344-1.TXT">AI12-0344-1</A></I>} 
+Aspect Parallel_Calls is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

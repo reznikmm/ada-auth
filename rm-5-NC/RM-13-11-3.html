@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,11 +44,11 @@ of a storage pool or storage size for an access type.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Default_Storage_Pool is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5685"></A><A NAME="I5686"></A>Default_Storage_Pool 
-(<A NAME="I5687"></A><SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0358">storage_pool_indicator</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5676"></A><A NAME="I5677"></A>Default_Storage_Pool 
+(<A NAME="I5678"></A><SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0358">storage_pool_indicator</A></SPAN>); 
 </div>
 <div class="paranum"><a name="p3.1">3.1/4</a></div>
-<div class="Indented1"><SPAN Class="swiss">storage_pool_indicator</SPAN><A NAME="I5688"></A><A NAME="S0358"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>storage_pool_</I><A NAME="I5689"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>null</B>&nbsp;|&nbsp;Standard</div>
+<div class="Indented1"><SPAN Class="swiss">storage_pool_indicator</SPAN><A NAME="I5679"></A><A NAME="S0358"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>storage_pool_</I><A NAME="I5680"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>null</B>&nbsp;|&nbsp;Standard</div>
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Default_Storage_Pool is allowed immediately within the visible part of 
@@ -64,7 +64,7 @@ is expected to be of type Root_Storage_Pool'Class.&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-shall denote a variable.<A NAME="I5690"></A><A NAME="I5691"></A></div>
+shall denote a variable.<A NAME="I5681"></A><A NAME="I5682"></A></div>
 <div class="paranum"><a name="p4.1">4.1/4</a></div>
 <div class="Normal">&nbsp;The Standard <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0358">storage_pool_indicator</A></SPAN> 
 is an identifier specific to a pragma (see <A HREF="RM-2-8.html">2.8</A>) 
@@ -76,7 +76,7 @@ than package Standard itself.</div>
 <div class="Normal">&nbsp;If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 is used as a configuration pragma, the <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0358">storage_pool_indicator</A></SPAN> 
 shall be either <B>null</B> or Standard, and it defines the <I>default 
-pool</I><A NAME="I5692"></A><A NAME="I5693"></A><A NAME="I5694"></A> 
+pool</I><A NAME="I5683"></A><A NAME="I5684"></A><A NAME="I5685"></A> 
 to be the given <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0358">storage_pool_indicator</A></SPAN> 
 within all applicable compilation units (see <A HREF="RM-10-1-5.html">10.1.5</A>), 
 except within the immediate scope of another <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
@@ -95,7 +95,7 @@ applies to a compilation unit that is within the immediate scope of another
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal">The language-defined aspect Default_Storage_Pool 
 may be specified for a generic instance; it defines the default pool 
-for access types within an instance.<A NAME="I5695"></A><A NAME="I5696"></A> 
+for access types within an instance.<A NAME="I5686"></A><A NAME="I5687"></A> 
 .</div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
 <div class="Normal">&nbsp;The Default_Storage_Pool aspect may be specified 

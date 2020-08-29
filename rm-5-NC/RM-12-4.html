@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,24 +35,24 @@
 <HR>
 <H1>12.4 Formal Objects</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5156"></A><A NAME="I5157"></A>A generic 
+<div class="Normal"><A NAME="I5147"></A><A NAME="I5148"></A>A generic 
 formal object can be used to pass a value or variable to a generic unit. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_object_declaration</SPAN><A NAME="I5158"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5159"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5160"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0208">mode</A></SPAN>&nbsp;[<A NAME="I5161"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I5162"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5163"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5164"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
-&nbsp;&nbsp;|&nbsp;&nbsp;<A NAME="I5165"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5166"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0208">mode</A></SPAN>&nbsp;<A NAME="I5167"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5168"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5169"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">formal_object_declaration</SPAN><A NAME="I5149"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5150"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5151"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0208">mode</A></SPAN>&nbsp;[<A NAME="I5152"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I5153"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5154"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5155"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
+&nbsp;&nbsp;|&nbsp;&nbsp;<A NAME="I5156"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5157"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0208">mode</A></SPAN>&nbsp;<A NAME="I5158"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5159"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5160"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I5170"></A>The expected type for the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>, 
+<div class="Normal"><A NAME="I5161"></A>The expected type for the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>, 
 if any, of a formal object is the type of the formal object.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5171"></A>For a generic formal object of 
+<div class="Normal"><A NAME="I5162"></A>For a generic formal object of 
 mode <B>in</B>, the expected type for the actual is the type of the formal.</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">For a generic formal object of mode <B>in out</B>, 
@@ -65,7 +65,7 @@ designated type as that of the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">
 If the anonymous access type is an access-to-subprogram type, the type 
 of the actual shall have a designated profile which is type conformant 
 with that of the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>. 
-<A NAME="I5172"></A></div>
+<A NAME="I5163"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
@@ -77,7 +77,7 @@ its mode shall be either <B>in</B> or <B>in out</B>.&nbsp;</div>
 actual shall be an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>. 
 For a generic formal object of mode <B>in out</B>, the actual shall be 
 a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> that 
-denotes a variable for which renaming is allowed (see <A HREF="RM-8-5-1.html">8.5.1</A>).<A NAME="I5173"></A><A NAME="I5174"></A> 
+denotes a variable for which renaming is allowed (see <A HREF="RM-8-5-1.html">8.5.1</A>).<A NAME="I5164"></A><A NAME="I5165"></A> 
 </div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">In the case where the 
@@ -86,10 +86,10 @@ the type of the actual and the type of the formal:</div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Bulleted">shall both be access-to-object types with statically 
 matching designated subtypes and with both or neither being access-to-constant 
-types; or <A NAME="I5175"></A></div>
+types; or <A NAME="I5166"></A></div>
 <div class="paranum"><a name="p8.2">8.2/2</a></div>
 <div class="Bulleted">shall both be access-to-subprogram types with subtype 
-conformant designated profiles. <A NAME="I5176"></A></div>
+conformant designated profiles. <A NAME="I5167"></A></div>
 <div class="paranum"><a name="p8.3">8.3/5</a></div>
 <div class="Normal">&nbsp;For a <SPAN Class="swiss"><A HREF="RM-12-4.html#S0319">formal_object_declaration</A></SPAN> 
 of mode <B>in out</B> with a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN> 
@@ -102,18 +102,18 @@ another generic unit <I>G</I>, and the instantiation containing the actual
 occurs within the body of <I>G</I> or within the body of a generic unit 
 declared within the declarative region of <I>G</I>, then the declaration 
 of the formal object of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>. 
-<A NAME="I5177"></A>In addition to the places where Legality Rules normally 
+<A NAME="I5168"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), this rule applies also in 
 the private part of an instance of a generic unit.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-4.html#S0319">formal_object_declaration</A></SPAN> 
-declares a generic formal object. The default mode is <B>in</B>. <A NAME="I5178"></A>For 
+declares a generic formal object. The default mode is <B>in</B>. <A NAME="I5169"></A>For 
 a formal object of mode <B>in</B>, the nominal subtype is the one denoted 
 by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
-in the declaration of the formal. <A NAME="I5179"></A>For a formal object 
+in the declaration of the formal. <A NAME="I5170"></A>For a formal object 
 of mode <B>in out</B>, its type is determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 in the declaration; its nominal subtype is nonstatic, even if the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
@@ -122,7 +122,7 @@ unconstrained if the first subtype of the type is unconstrained, even
 if the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes a constrained subtype.&nbsp;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal"><A NAME="I5180"></A><A NAME="I5181"></A><A NAME="I5182"></A>In 
+<div class="Normal"><A NAME="I5171"></A><A NAME="I5172"></A><A NAME="I5173"></A>In 
 an instance, a <SPAN Class="swiss"><A HREF="RM-12-4.html#S0319">formal_object_declaration</A></SPAN> 
 of mode <B>in</B> is a <I>full constant declaration</I> and declares 
 a new stand-alone constant object whose initialization expression is 
@@ -132,12 +132,12 @@ to those of the actual.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I5183"></A><A NAME="I5184"></A>For the evaluation 
+<div class="Normal"><A NAME="I5174"></A><A NAME="I5175"></A>For the evaluation 
 of a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0317">generic_association</A></SPAN> 
 for a formal object of mode <B>in</B>, a constant object is created, 
 the value of the actual parameter is converted to the nominal subtype 
 of the formal object, and assigned to the object, including any value 
-adjustment &mdash; see <A HREF="RM-7-6.html">7.6</A>. <A NAME="I5185"></A></div>
+adjustment &mdash; see <A HREF="RM-7-6.html">7.6</A>. <A NAME="I5176"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">6&nbsp;&nbsp;The constraints that apply to a generic 

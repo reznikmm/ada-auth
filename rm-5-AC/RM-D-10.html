@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,14 +49,14 @@ block for implementing higher-level queues.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9256"></A><span class="insert2"><BR>
-&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Synchronous_Task_Control);</span></span><span class="insert2"></span></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9277"></A><span class="insert2"><BR>
+&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Synchronous_Task_Control);</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9257"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9258"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9259"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9260"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9261"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<span class="insert5"><BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9278"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9279"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9280"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9281"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9282"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -69,8 +69,8 @@ following language-defined package exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Examples"><span class="insert3"></span><span class="insert5"><B>with</B>&nbsp;Ada.Real_Time;<BR>
 </span><span class="insert3"><B>package</B>&nbsp;Ada.Synchronous_Task_Control.EDF</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert3">&nbsp;<B>is</B><A NAME="I9262"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9263"></A>Suspend_Until_True_And_Set_Deadline<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert3">&nbsp;<B>is</B><A NAME="I9283"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9284"></A>Suspend_Until_True_And_Set_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(S&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Suspension_Object;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Span)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span><span class="insert3">;<BR>
@@ -98,7 +98,7 @@ task until the state of the object S is <span class="insert2">True</span><span c
 at that point the task becomes ready and the state of the object becomes 
 <span class="insert2">False</span><span class="delete2">&nbsp;false</span>.</div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal"><span class="delete5"><A NAME="I9264"></A><A NAME="I9265"></A></span>Program_Error 
+<div class="Normal"><span class="delete5"><A NAME="I9285"></A><A NAME="I9286"></A></span>Program_Error 
 is raised upon calling Suspend_Until_True if another task is already 
 waiting on that suspension object.<span class="delete5">&nbsp;Suspend_Until_True 
 is a potentially blocking operation (see <A HREF="RM-9-5-1.html">9.5.1</A>).</span></div>
@@ -118,7 +118,7 @@ two or more tasks to call Suspend_Until_True on the same Suspension_Object
 concurrently. For each task, Program_Error might be raised, the task 
 might proceed without suspending, or the task might suspend, potentially 
 indefinitely. The state of the suspension object might end up either 
-True or False.<A NAME="I9266"></A></span>&nbsp;</div>
+True or False.<A NAME="I9287"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p12">12</a></div>

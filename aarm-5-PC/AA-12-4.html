@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <HR>
 <H1>12.4 Formal Objects</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I5693"></A> <A NAME="I5694"></A>A generic 
+<div class="Normal">[<A NAME="I5689"></A> <A NAME="I5690"></A>A generic 
 formal object can be used to pass a value or variable to a generic unit.] 
 </div>
 
@@ -56,18 +56,18 @@ is like a renaming of the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0318">expli
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">formal_object_declaration</SPAN><A NAME="I5695"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5696"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5697"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0208">mode</A></SPAN>&nbsp;[<A NAME="I5698"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I5699"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5700"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5701"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
-&nbsp;&nbsp;|&nbsp;&nbsp;<A NAME="I5702"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5703"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0208">mode</A></SPAN>&nbsp;<A NAME="I5704"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5705"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5706"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">formal_object_declaration</SPAN><A NAME="I5691"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5692"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5693"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0208">mode</A></SPAN>&nbsp;[<A NAME="I5694"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I5695"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5696"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5697"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
+&nbsp;&nbsp;|&nbsp;&nbsp;<A NAME="I5698"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I5699"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0208">mode</A></SPAN>&nbsp;<A NAME="I5700"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I5701"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5702"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I5707"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
+<div class="Normal"><A NAME="I5703"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
 if any, of a formal object is the type of the formal object.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5708"></A>For a generic formal object of 
+<div class="Normal"><A NAME="I5704"></A>For a generic formal object of 
 mode <B>in</B>, the expected type for the actual is the type of the formal.</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
@@ -81,7 +81,7 @@ designated type as that of the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">
 If the anonymous access type is an access-to-subprogram type, the type 
 of the actual shall have a designated profile which is type conformant 
 with that of the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
-<A NAME="I5709"></A></div>
+<A NAME="I5705"></A></div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>See the corresponding rule for 
 <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0239">object_renaming_declaration</A></SPAN>s 
@@ -100,7 +100,7 @@ allowed for generic formal objects.&nbsp;</div>
 actual shall be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>. 
 For a generic formal object of mode <B>in out</B>, the actual shall be 
 a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> that 
-denotes a variable for which renaming is allowed (see <A HREF="AA-8-5-1.html">8.5.1</A>).<A NAME="I5710"></A><A NAME="I5711"></A> 
+denotes a variable for which renaming is allowed (see <A HREF="AA-8-5-1.html">8.5.1</A>).<A NAME="I5706"></A><A NAME="I5707"></A> 
 </div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The part of this that requires 
@@ -118,11 +118,11 @@ the type of the actual and the type of the formal:</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 shall both be access-to-object types with statically matching designated 
 subtypes and with both or neither being access-to-constant types; or 
-<A NAME="I5712"></A></div>
+<A NAME="I5708"></A></div>
 <div class="paranum"><a name="p8.2">8.2/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 shall both be access-to-subprogram types with subtype conformant designated 
-profiles. <A NAME="I5713"></A></div>
+profiles. <A NAME="I5709"></A></div>
 <div class="paranum"><a name="p8.3">8.3/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
@@ -137,7 +137,7 @@ another generic unit <I>G</I>, and the instantiation containing the actual
 occurs within the body of <I>G</I> or within the body of a generic unit 
 declared within the declarative region of <I>G</I>, then the declaration 
 of the formal object of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>. 
-<A NAME="I5714"></A>In addition to the places where Legality Rules normally 
+<A NAME="I5710"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), this rule applies also in 
 the private part of an instance of a generic unit.</span><span class="delete5">:</span></div>
 <div class="paranum"><a name="p8.4">8.4/5</a></div>
@@ -152,7 +152,7 @@ shall have a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
 <span class="delete5">otherwise, the subtype of the actual matching the 
 <SPAN Class="swiss"><A HREF="AA-12-4.html#S0319">formal_object_declaration</A></SPAN> 
-shall exclude null. <A NAME="I5715"></A>In addition to the places where 
+shall exclude null. <A NAME="I5711"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -176,11 +176,11 @@ lying; thus we don't need a Legality Rule for such objects.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00255.TXT">AI95-00255-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-12-4.html#S0319">formal_object_declaration</A></SPAN> 
-declares a generic formal object. The default mode is <B>in</B>. <A NAME="I5716"></A>For 
+declares a generic formal object. The default mode is <B>in</B>. <A NAME="I5712"></A>For 
 a formal object of mode <B>in</B>, the nominal subtype is the one denoted 
 by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
-in the declaration of the formal. <A NAME="I5717"></A>For a formal object 
+in the declaration of the formal. <A NAME="I5713"></A>For a formal object 
 of mode <B>in out</B>, its type is determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 in the declaration; its nominal subtype is nonstatic, even if the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
@@ -205,7 +205,7 @@ an access subtype can neither be a static subtype nor be a composite
 type.&nbsp;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00269.TXT">AI95-00269-01</A></I>} 
-<A NAME="I5718"></A><A NAME="I5719"></A><A NAME="I5720"></A>In an instance, 
+<A NAME="I5714"></A><A NAME="I5715"></A><A NAME="I5716"></A>In an instance, 
 a <SPAN Class="swiss"><A HREF="AA-12-4.html#S0319">formal_object_declaration</A></SPAN> 
 of mode <B>in</B> is a <I>full constant declaration</I> and declares 
 a new stand-alone constant object whose initialization expression is 
@@ -224,19 +224,19 @@ of mode <B>in</B> as for any constant; see <A HREF="AA-3-3-1.html">3.3.1</A>,
 &ldquo;<A HREF="AA-3-3-1.html">Object Declarations</A>&rdquo; and <A HREF="AA-7-6.html">7.6</A>, 
 &ldquo;<A HREF="AA-7-6.html">Assignment and Finalization</A>&rdquo;.</div>
 <div class="paranum"><a name="p10.c">10.c</a></div>
-<div class="Annotations"><A NAME="I5721"></A>In an instance, the subtype 
+<div class="Annotations"><A NAME="I5717"></A>In an instance, the subtype 
 of a generic formal object of mode <B>in</B> is as for the equivalent 
 constant. In an instance, the subtype of a generic formal object of mode 
 <B>in out</B> is the subtype of the corresponding generic actual.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I5722"></A><A NAME="I5723"></A>For the evaluation 
+<div class="Normal"><A NAME="I5718"></A><A NAME="I5719"></A>For the evaluation 
 of a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0317">generic_association</A></SPAN> 
 for a formal object of mode <B>in</B>, a constant object is created, 
 the value of the actual parameter is converted to the nominal subtype 
 of the formal object, and assigned to the object[, including any value 
-adjustment &mdash; see <A HREF="AA-7-6.html">7.6</A>]. <A NAME="I5724"></A></div>
+adjustment &mdash; see <A HREF="AA-7-6.html">7.6</A>]. <A NAME="I5720"></A></div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This includes evaluating 
 the actual and doing a subtype conversion, which might raise an exception. 
@@ -261,7 +261,7 @@ formal objects of mode <B>in out</B>.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p12.b">12.b</a></div>
-<div class="Annotations"><A NAME="I5725"></A>In Ada 83, it is forbidden 
+<div class="Annotations"><A NAME="I5721"></A>In Ada 83, it is forbidden 
 to pass a (nongeneric) formal parameter of mode <B>out</B>, or a subcomponent 
 thereof, to a generic formal object of mode <B>in out</B>. This restriction 
 is removed in Ada 95.&nbsp;</div>
@@ -287,7 +287,7 @@ benefit, and any change has some cost.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p12.e">12.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I5726"></A>A generic formal <B>in</B> object can have a limited 
+<A NAME="I5722"></A>A generic formal <B>in</B> object can have a limited 
 type. The actual for such an object must be built-in-place via a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
 see <A HREF="AA-7-5.html">7.5</A>.</div>
@@ -310,14 +310,14 @@ constant declaration).&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p12.i">12.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I5727"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<A NAME="I5723"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-12-4.html#S0319">formal_object_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p12.j">12.j/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
-<span class="insert5"><A NAME="I5728"></A><B>Correction:</B> The Legality 
+<span class="insert5"><A NAME="I5724"></A><B>Correction:</B> The Legality 
 Rule for matching null exclusions only applies to formal objects with 
 mode <B>in out</B>. (<B>In</B> mode formal objects have a run-time check 
 to avoid problems.) This is an extension as some instantiations that 

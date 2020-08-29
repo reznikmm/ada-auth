@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 <H1>3.9.1 Type Extensions</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-[<A NAME="I2286"></A> <A NAME="I2287"></A><A NAME="I2288"></A><A NAME="I2289"></A><A NAME="I2290"></A><A NAME="I2291"></A>Every 
+[<A NAME="I2287"></A> <A NAME="I2288"></A><A NAME="I2289"></A><A NAME="I2290"></A><A NAME="I2291"></A><A NAME="I2292"></A>Every 
 type extension is a tagged type, and is a <I>record extension</I> or 
 a <I>private extension</I> of some other tagged type, or a noninterface 
 synchronized tagged type.]&nbsp;</div>
@@ -54,7 +54,7 @@ variants.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_extension_part</SPAN><A NAME="I2292"></A><A NAME="S0075"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>with</B>&nbsp;<A NAME="I2293"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">record_extension_part</SPAN><A NAME="I2293"></A><A NAME="S0075"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>with</B>&nbsp;<A NAME="I2294"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -65,7 +65,7 @@ The parent type of a record extension shall not be a class-wide type
 nor shall it be a synchronized tagged type (see <A HREF="AA-3-9-4.html">3.9.4</A>). 
 If the parent type or any progenitor is nonlimited, then each of the 
 components of the <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN> 
-shall be nonlimited. <A NAME="I2294"></A>In addition to the places where 
+shall be nonlimited. <A NAME="I2295"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -155,7 +155,7 @@ have the same problem with abstract procedures.</div>
 a generic body, for simplicity. We decided not to go that far, in order 
 to avoid unnecessary restrictions.</div>
 <div class="paranum"><a name="p4.k">4.k</a></div>
-<div class="Annotations"><A NAME="I2295"></A>We also considered trying 
+<div class="Annotations"><A NAME="I2296"></A>We also considered trying 
 make the accessibility level part of the contract; i.e. invent some way 
 of saying (in the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN>) 
 &ldquo;all instances of this generic unit will have the same accessibility 
@@ -176,13 +176,13 @@ derived private types whose ancestor type is tagged (see <A HREF="AA-12-5-1.html
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00391.TXT">AI95-00391-01</A></I>} 
-<A NAME="I2296"></A>A record extension is a <I>null extension</I> if 
+<A NAME="I2297"></A>A record extension is a <I>null extension</I> if 
 its declaration has no <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 and its <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN> 
 includes no <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>s.</div>
 <div class="paranum"><a name="p4.2">4.2/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0191-1.TXT">AI12-0191-1</A></I>} 
-<A NAME="I2297"></A><A NAME="I2298"></A><A NAME="I2299"></A>In the case 
+<A NAME="I2298"></A><A NAME="I2299"></A><A NAME="I2300"></A>In the case 
 where the (compile-time) view of an object <I>X</I> is of a tagged type 
 T1 or T1'Class and the (run-time) tag of <I>X</I> is T2'Tag, only the 
 components (if any) of <I>X</I> that are components of T1 (or that are 
@@ -227,7 +227,7 @@ the nominal type of the object are read or written.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I2300"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+<div class="Normal"><A NAME="I2301"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN>. 
 </div>
 <div class="NotesHeader">NOTES</div>
@@ -318,13 +318,13 @@ extensions (of types defined above in <A HREF="AA-3-9.html">3.9</A>):</I>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p17.a">17.a</a></div>
-<div class="Annotations"><A NAME="I2301"></A>Type extension is a new 
+<div class="Annotations"><A NAME="I2302"></A>Type extension is a new 
 concept.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p17.b">17.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
-<A NAME="I2302"></A>Type extensions now can be declared in more nested 
+<A NAME="I2303"></A>Type extensions now can be declared in more nested 
 scopes than their parent types. Additional accessibility checks on <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>s 
 and return statements prevent objects from outliving their type.&nbsp;</div>
 

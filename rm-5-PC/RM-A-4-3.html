@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -66,12 +66,12 @@ by the string transformation procedures.&nbsp;</div>
 Strings.Fixed has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Strings.Maps;<BR>
-<A NAME="I6307"></A><B>package</B>&nbsp;Ada.Strings.Fixed<span class="delete5">&nbsp;<B>is</B></span><BR>
-&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Fixed);</span></div>
+<A NAME="I6302"></A><B>package</B>&nbsp;Ada.Strings.Fixed<span class="delete5">&nbsp;<B>is</B></span><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Fixed);</span></div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;&quot;Copy&quot;&nbsp;procedure&nbsp;for&nbsp;strings&nbsp;of&nbsp;possibly&nbsp;different&nbsp;lengths</I></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6308"></A>Move&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6303"></A>Move&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drop&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Truncation&nbsp;:=&nbsp;Error;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Alignment&nbsp;&nbsp;:=&nbsp;Left;<BR>
@@ -79,78 +79,78 @@ Strings.Fixed has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;Search&nbsp;subprograms</I></SPAN></div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6309"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6304"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping&nbsp;:=&nbsp;Maps.Identity)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p8.2">8.2/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6310"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6305"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6311"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6306"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Maps.Identity)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6312"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6307"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6313"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6308"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership&nbsp;:=&nbsp;Inside;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6314"></A>Index&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6309"></A>Index&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership&nbsp;:=&nbsp;Inside;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;&nbsp;:=&nbsp;Forward)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6315"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6310"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6316"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6311"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6317"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6312"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Maps.Identity)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6318"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6313"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6319"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6314"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p15.1">15.1/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6320"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6315"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6321"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6316"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Positive;<BR>
@@ -158,29 +158,29 @@ Strings.Fixed has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;String&nbsp;translation&nbsp;subprograms</I></SPAN></div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6322"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6317"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6323"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6318"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping);</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6324"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6319"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6325"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6320"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function);</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;String&nbsp;transformation&nbsp;subprograms</I></SPAN></div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6326"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6321"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6327"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6322"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
@@ -188,74 +188,74 @@ Strings.Fixed has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Alignment&nbsp;&nbsp;:=&nbsp;Left;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;&nbsp;:=&nbsp;Space);</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6328"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6323"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6329"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6324"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Truncation&nbsp;:=&nbsp;Error);</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6330"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6325"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6331"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6326"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Truncation&nbsp;:=&nbsp;Right);</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6332"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6327"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Through&nbsp;:&nbsp;<B>in</B>&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6333"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6328"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Through&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;:&nbsp;<B>in</B>&nbsp;Alignment&nbsp;:=&nbsp;Left;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space);</div>
 <div class="paranum"><a name="p31">31</a></div>
 <div class="Examples">&nbsp;--<SPAN Class="roman"><I>String&nbsp;selector&nbsp;subprograms</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6334"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6329"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Side&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Trim_End)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6335"></A>Trim&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6330"></A>Trim&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Side&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Trim_End;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;:&nbsp;<B>in</B>&nbsp;Alignment&nbsp;:=&nbsp;Left;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space);</div>
 <div class="paranum"><a name="p33">33</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6336"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6331"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6337"></A>Trim&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6332"></A>Trim&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;:&nbsp;<B>in</B>&nbsp;Alignment&nbsp;:=&nbsp;Strings.Left;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space);</div>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6338"></A>Head&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6333"></A>Head&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p36">36</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6339"></A>Head&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6334"></A>Head&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;:&nbsp;<B>in</B>&nbsp;Alignment&nbsp;:=&nbsp;Left;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space);</div>
 <div class="paranum"><a name="p37">37</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6340"></A>Tail&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6335"></A>Tail&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p38">38</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6341"></A>Tail&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6336"></A>Tail&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;:&nbsp;<B>in</B>&nbsp;Alignment&nbsp;:=&nbsp;Left;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space);</div>

@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,7 +50,7 @@ procedure Containers.Generic_Array_Sort has the following declaration:
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Array_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(Index_Type&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Array_Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type)<span class="delete5">;</span><A NAME="I8175"></A><span class="insert5"><BR>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Array_Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type)<span class="delete5">;</span><A NAME="I8192"></A><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B></span><span class="delete5"><B>&nbsp;pragma</B>&nbsp;Pure(Ada.Containers.Generic_Array_Sort)</span>;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
@@ -66,7 +66,7 @@ It should define a strict weak ordering relationship (see <A HREF="RM-A-18.html"
 it should not modify Container. If the actual for &quot;&lt;&quot; behaves 
 in some other manner, the behavior of the instance of Generic_Array_Sort 
 is unspecified. The number of times Generic_Array_Sort calls &quot;&lt;&quot; 
-is unspecified.<A NAME="I8176"></A></div>
+is unspecified.<A NAME="I8193"></A></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The generic library 
 procedure Containers.Generic_Constrained_Array_Sort has the following 
@@ -78,7 +78,7 @@ declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Array_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(Index_Type)&nbsp;<B>of</B>&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Constrained_Array_Sort<A NAME="I8177"></A><BR>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Constrained_Array_Sort<A NAME="I8194"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B></span><span class="delete5"><B>&nbsp;pragma</B>&nbsp;Pure(Ada.Containers.Generic_Constrained_Array_Sort)</span>;</div>
@@ -95,7 +95,7 @@ values. It should define a strict weak ordering relationship (see <A HREF="RM-A-
 it should not modify Container. If the actual for &quot;&lt;&quot; behaves 
 in some other manner, the behavior of the instance of Generic_Constrained_Array_Sort 
 is unspecified. The number of times Generic_Constrained_Array_Sort calls 
-&quot;&lt;&quot; is unspecified.<A NAME="I8178"></A></div>
+&quot;&lt;&quot; is unspecified.<A NAME="I8195"></A></div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;The generic library 
 procedure Containers.Generic_Sort has the following declaration:&nbsp;</div>
@@ -104,7 +104,7 @@ procedure Containers.Generic_Sort has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index_Type&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Before&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Index_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;procedure</B>&nbsp;Swap&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type);<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Sort<A NAME="I8179"></A><BR>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Sort<A NAME="I8196"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(First,&nbsp;Last&nbsp;:&nbsp;Index_Type'Base)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B></span><span class="delete5"><B>&nbsp;pragma</B>&nbsp;Pure(Ada.Containers.Generic_Sort)</span>;</div>
 <div class="paranum"><a name="p9.3">9.3/3</a></div>
@@ -124,7 +124,7 @@ it should not modify the elements. The actual function for the generic
 formal Swap should exchange the values of the indicated elements. If 
 the actual for either Before or Swap behaves in some other manner, the 
 behavior of Generic_Sort is unspecified. The number of times the Generic_Sort 
-calls Before or Swap is unspecified.<A NAME="I8180"></A></div>
+calls Before or Swap is unspecified.<A NAME="I8197"></A></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p10">10/2</a></div>

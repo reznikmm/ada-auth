@@ -35,7 +35,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -61,18 +61,18 @@ the package.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I10290"></A><A NAME="I10291"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I10312"></A><A NAME="I10313"></A>The 
 form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Remote_Types is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10292"></A><A NAME="I10293"></A>Remote_Types[(<I>library_unit_</I><A NAME="I10294"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10314"></A><A NAME="I10315"></A>Remote_Types[(<I>library_unit_</I><A NAME="I10316"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<A NAME="I10295"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I10317"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Remote_Types is used to specify that a library unit is a</span> <I>remote 
-types library unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Types <span class="insert3">aspect<A NAME="I10296"></A><A NAME="I10297"></A> 
+types library unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Types <span class="insert3">aspect<A NAME="I10318"></A><A NAME="I10319"></A> 
 of the library unit is True</span><span class="delete3">&nbsp;applies</span>. 
 The following restrictions apply to the declaration of such a library 
 unit:</div>
@@ -134,10 +134,10 @@ not have specified attributes.</span>&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0082">8652/0082</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00164.TXT">AI95-00164-01</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
-<span class="insert1"></span><A NAME="I10298"></A><span class="insert3">A 
+<span class="insert1"></span><A NAME="I10320"></A><span class="insert3">A 
 named</span><span class="delete3">&nbsp;An</span> access type declared in 
 the visible part of a remote types or remote call interface library unit 
-is called a <I>remote access type</I>. <A NAME="I10299"></A><A NAME="I10300"></A>Such 
+is called a <I>remote access type</I>. <A NAME="I10321"></A><A NAME="I10322"></A>Such 
 a type shall be<span class="insert1">:</span><span class="delete1">&nbsp;either 
 an access-to-subprogram type or a general access type that designates 
 a class-wide limited private type.</span></div>
@@ -305,7 +305,7 @@ see <A HREF="AA-3-9-4.html">3.9.4</A>.</span>&nbsp;</div>
 <div class="paranum"><a name="p20.b">20.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00240.TXT">AI95-00240-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert2"><A NAME="I10301"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I10323"></A><B>Amendment Correction:</B> 
 The wording was changed from &ldquo;user-specified&rdquo; to &ldquo;available&rdquo; 
 </span><span class="insert3">read and write&nbsp;</span><span class="insert2">attributes. 
 (This was then further changed, see below.) This means that an access 
@@ -321,7 +321,7 @@ should not depend on the contents of the private part.</span>&nbsp;</div>
 <div class="paranum"><a name="p20.c">20.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<span class="insert2"><A NAME="I10302"></A>Remote types that cannot be 
+<span class="insert2"><A NAME="I10324"></A>Remote types that cannot be 
 streamed (that is, have no available stream attributes) do not require 
 the specification of stream attributes. This is necessary so that most 
 extensions of Limited_Controlled do not need stream attributes defined 
@@ -368,7 +368,7 @@ type, as intended (and required by the ACATS).</span>&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0101-1.TXT">AI05-0101-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
-<span class="insert3"><A NAME="I10303"></A><B>Correction:</B> Added rules 
+<span class="insert3"><A NAME="I10325"></A><B>Correction:</B> Added rules 
 </span><span class="insert5">about the</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;for</span></span><span class="insert3">&nbsp;returning of remote&nbsp;</span><span class="insert4">access-to-class-wide</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;access-to-classwide</span></span><span class="insert3">&nbsp;types; this had been missed in the past. While programs that returned 
 unstreamable types from RCI functions were legal, it is not clear what 
 they could have done (as the results could not be marshalled). Similarly, 
@@ -380,7 +380,7 @@ be impacted by these changes.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p20.k">20.k/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
-<span class="insert3"><A NAME="I10304"></A><B>Correction:</B> Clarified 
+<span class="insert3"><A NAME="I10326"></A><B>Correction:</B> Clarified 
 that anonymous access types are never remote access types (and can be 
 used in remote types units subject to the normal restrictions). Added 
 wording to allow limited class-wide interfaces to be designated by remote 
@@ -391,7 +391,7 @@ access types.</span></div>
 normal units in the specification of a remote types unit.</span></div>
 <div class="paranum"><a name="p20.m">20.m/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<span class="insert3"><A NAME="I10305"></A>Remote_Types is now a categorization 
+<span class="insert3"><A NAME="I10327"></A>Remote_Types is now a categorization 
 aspect, so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 &mdash; although the pragma is still preferred by the Standard.</span> 
 </div>

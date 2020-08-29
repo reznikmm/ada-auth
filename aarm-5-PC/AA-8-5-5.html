@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,13 +41,13 @@ is used to rename a generic unit.]&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">generic_renaming_declaration</SPAN><A NAME="I4595"></A><A NAME="S0243"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>generic&nbsp;package</B>&nbsp;<A NAME="I4596"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>generic_package_</I><A NAME="I4597"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4598"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
-&nbsp;&nbsp;|&nbsp;<B>generic&nbsp;procedure</B>&nbsp;<A NAME="I4599"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>generic_procedure_</I><A NAME="I4600"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4601"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
-&nbsp;&nbsp;|&nbsp;<B>generic&nbsp;function</B>&nbsp;<A NAME="I4602"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>generic_function_</I><A NAME="I4603"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4604"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">generic_renaming_declaration</SPAN><A NAME="I4601"></A><A NAME="S0243"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>generic&nbsp;package</B>&nbsp;<A NAME="I4602"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>generic_package_</I><A NAME="I4603"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4604"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
+&nbsp;&nbsp;|&nbsp;<B>generic&nbsp;procedure</B>&nbsp;<A NAME="I4605"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>generic_procedure_</I><A NAME="I4606"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4607"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
+&nbsp;&nbsp;|&nbsp;<B>generic&nbsp;function</B>&nbsp;<A NAME="I4608"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>generic_function_</I><A NAME="I4609"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4610"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
@@ -76,7 +76,7 @@ a generic unit:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p7.a">7.a</a></div>
-<div class="Annotations"><A NAME="I4605"></A>Renaming of generic units 
+<div class="Annotations"><A NAME="I4611"></A>Renaming of generic units 
 is new to Ada 95. It is particularly important for renaming child library 
 units that are generic units. For example, it might be used to rename 
 Numerics.Generic_Elementary_Functions as simply Generic_Elementary_Functions, 
@@ -93,7 +93,7 @@ type,&rdquo; which has been moved to <A HREF="AA-3-2-1.html">3.2.1</A>.
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p7.c">7.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I4606"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<A NAME="I4612"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-8-5-5.html#S0243">generic_renaming_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 

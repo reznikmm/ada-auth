@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,22 +36,22 @@
 issues an entry call that is cancelled if the call (or a requeue-with-abort 
 of the call) is not selected before the expiration time is reached. A 
 procedure call may appear rather than an entry call for cases where the 
-procedure might be implemented by an entry. <A NAME="I4620"></A></div>
+procedure might be implemented by an entry. <A NAME="I4609"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">timed_entry_call</SPAN><A NAME="I4621"></A><A NAME="S0276"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">timed_entry_call</SPAN><A NAME="I4610"></A><A NAME="S0276"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4622"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0277">entry_call_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4611"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0277">entry_call_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>or</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4623"></A><SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0274">delay_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4612"></A><SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0274">delay_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">entry_call_alternative</SPAN><A NAME="I4624"></A><A NAME="S0277"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I4625"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN>&nbsp;[<A NAME="I4626"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">entry_call_alternative</SPAN><A NAME="I4613"></A><A NAME="S0277"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I4614"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN>&nbsp;[<A NAME="I4615"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN>]</div>
 <div class="paranum"><a name="p3.1">3.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">procedure_or_entry_call</SPAN><A NAME="I4627"></A><A NAME="S0278"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I4628"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0217">procedure_call_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I4629"></A><SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0264">entry_call_statement</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">procedure_or_entry_call</SPAN><A NAME="I4616"></A><A NAME="S0278"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I4617"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0217">procedure_call_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I4618"></A><SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0264">entry_call_statement</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3.2">3.2/2</a></div>
@@ -66,7 +66,7 @@ a controlling parameter (see <A HREF="RM-3-9-2.html">3.9.2</A>).&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><A NAME="I4630"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0276">timed_entry_call</A></SPAN>, 
+<div class="Normal"><A NAME="I4619"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0276">timed_entry_call</A></SPAN>, 
 the <I>entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
 <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
 or <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>, 

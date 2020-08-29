@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,13 +48,13 @@ aspect may be specified:</span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="WideHanging-Term"><span class="insert3">Implicit_Dereference</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">This aspect is specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes an access discriminant declared for the type <I>T</I>.<A NAME="I2565"></A><A NAME="I2566"></A></span></div>
+that denotes an access discriminant declared for the type <I>T</I>.<A NAME="I2567"></A><A NAME="I2568"></A></span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal"><span class="insert3">A (view of a) type with a specified 
-Implicit_Dereference aspect is a <I>reference type</I>.<A NAME="I2567"></A> 
-A <I>reference object</I> is an object of a reference type.<A NAME="I2568"></A> 
+Implicit_Dereference aspect is a <I>reference type</I>.<A NAME="I2569"></A> 
+A <I>reference object</I> is an object of a reference type.<A NAME="I2570"></A> 
 The discriminant named by the Implicit_Dereference aspect is the <I>reference 
-discriminant</I> of the reference type or reference object.<A NAME="I2569"></A> 
+discriminant</I> of the reference type or reference object.<A NAME="I2571"></A> 
 A <SPAN Class="swiss"><A HREF="RM-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that identifies a reference object, and denotes the object or subprogram 
@@ -62,13 +62,13 @@ designated by the reference discriminant of the reference object.</span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">generalized_reference</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2570"></A><A NAME="S0104"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>reference_object_</I><A NAME="I2571"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">generalized_reference</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2572"></A><A NAME="S0104"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>reference_object_</I><A NAME="I2573"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal"><span class="insert3">The expected type for the <I>reference_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="RM-4-1-5.html#S0104">generalized_reference</A></SPAN> 
-is any reference type.<A NAME="I2572"></A></span>&nbsp;</div>
+is any reference type.<A NAME="I2574"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
@@ -94,13 +94,13 @@ subprogram designated by the value of this constraining expression.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I2573"></A>The evaluation 
+<div class="Normal"><span class="insert3"><A NAME="I2575"></A>The evaluation 
 of a <SPAN Class="swiss"><A HREF="RM-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 consists of the evaluation of the <I>reference_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 and a determination of the object or subprogram designated by the reference 
-discriminant of the named reference object. <A NAME="I2574"></A><A NAME="I2575"></A>A 
+discriminant of the named reference object. <A NAME="I2576"></A><A NAME="I2577"></A>A 
 check is made that the value of the reference discriminant is not the 
-null access value. <A NAME="I2576"></A>Constraint_Error is raised if 
+null access value. <A NAME="I2578"></A>Constraint_Error is raised if 
 this check fails. The <SPAN Class="swiss"><A HREF="RM-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 denotes the object or subprogram designated by the value of the reference 
 discriminant of the named reference object.</span></div>

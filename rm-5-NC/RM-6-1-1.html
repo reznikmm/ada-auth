@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,37 +48,37 @@ may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspe
 <div class="WideHanging-Term">Pre</div><div class="WideHanging-Body">
 This aspect specifies a specific precondition for a callable entity or 
 an access-to-subprogram type; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-called a <I>specific precondition expression</I>.<A NAME="I3616"></A><A NAME="I3617"></A> 
+called a <I>specific precondition expression</I>.<A NAME="I3620"></A><A NAME="I3621"></A> 
 If not specified for an entity, the specific precondition expression 
-for the entity is the enumeration literal True.<A NAME="I3618"></A><A NAME="I3619"></A></div>
+for the entity is the enumeration literal True.<A NAME="I3622"></A><A NAME="I3623"></A></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="WideHanging-Term">Pre'Class</div><div class="WideHanging-Body">
 This aspect specifies a class-wide precondition for an operation of a 
 tagged type and its descendants; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-called a <I>class-wide precondition expression</I>.<A NAME="I3620"></A><A NAME="I3621"></A> 
+called a <I>class-wide precondition expression</I>.<A NAME="I3624"></A><A NAME="I3625"></A> 
 If not specified for an entity, then if no other class-wide precondition 
 applies to the entity, the class-wide precondition expression for the 
-entity is the enumeration literal True.<A NAME="I3622"></A><A NAME="I3623"></A></div>
+entity is the enumeration literal True.<A NAME="I3626"></A><A NAME="I3627"></A></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="WideHanging-Term">Post</div><div class="WideHanging-Body">
 This aspect specifies a specific postcondition for a callable entity 
 or an access-to-subprogram type; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-called a <I>specific postcondition expression</I>.<A NAME="I3624"></A><A NAME="I3625"></A> 
+called a <I>specific postcondition expression</I>.<A NAME="I3628"></A><A NAME="I3629"></A> 
 If not specified for an entity, the specific postcondition expression 
-for the entity is the enumeration literal True.<A NAME="I3626"></A><A NAME="I3627"></A></div>
+for the entity is the enumeration literal True.<A NAME="I3630"></A><A NAME="I3631"></A></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="WideHanging-Term">Post'Class</div><div class="WideHanging-Body">
 This aspect specifies a class-wide postcondition for an operation of 
 a tagged type and its descendants; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-called a <I>class-wide postcondition expression</I>.<A NAME="I3628"></A><A NAME="I3629"></A> 
+called a <I>class-wide postcondition expression</I>.<A NAME="I3632"></A><A NAME="I3633"></A> 
 If not specified for an entity, the class-wide postcondition expression 
-for the entity is the enumeration literal True.<A NAME="I3630"></A><A NAME="I3631"></A> 
+for the entity is the enumeration literal True.<A NAME="I3634"></A><A NAME="I3635"></A> 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">The expected type for a precondition or postcondition 
-expression is any boolean type.<A NAME="I3632"></A><A NAME="I3633"></A></div>
+expression is any boolean type.<A NAME="I3636"></A><A NAME="I3637"></A></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">Within the expression for a Pre'Class or Post'Class 
 aspect for a primitive subprogram <I>S</I> of a tagged type <I>T</I>, 
@@ -127,7 +127,7 @@ that applies to <I>P1</I>,&nbsp;</div>
 declared subprogram <I>P</I> is <I>abstract</I>.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Bulleted">Otherwise, the subprogram <I>P</I> <I>requires 
-overriding</I> and shall be overridden with a nonabstract subprogram.<A NAME="I3634"></A></div>
+overriding</I> and shall be overridden with a nonabstract subprogram.<A NAME="I3638"></A></div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal">If a renaming of a subprogram or entry <I>S1</I> 
 overrides an inherited subprogram <I>S2</I>, then the overriding is illegal 
@@ -142,7 +142,7 @@ primitive subprogram of a tagged type <I>T</I> unless the Pre'Class aspect
 is specified for the corresponding primitive subprogram of some ancestor 
 of <I>T</I>.</div>
 <div class="paranum"><a name="p17.2">17.2/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I3635"></A>In addition to the places where 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I3639"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -154,8 +154,8 @@ for a primitive subprogram <I>S</I> of a tagged type <I>T</I>, or such
 an aspect defaults to True, then a corresponding expression also applies 
 to the corresponding primitive subprogram <I>S</I> of each descendant 
 of <I>T</I> (including <I>T</I> itself). The <I>corresponding expression</I> 
-is constructed from the associated expression as follows:<A NAME="I3636"></A> 
-<A NAME="I3637"></A></div>
+is constructed from the associated expression as follows:<A NAME="I3640"></A> 
+<A NAME="I3641"></A></div>
 <div class="paranum"><a name="p18.1">18.1/4</a></div>
 <div class="Bulleted">References to formal parameters of <I>S</I> (or 
 to <I>S</I> itself) are replaced with references to the corresponding 
@@ -170,10 +170,10 @@ Post'Class aspect would be illegal.</div>
 Post, or Post'Class assertion policies (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
 in effect at the point of a corresponding aspect specification applicable 
 to a given subprogram, entry, or access-to-subprogram type, then the 
-respective precondition or postcondition expressions are considered <I>enabled</I>.<A NAME="I3638"></A><A NAME="I3639"></A></div>
+respective precondition or postcondition expressions are considered <I>enabled</I>.<A NAME="I3642"></A><A NAME="I3643"></A></div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A subexpression of 
-a postcondition expression is <I>known on entry</I> if it is any of:<A NAME="I3640"></A></div>
+a postcondition expression is <I>known on entry</I> if it is any of:<A NAME="I3644"></A></div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="Bulleted">a static subexpression (see <A HREF="RM-4-9.html">4.9</A>);</div>
 <div class="paranum"><a name="p22">22/5</a></div>
@@ -216,8 +216,8 @@ and <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression<
 are known on entry.</div>
 <div class="paranum"><a name="p22.11">22.11/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;A subexpression 
-of a postcondition expression is <I>unconditionally evaluated</I>,<A NAME="I3641"></A> 
-conditionally evaluated, or <I>repeatedly evaluated</I>.<A NAME="I3642"></A> 
+of a postcondition expression is <I>unconditionally evaluated</I>,<A NAME="I3645"></A> 
+conditionally evaluated, or <I>repeatedly evaluated</I>.<A NAME="I3646"></A> 
 The following subexpressions are repeatedly evaluated:</div>
 <div class="paranum"><a name="p22.12">22.12/5</a></div>
 <div class="Bulleted">A subexpression of a predicate of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN>;</div>
@@ -229,8 +229,8 @@ The following subexpressions are repeatedly evaluated:</div>
 <div class="paranum"><a name="p22.15">22.15/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;If a subexpression 
 is not repeatedly evaluated, and not evaluated unconditionally, then 
-it is <I>conditionally evaluated</I>,<A NAME="I3643"></A> and there is 
-a set of <I>determining expressions</I><A NAME="I3644"></A> that determine 
+it is <I>conditionally evaluated</I>,<A NAME="I3647"></A> and there is 
+a set of <I>determining expressions</I><A NAME="I3648"></A> that determine 
 whether the subexpression is actually evaluated at run time. Such subexpressions 
 and their determining expressions are as follows:</div>
 <div class="paranum"><a name="p22.16">22.16/5</a></div>
@@ -262,15 +262,15 @@ of the membership test.&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;A conditionally evaluated subexpression is <I>determined 
 to be unevaluated</I> at run time if its set of determining expressions 
 are all known on entry, and when evaluated on entry their values are 
-such that the given subexpression is not evaluated.<A NAME="I3645"></A> 
-<A NAME="I3646"></A></div>
+such that the given subexpression is not evaluated.<A NAME="I3649"></A> 
+<A NAME="I3650"></A></div>
 <div class="paranum"><a name="p25">25/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 X that denotes an object of a nonlimited type, the following attribute 
 is defined:&nbsp;</div>
 <div class="paranum"><a name="p26">26/5</a></div>
 <div class="WideHanging-Term">X'Old</div><div class="WideHanging-Body">
-<A NAME="I3647"></A><A NAME="I3648"></A>Each X'Old in a postcondition 
+<A NAME="I3651"></A><A NAME="I3652"></A>Each X'Old in a postcondition 
 expression that is enabled, other than those that occur in subexpressions 
 that are determined to be unevaluated, denotes a constant that is implicitly 
 declared at the beginning of the subprogram body, entry body, or accept 
@@ -303,7 +303,7 @@ the object renaming.&nbsp;</div>
 subtype of X. This includes the case where the type of <I>S</I> is an 
 anonymous array type or a universal type.&nbsp;</div>
 <div class="paranum"><a name="p26.10">26.10/5</a></div>
-<div class="WideHanging-Body">The type and nominal subtype of X'Old is 
+<div class="WideHanging-Body">The type and nominal subtype of X'Old are 
 as implied by the above definitions.</div>
 <div class="paranum"><a name="p27">27/5</a></div>
 <div class="WideHanging-Body">Reference to this attribute is only allowed 
@@ -326,13 +326,13 @@ F that denotes a function declaration or an access-to-function type,
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p29">29/5</a></div>
 <div class="WideHanging-Term">F'Result</div><div class="WideHanging-Body">
-<A NAME="I3649"></A><A NAME="I3650"></A>Within a postcondition expression 
+<A NAME="I3653"></A><A NAME="I3654"></A>Within a postcondition expression 
 for F, denotes the return object of the function call for which the postcondition 
 expression is evaluated. The type of this attribute is that of the result 
 subtype of the function or access-to-function type  except within a Post'Class 
 postcondition expression for a function with a controlling result or 
 with a controlling access result; in those cases the type of the attribute 
-was described previously.</div>
+was described above as part of the Name Resolution Rules for Post'Class.</div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="WideHanging-Body">Use of this attribute is allowed only within 
 a postcondition expression for F.&nbsp;</div>
@@ -342,7 +342,7 @@ E that denotes an entry declaration of an entry family (see <A HREF="RM-9-5-2.ht
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p30.2">30.2/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;E'Index</div><div class="WideHanging-Body">
-<A NAME="I3651"></A><A NAME="I3652"></A>Within a precondition or postcondition 
+<A NAME="I3655"></A><A NAME="I3656"></A>Within a precondition or postcondition 
 expression for entry family E, denotes the value of the entry index for 
 the call of E. The nominal subtype of this attribute is the entry index 
 subtype.</div>
@@ -360,12 +360,12 @@ checks are performed as follows:</div>
 evaluation of the specific precondition expression that applies to the 
 subprogram or entry, if it is enabled; if the expression evaluates to 
 False, Assertions.Assertion_Error is raised; if the expression is not 
-enabled, the check succeeds.<A NAME="I3653"></A><A NAME="I3654"></A><A NAME="I3655"></A></div>
+enabled, the check succeeds.<A NAME="I3657"></A><A NAME="I3658"></A><A NAME="I3659"></A></div>
 <div class="paranum"><a name="p33">33/3</a></div>
 <div class="Bulleted">The class-wide precondition check begins with the 
 evaluation of any enabled class-wide precondition expressions that apply 
 to the subprogram or entry. If and only if all the class-wide precondition 
-expressions evaluate to False, Assertions.Assertion_Error is raised.<A NAME="I3656"></A><A NAME="I3657"></A><A NAME="I3658"></A></div>
+expressions evaluate to False, Assertions.Assertion_Error is raised.<A NAME="I3660"></A><A NAME="I3661"></A><A NAME="I3662"></A></div>
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="Normal">The precondition checks are performed in an arbitrary 
 order, and if any of the class-wide precondition expressions evaluate 
@@ -374,7 +374,7 @@ expressions are evaluated. The precondition checks and any check for
 elaboration of the subprogram body are performed in an arbitrary order. 
 In a call on a protected operation, the checks are performed before starting 
 the protected action. For an entry call, the checks are performed prior 
-to checking whether the entry is open.<A NAME="I3659"></A><A NAME="I3660"></A></div>
+to checking whether the entry is open.<A NAME="I3663"></A><A NAME="I3664"></A></div>
 <div class="paranum"><a name="p35">35/3</a></div>
 <div class="Normal">Upon successful return from a call of the subprogram 
 or entry, prior to copying back any by-copy <B>in out</B> or <B>out</B> 
@@ -386,7 +386,7 @@ expressions are evaluated in an arbitrary order, and if any postcondition
 expression evaluates to False, it is not specified whether any other 
 postcondition expressions are evaluated. The postcondition check, and 
 any constraint or predicate checks associated with <B>in out</B> or <B>out</B> 
-parameters are performed in an arbitrary order.<A NAME="I3661"></A><A NAME="I3662"></A><A NAME="I3663"></A><A NAME="I3664"></A><A NAME="I3665"></A></div>
+parameters are performed in an arbitrary order.<A NAME="I3665"></A><A NAME="I3666"></A><A NAME="I3667"></A><A NAME="I3668"></A><A NAME="I3669"></A></div>
 <div class="paranum"><a name="p35.1">35.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;For a call to a task entry, the postcondition check 
 is performed before the end of the rendezvous; for a call to a protected 

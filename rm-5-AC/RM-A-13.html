@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,17 +41,17 @@ needed by the predefined input-output packages.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 IO_Exceptions has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.IO_Exceptions&nbsp;<B>is</B><A NAME="I7469"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.IO_Exceptions&nbsp;<B>is</B><A NAME="I7464"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(IO_Exceptions);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7470"></A>Status_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7471"></A>Mode_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7472"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7473"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7474"></A>Device_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7475"></A>End_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7476"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7477"></A>Layout_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7465"></A>Status_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7466"></A>Mode_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7467"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7468"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7469"></A>Device_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7470"></A>End_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7471"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7472"></A>Layout_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.IO_Exceptions;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -127,12 +127,12 @@ required subtype.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I7478"></A>If the element read by the procedure 
+<div class="Normal"><A NAME="I7473"></A>If the element read by the procedure 
 Read (or by the Read attribute) cannot be interpreted as a value of the 
 required subtype, but this is not detected and Data_Error is not propagated, 
 then the resulting value can be abnormal, and subsequent references to 
 the value can lead to erroneous execution, as explained in <A HREF="RM-13-9-1.html">13.9.1</A>. 
-<A NAME="I7479"></A><A NAME="I7480"></A></div>
+<A NAME="I7474"></A><A NAME="I7475"></A></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

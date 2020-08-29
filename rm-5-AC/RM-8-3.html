@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,21 +44,21 @@
 <HR>
 <H1>8.3 Visibility</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4290"></A>The <I>visibility rules</I>, 
+<div class="Normal"><A NAME="I4295"></A>The <I>visibility rules</I>, 
 given below, determine which declarations are visible and directly visible 
 at each place within a program. The visibility rules apply to both explicit 
 and implicit declarations.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4291"></A><A NAME="I4292"></A><A NAME="I4293"></A>A 
+<div class="Normal"><A NAME="I4296"></A><A NAME="I4297"></A><A NAME="I4298"></A>A 
 declaration is defined to be <I>directly visible</I> at places where 
 a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> consisting 
 of only an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0202">operator_symbol</A></SPAN> 
 is sufficient to denote the declaration; that is, no <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN> 
 notation or special context (such as preceding =&gt; in a named association) 
-is necessary to denote the declaration. <A NAME="I4294"></A>A declaration 
+is necessary to denote the declaration. <A NAME="I4299"></A>A declaration 
 is defined to be <I>visible</I> wherever it is directly visible, as well 
 as at other places where some <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 (such as a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN>) 
@@ -70,40 +70,40 @@ syntactic category <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_na
 is used to indicate contexts where visibility, but not direct visibility, 
 is required.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I4295"></A><A NAME="I4296"></A>There are 
+<div class="Normal"><A NAME="I4300"></A><A NAME="I4301"></A>There are 
 two kinds of direct visibility: <I>immediate visibility</I> and <I>use-visibility</I>. 
-<A NAME="I4297"></A>A declaration is immediately visible at a place if 
+<A NAME="I4302"></A>A declaration is immediately visible at a place if 
 it is directly visible because the place is within its immediate scope. 
-<A NAME="I4298"></A>A declaration is use-visible if it is directly visible 
+<A NAME="I4303"></A>A declaration is use-visible if it is directly visible 
 because of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN> 
 (see <A HREF="RM-8-4.html">8.4</A>). Both conditions can apply.</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4299"></A>A declaration can be <I>hidden</I>, 
+<div class="Normal"><A NAME="I4304"></A>A declaration can be <I>hidden</I>, 
 either from direct visibility, or from all visibility, within certain 
-parts of its scope. <A NAME="I4300"></A>Where <I>hidden from all visibility</I>, 
+parts of its scope. <A NAME="I4305"></A>Where <I>hidden from all visibility</I>, 
 it is not visible at all (neither using a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
 nor a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>). 
-<A NAME="I4301"></A>Where <I>hidden from direct visibility</I>, only 
+<A NAME="I4306"></A>Where <I>hidden from direct visibility</I>, only 
 direct visibility is lost; visibility using a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
 is still possible.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I4302"></A>Two or more declarations are 
+<div class="Normal"><A NAME="I4307"></A>Two or more declarations are 
 <I>overloaded</I> if they all have the same defining name and there is 
 a place where they are all directly visible.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4303"></A>The declarations of callable 
+<div class="Normal"><A NAME="I4308"></A>The declarations of callable 
 entities (including enumeration literals) are <I>overloadable</I>, meaning 
 that overloading is allowed for them.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I4304"></A>Two declarations are <I>homographs</I> 
+<div class="Normal"><A NAME="I4309"></A>Two declarations are <I>homographs</I> 
 if they have the same defining name, and, if both are overloadable, their 
-profiles are type conformant. <A NAME="I4305"></A>An inner declaration 
+profiles are type conformant. <A NAME="I4310"></A>An inner declaration 
 hides any outer homograph from direct visibility.</div>
 <div class="paranum"><a name="p9">9/1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">Two homographs are 
 not generally allowed immediately within the same declarative region 
-unless one <I>overrides</I> the other (see Legality Rules below). <A NAME="I4306"></A><span class="insert1">The 
-only declarations that are <A NAME="I4307"></A><I>overridable</I> are 
+unless one <I>overrides</I> the other (see Legality Rules below). <A NAME="I4311"></A><span class="insert1">The 
+only declarations that are <A NAME="I4312"></A><I>overridable</I> are 
 the implicit declarations for predefined operators and inherited primitive 
 subprograms.</span> A declaration overrides another homograph that occurs 
 immediately within the same declarative region in the following cases: 
@@ -136,7 +136,7 @@ then any null procedure overrides all abstract subprograms and all subprograms
 that require overriding; if more than one such homograph remains that 
 is not thus overridden, then if&nbsp;</span><span class="insert5">the profiles 
 of the remaining homographs</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;they</span></span><span class="insert2">&nbsp;are all fully conformant with one another, one is chosen arbitrarily; 
-if not, they are all hidden from all visibility. <A NAME="I4308"></A></span></div>
+if not, they are all hidden from all visibility. <A NAME="I4313"></A></span></div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Bulleted">For an implicit declaration of a primitive subprogram 
 in a generic unit, there is a copy of this declaration in an instance. 
@@ -148,15 +148,15 @@ the new ones can be called only from outside the instance, although for
 tagged types, the body of a new one can be executed by a call to an old 
 one.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4309"></A><A NAME="I4310"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4314"></A><A NAME="I4315"></A>A 
 declaration is visible within its scope, except where hidden from all 
 visibility, as follows:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I4311"></A>An overridden declaration is 
+<div class="Bulleted"><A NAME="I4316"></A>An overridden declaration is 
 hidden from all visibility within the scope of the overriding declaration. 
 </div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I4312"></A>A 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I4317"></A>A 
 declaration is hidden from all visibility until the end of the declaration, 
 except:&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
@@ -178,7 +178,7 @@ all visibility only until the reserved word <B>with</B> of the declaration
 if there is one, or the reserved word <B>is</B> of the declaration if 
 there is no <B>with</B>.</span></div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Bulleted"><A NAME="I4313"></A>If the completion of a declaration 
+<div class="Bulleted"><A NAME="I4318"></A>If the completion of a declaration 
 is a declaration, then within the scope of the completion, the first 
 declaration is hidden from all visibility. Similarly, a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0207">parameter_specification</A></SPAN> 
@@ -187,7 +187,7 @@ or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0207">parameter_specification</A></
 of a corresponding completion, or of a corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Bulleted"><A NAME="I4314"></A>The declaration of a library 
+<div class="Bulleted"><A NAME="I4319"></A>The declaration of a library 
 unit (including a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0289">library_unit_renaming_declaration</A></SPAN>) 
 is hidden from all visibility <span class="delete2">except&nbsp;</span>at 
 places <span class="insert2">outside</span><span class="delete2">&nbsp;that 
@@ -215,31 +215,31 @@ the parent. Such a nested declaration is hidden from all visibility except
 at places that are within the scope of a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN> 
 that mentions the child.</span></div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4315"></A><A NAME="I4316"></A><A NAME="I4317"></A><A NAME="I4318"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4320"></A><A NAME="I4321"></A><A NAME="I4322"></A><A NAME="I4323"></A>A 
 declaration with a <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0203">defining_operator_symbol</A></SPAN> 
 is immediately visible (and hence directly visible) within its immediate 
-scope <A NAME="I4319"></A> except where hidden from direct visibility, 
+scope <A NAME="I4324"></A> except where hidden from direct visibility, 
 as follows:&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted"><A NAME="I4320"></A>A declaration is hidden from 
+<div class="Bulleted"><A NAME="I4325"></A>A declaration is hidden from 
 direct visibility within the immediate scope of a homograph of the declaration, 
 if the homograph occurs within an inner declarative region;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Bulleted"><A NAME="I4321"></A>A declaration is also hidden 
+<div class="Bulleted"><A NAME="I4326"></A>A declaration is also hidden 
 from direct visibility where hidden from all visibility.&nbsp;</div>
 <div class="paranum"><a name="p23.1">23.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I4322"></A>An <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
-</span><span class="insert3">or an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN><A NAME="I4323"></A> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I4327"></A>An <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
+</span><span class="insert3">or an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN><A NAME="I4328"></A> 
 </span><span class="insert2">is <I>visible</I> everywhere within its 
 scope.</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Normal"><A NAME="I4324"></A>A <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+<div class="Normal"><A NAME="I4329"></A>A <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
 shall resolve to denote a directly visible declaration whose defining 
 name is the same as the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>. 
-<A NAME="I4325"></A>A <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+<A NAME="I4330"></A>A <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
 shall resolve to denote a visible declaration whose defining name is 
 the same as the <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>. 
 </div>
@@ -268,12 +268,12 @@ is illegal if it mentions (in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S029
 some library unit, and there is a homograph of the library unit that 
 is visible at the place of the <span class="insert2">compilation unit</span><span class="delete2">&nbsp;corresponding 
 stub</span>, and the homograph and the mentioned library unit are both 
-declared immediately within the same declarative region.<A NAME="I4326"></A> 
+declared immediately within the same declarative region.<A NAME="I4331"></A> 
 These rules also apply to dispatching operations declared in the visible 
 part of an instance of a generic unit. However, they do not apply to 
 other overloadable declarations in an instance; such declarations may 
 have type conformant profiles in the instance, so long as the corresponding 
-declarations in the generic were not type conformant. <A NAME="I4327"></A></div>
+declarations in the generic were not type conformant. <A NAME="I4332"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Notes">5&nbsp;&nbsp;Visibility for compilation units follows 

@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -53,7 +53,7 @@ definitions add conditions to those in <A HREF="AA-A-5-3.html">A.5.3</A>.
 of a floating point type <I>T</I>:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
-S'<A NAME="I10519"></A><A NAME="I10520"></A>Model_Mantissa&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+S'<A NAME="I10541"></A><A NAME="I10542"></A>Model_Mantissa&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 Yields the number of digits in the mantissa of the canonical form of 
 the model numbers of <I>T</I> (see <A HREF="AA-A-5-3.html">A.5.3</A>). 
 The value of this attribute shall be greater than or equal to<span class="delete2">&nbsp;<I>Ceiling</I>(<SPAN Class="roman"><I>d</I></SPAN> &middot; log(10) / 
@@ -79,7 +79,7 @@ model number of the type <I>T</I> above one. It is equal to or larger
 than the absolute value of the difference between one and the next machine 
 number of the type <I>T</I> above one.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="WideHanging-Term">S'<A NAME="I10521"></A><A NAME="I10522"></A>Model_Emin 
+<div class="WideHanging-Term">S'<A NAME="I10543"></A><A NAME="I10544"></A>Model_Emin 
 </div><div class="WideHanging-Body">
 Yields the minimum exponent of the canonical form of the model numbers 
 of <I>T</I> (see <A HREF="AA-A-5-3.html">A.5.3</A>). The value of this 
@@ -91,7 +91,7 @@ defined in terms of S'Model_Emin (see <A HREF="AA-A-5-3.html">A.5.3</A>),
 yields the smallest positive (nonzero) model number of the type <I>T</I>. 
 </div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term">S'<A NAME="I10523"></A><A NAME="I10524"></A>Safe_First 
+<div class="WideHanging-Term">S'<A NAME="I10545"></A><A NAME="I10546"></A>Safe_First 
 </div><div class="WideHanging-Body">
 Yields the lower bound of the safe range of <I>T</I>. The value of this 
 attribute shall be a model number of <I>T</I> and greater than or equal 
@@ -106,7 +106,7 @@ otherwise, it shall be less than or equal to &ndash;10.0 <SUP><SPAN STYLE="font-
 where <SPAN Class="roman"><I>d</I></SPAN> is the requested decimal precision 
 of <I>T</I>. This attribute yields a value of the type <I>universal_real</I>.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Term">S'<A NAME="I10525"></A><A NAME="I10526"></A>Safe_Last 
+<div class="WideHanging-Term">S'<A NAME="I10547"></A><A NAME="I10548"></A>Safe_Last 
 </div><div class="WideHanging-Body">
 Yields the upper bound of the safe range of <I>T</I>. The value of this 
 attribute shall be a model number of <I>T</I> and less than or equal 
@@ -121,13 +121,13 @@ otherwise, it shall be greater than or equal to 10.0 <SUP><SPAN STYLE="font-size
 where d is the requested decimal precision of <I>T</I>. This attribute 
 yields a value of the type <I>universal_real</I>.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I10527"></A>S'<A NAME="I10528"></A><A NAME="I10529"></A>Model 
+<div class="WideHanging-Term"><A NAME="I10549"></A>S'<A NAME="I10550"></A><A NAME="I10551"></A>Model 
 </div><div class="WideHanging-Body">
 Denotes a function (of a parameter <I>X</I>) whose specification is given 
 in <A HREF="AA-A-5-3.html">A.5.3</A>. If <I>X</I> is a model number of 
 <I>T</I>, the function yields <I>X</I>; otherwise, it yields the value 
 obtained by rounding or truncating <I>X</I> to either one of the adjacent 
-model numbers of <I>T</I>. <A NAME="I10530"></A><A NAME="I10531"></A>Constraint_Error 
+model numbers of <I>T</I>. <A NAME="I10552"></A><A NAME="I10553"></A>Constraint_Error 
 is raised if the resulting model number is outside the safe range of 
 S. A zero result has the sign of <I>X</I> when S'Signed_Zeros is True. 
 </div>
@@ -157,7 +157,7 @@ for which the implementation satisfies the strict-mode requirements of
 range induced by these attributes and the previously determined values 
 of S'Model_Mantissa and S'Model_Emin.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I10532"></A><A NAME="I10533"></A>The 
+<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I10554"></A><A NAME="I10555"></A>The 
 following table shows appropriate attribute values for IEEE basic single 
 and double precision types (ANSI/IEEE Std 754-1985, IEC 559:1989). Here, 
 we use the names IEEE_Float_32 and IEEE_Float_64, the names that would 

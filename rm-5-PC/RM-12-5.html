@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,45 +43,45 @@ generic unit a subtype whose type is in a certain category of types.
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_type_declaration</SPAN><A NAME="I5225"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5226"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0321">formal_complete_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5227"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0322">formal_incomplete_type_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">formal_type_declaration</SPAN><A NAME="I5220"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5221"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0321">formal_complete_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5222"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0322">formal_incomplete_type_declaration</A></SPAN></div>
 <div class="paranum"><a name="p2.1">2.1/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_complete_type_declaration</SPAN><A NAME="I5228"></A><A NAME="S0321"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5229"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5230"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I5231"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0323">formal_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5">[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5232"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>]&nbsp;</span>[<A NAME="I5233"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">formal_complete_type_declaration</SPAN><A NAME="I5223"></A><A NAME="S0321"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5224"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5225"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I5226"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0323">formal_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5">[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5227"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>]&nbsp;</span>[<A NAME="I5228"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p2.2">2.2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_incomplete_type_declaration</SPAN><A NAME="I5234"></A><A NAME="S0322"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5235"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5236"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>]<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5237"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>]</span>;</div>
+<div class="Indented1"><SPAN Class="swiss">formal_incomplete_type_declaration</SPAN><A NAME="I5229"></A><A NAME="S0322"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5230"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5231"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>]<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5232"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_type_definition</SPAN><A NAME="I5238"></A><A NAME="S0323"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5239"></A><SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0324">formal_private_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5240"></A><SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0325">formal_derived_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5241"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0326">formal_discrete_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5242"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0327">formal_signed_integer_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5243"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0328">formal_modular_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5244"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0329">formal_floating_point_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5245"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0330">formal_ordinary_fixed_point_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5246"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0331">formal_decimal_fixed_point_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5247"></A><SPAN Class="swiss"><A HREF="RM-12-5-3.html#S0332">formal_array_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5248"></A><SPAN Class="swiss"><A HREF="RM-12-5-4.html#S0333">formal_access_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5249"></A><SPAN Class="swiss"><A HREF="RM-12-5-5.html#S0334">formal_interface_type_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">formal_type_definition</SPAN><A NAME="I5233"></A><A NAME="S0323"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5234"></A><SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0324">formal_private_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5235"></A><SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0325">formal_derived_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5236"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0326">formal_discrete_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5237"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0327">formal_signed_integer_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5238"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0328">formal_modular_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5239"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0329">formal_floating_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5240"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0330">formal_ordinary_fixed_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5241"></A><SPAN Class="swiss"><A HREF="RM-12-5-2.html#S0331">formal_decimal_fixed_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5242"></A><SPAN Class="swiss"><A HREF="RM-12-5-3.html#S0332">formal_array_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5243"></A><SPAN Class="swiss"><A HREF="RM-12-5-4.html#S0333">formal_access_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5244"></A><SPAN Class="swiss"><A HREF="RM-12-5-5.html#S0334">formal_interface_type_definition</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5250"></A><A NAME="I5251"></A><A NAME="I5252"></A><A NAME="I5253"></A>For 
+<div class="Normal"><A NAME="I5245"></A><A NAME="I5246"></A><A NAME="I5247"></A><A NAME="I5248"></A>For 
 a generic formal subtype, the actual shall be a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>; 
 it denotes the <I>(generic) actual subtype</I>.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5254"></A><A NAME="I5255"></A><A NAME="I5256"></A><A NAME="I5257"></A>A 
+<div class="Normal"><A NAME="I5249"></A><A NAME="I5250"></A><A NAME="I5251"></A><A NAME="I5252"></A>A 
 <SPAN Class="swiss"><A HREF="RM-12-5.html#S0320">formal_type_declaration</A></SPAN> 
 declares a <I>(generic) formal type</I>, and its first subtype, the <I>(generic) 
 formal subtype</I>.&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Normal"><A NAME="I5258"></A><A NAME="I5259"></A>The form 
+<div class="Normal"><A NAME="I5253"></A><A NAME="I5254"></A>The form 
 of a <SPAN Class="swiss"><A HREF="RM-12-5.html#S0323">formal_type_definition</A></SPAN> 
 <I>determines a category (of types)</I> to which the formal type belongs. 
 For a <SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0324">formal_private_type_definition</A></SPAN> 

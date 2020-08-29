@@ -19,12 +19,10 @@
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +39,7 @@ with each category to ensure that the semantics of a distributed program
 remain close to the semantics for a nondistributed program.]</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<A NAME="I9868"></A><A NAME="I9869"></A><A NAME="I9870"></A><A NAME="I9871"></A><A NAME="I9872"></A><A NAME="I9873"></A>A 
+<A NAME="I9890"></A><A NAME="I9891"></A><A NAME="I9892"></A><A NAME="I9893"></A><A NAME="I9894"></A><A NAME="I9895"></A>A 
 <I>categorization pragma</I> is a library unit pragma (see <A HREF="AA-10-1-5.html">10.1.5</A>) 
 that specifies a corresponding <I>categorization aspect</I>. A categorization 
 aspect restricts the declarations, child units, or semantic dependences 
@@ -58,13 +56,13 @@ aspect and the pragma Pure is considered a categorization pragma.</div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00048.TXT">AI95-00048-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-[<A NAME="I9874"></A> A library package or generic library package is 
+[<A NAME="I9896"></A> A library package or generic library package is 
 called a <I>shared passive</I> library unit if the Shared_Passive aspect 
-of the unit is True. <A NAME="I9875"></A> A library package or generic 
+of the unit is True. <A NAME="I9897"></A> A library package or generic 
 library package is called a <I>remote types</I> library unit if the Remote_Types 
-aspect of the unit is True. <A NAME="I9876"></A> A library unit is called 
+aspect of the unit is True. <A NAME="I9898"></A> A library unit is called 
 a <I>remote call interface</I> if the Remote_Call_Interface aspect of 
-the unit is True.] <A NAME="I9877"></A>A <I>normal library unit</I> is 
+the unit is True.] <A NAME="I9899"></A>A <I>normal library unit</I> is 
 one for which no categorization aspect is True.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
@@ -113,33 +111,10 @@ Remote Call Interface</div>
 Normal (no restrictions)&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 7 through 
 11 were deleted.</I></SPAN>&nbsp;</div>
-<div class="paranum"><a name="p7">7/3</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-</div>
-<div class="paranum"><a name="p8">8/3</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-</div>
-<div class="paranum"><a name="p9">9/3</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-</div>
-<div class="paranum"><a name="p10">10/3</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-</div>
-<div class="paranum"><a name="p11">11/3</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">Declared pure and shared passive library units are 
 preelaborated. The declaration of a remote types or remote call interface 
 library unit is required to be preelaborable. ]</div>
-
-<H4 Class="centered">Implementation Requirements</H4>
-<div class="paranum"><a name="p13">13/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0079">8652/0079</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00208.TXT">AI95-00208-01</A></I>} 
-</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 13 was 
 deleted.</I></SPAN>&nbsp;</div>
 

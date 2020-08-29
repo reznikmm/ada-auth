@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,14 +43,14 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>package</B>&nbsp;Ada.Containers.Ordered_Maps<A NAME="I7621"></A><BR>
+<B>package</B>&nbsp;Ada.Containers.Ordered_Maps<A NAME="I7612"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Remote_Types,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7622"></A>Equivalent_Keys&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7613"></A>Equivalent_Keys&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(<B>not</B>&nbsp;((Left&nbsp;&lt;&nbsp;Right)&nbsp;<B>or</B>&nbsp;(Right&nbsp;&lt;&nbsp;Left)));</div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7623"></A>Map&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7614"></A>Map&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Iterator&nbsp;&nbsp;=&gt;&nbsp;Iterate,<BR>
@@ -67,97 +67,95 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Map));<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Map);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7624"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7615"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7625"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7616"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7626"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7617"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7627"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7618"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
 <div class="paranum"><a name="p7.2">7.2/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7628"></A>Has_Element&nbsp;(Container&nbsp;:&nbsp;Map;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7619"></A>Has_Element&nbsp;(Container&nbsp;:&nbsp;Map;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p7.3">7.3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7629"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7620"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7630"></A>Tampering_With_Cursors_Prohibited<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7621"></A>Tampering_With_Cursors_Prohibited<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p8.2">8.2/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7631"></A>Tampering_With_Elements_Prohibited<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7622"></A>Tampering_With_Elements_Prohibited<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p8.3">8.3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7632"></A>Empty&nbsp;<B>return</B>&nbsp;Map<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7623"></A>Empty&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Empty_Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Empty'Result)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Empty'Result)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Empty'Result)&nbsp;=&nbsp;0;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7633"></A>Length&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7624"></A>Length&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p10">10/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7634"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7625"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Is_Empty'Result&nbsp;=&nbsp;(Length&nbsp;(Container)&nbsp;=&nbsp;0);</div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7635"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7626"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;0;</div>
 <div class="paranum"><a name="p12">12/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7636"></A>Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7627"></A>Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Key_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use</B>&nbsp;Key_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Key_Type;</div>
 <div class="paranum"><a name="p12.1">12.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7637"></A>Key&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7628"></A>Key&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Key_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Key_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Key_Type;</div>
 <div class="paranum"><a name="p13">13/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7638"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7629"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use</B>&nbsp;Element_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p13.1">13.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7639"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7630"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Element_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p14">14/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7640"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7631"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p15">15/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7641"></A>Query_Element<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7632"></A>Query_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>;</div>
 <div class="paranum"><a name="p15.1">15.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7642"></A>Query_Element<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7633"></A>Query_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type;<BR>
@@ -167,14 +165,16 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p16">16/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7643"></A>Update_Element<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7634"></A>Update_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type))<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p16.1">16.1/5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
@@ -182,69 +182,70 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p16.2">16.2/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7644"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7635"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p16.3">16.3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7645"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7636"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p16.4">16.4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7646"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7637"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p16.5">16.5/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7647"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7638"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p16.6">16.6/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7648"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7639"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p16.7">16.7/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7649"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7640"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;Length&nbsp;(Target);</div>
 <div class="paranum"><a name="p16.8">16.8/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7650"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7641"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result);</div>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7651"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7642"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Source)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Target&nbsp;=&nbsp;Source&nbsp;<B>then</B>&nbsp;True<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Target'Has_Same_Storage&nbsp;(Source)&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Target)&nbsp;=&nbsp;Length&nbsp;(Source'Old)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;0);</div>
 <div class="paranum"><a name="p18">18/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7652"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7643"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
@@ -263,7 +264,7 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Original_Length));</div>
 <div class="paranum"><a name="p19">19/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7653"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7644"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserted&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean)<BR>
@@ -281,7 +282,7 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Original_Length));</div>
 <div class="paranum"><a name="p20">20/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7654"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7645"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
@@ -290,7 +291,7 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;+&nbsp;1;</div>
 <div class="paranum"><a name="p21">21/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7655"></A>Include&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7646"></A>Include&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
@@ -304,14 +305,14 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>in</B>&nbsp;Original_Length&nbsp;|&nbsp;Original_Length&nbsp;+&nbsp;1);</div>
 <div class="paranum"><a name="p22">22/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7656"></A>Replace&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7647"></A>Replace&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old;</div>
 <div class="paranum"><a name="p23">23/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7657"></A>Exclude&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7648"></A>Exclude&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
@@ -322,24 +323,24 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>in</B>&nbsp;Original_Length&nbsp;-&nbsp;1&nbsp;|&nbsp;Original_Length);</div>
 <div class="paranum"><a name="p24">24/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7658"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7649"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;-&nbsp;1;</div>
 <div class="paranum"><a name="p25">25/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7659"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7650"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;-&nbsp;1&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;No_Element;</div>
 <div class="paranum"><a name="p26">26/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7660"></A>Delete_First&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7651"></A>Delete_First&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>declare</B><BR>
@@ -349,7 +350,7 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>if</B>&nbsp;Original_Length&nbsp;=&nbsp;0&nbsp;<B>then</B>&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;0<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Original_Length&nbsp;-&nbsp;1));</div>
 <div class="paranum"><a name="p27">27/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7661"></A>Delete_Last&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7652"></A>Delete_Last&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>declare</B><BR>
@@ -359,112 +360,112 @@ package Containers.Ordered_Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>if</B>&nbsp;Original_Length&nbsp;=&nbsp;0&nbsp;<B>then</B>&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;0<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Original_Length&nbsp;-&nbsp;1));</div>
 <div class="paranum"><a name="p28">28/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7662"></A>First&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7653"></A>First&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Is_Empty&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;First'Result)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;First'Result&nbsp;=&nbsp;No_Element);</div>
 <div class="paranum"><a name="p29">29/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7663"></A>First_Element&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7654"></A>First_Element&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>then&nbsp;raise</B>&nbsp;Constraint_Error);</div>
 <div class="paranum"><a name="p30">30/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7664"></A>First_Key&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7655"></A>First_Key&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Key_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>then&nbsp;raise</B>&nbsp;Constraint_Error);</div>
 <div class="paranum"><a name="p31">31/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7665"></A>Last&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7656"></A>Last&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;not&nbsp;Is_Empty&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Last'Result)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Last'Result&nbsp;=&nbsp;No_Element);</div>
 <div class="paranum"><a name="p32">32/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7666"></A>Last_Element&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7657"></A>Last_Element&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>then&nbsp;raise</B>&nbsp;Constraint_Error);</div>
 <div class="paranum"><a name="p33">33/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7667"></A>Last_Key&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7658"></A>Last_Key&nbsp;(Container&nbsp;:&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Key_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Empty&nbsp;(Container)&nbsp;<B>then&nbsp;raise</B>&nbsp;Constraint_Error);</div>
 <div class="paranum"><a name="p34">34/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7668"></A>Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7659"></A>Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;True,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;True);</div>
 <div class="paranum"><a name="p34.1">34.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7669"></A>Next&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7660"></A>Next&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;Last&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;Last&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Next'Result));</div>
 <div class="paranum"><a name="p35">35/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7670"></A>Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7661"></A>Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p35.1">35.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7671"></A>Next&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7662"></A>Next&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Position));</div>
 <div class="paranum"><a name="p36">36/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7672"></A>Previous&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7663"></A>Previous&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Previous'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;True);</div>
 <div class="paranum"><a name="p36.1">36.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7673"></A>Previous&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7664"></A>Previous&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Previous'Result&nbsp;=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Previous'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Previous'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;First&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;First&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Previous'Result));</div>
 <div class="paranum"><a name="p37">37/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7674"></A>Previous&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7665"></A>Previous&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p37.1">37.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7675"></A>Previous&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7666"></A>Previous&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Position));</div>
 <div class="paranum"><a name="p38">38/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7676"></A>Find&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7667"></A>Find&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Cursor<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Find'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;True<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Find'Result));</div>
 <div class="paranum"><a name="p39">39/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7677"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7668"></A>Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p40">40/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7678"></A>Floor&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7669"></A>Floor&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Cursor<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Floor'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;True<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Floor'Result));</div>
 <div class="paranum"><a name="p41">41/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7679"></A>Ceiling&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7670"></A>Ceiling&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Cursor<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Ceiling'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;True<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Ceiling'Result));</div>
 <div class="paranum"><a name="p42">42/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7680"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7671"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p43">43/3</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
@@ -496,31 +497,31 @@ was deleted.</I></SPAN></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Right&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>;</div>
 <div class="paranum"><a name="p50">50/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;&nbsp;<A NAME="I7681"></A>Iterate<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;&nbsp;<A NAME="I7672"></A>Iterate<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor))<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Allows_Exit;</div>
 <div class="paranum"><a name="p51">51/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7682"></A>Reverse_Iterate<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7673"></A>Reverse_Iterate<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor))<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Allows_Exit;</div>
 <div class="paranum"><a name="p51.1">51.1/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7683"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7674"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Map_Iterator_Interfaces.Parallel_Reversible_Iterator'Class<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container);</div>
 <div class="paranum"><a name="p51.2">51.2/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7684"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;&nbsp;Start&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7675"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;&nbsp;Start&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Map_Iterator_Interfaces.Reversible_Iterator'Class<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Start&nbsp;/=&nbsp;No_Element<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Start)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Start)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container);</div>
 <div class="paranum"><a name="p51.3">51.3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7685"></A>Stable&nbsp;<B>is</B></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7676"></A>Stable&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p51.4">51.4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7686"></A>Map&nbsp;(Base&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ordered_Maps.Map)&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7677"></A>Map&nbsp;(Base&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ordered_Maps.Map)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>tagged&nbsp;limited&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
@@ -533,36 +534,36 @@ was deleted.</I></SPAN></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;Length&nbsp;(Map)&nbsp;=&nbsp;0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Map);</div>
 <div class="paranum"><a name="p51.5">51.5/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7687"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7678"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</div>
 <div class="paranum"><a name="p51.6">51.6/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7688"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7679"></A>Empty_Map&nbsp;:&nbsp;<B>constant</B>&nbsp;Map;</div>
 <div class="paranum"><a name="p51.7">51.7/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7689"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7680"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p51.8">51.8/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7690"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7681"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p51.9">51.9/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7691"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7682"></A>Map_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</div>
 <div class="paranum"><a name="p51.10">51.10/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7692"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ordered_Maps.Map;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7683"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ordered_Maps.Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;Length&nbsp;(Target);</div>
 <div class="paranum"><a name="p51.11">51.11/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7693"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Ordered_Maps.Map)&nbsp;<B>return</B>&nbsp;Map<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7684"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Ordered_Maps.Map)&nbsp;<B>return</B>&nbsp;Map<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source);</div>
 <div class="paranum"><a name="p51.12">51.12/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7694"></A>Constant_Reference_Type<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7685"></A>Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p51.13">51.13/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7695"></A>Reference_Type<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7686"></A>Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</div>
 <div class="paranum"><a name="p51.14">51.14/5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Additional&nbsp;subprograms&nbsp;as&nbsp;described&nbsp;in&nbsp;the&nbsp;text</I></SPAN><BR>
@@ -580,7 +581,7 @@ was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p54">54/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Containers.Ordered_Maps;</div>
 <div class="paranum"><a name="p55">55/2</a></div>
-<div class="Normal"><A NAME="I7696"></A>Two keys <I>K1</I> and <I>K2</I> 
+<div class="Normal"><A NAME="I7687"></A>Two keys <I>K1</I> and <I>K2</I> 
 are <I>equivalent</I> if both <I>K1</I> &lt; <I>K2</I> and <I>K2</I> 
 &lt; <I>K1</I> return False, using the generic formal &quot;&lt;&quot; 
 operator for keys. Function Equivalent_Keys returns True if Left and 
@@ -592,14 +593,14 @@ each time it is called with a particular pair of key values. It should
 define a strict weak ordering relationship (see <A HREF="RM-A-18.html">A.18</A>). 
 If the actual for &quot;&lt;&quot; behaves in some other manner, the 
 behavior of this package is unspecified. Which subprograms of this package 
-call &quot;&lt;&quot; and how many times they call it, is unspecified.<A NAME="I7697"></A></div>
+call &quot;&lt;&quot; and how many times they call it, is unspecified.<A NAME="I7688"></A></div>
 <div class="paranum"><a name="p57">57/2</a></div>
 <div class="Normal">If the value of a key stored in a map is changed 
 other than by an operation in this package such that at least one of 
 &quot;&lt;&quot; or &quot;=&quot; give different results, the behavior 
-of this package is unspecified.<A NAME="I7698"></A></div>
+of this package is unspecified.<A NAME="I7689"></A></div>
 <div class="paranum"><a name="p58">58/3</a></div>
-<div class="Normal"><A NAME="I7699"></A><A NAME="I7700"></A><A NAME="I7701"></A><A NAME="I7702"></A>The 
+<div class="Normal"><A NAME="I7690"></A><A NAME="I7691"></A><A NAME="I7692"></A><A NAME="I7693"></A>The 
 <I>first node</I> of a nonempty map is the one whose key is less than 
 the key of all the other nodes in the map. The <I>last node</I> of a 
 nonempty map is the one whose key is greater than the key of all the 
@@ -665,7 +666,7 @@ of Container.</div>
 (First (Container)).</div>
 <div class="paranum"><a name="p67">67/5</a></div>
 <div class="Examples"><B>function</B>&nbsp;Last&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;not&nbsp;Is_Empty&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Last'Result)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Last'Result&nbsp;=&nbsp;No_Element);</div>
@@ -689,7 +690,7 @@ No_Element.</div>
 (Last (Container)).</div>
 <div class="paranum"><a name="p73">73/5</a></div>
 <div class="Examples"><B>function</B>&nbsp;Previous&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Previous'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;True);</div>
@@ -701,14 +702,14 @@ If Position designates the first element, then Previous returns No_Element.</div
 <div class="paranum"><a name="p74.1">74.1/5</a></div>
 <div class="Examples"><B>function</B>&nbsp;Previous&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Previous'Result&nbsp;=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Previous'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Previous'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;First&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;First&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Previous'Result));</div>
 <div class="paranum"><a name="p74.2">74.2/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">Returns a cursor 
@@ -716,17 +717,17 @@ designating the predecessor of the node designated by Position in Container,
 if any.</div>
 <div class="paranum"><a name="p75">75/5</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Previous&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>);</div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p76">76/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Position 
 := Previous (Position).</div>
 <div class="paranum"><a name="p76.1">76.1/5</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Previous&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Position));</div>
 <div class="paranum"><a name="p76.2">76.2/5</a></div>
@@ -828,9 +829,9 @@ denotes this object). The iterator object needs finalization.</div>
 <div class="Examples"><B>function</B>&nbsp;Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;&nbsp;Start&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Map_Iterator_Interfaces.Reversible_Iterator'Class<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Start&nbsp;/=&nbsp;No_Element<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Start)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Start)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container);</div>
 <div class="paranum"><a name="p94.4">94.4/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">Iterate returns 

@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 <H1>4.10 Image Attributes</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">An <I>image</I> of a value is a string representing 
-the value in display form.<A NAME="I3270"></A> The attributes Image, 
+the value in display form.<A NAME="I3274"></A> The attributes Image, 
 Wide_Image, and Wide_Wide_Image are available to produce the image of 
 a value as a String, Wide_String, or Wide_Wide_String (respectively). 
 User-defined images for a given type can be implemented by overriding 
@@ -50,7 +50,7 @@ of a type T other than <I>universal_real</I> or <I>universal_fixed</I>,
 the following type-related operational attribute is defined:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Put_Image</div><div class="WideHanging-Body">
-<A NAME="I3271"></A><A NAME="I3272"></A>S'Put_Image denotes a procedure 
+<A NAME="I3275"></A><A NAME="I3276"></A>S'Put_Image denotes a procedure 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p3.1">3.1/5</a></div>
 <div class="Indented4Examples"><B>procedure</B>&nbsp;S'Put_Image<BR>
@@ -63,7 +63,7 @@ writes (using Wide_Wide_Put) an <I>image</I> of the value of <I>Arg</I>.</div>
 <div class="Normal">The Put_Image attribute may be specified for any 
 specific type T either via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 or via an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN> 
-specifying the Put_Image aspect of the type.<A NAME="I3273"></A><A NAME="I3274"></A></div>
+specifying the Put_Image aspect of the type.<A NAME="I3277"></A><A NAME="I3278"></A></div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The behavior of the 
 default implementation of S'Put_Image depends on the class of T. For 
@@ -91,7 +91,7 @@ trailing spaces are included. For a <I>nongraphic character</I> (a value
 of a character type that has no enumeration literal associated with it), 
 the value is a corresponding language-defined name in upper case (for 
 example, the image of the nongraphic character identified as <I>nul</I> 
-is <TT>&quot;NUL&quot;</TT> &mdash; the quotes are not part of the image).<A NAME="I3275"></A></div>
+is <TT>&quot;NUL&quot;</TT> &mdash; the quotes are not part of the image).<A NAME="I3279"></A></div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">For a floating point type, the image written out 
 is a decimal real literal best approximating the value (rounded away 
@@ -183,7 +183,7 @@ values, as in:&nbsp;</div>
 of a type T, the following attributes are defined:</div>
 <div class="paranum"><a name="p25">25/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3276"></A><A NAME="I3277"></A>S'Wide_Wide_Image denotes a function 
+<A NAME="I3280"></A><A NAME="I3281"></A>S'Wide_Wide_Image denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p25.1">25.1/5</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -195,7 +195,7 @@ in a text buffer) and then returns the result of retrieving the contents
 of that buffer with Wide_Wide_Get. The lower bound of the result is one.</div>
 <div class="paranum"><a name="p26">26/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Image</div><div class="WideHanging-Body">
-<A NAME="I3278"></A><A NAME="I3279"></A>S'Wide_Image denotes a function 
+<A NAME="I3282"></A><A NAME="I3283"></A>S'Wide_Image denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p27">27/5</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -207,7 +207,7 @@ in a text buffer) and then returns the result of retrieving the contents
 of that buffer with Wide_Get. The lower bound of the result is one.</div>
 <div class="paranum"><a name="p29">29/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Image</div><div class="WideHanging-Body">
-<A NAME="I3280"></A><A NAME="I3281"></A>S'Image denotes a function with 
+<A NAME="I3284"></A><A NAME="I3285"></A>S'Image denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p30">30/5</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -223,17 +223,17 @@ X of a type T other than <I>universal_real</I> or <I>universal_fixed</I>,
 the following attributes are defined:</div>
 <div class="paranum"><a name="p33">33/5</a></div>
 <div class="WideHanging-Term">X'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3282"></A><A NAME="I3283"></A>X'Wide_Wide_Image denotes the 
+<A NAME="I3286"></A><A NAME="I3287"></A>X'Wide_Wide_Image denotes the 
 result of calling function S'Wide_Wide_Image with <I>Arg</I> being X, 
 where S is the nominal subtype of X.</div>
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="WideHanging-Term">X'Wide_Image</div><div class="WideHanging-Body">
-<A NAME="I3284"></A><A NAME="I3285"></A>X'Wide_Image denotes the result 
+<A NAME="I3288"></A><A NAME="I3289"></A>X'Wide_Image denotes the result 
 of calling function S'Wide_Image with <I>Arg</I> being X, where S is 
 the nominal subtype of X.</div>
 <div class="paranum"><a name="p35">35/5</a></div>
 <div class="WideHanging-Term">X'Image</div><div class="WideHanging-Body">
-<A NAME="I3286"></A><A NAME="I3287"></A>X'Image denotes the result of 
+<A NAME="I3290"></A><A NAME="I3291"></A>X'Image denotes the result of 
 calling function S'Image with <I>Arg</I> being X, where S is the nominal 
 subtype of X.&nbsp;</div>
 

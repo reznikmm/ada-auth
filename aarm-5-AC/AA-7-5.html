@@ -36,7 +36,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -197,7 +197,7 @@ above, we can require the new object to be built-in-place.</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0178-1.TXT">AI05-0178-1</A></I>} 
-<A NAME="I4550"></A>A <span class="insert3">view of a&nbsp;</span>type is 
+<A NAME="I4556"></A>A <span class="insert3">view of a&nbsp;</span>type is 
 <I>limited</I> if it is <span class="delete2">a descendant of&nbsp;</span>one 
 of the following:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
@@ -262,14 +262,14 @@ the word <B>limited</B> is illegal by the rules in <A HREF="AA-3-4.html">3.4</A>
 The net effect is that the order of the interfaces doesn't matter.</span> 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4551"></A>Otherwise, the type is nonlimited.</div>
+<div class="Normal"><A NAME="I4557"></A>Otherwise, the type is nonlimited.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">[There are no predefined equality operators for a 
 limited type.]</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0052-1.TXT">AI05-0052-1</A></I>} 
 <span class="insert3">A type is <I>immutably limited</I> if it is one 
-of the following:<A NAME="I4552"></A><A NAME="I4553"></A></span></div>
+of the following:<A NAME="I4558"></A><A NAME="I4559"></A></span></div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
 <div class="Bulleted"><span class="insert3">An explicitly limited record 
 type;</span></div>
@@ -340,7 +340,7 @@ shall be constructed directly in the new object.</span></span><span class="delet
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
 <span class="delete3"></span><span class="insert2"><span class="delete3">For 
 a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>, 
-we only require <I>build-in-place</I><A NAME="I4554"></A> for a limited 
+we only require <I>build-in-place</I><A NAME="I4560"></A> for a limited 
 type that would have been a return-by-reference type in Ada 95. We do 
 this because we want to minimize disruption to Ada 95 implementations 
 and users.</span></span><span class="delete3"></span>&nbsp;</div>
@@ -393,7 +393,7 @@ for a formal parameter of a limited type; they do not exclude a deferred
 constant of a limited type if the full declaration of the constant is 
 of a nonlimited type.</span></div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Notes">20&nbsp;&nbsp;<A NAME="I4555"></A><A NAME="I4556"></A><A NAME="I4557"></A>As 
+<div class="Notes">20&nbsp;&nbsp;<A NAME="I4561"></A><A NAME="I4562"></A><A NAME="I4563"></A>As 
 illustrated in <A HREF="AA-7-3-1.html">7.3.1</A>, an untagged limited 
 type can become nonlimited under certain circumstances.&nbsp;</div>
 <div class="paranum"><a name="p16.a">16.a</a></div>
@@ -468,7 +468,7 @@ results will always be built directly in the result object</span> (see
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p23.a">23.a</a></div>
-<div class="Annotations"><A NAME="I4558"></A>The restrictions in RM83-7.4.4(4), 
+<div class="Annotations"><A NAME="I4564"></A>The restrictions in RM83-7.4.4(4), 
 which disallowed <B>out</B> parameters of limited types in certain cases, 
 are removed.&nbsp;</div>
 
@@ -484,7 +484,7 @@ Types and Private Extensions</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p23.c">23.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2"><A NAME="I4559"></A>Limited types now have an assignment 
+<span class="insert2"><A NAME="I4565"></A>Limited types now have an assignment 
 operation, but its use is restricted such that all uses are build-in-place. 
 This is accomplished by restricting uses to <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s. 
@@ -543,7 +543,7 @@ But it is much better to have all of the reasons for limitedness together.</span
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p23.k">23.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0172-1.TXT">AI12-0172-1</A></I>} 
-<span class="insert5"><A NAME="I4560"></A><B>Correction:</B> A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
+<span class="insert5"><A NAME="I4566"></A><B>Correction:</B> A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
 can be used in an expression used in a limited context. This is harmless 
 (no object will be created if an exception is raised instead), useful, 
 and thus appears to have been an omission when <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN>s 

@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,14 +45,14 @@ of the execution of constructs and entities. A <I>master</I> is the execution
 of a construct that includes finalization of local objects after it is 
 complete (and after waiting for any local tasks &mdash; see <A HREF="RM-9-3.html">9.3</A>), 
 but before leaving. Other constructs and entities are left immediately 
-upon completion. <A NAME="I4236"></A><A NAME="I4237"></A></div>
+upon completion. <A NAME="I4241"></A><A NAME="I4242"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Normal"><A NAME="I4238"></A><A NAME="I4239"></A>The execution 
+<div class="Normal"><A NAME="I4243"></A><A NAME="I4244"></A>The execution 
 of a construct or entity is <I>complete</I> when the end of that execution 
 has been reached, or when a transfer of control (see <A HREF="RM-5-1.html">5.1</A>) 
-causes it to be abandoned. <A NAME="I4240"></A><A NAME="I4241"></A><A NAME="I4242"></A><A NAME="I4243"></A>Completion 
+causes it to be abandoned. <A NAME="I4245"></A><A NAME="I4246"></A><A NAME="I4247"></A><A NAME="I4248"></A>Completion 
 due to reaching the end of execution, or due to the transfer of control 
 of an <span class="insert2"><SPAN Class="swiss"><A HREF="RM-5-7.html#S0193">exit_statement</A></SPAN>, 
 return statement, <SPAN Class="swiss"><A HREF="RM-5-8.html#S0194">goto_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;exit_</SPAN>, 
@@ -63,10 +63,10 @@ is <I>normal completion</I>. Completion is <I>abnormal</I> otherwise
 &mdash; when control is transferred out of a construct due to abort or 
 the raising of an exception.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Normal"><A NAME="I4244"></A><A NAME="I4245"></A>After execution 
+<div class="Normal"><A NAME="I4249"></A><A NAME="I4250"></A>After execution 
 of a construct or entity is complete, it is <I>left</I>, meaning that 
 execution continues with the next action, as defined for the execution 
-that is taking place. <A NAME="I4246"></A>Leaving an execution happens 
+that is taking place. <A NAME="I4251"></A>Leaving an execution happens 
 immediately after its completion, except in the case of a <I>master</I>: 
 the execution of a <span class="insert2">body other than a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN>; 
 the execution of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0167">statement</A></SPAN>; 
@@ -84,7 +84,7 @@ an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN>,
 or an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN></span>. 
 A master is finalized after it is complete, and before it is left.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I4247"></A>For the <I>finalization</I> of 
+<div class="Normal"><A NAME="I4252"></A>For the <I>finalization</I> of 
 a master, dependent tasks are first awaited, as explained in <A HREF="RM-9-3.html">9.3</A>. 
 Then each object whose accessibility level is the same as that of the 
 master is finalized if the object was successfully initialized and still 
@@ -93,7 +93,7 @@ the last statement or via a transfer of control. When a transfer of control
 causes completion of an execution, each included master is finalized 
 in order, from innermost outward.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4248"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4253"></A>For 
 the <I>finalization</I> of an object:&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted">If <span class="insert3">the full type of&nbsp;</span>the 
@@ -115,7 +115,7 @@ are performed;</div>
 <div class="Bulleted">If <span class="insert3">the full type of&nbsp;</span>the 
 object is <span class="delete3">of&nbsp;</span>a composite type, then after 
 performing the above actions, if any, every component of the object is 
-finalized in an arbitrary order, except as follows:<A NAME="I4249"></A> 
+finalized in an arbitrary order, except as follows:<A NAME="I4254"></A> 
 if the object has a component with an access discriminant constrained 
 by a per-object expression, this component is finalized before any components 
 that do not have such discriminants; for an object with several components 
@@ -127,7 +127,7 @@ of their <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</
 (see <A HREF="RM-3-10-2.html">3.10.2</A>), each coextension is finalized 
 after the object whose access discriminant designates it.</span></div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I4250"></A>Immediately before an instance 
+<div class="Normal"><A NAME="I4255"></A>Immediately before an instance 
 of Unchecked_Deallocation reclaims the storage of an object, the object 
 is finalized. If an instance of Unchecked_Deallocation is never applied 
 to an object created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>, 
@@ -140,23 +140,23 @@ as follows: Objects&nbsp;</span>created by declarations in the master <span clas
 finalized&nbsp;</span>in the reverse order of their creation.<span class="delete3">&nbsp;For objects that were created by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 for an access type whose ultimate ancestor is declared in the master, 
 this rule is applied as though each such object that still exists had 
-been created in an arbitrary order at the first freezing point (see <A HREF="RM-13-14.html">13.14</A>)<A NAME="I4251"></A> 
+been created in an arbitrary order at the first freezing point (see <A HREF="RM-13-14.html">13.14</A>)<A NAME="I4256"></A> 
 of the ultimate ancestor type</span><span class="insert2"><span class="delete3">; 
 the finalization of these objects is called the <I>finalization of the 
-collection</I><A NAME="I4252"></A><A NAME="I4253"></A></span></span><span class="delete3">.</span><span class="insert3"><span class="delete3">&nbsp;Objects created by allocators for an anonymous access type that are not 
+collection</I><A NAME="I4257"></A><A NAME="I4258"></A></span></span><span class="delete3">.</span><span class="insert3"><span class="delete3">&nbsp;Objects created by allocators for an anonymous access type that are not 
 coextensions of some other object, are finalized in an arbitrary order 
-during the finalization of their associated master.<A NAME="I4254"></A></span></span><span class="delete3"></span><span class="insert2">&nbsp;After the finalization of a master is complete, the objects finalized 
+during the finalization of their associated master.<A NAME="I4259"></A></span></span><span class="delete3"></span><span class="insert2">&nbsp;After the finalization of a master is complete, the objects finalized 
 as part of its finalization cease to <I>exist</I>, as do any types and 
-subtypes defined and created within the master.<A NAME="I4255"></A> <A NAME="I4256"></A><A NAME="I4257"></A></span></div>
+subtypes defined and created within the master.<A NAME="I4260"></A> <A NAME="I4261"></A><A NAME="I4262"></A></span></div>
 <div class="paranum"><a name="p11.1">11.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">Each 
-nonderived access type <I>T</I> has an associated <I>collection</I>,<A NAME="I4258"></A> 
+nonderived access type <I>T</I> has an associated <I>collection</I>,<A NAME="I4263"></A> 
 which is the set of objects created by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 of <I>T</I>, or of types derived from <I>T</I>. Unchecked_Deallocation 
 removes an object from its collection. Finalization of a collection consists 
 of finalization of each object in the collection, in an arbitrary order. 
 The collection of an access type is an object implicitly declared at 
-the following place:<A NAME="I4259"></A></span></div>
+the following place:<A NAME="I4264"></A></span></div>
 <div class="paranum"><a name="p11.2">11.2/3</a></div>
 <div class="Bulleted"><span class="insert3">For a named access type, 
 the first freezing point (see <A HREF="RM-13-14.html">13.14</A>) of the 
@@ -173,7 +173,7 @@ result, within the master of the call (see <A HREF="RM-3-10-2.html">3.10.2</A>).
 type, the first freezing point of the innermost enclosing declaration.</span> 
 </div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal"><A NAME="I4260"></A>The target of an <span class="insert2"><SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
+<div class="Normal"><A NAME="I4265"></A>The target of an <span class="insert2"><SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
 statement</span> is finalized before copying in the new value, as explained 
 in <A HREF="RM-7-6.html">7.6</A>.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
@@ -223,13 +223,13 @@ enclosing master.</span></span><span class="delete2"></span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4261"></A>It 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4266"></A>It 
 is a bounded error for a call on Finalize or Adjust <span class="insert1">that 
 occurs as part of object finalization or assignment&nbsp;</span>to propagate 
 an exception. The possible consequences depend on what action invoked 
 the Finalize or Adjust operation:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I4262"></A>For a Finalize invoked as part 
+<div class="Bulleted"><A NAME="I4267"></A>For a Finalize invoked as part 
 of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN>, 
 Program_Error is raised at that point.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
@@ -240,29 +240,29 @@ initialization of a controlled object</span></span><span class="insert1">,
 other adjustments due to be performed might or might not be performed, 
 and then Program_Error is raised. During its propagation, finalization 
 might or might not be applied to objects whose Adjust failed.</span> 
-<A NAME="I4263"></A>For an Adjust invoked as part of an <span class="insert2"><SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
+<A NAME="I4268"></A>For an Adjust invoked as part of an <span class="insert2"><SPAN Class="swiss"><A HREF="RM-5-2.html#S0173">assignment_statement</A></SPAN></span><span class="delete2">&nbsp;assignment 
 </span><span class="insert1"><span class="delete2">statement</span></span><span class="delete2"></span><span class="delete1">&nbsp;operation</span><span class="delete2"></span>, 
 any other adjustments due to be performed are performed, and then Program_Error 
 is raised.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Bulleted"><A NAME="I4264"></A>For a Finalize invoked as part 
+<div class="Bulleted"><A NAME="I4269"></A>For a Finalize invoked as part 
 of a call on an instance of Unchecked_Deallocation, any other finalizations 
 due to be performed are performed, and then Program_Error is raised. 
 </div>
 <div class="paranum"><a name="p17.1">17.1/3</a></div>
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete3"></span><span class="insert1"><span class="delete3"><A NAME="I4265"></A>For 
+was deleted.</I></SPAN><span class="delete3"></span><span class="insert1"><span class="delete3"><A NAME="I4270"></A>For 
 a Finalize invoked as part of the finalization of the anonymous object 
 created by a function call or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
 any other finalizations due to be performed are performed, and then Program_Error 
 is raised.</span></span><span class="delete3"></span></div>
 <div class="paranum"><a name="p17.2">17.2/1</a></div>
-<div class="Bulleted"><span class="insert1"><A NAME="I4266"></A>For a 
+<div class="Bulleted"><span class="insert1"><A NAME="I4271"></A>For a 
 Finalize invoked due to reaching the end of the execution of a master, 
 any other finalizations associated with the master are performed, and 
 Program_Error is raised immediately after leaving the master.</span></div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Bulleted"><A NAME="I4267"></A>For a Finalize invoked by the 
+<div class="Bulleted"><A NAME="I4272"></A>For a Finalize invoked by the 
 transfer of control of an <span class="insert2"><SPAN Class="swiss"><A HREF="RM-5-7.html#S0193">exit_statement</A></SPAN>, 
 return statement, <SPAN Class="swiss"><A HREF="RM-5-8.html#S0194">goto_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;exit_</SPAN>, 
 <SPAN Class="swiss">return_</SPAN>, <SPAN Class="swiss">goto_</SPAN></span>, 
@@ -295,7 +295,7 @@ objects created by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A>
 for an access type whose storage pool supports subpools (see <A HREF="RM-13-11-4.html">13.11.4</A>) 
 as if the objects were created (in an arbitrary order) at the point where 
 the storage pool was elaborated instead of at the first freezing point 
-of the access type.<A NAME="I4268"></A></span></div>
+of the access type.<A NAME="I4273"></A></span></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Notes">22&nbsp;&nbsp;The rules of <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 

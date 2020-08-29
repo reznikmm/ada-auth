@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,38 +50,38 @@ A that is of an array type (after any implicit dereference), or denotes
 a constrained array subtype:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">A'First</div><div class="WideHanging-Body">
-<A NAME="I1937"></A><A NAME="I1938"></A>A'First denotes the lower bound 
+<A NAME="I1938"></A><A NAME="I1939"></A>A'First denotes the lower bound 
 of the first index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">A'First(N)</div><div class="WideHanging-Body">
-<A NAME="I1939"></A><A NAME="I1940"></A>A'First(N) denotes the lower 
+<A NAME="I1940"></A><A NAME="I1941"></A>A'First(N) denotes the lower 
 bound of the N-th index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term">A'Last</div><div class="WideHanging-Body">
-<A NAME="I1941"></A><A NAME="I1942"></A>A'Last denotes the upper bound 
+<A NAME="I1942"></A><A NAME="I1943"></A>A'Last denotes the upper bound 
 of the first index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="WideHanging-Term">A'Last(N)</div><div class="WideHanging-Body">
-<A NAME="I1943"></A><A NAME="I1944"></A>A'Last(N) denotes the upper bound 
+<A NAME="I1944"></A><A NAME="I1945"></A>A'Last(N) denotes the upper bound 
 of the N-th index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="WideHanging-Term">A'Range</div><div class="WideHanging-Body">
-<A NAME="I1945"></A><A NAME="I1946"></A>A'Range is equivalent to the 
+<A NAME="I1946"></A><A NAME="I1947"></A>A'Range is equivalent to the 
 range A'First .. A'Last, except that the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 A is only evaluated once.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="WideHanging-Term">A'Range(N)</div><div class="WideHanging-Body">
-<A NAME="I1947"></A><A NAME="I1948"></A>A'Range(N) is equivalent to the 
+<A NAME="I1948"></A><A NAME="I1949"></A>A'Range(N) is equivalent to the 
 range A'First(N) .. A'Last(N), except that the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 A is only evaluated once.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">A'Length</div><div class="WideHanging-Body">
-<A NAME="I1949"></A><A NAME="I1950"></A>A'Length denotes the number of 
+<A NAME="I1950"></A><A NAME="I1951"></A>A'Length denotes the number of 
 values of the first index range (zero for a null range); its type is 
 <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="WideHanging-Term">A'Length(N)</div><div class="WideHanging-Body">
-<A NAME="I1951"></A><A NAME="I1952"></A>A'Length(N) denotes the number 
+<A NAME="I1952"></A><A NAME="I1953"></A>A'Length(N) denotes the number 
 of values of the N-th index range (zero for a null range); its type is 
 <I>universal_integer</I>.&nbsp;</div>
 
@@ -107,7 +107,7 @@ type:&nbsp;</div>
 <div class="Notes">54&nbsp;&nbsp;An array type is limited if its component 
 type is limited (see <A HREF="RM-7-5.html">7.5</A>).</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Notes">55&nbsp;&nbsp;<A NAME="I1953"></A>The predefined operations 
+<div class="Notes">55&nbsp;&nbsp;<A NAME="I1954"></A>The predefined operations 
 of an array type include the membership tests, qualification, and explicit 
 conversion. If the array type is not limited, they also include assignment 
 and the predefined equality operators. For a one-dimensional array type, 

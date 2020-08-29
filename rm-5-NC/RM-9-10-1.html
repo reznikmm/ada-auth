@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,16 +36,16 @@
 <H1>9.10.1 Conflict Check Policies</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">This subclause determines what checks are performed 
-relating to possible concurrent conflicting actions (see <A HREF="RM-9-10.html">9.10</A>).<A NAME="I4701"></A></div>
+relating to possible concurrent conflicting actions (see <A HREF="RM-9-10.html">9.10</A>).<A NAME="I4690"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Conflict_Check_Policy is as follows:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4702"></A><A NAME="I4703"></A>Conflict_Check_Policy 
-(<I>policy_</I><A NAME="I4704"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>[, 
-<I>policy_</I><A NAME="I4705"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4691"></A><A NAME="I4692"></A>Conflict_Check_Policy 
+(<I>policy_</I><A NAME="I4693"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>[, 
+<I>policy_</I><A NAME="I4694"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]);</div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Conflict_Check_Policy is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
@@ -89,15 +89,15 @@ policies apply at the place where the action or actions occur, as follows:</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="WideHanging-Term">No_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 This policy imposes no restrictions on concurrent actions arising from 
-<A NAME="I4706"></A>parallel constructs.</div>
+<A NAME="I4695"></A>parallel constructs.</div>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="WideHanging-Term">No_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 This policy imposes no restrictions on concurrent actions arising from 
-tasking <A NAME="I4707"></A>constructs.</div>
+tasking <A NAME="I4696"></A>constructs.</div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">Known_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 If this policy applies to two concurrent actions appearing within parallel 
-constructs, <A NAME="I4708"></A>they are disallowed if they are known 
+constructs, <A NAME="I4697"></A>they are disallowed if they are known 
 to denote the same object (see <A HREF="RM-6-4-1.html">6.4.1</A>) with 
 uses that conflict. For the purposes of this check, any parallel loop 
 may be presumed to involve multiple concurrent iterations. Also, for 
@@ -115,7 +115,7 @@ action updates the shared volatile object, also updates this shared synchronized
 object.</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">Known_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-If this policy applies to two concurrent actions appearing within <A NAME="I4709"></A>the 
+If this policy applies to two concurrent actions appearing within <A NAME="I4698"></A>the 
 same compilation unit, at least one of which appears within a task body 
 but not within a parallel construct, they are disallowed if they are 
 known to denote the same object (see <A HREF="RM-6-4-1.html">6.4.1</A>) 
@@ -137,7 +137,7 @@ object.</div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="WideHanging-Term">All_Parallel_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
 This policy includes the restrictions imposed by the Known_Parallel_Conflict_Checks 
-policy, and in <A NAME="I4710"></A>addition disallows a parallel construct 
+policy, and in <A NAME="I4699"></A>addition disallows a parallel construct 
 from reading or updating a variable that is global to the construct, 
 unless it is a synchronized object, or unless the construct is a parallel 
 loop, and the global variable is a part of a component of an array denoted 
@@ -146,20 +146,40 @@ denotes the loop parameter of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0181
 or the chunk parameter of the parallel loop.</div>
 <div class="paranum"><a name="p21">21/5</a></div>
 <div class="WideHanging-Term">All_Tasking_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-This policy includes <A NAME="I4711"></A>the restrictions imposed by 
+This policy includes <A NAME="I4700"></A>the restrictions imposed by 
 the Known_Tasking_Conflict_Checks policy, and in addition disallows a 
 task body from reading or updating a variable that is global to the task 
 body, unless it is a synchronized object.</div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="WideHanging-Term">No_Conflict_Checks, Known_Conflict_Checks, 
 All_Conflict_Checks</div><div class="WideHanging-Body"><br clear="left">
-These are short hands for (No_Parallel_Conflict_Checks, <A NAME="I4712"></A>No_Tasking_Conflict_Checks), 
-(Known_Parallel_Conflict_Checks, <A NAME="I4713"></A>Known_Tasking_Conflict_Checks), 
-and (All_Parallel_Conflict_Checks, <A NAME="I4714"></A>All_Tasking_Conflict_Checks), 
+These are short hands for (No_Parallel_Conflict_Checks, <A NAME="I4701"></A>No_Tasking_Conflict_Checks), 
+(Known_Parallel_Conflict_Checks, <A NAME="I4702"></A>Known_Tasking_Conflict_Checks), 
+and (All_Parallel_Conflict_Checks, <A NAME="I4703"></A>All_Tasking_Conflict_Checks), 
 respectively.</div>
 
-<H4 Class="centered">Implementation Permissions</H4>
+<H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a subprogram, the 
+following language-defined representation aspect may be specified:</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="WideHanging-Term">Parallel_Calls</div><div class="WideHanging-Body"><br clear="left">
+The Parallel_Calls aspect is of type Boolean. The specified value shall 
+be static. The Parallel_Calls aspect<A NAME="I4704"></A><A NAME="I4705"></A> 
+of an inherited primitive subprogram is True if Parallel_Calls is True 
+either for the corresponding subprogram of the progenitor type or for 
+any other inherited subprogram that it overrides. If not specified or 
+inherited as True, the Parallel_Calls aspect of a subprogram is False.</div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="WideHanging-Body">Specifying the Parallel_Calls aspect to 
+be True for a subprogram indicates that the subprogram can be safely 
+called in parallel. Conflict checks (if required by the Conflict_Check_Policy 
+in effect) are made on the subprogram assuming that multiple concurrent 
+calls exist. Such checks need not be repeated at each call of the subprogram 
+in a parallel iteration context.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p26">26/5</a></div>
 <div class="Normal">When the conflict check policy Known_Parallel_Conflict_Checks 
 applies, the implementation may disallow two concurrent actions appearing 
 within parallel constructs if the implementation can prove they will 

@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,23 +48,23 @@ of the <I>ceiling priority</I> of a protected object.]&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9538"></A><A NAME="I9539"></A>Locking_Policy(<I>policy_</I><A NAME="I9540"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9560"></A><A NAME="I9561"></A>Locking_Policy(<I>policy_</I><A NAME="I9562"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The <I>policy_</I><A NAME="I9541"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-shall either be Ceiling_Locking or an implementation-defined <A NAME="I9542"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
+<div class="Normal">The <I>policy_</I><A NAME="I9563"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall either be Ceiling_Locking or an implementation-defined <A NAME="I9564"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
-<I>policy_</I><A NAME="I9543"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+<I>policy_</I><A NAME="I9565"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
 allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I9544"></A><A NAME="I9545"></A>A Locking_Policy 
+<div class="Normal"><A NAME="I9566"></A><A NAME="I9567"></A>A Locking_Policy 
 pragma is a configuration pragma.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -72,7 +72,7 @@ pragma is a configuration pragma.</div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0073">8652/0073</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00091.TXT">AI95-00091-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
-<A NAME="I9546"></A>[A locking policy specifies the details of protected 
+<A NAME="I9568"></A>[A locking policy specifies the details of protected 
 object locking. All protected objects have a priority. The locking policy 
 specifies the meaning of the priority of a protected object, and the 
 relationships between these priorities and task priorities. In addition, 
@@ -83,7 +83,7 @@ locking policies, the meaning of the priority of a protected object is
 implementation defined. If no Locking_Policy pragma applies to any of 
 the program units comprising a partition, the locking policy for that 
 partition, as well as the meaning of the priority of a protected object, 
-are implementation defined. <A NAME="I9547"></A></div>
+are implementation defined. <A NAME="I9569"></A></div>
 <div class="paranum"><a name="p6.a">6.a/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The locking policy 
 if no Locking_Policy pragma applies to any unit of a partition.</div>
@@ -97,15 +97,15 @@ and converted to the subtype System.Any_Priority or System.Interrupt_Priority,
 respectively. The value of the expression is the initial priority of 
 the corresponding protected object. If no Priority or Interrupt_Priority 
 aspect is specified for a protected object, the initial priority is specified 
-by the locking policy. <A NAME="I9548"></A><A NAME="I9549"></A></div>
+by the locking policy. <A NAME="I9570"></A><A NAME="I9571"></A></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">There is one predefined 
-locking policy, Ceiling_Locking; this policy is defined as follows:<A NAME="I9550"></A><A NAME="I9551"></A> 
+locking policy, Ceiling_Locking; this policy is defined as follows:<A NAME="I9572"></A><A NAME="I9573"></A> 
 </div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9552"></A>Every protected object has a <I>ceiling priority</I>, 
+<A NAME="I9574"></A>Every protected object has a <I>ceiling priority</I>, 
 which is determined by either a Priority or Interrupt_Priority aspect 
 as defined in <A HREF="AA-D-1.html">D.1</A>, or by assignment to the 
 Priority attribute as described in <A HREF="AA-D-5-2.html">D.5.2</A>. 
@@ -139,7 +139,7 @@ protected object is System.Priority'Last.</div>
 <div class="Bulleted">While a task executes a protected action, it inherits 
 the ceiling priority of the corresponding protected object.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted"><A NAME="I9553"></A><A NAME="I9554"></A><A NAME="I9555"></A>When 
+<div class="Bulleted"><A NAME="I9575"></A><A NAME="I9576"></A><A NAME="I9577"></A>When 
 a task calls a protected operation, a check is made that its active priority 
 is not higher than the ceiling of the corresponding protected object; 
 Program_Error is raised if this check fails.</div>
@@ -149,7 +149,7 @@ Program_Error is raised if this check fails.</div>
 one with EDF_Within_Priorities, the following additional rules apply:</span></div>
 <div class="paranum"><a name="p13.2">13.2/5</a></div>
 <div class="Bulleted"><span class="insert5">Every protected object has 
-a <I>relative deadline</I>,<A NAME="I9556"></A><A NAME="I9557"></A> which 
+a <I>relative deadline</I>,<A NAME="I9578"></A><A NAME="I9579"></A> which 
 is determined by a Relative_Deadline aspect as defined in <A HREF="AA-D-2-6.html">D.2.6</A>, 
 or by assignment to the Relative_Deadline attribute as described in <A HREF="AA-D-5-2.html">D.5.2</A>. 
 The relative deadline of a protected object represents a lower bound 
@@ -169,8 +169,8 @@ object; 'now' is obtained via a call on Ada.Real_Time.Clock.</span></div>
 <div class="Bulleted"><span class="insert5">When a task calls a protected 
 operation, a check is made that its active deadline minus its last release 
 time is not less than the relative deadline of the corresponding protected 
-object; Program_Error is raised if this<A NAME="I9558"></A><A NAME="I9559"></A> 
-<A NAME="I9560"></A>check fails.</span>&nbsp;</div>
+object; Program_Error is raised if this<A NAME="I9580"></A><A NAME="I9581"></A> 
+<A NAME="I9582"></A>check fails.</span>&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/5</a></div>
@@ -178,11 +178,11 @@ object; Program_Error is raised if this<A NAME="I9558"></A><A NAME="I9559"></A>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0230-1.TXT">AI12-0230-1</A></I>} 
 Following any change of priority, it is a bounded error for the active 
 priority of any task with a call queued on an entry of a protected object 
-to be higher than the ceiling priority of the protected object. <A NAME="I9561"></A>In 
+to be higher than the ceiling priority of the protected object. <A NAME="I9583"></A>In 
 this case one of the following applies:</div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Bulleted">at any time prior to executing the entry body Program_Error 
-is raised in the calling task;<A NAME="I9562"></A></div>
+is raised in the calling task;<A NAME="I9584"></A></div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Bulleted">when the entry is open the entry body is executed 
 at the ceiling priority of the protected object;</div>
@@ -295,7 +295,7 @@ object).</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p28.a">28.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
-<A NAME="I9563"></A>All protected objects now have a priority, which 
+<A NAME="I9585"></A>All protected objects now have a priority, which 
 is the value of the Priority attribute of <A HREF="AA-D-5-2.html">D.5.2</A>. 
 How this value is interpreted depends on the locking policy; for instance, 
 the ceiling priority is derived from this value when the locking policy 
@@ -326,7 +326,7 @@ Priority and Interrupt_Priority are now obsolescent.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p28.f">28.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0230-1.TXT">AI12-0230-1</A></I>} 
-<span class="insert5"><A NAME="I9564"></A>All protected objects now have 
+<span class="insert5"><A NAME="I9586"></A>All protected objects now have 
 a relative deadline, which is the value of the Relative_Deadline attribute 
 of <A HREF="AA-D-5-2.html">D.5.2</A>. How this value is interpreted depends 
 on the locking policy.</span>&nbsp;</div>

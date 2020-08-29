@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,19 +42,19 @@ whose names are needed within a compilation unit.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I4772"></A><A NAME="S0292"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4773"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0293">context_item</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I4763"></A><A NAME="S0292"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4764"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0293">context_item</A></SPAN>}</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I4774"></A><A NAME="S0293"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4775"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4776"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I4765"></A><A NAME="S0293"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4766"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4767"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">with_clause</SPAN><A NAME="I4777"></A><A NAME="S0294"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4778"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0295">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4779"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0296">nonlimited_with_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">with_clause</SPAN><A NAME="I4768"></A><A NAME="S0294"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4769"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0295">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4770"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0296">nonlimited_with_clause</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I4780"></A><A NAME="S0295"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4781"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4782"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I4771"></A><A NAME="S0295"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4772"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4773"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I4783"></A><A NAME="S0296"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4784"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4785"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I4774"></A><A NAME="S0296"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4775"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4776"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4786"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN> 
+<div class="Normal"><A NAME="I4777"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN> 
 that appears on a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0288">library_unit_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0289">library_unit_renaming_declaration</A></SPAN> 
 consists of the entire declarative region of the declaration, which includes 
@@ -62,8 +62,8 @@ all children and subunits. The scope of a <SPAN Class="swiss"><A HREF="RM-10-1-2
 that appears on a body consists of the body, which includes all subunits. 
 </div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I4787"></A><A NAME="I4788"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
-(and the corresponding library unit) is <I>named</I> <A NAME="I4789"></A><A NAME="I4790"></A>in 
+<div class="Normal"><A NAME="I4778"></A><A NAME="I4779"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN> 
+(and the corresponding library unit) is <I>named</I> <A NAME="I4780"></A><A NAME="I4781"></A>in 
 a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN> 
 if it is denoted by a <I>library_unit_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 in the <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0294">with_clause</A></SPAN>. 

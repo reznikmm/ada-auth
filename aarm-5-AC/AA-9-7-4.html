@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,24 +44,24 @@ call or the expiration of a delay.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">asynchronous_select</SPAN><A NAME="I5294"></A><A NAME="S0280"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">asynchronous_select</SPAN><A NAME="I5288"></A><A NAME="S0280"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5295"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5289"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>then&nbsp;abort</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5296"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5290"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN><BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">triggering_alternative</SPAN><A NAME="I5297"></A><A NAME="S0281"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5298"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN>&nbsp;[<A NAME="I5299"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">triggering_alternative</SPAN><A NAME="I5291"></A><A NAME="S0281"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5292"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN>&nbsp;[<A NAME="I5293"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>]</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<SPAN Class="swiss">triggering_statement</SPAN><A NAME="I5300"></A><A NAME="S0282"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><A NAME="I5301"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN></span><span class="delete2"><A NAME="I5302"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">&nbsp;entry_call_statement</A></SPAN></span>&nbsp;|&nbsp;<A NAME="I5303"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN></div>
+<SPAN Class="swiss">triggering_statement</SPAN><A NAME="I5294"></A><A NAME="S0282"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><A NAME="I5295"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN></span><span class="delete2"><A NAME="I5296"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">&nbsp;entry_call_statement</A></SPAN></span>&nbsp;|&nbsp;<A NAME="I5297"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">abortable_part</SPAN><A NAME="I5304"></A><A NAME="S0283"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5305"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">abortable_part</SPAN><A NAME="I5298"></A><A NAME="S0283"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5299"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I5306"></A><span class="insert2"><A NAME="I5307"></A></span>For 
+<A NAME="I5300"></A><span class="insert2"><A NAME="I5301"></A></span>For 
 the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
 is <span class="insert2">a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN></span><span class="delete2">&nbsp;an 
@@ -82,7 +82,7 @@ of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0281">triggering_alternative<
 the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0283">abortable_part</A></SPAN> 
 is never started].</span></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5308"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
+<div class="Normal"><A NAME="I5302"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN>, 
 the <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
@@ -132,7 +132,7 @@ to achieve portability.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5309"></A><A NAME="I5310"></A><A NAME="I5311"></A><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5303"></A><A NAME="I5304"></A><A NAME="I5305"></A><I>Example 
 of a main command loop for a command interpreter:</I>&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>loop</B><BR>
@@ -148,7 +148,7 @@ of a main command loop for a command interpreter:</I>&nbsp;</div>
 <B>end</B>&nbsp;<B>loop</B>;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
-time-limited calculation:</I> <A NAME="I5312"></A><A NAME="I5313"></A><A NAME="I5314"></A><A NAME="I5315"></A><A NAME="I5316"></A></div>
+time-limited calculation:</I> <A NAME="I5306"></A><A NAME="I5307"></A><A NAME="I5308"></A><A NAME="I5309"></A><A NAME="I5310"></A></div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Examples"><B>select</B><BR>
 &nbsp;&nbsp;&nbsp;<B>delay</B>&nbsp;5.0;<BR>
@@ -166,13 +166,13 @@ abort completion points within the execution of the <SPAN Class="swiss"><A HREF=
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><A NAME="I5317"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">Asynchronous_select</A></SPAN> 
+<div class="Annotations"><A NAME="I5311"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">Asynchronous_select</A></SPAN> 
 is new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p14.b">14.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<span class="insert2"><A NAME="I5318"></A>A procedure can be used as 
+<span class="insert2"><A NAME="I5312"></A>A procedure can be used as 
 the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0282">triggering_statement</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0280">asynchronous_select</A></SPAN>, 
 if the procedure might actually be an entry.</span>&nbsp;</div>

@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,17 +39,17 @@
 is used to state explicitly the type, and to verify the subtype, of an 
 operand that is either an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>. 
-<A NAME="I3435"></A>]</div>
+<A NAME="I3437"></A>]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">qualified_expression</SPAN><A NAME="I3436"></A><A NAME="S0163"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3437"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'(<A NAME="I3438"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)&nbsp;|&nbsp;<A NAME="I3439"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I3440"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">qualified_expression</SPAN><A NAME="I3438"></A><A NAME="S0163"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3439"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'(<A NAME="I3440"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)&nbsp;|&nbsp;<A NAME="I3441"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I3442"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0325-1.TXT">AI12-0325-1</A></I>} 
-<A NAME="I3441"></A>The expected type for the <I>operand</I> (the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+<A NAME="I3443"></A>The expected type for the <I>operand</I> (the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>) 
 is determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
 Furthermore, the operand shall resolve to be either the specified expected 
@@ -69,7 +69,7 @@ would interfere with that intent.&nbsp;</div>
 [If the operand of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 denotes an object, the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 denotes a constant view of that object.] The nominal subtype of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
-is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>.<A NAME="I3444"></A> 
 </div>
 <div class="paranum"><a name="p3.b">3.b/3</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
@@ -78,12 +78,12 @@ This is stated in <A HREF="AA-3-3.html">3.3</A>.&nbsp;</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0100-1.TXT">AI12-0100-1</A></I>} 
-<A NAME="I3442"></A><A NAME="I3443"></A><A NAME="I3444"></A><A NAME="I3445"></A><A NAME="I3446"></A><A NAME="I3447"></A><A NAME="I3448"></A>The 
+<A NAME="I3445"></A><A NAME="I3446"></A><A NAME="I3447"></A><A NAME="I3448"></A><A NAME="I3449"></A><A NAME="I3450"></A><A NAME="I3451"></A>The 
 evaluation of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 evaluates the operand (and if of a universal type, converts it to the 
 type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>) 
 and checks that its value belongs to the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
-<A NAME="I3449"></A><A NAME="I3450"></A>The exception Constraint_Error 
+<A NAME="I3452"></A><A NAME="I3453"></A>The exception Constraint_Error 
 is raised if this check fails. Furthermore, if predicate checks are enabled 
 for the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 a check is performed as defined in subclause <A HREF="AA-3-2-4.html">3.2.4</A>, 
@@ -147,7 +147,7 @@ Added a definition of the nominal subtype of a <SPAN Class="swiss"><A HREF="AA-4
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p10.b">10.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0100-1.TXT">AI12-0100-1</A></I>} 
-<A NAME="I3451"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
+<A NAME="I3454"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 now performs a predicate check for the named subtype (if it is enabled). 
 Original Ada 2012 did not include that check (an omission). While this 
 is formally inconsistent (an exception could be raised when none would 

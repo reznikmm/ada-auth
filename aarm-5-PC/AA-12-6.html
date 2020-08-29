@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +41,7 @@
 <HR>
 <H1>12.6 Formal Subprograms</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I5804"></A> <A NAME="I5805"></A>Formal 
+<div class="Normal">[<A NAME="I5800"></A> <A NAME="I5801"></A>Formal 
 subprograms can be used to pass callable entities to a generic unit.] 
 </div>
 
@@ -54,25 +54,25 @@ of the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0318">explicit_generic_actual_
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
-<SPAN Class="swiss">formal_subprogram_declaration</SPAN><A NAME="I5806"></A><A NAME="S0335"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5807"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0336">formal_concrete_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5808"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN></div>
+<SPAN Class="swiss">formal_subprogram_declaration</SPAN><A NAME="I5802"></A><A NAME="S0335"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5803"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0336">formal_concrete_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5804"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN></div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">formal_concrete_subprogram_declaration</SPAN><A NAME="I5809"></A><A NAME="S0336"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5810"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5811"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0338">subprogram_default</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5812"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">formal_concrete_subprogram_declaration</SPAN><A NAME="I5805"></A><A NAME="S0336"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5806"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5807"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0338">subprogram_default</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5808"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p2.2">2.2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">formal_abstract_subprogram_declaration</SPAN><A NAME="I5813"></A><A NAME="S0337"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5814"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is&nbsp;abstract</B>&nbsp;[<A NAME="I5815"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0338">subprogram_default</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5816"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">formal_abstract_subprogram_declaration</SPAN><A NAME="I5809"></A><A NAME="S0337"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5810"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is&nbsp;abstract</B>&nbsp;[<A NAME="I5811"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0338">subprogram_default</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5812"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<SPAN Class="swiss">subprogram_default</SPAN><A NAME="I5817"></A><A NAME="S0338"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5818"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0339">default_name</A></SPAN>&nbsp;|&nbsp;&lt;&gt;&nbsp;|&nbsp;<B>null</B></div>
+<SPAN Class="swiss">subprogram_default</SPAN><A NAME="I5813"></A><A NAME="S0338"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5814"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0339">default_name</A></SPAN>&nbsp;|&nbsp;&lt;&gt;&nbsp;|&nbsp;<B>null</B></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">default_name</SPAN><A NAME="I5819"></A><A NAME="S0339"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5820"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">default_name</SPAN><A NAME="I5815"></A><A NAME="S0339"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5816"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
@@ -95,7 +95,7 @@ seem worth the effort.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5821"></A>The expected profile for the 
+<div class="Normal"><A NAME="I5817"></A>The expected profile for the 
 <SPAN Class="swiss"><A HREF="AA-12-6.html#S0339">default_name</A></SPAN>, 
 if any, is that of the formal subprogram.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
@@ -108,7 +108,7 @@ takes place during the elaboration of each instantiation that uses the
 default, as defined in <A HREF="AA-12-3.html">12.3</A>, &ldquo;<A HREF="AA-12-3.html">Generic 
 Instantiation</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I5822"></A>For a generic formal subprogram, 
+<div class="Normal"><A NAME="I5818"></A>For a generic formal subprogram, 
 the expected profile for the actual is that of the formal subprogram. 
 </div>
 
@@ -116,7 +116,7 @@ the expected profile for the actual is that of the formal subprogram.
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
 The profiles of the formal and any named default shall be mode conformant. 
-<A NAME="I5823"></A></div>
+<A NAME="I5819"></A></div>
 <div class="paranum"><a name="p7.a">7.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 This rule, unlike others in this subclause, is checked at compile time 
@@ -124,7 +124,7 @@ of the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A><
 </div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
-The profiles of the formal and actual shall be mode conformant. <A NAME="I5824"></A></div>
+The profiles of the formal and actual shall be mode conformant. <A NAME="I5820"></A></div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 For a parameter or result subtype of a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
@@ -143,7 +143,7 @@ a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>;</d
 <div class="paranum"><a name="p8.3">8.3/2</a></div>
 <div class="Bulleted">otherwise, the subtype of the corresponding parameter 
 or result type of the actual matching the <SPAN Class="swiss"><A HREF="AA-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
-shall exclude null. <A NAME="I5825"></A>In addition to the places where 
+shall exclude null. <A NAME="I5821"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -181,7 +181,7 @@ access type designating a specific tagged type <I>T</I>, <I>T</I> is
 called a controlling type of the <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN>. 
 A <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 shall have exactly one controlling type, and that type shall not be incomplete. 
-<A NAME="I5826"></A></div>
+<A NAME="I5822"></A></div>
 <div class="paranum"><a name="p8.c">8.c/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The specific tagged type 
 could be any of a formal tagged private type, a formal derived type, 
@@ -193,7 +193,7 @@ some type, and that we unambiguously know what that type is.</div>
 <div class="Annotations">We informally call a subprogram declared by 
 a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 an <I>abstract formal subprogram</I>, but we do not use this term in 
-normative wording. <A NAME="I5827"></A>(We do use it often in these notes.) 
+normative wording. <A NAME="I5823"></A>(We do use it often in these notes.) 
 </div>
 <div class="paranum"><a name="p8.6">8.6/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
@@ -345,7 +345,7 @@ subprogram with the same defining name, and having the same profile as
 the primitive subprogram except that <I>T</I> is systematically replaced 
 by <I>T</I>'Class in the types of its profile, is potentially use-visible. 
 The body of such a subprogram is as defined in <A HREF="AA-12-5-1.html">12.5.1</A> 
-for primitive subprograms of a formal type when the actual type is class-wide.<A NAME="I5828"></A> 
+for primitive subprograms of a formal type when the actual type is class-wide.<A NAME="I5824"></A> 
 </div>
 <div class="paranum"><a name="p9.b">9.b/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0071-1.TXT">AI05-0071-1</A></I>} 
@@ -483,7 +483,7 @@ formal subprograms:</I>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p24.a">24.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
-<A NAME="I5829"></A>The <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
+<A NAME="I5825"></A>The <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 is new. It allows the passing of dispatching operations to generic units.</div>
 <div class="paranum"><a name="p24.b">24.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
@@ -500,7 +500,7 @@ Added matching rules for <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_e
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p24.d">24.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0296-1.TXT">AI05-0296-1</A></I>} 
-<A NAME="I5830"></A>It is now illegal to declare a formal abstract subprogram 
+<A NAME="I5826"></A>It is now illegal to declare a formal abstract subprogram 
 whose controlling type is incomplete. It was never intended to allow 
 that, and such a type would have to come from outside of the generic 
 unit in Ada 2005, so it is unlikely to be useful. Moreover, a dispatching 
@@ -512,7 +512,7 @@ this new rule.&nbsp;</div>
 <div class="paranum"><a name="p24.e">24.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0071-1.TXT">AI05-0071-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0131-1.TXT">AI05-0131-1</A></I>} 
-<A NAME="I5831"></A><B>Correction:</B> Added construction of implicit 
+<A NAME="I5827"></A><B>Correction:</B> Added construction of implicit 
 subprograms for primitives of class-wide actual types, to make it possible 
 to import subprograms via formal subprograms as well as by implicit primitive 
 operations of a formal type. (This is a <B>Correction</B> as it is very 
@@ -529,7 +529,7 @@ This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p24.g">24.g/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0204-1.TXT">AI12-0204-1</A></I>} 
-<span class="insert5"><A NAME="I5832"></A><B>Correction:</B> Added a 
+<span class="insert5"><A NAME="I5828"></A><B>Correction:</B> Added a 
 rule to ensure that for an actual subprogram that is a prefixed view, 
 the prefix continues to exist during the life of the instantiation. If 
 the prefix is a subcomponent that depends on discriminants, Ada 2005 
@@ -541,7 +541,7 @@ that's inconsistent with other kinds of actual subprograms.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p24.h">24.h/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0165-1.TXT">AI12-0165-1</A></I>} 
-<span class="insert5"><A NAME="I5833"></A><B>Correction:</B> We now allow 
+<span class="insert5"><A NAME="I5829"></A><B>Correction:</B> We now allow 
 the actual for a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 to be an implicitly declared subprogram for a class-wide type. The rules 
 already required a compiler to be able to construct this subprogram for 

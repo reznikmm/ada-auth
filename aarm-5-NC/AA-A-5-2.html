@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +41,7 @@
 point numbers are provided in the package Numerics.Float_Random; the 
 generic package Numerics.Discrete_Random provides similar facilities 
 for the generation of pseudo-random integers and pseudo-random values 
-of enumeration types. <A NAME="I7249"></A>For brevity, pseudo-random 
+of enumeration types. <A NAME="I7241"></A>For brevity, pseudo-random 
 values of any of these types are called <I>random numbers</I>.</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">Some of the facilities provided are basic to all 
@@ -67,78 +67,97 @@ to unique sequences in each execution of a program.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Numerics.Float_Random has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p5">5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Numerics.Float_Random&nbsp;<B>is</B><A NAME="I7250"></A></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<B>package</B>&nbsp;Ada.Numerics.Float_Random<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B><A NAME="I7242"></A></div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Basic&nbsp;facilities</I></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7251"></A>Generator&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
-<div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7252"></A>Uniformly_Distributed&nbsp;<B>is</B>&nbsp;Float&nbsp;<B>range</B>&nbsp;0.0&nbsp;..&nbsp;1.0;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7253"></A>Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Uniformly_Distributed;</div>
-<div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7254"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7255"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7243"></A>Generator&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7244"></A>Uniformly_Distributed&nbsp;<B>is</B>&nbsp;Float&nbsp;<B>range</B>&nbsp;0.0&nbsp;..&nbsp;1.0;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7245"></A>Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Uniformly_Distributed<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7246"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7247"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Advanced&nbsp;facilities</I></SPAN></div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7256"></A>State&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
-<div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7257"></A>Save&nbsp;&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7248"></A>State&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7249"></A>Save&nbsp;&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To_State&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;State);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7258"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From_State&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;State);</div>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7250"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From_State&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;State)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7259"></A>Max_Image_Width&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;value</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7251"></A>Max_Image_Width&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;value</I></SPAN>;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7260"></A>Image&nbsp;(Of_State&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;State)&nbsp;&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7261"></A>Value&nbsp;(Coded_State&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;State;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7252"></A>Image&nbsp;(Of_State&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;State)&nbsp;&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7253"></A>Value&nbsp;(Coded_State&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;State;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Numerics.Float_Random;</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
-The type Generator needs finalization<A NAME="I7262"></A> (see <A HREF="AA-7-6.html">7.6</A>).</div>
+The type Generator needs finalization<A NAME="I7254"></A> (see <A HREF="AA-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Normal">The generic library package Numerics.Discrete_Random 
 has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p17">17</a></div>
-<div class="Examples"><A NAME="I7263"></A><BR>
-<B>generic</B><BR>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<B>generic</B><A NAME="I7255"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Result_Subtype&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
-<B>package</B>&nbsp;Ada.Numerics.Discrete_Random&nbsp;<B>is</B></div>
+<B>package</B>&nbsp;Ada.Numerics.Discrete_Random<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Basic&nbsp;facilities</I></SPAN></div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7264"></A>Generator&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
-<div class="paranum"><a name="p20">20</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7265"></A>Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Result_Subtype;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7256"></A>Generator&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7257"></A>Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Result_Subtype<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;</div>
 <div class="paranum"><a name="p20.1">20.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0144-1.TXT">AI12-0144-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Random&nbsp;(Gen&nbsp;&nbsp;&nbsp;:&nbsp;Generator;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;:&nbsp;Result_Subtype;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;:&nbsp;Result_Subtype)&nbsp;<B>return</B>&nbsp;Result_Subtype<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Random'Result&nbsp;<B>in</B>&nbsp;First&nbsp;..&nbsp;Last;</div>
-<div class="paranum"><a name="p21">21</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7266"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7267"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Random'Result&nbsp;<B>in</B>&nbsp;First&nbsp;..&nbsp;Last<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7258"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7259"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Advanced&nbsp;facilities</I></SPAN></div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7268"></A>State&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
-<div class="paranum"><a name="p24">24</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7269"></A>Save&nbsp;&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7260"></A>State&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7261"></A>Save&nbsp;&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To_State&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;State);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7270"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From_State&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;State);</div>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7262"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From_State&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;State)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;Gen;</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7271"></A>Max_Image_Width&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;value</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7263"></A>Max_Image_Width&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;value</I></SPAN>;</div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7272"></A>Image&nbsp;(Of_State&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;State)&nbsp;&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7273"></A>Value&nbsp;(Coded_State&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;State;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7264"></A>Image&nbsp;(Of_State&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;State)&nbsp;&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7265"></A>Value&nbsp;(Coded_State&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;State;</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -175,13 +194,13 @@ for all operations on a Generator. For this reason, Numerics.Float_Random
 and Numerics.Discrete_Random cannot be declared pure.&nbsp;</div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
-The type Generator needs finalization<A NAME="I7274"></A> (see <A HREF="AA-7-6.html">7.6</A>) 
+The type Generator needs finalization<A NAME="I7266"></A> (see <A HREF="AA-7-6.html">7.6</A>) 
 in every instantiation of Numerics.Discrete_Random.</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Normal">An object of the limited private type Generator is 
 associated with a sequence of random numbers. Each generator has a hidden 
 (internal) state, which the operations on generators use to determine 
-the position in the associated sequence. <A NAME="I7275"></A>All generators 
+the position in the associated sequence. <A NAME="I7267"></A>All generators 
 are implicitly initialized to an unspecified state that does not vary 
 from one program execution to another; they may also be explicitly initialized, 
 or reinitialized, to a time-dependent state, to a previously saved state, 
@@ -243,10 +262,10 @@ is raised.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
 <B>procedure</B>&nbsp;Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator);</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><A NAME="I7276"></A>Sets 
+<div class="Indented2" style="margin-bottom: 0.9em"><A NAME="I7268"></A>Sets 
 the state of the specified generator to one that is an unspecified function 
 of the value of the parameter Initiator (or to a time-dependent state, 
-if only a generator parameter is specified). <A NAME="I7277"></A>The 
+if only a generator parameter is specified). <A NAME="I7269"></A>The 
 latter form of the procedure is known as the <I>time-dependent Reset 
 procedure</I>.&nbsp;</div>
 <div class="paranum"><a name="p34.a">34.a</a></div>
@@ -293,7 +312,7 @@ deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0050">8652/0050</A></I>}
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0050">8652/0050</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00089.TXT">AI95-00089</A></I>} 
 It is a bounded error to invoke Value with a string that is not the image 
-of any generator state.<A NAME="I7278"></A> If the error is detected, 
+of any generator state.<A NAME="I7270"></A> If the error is detected, 
 Constraint_Error or Program_Error is raised. Otherwise, a call to Reset 
 with the resulting state will produce a generator such that calls to 
 Random with this generator will produce a sequence of values of the appropriate 
@@ -304,7 +323,7 @@ of values might not fulfill the implementation requirements of this subclause.
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p40.2">40.2/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0144-1.TXT">AI12-0144-1</A></I>} 
-Each call of a Random function has a <I>result range</I>;<A NAME="I7279"></A> 
+Each call of a Random function has a <I>result range</I>;<A NAME="I7271"></A> 
 this is the range First .. Last for the version of Random with First 
 and Last parameters and the range of the result subtype of the function 
 otherwise.</div>
@@ -524,7 +543,7 @@ initialize the generators in each Worker task.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p61.a">61.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
-<A NAME="I7280"></A><B>Amendment Correction:</B> Type Generator in Numerics.Float_Random 
+<A NAME="I7272"></A><B>Amendment Correction:</B> Type Generator in Numerics.Float_Random 
 and in an instance of Numerics.Discrete_Random is defined to need finalization. 
 If the restriction No_Nested_Finalization (see <A HREF="AA-D-7.html">D.7</A>) 
 applies to the partition, and Generator does not have a controlled part, 
@@ -555,7 +574,7 @@ unchanged while meeting this new requirement.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p61.d">61.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0144-1.TXT">AI12-0144-1</A></I>} 
-<A NAME="I7281"></A> The function Random with First and Last parameters 
+<A NAME="I7273"></A> The function Random with First and Last parameters 
 is new.&nbsp;</div>
 
 <HR>

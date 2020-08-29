@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,12 +50,12 @@ raises an exception.]&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
-<SPAN Class="swiss">raise_statement</SPAN><A NAME="I5658"></A><A NAME="S0308"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><B>raise</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I5659"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5660"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>];</span><span class="delete2"><B>&nbsp;raise</B>&nbsp;[<I>exception_</I><A NAME="I5661"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>];</span></div>
+<SPAN Class="swiss">raise_statement</SPAN><A NAME="I5654"></A><A NAME="S0308"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><B>raise</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I5655"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5656"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>];</span><span class="delete2"><B>&nbsp;raise</B>&nbsp;[<I>exception_</I><A NAME="I5657"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>];</span></div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert4"><SPAN Class="swiss">raise_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5662"></A><A NAME="S0309"></A><span class="insert4"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert4"><B>raise</B>&nbsp;<I>exception_</I><A NAME="I5663"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5664"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>]</span></div>
+<SPAN Class="swiss"></SPAN><span class="insert4"><SPAN Class="swiss">raise_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5658"></A><A NAME="S0309"></A><span class="insert4"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert4"><B>raise</B>&nbsp;<I>exception_</I><A NAME="I5659"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5660"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN>]</span></div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
 <span class="insert4">If a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
@@ -172,7 +172,7 @@ The <span class="insert4"><I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.h
 if any, <span class="insert4">of</span><span class="delete4">&nbsp;in</span> 
 a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 <span class="insert4">or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
-</span>shall denote an exception. <A NAME="I5665"></A>A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
+</span>shall denote an exception. <A NAME="I5661"></A>A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 with no <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (that is, a <I>re-raise statement</I>) shall be within a handler, but 
 not within a body enclosed by that handler.&nbsp;</div>
@@ -196,9 +196,9 @@ shall be any single type.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<A NAME="I5666"></A>To <I>raise an exception</I> is to raise a new occurrence 
+<A NAME="I5662"></A>To <I>raise an exception</I> is to raise a new occurrence 
 of that exception[, as explained in <A HREF="AA-11-4.html">11.4</A>]. 
-<A NAME="I5667"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
+<A NAME="I5663"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 with an <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 the named exception is raised.<span class="insert4">&nbsp;Similarly, for the 
 evaluation of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN>, 
@@ -206,7 +206,7 @@ the named exception is raised.</span> <span class="insert2">[</span><span class=
 both of these cases, if</span><span class="insert2"></span><span class="insert2"><span class="delete4">&nbsp;If</span></span><span class="insert2">&nbsp;a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 </span><span class="insert4">or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN> 
 </span><span class="insert2">is present, the&nbsp;</span><span class="insert4">expression</span><span class="insert2"></span><span class="insert2"><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">&nbsp;expression</A></SPAN></span></span><span class="insert2">&nbsp;is evaluated and its value is associated with the exception occurrence.]</span> 
-<A NAME="I5668"></A>For the execution of a re-raise statement, the exception 
+<A NAME="I5664"></A>For the execution of a re-raise statement, the exception 
 occurrence that caused transfer of control to the innermost enclosing 
 handler is raised [again].&nbsp;</div>
 <div class="paranum"><a name="p4.a.1">4.a.1/2</a></div>
@@ -259,7 +259,7 @@ parts of the syntax any force.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p8.b">8.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
-<span class="insert2"><A NAME="I5669"></A>The syntax of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
+<span class="insert2"><A NAME="I5665"></A>The syntax of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN> 
 is extended to include a string message. This is more convenient than 
 calling Exceptions.Exception_Message (<I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>'Identity, 
 <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>), 
@@ -271,7 +271,7 @@ and should encourage the use of message strings when raising exceptions.</span>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 <span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
 <span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<span class="insert4"><A NAME="I5670"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
+<span class="insert4"><A NAME="I5666"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
 is new. This construct is necessary to allow conversion of existing specifications 
 to use preconditions and predicates without changing the exceptions raised. 
 It is considered important enough to be added to Ada 2012 rather than 

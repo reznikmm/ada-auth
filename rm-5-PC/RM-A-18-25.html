@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,7 +36,7 @@
 <HR>
 <H1>A.18.25 The Generic Package Containers.Bounded_Multiway_Trees</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">The language-defined generic package Containers.Bounded_Multiway_Trees<A NAME="I8171"></A> 
+<div class="Normal">The language-defined generic package Containers.Bounded_Multiway_Trees<A NAME="I8188"></A> 
 provides a private type Tree and a set of operations. It provides the 
 same operations as the package Containers.Multiway_Trees (see <A HREF="RM-A-18-10.html">A.18.10</A>), 
 with the difference that the maximum storage is bounded.</div>
@@ -49,7 +49,7 @@ same contents and semantics as Containers.Multiway_Trees except:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Bulleted">The <span class="insert5">aspect</span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
 Preelaborate is replaced with <span class="insert5">aspect</span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
-Pure.</div>
+Pure.<span class="insert5">&nbsp;Aspect Global is deleted.</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The type Tree is 
 declared with a discriminant that specifies the capacity (maximum number 
@@ -77,10 +77,10 @@ subexpression of the precondition is replaced with:</span><span class="delete5">
 allocation of internal storage includes a check that the capacity is 
 not exceeded, and Capacity_Error is raised if this check fails.</span></div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Container)&nbsp;-&nbsp;1&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;Count<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5"></span>In 
 procedure Assign, <span class="insert5">the precondition is altered to:</span><span class="delete5">&nbsp;if 
@@ -88,9 +88,9 @@ Source length is greater than Target capacity, then Capacity_Error is
 propagated.</span>&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Source)&nbsp;-&nbsp;1&nbsp;&lt;=&nbsp;Target.Capacity<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Source)&nbsp;-&nbsp;1&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">Function Copy is 
 declared as follows:&nbsp;</div>
@@ -99,11 +99,12 @@ declared as follows:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Node_Count&nbsp;(Source)&nbsp;-&nbsp;1<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Node_Count&nbsp;(Copy'Result)&nbsp;=&nbsp;Node_Count&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Source)&nbsp;-&nbsp;1&nbsp;<B>else</B>&nbsp;Capacity)</span>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Copy'Result)&nbsp;=&nbsp;Node_Count&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Source)&nbsp;-&nbsp;1&nbsp;<B>else</B>&nbsp;Capacity)</span>;</div>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="Indented2"><span class="insert5">Returns a list whose elements 
 have the same values as the elements of Source.</span><span class="delete5">&nbsp;If 
@@ -117,9 +118,10 @@ the four-parameter procedure Copy_Subtree, the last <B>or else</B> of
 the precondition is replaced by:</span></div>
 <div class="paranum"><a name="p11.2">11.2/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Is_Root&nbsp;(Source)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+&nbsp;Subtree_Node_Count&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+&nbsp;Subtree_Node_Count&nbsp;(Source)&nbsp;&lt;=&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
 <div class="paranum"><a name="p11.3">11.3/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">In 
 the five-parameter procedure Copy_Subtree, the last <B>or else</B> of 
@@ -150,7 +152,7 @@ Splice_Subtree propagates Capacity_Error.</span></div>
 <div class="paranum"><a name="p12.1">12.1/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Source,&nbsp;Position)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Same_Object&nbsp;(Target,&nbsp;Source)&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Target'Has_Same_Object&nbsp;(Source)&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subtree_Node_Count&nbsp;(Source,&nbsp;Position)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)&nbsp;<B>and&nbsp;then</B></span></div>
@@ -164,26 +166,26 @@ then Splice_Children propagates Capacity_Error.</span></div>
 <div class="paranum"><a name="p13.1">13.1/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Before&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;(Target,&nbsp;Before)&nbsp;/=&nbsp;Target_Parent<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Same_Object&nbsp;(Target,&nbsp;Source)&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Target'Has_Same_Object&nbsp;(Source)&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node_Count&nbsp;(Target)&nbsp;-&nbsp;1&nbsp;+<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Child_Count&nbsp;(Source,&nbsp;Source_Parent)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)&nbsp;<B>and&nbsp;then</B></span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Child_Count&nbsp;(Source,&nbsp;Source_Parent)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)&nbsp;<B>and&nbsp;then</B></span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><A NAME="I8172"></A>It is a bounded error to assign 
+<div class="Normal"><A NAME="I8189"></A>It is a bounded error to assign 
 from a bounded tree object while tampering with elements or cursors of 
 that object is prohibited. Either Program_Error is raised by the assignment, 
 execution proceeds with the target object prohibiting tampering with 
-elements or cursors, or execution proceeds normally.<A NAME="I8173"></A> 
+elements or cursors, or execution proceeds normally.<A NAME="I8190"></A> 
 </div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal">When a bounded tree object <I>T</I> is finalized, 
 if tampering with cursors is prohibited for <I>T</I> other than due to 
-an assignment from another tree, then execution is erroneous. <A NAME="I8174"></A></div>
+an assignment from another tree, then execution is erroneous. <A NAME="I8191"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p16">16/3</a></div>

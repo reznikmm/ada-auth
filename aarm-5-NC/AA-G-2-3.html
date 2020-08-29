@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -66,10 +66,10 @@ the attribute T'Round may be used to imply explicit conversion with rounding
 (see <A HREF="AA-3-5-10.html">3.5.10</A>).</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">When the result type is a floating point type, the 
-accuracy is as given in <A HREF="AA-G-2-1.html">G.2.1</A>. <A NAME="I10058"></A>For 
+accuracy is as given in <A HREF="AA-G-2-1.html">G.2.1</A>. <A NAME="I10076"></A>For 
 some combinations of the operand and result types in the remaining cases, 
 the result is required to belong to a small set of values called the 
-<I>perfect result set</I>; <A NAME="I10059"></A>for other combinations, 
+<I>perfect result set</I>; <A NAME="I10077"></A>for other combinations, 
 it is required merely to belong to a generally larger and implementation-defined 
 set of values called the <I>close result set</I>. When the result type 
 is a decimal fixed point type, the perfect result set contains a single 
@@ -217,12 +217,12 @@ operand to a fixed point type shall belong to the perfect result set.</div>
 <div class="Normal">The possibility of overflow in the result of a predefined 
 arithmetic operation or conversion yielding a result of a fixed point 
 type T is analogous to that for floating point types, except for being 
-related to the base range instead of the safe range. <A NAME="I10060"></A><A NAME="I10061"></A>If 
+related to the base range instead of the safe range. <A NAME="I10078"></A><A NAME="I10079"></A>If 
 all of the permitted results belong to the base range of T, then the 
 implementation shall deliver one of the permitted results; otherwise, 
 </div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Bulleted"><A NAME="I10062"></A>if T'Machine_Overflows is 
+<div class="Bulleted"><A NAME="I10080"></A>if T'Machine_Overflows is 
 True, the implementation shall either deliver one of the permitted results 
 or raise Constraint_Error;</div>
 <div class="paranum"><a name="p27">27</a></div>
@@ -235,7 +235,7 @@ attribute of the result type is False.</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p27.b">27.b</a></div>
-<div class="Annotations"><A NAME="I10063"></A>Since the values of a fixed 
+<div class="Annotations"><A NAME="I10081"></A>Since the values of a fixed 
 point type are now just the integer multiples of its <I>small</I>, the 
 possibility of using extra bits available in the chosen representation 
 for extra accuracy rather than for increasing the base range would appear 

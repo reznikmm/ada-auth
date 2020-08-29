@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 <HR>
 <H1>4.5.10 Reduction Expressions</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal">Reduction expressions<A NAME="I3045"></A><A NAME="I3046"></A> 
+<div class="Normal">Reduction expressions<A NAME="I3047"></A><A NAME="I3048"></A> 
 provide a way to map or transform a collection of values into a new set 
 of values, and then summarize the values produced by applying an operation 
 to reduce the set to a single value result. A reduction expression is 
@@ -46,16 +46,16 @@ of the reduction attributes Reduce or Parallel_Reduce.</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">reduction_attribute_reference</SPAN><A NAME="I3047"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3048"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">value_sequence</A></SPAN>'<A NAME="I3049"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3050"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I3051"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">reduction_attribute_reference</SPAN><A NAME="I3049"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3050"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">value_sequence</A></SPAN>'<A NAME="I3051"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3052"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I3053"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">value_sequence</SPAN><A NAME="I3052"></A><A NAME="S0159"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;'['&nbsp;[<B>parallel</B>[(<A NAME="I3053"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>)]]&nbsp;<A NAME="I3054"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN>&nbsp;']'</div>
+<div class="Indented1"><SPAN Class="swiss">value_sequence</SPAN><A NAME="I3054"></A><A NAME="S0159"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;'['&nbsp;[<B>parallel</B>[(<A NAME="I3055"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>)]]&nbsp;<A NAME="I3056"></A><SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN>&nbsp;']'</div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">reduction_attribute_designator</SPAN><A NAME="I3055"></A><A NAME="S0160"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reduction_</I><A NAME="I3056"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>(<A NAME="I3057"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0161">reduction_specification</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">reduction_attribute_designator</SPAN><A NAME="I3057"></A><A NAME="S0160"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reduction_</I><A NAME="I3058"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>(<A NAME="I3059"></A><SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0161">reduction_specification</A></SPAN>)</div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">reduction_specification</SPAN><A NAME="I3058"></A><A NAME="S0161"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reducer_</I><A NAME="I3059"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>,&nbsp;<I>initial_value_</I><A NAME="I3060"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">reduction_specification</SPAN><A NAME="I3060"></A><A NAME="S0161"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reducer_</I><A NAME="I3061"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>,&nbsp;<I>initial_value_</I><A NAME="I3062"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Indented1">The <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">value_sequence</A></SPAN> 
@@ -83,15 +83,17 @@ are determined by the following rules:</div>
 <div class="Bulleted"><I>Accum_Type</I> is a subtype of the expected 
 type of the <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN>.</div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em">A <I>reducer subprogram</I><A NAME="I3061"></A> 
+<div class="Bulleted" style="margin-bottom: 0.3em">A <I>reducer subprogram</I><A NAME="I3063"></A> 
 is either subtype conformant with the following specification:</div>
 <div class="paranum"><a name="p12">12/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<I>Accum_Type</I>;&nbsp;Value&nbsp;:&nbsp;<I>Value_Type</I>)&nbsp;<B>return</B>&nbsp;<I>Accum_Type</I>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<I>Accum_Type</I>;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;<I>Value_Type</I>)&nbsp;<B>return</B>&nbsp;<I>Accum_Type</I>;</div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Bulleted-NoPrefix" style="margin-bottom: 0.3em">or is subtype 
 conformant with the following specification:</div>
 <div class="paranum"><a name="p14">14/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;<I>Accum_Type</I>;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;<I>Value_Type</I>);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;<I>Accum_Type</I>;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;<I>Value_Type</I>);</div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Bulleted">The <I>reducer_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0161">reduction_specification</A></SPAN> 
@@ -127,7 +129,7 @@ parameter of the subprogram denoted by the <I>reducer_</I><SPAN Class="swiss"><A
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p21">21/5</a></div>
-<div class="Normal"><A NAME="I3062"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">value_sequence</A></SPAN>, 
+<div class="Normal"><A NAME="I3064"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">value_sequence</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
 is elaborated, then an iteration is performed, and for each value conditionally 
 produced by the iteration (see <A HREF="RM-5-5.html">5.5</A> and <A HREF="RM-5-5-2.html">5.5.2</A>), 
@@ -144,7 +146,7 @@ the enclosing <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0158">reduction_attri
 is a parallel construct, and the sequence of values is generated by a 
 parallel iteration (as defined in <A HREF="RM-5-5.html">5.5</A>, <A HREF="RM-5-5-1.html">5.5.1</A>, 
 and <A HREF="RM-5-5-2.html">5.5.2</A>), as a set of non-empty, non-overlapping 
-contiguous chunks (<I>subsequences</I>)<A NAME="I3063"></A> with one 
+contiguous chunks (<I>subsequences</I>)<A NAME="I3065"></A> with one 
 logical thread of control (see clause <A HREF="RM-9.html">9</A>) associated 
 with each subsequence. If there is a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0180">chunk_specification</A></SPAN>, 
 it determines the maximum number of chunks, as defined in <A HREF="RM-5-5.html">5.5</A>; 
@@ -155,18 +157,18 @@ V, the following attribute is defined:</div>
 <div class="paranum"><a name="p24">24/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">V'Reduce(Reducer, 
 Initial_Value)</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3064"></A><A NAME="I3065"></A>This attribute represents a <I>reduction 
+<A NAME="I3066"></A><A NAME="I3067"></A>This attribute represents a <I>reduction 
 expression</I>, and is in the form of a <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p25">25/5</a></div>
-<div class="WideHanging-Body"><A NAME="I3066"></A>The evaluation of a 
+<div class="WideHanging-Body"><A NAME="I3068"></A>The evaluation of a 
 use of this attribute begins by evaluating the parts of the <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN> 
 (the <I>reducer_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 Reducer and the <I>initial_value_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
-Initial_Value), in an arbitrary order.<A NAME="I3067"></A> It then initializes 
+Initial_Value), in an arbitrary order.<A NAME="I3069"></A> It then initializes 
 the <I>accumulator</I> of the reduction expression to the value of the 
 <I>initial_value_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
-(the <I>initial value</I>).<A NAME="I3068"></A> <A NAME="I3069"></A> 
+(the <I>initial value</I>).<A NAME="I3070"></A> <A NAME="I3071"></A> 
 The <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">value_sequence</A></SPAN> 
 V is then evaluated.</div>
 <div class="paranum"><a name="p26">26/5</a></div>
@@ -214,7 +216,7 @@ the following attributes are defined:</div>
 <div class="paranum"><a name="p33">33/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">X'Reduce(Reducer, 
 Initial_Value)</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3070"></A><A NAME="I3071"></A>X'Reduce is a reduction expression 
+<A NAME="I3072"></A><A NAME="I3073"></A>X'Reduce is a reduction expression 
 that yields a result equivalent to replacing the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of the attribute with the <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">value_sequence</A></SPAN>: 
 </div>
@@ -223,7 +225,7 @@ of the attribute with the <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">val
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">X'Parallel_Reduce(Reducer, 
 Initial_Value)</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3072"></A><A NAME="I3073"></A>X'Parallel_Reduce is a reduction 
+<A NAME="I3074"></A><A NAME="I3075"></A>X'Parallel_Reduce is a reduction 
 expression that yields a result equivalent to replacing the attribute 
 <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 with Reduce and the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
@@ -234,7 +236,7 @@ of the attribute with the <SPAN Class="swiss"><A HREF="RM-4-5-10.html#S0159">val
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p35">35/5</a></div>
-<div class="Normal"><A NAME="I3074"></A>For a parallel reduction expression, 
+<div class="Normal"><A NAME="I3076"></A>For a parallel reduction expression, 
 it is a bounded error if the reducer subprogram is not associative. That 
 is, for any arbitrary values of subtype <I>Value_Type</I> <I>A</I>, <I>B</I>, 
 <I>C</I> and a reducer function <I>R</I>, the result of <I>R</I> (<I>A</I>, 
@@ -243,7 +245,7 @@ is, for any arbitrary values of subtype <I>Value_Type</I> <I>A</I>, <I>B</I>,
 are Program_Error, or a result that does not match the equivalent sequential 
 reduction expression due to the order of calls on the reducer subprogram 
 being unspecified in the overall reduction. Analogous rules apply in 
-the case of a reduction procedure.<A NAME="I3075"></A></div>
+the case of a reduction procedure.<A NAME="I3077"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p36">36/5</a></div>
@@ -257,8 +259,8 @@ that returns its result as a Reduction Expression:</div>
 that computes the Sine of X using a Taylor expansion:</div>
 <div class="paranum"><a name="p39">39/5</a></div>
 <div class="Examples"><B>function</B>&nbsp;Sine&nbsp;(X&nbsp;:&nbsp;Float;&nbsp;Num_Terms&nbsp;:&nbsp;Positive&nbsp;:=&nbsp;5)&nbsp;<B>return</B>&nbsp;Float&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;([<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1..Num_Terms&nbsp;=&gt;&nbsp;(-1.0)**(I-1)&nbsp;*&nbsp;X**(2*I-1)/Float(Factorial(2*I-1))]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Reduce(&quot;+&quot;,&nbsp;0.0));</div>
+&nbsp;&nbsp;&nbsp;([<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1..Num_Terms&nbsp;=&gt;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(-1.0)**(I-1)&nbsp;*&nbsp;X**(2*I-1)/Float(Factorial(2*I-1))]'Reduce(&quot;+&quot;,&nbsp;0.0));</div>
 <div class="paranum"><a name="p40">40/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A reduction expression 
 that outputs the sum of squares:</div>
@@ -273,7 +275,7 @@ to compute the value of Pi:</div>
 <B>function</B>&nbsp;Pi&nbsp;(Number_Of_Steps&nbsp;:&nbsp;Natural&nbsp;:=&nbsp;10_000)&nbsp;<B>return</B>&nbsp;Real&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;(1.0&nbsp;/&nbsp;Real&nbsp;(Number_Of_Steps)&nbsp;*<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;[<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;Number_Of_Steps&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4.0&nbsp;/&nbsp;(1.0&nbsp;+&nbsp;((Real&nbsp;(I)&nbsp;-&nbsp;0.5)&nbsp;*&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4.0&nbsp;/&nbsp;(1.0&nbsp;+&nbsp;((Real&nbsp;(I)&nbsp;-&nbsp;0.5)&nbsp;*<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1.0&nbsp;/&nbsp;Real&nbsp;(Number_Of_Steps)))**2))]<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Reduce(&quot;+&quot;,&nbsp;0.0));</div>
 <div class="paranum"><a name="p44">44/5</a></div>

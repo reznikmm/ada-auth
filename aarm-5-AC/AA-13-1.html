@@ -38,7 +38,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -52,7 +52,7 @@
 <div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0295-1.TXT">AI05-0295-1</A></I>} 
-<span class="insert1">[</span><span class="insert3"><A NAME="I6073"></A></span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;Representation 
+<span class="insert1">[</span><span class="insert3"><A NAME="I6069"></A></span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;Representation 
 and operational items can be used to specify aspects of entities.&nbsp;</span></span><span class="insert1">Two 
 kinds of aspects of entities can be specified:&nbsp;</span><span class="insert1"><span class="delete3">aspects 
 of&nbsp;</span></span><span class="insert1">representation</span><span class="insert3">&nbsp;aspects</span><span class="insert1">&nbsp;and operational aspects. Representation 
@@ -85,12 +85,12 @@ item.]</span></div>
 <div class="paranum"><a name="p1">1/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<A NAME="I6074"></A><A NAME="I6075"></A><A NAME="I6076"></A>There are 
+<A NAME="I6070"></A><A NAME="I6071"></A><A NAME="I6072"></A>There are 
 <span class="insert1">six</span><span class="delete1">&nbsp;three</span> kinds 
 of <I>representation items</I>: <span class="insert1"><SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>s 
 for representation attributes, <SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN>s, 
 <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>s, 
-<SPAN Class="swiss"><A HREF="AA-J-7.html#S0371">at_clause</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-J-7.html#S0368">at_clause</A></SPAN>s, 
 </span><span class="delete1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">representation_clause</A></SPAN>s, 
 </span><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>s, 
 and <I>representation pragmas</I>. [<span class="delete1">Representation 
@@ -107,7 +107,7 @@ in a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN>.<
 <div class="paranum"><a name="p1.1">1.1/1</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<span class="insert1">An <A NAME="I6077"></A><I>operational item</I> 
+<span class="insert1">An <A NAME="I6073"></A><I>operational item</I> 
 is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 for an operational attribute.</span></div>
 <div class="paranum"><a name="p1.2">1.2/1</a></div>
@@ -153,14 +153,14 @@ on the declaration of the entity. Some aspects may be queried via attributes.</s
 <div class="paranum"><a name="p2">2/1</a></div>
 <div class="Indented1">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert1"><SPAN Class="swiss">aspect_clause</SPAN></span><SPAN Class="swiss"></SPAN><span class="delete1"><SPAN Class="swiss">&nbsp;representation_clause</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I6078"></A><A NAME="S0343"></A><A NAME="S0344"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I6079"></A><SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6080"></A><SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6081"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6082"></A><SPAN Class="swiss"><A HREF="AA-J-7.html#S0371">at_clause</A></SPAN></div>
+<SPAN Class="swiss"></SPAN><span class="insert1"><SPAN Class="swiss">aspect_clause</SPAN></span><SPAN Class="swiss"></SPAN><span class="delete1"><SPAN Class="swiss">&nbsp;representation_clause</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I6074"></A><A NAME="S0343"></A><A NAME="S0344"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I6075"></A><SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6076"></A><SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6077"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6078"></A><SPAN Class="swiss"><A HREF="AA-J-7.html#S0368">at_clause</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">local_name</SPAN><A NAME="I6083"></A><A NAME="S0345"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I6084"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6085"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>'<A NAME="I6086"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>library_unit_</I><A NAME="I6087"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">local_name</SPAN><A NAME="I6079"></A><A NAME="S0345"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I6080"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I6081"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>'<A NAME="I6082"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>library_unit_</I><A NAME="I6083"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p4">4/1</a></div>
 <div class="Indented1">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
@@ -168,7 +168,7 @@ A representation pragma is allowed only at places where <span class="insert1">an
 <SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN></span><span class="delete1">&nbsp;a 
 <SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">representation_clause</A></SPAN></span> 
 or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN> 
-is allowed. <span class="insert1"><A NAME="I6088"></A></span></div>
+is allowed. <span class="insert1"><A NAME="I6084"></A></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/1</a></div>
@@ -262,7 +262,7 @@ See <A HREF="AA-13-5-1.html">13.5.1</A>, &ldquo;<A HREF="AA-13-5-1.html">Record
 Representation Clauses</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<A NAME="I6089"></A><A NAME="I6090"></A>The <I>representation</I> of 
+<A NAME="I6085"></A><A NAME="I6086"></A>The <I>representation</I> of 
 an object consists of a certain number of bits (the <I>size</I> of the 
 object). <span class="insert2">For an object of an elementary type, these</span><span class="delete2">&nbsp;These</span> 
 are the bits that are normally read or updated by the machine code when 
@@ -272,7 +272,7 @@ and include bits occupied by subcomponents of the object. If</span><span class="
 includes some padding bits, when</span> the size of <span class="insert2">an</span><span class="delete2">&nbsp;the</span> 
 object is greater than <span class="insert2">that</span><span class="delete2">&nbsp;the 
 size</span> of its subtype<span class="insert2">, the additional bits 
-are padding bits.</span><span class="delete2">. <A NAME="I6091"></A></span><A NAME="I6092"></A><span class="insert2">For 
+are padding bits.</span><span class="delete2">. <A NAME="I6087"></A></span><A NAME="I6088"></A><span class="insert2">For 
 an elementary object, these</span><span class="delete2">&nbsp;Such</span> 
 padding bits <span class="delete2">are considered to be part of the representation 
 of the object, rather than being gaps between objects, if these bits 
@@ -281,7 +281,7 @@ the others. For a composite object, padding bits might not be read or
 updated in any given composite operation, depending on the implementation</span>.</div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<A NAME="I6093"></A><A NAME="I6094"></A>Discontiguous representations 
+<A NAME="I6089"></A><A NAME="I6090"></A>Discontiguous representations 
 are allowed, but the ones we're interested in here are generally contiguous 
 sequences of bits.<span class="insert2">&nbsp;For a discontiguous representation, 
 the size doesn't necessarily describe the &ldquo;footprint&rdquo; of 
@@ -355,13 +355,13 @@ more concrete.&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0112-1.TXT">AI05-0112-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0295-1.TXT">AI05-0295-1</A></I>} 
-<A NAME="I6095"></A><A NAME="I6096"></A><span class="insert3"><A NAME="I6097"></A></span><span class="delete3"><A NAME="I6098"></A></span>A 
+<A NAME="I6091"></A><A NAME="I6092"></A><span class="insert3"><A NAME="I6093"></A></span><span class="delete3"><A NAME="I6094"></A></span>A 
 representation item <I>directly specifies</I> <span class="insert3">a 
 <I>representation aspect</I></span><span class="delete3">&nbsp;an <I>aspect 
 of representation</I></span> of the entity denoted by the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>, 
 except in the case of a type-related representation item, whose <SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN> 
 shall denote a first subtype, and which directly specifies an aspect 
-of the subtype's type. <A NAME="I6099"></A><A NAME="I6100"></A><A NAME="I6101"></A><A NAME="I6102"></A>A 
+of the subtype's type. <A NAME="I6095"></A><A NAME="I6096"></A><A NAME="I6097"></A><A NAME="I6098"></A>A 
 representation item that names a subtype is either <I>subtype-specific</I> 
 (Size and Alignment clauses) or <I>type-related</I> (all others). [Subtype-specific 
 aspects may differ for different subtypes of the same type.]</div>
@@ -383,13 +383,13 @@ specifying the associated aspects is preferred.</span>&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Each specifiable attribute 
 constitutes a separate aspect. An <SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN> 
 specifies the coding aspect. A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
-(without the <SPAN Class="swiss"><A HREF="AA-J-8.html#S0372">mod_clause</A></SPAN>) 
+(without the <SPAN Class="swiss"><A HREF="AA-J-8.html#S0369">mod_clause</A></SPAN>) 
 specifies the record layout aspect. Each representation pragma specifies 
 a separate aspect.&nbsp;</div>
 <div class="paranum"><a name="p8.e">8.e</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We don't need to say that an 
-<SPAN Class="swiss"><A HREF="AA-J-7.html#S0371">at_clause</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="AA-J-8.html#S0372">mod_clause</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-J-7.html#S0368">at_clause</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-J-8.html#S0369">mod_clause</A></SPAN> 
 specify separate aspects, because these are equivalent to <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>s. 
 See <A HREF="AA-J-7.html">J.7</A>, &ldquo;<A HREF="AA-J-7.html">At Clauses</A>&rdquo;, 
 and <A HREF="AA-J-8.html">J.8</A>, &ldquo;<A HREF="AA-J-8.html">Mod Clauses</A>&rdquo;.</div>
@@ -591,7 +591,7 @@ of the type of the subtype</span><span class="insert1"></span><span class="inser
 The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN> 
 of an operational item shall denote a first subtype. An operational item 
 that names a subtype is type-related</span></span><span class="insert1">. 
-<A NAME="I6103"></A><A NAME="I6104"></A><A NAME="I6105"></A><A NAME="I6106"></A></span></div>
+<A NAME="I6099"></A><A NAME="I6100"></A><A NAME="I6101"></A><A NAME="I6102"></A></span></div>
 <div class="paranum"><a name="p8.uu">8.uu/1</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><span class="insert1"><B>Ramification: 
 </B></span>{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
@@ -926,7 +926,7 @@ cannot conflict.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0059-1.TXT">AI12-0059-1</A></I>} 
 If two subtypes statically match, then their subtype-specific aspects 
 (<span class="insert5">for example,&nbsp;</span>Size and Alignment) are the 
-same. <A NAME="I6107"></A></div>
+same. <A NAME="I6103"></A></div>
 <div class="paranum"><a name="p14.a">14.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0295-1.TXT">AI05-0295-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0059-1.TXT">AI12-0059-1</A></I>} 
@@ -1120,7 +1120,7 @@ the parameter names and types, and the needed implicit conversions.</span>
 <div class="Normal" style="margin-bottom: 0.4em">Each aspect of representation 
 of an entity is as follows:&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Bulleted"><A NAME="I6108"></A>If the aspect is <I>specified</I> 
+<div class="Bulleted"><A NAME="I6104"></A>If the aspect is <I>specified</I> 
 for the entity, meaning that it is either directly specified or inherited, 
 then that aspect of the entity is as specified, except in the case of 
 Storage_Size, which specifies a minimum.&nbsp;</div>
@@ -1130,7 +1130,7 @@ queries of the aspect return the specified value. For example, if the
 user writes &ldquo;<B>for</B> X'Size <B>use</B> 32;&rdquo;, then a query 
 of X'Size will return 32.&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Bulleted"><A NAME="I6109"></A>If an aspect of representation 
+<div class="Bulleted"><A NAME="I6105"></A>If an aspect of representation 
 of an entity is not specified, it is chosen by default in an unspecified 
 manner.&nbsp;</div>
 <div class="paranum"><a name="p18.a">18.a/3</a></div>
@@ -1163,7 +1163,7 @@ do not have to be the same as those of the underlying object.</span>
 <div class="paranum"><a name="p18.1">18.1/1</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
-<span class="insert1"><A NAME="I6110"></A>If an operational aspect is 
+<span class="insert1"><A NAME="I6106"></A>If an operational aspect is 
 <I>specified</I> for an entity (meaning that it is either directly specified 
 or inherited), then that aspect of the entity is as specified. Otherwise, 
 the aspect of the entity has the default value for that aspect.</span></div>
@@ -1175,16 +1175,16 @@ or&nbsp;</span><span class="insert2"></span><span class="insert2"><span class="d
 item that specifies&nbsp;</span><span class="insert3">a</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;an 
 aspect of</span></span><span class="insert2">&nbsp;representation</span><span class="insert3">&nbsp;aspect</span><span class="insert2">&nbsp;that would have been chosen in the 
 absence of the&nbsp;</span><span class="insert3"><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
-or&nbsp;</span><span class="insert2">representation item is said to be <I>confirming</I>.<A NAME="I6111"></A></span><span class="insert3">&nbsp;The aspect value specified in this case is said to be a <I>confirming</I> 
+or&nbsp;</span><span class="insert2">representation item is said to be <I>confirming</I>.<A NAME="I6107"></A></span><span class="insert3">&nbsp;The aspect value specified in this case is said to be a <I>confirming</I> 
 representation aspect value. Other values of the aspect are said to be 
 <I>nonconfirming</I>, as are the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>s 
-and representation items that specified them.<A NAME="I6112"></A> <A NAME="I6113"></A><A NAME="I6114"></A><A NAME="I6115"></A><A NAME="I6116"></A></span><span class="insert2"></span></div>
+and representation items that specified them.<A NAME="I6108"></A> <A NAME="I6109"></A><A NAME="I6110"></A><A NAME="I6111"></A><A NAME="I6112"></A></span><span class="insert2"></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p19">19/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<span class="insert1"><A NAME="I6117"></A></span><span class="delete1"><A NAME="I6118"></A></span>For 
+<span class="insert1"><A NAME="I6113"></A></span><span class="delete1"><A NAME="I6114"></A></span>For 
 the elaboration of <span class="insert1">an <SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN></span><span class="delete1">&nbsp;a 
 <SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">representation_clause</A></SPAN></span>, 
 any evaluable constructs within it are evaluated.&nbsp;</div>
@@ -1200,7 +1200,7 @@ for pragmas in <span class="insert3"><A HREF="AA-2-8.html">2.8</A></span><span c
 An implementation may interpret <span class="delete3">aspects of&nbsp;</span>representation<span class="insert3">&nbsp;aspects</span> in an implementation-defined manner. An implementation 
 may place implementation-defined restrictions on <span class="insert3">the 
 specification of&nbsp;</span>representation <span class="insert3">aspects</span><span class="delete3">&nbsp;items</span>. 
-<A NAME="I6119"></A>A <I>recommended level of support</I> is <span class="insert3">defined</span><span class="delete3">&nbsp;specified</span> 
+<A NAME="I6115"></A>A <I>recommended level of support</I> is <span class="insert3">defined</span><span class="delete3">&nbsp;specified</span> 
 for <span class="insert3">the specification of&nbsp;</span>representation 
 <span class="insert3">aspects</span><span class="delete3">&nbsp;items</span> 
 and related features in each subclause. These recommendations are changed 
@@ -1229,7 +1229,7 @@ excessive inefficiency, for example.</div>
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0295-1.TXT">AI05-0295-1</A></I>} 
-<A NAME="I6120"></A>The recommended level of support for <span class="insert3">the 
+<A NAME="I6116"></A>The recommended level of support for <span class="insert3">the 
 specification of&nbsp;</span>all representation <span class="insert3">aspects</span><span class="delete3">&nbsp;items</span> 
 is qualified as follows:&nbsp;</div>
 <div class="paranum"><a name="p21.1">21.1/3</a></div>
@@ -1406,7 +1406,7 @@ this International Standard, and are summarized in <A HREF="AA-K-1.html">K.1</A>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p29.a">29.a</a></div>
-<div class="Annotations"><A NAME="I6121"></A>It is now illegal for a 
+<div class="Annotations"><A NAME="I6117"></A>It is now illegal for a 
 representation item to cause a derived by-reference type to have a different 
 record layout from its parent. This is necessary for by-reference parameter 
 passing to be feasible. This only affects programs that specify the representation 
@@ -1419,7 +1419,7 @@ Pack to A2.&nbsp;</div>
 <div class="paranum"><a name="p29.b">29.b/1</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<A NAME="I6122"></A>Ada 95 allows additional <span class="insert1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN>s</span><span class="delete1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">&nbsp;representation_clause</A></SPAN>s</span> 
+<A NAME="I6118"></A>Ada 95 allows additional <span class="insert1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN>s</span><span class="delete1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">&nbsp;representation_clause</A></SPAN>s</span> 
 for objects.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
@@ -1472,7 +1472,7 @@ Representation Support</A>&rdquo;.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p29.i">29.i/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<span class="insert2"><A NAME="I6123"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I6119"></A><B>Amendment Correction:</B> 
 Confirming representation items are defined, and the recommended level 
 of support is now that they always be supported.</span>&nbsp;</div>
 
@@ -1522,7 +1522,7 @@ that subprogram inheritance works like derivation of subprograms.</span>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p29.p">29.p/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0106-1.TXT">AI05-0106-1</A></I>} 
-<span class="insert3"><A NAME="I6124"></A><B>Correction:</B> Specifying 
+<span class="insert3"><A NAME="I6120"></A><B>Correction:</B> Specifying 
 a language-defined aspect for a generic formal parameter is no longer 
 allowed. Most aspects could not be specified on these anyway; moreover, 
 this was not allowed in Ada 83, so it is unlikely that compilers are 
@@ -1560,7 +1560,7 @@ item&quot;. This better separates <I>how</I> an aspect is specified from
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p29.u">29.u/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0109-1.TXT">AI12-0109-1</A></I>} 
-<span class="insert4"><A NAME="I6125"></A><B>Corrigendum:</B> Added a 
+<span class="insert4"><A NAME="I6121"></A><B>Corrigendum:</B> Added a 
 rule that makes it illegal to specify a representation value after a 
 type is derived from an untagged by-reference type. This restriction 
 is incompatible, but since the implementation would have had to copy 
@@ -1586,7 +1586,7 @@ any implementation accepted them or that they appear in any program.</span>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p29.x">29.x/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0376-1.TXT">AI12-0376-1</A></I>} 
-<span class="insert5"><A NAME="I6126"></A>It is now allowed to specify 
+<span class="insert5"><A NAME="I6122"></A>It is now allowed to specify 
 type-related representation aspects for an untagged derived type that 
 has primitive operations, so long as the type is not a by-reference type.</span> 
 </div>

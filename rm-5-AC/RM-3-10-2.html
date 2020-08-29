@@ -43,7 +43,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -62,13 +62,13 @@ unchecked features &mdash; see <span class="insert3">Clause</span><span class="d
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Normal"><A NAME="I2395"></A>For an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+<div class="Normal"><A NAME="I2396"></A>For an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 with <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 Access (or Unchecked_Access &mdash; see <A HREF="RM-13-10.html">13.10</A>), 
 the expected type shall be a single access type<span class="insert2">&nbsp;<I>A</I> such that:</span><span class="delete2">; the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of such an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 is never interpreted as an <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN>. 
-<A NAME="I2396"></A>If the expected type is an access-to-subprogram type, 
+<A NAME="I2397"></A>If the expected type is an access-to-subprogram type, 
 then the expected profile of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 is the designated profile of the access type.</span>&nbsp;</div>
 <div class="paranum"><a name="p2.1">2.1/2</a></div>
@@ -84,14 +84,14 @@ type whose designated profile is type conformant with that of the prefix.</span>
 of such an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 is never interpreted as an <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN> 
 or a parameterless <SPAN Class="swiss"><A HREF="RM-6-4.html#S0218">function_call</A></SPAN> 
-(see <A HREF="RM-4-1-4.html">4.1.4</A>). <A NAME="I2397"></A><A NAME="I2398"></A>The 
+(see <A HREF="RM-4-1-4.html">4.1.4</A>). <A NAME="I2398"></A><A NAME="I2399"></A>The 
 designated type or profile of the expected type of the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 is the expected type or profile for the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>.</span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Normal"><A NAME="I2399"></A><A NAME="I2400"></A><A NAME="I2401"></A><A NAME="I2402"></A><A NAME="I2403"></A><A NAME="I2404"></A>The 
+<div class="Normal"><A NAME="I2400"></A><A NAME="I2401"></A><A NAME="I2402"></A><A NAME="I2403"></A><A NAME="I2404"></A><A NAME="I2405"></A>The 
 accessibility rules, which prevent dangling references, are written in 
 terms of <I>accessibility levels</I>, which reflect the run-time nesting 
 of <I>masters</I>. As explained in <A HREF="RM-7-6-1.html">7.6.1</A>, 
@@ -112,7 +112,7 @@ that the access value cannot later designate an object that no longer
 exists. The Unchecked_Access attribute may be used to circumvent the 
 accessibility rules.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I2405"></A><A NAME="I2406"></A>A given accessibility 
+<div class="Normal"><A NAME="I2406"></A><A NAME="I2407"></A>A given accessibility 
 level is said to be <I>statically deeper</I> than another if the given 
 level is known at compile time (as defined below) to be deeper than the 
 other for all possible executions. In most cases, accessibility is enforced 
@@ -123,7 +123,7 @@ access parameters and generic packages.</div>
 <div class="Normal" style="margin-bottom: 0.4em">Each master, and each 
 entity and view created by it, has an accessibility level<span class="insert5">; 
 when two levels are defined to be the same, the accessibility levels 
-of the two associated entities are said to be <I>tied</I><A NAME="I2407"></A> 
+of the two associated entities are said to be <I>tied</I><A NAME="I2408"></A> 
 to each other</span>:&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Bulleted">The accessibility level of a given master is deeper 
@@ -182,7 +182,7 @@ apply to a value conversion (see <A HREF="RM-4-6.html">4.6</A>).</span></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">The 
 accessibility level of the result of a function call is that of the <I>master 
 of the function call</I>, which is determined by the point of call as 
-follows:<A NAME="I2408"></A><A NAME="I2409"></A><A NAME="I2410"></A></span></div>
+follows:<A NAME="I2409"></A><A NAME="I2410"></A><A NAME="I2411"></A></span></div>
 <div class="paranum"><a name="p10.2">10.2/3</a></div>
 <div class="Indented2NestedBulleted"><span class="insert3">If the result 
 is used (in its entirety) to directly initialize part of an object, the 
@@ -204,10 +204,12 @@ that defines an access discriminant (even if the access result is of
 an access-to-subprogram type).</span></div>
 <div class="paranum"><a name="p10.5">10.5/5</a></div>
 <div class="Indented2NestedBulleted"><span class="insert3">If the call 
-itself defines the result of a function to which one of the above rules 
-applies,&nbsp;</span><span class="insert5">or has an accessibility level that 
-is tied to the result of such a function,&nbsp;</span><span class="insert3">these 
-rules are applied recursively;</span></div>
+itself defines the result of a function&nbsp;</span><span class="insert5"><I>F</I></span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;to 
+which one of the above rules applies</span></span><span class="insert3">, 
+</span><span class="insert5">or has an accessibility level that is tied 
+to the result of such a function <I>F</I>, then the master of the call 
+is that of the master of the call invoking <I>F</I></span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;these 
+rules are applied recursively</span></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p10.6">10.6/3</a></div>
 <div class="Indented2NestedBulleted"><span class="insert3">In other cases, 
 the master of the call is that of the innermost master that evaluates 
@@ -310,7 +312,7 @@ accessibility level of an object created by an <SPAN Class="swiss"><A HREF="RM-4
 is the same as that of the access type<span class="insert2">, except 
 for an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 of an anonymous access type&nbsp;</span><span class="insert3">(an <I>anonymous 
-allocator</I>) in <A NAME="I2411"></A>certain contexts, as follows: For 
+allocator</I>) in <A NAME="I2412"></A>certain contexts, as follows: For 
 an anonymous allocator that defines the result of a function with an 
 access result, the accessibility level is determined as though the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 were in place of the call of the function; in the special case of a call 
@@ -341,7 +343,7 @@ paragraph was deleted.</I></SPAN><span class="insert2"></span><span class="inser
 an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN> 
 used to define the discriminant of an object, the level of the object.</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p14.4">14.4/3</a></div>
-<div class="Bulleted-NoPrefix"><span class="insert2"><A NAME="I2412"></A>In 
+<div class="Bulleted-NoPrefix"><span class="insert2"><A NAME="I2413"></A>In 
 </span><span class="insert3">the first</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;this 
 last</span></span><span class="insert2">&nbsp;case, the allocated object is 
 said to be a <I>coextension</I> of the object whose discriminant designates 
@@ -382,7 +384,7 @@ of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A
 is considered to be used in a context if the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
 itself is used in that context.</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I2413"></A><A NAME="I2414"></A>One 
+<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I2414"></A><A NAME="I2415"></A>One 
 accessibility level is defined to be <I>statically deeper</I> than another 
 in the following cases:&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
@@ -423,16 +425,21 @@ aliased parameter of <I>F</I> is considered to have the accessibility
 level of&nbsp;</span></span><span class="insert5"><span class="delete5">a 
 parameter of <I>F</I> that is not explicitly aliased</span></span><span class="insert3"><span class="delete5">&nbsp;the 
 body of <I>F</I>.</span></span><span class="insert3"></span></div>
-<div class="paranum"><a name="p19.3">19.3/4</a></div>
-<div class="Bulleted"><span class="insert3">For determining whether a 
-level is statically deeper than the level of the anonymous access type 
-of an access result of a function</span><span class="insert4">&nbsp;or generic 
-function <I>F</I></span><span class="insert3">, when within a return 
-statement that applies to&nbsp;</span><span class="insert4"><I>F</I> or the 
-return expression of expression function <I>F</I></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;the 
-function</span></span><span class="insert3">, the level of the master 
-of the call is presumed to be the same as that of the level of the master 
-that elaborated the</span><span class="insert3"><span class="delete4">&nbsp;function</span></span><span class="insert3">&nbsp;body</span><span class="insert4">&nbsp;of <I>F</I></span><span class="insert3">.</span></div>
+<div class="paranum"><a name="p19.3">19.3/5</a></div>
+<div class="Bulleted"><span class="insert3"></span><span class="insert5">When 
+within a function body or the return expression of an expression function, 
+the accessibility level of the master representing an execution of the 
+function</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;For 
+determining whether a level</span></span><span class="insert3">&nbsp;is statically 
+deeper than&nbsp;</span><span class="insert5">that of the master of the function 
+call invoking that execution, independent of how the master of the function 
+call is determined (see above)</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;the 
+level of the anonymous access type of an access result of a function</span></span><span class="insert4"><span class="delete5">&nbsp;or generic function <I>F</I></span></span><span class="insert3"><span class="delete5">, 
+when within a return statement that applies to&nbsp;</span></span><span class="insert4"><span class="delete5"><I>F</I> 
+or the return expression of expression function <I>F</I></span></span><span class="insert3"><span class="delete5"></span></span><span class="insert3"><span class="delete4">&nbsp;the 
+function</span></span><span class="insert3"><span class="delete5">, the 
+level of the master of the call is presumed to be the same as that of 
+the level of the master that elaborated the</span></span><span class="insert3"><span class="delete4">&nbsp;function</span></span><span class="insert3"><span class="delete5">&nbsp;body</span></span><span class="insert4"><span class="delete5">&nbsp;of <I>F</I></span></span><span class="insert3"><span class="delete5"></span></span><span class="insert3">.</span></div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Bulleted">For determining whether one level is statically 
 deeper than another when within a generic package body, the generic package 
@@ -452,7 +459,7 @@ considered (both statically and dynamically) to be the same as that of
 an entity whose accessibility level is tied to that of the return object 
 of that function.</span></div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Normal"><A NAME="I2415"></A><A NAME="I2416"></A>The accessibility 
+<div class="Normal"><A NAME="I2416"></A><A NAME="I2417"></A>The accessibility 
 level of all library units is called the <I>library level</I>; a library-level 
 declaration or entity is one whose accessibility level is the library 
 level.&nbsp;</div>
@@ -462,10 +469,10 @@ is defined for a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPA
 X that denotes an aliased view of an object:&nbsp;</div>
 <div class="paranum"><a name="p24">24/1</a></div>
 <div class="WideHanging-Term"><span class="insert1">X'Access</span></div><div class="WideHanging-Body">
-<span class="insert1"><A NAME="I2417"></A><A NAME="I2418"></A></span>X'Access yields an access 
+<span class="insert1"><A NAME="I2418"></A><A NAME="I2419"></A></span>X'Access yields an access 
 value that designates the object denoted by X. The type of X'Access is 
 an access-to-object type, as determined by the expected type. The expected 
-type shall be a general access type. <A NAME="I2419"></A>X shall denote 
+type shall be a general access type. <A NAME="I2420"></A>X shall denote 
 an aliased view of an object, including possibly the current instance 
 (see <A HREF="RM-8-6.html">8.6</A>) of a limited type within its definition, 
 or a formal parameter or generic formal object of a tagged type. The 
@@ -500,11 +507,11 @@ and <span class="insert2">either:</span><span class="delete2"></span><span class
 </span></span><span class="delete2">statically match the nominal subtype 
 of the view</span><span class="insert1"><span class="delete2">&nbsp;or be</span></span><span class="delete2"></span><span class="delete1">, 
 or the designated subtype shall be</span><span class="delete2">&nbsp;discriminated 
-and unconstrained; <A NAME="I2420"></A></span></div>
+and unconstrained; <A NAME="I2421"></A></span></div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
 <div class="Indented5NestedBulleted"><span class="insert2">the designated 
 subtype of <I>A</I> shall statically match the nominal subtype of the 
-view; or<A NAME="I2421"></A></span></div>
+view; or<A NAME="I2422"></A></span></div>
 <div class="paranum"><a name="p27.2">27.2/4</a></div>
 <div class="Indented5NestedBulleted"><span class="insert2"><I>D</I> shall 
 be discriminated in its full view and unconstrained in any partial view, 
@@ -517,19 +524,19 @@ generic formal private or derived type.</span></span><span class="insert3"></spa
 <div class="Indented4Bulleted">The accessibility level of the view shall 
 not be statically deeper than that of the access type <I>A</I>.<span class="delete3">&nbsp;In addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
-unit.<A NAME="I2422"></A></span> <A NAME="I2423"></A></div>
+unit.<A NAME="I2423"></A></span> <A NAME="I2424"></A></div>
 <div class="paranum"><a name="p28.1">28.1/3</a></div>
 <div class="WideHanging-Body"><span class="insert3">In addition to the 
 places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these requirements apply also in the private part of an instance of a 
-generic unit.<A NAME="I2424"></A></span></div>
+generic unit.<A NAME="I2425"></A></span></div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="WideHanging-Body"><A NAME="I2425"></A><A NAME="I2426"></A><A NAME="I2427"></A>A 
+<div class="WideHanging-Body"><A NAME="I2426"></A><A NAME="I2427"></A><A NAME="I2428"></A>A 
 check is made that the accessibility level of X is not deeper than that 
 of the access type <I>A</I>. If this check fails, Program_Error is raised. 
 </div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="WideHanging-Body"><A NAME="I2428"></A>If the nominal subtype 
+<div class="WideHanging-Body"><A NAME="I2429"></A>If the nominal subtype 
 of X does not statically match the designated subtype of <I>A</I>, a 
 view conversion of X to the designated subtype is evaluated (which might 
 raise Constraint_Error &mdash; see <A HREF="RM-4-6.html">4.6</A>) and 
@@ -539,18 +546,18 @@ the value of X'Access designates that view.&nbsp;</div>
 P that denotes a subprogram:&nbsp;</div>
 <div class="paranum"><a name="p32">32/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">P'Access</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I2429"></A><A NAME="I2430"></A></span>P'Access yields an access 
+<span class="insert5"><A NAME="I2430"></A><A NAME="I2431"></A></span>P'Access yields an access 
 value that designates the subprogram denoted by P. The type of P'Access 
 is an access-to-subprogram type (<I>S</I>), as determined by the expected 
-type. <A NAME="I2431"></A>The accessibility level of P shall not be statically 
+type. <A NAME="I2432"></A>The accessibility level of P shall not be statically 
 deeper than that of <I>S</I>.<span class="insert5">&nbsp;If <I>S</I> is nonblocking, 
-P shall be nonblocking.&nbsp;</span><A NAME="I2432"></A>In addition to the 
+P shall be nonblocking.&nbsp;</span><A NAME="I2433"></A>In addition to the 
 places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 <span class="insert5">these rules apply</span><span class="delete5">&nbsp;this 
 rule applies</span> also in the private part of an instance of a generic 
 unit. The profile of P shall be <span class="insert3">subtype conformant</span><span class="delete3">&nbsp;subtype-conformant</span> 
 with the designated profile of <I>S</I>, and shall not be Intrinsic. 
-<A NAME="I2433"></A>If the subprogram denoted by P is declared within 
+<A NAME="I2434"></A>If the subprogram denoted by P is declared within 
 a generic <span class="insert2">unit, and the expression P'Access occurs 
 within the body of that generic unit or within the body of a generic 
 unit declared within the declarative region of the generic unit, then 
@@ -562,7 +569,7 @@ within the generic unit or an anonymous access type of an access parameter.</spa
 <div class="paranum"><a name="p32.1">32.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">An 
 <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
-is said to have <I>distributed accessibility</I> if it is<A NAME="I2434"></A><A NAME="I2435"></A></span></div>
+is said to have <I>distributed accessibility</I> if it is<A NAME="I2435"></A><A NAME="I2436"></A></span></div>
 <div class="paranum"><a name="p32.2">32.2/3</a></div>
 <div class="Bulleted"><span class="insert3">a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
 (see <A HREF="RM-4-5-7.html">4.5.7</A>); or</span></div>
@@ -598,12 +605,12 @@ can be used to create an object, and return an access value that designates
 it (see <A HREF="RM-4-8.html">4.8</A>); evaluating the literal <B>null</B> 
 yields a null access value that designates no entity at all (see <A HREF="RM-4-2.html">4.2</A>).</div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Notes">92&nbsp;&nbsp;<A NAME="I2436"></A>The predefined operations 
+<div class="Notes">92&nbsp;&nbsp;<A NAME="I2437"></A>The predefined operations 
 of an access type also include the assignment operation, qualification, 
 and membership tests. Explicit conversion is allowed between general 
 access types with matching designated subtypes; explicit conversion is 
 allowed between access-to-subprogram types with subtype conformant profiles 
-(see <A HREF="RM-4-6.html">4.6</A>). <A NAME="I2437"></A>Named access 
+(see <A HREF="RM-4-6.html">4.6</A>). <A NAME="I2438"></A>Named access 
 types have predefined equality operators; anonymous access types do not<span class="insert2">, 
 but they can use the predefined equality operators for <I>universal_access</I> 
 </span>(see <A HREF="RM-4-5-2.html">4.5.2</A>).&nbsp;</div>
@@ -616,7 +623,7 @@ See <A HREF="RM-4-1.html">4.1</A>.</div>
 <div class="Notes">94&nbsp;&nbsp;A call through the dereference of an 
 access-to-subprogram value is never a dispatching call.&nbsp;</div>
 <div class="paranum"><a name="p37">37/2</a></div>
-<div class="Notes">95&nbsp;&nbsp;<A NAME="I2438"></A><A NAME="I2439"></A><span class="insert2">The</span><span class="delete2">&nbsp;The 
+<div class="Notes">95&nbsp;&nbsp;<A NAME="I2439"></A><A NAME="I2440"></A><span class="insert2">The</span><span class="delete2">&nbsp;The 
 accessibility rules imply that it is not possible to use the</span> Access 
 attribute<span class="insert2">&nbsp;for subprograms and parameters of an 
 anonymous access-to-subprogram type may together be used</span> to implement 

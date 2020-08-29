@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,15 +40,15 @@ The package Containers is the root of the containers subsystem.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The library package Containers has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Containers&nbsp;<B>is</B><A NAME="I7965"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Containers&nbsp;<B>is</B><A NAME="I7957"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Containers);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7966"></A>Hash_Type&nbsp;<B>is&nbsp;mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7958"></A>Hash_Type&nbsp;<B>is&nbsp;mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7967"></A>Count_Type&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7959"></A>Count_Type&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p5.1">5.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<A NAME="I7968"></A>Capacity_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+&nbsp;&nbsp;&nbsp;<A NAME="I7960"></A>Capacity_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Containers;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
@@ -81,12 +81,12 @@ for Hash_Type'Modulus.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p8.c">8.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7969"></A>The package Containers is new.&nbsp;</div>
+<A NAME="I7961"></A>The package Containers is new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p8.d">8.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<A NAME="I7970"></A>Exception Capacity_Error is added to Containers. 
+<A NAME="I7962"></A>Exception Capacity_Error is added to Containers. 
 If Containers is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity with the name Capacity_Error is defined in a package that 
 is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 

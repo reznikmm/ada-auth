@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,13 +46,13 @@ from the internal entities.]&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<SPAN Class="swiss">package_body</SPAN><A NAME="I4268"></A><A NAME="S0231"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4269"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4270"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4271"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<SPAN Class="swiss">package_body</SPAN><A NAME="I4274"></A><A NAME="S0231"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4275"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0201">defining_program_unit_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4276"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4277"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;[<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4272"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I4273"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0291">parent_unit_name</A></SPAN>.]<A NAME="I4274"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4278"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I4279"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0291">parent_unit_name</A></SPAN>.]<A NAME="I4280"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">If an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0291">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
@@ -95,7 +95,7 @@ For a noninstance, nonlibrary package, this body occurs at the end of
 the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 of the innermost enclosing program unit or <SPAN Class="swiss"><A HREF="AA-5-6.html#S0191">block_statement</A></SPAN>; 
 if there are several such packages, the order of the implicit <SPAN Class="swiss">package_bodies</SPAN> 
-is unspecified. <A NAME="I4275"></A>[(For an instance, the implicit <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN> 
+is unspecified. <A NAME="I4281"></A>[(For an instance, the implicit <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN> 
 occurs at the place of the instantiation (see <A HREF="AA-12-3.html">12.3</A>). 
 For a library package, the place is partially determined by the elaboration 
 dependences (see Clause <A HREF="AA-10.html">10</A>).)]&nbsp;</div>
@@ -114,7 +114,7 @@ does not allow) a body. This is a bit strange, but not harmful.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I4276"></A>For the elaboration of a nongeneric 
+<div class="Normal"><A NAME="I4282"></A>For the elaboration of a nongeneric 
 <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN>, 
 its <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 is first elaborated, and its <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
@@ -197,7 +197,7 @@ is moved here, since it is more generally applicable.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p15.f">15.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<A NAME="I4277"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<A NAME="I4283"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0231">package_body</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 

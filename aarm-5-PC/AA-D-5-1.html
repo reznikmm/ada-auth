@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,16 +51,17 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<SPAN Class="roman"><I>--&nbsp;See&nbsp;<A HREF="AA-C-7-1.html">C.7.1</A></I></SPAN><BR>
-<B>package</B>&nbsp;Ada.Dynamic_Priorities<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9590"></A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Dynamic_Priorities);</span></div>
+<B>package</B>&nbsp;Ada.Dynamic_Priorities<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9612"></A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Dynamic_Priorities);</span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9591"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9613"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9592"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9614"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Any_Priority;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -138,19 +139,12 @@ the ceilings used in the system. If the interrupt handler wants to hand
 the job off to a third task whose job is to call Set_Priority, this won't 
 help, because one would normally want the third task to have high priority. 
 </div>
-
-<H4 Class="centered">Bounded (Run-Time) Errors</H4>
-<div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
-</div>
-<div class="paranum"><a name="p11.a">11.a/2</a></div>
-<div class="Annotations"></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 11 was 
 deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I9593"></A>If any subprogram in this package 
+<div class="Normal"><A NAME="I9615"></A>If any subprogram in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
@@ -231,7 +225,7 @@ tasks.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
-<A NAME="I9594"></A><B>Amendment Correction:</B> Priority changes are 
+<A NAME="I9616"></A><B>Amendment Correction:</B> Priority changes are 
 now required to be done immediately so long as the target task is not 
 on an entry queue.</div>
 <div class="paranum"><a name="p19.b">19.b/2</a></div>

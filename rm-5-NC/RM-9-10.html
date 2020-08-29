@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,17 +34,18 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><A NAME="I4685"></A><A NAME="I4686"></A>If two different 
+<div class="Normal"><A NAME="I4674"></A><A NAME="I4675"></A>If two different 
 objects, including nonoverlapping parts of the same object, are <I>independently 
 addressable</I>, they can be manipulated concurrently by two different 
-logical threads of control without synchronization. Any two nonoverlapping 
-objects are independently addressable if either object is specified as 
-independently addressable (see <A HREF="RM-C-6.html">C.6</A>). Otherwise, 
-two nonoverlapping objects are independently addressable except when 
-they are both parts of a composite object for which a nonconfirming value 
-is specified for any of the following representation aspects: (record) 
+logical threads of control without synchronization, unless both are subcomponents 
+of the same full access object, and either is nonatomic (see <A HREF="RM-C-6.html">C.6</A>). 
+Any two nonoverlapping objects are independently addressable if either 
+object is specified as independently addressable (see <A HREF="RM-C-6.html">C.6</A>). 
+Otherwise, two nonoverlapping objects are independently addressable except 
+when they are both parts of a composite object for which a nonconfirming 
+value is specified for any of the following representation aspects: (record) 
 Layout, Component_Size, Pack, Atomic, or Convention; in this case it 
-is unspecified whether the parts are independently addressable.<A NAME="I4687"></A> 
+is unspecified whether the parts are independently addressable.<A NAME="I4676"></A> 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -56,7 +57,7 @@ two or more logical threads of control to allow, for example, meaningful
 communication by the direct updating and reading of variables shared 
 between them. The actions of two different logical threads of control 
 are synchronized in this sense when an action of one <I>signals</I> an 
-action of the other; <A NAME="I4688"></A>an action A1 is defined to signal 
+action of the other; <A NAME="I4677"></A>an action A1 is defined to signal 
 an action A2 under the following circumstances:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Bulleted">If A1 and A2 are part of the execution of the same 
@@ -99,9 +100,9 @@ action that in turn signals A2.&nbsp;</div>
 action A2 if A1 signals A2, if action A1 and A2 occur as part of the 
 execution of the same logical thread of control, and the language rules 
 permit action A1 to precede action A2, or if action A1 potentially signals 
-some action that in turn potentially signals A2.<A NAME="I4689"></A></div>
+some action that in turn potentially signals A2.<A NAME="I4678"></A></div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4690"></A><A NAME="I4691"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4679"></A><A NAME="I4680"></A>Two 
 actions are defined to be <I>sequential</I> if one of the following is 
 true:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -120,23 +121,23 @@ be specified to ensure that certain reads and updates are sequential
 &mdash; see <A HREF="RM-C-6.html">C.6</A>.&nbsp;</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal">Two actions that are not sequential are defined to 
-be <I>concurrent</I> actions.<A NAME="I4692"></A><A NAME="I4693"></A></div>
+be <I>concurrent</I> actions.<A NAME="I4681"></A><A NAME="I4682"></A></div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Normal">Two actions are defined to <I>conflict</I> if one 
-action<A NAME="I4694"></A><A NAME="I4695"></A> assigns to an object, 
+action<A NAME="I4683"></A><A NAME="I4684"></A> assigns to an object, 
 and the other action reads or assigns to a part of the same object (or 
 of a neighboring object if the two are not independently addressable). 
  The action comprising a call on a subprogram or an entry is defined 
 to <I>potentially conflict</I> with another action if the Global aspect 
 (or Global'Class aspect in the case of a dispatching call) of the called 
-subprogram or entry is such that a conflicting action<A NAME="I4696"></A><A NAME="I4697"></A><A NAME="I4698"></A> 
+subprogram or entry is such that a conflicting action<A NAME="I4685"></A><A NAME="I4686"></A><A NAME="I4687"></A> 
 would be possible during the execution of the call. Similarly, two calls 
 are considered to potentially conflict if they each have Global (or Global'Class 
 in the case of a dispatching call) aspects such that conflicting actions 
 would be possible during the execution of the calls. Finally, two actions 
 that conflict are also considered to potentially conflict.</div>
 <div class="paranum"><a name="p18">18/5</a></div>
-<div class="Normal">A <I>synchronized</I> object<A NAME="I4699"></A> 
+<div class="Normal">A <I>synchronized</I> object<A NAME="I4688"></A> 
 is an object of a task or protected type, an atomic object (see <A HREF="RM-C-6.html">C.6</A>), 
 a suspension object (see <A HREF="RM-D-10.html">D.10</A>), or a synchronous 
 barrier (see <A HREF="RM-D-10-1.html">D.10.1</A>). Operations on such 
@@ -145,7 +146,7 @@ are never considered to conflict.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p19">19/5</a></div>
-<div class="Normal">The execution of two concurrent actions is erroneous<A NAME="I4700"></A> 
+<div class="Normal">The execution of two concurrent actions is erroneous<A NAME="I4689"></A> 
 if the actions make conflicting uses of a shared variable (or neighboring 
 variables that are not independently addressable).</div>
 

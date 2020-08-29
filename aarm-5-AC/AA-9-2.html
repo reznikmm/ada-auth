@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,13 +40,13 @@
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4903"></A>The execution of a task of a 
+<div class="Normal"><A NAME="I4909"></A>The execution of a task of a 
 given task type consists of the execution of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>. 
-<A NAME="I4904"></A><A NAME="I4905"></A><A NAME="I4906"></A><A NAME="I4907"></A>The 
+<A NAME="I4910"></A><A NAME="I4911"></A><A NAME="I4912"></A><A NAME="I4913"></A>The 
 initial part of this execution is called the <I>activation</I> of the 
 task; it consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>. 
-<A NAME="I4908"></A>Should an exception be propagated by the elaboration 
+<A NAME="I4914"></A>Should an exception be propagated by the elaboration 
 of its <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 the activation of the task is defined to have <I>failed</I>, and it becomes 
 a completed task.</div>
@@ -119,10 +119,10 @@ together. Each such &ldquo;whole&rdquo; object has its own task activation
 sequence, involving the activating task being suspended until all the 
 new tasks complete their activation.</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4909"></A><A NAME="I4910"></A><A NAME="I4911"></A><A NAME="I4912"></A>The 
+<div class="Normal"><A NAME="I4915"></A><A NAME="I4916"></A><A NAME="I4917"></A><A NAME="I4918"></A>The 
 task that created the new tasks and initiated their activations (the 
 <I>activator</I>) is blocked until all of these activations complete 
-(successfully or not). <A NAME="I4913"></A>Once all of these activations 
+(successfully or not). <A NAME="I4919"></A>Once all of these activations 
 are complete, if the activation of any of the tasks has failed [(due 
 to the propagation of an exception)], Tasking_Error is raised in the 
 activator, at the place at which it initiated the activations. Otherwise, 

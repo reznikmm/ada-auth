@@ -37,7 +37,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,11 +49,11 @@
 <H1>3.9.3 Abstract Types and Subprograms</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-[<A NAME="I2449"></A> <A NAME="I2450"></A><A NAME="I2451"></A><A NAME="I2452"></A>An 
+[<A NAME="I2450"></A> <A NAME="I2451"></A><A NAME="I2452"></A><A NAME="I2453"></A>An 
 <I>abstract type</I> is a tagged type intended for use as <span class="insert2">an 
 ancestor of other types</span><span class="delete2">&nbsp;a parent type for 
 type extensions</span>, but which is not allowed to have objects of its 
-own. <A NAME="I2453"></A><A NAME="I2454"></A>An <I>abstract subprogram</I> 
+own. <A NAME="I2454"></A><A NAME="I2455"></A>An <I>abstract subprogram</I> 
 is a subprogram that has no body, but is intended to be overridden at 
 some point when inherited. Because objects of an abstract type cannot 
 be created, a dispatching call to an abstract subprogram always dispatches 
@@ -80,15 +80,15 @@ never reach them).&nbsp;</div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">abstract_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2455"></A><A NAME="S0076"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2456"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2457"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2458"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">abstract_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2456"></A><A NAME="S0076"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2457"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2458"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2459"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.2">1.2/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<span class="insert2"><A NAME="I2459"></A><A NAME="I2460"></A>Interface 
+<span class="insert2"><A NAME="I2460"></A><A NAME="I2461"></A>Interface 
 types (see <A HREF="AA-3-9-4.html">3.9.4</A>) are abstract types. In 
 addition, a tagged type that has the reserved word <B>abstract</B> in 
 its declaration is an abstract type. The class-wide type (see <A HREF="AA-3-4-1.html">3.4.1</A>) 
@@ -97,8 +97,8 @@ rooted at an abstract type is not itself an abstract type.</span>&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<span class="insert2">Only a tagged type shall have</span><span class="delete2"><A NAME="I2461"></A> 
-<A NAME="I2462"></A>An <I>abstract type</I> is a specific type that has</span> 
+<span class="insert2">Only a tagged type shall have</span><span class="delete2"><A NAME="I2462"></A> 
+<A NAME="I2463"></A>An <I>abstract type</I> is a specific type that has</span> 
 the reserved word <B>abstract</B> in its declaration.<span class="delete2">Only 
 a tagged type is allowed to be declared abstract.</span>&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
@@ -115,7 +115,7 @@ be different from T'Tag.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I2463"></A><A NAME="I2464"></A>A subprogram declared by an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+<A NAME="I2464"></A><A NAME="I2465"></A>A subprogram declared by an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 <span class="insert2">or a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 (see <A HREF="AA-12-6.html">12.6</A>)</span><span class="delete2">(see 
 <A HREF="AA-6-1.html">6.1</A>)</span> is an <I>abstract subprogram</I>. 
@@ -238,7 +238,7 @@ Otherwise, the subprogram shall be overridden with a nonabstract subprogram<span
 a full type that is a null extension</span> [; for a type declared in 
 the visible part of a package, the overriding may be either in the visible 
 or the private part]. <span class="insert2">Such a subprogram is said 
-to <I>require overriding</I>.<A NAME="I2465"></A>&nbsp;</span>However, if 
+to <I>require overriding</I>.<A NAME="I2466"></A>&nbsp;</span>However, if 
 the type is a generic formal type, the subprogram need not be overridden 
 for the formal type itself; [a nonabstract version will necessarily be 
 provided by the actual type.]&nbsp;</div>
@@ -464,7 +464,7 @@ The part about generic actual subprograms includes those given by default.<span 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<span class="insert2"><A NAME="I2466"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+<span class="insert2"><A NAME="I2467"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 has no effect.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -534,7 +534,7 @@ but then clients of the package would not have visibility to T.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p16.d">16.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00391.TXT">AI95-00391-01</A></I>} 
-<span class="insert2"><A NAME="I2467"></A>It is not necessary to override 
+<span class="insert2"><A NAME="I2468"></A>It is not necessary to override 
 functions with a controlling result for a null extension. This makes 
 it easier to derive a tagged type to complete a private type.</span> 
 </div>
@@ -566,7 +566,7 @@ make other wording easier to understand.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p16.j">16.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
-<span class="insert3"><A NAME="I2468"></A><B>Correction:</B> Added rules 
+<span class="insert3"><A NAME="I2469"></A><B>Correction:</B> Added rules 
 to eliminate holes with controlling access results and generic functions 
 that return abstract types. While these changes are technically incompatible, 
 it is unlikely that they could be used in a program without violating 
@@ -581,7 +581,7 @@ these cases exist in user code.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p16.l">16.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I2469"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<span class="insert3"><A NAME="I2470"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 

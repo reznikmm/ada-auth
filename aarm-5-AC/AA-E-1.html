@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +46,7 @@ as either active or passive.]&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I10253"></A><A NAME="I10254"></A>An <I>active 
+<div class="Normal"><A NAME="I10275"></A><A NAME="I10276"></A>An <I>active 
 partition</I> is a partition as defined in <A HREF="AA-10-2.html">10.2</A>. 
 A <I>passive partition</I> is a partition that has no thread of control 
 of its own, whose library units are all preelaborated, and whose data 
@@ -70,7 +70,7 @@ or on a processing node.</div>
 <div class="Normal">The configuration of the partitions of a program 
 onto a distributed system shall be consistent with the possibility for 
 data references or calls between the partitions implied by their semantic 
-dependences. <A NAME="I10255"></A>Any reference to data or call of a 
+dependences. <A NAME="I10277"></A>Any reference to data or call of a 
 subprogram across partitions is called a <I>remote access</I>.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For example, an active partition 
@@ -94,7 +94,7 @@ executes the body of the subprogram of the passive partition.</span>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I10256"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN> 
+<div class="Normal"><A NAME="I10278"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN> 
 is elaborated as part of the elaboration of each partition that includes 
 it. If a normal library unit (see <A HREF="AA-E-2.html">E.2</A>) has 
 state, then a separate copy of the state exists in each active partition 
@@ -103,7 +103,7 @@ that elaborates it. [The state evolves independently in each such partition.]</d
 <div class="Annotations"><B>Ramification:&nbsp;</B>Normal library units cannot 
 be included in passive partitions.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I10257"></A><A NAME="I10258"></A><A NAME="I10259"></A><A NAME="I10260"></A>[An 
+<div class="Normal"><A NAME="I10279"></A><A NAME="I10280"></A><A NAME="I10281"></A><A NAME="I10282"></A>[An 
 active partition <I>terminates</I> when its environment task terminates.] 
 A partition becomes <I>inaccessible</I> if it terminates or if it is 
 <I>aborted</I>. An active partition is aborted when its environment task 
@@ -120,7 +120,7 @@ or within a declared-pure library unit, the following attribute is defined:
 </div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">D'Partition_Id</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I10261"></A><A NAME="I10262"></A>Denotes a value of the type 
+<A NAME="I10283"></A><A NAME="I10284"></A>Denotes a value of the type 
 <I>universal_integer</I> that identifies the partition in which D was 
 elaborated. If D denotes the declaration of a remote call interface library 
 unit (see <A HREF="AA-E-2-3.html">E.2.3</A>) the given partition is the 
@@ -129,7 +129,7 @@ one where the body of D was elaborated.&nbsp;</div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00226.TXT">AI95-00226-01</A></I>} 
-<A NAME="I10263"></A>It is a bounded error for there to be cyclic elaboration 
+<A NAME="I10285"></A>It is a bounded error for there to be cyclic elaboration 
 dependences between the active partitions of a single distributed program. 
 The possible effects<span class="insert2">, in each of the partitions 
 involved,</span> are deadlock during elaboration, or the raising of <span class="insert2">Communication_Error 

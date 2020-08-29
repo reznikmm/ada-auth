@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
 An <I>image</I> of a value is a string representing the value in display 
-form.<A NAME="I3539"></A> The attributes Image, Wide_Image, and Wide_Wide_Image 
+form.<A NAME="I3543"></A> The attributes Image, Wide_Image, and Wide_Wide_Image 
 are available to produce the image of a value as a String, Wide_String, 
 or Wide_Wide_String (respectively). User-defined images for a given type 
 can be implemented by overriding the default implementation of the attribute 
@@ -54,7 +54,7 @@ For every subtype S of a type T other than <I>universal_real</I> or <I>universal
 the following type-related operational attribute is defined:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Put_Image</div><div class="WideHanging-Body">
-<A NAME="I3540"></A><A NAME="I3541"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+<A NAME="I3544"></A><A NAME="I3545"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0320-1.TXT">AI12-0320-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
 S'Put_Image denotes a procedure with the following specification:&nbsp;</div>
@@ -72,7 +72,7 @@ an <I>image</I> of the value of <I>Arg</I>.</div>
 The Put_Image attribute may be specified for any specific type T either 
 via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 or via an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
-specifying the Put_Image aspect of the type.<A NAME="I3542"></A><A NAME="I3543"></A></div>
+specifying the Put_Image aspect of the type.<A NAME="I3546"></A><A NAME="I3547"></A></div>
 <div class="paranum"><a name="p4.a">4.a/5</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Put_Image: 
 </B>Procedure to define the image of a given type.</div>
@@ -136,7 +136,7 @@ For a <I>nongraphic character</I> (a value of a character type that has
 no enumeration literal associated with it), the value is a corresponding 
 language-defined name in upper case (for example, the image of the nongraphic 
 character identified as <I>nul</I> is <TT>&quot;NUL&quot;</TT> &mdash; 
-the quotes are not part of the image).<A NAME="I3544"></A></div>
+the quotes are not part of the image).<A NAME="I3548"></A></div>
 <div class="paranum"><a name="p9.a">9.a/5</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>For an enumeration 
 type T that has &quot;holes&quot; (caused by an enumeration_representation_clause), 
@@ -349,7 +349,7 @@ type, then the default implementation of T'Put_Image will raise Program_Error.
 For every subtype S of a type T, the following attributes are defined:</div>
 <div class="paranum"><a name="p25">25/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3545"></A><A NAME="I3546"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+<A NAME="I3549"></A><A NAME="I3550"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
 S'Wide_Wide_Image denotes a function with the following specification: 
 </div>
@@ -363,7 +363,7 @@ in a text buffer) and then returns the result of retrieving the contents
 of that buffer with Wide_Wide_Get. The lower bound of the result is one.</div>
 <div class="paranum"><a name="p26">26/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Image</div><div class="WideHanging-Body">
-<A NAME="I3547"></A><A NAME="I3548"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+<A NAME="I3551"></A><A NAME="I3552"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
 S'Wide_Image denotes a function with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p27">27/5</a></div>
@@ -376,7 +376,7 @@ in a text buffer) and then returns the result of retrieving the contents
 of that buffer with Wide_Get. The lower bound of the result is one.</div>
 <div class="paranum"><a name="p29">29/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Image</div><div class="WideHanging-Body">
-<A NAME="I3549"></A><A NAME="I3550"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
+<A NAME="I3553"></A><A NAME="I3554"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
 S'Image denotes a function with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p30">30/5</a></div>
@@ -396,19 +396,19 @@ X of a type T other than <I>universal_real</I> or <I>universal_fixed</I>,
 the following attributes are defined:</div>
 <div class="paranum"><a name="p33">33/5</a></div>
 <div class="WideHanging-Term">X'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3551"></A><A NAME="I3552"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+<A NAME="I3555"></A><A NAME="I3556"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 X'Wide_Wide_Image denotes the result of calling function S'Wide_Wide_Image 
 with <I>Arg</I> being X, where S is the nominal subtype of X.</div>
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="WideHanging-Term">X'Wide_Image</div><div class="WideHanging-Body">
-<A NAME="I3553"></A><A NAME="I3554"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+<A NAME="I3557"></A><A NAME="I3558"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 X'Wide_Image denotes the result of calling function S'Wide_Image with 
 <I>Arg</I> being X, where S is the nominal subtype of X.</div>
 <div class="paranum"><a name="p35">35/5</a></div>
 <div class="WideHanging-Term">X'Image</div><div class="WideHanging-Body">
-<A NAME="I3555"></A><A NAME="I3556"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+<A NAME="I3559"></A><A NAME="I3560"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 X'Image denotes the result of calling function S'Image with <I>Arg</I> 
 being X, where S is the nominal subtype of X.&nbsp;</div>
@@ -549,7 +549,7 @@ based only on the relevant public interfaces.</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0020-1.TXT">AI12-0020-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0315-1.TXT">AI12-0315-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
-<A NAME="I3557"></A>Attribute Put_Image is new. Attributes Image, Wide_Image, 
+<A NAME="I3561"></A>Attribute Put_Image is new. Attributes Image, Wide_Image, 
 and Wide_Wide_Image now can be used with any type, and are defined in 
 terms of Put_Image so that they can be redefined.&nbsp;</div>
 

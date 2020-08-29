@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,22 +46,22 @@ save and retrieve the text need not be the same.</span>&nbsp;</div>
 declarations:</span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
-<span class="insert5"><A NAME="I7503"></A><B>package</B>&nbsp;Ada.Strings.Text_Buffers<BR>
+<span class="insert5"><A NAME="I7499"></A><B>package</B>&nbsp;Ada.Strings.Text_Buffers<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null&nbsp;is</B></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7504"></A>Text_Buffer_Count&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7500"></A>Text_Buffer_Count&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<A NAME="I7505"></A>New_Line_Count&nbsp;:&nbsp;<B>constant</B>&nbsp;Text_Buffer_Count&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<A NAME="I7501"></A>New_Line_Count&nbsp;:&nbsp;<B>constant</B>&nbsp;Text_Buffer_Count&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7506"></A>Root_Buffer_Type&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;private</B>;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7502"></A>Root_Buffer_Type&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;private</B>;</span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7507"></A>Character_Count&nbsp;(Buffer&nbsp;:&nbsp;Root_Buffer_Type)<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7503"></A>Character_Count&nbsp;(Buffer&nbsp;:&nbsp;Root_Buffer_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Text_Buffer_Count&nbsp;<B>is&nbsp;abstract</B>;</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7508"></A>Clear&nbsp;(Buffer&nbsp;:&nbsp;Root_Buffer_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7504"></A>Clear&nbsp;(Buffer&nbsp;:&nbsp;Root_Buffer_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post'Class&nbsp;=&gt;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=&nbsp;0;</span></div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7509"></A>Get&nbsp;(<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7505"></A>Get&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural)&nbsp;<B>is&nbsp;abstract</B><BR>
@@ -75,7 +75,7 @@ declarations:</span></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)'Old&nbsp;-&nbsp;Num_Read);</span></div>
 <div class="paranum"><a name="p10">10/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7510"></A>Wide_Get&nbsp;(<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7506"></A>Wide_Get&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural)&nbsp;<B>is&nbsp;abstract</B><BR>
@@ -89,7 +89,7 @@ declarations:</span></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)'Old&nbsp;-&nbsp;Num_Read);</span></div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7511"></A>Wide_Wide_Get&nbsp;(<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7507"></A>Wide_Wide_Get&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural)&nbsp;<B>is&nbsp;abstract</B><BR>
@@ -103,31 +103,31 @@ declarations:</span></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)'Old&nbsp;-&nbsp;Num_Read);</span></div>
 <div class="paranum"><a name="p12">12/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7512"></A>End_of_Line&nbsp;(Buffer&nbsp;:&nbsp;<B>in</B>&nbsp;Root_Buffer_Type)<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7508"></A>End_of_Line&nbsp;(Buffer&nbsp;:&nbsp;<B>in</B>&nbsp;Root_Buffer_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is&nbsp;abstract</B>;</span></div>
 <div class="paranum"><a name="p13">13/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7513"></A>Put&nbsp;(<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7509"></A>Put&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post'Class&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)'Old&nbsp;+&nbsp;Item'Length;</span></div>
 <div class="paranum"><a name="p14">14/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7514"></A>Wide_Put&nbsp;(<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7510"></A>Wide_Put&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_String)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post'Class&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)'Old&nbsp;+&nbsp;Item'Length;</span></div>
 <div class="paranum"><a name="p15">15/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7515"></A>Wide_Wide_Put&nbsp;(<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7511"></A>Wide_Wide_Put&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_String)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post'Class&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)'Old&nbsp;+&nbsp;Item'Length;</span></div>
 <div class="paranum"><a name="p16">16/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7516"></A>New_Line&nbsp;(Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type)<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7512"></A>New_Line&nbsp;(Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Buffer_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post'Class&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer)&nbsp;=<BR>
@@ -138,10 +138,10 @@ declarations:</span></div>
 <B>end</B>&nbsp;Ada.Strings.Text_Buffers;</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
-<span class="insert5"><A NAME="I7517"></A><B>package</B>&nbsp;Ada.Strings.Text_Buffers.Unbounded<BR>
+<span class="insert5"><A NAME="I7513"></A><B>package</B>&nbsp;Ada.Strings.Text_Buffers.Unbounded<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null&nbsp;is</B></span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7518"></A>Buffer_Type&nbsp;<B>is&nbsp;new</B>&nbsp;Root_Buffer_Type&nbsp;<B>with&nbsp;private</B><BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7514"></A>Buffer_Type&nbsp;<B>is&nbsp;new</B>&nbsp;Root_Buffer_Type&nbsp;<B>with&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Default_Initial_Condition&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer_Type)&nbsp;=&nbsp;0;</span></div>
 <div class="paranum"><a name="p20">20/5</a></div>
@@ -152,10 +152,10 @@ declarations:</span></div>
 <B>end</B>&nbsp;Ada.Strings.Text_Buffers.Unbounded;</span></div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
-<span class="insert5"><A NAME="I7519"></A><B>package</B>&nbsp;Ada.Strings.Text_Buffers.Bounded<BR>
+<span class="insert5"><A NAME="I7515"></A><B>package</B>&nbsp;Ada.Strings.Text_Buffers.Bounded<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null&nbsp;is</B></span></div>
 <div class="paranum"><a name="p23">23/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7520"></A>Buffer_Type&nbsp;(Max_Characters&nbsp;:&nbsp;Text_Buffer_Count)<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7516"></A>Buffer_Type&nbsp;(Max_Characters&nbsp;:&nbsp;Text_Buffer_Count)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;new</B>&nbsp;Root_Buffer_Type&nbsp;<B>with&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Default_Initial_Condition&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character_Count&nbsp;(Buffer_Type)&nbsp;=&nbsp;0;</span></div>
@@ -230,7 +230,7 @@ without dynamic allocation.</span></div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p30.a">30.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
-<span class="insert5"><A NAME="I7521"></A>The packages Strings.Text_Buffers, 
+<span class="insert5"><A NAME="I7517"></A>The packages Strings.Text_Buffers, 
 Strings.Text_Buffers.Unbounded, and Strings.Text_Buffers.Bounded are 
 new.</span>&nbsp;</div>
 

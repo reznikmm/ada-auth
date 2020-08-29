@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <HR>
 <H1>3.9.1 Type Extensions</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I2233"></A><A NAME="I2234"></A><A NAME="I2235"></A><A NAME="I2236"></A><A NAME="I2237"></A><A NAME="I2238"></A>Every 
+<div class="Normal"><A NAME="I2234"></A><A NAME="I2235"></A><A NAME="I2236"></A><A NAME="I2237"></A><A NAME="I2238"></A><A NAME="I2239"></A>Every 
 type extension is a tagged type, and is <span class="delete2">either 
 </span>a <I>record extension</I> or a <I>private extension</I> of some 
 other tagged type<span class="insert2">, or a noninterface synchronized 
@@ -46,7 +46,7 @@ tagged type</span>.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_extension_part</SPAN><A NAME="I2239"></A><A NAME="S0075"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>with</B>&nbsp;<A NAME="I2240"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">record_extension_part</SPAN><A NAME="I2240"></A><A NAME="S0075"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>with</B>&nbsp;<A NAME="I2241"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -55,9 +55,9 @@ a class-wide type<span class="insert2">&nbsp;nor shall it be a synchronized
 tagged type (see <A HREF="RM-3-9-4.html">3.9.4</A>)</span>. If the parent 
 type<span class="insert2">&nbsp;or any progenitor</span> is nonlimited, then 
 each of the components of the <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
-shall be nonlimited.<span class="delete2">&nbsp;<A NAME="I2241"></A>The accessibility 
+shall be nonlimited.<span class="delete2">&nbsp;<A NAME="I2242"></A>The accessibility 
 level (see <A HREF="RM-3-10-2.html">3.10.2</A>) of a record extension 
-shall not be statically deeper than that of its parent type.</span> <A NAME="I2242"></A>In 
+shall not be statically deeper than that of its parent type.</span> <A NAME="I2243"></A>In 
 addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -71,12 +71,12 @@ type is declared outside that body</span>.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Normal">&nbsp;<span class="insert2"><A NAME="I2243"></A>A record 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I2244"></A>A record 
 extension is a <I>null extension</I> if its declaration has no <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 and its <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
 includes no <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>s.</span></div>
 <div class="paranum"><a name="p4.2">4.2/5</a></div>
-<div class="Normal">&nbsp;<span class="insert5"><A NAME="I2244"></A><A NAME="I2245"></A><A NAME="I2246"></A>In 
+<div class="Normal">&nbsp;<span class="insert5"><A NAME="I2245"></A><A NAME="I2246"></A><A NAME="I2247"></A>In 
 the case where the (compile-time) view of an object <I>X</I> is of a 
 tagged type T1 or T1'Class and the (run-time) tag of <I>X</I> is T2'Tag, 
 only the components (if any) of <I>X</I> that are components of T1 (or 
@@ -87,7 +87,7 @@ subcomponents) of the nominal type of <I>X</I>.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I2247"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+<div class="Normal"><A NAME="I2248"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN>. 
 </div>
 <div class="NotesHeader">NOTES</div>

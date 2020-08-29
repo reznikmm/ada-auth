@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,18 +47,19 @@ time.&nbsp;</div>
 The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>with</B>&nbsp;Ada.Real_Time;&nbsp;<B>use</B>&nbsp;Ada.Real_Time;<BR>
 <B>package</B>&nbsp;Ada.Execution_Time<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I9743"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><A NAME="I9765"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9744"></A>CPU_Time&nbsp;<B>is&nbsp;private</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9745"></A>CPU_Time_First&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9746"></A>CPU_Time_Last&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9747"></A>CPU_Time_Unit&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined-real-number</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9748"></A>CPU_Tick&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9766"></A>CPU_Time&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9767"></A>CPU_Time_First&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9768"></A>CPU_Time_Last&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9769"></A>CPU_Time_Unit&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined-real-number</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9770"></A>CPU_Tick&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9749"></A>Clock<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9771"></A>Clock<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
@@ -73,21 +74,21 @@ The following language-defined library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;CPU_Time)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;CPU_Time)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9750"></A>Split<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9772"></A>Split<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Time;&nbsp;SC&nbsp;:&nbsp;<B>out</B>&nbsp;Seconds_Count;&nbsp;TS&nbsp;:&nbsp;<B>out</B>&nbsp;Time_Span);</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9751"></A>Time_Of&nbsp;(SC&nbsp;:&nbsp;Seconds_Count;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9773"></A>Time_Of&nbsp;(SC&nbsp;:&nbsp;Seconds_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS&nbsp;:&nbsp;Time_Span&nbsp;:=&nbsp;Time_Span_Zero)&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<A NAME="I9752"></A>Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+&nbsp;&nbsp;&nbsp;<A NAME="I9774"></A>Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<A NAME="I9753"></A>Separate_Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9775"></A>Separate_Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p9.3">9.3/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9754"></A>Clock_For_Interrupts&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9776"></A>Clock_For_Interrupts&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -96,7 +97,7 @@ The following language-defined library package exists:&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<A NAME="I9755"></A><A NAME="I9756"></A>The <I>execution time</I> or 
+<A NAME="I9777"></A><A NAME="I9778"></A>The <I>execution time</I> or 
 CPU time of a given task is defined as the time spent by the system executing 
 that task, including the time spent executing run-time or system services 
 on its behalf. The mechanism used to measure execution time is implementation 
@@ -141,7 +142,7 @@ to zero.</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
-<A NAME="I9757"></A>CPU_Time_Unit is the smallest amount of execution 
+<A NAME="I9779"></A>CPU_Time_Unit is the smallest amount of execution 
 time representable by the CPU_Time type; it is expressed in seconds. 
 A <I>CPU clock tick</I> is an execution time interval during which the 
 clock value (as observed by calling the Clock function) remains constant. 
@@ -173,7 +174,7 @@ False the function raises Program_Error.</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
-<A NAME="I9758"></A>For a call of Clock, if the task identified by T 
+<A NAME="I9780"></A>For a call of Clock, if the task identified by T 
 no longer exists, the execution of the program is erroneous.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -246,12 +247,12 @@ value of Execution_Time.CPU_Tick.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p29.b">29.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
-<A NAME="I9759"></A>The package Execution_Time is new.&nbsp;</div>
+<A NAME="I9781"></A>The package Execution_Time is new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p29.c">29.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
-<A NAME="I9760"></A>Function Clock_For_Interrupts, and constants Interrupt_Clocks_Supported 
+<A NAME="I9782"></A>Function Clock_For_Interrupts, and constants Interrupt_Clocks_Supported 
 and Separate_Interrupt_Clocks_Supported are added to Execution_Time. 
 If Execution_Time is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 

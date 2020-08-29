@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,13 +44,13 @@ from the internal entities.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">package_body</SPAN><A NAME="I3936"></A><A NAME="S0231"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3937"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0201">defining_program_unit_name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3938"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3939"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">package_body</SPAN><A NAME="I3941"></A><A NAME="S0231"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3942"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0201">defining_program_unit_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3943"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3944"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;[<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3940"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3941"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>.]<A NAME="I3942"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3945"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3946"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>.]<A NAME="I3947"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">If an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0291">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
@@ -82,14 +82,14 @@ For a noninstance, nonlibrary package, this body occurs at the end of
 the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 of the innermost enclosing program unit or <SPAN Class="swiss"><A HREF="RM-5-6.html#S0191">block_statement</A></SPAN>; 
 if there are several such packages, the order of the implicit <SPAN Class="swiss">package_bodies</SPAN> 
-is unspecified. <A NAME="I3943"></A>(For an instance, the implicit <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN> 
+is unspecified. <A NAME="I3948"></A>(For an instance, the implicit <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN> 
 occurs at the place of the instantiation (see <A HREF="RM-12-3.html">12.3</A>). 
 For a library package, the place is partially determined by the elaboration 
 dependences (see Clause <A HREF="RM-10.html">10</A>).)&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3944"></A>For the elaboration of a nongeneric 
+<div class="Normal"><A NAME="I3949"></A>For the elaboration of a nongeneric 
 <SPAN Class="swiss"><A HREF="RM-7-2.html#S0231">package_body</A></SPAN>, 
 its <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 is first elaborated, and its <SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 

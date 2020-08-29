@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <HR>
 <H1>3.9.2 Dispatching Operations of Tagged Types</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><A NAME="I2165"></A><A NAME="I2166"></A><A NAME="I2167"></A><A NAME="I2168"></A><A NAME="I2169"></A><A NAME="I2170"></A><A NAME="I2171"></A><A NAME="I2172"></A>The 
+<div class="Normal"><A NAME="I2166"></A><A NAME="I2167"></A><A NAME="I2168"></A><A NAME="I2169"></A><A NAME="I2170"></A><A NAME="I2171"></A><A NAME="I2172"></A><A NAME="I2173"></A>The 
 primitive subprograms of a tagged type, the subprograms declared by <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN>s, 
 <span class="insert5">the subprograms identified by the user-defined 
 literal aspects of a specific tagged type (see <A HREF="RM-4-2-1.html">4.2.1</A>),</span> 
@@ -54,28 +54,28 @@ below, the properties of the operands and the context of a particular
 call on a dispatching operation determine how the controlling tag is 
 determined, and hence whether or not the call is a dispatching call. 
 Run-time polymorphism is achieved when a dispatching operation is called 
-by a dispatching call. <A NAME="I2173"></A><A NAME="I2174"></A><A NAME="I2175"></A><A NAME="I2176"></A><A NAME="I2177"></A></div>
+by a dispatching call. <A NAME="I2174"></A><A NAME="I2175"></A><A NAME="I2176"></A><A NAME="I2177"></A><A NAME="I2178"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I2178"></A><A NAME="I2179"></A>A <I>call 
+<div class="Normal"><A NAME="I2179"></A><A NAME="I2180"></A>A <I>call 
 on a dispatching operation</I> is a call whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-denotes the declaration of a dispatching operation. <A NAME="I2180"></A>A 
+denotes the declaration of a dispatching operation. <A NAME="I2181"></A>A 
 <I>controlling operand</I> in a call on a dispatching operation of a 
 tagged type <I>T</I> is one whose corresponding formal parameter is of 
 type <I>T</I> or is of an anonymous access type with designated type 
-<I>T</I>; <A NAME="I2181"></A>the corresponding formal parameter is called 
+<I>T</I>; <A NAME="I2182"></A>the corresponding formal parameter is called 
 a <I>controlling formal parameter</I>. If the controlling formal parameter 
 is an access parameter, the controlling operand is the object designated 
-by the actual parameter, rather than the actual parameter itself. <A NAME="I2182"></A><A NAME="I2183"></A>If 
+by the actual parameter, rather than the actual parameter itself. <A NAME="I2183"></A><A NAME="I2184"></A>If 
 the call is to a (primitive) function with result type <I>T</I> (a <I>function 
 with a controlling result</I>), then the call has a <I>controlling result</I> 
 &mdash; the context of the call can control the dispatching. Similarly, 
 if the call is to a function with an access result type designating <I>T</I> 
 (a <I>function with a controlling access result</I>), then the call has 
 a <I>controlling access result</I>, and the context can similarly control 
-dispatching.<A NAME="I2184"></A><A NAME="I2185"></A>&nbsp;</div>
+dispatching.<A NAME="I2185"></A><A NAME="I2186"></A>&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression of a tagged type is either <I>statically</I> tagged, <I>dynamically</I> 
@@ -92,17 +92,17 @@ is statically, dynamically, or indeterminately tagged according to its
 For other kinds of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 and expressions, this is determined as follows:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Bulleted"><A NAME="I2186"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Bulleted"><A NAME="I2187"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression is <I>statically tagged</I> if it is of a specific tagged 
 type and, if it is a call with a controlling result or controlling access 
 result, it has at least one statically tagged controlling operand;&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Bulleted"><A NAME="I2187"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Bulleted"><A NAME="I2188"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression is <I>dynamically tagged</I> if it is of a class-wide type, 
 or it is a call with a controlling result or controlling access result 
 and at least one dynamically tagged controlling operand;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Bulleted"><A NAME="I2188"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Bulleted"><A NAME="I2189"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression is <I>tag indeterminate</I> if it is a call with a controlling 
 result or controlling access result, all of whose controlling operands 
 (if any) are tag indeterminate.&nbsp;</div>
@@ -135,9 +135,9 @@ it is a controlling operand in a call on a dispatching operation.&nbsp;</div>
 <div class="Normal">In the declaration of a dispatching operation of 
 a tagged type, everywhere a subtype of the tagged type appears as a subtype 
 of the profile (see <A HREF="RM-6-1.html">6.1</A>), it shall statically 
-match the first subtype of the tagged type. <A NAME="I2189"></A>If the 
+match the first subtype of the tagged type. <A NAME="I2190"></A>If the 
 dispatching operation overrides an inherited subprogram, it shall be 
-subtype conformant with the inherited subprogram. <A NAME="I2190"></A>The 
+subtype conformant with the inherited subprogram. <A NAME="I2191"></A>The 
 convention of an inherited dispatching operation is the convention of 
 the corresponding primitive operation of the parent or progenitor type. 
 The default convention of a dispatching operation that overrides an inherited 
@@ -167,20 +167,20 @@ it, nor after a body.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2191"></A><A NAME="I2192"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2192"></A><A NAME="I2193"></A>For 
 the execution of a call on a dispatching operation of a type <I>T</I>, 
 the <I>controlling tag value</I> determines which subprogram body is 
 executed. The controlling tag value is defined as follows:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I2193"></A>If one or more controlling 
+<div class="Bulleted"><A NAME="I2194"></A>If one or more controlling 
 operands are statically tagged, then the controlling tag value is <I>statically 
 determined</I> to be the tag of <I>T</I>.</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Bulleted">If one or more controlling operands are dynamically 
 tagged, then the controlling tag value is not statically determined, 
-but is rather determined by the tags of the controlling operands. <A NAME="I2194"></A><A NAME="I2195"></A>If 
+but is rather determined by the tags of the controlling operands. <A NAME="I2195"></A><A NAME="I2196"></A>If 
 there is more than one dynamically tagged controlling operand, a check 
-is made that they all have the same tag. <A NAME="I2196"></A>If this 
+is made that they all have the same tag. <A NAME="I2197"></A>If this 
 check fails, Constraint_Error is raised unless the call is a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0218">function_call</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denotes the declaration of an equality operator (predefined or user defined) 
@@ -205,7 +205,7 @@ or dereferenced) is the expression of an <SPAN Class="swiss"><A HREF="RM-5-2.htm
 whose target is of a class-wide type, then its controlling tag value 
 is determined by the target;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I2197"></A>Otherwise, the 
+<div class="Indented2NestedBulleted"><A NAME="I2198"></A>Otherwise, the 
 controlling tag value is statically determined to be the tag of type 
 <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p20">20/3</a></div>

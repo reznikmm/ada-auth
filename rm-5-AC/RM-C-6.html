@@ -32,7 +32,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -57,16 +57,16 @@ form for pragmas Atomic, Volatile, Atomic_Components, and Volatile_Components
 is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I8862"></A><A NAME="I8863"></A>Atomic(<A NAME="I8864"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
+<A NAME="I8879"></A><A NAME="I8880"></A>Atomic(<A NAME="I8881"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I8865"></A><A NAME="I8866"></A>Volatile(<A NAME="I8867"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
+<A NAME="I8882"></A><A NAME="I8883"></A>Volatile(<A NAME="I8884"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I8868"></A><A NAME="I8869"></A>Atomic_Components(<I>array_</I><A NAME="I8870"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
+<A NAME="I8885"></A><A NAME="I8886"></A>Atomic_Components(<I>array_</I><A NAME="I8887"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I8871"></A><A NAME="I8872"></A>Volatile_Components(<I>array_</I><A NAME="I8873"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
+<A NAME="I8888"></A><A NAME="I8889"></A>Volatile_Components(<I>array_</I><A NAME="I8890"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6.1">6.1/5</a></div>
@@ -80,14 +80,17 @@ a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPA
 be specified:</span></div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Atomic</span></div><div class="WideHanging-Body">
-<span class="insert3">The type of aspect Atomic is Boolean.<A NAME="I8874"></A><A NAME="I8875"></A></span></div>
+<span class="insert3">The type of aspect Atomic is Boolean.<A NAME="I8891"></A><A NAME="I8892"></A></span></div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Independent</span></div><div class="WideHanging-Body">
-<span class="insert3">The type of aspect Independent is Boolean.<A NAME="I8876"></A><A NAME="I8877"></A></span></div>
+<span class="insert3">The type of aspect Independent is Boolean.<A NAME="I8893"></A><A NAME="I8894"></A></span></div>
 <div class="paranum"><a name="p6.4">6.4/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Volatile</span></div><div class="WideHanging-Body">
-<span class="insert3">The type of aspect Volatile is Boolean.<A NAME="I8878"></A><A NAME="I8879"></A></span></div>
+<span class="insert3">The type of aspect Volatile is Boolean.<A NAME="I8895"></A><A NAME="I8896"></A></span></div>
 <div class="paranum"><a name="p6.5">6.5/5</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert5">Full_Access_Only</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">The type of aspect Full_Access_Only is Boolean.<A NAME="I8897"></A><A NAME="I8898"></A></span></div>
+<div class="paranum"><a name="p6.6">6.6/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
 a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 of an array type</span><span class="insert5">,</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;(including the anonymous type of</span></span><span class="insert3">&nbsp;an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -96,13 +99,13 @@ or the <SPAN Class="swiss"><A HREF="RM-12-5.html#S0321">formal_complete_type_dec
 of a formal array type</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;of 
 an anonymous array object)</span></span><span class="insert3">, the following 
 representation aspects may be specified:</span></div>
-<div class="paranum"><a name="p6.6">6.6/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">Atomic_Components</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">The type of aspect Atomic_Components is Boolean.<A NAME="I8880"></A><A NAME="I8881"></A></span></div>
 <div class="paranum"><a name="p6.7">6.7/3</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert3">Atomic_Components</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">The type of aspect Atomic_Components is Boolean.<A NAME="I8899"></A><A NAME="I8900"></A></span></div>
+<div class="paranum"><a name="p6.8">6.8/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Volatile_Components</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">The type of aspect Volatile_Components is Boolean.<A NAME="I8882"></A><A NAME="I8883"></A></span></div>
-<div class="paranum"><a name="p6.8">6.8/5</a></div>
+<span class="insert3">The type of aspect Volatile_Components is Boolean.<A NAME="I8901"></A><A NAME="I8902"></A></span></div>
+<div class="paranum"><a name="p6.9">6.9/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
 a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 </span><span class="insert5">of a composite type,</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;(including the anonymous type of</span></span><span class="insert3">&nbsp;an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -111,16 +114,27 @@ type, or the <SPAN Class="swiss"><A HREF="RM-12-5.html#S0321">formal_complete_ty
 of a formal composite type</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;of 
 an anonymous array object)</span></span><span class="insert3">, the following 
 representation aspect may be specified:</span></div>
-<div class="paranum"><a name="p6.9">6.9/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">Independent_Components</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">The type of aspect Independent_Components is Boolean.<A NAME="I8884"></A><A NAME="I8885"></A></span></div>
 <div class="paranum"><a name="p6.10">6.10/3</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">Independent_Components</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">The type of aspect Independent_Components is Boolean.<A NAME="I8903"></A><A NAME="I8904"></A></span></div>
+<div class="paranum"><a name="p6.11">6.11/5</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert3">If any of these aspects are 
 directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
-shall be a static expression. If not specified (including by inheritance), 
-each of these aspects is False.</span></div>
+shall be a static expression. If not specified&nbsp;</span><span class="insert5">for 
+a type&nbsp;</span><span class="insert3">(including by inheritance),&nbsp;</span><span class="insert5">the 
+Atomic, Atomic_Components, and Full_Access_Only</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;each 
+of these</span></span><span class="insert3">&nbsp;aspects&nbsp;</span><span class="insert5">are</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;is</span></span><span class="insert3">&nbsp;False.</span><span class="insert5">&nbsp;If any of these aspects are specified 
+True for a type, then the corresponding aspect is True for all objects 
+of the type. If the Atomic aspect is specified True, then the aspects 
+Volatile, Independent, and Volatile_Component (if defined) are True; 
+if the Atomic_Components aspect is specified True, then the aspects Volatile, 
+Volatile_Components, and Independent_Components are True. If the Volatile 
+aspect is specified True, then the Volatile_Components aspect (if defined) 
+is True, and vice versa. When not determined by one of the other aspects, 
+or for an object by its type, the Volatile, Volatile_Components, Independent, 
+and Independent_Components aspects are False.</span><span class="insert3"></span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal"><A NAME="I8886"></A>An <I>atomic</I> type is one 
+<div class="Normal"><A NAME="I8905"></A>An <I>atomic</I> type is one 
 <span class="insert3">for</span><span class="delete3">&nbsp;to</span> which 
 <span class="insert3">the aspect</span><span class="delete3">&nbsp;a pragma</span> 
 Atomic <span class="insert3">is True</span><span class="delete3">&nbsp;applies</span>. 
@@ -134,7 +148,7 @@ associated type</span><span class="delete3">&nbsp;applies</span>, or any object
 of an atomic type<span class="insert2">, other than objects obtained 
 by evaluating a slice</span>.&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><A NAME="I8887"></A>A <I>volatile</I> type is one 
+<div class="Normal"><A NAME="I8906"></A>A <I>volatile</I> type is one 
 <span class="insert3">for</span><span class="delete3">&nbsp;to</span> which 
 <span class="insert3">the aspect</span><span class="delete3">&nbsp;a pragma</span> 
 Volatile <span class="insert3">is True</span><span class="delete3">&nbsp;applies</span>. 
@@ -154,7 +168,17 @@ and Independent_Components <I>specify as independently addressable</I>
 the named object or component(s), or in the case of a type, all objects 
 or components of that type. All atomic objects&nbsp;</span><span class="insert4">and 
 aliased objects&nbsp;</span><span class="insert3">are considered to be specified 
-as independently addressable.<A NAME="I8888"></A><A NAME="I8889"></A></span></div>
+as independently addressable.<A NAME="I8907"></A><A NAME="I8908"></A></span></div>
+<div class="paranum"><a name="p8.2">8.2/5</a></div>
+<div class="Normal">&nbsp;<span class="insert5">The Full_Access_Only aspect 
+shall not be specified unless the associated type or object is volatile 
+(or atomic). A <I>full access</I> type is any atomic type, or a volatile 
+type for which the aspect Full_Access_Only is True.<A NAME="I8909"></A> 
+A <I>full access</I> object (including a component) is any atomic object, 
+or a volatile object for which the aspect Full_Access_Only is True for 
+the object or its type.<A NAME="I8910"></A> A Full_Access_Only aspect 
+is illegal if any subcomponent of the object or type is a full access 
+object or is of a generic formal type.</span></div>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
 9 was moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
@@ -176,7 +200,7 @@ type.</span>&nbsp;</div>
 is specified for a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
 the declaration shall be that of an array or record type.</span></div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Normal"><A NAME="I8890"></A>It is illegal to <span class="insert3">specify</span><span class="delete3">&nbsp;apply</span> 
+<div class="Normal"><A NAME="I8911"></A>It is illegal to <span class="insert3">specify</span><span class="delete3">&nbsp;apply</span> 
 either <span class="insert3">of the aspects</span><span class="delete3">&nbsp;an</span> 
 Atomic or Atomic_Components <span class="delete3">pragma&nbsp;</span>to <span class="insert3">have 
 the value True for&nbsp;</span>an object or type if the implementation cannot 
@@ -201,16 +225,36 @@ of an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A><
 for an Access attribute denotes an atomic object (including a component), 
 then the designated type of the resulting access type shall be atomic.<span class="delete5">&nbsp;If an atomic type is used as an actual for a generic formal derived type, 
 then the ancestor of the formal type shall be atomic</span><span class="delete3">&nbsp;or allow pass by copy</span><span class="delete5">.</span> Corresponding 
-rules apply to volatile objects<span class="delete5">&nbsp;and types</span>.</div>
+rules apply to volatile objects and <span class="insert5">to full access 
+objects</span><span class="delete5">&nbsp;types</span>.</div>
 <div class="paranum"><a name="p12.1">12.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">If a nonatomic subcomponent 
+of a full access object is passed as an actual parameter in a call then 
+the formal parameter shall allow pass by copy (and, at run time, the 
+parameter shall be passed by copy). A nonatomic subcomponent of a full 
+access object shall not be used as an actual for a generic formal of 
+mode <B>in out</B>. The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+for an Access attribute shall not denote a nonatomic subcomponent of 
+a full access object.</span></div>
+<div class="paranum"><a name="p12.2">12.2/5</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert3">If&nbsp;</span><span class="insert5">the 
 Atomic, Atomic_Components, Volatile, Volatile_Components, Independent, 
-or Independent_Components aspect is True for a generic formal type, then 
-that aspect shall be True for the actual type. If&nbsp;</span><span class="insert3">a 
+Independent_Components, or Full_Access_Only aspect is True for a generic 
+formal type, then that aspect shall be True for the actual type. If an 
+atomic type is used as an actual for a generic formal derived type, then 
+the ancestor of the formal type shall be atomic. A corresponding rule 
+applies to volatile types and similarly to full access types</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;a 
 volatile type is used as an actual for a generic formal array type, then 
-the element type of the formal type shall be volatile.</span><span class="insert5">&nbsp;If an atomic type is used as an actual for a generic formal derived type, 
-then the ancestor of the formal type shall be atomic. A corresponding 
-rule applies to volatile types.</span><span class="insert3"></span></div>
+the element type of the formal type shall be volatile</span></span><span class="insert3">.</span></div>
+<div class="paranum"><a name="p12.3">12.3/5</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert5">If a type with volatile components 
+is used as an actual for a generic formal array type, then the components 
+of the formal type shall be volatile. Furthermore, if the actual type 
+has atomic components and the formal array type has aliased components, 
+then the components of the formal array type shall also be atomic. A 
+corresponding rule applies when the actual type has volatile full access 
+components.</span></div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Normal">If <span class="insert3">an aspect</span><span class="delete3">&nbsp;a 
 pragma</span> Volatile, Volatile_Components, Atomic, or Atomic_Components 
@@ -230,22 +274,13 @@ a representation aspect for a component, object or type for which the
 aspect Independent or Independent_Components is True, in a way that prevents 
 the implementation from providing the independent addressability required 
 by the aspect.</span></div>
-<div class="paranum"><a name="p13.3">13.3/5</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert5">If a nonatomic subcomponent 
-of an atomic object is passed as the actual parameter in a call then 
-the formal parameter shall allow pass by copy (and, at run time, the 
-parameter shall be passed by copy). A nonatomic subcomponent of an atomic 
-object shall not be used as an actual for a generic formal of mode <B>in 
-out</B>. A nonatomic subcomponent of an atomic type shall not be aliased. 
-A nonatomic subcomponent of an atomic type or object shall not have components 
-that are specified to be independently addressable.</span></div>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
 14 was moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><span class="delete3"><A NAME="I8891"></A><A NAME="I8892"></A><A NAME="I8893"></A><A NAME="I8894"></A><A NAME="I8895"></A><A NAME="I8896"></A><A NAME="I8897"></A><A NAME="I8898"></A>These 
+<div class="Normal"><span class="delete3"><A NAME="I8912"></A><A NAME="I8913"></A><A NAME="I8914"></A><A NAME="I8915"></A><A NAME="I8916"></A><A NAME="I8917"></A><A NAME="I8918"></A><A NAME="I8919"></A>These 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s are 
 representation pragmas (see <A HREF="RM-13-1.html">13.1</A>).</span> 
 </div>
@@ -263,11 +298,11 @@ to nonatomic volatile variables is sequential (see <A HREF="RM-9-10.html">9.10</
 a volatile object all reads and updates of the object as a whole are 
 performed directly to memory.</span></div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I8899"></A>Two actions are sequential (see 
+<div class="Normal"><A NAME="I8920"></A>Two actions are sequential (see 
 <A HREF="RM-9-10.html">9.10</A>) if each is the read or update of the 
 same atomic object.</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8900"></A>If a type is atomic or volatile 
+<div class="Normal"><A NAME="I8921"></A>If a type is atomic or volatile 
 and it is not a by-copy type, then the type is defined to be a by-reference 
 type. If any subcomponent of a type is atomic or volatile, then the type 
 is defined to be a by-reference type.</div>
@@ -277,12 +312,12 @@ the corresponding formal parameter is not, then the parameter is passed
 by copy.&nbsp;</div>
 <div class="paranum"><a name="p19.1">19.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert5">All reads of or writes to 
-any nonatomic subcomponent of an atomic object are performed by reading 
-and/or writing all of the nearest enclosing atomic object.</span></div>
+any nonatomic subcomponent of a full access object are performed by reading 
+and/or writing all of the nearest enclosing full access object.</span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p20">20/5</a></div>
-<div class="Normal"><A NAME="I8901"></A>The external effect of a program 
+<div class="Normal"><A NAME="I8922"></A>The external effect of a program 
 (see <A HREF="RM-1-1-3.html">1.1.3</A>) is defined to include each read 
 and update of a volatile or atomic object. The implementation shall not 
 generate any memory reads or updates of atomic or volatile objects other 

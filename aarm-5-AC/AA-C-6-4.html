@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,28 +50,28 @@ has the following declaration:</span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><span class="insert5"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Atomic_Type&nbsp;<B>is&nbsp;range</B>&nbsp;&lt;&gt;&nbsp;<B>with</B>&nbsp;Atomic;<BR>
-<B>package</B>&nbsp;System.Atomic_Operations.Integer_Arithmetic<A NAME="I9725"></A><BR>
+<B>package</B>&nbsp;System.Atomic_Operations.Integer_Arithmetic<A NAME="I9747"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;<B>is</B></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9726"></A>Atomic_Add&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9748"></A>Atomic_Add&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9727"></A>Atomic_Subtract&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9749"></A>Atomic_Subtract&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9728"></A>Atomic_Fetch_And_Add<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9750"></A>Atomic_Fetch_And_Add<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Atomic_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9729"></A>Atomic_Fetch_And_Subtract<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9751"></A>Atomic_Fetch_And_Subtract<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Atomic_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9730"></A>Is_Lock_Free&nbsp;(Item&nbsp;:&nbsp;<B>aliased</B>&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9752"></A>Is_Lock_Free&nbsp;(Item&nbsp;:&nbsp;<B>aliased</B>&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Examples"><span class="insert5"><B>end</B>&nbsp;System.Atomic_Operations.Integer_Arithmetic;</span></div>
@@ -114,7 +114,7 @@ has the following declaration:</span></div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p18.a">18.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0321-1.TXT">AI12-0321-1</A></I>} 
-<span class="insert5"><A NAME="I9731"></A>This package is new.</span> 
+<span class="insert5"><A NAME="I9753"></A>This package is new.</span> 
 </div>
 
 <HR>

@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -32,7 +32,7 @@
 <HR>
 <H1>M.3 Implementation Advice</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I9740"></A><A NAME="I9741"></A>This International 
+<div class="Normal"><A NAME="I9759"></A><A NAME="I9760"></A>This International 
 Standard sometimes gives advice about handling certain target machine 
 dependences. Each Ada implementation must document whether that advice 
 is followed:&nbsp;</div>
@@ -307,30 +307,30 @@ See <A HREF="RM-A-17.html">A.17</A>(33/2).</div>
 <A HREF="RM-A-18-1.html">A.18.1</A>(8/2).</div>
 <div class="paranum"><a name="p61">61/2</a></div>
 <div class="Bulleted">The worst-case time complexity of Element for Containers.Vector 
-should be <I>O</I>(log <I>N</I>). See <A HREF="RM-A-18-2.html">A.18.2</A>(255/2).</div>
+should be <I>O</I>(log <I>N</I>). See <A HREF="RM-A-18-2.html">A.18.2</A>(256/2).</div>
 <div class="paranum"><a name="p62">62/2</a></div>
 <div class="Bulleted">The worst-case time complexity of Append with Count 
 = 1 when <I>N</I> is less than the capacity for Containers.Vector should 
-be <I>O</I>(log <I>N</I>). See <A HREF="RM-A-18-2.html">A.18.2</A>(256/2).</div>
+be <I>O</I>(log <I>N</I>). See <A HREF="RM-A-18-2.html">A.18.2</A>(257/2).</div>
 <div class="paranum"><a name="p63">63/2</a></div>
 <div class="Bulleted">The worst-case time complexity of Prepend with 
 Count = 1 and Delete_First with Count=1 for Containers.Vectors should 
-be <I>O</I>(<I>N</I> log <I>N</I>). See <A HREF="RM-A-18-2.html">A.18.2</A>(257/2).</div>
+be <I>O</I>(<I>N</I> log <I>N</I>). See <A HREF="RM-A-18-2.html">A.18.2</A>(258/2).</div>
 <div class="paranum"><a name="p64">64/2</a></div>
 <div class="Bulleted">The worst-case time complexity of a call on procedure 
 Sort of an instance of Containers.Vectors.Generic_Sorting should be <I>O</I>(<I>N</I>**2), 
 and the average time complexity should be better than <I>O</I>(<I>N</I>**2). 
-See <A HREF="RM-A-18-2.html">A.18.2</A>(258/2).</div>
+See <A HREF="RM-A-18-2.html">A.18.2</A>(259/2).</div>
 <div class="paranum"><a name="p65">65/2</a></div>
 <div class="Bulleted">Containers.Vectors.Generic_Sorting.Sort and Containers.Vectors.Generic_Sorting.Merge 
-should minimize copying of elements. See <A HREF="RM-A-18-2.html">A.18.2</A>(259/2).</div>
+should minimize copying of elements. See <A HREF="RM-A-18-2.html">A.18.2</A>(260/2).</div>
 <div class="paranum"><a name="p66">66/2</a></div>
 <div class="Bulleted">Containers.Vectors.Move should not copy elements, 
-and should minimize copying of internal data structures. See <A HREF="RM-A-18-2.html">A.18.2</A>(260/2).</div>
+and should minimize copying of internal data structures. See <A HREF="RM-A-18-2.html">A.18.2</A>(261/2).</div>
 <div class="paranum"><a name="p67">67/2</a></div>
 <div class="Bulleted">If an exception is propagated from a vector operation, 
 no storage should be lost, nor any elements removed from a vector unless 
-specified by the operation. See <A HREF="RM-A-18-2.html">A.18.2</A>(261/2).</div>
+specified by the operation. See <A HREF="RM-A-18-2.html">A.18.2</A>(262/2).</div>
 <div class="paranum"><a name="p68">68/2</a></div>
 <div class="Bulleted">The worst-case time complexity of Element, Insert 
 with Count=1, and Delete with Count=1 for Containers.Doubly_Linked_Lists 

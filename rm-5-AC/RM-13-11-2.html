@@ -35,7 +35,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +46,7 @@
 <HR>
 <H1>13.11.2 Unchecked Storage Deallocation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5947"></A><A NAME="I5948"></A><A NAME="I5949"></A><A NAME="I5950"></A><A NAME="I5951"></A>Unchecked 
+<div class="Normal"><A NAME="I5942"></A><A NAME="I5943"></A><A NAME="I5944"></A><A NAME="I5945"></A><A NAME="I5946"></A>Unchecked 
 storage deallocation of an object designated by a value of an access 
 type is achieved by a call to an instance of the generic procedure Unchecked_Deallocation. 
 </div>
@@ -59,8 +59,8 @@ generic library procedure exists:&nbsp;</div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Name&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;&nbsp;Object;<BR>
-<A NAME="I5952"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocation(X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Name)<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;</span><span class="insert5">Preelaborate,<BR>
+<A NAME="I5947"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocation(X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Name)<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;</span><span class="insert5">Preelaborate,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Object'Nonblocking&nbsp;<B>and</B>&nbsp;Name'Storage_Pool'Nonblocking,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert3">Convention&nbsp;=&gt;&nbsp;Intrinsic;</span><span class="delete3">;<BR>
 <B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;Ada.Unchecked_Deallocation);</span><span class="delete5"><BR>
@@ -71,7 +71,7 @@ generic library procedure exists:&nbsp;</div>
 <div class="Normal">&nbsp;<span class="insert3">A call on an instance of Unchecked_Deallocation 
 is illegal if the actual access type of the instance is a type for which 
 the Storage_Size has been specified by a static expression with value 
-zero or is defined by the language to be zero. <A NAME="I5953"></A>In 
+zero or is defined by the language to be zero. <A NAME="I5948"></A>In 
 addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span></div>
@@ -108,7 +108,7 @@ and Alignment are the same values passed to the corresponding Allocate
 call</span>. There is one exception: if the object being freed contains 
 tasks, the object might not be deallocated.&nbsp;</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Normal"><A NAME="I5954"></A><A NAME="I5955"></A><A NAME="I5956"></A><A NAME="I5957"></A>After 
+<div class="Normal"><A NAME="I5949"></A><A NAME="I5950"></A><A NAME="I5951"></A><A NAME="I5952"></A>After 
 <span class="insert4">the finalization step of&nbsp;</span>Free(X), the object 
 designated by X, and any subcomponents <span class="insert2">(and coextensions) 
 </span>thereof, no longer exist; their storage can be reused for other 
@@ -116,14 +116,14 @@ purposes.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5958"></A>It 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5953"></A>It 
 is a bounded error to free a discriminated, unterminated task object. 
 The possible consequences are:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Bulleted">No exception is raised.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Bulleted">Program_Error or Tasking_Error is raised at the 
-point of the deallocation.<A NAME="I5959"></A> <A NAME="I5960"></A></div>
+point of the deallocation.<A NAME="I5954"></A> <A NAME="I5955"></A></div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Bulleted">Program_Error or Tasking_Error is raised in the 
 task the next time it references any of the discriminants.&nbsp;</div>
@@ -133,20 +133,20 @@ task the next time it references any of the discriminants.&nbsp;</div>
 of the task) is not reclaimed prior to task termination.&nbsp;</div>
 <div class="paranum"><a name="p15.1">15.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert4">An access value that designates 
-a nonexistent object is called a <I>dangling reference</I>.<A NAME="I5961"></A><A NAME="I5962"></A></span></div>
+a nonexistent object is called a <I>dangling reference</I>.<A NAME="I5956"></A><A NAME="I5957"></A></span></div>
 <div class="paranum"><a name="p15.2">15.2/4</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert4">If a dangling reference is 
 dereferenced (implicitly or explicitly), execution is erroneous (see 
 below). If there is no explicit or implicit dereference, then it is a 
-bounded error <A NAME="I5963"></A>to evaluate an expression whose result 
+bounded error <A NAME="I5958"></A>to evaluate an expression whose result 
 is a dangling reference. If the error is detected, either Constraint_Error 
-or Program_Error is raised. <A NAME="I5964"></A><A NAME="I5965"></A>Otherwise, 
+or Program_Error is raised. <A NAME="I5959"></A><A NAME="I5960"></A>Otherwise, 
 execution proceeds normally, but with the possibility that the access 
 value designates some other existing object.</span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5966"></A><A NAME="I5967"></A>Evaluating 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5961"></A><A NAME="I5962"></A>Evaluating 
 a name that denotes a nonexistent object<span class="insert3">, or a 
 protected subprogram or subprogram renaming whose associated object (if 
 any) is nonexistent,&nbsp;</span>is erroneous. The execution of a call to 

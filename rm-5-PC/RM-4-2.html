@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,19 +35,19 @@
 <HR>
 <H1>4.2 Literals</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2498"></A>A <I>literal</I> represents a 
+<div class="Normal"><A NAME="I2500"></A>A <I>literal</I> represents a 
 value literally, that is, by means of notation suited to its kind. A 
 literal is either a <SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_literal</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>, 
 the literal <B>null</B>, or a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN>. 
-<A NAME="I2499"></A></div>
+<A NAME="I2501"></A></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I2500"></A><A NAME="I2501"></A>For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I2502"></A><A NAME="I2503"></A>For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that consists of a <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>, 
 either its expected type shall be a single character type, in which case 
 it is interpreted as a parameterless <SPAN Class="swiss"><A HREF="RM-6-4.html#S0218">function_call</A></SPAN> 
@@ -59,18 +59,18 @@ parameterless function declared as part of the character type's definition
 denotes the <SPAN Class="swiss"><A HREF="RM-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Normal"><A NAME="I2502"></A>The expected type for a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0141">primary</A></SPAN> 
+<div class="Normal"><A NAME="I2504"></A>The expected type for a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0141">primary</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 shall be a single string type<span class="insert5">&nbsp;or a type with a 
 specified String_Literal aspect (see <A HREF="RM-4-2-1.html">4.2.1</A>). 
 In either case, the <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 is interpreted to be of its expected type. If the expected type of an 
 integer literal is a type with a specified Integer_Literal aspect (see 
-<A HREF="RM-4-2-1.html">4.2.1</A>), the literal is interpreted to<A NAME="I2503"></A> 
+<A HREF="RM-4-2-1.html">4.2.1</A>), the literal is interpreted to<A NAME="I2505"></A> 
 be of its expected type; otherwise it is interpreted to be of type <I>universal_integer</I>. 
 If the expected type of a real literal is a type with a specified Real_Literal 
 aspect (see <A HREF="RM-4-2-1.html">4.2.1</A>), it is interpreted to 
-be of its<A NAME="I2504"></A> expected type; otherwise, it is interpreted 
+be of its<A NAME="I2506"></A> expected type; otherwise, it is interpreted 
 to be of type <I>universal_real</I>.</span>.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -94,12 +94,12 @@ deleted.</I></SPAN></div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Normal"><span class="delete5">An integer literal is of type 
-<I>universal_integer</I>. A real literal is of type <I>universal_real</I>.</span><span class="delete5">&nbsp;</span>The literal <B>null</B> is of type <I>universal_access</I>.<A NAME="I2505"></A><A NAME="I2506"></A><A NAME="I2507"></A> 
+<I>universal_integer</I>. A real literal is of type <I>universal_real</I>.</span><span class="delete5">&nbsp;</span>The literal <B>null</B> is of type <I>universal_access</I>.<A NAME="I2507"></A><A NAME="I2508"></A><A NAME="I2509"></A> 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal"><A NAME="I2508"></A><A NAME="I2509"></A><A NAME="I2510"></A><A NAME="I2511"></A><span class="insert5">If 
+<div class="Normal"><A NAME="I2510"></A><A NAME="I2511"></A><A NAME="I2512"></A><A NAME="I2513"></A><span class="insert5">If 
 its expected type is a numeric type, the</span><span class="delete5">&nbsp;The</span> 
 evaluation of a numeric literal<span class="delete5">, or the literal 
 <B>null</B>,</span> yields the represented value.<span class="insert5">&nbsp;In other cases, the effect of evaluating a numeric literal is determined 
@@ -108,7 +108,7 @@ by the Integer_Literal or Real_Literal aspect that applies (see <A HREF="RM-4-2-
 <div class="Normal">&nbsp;<span class="insert5">The evaluation of the literal 
 <B>null</B> yields the null value of the expected type.</span></div>
 <div class="paranum"><a name="p10">10/5</a></div>
-<div class="Normal"><A NAME="I2512"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
+<div class="Normal"><A NAME="I2514"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0141">primary</A></SPAN> 
 <span class="insert5">and has an expected type that is a string type, 
 </span>yields an array value containing the value of each character of 
@@ -119,14 +119,14 @@ value are determined according to the rules for <SPAN Class="swiss"><A HREF="RM-
 literal, the upper bound is the predecessor of the lower bound.<span class="insert5">&nbsp;In other cases, the effect of evaluating a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 is determined by the String_Literal aspect that applies (see <A HREF="RM-4-2-1.html">4.2.1</A>).</span></div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal"><A NAME="I2513"></A><A NAME="I2514"></A>For the evaluation 
+<div class="Normal"><A NAME="I2515"></A><A NAME="I2516"></A>For the evaluation 
 of a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 of <span class="insert5">a string&nbsp;</span>type <I>T</I>, a check is made 
 that the value of each character of the <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 belongs to the component subtype of <I>T</I>. For the evaluation of a 
 null string literal<span class="insert5">&nbsp;of a string type</span>, a 
 check is made that its lower bound is greater than the lower bound of 
-the base range of the index type. <A NAME="I2515"></A>The exception Constraint_Error 
+the base range of the index type. <A NAME="I2517"></A>The exception Constraint_Error 
 is raised if either of these checks fails.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>

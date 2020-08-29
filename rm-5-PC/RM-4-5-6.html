@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,14 +35,14 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2997"></A><A NAME="I2998"></A><A NAME="I2999"></A><A NAME="I3000"></A><A NAME="I3001"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2999"></A><A NAME="I3000"></A><A NAME="I3001"></A><A NAME="I3002"></A><A NAME="I3003"></A>The 
 highest precedence unary operator <B>abs</B> (absolute value) is predefined 
 for every specific numeric type <I>T</I>, with the following specification: 
 </div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>abs</B>&quot;(Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3002"></A><A NAME="I3003"></A><A NAME="I3004"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3004"></A><A NAME="I3005"></A><A NAME="I3006"></A>The 
 highest precedence unary operator <B>not</B> (logical negation) is predefined 
 for every boolean type <I>T</I>, every modular type <I>T</I>, and for 
 every one-dimensional array type <I>T</I> whose components are of a boolean 
@@ -60,12 +60,12 @@ of the value of the operand.</div>
 array of boolean components yields a one-dimensional boolean array with 
 the same bounds; each component of the result is obtained by logical 
 negation of the corresponding component of the operand (that is, the 
-component that has the same index value). <A NAME="I3005"></A><A NAME="I3006"></A><A NAME="I3007"></A>A 
+component that has the same index value). <A NAME="I3007"></A><A NAME="I3008"></A><A NAME="I3009"></A>A 
 check is made that each component of the result belongs to the component 
 subtype; the exception Constraint_Error is raised if this check fails. 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3008"></A><A NAME="I3009"></A><A NAME="I3010"></A><A NAME="I3011"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3010"></A><A NAME="I3011"></A><A NAME="I3012"></A><A NAME="I3013"></A>The 
 highest precedence <I>exponentiation</I> operator ** is predefined for 
 every specific integer type <I>T</I> with the following specification: 
 </div>
@@ -79,7 +79,7 @@ or the floating point type):&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;**&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Integer'Base)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I3012"></A>The right operand of an exponentiation 
+<div class="Normal"><A NAME="I3014"></A>The right operand of an exponentiation 
 is the <I>exponent</I>. The value of X**N with the value of the exponent 
 N positive is the same as the value of X*X*...X (with N&ndash;1 multiplications) 
 except that the multiplications are associated in an arbitrary order. 
@@ -97,9 +97,9 @@ not be. (The best machine approximation to the final result in this case
 would generally be 0.0.)&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Notes">20&nbsp;&nbsp;<A NAME="I3013"></A><A NAME="I3014"></A>As 
+<div class="Notes">20&nbsp;&nbsp;<A NAME="I3015"></A><A NAME="I3016"></A>As 
 implied by the specification given above for exponentiation of an integer 
-type, a check is made that the exponent is not negative. <A NAME="I3015"></A>Constraint_Error 
+type, a check is made that the exponent is not negative. <A NAME="I3017"></A>Constraint_Error 
 is raised if this check fails.&nbsp;</div>
 
 <HR>

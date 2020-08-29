@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -22,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,12 +42,13 @@ for treating a text file as a stream.&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Text_IO.Text_Streams has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><B>with</B>&nbsp;Ada.Streams;<A NAME="I7460"></A><BR>
-<B>package</B>&nbsp;Ada.Text_IO.Text_Streams&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7461"></A>Stream_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Streams.Root_Stream_Type'Class;</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Streams;<A NAME="I7455"></A><BR>
+<B>package</B>&nbsp;Ada.Text_IO.Text_Streams<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7456"></A>Stream_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Streams.Root_Stream_Type'Class;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7462"></A>Stream&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Stream_Access;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7457"></A>Stream&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Stream_Access;<BR>
 <B>end</B>&nbsp;Ada.Text_IO.Text_Streams;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">The Stream function has the same effect as the corresponding 

@@ -32,7 +32,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,25 +43,25 @@
 <HR>
 <H1>12.6 Formal Subprograms</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5493"></A><A NAME="I5494"></A>Formal subprograms 
+<div class="Normal"><A NAME="I5488"></A><A NAME="I5489"></A>Formal subprograms 
 can be used to pass callable entities to a generic unit.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_subprogram_declaration</SPAN><A NAME="I5495"></A><A NAME="S0335"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><A NAME="I5496"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0336">formal_concrete_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5497"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN></span><span class="delete2"><B>&nbsp;with</B>&nbsp;<A NAME="I5498"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5499"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>];</span></div>
+<div class="Indented1"><SPAN Class="swiss">formal_subprogram_declaration</SPAN><A NAME="I5490"></A><A NAME="S0335"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><A NAME="I5491"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0336">formal_concrete_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5492"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN></span><span class="delete2"><B>&nbsp;with</B>&nbsp;<A NAME="I5493"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5494"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>];</span></div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">formal_concrete_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5500"></A><A NAME="S0336"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5501"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5502"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>]</span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5503"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">formal_concrete_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5495"></A><A NAME="S0336"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5496"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;[<B>is</B>&nbsp;<A NAME="I5497"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>]</span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5498"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p2.2">2.2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">formal_abstract_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5504"></A><A NAME="S0337"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5505"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is&nbsp;abstract</B>&nbsp;[<A NAME="I5506"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>]</span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5507"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">formal_abstract_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5499"></A><A NAME="S0337"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5500"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>is&nbsp;abstract</B>&nbsp;[<A NAME="I5501"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN>]</span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5502"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">subprogram_default</SPAN><A NAME="I5508"></A><A NAME="S0338"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5509"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0339">default_name</A></SPAN>&nbsp;|&nbsp;&lt;&gt;<span class="insert2">&nbsp;|&nbsp;<B>null</B></span></div>
+<div class="Indented1"><SPAN Class="swiss">subprogram_default</SPAN><A NAME="I5503"></A><A NAME="S0338"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5504"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0339">default_name</A></SPAN>&nbsp;|&nbsp;&lt;&gt;<span class="insert2">&nbsp;|&nbsp;<B>null</B></span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">default_name</SPAN><A NAME="I5510"></A><A NAME="S0339"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5511"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">default_name</SPAN><A NAME="I5505"></A><A NAME="S0339"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5506"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Indented1"><span class="insert2">A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN> 
 of <B>null</B> shall not be specified for a formal function or for a 
@@ -70,11 +70,11 @@ of <B>null</B> shall not be specified for a formal function or for a
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5512"></A>The expected profile for the 
+<div class="Normal"><A NAME="I5507"></A>The expected profile for the 
 <SPAN Class="swiss"><A HREF="RM-12-6.html#S0339">default_name</A></SPAN>, 
 if any, is that of the formal subprogram.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I5513"></A>For a generic formal subprogram, 
+<div class="Normal"><A NAME="I5508"></A>For a generic formal subprogram, 
 the expected profile for the actual is that of the formal subprogram. 
 </div>
 
@@ -82,10 +82,10 @@ the expected profile for the actual is that of the formal subprogram.
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">The profiles of the formal and any named default 
 shall be <span class="insert3">mode conformant</span><span class="delete3">&nbsp;mode-conformant</span>. 
-<A NAME="I5514"></A></div>
+<A NAME="I5509"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">The profiles of the formal and actual shall be <span class="insert3">mode 
-conformant</span><span class="delete3">&nbsp;mode-conformant</span>. <A NAME="I5515"></A></div>
+conformant</span><span class="delete3">&nbsp;mode-conformant</span>. <A NAME="I5510"></A></div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">For 
 a parameter or result subtype of a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
@@ -104,7 +104,7 @@ of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_e
 <div class="Bulleted"><span class="insert2">otherwise, the subtype of 
 the corresponding parameter or result type of the actual matching the 
 <SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN> 
-shall exclude null. <A NAME="I5516"></A>In addition to the places where 
+shall exclude null. <A NAME="I5511"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -126,7 +126,7 @@ access type designating a specific tagged type <I>T</I>, <I>T</I> is
 called a controlling type of the <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN>. 
 A <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
 shall have exactly one controlling type</span><span class="insert3">, 
-and that type shall not be incomplete</span><span class="insert2">. <A NAME="I5517"></A></span></div>
+and that type shall not be incomplete</span><span class="insert2">. <A NAME="I5512"></A></span></div>
 <div class="paranum"><a name="p8.6">8.6/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5"></span><span class="insert2">The 
 actual subprogram for a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0337">formal_abstract_subprogram_declaration</A></SPAN> 
@@ -183,7 +183,7 @@ the same profile as the primitive subprogram except that <I>T</I> is
 systematically replaced by <I>T</I>'Class in the types of its profile, 
 is potentially use-visible. The body of such a subprogram is as defined 
 in <A HREF="RM-12-5-1.html">12.5.1</A> for primitive subprograms of a 
-formal type when the actual type is class-wide.<A NAME="I5518"></A></span> 
+formal type when the actual type is class-wide.<A NAME="I5513"></A></span> 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">If a generic unit has a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0338">subprogram_default</A></SPAN> 

@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 <HR>
 <H1>B.5 Interfacing with Fortran</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><A NAME="I8763"></A><A NAME="I8764"></A>The facilities 
+<div class="Normal"><A NAME="I8780"></A><A NAME="I8781"></A>The facilities 
 relevant to interfacing with the Fortran language are the package Interfaces.Fortran 
 and support for <span class="insert3">specifying&nbsp;</span>the <span class="delete3">Import, 
 Export and&nbsp;</span>Convention <span class="insert3">aspect</span><span class="delete3">&nbsp;pragmas</span> 
@@ -60,49 +60,49 @@ Interfaces.Fortran has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Numerics.Generic_Complex_Types;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;see&nbsp;<A HREF="RM-G-1-1.html">G.1.1</A></I></SPAN><BR>
 <B>pragma</B>&nbsp;Elaborate_All(Ada.Numerics.Generic_Complex_Types);<BR>
-<B>package</B>&nbsp;Interfaces.Fortran&nbsp;<B>is</B><A NAME="I8765"></A><BR>
+<B>package</B>&nbsp;Interfaces.Fortran&nbsp;<B>is</B><A NAME="I8782"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Fortran);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8766"></A>Fortran_Integer&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8783"></A>Fortran_Integer&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8767"></A>Real&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8768"></A>Double_Precision&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8784"></A>Real&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8785"></A>Double_Precision&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8769"></A>Logical&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8786"></A>Logical&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8770"></A>Single_Precision_Complex_Types&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8787"></A>Single_Precision_Complex_Types&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;(Real);</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8771"></A>Complex&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Single_Precision_Complex_Types.Complex;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8788"></A>Complex&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Single_Precision_Complex_Types.Complex;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8772"></A>Imaginary&nbsp;<B>is</B>&nbsp;Single_Precision_Complex_Types.Imaginary;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8773"></A>i&nbsp;:&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;Single_Precision_Complex_Types.i;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8774"></A>j&nbsp;:&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;Single_Precision_Complex_Types.j;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8789"></A>Imaginary&nbsp;<B>is</B>&nbsp;Single_Precision_Complex_Types.Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8790"></A>i&nbsp;:&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;Single_Precision_Complex_Types.i;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8791"></A>j&nbsp;:&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;Single_Precision_Complex_Types.j;</div>
 <div class="paranum"><a name="p10.1">10.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8775"></A>Double_Precision_Complex_Types&nbsp;<B>is</B><BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8792"></A>Double_Precision_Complex_Types&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;(Double_Precision);</span></div>
 <div class="paranum"><a name="p10.2">10.2/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8776"></A>Double_Complex&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Double_Precision_Complex_Types.Complex;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8793"></A>Double_Complex&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Double_Precision_Complex_Types.Complex;</span></div>
 <div class="paranum"><a name="p10.3">10.3/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8777"></A>Double_Imaginary&nbsp;<B>is</B>&nbsp;Double_Precision_Complex_Types.Imaginary;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8794"></A>Double_Imaginary&nbsp;<B>is</B>&nbsp;Double_Precision_Complex_Types.Imaginary;</span></div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8778"></A>Character_Set&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;character&nbsp;type</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8795"></A>Character_Set&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;character&nbsp;type</I></SPAN>;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8779"></A>Fortran_Character&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character_Set<span class="insert3"><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8796"></A>Fortran_Character&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character_Set<span class="insert3"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span><span class="delete3">;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack&nbsp;(Fortran_Character)</span>;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8780"></A>To_Fortran&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character_Set;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8781"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8797"></A>To_Fortran&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character_Set;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8798"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8782"></A>To_Fortran&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Fortran_Character;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8783"></A>To_Ada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Fortran_Character)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8799"></A>To_Fortran&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Fortran_Character;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8800"></A>To_Ada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Fortran_Character)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8784"></A>To_Fortran&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8801"></A>To_Fortran&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Fortran_Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8785"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Fortran_Character;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8802"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Fortran_Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);</div>
 <div class="paranum"><a name="p17">17</a></div>

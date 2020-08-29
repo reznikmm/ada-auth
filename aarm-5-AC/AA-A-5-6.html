@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,17 +43,17 @@
 has the following declaration:</span></div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples"><span class="insert5"><B>with</B>&nbsp;Ada.Strings.Text_Buffers;<BR>
-<B>package</B>&nbsp;Ada.Numerics.Big_Numbers.Big_Integers<A NAME="I7700"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>&nbsp;<B>is</B></span></div>
+<B>package</B>&nbsp;Ada.Numerics.Big_Numbers.Big_Integers<A NAME="I7696"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7701"></A>Big_Integer&nbsp;<B>is&nbsp;private</B><BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7697"></A>Big_Integer&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Integer_Literal&nbsp;=&gt;&nbsp;From_String,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Image&nbsp;=&gt;&nbsp;Put_Image;</span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7702"></A>Is_Valid&nbsp;(Arg&nbsp;:&nbsp;Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7698"></A>Is_Valid&nbsp;(Arg&nbsp;:&nbsp;Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7703"></A>Valid_Big_Integer&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7699"></A>Valid_Big_Integer&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;Is_Valid&nbsp;(Valid_Big_Integer),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error);</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
@@ -63,20 +63,22 @@ has the following declaration:</span></div>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7704"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7700"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7705"></A>Big_Positive&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Valid&nbsp;(Big_Positive)&nbsp;<B>then</B>&nbsp;Big_Positive&nbsp;&gt;&nbsp;0),<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7701"></A>Big_Positive&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Valid&nbsp;(Big_Positive)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Big_Positive&nbsp;&gt;&nbsp;0),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Constraint_Error);</span></div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7706"></A>Big_Natural&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Valid&nbsp;(Big_Natural)&nbsp;<B>then</B>&nbsp;Big_Natural&nbsp;=&gt;&nbsp;0),<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7702"></A>Big_Natural&nbsp;<B>is</B>&nbsp;Big_Integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Is_Valid&nbsp;(Big_Natural)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Big_Natural&nbsp;&gt;=&nbsp;0),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Constraint_Error);</span></div>
 <div class="paranum"><a name="p10">10/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7707"></A>In_Range&nbsp;(Arg,&nbsp;Low,&nbsp;High&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B><BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7703"></A>In_Range&nbsp;(Arg,&nbsp;Low,&nbsp;High&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Low&nbsp;&lt;=&nbsp;Arg&nbsp;<B>and</B>&nbsp;Arg&nbsp;&lt;=&nbsp;High);</span></div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7708"></A>To_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Integer<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7704"></A>To_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Integer<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;In_Range&nbsp;(Arg,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Integer'First),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Integer'Last))<BR>
@@ -84,9 +86,9 @@ has the following declaration:</span></div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Int&nbsp;<B>is&nbsp;range</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7709"></A>Signed_Conversions&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7710"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Int)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7711"></A>From_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Int<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7705"></A>Signed_Conversions&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7706"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Int)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7707"></A>From_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Int<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;In_Range&nbsp;(Arg,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'First),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'Last))<BR>
@@ -95,23 +97,23 @@ has the following declaration:</span></div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Int&nbsp;<B>is&nbsp;mod</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7712"></A>Unsigned_Conversions&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7713"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Int)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7714"></A>From_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Int<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7708"></A>Unsigned_Conversions&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7709"></A>To_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Int)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7710"></A>From_Big_Integer&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Int<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;In_Range&nbsp;(Arg,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'First),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;=&gt;&nbsp;To_Big_Integer&nbsp;(Int'Last))<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error;<BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Unsigned_Conversions;</span></div>
 <div class="paranum"><a name="p14">14/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7715"></A>To_String&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer;<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7711"></A>To_String&nbsp;(Arg&nbsp;:&nbsp;Valid_Big_Integer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;Number_Base&nbsp;:=&nbsp;10)&nbsp;<B>return</B>&nbsp;String<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;To_String'Result'First&nbsp;=&nbsp;1;</span></div>
 <div class="paranum"><a name="p15">15/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7716"></A>From_String&nbsp;(Arg&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7712"></A>From_String&nbsp;(Arg&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
 <div class="paranum"><a name="p16">16/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7717"></A>Put_Image<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7713"></A>Put_Image<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Buffer&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arg&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Valid_Big_Integer);</span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
@@ -126,10 +128,10 @@ has the following declaration:</span></div>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;rem&quot;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;(L&nbsp;:&nbsp;Valid_Big_Integer;&nbsp;R&nbsp;:&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7718"></A>Min&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7719"></A>Max&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7714"></A>Min&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7715"></A>Max&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Valid_Big_Integer;</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7720"></A>Greatest_Common_Divisor<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7716"></A>Greatest_Common_Divisor<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(L,&nbsp;R&nbsp;:&nbsp;Valid_Big_Integer)&nbsp;<B>return</B>&nbsp;Big_Positive<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;(L&nbsp;/=&nbsp;0&nbsp;<B>and</B>&nbsp;R&nbsp;/=&nbsp;0)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error;</span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
@@ -155,7 +157,7 @@ meanings.</span></div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
-<span class="insert5">The type Big_Integer needs finalization<A NAME="I7721"></A> 
+<span class="insert5">The type Big_Integer needs finalization<A NAME="I7717"></A> 
 (see <A HREF="AA-7-6.html">7.6</A>).</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -192,7 +194,7 @@ or unique number tables.</span>&nbsp;</div>
 <div class="paranum"><a name="p24.b">24.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0366-1.TXT">AI12-0366-1</A></I>} 
-<span class="insert5"><A NAME="I7722"></A>The package Numerics.Big_Numbers.Big_Integers 
+<span class="insert5"><A NAME="I7718"></A>The package Numerics.Big_Numbers.Big_Integers 
 is new.</span>&nbsp;</div>
 
 <HR>

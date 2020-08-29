@@ -20,7 +20,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,14 +40,14 @@ tasks reaches a specified count value.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Barriers<A NAME="I8815"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Barriers<A NAME="I8832"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8816"></A>Barrier_Limit&nbsp;<B>is</B>&nbsp;Positive&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8833"></A>Barrier_Limit&nbsp;<B>is</B>&nbsp;Positive&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8817"></A>Synchronous_Barrier&nbsp;(Release_Threshold&nbsp;:&nbsp;Barrier_Limit)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8834"></A>Synchronous_Barrier&nbsp;(Release_Threshold&nbsp;:&nbsp;Barrier_Limit)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8818"></A>Wait_For_Release&nbsp;(The_Barrier&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronous_Barrier;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8835"></A>Wait_For_Release&nbsp;(The_Barrier&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronous_Barrier;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notified&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
@@ -85,7 +85,7 @@ or aborted when the tasks waiting on the object are released.&nbsp;</div>
 <div class="Normal">It is a bounded error to call Wait_For_Release on 
 a Synchronous_Barrier object after that object is finalized. If the error 
 is detected, Program_Error is raised. Otherwise, the call proceeds normally, 
-which may leave a task blocked forever.<A NAME="I8819"></A>&nbsp;</div>
+which may leave a task blocked forever.<A NAME="I8836"></A>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,7 +48,7 @@
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00068.TXT">AI95-00068-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
-[<A NAME="I9949"></A> This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+[<A NAME="I9971"></A> This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 specifies a mechanism for a user to choose an entry <I>queuing policy</I>. 
 It also defines <span class="insert1"></span><span class="insert5">three</span><span class="insert1"></span><span class="insert1"><span class="delete5">&nbsp;two</span></span><span class="insert1"></span><span class="delete1">&nbsp;one</span> 
 such <span class="insert1">policies</span><span class="delete1">&nbsp;policy</span>. 
@@ -62,24 +62,24 @@ queuing policies.</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Queuing_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9950"></A><A NAME="I9951"></A>Queuing_Policy(<I>policy_</I><A NAME="I9952"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9972"></A><A NAME="I9973"></A>Queuing_Policy(<I>policy_</I><A NAME="I9974"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0183-1.TXT">AI12-0183-1</A></I>} 
-The <I>policy_</I><A NAME="I9953"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+The <I>policy_</I><A NAME="I9975"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 shall be either FIFO_Queuing, <span class="insert5">Ordered_FIFO_Queuing, 
-</span>Priority_Queuing or an implementation-defined <A NAME="I9954"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.</div>
+</span>Priority_Queuing or an implementation-defined <A NAME="I9976"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I9955"></A><A NAME="I9956"></A>A Queuing_Policy 
+<div class="Normal"><A NAME="I9977"></A><A NAME="I9978"></A>A Queuing_Policy 
 pragma is a configuration pragma.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I9957"></A>[A <I>queuing policy</I> governs 
+<div class="Normal"><A NAME="I9979"></A>[A <I>queuing policy</I> governs 
 the order in which tasks are queued for entry service, and the order 
 in which different entry queues are considered for service.] The queuing 
 policy is specified by a Queuing_Policy pragma.&nbsp;</div>
@@ -99,12 +99,12 @@ policies, FIFO_Queuing<span class="insert5">, Ordered_FIFO_Queuing,&nbsp;</span>
 Priority_Queuing, are language defined. If no Queuing_Policy pragma <span class="insert2">applies 
 to</span><span class="delete2">&nbsp;appears in</span> any of the program 
 units comprising the partition, the queuing policy for that partition 
-is FIFO_Queuing.<span class="insert3"><A NAME="I9958"></A><A NAME="I9959"></A></span> 
+is FIFO_Queuing.<span class="insert3"><A NAME="I9980"></A><A NAME="I9981"></A></span> 
 The rules for <span class="insert5">the FIFO_Queuing</span><span class="delete5">&nbsp;this</span> 
 policy are specified in <A HREF="AA-9-5-3.html">9.5.3</A> and <A HREF="AA-9-7-1.html">9.7.1</A>.</div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0163-1.TXT">AI12-0163-1</A></I>} 
-<span class="insert5">The Ordered_FIFO_Queuing policy is defined as follows:<A NAME="I9960"></A><A NAME="I9961"></A></span></div>
+<span class="insert5">The Ordered_FIFO_Queuing policy is defined as follows:<A NAME="I9982"></A><A NAME="I9983"></A></span></div>
 <div class="paranum"><a name="p7.2">7.2/5</a></div>
 <div class="Bulleted"><span class="insert5">Calls are selected on a given 
 entry queue in order of arrival.</span></div>
@@ -141,9 +141,9 @@ ones if calls arrive fast enough. Applying arrival first as the selector
 provides fairness for this policy.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The Priority_Queuing 
-policy is defined as follows:<span class="insert3"><A NAME="I9962"></A><A NAME="I9963"></A></span></div>
+policy is defined as follows:<span class="insert3"><A NAME="I9984"></A><A NAME="I9985"></A></span></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I9964"></A>The calls to an entry [(including 
+<div class="Bulleted"><A NAME="I9986"></A>The calls to an entry [(including 
 a member of an entry family)] are queued in an order consistent with 
 the priorities of the calls. The <I>priority of an entry call</I> is 
 initialized from the active priority of the calling task at the time 
@@ -281,7 +281,7 @@ should be used for implementation-defined queuing policies.</span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0164-1.TXT">AI12-0164-1</A></I>} 
 <span class="insert5">For a task type (including the anonymous type of 
 a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0245">single_task_declaration</A></SPAN>), 
 protected type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0250">single_protected_declaration</A></SPAN>), 
@@ -289,7 +289,7 @@ or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></S
 the following language-defined representation aspect may be specified:</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Max_Entry_Queue_Length</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert5">The type of aspect Max_Entry_Queue_Length is Integer.<A NAME="I9965"></A><A NAME="I9966"></A></span></div>
+<span class="insert5">The type of aspect Max_Entry_Queue_Length is Integer.<A NAME="I9987"></A><A NAME="I9988"></A></span></div>
 <div class="paranum"><a name="p18.a">18.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert5"><B>Max_Entry_Queue_Length:&nbsp;</B></span><span class="insert5">The 
@@ -303,12 +303,13 @@ has value -1 (representing no additional restriction on queue length).</span>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p20">20/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0164-1.TXT">AI12-0164-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0388-1.TXT">AI12-0388-1</A></I>} 
 <span class="insert5">If the Max_Entry_Queue_Length aspect for a type 
 has a nonnegative value, the Max_Entry_Queue_Length aspect for every 
 individual entry of that type shall not be greater than the value of 
 the aspect for the type. The Max_Entry_Queue_Length aspect of a type 
-is nonoverridable.</span></div>
+is nonoverridable (see <A HREF="AA-13-1-1.html">13.1.1</A>).</span></div>
 <div class="paranum"><a name="p20.a">20.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>Aspect 
 Max_Entry_Queue_Length can specify less than the partition-wide or type-wide 
@@ -316,7 +317,7 @@ default, but it can't expand the length of a queue.</span>&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p21">21/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0164-1.TXT">AI12-0164-1</A></I>} 
 <span class="insert5">If a restriction Max_Entry_Queue_Length applies 
 to a partition, any value specified for the Max_Entry_Queue_Length aspect 
 specified for the declaration of a type or entry in the partition shall 
@@ -330,17 +331,17 @@ as the aspect, so the check cannot, in general, be done until link time.</span>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p22">22/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0164-1.TXT">AI12-0164-1</A></I>} 
 <span class="insert5">If a nonconfirming value is specified for Max_Entry_Queue_Length 
 for a type, and an entry call or requeue would cause the queue for any 
 entry of the type to become longer than the specified value, then Program_Error 
-is raised at the point of the call or requeue.<A NAME="I9967"></A></span></div>
+is raised at the point of the call or requeue.<A NAME="I9989"></A></span></div>
 <div class="paranum"><a name="p23">23/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0164-1.TXT">AI12-0164-1</A></I>} 
 <span class="insert5">If a nonconfirming value is specified for Max_Entry_Queue_Length 
 for an entry, and an entry call or requeue would cause the queue for 
 an entry to become longer than the specified value, then Program_Error 
-is raised at the point of the call or requeue.<A NAME="I9968"></A></span> 
+is raised at the point of the call or requeue.<A NAME="I9990"></A></span> 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -373,10 +374,10 @@ unit.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p23.f">23.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0163-1.TXT">AI12-0163-1</A></I>} 
-<span class="insert5"><A NAME="I9969"></A>Defined the new queuing policy 
+<span class="insert5"><A NAME="I9991"></A>Defined the new queuing policy 
 Ordered_FIFO_Queuing.</span></div>
 <div class="paranum"><a name="p23.g">23.g/5</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0164-1.TXT">AI12-0164-1</A></I>} 
 <span class="insert5">Defined the new aspect Max_Enty_Queue_Length.</span> 
 </div>
 

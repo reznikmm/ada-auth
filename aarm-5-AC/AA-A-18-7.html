@@ -34,7 +34,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,7 +51,7 @@ and Containers.Ordered_Sets provide private types Set and Cursor, and
 a set of operations for each type. A set container allows elements of 
 an arbitrary type to be stored without duplication. A hashed set uses 
 a hash function to organize elements, while an ordered set orders its 
-element per a specified relation.<A NAME="I8746"></A> <A NAME="I8747"></A></span></div>
+element per a specified relation.<A NAME="I8742"></A> <A NAME="I8743"></A></span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
@@ -70,7 +70,7 @@ and symmetric relationship and return the same result value each time
 it is called with a particular pair of values. If it behaves in some 
 other manner, the function &quot;=&quot; on set values returns an unspecified 
 value. The exact arguments and number of calls of this generic formal 
-function by the function &quot;=&quot; on set values are unspecified.<A NAME="I8748"></A></span></div>
+function by the function &quot;=&quot; on set values are unspecified.<A NAME="I8744"></A></span></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>If 
 the actual function for &quot;=&quot; is not symmetric and consistent, 
@@ -84,17 +84,17 @@ aren't expected to use &quot;=&quot;).</span>&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">The type Set is used to represent sets. The type 
-Set needs finalization<A NAME="I8749"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
+Set needs finalization<A NAME="I8745"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">A set contains elements. Set cursors designate 
 elements. There exists an equivalence relation on elements, whose definition 
 is different for hashed sets and ordered sets. A set never contains two 
 or more equivalent elements. The <I>length</I> of a set is the number 
-of elements it contains.<A NAME="I8750"></A></span></div>
+of elements it contains.<A NAME="I8746"></A></span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<span class="insert2"><A NAME="I8751"></A><A NAME="I8752"></A><A NAME="I8753"></A>Each 
+<span class="insert2"><A NAME="I8747"></A><A NAME="I8748"></A><A NAME="I8749"></A>Each 
 nonempty set has two particular elements called the <I>first element</I> 
 and the <I>last element</I> (which may be the same). Each element except 
 for the last element has a <I>successor element</I>. If there are no 
@@ -106,7 +106,7 @@ terms is different for hashed sets and ordered sets.</span></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert2">[Some operations&nbsp;</span><span class="insert5"><A NAME="I8754"></A><A NAME="I8755"></A></span><span class="insert2"></span><span class="insert2"><span class="delete5">of 
+<span class="insert2">[Some operations&nbsp;</span><span class="insert5"><A NAME="I8750"></A><A NAME="I8751"></A></span><span class="insert2"></span><span class="insert2"><span class="delete5">of 
 these generic packages have access-to-subprogram parameters. To ensure 
 such operations are well-defined, they guard against certain actions 
 by the designated subprogram. In particular, some operations</span></span><span class="insert2">&nbsp;check for &ldquo;tampering with cursors&rdquo; of a container because 
@@ -114,7 +114,7 @@ they depend on the set of elements of the container remaining constant</span><sp
 and others check for &ldquo;tampering with elements&rdquo; of a container 
 because they depend</span></span><span class="insert2">&nbsp;on elements of 
 the container not being replaced.]</span><span class="insert5">&nbsp;When 
-tampering with cursors is <I>prohibited</I><A NAME="I8756"></A> <A NAME="I8757"></A>for 
+tampering with cursors is <I>prohibited</I><A NAME="I8752"></A> <A NAME="I8753"></A>for 
 a particular set object <I>M</I>, Program_Error is propagated by the 
 finalization of <I>M</I>[, as well as by a call that passes <I>M</I> 
 to certain of the operations of this package, as indicated by the precondition 
@@ -142,7 +142,7 @@ to be any reason to define tampering with elements for sets.</span>&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="delete5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 <span class="delete5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="delete5"></span><span class="insert2"><span class="delete5"><A NAME="I8758"></A>A 
+<span class="delete5"></span><span class="insert2"><span class="delete5"><A NAME="I8754"></A>A 
 subprogram is said to <I>tamper with cursors</I> of a set object <I>S</I> 
 if:</span></span><span class="delete5"></span>&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
@@ -186,7 +186,7 @@ calls one of the operations defined to tamper with the cursors of <I>S</I>.</spa
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="delete5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 <span class="delete5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="delete5"></span><span class="insert2"><span class="delete5"><A NAME="I8759"></A>A 
+<span class="delete5"></span><span class="insert2"><span class="delete5"><A NAME="I8755"></A>A 
 subprogram is said to <I>tamper with elements</I> of a set object <I>S</I> 
 if:</span></span><span class="delete5"></span></div>
 <div class="paranum"><a name="p14">14/5</a></div>
@@ -211,7 +211,7 @@ are consistent across all containers.</span></span><span class="insert2"></span>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I8760"></A><A NAME="I8761"></A>When 
+<span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I8756"></A><A NAME="I8757"></A>When 
 tampering with cursors is <I>prohibited</I> for a particular set object 
 <I>S</I>, Program_Error is propagated by a call of any language-defined 
 subprogram that is defined to tamper with the cursors of <I>S</I>, leaving 
@@ -273,7 +273,7 @@ implications of this rule, see the Implementation Note in <A HREF="AA-A-18-2.htm
 <div class="paranum"><a name="p18.3">18.3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p18.4">18.4/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3">Returns True if Position designates an element, 
@@ -289,7 +289,7 @@ erroneous).</span>&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5"><B>function</B>&nbsp;Has_Element&nbsp;(Container&nbsp;:&nbsp;Set;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</span></div>
 <div class="paranum"><a name="p18.6">18.6/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">Returns True if Position designates an element 
@@ -332,7 +332,7 @@ evaluation of element equivalence is propagated.</span></div>
 <div class="paranum"><a name="p22.1">22.1/5</a></div>
 <div class="Examples"><span class="insert5"><B>function</B>&nbsp;Tampering_With_Cursors_Prohibited<BR>
 &nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>);</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>;</span></div>
 <div class="paranum"><a name="p22.2">22.2/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">Returns True if tampering with cursors is currently 
@@ -362,13 +362,13 @@ so no special protection is needed to read the counter.)</span>&nbsp;</div>
 <div class="paranum"><a name="p25">25/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;Length&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Count_Type</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert2">;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p26">26/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">Returns the number of elements in Container.</span></div>
 <div class="paranum"><a name="p27">27/5</a></div>
 <div class="Examples"><span class="insert2"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Boolean</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Is_Empty'Result&nbsp;=&nbsp;(Length&nbsp;(Container)&nbsp;=&nbsp;0)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p28">28/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -388,8 +388,8 @@ to Length (Container) = 0</span></span><span class="insert2">.</span></div>
 <div class="paranum"><a name="p31">31/5</a></div>
 <div class="Examples"><span class="insert2"><B>function</B>&nbsp;Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use</B>&nbsp;Element_Type)</span><span class="insert2">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p32">32/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
@@ -403,9 +403,8 @@ by Position.</span></div>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Element_Type'Nonblocking,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use</B>&nbsp;Element_Type);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;Element_Type;</span></div>
 <div class="paranum"><a name="p32.2">32.2/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">Element returns the element designated by Position.</span></div>
@@ -417,7 +416,8 @@ by Position.</span></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</span><span class="insert2">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
@@ -451,7 +451,8 @@ of other elements), so this should not pose an implementation hardship.</span>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Query_Element<BR>
 &nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p36">36/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -472,9 +473,9 @@ Any exception raised by Process.<B>all</B> is propagated.</span></div>
 &nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type))<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error);</span></div>
 <div class="paranum"><a name="p36.2">36.2/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">Query_Element calls Process.<B>all</B> with the 
@@ -491,7 +492,7 @@ is propagated.</span></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p36.4">36.4/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">The type Constant_Reference_Type needs finalization.<A NAME="I8762"></A></span></div>
+<span class="insert3">The type Constant_Reference_Type needs finalization.<A NAME="I8758"></A></span></div>
 <div class="paranum"><a name="p36.5">36.5/5</a></div>
 <div class="Indented2"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="insert3"></span> {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
@@ -511,10 +512,10 @@ would take extra work, we define it to raise an exception.</span>&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p36.7">36.7/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
@@ -561,8 +562,7 @@ will not raise an exception if there is enough room in the target.</span>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Source)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Target&nbsp;=&nbsp;Source&nbsp;<B>then</B>&nbsp;True<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Target'Has_Same_Storage&nbsp;(Source)&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Target)&nbsp;=&nbsp;Length&nbsp;(Source'Old)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;=&nbsp;0)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p38">38/3</a></div>
@@ -701,7 +701,7 @@ from the set; otherwise, Constraint_Error is propagated.</span></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Container)&nbsp;=&nbsp;Length&nbsp;(Container)'Old&nbsp;-&nbsp;1&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;No_Element</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p52">52/5</a></div>
@@ -725,7 +725,7 @@ is erroneous, and any result is allowed (including not raising an exception).</s
 <span class="insert2"><B>procedure</B>&nbsp;Union&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p54">54/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -739,7 +739,8 @@ do not make the result trash; Union (S, S); must work.</span>&nbsp;</div>
 <div class="paranum"><a name="p55">55/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;Union&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Union'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Union'Result)&nbsp;&lt;=&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Union'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p56">56/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -751,7 +752,7 @@ of Left.</span></div>
 <span class="insert2"><B>procedure</B>&nbsp;Intersection&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p58">58/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -767,7 +768,8 @@ do not make the result trash; Intersection (S, S); must work.</span>
 <div class="paranum"><a name="p59">59/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;Intersection&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Intersection'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Intersection'Result)&nbsp;&lt;=&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Intersection'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p60">60/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -778,7 +780,7 @@ that are equivalent to the some element of Right.</span></div>
 <span class="insert2"><B>procedure</B>&nbsp;Difference&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p62">62/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -788,7 +790,8 @@ that are equivalent to some element of Source.</span></div>
 <div class="paranum"><a name="p63">63/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Difference'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Difference'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Difference'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p64">64/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -799,7 +802,7 @@ are not equivalent to some element of Right.</span></div>
 <span class="insert2"><B>procedure</B>&nbsp;Symmetric_Difference&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Target)&nbsp;&lt;=&nbsp;Length&nbsp;(Target)'Old&nbsp;+&nbsp;Length&nbsp;(Source)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p66">66/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -811,7 +814,8 @@ of Target.</span></div>
 <div class="paranum"><a name="p67">67/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;Symmetric_Difference&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Set</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Symmetric_Difference'Result)&nbsp;&lt;=&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Symmetric_Difference'Result)&nbsp;&lt;=&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Left)&nbsp;+&nbsp;Length&nbsp;(Right)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Symmetric_Difference'Result)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p68">68/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
@@ -844,7 +848,7 @@ clear in named notation which set is which.</span>&nbsp;</div>
 <div class="paranum"><a name="p73">73/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;First&nbsp;(Container&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Cursor</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if&nbsp;not</B>&nbsp;Is_Empty&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;First'Result)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;First'Result&nbsp;=&nbsp;No_Element)</span><span class="insert2">;</span></div>
@@ -856,7 +860,7 @@ Container.</span></div>
 <div class="paranum"><a name="p75">75/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;True)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p76">76/2</a></div>
@@ -868,13 +872,13 @@ then No_Element is returned.</span></div>
 <div class="paranum"><a name="p76.1">76.1/5</a></div>
 <div class="Examples"><span class="insert5"><B>function</B>&nbsp;Next&nbsp;(Container&nbsp;:&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>then</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Next'Result&nbsp;=&nbsp;No_Element&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;Last&nbsp;(Container)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;=&nbsp;Last&nbsp;(Container)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Next'Result));</span></div>
 <div class="paranum"><a name="p76.2">76.2/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
@@ -883,17 +887,17 @@ node designated by Position in Container.</span></div>
 <div class="paranum"><a name="p77">77/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>procedure</B>&nbsp;Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>in&nbsp;all</B>,&nbsp;<B>use&nbsp;null</B>)</span><span class="insert2">;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p78">78/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">Equivalent to Position := Next (Position).</span></div>
 <div class="paranum"><a name="p78.1">78.1/5</a></div>
 <div class="Examples"><span class="insert5"><B>procedure</B>&nbsp;Next&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>),<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B>,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Position&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Position&nbsp;/=&nbsp;No_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then</B>&nbsp;Has_Element&nbsp;(Container,&nbsp;Position));</span></div>
 <div class="paranum"><a name="p78.2">78.2/5</a></div>
@@ -971,13 +975,13 @@ an element) instead of a complete element. The formal function Key of
 Generic_Keys extracts a key value from an element. It is expected to 
 return the same value each time it is called with a particular element. 
 The behavior of Generic_Keys is unspecified if Key behaves in some other 
-manner.<A NAME="I8763"></A></span></div>
+manner.<A NAME="I8759"></A></span></div>
 <div class="paranum"><a name="p88">88/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">A key is expected to unambiguously determine a 
 single equivalence class for elements. The behavior of Generic_Keys is 
 unspecified if the formal parameters of this package behave in some other 
-manner.<A NAME="I8764"></A></span></div>
+manner.<A NAME="I8760"></A></span></div>
 <div class="paranum"><a name="p89">89/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert2"><B>function</B>&nbsp;Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type</span><span class="insert5"><BR>
@@ -1021,9 +1025,9 @@ is used to locate an element in the set.</span></div>
 &nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type))</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</span><span class="insert2">;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p95">95/5</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
@@ -1064,7 +1068,7 @@ must be possible to change the discriminants of the element in place.</span>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Initial_Condition&nbsp;=&gt;&nbsp;(<B>raise</B>&nbsp;Program_Error)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.2">96.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">The type Reference_Type needs finalization.<A NAME="I8765"></A></span></div>
+<span class="insert3">The type Reference_Type needs finalization.<A NAME="I8761"></A></span></div>
 <div class="paranum"><a name="p96.3">96.3/5</a></div>
 <div class="Indented2"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="insert3"></span> {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
@@ -1077,9 +1081,9 @@ Program_Error.</span></span><span class="insert3"></span></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Container,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error),<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.5">96.5/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
@@ -1107,7 +1111,8 @@ the set and Program_Error is propagated.</span></div>
 <span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.8">96.8/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
@@ -1123,7 +1128,8 @@ element of a set given a key value.</span></div>
 <span class="insert3"><B>function</B>&nbsp;Reference_Preserving_Key&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type</span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Find&nbsp;(Container,&nbsp;Key)&nbsp;/=&nbsp;No_Element&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Container)</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p96.11">96.11/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
@@ -1137,10 +1143,10 @@ individual element of a set given a key value.</span></div>
 <div class="paranum"><a name="p96.13">96.13/5</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 <span class="insert5">The nested package Stable provides a type Stable.Set 
-that represents a <I>stable</I> set,<A NAME="I8766"></A> which is one 
+that represents a <I>stable</I> set,<A NAME="I8762"></A> which is one 
 that cannot grow and shrink. Such a list can be created by calling the 
 Copy function, or by establishing a <I>stabilized view</I> of a regular 
-set.<A NAME="I8767"></A></span></div>
+set.<A NAME="I8763"></A></span></div>
 <div class="paranum"><a name="p96.14">96.14/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 <span class="insert5">The subprograms of the set package that have a 
@@ -1196,27 +1202,27 @@ the set. The Length of a stable set never changes after initialization.</span></
 <div class="paranum"><a name="p96.19">96.19/3</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3"><A NAME="I8768"></A>It is a bounded error for the 
+<span class="insert3"><A NAME="I8764"></A>It is a bounded error for the 
 actual function associated with a generic formal subprogram, when called 
 as part of an operation of a set package, to tamper with elements of 
 any set parameter of the operation. Either Program_Error is raised, or 
 the operation works as defined on the value of the set either prior to, 
-or subsequent to, some or all of the modifications to the set.<A NAME="I8769"></A></span></div>
+or subsequent to, some or all of the modifications to the set.<A NAME="I8765"></A></span></div>
 <div class="paranum"><a name="p96.20">96.20/3</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
-<span class="insert3"><A NAME="I8770"></A>It is a bounded error to call 
+<span class="insert3"><A NAME="I8766"></A>It is a bounded error to call 
 any subprogram declared in the visible part of a set package when the 
 associated container has been finalized. If the operation takes Container 
 as an <B>in out</B> parameter, then it raises Constraint_Error or Program_Error. 
 Otherwise, the operation either proceeds as it would for an empty container, 
-or it raises Constraint_Error or<A NAME="I8771"></A> Program_Error.<A NAME="I8772"></A></span> 
+or it raises Constraint_Error or<A NAME="I8767"></A> Program_Error.<A NAME="I8768"></A></span> 
 </div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p97">97/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">A Cursor value is <I>invalid</I> if any of the 
-following have occurred since it was created:<A NAME="I8773"></A> <A NAME="I8774"></A></span></div>
+following have occurred since it was created:<A NAME="I8769"></A> <A NAME="I8770"></A></span></div>
 <div class="paranum"><a name="p98">98/2</a></div>
 <div class="Bulleted"><span class="insert2">The set that contains the 
 element it designates has been finalized;</span></div>
@@ -1243,9 +1249,9 @@ procedures Intersection, Difference, and Symmetric_Difference.</span>
 <div class="paranum"><a name="p101">101/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">The result of &quot;=&quot; or Has_Element is unspecified 
-if these functions are called with an invalid cursor parameter.<A NAME="I8775"></A> 
+if these functions are called with an invalid cursor parameter.<A NAME="I8771"></A> 
 Execution is erroneous if any other subprogram declared in Containers.Hashed_Sets 
-or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I8776"></A></span></div>
+or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I8772"></A></span></div>
 <div class="paranum"><a name="p101.a">101.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>The 
 list above is intended to be exhaustive. In other cases, a cursor value 
@@ -1339,7 +1345,7 @@ are documented with the specific packages.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p105.d">105.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"><A NAME="I8777"></A>Added reference support to 
+<span class="insert3"><A NAME="I8773"></A>Added reference support to 
 make set containers more convenient to use.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -1372,7 +1378,7 @@ the exception raised.</span>&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p105.k">105.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
-<span class="insert5"><A NAME="I8778"></A>Procedures Union, Intersection, 
+<span class="insert5"><A NAME="I8774"></A>Procedures Union, Intersection, 
 Difference, and Symmeteric_Difference are now defined to tamper with 
 the cursors of the Target parameter. A program which attempts to use 
 one of these operations while tampering is prohibited will raise Program_Error. 
@@ -1383,7 +1389,7 @@ have been unpredictable, so this change will likely fix bugs.</span>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p105.l">105.l/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
-<span class="insert5"><A NAME="I8779"></A><B>Correction:</B> Replace_Element 
+<span class="insert5"><A NAME="I8775"></A><B>Correction:</B> Replace_Element 
 is now defined such that it can be used concurrently so long as it operates 
 on different elements. This allows some container operations to be used 
 in parallel without separate synchronization.</span>&nbsp;</div>

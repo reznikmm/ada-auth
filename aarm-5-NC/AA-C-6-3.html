@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,21 +42,21 @@ an operation to atomically set and clear an atomic flag object.&nbsp;</div>
 The library package System.Atomic_Operations.Test_And_Set has the following 
 declaration:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;System.Atomic_Operations.Test_And_Set<A NAME="I9299"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;System.Atomic_Operations.Test_And_Set<A NAME="I9317"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9300"></A>Test_And_Set_Flag&nbsp;<B>is&nbsp;mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9318"></A>Test_And_Set_Flag&nbsp;<B>is&nbsp;mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Atomic,&nbsp;Default_Value&nbsp;=&gt;&nbsp;0,&nbsp;Size&nbsp;=&gt;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9301"></A>Atomic_Test_And_Set<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9319"></A>Atomic_Test_And_Set<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Test_And_Set_Flag)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9302"></A>Atomic_Clear<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9320"></A>Atomic_Clear<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Test_And_Set_Flag)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9303"></A>Is_Lock_Free<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9321"></A>Is_Lock_Free<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>aliased</B>&nbsp;Test_And_Set_Flag)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p8">8/5</a></div>
@@ -85,7 +85,7 @@ Item contains 0. This call should be used in conjunction with Atomic_Test_And_Se
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p11.a">11.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0321-1.TXT">AI12-0321-1</A></I>} 
-<A NAME="I9304"></A>This package is new.&nbsp;</div>
+<A NAME="I9322"></A>This package is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

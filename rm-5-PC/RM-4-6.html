@@ -32,7 +32,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,39 +47,39 @@
 and view conversions, are allowed between closely related types as defined 
 below. This subclause also defines rules for value and view conversions 
 to a particular subtype of a type, both explicit ones and those implicit 
-in other constructs. <A NAME="I3101"></A><A NAME="I3102"></A><A NAME="I3103"></A><A NAME="I3104"></A><A NAME="I3105"></A><A NAME="I3106"></A></div>
+in other constructs. <A NAME="I3103"></A><A NAME="I3104"></A><A NAME="I3105"></A><A NAME="I3106"></A><A NAME="I3107"></A><A NAME="I3108"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">type_conversion</SPAN><A NAME="I3107"></A><A NAME="S0162"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3108"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3109"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>)<BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3110"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3111"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">type_conversion</SPAN><A NAME="I3109"></A><A NAME="S0162"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3110"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3111"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3112"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>(<A NAME="I3113"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3112"></A>The <I>target subtype</I> of 
+<div class="Normal"><A NAME="I3114"></A>The <I>target subtype</I> of 
 a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
 is the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
-<A NAME="I3113"></A>The <I>operand</I> of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
+<A NAME="I3115"></A>The <I>operand</I> of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
 is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> within 
-the parentheses; <A NAME="I3114"></A>its type is the <I>operand type</I>.</div>
+the parentheses; <A NAME="I3116"></A>its type is the <I>operand type</I>.</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><A NAME="I3115"></A>One type is <I>convertible</I> 
+<div class="Normal"><A NAME="I3117"></A>One type is <I>convertible</I> 
 to a second type if a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
 with the first type as operand type and the second type as target type 
 is legal according to the rules of this subclause. Two types are convertible 
 if each is convertible to the other.&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Normal"><A NAME="I3116"></A><A NAME="I3117"></A>A <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
+<div class="Normal"><A NAME="I3118"></A><A NAME="I3119"></A>A <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
 whose operand is the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of an object is called a <I>view conversion</I> if both its target type 
 and operand type are tagged, or if it appears in a call as an actual 
-parameter of mode <B>out</B> or <B>in out</B>; <A NAME="I3118"></A><A NAME="I3119"></A>other 
+parameter of mode <B>out</B> or <B>in out</B>; <A NAME="I3120"></A><A NAME="I3121"></A>other 
 <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN>s 
-are called <I>value conversions</I>. <A NAME="I3120"></A></div>
+are called <I>value conversions</I>. <A NAME="I3122"></A></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3121"></A>The operand of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
+<div class="Normal"><A NAME="I3123"></A>The operand of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
 is expected to be of any type.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">The operand of a view conversion is interpreted only 
@@ -93,39 +93,13 @@ the operand of a value conversion is interpreted as an <SPAN Class="swiss"><A HR
 type shall be convertible (back) to the operand type.&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 9 through 
 20 were reorganized and moved below.</I></SPAN>&nbsp;</div>
-<div class="paranum"><a name="p9">9/2</a></div>
-<div class="Normal"></div>
-<div class="paranum"><a name="p10">10/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p11">11/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p12">12/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p12.1">12.1/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal"></div>
-<div class="paranum"><a name="p14">14/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p15">15/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p16">16/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p17">17/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal"></div>
-<div class="paranum"><a name="p19">19/2</a></div>
-<div class="Bulleted"></div>
-<div class="paranum"><a name="p20">20/2</a></div>
-<div class="Bulleted"></div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3122"></A><A NAME="I3123"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3124"></A><A NAME="I3125"></A>If 
 there is a type (other than a root numeric type) that is an ancestor 
 of both the target type and the operand type, or both types are class-wide 
 types, then at least one of the following rules shall apply:&nbsp;</div>
 <div class="paranum"><a name="p21.1">21.1/2</a></div>
-<div class="Bulleted"><A NAME="I3124"></A><A NAME="I3125"></A>The target 
+<div class="Bulleted"><A NAME="I3126"></A><A NAME="I3127"></A>The target 
 type shall be untagged; or</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Bulleted">The operand type shall be covered by or descended 
@@ -143,25 +117,25 @@ that is the ancestor of both the target type and the operand type, and
 they are not both class-wide types, one of the following rules shall 
 apply:&nbsp;</div>
 <div class="paranum"><a name="p24.1">24.1/2</a></div>
-<div class="Bulleted"><A NAME="I3126"></A><A NAME="I3127"></A>If the 
+<div class="Bulleted"><A NAME="I3128"></A><A NAME="I3129"></A>If the 
 target type is a numeric type, then the operand type shall be a numeric 
 type.</div>
 <div class="paranum"><a name="p24.2">24.2/2</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3128"></A><A NAME="I3129"></A>If 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3130"></A><A NAME="I3131"></A>If 
 the target type is an array type, then the operand type shall be an array 
 type. Further:</div>
 <div class="paranum"><a name="p24.3">24.3/2</a></div>
 <div class="Indented2NestedBulleted">The types shall have the same dimensionality;</div>
 <div class="paranum"><a name="p24.4">24.4/2</a></div>
 <div class="Indented2NestedBulleted">Corresponding index types shall 
-be convertible; <A NAME="I3130"></A></div>
+be convertible; <A NAME="I3132"></A></div>
 <div class="paranum"><a name="p24.5">24.5/2</a></div>
 <div class="Indented2NestedBulleted">The component subtypes shall statically 
-match; <A NAME="I3131"></A></div>
+match; <A NAME="I3133"></A></div>
 <div class="paranum"><a name="p24.6">24.6/2</a></div>
 <div class="Indented2NestedBulleted">If the component types are anonymous 
 access types, then the accessibility level of the operand type shall 
-not be statically deeper than that of the target type; <A NAME="I3132"></A></div>
+not be statically deeper than that of the target type; <A NAME="I3134"></A></div>
 <div class="paranum"><a name="p24.7">24.7/2</a></div>
 <div class="Indented2NestedBulleted">Neither the target type nor the 
 operand type shall be limited;&nbsp;</div>
@@ -175,7 +149,7 @@ shall not have a tagged, private, or volatile subcomponent.&nbsp;</div>
 <div class="Bulleted">If the target type is <I>universal_access</I>, 
 then the operand type shall be an access type.</div>
 <div class="paranum"><a name="p24.11">24.11/2</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3133"></A><A NAME="I3134"></A>If 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3135"></A><A NAME="I3136"></A>If 
 the target type is a general access-to-object type, then the operand 
 type shall be <I>universal_access</I> or an access-to-object type. Further, 
 if the operand type is not <I>universal_access</I>:</div>
@@ -185,47 +159,54 @@ type, then the operand type shall be an access-to-variable type;&nbsp;</div>
 <div class="paranum"><a name="p24.13">24.13/2</a></div>
 <div class="Indented2NestedBulleted">If the target designated type is 
 tagged, then the operand designated type shall be convertible to the 
-target designated type; <A NAME="I3135"></A></div>
+target designated type; <A NAME="I3137"></A></div>
 <div class="paranum"><a name="p24.14">24.14/2</a></div>
 <div class="Indented2NestedBulleted" style="margin-bottom: 0.3em">If 
 the target designated type is not tagged, then the designated types shall 
 be the same, and either:</div>
 <div class="paranum"><a name="p24.15">24.15/2</a></div>
 <div class="Indented3NestedBulleted">the designated subtypes shall statically 
-match; or<A NAME="I3136"></A></div>
+match; or<A NAME="I3138"></A></div>
 <div class="paranum"><a name="p24.16">24.16/2</a></div>
 <div class="Indented3NestedBulleted">the designated type shall be discriminated 
 in its full view and unconstrained in any partial view, and one of the 
 designated subtypes shall be unconstrained;</div>
 <div class="paranum"><a name="p24.17">24.17/4</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3137"></A>The accessibility 
+<div class="Indented2NestedBulleted"><A NAME="I3139"></A>The accessibility 
 level of the operand type shall not be statically deeper than that of 
 the target type, unless the target type is an anonymous access type of 
 a stand-alone object. If the target type is that of such a stand-alone 
 object, the accessibility level of the operand type shall not be statically 
 deeper than that of the declaration of the stand-alone object.&nbsp;</div>
 <div class="paranum"><a name="p24.18">24.18/2</a></div>
-<div class="Bulleted"><A NAME="I3138"></A><A NAME="I3139"></A>If the 
+<div class="Bulleted"><A NAME="I3140"></A><A NAME="I3141"></A>If the 
 target type is a pool-specific access-to-object type, then the operand 
 type shall be <I>universal_access</I>.&nbsp;</div>
 <div class="paranum"><a name="p24.19">24.19/2</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3140"></A><A NAME="I3141"></A>If 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3142"></A><A NAME="I3143"></A>If 
 the target type is an access-to-subprogram type, then the operand type 
 shall be <I>universal_access</I> or an access-to-subprogram type. Further, 
 if the operand type is not <I>universal_access</I>:</div>
 <div class="paranum"><a name="p24.20">24.20/3</a></div>
 <div class="Indented2NestedBulleted">The designated profiles shall be 
-subtype conformant. <A NAME="I3142"></A></div>
+subtype conformant. <A NAME="I3144"></A></div>
 <div class="paranum"><a name="p24.21">24.21/4</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3143"></A>The accessibility 
+<div class="Indented2NestedBulleted"><A NAME="I3145"></A>The accessibility 
 level of the operand type shall not be statically deeper than that of 
 the target type. If the operand type is declared within a generic body, 
 the target type shall be declared within the generic body.</div>
 <div class="paranum"><a name="p24.22">24.22/5</a></div>
 <div class="Indented2NestedBulleted"><span class="insert5">If the target 
-type is nonblocking, the operand type shall be nonblocking.</span>&nbsp;</div>
+type has a Global aspect other than <B>in out all</B> or Unspecified, 
+then each mode of the Global aspect of the operand type shall identify 
+a subset of the variables identified by the corresponding mode of the 
+target type Global aspect, or by the <B>in out</B> mode of the target 
+type Global aspect.</span></div>
 <div class="paranum"><a name="p24.23">24.23/5</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I3144"></A>In addition to the places 
+<div class="Indented2NestedBulleted"><span class="insert5">If the target 
+type is nonblocking, the operand type shall be nonblocking.</span>&nbsp;</div>
+<div class="paranum"><a name="p24.24">24.24/5</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I3146"></A>In addition to the places 
 where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -241,22 +222,22 @@ that is a view conversion denotes a view of the object denoted by the
 operand. This view is a variable of the target type if the operand denotes 
 a variable; otherwise, it is a constant of the target type.</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I3145"></A>The nominal subtype of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
+<div class="Normal"><A NAME="I3147"></A>The nominal subtype of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
 is its target subtype.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3146"></A><A NAME="I3147"></A><A NAME="I3148"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3148"></A><A NAME="I3149"></A><A NAME="I3150"></A>For 
 the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN> 
 that is a value conversion, the operand is evaluated, and then the value 
 of the operand is <I>converted</I> to a <I>corresponding</I> value of 
-the target type, if any. <A NAME="I3149"></A><A NAME="I3150"></A><A NAME="I3151"></A>If 
+the target type, if any. <A NAME="I3151"></A><A NAME="I3152"></A><A NAME="I3153"></A>If 
 there is no value of the target type that corresponds to the operand 
 value, Constraint_Error is raised; this can only happen on conversion 
 to a modular type, and only when the operand value is outside the base 
 range of the modular type. Additional rules follow:&nbsp;</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Bulleted"><A NAME="I3152"></A><A NAME="I3153"></A>Numeric 
+<div class="Bulleted"><A NAME="I3154"></A><A NAME="I3155"></A>Numeric 
 Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p30">30</a></div>
 <div class="Indented2NestedBulleted">If the target and the operand types 
@@ -267,7 +248,7 @@ that corresponds to the same mathematical integer as the operand.</div>
 fixed point type, then the result is truncated (toward 0) if the value 
 of the operand is not a multiple of the <I>small</I> of the target type.</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3154"></A>If the target 
+<div class="Indented2NestedBulleted"><A NAME="I3156"></A>If the target 
 type is some other real type, then the result is within the accuracy 
 of the target type (see <A HREF="RM-G-2.html">G.2</A>, &ldquo;<A HREF="RM-G-2.html">Numeric 
 Performance Requirements</A>&rdquo;, for implementations that support 
@@ -277,25 +258,25 @@ the Numerics Annex).&nbsp;</div>
 type and the operand type is real, the result is rounded to the nearest 
 integer (away from zero if exactly halfway between two integers).&nbsp;</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Bulleted"><A NAME="I3155"></A><A NAME="I3156"></A>Enumeration 
+<div class="Bulleted"><A NAME="I3157"></A><A NAME="I3158"></A>Enumeration 
 Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p35">35</a></div>
 <div class="Indented2NestedBulleted">The result is the value of the target 
 type with the same position number as that of the operand value.&nbsp;</div>
 <div class="paranum"><a name="p36">36</a></div>
-<div class="Bulleted"><A NAME="I3157"></A><A NAME="I3158"></A>Array Type 
+<div class="Bulleted"><A NAME="I3159"></A><A NAME="I3160"></A>Array Type 
 Conversion&nbsp;</div>
 <div class="paranum"><a name="p37">37</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3159"></A><A NAME="I3160"></A>If 
+<div class="Indented2NestedBulleted"><A NAME="I3161"></A><A NAME="I3162"></A>If 
 the target subtype is a constrained array subtype, then a check is made 
 that the length of each dimension of the value of the operand equals 
 the length of the corresponding dimension of the target subtype. The 
 bounds of the result are those of the target subtype.</div>
 <div class="paranum"><a name="p38">38</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3161"></A><A NAME="I3162"></A>If 
+<div class="Indented2NestedBulleted"><A NAME="I3163"></A><A NAME="I3164"></A>If 
 the target subtype is an unconstrained array subtype, then the bounds 
 of the result are obtained by converting each bound of the value of the 
-operand to the corresponding index type of the target type. <A NAME="I3163"></A>For 
+operand to the corresponding index type of the target type. <A NAME="I3165"></A>For 
 each nonnull index range, a check is made that the bounds of the range 
 belong to the corresponding index subtype.&nbsp;</div>
 <div class="paranum"><a name="p39">39</a></div>
@@ -306,9 +287,9 @@ the operand value (see <A HREF="RM-4-5-2.html">4.5.2</A>).&nbsp;</div>
 <div class="Indented2NestedBulleted">If the component types of the array 
 types are anonymous access types, then a check is made that the accessibility 
 level of the operand type is not deeper than that of the target type. 
-<A NAME="I3164"></A><A NAME="I3165"></A></div>
+<A NAME="I3166"></A><A NAME="I3167"></A></div>
 <div class="paranum"><a name="p40">40</a></div>
-<div class="Bulleted"><A NAME="I3166"></A><A NAME="I3167"></A>Composite 
+<div class="Bulleted"><A NAME="I3168"></A><A NAME="I3169"></A>Composite 
 (Non-Array) Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p41">41</a></div>
 <div class="Indented2NestedBulleted">The value of each nondiscriminant 
@@ -316,14 +297,14 @@ component of the result is that of the matching component of the operand
 value.&nbsp;</div>
 <div class="paranum"><a name="p42">42</a></div>
 <div class="Indented2NestedBulleted">The tag of the result is that of 
-the operand. <A NAME="I3168"></A><A NAME="I3169"></A>If the operand type 
+the operand. <A NAME="I3170"></A><A NAME="I3171"></A>If the operand type 
 is class-wide, a check is made that the tag of the operand identifies 
 a (specific) type that is covered by or descended from the target type. 
 </div>
 <div class="paranum"><a name="p43">43</a></div>
 <div class="Indented2NestedBulleted">For each discriminant of the target 
 type that corresponds to a discriminant of the operand type, its value 
-is that of the corresponding discriminant of the operand value; <A NAME="I3170"></A><A NAME="I3171"></A>if 
+is that of the corresponding discriminant of the operand value; <A NAME="I3172"></A><A NAME="I3173"></A>if 
 it corresponds to more than one discriminant of the operand type, a check 
 is made that all these discriminants are equal in the operand value.</div>
 <div class="paranum"><a name="p44">44</a></div>
@@ -334,17 +315,17 @@ of the specific type identified by the tag of the operand), its value
 in the result is that specified by the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p45">45</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3172"></A><A NAME="I3173"></A>For 
+<div class="Indented2NestedBulleted"><A NAME="I3174"></A><A NAME="I3175"></A>For 
 each discriminant of the operand type that corresponds to a discriminant 
 that is specified by the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN> 
 for some ancestor of the target type, a check is made that in the operand 
 value it equals the value specified for it.</div>
 <div class="paranum"><a name="p46">46</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I3174"></A><A NAME="I3175"></A>For 
+<div class="Indented2NestedBulleted"><A NAME="I3176"></A><A NAME="I3177"></A>For 
 each discriminant of the result, a check is made that its value belongs 
 to its subtype.&nbsp;</div>
 <div class="paranum"><a name="p47">47</a></div>
-<div class="Bulleted"><A NAME="I3176"></A><A NAME="I3177"></A>Access 
+<div class="Bulleted"><A NAME="I3178"></A><A NAME="I3179"></A>Access 
 Type Conversion&nbsp;</div>
 <div class="paranum"><a name="p48">48/3</a></div>
 <div class="Indented2NestedBulleted">For an access-to-object type, a 
@@ -354,7 +335,7 @@ access type of a stand-alone object. If the target type is that of such
 a stand-alone object, a check is made that the accessibility level of 
 the operand type is not deeper than that of the declaration of the stand-alone 
 object; then if the check succeeds, the accessibility level of the target 
-type becomes that of the operand type. <A NAME="I3178"></A><A NAME="I3179"></A></div>
+type becomes that of the operand type. <A NAME="I3180"></A><A NAME="I3181"></A></div>
 <div class="paranum"><a name="p49">49/2</a></div>
 <div class="Indented2NestedBulleted">If the operand value is null, the 
 result of the conversion is the null value of the target type.&nbsp;</div>
@@ -365,14 +346,14 @@ by the operand value, but viewed as being of the target designated subtype
 (or profile); any checks associated with evaluating a conversion to the 
 target designated subtype are performed.&nbsp;</div>
 <div class="paranum"><a name="p51">51/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5"></span><A NAME="I3180"></A><A NAME="I3181"></A><A NAME="I3182"></A><A NAME="I3183"></A><A NAME="I3184"></A><A NAME="I3185"></A><A NAME="I3186"></A><A NAME="I3187"></A>After 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5"></span><A NAME="I3182"></A><A NAME="I3183"></A><A NAME="I3184"></A><A NAME="I3185"></A><A NAME="I3186"></A><A NAME="I3187"></A><A NAME="I3188"></A><A NAME="I3189"></A>After 
 conversion of the value to the target type, if the target subtype is 
 constrained, a check is performed that the value satisfies this constraint. 
 If the target subtype excludes null, then a check is made that the value 
 is not null. If predicate checks are enabled for the target subtype (see 
 <A HREF="RM-3-2-4.html">3.2.4</A>), a check is performed that the value 
 satisfies the predicates of the target subtype<span class="insert5">, 
-unless the conversion is:</span>.<A NAME="I3188"></A><A NAME="I3189"></A> 
+unless the conversion is:</span>.<A NAME="I3190"></A><A NAME="I3191"></A> 
 </div>
 <div class="paranum"><a name="p51.1">51.1/5</a></div>
 <div class="Bulleted"><span class="insert5">a view conversion that is 
@@ -382,10 +363,10 @@ an actual parameter of mode <B>out</B>; or</span></div>
 of an actual parameter of mode <B>out</B> to the nominal subtype of its 
 formal parameter.</span>&nbsp;</div>
 <div class="paranum"><a name="p52">52</a></div>
-<div class="Normal"><A NAME="I3190"></A>For the evaluation of a view 
+<div class="Normal"><A NAME="I3192"></A>For the evaluation of a view 
 conversion, the operand <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is evaluated, and a new view of the object denoted by the operand is 
-created, whose type is the target type; <A NAME="I3191"></A><A NAME="I3192"></A><A NAME="I3193"></A><A NAME="I3194"></A><A NAME="I3195"></A><A NAME="I3196"></A>if 
+created, whose type is the target type; <A NAME="I3193"></A><A NAME="I3194"></A><A NAME="I3195"></A><A NAME="I3196"></A><A NAME="I3197"></A><A NAME="I3198"></A>if 
 the target type is composite, checks are performed as above for a value 
 conversion.</div>
 <div class="paranum"><a name="p53">53</a></div>
@@ -405,7 +386,7 @@ type;</div>
 to the view assigns to the corresponding part of the object denoted by 
 the operand; otherwise, an assignment to the view assigns to the object, 
 after converting the assigned value to the subtype of the object (which 
-might raise Constraint_Error); <A NAME="I3197"></A></div>
+might raise Constraint_Error); <A NAME="I3199"></A></div>
 <div class="paranum"><a name="p56">56/4</a></div>
 <div class="Bulleted">Reading the value of the view yields the result 
 of converting the value of the operand object to the target subtype (which 
@@ -414,9 +395,9 @@ type and the view conversion is passed as an <B>out</B> parameter; in
 this latter case, the value of the operand object may be used to initialize 
 the formal parameter without checking against any constraint of the target 
 subtype (as described more precisely in <A HREF="RM-6-4-1.html">6.4.1</A>). 
-<A NAME="I3198"></A></div>
+<A NAME="I3200"></A></div>
 <div class="paranum"><a name="p57">57/4</a></div>
-<div class="Normal"><A NAME="I3199"></A><A NAME="I3200"></A><A NAME="I3201"></A>If 
+<div class="Normal"><A NAME="I3201"></A><A NAME="I3202"></A><A NAME="I3203"></A>If 
 an Accessibility_Check fails, Program_Error is raised. If a predicate 
 check fails, the effect is as defined in subclause <A HREF="RM-3-2-4.html">3.2.4</A>, 
 &ldquo;<A HREF="RM-3-2-4.html">Subtype Predicates</A>&rdquo;. Any other 
@@ -444,13 +425,13 @@ then a new object is created;</div>
 elementary type, then a new object is created;</span></div>
 <div class="paranum"><a name="p58.5">58.5/5</a></div>
 <div class="Bulleted">Otherwise, it is unspecified whether a new object 
-is created.<A NAME="I3202"></A>&nbsp;</div>
+is created.<A NAME="I3204"></A>&nbsp;</div>
 <div class="paranum"><a name="p58.6">58.6/5</a></div>
 <div class="Normal">&nbsp;&nbsp;If a new object is created, then the initialization 
 of that object is an assignment operation.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p59">59</a></div>
-<div class="Notes">21&nbsp;&nbsp;<A NAME="I3203"></A>In addition to explicit 
+<div class="Notes">21&nbsp;&nbsp;<A NAME="I3205"></A>In addition to explicit 
 <SPAN Class="swiss"><A HREF="RM-4-6.html#S0162">type_conversion</A></SPAN>s, 
 type conversions are performed implicitly in situations where the expected 
 type and the actual type of a construct differ, as is permitted by the 
@@ -460,7 +441,7 @@ converted when assigned to a target of some specific integer type. Similarly,
 an actual parameter of a specific tagged type is implicitly converted 
 when the corresponding formal parameter is of a class-wide type.</div>
 <div class="paranum"><a name="p60">60</a></div>
-<div class="Notes"><A NAME="I3204"></A><A NAME="I3205"></A>Even when 
+<div class="Notes"><A NAME="I3206"></A><A NAME="I3207"></A>Even when 
 the expected and actual types are the same, implicit subtype conversions 
 are performed to adjust the array bounds (if any) of an operand to match 
 the desired target subtype, or to raise Constraint_Error if the (possibly 

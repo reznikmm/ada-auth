@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -23,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,38 +44,39 @@ provides input-output in human-readable form for Bounded_Strings.</span>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">The 
 generic library package Text_IO.Bounded_IO has the following declaration:</span></div>
-<div class="paranum"><a name="p3">3/2</a></div>
+<div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Strings.Bounded;<BR>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
-<B>package</B>&nbsp;Ada.Text_IO.Bounded_IO&nbsp;<B>is</B><A NAME="I7381"></A></span></div>
+<B>package</B>&nbsp;Ada.Text_IO.Bounded_IO</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert2">&nbsp;<B>is</B><A NAME="I7376"></A></span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7382"></A>Put<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7377"></A>Put<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7383"></A>Put<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7378"></A>Put<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7384"></A>Put_Line<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7379"></A>Put_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7385"></A>Put_Line<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7380"></A>Put_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7386"></A>Get_Line<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7381"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Bounded.Bounded_String;</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7387"></A>Get_Line<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7382"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Bounded.Bounded_String;</span></div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7388"></A>Get_Line<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7383"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Bounded.Bounded_String);</span></div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7389"></A>Get_Line<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7384"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Bounded.Bounded_String);</span></div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Examples"><span class="insert2"><B>end</B>&nbsp;Ada.Text_IO.Bounded_IO;</span></div>

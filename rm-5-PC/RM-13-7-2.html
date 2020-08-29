@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,15 +38,15 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 generic library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><A NAME="I5622"></A><B>generic</B><BR>
+<div class="Examples"><A NAME="I5617"></A><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 <B>package</B>&nbsp;System.Address_To_Access_Conversions&nbsp;<span class="delete5">&nbsp;<B>is</B></span><BR>
-&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Address_To_Access_Conversions);</span></div>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Address_To_Access_Conversions);</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object_Pointer&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Object;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5623"></A>To_Pointer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Object_Pointer<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5618"></A>To_Pointer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Object_Pointer<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5624"></A>To_Address(Value&nbsp;:&nbsp;Object_Pointer)&nbsp;<B>return</B>&nbsp;Address<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5619"></A>To_Address(Value&nbsp;:&nbsp;Object_Pointer)&nbsp;<B>return</B>&nbsp;Address<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;System.Address_To_Access_Conversions;</div>
@@ -54,7 +54,7 @@ generic library package exists:&nbsp;</div>
 <div class="Normal">The To_Pointer and To_Address subprograms convert 
 back and forth between values of types Object_Pointer and Address. To_Pointer(X'Address) 
 is equal to X'Unchecked_Access for any X that allows Unchecked_Access. 
-To_Pointer(Null_Address) returns <B>null</B>. <A NAME="I5625"></A>For 
+To_Pointer(Null_Address) returns <B>null</B>. <A NAME="I5620"></A>For 
 other addresses, the behavior is unspecified. To_Address(<B>null</B>) 
 returns Null_Address. To_Address(Y), where Y /= <B>null</B>, returns 
 Y.<B>all</B>'Address.&nbsp;</div>

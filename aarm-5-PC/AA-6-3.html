@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,14 +41,14 @@ specifies the execution of a subprogram.]&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">subprogram_body</SPAN><A NAME="I4036"></A><A NAME="S0216"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4037"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4038"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4039"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4040"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<SPAN Class="swiss">subprogram_body</SPAN><A NAME="I4041"></A><A NAME="S0216"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4042"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4043"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4044"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4045"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4041"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<A NAME="I4042"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0199">designator</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4046"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<A NAME="I4047"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0199">designator</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">If a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0199">designator</A></SPAN> 
 appears at the end of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>, 
@@ -65,7 +65,7 @@ be the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogra
 or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>. 
 The profile of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 that completes a declaration shall conform fully to that of the declaration. 
-<A NAME="I4043"></A></div>
+<A NAME="I4048"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
@@ -75,7 +75,7 @@ or itself be the initial declaration of the subprogram.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I4044"></A>The elaboration of a nongeneric 
+<div class="Normal"><A NAME="I4049"></A>The elaboration of a nongeneric 
 <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 has no other effect than to establish that the subprogram can from then 
 on be called without failing the Elaboration_Check.&nbsp;</div>
@@ -85,7 +85,7 @@ for elaboration of a generic body. Note that protected <SPAN Class="swiss">subpr
 never get elaborated; the elaboration of the containing <SPAN Class="swiss"><A HREF="AA-9-4.html#S0254">protected_body</A></SPAN> 
 allows them to be called without failing the Elaboration_Check.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4045"></A>[The execution of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
+<div class="Normal"><A NAME="I4050"></A>[The execution of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 is invoked by a subprogram call.] For this execution the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 is elaborated, and the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
 is then executed.&nbsp;</div>
@@ -120,7 +120,7 @@ function body:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p11.a">11.a</a></div>
-<div class="Annotations"><A NAME="I4046"></A>A <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
+<div class="Annotations"><A NAME="I4051"></A>A <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
 may be used instead of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>. 
 </div>
 
@@ -151,7 +151,7 @@ is added to <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A><
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p11.g">11.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I4047"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<A NAME="I4052"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 

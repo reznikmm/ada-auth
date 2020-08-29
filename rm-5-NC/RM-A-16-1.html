@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,31 +44,31 @@ and decomposition for targets with hierarchical file naming.&nbsp;</div>
 package Directories.Hierarchical_File_Names has the following declaration:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>package</B>&nbsp;Ada.Directories.Hierarchical_File_Names<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><A NAME="I7241"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B><A NAME="I7232"></A></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7242"></A>Is_Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7233"></A>Is_Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7243"></A>Is_Root_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7234"></A>Is_Root_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7244"></A>Is_Parent_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7235"></A>Is_Parent_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7245"></A>Is_Current_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7236"></A>Is_Current_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7246"></A>Is_Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7237"></A>Is_Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7247"></A>Is_Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7238"></A>Is_Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7248"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7239"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Directories.Simple_Name;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7249"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7240"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Directories.Containing_Directory;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7250"></A>Initial_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7241"></A>Initial_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7251"></A>Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7242"></A>Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7252"></A>Compose&nbsp;(Directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7243"></A>Compose&nbsp;(Directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relative_Name&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p15">15/3</a></div>

@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,14 +44,14 @@ specifies the internal codes for enumeration literals.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I5470"></A><A NAME="S0350"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5471"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5472"></A><SPAN Class="swiss"><A HREF="RM-13-4.html#S0351">enumeration_aggregate</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I5461"></A><A NAME="S0350"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5462"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5463"></A><SPAN Class="swiss"><A HREF="RM-13-4.html#S0351">enumeration_aggregate</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I5473"></A><A NAME="S0351"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5474"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I5464"></A><A NAME="S0351"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5465"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5475"></A>The <SPAN Class="swiss"><A HREF="RM-13-4.html#S0351">enumeration_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I5466"></A>The <SPAN Class="swiss"><A HREF="RM-13-4.html#S0351">enumeration_aggregate</A></SPAN> 
 shall be written as a one-dimensional <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 for which the index subtype is the unconstrained subtype of the enumeration 
 type, and each component expression is expected to be of any integer 
@@ -73,10 +73,10 @@ predefined ordering relation of the type.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5476"></A>An <SPAN Class="swiss"><A HREF="RM-13-4.html#S0350">enumeration_representation_clause</A></SPAN> 
-specifies the <I>coding</I> aspect of representation. <A NAME="I5477"></A>The 
+<div class="Normal"><A NAME="I5467"></A>An <SPAN Class="swiss"><A HREF="RM-13-4.html#S0350">enumeration_representation_clause</A></SPAN> 
+specifies the <I>coding</I> aspect of representation. <A NAME="I5468"></A>The 
 coding consists of the <I>internal code</I> for each enumeration literal, 
-that is, the integral value used internally to represent each literal.<A NAME="I5478"></A><A NAME="I5479"></A></div>
+that is, the integral value used internally to represent each literal.<A NAME="I5469"></A><A NAME="I5470"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p8">8</a></div>
@@ -86,7 +86,7 @@ code shall be equal to its position number.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5480"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5471"></A>The 
 recommended level of support for <SPAN Class="swiss"><A HREF="RM-13-4.html#S0350">enumeration_representation_clause</A></SPAN>s 
 is:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -101,20 +101,20 @@ for boolean types.&nbsp;</div>
 subtype S, the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p10.2">10.2/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Enum_Rep</div><div class="WideHanging-Body">
-<A NAME="I5481"></A><A NAME="I5482"></A>S'Enum_Rep denotes a function 
+<A NAME="I5472"></A><A NAME="I5473"></A>S'Enum_Rep denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p10.3">10.3/5</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Enum_Rep&nbsp;(Arg&nbsp;:&nbsp;S'Base)&nbsp;<B>return</B>&nbsp;<I>universal_integer</I></div>
 <div class="paranum"><a name="p10.4">10.4/5</a></div>
 <div class="WideHanging-Body">This function returns the representation 
 value of the value of Arg, as a value of type <I>universal_integer</I>. 
-The <I>representation value</I><A NAME="I5483"></A> is<A NAME="I5484"></A> 
+The <I>representation value</I><A NAME="I5474"></A> is<A NAME="I5475"></A> 
 the internal code specified in an enumeration representation clause, 
 if any, for the type corresponding to the value of Arg, and otherwise 
 is the position number of the value.</div>
 <div class="paranum"><a name="p10.5">10.5/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Enum_Val</div><div class="WideHanging-Body">
-<A NAME="I5485"></A><A NAME="I5486"></A>S'Enum_Val denotes a function 
+<A NAME="I5476"></A><A NAME="I5477"></A>S'Enum_Val denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p10.6">10.6/5</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Enum_Val&nbsp;(Arg&nbsp;:&nbsp;<I>universal_integer</I>)&nbsp;<B>return</B>&nbsp;S'Base</div>

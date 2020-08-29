@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,18 +45,18 @@ implicit in objects declared in the shared passive library unit.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9025"></A><A NAME="I9026"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9046"></A><A NAME="I9047"></A>The 
 form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Shared_Passive is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9027"></A><A NAME="I9028"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I9029"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9048"></A><A NAME="I9049"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I9050"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I9030"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I9051"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Shared_Passive 
 is used to specify that a library unit is a <I>shared passive library 
-unit</I>, namely that the Shared_Passive aspect<A NAME="I9031"></A><A NAME="I9032"></A> 
+unit</I>, namely that the Shared_Passive aspect<A NAME="I9052"></A><A NAME="I9053"></A> 
 of the library unit is True. The following restrictions apply to such 
 a library unit:</div>
 <div class="paranum"><a name="p5">5</a></div>
@@ -87,7 +87,7 @@ a type declared within a declared-pure package, if that type has a part
 that is of an access type; for the purposes of this rule, the parts considered 
 include those of the full views of any private types or private extensions.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I9033"></A><A NAME="I9034"></A>Notwithstanding 
+<div class="Normal"><A NAME="I9054"></A><A NAME="I9055"></A>Notwithstanding 
 the definition of accessibility given in <A HREF="RM-3-10-2.html">3.10.2</A>, 
 the declaration of a library unit P1 is not accessible from within the 
 declarative region of a shared passive library unit P2, unless the shared 
@@ -95,7 +95,7 @@ passive library unit P2 depends semantically on P1.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I9035"></A>A shared passive library unit 
+<div class="Normal"><A NAME="I9056"></A>A shared passive library unit 
 is preelaborated.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
@@ -103,7 +103,7 @@ is preelaborated.</div>
 <div class="Normal">A shared passive library unit shall be assigned to 
 at most one partition within a given program.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9036"></A><A NAME="I9037"></A><A NAME="I9038"></A>Notwithstanding 
+<div class="Normal"><A NAME="I9057"></A><A NAME="I9058"></A><A NAME="I9059"></A>Notwithstanding 
 the rule given in <A HREF="RM-10-2.html">10.2</A>, a compilation unit 
 in a given partition does not <I>need</I> (in the sense of <A HREF="RM-10-2.html">10.2</A>) 
 the shared passive library units on which it depends semantically to 

@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,13 +45,13 @@ based on conceptual priority-ordered ready queues.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p1.2">1.2/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Dispatching<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8637"></A><BR>
-&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Dispatching);</span></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Dispatching<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8658"></A><BR>
+&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Dispatching);</span></div>
 <div class="paranum"><a name="p1.3">1.3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8638"></A>Yield<span class="insert5"><BR>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8659"></A>Yield<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p1.4">1.4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I8639"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I8660"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
 <B>end</B>&nbsp;Ada.Dispatching;</div>
 <div class="paranum"><a name="p1.5">1.5/2</a></div>
 <div class="Normal">&nbsp;Dispatching serves as the parent of other language-defined 
@@ -64,7 +64,7 @@ specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_spec
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):</span></div>
 <div class="paranum"><a name="p1.7">1.7/5</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert5">Yield</span></div><div class="WideHanging-Body">
-<span class="insert5">The type of aspect Yield is Boolean.<A NAME="I8640"></A><A NAME="I8641"></A></span></div>
+<span class="insert5">The type of aspect Yield is Boolean.<A NAME="I8661"></A><A NAME="I8662"></A></span></div>
 <div class="paranum"><a name="p1.8">1.8/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">If directly specified, 
 the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
@@ -92,7 +92,7 @@ expression of the Nonblocking aspect of the entity are statically True.</span></
 <div class="Normal">&nbsp;&nbsp;<span class="insert5">In addition to the places 
 where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
-unit.<A NAME="I8642"></A></span>&nbsp;</div>
+unit.<A NAME="I8663"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
@@ -105,7 +105,7 @@ based on each task's active priority.</div>
 a task that is waiting for access to a protected object keeps its processor 
 busy.&nbsp;</div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Normal"><A NAME="I8643"></A><A NAME="I8644"></A><A NAME="I8645"></A><A NAME="I8646"></A><I>Task 
+<div class="Normal"><A NAME="I8664"></A><A NAME="I8665"></A><A NAME="I8666"></A><A NAME="I8667"></A><I>Task 
 dispatching</I> is the process by which <span class="insert5">a logical 
 thread of control associated with a</span><span class="delete5">&nbsp;one</span> 
 ready task is selected for execution on a processor. This selection is 
@@ -121,7 +121,7 @@ of tasks, but in the context of a parallel construct, a single task can
 be represented by multiple logical threads of control, each of which 
 can appear separately on a ready queue.</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Normal"><A NAME="I8647"></A><A NAME="I8648"></A><A NAME="I8649"></A><A NAME="I8650"></A><A NAME="I8651"></A><A NAME="I8652"></A><I>Task 
+<div class="Normal"><A NAME="I8668"></A><A NAME="I8669"></A><A NAME="I8670"></A><A NAME="I8671"></A><A NAME="I8672"></A><A NAME="I8673"></A><I>Task 
 dispatching policies</I> are specified in terms of conceptual <I>ready 
 queues</I> and task states. A ready queue is an ordered list of ready 
 tasks. The first position in a queue is called the <I>head of the queue</I>, 
@@ -135,7 +135,7 @@ not running on any processor, and can be executed using that processor
 and other available resources. A task can be on the ready queues of more 
 than one processor.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I8653"></A>Each processor also has one <I>running 
+<div class="Normal"><A NAME="I8674"></A>Each processor also has one <I>running 
 task</I>, which is the task currently being executed by that processor. 
 Whenever a task running on a processor reaches a task dispatching point 
 it goes back to one or more ready queues; a task (possibly the same task) 
@@ -176,7 +176,7 @@ always corresponds to at least one task dispatching point.</span></div>
 <div class="Notes">7&nbsp;&nbsp;Clause <A HREF="RM-9.html">9</A> specifies 
 under which circumstances a task becomes ready. The ready state is affected 
 by the rules for task activation and termination, delay statements, and 
-entry calls. <A NAME="I8654"></A>When a task is not ready, it is said 
+entry calls. <A NAME="I8675"></A>When a task is not ready, it is said 
 to be blocked.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">8&nbsp;&nbsp;An example of a possible implementation-defined 

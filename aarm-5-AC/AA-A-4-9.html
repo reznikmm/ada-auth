@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,7 +47,7 @@ declaration:</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
 <span class="insert2"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Hash&nbsp;(Key&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type;<A NAME="I7442"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Hash&nbsp;(Key&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type;<A NAME="I7438"></A><BR>
 <B>pragma</B>&nbsp;Pure(</span><span class="insert3">&nbsp;Ada.Strings.Hash</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Hash</span></span><span class="insert2">);</span></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
@@ -74,13 +74,14 @@ has the following declaration:</span>&nbsp;</div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <span class="insert2"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>generic</B><A NAME="I7443"></A><BR>
+<B>generic</B><A NAME="I7439"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
 <B>function</B>&nbsp;Ada.Strings.Bounded.Hash&nbsp;(Key&nbsp;:&nbsp;Bounded.Bounded_String)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type</span><span class="insert2"><span class="delete5">;</span></span><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking</span><span class="insert2"></span><span class="insert2"><span class="delete5">(</span></span><span class="insert3"><span class="delete5">&nbsp;Ada.Strings.Bounded.Hash</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2"><span class="delete3">&nbsp;Hash</span></span><span class="insert2"><span class="delete5">)</span></span><span class="insert2">;</span></div>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(</span></span><span class="insert3"><span class="delete5">&nbsp;Ada.Strings.Bounded.Hash</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2"><span class="delete3">&nbsp;Hash</span></span><span class="insert2"><span class="delete5">)</span></span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 <span class="insert2"></span><span class="insert3">Equivalent to</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Strings.Bounded.Hash 
@@ -92,10 +93,11 @@ the following declaration:</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <span class="insert2"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash&nbsp;(Key&nbsp;:&nbsp;Unbounded_String)<A NAME="I7444"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash&nbsp;(Key&nbsp;:&nbsp;Unbounded_String)<A NAME="I7440"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type</span><span class="insert2"><span class="delete5">;</span></span><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking</span><span class="insert2"></span><span class="insert2"><span class="delete5">(</span></span><span class="insert3"><span class="delete5">&nbsp;Ada.Strings.Unbounded.Hash</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2"><span class="delete3">&nbsp;Hash</span></span><span class="insert2"><span class="delete5">)</span></span><span class="insert2">;</span></div>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(</span></span><span class="insert3"><span class="delete5">&nbsp;Ada.Strings.Unbounded.Hash</span></span><span class="insert2"><span class="delete5"></span></span><span class="insert2"><span class="delete3">&nbsp;Hash</span></span><span class="insert2"><span class="delete5">)</span></span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 <span class="insert2"></span><span class="insert3">Equivalent to</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Strings.Unbounded.Hash 
@@ -107,7 +109,7 @@ is equivalent to the function call</span></span><span class="insert2">&nbsp;Stri
 has the following declaration:</span></div>
 <div class="paranum"><a name="p11.2">11.2/3</a></div>
 <div class="Examples"><span class="insert3"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I7445"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I7441"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type;<BR>
 <B>pragma</B>&nbsp;Pure(Ada.Strings.Hash_Case_Insensitive);</span></div>
 <div class="paranum"><a name="p11.3">11.3/3</a></div>
@@ -123,7 +125,7 @@ equals Hash_Case_Insensitive(B).</span>&nbsp;</div>
 has the following declaration:</span></div>
 <div class="paranum"><a name="p11.5">11.5/3</a></div>
 <div class="Examples"><span class="insert3"><B>with</B>&nbsp;Ada.Containers,&nbsp;Ada.Strings.Hash_Case_Insensitive;<BR>
-<B>function</B>&nbsp;Ada.Strings.Fixed.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I7446"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Fixed.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I7442"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type&nbsp;<B>renames</B>&nbsp;Ada.Strings.Hash_Case_Insensitive;</span></div>
 <div class="paranum"><a name="p11.6">11.6/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
@@ -132,13 +134,14 @@ has the following declaration:</span></div>
 has the following declaration:</span></div>
 <div class="paranum"><a name="p11.7">11.7/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <span class="insert3"><B>with</B>&nbsp;Ada.Containers;<BR>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
-<B>function</B>&nbsp;Ada.Strings.Bounded.Hash_Case_Insensitive<A NAME="I7447"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Bounded.Hash_Case_Insensitive<A NAME="I7443"></A><BR>
 &nbsp;&nbsp;&nbsp;(Key&nbsp;:&nbsp;Bounded.Bounded_String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type</span><span class="insert3"><span class="delete5">;</span></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking</span><span class="insert3"></span><span class="insert3"><span class="delete5">(Ada.Strings.Bounded.Hash_Case_Insensitive)</span></span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Ada.Strings.Bounded.Hash_Case_Insensitive)</span></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p11.8">11.8/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Equivalent 
 to Strings.Hash_Case_Insensitive (Bounded.To_String (Key));</span>&nbsp;</div>
@@ -149,10 +152,11 @@ to Strings.Hash_Case_Insensitive (Bounded.To_String (Key));</span>&nbsp;</div>
 has the following declaration:</span></div>
 <div class="paranum"><a name="p11.10">11.10/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <span class="insert3"><B>with</B>&nbsp;Ada.Containers;<BR>
-<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash_Case_Insensitive<A NAME="I7448"></A><BR>
+<B>function</B>&nbsp;Ada.Strings.Unbounded.Hash_Case_Insensitive<A NAME="I7444"></A><BR>
 &nbsp;&nbsp;&nbsp;(Key&nbsp;:&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;Containers.Hash_Type</span><span class="insert3"><span class="delete5">;</span></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking</span><span class="insert3"></span><span class="insert3"><span class="delete5">(Ada.Strings.Unbounded.Hash_Case_Insensitive)</span></span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Ada.Strings.Unbounded.Hash_Case_Insensitive)</span></span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p11.11">11.11/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Equivalent 
 to Strings.Hash_Case_Insensitive (To_String (Key));</span>&nbsp;</div>
@@ -176,14 +180,14 @@ separate advice in the Annex.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p12.c">12.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<span class="insert2"><A NAME="I7449"></A>The Strings.Hash, Strings.Fixed.Hash, 
+<span class="insert2"><A NAME="I7445"></A>The Strings.Hash, Strings.Fixed.Hash, 
 Strings.Bounded.Hash, and Strings.Unbounded.Hash functions are new.</span> 
 </div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p12.d">12.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"><A NAME="I7450"></A>The Strings.Hash_Case_Insensitive, 
+<span class="insert3"><A NAME="I7446"></A>The Strings.Hash_Case_Insensitive, 
 Strings.Fixed.Hash_Case_Insensitive, Strings.Bounded.Hash_Case_Insensitive, 
 and Strings.Unbounded.Hash_Case_Insensitive functions are new.</span> 
 </div>

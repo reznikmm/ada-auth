@@ -37,7 +37,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,8 +51,8 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 can serve as the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN>; 
-<A NAME="I4765"></A>such a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
-is called a <I>renaming-as-body</I>. <A NAME="I4766"></A>A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
+<A NAME="I4771"></A>such a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0238">renaming_declaration</A></SPAN> 
+is called a <I>renaming-as-body</I>. <A NAME="I4772"></A>A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN> 
 that is not a completion is called a <I>renaming-as-declaration</I>[, 
 and is used to rename a subprogram (possibly an enumeration literal) 
 or an entry].&nbsp;</div>
@@ -65,14 +65,14 @@ A renaming-as-body is a declaration, as defined in <span class="insert3">Clause<
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">subprogram_renaming_declaration</SPAN><A NAME="I4767"></A><A NAME="S0242"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4768"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4769"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>callable_entity_</I><A NAME="I4770"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4771"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">subprogram_renaming_declaration</SPAN><A NAME="I4773"></A><A NAME="S0242"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4774"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4775"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>callable_entity_</I><A NAME="I4776"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4777"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4772"></A>The expected profile for the 
+<div class="Normal"><A NAME="I4778"></A>The expected profile for the 
 <I>callable_entity_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is the profile given in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN>. 
 </div>
@@ -83,7 +83,7 @@ is the profile given in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subp
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0373-1.TXT">AI12-0373-1</A></I>} 
 The profile of a renaming-as-declaration shall be <span class="insert3">mode 
 conformant</span><span class="insert3"><span class="delete5">,</span></span><span class="insert3"></span><span class="delete3">&nbsp;mode-conformant</span> 
-with that of the renamed callable entity. <A NAME="I4773"></A></div>
+with that of the renamed callable entity. <A NAME="I4779"></A></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 <span class="insert2">For a parameter or result subtype of the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN> 
@@ -100,7 +100,7 @@ the formal subprogram of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="AA-3
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
 <div class="Bulleted"><span class="insert2">otherwise, the subtype of 
 the corresponding parameter or result type of the renamed callable entity 
-shall exclude null. <A NAME="I4774"></A>In addition to the places where 
+shall exclude null. <A NAME="I4780"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -118,14 +118,14 @@ excludes null implicitly.</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
 The profile of a renaming-as-body <span class="delete1">shall be subtype-conformant 
 with that of the renamed callable entity, and&nbsp;</span>shall conform fully 
-to that of the declaration it completes. <A NAME="I4775"></A>If the renaming-as-body 
+to that of the declaration it completes. <A NAME="I4781"></A>If the renaming-as-body 
 completes that declaration before the subprogram it declares is frozen, 
 <span class="insert1">the profile shall be&nbsp;</span><span class="insert3">mode 
-conformant</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;mode-conformant</span></span><span class="insert1">&nbsp;<A NAME="I4776"></A>with that of the renamed callable entity and&nbsp;</span>the 
+conformant</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;mode-conformant</span></span><span class="insert1">&nbsp;<A NAME="I4782"></A>with that of the renamed callable entity and&nbsp;</span>the 
 subprogram it declares takes its convention from the renamed subprogram; 
 otherwise<span class="insert1">, the profile shall be&nbsp;</span><span class="insert3">subtype 
 conformant</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;subtype-conformant</span></span><span class="insert1">&nbsp;with that of the renamed callable entity and</span> the convention of 
-the renamed subprogram shall not be Intrinsic. <A NAME="I4777"></A><span class="insert1">A 
+the renamed subprogram shall not be Intrinsic. <A NAME="I4783"></A><span class="insert1">A 
 renaming-as-body is illegal if the declaration occurs before the subprogram 
 whose declaration it completes is frozen, and the renaming renames the 
 subprogram itself, through one or more subprogram renaming declarations, 
@@ -311,7 +311,7 @@ of P.</div>
 <div class="paranum"><a name="p8.g">8.g</a></div>
 <div class="Annotations">Thus a renaming allows one to squirrel away 
 a copy of an inherited or predefined subprogram before later overriding 
-it.<A NAME="I4778"></A>&nbsp;</div>
+it.<A NAME="I4784"></A>&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p8.1">8.1/1</a></div>
@@ -320,7 +320,7 @@ it.<A NAME="I4778"></A>&nbsp;</div>
 <span class="insert1">If a subprogram directly or indirectly renames 
 itself, then it is a bounded error to call that subprogram. Possible 
 consequences are that Program_Error or Storage_Error is raised, or that 
-the call results in infinite recursion. <A NAME="I4779"></A><A NAME="I4780"></A></span></div>
+the call results in infinite recursion. <A NAME="I4785"></A><A NAME="I4786"></A></span></div>
 <div class="paranum"><a name="p8.g.1">8.g.1/1</a></div>
 <div class="Annotations"><span class="insert1"><B>Reason:&nbsp;</B></span>{<I><A HREF="defect1.html#8652/0027">8652/0027</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00135.TXT">AI95-00135-01</A></I>} 
@@ -407,7 +407,7 @@ subprogram renaming declaration with a new default expression:</I>&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a/2</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0028">8652/0028</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00145.TXT">AI95-00145-01</A></I>} 
-<span class="insert2"><A NAME="I4781"></A><B>Corrigendum:</B> Allowed 
+<span class="insert2"><A NAME="I4787"></A><B>Corrigendum:</B> Allowed 
 a renaming-as-body to be just mode conformant with the specification 
 if the subprogram is not yet frozen.</span></div>
 <div class="paranum"><a name="p21.b">21.b/2</a></div>
@@ -440,7 +440,7 @@ an abstract subprogram.</span></div>
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p21.f.1">21.f.1/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0123-1.TXT">AI05-0123-1</A></I>} 
-<span class="insert3"><A NAME="I4782"></A>Renaming of user-defined untagged 
+<span class="insert3"><A NAME="I4788"></A>Renaming of user-defined untagged 
 record equality is now defined to call the overridden body so long as 
 the overriding occurred before the renames. This could change the body 
 called in unusual cases; the change is necessary to preserve the principle 
@@ -453,14 +453,14 @@ likely will fix a bug.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p21.g">21.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I4783"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<span class="insert3"><A NAME="I4789"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p21.h">21.h/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0204-1.TXT">AI12-0204-1</A></I>} 
-<span class="insert5"><A NAME="I4784"></A><B>Correction:</B> Added a 
+<span class="insert5"><A NAME="I4790"></A><B>Correction:</B> Added a 
 rule to ensure that the prefix of a renaming of a prefixed view continues 
 to exist during the life of a renames. If the prefix is a subcomponent 
 that depends on discriminants, Ada 2005 and 2012 would have allowed the 

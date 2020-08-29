@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,31 +41,31 @@
 <HR>
 <H1>3.5.9 Fixed Point Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1912"></A><A NAME="I1913"></A><A NAME="I1914"></A>A 
+<div class="Normal"><A NAME="I1913"></A><A NAME="I1914"></A><A NAME="I1915"></A>A 
 fixed point type is either an ordinary fixed point type, or a decimal 
-fixed point type. <A NAME="I1915"></A>The error bound of a fixed point 
+fixed point type. <A NAME="I1916"></A>The error bound of a fixed point 
 type is specified as an absolute value, called the <I>delta</I> of the 
 fixed point type.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">fixed_point_definition</SPAN><A NAME="I1916"></A><A NAME="S0047"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1917"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1918"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">fixed_point_definition</SPAN><A NAME="I1917"></A><A NAME="S0047"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1918"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1919"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">ordinary_fixed_point_definition</SPAN><A NAME="I1919"></A><A NAME="S0048"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1920"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;&nbsp;<A NAME="I1921"></A><SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">ordinary_fixed_point_definition</SPAN><A NAME="I1920"></A><A NAME="S0048"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1921"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;&nbsp;<A NAME="I1922"></A><SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">decimal_fixed_point_definition</SPAN><A NAME="I1922"></A><A NAME="S0049"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1923"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>digits</B>&nbsp;<I>static_</I><A NAME="I1924"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;[<A NAME="I1925"></A><SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">decimal_fixed_point_definition</SPAN><A NAME="I1923"></A><A NAME="S0049"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1924"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>digits</B>&nbsp;<I>static_</I><A NAME="I1925"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;[<A NAME="I1926"></A><SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN>]</div>
 <div class="paranum"><a name="p5">5/4</a></div>
-<div class="Indented1"><SPAN Class="swiss">digits_constraint</SPAN><A NAME="I1926"></A><A NAME="S0050"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>digits</B>&nbsp;<I>static_</I><span class="insert4"><A NAME="I1927"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN></span><span class="delete4"><A NAME="I1928"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">&nbsp;expression</A></SPAN></span>&nbsp;[<A NAME="I1929"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">digits_constraint</SPAN><A NAME="I1927"></A><A NAME="S0050"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>digits</B>&nbsp;<I>static_</I><span class="insert4"><A NAME="I1928"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN></span><span class="delete4"><A NAME="I1929"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">&nbsp;expression</A></SPAN></span>&nbsp;[<A NAME="I1930"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>]</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1930"></A>For a type defined by a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0047">fixed_point_definition</A></SPAN>, 
+<div class="Normal"><A NAME="I1931"></A>For a type defined by a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0047">fixed_point_definition</A></SPAN>, 
 the <I>delta</I> of the type is specified by the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 given after the reserved word <B>delta</B>; this <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
-is expected to be of any real type. <A NAME="I1931"></A><A NAME="I1932"></A><A NAME="I1933"></A>For 
+is expected to be of any real type. <A NAME="I1932"></A><A NAME="I1933"></A><A NAME="I1934"></A>For 
 a type defined by a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
 (a <I>decimal</I> fixed point type), the number of significant decimal 
 digits for its first subtype (the <I>digits</I> of the first subtype) 
@@ -85,12 +85,12 @@ the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s
 given after the reserved words <B>delta</B> and <B>digits</B> shall be 
 static; their values shall be positive.</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I1934"></A>The set of values of a fixed 
+<div class="Normal"><A NAME="I1935"></A>The set of values of a fixed 
 point type comprise the integral multiples of a number called the <I>small</I> 
-of the type.<span class="insert2"><A NAME="I1935"></A> The <I>machine 
+of the type.<span class="insert2"><A NAME="I1936"></A> The <I>machine 
 numbers</I> of a fixed point type are the values of the type that can 
 be represented exactly in every unconstrained variable of the type.</span> 
-<A NAME="I1936"></A>For a type defined by an <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
+<A NAME="I1937"></A>For a type defined by an <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
 (an <I>ordinary</I> fixed point type), the <I>small</I> may be specified 
 by an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0349">attribute_definition_clause</A></SPAN> 
 (see <A HREF="RM-13-3.html">13.3</A>); if so specified, it shall be no 
@@ -115,41 +115,41 @@ shall denote a decimal fixed point subtype.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I1937"></A>The base range (see <A HREF="RM-3-5.html">3.5</A>) 
+<div class="Normal"><A NAME="I1938"></A>The base range (see <A HREF="RM-3-5.html">3.5</A>) 
 of a fixed point type is symmetric around zero, except possibly for an 
 extra negative value in some implementations.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1938"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1939"></A>An 
 <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
 defines an ordinary fixed point type whose base range includes at least 
 all multiples of <I>small</I> that are between the bounds specified in 
 the <SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN>. 
 The base range of the type does not necessarily include the specified 
-bounds themselves. <A NAME="I1939"></A><A NAME="I1940"></A>An <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
+bounds themselves. <A NAME="I1940"></A><A NAME="I1941"></A>An <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
 also defines a constrained first subtype of the type, with each bound 
 of its range given by the closer to zero of:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Bulleted">the value of the conversion to the fixed point 
 type of the corresponding <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN>; 
-<A NAME="I1941"></A></div>
+<A NAME="I1942"></A></div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Bulleted">the corresponding bound of the base range.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I1942"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1943"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
 defines a decimal fixed point type whose base range includes at least 
 the range &ndash;(10**<I>digits</I>&ndash;1)*<I>delta</I> .. +(10**<I>digits</I>&ndash;1)*<I>delta</I>. 
-<A NAME="I1943"></A><A NAME="I1944"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
+<A NAME="I1944"></A><A NAME="I1945"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
 also defines a constrained first subtype of the type. If a <SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN> 
 is given, the bounds of the first subtype are given by a conversion of 
 the values of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0046">real_range_specification</A></SPAN>. 
-<A NAME="I1945"></A>Otherwise, the range of the first subtype is &ndash;(10**<I>digits</I>&ndash;1)*<I>delta</I> 
+<A NAME="I1946"></A>Otherwise, the range of the first subtype is &ndash;(10**<I>digits</I>&ndash;1)*<I>delta</I> 
 .. +(10**<I>digits</I>&ndash;1)*<I>delta</I>.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I1946"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0047">fixed_point_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1947"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0047">fixed_point_definition</A></SPAN> 
 creates the fixed point type and its first subtype.</div>
 <div class="paranum"><a name="p18">18/4</a></div>
 <div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
@@ -158,20 +158,20 @@ not have a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A><
 then it specifies an implicit range &ndash;(10**<I>D</I>&ndash;1)*<I>delta</I> 
 .. +(10**<I>D</I>&ndash;1)*<I>delta</I>, where <I>D</I> is the value 
 of the <span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">&nbsp;expression</A></SPAN></span>. 
-<A NAME="I1947"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+<A NAME="I1948"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 is <I>compatible</I> with a decimal fixed point subtype if the value 
 of the <span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">&nbsp;expression</A></SPAN></span> 
 is no greater than the <I>digits</I> of the subtype, and if it specifies 
 (explicitly or implicitly) a range that is compatible with the subtype. 
 </div>
 <div class="paranum"><a name="p19">19/4</a></div>
-<div class="Normal"><A NAME="I1948"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I1949"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
-if any. <A NAME="I1949"></A><A NAME="I1950"></A>If a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN> 
+if any. <A NAME="I1950"></A><A NAME="I1951"></A>If a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN> 
 is given, a check is made that the bounds of the range are both in the 
 range &ndash;(10**<I>D</I>&ndash;1)*<I>delta</I> .. +(10**<I>D</I>&ndash;1)*<I>delta</I>, 
 where <I>D</I> is the value of the (static) <span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">&nbsp;expression</A></SPAN></span> 
-given after the reserved word <B>digits</B>. <A NAME="I1951"></A>If this 
+given after the reserved word <B>digits</B>. <A NAME="I1952"></A>If this 
 check fails, Constraint_Error is raised.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>

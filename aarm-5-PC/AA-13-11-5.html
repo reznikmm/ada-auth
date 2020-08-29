@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,10 +44,20 @@ A subpool may be explicitly deallocated using Unchecked_Deallocate_Subpool.
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 The following language-defined library procedure exists:</div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><B>with</B>&nbsp;System.Storage_Pools.Subpools;<BR>
-<A NAME="I6346"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
-&nbsp;&nbsp;&nbsp;(Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;System.Storage_Pools.Subpools.Subpool_Handle);</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<B>with</B>&nbsp;System.Storage_Pools.Subpools;<BR>
+<A NAME="I6342"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
+&nbsp;&nbsp;&nbsp;(Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;System.Storage_Pools.Subpools.Subpool_Handle)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p3.a">3.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert5">The Global specification for this routine needs 
+to account for the dispatching call to the user-defined Deallocate_Subpool 
+routine. We can't use the <B>do</B> notation as that requires a statically 
+denoted dispatching argument (we have a function call here), so we have 
+to use <B>in out all</B> in order to allow the user-defined subprogram 
+to do anything.</span>&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 If Subpool is <B>null</B>, a call on Unchecked_Deallocate_Subpool has 
@@ -65,11 +75,11 @@ was deleted.</I></SPAN>1.</div><div class="Enumerated-Body"><br clear="left">
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
 Any of the objects allocated from the subpool that still exist are finalized 
-in an arbitrary order;<A NAME="I6347"></A></div>
+in an arbitrary order;<A NAME="I6343"></A></div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
 <div class="Enumerated-Term">&nbsp;3.</div><div class="Enumerated-Body">
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
-All of the objects allocated from the subpool cease to exist;<A NAME="I6348"></A></div>
+All of the objects allocated from the subpool cease to exist;<A NAME="I6344"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Enumerated-Term" style="margin-bottom: 0.3em">4.</div><div class="Enumerated-Body">
 The following [dispatching] call is then made:&nbsp;</div>
@@ -109,7 +119,7 @@ be finalized when the Pool_With_Subpools is finalized (by permission
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p10.f">10.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<A NAME="I6349"></A>Unchecked_Deallocate_Subpool is new.&nbsp;</div>
+<A NAME="I6345"></A>Unchecked_Deallocate_Subpool is new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p10.g">10.g/4</a></div>

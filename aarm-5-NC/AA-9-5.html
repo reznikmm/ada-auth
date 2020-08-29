@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 <HR>
 <H1>9.5 Intertask Communication</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4764"></A><A NAME="I4765"></A>The primary 
+<div class="Normal"><A NAME="I4766"></A><A NAME="I4767"></A>The primary 
 means for intertask communication is provided by calls on entries and 
 protected subprograms. Calls on protected subprograms allow coordinated 
 access to shared data objects. Entry calls allow for blocking the caller 
@@ -52,7 +52,7 @@ or indirectly via a shared protected object.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0225-1.TXT">AI05-0225-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0291-1.TXT">AI05-0291-1</A></I>} 
-<A NAME="I4766"></A>When a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<A NAME="I4768"></A>When a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 denotes an entry, protected subprogram, or a prefixed view of a primitive 
 subprogram of a limited interface whose first parameter is a controlling 
@@ -71,7 +71,7 @@ renames (a renames is not an entry or protected subprogram).&nbsp;</div>
 If it is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 or expanded name that denotes the declaration (or body) of the operation, 
 then the target object is implicitly specified to be the current instance 
-of the task or protected unit immediately enclosing the operation; <A NAME="I4767"></A>a 
+of the task or protected unit immediately enclosing the operation; <A NAME="I4769"></A>a 
 call using such a name is defined to be an <I>internal call</I>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0291-1.TXT">AI05-0291-1</A></I>} 
@@ -79,7 +79,7 @@ If it is a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component<
 that is not an expanded name, then the target object is explicitly specified 
 to be the  object denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
-<A NAME="I4768"></A>a call using such a name is defined to be an <I>external 
+<A NAME="I4770"></A>a call using such a name is defined to be an <I>external 
 call</I>;&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For example:&nbsp;</div>
@@ -129,7 +129,7 @@ whose first parameter is a controlling parameter, in which case the target
 object is identified explicitly by the first parameter. This latter case 
 is an <I>external call</I>.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4769"></A><A NAME="I4770"></A><A NAME="I4771"></A>A 
+<div class="Normal"><A NAME="I4771"></A><A NAME="I4772"></A><A NAME="I4773"></A>A 
 corresponding definition of target object applies to a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN> 
 (see <A HREF="AA-9-5-4.html">9.5.4</A>), with a corresponding distinction 
 between an <I>internal requeue</I> and an <I>external requeue</I>.</div>
@@ -207,7 +207,7 @@ value of a Count attribute.&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
-<SPAN Class="swiss">synchronization_kind</SPAN><A NAME="I4772"></A><A NAME="S0256"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>By_Entry&nbsp;|&nbsp;By_Protected_Procedure&nbsp;|&nbsp;Optional</div>
+<SPAN Class="swiss">synchronization_kind</SPAN><A NAME="I4774"></A><A NAME="S0256"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>By_Entry&nbsp;|&nbsp;By_Protected_Procedure&nbsp;|&nbsp;Optional</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -218,7 +218,7 @@ with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification<
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="WideHanging-Term">Synchronization</div><div class="WideHanging-Body"><br clear="left">
-If specified, the aspect definition shall be a <SPAN Class="swiss"><A HREF="AA-9-5.html#S0256">synchronization_kind</A></SPAN>.<A NAME="I4773"></A><A NAME="I4774"></A></div>
+If specified, the aspect definition shall be a <SPAN Class="swiss"><A HREF="AA-9-5.html#S0256">synchronization_kind</A></SPAN>.<A NAME="I4775"></A><A NAME="I4776"></A></div>
 <div class="paranum"><a name="p12.a">12.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Synchronization: 
 </B>Defines whether a given primitive operation of a synchronized interface 
@@ -258,126 +258,78 @@ then any specification of the aspect Synchronization applied to the overriding
 operation shall have the same <SPAN Class="swiss"><A HREF="AA-9-5.html#S0256">synchronization_kind</A></SPAN>.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
-<A NAME="I4775"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4777"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), these rules also apply in 
 the private part of an instance of a generic unit.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-An <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
-is <I>nonblocking-static</I> if it is one of the following:<A NAME="I4776"></A><A NAME="I4777"></A></div>
-<div class="paranum"><a name="p19">19/5</a></div>
-<div class="Bulleted">a static expression;</div>
-<div class="paranum"><a name="p20">20/5</a></div>
-<div class="Bulleted">a Nonblocking <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>;</div>
-<div class="paranum"><a name="p21">21/5</a></div>
-<div class="Bulleted">a call to a predefined boolean logical operator 
-<B>and</B> where each operand is nonblocking-static;</div>
-<div class="paranum"><a name="p22">22/5</a></div>
-<div class="Bulleted">an <B>and then</B> short-circuit control form where 
-each operand is nonblocking-static;</div>
-<div class="paranum"><a name="p23">23/5</a></div>
-<div class="Bulleted">a parenthesized nonblocking-static <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>. 
-</div>
-<div class="paranum"><a name="p23.a">23.a/5</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>We define the term &ldquo;nonblocking-static 
-expression&rdquo; so that nonblocking <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
-can be used to define the value of other nonblocking aspects, but we 
-don't allow anything else with a value not known at compile-time.&nbsp;</div>
-<div class="paranum"><a name="p24">24/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
 For a program unit, task entry, formal package, formal subprogram, formal 
 object of an anonymous access-to-subprogram type, enumeration literal, 
 and for a subtype (including a formal subtype), the following language-defined 
 operational aspect is defined:</div>
-<div class="paranum"><a name="p25">25/5</a></div>
+<div class="paranum"><a name="p19">19/5</a></div>
 <div class="WideHanging-Term">Nonblocking</div><div class="WideHanging-Body">
 This aspect specifies the blocking restriction for the entity; it shall 
-be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
-called a <I>nonblocking expression</I>.<A NAME="I4778"></A> If directly 
-specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
-shall be a nonblocking-static expression. The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
-is the predefined type Boolean. [The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
+be specified by a static Boolean expression. [The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 can be omitted from the specification of this aspect; in that case the 
-nonblocking expression for the entity is the enumeration literal True.<A NAME="I4779"></A><A NAME="I4780"></A>]</div>
-<div class="paranum"><a name="p25.a">25.a/5</a></div>
+nonblocking expression for the entity is the enumeration literal True.<A NAME="I4778"></A><A NAME="I4779"></A>]</div>
+<div class="paranum"><a name="p19.a">19.a/5</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Nonblocking: 
 </B>Specifies that an associated subprogram does not block.</div>
-<div class="paranum"><a name="p25.b">25.b/5</a></div>
+<div class="paranum"><a name="p19.b">19.b/5</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B><A HREF="AA-13-1-1.html">13.1.1</A> 
 allows omitting the aspect <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 for any aspect with type Boolean; we take advantage of that here.&nbsp;</div>
-<div class="paranum"><a name="p26">26/5</a></div>
+<div class="paranum"><a name="p20">20/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 The Nonblocking aspect may be specified for all entities for which it 
 is defined, except for protected operations and task entries. In particular, 
 Nonblocking may be specified for generic formal parameters.</div>
-<div class="paranum"><a name="p26.a">26.a/5</a></div>
+<div class="paranum"><a name="p20.a">20.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The Nonblocking aspect 
 cannot be specified for predefined operators or enumeration literals 
 but we don't need to mention that above. One would have to declare a 
 subprogram in order to specify the aspect in those cases, but that defines 
 a user-defined subprogram which is itself not a predefined operator or 
 an enumeration literal.&nbsp;</div>
-<div class="paranum"><a name="p27">27/5</a></div>
+<div class="paranum"><a name="p21">21/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-When the nonblocking expression is static for an entity, the expression 
-is evaluated to produce a static value for the aspect. When aspect Nonblocking 
-is statically False for an entity, the entity might contain a potentially 
-blocking operation; such an entity <I>allows blocking</I>. If the aspect 
-is statically True for an entity, the entity is said to be <I>nonblocking</I>.<A NAME="I4781"></A><A NAME="I4782"></A><A NAME="I4783"></A><A NAME="I4784"></A></div>
-<div class="paranum"><a name="p27.a">27.a/5</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>We have to allow the aspect 
-to be described as an expression inside of generic units, where the actual 
-value of the aspect in an instance could be determined by the aspect 
-of one or more actuals. Our intent is that the expression is always a 
-static expression outside of any generic unit, and that in such contexts 
-it is treated more like a static value than an expression.&nbsp;</div>
-<div class="paranum"><a name="p27.b">27.b/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+When aspect Nonblocking is False for an entity, the entity might contain 
+a potentially blocking operation; such an entity <I>allows blocking</I>. 
+If the aspect is True for an entity, the entity is said to be <I>nonblocking</I>.<A NAME="I4780"></A><A NAME="I4781"></A><A NAME="I4782"></A><A NAME="I4783"></A></div>
+<div class="paranum"><a name="p21.a">21.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Specifying Nonblocking 
 as False imposes no restrictions. Specifying Nonblocking as True imposes 
 additional compile-time checks to prevent blocking, but does not prevent 
 deadlock. A pragma Detect_Blocking can be used to ensure that Program_Error 
 is raised in a deadlock situation.&nbsp;</div>
-<div class="paranum"><a name="p28">28/5</a></div>
-<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-For a generic unit <I>G</I>, if the aspect Nonblocking is statically 
-true for <I>G</I> (by inheritance or specification), then the nonblocking 
-expression for <I>G</I> is the <B>and</B> of the nonblocking attribute 
-for each formal parameter of <I>G</I>.</div>
-<div class="paranum"><a name="p28.a">28.a/5</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>This means that an instance of 
-this generic will be nonblocking only if all of the formal parameters 
-are nonblocking (see below). This is the most usable definition. If one 
-wants a generic whose instantiations will always be nonblocking, Nonblocking 
-can be specified on the formal parameters.&nbsp;</div>
-<div class="paranum"><a name="p29">29/5</a></div>
+<div class="paranum"><a name="p22">22/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
 For a generic instantiation and entities declared within such an instance, 
-the aspect is determined by the nonblocking expression for the corresponding 
-entity of the generic unit, with any Nonblocking attributes of the generic 
-formal parameters replaced by the appropriate nonblocking expression 
-of the corresponding actual parameters. If the aspect is directly specified 
-for an instance, the specified expression shall be static and have the 
-same value as the nonblocking expression of the instance (after replacement).</div>
-<div class="paranum"><a name="p29.a">29.a/5</a></div>
+the aspect is determined by the Nonblocking aspect for the corresponding 
+entity of the generic unit, <B>and</B>ed with the Nonblocking aspects 
+of the actual generic parameters <I>used</I> by the entity. If the aspect 
+is directly specified for an instance, the specified expression shall 
+have the same value as the Nonblocking aspect of the instance (after 
+<B>and</B>ing with the aspects of the used actual parameters). In the 
+absence of a Use_Formal aspect, all actual generic parameters are presumed 
+to be <I>used</I> by an entity (see <A HREF="AA-H-7-1.html">H.7.1</A>).</div>
+<div class="paranum"><a name="p22.a">22.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We want to allow confirming aspects 
 for instances, but nothing else. The Legality Rules of the generic body 
 were checked assuming the nonblocking expression of the generic unit, 
 and if that is changed, the instance body might make calls that allow 
-blocking in subprograms that are nonblocking.&nbsp;</div>
-<div class="paranum"><a name="p29.b">29.b/5</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>If the nonblocking expression 
-of the instance is not static (if the instance is itself inside of a 
-generic unit), then the Nonblocking aspect cannot be specified for the 
-instance.&nbsp;</div>
-<div class="paranum"><a name="p30">30/5</a></div>
+blocking in subprograms that are declared nonblocking.&nbsp;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-For a (protected or task) entry, the Nonblocking aspect is the Boolean 
-literal False.</div>
-<div class="paranum"><a name="p30.a">30.a/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+For a (protected or task) entry, the Nonblocking aspect is False.</div>
+<div class="paranum"><a name="p23.a">23.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>An entry can be renamed as a 
 procedure, so the value of the aspect has to be well-defined (as the 
 attribute can be applied to a procedure). We do not want a nonblocking 
@@ -387,21 +339,22 @@ an entry to be able to override a nonblocking subprogram. We could have
 used individual rules for these cases, but there were already many of 
 them, and this solution avoids the need for extra rules for entries. 
 </div>
-<div class="paranum"><a name="p31">31/5</a></div>
+<div class="paranum"><a name="p24">24/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-For an enumeration literal, the Nonblocking aspect is the Boolean literal 
-True.</div>
-<div class="paranum"><a name="p31.a">31.a/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+For an enumeration literal, the Nonblocking aspect is True.</div>
+<div class="paranum"><a name="p24.a">24.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Enumeration literals can be renamed 
 as functions, and passed to generic formal functions, so we need to define 
 the value of the aspect to ensure the other rules are meaningful.&nbsp;</div>
-<div class="paranum"><a name="p32">32/5</a></div>
+<div class="paranum"><a name="p25">25/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
 For a predefined operator of an elementary type, the Nonblocking aspect 
-is the Boolean literal True. For a predefined operator of a composite 
-type, the Nonblocking aspect of the operator is the same as the Nonblocking 
-aspect for the type.</div>
-<div class="paranum"><a name="p32.a">32.a/5</a></div>
+is True. For a predefined operator of a composite type, the Nonblocking 
+aspect of the operator is the same as the Nonblocking aspect for the 
+type.</div>
+<div class="paranum"><a name="p25.a">25.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Predefined operators of elementary 
 types can never include any potentially blocking operations, so we want 
 them to declare that. Record equality can be composed of operations including 
@@ -410,195 +363,110 @@ equality might use some record equality. So we have to have the possibility
 of allowing blocking for them. We don't just copy the Nonblocking aspect 
 of the type in every case, as someone could declare an elementary type 
 to allow blocking.&nbsp;</div>
-<div class="paranum"><a name="p32.b">32.b/5</a></div>
+<div class="paranum"><a name="p25.b">25.b/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>It's not possible to specify 
 the nonblocking expression of a predefined operator; if an operator is 
 declared in order to do that, it is no longer predefined.&nbsp;</div>
-<div class="paranum"><a name="p33">33/5</a></div>
+<div class="paranum"><a name="p26">26/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 For a dereference of an access-to-subprogram type, the Nonblocking aspect 
 of the designated subprogram is that of the access-to-subprogram type.</div>
-<div class="paranum"><a name="p34">34/5</a></div>
-<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-For the base type of a scalar (sub)type, the Nonblocking aspect is the 
-Boolean literal True.</div>
-<div class="paranum"><a name="p34.a">34.a/5</a></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+For the base subtype of a scalar (sub)type, the Nonblocking aspect is 
+True.</div>
+<div class="paranum"><a name="p27.a">27.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The first subtype of a scalar 
 type can allow blocking (which can be useful so a predicate can allow 
-blocking), but the base type is always Nonblocking. We need this so the 
-Nonblocking value is well-defined for any subtype that is built from 
-the base type (T'Base). T'Base of any scalar type, including a generic 
+blocking), but the base subtype is always Nonblocking. We need this so 
+the Nonblocking value is well-defined for any subtype that is built from 
+the base subtype (T'Base). T'Base of any scalar type, including a generic 
 formal type, is always nonblocking.&nbsp;</div>
-<div class="paranum"><a name="p35">35/5</a></div>
+<div class="paranum"><a name="p28">28/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 For an inherited primitive dispatching subprogram that is null or abstract, 
 the subprogram is nonblocking if and only if a corresponding subprogram 
 of at least one ancestor is nonblocking. For any other inherited subprogram, 
 it is nonblocking if and only if the corresponding subprogram of the 
 parent is nonblocking.</div>
-<div class="paranum"><a name="p36">36/5</a></div>
+<div class="paranum"><a name="p29">29/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 Unless directly specified, overridings of dispatching operations inherit 
 this aspect.</div>
-<div class="paranum"><a name="p37">37/5</a></div>
+<div class="paranum"><a name="p30">30/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
 Unless directly specified, for a formal subtype, formal package, or formal 
 subprogram, the Nonblocking aspect is that of the actual subtype, package, 
 or subprogram.</div>
-<div class="paranum"><a name="p37.a">37.a/5</a></div>
+<div class="paranum"><a name="p30.a">30.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This means that Nonblocking legality 
 checking for the actual parameters of the instance is only necessary 
 when the aspect is explicitly specified for the formal type.&nbsp;</div>
-<div class="paranum"><a name="p38">38/5</a></div>
+<div class="paranum"><a name="p31">31/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-Unless directly specified, for a derived type, the Nonblocking aspect 
-is that of the parent type.</div>
-<div class="paranum"><a name="p38.a">38.a/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+Unless directly specified, for a non-first subtype <I>S</I>, the Nonblocking 
+aspect is that of the subtype identified in the subtype_indication defining 
+<I>S</I>; unless directly specified for the first subtype of a derived 
+type, the Nonblocking aspect is that of the ancestor subtype.</div>
+<div class="paranum"><a name="p31.a">31.a/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The expressions that can 
-be specified for a derived type are limited by a Legality Rule, see below. 
-</div>
-<div class="paranum"><a name="p39">39/5</a></div>
+be specified for a such a subtype are limited by a Legality Rule, see 
+below.&nbsp;</div>
+<div class="paranum"><a name="p32">32/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-Unless directly specified, for any other program unit, type, or formal 
-object, the Nonblocking aspect of the entity is determined by the Nonblocking 
-aspect for the innermost program unit enclosing the entity.</div>
-<div class="paranum"><a name="p40">40/5</a></div>
+Unless directly specified, for any other program unit, first  subtype, 
+or formal object, the Nonblocking aspect of the entity is determined 
+by the Nonblocking aspect for the innermost program unit enclosing the 
+entity.</div>
+<div class="paranum"><a name="p33">33/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-If not specified for a library unit, the nonblocking expression is the 
-Boolean literal True if the library unit is declared pure and is not 
-a generic unit, or the Boolean literal False otherwise.</div>
-<div class="paranum"><a name="p41">41/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-S that denotes a subprogram (including a formal subprogram), the following 
-attribute is defined:</div>
-<div class="paranum"><a name="p42">42/5</a></div>
-<div class="WideHanging-Term">S'Nonblocking</div><div class="WideHanging-Body">
-<A NAME="I4785"></A><A NAME="I4786"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-Denotes whether subprogram S is considered nonblocking; the type of this 
-attribute is the predefined type Boolean.</div>
-<div class="paranum"><a name="p43">43/5</a></div>
-<div class="WideHanging-Body">The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-S shall statically denote a subprogram.</div>
-<div class="paranum"><a name="p43.a">43.a/5</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>The evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-S will have no effect, which is necessary for S'Nonblocking to be static. 
-For the intended use in aspect specifications, we don't want any evaluation, 
-as it would happen at some freezing point.&nbsp;</div>
-<div class="paranum"><a name="p44">44/5</a></div>
-<div class="WideHanging-Body">S'Nonblocking represents the nonblocking 
-expression of S; evaluation of S'Nonblocking evaluates that expression. 
-</div>
-<div class="paranum"><a name="p45">45/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-P that denotes a package (including a formal package), the following 
-attribute is defined:</div>
-<div class="paranum"><a name="p46">46/5</a></div>
-<div class="WideHanging-Term">P'Nonblocking</div><div class="WideHanging-Body">
-<A NAME="I4787"></A><A NAME="I4788"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-Denotes whether package P is considered nonblocking; the type of this 
-attribute is the predefined type Boolean. P'Nonblocking represents the 
-nonblocking expression of P; evaluation of P'Nonblocking evaluates that 
-expression.&nbsp;</div>
-<div class="paranum"><a name="p47">47/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-S that denotes a subtype (including formal subtypes), the following attribute 
-is defined:</div>
-<div class="paranum"><a name="p48">48/5</a></div>
-<div class="WideHanging-Term">S'Nonblocking</div><div class="WideHanging-Body">
-<A NAME="I4789"></A><A NAME="I4790"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-Denotes whether default initialization, finalization, assignment, predefined 
-operators, and (in the case of access-to-subprogram subtypes) a subprogram 
-designated by a value of subtype S are considered nonblocking; the type 
-of this attribute is the predefined type Boolean. S'Nonblocking represents 
-the nonblocking expression of S; evaluation of S'Nonblocking evaluates 
-that expression.&nbsp;</div>
-<div class="paranum"><a name="p49">49/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
-For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-X that denotes an object, the following attribute is defined:</div>
-<div class="paranum"><a name="p50">50/5</a></div>
-<div class="WideHanging-Term">X'Nonblocking</div><div class="WideHanging-Body">
-<A NAME="I4791"></A><A NAME="I4792"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-Denotes whether the subtype of X is considered nonblocking; the type 
-of this attribute is the predefined type Boolean. X'Nonblocking represents 
-the nonblocking expression of X; evaluation of X'Nonblocking evaluates 
-that expression. X'Nonblocking represents the nonblocking expression 
-of X; evaluation of X'Nonblocking evaluates that expression.</div>
-<div class="paranum"><a name="p50.a">50.a/5</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B>In the case when the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-represents the Storage_Pool of some type, this is the specific type of 
-the associated pool object, if known.&nbsp;</div>
-<div class="paranum"><a name="p50.b">50.b/5</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>This attribute, combined with 
-rules found in <A HREF="AA-13-11.html">13.11</A>, allow Acc'Storage_Pool'Nonblocking 
-to describe whether the storage pool of an access type allows blocking. 
-</div>
-<div class="paranum"><a name="p51">51/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-X that denotes an object of a class-wide type T'Class, the following 
-attribute is defined:&nbsp;</div>
-<div class="paranum"><a name="p52">52/5</a></div>
-<div class="WideHanging-Term">X'Nonblocking(dispatching_operation_set)</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I4793"></A><A NAME="I4794"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-X'Nonblocking(<SPAN Class="swiss"><A HREF="AA-H-7.html#S0368">dispatching_operation_set</A></SPAN>) 
-represents the <B>and</B> of the Nonblocking aspect of the tagged type 
-<I>T1</I> identified by the tag of X, and the Nonblocking aspects of 
-the dispatching operations of <I>T1</I> corresponding to the specified 
-dispatching operations of T (or all dispatching operations of T if the 
-set is the reserved word <B>all</B>). If a <I>dispatching_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
-within the set denotes multiple dispatching operations of T, the Nonblocking 
-aspects of all of the corresponding dispatching operations of <I>T1</I> 
-are <B>and</B>ed together.&nbsp;</div>
-<div class="paranum"><a name="p53">53/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+If not specified for a library unit, the nonblocking expression is True 
+if the library unit is declared pure, or False otherwise.</div>
+<div class="paranum"><a name="p34">34/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0247-1.TXT">AI12-0247-1</A></I>} 
-The following are defined to be <I>potentially blocking</I> operations:<A NAME="I4795"></A> 
-<A NAME="I4796"></A></div>
-<div class="paranum"><a name="p53.a">53.a/5</a></div>
+The following are defined to be <I>potentially blocking</I> operations:<A NAME="I4784"></A> 
+<A NAME="I4785"></A></div>
+<div class="paranum"><a name="p34.a">34.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The primary purpose of these 
 rules is to define what operations are not allowed in a protected operation 
 (blocking is not allowed). Some of these operations are not directly 
 blocking. However, they are still treated as potentially blocking, because 
 allowing them in a protected action might impose an undesirable implementation 
 burden.&nbsp;</div>
-<div class="paranum"><a name="p54">54/5</a></div>
+<div class="paranum"><a name="p35">35/5</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0269">select_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p55">55/5</a></div>
+<div class="paranum"><a name="p36">36/5</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p56">56/5</a></div>
+<div class="paranum"><a name="p37">37/5</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">entry_call_statement</A></SPAN>, 
 or a call on a procedure that renames or is implemented by an entry;</div>
-<div class="paranum"><a name="p57">57/5</a></div>
+<div class="paranum"><a name="p38">38/5</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p58">58/5</a></div>
+<div class="paranum"><a name="p39">39/5</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-8.html#S0284">abort_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p59">59/5</a></div>
+<div class="paranum"><a name="p40">40/5</a></div>
 <div class="Bulleted">task creation or activation;</div>
-<div class="paranum"><a name="p60">60/5</a></div>
+<div class="paranum"><a name="p41">41/5</a></div>
 <div class="Bulleted">during a protected action, an external call on 
 a protected subprogram (or an external requeue) with the same target 
 object as that of the protected action.</div>
-<div class="paranum"><a name="p60.a">60.a/5</a></div>
+<div class="paranum"><a name="p41.a">41.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is really a deadlocking 
 call, rather than a blocking call, but we include it in this list for 
 simplicity.&nbsp;</div>
-<div class="paranum"><a name="p61">61/5</a></div>
+<div class="paranum"><a name="p42">42/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 If a language-defined subprogram allows blocking, then a call on the 
 subprogram is a potentially blocking operation.</div>
-<div class="paranum"><a name="p61.a">61.a/5</a></div>
+<div class="paranum"><a name="p42.a">42.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Calls on other subprograms 
 that allow blocking are not themselves potentially blocking; the execution 
 of the body could execute a potentially blocking operation.</div>
-<div class="paranum"><a name="p61.b">61.b/5</a></div>
+<div class="paranum"><a name="p42.b">42.b/5</a></div>
 <div class="Annotations">A user-defined instance of a language-defined 
 generic creates user-defined subprograms for the purpose of this rule. 
 A dispatching call to a language-defined abstract subprogram always calls 
@@ -606,47 +474,67 @@ a user-defined concrete subprogram, so that too is not potentially blocking
 for the purposes of this rule.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p62">62/5</a></div>
+<div class="paranum"><a name="p43">43/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
-A parallel construct or a nonblocking program unit shall not contain, 
-other than within nested units with Nonblocking specified as statically 
-False, a call on a callable entity for which the Nonblocking aspect is 
-statically False, nor shall it contain any of the following:</div>
-<div class="paranum"><a name="p63">63/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+A portion of program text is called a <I>nonblocking region</I><A NAME="I4786"></A> 
+if it is anywhere within a parallel construct, or if the innermost enclosing 
+program unit is nonblocking. A nonblocking region shall not contain any 
+of the following:</div>
+<div class="paranum"><a name="p44">44/5</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0269">select_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p64">64/5</a></div>
+<div class="paranum"><a name="p45">45/5</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p65">65/5</a></div>
+<div class="paranum"><a name="p46">46/5</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p66">66/5</a></div>
+<div class="paranum"><a name="p47">47/5</a></div>
 <div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-8.html#S0284">abort_statement</A></SPAN>;</div>
-<div class="paranum"><a name="p67">67/5</a></div>
+<div class="paranum"><a name="p48">48/5</a></div>
 <div class="Bulleted">task creation or activation.&nbsp;</div>
-<div class="paranum"><a name="p67.a">67.a/5</a></div>
+<div class="paranum"><a name="p49">49/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+Futhermore, a parallel construct shall neither contain a call on a callable 
+entity for which the Nonblocking aspect is False, nor shall it contain 
+a call on a callable entity declared within a generic unit that uses 
+a generic formal parameter with Nonblocking aspect False (see Use_Formal 
+aspect in <A HREF="AA-H-7-1.html">H.7.1</A>). Finally, a nonblocking 
+region that is outside of a parallel construct shall not contain a call 
+on a callable entity for which the Nonblocking aspect is False, unless 
+the region is within a generic unit and the callable entity is associated 
+with a generic formal parameter of the generic unit, or the call is within 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
+of an assertion aspect for an entity that allows blocking.</div>
+<div class="paranum"><a name="p49.a">49.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+A generic unit or entity declared within one is presumed to use its &quot;used&quot; 
+generic formal parameters at least once each time it is invoked, and 
+this passes through to the parallel construct check.&nbsp;</div>
+<div class="paranum"><a name="p49.b">49.b/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Implicit calls for finalization, 
 storage pools, and the like are covered by the above prohibition. The 
 rules above say &ldquo;a call&rdquo;, not &ldquo;an explicit call&rdquo;. 
 Such calls are considered statically bound when that is possible, that 
 is, when the controlling object has a known specific type (even if the 
 actual implementation uses dispatching).&nbsp;</div>
-<div class="paranum"><a name="p67.b">67.b/5</a></div>
+<div class="paranum"><a name="p49.c">49.c/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We don't need to worry specially 
 about entry calls (even if the entry has been renamed as a procedure), 
 as they will be detected by the prohibition against calls to entities 
 with the Nonblocking aspect False.</div>
-<div class="paranum"><a name="p67.c">67.c/5</a></div>
+<div class="paranum"><a name="p49.d">49.d/5</a></div>
 <div class="Annotations">Similarly, we don't need to specially worry 
 about subprograms of limited interfaces that are implemented by entries, 
 as any such subprogram necessarily has the value statically False for 
 the Nonblocking aspect, and thus is already covered by the prohibition 
 against calling such subprograms.&nbsp;</div>
-<div class="paranum"><a name="p68">68/5</a></div>
+<div class="paranum"><a name="p50">50/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-For the purposes of the above rule, an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0260">entry_body</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+For the purposes of the above rules, an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0260">entry_body</A></SPAN> 
 is considered nonblocking if the immediately enclosing protected unit 
 is nonblocking.</div>
-<div class="paranum"><a name="p68.a">68.a/5</a></div>
+<div class="paranum"><a name="p50.a">50.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>An entry always allows blocking 
 (by rule); but we want to be able to compile-time check for most violations 
 of prohibition against potentially blocking operations in a protected 
@@ -654,23 +542,23 @@ action (see <A HREF="AA-9-5-1.html">9.5.1</A>). We do that by using the
 nonblocking status of the protected unit as the controlling factor, and 
 enforce that by not allowing the specification of the Nonblocking aspect 
 for any protected operation.&nbsp;</div>
-<div class="paranum"><a name="p69">69/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
+<div class="paranum"><a name="p51">51/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
 For a subtype for which aspect Nonblocking is True, any predicate expression 
 that applies to the subtype shall only contain constructs that are allowed 
 immediately within a nonblocking program unit.</div>
-<div class="paranum"><a name="p70">70/5</a></div>
+<div class="paranum"><a name="p52">52/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 A subprogram shall be nonblocking if it overrides a nonblocking dispatching 
 operation. An entry shall not implement a nonblocking procedure. If an 
 inherited dispatching subprogram allows blocking, then the corresponding 
 subprogram of each ancestor shall allow blocking.</div>
-<div class="paranum"><a name="p70.a">70.a/5</a></div>
+<div class="paranum"><a name="p52.a">52.a/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Rules elsewhere in the standard 
 (<A HREF="AA-4-6.html">4.6</A> and <A HREF="AA-3-10-2.html">3.10.2</A>) 
 ensure that access-to-subprogram conversion and the Access attribute 
 enforce nonblocking.&nbsp;</div>
-<div class="paranum"><a name="p70.b">70.b/5</a></div>
+<div class="paranum"><a name="p52.b">52.b/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A nonblocking subprogram 
 can override one that allows blocking, but the reverse is illegal. Thus 
 one can declare a Finalize subprogram to be nonblocking, even though 
@@ -678,233 +566,132 @@ it overrides a routine that allows blocking. (This works because a nonblocking
 subprogram allows a strict subset of the operations allowed in allows 
 blocking subprograms, so calling such a subprogram as if it allows blocking 
 &mdash; as is necessary in a dispatching call &mdash; is harmless.)&nbsp;</div>
-<div class="paranum"><a name="p71">71/5</a></div>
+<div class="paranum"><a name="p53">53/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-It is illegal to specify aspect Nonblocking for the full view of a type 
-that has a partial view.</div>
-<div class="paranum"><a name="p71.a">71.a/5</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>The aspect should be specified 
-on the partial view for such a type. This is necessary to prevent the 
-predefined equality operator from being nonblocking in the partial view 
-and allowing blocking in the full view.&nbsp;</div>
-<div class="paranum"><a name="p72">72/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+AIt is illegal to specify aspect Nonblocking for the first subtype of 
+the full view of a type that has a partial or incomplete view.</div>
+<div class="paranum"><a name="p53.a">53.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We need completions to agree 
+on nonblocking with the original view. One reason this is necessary to 
+prevent the predefined equality operator from being nonblocking in the 
+partial view and allowing blocking in the full view.&nbsp;</div>
+<div class="paranum"><a name="p54">54/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-Aspect Nonblocking shall be specified for the first subtype of a derived 
-type only if it fully conforms to the nonblocking expression of the ancestor 
-subtype or if it is specified to have the Boolean literal True. Aspect 
-Nonblocking shall be specified for a nonfirst subtype <I>S</I> only if 
-it fully conforms to the nonblocking expression of the subtype identified 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+Aspect Nonblocking shall be directly specified for the first subtype 
+of a derived type only if it has the same value as the Nonblocking aspect 
+of the ancestor subtype or if it is specified True. Aspect Nonblocking 
+shall be directly specified for a nonfirst subtype <I>S</I> only if it 
+has the same value as the Nonblocking aspect of the subtype identified 
 in the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-defining <I>S</I> or if it is specified to have the Boolean literal True. 
-Aspect Nonblocking shall be specified for a first subtype <I>S</I> that 
-completes an incomplete or partial view <I>P</I> only if it fully conforms 
-to the nonblocking expression of the subtype <I>P</I> or if it is specified 
-to have the Boolean literal True.</div>
-<div class="paranum"><a name="p72.a">72.a/5</a></div>
+defining <I>S</I> or if it is specified True.</div>
+<div class="paranum"><a name="p54.a">54.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Boolean-valued aspects have a 
 similar rule to the first rule here (see <A HREF="AA-13-1-1.html">13.1.1</A>), 
-we want this one to work similarly. For the other rules, we need non-first 
-subtypes and completions to allow blocking only if the original first 
-subtype allows blocking, as that allows the programmer to know that any 
-operation on any subtype of a type are nonblocking if the first subtype 
-is nonblocking.&nbsp;</div>
-<div class="paranum"><a name="p73">73/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-If aspect Nonblocking is specified for an entity that is not a generic 
-unit or declared inside of a generic unit, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
-shall be a static expression.</div>
-<div class="paranum"><a name="p74">74/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-If the prefix of a Nonblocking <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
-denotes a generic unit <I>G</I>, the reference shall occur within the 
-declarative region of <I>G</I>.</div>
-<div class="paranum"><a name="p74.a">74.a/5</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>We want the value of Nonblocking 
-attributes to be static so long as they occur outside of any generic 
-unit. The Nonblocking aspect of a generic unit will often depend on the 
-actual parameters of the unit, so it cannot be static (or have any well-defined 
-value). We need this latter rule in case the attribute of a generic is 
-used outside of the generic. Note that the previous rule makes it illegal 
-to use such an attribute to specify aspect Nonblocking outside of a generic, 
-but we don't want to allow any other uses since it does not have a known 
-value until instantiated.&nbsp;</div>
-<div class="paranum"><a name="p74.b">74.b/5</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>This rule does not apply 
-to instances of generic units and entities declared within them.&nbsp;</div>
-<div class="paranum"><a name="p75">75/5</a></div>
+we want this one to work similarly. We need non-first subtypes to allow 
+blocking only if the original first subtype allows blocking, as that 
+allows the programmer to know that any operation on any subtype of a 
+type are nonblocking if the first subtype is nonblocking.&nbsp;</div>
+<div class="paranum"><a name="p55">55/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
 For a composite type that is nonblocking:</div>
-<div class="paranum"><a name="p76">76/5</a></div>
+<div class="paranum"><a name="p56">56/5</a></div>
 <div class="Bulleted">All component subtypes shall be nonblocking;</div>
-<div class="paranum"><a name="p77">77/5</a></div>
+<div class="paranum"><a name="p57">57/5</a></div>
 <div class="Bulleted">For a record type or extension, every call in the 
 <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
 of a component (including discriminants) shall call an operation that 
 is nonblocking;</div>
-<div class="paranum"><a name="p78">78/5</a></div>
+<div class="paranum"><a name="p58">58/5</a></div>
 <div class="Bulleted">For a controlled type, the Initialize, Finalize, 
 and Adjust (if any) subprograms shall be nonblocking.</div>
-<div class="paranum"><a name="p78.a">78.a/5</a></div>
+<div class="paranum"><a name="p58.a">58.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>These rules ensure that if a 
 type is nonblocking, the default initialization, finalization, and assignment 
 of the type are also nonblocking. This allows the use of the nonblocking 
 attribute of a generic formal type to describe whether these operations 
 of the type allow blocking.</div>
-<div class="paranum"><a name="p78.b">78.b/5</a></div>
+<div class="paranum"><a name="p58.b">58.b/5</a></div>
 <div class="Annotations">Default initialization, finalization, and assignment 
 of elementary types are always nonblocking, so we don't need any rules 
 for those.&nbsp;</div>
-<div class="paranum"><a name="p79">79/5</a></div>
+<div class="paranum"><a name="p59">59/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-The predefined equality operator for a composite type is illegal if it 
-is nonblocking and, for a record type, it is not overridden by a primitive 
-equality operator, and:</div>
-<div class="paranum"><a name="p80">80/5</a></div>
-<div class="Bulleted">for a record type, the parent primitive &quot;=&quot; 
-allows blocking; or</div>
-<div class="paranum"><a name="p81">81/5</a></div>
-<div class="Bulleted">any component that has a record type that has a 
-primitive &quot;=&quot; that allows blocking; or</div>
-<div class="paranum"><a name="p82">82/5</a></div>
-<div class="Bulleted">any component that has a non-record type that has 
-a predefined &quot;=&quot; that allows blocking.&nbsp;</div>
-<div class="paranum"><a name="p82.a">82.a/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+The predefined equality operator for a composite type, unless it is for 
+a record type or record extension and the operator is overridden by a 
+primitive equality operator, is illegal if it is nonblocking and:</div>
+<div class="paranum"><a name="p60">60/5</a></div>
+<div class="Bulleted">for a record type or record extension, the parent 
+primitive &quot;=&quot; allows blocking; or</div>
+<div class="paranum"><a name="p61">61/5</a></div>
+<div class="Bulleted">some component is of a record type or record extension 
+that has a primitive &quot;=&quot; that allows blocking; or</div>
+<div class="paranum"><a name="p62">62/5</a></div>
+<div class="Bulleted">some component is of a type, other than a record 
+type or a record extension, that has a predefined &quot;=&quot; that 
+allows blocking.&nbsp;</div>
+<div class="paranum"><a name="p62.a">62.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This applies to both record 
 and array &quot;=&quot;.</div>
-<div class="paranum"><a name="p82.b">82.b/5</a></div>
+<div class="paranum"><a name="p62.b">62.b/5</a></div>
 <div class="Annotations">This check occurs when the equality operator 
 is declared, so this rule effectively makes the type illegal if the rule 
 is violated.&nbsp;</div>
-<div class="paranum"><a name="p82.c">82.c/5</a></div>
+<div class="paranum"><a name="p62.c">62.c/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We don't need to check this when 
 the operator is overridden for a record type, as the body of the new 
 definition of equality will enforce the rules, and there is no case where 
 the predefined operator will re-emerge. We do have to check this for 
 array types even if the operator is overridden, as the predefined operator 
 will re-emerge in generics and record equality.&nbsp;</div>
-<div class="paranum"><a name="p83">83/5</a></div>
+<div class="paranum"><a name="p63">63/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-In a generic instantiation (after replacement in the nonblocking expressions 
-by values of the actuals as described previously):</div>
-<div class="paranum"><a name="p84">84/5</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+In a generic instantiation:</div>
+<div class="paranum"><a name="p64">64/5</a></div>
 <div class="Bulleted">the actual subprogram corresponding to a nonblocking 
 formal subprogram shall be nonblocking [(an actual that is an entry is 
 not permitted in this case)];</div>
-<div class="paranum"><a name="p85">85/5</a></div>
-<div class="Bulleted">the actual type corresponding to a nonblocking 
-formal private, derived, array, or access-to-subprogram type shall be 
-nonblocking;</div>
-<div class="paranum"><a name="p85.a">85.a/5</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>We do not require matching 
-for formal scalar or access-to-object types, as their predefined operators 
-are always nonblocking (and they re-emerge in the generic unit) &mdash; 
-the nonblocking status of the type has no impact.&nbsp;</div>
-<div class="paranum"><a name="p86">86/5</a></div>
+<div class="paranum"><a name="p65">65/5</a></div>
+<div class="Bulleted">the actual subtype corresponding to a nonblocking 
+formal subtype shall be nonblocking;</div>
+<div class="paranum"><a name="p65.a">65.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>We require matching for 
+formal scalar or access-to-object types, even though their predefined 
+operators are always nonblocking (and they re-emerge in the generic unit) 
+- because a &quot;blocking&quot; predicate might apply to the actual 
+subtype, which will also be enforced on operations on the formal type. 
+</div>
+<div class="paranum"><a name="p66">66/5</a></div>
 <div class="Bulleted">the actual object corresponding to a formal object 
 of a nonblocking access-to-subprogram type shall be of a nonblocking 
 access-to-subprogram type;</div>
-<div class="paranum"><a name="p87">87/5</a></div>
+<div class="paranum"><a name="p67">67/5</a></div>
 <div class="Bulleted">the actual instance corresponding to a nonblocking 
 formal package shall be nonblocking.</div>
-<div class="paranum"><a name="p88">88/5</a></div>
+<div class="paranum"><a name="p68">68/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-<A NAME="I4797"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4787"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), the above rules also apply 
 in the private part of an instance of a generic unit.</div>
-<div class="paranum"><a name="p88.a">88.a/5</a></div>
+<div class="paranum"><a name="p68.a">68.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For a generic formal parameter 
 to be nonblocking (thus, for these rules to apply), it has to explicitly 
-specify aspect Nonblocking to be True. In particular, these rules do 
-not apply when it specifies aspect Nonblocking to be an expression involving 
-attribute Nonblocking of a generic formal parameter. However, in such 
-a case, these rules do apply in the instance of the specification of 
-the generic unit (the normal re-checking is needed). For instance, the 
-body of an expression function might make a prohibited call.&nbsp;</div>
-<div class="paranum"><a name="p89">89/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-A program unit <I>P</I> declared inside of a generic unit but not in 
-a generic body or that is a generic specification not declared in a generic 
-unit is considered nonblocking for the purposes of checking the restrictions 
-on a nonblocking unit only if the value of its Nonblocking aspect is 
-statically True. For the purposes of checks in <I>P</I>, a call to a 
-subprogram is considered nonblocking unless the value of its Nonblocking 
-aspect is statically False.</div>
-<div class="paranum"><a name="p89.a">89.a/5</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>This is a typical &ldquo;assume-the-best&rdquo; 
-rule. We only make checks if we know the nonblocking status of both <I>P</I> 
-and the called subprogram. All other checks will be performed when the 
-generic unit is instantiated. We used the awkward &ldquo;inside of a 
-generic unit but not in a generic body&rdquo; so that a generic specification 
-declared inside of a generic body uses the following &ldquo;assume-the-worst&rdquo; 
-rule.&nbsp;</div>
-<div class="paranum"><a name="p90">90/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-A program unit <I>P</I> declared inside of a generic body or that is 
-a generic body is considered nonblocking for the purposes of checking 
-the restrictions on a nonblocking unit unless the value of its Nonblocking 
-aspect is statically False. For the purposes of checks in <I>P</I>, a 
-call to a subprogram is considered to allow blocking unless:</div>
-<div class="paranum"><a name="p91">91/5</a></div>
-<div class="Bulleted">the value of its Nonblocking aspect is statically 
-True, or</div>
-<div class="paranum"><a name="p92">92/5</a></div>
-<div class="Bulleted">its nonblocking expression (that is, Nonblocking 
-aspect) conforms exactly to that of <I>P</I>, or conforms to some part 
-of the nonblocking expression of <I>P</I> that is combined with the remainder 
-of the nonblocking expression of <I>P</I> by one or more <B>and</B> or 
-<B>and then</B> operations.&nbsp;</div>
-<div class="paranum"><a name="p92.a">92.a/5</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>That is, if the aspect 
-of the program unit is specified (directly or via inheritance) with any 
-non-static Nonblocking aspects, it is considered to be a nonblocking 
-program unit for the purposes of making checks. This is a typical &ldquo;assume-the-worst&rdquo; 
-rule.&nbsp;</div>
-<div class="paranum"><a name="p92.b">92.b/5</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>The second part allows calls 
-on subprograms with Nonblocking aspects of Formal'Nonblocking, so long 
-as the Nonblocking aspect of <I>P</I> is some formula that contains Formal'Nonblocking 
-combined with <B>and</B>. This ensures that P will always allow blocking 
-if the actual for Formal turns out to allow blocking.</div>
-<div class="paranum"><a name="p92.c">92.c/5</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em">Without this rule, 
-we'd allow calls on formals in any body subprogram, even if the subprogram 
-did not include the formal in its Nonblocking aspect. For instance:</div>
-<div class="paranum"><a name="p92.d">92.d/5</a></div>
-<div class="SmallExamples"><B>procedure</B>&nbsp;Blah&nbsp;<B>with</B>&nbsp;Formal1'Blocking&nbsp;<B>is</B><BR>
-<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;Formal2;<BR>
-<B>end</B>&nbsp;Blah;</div>
-<div class="paranum"><a name="p92.e">92.e/5</a></div>
-<div class="Annotations">If Formal1 is nonblocking and Formal2 allows 
-blocking, then we'd have a nonblocking routine calling a routine that 
-might block. That has to be prevented as this is &ldquo;assume-the-worst&rdquo; 
-checking.&nbsp;</div>
-<div class="paranum"><a name="p92.f">92.f/5</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
-For checking in <I>P</I>, default initialization, finalization, assignment, 
-or conversion to a formal subtype <I>F</I> is considered to call subprograms 
-that have the nonblocking aspect of <I>F</I>'Nonblocking, and this is 
-checked for conformance against that of <I>P</I> as described above. 
-Note that the nonblocking aspect includes the evaluation of any predicate 
-for the subtype.</div>
-<div class="paranum"><a name="p92.g">92.g/5</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
-Similarly, for checking in <I>P</I>, the implicit calls associated with 
-an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
-of an access type <I>A</I> or a use of attribute <I>A</I>'Storage_Size 
-are considered to call subprograms that have the nonblocking aspect of 
-<I>A</I>'Storage_Pool'Nonblocking, and this is checked for conformance 
-against that of <I>P</I> as described above.&nbsp;</div>
+specify aspect Nonblocking to be True. However, if not specified True, 
+these rules do apply in the instance of the specification of the generic 
+unit (the normal re-checking is needed). For instance, the body of an 
+expression function might make a prohibited call.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p93">93/3</a></div>
+<div class="paranum"><a name="p69">69/3</a></div>
 <div class="Notes">18&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
 The <SPAN Class="swiss"><A HREF="AA-9-5.html#S0256">synchronization_kind</A></SPAN> 
 By_Protected_Procedure implies that the operation will not block.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
-<div class="paranum"><a name="p93.a">93.a/2</a></div>
+<div class="paranum"><a name="p69.a">69.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 Added a Legality Rule to make it crystal-clear that the protected object 
 of an entry or procedure call must be a variable. This rule was implied 
@@ -914,15 +701,15 @@ have gotten this wrong, this is not an incompatibility &mdash; allowing
 updates of protected constants has always been wrong.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
-<div class="paranum"><a name="p93.b">93.b/3</a></div>
+<div class="paranum"><a name="p69.b">69.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
-<A NAME="I4798"></A>Added the Synchronization aspect to allow specifying 
+<A NAME="I4788"></A>Added the Synchronization aspect to allow specifying 
 that an interface procedure is really an entry or a protected procedure. 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
-<div class="paranum"><a name="p93.c">93.c/3</a></div>
+<div class="paranum"><a name="p69.c">69.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0225-1.TXT">AI05-0225-1</A></I>} 
 <B>Correction:</B> Clarified that the target object of any name denoted 
 a protected procedure or entry can never be a constant (other than for 
@@ -930,9 +717,9 @@ the 'Count attribute). This closes holes involving calls to access-to-protected,
 renaming as a procedure, and generic formal subprograms.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
-<div class="paranum"><a name="p93.d">93.d/5</a></div>
+<div class="paranum"><a name="p69.d">69.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-<A NAME="I4799"></A>Calls on procedures that rename an entry or are implemented 
+<A NAME="I4789"></A>Calls on procedures that rename an entry or are implemented 
 by an entry are now defined to be potentially blocking. This means that 
 such a call now might raise Program_Error. However, it never made sense 
 for some entry calls to be excluded from being potentially blocking, 
@@ -942,20 +729,20 @@ the behavior of any implementation, and thus no program will change.
 </div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
-<div class="paranum"><a name="p93.e">93.e/5</a></div>
+<div class="paranum"><a name="p69.e">69.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0166-1.TXT">AI12-0166-1</A></I>} 
-<A NAME="I4800"></A><B>Correction:</B> Internal protected calls are now 
+<A NAME="I4790"></A><B>Correction:</B> Internal protected calls are now 
 prohibited in preconditions and default expressions of protected operations. 
 These were allowed in Ada 2012, but as they cause race conditions and 
 as most existing Ada 95 compilers crash when given such a default parameter, 
 we expect such code to be extremely rare.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p93.f">93.f/5</a></div>
+<div class="paranum"><a name="p69.f">69.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0319-1.TXT">AI12-0319-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-1.TXT">AI12-0374-1</A></I>} 
-<A NAME="I4801"></A>Aspect Nonblocking is new; it allows compile-time 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0374-2.TXT">AI12-0374-2</A></I>} 
+<A NAME="I4791"></A>Aspect Nonblocking is new; it allows compile-time 
 checks to prevent using potentially blocking operations in contexts where 
 that is not allowed.&nbsp;</div>
 

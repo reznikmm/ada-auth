@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,7 +43,7 @@
 <div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 specifies the storage representation of records and record extensions, 
 that is, the order, position, and size of components (including discriminants, 
-if any). <A NAME="I6086"></A>]</div>
+if any). <A NAME="I6082"></A>]</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a/2</a></div>
@@ -57,20 +57,20 @@ uniformity, negative offsets should be disallowed in <SPAN Class="swiss"><A HREF
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0213-1.TXT">AI12-0213-1</A></I>} 
-<SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I6087"></A><A NAME="S0352"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I6088"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>use</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I6089"></A><SPAN Class="swiss"><A HREF="AA-J-8.html#S0372">mod_clause</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I6090"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B><span class="insert5">&nbsp;[<A NAME="I6091"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I6083"></A><A NAME="S0352"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I6084"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>use</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I6085"></A><SPAN Class="swiss"><A HREF="AA-J-8.html#S0369">mod_clause</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I6086"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0353">component_clause</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B><span class="insert5">&nbsp;[<A NAME="I6087"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I6092"></A><A NAME="S0353"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I6093"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I6094"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0354">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I6095"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0355">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I6096"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0356">last_bit</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I6088"></A><A NAME="S0353"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I6089"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I6090"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0354">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I6091"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0355">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I6092"></A><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0356">last_bit</A></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I6097"></A><A NAME="S0354"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I6098"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I6093"></A><A NAME="S0354"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I6094"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I6099"></A><A NAME="S0355"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I6100"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I6095"></A><A NAME="S0355"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I6096"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I6101"></A><A NAME="S0356"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I6102"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I6097"></A><A NAME="S0356"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I6098"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0138">simple_expression</A></SPAN></div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B><SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0355">First_bit</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0356">last_bit</A></SPAN> 
@@ -88,7 +88,7 @@ it shall repeat the <I>first_subtype_</I><SPAN Class="swiss"><A HREF="AA-13-1.ht
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I6103"></A><A NAME="I6104"></A><A NAME="I6105"></A><A NAME="I6106"></A>Each 
+<div class="Normal"><A NAME="I6099"></A><A NAME="I6100"></A><A NAME="I6101"></A><A NAME="I6102"></A>Each 
 <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0354">position</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0355">first_bit</A></SPAN>, 
 and <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0356">last_bit</A></SPAN> 
@@ -188,7 +188,7 @@ the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_cla
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
-(without the <SPAN Class="swiss"><A HREF="AA-J-8.html#S0372">mod_clause</A></SPAN>) 
+(without the <SPAN Class="swiss"><A HREF="AA-J-8.html#S0369">mod_clause</A></SPAN>) 
 specifies the layout.</div>
 <div class="paranum"><a name="p13.a">13.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Layout (record): 
@@ -265,7 +265,7 @@ for example. The visibility rules for such names are up to the implementation.</
 identifiers &mdash; that would constitute blanket permission to do all 
 kinds of evil things.&nbsp;</div>
 <div class="paranum"><a name="p15.d">15.d</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I6107"></A>Such 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I6103"></A>Such 
 implementation-defined components are known in the vernacular as &ldquo;dope.&rdquo; 
 Their main purpose is for storing offsets of components that depend on 
 discriminants.&nbsp;</div>
@@ -282,7 +282,7 @@ the whole record may need to be laid out differently.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6108"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6104"></A>The 
 recommended level of support for <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>s 
 is:&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/2</a></div>
@@ -420,7 +420,7 @@ type will have addresses divisible by eight.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p31.a">31.a</a></div>
 <div class="Annotations">The <SPAN Class="swiss">alignment_clause</SPAN> 
-has been renamed to <SPAN Class="swiss"><A HREF="AA-J-8.html#S0372">mod_clause</A></SPAN> 
+has been renamed to <SPAN Class="swiss"><A HREF="AA-J-8.html#S0369">mod_clause</A></SPAN> 
 and moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
 Features</A>&rdquo;.</div>
 <div class="paranum"><a name="p31.b">31.b</a></div>
@@ -436,7 +436,7 @@ components in nonvariant records to overlap. We have corrected that oversight.
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p31.d">31.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
-<A NAME="I6109"></A><B>Amendment Correction:</B> The meaning of a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
+<A NAME="I6105"></A><B>Amendment Correction:</B> The meaning of a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN> 
 for the nondefault bit order is now clearly defined. Thus, such clauses 
 can be portably written. In order to do that though, the equivalence 
 of bit 1 in word 1 to bit 9 in word 0 (for a machine with Storage_Unit 
@@ -448,7 +448,7 @@ that compilers were supporting that anyway).&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p31.e">31.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00436.TXT">AI95-00436-01</A></I>} 
-<A NAME="I6110"></A><B>Amendment Correction:</B> The undocumented (and 
+<A NAME="I6106"></A><B>Amendment Correction:</B> The undocumented (and 
 likely unintentional) incompatibility with Ada 83 caused by not allowing 
 <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>s 
 on limited record types is removed.&nbsp;</div>
@@ -456,7 +456,7 @@ on limited record types is removed.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p31.f">31.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0213-1.TXT">AI12-0213-1</A></I>} 
-<span class="insert5"><A NAME="I6111"></A>The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN> 
+<span class="insert5"><A NAME="I6107"></A>The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN> 
 following <B>end record</B> is new.</span>&nbsp;</div>
 
 <HR>

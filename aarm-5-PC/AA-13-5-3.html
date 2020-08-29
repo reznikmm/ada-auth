@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -56,25 +56,25 @@ can be used to force all implementations to use the same bit ordering.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I6122"></A>A bit ordering is a method of 
-interpreting the meaning of the storage place attributes. <A NAME="I6123"></A><A NAME="I6124"></A><A NAME="I6125"></A>High_Order_First 
+<div class="Normal"><A NAME="I6118"></A>A bit ordering is a method of 
+interpreting the meaning of the storage place attributes. <A NAME="I6119"></A><A NAME="I6120"></A><A NAME="I6121"></A>High_Order_First 
 [(known in the vernacular as &ldquo;big endian&rdquo;)] means that the 
 first bit of a storage element (bit 0) is the most significant bit (interpreting 
 the sequence of bits that represent a component as an unsigned integer 
-value). <A NAME="I6126"></A><A NAME="I6127"></A><A NAME="I6128"></A>Low_Order_First 
+value). <A NAME="I6122"></A><A NAME="I6123"></A><A NAME="I6124"></A>Low_Order_First 
 [(known in the vernacular as &ldquo;little endian&rdquo;)] means the 
 opposite: the first bit is the least significant.</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0373-1.TXT">AI12-0373-1</A></I>} 
-For every specific record subtype S, the following <span class="insert5">representation<A NAME="I6129"></A> 
+For every specific record subtype S, the following <span class="insert5">representation<A NAME="I6125"></A> 
 </span>attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">S'Bit_Order</div><div class="WideHanging-Body">
-<A NAME="I6130"></A><A NAME="I6131"></A>Denotes the bit ordering for 
+<A NAME="I6126"></A><A NAME="I6127"></A>Denotes the bit ordering for 
 the type of S. The value of this attribute is of type System.Bit_Order. 
-<A NAME="I6132"></A><A NAME="I6133"></A>Bit_Order may be specified for 
+<A NAME="I6128"></A><A NAME="I6129"></A>Bit_Order may be specified for 
 specific record types via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0349">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static.<A NAME="I6134"></A><A NAME="I6135"></A></div>
+the expression of such a clause shall be static.<A NAME="I6130"></A><A NAME="I6131"></A></div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Bit_Order: 
 </B>Order of bit numbering in a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>.</div>
@@ -82,7 +82,7 @@ the expression of such a clause shall be static.<A NAME="I6134"></A><A NAME="I61
 <div class="Normal">If Word_Size = Storage_Unit, the default bit ordering 
 is implementation defined. If Word_Size &gt; Storage_Unit, the default 
 bit ordering is the same as the ordering of storage elements in a word, 
-when interpreted as an integer. <A NAME="I6136"></A></div>
+when interpreted as an integer. <A NAME="I6132"></A></div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>If Word_Size 
 = Storage_Unit, the default bit ordering.</div>
@@ -109,7 +109,7 @@ obey the bit ordering given in a representation item.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6137"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6133"></A>The 
 recommended level of support for the nondefault bit ordering is:&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
@@ -138,7 +138,7 @@ do not guarantee transparent exchange of data between such machines.
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p9.a">9.a</a></div>
-<div class="Annotations"><A NAME="I6138"></A>The Bit_Order attribute 
+<div class="Annotations"><A NAME="I6134"></A>The Bit_Order attribute 
 is new to Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>

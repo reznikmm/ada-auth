@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,8 +36,8 @@
 <H2>(normative)</H2>
 <H1>Predefined Language Environment</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">[<A NAME="I6523"></A> 
-<A NAME="I6524"></A>This Annex contains the specifications of library 
+<div class="Normal" style="margin-bottom: 0.4em">[<A NAME="I6519"></A> 
+<A NAME="I6520"></A>This Annex contains the specifications of library 
 units that shall be provided by every implementation. There are three 
 root library units: Ada, Interfaces, and System; other library units 
 are children of these:]</div>
@@ -340,7 +340,7 @@ to place library units whose use is highly nonportable under System.
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0114-1.TXT">AI12-0114-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0200-1.TXT">AI12-0200-1</A></I>} 
 The implementation shall ensure that<span class="delete5">&nbsp;each language-defined 
-subprogram is reentrant<A NAME="I6525"></A> in the sense that</span> 
+subprogram is reentrant<A NAME="I6521"></A> in the sense that</span> 
 concurrent calls on any<span class="insert5">&nbsp;two (possibly the same)</span> 
 language-defined <span class="insert5">subprograms</span><span class="delete5">&nbsp;subprogram</span> 
 perform as specified, so long as all <span class="insert5">pairs of&nbsp;</span>objects 
@@ -415,72 +415,47 @@ may say, &ldquo;you cannot compile a library unit called System&rdquo;
 or &ldquo;you cannot compile a child of package System&rdquo; or &ldquo;if 
 you compile a library unit called System, it has to be a package, and 
 it has to contain at least the following declarations: ...&rdquo;.&nbsp;</div>
-<div class="paranum"><a name="p5">5/5</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert5">The implementation may add specifications of synchronized 
-entities of implementation-defined packages to the global specification 
-(see  <A HREF="AA-6-1-2.html">6.1.2</A>) for any language-defined entity 
-that is not declared pure or has a global specification of <B>null</B>.</span></div>
-<div class="paranum"><a name="p5.a">5.a/5</a></div>
-<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>Ada runtime 
-libraries often use implementation-defined helper packages to implement 
-the language-defined units. For instance, it is common to use a common 
-low-level package to implement I/O; if that package includes support 
-for Current Input and Current Output, then it is likely to have state 
-that needs to be reflected in the packages that use it such as Ada.Text_IO.</span></div>
-<div class="paranum"><a name="p5.b">5.b/5</a></div>
-<div class="Annotations"><span class="insert5">We want to allow such 
-packages, so we have defined this permission to allow them to include 
-state if necessary. We require that any such state is synchronized to 
-ensure that appropriate use (as defined above) is allowed in parallel 
-operations.</span></div>
-<div class="paranum"><a name="p5.c">5.c/5</a></div>
-<div class="Annotations"><span class="insert5">We exclude units that 
-are declared pure from this permission since this is a declaration that 
-the unit doesn't have any global state, so specifying otherwise would 
-defeat the purpose. Similarly, entities that explicitly specify Global 
-as <B>null</B> are supposed to have no side-effects, and we don't want 
-implementations to add any.</span>&nbsp;</div>
-<div class="paranum"><a name="p5.d">5.d/5</a></div>
-<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>Implementations 
-are of course allowed to make other changes to the specifications of 
-language-defined units, so long as those changes are semantically neutral 
-(that is, no program could change legality or effect because of the changes). 
-In particular, an implementation would need to add implementation-defined 
-units to the context clause in order to use the previous permission; 
-this is allowed and does not need a separate permission.</span></div>
-<div class="paranum"><a name="p5.e">5.e/5</a></div>
+<div class="paranum"><a name="p4.b">4.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">Implementations are of course allowed to make changes 
+to the specifications of language-defined units, so long as those changes 
+are semantically neutral (that is, no program could change legality or 
+effect because of the changes). In particular, an implementation can 
+<B>with</B> additional units (especially implementation-defined units) 
+so long as those units do not change the elaboration of the language-defined 
+unit.</span></div>
+<div class="paranum"><a name="p4.c">4.c/5</a></div>
 <div class="Annotations"><span class="insert5">Similarly, an implementation 
 can add postconditions to language-defined subprograms, so long as those 
 postconditions always evaluate to True. This is useful if the implementation 
 can use those postconditions for optimization.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
-<div class="paranum"><a name="p5.f">5.f</a></div>
+<div class="paranum"><a name="p4.d">4.d</a></div>
 <div class="Annotations">Many of Ada 83's language-defined library units 
 are now children of Ada or System. For upward compatibility, these are 
 renamed as root library units (see <A HREF="AA-J-1.html">J.1</A>).</div>
-<div class="paranum"><a name="p5.g">5.g</a></div>
+<div class="paranum"><a name="p4.e">4.e</a></div>
 <div class="Annotations">The order and lettering of the annexes has been 
 changed.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
-<div class="paranum"><a name="p5.h">5.h/2</a></div>
+<div class="paranum"><a name="p4.f">4.f/2</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0047">8652/0047</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00081.TXT">AI95-00081-01</A></I>} 
 <B>Corrigendum:</B> Units missing from the list of predefined units were 
 added.</div>
-<div class="paranum"><a name="p5.i">5.i/2</a></div>
+<div class="paranum"><a name="p4.g">4.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00424.TXT">AI95-00424-01</A></I>} 
 Added new units to the list of predefined units.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
-<div class="paranum"><a name="p5.j">5.j/3</a></div>
+<div class="paranum"><a name="p4.h">4.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0048-1.TXT">AI05-0048-1</A></I>} 
 <B>Correction:</B> Added wording to ban redispatching unless it is explicitly 
 required, in order to safeguard portability when overriding language-defined 
 routines.</div>
-<div class="paranum"><a name="p5.k">5.k/3</a></div>
+<div class="paranum"><a name="p4.i">4.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
 <B>Correction:</B> Added a permission to omit pragma Remote_Types from 
@@ -489,7 +464,7 @@ as a better method of supporting the reason is now available. Note that
 this requires all implementations to provide minimal support for the 
 Remote_Types categorization even if Annex E is not supported; being unable 
 to compile language-defined units is not allowed.</div>
-<div class="paranum"><a name="p5.l">5.l/3</a></div>
+<div class="paranum"><a name="p4.j">4.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
@@ -501,7 +476,7 @@ to compile language-defined units is not allowed.</div>
 Added various new units to the list of predefined units.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p5.l.1">5.l.1/4</a></div>
+<div class="paranum"><a name="p4.j.1">4.j.1/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0052-1.TXT">AI12-0052-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0114-1.TXT">AI12-0114-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
@@ -511,15 +486,20 @@ objects designated by parameters of an access type, and simultaneous
 calls on different language-defined subprograms. While this might change 
 behavior of some programs, it would do so by eliminating erroneous execution, 
 so we don't consider this an inconsistency.</div>
-<div class="paranum"><a name="p5.l.2">5.l.2/5</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-<span class="insert5">Added an Implementation Permissions to allow implementation-defined 
-units to appear in most language-defined global specifications.</span></div>
-<div class="paranum"><a name="p5.l.3">5.l.3/5</a></div>
+<div class="paranum"><a name="p4.j.2">4.j.2/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0200-1.TXT">AI12-0200-1</A></I>} 
 <span class="insert5"><B>Correction:</B> The rules requiring concurrent 
-access of language-defined subprograms were clarified further.</span> 
-</div>
+access of language-defined subprograms were clarified further.</span></div>
+<div class="paranum"><a name="p4.k">4.k/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0021-1.TXT">AI12-0021-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0208-1.TXT">AI12-0208-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0234-1.TXT">AI12-0234-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0254-1.TXT">AI12-0254-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0321-1.TXT">AI12-0321-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0340-1.TXT">AI12-0340-1</A></I>} 
+<span class="insert5">Added various new units to the list of predefined 
+units.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

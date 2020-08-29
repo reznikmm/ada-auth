@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,25 +47,26 @@ and the package Round_Robin.]&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
 The <I>policy</I>_<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-Round_Robin_Within_Priorities is a task dispatching policy.<A NAME="I9497"></A><A NAME="I9498"></A></div>
+Round_Robin_Within_Priorities is a task dispatching policy.<A NAME="I9519"></A><A NAME="I9520"></A></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
 The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>package</B>&nbsp;Ada.Dispatching.Round_Robin<span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I9499"></A><BR>
-&nbsp;&nbsp;<A NAME="I9500"></A>Default_Quantum&nbsp;:&nbsp;<B>constant</B>&nbsp;Ada.Real_Time.Time_Span&nbsp;:=<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><A NAME="I9521"></A><BR>
+&nbsp;&nbsp;<A NAME="I9522"></A>Default_Quantum&nbsp;:&nbsp;<B>constant</B>&nbsp;Ada.Real_Time.Time_Span&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9501"></A>Set_Quantum&nbsp;(Pri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9523"></A>Set_Quantum&nbsp;(Pri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9502"></A>Set_Quantum&nbsp;(Low,&nbsp;High&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9524"></A>Set_Quantum&nbsp;(Low,&nbsp;High&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9503"></A>Actual_Quantum&nbsp;(Pri&nbsp;:&nbsp;System.Priority)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9525"></A>Actual_Quantum&nbsp;(Pri&nbsp;:&nbsp;System.Priority)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Real_Time.Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9504"></A>Is_Round_Robin&nbsp;(Pri&nbsp;:&nbsp;System.Priority)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9526"></A>Is_Round_Robin&nbsp;(Pri&nbsp;:&nbsp;System.Priority)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Dispatching.Round_Robin;</div>
 <div class="paranum"><a name="p4.a.1">4.a.1/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
@@ -177,7 +178,7 @@ be subject to round robin dispatching.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
-<A NAME="I9505"></A>Policy Round_Robin_Within_Priorities and package 
+<A NAME="I9527"></A>Policy Round_Robin_Within_Priorities and package 
 Dispatching.Round_Robin are new.&nbsp;</div>
 
 <HR>

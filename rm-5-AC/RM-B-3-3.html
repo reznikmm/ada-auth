@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +44,7 @@
 <HR>
 <H1>B.3.3 <span class="insert3">Unchecked Union Types</span><span class="delete3"><span class="insert2">Pragma Unchecked_Union</span></span></H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I8696"></A></span><span class="insert3">Specifying 
+<div class="Normal"><span class="insert2"><A NAME="I8713"></A></span><span class="insert3">Specifying 
 aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;A 
 pragma</span></span><span class="insert2">&nbsp;Unchecked_Union&nbsp;</span><span class="insert3">to 
 have the value True defines</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;specifies</span></span><span class="insert2">&nbsp;an interface correspondence between a given discriminated type and some 
@@ -62,7 +62,7 @@ form of a pragma Unchecked_Union is as follows:</span></span><span class="delete
 </div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
-<A NAME="I8697"></A><A NAME="I8698"></A>Unchecked_Union (<I>first_subtype_</I><A NAME="I8699"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></span><span class="delete3"></span></div>
+<A NAME="I8714"></A><A NAME="I8715"></A>Unchecked_Union (<I>first_subtype_</I><A NAME="I8716"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0345">local_name</A></SPAN>);</span></span><span class="delete3"></span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3.1">3.1/3</a></div>
@@ -74,7 +74,7 @@ the following language-defined representation aspect may be specified:</span></d
 <span class="insert3">The type of aspect Unchecked_Union is Boolean. 
 If directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
-the aspect is False.<A NAME="I8700"></A><A NAME="I8701"></A></span></div>
+the aspect is False.<A NAME="I8717"></A><A NAME="I8718"></A></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
@@ -90,7 +90,7 @@ of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>
 Unchecked_Union shall denote an unconstrained discriminated record subtype 
 having a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN>.</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I8702"></A><A NAME="I8703"></A><A NAME="I8704"></A>A 
+<div class="Normal"><span class="insert2"><A NAME="I8719"></A><A NAME="I8720"></A><A NAME="I8721"></A>A 
 type&nbsp;</span><span class="insert3">for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;to</span></span><span class="insert2">&nbsp;which&nbsp;</span><span class="insert3">aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;a 
 pragma</span></span><span class="insert2">&nbsp;Unchecked_Union&nbsp;</span><span class="insert3">is 
 True</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;applies</span></span><span class="insert2">&nbsp;is called an <I>unchecked union type</I>. A subtype of an unchecked union 
@@ -115,7 +115,7 @@ type of a</span><span class="insert2"></span><span class="insert2"><span class="
 of an unchecked union type shall not&nbsp;</span><span class="insert3">need 
 finalization. In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), this rule also applies in 
-the private part of an instance of a generic unit.<A NAME="I8705"></A> 
+the private part of an instance of a generic unit.<A NAME="I8722"></A> 
 For an unchecked union type declared within the body of a generic unit, 
 or within the body of any of its descendant library units, no part of 
 the type of a component declared in a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
@@ -169,7 +169,7 @@ object (including a type conversion or function call) has <I>inferable
 discriminants</I> if it has a constrained nominal subtype, unless the 
 object is a component of an enclosing unchecked union object that is 
 subject to a per-object constraint and the enclosing object lacks inferable 
-discriminants.<A NAME="I8706"></A></span></div>
+discriminants.<A NAME="I8723"></A></span></div>
 <div class="paranum"><a name="p21">21/2</a></div>
 <div class="Normal"><span class="insert2">An expression of an unchecked 
 union type has inferable discriminants if it is either a name of an object 
@@ -177,7 +177,7 @@ with inferable discriminants or a qualified expression whose <SPAN Class="swiss"
 denotes a constrained subtype.</span></div>
 <div class="paranum"><a name="p22">22/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">Program_Error 
-is raised in the following<A NAME="I8707"></A><A NAME="I8708"></A> cases:<A NAME="I8709"></A></span></div>
+is raised in the following<A NAME="I8724"></A><A NAME="I8725"></A> cases:<A NAME="I8726"></A></span></div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Bulleted"><span class="insert2">Evaluation of the predefined 
 equality operator for an unchecked union type if either of the operands 

@@ -35,7 +35,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +46,7 @@
 <HR>
 <H1>9.5.1 Protected Subprograms and Protected Actions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5031"></A><A NAME="I5032"></A><A NAME="I5033"></A>A 
+<div class="Normal"><A NAME="I5025"></A><A NAME="I5026"></A><A NAME="I5027"></A>A 
 <I>protected subprogram</I> is a subprogram declared immediately within 
 a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0251">protected_definition</A></SPAN>. 
 Protected procedures provide exclusive read-write access to the data 
@@ -88,7 +88,7 @@ be specified:</span></div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert4">Exclusive_Functions</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert4">The type of aspect Exclusive_Functions is Boolean. 
-If not specified (including by inheritance), the aspect is False.<A NAME="I5034"></A><A NAME="I5035"></A></span></div>
+If not specified (including by inheritance), the aspect is False.<A NAME="I5028"></A><A NAME="I5029"></A></span></div>
 <div class="paranum"><a name="p2.3">2.3/4</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert4"></span></div><div class="WideHanging-Body">
 <span class="insert4">A value of True for this aspect indicates that 
@@ -101,13 +101,13 @@ mutual exclusion behavior of protected functions in a protected type.</span></di
 <div class="paranum"><a name="p2.4">2.4/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
 <span class="insert4">A protected procedure or entry is an <I>exclusive</I> 
-protected operation.<A NAME="I5036"></A> A protected function of a protected 
+protected operation.<A NAME="I5030"></A> A protected function of a protected 
 type <I>P</I> is an exclusive protected operation if the Exclusive_Functions 
 aspect of <I>P</I> is True.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I5037"></A>For the execution of a call on 
+<div class="Normal"><A NAME="I5031"></A>For the execution of a call on 
 a protected subprogram, the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 and of the parameter associations, and any assigning back of <B>in out</B> 
@@ -121,14 +121,14 @@ after the body of the subprogram is executed. [A protected action can
 also be started by an entry call (see <A HREF="AA-9-5-3.html">9.5.3</A>).]</div>
 <div class="paranum"><a name="p4">4/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
-<A NAME="I5038"></A>A new protected action is not started on a protected 
+<A NAME="I5032"></A>A new protected action is not started on a protected 
 object while another protected action on the same protected object is 
 underway, unless both actions are the result of a call on a <span class="insert4">nonexclusive 
 </span>protected function. This rule is expressible in terms of the execution 
 resource associated with the protected object:&nbsp;</div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
-<A NAME="I5039"></A><A NAME="I5040"></A><I>Starting</I> a protected action 
+<A NAME="I5033"></A><A NAME="I5034"></A><I>Starting</I> a protected action 
 on a protected object corresponds to <I>acquiring</I> the execution resource 
 associated with the protected object, either for <span class="insert4">exclusive 
 read-write</span><span class="delete4">&nbsp;concurrent read-only</span> access 
@@ -137,7 +137,7 @@ protected operation</span><span class="delete4">&nbsp;a protected function</span
 or for <span class="insert4">concurrent read-only</span><span class="delete4">&nbsp;exclusive 
 read-write</span> access otherwise;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I5041"></A><A NAME="I5042"></A><I>Completing</I> 
+<div class="Bulleted"><A NAME="I5035"></A><A NAME="I5036"></A><I>Completing</I> 
 the protected action corresponds to <I>releasing</I> the associated execution 
 resource.&nbsp;</div>
 <div class="paranum"><a name="p7">7/4</a></div>
@@ -167,10 +167,10 @@ be buried within a subprogram that is declared Nonblocking.</span>&nbsp;</div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
-<span class="delete5"></span><A NAME="I5043"></A>During a protected action, 
+<span class="delete5"></span><A NAME="I5037"></A>During a protected action, 
 it is a bounded error to invoke an operation that is <span class="insert5">potentially 
 blocking (see <A HREF="AA-9-5.html">9.5</A>).</span><span class="delete5"><I>&nbsp;potentially 
-blocking</I>. <A NAME="I5044"></A><A NAME="I5045"></A>The following are 
+blocking</I>. <A NAME="I5038"></A><A NAME="I5039"></A>The following are 
 defined to be potentially blocking operations:</span>&nbsp;</div>
 <div class="Normal"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 9 through 16 were moved to <A HREF="AA-9-5.html">9.5</A>.</I></SPAN></span> 
@@ -212,7 +212,7 @@ the potentially blocking operation. This in turn allows the potentially
 blocking operation check to be performed prior to run time in some environments.</span> 
 </div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I5046"></A>If the bounded error is detected, 
+<div class="Normal"><A NAME="I5040"></A>If the bounded error is detected, 
 Program_Error is raised. If not detected, the bounded error might result 
 in deadlock or a (nested) protected action on the same target object.</div>
 <div class="paranum"><a name="p17.a">17.a/2</a></div>
@@ -228,7 +228,7 @@ is to use pragma Detect_Blocking (see <A HREF="AA-H-5.html">H.5</A>).</span>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0247-1.TXT">AI12-0247-1</A></I>} 
 <span class="insert5">During a protected action, a call on a subprogram 
 whose body contains a potentially blocking operation is a bounded error. 
-<A NAME="I5047"></A><A NAME="I5048"></A>If the bounded error is detected, 
+<A NAME="I5041"></A><A NAME="I5042"></A>If the bounded error is detected, 
 Program_Error is raised; otherwise, the call proceeds normally.&nbsp;</span><span class="delete5">Certain 
 language-defined subprograms are potentially blocking. In particular, 
 the subprograms of the language-defined input-output packages that manipulate 
@@ -332,7 +332,7 @@ Error into a required check.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p25.b">25.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
-<span class="insert4"><A NAME="I5049"></A><B>Corrigendum:</B> Aspect 
+<span class="insert4"><A NAME="I5043"></A><B>Corrigendum:</B> Aspect 
 Exclusive_Functions is new. The term &ldquo;exclusive protected operations&rdquo; 
 is new.</span>&nbsp;</div>
 

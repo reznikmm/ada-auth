@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 <HR>
 <H1>4.5 Operators and Expression Evaluation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I3092"></A> <A NAME="I3093"></A>The language 
+<div class="Normal">[<A NAME="I3094"></A> <A NAME="I3095"></A>The language 
 defines the following six categories of operators (given in order of 
 increasing precedence). The corresponding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0202">operator_symbol</A></SPAN>s, 
 and only those, can be used as <SPAN Class="swiss"><A HREF="AA-6-1.html#S0199">designator</A></SPAN>s 
@@ -46,17 +46,17 @@ in declarations of functions for user-defined operators. See <A HREF="AA-6-6.htm
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">logical_operator</SPAN><A NAME="I3094"></A><A NAME="S0142"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;<B>and</B>&nbsp;|&nbsp;<B>or</B>&nbsp;&nbsp;|&nbsp;<B>xor</B></div>
+<div class="Indented1"><SPAN Class="swiss">logical_operator</SPAN><A NAME="I3096"></A><A NAME="S0142"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;<B>and</B>&nbsp;|&nbsp;<B>or</B>&nbsp;&nbsp;|&nbsp;<B>xor</B></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">relational_operator</SPAN><A NAME="I3095"></A><A NAME="S0143"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;|&nbsp;/=&nbsp;&nbsp;|&nbsp;&lt;&nbsp;&nbsp;&nbsp;|&nbsp;&lt;=&nbsp;|&nbsp;&gt;&nbsp;|&nbsp;&gt;=</div>
+<div class="Indented1"><SPAN Class="swiss">relational_operator</SPAN><A NAME="I3097"></A><A NAME="S0143"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;|&nbsp;/=&nbsp;&nbsp;|&nbsp;&lt;&nbsp;&nbsp;&nbsp;|&nbsp;&lt;=&nbsp;|&nbsp;&gt;&nbsp;|&nbsp;&gt;=</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">binary_adding_operator</SPAN><A NAME="I3096"></A><A NAME="S0144"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;&nbsp;&nbsp;&nbsp;|&nbsp;&amp;</div>
+<div class="Indented1"><SPAN Class="swiss">binary_adding_operator</SPAN><A NAME="I3098"></A><A NAME="S0144"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;&nbsp;&nbsp;&nbsp;|&nbsp;&amp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">unary_adding_operator</SPAN><A NAME="I3097"></A><A NAME="S0145"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;</div>
+<div class="Indented1"><SPAN Class="swiss">unary_adding_operator</SPAN><A NAME="I3099"></A><A NAME="S0145"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">multiplying_operator</SPAN><A NAME="I3098"></A><A NAME="S0146"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;|&nbsp;/&nbsp;&nbsp;&nbsp;|&nbsp;<B>mod</B>&nbsp;|&nbsp;<B>rem</B></div>
+<div class="Indented1"><SPAN Class="swiss">multiplying_operator</SPAN><A NAME="I3100"></A><A NAME="S0146"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;|&nbsp;/&nbsp;&nbsp;&nbsp;|&nbsp;<B>mod</B>&nbsp;|&nbsp;<B>rem</B></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">highest_precedence_operator</SPAN><A NAME="I3099"></A><A NAME="S0147"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;**&nbsp;&nbsp;|&nbsp;<B>abs</B>&nbsp;|&nbsp;<B>not</B></div>
+<div class="Indented1"><SPAN Class="swiss">highest_precedence_operator</SPAN><A NAME="I3101"></A><A NAME="S0147"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;**&nbsp;&nbsp;|&nbsp;<B>abs</B>&nbsp;|&nbsp;<B>not</B></div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Some of the above syntactic 
 categories are not used in other syntax rules. They are just used for 
@@ -80,10 +80,10 @@ metasymbols.</div>
 <div class="Annotations">See the Implementation Permissions below regarding 
 flexibility in reassociating operators of the same precedence.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I3100"></A><A NAME="I3101"></A>For each 
+<div class="Normal"><A NAME="I3102"></A><A NAME="I3103"></A>For each 
 form of type definition, certain of the above operators are <I>predefined</I>; 
 that is, they are implicitly declared immediately after the type definition. 
-<A NAME="I3102"></A><A NAME="I3103"></A><A NAME="I3104"></A><A NAME="I3105"></A>For 
+<A NAME="I3104"></A><A NAME="I3105"></A><A NAME="I3106"></A><A NAME="I3107"></A>For 
 each such implicit operator declaration, the parameters are called Left 
 and Right for <I>binary</I> operators; the single parameter is called 
 Right for <I>unary</I> operators. [An expression of the form X op Y, 
@@ -96,7 +96,7 @@ are described in subclauses <A HREF="AA-4-5-1.html">4.5.1</A> through
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal">[<A NAME="I3106"></A> The predefined operations on 
+<div class="Normal">[<A NAME="I3108"></A> The predefined operations on 
 integer types either yield the mathematically correct result or raise 
 the exception Constraint_Error. For implementations that support the 
 Numerics Annex, the predefined operations on real types yield results 
@@ -116,12 +116,12 @@ Requirements of <A HREF="AA-G-2-3.html">G.2.3</A>.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I3107"></A>The implementation of a predefined 
+<div class="Normal"><A NAME="I3109"></A>The implementation of a predefined 
 operator that delivers a result of an integer or fixed point type may 
 raise Constraint_Error only if the result is outside the base range of 
 the result type.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I3108"></A>The implementation of a predefined 
+<div class="Normal"><A NAME="I3110"></A>The implementation of a predefined 
 operator that delivers a result of a floating point type may raise Constraint_Error 
 only if the result is outside the safe range of the result type.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>

@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -136,7 +136,7 @@ for Width.&nbsp;</div>
 a library package that is a nongeneric equivalent to Text_IO.Integer_IO 
 for the predefined type Integer:&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples"><B>with</B>&nbsp;Ada.Text_IO;<A NAME="I8048"></A><BR>
+<div class="Examples"><B>with</B>&nbsp;Ada.Text_IO;<A NAME="I8044"></A><BR>
 <B>package</B>&nbsp;Ada.Integer_Text_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Ada.Text_IO.Integer_IO(Integer);</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Normal">For each predefined signed integer type, a nongeneric 
@@ -173,7 +173,7 @@ Put(126,&nbsp;Width&nbsp;=&gt;&nbsp;13,&nbsp;Base&nbsp;=&gt;&nbsp;2);&nbsp;&nbsp
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p27.a">27.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0038-1.TXT">AI05-0038-1</A></I>} 
-<span class="insert3"><A NAME="I8049"></A><B>Correction:</B> Changed 
+<span class="insert3"><A NAME="I8045"></A><B>Correction:</B> Changed 
 wording to make Integer_IO and Modular_IO raise Data_Error in the same 
 way when the bounds of the subtype are exceeded. There is no value to 
 different behavior, and all surveyed compilers already treat integer 

@@ -31,7 +31,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,12 +48,12 @@ is either simple or compound. A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">
 encloses no other <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>. 
 A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0169">compound_statement</A></SPAN> 
 can enclose <SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">simple_statement</A></SPAN>s 
-and other <SPAN Class="swiss"><A HREF="AA-5-1.html#S0169">compound_statement</A></SPAN>s.]<span class="insert5">&nbsp;A <I>parallel construct</I><A NAME="I3716"></A><A NAME="I3717"></A> is 
+and other <SPAN Class="swiss"><A HREF="AA-5-1.html#S0169">compound_statement</A></SPAN>s.]<span class="insert5">&nbsp;A <I>parallel construct</I><A NAME="I3720"></A><A NAME="I3721"></A> is 
 a construct that introduces additional logical threads of control (see 
 clause <A HREF="AA-9.html">9</A>) without creating a new task. Parallel 
 loops (see <A HREF="AA-5-5.html">5.5</A>) and <SPAN Class="swiss"><A HREF="AA-5-6-1.html#S0192">parallel_block_statement</A></SPAN>s 
-(see <A HREF="AA-5-6-1.html">5.6.1</A>) are parallel constructs.<A NAME="I3718"></A> 
-<A NAME="I3719"></A></span></div>
+(see <A HREF="AA-5-6-1.html">5.6.1</A>) are parallel constructs.<A NAME="I3722"></A> 
+<A NAME="I3723"></A></span></div>
 <div class="paranum"><a name="p1.a.1">1.a.1/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Glossary entry:&nbsp;</B>An 
 executable construct that defines multiple activities of a single task 
@@ -63,34 +63,34 @@ of control.</span></div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0179-1.TXT">AI05-0179-1</A></I>} 
-<SPAN Class="swiss">sequence_of_statements</SPAN><A NAME="I3720"></A><A NAME="S0166"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3721"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>&nbsp;{<A NAME="I3722"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>}<span class="insert3">&nbsp;{<A NAME="I3723"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN>}</span></div>
+<SPAN Class="swiss">sequence_of_statements</SPAN><A NAME="I3724"></A><A NAME="S0166"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3725"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>&nbsp;{<A NAME="I3726"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>}<span class="insert3">&nbsp;{<A NAME="I3727"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN>}</span></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">statement</SPAN><A NAME="I3724"></A><A NAME="S0167"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;{<A NAME="I3725"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN>}&nbsp;<A NAME="I3726"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">simple_statement</A></SPAN>&nbsp;|&nbsp;{<A NAME="I3727"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN>}&nbsp;<A NAME="I3728"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0169">compound_statement</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">statement</SPAN><A NAME="I3728"></A><A NAME="S0167"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<A NAME="I3729"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN>}&nbsp;<A NAME="I3730"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0168">simple_statement</A></SPAN>&nbsp;|&nbsp;{<A NAME="I3731"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN>}&nbsp;<A NAME="I3732"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0169">compound_statement</A></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<SPAN Class="swiss">simple_statement</SPAN><A NAME="I3729"></A><A NAME="S0168"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3730"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0170">null_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3731"></A><SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3732"></A><SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3733"></A><SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3734"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0217">procedure_call_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<span class="insert2"><A NAME="I3735"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN></span><span class="delete2"><A NAME="I3736"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0223">&nbsp;return_statement</A></SPAN></span>&nbsp;|&nbsp;<A NAME="I3737"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">entry_call_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3738"></A><SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3739"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3740"></A><SPAN Class="swiss"><A HREF="AA-9-8.html#S0284">abort_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3741"></A><SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3742"></A><SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN></div>
+<SPAN Class="swiss">simple_statement</SPAN><A NAME="I3733"></A><A NAME="S0168"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3734"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0170">null_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3735"></A><SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3736"></A><SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3737"></A><SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3738"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0217">procedure_call_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<span class="insert2"><A NAME="I3739"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN></span><span class="delete2"><A NAME="I3740"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0223">&nbsp;return_statement</A></SPAN></span>&nbsp;|&nbsp;<A NAME="I3741"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">entry_call_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3742"></A><SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3743"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3744"></A><SPAN Class="swiss"><A HREF="AA-9-8.html#S0284">abort_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3745"></A><SPAN Class="swiss"><A HREF="AA-11-3.html#S0308">raise_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3746"></A><SPAN Class="swiss"><A HREF="AA-13-8.html#S0357">code_statement</A></SPAN></div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
-<SPAN Class="swiss">compound_statement</SPAN><A NAME="I3743"></A><A NAME="S0169"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3744"></A><SPAN Class="swiss"><A HREF="AA-5-3.html#S0175">if_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3745"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3746"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3747"></A><SPAN Class="swiss"><A HREF="AA-5-6.html#S0191">block_statement</A></SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3748"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0225">extended_return_statement</A></SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3749"></A><SPAN Class="swiss"><A HREF="AA-5-6-1.html#S0192">parallel_block_statement</A></SPAN></span><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3750"></A><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3751"></A><SPAN Class="swiss"><A HREF="AA-9-7.html#S0269">select_statement</A></SPAN></div>
+<SPAN Class="swiss">compound_statement</SPAN><A NAME="I3747"></A><A NAME="S0169"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3748"></A><SPAN Class="swiss"><A HREF="AA-5-3.html#S0175">if_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3749"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3750"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3751"></A><SPAN Class="swiss"><A HREF="AA-5-6.html#S0191">block_statement</A></SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3752"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0225">extended_return_statement</A></SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3753"></A><SPAN Class="swiss"><A HREF="AA-5-6-1.html#S0192">parallel_block_statement</A></SPAN></span><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3754"></A><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0258">accept_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3755"></A><SPAN Class="swiss"><A HREF="AA-9-7.html#S0269">select_statement</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">null_statement</SPAN><A NAME="I3752"></A><A NAME="S0170"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>null</B>;</div>
+<div class="Indented1"><SPAN Class="swiss">null_statement</SPAN><A NAME="I3756"></A><A NAME="S0170"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>null</B>;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">label</SPAN><A NAME="I3753"></A><A NAME="S0171"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&lt;&lt;<I>label_</I><A NAME="I3754"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0172">statement_identifier</A></SPAN>&gt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">label</SPAN><A NAME="I3757"></A><A NAME="S0171"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&lt;&lt;<I>label_</I><A NAME="I3758"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0172">statement_identifier</A></SPAN>&gt;&gt;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1"><SPAN Class="swiss">statement_identifier</SPAN><A NAME="I3755"></A><A NAME="S0172"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3756"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">statement_identifier</SPAN><A NAME="I3759"></A><A NAME="S0172"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3760"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0172">statement_identifier</A></SPAN> 
@@ -199,11 +199,11 @@ implicit.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I3757"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0170">null_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3761"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0170">null_statement</A></SPAN> 
 has no effect.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I3758"></A>A <I>transfer of control</I> is the run-time action 
+<A NAME="I3762"></A>A <I>transfer of control</I> is the run-time action 
 of an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN>, 
 <span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0223">&nbsp;return_statement</A></SPAN></span>, 
 <SPAN Class="swiss"><A HREF="AA-5-8.html#S0194">goto_statement</A></SPAN>, 
@@ -215,7 +215,7 @@ of the language. [As explained in <A HREF="AA-7-6-1.html">7.6.1</A>,
 a transfer of control can cause the execution of constructs to be completed 
 and then left, which may trigger finalization.]</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I3759"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
+<div class="Normal"><A NAME="I3763"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 consists of the execution of the individual <SPAN Class="swiss"><A HREF="AA-5-1.html#S0167">statement</A></SPAN>s 
 in succession until the <SPAN Class="swiss">sequence_</SPAN> is completed. 
 </div>
@@ -226,7 +226,7 @@ reaching the end of it, or by a transfer of control.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
 <span class="insert5">Within a parallel construct, if a transfer of control 
 out of the construct is initiated by one of the logical threads of control, 
-an attempt is made to <I>cancel</I><A NAME="I3760"></A><A NAME="I3761"></A> 
+an attempt is made to <I>cancel</I><A NAME="I3764"></A><A NAME="I3765"></A> 
 all other logical threads of control initiated by the parallel construct. 
 Once all other logical threads of control of the construct either complete 
 or are canceled, the transfer of control occurs. If two or more logical 
@@ -247,13 +247,13 @@ that is outside such an abort-deferred operation.</span>&nbsp;</div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
-<span class="insert5"><A NAME="I3762"></A>During the execution of a parallel 
+<span class="insert5"><A NAME="I3766"></A>During the execution of a parallel 
 construct, it is a bounded error to invoke an operation that is potentially 
 blocking (see <A HREF="AA-9-5.html">9.5</A>). Program_Error is raised 
 if the error is detected by the implementation; otherwise, the execution 
 of the potentially blocking operation might proceed normally, or it might 
 result in the indefinite blocking of some or all of the logical threads 
-of control making up the current task.<A NAME="I3763"></A></span>&nbsp;</div>
+of control making up the current task.<A NAME="I3767"></A></span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Notes">1&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0172">statement_identifier</A></SPAN> 
@@ -306,7 +306,7 @@ statements:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p22.a">22.a</a></div>
-<div class="Annotations"><A NAME="I3764"></A>The <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN> 
+<div class="Annotations"><A NAME="I3768"></A>The <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0265">requeue_statement</A></SPAN> 
 is new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
@@ -322,14 +322,14 @@ of control, although RM83-5.1(6) did not take this view.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p22.d">22.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2"><A NAME="I3765"></A>The <SPAN Class="swiss"><A HREF="AA-6-5.html#S0225">extended_return_statement</A></SPAN> 
+<span class="insert2"><A NAME="I3769"></A>The <SPAN Class="swiss"><A HREF="AA-6-5.html#S0225">extended_return_statement</A></SPAN> 
 is new (<SPAN Class="swiss"><A HREF="AA-6-5.html#S0222">simple_return_statement</A></SPAN> 
 is merely renamed).</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p22.e">22.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0179-1.TXT">AI05-0179-1</A></I>} 
-<span class="insert3"><A NAME="I3766"></A>A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN> 
+<span class="insert3"><A NAME="I3770"></A>A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0171">label</A></SPAN> 
 can end a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>, 
 eliminating the requirement for having an explicit <B>null</B>; statement 
 after an ending label (a common use).</span>&nbsp;</div>
@@ -337,7 +337,7 @@ after an ending label (a common use).</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p22.f">22.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
-<span class="insert5"><A NAME="I3767"></A>The definition of &ldquo;parallel 
+<span class="insert5"><A NAME="I3771"></A>The definition of &ldquo;parallel 
 constructs&rdquo; and the <SPAN Class="swiss"><A HREF="AA-5-6-1.html#S0192">parallel_block_statement</A></SPAN> 
 are new.</span>&nbsp;</div>
 

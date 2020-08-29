@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -32,7 +32,7 @@
 <HR>
 <H1>10.1.4 The Compilation Process</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4817"></A><A NAME="I4818"></A>Each compilation 
+<div class="Normal"><A NAME="I4808"></A><A NAME="I4809"></A>Each compilation 
 unit submitted to the compiler is compiled in the context of an <I>environment</I> 
 <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 (or simply, an <I>environment</I>), which is a conceptual <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
@@ -67,13 +67,13 @@ of a generic subprogram or for a generic subprogram (even if the profile
 of the body is not type conformant with that of the declaration); otherwise, 
 the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
 is interpreted as both the declaration and body of a library subprogram. 
-<A NAME="I4819"></A></div>
+<A NAME="I4810"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">When a compilation unit is compiled, all compilation 
 units upon which it depends semantically shall already exist in the environment; 
-<A NAME="I4820"></A>the set of these compilation units shall be <I>consistent</I> 
+<A NAME="I4811"></A>the set of these compilation units shall be <I>consistent</I> 
 in the sense that the new compilation unit shall not semantically depend 
 (directly or indirectly) on two different versions of the same compilation 
 unit, nor on an earlier version of itself.&nbsp;</div>
@@ -108,13 +108,13 @@ across <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0285">compilation</A></SPAN>
 and compilation unit boundaries, just as they are enforced within a single 
 compilation unit.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Notes">6&nbsp;&nbsp;<A NAME="I4821"></A>An implementation 
+<div class="Notes">6&nbsp;&nbsp;<A NAME="I4812"></A>An implementation 
 may support a concept of a <I>library</I>, which contains <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s. 
 If multiple libraries are supported, the implementation has to define 
 how a single environment is constructed when a compilation unit is submitted 
 to the compiler. Naming conflicts between different libraries might be 
 resolved by treating each library as the root of a hierarchy of child 
-library units. <A NAME="I4822"></A></div>
+library units. <A NAME="I4813"></A></div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Notes">7&nbsp;&nbsp;A compilation unit containing an instantiation 
 of a separately compiled generic unit does not semantically depend on 

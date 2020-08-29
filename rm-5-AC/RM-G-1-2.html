@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,44 +48,44 @@ package Numerics.Generic_Complex_Elementary_Functions has the following
 declaration:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Numerics.Generic_Complex_Types;<BR>
-<B>generic</B><A NAME="I9578"></A><BR>
+<B>generic</B><A NAME="I9599"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>package</B>&nbsp;Complex_Types&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Complex_Types;<BR>
 <B>package</B>&nbsp;Ada.Numerics.Generic_Complex_Elementary_Functions<span class="delete5">&nbsp;<B>is</B></span><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="delete5"></span><span class="delete2">&nbsp;pragma</span><span class="delete5"></span>&nbsp;Pure<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Generic_Complex_Elementary_Functions);</span></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9579"></A>Sqrt&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9580"></A>Log&nbsp;&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9581"></A>Exp&nbsp;&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9582"></A>Exp&nbsp;&nbsp;(X&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9600"></A>Sqrt&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9601"></A>Log&nbsp;&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9602"></A>Exp&nbsp;&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9603"></A>Exp&nbsp;&nbsp;(X&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9583"></A>Sin&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9584"></A>Cos&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9585"></A>Tan&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9586"></A>Cot&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9604"></A>Sin&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9605"></A>Cos&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9606"></A>Tan&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9607"></A>Cot&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9587"></A>Arcsin&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9588"></A>Arccos&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9589"></A>Arctan&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9590"></A>Arccot&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9608"></A>Arcsin&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9609"></A>Arccos&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9610"></A>Arctan&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9611"></A>Arccot&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9591"></A>Sinh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9592"></A>Cosh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9593"></A>Tanh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9594"></A>Coth&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9612"></A>Sinh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9613"></A>Cosh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9614"></A>Tanh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9615"></A>Coth&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9595"></A>Arcsinh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9596"></A>Arccosh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9597"></A>Arctanh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9598"></A>Arccoth&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9616"></A>Arcsinh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9617"></A>Arccosh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9618"></A>Arctanh&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9619"></A>Arccoth&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Complex_Elementary_Functions;</div>
 <div class="paranum"><a name="p9">9/1</a></div>
-<div class="Normal"><A NAME="I9599"></A>The library package Numerics.Complex_Elementary_Functions 
+<div class="Normal"><A NAME="I9620"></A>The library package Numerics.Complex_Elementary_Functions 
 <span class="insert1">is declared pure and&nbsp;</span>defines the same subprograms 
 as Numerics.Generic_Complex_Elementary_Functions, except that the predefined 
 type Float is systematically substituted for Real'Base, and the Complex 
@@ -210,7 +210,7 @@ value of the parameter X is &plusmn; 1.0.&nbsp;</div>
 result overflows (see <A HREF="RM-G-2-6.html">G.2.6</A>); this may occur 
 for parameter values sufficiently <I>near</I> poles, and, in the case 
 of some of the functions, for parameter values having components of sufficiently 
-large magnitude. <A NAME="I9600"></A>When Complex_Types.Real'Machine_Overflows 
+large magnitude. <A NAME="I9621"></A>When Complex_Types.Real'Machine_Overflows 
 is False, the result at poles is unspecified.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -220,7 +220,7 @@ the range of intermediate values allowed during the calculation of a
 final result shall not be affected by any range constraint of the subtype 
 Complex_Types.Real.&nbsp;</div>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I9601"></A>In 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I9622"></A>In 
 the following cases, evaluation of a complex elementary function shall 
 yield the <I>prescribed result</I> (or a result having the prescribed 
 component), provided that the preceding rules do not call for an exception 
@@ -279,7 +279,7 @@ terms of the Exp and Log functions. Because this implementation yields
 poor accuracy in some parts of the domain, no accuracy requirement is 
 imposed on complex exponentiation.</div>
 <div class="paranum"><a name="p48">48</a></div>
-<div class="Normal"><A NAME="I9602"></A>The implementation of the Exp 
+<div class="Normal"><A NAME="I9623"></A>The implementation of the Exp 
 function of a complex parameter X is allowed to raise the exception Constraint_Error, 
 signaling overflow, when the real component of X exceeds an unspecified 
 threshold that is approximately log(<SPAN Class="roman">Complex_Types.Real'Safe_Last</SPAN>). 
@@ -290,7 +290,7 @@ result do not. Similarly, the Sin and Cos (resp., Sinh and Cosh) functions
 are allowed to raise the exception Constraint_Error, signaling overflow, 
 when the absolute value of the imaginary (resp., real) component of the 
 parameter X exceeds an unspecified threshold that is approximately log(<SPAN Class="roman">Complex_Types.Real'Safe_Last</SPAN>) 
-+ log(2.0). <A NAME="I9603"></A>This permission recognizes the impracticality 
++ log(2.0). <A NAME="I9624"></A>This permission recognizes the impracticality 
 of avoiding overflow in the marginal case that the hyperbolic sine or 
 cosine of the imaginary (resp., real) component of X exceeds the safe 
 range of Complex_Types.Real but both components of the final result do 

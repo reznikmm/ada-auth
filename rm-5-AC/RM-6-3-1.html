@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,14 +44,14 @@
 <HR>
 <H1>6.3.1 Conformance Rules</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3889"></A><A NAME="I3890"></A><A NAME="I3891"></A><A NAME="I3892"></A><A NAME="I3893"></A>When 
+<div class="Normal"><A NAME="I3894"></A><A NAME="I3895"></A><A NAME="I3896"></A><A NAME="I3897"></A><A NAME="I3898"></A>When 
 subprogram profiles are given in more than one place, they are required 
 to conform in one of four ways: type conformance, mode conformance, subtype 
 conformance, or full conformance.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3894"></A><A NAME="I3895"></A>As 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3899"></A><A NAME="I3900"></A>As 
 explained in <A HREF="RM-B-1.html">B.1</A>, &ldquo;<A HREF="RM-B-1.html">Interfacing 
 Aspects</A>&rdquo;, a <I>convention</I> can be specified for an entity. 
 <span class="insert1">Unless this International Standard states otherwise, 
@@ -60,7 +60,7 @@ or access-to-subprogram type, the convention is called the <I>calling
 convention</I>. The following conventions are defined by the language: 
 </div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Bulleted"><A NAME="I3896"></A><A NAME="I3897"></A>The default 
+<div class="Bulleted"><A NAME="I3901"></A><A NAME="I3902"></A>The default 
 calling convention for any subprogram not listed below is <I>Ada</I>. 
 <span class="insert3">The</span><span class="delete3">&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Convention<span class="insert3">&nbsp;aspect</span><span class="delete3">, 
@@ -68,7 +68,7 @@ Import, or Export</span> may be <span class="insert3">specified</span><span clas
 to override the default calling convention (see <A HREF="RM-B-1.html">B.1</A>). 
 </div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3898"></A><A NAME="I3899"></A>The 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3903"></A><A NAME="I3904"></A>The 
 <I>Intrinsic</I> calling convention represents subprograms that are &ldquo;built 
 in&rdquo; to the compiler. The default calling convention is Intrinsic 
 for the following:&nbsp;</div>
@@ -96,12 +96,12 @@ or By_Protected_Procedure</span><span class="insert2">.</span>&nbsp;</div>
 <div class="Bulleted-NoPrefix">The Access attribute is not allowed for 
 Intrinsic subprograms.&nbsp;</div>
 <div class="paranum"><a name="p12">12/4</a></div>
-<div class="Bulleted"><A NAME="I3900"></A><A NAME="I3901"></A>The default 
+<div class="Bulleted"><A NAME="I3905"></A><A NAME="I3906"></A>The default 
 calling convention is <I>protected</I> for a protected subprogram,<span class="insert4">&nbsp;for a prefixed view of a subprogram with a synchronization kind of By_Protected_Procedure,</span> 
 and for an access-to-subprogram type with the reserved word <B>protected</B> 
 in its definition.</div>
 <div class="paranum"><a name="p13">13/4</a></div>
-<div class="Bulleted"><A NAME="I3902"></A><A NAME="I3903"></A>The default 
+<div class="Bulleted"><A NAME="I3907"></A><A NAME="I3908"></A>The default 
 calling convention is <I>entry</I> for an entry<span class="insert4">&nbsp;and for a prefixed view of a subprogram with a synchronization kind of 
 By_Entry</span>.</div>
 <div class="paranum"><a name="p13.1">13.1/5</a></div>
@@ -126,17 +126,17 @@ in <span class="insert3">the specification of a</span><span class="delete3">&nbs
 Convention<span class="insert3">&nbsp;aspect</span><span class="delete3">, 
 Import, or Export</span>.&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><A NAME="I3904"></A><A NAME="I3905"></A>Two profiles 
+<div class="Normal"><A NAME="I3909"></A><A NAME="I3910"></A>Two profiles 
 are <I>type conformant</I> if they have the same number of parameters, 
 and both have a result if either does, and corresponding parameter and 
 result types are the same, or, for access parameters<span class="insert2">&nbsp;or access results</span>, corresponding designated types are the same<span class="insert2">, 
-or corresponding designated profiles are type conformant</span>. <A NAME="I3906"></A></div>
+or corresponding designated profiles are type conformant</span>. <A NAME="I3911"></A></div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><A NAME="I3907"></A><A NAME="I3908"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><A NAME="I3912"></A><A NAME="I3913"></A>Two 
 profiles are <I>mode conformant</I> if<span class="insert3">:</span><span class="delete3">&nbsp;they are type-conformant, and corresponding parameters have identical 
 modes, and, for access parameters</span><span class="insert2"><span class="delete3">&nbsp;or access result types</span></span><span class="delete3">, the designated 
 subtypes statically match</span><span class="insert2"><span class="delete3">, 
-or the designated profiles are subtype conformant.</span></span><span class="delete3">&nbsp;<A NAME="I3909"></A></span></div>
+or the designated profiles are subtype conformant.</span></span><span class="delete3">&nbsp;<A NAME="I3914"></A></span></div>
 <div class="paranum"><a name="p16.1">16.1/3</a></div>
 <div class="Bulleted"><span class="insert3">they are type conformant; 
 and</span></div>
@@ -148,17 +148,17 @@ and</span></div>
 <div class="Bulleted"><span class="insert3">for corresponding access 
 parameters and any access result type, the designated subtypes statically 
 match and either both or neither are access-to-constant, or the designated 
-profiles are subtype conformant. <A NAME="I3910"></A></span></div>
+profiles are subtype conformant. <A NAME="I3915"></A></span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><A NAME="I3911"></A><A NAME="I3912"></A>Two profiles 
+<div class="Normal"><A NAME="I3916"></A><A NAME="I3917"></A>Two profiles 
 are <I>subtype conformant</I> if they are <span class="insert3">mode 
 conformant</span><span class="delete3">&nbsp;mode-conformant</span>, corresponding 
 subtypes of the profile statically match, and the associated calling 
 conventions are the same. The profile of a generic formal subprogram 
 is not <span class="insert3">subtype conformant</span><span class="delete3">&nbsp;subtype-conformant</span> 
-with any other profile. <A NAME="I3913"></A></div>
+with any other profile. <A NAME="I3918"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><A NAME="I3914"></A><A NAME="I3915"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><A NAME="I3919"></A><A NAME="I3920"></A>Two 
 profiles are <I>fully conformant</I> if they are <span class="insert3">subtype 
 conformant</span><span class="delete3">&nbsp;subtype-conformant</span>, <span class="insert3">if 
 they have access-to-subprogram results whose designated profiles are 
@@ -180,7 +180,7 @@ that are fully conformant with one another; and</span></div>
 <div class="Bulleted"><span class="insert3">for access-to-subprogram 
 parameters, the designated profiles are fully conformant.</span>&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3916"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3921"></A>Two 
 expressions are <I>fully conformant</I> if, after replacing each use 
 of an operator with the equivalent <SPAN Class="swiss"><A HREF="RM-6-4.html#S0218">function_call</A></SPAN>: 
 </div>
@@ -220,13 +220,13 @@ if both are user-defined literals then they shall have the same textual
 representation</span><span class="delete5">&nbsp;has the same value as the 
 corresponding literal in the other</span>.</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Normal"><A NAME="I3917"></A>Two <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>s 
+<div class="Normal"><A NAME="I3922"></A>Two <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>s 
 are <I>fully conformant</I> if they have the same number of discriminants, 
 and discriminants in the same positions have the same names, statically 
 matching subtypes, and <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
-that are fully conformant with one another. <A NAME="I3918"></A></div>
+that are fully conformant with one another. <A NAME="I3923"></A></div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Normal"><A NAME="I3919"></A>Two <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
+<div class="Normal"><A NAME="I3924"></A>Two <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
 are <I>fully conformant</I> if they are both <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>s 
 or are both <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s, 
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
@@ -234,7 +234,7 @@ the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s
 of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s 
 (if any) fully conform.&nbsp;</div>
 <div class="paranum"><a name="p24.1">24.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I3920"></A>The <I>prefixed 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I3925"></A>The <I>prefixed 
 view profile</I> of a subprogram is the profile obtained by omitting 
 the first parameter of that subprogram. There is no prefixed view profile 
 for a parameterless subprogram. For the purposes of defining subtype 

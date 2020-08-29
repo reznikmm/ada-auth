@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,27 +51,28 @@ for a task or a delay statement.&nbsp;</div>
 The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>package</B>&nbsp;Ada.Real_Time.Timing_Events<span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I9808"></A></div>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><A NAME="I9830"></A></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9809"></A>Timing_Event&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
-&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9810"></A>Timing_Event_Handler<BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9831"></A>Timing_Event&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9832"></A>Timing_Event_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B>&nbsp;(Event&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9811"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9833"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timing_Event_Handler);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9812"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9834"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timing_Event_Handler);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9813"></A>Current_Handler&nbsp;(Event&nbsp;:&nbsp;Timing_Event)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9835"></A>Current_Handler&nbsp;(Event&nbsp;:&nbsp;Timing_Event)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Timing_Event_Handler;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9814"></A>Cancel_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9836"></A>Cancel_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9815"></A>Time_Of_Event&nbsp;(Event&nbsp;:&nbsp;Timing_Event)&nbsp;<B>return</B>&nbsp;Time;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9837"></A>Time_Of_Event&nbsp;(Event&nbsp;:&nbsp;Timing_Event)&nbsp;<B>return</B>&nbsp;Time;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -79,18 +80,18 @@ The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00297.TXT">AI95-00297-01</A></I>} 
 The type Timing_Event represents a time in the future when an event is 
-to occur. The type Timing_Event needs finalization<A NAME="I9816"></A> 
+to occur. The type Timing_Event needs finalization<A NAME="I9838"></A> 
 (see <A HREF="AA-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00297.TXT">AI95-00297-01</A></I>} 
 An object of type Timing_Event is said to be <I>set</I> if it is associated 
 with a nonnull value of type Timing_Event_Handler and <I>cleared</I> 
-otherwise. All Timing_Event objects are initially cleared. <A NAME="I9817"></A><A NAME="I9818"></A></div>
+otherwise. All Timing_Event objects are initially cleared. <A NAME="I9839"></A><A NAME="I9840"></A></div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00297.TXT">AI95-00297-01</A></I>} 
 The type Timing_Event_Handler identifies a protected procedure to be 
 executed by the implementation when the timing event occurs. Such a protected 
-procedure is called a <I>handler</I>. <A NAME="I9819"></A></div>
+procedure is called a <I>handler</I>. <A NAME="I9841"></A></div>
 <div class="paranum"><a name="p10.a">10.a/2</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
 </B>Type Timing_Event is tagged. This makes it possible to share a handler 
@@ -257,7 +258,7 @@ A Timing_Event_Handler can be associated with several Timing_Event objects.</div
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p27.a">27.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00297.TXT">AI95-00297-01</A></I>} 
-<A NAME="I9820"></A>The package Real_Time.Timing_Events is new.&nbsp;</div>
+<A NAME="I9842"></A>The package Real_Time.Timing_Events is new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p27.b">27.b/3</a></div>

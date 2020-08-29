@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0242-1.TXT">AI12-0242-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
-Reduction expressions<A NAME="I3293"></A><A NAME="I3294"></A> provide 
+Reduction expressions<A NAME="I3295"></A><A NAME="I3296"></A> provide 
 a way to map or transform a collection of values into a new set of values, 
 and then summarize the values produced by applying an operation to reduce 
 the set to a single value result. A reduction expression is represented 
@@ -56,20 +56,20 @@ set to a single value.</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0242-1.TXT">AI12-0242-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
-<SPAN Class="swiss">reduction_attribute_reference</SPAN><A NAME="I3295"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3296"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0159">value_sequence</A></SPAN>'<A NAME="I3297"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3298"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I3299"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN></div>
+<SPAN Class="swiss">reduction_attribute_reference</SPAN><A NAME="I3297"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3298"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0159">value_sequence</A></SPAN>'<A NAME="I3299"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3300"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I3301"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN></div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
-<SPAN Class="swiss">value_sequence</SPAN><A NAME="I3300"></A><A NAME="S0159"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;'['&nbsp;[<B>parallel</B>[(<A NAME="I3301"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN>)]]&nbsp;<A NAME="I3302"></A><SPAN Class="swiss"><A HREF="AA-4-3-5.html#S0131">iterated_element_association</A></SPAN>&nbsp;']'</div>
+<SPAN Class="swiss">value_sequence</SPAN><A NAME="I3302"></A><A NAME="S0159"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;'['&nbsp;[<B>parallel</B>[(<A NAME="I3303"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN>)]]&nbsp;<A NAME="I3304"></A><SPAN Class="swiss"><A HREF="AA-4-3-5.html#S0131">iterated_element_association</A></SPAN>&nbsp;']'</div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
-<SPAN Class="swiss">reduction_attribute_designator</SPAN><A NAME="I3303"></A><A NAME="S0160"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reduction_</I><A NAME="I3304"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>(<A NAME="I3305"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0161">reduction_specification</A></SPAN>)</div>
+<SPAN Class="swiss">reduction_attribute_designator</SPAN><A NAME="I3305"></A><A NAME="S0160"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reduction_</I><A NAME="I3306"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>(<A NAME="I3307"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0161">reduction_specification</A></SPAN>)</div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0348-1.TXT">AI12-0348-1</A></I>} 
-<SPAN Class="swiss">reduction_specification</SPAN><A NAME="I3306"></A><A NAME="S0161"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reducer_</I><A NAME="I3307"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>,&nbsp;<I>initial_value_</I><A NAME="I3308"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></div>
+<SPAN Class="swiss">reduction_specification</SPAN><A NAME="I3308"></A><A NAME="S0161"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reducer_</I><A NAME="I3309"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>,&nbsp;<I>initial_value_</I><A NAME="I3310"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0250-1.TXT">AI12-0250-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
@@ -112,15 +112,17 @@ represents the type of the input values to the reduction.&nbsp;</div>
 <I>Accum_Type</I> is a subtype of the expected type of the <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN>.</div>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
-A <I>reducer subprogram</I><A NAME="I3309"></A> is either subtype conformant 
+A <I>reducer subprogram</I><A NAME="I3311"></A> is either subtype conformant 
 with the following specification:</div>
 <div class="paranum"><a name="p12">12/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<I>Accum_Type</I>;&nbsp;Value&nbsp;:&nbsp;<I>Value_Type</I>)&nbsp;<B>return</B>&nbsp;<I>Accum_Type</I>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<I>Accum_Type</I>;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;<I>Value_Type</I>)&nbsp;<B>return</B>&nbsp;<I>Accum_Type</I>;</div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Bulleted-NoPrefix" style="margin-bottom: 0.3em">or is subtype 
 conformant with the following specification:</div>
 <div class="paranum"><a name="p14">14/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;<I>Accum_Type</I>;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;<I>Value_Type</I>);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Reducer(Accumulator&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;<I>Accum_Type</I>;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;<I>Value_Type</I>);</div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 The <I>reducer_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -177,7 +179,7 @@ parameter of the subprogram denoted by the <I>reducer_</I><SPAN Class="swiss"><A
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0250-1.TXT">AI12-0250-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0327-1.TXT">AI12-0327-1</A></I>} 
-<A NAME="I3310"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0159">value_sequence</A></SPAN>, 
+<A NAME="I3312"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0159">value_sequence</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-3-5.html#S0131">iterated_element_association</A></SPAN> 
 is elaborated, then an iteration is performed, and for each value conditionally 
 produced by the iteration (see <A HREF="AA-5-5.html">5.5</A> and <A HREF="AA-5-5-2.html">5.5.2</A>), 
@@ -195,7 +197,7 @@ the enclosing <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attri
 is a parallel construct, and the sequence of values is generated by a 
 parallel iteration (as defined in <A HREF="AA-5-5.html">5.5</A>, <A HREF="AA-5-5-1.html">5.5.1</A>, 
 and <A HREF="AA-5-5-2.html">5.5.2</A>), as a set of non-empty, non-overlapping 
-contiguous chunks (<I>subsequences</I>)<A NAME="I3311"></A> with one 
+contiguous chunks (<I>subsequences</I>)<A NAME="I3313"></A> with one 
 logical thread of control (see clause <A HREF="AA-9.html">9</A>) associated 
 with each subsequence. If there is a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0180">chunk_specification</A></SPAN>, 
 it determines the maximum number of chunks, as defined in <A HREF="AA-5-5.html">5.5</A>; 
@@ -210,7 +212,7 @@ V, the following attribute is defined:</div>
 <div class="paranum"><a name="p24">24/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">V'Reduce(Reducer, 
 Initial_Value)</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3312"></A><A NAME="I3313"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
+<A NAME="I3314"></A><A NAME="I3315"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0348-1.TXT">AI12-0348-1</A></I>} 
 This attribute represents a <I>reduction expression</I>, and is in the 
 form of a <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN>. 
@@ -218,14 +220,14 @@ form of a <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attribute
 <div class="paranum"><a name="p25">25/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0348-1.TXT">AI12-0348-1</A></I>} 
-<A NAME="I3314"></A>The evaluation of a use of this attribute begins 
+<A NAME="I3316"></A>The evaluation of a use of this attribute begins 
 by evaluating the parts of the <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0160">reduction_attribute_designator</A></SPAN> 
 (the <I>reducer_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 Reducer and the <I>initial_value_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
-Initial_Value), in an arbitrary order.<A NAME="I3315"></A> It then initializes 
+Initial_Value), in an arbitrary order.<A NAME="I3317"></A> It then initializes 
 the <I>accumulator</I> of the reduction expression to the value of the 
 <I>initial_value_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
-(the <I>initial value</I>).<A NAME="I3316"></A> <A NAME="I3317"></A> 
+(the <I>initial value</I>).<A NAME="I3318"></A> <A NAME="I3319"></A> 
 The <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0159">value_sequence</A></SPAN> 
 V is then evaluated.</div>
 <div class="paranum"><a name="p26">26/5</a></div>
@@ -307,7 +309,7 @@ the following attributes are defined:</div>
 <div class="paranum"><a name="p33">33/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">X'Reduce(Reducer, 
 Initial_Value)</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3318"></A><A NAME="I3319"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0242-1.TXT">AI12-0242-1</A></I>} 
+<A NAME="I3320"></A><A NAME="I3321"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0242-1.TXT">AI12-0242-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0348-1.TXT">AI12-0348-1</A></I>} 
 X'Reduce is a reduction expression that yields a result equivalent to 
 replacing the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -318,7 +320,7 @@ of the attribute with the <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0159">val
 <div class="paranum"><a name="p34">34/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">X'Parallel_Reduce(Reducer, 
 Initial_Value)</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I3320"></A><A NAME="I3321"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0242-1.TXT">AI12-0242-1</A></I>} 
+<A NAME="I3322"></A><A NAME="I3323"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0242-1.TXT">AI12-0242-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0348-1.TXT">AI12-0348-1</A></I>} 
 X'Parallel_Reduce is a reduction expression that yields a result equivalent 
 to replacing the attribute <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
@@ -332,7 +334,7 @@ of the attribute with the <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0159">val
 <div class="paranum"><a name="p35">35/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0348-1.TXT">AI12-0348-1</A></I>} 
-<A NAME="I3322"></A>For a parallel reduction expression, it is a bounded 
+<A NAME="I3324"></A>For a parallel reduction expression, it is a bounded 
 error if the reducer subprogram is not associative. That is, for any 
 arbitrary values of subtype <I>Value_Type</I> <I>A</I>, <I>B</I>, <I>C</I> 
 and a reducer function <I>R</I>, the result of <I>R</I> (<I>A</I>, <I>R</I> 
@@ -341,7 +343,7 @@ and a reducer function <I>R</I>, the result of <I>R</I> (<I>A</I>, <I>R</I>
 or a result that does not match the equivalent sequential reduction expression 
 due to the order of calls on the reducer subprogram being unspecified 
 in the overall reduction. Analogous rules apply in the case of a reduction 
-procedure.<A NAME="I3323"></A></div>
+procedure.<A NAME="I3325"></A></div>
 <div class="paranum"><a name="p35.a">35.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>In a sequential reduction expression, 
 the reducer subprogram is called in a left-to-right order, whereas in 
@@ -375,8 +377,8 @@ An expression function that returns its result as a Reduction Expression:</div>
 An expression function that computes the Sine of X using a Taylor expansion:</div>
 <div class="paranum"><a name="p39">39/5</a></div>
 <div class="Examples"><B>function</B>&nbsp;Sine&nbsp;(X&nbsp;:&nbsp;Float;&nbsp;Num_Terms&nbsp;:&nbsp;Positive&nbsp;:=&nbsp;5)&nbsp;<B>return</B>&nbsp;Float&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;([<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1..Num_Terms&nbsp;=&gt;&nbsp;(-1.0)**(I-1)&nbsp;*&nbsp;X**(2*I-1)/Float(Factorial(2*I-1))]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Reduce(&quot;+&quot;,&nbsp;0.0));</div>
+&nbsp;&nbsp;&nbsp;([<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1..Num_Terms&nbsp;=&gt;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(-1.0)**(I-1)&nbsp;*&nbsp;X**(2*I-1)/Float(Factorial(2*I-1))]'Reduce(&quot;+&quot;,&nbsp;0.0));</div>
 <div class="paranum"><a name="p40">40/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0379-1.TXT">AI12-0379-1</A></I>} 
@@ -393,7 +395,7 @@ An expression function to compute the value of Pi:</div>
 <B>function</B>&nbsp;Pi&nbsp;(Number_Of_Steps&nbsp;:&nbsp;Natural&nbsp;:=&nbsp;10_000)&nbsp;<B>return</B>&nbsp;Real&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;(1.0&nbsp;/&nbsp;Real&nbsp;(Number_Of_Steps)&nbsp;*<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;[<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;Number_Of_Steps&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4.0&nbsp;/&nbsp;(1.0&nbsp;+&nbsp;((Real&nbsp;(I)&nbsp;-&nbsp;0.5)&nbsp;*&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(4.0&nbsp;/&nbsp;(1.0&nbsp;+&nbsp;((Real&nbsp;(I)&nbsp;-&nbsp;0.5)&nbsp;*<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1.0&nbsp;/&nbsp;Real&nbsp;(Number_Of_Steps)))**2))]<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Reduce(&quot;+&quot;,&nbsp;0.0));</div>
 <div class="paranum"><a name="p44">44/5</a></div>
@@ -440,7 +442,7 @@ that are greater than 100.0:</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0242-1.TXT">AI12-0242-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0348-1.TXT">AI12-0348-1</A></I>} 
-<A NAME="I3324"></A>Reduction expressions attributes are new.&nbsp;</div>
+<A NAME="I3326"></A>Reduction expressions attributes are new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

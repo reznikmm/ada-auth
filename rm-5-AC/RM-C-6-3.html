@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,21 +43,21 @@ set and clear an atomic flag object.</span>&nbsp;</div>
 library package System.Atomic_Operations.Test_And_Set has the following 
 declaration:</span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><span class="insert5"><B>package</B>&nbsp;System.Atomic_Operations.Test_And_Set<A NAME="I8908"></A><BR>
+<div class="Examples"><span class="insert5"><B>package</B>&nbsp;System.Atomic_Operations.Test_And_Set<A NAME="I8929"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;<B>is</B></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8909"></A>Test_And_Set_Flag&nbsp;<B>is&nbsp;mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN><BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8930"></A>Test_And_Set_Flag&nbsp;<B>is&nbsp;mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Atomic,&nbsp;Default_Value&nbsp;=&gt;&nbsp;0,&nbsp;Size&nbsp;=&gt;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8910"></A>Atomic_Test_And_Set<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8931"></A>Atomic_Test_And_Set<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Test_And_Set_Flag)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8911"></A>Atomic_Clear<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8932"></A>Atomic_Clear<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Test_And_Set_Flag)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8912"></A>Is_Lock_Free<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8933"></A>Is_Lock_Free<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>aliased</B>&nbsp;Test_And_Set_Flag)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>

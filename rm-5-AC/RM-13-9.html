@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 <HR>
 <H1>13.9 Unchecked Type Conversions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5873"></A><A NAME="I5874"></A><A NAME="I5875"></A><A NAME="I5876"></A><A NAME="I5877"></A>An 
+<div class="Normal"><A NAME="I5868"></A><A NAME="I5869"></A><A NAME="I5870"></A><A NAME="I5871"></A><A NAME="I5872"></A>An 
 unchecked type conversion can be achieved by a call to an instance of 
 the generic function Unchecked_Conversion.&nbsp;</div>
 
@@ -51,7 +51,7 @@ generic library function exists:&nbsp;</div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Source(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Target(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-<A NAME="I5878"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<span class="insert3"><BR>
+<A NAME="I5873"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<span class="insert3"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;</span><span class="insert5">Pure,&nbsp;Nonblocking,&nbsp;</span><span class="insert3">Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<span class="delete3"><BR>
 <B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;Ada.Unchecked_Conversion);</span><span class="delete5"><BR>
 <B>pragma</B>&nbsp;Pure(Ada.Unchecked_Conversion);</span></div>
@@ -77,7 +77,7 @@ of</span><span class="delete3">&nbsp;=</span> Target'Alignment<span class="inser
 <div class="Bulleted">The target subtype is not an unconstrained composite 
 subtype.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I5879"></A><A NAME="I5880"></A>S and the 
+<div class="Bulleted"><A NAME="I5874"></A><A NAME="I5875"></A>S and the 
 target subtype both have a contiguous representation.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted">The representation of S is a representation of 
@@ -112,12 +112,12 @@ of the target type. It should take advantage of the permission to return
 by reference when possible. Restrictions on unchecked conversions should 
 be avoided unless required by the target environment.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5881"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5876"></A>The 
 recommended level of support for unchecked conversions is:&nbsp;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Bulleted">Unchecked conversions should be supported and should 
 be reversible in the cases where this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-defines the result.<A NAME="I5882"></A> <A NAME="I5883"></A>To enable 
+defines the result.<A NAME="I5877"></A> <A NAME="I5878"></A>To enable 
 meaningful use of unchecked conversion, a contiguous representation should 
 be used for elementary subtypes, for statically constrained array subtypes 
 whose component subtype is one of the subtypes described in this paragraph, 

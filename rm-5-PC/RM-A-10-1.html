@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,198 +37,248 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Text_IO has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p2">2</a></div>
+<div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.IO_Exceptions;<BR>
-<B>package</B>&nbsp;Ada.Text_IO&nbsp;<B>is</B><A NAME="I6948"></A></div>
+<B>package</B>&nbsp;Ada.Text_IO<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><A NAME="I6943"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6949"></A>File_Type&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6944"></A>File_Type&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6950"></A>File_Mode&nbsp;<B>is</B>&nbsp;(In_File,&nbsp;Out_File,&nbsp;Append_File);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6945"></A>File_Mode&nbsp;<B>is</B>&nbsp;(In_File,&nbsp;Out_File,&nbsp;Append_File);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6951"></A>Count&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6952"></A>Positive_Count&nbsp;<B>is</B>&nbsp;Count&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Count'Last;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I6953"></A>Unbounded&nbsp;:&nbsp;<B>constant</B>&nbsp;Count&nbsp;:=&nbsp;0;&nbsp;--<SPAN Class="roman"><I>&nbsp;line&nbsp;and&nbsp;page&nbsp;length</I></SPAN></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6946"></A>Count&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6947"></A>Positive_Count&nbsp;<B>is</B>&nbsp;Count&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Count'Last;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6948"></A>Unbounded&nbsp;:&nbsp;<B>constant</B>&nbsp;Count&nbsp;:=&nbsp;0;&nbsp;--<SPAN Class="roman"><I>&nbsp;line&nbsp;and&nbsp;page&nbsp;length</I></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6954"></A>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6955"></A>Number_Base&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;2&nbsp;..&nbsp;16;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6949"></A>Field&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6950"></A>Number_Base&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;2&nbsp;..&nbsp;16;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6956"></A>Type_Set&nbsp;<B>is</B>&nbsp;(Lower_Case,&nbsp;Upper_Case);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6951"></A>Type_Set&nbsp;<B>is</B>&nbsp;(Lower_Case,&nbsp;Upper_Case);</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;File&nbsp;Management</I></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6957"></A>Create&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6952"></A>Create&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode&nbsp;:=&nbsp;Out_File;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;&quot;&quot;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;&quot;&quot;);</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6958"></A>Open&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6953"></A>Open&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6959"></A>Close&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6960"></A>Delete&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6961"></A>Reset&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6962"></A>Reset&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6954"></A>Close&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6955"></A>Delete&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6956"></A>Reset&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6957"></A>Reset&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Type);</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6963"></A>Mode&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;File_Mode;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6964"></A>Name&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6965"></A>Form&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6958"></A>Mode&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;File_Mode;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6959"></A>Name&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6960"></A>Form&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6966"></A>Is_Open(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6961"></A>Is_Open(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Control&nbsp;of&nbsp;default&nbsp;input&nbsp;and&nbsp;output&nbsp;files</I></SPAN></div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6967"></A>Set_Input&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6968"></A>Set_Output(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6969"></A>Set_Error&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6962"></A>Set_Input&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6963"></A>Set_Output(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6964"></A>Set_Error&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6970"></A>Standard_Input&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6971"></A>Standard_Output&nbsp;<B>return</B>&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6972"></A>Standard_Error&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6965"></A>Standard_Input&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6966"></A>Standard_Output&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6967"></A>Standard_Error&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6973"></A>Current_Input&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6974"></A>Current_Output&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6975"></A>Current_Error&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6968"></A>Current_Input&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6969"></A>Current_Output&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6970"></A>Current_Error&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Type;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6976"></A>File_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>constant</B>&nbsp;File_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6971"></A>File_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>constant</B>&nbsp;File_Type;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6977"></A>Standard_Input&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6978"></A>Standard_Output&nbsp;<B>return</B>&nbsp;File_Access;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6979"></A>Standard_Error&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6972"></A>Standard_Input&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6973"></A>Standard_Output&nbsp;<B>return</B>&nbsp;File_Access;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6974"></A>Standard_Error&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6980"></A>Current_Input&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6981"></A>Current_Output&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6982"></A>Current_Error&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;</div>
-<div class="paranum"><a name="p21">21/1</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6975"></A>Current_Input&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6976"></A>Current_Output&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6977"></A>Current_Error&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="paranum"><a name="p21">21/5</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>Buffer&nbsp;control</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6983"></A>Flush&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6984"></A>Flush;</div>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6978"></A>Flush&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6979"></A>Flush<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Specification&nbsp;of&nbsp;line&nbsp;and&nbsp;page&nbsp;lengths</I></SPAN></div>
-<div class="paranum"><a name="p23">23</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6985"></A>Set_Line_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Count);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6986"></A>Set_Line_Length(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Count);</div>
-<div class="paranum"><a name="p24">24</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6987"></A>Set_Page_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Count);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6988"></A>Set_Page_Length(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Count);</div>
-<div class="paranum"><a name="p25">25</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6989"></A>Line_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Count;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6990"></A>Line_Length&nbsp;<B>return</B>&nbsp;Count;</div>
-<div class="paranum"><a name="p26">26</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6991"></A>Page_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Count;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6992"></A>Page_Length&nbsp;<B>return</B>&nbsp;Count;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6980"></A>Set_Line_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6981"></A>Set_Line_Length(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6982"></A>Set_Page_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6983"></A>Set_Page_Length(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6984"></A>Line_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Count;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6985"></A>Line_Length&nbsp;<B>return</B>&nbsp;Count<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6986"></A>Page_Length(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Count;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6987"></A>Page_Length&nbsp;<B>return</B>&nbsp;Count<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Column,&nbsp;Line,&nbsp;and&nbsp;Page&nbsp;Control</I></SPAN></div>
-<div class="paranum"><a name="p28">28</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6993"></A>New_Line&nbsp;&nbsp;&nbsp;(File&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6994"></A>New_Line&nbsp;&nbsp;&nbsp;(Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);</div>
-<div class="paranum"><a name="p29">29</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6995"></A>Skip_Line&nbsp;&nbsp;(File&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6996"></A>Skip_Line&nbsp;&nbsp;(Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);</div>
-<div class="paranum"><a name="p30">30</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6997"></A>End_Of_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6998"></A>End_Of_Line&nbsp;<B>return</B>&nbsp;Boolean;</div>
-<div class="paranum"><a name="p31">31</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6999"></A>New_Page&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7000"></A>New_Page;</div>
-<div class="paranum"><a name="p32">32</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7001"></A>Skip_Page&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7002"></A>Skip_Page;</div>
-<div class="paranum"><a name="p33">33</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7003"></A>End_Of_Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7004"></A>End_Of_Page&nbsp;<B>return</B>&nbsp;Boolean;</div>
-<div class="paranum"><a name="p34">34</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7005"></A>End_Of_File(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7006"></A>End_Of_File&nbsp;<B>return</B>&nbsp;Boolean;</div>
-<div class="paranum"><a name="p35">35</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7007"></A>Set_Col&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7008"></A>Set_Col&nbsp;(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);</div>
-<div class="paranum"><a name="p36">36</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7009"></A>Set_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7010"></A>Set_Line(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);</div>
-<div class="paranum"><a name="p37">37</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7011"></A>Col&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7012"></A>Col&nbsp;&nbsp;<B>return</B>&nbsp;Positive_Count;</div>
-<div class="paranum"><a name="p38">38</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7013"></A>Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7014"></A>Line&nbsp;<B>return</B>&nbsp;Positive_Count;</div>
-<div class="paranum"><a name="p39">39</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7015"></A>Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7016"></A>Page&nbsp;<B>return</B>&nbsp;Positive_Count;</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6988"></A>New_Line&nbsp;&nbsp;&nbsp;(File&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6989"></A>New_Line&nbsp;&nbsp;&nbsp;(Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6990"></A>Skip_Line&nbsp;&nbsp;(File&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6991"></A>Skip_Line&nbsp;&nbsp;(Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6992"></A>End_Of_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6993"></A>End_Of_Line&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6994"></A>New_Page&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6995"></A>New_Page<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6996"></A>Skip_Page&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6997"></A>Skip_Page<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p33">33/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6998"></A>End_Of_Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I6999"></A>End_Of_Page&nbsp;<B>return</B>&nbsp;Boolean<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p34">34/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7000"></A>End_Of_File(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7001"></A>End_Of_File&nbsp;<B>return</B>&nbsp;Boolean<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p35">35/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7002"></A>Set_Col&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7003"></A>Set_Col&nbsp;(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p36">36/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7004"></A>Set_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7005"></A>Set_Line(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p37">37/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7006"></A>Col&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7007"></A>Col&nbsp;&nbsp;<B>return</B>&nbsp;Positive_Count<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p38">38/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7008"></A>Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7009"></A>Line&nbsp;<B>return</B>&nbsp;Positive_Count<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p39">39/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7010"></A>Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7011"></A>Page&nbsp;<B>return</B>&nbsp;Positive_Count<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p40">40</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character&nbsp;Input-Output</I></SPAN></div>
-<div class="paranum"><a name="p41">41</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7017"></A>Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Character);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7018"></A>Get(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Character);</div>
-<div class="paranum"><a name="p42">42</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7019"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7020"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Character);</div>
-<div class="paranum"><a name="p43">43</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7021"></A>Look_Ahead&nbsp;(File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="paranum"><a name="p41">41/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7012"></A>Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Character)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7013"></A>Get(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Character)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p42">42/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7014"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7015"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Character)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p43">43/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7016"></A>Look_Ahead&nbsp;(File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End_Of_Line&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7022"></A>Look_Ahead&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End_Of_Line&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</div>
-<div class="paranum"><a name="p44">44</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7023"></A>Get_Immediate(File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7024"></A>Get_Immediate(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character);</div>
-<div class="paranum"><a name="p45">45</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7025"></A>Get_Immediate(File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End_Of_Line&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7017"></A>Look_Ahead&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End_Of_Line&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p44">44/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7018"></A>Get_Immediate(File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7019"></A>Get_Immediate(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p45">45/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7020"></A>Get_Immediate(File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Available&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7026"></A>Get_Immediate(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Available&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Available&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7021"></A>Get_Immediate(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Available&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p46">46</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;String&nbsp;Input-Output</I></SPAN></div>
-<div class="paranum"><a name="p47">47</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7027"></A>Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;String);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7028"></A>Get(Item&nbsp;:&nbsp;<B>out</B>&nbsp;String);</div>
-<div class="paranum"><a name="p48">48</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7029"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;String);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7030"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String);</div>
-<div class="paranum"><a name="p49">49</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7031"></A>Get_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="paranum"><a name="p47">47/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7022"></A>Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;String)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7023"></A>Get(Item&nbsp;:&nbsp;<B>out</B>&nbsp;String)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p48">48/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7024"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7025"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p49">49/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7026"></A>Get_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7032"></A>Get_Line(Item&nbsp;:&nbsp;<B>out</B>&nbsp;String;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);</div>
-<div class="paranum"><a name="p49.1">49.1/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7033"></A>Get_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7034"></A>Get_Line&nbsp;<B>return</B>&nbsp;String;</div>
-<div class="paranum"><a name="p50">50</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7035"></A>Put_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;String);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7036"></A>Put_Line(Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Natural)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7027"></A>Get_Line(Item&nbsp;:&nbsp;<B>out</B>&nbsp;String;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Natural)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p49.1">49.1/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7028"></A>Get_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;String<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7029"></A>Get_Line&nbsp;<B>return</B>&nbsp;String<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p50">50/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7030"></A>Put_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7031"></A>Put_Line(Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p51">51</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;Generic&nbsp;packages&nbsp;for&nbsp;Input-Output&nbsp;of&nbsp;Integer&nbsp;Types</I></SPAN></div>
 <div class="paranum"><a name="p52">52</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Num&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7037"></A>Integer_IO&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7032"></A>Integer_IO&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p53">53</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7038"></A>Default_Width&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7039"></A>Default_Base&nbsp;&nbsp;:&nbsp;Number_Base&nbsp;:=&nbsp;10;</div>
-<div class="paranum"><a name="p54">54</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7040"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7033"></A>Default_Width&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Width;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7034"></A>Default_Base&nbsp;&nbsp;:&nbsp;Number_Base&nbsp;:=&nbsp;10;</div>
+<div class="paranum"><a name="p54">54/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7035"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;0);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7041"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7036"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p55">55/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7042"></A>Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7037"></A>Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7043"></A>Put(Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7038"></A>Put(Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7044"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7039"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7045"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7040"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;</div>
@@ -237,29 +287,33 @@ Text_IO has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p57">57</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Num&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7046"></A>Modular_IO&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7041"></A>Modular_IO&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p58">58</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7047"></A>Default_Width&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7048"></A>Default_Base&nbsp;&nbsp;:&nbsp;Number_Base&nbsp;:=&nbsp;10;</div>
-<div class="paranum"><a name="p59">59</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7049"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7042"></A>Default_Width&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Width;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7043"></A>Default_Base&nbsp;&nbsp;:&nbsp;Number_Base&nbsp;:=&nbsp;10;</div>
+<div class="paranum"><a name="p59">59/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7044"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;0);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7050"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7045"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p60">60/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7051"></A>Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7046"></A>Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7052"></A>Put(Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7047"></A>Put(Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7053"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7048"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7054"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7049"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base&nbsp;:&nbsp;<B>in</B>&nbsp;Number_Base&nbsp;:=&nbsp;Default_Base)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;</div>
@@ -270,33 +324,37 @@ Text_IO has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p63">63</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Num&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7055"></A>Float_IO&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7050"></A>Float_IO&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p64">64</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7056"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;2;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7057"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Digits-1;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7058"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;3;</div>
-<div class="paranum"><a name="p65">65</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7059"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7051"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;2;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7052"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Digits-1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7053"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;3;</div>
+<div class="paranum"><a name="p65">65/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7054"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7060"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);</div>
-<div class="paranum"><a name="p66">66</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7061"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7055"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p66">66/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7056"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7062"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7057"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p67">67/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7063"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7058"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7064"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7059"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
@@ -305,33 +363,37 @@ Text_IO has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p68">68</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Num&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7065"></A>Fixed_IO&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7060"></A>Fixed_IO&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p69">69</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7066"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Fore;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7067"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7068"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;</div>
-<div class="paranum"><a name="p70">70</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7069"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7061"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Fore;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7062"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Aft;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7063"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;</div>
+<div class="paranum"><a name="p70">70/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7064"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7070"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);</div>
-<div class="paranum"><a name="p71">71</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7071"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7065"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p71">71/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7066"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7072"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7067"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p72">72/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7073"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7068"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7074"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7069"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
@@ -340,33 +402,37 @@ Text_IO has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p73">73</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Num&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7075"></A>Decimal_IO&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7070"></A>Decimal_IO&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p74">74</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7076"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Fore;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7077"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7078"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;</div>
-<div class="paranum"><a name="p75">75</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7079"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7071"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Fore;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7072"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Aft;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7073"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;</div>
+<div class="paranum"><a name="p75">75/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7074"></A>Get(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7080"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);</div>
-<div class="paranum"><a name="p76">76</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7081"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7075"></A>Get(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p76">76/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7076"></A>Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7082"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7077"></A>Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p77">77/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7083"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7078"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7084"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7079"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
@@ -377,28 +443,32 @@ Text_IO has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p79">79</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Enum&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7085"></A>Enumeration_IO&nbsp;<B>is</B></div>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7080"></A>Enumeration_IO&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p80">80</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7086"></A>Default_Width&nbsp;&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7087"></A>Default_Setting&nbsp;:&nbsp;Type_Set&nbsp;:=&nbsp;Upper_Case;</div>
-<div class="paranum"><a name="p81">81</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7088"></A>Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Enum);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7089"></A>Get(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Enum);</div>
-<div class="paranum"><a name="p82">82</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7090"></A>Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7081"></A>Default_Width&nbsp;&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I7082"></A>Default_Setting&nbsp;:&nbsp;Type_Set&nbsp;:=&nbsp;Upper_Case;</div>
+<div class="paranum"><a name="p81">81/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7083"></A>Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Enum)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7084"></A>Get(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Enum)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
+<div class="paranum"><a name="p82">82/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7085"></A>Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Enum;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Default_Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Type_Set&nbsp;:=&nbsp;Default_Setting);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7091"></A>Put(Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Enum;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Type_Set&nbsp;:=&nbsp;Default_Setting)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>overriding&nbsp;in&nbsp;out</B>&nbsp;File</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7086"></A>Put(Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Enum;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Default_Width;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Type_Set&nbsp;:=&nbsp;Default_Setting);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Type_Set&nbsp;:=&nbsp;Default_Setting)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;all</B></span>;</div>
 <div class="paranum"><a name="p83">83/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7092"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7087"></A>Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Enum;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7093"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7088"></A>Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Enum;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Type_Set&nbsp;:=&nbsp;Default_Setting)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
@@ -406,55 +476,55 @@ Text_IO has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p84">84</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;Exceptions</I></SPAN></div>
 <div class="paranum"><a name="p85">85/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7094"></A>Status_Error&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Status_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7095"></A>Mode_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Mode_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7096"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Name_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7097"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Use_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7098"></A>Device_Error&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Device_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7099"></A>End_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.End_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7100"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Data_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7101"></A>Layout_Error&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Layout_Error;<span class="delete5"><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7089"></A>Status_Error&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Status_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7090"></A>Mode_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Mode_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7091"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Name_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7092"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Use_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7093"></A>Device_Error&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Device_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7094"></A>End_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.End_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7095"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Data_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7096"></A>Layout_Error&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Layout_Error;<span class="delete5"><BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Text_IO;</span></div>
 <div class="paranum"><a name="p85.1">85.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7102"></A>Wide_File_Names&nbsp;<B>is</B></span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7097"></A>Wide_File_Names&nbsp;<B>is</B></span></div>
 <div class="paranum"><a name="p85.2">85.2/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;management</I></SPAN></span></div>
 <div class="paranum"><a name="p85.3">85.3/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7103"></A>Create&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7098"></A>Create&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode&nbsp;:=&nbsp;Out_File;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String&nbsp;:=&nbsp;&quot;&quot;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
 <div class="paranum"><a name="p85.4">85.4/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7104"></A>Open&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7099"></A>Open&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
 <div class="paranum"><a name="p85.5">85.5/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7105"></A>Name&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7100"></A>Name&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
 <div class="paranum"><a name="p85.6">85.6/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7106"></A>Form&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7101"></A>Form&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
 <div class="paranum"><a name="p85.7">85.7/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Wide_File_Names;</span></div>
 <div class="paranum"><a name="p85.8">85.8/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7107"></A>Wide_Wide_File_Names&nbsp;<B>is</B></span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7102"></A>Wide_Wide_File_Names&nbsp;<B>is</B></span></div>
 <div class="paranum"><a name="p85.9">85.9/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;management</I></SPAN></span></div>
 <div class="paranum"><a name="p85.10">85.10/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7108"></A>Create&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7103"></A>Create&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode&nbsp;:=&nbsp;Out_File;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_String&nbsp;:=&nbsp;&quot;&quot;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
 <div class="paranum"><a name="p85.11">85.11/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7109"></A>Open&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7104"></A>Open&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode&nbsp;:&nbsp;<B>in</B>&nbsp;File_Mode;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
 <div class="paranum"><a name="p85.12">85.12/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7110"></A>Name&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7105"></A>Name&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</span></div>
 <div class="paranum"><a name="p85.13">85.13/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7111"></A>Form&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7106"></A>Form&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</span></div>
 <div class="paranum"><a name="p85.14">85.14/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Wide_Wide_File_Names;</span></div>
 <div class="paranum"><a name="p85.15">85.15/5</a></div>
@@ -462,7 +532,7 @@ Text_IO has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Text_IO;</span></div>
 <div class="paranum"><a name="p86">86/2</a></div>
-<div class="Normal">The type File_Type needs finalization<A NAME="I7112"></A> 
+<div class="Normal">The type File_Type needs finalization<A NAME="I7107"></A> 
 (see <A HREF="RM-7-6.html">7.6</A>).</div>
 
 <HR>

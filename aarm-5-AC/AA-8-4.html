@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,14 +48,14 @@ achieves direct visibility of the primitive operators of a type.]&nbsp;</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a</a></div>
-<div class="Annotations"><A NAME="I4705"></A>If and only if the visibility 
+<div class="Annotations"><A NAME="I4711"></A>If and only if the visibility 
 rules allow P.A, &quot;<B>use</B> P;&quot; should make A directly visible 
 (barring name conflicts). This means, for example, that child library 
 units, and generic formals of a formal package whose <SPAN Class="swiss"><A HREF="AA-12-7.html#S0341">formal_package_actual_part</A></SPAN> 
 is (&lt;&gt;), should be made visible by a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN> 
 for the appropriate package.</div>
 <div class="paranum"><a name="p1.b">1.b</a></div>
-<div class="Annotations"><A NAME="I4706"></A>The rules for <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>s 
+<div class="Annotations"><A NAME="I4712"></A>The rules for <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>s 
 were carefully constructed to avoid so-called <I>Beaujolais</I> effects, 
 where the addition or removal of a single <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 or a single declaration in a &quot;use&quot;d package, would change the 
@@ -63,12 +63,12 @@ meaning of a program from one legal interpretation to another.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_clause</SPAN><A NAME="I4707"></A><A NAME="S0235"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4708"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0236">use_package_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4709"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0237">use_type_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">use_clause</SPAN><A NAME="I4713"></A><A NAME="S0235"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4714"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0236">use_package_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4715"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0237">use_type_clause</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_package_clause</SPAN><A NAME="I4710"></A><A NAME="S0236"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<I>package_</I><A NAME="I4711"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>package_</I><A NAME="I4712"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">use_package_clause</SPAN><A NAME="I4716"></A><A NAME="S0236"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<I>package_</I><A NAME="I4717"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>package_</I><A NAME="I4718"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0150-1.TXT">AI05-0150-1</A></I>} 
-<SPAN Class="swiss">use_type_clause</SPAN><A NAME="I4713"></A><A NAME="S0237"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<span class="insert3">[<B>all</B>]&nbsp;</span><B>type</B>&nbsp;<A NAME="I4714"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{,&nbsp;<A NAME="I4715"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>};</div>
+<SPAN Class="swiss">use_type_clause</SPAN><A NAME="I4719"></A><A NAME="S0237"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<span class="insert3">[<B>all</B>]&nbsp;</span><B>type</B>&nbsp;<A NAME="I4720"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{,&nbsp;<A NAME="I4721"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>};</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
@@ -83,7 +83,7 @@ shall denote <span class="insert2">a nonlimited view of&nbsp;</span>a package.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I4716"></A>For each <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
+<div class="Normal"><A NAME="I4722"></A>For each <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 there is a certain region of text called the <I>scope</I> of the <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>. 
 For a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN> 
 within a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0292">context_clause</A></SPAN> 
@@ -137,11 +137,11 @@ legal.&nbsp;</div>
 if it is denoted by a <I>package_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of that clause. A type is <I>named</I> in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0237">use_type_clause</A></SPAN> 
 if it is determined by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-of that clause.<A NAME="I4717"></A></span></div>
+of that clause.<A NAME="I4723"></A></span></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0150-1.TXT">AI05-0150-1</A></I>} 
-<span class="insert3"></span><A NAME="I4718"></A>For each package <span class="insert2">named 
+<span class="insert3"></span><A NAME="I4724"></A>For each package <span class="insert2">named 
 in&nbsp;</span><span class="delete2">denoted by a <I>package_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of&nbsp;</span>a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0236">use_package_clause</A></SPAN> 
 whose scope encloses a place, each declaration that occurs immediately 
@@ -196,7 +196,7 @@ the generic contract model.&nbsp;</div>
 <span class="insert3">Certain implicit declarations may become potentially 
 use-visible in certain contexts as described in <A HREF="AA-12-6.html">12.6</A>.</span></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4719"></A><A NAME="I4720"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4725"></A><A NAME="I4726"></A>A 
 declaration is <I>use-visible</I> if it is potentially use-visible, except 
 in these naming-conflict cases:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -221,7 +221,7 @@ is irrelevant for <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_lite
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I4721"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN> 
+<div class="Normal"><A NAME="I4727"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN> 
 has no effect.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
@@ -270,7 +270,7 @@ with the same defining name, and the case of <SPAN Class="swiss"><A HREF="AA-3-2
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p16.e">16.e</a></div>
-<div class="Annotations"><A NAME="I4722"></A>The <SPAN Class="swiss"><A HREF="AA-8-4.html#S0237">use_type_clause</A></SPAN> 
+<div class="Annotations"><A NAME="I4728"></A>The <SPAN Class="swiss"><A HREF="AA-8-4.html#S0237">use_type_clause</A></SPAN> 
 is new to Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
@@ -291,7 +291,7 @@ view rules (see <A HREF="AA-10-1-2.html">10.1.2</A>).</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p16.h">16.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0150-1.TXT">AI05-0150-1</A></I>} 
-<span class="insert3"><A NAME="I4723"></A>The <B>use all type</B> version 
+<span class="insert3"><A NAME="I4729"></A>The <B>use all type</B> version 
 of the <SPAN Class="swiss"><A HREF="AA-8-4.html#S0237">use_type_clause</A></SPAN> 
 is new to Ada 2012. It works similarly to prefixed views.</span>&nbsp;</div>
 

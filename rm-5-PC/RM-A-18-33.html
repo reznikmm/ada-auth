@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -122,10 +122,11 @@ The graph is represented by a map from nodes to sets of edges.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Rebuild&nbsp;path&nbsp;from&nbsp;target&nbsp;to&nbsp;source.</I></SPAN></div>
-<div class="paranum"><a name="p20">20/3</a></div>
+<div class="paranum"><a name="p20">20/5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>declare</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N&nbsp;:&nbsp;Node&nbsp;:=&nbsp;Target;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepend&nbsp;(The_Path,&nbsp;N);</span><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>while</B>&nbsp;N&nbsp;/=&nbsp;Source&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N&nbsp;:=&nbsp;Reached_From(N);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepend&nbsp;(The_Path,&nbsp;N);<BR>

@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,15 +44,15 @@
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal"><span class="insert2">The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.</span><span class="insert3"><A NAME="I9041"></A><A NAME="I9042"></A></span><span class="insert2"></span></div>
+Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.</span><span class="insert3"><A NAME="I9062"></A><A NAME="I9063"></A></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">The 
 following language-defined library package exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p2.2">2.2/5</a></div>
-<div class="Examples"><span class="insert3"><B>package</B>&nbsp;Ada.Dispatching.Non_Preemptive</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I9043"></A><BR>
-&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Non_Preemptive);</span></span><span class="insert3"><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9044"></A>Yield_To_Higher;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9045"></A>Yield_To_Same_Or_Higher&nbsp;<B>renames</B>&nbsp;Yield;<BR>
+<div class="Examples"><span class="insert3"><B>package</B>&nbsp;Ada.Dispatching.Non_Preemptive</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I9064"></A><BR>
+&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Non_Preemptive);</span></span><span class="insert3"><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9065"></A>Yield_To_Higher;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9066"></A>Yield_To_Same_Or_Higher&nbsp;<B>renames</B>&nbsp;Yield;<BR>
 <B>end</B>&nbsp;Ada.Dispatching.Non_Preemptive;</span></div>
 <div class="paranum"><a name="p2.3">2.3/3</a></div>
 <div class="Normal">&nbsp;<span class="insert3">A call of Yield_To_Higher 
@@ -93,7 +93,7 @@ queue for its active priority.</span>&nbsp;</div>
 or termination of a task,&nbsp;</span><span class="insert2">a</span><span class="insert2"><span class="delete3">&nbsp;non-blocking</span></span><span class="insert2">&nbsp;<SPAN Class="swiss"><A HREF="RM-9-6.html#S0266">delay_statement</A></SPAN></span><span class="insert3">, 
 a call to Yield_To_Higher, and a call to Yield_To_Same_Or_Higher or Yield 
 are</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;is</span></span><span class="insert2">&nbsp;the only</span><span class="insert2"><span class="delete3">&nbsp;non-blocking event that is a</span></span><span class="insert2">&nbsp;task 
-dispatching&nbsp;</span><span class="insert3">points</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;point</span></span><span class="insert2">&nbsp;(see <A HREF="RM-D-2-1.html">D.2.1</A>).<A NAME="I9046"></A> <A NAME="I9047"></A></span></div>
+dispatching&nbsp;</span><span class="insert3">points</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;point</span></span><span class="insert2">&nbsp;(see <A HREF="RM-D-2-1.html">D.2.1</A>).<A NAME="I9067"></A> <A NAME="I9068"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p10">10/2</a></div>

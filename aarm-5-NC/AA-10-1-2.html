@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +44,7 @@ whose names are needed within a compilation unit.]&nbsp;</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a</a></div>
-<div class="Annotations"><A NAME="I5205"></A>The reader should be able 
+<div class="Annotations"><A NAME="I5197"></A>The reader should be able 
 to understand a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0292">context_clause</A></SPAN> 
 without looking ahead. Similarly, when compiling a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0292">context_clause</A></SPAN>, 
 the compiler should not have to look ahead at subsequent <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0293">context_item</A></SPAN>s, 
@@ -52,7 +52,7 @@ nor at the compilation unit to which the <SPAN Class="swiss"><A HREF="AA-10-1-2.
 is attached. (We have not completely achieved this.)</div>
 <div class="paranum"><a name="p1.b">1.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
-<A NAME="I5206"></A>A <I>ripple effect</I> occurs when the legality of 
+<A NAME="I5198"></A>A <I>ripple effect</I> occurs when the legality of 
 a compilation unit could be affected by adding or removing an otherwise 
 unneeded <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 on some compilation unit on which the unit depends, directly or indirectly. 
@@ -66,24 +66,24 @@ which we also try to avoid.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I5207"></A><A NAME="S0292"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I5208"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0293">context_item</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I5199"></A><A NAME="S0292"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I5200"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0293">context_item</A></SPAN>}</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I5209"></A><A NAME="S0293"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5210"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I5211"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I5201"></A><A NAME="S0293"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5202"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I5203"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
-<SPAN Class="swiss">with_clause</SPAN><A NAME="I5212"></A><A NAME="S0294"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5213"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0295">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I5214"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0296">nonlimited_with_clause</A></SPAN></div>
+<SPAN Class="swiss">with_clause</SPAN><A NAME="I5204"></A><A NAME="S0294"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5205"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0295">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I5206"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0296">nonlimited_with_clause</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I5215"></A><A NAME="S0295"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I5216"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I5217"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I5207"></A><A NAME="S0295"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I5208"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I5209"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I5218"></A><A NAME="S0296"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I5219"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I5220"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I5210"></A><A NAME="S0296"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I5211"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I5212"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4.a">4.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0295">limited_with_clause</A></SPAN> 
 makes a limited view of a unit visible.</div>
 <div class="paranum"><a name="p4.b">4.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
-<A NAME="I5221"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
+<A NAME="I5213"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 containing the reserved word <B>private</B> is called a <I>private with_clause</I>. 
 It can be thought of as making items visible only in the private part, 
 although it really makes items visible everywhere except the visible 
@@ -93,7 +93,7 @@ that otherwise would be prohibited.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5222"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
+<div class="Normal"><A NAME="I5214"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 that appears on a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0288">library_unit_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0289">library_unit_renaming_declaration</A></SPAN> 
 consists of the entire declarative region of the declaration[, which 
@@ -128,8 +128,8 @@ even though those are not in the scope of the <SPAN Class="swiss"><A HREF="AA-10
 </div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
-<A NAME="I5223"></A><A NAME="I5224"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN> 
-(and the corresponding library unit) is <I>named</I> <A NAME="I5225"></A><A NAME="I5226"></A>in 
+<A NAME="I5215"></A><A NAME="I5216"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN> 
+(and the corresponding library unit) is <I>named</I> <A NAME="I5217"></A><A NAME="I5218"></A>in 
 a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 if it is denoted by a <I>library_unit_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN>. 
@@ -507,7 +507,7 @@ unit in the visible part of the first unit.</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p31.a">31.a</a></div>
-<div class="Annotations"><A NAME="I5227"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
+<div class="Annotations"><A NAME="I5219"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 is modified to allow expanded name notation.</div>
 <div class="paranum"><a name="p31.b">31.b</a></div>
 <div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN> 
@@ -540,7 +540,7 @@ definition in <A HREF="AA-8-4.html">8.4</A>.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p31.f">31.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00220.TXT">AI95-00220-01</A></I>} 
-<A NAME="I5228"></A><B>Amendment Correction:</B> A subprogram body acting 
+<A NAME="I5220"></A><B>Amendment Correction:</B> A subprogram body acting 
 as a declaration cannot <B>with</B> a private child unit. This would 
 allow public export of types declared in private child packages, and 
 thus cannot be allowed. This was allowed by mistake in Ada 95; a subprogram 
@@ -549,14 +549,14 @@ that does this will now be illegal.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p31.g">31.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
-<A NAME="I5229"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0295">limited_with_clause</A></SPAN>s 
+<A NAME="I5221"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0295">limited_with_clause</A></SPAN>s 
 are new. They make a limited view of a package visible, where all of 
 the types in the package are incomplete. They facilitate construction 
 of mutually recursive types in multiple packages.</div>
 <div class="paranum"><a name="p31.h">31.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
-<A NAME="I5230"></A>The syntax rules for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
+<A NAME="I5222"></A>The syntax rules for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN> 
 are modified to allow the reserved word <B>private</B>. Private <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0294">with_clause</A></SPAN>s 
 do not allow the use of their <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN> 
 in the visible part of their <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>. 
@@ -566,7 +566,7 @@ They also allow using private units in more locations than in Ada 95.
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p31.i">31.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0040-1.TXT">AI05-0040-1</A></I>} 
-<A NAME="I5231"></A><B>Correction:</B> Added missing rule that a limited 
+<A NAME="I5223"></A><B>Correction:</B> Added missing rule that a limited 
 with clause cannot name an ancestor unit. This is incompatible if an 
 Ada 2005 program does this, but as this is a new Ada 2005 feature and 
 the unintentionally allowed capability is not useful, the incompatibility 

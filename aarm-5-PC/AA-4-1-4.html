@@ -24,10 +24,12 @@
     DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +40,7 @@
 <HR>
 <H1>4.1.4 Attributes</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2649"></A>[An <I>attribute</I> is a characteristic 
+<div class="Normal"><A NAME="I2650"></A>[An <I>attribute</I> is a characteristic 
 of an entity that can be queried via an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN>.] 
 </div>
@@ -50,18 +52,18 @@ cases specified.</span></div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
-<SPAN Class="swiss">attribute_reference</SPAN><A NAME="I2650"></A><A NAME="S0100"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I2651"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2652"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN><span class="insert5"><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I2653"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN></span></div>
+<SPAN Class="swiss">attribute_reference</SPAN><A NAME="I2651"></A><A NAME="S0100"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I2652"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2653"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN><span class="insert5"><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2654"></A><SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN></span></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<SPAN Class="swiss">attribute_designator</SPAN><A NAME="I2654"></A><A NAME="S0101"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2655"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>[(<I>static_</I><A NAME="I2656"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)]<BR>
+<SPAN Class="swiss">attribute_designator</SPAN><A NAME="I2655"></A><A NAME="S0101"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2656"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>[(<I>static_</I><A NAME="I2657"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)]<BR>
 &nbsp;&nbsp;|&nbsp;Access&nbsp;|&nbsp;Delta&nbsp;|&nbsp;Digits&nbsp;|&nbsp;Mod</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">range_attribute_reference</SPAN><A NAME="I2657"></A><A NAME="S0102"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2658"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2659"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0103">range_attribute_designator</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">range_attribute_reference</SPAN><A NAME="I2658"></A><A NAME="S0102"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2659"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2660"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0103">range_attribute_designator</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">range_attribute_designator</SPAN><A NAME="I2660"></A><A NAME="S0103"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>Range[(<I>static_</I><A NAME="I2661"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)]</div>
+<div class="Indented1"><SPAN Class="swiss">range_attribute_designator</SPAN><A NAME="I2661"></A><A NAME="S0103"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>Range[(<I>static_</I><A NAME="I2662"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)]</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6/5</a></div>
@@ -130,7 +132,7 @@ The same would be true if (2) had been a procedure; even though the procedure
 does not denote an object, the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 is still illegal.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2662"></A><A NAME="I2663"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+<div class="Normal"><A NAME="I2663"></A><A NAME="I2664"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
 if any, in an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0103">range_attribute_designator</A></SPAN> 
 is expected to be of any integer type.&nbsp;</div>
@@ -154,8 +156,8 @@ that denotes a value or an object, if its type is scalar, then its nominal
 subtype is the base subtype of the type; if its type is tagged, its nominal 
 subtype is the first subtype of the type; otherwise, its nominal subtype 
 is a subtype of the type without any constraint, <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>, 
-or predicate. Similarly, unless explicitly specified otherwise, for an 
-<SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+or predicate.<A NAME="I2665"></A> Similarly, unless explicitly specified 
+otherwise, for an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 that denotes a function, when its result type is scalar, its result subtype 
 is the base subtype of the type, when its result type is tagged, the 
 result subtype is the first subtype of the type, and when the result 
@@ -200,7 +202,7 @@ is only evaluated once.]</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
-<A NAME="I2664"></A><A NAME="I2665"></A>The evaluation of <span class="insert5">a</span><span class="delete5">&nbsp;an 
+<A NAME="I2666"></A><A NAME="I2667"></A>The evaluation of <span class="insert5">a</span><span class="delete5">&nbsp;an 
 <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 (or</span> <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN><span class="insert5">&nbsp;or an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 that is not a <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN></span><span class="delete5">)</span> 
@@ -208,14 +210,15 @@ consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093
 is defined in <A HREF="AA-4-5-10.html">4.5.10</A>.</span> ]&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
-<div class="paranum"><a name="p12">12/1</a></div>
+<div class="paranum"><a name="p12">12/5</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0015">8652/0015</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00093.TXT">AI95-00093-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0362-2.TXT">AI12-0362-2</A></I>} 
 An implementation may provide implementation-defined attributes; the 
 <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-for an implementation-defined attribute shall differ from those of the 
-language-defined attributes unless supplied for compatibility with a 
-previous edition of this International Standard.&nbsp;</div>
+for <span class="insert5">such&nbsp;</span>an implementation-defined attribute 
+shall differ from those of the language-defined attributes<span class="delete5">&nbsp;unless supplied for compatibility with a previous edition of this International 
+Standard</span>.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
 attributes.</div>
@@ -226,13 +229,29 @@ words because reserved words are not legal identifiers.</div>
 <div class="Annotations">The semantics of implementation-defined attributes, 
 and any associated rules, are, of course, implementation defined. For 
 example, the implementation defines whether a given implementation-defined 
-attribute can be used in a static expression.</div>
-<div class="paranum"><a name="p12.c.1">12.c.1/1</a></div>
-<div class="Annotations">{<I><A HREF="defect1.html#8652/0015">8652/0015</A></I>} 
+attribute can be used in a static expression.&nbsp;</div>
+<div class="paranum"><a name="p12.1">12.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0362-2.TXT">AI12-0362-2</A></I>} 
+<span class="insert5">An implementation may extend the definition of 
+a language-defined attribute by accepting uses of that attribute that 
+would otherwise be illegal in the following cases:</span>&nbsp;</div>
+<div class="paranum"><a name="p12.2">12.2/5</a></div>
+<div class="Bulleted"><span class="insert5">in order to support compatibility 
+with a previous edition of of this International Standard; or</span></div>
+<div class="paranum"><a name="p12.d">12.d/1</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="defect1.html#8652/0015">8652/0015</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00093.TXT">AI95-00093-01</A></I>} 
 Implementations are allowed to support the Small attribute for floating 
 types, as this was defined in Ada 83, even though the name would conflict 
 with a language-defined attribute.&nbsp;</div>
+<div class="paranum"><a name="p12.3">12.3/5</a></div>
+<div class="Bulleted"><span class="insert5">in the case of a language-defined 
+attribute whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+is required by this International Standard to be a floating point subtype, 
+an implementation may accept an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+is a fixed point subtype[; the semantics of such an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+are implementation defined.]</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Notes">4&nbsp;&nbsp;Attributes are defined throughout this 
@@ -249,7 +268,7 @@ has to be a single access type, and the resolution of the <SPAN Class="swiss"><A
 can use the fact that the type of the object or the profile of the callable 
 entity denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 has to match the designated type or be type conformant with the designated 
-profile of the access type. <A NAME="I2666"></A></div>
+profile of the access type. <A NAME="I2668"></A></div>
 <div class="paranum"><a name="p14.a">14.a/2</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00235.TXT">AI95-00235</A></I>} 
 In the general case, there is no &ldquo;expected type&rdquo; for the 
@@ -279,7 +298,7 @@ Message'Address&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;address&nb
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p16.a">16.a</a></div>
-<div class="Annotations"><A NAME="I2667"></A>We now uniformly treat X'Range 
+<div class="Annotations"><A NAME="I2669"></A>We now uniformly treat X'Range 
 as X'First..X'Last, allowing its use with scalar subtypes.</div>
 <div class="paranum"><a name="p16.b">16.b</a></div>
 <div class="Annotations">We allow any integer type in the <I>static_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
@@ -351,7 +370,12 @@ apply to the result of an attribute.</div>
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0262-1.TXT">AI12-0262-1</A></I>} 
 <span class="insert5">Added <SPAN Class="swiss"><A HREF="AA-4-5-10.html#S0158">reduction_attribute_reference</A></SPAN> 
 and cleaned up the rules here to avoid trampling the definition of those 
-in <A HREF="AA-4-5-10.html">4.5.10</A>.</span>&nbsp;</div>
+in <A HREF="AA-4-5-10.html">4.5.10</A>.</span></div>
+<div class="paranum"><a name="p16.n">16.n/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0362-2.TXT">AI12-0362-2</A></I>} 
+<span class="insert5">Added a permission to support fixed point versions 
+of float attributes, such as the rounding attributes found in <A HREF="AA-A-5-3.html">A.5.3</A>.</span> 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

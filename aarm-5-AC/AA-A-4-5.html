@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -62,43 +62,44 @@ length does not exceed the allocated length.&nbsp;</div>
 Strings.Unbounded has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>with</B>&nbsp;Ada.Strings.Maps;<BR>
-<A NAME="I7288"></A><B>package</B>&nbsp;Ada.Strings.Unbounded<span class="delete5">&nbsp;<B>is</B></span><BR>
-&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Unbounded);</span></div>
+<A NAME="I7284"></A><B>package</B>&nbsp;Ada.Strings.Unbounded<span class="delete5">&nbsp;<B>is</B></span><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Unbounded);</span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7289"></A>Unbounded_String&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7285"></A>Unbounded_String&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Unbounded_String);</span></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7290"></A>Null_Unbounded_String&nbsp;:&nbsp;<B>constant</B>&nbsp;Unbounded_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7286"></A>Null_Unbounded_String&nbsp;:&nbsp;<B>constant</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7291"></A>Length&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7287"></A>Length&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7292"></A>String_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7293"></A>Free&nbsp;(X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String_Access);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7288"></A>String_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7289"></A>Free&nbsp;(X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;String_Access);</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;Conversion,&nbsp;Concatenation,&nbsp;and&nbsp;Selection&nbsp;functions</I></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7294"></A>To_Unbounded_String&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7290"></A>To_Unbounded_String&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7295"></A>To_Unbounded_String&nbsp;(Length&nbsp;:&nbsp;<B>in</B>&nbsp;Natural)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7291"></A>To_Unbounded_String&nbsp;(Length&nbsp;:&nbsp;<B>in</B>&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7296"></A>To_String&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7292"></A>To_String&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7297"></A>Set_Unbounded_String<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7293"></A>Set_Unbounded_String<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Target&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String);</span></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7298"></A>Append&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7294"></A>Append&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String);</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7299"></A>Append&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7295"></A>Append&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7300"></A>Append&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7296"></A>Append&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character);</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String)<BR>
@@ -116,28 +117,28 @@ Strings.Unbounded has the following declaration:&nbsp;</div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Character;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7301"></A>Element&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7297"></A>Element&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Character;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7302"></A>Replace_Element&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7298"></A>Replace_Element&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character);</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7303"></A>Slice&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7299"></A>Slice&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p22.1">22.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7304"></A>Unbounded_Slice<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7300"></A>Unbounded_Slice<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</span></div>
 <div class="paranum"><a name="p22.2">22.2/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7305"></A>Unbounded_Slice<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7301"></A>Unbounded_Slice<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Positive;<BR>
@@ -186,7 +187,7 @@ Strings.Unbounded has the following declaration:&nbsp;</div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;Search&nbsp;subprograms</I></SPAN></div>
 <div class="paranum"><a name="p38.1">38.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7306"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7302"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
@@ -194,73 +195,73 @@ Strings.Unbounded has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</span></div>
 <div class="paranum"><a name="p38.2">38.2/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7307"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7303"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</span></div>
 <div class="paranum"><a name="p39">39</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7308"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7304"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Maps.Identity)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p40">40</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7309"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7305"></A>Index&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p40.1">40.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7310"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7306"></A>Index&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership&nbsp;:=&nbsp;Inside;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</span></div>
 <div class="paranum"><a name="p41">41</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7311"></A>Index&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7307"></A>Index&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership&nbsp;:=&nbsp;Inside;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;&nbsp;:=&nbsp;Forward)&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p41.1">41.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7312"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7308"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</span></div>
 <div class="paranum"><a name="p42">42</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7313"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7309"></A>Index_Non_Blank&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Going&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Direction&nbsp;:=&nbsp;Forward)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p43">43</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7314"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7310"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Maps.Identity)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p44">44</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7315"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7311"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p45">45</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7316"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7312"></A>Count&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p45.1">45.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0031-1.TXT">AI05-0031-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7317"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7313"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);</span></div>
 <div class="paranum"><a name="p46">46</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7318"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7314"></A>Find_Token&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Membership;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Positive;<BR>
@@ -268,91 +269,91 @@ Strings.Unbounded has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p47">47</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;String&nbsp;translation&nbsp;subprograms</I></SPAN></div>
 <div class="paranum"><a name="p48">48</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7319"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7315"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p49">49</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7320"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7316"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping);</div>
 <div class="paranum"><a name="p50">50</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7321"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7317"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p51">51</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7322"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7318"></A>Translate&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Mapping_Function);</div>
 <div class="paranum"><a name="p52">52</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>&nbsp;String&nbsp;transformation&nbsp;subprograms</I></SPAN></div>
 <div class="paranum"><a name="p53">53</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7323"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7319"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p54">54</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7324"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7320"></A>Replace_Slice&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p55">55</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7325"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7321"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p56">56</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7326"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7322"></A>Insert&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p57">57</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7327"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7323"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p58">58</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7328"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7324"></A>Overwrite&nbsp;(Source&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p59">59</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7329"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7325"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Through&nbsp;:&nbsp;<B>in</B>&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p60">60</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7330"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7326"></A>Delete&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Through&nbsp;:&nbsp;<B>in</B>&nbsp;Natural);</div>
 <div class="paranum"><a name="p61">61</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7331"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7327"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Side&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Trim_End)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p62">62</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7332"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7328"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Side&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Trim_End);</div>
 <div class="paranum"><a name="p63">63</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7333"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7329"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p64">64</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7334"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7330"></A>Trim&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Maps.Character_Set);</div>
 <div class="paranum"><a name="p65">65</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7335"></A>Head&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7331"></A>Head&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p66">66</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7336"></A>Head&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7332"></A>Head&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space);</div>
 <div class="paranum"><a name="p67">67</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7337"></A>Tail&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7333"></A>Tail&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unbounded_String;</div>
 <div class="paranum"><a name="p68">68</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7338"></A>Tail&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7334"></A>Tail&nbsp;(Source&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Unbounded_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character&nbsp;:=&nbsp;Space);</div>
 <div class="paranum"><a name="p69">69</a></div>
@@ -373,7 +374,7 @@ Strings.Unbounded has the following declaration:&nbsp;</div>
 <B>end</B>&nbsp;Ada.Strings.Unbounded;</div>
 <div class="paranum"><a name="p72.1">72.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
-<span class="insert2">The type Unbounded_String needs finalization<A NAME="I7339"></A> 
+<span class="insert2">The type Unbounded_String needs finalization<A NAME="I7335"></A> 
 (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p73">73</a></div>
 <div class="Normal">Null_Unbounded_String represents the null String. 
@@ -481,7 +482,7 @@ of the subprograms appears in the <span class="insert2">Ada 95&nbsp;</span>Ratio
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p88.b">88.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
-<span class="insert2"><A NAME="I7340"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I7336"></A><B>Amendment Correction:</B> 
 Type Unbounded_String is defined to need finalization. If the restriction 
 No_Nested_Finalization (see <A HREF="AA-D-7.html">D.7</A>) applies to 
 the partition, and Unbounded_String does not have a controlled part, 
@@ -505,7 +506,7 @@ This should be rare and is easily fixed if it does occur.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p88.d">88.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-<span class="insert2"><A NAME="I7341"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I7337"></A><B>Amendment Correction:</B> 
 Added a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborable_Initialization to type Unbounded_String, so that it can 
 be used to declare default-initialized objects in preelaborated units.</span> 
@@ -514,7 +515,7 @@ be used to declare default-initialized objects in preelaborated units.</span>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p88.e">88.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0031-1.TXT">AI05-0031-1</A></I>} 
-<span class="insert3"><A NAME="I7342"></A>An overloaded version of Find_Token 
+<span class="insert3"><A NAME="I7338"></A>An overloaded version of Find_Token 
 is added to Strings.Unbounded. If Strings.Unbounded is referenced in 
 a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 

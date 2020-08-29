@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,7 +35,7 @@
 <HR>
 <H1>7.6 Assignment and Finalization</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I4346"></A> <A NAME="I4347"></A>Three kinds 
+<div class="Normal">[<A NAME="I4349"></A> <A NAME="I4350"></A>Three kinds 
 of actions are fundamental to the manipulation of objects: initialization, 
 finalization, and assignment. Every object is initialized, either explicitly 
 or by default, after being created (for example, by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -45,12 +45,12 @@ a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN>
 containing an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>, 
 or by a call to an instance of Unchecked_Deallocation). An assignment 
 operation is used as part of <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>s, 
-explicit initialization, parameter passing, and other operations. <A NAME="I4348"></A><A NAME="I4349"></A><A NAME="I4350"></A></div>
+explicit initialization, parameter passing, and other operations. <A NAME="I4351"></A><A NAME="I4352"></A><A NAME="I4353"></A></div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">Default definitions for these three fundamental operations 
-are provided by the language, but <A NAME="I4351"></A>a <I>controlled</I> 
+are provided by the language, but <A NAME="I4354"></A>a <I>controlled</I> 
 type gives the user additional control over parts of these operations. 
-<A NAME="I4352"></A><A NAME="I4353"></A><A NAME="I4354"></A>In particular, 
+<A NAME="I4355"></A><A NAME="I4356"></A><A NAME="I4357"></A>In particular, 
 the user can define, for a controlled type, an Initialize procedure which 
 is invoked immediately after the normal default initialization of a controlled 
 object, a Finalize procedure which is invoked immediately before finalization 
@@ -89,25 +89,25 @@ library package exists:&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00126.TXT">AI95-00126-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>package</B>&nbsp;Ada.Finalization<A NAME="I4355"></A><BR>
+<B>package</B>&nbsp;Ada.Finalization<A NAME="I4358"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4356"></A>Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4359"></A>Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Controlled);</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4357"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4358"></A>Adjust&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4359"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4360"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4361"></A>Adjust&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4362"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4360"></A>Limited_Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4363"></A>Limited_Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Limited_Controlled);</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4361"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4362"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4364"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4365"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Finalization;</div>
@@ -120,7 +120,7 @@ does so. Users can still declare their overridding routines nonblocking
 if they wish.&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I4363"></A>A controlled type is a descendant of Controlled or 
+<A NAME="I4366"></A>A controlled type is a descendant of Controlled or 
 Limited_Controlled. The predefined &quot;=&quot; operator of type Controlled 
 always returns True, [since this operator is incorporated into the implementation 
 of the predefined equality operator of types derived from Controlled, 
@@ -159,7 +159,7 @@ a tagged private type from being completed with a derivation from Controlled
 or Limited_Controlled &mdash; a very common idiom.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
-A type is said to <I>need finalization</I> if:<A NAME="I4364"></A><A NAME="I4365"></A></div>
+A type is said to <I>need finalization</I> if:<A NAME="I4367"></A><A NAME="I4368"></A></div>
 <div class="paranum"><a name="p9.2">9.2/2</a></div>
 <div class="Bulleted">it is a controlled type, a task type or a protected 
 type; or</div>
@@ -241,7 +241,7 @@ of an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A><
 are handled similarly.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">Initialize and other initialization operations are 
-done in an arbitrary order, except as follows.<A NAME="I4366"></A> Initialize 
+done in an arbitrary order, except as follows.<A NAME="I4369"></A> Initialize 
 is applied to an object after initialization of its subcomponents, if 
 any [(including both implicit initialization and Initialize calls)]. 
 If an object has a component with an access discriminant constrained 
@@ -263,24 +263,24 @@ to assume that other components of the enclosing object have already
 been properly initialized. For multiple such components, it allows some 
 predictability.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4367"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4370"></A>When 
 a target object with any controlled parts is assigned a value, [either 
 when created or in a subsequent <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>,] 
 the <I>assignment operation</I> proceeds as follows:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Bulleted">The value of the target becomes the assigned value.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I4368"></A><A NAME="I4369"></A>The value 
+<div class="Bulleted"><A NAME="I4371"></A><A NAME="I4372"></A>The value 
 of the target is <I>adjusted.</I>&nbsp;</div>
 <div class="paranum"><a name="p15.a">15.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If any parts of the object 
 are controlled, abort is deferred during the assignment operation.&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
-<A NAME="I4370"></A><A NAME="I4371"></A>To adjust the value of a composite 
+<A NAME="I4373"></A><A NAME="I4374"></A>To adjust the value of a composite 
 object, the values of the components of the object are first adjusted 
 in an arbitrary order, and then, if the object is nonlimited controlled, 
-Adjust is called.<A NAME="I4372"></A> Adjusting the value of an elementary 
+Adjust is called.<A NAME="I4375"></A> Adjusting the value of an elementary 
 object has no effect[, nor does adjusting the value of a composite object 
 with no controlled parts.]&nbsp;</div>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
@@ -298,7 +298,7 @@ be changed by an assignment to an outer object. Such an assignment could
 happen only before any adjustments or (if part of an outer Adjust) only 
 after any inner (component) adjustments have completed.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I4373"></A>For an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I4376"></A>For an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></SPAN>, 
 [ after the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 have been evaluated, and any conversion (including constraint checking) 
@@ -354,7 +354,7 @@ it would cause generic contract model violations.&nbsp;</div>
 When a function call or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 is used to initialize an object, the result of the function call or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 is an anonymous object, which is assigned into the newly-created object. 
-For such an assignment, the anonymous object might be <I>built in place</I>,<A NAME="I4374"></A><A NAME="I4375"></A> 
+For such an assignment, the anonymous object might be <I>built in place</I>,<A NAME="I4377"></A><A NAME="I4378"></A> 
 in which case the assignment does not involve any copying. Under certain 
 circumstances, the anonymous object is required to be built in place. 
 In particular:</div>
@@ -439,7 +439,7 @@ Dyn_String (in the example above) is used as a component in a type used
 as a deferred constant in package P.&nbsp;</div>
 <div class="paranum"><a name="p17.4">17.4/3</a></div>
 <div class="Bulleted">In other cases, it is unspecified whether the anonymous 
-object is built in place.<A NAME="I4376"></A></div>
+object is built in place.<A NAME="I4379"></A></div>
 <div class="paranum"><a name="p17.p">17.p/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is left unspecified so the 
 implementation can use any appropriate criteria for determining when 
@@ -448,14 +448,14 @@ basis. Reasonable programs will not care what decision is made here anyway.
 </div>
 <div class="paranum"><a name="p17.5">17.5/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
-Notwithstanding<A NAME="I4377"></A> what this International Standard 
+Notwithstanding<A NAME="I4380"></A> what this International Standard 
 says elsewhere, if an object is built in place:</div>
 <div class="paranum"><a name="p17.6">17.6/3</a></div>
 <div class="Bulleted">Upon successful completion of the return statement 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
 the anonymous object <I>mutates into</I> the newly-created object; that 
 is, the anonymous object ceases to exist, and the newly-created object 
-appears in its place.<A NAME="I4378"></A></div>
+appears in its place.<A NAME="I4381"></A></div>
 <div class="paranum"><a name="p17.7">17.7/3</a></div>
 <div class="Bulleted">Finalization is not performed on the anonymous 
 object.</div>
@@ -630,14 +630,14 @@ pairs, which is why we talk about &ldquo;any execution of the program&rdquo;.)
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p27.b">27.b</a></div>
-<div class="Annotations"><A NAME="I4379"></A>Controlled types and user-defined 
+<div class="Annotations"><A NAME="I4382"></A>Controlled types and user-defined 
 finalization are new to Ada 95. (Ada 83 had finalization semantics only 
 for masters of tasks.)&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p27.c">27.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-<A NAME="I4380"></A><B>Amendment Correction:</B> Types Controlled and 
+<A NAME="I4383"></A><B>Amendment Correction:</B> Types Controlled and 
 Limited_Controlled now have Preelaborable_Initialization, so that objects 
 of types derived from these types can be used in preelaborated packages. 
 </div>
@@ -688,7 +688,7 @@ This is needed so that all of the new cases are covered.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p27.l">27.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<A NAME="I4381"></A>Package Ada.Finalization now has Pure categorization, 
+<A NAME="I4384"></A>Package Ada.Finalization now has Pure categorization, 
 so it can be mentioned for any package. Note that this does not change 
 the preelaborability of objects descended from Controlled and Limited_Controlled. 
 </div>

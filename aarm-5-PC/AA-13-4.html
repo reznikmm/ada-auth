@@ -32,7 +32,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,14 +48,14 @@ specifies the internal codes for enumeration literals.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I6058"></A><A NAME="S0350"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I6059"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I6060"></A><SPAN Class="swiss"><A HREF="AA-13-4.html#S0351">enumeration_aggregate</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I6054"></A><A NAME="S0350"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I6055"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0345">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I6056"></A><SPAN Class="swiss"><A HREF="AA-13-4.html#S0351">enumeration_aggregate</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I6061"></A><A NAME="S0351"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I6062"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I6057"></A><A NAME="S0351"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I6058"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I6063"></A>The <SPAN Class="swiss"><A HREF="AA-13-4.html#S0351">enumeration_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I6059"></A>The <SPAN Class="swiss"><A HREF="AA-13-4.html#S0351">enumeration_aggregate</A></SPAN> 
 shall be written as a one-dimensional <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 for which the index subtype is the unconstrained subtype of the enumeration 
 type, and each component expression is expected to be of any integer 
@@ -94,10 +94,10 @@ Enum'Base'Last, which need to have defined representations.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I6064"></A>An <SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN> 
-specifies the <I>coding</I> aspect of representation. <A NAME="I6065"></A>The 
+<div class="Normal"><A NAME="I6060"></A>An <SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN> 
+specifies the <I>coding</I> aspect of representation. <A NAME="I6061"></A>The 
 coding consists of the <I>internal code</I> for each enumeration literal, 
-that is, the integral value used internally to represent each literal.<A NAME="I6066"></A><A NAME="I6067"></A></div>
+that is, the integral value used internally to represent each literal.<A NAME="I6062"></A><A NAME="I6063"></A></div>
 <div class="paranum"><a name="p7.a">7.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Coding:&nbsp;</B>Internal 
 representation of enumeration literals. Specified by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN>, 
@@ -124,7 +124,7 @@ True is presumably one (choosing the reverse would be extremely unfriendly!).
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6068"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6064"></A>The 
 recommended level of support for <SPAN Class="swiss"><A HREF="AA-13-4.html#S0350">enumeration_representation_clause</A></SPAN>s 
 is:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -154,7 +154,7 @@ should be followed.</div>
 are defined:</span>&nbsp;</div>
 <div class="paranum"><a name="p10.2">10.2/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5">S'Enum_Rep</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I6069"></A><A NAME="I6070"></A></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0237-1.TXT">AI12-0237-1</A></I>} 
+<span class="insert5"><A NAME="I6065"></A><A NAME="I6066"></A></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0237-1.TXT">AI12-0237-1</A></I>} 
 <span class="insert5"></span><span class="insert5">S'Enum_Rep denotes 
 a function with the following specification:</span>&nbsp;</div>
 <div class="paranum"><a name="p10.3">10.3/5</a></div>
@@ -162,13 +162,13 @@ a function with the following specification:</span>&nbsp;</div>
 <div class="paranum"><a name="p10.4">10.4/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">This function returns 
 the representation value of the value of Arg, as a value of type <I>universal_integer</I>. 
-The <I>representation value</I><A NAME="I6071"></A> is<A NAME="I6072"></A> 
+The <I>representation value</I><A NAME="I6067"></A> is<A NAME="I6068"></A> 
 the internal code specified in an enumeration representation clause, 
 if any, for the type corresponding to the value of Arg, and otherwise 
 is the position number of the value.</span></div>
 <div class="paranum"><a name="p10.5">10.5/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5">S'Enum_Val</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I6073"></A><A NAME="I6074"></A></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0237-1.TXT">AI12-0237-1</A></I>} 
+<span class="insert5"><A NAME="I6069"></A><A NAME="I6070"></A></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0237-1.TXT">AI12-0237-1</A></I>} 
 <span class="insert5"></span><span class="insert5">S'Enum_Val denotes 
 a function with the following specification:</span>&nbsp;</div>
 <div class="paranum"><a name="p10.6">10.6/5</a></div>
@@ -250,7 +250,7 @@ worth the trouble.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p16.a">16.a</a></div>
-<div class="Annotations"><A NAME="I6075"></A>As in other similar contexts, 
+<div class="Annotations"><A NAME="I6071"></A>As in other similar contexts, 
 Ada 95 allows expressions of any integer type, not just expressions of 
 type <I>universal_integer</I>, for the component expressions in the <SPAN Class="swiss"><A HREF="AA-13-4.html#S0351">enumeration_aggregate</A></SPAN>. 
 The preference rules for the predefined operators of <I>root_integer</I> 
@@ -275,7 +275,7 @@ Added wording to prevent the use of &lt;&gt; in a <SPAN Class="swiss"><A HREF="A
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p16.e">16.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0237-1.TXT">AI12-0237-1</A></I>} 
-<span class="insert5"><A NAME="I6076"></A>Attributes Enum_Rep and Enum_Val 
+<span class="insert5"><A NAME="I6072"></A>Attributes Enum_Rep and Enum_Val 
 are new.</span>&nbsp;</div>
 
 <HR>

@@ -32,7 +32,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,22 +48,22 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Task_Identification<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8925"></A><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Task_Identification);</span></span><span class="insert2"></span><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8926"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Task_Identification<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8946"></A><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Task_Identification);</span></span><span class="insert2"></span><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8947"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Task_Id);</span><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8927"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8948"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8928"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8929"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8930"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;</span><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8931"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;<span class="delete1"><B>out</B>&nbsp;</span>Task_Id)<span class="insert5"><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8949"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8950"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8951"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;</span><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8952"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;<span class="delete1"><B>out</B>&nbsp;</span>Task_Id)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8932"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8933"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8934"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</span><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8953"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8954"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8955"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</span><BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Task_Identification;</div>
@@ -107,7 +107,7 @@ T that is of a task type (after any implicit dereference), the following
 attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideHanging-Term">T'Identity</div><div class="WideHanging-Body">
-<A NAME="I8935"></A><A NAME="I8936"></A>Yields a value of the type Task_Id 
+<A NAME="I8956"></A><A NAME="I8957"></A>Yields a value of the type Task_Id 
 that identifies the task denoted by T.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
@@ -115,7 +115,7 @@ E that denotes an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declar
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="WideHanging-Term">E'Caller</div><div class="WideHanging-Body">
-<A NAME="I8937"></A><A NAME="I8938"></A>Yields a value of the type Task_Id 
+<A NAME="I8958"></A><A NAME="I8959"></A>Yields a value of the type Task_Id 
 that identifies the task whose call is now being serviced. Use of this 
 attribute is allowed only inside an <span class="delete3"><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN> 
 or&nbsp;</span><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN><span class="insert3">, 
@@ -129,22 +129,22 @@ is passed as a parameter to Abort_Task, <span class="insert5">Activation_Is_Comp
 </span>Is_Terminated, and Is_Callable.</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete5"><A NAME="I8939"></A><A NAME="I8940"></A>Abort_Task 
+deleted.</I></SPAN><span class="delete5"><A NAME="I8960"></A><A NAME="I8961"></A>Abort_Task 
 is a potentially blocking operation (see <A HREF="RM-9-5-1.html">9.5.1</A>).</span> 
 </div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><A NAME="I8941"></A>It is a bounded error to call 
+<div class="Normal"><A NAME="I8962"></A>It is a bounded error to call 
 the Current_Task function from an <span class="insert3"><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN></span><span class="delete3">&nbsp;entry 
 body</span><span class="insert2">,</span><span class="delete2">&nbsp;or an</span> 
 interrupt handler<span class="insert2">, or finalization of a task attribute</span>. 
 Program_Error is raised, or an implementation-defined value of the type 
-Task_Id is returned.<A NAME="I8942"></A>&nbsp;</div>
+Task_Id is returned.<A NAME="I8963"></A>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8943"></A>If a value of Task_Id is passed 
+<div class="Normal"><A NAME="I8964"></A>If a value of Task_Id is passed 
 as a parameter to any of the operations declared in this package (or 
 any language-defined child of this package), and the corresponding task 
 object no longer exists, the execution of the program is erroneous.&nbsp;</div>

@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,16 +41,16 @@ and thereby the corresponding array bounds.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">index_constraint</SPAN><A NAME="I1946"></A><A NAME="S0057"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;(<A NAME="I1947"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1948"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">index_constraint</SPAN><A NAME="I1947"></A><A NAME="S0057"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;(<A NAME="I1948"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1949"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>})</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">discrete_range</SPAN><A NAME="I1949"></A><A NAME="S0058"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>discrete_</I><A NAME="I1950"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I1951"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">discrete_range</SPAN><A NAME="I1950"></A><A NAME="S0058"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>discrete_</I><A NAME="I1951"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I1952"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I1952"></A>The type of a <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
+<div class="Normal"><A NAME="I1953"></A>The type of a <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
 is the type of the subtype defined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 or the type of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
-<A NAME="I1953"></A>For an <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN>, 
+<A NAME="I1954"></A>For an <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN>, 
 each <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
 shall resolve to be of the type of the corresponding index.&nbsp;</div>
 
@@ -67,27 +67,27 @@ for each index of the array type.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1954"></A>A <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
+<div class="Normal"><A NAME="I1955"></A>A <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
 defines a range whose bounds are given by the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>, 
 or by the range of the subtype defined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I1955"></A>An <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I1956"></A>An <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN> 
 is <I>compatible</I> with an unconstrained array subtype if and only 
 if the index range defined by each <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
 is compatible (see <A HREF="RM-3-5.html">3.5</A>) with the corresponding 
-index subtype. <A NAME="I1956"></A>If any of the <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>s 
+index subtype. <A NAME="I1957"></A>If any of the <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>s 
 defines a null range, any array thus constrained is a <I>null array</I>, 
-having no components. <A NAME="I1957"></A>An array value <I>satisfies</I> 
+having no components. <A NAME="I1958"></A>An array value <I>satisfies</I> 
 an <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN> 
 if at each index position the array value and the <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN> 
 have the same index bounds.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I1958"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I1959"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN> 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN>(s), 
-in an arbitrary order. <A NAME="I1959"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
+in an arbitrary order. <A NAME="I1960"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or the evaluation of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
 </div>

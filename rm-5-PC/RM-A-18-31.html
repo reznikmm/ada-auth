@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,38 +51,38 @@ provides type Queue, which implements the interface type Containers.Synchronized
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Queue_Priority)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
 &nbsp;&nbsp;&nbsp;Default_Capacity&nbsp;:&nbsp;Count_Type;<BR>
 &nbsp;&nbsp;&nbsp;Default_Ceiling&nbsp;&nbsp;:&nbsp;System.Any_Priority&nbsp;:=&nbsp;System.Priority'Last;<BR>
-<B>package</B>&nbsp;Ada.Containers.Bounded_Priority_Queues<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8207"></A><span class="insert5"><BR>
+<B>package</B>&nbsp;Ada.Containers.Bounded_Priority_Queues<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8224"></A><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>&nbsp;<B>is</B></span><span class="delete5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5"><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Bounded_Priority_Queues);</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Implementation&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Implementation;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>protected&nbsp;type</B>&nbsp;<A NAME="I8208"></A>Queue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>protected&nbsp;type</B>&nbsp;<A NAME="I8225"></A>Queue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;Default_Capacity;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ceiling&nbsp;&nbsp;:&nbsp;System.Any_Priority&nbsp;:=&nbsp;Default_Ceiling)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Priority&nbsp;=&gt;&nbsp;Ceiling&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Queue_Interfaces.Queue&nbsp;<B>with</B></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8209"></A>Enqueue&nbsp;(New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Queue_Interfaces.Element_Type);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8226"></A>Enqueue&nbsp;(New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Queue_Interfaces.Element_Type);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8210"></A>Dequeue&nbsp;(Element&nbsp;:&nbsp;<B>out</B>&nbsp;Queue_Interfaces.Element_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8227"></A>Dequeue&nbsp;(Element&nbsp;:&nbsp;<B>out</B>&nbsp;Queue_Interfaces.Element_Type);</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not&nbsp;overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8211"></A>Dequeue_Only_High_Priority<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8228"></A>Dequeue_Only_High_Priority<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(At_Least&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queue_Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue_Interfaces.Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Success&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8212"></A>Current_Use&nbsp;<B>return</B>&nbsp;Count_Type<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8229"></A>Current_Use&nbsp;<B>return</B>&nbsp;Count_Type<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8213"></A>Peak_Use&nbsp;<B>return</B>&nbsp;Count_Type<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;(<B>null</B>,&nbsp;<B>use&nbsp;null</B>)</span>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8230"></A>Peak_Use&nbsp;<B>return</B>&nbsp;Count_Type<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>null</B>,&nbsp;Use_Formal&nbsp;=&gt;&nbsp;<B>null</B></span>;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>

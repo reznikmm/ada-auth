@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -26,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -74,8 +76,9 @@ we require that all enumeration literals have distinct images.</span>
 is the explicit declaration of the corresponding <I>enumeration literal</I>: 
 it declares a parameterless function, whose defining name is the <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN>, 
-and whose result <span class="insert3">subtype is the base subtype of</span><span class="delete3">&nbsp;type 
-is</span> the enumeration type.&nbsp;</div>
+and whose result <span class="insert3">subtype<A NAME="I1881"></A> is 
+the base subtype of</span><span class="delete3">&nbsp;type is</span> the enumeration 
+type.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This rule defines the profile 
 of the enumeration literal, which is used in the various types of conformance. 
@@ -93,7 +96,7 @@ of a case statement, due to the full coverage requirement based on the
 nominal subtype.</span>&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">Each enumeration literal corresponds to a distinct 
-value of the enumeration type, and to a distinct position number. <A NAME="I1881"></A>The 
+value of the enumeration type, and to a distinct position number. <A NAME="I1882"></A>The 
 position number of the value of the first listed enumeration literal 
 is zero; the position number of the value of each subsequent enumeration 
 literal is one more than that of its predecessor in the list.</div>
@@ -101,7 +104,7 @@ literal is one more than that of its predecessor in the list.</div>
 <div class="Normal">[The predefined order relations between values of 
 the enumeration type follow the order of corresponding position numbers.]</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">[<A NAME="I1882"></A> If the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+<div class="Normal">[<A NAME="I1883"></A> If the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN> 
 is specified in more than one <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0038">enumeration_type_definition</A></SPAN>, 
 the corresponding enumeration literals are said to be <I>overloaded</I>. 
@@ -111,7 +114,7 @@ from the context (see <A HREF="AA-8-6.html">8.6</A>).]&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1883"></A><A NAME="I1884"></A><A NAME="I1885"></A>The 
+<div class="Normal"><A NAME="I1884"></A><A NAME="I1885"></A><A NAME="I1886"></A>The 
 elaboration of an <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0038">enumeration_type_definition</A></SPAN> 
 creates the enumeration type and its first subtype, which is constrained 
 to the base range of the type.&nbsp;</div>
@@ -134,16 +137,19 @@ way to resolve the ambiguity (see <A HREF="AA-4-7.html">4.7</A>).&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><I>Examples of enumeration 
 types and subtypes:&nbsp;</I></div>
-<div class="paranum"><a name="p14">14</a></div>
-<div class="Examples"><B>type</B>&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Mon,&nbsp;Tue,&nbsp;Wed,&nbsp;Thu,&nbsp;Fri,&nbsp;Sat,&nbsp;Sun);<BR>
-<B>type</B>&nbsp;Suit&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Clubs,&nbsp;Diamonds,&nbsp;Hearts,&nbsp;Spades);<BR>
-<B>type</B>&nbsp;Gender&nbsp;<B>is</B>&nbsp;(M,&nbsp;F);<BR>
-<B>type</B>&nbsp;Level&nbsp;&nbsp;<B>is</B>&nbsp;(Low,&nbsp;Medium,&nbsp;Urgent);<BR>
-<B>type</B>&nbsp;Color&nbsp;&nbsp;<B>is</B>&nbsp;(White,&nbsp;Red,&nbsp;Yellow,&nbsp;Green,&nbsp;Blue,&nbsp;Brown,&nbsp;Black);<BR>
-<B>type</B>&nbsp;Light&nbsp;&nbsp;<B>is</B>&nbsp;(Red,&nbsp;Amber,&nbsp;Green);&nbsp;--<SPAN Class="roman"><I>&nbsp;Red&nbsp;and&nbsp;Green&nbsp;are&nbsp;overloaded</I></SPAN></div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0386-1.TXT">AI12-0386-1</A></I>} 
+<B>type</B>&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Mon,&nbsp;Tue,&nbsp;Wed,&nbsp;Thu,&nbsp;Fri,&nbsp;Sat,&nbsp;Sun);<span class="insert5"><BR>
+<B>type</B>&nbsp;Month_Name&nbsp;<B>is</B>&nbsp;(January,&nbsp;February,&nbsp;March,&nbsp;April,&nbsp;May,&nbsp;June,&nbsp;July,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;August,&nbsp;September,&nbsp;October,&nbsp;November,&nbsp;December);</span><BR>
+<B>type</B>&nbsp;Suit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Clubs,&nbsp;Diamonds,&nbsp;Hearts,&nbsp;Spades);<BR>
+<B>type</B>&nbsp;Gender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(M,&nbsp;F);<BR>
+<B>type</B>&nbsp;Level&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Low,&nbsp;Medium,&nbsp;Urgent);<BR>
+<B>type</B>&nbsp;Color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(White,&nbsp;Red,&nbsp;Yellow,&nbsp;Green,&nbsp;Blue,&nbsp;Brown,&nbsp;Black);<BR>
+<B>type</B>&nbsp;Light&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Red,&nbsp;Amber,&nbsp;Green);&nbsp;--<SPAN Class="roman"><I>&nbsp;Red&nbsp;and&nbsp;Green&nbsp;are&nbsp;overloaded</I></SPAN></div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples"><B>type</B>&nbsp;Hexa&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;('A',&nbsp;'B',&nbsp;'C',&nbsp;'D',&nbsp;'E',&nbsp;'F');<BR>
-<B>type</B>&nbsp;Mixed&nbsp;&nbsp;<B>is</B>&nbsp;('A',&nbsp;'B',&nbsp;'*',&nbsp;B,&nbsp;None,&nbsp;'?',&nbsp;'%');</div>
+<div class="Examples"><B>type</B>&nbsp;Hexa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;('A',&nbsp;'B',&nbsp;'C',&nbsp;'D',&nbsp;'E',&nbsp;'F');<BR>
+<B>type</B>&nbsp;Mixed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;('A',&nbsp;'B',&nbsp;'*',&nbsp;B,&nbsp;None,&nbsp;'?',&nbsp;'%');</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Examples"><B>subtype</B>&nbsp;Weekday&nbsp;<B>is</B>&nbsp;Day&nbsp;&nbsp;&nbsp;<B>range</B>&nbsp;Mon&nbsp;..&nbsp;Fri;<BR>
 <B>subtype</B>&nbsp;Major&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Suit&nbsp;&nbsp;<B>range</B>&nbsp;Hearts&nbsp;..&nbsp;Spades;<BR>
@@ -164,7 +170,7 @@ denotes a function, which is called to produce a value.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p16.c">16.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
-<span class="insert3"><A NAME="I1886"></A><B>Correction:</B> Required 
+<span class="insert3"><A NAME="I1887"></A><B>Correction:</B> Required 
 that all enumeration literals in a type have distinct images; this might 
 not be the case since upper case conversion can map distinct characters 
 to the same upper case character. This can only happen for identifiers 

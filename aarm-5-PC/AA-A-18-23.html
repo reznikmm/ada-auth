@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <H1>A.18.23 The Generic Package Containers.Bounded_Hashed_Sets</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-The language-defined generic package Containers.Bounded_Hashed_Sets<A NAME="I8915"></A> 
+The language-defined generic package Containers.Bounded_Hashed_Sets<A NAME="I8933"></A> 
 provides a private type Set and a set of operations. It provides the 
 same operations as the package Containers.Hashed_Sets (see <A HREF="AA-A-18-8.html">A.18.8</A>), 
 with the difference that the maximum storage is bounded.</div>
@@ -52,7 +52,7 @@ has the same contents and semantics as Containers.Hashed_Sets except:</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 The <span class="insert5">aspect</span><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
 Preelaborate is replaced with <span class="insert5">aspect</span><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
-Pure.</div>
+Pure.<span class="insert5">&nbsp;Aspect Global is deleted.</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The type Set is declared 
 with discriminants that specify both the capacity (number of elements) 
@@ -89,7 +89,8 @@ Reserve_Capacity is replaced with:&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Reserve_Capacity&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;Capacity&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;Capacity&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error;</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">This</span><span class="delete5">&nbsp;If the specified 
@@ -100,7 +101,7 @@ propagates Capacity_Error. Otherwise, the</span> operation has no effect<span cl
 <div class="Bulleted" style="margin-bottom: 0.3em">An additional operation 
 is added immediately following Reserve_Capacity:&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8916"></A>Default_Modulus&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Hash_Type;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8934"></A>Default_Modulus&nbsp;(Capacity&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Hash_Type;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Indented2">Default_Modulus returns an implementation-defined 
 value for the number of distinct hash values to be used for the given 
@@ -111,40 +112,41 @@ capacity (maximum number of elements).&nbsp;</div>
 the precondition reading:</span></div>
 <div class="paranum"><a name="p11.2">11.2/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</span></div>
 <div class="paranum"><a name="p11.3">11.3/5</a></div>
 <div class="Bulleted-NoPrefix" style="margin-bottom: 0.3em"><span class="insert5">is 
 replaced by:</span></div>
 <div class="paranum"><a name="p11.4">11.4/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
 <div class="paranum"><a name="p11.5">11.5/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5">In procedure Assign, the precondition is altered 
 to:</span>&nbsp;</div>
 <div class="paranum"><a name="p11.6">11.6/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The function Copy 
 is replaced with:&nbsp;</div>
 <div class="paranum"><a name="p13">13/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8917"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Set;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8935"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modulus&nbsp;&nbsp;:&nbsp;Hash_Type&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;Map<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Length&nbsp;(Source)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;<B>else</B>&nbsp;Capacity)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Modulus&nbsp;=&nbsp;(<B>if</B>&nbsp;Modulus&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Modulus&nbsp;(Capacity)&nbsp;<B>else</B>&nbsp;Modulus)</span>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;<B>else</B>&nbsp;Capacity)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Modulus&nbsp;=&nbsp;(<B>if</B>&nbsp;Modulus&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Modulus&nbsp;(Capacity)&nbsp;<B>else</B>&nbsp;Modulus)</span>;</div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 Returns a set with key/element pairs initialized from the values in Source.<span class="delete5">&nbsp;If Capacity is 0, then the set capacity is the length of Source; if Capacity 
@@ -159,11 +161,11 @@ parameter.</span>&nbsp;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<A NAME="I8918"></A>It is a bounded error to assign from a bounded set 
+<A NAME="I8936"></A>It is a bounded error to assign from a bounded set 
 object while tampering with elements [or cursors] of that object is prohibited. 
 Either Program_Error is raised by the assignment, execution proceeds 
 with the target object prohibiting tampering with elements [or cursors], 
-or execution proceeds normally.<A NAME="I8919"></A>&nbsp;</div>
+or execution proceeds normally.<A NAME="I8937"></A>&nbsp;</div>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>Tampering with elements includes 
 tampering with cursors, so we only really need to talk about tampering 
@@ -174,7 +176,7 @@ with elements here; we mention cursors for clarity.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 When a bounded set object <I>S</I> is finalized, if tampering with cursors 
 is prohibited for <I>S</I> other than due to an assignment from another 
-set, then execution is erroneous. <A NAME="I8920"></A></div>
+set, then execution is erroneous. <A NAME="I8938"></A></div>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is a tampering event, but 
 since the implementation is not allowed to use Ada.Finalization, it is 
@@ -230,7 +232,7 @@ hashed sets.</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0184-1.TXT">AI05-0184-1</A></I>} 
-<A NAME="I8921"></A> The generic package Containers.Bounded_Hashed_Sets 
+<A NAME="I8939"></A> The generic package Containers.Bounded_Hashed_Sets 
 is new.&nbsp;</div>
 
 <HR>

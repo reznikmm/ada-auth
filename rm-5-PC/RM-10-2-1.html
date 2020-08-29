@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 <HR>
 <H1>10.2.1 Elaboration Control</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4903"></A>This subclause defines pragmas 
+<div class="Normal"><A NAME="I4898"></A>This subclause defines pragmas 
 that help control the elaboration order of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s. 
 </div>
 
@@ -48,20 +48,20 @@ that help control the elaboration order of <SPAN Class="swiss"><A HREF="RM-10-1-
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborate is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4904"></A><A NAME="I4905"></A>Preelaborate[(<I>library_unit_</I><A NAME="I4906"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4899"></A><A NAME="I4900"></A>Preelaborate[(<I>library_unit_</I><A NAME="I4901"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><A NAME="I4907"></A><A NAME="I4908"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Indented1"><A NAME="I4902"></A><A NAME="I4903"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborate is a library unit pragma.&nbsp;</div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborable_Initialization is as follows:&nbsp;</div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4909"></A><A NAME="I4910"></A>Preelaborable_Initialization(<A NAME="I4911"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4904"></A><A NAME="I4905"></A>Preelaborable_Initialization(<A NAME="I4906"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4912"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4907"></A>An 
 elaborable construct is preelaborable unless its elaboration performs 
 any of the following actions:&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -105,7 +105,7 @@ unless every instance would perform one of the above actions.</span></div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A generic body is preelaborable 
 only if elaboration of a corresponding instance body would not perform 
-any such actions, presuming that: <A NAME="I4913"></A></div>
+any such actions, presuming that: <A NAME="I4908"></A></div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
 <div class="Bulleted">the actual for each discriminated formal derived 
 type, formal private type, or formal private extension declared within 
@@ -121,24 +121,24 @@ and</div>
 <div class="Bulleted">the actual for each formal subprogram is a user-defined 
 subprogram.&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I4914"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal"><A NAME="I4909"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborate (or <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Pure &mdash; see below) is used to specify that a library unit is <I>preelaborated</I>, 
-namely that the Preelaborate aspect<A NAME="I4915"></A><A NAME="I4916"></A> 
+namely that the Preelaborate aspect<A NAME="I4910"></A><A NAME="I4911"></A> 
 of the library unit is True; all compilation units of the library unit 
 are preelaborated. The declaration and body of a preelaborated library 
 unit, and all subunits that are elaborated as part of elaborating the 
 library unit, shall be preelaborable. All compilation units of a preelaborated 
 library unit shall depend semantically only on declared pure or preelaborated 
 <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s. 
-<A NAME="I4917"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4912"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), these rules also apply in 
-the private part of an instance of a generic unit. <A NAME="I4918"></A>If 
+the private part of an instance of a generic unit. <A NAME="I4913"></A>If 
 a library unit is preelaborated, then its declaration, if any, and body, 
 if any, are elaborated prior to all nonpreelaborated <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s 
 of the partition.&nbsp;</div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I4919"></A>The following rules specify 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I4914"></A>The following rules specify 
 which entities have <I>preelaborable initialization</I>:</div>
 <div class="paranum"><a name="p11.2">11.2/3</a></div>
 <div class="Bulleted">The partial view of a private type or private extension, 
@@ -183,7 +183,7 @@ the type shall have preelaborable initialization. If the <SPAN Class="swiss"><A 
 is applied to a protected type, the protected type shall not have entries, 
 and each component of the protected type shall have preelaborable initialization. 
 For any other composite type, the type shall have preelaborable initialization. 
-<A NAME="I4920"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4915"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), these rules apply also in 
 the private part of an instance of a generic unit.</div>
 <div class="paranum"><a name="p11.8">11.8/2</a></div>
@@ -209,14 +209,14 @@ or partitions that include the given version.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Pure is as follows:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4921"></A><A NAME="I4922"></A>Pure[(<I>library_unit_</I><A NAME="I4923"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4916"></A><A NAME="I4917"></A>Pure[(<I>library_unit_</I><A NAME="I4918"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Indented1"><A NAME="I4924"></A><A NAME="I4925"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Indented1"><A NAME="I4919"></A><A NAME="I4920"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Pure is a library unit pragma.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p15.1">15.1/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<A NAME="I4926"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<A NAME="I4921"></A>A 
 <I>pure</I> <span class="insert5">program</span><span class="delete5">&nbsp;compilation</span> 
 unit is a preelaborable <span class="insert5">program</span><span class="delete5">&nbsp;compilation</span> 
 unit whose elaboration does not perform any of the following actions:</div>
@@ -258,16 +258,16 @@ is defined to be zero.</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><A NAME="I4927"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal"><A NAME="I4922"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Pure is used to specify that a library unit is <I>declared pure</I>, 
-namely that the Pure aspect<A NAME="I4928"></A><A NAME="I4929"></A> of 
+namely that the Pure aspect<A NAME="I4923"></A><A NAME="I4924"></A> of 
 the library unit is True; all compilation units of the library unit are 
 declared pure. In addition, the limited view of any library package is 
 declared pure. The declaration and body of a declared pure library unit, 
 and all subunits that are elaborated as part of elaborating the library 
 unit, shall be pure. All compilation units of a declared pure library 
 unit shall depend semantically only on declared pure <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A></SPAN>s. 
-<A NAME="I4930"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4925"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), these rules also apply in 
 the private part of an instance of a generic unit. Furthermore, the full 
 view of any partial view declared in the visible part of a declared pure 
@@ -300,27 +300,27 @@ subprogram produces other side effects when called.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate, Elaborate_All, or Elaborate_Body is as follows:&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4931"></A><A NAME="I4932"></A>Elaborate(<I>library_unit_</I><A NAME="I4933"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>{, 
-<I>library_unit_</I><A NAME="I4934"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4926"></A><A NAME="I4927"></A>Elaborate(<I>library_unit_</I><A NAME="I4928"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>{, 
+<I>library_unit_</I><A NAME="I4929"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4935"></A><A NAME="I4936"></A>Elaborate_All(<I>library_unit_</I><A NAME="I4937"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>{, 
-<I>library_unit_</I><A NAME="I4938"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4930"></A><A NAME="I4931"></A>Elaborate_All(<I>library_unit_</I><A NAME="I4932"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>{, 
+<I>library_unit_</I><A NAME="I4933"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4939"></A><A NAME="I4940"></A>Elaborate_Body[(<I>library_unit_</I><A NAME="I4941"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4934"></A><A NAME="I4935"></A>Elaborate_Body[(<I>library_unit_</I><A NAME="I4936"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p23">23</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate or Elaborate_All is only allowed within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0292">context_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Indented1"><A NAME="I4942"></A><A NAME="I4943"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Indented1"><A NAME="I4937"></A><A NAME="I4938"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate_Body is a library unit pragma.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Normal"><A NAME="I4944"></A>If the aspect Elaborate_Body 
+<div class="Normal"><A NAME="I4939"></A>If the aspect Elaborate_Body 
 is True for a declaration (including when <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate_Body applies), then the declaration requires a completion (a 
-body).<A NAME="I4945"></A></div>
+body).<A NAME="I4940"></A></div>
 <div class="paranum"><a name="p25.1">25.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;The <I>library_unit_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
@@ -341,7 +341,7 @@ the current <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0287">library_item</A><
 Elaborate_Body sets the Elaborate_Body representation aspect of the library 
 unit to which it applies to the value True. If the Elaborate_Body aspect 
 of a library unit is True, the body of the library unit is elaborated 
-immediately after its declaration.<A NAME="I4946"></A><A NAME="I4947"></A></div>
+immediately after its declaration.<A NAME="I4941"></A><A NAME="I4942"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Notes">12&nbsp;&nbsp;A preelaborated library unit is allowed 

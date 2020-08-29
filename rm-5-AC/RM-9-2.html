@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,13 +39,13 @@
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4494"></A>The execution of a task of a 
+<div class="Normal"><A NAME="I4499"></A>The execution of a task of a 
 given task type consists of the execution of the corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>. 
-<A NAME="I4495"></A><A NAME="I4496"></A><A NAME="I4497"></A><A NAME="I4498"></A>The 
+<A NAME="I4500"></A><A NAME="I4501"></A><A NAME="I4502"></A><A NAME="I4503"></A>The 
 initial part of this execution is called the <I>activation</I> of the 
 task; it consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>. 
-<A NAME="I4499"></A>Should an exception be propagated by the elaboration 
+<A NAME="I4504"></A>Should an exception be propagated by the elaboration 
 of its <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
 the activation of the task is defined to have <I>failed</I>, and it becomes 
 a completed task.</div>
@@ -92,10 +92,10 @@ and&nbsp;</span>prior to returning the new access value.<span class="insert2">&n
 of a function call, the activations are not initiated until after the 
 function returns.</span></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4500"></A><A NAME="I4501"></A><A NAME="I4502"></A><A NAME="I4503"></A>The 
+<div class="Normal"><A NAME="I4505"></A><A NAME="I4506"></A><A NAME="I4507"></A><A NAME="I4508"></A>The 
 task that created the new tasks and initiated their activations (the 
 <I>activator</I>) is blocked until all of these activations complete 
-(successfully or not). <A NAME="I4504"></A>Once all of these activations 
+(successfully or not). <A NAME="I4509"></A>Once all of these activations 
 are complete, if the activation of any of the tasks has failed (due to 
 the propagation of an exception), Tasking_Error is raised in the activator, 
 at the place at which it initiated the activations. Otherwise, the activator 

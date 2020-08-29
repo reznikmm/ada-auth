@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,18 +49,19 @@ tasks reaches a specified count value.</span>&nbsp;</div>
 exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert3"><B>package</B>&nbsp;Ada.Synchronous_Barriers</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I10113"></A><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Synchronous_Barriers);</span></span><span class="insert3"></span></div>
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert3"><B>package</B>&nbsp;Ada.Synchronous_Barriers</span><span class="insert3"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert3"><A NAME="I10135"></A><BR>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert3"></span><span class="insert3"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert3">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert3"></span><span class="insert3"><span class="delete5">(Synchronous_Barriers);</span></span><span class="insert3"></span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I10114"></A>Barrier_Limit&nbsp;<B>is</B>&nbsp;Positive&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I10136"></A>Barrier_Limit&nbsp;<B>is</B>&nbsp;Positive&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
 <div class="paranum"><a name="p4.a.1">4.a.1/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Implementation defined: 
 </B></span><span class="insert3">The value of Barrier_Limit'Last in Synchronous_Barriers.</span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I10115"></A>Synchronous_Barrier&nbsp;(Release_Threshold&nbsp;:&nbsp;Barrier_Limit)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I10137"></A>Synchronous_Barrier&nbsp;(Release_Threshold&nbsp;:&nbsp;Barrier_Limit)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10116"></A>Wait_For_Release&nbsp;(The_Barrier&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronous_Barrier;<BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I10138"></A>Wait_For_Release&nbsp;(The_Barrier&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronous_Barrier;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notified&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span><span class="insert3">;</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
@@ -116,13 +117,13 @@ is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).</sp
 <span class="insert3">It is a bounded error to call Wait_For_Release 
 on a Synchronous_Barrier object after that object is finalized. If the 
 error is detected, Program_Error is raised. Otherwise, the call proceeds 
-normally, which may leave a task blocked forever.<A NAME="I10117"></A></span> 
+normally, which may leave a task blocked forever.<A NAME="I10139"></A></span> 
 </div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3"><A NAME="I10118"></A>The package Ada.Synchronous_Barriers 
+<span class="insert3"><A NAME="I10140"></A>The package Ada.Synchronous_Barriers 
 is new.</span>&nbsp;</div>
 
 <HR>

@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,7 +48,7 @@ to assembly language).&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Interfaces has the following skeletal declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><A NAME="I8584"></A><BR>
+<div class="Examples"><A NAME="I8601"></A><BR>
 <B>package</B>&nbsp;Interfaces&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Interfaces);</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -66,7 +66,7 @@ Interfaces has the following skeletal declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Rotate_Right&nbsp;(Value&nbsp;:&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;&nbsp;Amount&nbsp;:&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;...<A NAME="I8585"></A><A NAME="I8586"></A><A NAME="I8587"></A><A NAME="I8588"></A><A NAME="I8589"></A><BR>
+&nbsp;&nbsp;&nbsp;...<A NAME="I8602"></A><A NAME="I8603"></A><A NAME="I8604"></A><A NAME="I8605"></A><A NAME="I8606"></A><BR>
 <B>end</B>&nbsp;Interfaces;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -79,10 +79,10 @@ provide the following declarations in the visible part of package Interfaces:
 if supported by the target architecture, for each <I>n</I> that is at 
 least the size of a storage element and that is a factor of the word 
 size. The names of these types are of the form Integer_<I>n</I> for the 
-signed types, and Unsigned_<I>n</I> for the modular types;<A NAME="I8590"></A><A NAME="I8591"></A> 
+signed types, and Unsigned_<I>n</I> for the modular types;<A NAME="I8607"></A><A NAME="I8608"></A> 
 </div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I8592"></A><A NAME="I8593"></A>For each 
+<div class="Bulleted"><A NAME="I8609"></A><A NAME="I8610"></A>For each 
 such modular type in Interfaces, shifting and rotating subprograms as 
 specified in the declaration of Interfaces above. These subprograms are 
 Intrinsic. They operate on a bit-by-bit basis, using the binary representation 

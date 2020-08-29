@@ -18,14 +18,13 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
     DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,12 +43,6 @@ cannot return normally; it may propagate an exception or loop forever.
 3 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 
-<H4 Class="centered">Syntax</H4>
-<div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"></div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"></div>
-
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3.1">3.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a <span class="insert5">subprogram</span><span class="delete5">&nbsp;procedure</span> 
@@ -59,7 +52,7 @@ the following language-defined representation aspect may be specified:
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;No_Return</div><div class="WideHanging-Body">
 The type of aspect No_Return is Boolean. When aspect No_Return is True 
-for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I3876"></A><A NAME="I3877"></A><A NAME="I3878"></A></div>
+for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I3881"></A><A NAME="I3882"></A><A NAME="I3883"></A></div>
 <div class="paranum"><a name="p3.3">3.3/3</a></div>
 <div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. This aspect is never inherited; if not 
@@ -88,7 +81,7 @@ of one of these.</span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal">A <span class="insert5">subprogram</span><span class="delete5">&nbsp;procedure</span> 
 shall be nonreturning if it overrides a dispatching nonreturning <span class="insert5">subprogram</span><span class="delete5">&nbsp;procedure</span>. 
-<A NAME="I3879"></A>In addition to the places where Legality Rules normally 
+<A NAME="I3884"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), this rule applies also in 
 the private part of an instance of a generic unit.</div>
 <div class="paranum"><a name="p7">7/5</a></div>
@@ -98,14 +91,10 @@ shall be nonreturning.</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 8 was deleted.</I></SPAN> 
 </div>
 
-<H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"></div>
-
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">If the body of a nonreturning procedure completes 
-normally, Program_Error is raised at the point of the call. <A NAME="I3880"></A></div>
+normally, Program_Error is raised at the point of the call. <A NAME="I3885"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p10">10/3</a></div>

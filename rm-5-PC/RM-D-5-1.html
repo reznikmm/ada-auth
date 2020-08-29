@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,14 +47,14 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<SPAN Class="roman"><I>--&nbsp;See&nbsp;<A HREF="RM-C-7-1.html">C.7.1</A></I></SPAN><BR>
-<B>package</B>&nbsp;Ada.Dynamic_Priorities<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8766"></A><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Dynamic_Priorities);</span></div>
+<B>package</B>&nbsp;Ada.Dynamic_Priorities<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8787"></A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Dynamic_Priorities);</span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8767"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8788"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8768"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8789"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Any_Priority;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -76,16 +76,12 @@ if T is equal to Null_Task_Id.</div>
 of the base priority of a task <I>T</I> to the new value occurs immediately 
 at the first point when <I>T</I> is outside the execution of a protected 
 action.</div>
-
-<H4 Class="centered">Bounded (Run-Time) Errors</H4>
-<div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal"></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 11 was 
 deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I8769"></A>If any subprogram in this package 
+<div class="Normal"><A NAME="I8790"></A>If any subprogram in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 

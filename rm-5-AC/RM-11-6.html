@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,14 +36,14 @@
 <HR>
 <H1>11.6 Exceptions and Optimization</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><A NAME="I5301"></A><A NAME="I5302"></A><A NAME="I5303"></A><A NAME="I5304"></A><A NAME="I5305"></A><A NAME="I5306"></A>This 
+<div class="Normal"><A NAME="I5296"></A><A NAME="I5297"></A><A NAME="I5298"></A><A NAME="I5299"></A><A NAME="I5300"></A><A NAME="I5301"></A>This 
 <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 gives permission to the implementation to perform certain &ldquo;optimizations&rdquo; 
 that do not necessarily preserve the canonical semantics.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I5307"></A>The rest of this International 
+<div class="Normal"><A NAME="I5302"></A>The rest of this International 
 Standard (outside this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>) 
 defines the <I>canonical semantics</I> of the language. The canonical 
 semantics of a given (legal) program determines a set of possible external 
@@ -64,7 +64,7 @@ that is allowed by the canonical semantics, or by the rules of this <span class=
 <div class="Normal" style="margin-bottom: 0.4em">The following additional 
 permissions are granted to the implementation:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted"><A NAME="I5308"></A><A NAME="I5309"></A>An implementation 
+<div class="Bulleted"><A NAME="I5303"></A><A NAME="I5304"></A>An implementation 
 need not always raise an exception when a language-defined check fails. 
 Instead, the operation that failed the check can simply yield an <I>undefined 
 result</I>. The exception need be raised by the implementation only if, 
@@ -76,7 +76,7 @@ type, if scalar. Having removed the raise of the exception, the canonical
 semantics will in general allow the implementation to omit the code for 
 the check, and some or all of the operation itself.&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Bulleted"><A NAME="I5310"></A>If an exception is raised due 
+<div class="Bulleted"><A NAME="I5305"></A>If an exception is raised due 
 to the failure of a language-defined check, then upon reaching the corresponding 
 <SPAN Class="swiss"><A HREF="RM-11-2.html#S0305">exception_handler</A></SPAN> 
 (or the termination of the task, if none), the external interactions 
@@ -87,11 +87,11 @@ possibly earlier (or later if the interactions are independent of the
 result of the checked operation) than that defined by the canonical semantics, 
 but not within the execution of some abort-deferred operation or <I>independent</I> 
 subprogram that does not dynamically enclose the execution of the construct 
-whose check failed. <A NAME="I5311"></A>An independent subprogram is 
+whose check failed. <A NAME="I5306"></A>An independent subprogram is 
 one that is defined outside the library unit containing the construct 
 whose check failed, and <span class="insert3">for which the</span><span class="delete3">&nbsp;has 
 no</span> Inline <span class="insert3">aspect is False</span><span class="delete3"><SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">&nbsp;pragma</A></SPAN> 
-applied to it</span>. <A NAME="I5312"></A><A NAME="I5313"></A><A NAME="I5314"></A>Any 
+applied to it</span>. <A NAME="I5307"></A><A NAME="I5308"></A><A NAME="I5309"></A>Any 
 assignment that occurred outside of such abort-deferred operations or 
 independent subprograms can be disrupted by the raising of the exception, 
 causing the object or its parts to become abnormal, and certain subsequent 

@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,7 +42,7 @@ declares a formal parameter of mode <B>in</B>, <B>in out</B>, or <B>out</B>.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I3722"></A><A NAME="I3723"></A><A NAME="I3724"></A><A NAME="I3725"></A><A NAME="I3726"></A><A NAME="I3727"></A>A 
+<div class="Normal"><A NAME="I3727"></A><A NAME="I3728"></A><A NAME="I3729"></A><A NAME="I3730"></A><A NAME="I3731"></A><A NAME="I3732"></A>A 
 parameter is passed either <I>by copy</I> or <I>by reference</I>. When 
 a parameter is passed by copy, the formal parameter denotes a separate 
 object from the actual parameter, and any information transfer between 
@@ -51,12 +51,12 @@ parameter is passed by reference, the formal parameter denotes (a view
 of) the object denoted by the actual parameter; reads and updates of 
 the formal parameter directly reference the actual parameter object.</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal"><A NAME="I3728"></A>A type is a <I>by-copy type</I> 
+<div class="Normal"><A NAME="I3733"></A>A type is a <I>by-copy type</I> 
 if it is an elementary type, or if it is a descendant of a private type 
 whose full type is a by-copy type. A parameter of a by-copy type is passed 
 by copy, unless the formal parameter is explicitly aliased.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3729"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3734"></A>A 
 type is a <I>by-reference type</I> if it is a descendant of one of the 
 following:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
@@ -73,7 +73,7 @@ type;</div>
 type.&nbsp;</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">A parameter of a by-reference type is passed by reference, 
-as is an explicitly aliased parameter of any type. <A NAME="I3730"></A>Each 
+as is an explicitly aliased parameter of any type. <A NAME="I3735"></A>Each 
 value of a by-reference type has an associated object.<span class="delete5">&nbsp;For a parenthesized expression, <SPAN Class="swiss"><A HREF="RM-4-7.html#S0163">qualified_expression</A></SPAN>, 
 or view conversion, this object is the one associated with the operand.</span> 
 For a value conversion, the associated object is the anonymous result 
@@ -84,12 +84,12 @@ or <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>
 (see <A HREF="RM-4-4.html">4.4</A>) determines its associated object.</span><span class="delete5">&nbsp;For a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN>, 
 this object is the one associated with the evaluated <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>.</span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I3731"></A>For other parameters, it is unspecified 
+<div class="Normal"><A NAME="I3736"></A>For other parameters, it is unspecified 
 whether the parameter is passed by copy or by reference.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><A NAME="I3732"></A><A NAME="I3733"></A><A NAME="I3734"></A><A NAME="I3735"></A>If 
+<div class="Normal"><A NAME="I3737"></A><A NAME="I3738"></A><A NAME="I3739"></A><A NAME="I3740"></A>If 
 one <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> denotes 
 a part of a formal parameter, and a second <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denotes a part of a distinct formal parameter or an object that is not 
@@ -102,7 +102,7 @@ via a distinct access path, unless the first access path denotes a part
 of a formal parameter that no longer exists at the point of the second 
 access (due to leaving the corresponding callable construct). The possible 
 consequences are that Program_Error is raised, or the newly assigned 
-value is read, or some old value of the object is read. <A NAME="I3736"></A></div>
+value is read, or some old value of the object is read. <A NAME="I3741"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13/4</a></div>
 <div class="Notes">8&nbsp;&nbsp;The mode of a formal parameter describes 

@@ -18,7 +18,6 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
@@ -30,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +43,7 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<A NAME="I9165"></A>[Specifying aspect Unchecked_Union to have the value 
+<A NAME="I9183"></A>[Specifying aspect Unchecked_Union to have the value 
 True defines an interface correspondence between a given discriminated 
 type and some C union. The aspect requires that the associated type shall 
 be given a representation that allocates no space for its discriminant(s).] 
@@ -52,14 +51,6 @@ be given a representation that allocates no space for its discriminant(s).]
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 through 
 3 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
-
-<H4 Class="centered">Syntax</H4>
-<div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-</div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3.1">3.1/3</a></div>
@@ -71,7 +62,7 @@ the following language-defined representation aspect may be specified:</div>
 The type of aspect Unchecked_Union is Boolean. If directly specified, 
 the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
-the aspect is False.<A NAME="I9166"></A><A NAME="I9167"></A></div>
+the aspect is False.<A NAME="I9184"></A><A NAME="I9185"></A></div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Unchecked_Union: 
 </B>Type is used to interface to a C union type.</div>
@@ -79,18 +70,10 @@ the aspect is False.<A NAME="I9166"></A><A NAME="I9167"></A></div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 4 and 
 5 were deleted.</I></SPAN>&nbsp;</div>
-<div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-</div>
-<div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9168"></A><A NAME="I9169"></A><A NAME="I9170"></A>A type for 
+<A NAME="I9186"></A><A NAME="I9187"></A><A NAME="I9188"></A>A type for 
 which aspect Unchecked_Union is True is called an <I>unchecked union 
 type</I>. A subtype of an unchecked union type is defined to be an <I>unchecked 
 union subtype</I>. An object of an unchecked union type is defined to 
@@ -117,7 +100,7 @@ The type of a component declared in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html
 of an unchecked union type shall not need finalization. In addition to 
 the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule also applies in the private part of an instance of a generic 
-unit.<A NAME="I9171"></A> For an unchecked union type declared within 
+unit.<A NAME="I9189"></A> For an unchecked union type declared within 
 the body of a generic unit, or within the body of any of its descendant 
 library units, no part of the type of a component declared in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
 of the unchecked union type shall be of a formal private type or formal 
@@ -186,7 +169,7 @@ A view of an unchecked union object (including a type conversion or function
 call) has <I>inferable discriminants</I> if it has a constrained nominal 
 subtype, unless the object is a component of an enclosing unchecked union 
 object that is subject to a per-object constraint and the enclosing object 
-lacks inferable discriminants.<A NAME="I9172"></A></div>
+lacks inferable discriminants.<A NAME="I9190"></A></div>
 <div class="paranum"><a name="p21">21/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
 An expression of an unchecked union type has inferable discriminants 
@@ -195,8 +178,8 @@ qualified expression whose <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">sub
 denotes a constrained subtype.</div>
 <div class="paranum"><a name="p22">22/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
-Program_Error is raised in the following<A NAME="I9173"></A><A NAME="I9174"></A> 
-cases:<A NAME="I9175"></A></div>
+Program_Error is raised in the following<A NAME="I9191"></A><A NAME="I9192"></A> 
+cases:<A NAME="I9193"></A></div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Bulleted">Evaluation of the predefined equality operator 
 for an unchecked union type if either of the operands lacks inferable 
@@ -222,12 +205,6 @@ Write or Read attribute of an unchecked union type.</div>
 <div class="Bulleted">Execution of the default implementation of the 
 Output or Input attribute of an unchecked union type if the type lacks 
 default discriminant values.&nbsp;</div>
-
-<H4 Class="centered">Implementation Permissions</H4>
-<div class="paranum"><a name="p29">29/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 29 was 
 deleted.</I></SPAN>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
@@ -256,13 +233,13 @@ Y&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;X.F2;&nbsp;--&nbsp;<SPAN Class="roman"><I>err
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p32.a">32.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
-<A NAME="I9176"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+<A NAME="I9194"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
 Unchecked_Union is new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p32.b">32.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0026-1.TXT">AI05-0026-1</A></I>} 
-<A NAME="I9177"></A><B>Correction:</B> The use of discriminants on Unchecked_Union 
+<A NAME="I9195"></A><B>Correction:</B> The use of discriminants on Unchecked_Union 
 types is now illegal in <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0352">record_representation_clause</A></SPAN>s, 
 as it makes no sense to specify a position for something that is not 
 supposed to exist. It is very unlikely that this change will have any 
@@ -271,7 +248,7 @@ impact on existing code.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p32.c">32.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9178"></A>Aspect Unchecked_Union is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I9196"></A>Aspect Unchecked_Union is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Unchecked_Union is now obsolescent.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>

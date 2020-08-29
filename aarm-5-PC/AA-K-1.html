@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,7 +36,7 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I10491"></A>This subclause summarizes the definitions given 
+<A NAME="I10516"></A>This subclause summarizes the definitions given 
 elsewhere of the language-defined aspects. Aspects are properties of 
 entities that can be specified by the Ada program; unless otherwise specified 
 below, aspects can be specified using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>.</div>
@@ -119,6 +119,10 @@ Default value for a scalar subtype. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="WideHanging-Term">&nbsp;&nbsp;Discard_Names</div><div class="WideHanging-Body"><br clear="left">
 Requests a reduction in storage for names associated with an entity. 
 See <A HREF="AA-C-5.html">C.5</A>.</div>
+<div class="paranum"><a name="p19.2">19.2/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Dispatching</span></div><div class="WideHanging-Body">
+<span class="insert5">Generic formal parameters used in the implementation 
+of an entity.</span><span class="insert5">&nbsp;See <A HREF="AA-H-7-1.html">H.7.1</A>.</span></div>
 <div class="paranum"><a name="p20">20/3</a></div>
 <div class="WideHanging-Term">Dispatching_Domain</div><div class="WideHanging-Body"><br clear="left">
 Domain (group of processors) on which a given task should run. See <A HREF="AA-D-16-1.html">D.16.1</A>.</div>
@@ -144,9 +148,13 @@ Name used to identify an imported or exported entity. See <A HREF="AA-B-1.html">
 <div class="WideHanging-Term">External_Tag</div><div class="WideHanging-Body">
 Unique identifier for a tagged type in streams. See <A HREF="AA-13-3.html">13.3</A>.</div>
 <div class="paranum"><a name="p25.1">25.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Full_Access_Only</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Declare that a volatile type, object, or component 
+is full access.</span><span class="insert5">&nbsp;See <A HREF="AA-C-6.html">C.6</A>.</span></div>
+<div class="paranum"><a name="p25.2">25.2/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Global</span></div><div class="WideHanging-Body">
 <span class="insert5">Global object usage contract.</span><span class="insert5">&nbsp;See <A HREF="AA-6-1-2.html">6.1.2</A>.</span></div>
-<div class="paranum"><a name="p25.2">25.2/5</a></div>
+<div class="paranum"><a name="p25.3">25.3/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Global'Class</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">Global object usage contract inherited on derivation.</span><span class="insert5">&nbsp;See <A HREF="AA-6-1-2.html">6.1.2</A>.</span></div>
 <div class="paranum"><a name="p26">26/3</a></div>
@@ -232,6 +240,10 @@ with a given type, including any bounds and discriminants. See <A HREF="AA-13-13
 <div class="WideHanging-Term">Pack</div><div class="WideHanging-Body">
 Minimize storage when laying out records and arrays. See <A HREF="AA-13-2.html">13.2</A>.</div>
 <div class="paranum"><a name="p40.1">40.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Parallel_Calls</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Specifies whether a given subprogram is expected 
+to be called in parallel.</span><span class="insert5">&nbsp;See <A HREF="AA-9-10-1.html">9.10.1</A>.</span></div>
+<div class="paranum"><a name="p40.2">40.2/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Parallel_Iterator</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">An indication of whether a subprogram may use multiple 
 threads of control to invoke a loop body procedure.</span><span class="insert5">&nbsp;See <A HREF="AA-5-5-3.html">5.5.3</A>.</span></div>
@@ -352,6 +364,10 @@ See <A HREF="AA-7-3-2.html">7.3.2</A>.</div>
 <div class="paranum"><a name="p65">65/3</a></div>
 <div class="WideHanging-Term">Unchecked_Union</div><div class="WideHanging-Body"><br clear="left">
 Type is used to interface to a C union type. See <A HREF="AA-B-3-3.html">B.3.3</A>.</div>
+<div class="paranum"><a name="p65.1">65.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Use_Formal</span></div><div class="WideHanging-Body">
+<span class="insert5">Generic formal parameters used in the implementation 
+of an entity.</span><span class="insert5">&nbsp;See <A HREF="AA-H-7-1.html">H.7.1</A>.</span></div>
 <div class="paranum"><a name="p66">66/3</a></div>
 <div class="WideHanging-Term">Variable_Indexing</div><div class="WideHanging-Body"><br clear="left">
 Defines function(s) to implement user-defined <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>s. 

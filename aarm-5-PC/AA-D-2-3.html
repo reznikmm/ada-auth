@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,7 +43,7 @@
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
 The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-FIFO_Within_Priorities is a task dispatching policy.<A NAME="I9482"></A><A NAME="I9483"></A></div>
+FIFO_Within_Priorities is a task dispatching policy.<A NAME="I9504"></A><A NAME="I9505"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -76,7 +76,7 @@ in blocking, the task moves to the &ldquo;delay queue&rdquo;, not to
 the ready queue.&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<A NAME="I9484"></A><A NAME="I9485"></A>Each of the events specified 
+<A NAME="I9506"></A><A NAME="I9507"></A>Each of the events specified 
 above is a task dispatching point (see <A HREF="AA-D-2-1.html">D.2.1</A>).</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
@@ -84,7 +84,7 @@ A task dispatching point occurs for the currently running task of a processor
 whenever there is a nonempty ready queue for that processor with a higher 
 priority than the priority of the running task. The currently running 
 task is said to be <I>preempted</I> and it is added at the head of the 
-ready queue for its active priority.<A NAME="I9486"></A></div>
+ready queue for its active priority.<A NAME="I9508"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
@@ -101,7 +101,7 @@ that combination to be portable.&nbsp;</div>
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<A NAME="I9487"></A><I>Priority inversion</I> is the duration for which 
+<A NAME="I9509"></A><I>Priority inversion</I> is the duration for which 
 a task remains at the head of the highest priority nonempty ready queue 
 while the processor executes a lower priority task. The implementation 
 shall document:</div>

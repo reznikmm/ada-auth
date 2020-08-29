@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,53 +44,53 @@
 The following language-defined generic library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<A NAME="I3704"></A><B>generic</B><BR>
+<A NAME="I3708"></A><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>package</B>&nbsp;Ada.Iterator_Interfaces<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3705"></A>Forward_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3706"></A>First&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3707"></A>Next&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3709"></A>Forward_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3710"></A>First&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3711"></A>Next&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3708"></A>Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3709"></A>Last&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3710"></A>Previous&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3712"></A>Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3713"></A>Last&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3714"></A>Previous&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p4.1">4.1/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3711"></A>Parallel_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3715"></A>Parallel_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;</div>
 <div class="paranum"><a name="p4.2">4.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I3712"></A>Chunk_Index&nbsp;<B>is</B>&nbsp;Positive;</div>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I3716"></A>Chunk_Index&nbsp;<B>is</B>&nbsp;Positive;</div>
 <div class="paranum"><a name="p4.3">4.3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3713"></A>Is_Split&nbsp;(Object&nbsp;:&nbsp;Parallel_Iterator)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3717"></A>Is_Split&nbsp;(Object&nbsp;:&nbsp;Parallel_Iterator)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p4.4">4.4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3714"></A>Split_Into_Chunks&nbsp;(Object&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Parallel_Iterator;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3718"></A>Split_Into_Chunks&nbsp;(Object&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Parallel_Iterator;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max_Chunks&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chunk_Index)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>not</B>&nbsp;Object.Is_Split&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post'Class&nbsp;&nbsp;=&gt;&nbsp;Object.Is_Split&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object.Chunk_Count&nbsp;&lt;=&nbsp;Max_Chunks;</div>
 <div class="paranum"><a name="p4.5">4.5/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3715"></A>Chunk_Count&nbsp;(Object&nbsp;:&nbsp;Parallel_Iterator)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3719"></A>Chunk_Count&nbsp;(Object&nbsp;:&nbsp;Parallel_Iterator)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Chunk_Index&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Object.Is_Split&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error;</div>
 <div class="paranum"><a name="p4.6">4.6/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3716"></A>First&nbsp;(Object&nbsp;:&nbsp;Parallel_Iterator;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3720"></A>First&nbsp;(Object&nbsp;:&nbsp;Parallel_Iterator;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chunk&nbsp;&nbsp;:&nbsp;Chunk_Index)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;&nbsp;&nbsp;=&gt;&nbsp;(Object.Is_Split&nbsp;<B>and&nbsp;then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chunk&nbsp;&lt;=&nbsp;Object.Chunk_Count)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error;</div>
 <div class="paranum"><a name="p4.7">4.7/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3717"></A>Next&nbsp;(Object&nbsp;&nbsp;&nbsp;:&nbsp;Parallel_Iterator;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3721"></A>Next&nbsp;(Object&nbsp;&nbsp;&nbsp;:&nbsp;Parallel_Iterator;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chunk&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Chunk_Index)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;&nbsp;&nbsp;=&gt;&nbsp;(Object.Is_Split&nbsp;<B>and&nbsp;then</B><BR>
@@ -98,7 +98,7 @@ The following language-defined generic library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error;</div>
 <div class="paranum"><a name="p4.8">4.8/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3718"></A>Parallel_Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3722"></A>Parallel_Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>and</B>&nbsp;Parallel_Iterator&nbsp;<B>and</B>&nbsp;Reversible_Iterator;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Iterator_Interfaces;</div>
@@ -113,20 +113,20 @@ if they wish.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
 An <I>iterator type</I> is a type descended from the Forward_Iterator 
-interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3719"></A> 
+interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3723"></A> 
 A <I>reversible iterator type</I> is a type descended from the Reversible_Iterator 
-interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3720"></A> 
-A <I>parallel iterator type</I><A NAME="I3721"></A> is a type descended 
+interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3724"></A> 
+A <I>parallel iterator type</I><A NAME="I3725"></A> is a type descended 
 from the Parallel_Iterator interface from some instance of Ada.Iterator_Interfaces. 
 A type descended from the Parallel_Reversible_Iterator interface from 
 some instance of Ada.Iterator_Interfaces is both a parallel iterator 
 type and a reversible iterator type. An <I>iterator object</I> is an 
-object of an iterator type.<A NAME="I3722"></A> A <I>reversible iterator 
-object</I> is an object of a reversible iterator type.<A NAME="I3723"></A> 
+object of an iterator type.<A NAME="I3726"></A> A <I>reversible iterator 
+object</I> is an object of a reversible iterator type.<A NAME="I3727"></A> 
 A <I>parallel iterator object</I> is an object of a parallel iterator 
-type.<A NAME="I3724"></A> The formal subtype Cursor from the associated 
+type.<A NAME="I3728"></A> The formal subtype Cursor from the associated 
 instance of Ada.Iterator_Interfaces is the <I>iteration cursor subtype</I> 
-for the iterator type.<A NAME="I3725"></A></div>
+for the iterator type.<A NAME="I3729"></A></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
@@ -141,10 +141,10 @@ declaration list in which <I>T</I> is declared, whose first parameter
 is of type <I>T</I> or <I>T</I>'Class or an access parameter whose designated 
 type is type <I>T</I> or <I>T</I>'Class, whose other parameters, if any, 
 have default expressions, and whose result type is an iterator type. 
-This function is the <I>default iterator function</I> for <I>T</I>.<A NAME="I3726"></A> 
-Its result subtype is the <I>default iterator subtype</I> for <I>T</I>.<A NAME="I3727"></A> 
+This function is the <I>default iterator function</I> for <I>T</I>.<A NAME="I3730"></A> 
+Its result subtype is the <I>default iterator subtype</I> for <I>T</I>.<A NAME="I3731"></A> 
 The iteration cursor subtype for the default iterator subtype is the 
-<I>default cursor subtype</I> for <I>T</I>.<A NAME="I3728"></A><A NAME="I3729"></A><A NAME="I3730"></A> 
+<I>default cursor subtype</I> for <I>T</I>.<A NAME="I3732"></A><A NAME="I3733"></A><A NAME="I3734"></A> 
 This aspect is inherited by descendants of type <I>T</I> (including <I>T</I>'Class).</div>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Default_Iterator: 
@@ -154,7 +154,7 @@ This aspect is inherited by descendants of type <I>T</I> (including <I>T</I>'Cla
 Iterator_Element</div><div class="WideHanging-Body"><br clear="left">
 This aspect is specified by a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes a subtype. This is the <I>default element subtype</I> for 
-<I>T</I>.<A NAME="I3731"></A><A NAME="I3732"></A><A NAME="I3733"></A> 
+<I>T</I>.<A NAME="I3735"></A><A NAME="I3736"></A><A NAME="I3737"></A> 
 This aspect is inherited by descendants of type <I>T</I> (including <I>T</I>'Class).</div>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Iterator_Element: 
@@ -163,7 +163,7 @@ This aspect is inherited by descendants of type <I>T</I> (including <I>T</I>'Cla
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
 Iterator_View</div><div class="WideHanging-Body"><br clear="left">
 This aspect is specified by a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that denotes a type <I>T2</I> with the following properties:<A NAME="I3734"></A><A NAME="I3735"></A></div>
+that denotes a type <I>T2</I> with the following properties:<A NAME="I3738"></A><A NAME="I3739"></A></div>
 <div class="paranum"><a name="p9.2">9.2/5</a></div>
 <div class="Indented4Bulleted"><I>T2</I> is declared in the same compilation 
 unit as <I>T</I>;</div>
@@ -200,16 +200,16 @@ deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
 An <I>iterable container type</I> is an indexable container type with 
-specified Default_Iterator and Iterator_Element aspects.<A NAME="I3736"></A> 
+specified Default_Iterator and Iterator_Element aspects.<A NAME="I3740"></A> 
 A <I>reversible iterable container type</I> is an iterable container 
-type with the default iterator type being a reversible iterator type.<A NAME="I3737"></A> 
+type with the default iterator type being a reversible iterator type.<A NAME="I3741"></A> 
 A <I>parallel iterable container type</I> is an iterable container type 
-with the default iterator type being a parallel iterator type.<A NAME="I3738"></A> 
+with the default iterator type being a parallel iterator type.<A NAME="I3742"></A> 
 An <I>iterable container object</I> is an object of an iterable container 
-type.<A NAME="I3739"></A> A <I>reversible iterable container object</I> 
-is an object of a reversible iterable container type.<A NAME="I3740"></A> 
+type.<A NAME="I3743"></A> A <I>reversible iterable container object</I> 
+is an object of a reversible iterable container type.<A NAME="I3744"></A> 
 A <I>parallel iterable container object</I> is an object of a parallel 
-iterable container type.<A NAME="I3741"></A></div>
+iterable container type.<A NAME="I3745"></A></div>
 <div class="paranum"><a name="p11.a.1">11.a.1/3</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>An iterable container 
 type is one that has user-defined behavior for iteration, via the Default_Iterator 
@@ -242,7 +242,7 @@ covers the default cursor type for <I>T</I>;</div>
 parameters all have default expressions.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">This function (if any) is the <I>default constant 
-indexing function</I> for <I>T</I>.<A NAME="I3742"></A></div>
+indexing function</I> for <I>T</I>.<A NAME="I3746"></A></div>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This does not mean that 
 Constant_Indexing has to designate only one subprogram, only that there 
@@ -268,23 +268,42 @@ covers the default cursor type for <I>T</I>;</div>
 parameters all have default expressions.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal">This function (if any) is the <I>default variable 
-indexing function</I> for <I>T</I>.<A NAME="I3743"></A></div>
+indexing function</I> for <I>T</I>.<A NAME="I3747"></A></div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0354-1.TXT">AI12-0354-1</A></I>} 
+A call on the First or Next operation on a given Parallel_Iterator object 
+with a given Chunk value, which does not propagate an exception, should 
+return a Cursor value that either yields False when passed to Has_Element, 
+or that identifies an element distinct from any Cursor value returned 
+by a call on a First or Next operation on the same Parallel_Iterator 
+object with a different Chunk value. If the First or Next operations 
+with a Chunk parameter behave in any other manner, execution is erroneous. 
+</div>
+<div class="paranum"><a name="p22.a">22.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This describes the expectations 
+from a user-written parallel iterator. If the expectations are not met, 
+execution is erroneous so that implementations do not need to go to heroic 
+efforts to avoid problems caused by bad iterators. This is similar to 
+the handling of storage pools, see <A HREF="AA-13-11.html">13.11</A>. 
+</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
-<div class="paranum"><a name="p21.a">21.a/3</a></div>
+<div class="paranum"><a name="p22.b">22.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<A NAME="I3744"></A>User-defined iterator types are new in Ada 2012. 
+<A NAME="I3748"></A>User-defined iterator types are new in Ada 2012. 
 </div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
-<div class="paranum"><a name="p21.b">21.b/4</a></div>
+<div class="paranum"><a name="p22.c">22.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<A NAME="I3745"></A><B>Corrigendum:</B> Defined Default_Iterator and 
+<A NAME="I3749"></A><B>Corrigendum:</B> Defined Default_Iterator and 
 Iterator_Element to be nonoveridable, which makes redefinitions and hiding 
 of these aspects illegal. It's possible that some program could violate 
 one of these new restrictions, but in most cases this can easily be worked 
 around by using overriding rather than redefinition.</div>
-<div class="paranum"><a name="p21.c">21.c/5</a></div>
+<div class="paranum"><a name="p22.d">22.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
 Various new types and subprograms are newly added to Ada.Iterator_Interfaces. 
 If an instance of Ada.Iterator_Interfaces is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
@@ -294,13 +313,14 @@ the user-defined entity may no longer be use-visible, resulting in errors.
 This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p21.d">21.d/5</a></div>
+<div class="paranum"><a name="p22.e">22.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
-<A NAME="I3746"></A>Aspect Iterator_View is new; it allows container 
+<A NAME="I3750"></A>Aspect Iterator_View is new; it allows container 
 element iterators to set the tampering state once rather than for each 
 use of the element.</div>
-<div class="paranum"><a name="p21.e">21.e/5</a></div>
+<div class="paranum"><a name="p22.f">22.f/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0266-1.TXT">AI12-0266-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0354-1.TXT">AI12-0354-1</A></I>} 
 Parallel iterator interfaces are new; they allow user-defined parallel 
 loops to be defined.&nbsp;</div>
 

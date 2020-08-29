@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,24 +38,24 @@
 issues an entry call that is cancelled if the call (or a requeue-with-abort 
 of the call) is not selected before the expiration time is reached. A 
 procedure call may appear rather than an entry call for cases where the 
-procedure might be implemented by an entry. <A NAME="I5043"></A>]</div>
+procedure might be implemented by an entry. <A NAME="I5033"></A>]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">timed_entry_call</SPAN><A NAME="I5044"></A><A NAME="S0276"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">timed_entry_call</SPAN><A NAME="I5034"></A><A NAME="S0276"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5045"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0277">entry_call_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5035"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0277">entry_call_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>or</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5046"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0274">delay_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5036"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0274">delay_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<SPAN Class="swiss">entry_call_alternative</SPAN><A NAME="I5047"></A><A NAME="S0277"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I5048"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN>&nbsp;[<A NAME="I5049"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>]</div>
+<SPAN Class="swiss">entry_call_alternative</SPAN><A NAME="I5037"></A><A NAME="S0277"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I5038"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0278">procedure_or_entry_call</A></SPAN>&nbsp;[<A NAME="I5039"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN>]</div>
 <div class="paranum"><a name="p3.1">3.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<SPAN Class="swiss">procedure_or_entry_call</SPAN><A NAME="I5050"></A><A NAME="S0278"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I5051"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0217">procedure_call_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I5052"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">entry_call_statement</A></SPAN></div>
+<SPAN Class="swiss">procedure_or_entry_call</SPAN><A NAME="I5040"></A><A NAME="S0278"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I5041"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0217">procedure_call_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I5042"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0264">entry_call_statement</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3.2">3.2/2</a></div>
@@ -83,7 +83,7 @@ like access-to-entry. So only names of entries or procedures are possible.
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I5053"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0276">timed_entry_call</A></SPAN>, 
+<A NAME="I5043"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0276">timed_entry_call</A></SPAN>, 
 the <I>entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 or <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>, 
@@ -136,7 +136,7 @@ can define conditional entry calls in terms of timed entry calls.&nbsp;</div>
 <div class="paranum"><a name="p7.b">7.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<A NAME="I5054"></A>A procedure call can be used as the <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0277">entry_call_alternative</A></SPAN> 
+<A NAME="I5044"></A>A procedure call can be used as the <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0277">entry_call_alternative</A></SPAN> 
 in a timed or conditional entry call, if the procedure might actually 
 be an entry. Since the fact that something is an entry could be used 
 in resolving these calls in Ada 95, it is possible for timed or conditional 

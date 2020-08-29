@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,15 +42,15 @@ for any components not determined by the <SPAN Class="swiss"><A HREF="RM-4-3-2.h
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">extension_aggregate</SPAN><A NAME="I2543"></A><A NAME="S0111"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2544"></A><SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN>&nbsp;<B>with</B>&nbsp;<A NAME="I2545"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">extension_aggregate</SPAN><A NAME="I2545"></A><A NAME="S0111"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2546"></A><SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN>&nbsp;<B>with</B>&nbsp;<A NAME="I2547"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">ancestor_part</SPAN><A NAME="I2546"></A><A NAME="S0112"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2547"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I2548"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">ancestor_part</SPAN><A NAME="I2548"></A><A NAME="S0112"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2549"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I2550"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><A NAME="I2549"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
-shall be a single type that is a record extension. <A NAME="I2550"></A>If 
+<div class="Normal"><A NAME="I2551"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
+shall be a single type that is a record extension. <A NAME="I2552"></A>If 
 the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
 it is expected to be of any tagged type.&nbsp;</div>
@@ -63,7 +63,7 @@ it shall denote a specific tagged subtype. If the <SPAN Class="swiss"><A HREF="R
 is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
 it shall not be dynamically tagged. The type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
 shall be a descendant of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
-(the <I>ancestor</I> type)<A NAME="I2551"></A>, through one or more record 
+(the <I>ancestor</I> type)<A NAME="I2553"></A>, through one or more record 
 extensions (and no private extensions). If the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 the view of the ancestor type from which the type is descended (see <A HREF="RM-7-3-1.html">7.3.1</A>) 
@@ -77,7 +77,7 @@ that is a call to a function with an unconstrained result subtype.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I2552"></A>For the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
+<div class="Normal"><A NAME="I2554"></A>For the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN>, 
 the only components <I>needed</I> are those of the composite value defined 
 by the aggregate that are not inherited from the type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN>, 
@@ -87,7 +87,7 @@ that denotes an unconstrained subtype.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2553"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN>, 
+<div class="Normal"><A NAME="I2555"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
 is evaluated. If the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
@@ -98,9 +98,9 @@ are initialized by default as for an object of the ancestor type. Any
 implicit initializations or evaluations are performed in an arbitrary 
 order, except that the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 for a discriminant is evaluated prior to any other evaluation or initialization 
-that depends on it.<A NAME="I2554"></A></div>
+that depends on it.<A NAME="I2556"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><A NAME="I2555"></A><A NAME="I2556"></A>If the type 
+<div class="Normal"><A NAME="I2557"></A><A NAME="I2558"></A>If the type 
 of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 has discriminants and the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is not a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
@@ -110,7 +110,7 @@ has the value specified for a corresponding discriminant, if any, either
 in the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>, 
 or in the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN> 
 for some ancestor of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN>. 
-<A NAME="I2557"></A>Constraint_Error is raised if this check fails.&nbsp;</div>
+<A NAME="I2559"></A>Constraint_Error is raised if this check fails.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Notes">9&nbsp;&nbsp;If all components of the value of the 

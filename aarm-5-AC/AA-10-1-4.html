@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 <HR>
 <H1>10.1.4 The Compilation Process</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5501"></A><A NAME="I5502"></A>Each compilation 
+<div class="Normal"><A NAME="I5497"></A><A NAME="I5498"></A>Each compilation 
 unit submitted to the compiler is compiled in the context of an <I>environment</I> 
 <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 (or simply, an <I>environment</I>), which is a conceptual <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
@@ -103,7 +103,7 @@ other than an instance of a generic subprogram or for a generic subprogram
 </span>(even if the profile of the body is not type conformant with that 
 of the declaration); otherwise<span class="insert3">,</span> the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
 is interpreted as both the declaration and body of a library subprogram. 
-<A NAME="I5503"></A></div>
+<A NAME="I5499"></A></div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The principle here is that 
 a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN> 
@@ -128,7 +128,7 @@ declares a new subprogram.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">When a compilation unit is compiled, all compilation 
 units upon which it depends semantically shall already exist in the environment; 
-<A NAME="I5504"></A>the set of these compilation units shall be <I>consistent</I> 
+<A NAME="I5500"></A>the set of these compilation units shall be <I>consistent</I> 
 in the sense that the new compilation unit shall not semantically depend 
 (directly or indirectly) on two different versions of the same compilation 
 unit, nor on an earlier version of itself.&nbsp;</div>
@@ -254,13 +254,13 @@ Note that <span class="insert3">Clause</span><span class="delete3">&nbsp;Section
 <A HREF="AA-1.html">1</A> requires an implementation to detect illegal 
 compilation units at compile time.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Notes">6&nbsp;&nbsp;<A NAME="I5505"></A>An implementation 
+<div class="Notes">6&nbsp;&nbsp;<A NAME="I5501"></A>An implementation 
 may support a concept of a <I>library</I>, which contains <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0287">library_item</A></SPAN>s. 
 If multiple libraries are supported, the implementation has to define 
 how a single environment is constructed when a compilation unit is submitted 
 to the compiler. Naming conflicts between different libraries might be 
 resolved by treating each library as the root of a hierarchy of child 
-library units. <A NAME="I5506"></A></div>
+library units. <A NAME="I5502"></A></div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>Alternatively, naming 
 conflicts could be resolved via some sort of hiding rule.&nbsp;</div>
@@ -289,7 +289,7 @@ on the compilation unit containing the instantiation to be recompiled.
 <div class="paranum"><a name="p10.b">10.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00077.TXT">AI95-00077-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
-<span class="insert2"><A NAME="I5507"></A>Ada 83 allowed implementations 
+<span class="insert2"><A NAME="I5503"></A>Ada 83 allowed implementations 
 to require that the body of a generic unit be available when the instantiation 
 is compiled; that permission is dropped in Ada 95. This isn't really 
 an extension (it doesn't allow Ada users to write anything that they 

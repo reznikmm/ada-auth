@@ -23,12 +23,10 @@
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -104,7 +102,7 @@ or actual parameter for a formal object of mode <B>in</B> (see <A HREF="RM-12-4.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4021"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4026"></A>A 
 view of a type is <I>limited</I> if it is one of the following:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Bulleted">a type with the reserved word <B>limited</B>, <B>synchronized</B>, 
@@ -119,13 +117,13 @@ view of a type is <I>limited</I> if it is one of the following:&nbsp;</div>
 <div class="Bulleted">a derived type whose parent is limited and is not 
 an interface.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4022"></A>Otherwise, the type is nonlimited.</div>
+<div class="Normal"><A NAME="I4027"></A>Otherwise, the type is nonlimited.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">There are no predefined equality operators for a 
 limited type.</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;A type is <I>immutably 
-limited</I> if it is one of the following:<A NAME="I4023"></A><A NAME="I4024"></A></div>
+limited</I> if it is one of the following:<A NAME="I4028"></A><A NAME="I4029"></A></div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
 <div class="Bulleted">An explicitly limited record type;</div>
 <div class="paranum"><a name="p8.3">8.3/3</a></div>
@@ -144,10 +142,6 @@ type is presumed to be immutably limited except within the body of a
 generic unit or a body declared within the declarative region of a generic 
 unit, if the formal type is declared within the formal part of the generic 
 unit.</div>
-
-<H4 Class="centered">Implementation Requirements</H4>
-<div class="paranum"><a name="p8.8">8.8/3</a></div>
-<div class="Normal">&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Notes">17&nbsp;&nbsp;While it is allowed to write initializations 
@@ -160,20 +154,8 @@ must be built directly in the target object (see <A HREF="RM-7-6.html">7.6</A>).
 </div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>Paragraphs 10 through 
 15 were deleted.</I></SPAN>&nbsp;</div>
-<div class="paranum"><a name="p10">10/2</a></div>
-<div class="Indented2SmallBulleted"></div>
-<div class="paranum"><a name="p11">11/2</a></div>
-<div class="Indented2SmallBulleted"></div>
-<div class="paranum"><a name="p12">12/2</a></div>
-<div class="Indented2SmallBulleted"></div>
-<div class="paranum"><a name="p13">13/2</a></div>
-<div class="Indented2SmallBulleted"></div>
-<div class="paranum"><a name="p14">14/2</a></div>
-<div class="Notes"></div>
-<div class="paranum"><a name="p15">15/2</a></div>
-<div class="Notes"></div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Notes">18&nbsp;&nbsp;<A NAME="I4025"></A><A NAME="I4026"></A><A NAME="I4027"></A>As 
+<div class="Notes">18&nbsp;&nbsp;<A NAME="I4030"></A><A NAME="I4031"></A><A NAME="I4032"></A>As 
 illustrated in <A HREF="RM-7-3-1.html">7.3.1</A>, an untagged limited 
 type can become nonlimited under certain circumstances.&nbsp;</div>
 

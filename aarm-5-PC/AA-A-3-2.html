@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,55 +46,55 @@ Characters.Handling has the following declaration:&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
 <B>with</B>&nbsp;Ada.Characters.Conversions;<BR>
-<B>package</B>&nbsp;Ada.Characters.Handling&nbsp;<B>is</B><A NAME="I6557"></A><BR>
+<B>package</B>&nbsp;Ada.Characters.Handling&nbsp;<B>is</B><A NAME="I6553"></A><BR>
 &nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Handling);</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>Character&nbsp;classification&nbsp;functions</I></SPAN></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0185-1.TXT">AI05-0185-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6558"></A>Is_Control&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6559"></A>Is_Graphic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6560"></A>Is_Letter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6561"></A>Is_Lower&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6562"></A>Is_Upper&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6563"></A>Is_Basic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6564"></A>Is_Digit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6565"></A>Is_Decimal_Digit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6554"></A>Is_Control&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6555"></A>Is_Graphic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6556"></A>Is_Letter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6557"></A>Is_Lower&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6558"></A>Is_Upper&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6559"></A>Is_Basic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6560"></A>Is_Digit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6561"></A>Is_Decimal_Digit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Is_Digit;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6566"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6567"></A>Is_Alphanumeric&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6568"></A>Is_Special&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6569"></A>Is_Line_Terminator&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6570"></A>Is_Mark&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6571"></A>Is_Other_Format&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6572"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6573"></A>Is_Space&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<span class="insert5"><BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6574"></A>Is_NFKC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6562"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6563"></A>Is_Alphanumeric&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6564"></A>Is_Special&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6565"></A>Is_Line_Terminator&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6566"></A>Is_Mark&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6567"></A>Is_Other_Format&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6568"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6569"></A>Is_Space&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<span class="insert5"><BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6570"></A>Is_NFKC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>Conversion&nbsp;functions&nbsp;for&nbsp;Character&nbsp;and&nbsp;String</I></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6575"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6576"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6577"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6571"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6572"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6573"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6578"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6579"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6580"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6574"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6575"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6576"></A>To_Basic&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples">--<SPAN Class="roman"><I>Classifications&nbsp;of&nbsp;and&nbsp;conversions&nbsp;between&nbsp;Character&nbsp;and&nbsp;ISO&nbsp;646</I></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6581"></A>ISO_646&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6577"></A>ISO_646&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Character&nbsp;<B>range</B>&nbsp;Character'Val(0)&nbsp;..&nbsp;Character'Val(127);</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6582"></A>Is_ISO_646&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6583"></A>Is_ISO_646&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6578"></A>Is_ISO_646&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6579"></A>Is_ISO_646&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6584"></A>To_ISO_646&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6580"></A>To_ISO_646&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substitute&nbsp;:&nbsp;<B>in</B>&nbsp;ISO_646&nbsp;:=&nbsp;'&nbsp;')<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;ISO_646;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6585"></A>To_ISO_646&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6581"></A>To_ISO_646&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Substitute&nbsp;:&nbsp;<B>in</B>&nbsp;ISO_646&nbsp;:=&nbsp;'&nbsp;')<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p13">13/2</a></div>
@@ -103,21 +103,6 @@ Characters.Handling has the following declaration:&nbsp;</div>
 --<SPAN Class="roman"><I>&nbsp;The&nbsp;functions&nbsp;Is_Character,&nbsp;Is_String,&nbsp;To_Character,&nbsp;To_String,&nbsp;To_Wide_Character,</I></SPAN><BR>
 --<SPAN Class="roman"><I>&nbsp;and&nbsp;To_Wide_String&nbsp;are&nbsp;obsolescent;&nbsp;see&nbsp;<A HREF="AA-J-14.html">J.14</A>.</I></SPAN></div>
 <div class="Examples"><SPAN Class="roman"><SPAN STYLE="font-size: 80%"><I>Paragraphs&nbsp;14&nbsp;through&nbsp;18&nbsp;were&nbsp;deleted.</I></SPAN></SPAN></div>
-<div class="paranum"><a name="p14">14/2</a></div>
-<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p15">15/2</a></div>
-<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p16">16/2</a></div>
-<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p17">17/2</a></div>
-<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p18">18/2</a></div>
-<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Characters.Handling;</div>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
@@ -137,53 +122,53 @@ then the function returns False.</div>
 <div class="Normal">Each of the following classification functions has 
 a formal Character parameter, Item, and returns a Boolean result.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="WideHanging-Term"><A NAME="I6586"></A>Is_Control&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6582"></A>Is_Control&nbsp;</div><div class="WideHanging-Body">
 True if Item is a control character. A <I>control character</I> is a 
 character whose position is in one of the ranges 0..31 or 127..159.</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="WideHanging-Term"><A NAME="I6587"></A>Is_Graphic&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6583"></A>Is_Graphic&nbsp;</div><div class="WideHanging-Body">
 True if Item is a graphic character. A <I>graphic character</I> is a 
 character whose position is in one of the ranges 32..126 or 160..255.</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="WideHanging-Term"><A NAME="I6588"></A>Is_Letter&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6584"></A>Is_Letter&nbsp;</div><div class="WideHanging-Body">
 True if Item is a letter. A <I>letter</I> is a character that is in one 
 of the ranges 'A'..'Z' or 'a'..'z', or whose position is in one of the 
 ranges 192..214, 216..246, or 248..255.</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="WideHanging-Term"><A NAME="I6589"></A>Is_Lower&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6585"></A>Is_Lower&nbsp;</div><div class="WideHanging-Body">
 True if Item is a lower-case letter. A <I>lower-case letter</I> is a 
 character that is in the range 'a'..'z', or whose position is in one 
 of the ranges 223..246 or 248..255.</div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="WideHanging-Term"><A NAME="I6590"></A>Is_Upper</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6586"></A>Is_Upper</div><div class="WideHanging-Body">
 True if Item is an upper-case letter. An <I>upper-case letter</I> is 
 a character that is in the range 'A'..'Z' or whose position is in one 
 of the ranges 192..214 or 216.. 222.</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="WideHanging-Term"><A NAME="I6591"></A>Is_Basic&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6587"></A>Is_Basic&nbsp;</div><div class="WideHanging-Body">
 True if Item is a basic letter. A <I>basic letter</I> is a character 
 that is in one of the ranges 'A'..'Z' and 'a'..'z', or that is one of 
 the following: '&AElig;', '&aelig;', '&ETH;', '&eth;', '&THORN;', '&thorn;', 
 or '&szlig;'.</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="WideHanging-Term"><A NAME="I6592"></A>Is_Digit&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6588"></A>Is_Digit&nbsp;</div><div class="WideHanging-Body">
 True if Item is a decimal digit. A <I>decimal digit</I> is a character 
 in the range '0'..'9'.</div>
 <div class="paranum"><a name="p29">29</a></div>
 <div class="WideHanging-Term">Is_Decimal_Digit&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 A renaming of Is_Digit.</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="WideHanging-Term"><A NAME="I6593"></A>Is_Hexadecimal_Digit 
+<div class="WideHanging-Term"><A NAME="I6589"></A>Is_Hexadecimal_Digit 
 </div><div class="WideHanging-Body"><br clear="left">
 True if Item is a hexadecimal digit. A <I>hexadecimal digit</I> is a 
 character that is either a decimal digit or that is in one of the ranges 
 'A' .. 'F' or 'a' .. 'f'.</div>
 <div class="paranum"><a name="p31">31</a></div>
-<div class="WideHanging-Term"><A NAME="I6594"></A>Is_Alphanumeric&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term"><A NAME="I6590"></A>Is_Alphanumeric&nbsp;</div><div class="WideHanging-Body"><br clear="left">
 True if Item is an alphanumeric character. An <I>alphanumeric character</I> 
 is a character that is either a letter or a decimal digit.</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="WideHanging-Term"><A NAME="I6595"></A>Is_Special&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term"><A NAME="I6591"></A>Is_Special&nbsp;</div><div class="WideHanging-Body">
 True if Item is a special graphic character. A <I>special graphic character</I> 
 is a graphic character that is not alphanumeric.</div>
 <div class="paranum"><a name="p32.1">32.1/3</a></div>
@@ -265,39 +250,6 @@ the String whose Range is 1..Item'Length and each of whose elements is
 given by To_ISO_646 of the corresponding element in Item.&nbsp;</div>
 <div class="Normal"><SPAN Class="roman"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 42 through 49 were deleted.</I></SPAN></SPAN>&nbsp;</div>
-<div class="paranum"><a name="p42">42/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p43">43/2</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p44">44/2</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p45">45/2</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p46">46/2</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p47">47/2</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-<div class="paranum"><a name="p48">48/2</a></div>
-<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-</div>
-
-<H4 Class="centered">Implementation Advice</H4>
-<div class="paranum"><a name="p49">49/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p50">50</a></div>
 <div class="Notes">5&nbsp;&nbsp;A basic letter is a letter without a 
@@ -353,13 +305,13 @@ of Ada.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p60.c">60.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I6596"></A>Characters.Handling is now Pure, so it can be used 
+<A NAME="I6592"></A>Characters.Handling is now Pure, so it can be used 
 in pure units.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p60.d">60.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0185-1.TXT">AI05-0185-1</A></I>} 
-<A NAME="I6597"></A>Added additional classification routines so that 
+<A NAME="I6593"></A>Added additional classification routines so that 
 Characters.Handling has all of the routines available in Wide_Characters.Handling. 
 If Characters.Handling is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
@@ -389,7 +341,7 @@ have any relationship to the characters allowed in identifiers.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p60.h">60.h/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
-<span class="insert5"><A NAME="I6598"></A>Added an additional classification 
+<span class="insert5"><A NAME="I6594"></A>Added an additional classification 
 routine Is_NFKC. If Characters.Handling is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 of Is_NFKC is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 

@@ -20,7 +20,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -31,14 +31,14 @@
 <HR>
 <H1>10.1 Separate Compilation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I5387"></A> <A NAME="I5388"></A><A NAME="I5389"></A>A 
+<div class="Normal">[<A NAME="I5383"></A> <A NAME="I5384"></A><A NAME="I5385"></A>A 
 <I>program unit</I> is either a package, a task unit, a protected unit, 
 a protected entry, a generic unit, or an explicitly declared subprogram 
 other than an enumeration literal. Certain kinds of program units can 
 be separately compiled. Alternatively, they can appear physically nested 
 within other program units.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I5390"></A>The text of a program can be 
+<div class="Normal"><A NAME="I5386"></A>The text of a program can be 
 submitted to the compiler in one or more <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN>s. 
 Each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0285">compilation</A></SPAN> 
 is a succession of <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0286">compilation_unit</A></SPAN>s. 
@@ -65,11 +65,11 @@ unit.</div>
 <div class="Annotations">A protected entry is a program unit, but protected 
 entries cannot be separately compiled.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I5391"></A>A library unit is a separately 
+<div class="Normal"><A NAME="I5387"></A>A library unit is a separately 
 compiled program unit, and is always a package, subprogram, or generic 
 unit. Library units may have other (logically nested) library units as 
 children, and may have other program units physically nested within them. 
-<A NAME="I5392"></A>A root library unit, together with its children and 
+<A NAME="I5388"></A>A root library unit, together with its children and 
 grandchildren and so on, form a <I>subsystem</I>.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>

@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,7 +34,7 @@
 <HR>
 <H1>13.9 Unchecked Type Conversions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I6156"></A> <A NAME="I6157"></A><A NAME="I6158"></A><A NAME="I6159"></A><A NAME="I6160"></A>An 
+<div class="Normal">[<A NAME="I6148"></A> <A NAME="I6149"></A><A NAME="I6150"></A><A NAME="I6151"></A><A NAME="I6152"></A>An 
 unchecked type conversion can be achieved by a call to an instance of 
 the generic function Unchecked_Conversion.]&nbsp;</div>
 
@@ -48,7 +48,7 @@ generic library function exists:&nbsp;</div>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Source(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Target(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-<A NAME="I6161"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<BR>
+<A NAME="I6153"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking,&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -80,7 +80,7 @@ zero.</div>
 <div class="Bulleted">The target subtype is not an unconstrained composite 
 subtype.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I6162"></A><A NAME="I6163"></A>S and the 
+<div class="Bulleted"><A NAME="I6154"></A><A NAME="I6155"></A>S and the 
 target subtype both have a contiguous representation.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted">The representation of S is a representation of 
@@ -174,13 +174,13 @@ the program might misbehave. The implementation should not generate extra
 code to check for zero bits (except, perhaps, in a special error-checking 
 mode).&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6164"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6156"></A>The 
 recommended level of support for unchecked conversions is:&nbsp;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 Unchecked conversions should be supported and should be reversible in 
-the cases where this subclause defines the result.<A NAME="I6165"></A> 
-<A NAME="I6166"></A>To enable meaningful use of unchecked conversion, 
+the cases where this subclause defines the result.<A NAME="I6157"></A> 
+<A NAME="I6158"></A>To enable meaningful use of unchecked conversion, 
 a contiguous representation should be used for elementary subtypes, for 
 statically constrained array subtypes whose component subtype is one 
 of the subtypes described in this paragraph, and for record subtypes 

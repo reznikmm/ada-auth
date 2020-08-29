@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Use_Formal and Dispatching Aspects</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-J.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>H.7.1 The Use_Formal and Dispatching Aspects</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+The Use_Formal and Dispatching aspects are provided to more precisely 
+describe the use of generic formal parameters and dispatching calls within 
+the execution of an operation, enabling more precise checking of conformance 
+with the Nonblocking and global aspects that apply at the point of invocation 
+of the operation.</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+For any declaration within a generic unit for which a global or Nonblocking 
+aspect may be specified, other than a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>, 
+the following aspect may be specified to indicate which generic formal 
+parameters are <I>used</I> by the associated entity:<A NAME="I10249"></A></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+Use_Formal</div><div class="WideHanging-Body"><br clear="left">
+The aspect is specified with a <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0362">formal_parameter_set</A></SPAN>, 
+with the following form:<A NAME="I10250"></A><A NAME="I10251"></A></div>
+<div class="paranum"><a name="p3.a">3.a/5</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Use_Formal: 
+</B>Generic formal parameters used in the implementation of an entity.</div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="WideHanging-Body"><SPAN Class="swiss">formal_parameter_set</SPAN><A NAME="I10252"></A><A NAME="S0362"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I10253"></A><SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0363">formal_group_designator</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I10254"></A><SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0364">formal_parameter_name</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I10255"></A><SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0364">formal_parameter_name</A></SPAN>{,&nbsp;<A NAME="I10256"></A><SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0364">formal_parameter_name</A></SPAN>})</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="WideHanging-Body"><SPAN Class="swiss">formal_group_designator</SPAN><A NAME="I10257"></A><A NAME="S0363"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>null</B>&nbsp;|&nbsp;<B>all</B></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="WideHanging-Body"><SPAN Class="swiss">formal_parameter_name</SPAN><A NAME="I10258"></A><A NAME="S0364"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>formal_</I><A NAME="I10259"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>formal_subprogram_</I><A NAME="I10260"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>formal_access_to_subprogram_object_</I><A NAME="I10261"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+For any declaration for which a global or Nonblocking aspect may be specified, 
+other than for a library package, a generic library package, or a generic 
+formal, the following aspect may be specified:</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+Dispatching</div><div class="WideHanging-Body"><br clear="left">
+ The aspect is specified with a <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0365">dispatching_operation_set</A></SPAN>, 
+with the following form:<A NAME="I10262"></A><A NAME="I10263"></A></div>
+<div class="paranum"><a name="p8.a">8.a/5</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Dispatching: 
+</B>Generic formal parameters used in the implementation of an entity.</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="WideHanging-Body"><SPAN Class="swiss">dispatching_operation_set</SPAN><A NAME="I10264"></A><A NAME="S0365"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I10265"></A><SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I10266"></A><SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN>{,&nbsp;<A NAME="I10267"></A><SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN>})</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="WideHanging-Body"><SPAN Class="swiss">dispatching_operation_specifier</SPAN><A NAME="I10268"></A><A NAME="S0366"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>dispatching_operation_</I><A NAME="I10269"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;(<I>object_</I><A NAME="I10270"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0364">formal_parameter_name</A></SPAN> 
+in a Use_Formal aspect shall resolve to statically denote a formal subtype, 
+a formal subprogram, or a formal object of an anonymous access-to-subprogram 
+type[ of an enclosing generic unit or visible formal package].</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+The <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN> 
+shall resolve to statically name an object (including possibly a formal 
+parameter) of a tagged class-wide type <I>T</I>'Class, or of an access 
+type designating a tagged class-wide type <I>T</I>'Class; the <I>dispatching_operation_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN> 
+shall resolve to statically denote a dispatching operation associated 
+with <I>T</I>.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+The <I>formal parameter set</I><A NAME="I10271"></A> is identified by 
+a set of <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0364">formal_parameter_name</A></SPAN>s. 
+Alternatively, the reserved word <B>null</B> may be used to indicate 
+none of the generic formal parameters, or <B>all</B> to indicate all 
+of the generic formal parameters, of any enclosing generic unit (or visible 
+formal package) might be used within the execution of the operation. 
+If there is no formal parameter set specified for an entity declared 
+within a generic unit, it defaults to <B>all</B>.</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+The <I>dispatching operation set</I><A NAME="I10272"></A> is identified 
+by a set of <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN>s. 
+It indicates that the Nonblocking and global effects of dispatching calls 
+that match one of the specifiers need not be accounted for by the Nonblocking 
+or global aspect, but are instead to be accounted for by the invoker 
+of the operation. A dispatching call matches a <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN> 
+if the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of the call statically denotes the same operation(s) as that of the <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN>, 
+and at least one of the objects controlling the call is denoted by, or 
+designated by, a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that statically names the same object as that denoted by the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN>. 
+In the absence of any <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN>s, 
+Nonblocking and global aspects checks are performed at the point of a 
+dispatching call within the operation using the Nonblocking and Global'Class 
+aspects that apply to the named dispatching operation.</div>
+<div class="paranum"><a name="p14.a">14.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The object &quot;controlling 
+the call&quot; is not necessarily a controlling parameter of the call 
+if the call is a function with a controlling result or has parameters 
+that is such a function. It is one of the objects that provide the dispatching 
+tag used for the call; that could, for example, be a parameter of a function 
+used as a parameter to the call, or an object being assigned to, or a 
+parameter of an enclosing call.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+Within an operation to which a Use_Formal aspect applies, if the formal 
+parameter set is anything but <B>all</B>, then the only generic formal 
+subtypes that may be used, the only formal subprograms that may be called, 
+and the only formal objects of an anonymous access-to-subprogram type 
+that may be dereferenced as part of a call or passed as the actual for 
+an access parameter, are those included in the formal parameter set.</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+When an operation (or instance thereof) to which a Use_Formal aspect 
+applies is invoked, Nonblocking and global aspect checks are performed 
+presuming each generic formal parameter (or corresponding actual parameter) 
+of the formal parameter set is used at least once.</div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+Within an operation to which a Dispatching aspect applies, any dispatching 
+call that does not match any <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN> 
+of the dispatching operation set is checked using the Nonblocking and 
+Global'Class aspect(s) applicable to the called dispatching operation; 
+if there is a match, there is no checking against the Nonblocking or 
+global aspects applicable at the point of call.</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0380-1.TXT">AI12-0380-1</A></I>} 
+When an operation to which a Dispatching aspect applies is invoked, Nonblocking 
+and global aspect checks are performed presuming each named dispatching 
+operation is called at least once, with the named object controlling 
+the call, ignoring those dispatching calls that would match a <SPAN Class="swiss"><A HREF="AA-H-7-1.html#S0366">dispatching_operation_specifier</A></SPAN> 
+applicable at the point of invocation of the operation.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p18.a">18.a/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0079-3.TXT">AI12-0079-3</A></I>} 
+<A NAME="I10273"></A>The aspects Use_Formal and Dispatching are new. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-J.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

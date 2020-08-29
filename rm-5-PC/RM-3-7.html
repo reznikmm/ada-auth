@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,7 +36,7 @@
 <HR>
 <H1>3.7 Discriminants</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I1978"></A><A NAME="I1979"></A><A NAME="I1980"></A>A 
+<div class="Normal"><A NAME="I1979"></A><A NAME="I1980"></A><A NAME="I1981"></A>A 
 composite type (other than an array or interface type) can have discriminants, 
 which parameterize the type. A <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 specifies the discriminants of a composite type. A discriminant of an 
@@ -48,22 +48,22 @@ are indefinite subtypes.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">discriminant_part</SPAN><A NAME="I1981"></A><A NAME="S0059"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1982"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">unknown_discriminant_part</A></SPAN>&nbsp;|&nbsp;<A NAME="I1983"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_part</SPAN><A NAME="I1982"></A><A NAME="S0059"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1983"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">unknown_discriminant_part</A></SPAN>&nbsp;|&nbsp;<A NAME="I1984"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">unknown_discriminant_part</SPAN><A NAME="I1984"></A><A NAME="S0060"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(&lt;&gt;)</div>
+<div class="Indented1"><SPAN Class="swiss">unknown_discriminant_part</SPAN><A NAME="I1985"></A><A NAME="S0060"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(&lt;&gt;)</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">known_discriminant_part</SPAN><A NAME="I1985"></A><A NAME="S0061"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;(<A NAME="I1986"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN>&nbsp;{;&nbsp;<A NAME="I1987"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">known_discriminant_part</SPAN><A NAME="I1986"></A><A NAME="S0061"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I1987"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN>&nbsp;{;&nbsp;<A NAME="I1988"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN>})</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">discriminant_specification</SPAN><A NAME="I1988"></A><A NAME="S0062"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I1989"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<A NAME="I1990"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I1991"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1992"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;|&nbsp;<A NAME="I1993"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I1994"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1995"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_specification</SPAN><A NAME="I1989"></A><A NAME="S0062"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I1990"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<A NAME="I1991"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I1992"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1993"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;|&nbsp;<A NAME="I1994"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I1995"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1996"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">default_expression</SPAN><A NAME="I1996"></A><A NAME="S0063"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1997"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">default_expression</SPAN><A NAME="I1997"></A><A NAME="S0063"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1998"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I1998"></A>The expected type for the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+<div class="Normal"><A NAME="I1999"></A>The expected type for the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN> 
 is that of the corresponding discriminant.&nbsp;</div>
 
@@ -73,7 +73,7 @@ is that of the corresponding discriminant.&nbsp;</div>
 is only permitted in a declaration for a composite type that is not an 
 array or interface type (this includes generic formal types). A type 
 declared with a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
-is called a <I>discriminated</I> type,<A NAME="I1999"></A> as is a type 
+is called a <I>discriminated</I> type,<A NAME="I2000"></A> as is a type 
 that inherits (known) discriminants.&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">The subtype of a discriminant may be defined by an 
@@ -82,7 +82,7 @@ and a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>,
 in which case the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 shall denote a discrete or access subtype, or it may be defined by an 
 <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>. 
-<A NAME="I2000"></A>A discriminant that is defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
+<A NAME="I2001"></A>A discriminant that is defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 is called an <I>access discriminant</I> and is of an anonymous access 
 type.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
@@ -98,7 +98,7 @@ for an access discriminant may have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S
 only in the declaration for an immutably limited type (see <A HREF="RM-7-5.html">7.5</A>). 
 In addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
-unit.<A NAME="I2001"></A>&nbsp;</div>
+unit.<A NAME="I2002"></A>&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN></div>
@@ -133,17 +133,17 @@ defined by the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definitio
 <div class="Normal">For a type defined by a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 each discriminant of the parent type is either inherited, constrained 
 to equal some new discriminant of the derived type, or constrained to 
-the value of an expression. <A NAME="I2002"></A>When inherited or constrained 
+the value of an expression. <A NAME="I2003"></A>When inherited or constrained 
 to equal some new discriminant, the parent discriminant and the discriminant 
 of the derived type are said to <I>correspond</I>. Two discriminants 
 also correspond if there is some common discriminant to which they both 
-correspond. A discriminant corresponds to itself as well. <A NAME="I2003"></A>If 
+correspond. A discriminant corresponds to itself as well. <A NAME="I2004"></A>If 
 a discriminant of a parent type is constrained to a specific value by 
 a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 then that discriminant is said to be <I>specified</I> by that <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal"><A NAME="I2004"></A>A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+<div class="Normal"><A NAME="I2005"></A>A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 that appears within the definition of a discriminated type <I>depends 
 on a discriminant</I> of the type if it names the discriminant as a bound 
 or discriminant value. A <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
@@ -151,7 +151,7 @@ depends on a discriminant if its <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S002
 depends on the discriminant, or on a discriminant that corresponds to 
 it.&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2005"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2006"></A>A 
 component <I>depends on a discriminant</I> if:&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="Bulleted">Its <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
@@ -174,16 +174,16 @@ this includes the discriminants themselves. The values of discriminants
 determine which other component values are present in the value of the 
 discriminated type.&nbsp;</div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Normal"><A NAME="I2006"></A><A NAME="I2007"></A><A NAME="I2008"></A><A NAME="I2009"></A>A 
+<div class="Normal"><A NAME="I2007"></A><A NAME="I2008"></A><A NAME="I2009"></A><A NAME="I2010"></A>A 
 type declared with a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 is said to have <I>known discriminants</I>; its first subtype is unconstrained. 
-<A NAME="I2010"></A><A NAME="I2011"></A>A type declared with an <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">unknown_discriminant_part</A></SPAN> 
+<A NAME="I2011"></A><A NAME="I2012"></A>A type declared with an <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">unknown_discriminant_part</A></SPAN> 
 is said to have <I>unknown discriminants</I>. A type declared without 
 a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN> 
 has no discriminants, unless it is a derived type; if derived, such a 
 type has the same sort of discriminants (known, unknown, or none) as 
 its parent (or ancestor) type. A tagged class-wide type also has unknown 
-discriminants. <A NAME="I2012"></A><A NAME="I2013"></A>Any subtype of 
+discriminants. <A NAME="I2013"></A><A NAME="I2014"></A>Any subtype of 
 a type with unknown discriminants is an unconstrained and indefinite 
 subtype (see <A HREF="RM-3-2.html">3.2</A> and <A HREF="RM-3-3.html">3.3</A>). 
 </div>
@@ -194,7 +194,7 @@ subtype (see <A HREF="RM-3-2.html">3.2</A> and <A HREF="RM-3-3.html">3.3</A>).
 is elaborated when the value of the access discriminant is defined: by 
 evaluation of its <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>, 
 by elaboration of a <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
-or by an assignment that initializes the enclosing object. <A NAME="I2014"></A></div>
+or by an assignment that initializes the enclosing object. <A NAME="I2015"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Notes">58&nbsp;&nbsp;If a discriminated type has <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 

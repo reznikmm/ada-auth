@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -54,40 +54,40 @@ would not fit into the scheme very well.&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
-<SPAN Class="swiss">formal_type_declaration</SPAN><A NAME="I5729"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5730"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0321">formal_complete_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5731"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0322">formal_incomplete_type_declaration</A></SPAN></div>
+<SPAN Class="swiss">formal_type_declaration</SPAN><A NAME="I5725"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5726"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0321">formal_complete_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5727"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0322">formal_incomplete_type_declaration</A></SPAN></div>
 <div class="paranum"><a name="p2.1">2.1/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0205-1.TXT">AI12-0205-1</A></I>} 
-<SPAN Class="swiss">formal_complete_type_declaration</SPAN><A NAME="I5732"></A><A NAME="S0321"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5733"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5734"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I5735"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0323">formal_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5">[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5736"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>]&nbsp;</span>[<A NAME="I5737"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">formal_complete_type_declaration</SPAN><A NAME="I5728"></A><A NAME="S0321"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5729"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5730"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I5731"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0323">formal_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5">[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5732"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>]&nbsp;</span>[<A NAME="I5733"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p2.2">2.2/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0205-1.TXT">AI12-0205-1</A></I>} 
-<SPAN Class="swiss">formal_incomplete_type_declaration</SPAN><A NAME="I5738"></A><A NAME="S0322"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5739"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5740"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>]<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5741"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">formal_incomplete_type_declaration</SPAN><A NAME="I5734"></A><A NAME="S0322"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5735"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5736"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>]<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>or&nbsp;use</B>&nbsp;<I>default_</I><A NAME="I5737"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
-<SPAN Class="swiss">formal_type_definition</SPAN><A NAME="I5742"></A><A NAME="S0323"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5743"></A><SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0324">formal_private_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5744"></A><SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0325">formal_derived_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5745"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0326">formal_discrete_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5746"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0327">formal_signed_integer_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5747"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0328">formal_modular_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5748"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0329">formal_floating_point_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5749"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0330">formal_ordinary_fixed_point_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5750"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0331">formal_decimal_fixed_point_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5751"></A><SPAN Class="swiss"><A HREF="AA-12-5-3.html#S0332">formal_array_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5752"></A><SPAN Class="swiss"><A HREF="AA-12-5-4.html#S0333">formal_access_type_definition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5753"></A><SPAN Class="swiss"><A HREF="AA-12-5-5.html#S0334">formal_interface_type_definition</A></SPAN></div>
+<SPAN Class="swiss">formal_type_definition</SPAN><A NAME="I5738"></A><A NAME="S0323"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5739"></A><SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0324">formal_private_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5740"></A><SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0325">formal_derived_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5741"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0326">formal_discrete_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5742"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0327">formal_signed_integer_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5743"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0328">formal_modular_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5744"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0329">formal_floating_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5745"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0330">formal_ordinary_fixed_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5746"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0331">formal_decimal_fixed_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5747"></A><SPAN Class="swiss"><A HREF="AA-12-5-3.html#S0332">formal_array_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5748"></A><SPAN Class="swiss"><A HREF="AA-12-5-4.html#S0333">formal_access_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5749"></A><SPAN Class="swiss"><A HREF="AA-12-5-5.html#S0334">formal_interface_type_definition</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5754"></A><A NAME="I5755"></A><A NAME="I5756"></A><A NAME="I5757"></A>For 
+<div class="Normal"><A NAME="I5750"></A><A NAME="I5751"></A><A NAME="I5752"></A><A NAME="I5753"></A>For 
 a generic formal subtype, the actual shall be a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>; 
 it denotes the <I>(generic) actual subtype</I>.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
@@ -100,7 +100,7 @@ denotes a subtype, and the corresponding actual also denotes a subtype.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5758"></A><A NAME="I5759"></A><A NAME="I5760"></A><A NAME="I5761"></A>A 
+<div class="Normal"><A NAME="I5754"></A><A NAME="I5755"></A><A NAME="I5756"></A><A NAME="I5757"></A>A 
 <SPAN Class="swiss"><A HREF="AA-12-5.html#S0320">formal_type_declaration</A></SPAN> 
 declares a <I>(generic) formal type</I>, and its first subtype, the <I>(generic) 
 formal subtype</I>.&nbsp;</div>
@@ -111,7 +111,7 @@ first subtype) of a generic formal type is not a generic formal subtype.
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
-<A NAME="I5762"></A><A NAME="I5763"></A>The form of a <SPAN Class="swiss"><A HREF="AA-12-5.html#S0323">formal_type_definition</A></SPAN> 
+<A NAME="I5758"></A><A NAME="I5759"></A>The form of a <SPAN Class="swiss"><A HREF="AA-12-5.html#S0323">formal_type_definition</A></SPAN> 
 <I>determines a category (of types)</I> to which the formal type belongs. 
 For a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0324">formal_private_type_definition</A></SPAN> 
 the reserved words <B>tagged</B> and <B>limited</B> indicate the category 
@@ -329,7 +329,7 @@ all interesting properties form a class.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p16.g">16.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I5764"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<A NAME="I5760"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-12-5.html#S0320">formal_type_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
@@ -348,7 +348,7 @@ in the next subclause.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p16.j">16.j/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0205-1.TXT">AI12-0205-1</A></I>} 
-<span class="insert5"><A NAME="I5765"></A>Generic formal types now can 
+<span class="insert5"><A NAME="I5761"></A>Generic formal types now can 
 include an optional default <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>.</span> 
 </div>
 

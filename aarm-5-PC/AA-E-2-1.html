@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -54,18 +54,18 @@ separate run-time systems.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9878"></A><A NAME="I9879"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9900"></A><A NAME="I9901"></A>The 
 form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Shared_Passive is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9880"></A><A NAME="I9881"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I9882"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9902"></A><A NAME="I9903"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I9904"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<A NAME="I9883"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I9905"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Shared_Passive is used to specify that a library unit is a <I>shared 
-passive library unit</I>, namely that the Shared_Passive aspect<A NAME="I9884"></A><A NAME="I9885"></A> 
+passive library unit</I>, namely that the Shared_Passive aspect<A NAME="I9906"></A><A NAME="I9907"></A> 
 of the library unit is True. The following restrictions apply to such 
 a library unit:</div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
@@ -139,7 +139,7 @@ would have required disallowing the use in a shared passive package of
 any private type declared in a declared-pure package, which would have 
 been severely incompatible.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I9886"></A><A NAME="I9887"></A>Notwithstanding 
+<div class="Normal"><A NAME="I9908"></A><A NAME="I9909"></A>Notwithstanding 
 the definition of accessibility given in <A HREF="AA-3-10-2.html">3.10.2</A>, 
 the declaration of a library unit P1 is not accessible from within the 
 declarative region of a shared passive library unit P2, unless the shared 
@@ -158,7 +158,7 @@ of such pragmas.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I9888"></A>A shared passive library unit 
+<div class="Normal"><A NAME="I9910"></A>A shared passive library unit 
 is preelaborated.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
@@ -166,7 +166,7 @@ is preelaborated.</div>
 <div class="Normal">A shared passive library unit shall be assigned to 
 at most one partition within a given program.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9889"></A><A NAME="I9890"></A><A NAME="I9891"></A>Notwithstanding 
+<div class="Normal"><A NAME="I9911"></A><A NAME="I9912"></A><A NAME="I9913"></A>Notwithstanding 
 the rule given in <A HREF="AA-10-2.html">10.2</A>, a compilation unit 
 in a given partition does not <I>need</I> (in the sense of <A HREF="AA-10-2.html">10.2</A>) 
 the shared passive library units on which it depends semantically to 
@@ -204,14 +204,14 @@ in shared passive generic packages.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p11.e">11.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<A NAME="I9892"></A>Shared_Passive is now a categorization aspect, so 
+<A NAME="I9914"></A>Shared_Passive is now a categorization aspect, so 
 it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 &mdash; although the pragma is still preferred by the Standard.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p11.f">11.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0038-1.TXT">AI12-0038-1</A></I>} 
-<A NAME="I9893"></A><B>Corrigendum:</B> Uses of access types declared 
+<A NAME="I9915"></A><B>Corrigendum:</B> Uses of access types declared 
 in declared-pure units are not allowed in library-level shared passive 
 packages. These were allowed by Ada 2005 and Ada 2012, but it is unlikely 
 that they work properly, as active partitions could disappear before 

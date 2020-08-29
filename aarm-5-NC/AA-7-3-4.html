@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +41,7 @@
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
 Certain characteristics of an object of a given type are unchanged by 
 most of the primitive operations of the type. Such characteristics are 
-called <I>stable properties</I> of the type.<A NAME="I4310"></A><A NAME="I4311"></A></div>
+called <I>stable properties</I> of the type.<A NAME="I4313"></A><A NAME="I4314"></A></div>
 <div class="paranum"><a name="p1.a.1">1.a.1/5</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>A characteristic associated 
 with objects of a given type that is preserved by many of the primitive 
@@ -51,7 +51,7 @@ operations of the type.</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 A <I>property function</I> of type <I>T</I> is a function with a single 
-parameter of type <I>T</I> or of a class-wide type that covers <I>T</I>.<A NAME="I4312"></A><A NAME="I4313"></A></div>
+parameter of type <I>T</I> or of a class-wide type that covers <I>T</I>.<A NAME="I4315"></A><A NAME="I4316"></A></div>
 <div class="paranum"><a name="p2.a">2.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This provides restrictions on 
 name resolution so overloaded functions can be used as a stable property 
@@ -59,12 +59,14 @@ function.&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0285-1.TXT">AI12-0285-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
-A <I>type property aspect definition</I> is <A NAME="I4314"></A>a list 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0388-1.TXT">AI12-0388-1</A></I>} 
+A <I>type property aspect definition</I> is <A NAME="I4317"></A>a list 
 of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s written 
 in the syntax of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>. 
-A <I>subprogram property aspect definition</I><A NAME="I4315"></A> is 
-a list of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
-preceded by an optional <B>not</B>, also written in the syntax of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</div>
+A <I>subprogram property aspect definition</I><A NAME="I4318"></A> is 
+a list of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s, 
+each optionally preceded by reserved word <B>not</B>, also written in 
+the syntax of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</div>
 <div class="paranum"><a name="p3.a">3.a/5</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>A single <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 would technically be a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
@@ -88,7 +90,7 @@ This aspect shall be specified by a type property aspect definition;
 each <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 shall statically denote a single property function of the type. This 
 aspect defines the <I>stable property functions</I> of the associated 
-type.<A NAME="I4316"></A><A NAME="I4317"></A> <A NAME="I4318"></A><A NAME="I4319"></A><A NAME="I4320"></A></div>
+type.<A NAME="I4319"></A><A NAME="I4320"></A> <A NAME="I4321"></A><A NAME="I4322"></A><A NAME="I4323"></A></div>
 <div class="paranum"><a name="p5.a">5.a/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We do not allow this aspect 
 on generic formal types, as it is only meaningful for primitive subprograms 
@@ -111,7 +113,7 @@ shall statically denote a single property function of the type. This
 aspect defines the <I>class-wide stable property functions</I> of the 
 associated type. [Unlike most class-wide aspects, Stable_Properties'Class 
 is not inherited by descendant types and subprograms, but the enhanced 
-class-wide postconditions are inherited in the normal manner.]<A NAME="I4321"></A><A NAME="I4322"></A><A NAME="I4323"></A><A NAME="I4324"></A></div>
+class-wide postconditions are inherited in the normal manner.]<A NAME="I4324"></A><A NAME="I4325"></A><A NAME="I4326"></A><A NAME="I4327"></A></div>
 <div class="paranum"><a name="p6.a">6.a/5</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>Class-wide inheritance has to 
 be explicitly defined. Here we are not making such a definition, so there 
@@ -227,7 +229,7 @@ The <I>explicit</I> specific postcondition expression for a subprogram
 directly specified for <I>S</I> with the Post aspect. Similarly, the 
 <I>explicit</I> class-wide postcondition expression for a subprogram 
 <I>S</I> is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
-directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I4325"></A><A NAME="I4326"></A><A NAME="I4327"></A></div>
+directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I4328"></A><A NAME="I4329"></A><A NAME="I4330"></A></div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
@@ -292,7 +294,7 @@ definition in <A HREF="AA-A-18-2.html">A.18.2</A>.&nbsp;</div>
 <div class="paranum"><a name="p24.a">24.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0285-1.TXT">AI12-0285-1</A></I>} 
-<A NAME="I4328"></A>These aspects are new.&nbsp;</div>
+<A NAME="I4331"></A>These aspects are new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

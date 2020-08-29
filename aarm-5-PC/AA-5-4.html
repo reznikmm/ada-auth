@@ -31,7 +31,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,21 +49,21 @@ the chosen alternative is defined by the value of an expression.]&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
-<SPAN Class="swiss">case_statement</SPAN><A NAME="I3667"></A><A NAME="S0176"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3668"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3669"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0177">case_statement_alternative</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3670"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0177">case_statement_alternative</A></SPAN>}<BR>
+<SPAN Class="swiss">case_statement</SPAN><A NAME="I3671"></A><A NAME="S0176"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3672"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3673"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0177">case_statement_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3674"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0177">case_statement_alternative</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;<B>end&nbsp;case</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">case_statement_alternative</SPAN><A NAME="I3671"></A><A NAME="S0177"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3672"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3673"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">case_statement_alternative</SPAN><A NAME="I3675"></A><A NAME="S0177"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3676"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3677"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
-<A NAME="I3674"></A><A NAME="I3675"></A>The <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
-is expected to be of any discrete type. <A NAME="I3676"></A>The expected 
+<A NAME="I3678"></A><A NAME="I3679"></A>The <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+is expected to be of any discrete type. <A NAME="I3680"></A>The expected 
 type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 is the type of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>. 
 </div>
@@ -181,7 +181,7 @@ that can produce them.&nbsp;</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
-<A NAME="I3677"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN><span class="insert5">,</span> 
+<A NAME="I3681"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN><span class="insert5">,</span> 
 the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is first evaluated.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
@@ -192,7 +192,7 @@ of some <SPAN Class="swiss"><A HREF="AA-5-4.html#S0177">case_statement_alternati
 then the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0166">sequence_of_statements</A></SPAN> 
 of the <SPAN Class="swiss">_alternative</SPAN> is executed.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I3678"></A>Otherwise (the value is not covered 
+<div class="Normal"><A NAME="I3682"></A>Otherwise (the value is not covered 
 by any <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
 perhaps due to being outside the base range), Constraint_Error is raised. 
 </div>
@@ -239,7 +239,7 @@ statements:</I>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p18.a.1">18.a.1/1</a></div>
-<div class="Annotations"><A NAME="I3679"></A>In Ada 95, <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s 
+<div class="Annotations"><A NAME="I3683"></A>In Ada 95, <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN>s 
 are <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s, 
 whereas in Ada 83, they were <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s. 
@@ -265,7 +265,7 @@ than the bounds of the base type.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p18.a">18.a</a></div>
-<div class="Annotations"><A NAME="I3680"></A>In Ada 83, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+<div class="Annotations"><A NAME="I3684"></A>In Ada 83, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0176">case_statement</A></SPAN> 
 is not allowed to be of a generic formal type. This restriction is removed 
 in Ada 95; an <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 

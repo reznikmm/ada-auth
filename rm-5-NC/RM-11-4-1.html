@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,43 +40,43 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><A NAME="I4968"></A><B>with</B>&nbsp;Ada.Streams;<BR>
+<div class="Examples"><A NAME="I4959"></A><B>with</B>&nbsp;Ada.Streams;<BR>
 <B>package</B>&nbsp;Ada.Exceptions&nbsp;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4969"></A>Exception_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4960"></A>Exception_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Exception_Id);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4970"></A>Null_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Id;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4971"></A>Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4972"></A>Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4973"></A>Wide_Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4961"></A>Null_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4962"></A>Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4963"></A>Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4964"></A>Wide_Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4974"></A>Exception_Occurrence&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4965"></A>Exception_Occurrence&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Exception_Occurrence);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4975"></A>Exception_Occurrence_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Exception_Occurrence;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4976"></A>Null_Occurrence&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Occurrence;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4966"></A>Exception_Occurrence_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Exception_Occurrence;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4967"></A>Null_Occurrence&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Occurrence;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4977"></A>Raise_Exception(E&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Id;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4968"></A>Raise_Exception(E&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;No_Return;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4978"></A>Exception_Message(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4979"></A>Reraise_Occurrence(X&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Occurrence);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4969"></A>Exception_Message(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4970"></A>Reraise_Occurrence(X&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Occurrence);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4980"></A>Exception_Identity(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4971"></A>Exception_Identity(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Exception_Id;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4981"></A>Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4972"></A>Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Same&nbsp;as&nbsp;Exception_Name(Exception_Identity(X)).</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4982"></A>Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4973"></A>Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Same&nbsp;as&nbsp;Wide_Exception_Name(Exception_Identity(X)).</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4983"></A>Wide_Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4974"></A>Wide_Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Same&nbsp;as&nbsp;Wide_Wide_Exception_Name(Exception_Identity(X)).</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4984"></A>Exception_Information(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4975"></A>Exception_Information(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4985"></A>Save_Occurrence(Target&nbsp;:&nbsp;<B>out</B>&nbsp;Exception_Occurrence;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4976"></A>Save_Occurrence(Target&nbsp;:&nbsp;<B>out</B>&nbsp;Exception_Occurrence;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Occurrence);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4986"></A>Save_Occurrence(Source&nbsp;:&nbsp;Exception_Occurrence)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4977"></A>Save_Occurrence(Source&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Exception_Occurrence_Access;</div>
 <div class="paranum"><a name="p6.1">6.1/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Read_Exception_Occurrence<BR>
@@ -104,7 +104,7 @@ default initial value of type Exception_Occurrence.</div>
 E that denotes an exception, the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">E'Identity</div><div class="WideHanging-Body">
-<A NAME="I4987"></A><A NAME="I4988"></A>E'Identity returns the unique 
+<A NAME="I4978"></A><A NAME="I4979"></A>E'Identity returns the unique 
 identity of the exception. The type of this attribute is Exception_Id. 
 </div>
 <div class="paranum"><a name="p10">10/2</a></div>
@@ -129,7 +129,7 @@ or <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0138">simple_expressi
 the message is a string giving implementation-defined information about 
 the exception occurrence. For an occurrence originally raised in some 
 other manner (including by the failure of a language-defined check), 
-the message is an unspecified string.<A NAME="I4989"></A> In all cases, 
+the message is an unspecified string.<A NAME="I4980"></A> In all cases, 
 Exception_Message returns a string with lower bound 1.&nbsp;</div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
 <div class="Normal">&nbsp;&nbsp;Reraise_Occurrence reraises the specified exception 

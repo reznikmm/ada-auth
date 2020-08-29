@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,31 +44,31 @@ following language-defined library package exists:</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>with</B>&nbsp;Ada.Exceptions;<BR>
-<B>package</B>&nbsp;Ada.Task_Termination</span><span class="insert2"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert2"><A NAME="I8954"></A><BR>
-&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Task_Termination);</span></span><span class="insert2"></span></div>
+<B>package</B>&nbsp;Ada.Task_Termination</span><span class="insert2"><span class="delete5">&nbsp;<B>is</B></span></span><span class="insert2"><A NAME="I8975"></A><BR>
+&nbsp;&nbsp;&nbsp;</span><span class="insert5"><B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete5"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;Preelaborate</span><span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="insert2"></span><span class="insert2"><span class="delete5">(Task_Termination);</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8955"></A>Cause_Of_Termination&nbsp;<B>is</B>&nbsp;(Normal,&nbsp;Abnormal,&nbsp;Unhandled_Exception);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8976"></A>Cause_Of_Termination&nbsp;<B>is</B>&nbsp;(Normal,&nbsp;Abnormal,&nbsp;Unhandled_Exception);</span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8956"></A>Termination_Handler&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B><BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8977"></A>Termination_Handler&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Cause&nbsp;:&nbsp;<B>in</B>&nbsp;Cause_Of_Termination;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Exceptions.Exception_Occurrence);</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8957"></A>Set_Dependents_Fallback_Handler<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8978"></A>Set_Dependents_Fallback_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Handler:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8958"></A>Current_Task_Fallback_Handler&nbsp;<B>return</B>&nbsp;Termination_Handler;</span></div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8979"></A>Current_Task_Fallback_Handler&nbsp;<B>return</B>&nbsp;Termination_Handler;</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8959"></A>Set_Specific_Handler<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8980"></A>Set_Specific_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8960"></A>Specific_Handler&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8981"></A>Specific_Handler&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Termination_Handler;</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples"><span class="insert2"><B>end</B>&nbsp;Ada.Task_Termination;</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I8961"></A><A NAME="I8962"></A>The 
+<div class="Normal"><span class="insert2"><A NAME="I8982"></A><A NAME="I8983"></A>The 
 type Termination_Handler identifies a protected procedure to be executed 
 by the implementation when a task terminates. Such a protected procedure 
 is called a <I>handler</I>. In all cases T identifies the task that is 
@@ -85,7 +85,7 @@ completes normally</span><span class="insert2">.</span><span class="insert3">&nb
 an exception, then Cause is either Unhandled_Exception or Abnormal, and 
 X is an exception occurrence that identifies the Program_Error exception.</span><span class="insert2"></span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I8963"></A><A NAME="I8964"></A><A NAME="I8965"></A><A NAME="I8966"></A><A NAME="I8967"></A><A NAME="I8968"></A>Each 
+<div class="Normal"><span class="insert2"><A NAME="I8984"></A><A NAME="I8985"></A><A NAME="I8986"></A><A NAME="I8987"></A><A NAME="I8988"></A><A NAME="I8989"></A>Each 
 task has two termination handlers, a <I>fall-back handler</I> and a <I>specific 
 handler</I>. The specific handler applies only to the task itself, while 
 the fall-back handler applies only to the dependent tasks of the task. 

@@ -16,14 +16,12 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -60,7 +58,7 @@ then C<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">2</SPAN></
 execution following a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0267">delay_until_statement</A></SPAN> 
 with Real_Time.Time value T, then C &gt;= T.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8873"></A><A NAME="I8874"></A>A simple 
+<div class="Normal"><A NAME="I8894"></A><A NAME="I8895"></A>A simple 
 <SPAN Class="swiss"><A HREF="RM-9-6.html#S0266">delay_statement</A></SPAN> 
 with a negative or zero value for the expiration time does not cause 
 the calling task to be blocked; it is nevertheless a potentially blocking 
@@ -103,7 +101,7 @@ whose requested value of the delay expression is less than or equal to
 the value of Real_Time.Clock at the time of executing the statement. 
 Similarly, for Calendar.Clock.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Bulleted"><A NAME="I8875"></A><A NAME="I8876"></A>An upper 
+<div class="Bulleted"><A NAME="I8896"></A><A NAME="I8897"></A>An upper 
 bound on the <I>lateness</I> of a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0268">delay_relative_statement</A></SPAN>, 
 for a positive value of the delay expression, in a situation where the 
 task has sufficient priority to preempt the processor as soon as it becomes 
@@ -125,9 +123,6 @@ time and the clock value at the time the statement begins execution.
 The lateness of a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0267">delay_until_statement</A></SPAN> 
 is obtained by subtracting the requested expiration time from the real 
 time that the task resumes execution following this statement.&nbsp;</div>
-<div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p14">14/2</a></div>
-<div class="Notes"></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

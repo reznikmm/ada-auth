@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,22 +47,22 @@ can be a type, a subprogram, or a package.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_declaration</SPAN><A NAME="I5121"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5122"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5123"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0312">generic_package_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generic_declaration</SPAN><A NAME="I5116"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5117"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5118"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0312">generic_package_declaration</A></SPAN></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_subprogram_declaration</SPAN><A NAME="I5124"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5125"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5126"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5127"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">generic_subprogram_declaration</SPAN><A NAME="I5119"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5120"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5121"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5122"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_package_declaration</SPAN><A NAME="I5128"></A><A NAME="S0312"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5129"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5130"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">generic_package_declaration</SPAN><A NAME="I5123"></A><A NAME="S0312"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5124"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5125"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0230">package_specification</A></SPAN>;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_formal_part</SPAN><A NAME="I5131"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>generic</B>&nbsp;{<A NAME="I5132"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5133"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_part</SPAN><A NAME="I5126"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>generic</B>&nbsp;{<A NAME="I5127"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5128"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0235">use_clause</A></SPAN>}</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_formal_parameter_declaration</SPAN><A NAME="I5134"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5135"></A><SPAN Class="swiss"><A HREF="RM-12-4.html#S0319">formal_object_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5136"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0320">formal_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5137"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5138"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0340">formal_package_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_parameter_declaration</SPAN><A NAME="I5129"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5130"></A><SPAN Class="swiss"><A HREF="RM-12-4.html#S0319">formal_object_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5131"></A><SPAN Class="swiss"><A HREF="RM-12-5.html#S0320">formal_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5132"></A><SPAN Class="swiss"><A HREF="RM-12-6.html#S0335">formal_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5133"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0340">formal_package_declaration</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Indented1">The only form of <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 allowed within a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN> 
@@ -75,12 +75,12 @@ The defining name of a generic subprogram shall be an <SPAN Class="swiss"><A HRE
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I5139"></A><A NAME="I5140"></A><A NAME="I5141"></A><A NAME="I5142"></A>A 
+<div class="Normal"><A NAME="I5134"></A><A NAME="I5135"></A><A NAME="I5136"></A><A NAME="I5137"></A>A 
 <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 declares a generic unit &mdash; a generic package, generic procedure, 
 or generic function, as appropriate.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I5143"></A>An entity is a <I>generic formal</I> 
+<div class="Normal"><A NAME="I5138"></A>An entity is a <I>generic formal</I> 
 entity if it is declared by a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>. 
 &ldquo;Generic formal,&rdquo; or simply &ldquo;formal,&rdquo; is used 
 as a prefix in referring to objects, subtypes (and types), functions, 
@@ -90,11 +90,11 @@ or a &ldquo;formal integer type declaration.&rdquo;</div>
 <div class="paranum"><a name="p9.1">9.1/5</a></div>
 <div class="Normal">&nbsp;<span class="insert5">The list of <SPAN Class="swiss"><A HREF="RM-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0313">generic_formal_part</A></SPAN> 
-form a <I>declaration list</I> of the generic unit.<A NAME="I5144"></A></span></div>
+form a <I>declaration list</I> of the generic unit.<A NAME="I5139"></A></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I5145"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I5140"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0310">generic_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11</a></div>

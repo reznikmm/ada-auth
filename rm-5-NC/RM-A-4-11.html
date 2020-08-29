@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,138 +46,138 @@ Strings.UTF_Encoding.Wide_Strings, and Strings.UTF_Encoding.Wide_Wide_Strings.</
 <div class="Normal" style="margin-bottom: 0.4em">The encoding library 
 packages have the following declarations:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><A NAME="I6520"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6511"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(UTF_Encoding);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Declarations&nbsp;common&nbsp;to&nbsp;the&nbsp;string&nbsp;encoding&nbsp;packages</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6521"></A>Encoding_Scheme&nbsp;<B>is</B>&nbsp;(UTF_8,&nbsp;UTF_16BE,&nbsp;UTF_16LE);</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6512"></A>Encoding_Scheme&nbsp;<B>is</B>&nbsp;(UTF_8,&nbsp;UTF_16BE,&nbsp;UTF_16LE);</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6522"></A>UTF_String&nbsp;<B>is</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6513"></A>UTF_String&nbsp;<B>is</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6523"></A>UTF_8_String&nbsp;<B>is</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6514"></A>UTF_8_String&nbsp;<B>is</B>&nbsp;String;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6524"></A>UTF_16_Wide_String&nbsp;<B>is</B>&nbsp;Wide_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6515"></A>UTF_16_Wide_String&nbsp;<B>is</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6525"></A>Encoding_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6516"></A>Encoding_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6526"></A>BOM_8&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_8_String&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6517"></A>BOM_8&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_8_String&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character'Val(16#EF#)&nbsp;&amp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character'Val(16#BB#)&nbsp;&amp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character'Val(16#BF#);</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6527"></A>BOM_16BE&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_String&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6518"></A>BOM_16BE&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_String&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character'Val(16#FE#)&nbsp;&amp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character'Val(16#FF#);</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6528"></A>BOM_16LE&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_String&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6519"></A>BOM_16LE&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_String&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character'Val(16#FF#)&nbsp;&amp;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Character'Val(16#FE#);</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6529"></A>BOM_16&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_16_Wide_String&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6520"></A>BOM_16&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;UTF_16_Wide_String&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1&nbsp;=&gt;&nbsp;Wide_Character'Val(16#FEFF#));</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6530"></A>Encoding&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6521"></A>Encoding&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;:&nbsp;Encoding_Scheme&nbsp;:=&nbsp;UTF_8)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Encoding_Scheme;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Strings.UTF_Encoding;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Examples"><A NAME="I6531"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Conversions&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6522"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Conversions&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(Conversions);</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Conversions&nbsp;between&nbsp;various&nbsp;encoding&nbsp;schemes</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6532"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6523"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input_Scheme&nbsp;&nbsp;:&nbsp;Encoding_Scheme;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_Scheme&nbsp;:&nbsp;Encoding_Scheme;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_String;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6533"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6524"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input_Scheme&nbsp;&nbsp;:&nbsp;Encoding_Scheme;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;UTF_16_Wide_String;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6534"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_8_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6525"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_8_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;UTF_16_Wide_String;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6535"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_16_Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6526"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_16_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_Scheme&nbsp;:&nbsp;Encoding_Scheme;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_String;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6536"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_16_Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6527"></A>Convert&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_16_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_8_String;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Strings.UTF_Encoding.Conversions;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Examples"><A NAME="I6537"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Strings&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6528"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Strings&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(Strings);</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Encoding&nbsp;/&nbsp;decoding&nbsp;between&nbsp;String&nbsp;and&nbsp;various&nbsp;encoding&nbsp;schemes</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6538"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6529"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_Scheme&nbsp;:&nbsp;Encoding_Scheme;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_String;</div>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6539"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6530"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_8_String;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6540"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6531"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;UTF_16_Wide_String;</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6541"></A>Decode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6532"></A>Decode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input_Scheme&nbsp;:&nbsp;Encoding_Scheme)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6542"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_8_String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6533"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_8_String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6543"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_16_Wide_String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6534"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_16_Wide_String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Strings.UTF_Encoding.Strings;</div>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Examples"><A NAME="I6544"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Wide_Strings&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6535"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Wide_Strings&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(Wide_Strings);</div>
 <div class="paranum"><a name="p31">31/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Encoding&nbsp;/&nbsp;decoding&nbsp;between&nbsp;Wide_String&nbsp;and&nbsp;various&nbsp;encoding&nbsp;schemes</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6545"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6536"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_Scheme&nbsp;:&nbsp;Encoding_Scheme;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_String;</div>
 <div class="paranum"><a name="p32">32/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6546"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6537"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_8_String;</div>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6547"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6538"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;UTF_16_Wide_String;</div>
 <div class="paranum"><a name="p34">34/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6548"></A>Decode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6539"></A>Decode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input_Scheme&nbsp;:&nbsp;Encoding_Scheme)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p35">35/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6549"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_8_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6540"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_8_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p36">36/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6550"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_16_Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6541"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_16_Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p37">37/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Strings.UTF_Encoding.Wide_Strings;</div>
 <div class="paranum"><a name="p38">38/3</a></div>
-<div class="Examples"><A NAME="I6551"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Wide_Wide_Strings&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6542"></A><B>package</B>&nbsp;Ada.Strings.UTF_Encoding.Wide_Wide_Strings&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(Wide_Wide_Strings);</div>
 <div class="paranum"><a name="p39">39/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Encoding&nbsp;/&nbsp;decoding&nbsp;between&nbsp;Wide_Wide_String&nbsp;and&nbsp;various&nbsp;encoding&nbsp;schemes</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6552"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6543"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_Scheme&nbsp;:&nbsp;Encoding_Scheme;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_String;</div>
 <div class="paranum"><a name="p40">40/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6553"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6544"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)&nbsp;<B>return</B>&nbsp;UTF_8_String;</div>
 <div class="paranum"><a name="p41">41/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6554"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6545"></A>Encode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output_BOM&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;False)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;UTF_16_Wide_String;</div>
 <div class="paranum"><a name="p42">42/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6555"></A>Decode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6546"></A>Decode&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;UTF_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input_Scheme&nbsp;:&nbsp;Encoding_Scheme)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
 <div class="paranum"><a name="p43">43/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6556"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_8_String)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6547"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_8_String)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
 <div class="paranum"><a name="p44">44/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6557"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_16_Wide_String)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6548"></A>Decode&nbsp;(Item&nbsp;:&nbsp;UTF_16_Wide_String)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
 <div class="paranum"><a name="p45">45/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Strings.UTF_Encoding.Wide_Wide_Strings;</div>
 <div class="paranum"><a name="p46">46/3</a></div>
@@ -185,7 +185,7 @@ packages have the following declarations:</div>
 UTF_8 corresponds to the UTF-8 encoding scheme defined by Annex D of 
 ISO/IEC 10646. UTF_16BE corresponds to the UTF-16 encoding scheme defined 
 by Annex C of ISO/IEC 10646 in 8 bit, big-endian order; and UTF_16LE 
-corresponds to the UTF-16 encoding scheme in 8 bit, little-endian order.<A NAME="I6558"></A><A NAME="I6559"></A><A NAME="I6560"></A><A NAME="I6561"></A></div>
+corresponds to the UTF-16 encoding scheme in 8 bit, little-endian order.<A NAME="I6549"></A><A NAME="I6550"></A><A NAME="I6551"></A><A NAME="I6552"></A></div>
 <div class="paranum"><a name="p47">47/3</a></div>
 <div class="Normal">The subtype UTF_String is used to represent a String 
 of 8-bit values containing a sequence of values encoded in one of three 

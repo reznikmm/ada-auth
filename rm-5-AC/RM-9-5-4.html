@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,17 +48,17 @@
 can be used to complete an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN>, 
 while redirecting the corresponding entry call to a new (or the same) 
-entry queue. <A NAME="I4714"></A>Such a <I>requeue</I> can be performed 
+entry queue. <A NAME="I4707"></A>Such a <I>requeue</I> can be performed 
 with or without allowing an intermediate cancellation of the call, due 
-to an abort or the expiration of a delay. <A NAME="I4715"></A><A NAME="I4716"></A></div>
+to an abort or the expiration of a delay. <A NAME="I4708"></A><A NAME="I4709"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">requeue_statement</SPAN><A NAME="I4717"></A><A NAME="S0265"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>requeue</B>&nbsp;<I></I><span class="insert3"><I>procedure_or_entry_</I></span><I></I><span class="delete3"><I>&nbsp;entry_</I></span><I></I><A NAME="I4718"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<B>abort</B>];</div>
+<div class="Indented1"><SPAN Class="swiss">requeue_statement</SPAN><A NAME="I4710"></A><A NAME="S0265"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>requeue</B>&nbsp;<I></I><span class="insert3"><I>procedure_or_entry_</I></span><I></I><span class="delete3"><I>&nbsp;entry_</I></span><I></I><A NAME="I4711"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<B>abort</B>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I4719"></A></span><span class="delete3"><A NAME="I4720"></A></span>The 
+<div class="Normal"><span class="insert3"><A NAME="I4712"></A></span><span class="delete3"><A NAME="I4713"></A></span>The 
 <span class="insert3"><I>procedure_or_entry_</I></span><span class="delete3"><I>&nbsp;entry_</I></span><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN> 
 shall resolve to denote <span class="insert3">a procedure or&nbsp;</span>an 
@@ -69,7 +69,7 @@ no parameters, or <span class="insert3">be</span><span class="delete3">&nbsp;tha
 has a profile that is</span> type conformant (see <A HREF="RM-6-3-1.html">6.3.1</A>) 
 with the profile of the innermost enclosing <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0260">entry_body</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN>. 
-<A NAME="I4721"></A></div>
+<A NAME="I4714"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
@@ -81,7 +81,7 @@ construct.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">If the <span class="insert3">requeue&nbsp;</span>target<span class="delete3">&nbsp;entry</span> has parameters, then its <span class="insert3">(prefixed) 
 </span>profile shall be subtype conformant with the profile of the innermost 
-enclosing callable construct. <A NAME="I4722"></A></div>
+enclosing callable construct. <A NAME="I4715"></A></div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert4">Given 
 a requeue_statement where the innermost enclosing callable construct 
@@ -118,7 +118,7 @@ shall be a controlling parameter, and the Synchronization aspect shall
 be specified with <SPAN Class="swiss"><A HREF="RM-9-5.html#S0256">synchronization_kind</A></SPAN> 
 By_Entry for the primitive subprogram.</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Normal"><A NAME="I4723"></A>In a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN> 
+<div class="Normal"><A NAME="I4716"></A>In a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN> 
 of some task unit, either the target object shall be a part of a formal 
 parameter of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN>, 
@@ -133,7 +133,7 @@ deeper than that of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5"></span><A NAME="I4724"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5"></span><A NAME="I4717"></A>The 
 execution of a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN> 
 <span class="insert5">begins with the following sequence of steps:</span><span class="delete5">&nbsp;proceeds 
 by first evaluating the&nbsp;</span><span class="insert3"><span class="delete5"><I>procedure_or_entry_</I></span></span><span class="delete5"></span><span class="delete3"><I>&nbsp;entry_</I></span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
@@ -157,7 +157,7 @@ is evaluated. This includes evaluation of the <SPAN Class="swiss"><A HREF="RM-4-
 parameter of the innermost enclosing callable construct, a check is made 
 that the accessibility level of the target object is not equal to or 
 deeper than the level of the innermost enclosing callable construct. 
-If this check fails, Program_Error is raised.<A NAME="I4725"></A><A NAME="I4726"></A><A NAME="I4727"></A></span></div>
+If this check fails, Program_Error is raised.<A NAME="I4718"></A><A NAME="I4719"></A><A NAME="I4720"></A></span></div>
 <div class="paranum"><a name="p7.3">7.3/5</a></div>
 <div class="Enumerated-Term">&nbsp;3.</div><div class="Enumerated-Body">
 <span class="insert5">Precondition checks are performed as for a call 
@@ -169,13 +169,13 @@ or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0258">accept_statement</A></SPAN>
 enclosing the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN> 
 is then completed, finalized, and left (see <A HREF="RM-7-6-1.html">7.6.1</A>).</span></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I4728"></A>For the execution of a requeue 
+<div class="Normal"><A NAME="I4721"></A>For the execution of a requeue 
 on an entry of a target task, after leaving the enclosing callable construct, 
 the named entry is checked to see if it is open and the requeued call 
 is either selected immediately or queued, as for a normal entry call 
 (see <A HREF="RM-9-5-3.html">9.5.3</A>).</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4729"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4722"></A>For 
 the execution of a requeue on an entry of a target protected object, 
 after leaving the enclosing callable construct:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -202,7 +202,7 @@ construct completed by the requeue. In any case, no parameters are specified
 in a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN>; 
 any parameter passing is implicit.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4730"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4723"></A>If 
 the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0265">requeue_statement</A></SPAN> 
 includes the reserved words <B>with abort</B> (it is a <I>requeue-with-abort</I>), 
 then:&nbsp;</div>
@@ -226,7 +226,7 @@ entry to an entry of an entry family, or vice<span class="insert5">&nbsp;</span>
 The entry index, if any, plays no part in the subtype conformance check 
 between the profiles of the two entries; an entry index is part of the 
 <I>entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-for an entry of a family. <A NAME="I4731"></A></div>
+for an entry of a family. <A NAME="I4724"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p18">18</a></div>

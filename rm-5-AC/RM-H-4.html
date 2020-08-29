@@ -37,7 +37,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -69,41 +69,41 @@ apply in this Annex.</span></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Tasking-related 
 restriction:</B></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9736"></A><span class="insert3"><A NAME="I9737"></A></span>No_Protected_Types 
+<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9757"></A><span class="insert3"><A NAME="I9758"></A></span>No_Protected_Types 
 </div><div class="WideHanging-Body"><br clear="left">
 There are no declarations of protected types or protected objects.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Memory-management 
 related restrictions:</B></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I9738"></A><span class="insert3"><A NAME="I9739"></A></span>No_Allocators 
+<div class="WideHanging-Term"><A NAME="I9759"></A><span class="insert3"><A NAME="I9760"></A></span>No_Allocators 
 </div><div class="WideHanging-Body">
 There are no occurrences of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>.</div>
 <div class="paranum"><a name="p8">8/1</a></div>
-<div class="WideHanging-Term"><A NAME="I9740"></A><span class="insert3"><A NAME="I9741"></A></span>No_Local_Allocators 
+<div class="WideHanging-Term"><A NAME="I9761"></A><span class="insert3"><A NAME="I9762"></A></span>No_Local_Allocators 
 </div><div class="WideHanging-Body"><br clear="left">
 <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">Allocator</A></SPAN>s 
 are prohibited in subprograms, generic subprograms, tasks, and entry 
 bodies<span class="delete1">; instantiations of generic packages are 
 also prohibited in these contexts</span>.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3"><A NAME="I9742"></A><A NAME="I9743"></A>No_Anonymous_Allocators 
+<div class="WideHanging-Term">&nbsp;<span class="insert3"><A NAME="I9763"></A><A NAME="I9764"></A>No_Anonymous_Allocators 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 of anonymous access types.</span></div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3"><A NAME="I9744"></A><A NAME="I9745"></A>No_Coextensions 
+<div class="WideHanging-Term">&nbsp;<span class="insert3"><A NAME="I9765"></A><A NAME="I9766"></A>No_Coextensions 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">There are no coextensions. See <A HREF="RM-3-10-2.html">3.10.2</A>.</span></div>
 <div class="paranum"><a name="p8.3">8.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3"><A NAME="I9746"></A><A NAME="I9747"></A>No_Access_Parameter_Allocators 
+<div class="WideHanging-Term">&nbsp;<span class="insert3"><A NAME="I9767"></A><A NAME="I9768"></A>No_Access_Parameter_Allocators 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3"><SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">Allocator</A></SPAN>s 
 are not permitted as the actual parameter to an access parameter. See 
 <A HREF="RM-6-1.html">6.1</A>.</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="WideHanging-Term"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete2"><A NAME="I9748"></A>No_Unchecked_Deallocation 
+was deleted.</I></SPAN><span class="delete2"><A NAME="I9769"></A>No_Unchecked_Deallocation 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="delete2">Semantic dependence on Unchecked_Deallocation is 
 not allowed.</span>&nbsp;</div>
@@ -113,147 +113,171 @@ not allowed.</span>&nbsp;</div>
 Except for storage occupied by objects created by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0164">allocator</A></SPAN>s 
 and not deallocated via unchecked deallocation, any storage reserved 
 at run time for an object is immediately reclaimed when the object no 
-longer exists. <A NAME="I9749"></A><span class="insert3"><A NAME="I9750"></A></span></div>
+longer exists. <A NAME="I9770"></A><span class="insert3"><A NAME="I9771"></A></span></div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Exception-related 
 restriction:</B></div>
-<div class="paranum"><a name="p12">12</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9751"></A><span class="insert3"><A NAME="I9752"></A></span>No_Exceptions 
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.9em"><A NAME="I9772"></A><span class="insert3"><A NAME="I9773"></A></span>No_Exceptions 
 </div><div class="WideHanging-Body">
 <SPAN Class="swiss"><A HREF="RM-11-3.html#S0308">Raise_statement</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="RM-11-2.html#S0305">exception_handler</A></SPAN>s 
 are not allowed. No language-defined runtime checks are generated; however, 
-a runtime check performed automatically by the hardware is permitted. 
-</div>
+a runtime check performed automatically by the hardware is permitted.<span class="insert5">&nbsp;The callable entity associated with a <SPAN Class="swiss"><A HREF="RM-5-5-3.html#S0185">procedural_iterator</A></SPAN> 
+(see <A HREF="RM-5-5-3.html">5.5.3</A>) is considered to not allow exit, 
+independent of the value of its Allows_Exit aspect.</span></div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><B>Other restrictions:</B></div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="WideHanging-Term"><A NAME="I9753"></A><span class="insert3"><A NAME="I9754"></A></span>No_Floating_Point 
+<div class="WideHanging-Term"><A NAME="I9774"></A><span class="insert3"><A NAME="I9775"></A></span>No_Floating_Point 
 </div><div class="WideHanging-Body"><br clear="left">
 Uses of predefined floating point types and operations, and declarations 
 of new floating point types, are not allowed.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="WideHanging-Term"><A NAME="I9755"></A><span class="insert3"><A NAME="I9756"></A></span>No_Fixed_Point 
+<div class="WideHanging-Term"><A NAME="I9776"></A><span class="insert3"><A NAME="I9777"></A></span>No_Fixed_Point 
 </div><div class="WideHanging-Body"><br clear="left">
 Uses of predefined fixed point types and operations, and declarations 
 of new fixed point types, are not allowed.&nbsp;</div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="WideHanging-Term"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete2"><A NAME="I9757"></A>No_Unchecked_Conversion 
+was deleted.</I></SPAN><span class="delete2"><A NAME="I9778"></A>No_Unchecked_Conversion 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="delete2">Semantic dependence on the predefined generic Unchecked_Conversion 
 is not allowed.</span>&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="WideHanging-Term">No_Access_Subprograms&nbsp;</div><div class="WideHanging-Body"><br clear="left">
-The declaration of access-to-subprogram types is not allowed. <A NAME="I9758"></A><span class="insert3"><A NAME="I9759"></A></span></div>
+The declaration of access-to-subprogram types is not allowed. <A NAME="I9779"></A><span class="insert3"><A NAME="I9780"></A></span></div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="WideHanging-Term"><A NAME="I9760"></A><span class="insert3"><A NAME="I9761"></A></span>No_Unchecked_Access 
+<div class="WideHanging-Term"><A NAME="I9781"></A><span class="insert3"><A NAME="I9782"></A></span>No_Unchecked_Access 
 </div><div class="WideHanging-Body"><br clear="left">
-The <A NAME="I9762"></A><A NAME="I9763"></A>Unchecked_Access attribute 
+The <A NAME="I9783"></A><A NAME="I9784"></A>Unchecked_Access attribute 
 is not allowed.</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="WideHanging-Term"><A NAME="I9764"></A><span class="insert3"><A NAME="I9765"></A></span>No_Dispatch 
+<div class="WideHanging-Term"><A NAME="I9785"></A><span class="insert3"><A NAME="I9786"></A></span>No_Dispatch 
 </div><div class="WideHanging-Body">
 Occurrences of T'Class are not allowed, for any (tagged) subtype T.</div>
 <div class="paranum"><a name="p20">20/5</a></div>
-<div class="WideHanging-Term"><A NAME="I9766"></A><span class="insert3"><A NAME="I9767"></A></span>No_IO 
+<div class="WideHanging-Term"><A NAME="I9787"></A><span class="insert3"><A NAME="I9788"></A></span>No_IO 
 </div><div class="WideHanging-Body">
 Semantic dependence on any of the library units Sequential_IO, Direct_IO, 
 Text_IO, Wide_Text_IO, <span class="insert2">Wide_Wide_Text_IO,&nbsp;</span><span class="delete5">or 
 </span>Stream_IO<span class="insert5">, or Directories</span> is not 
 allowed.&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="WideHanging-Term"><A NAME="I9768"></A><span class="insert3"><A NAME="I9769"></A></span>No_Delay 
+<div class="WideHanging-Term"><A NAME="I9789"></A><span class="insert3"><A NAME="I9790"></A></span>No_Delay 
 </div><div class="WideHanging-Body">
 <SPAN Class="swiss"><A HREF="RM-9-6.html#S0266">Delay_Statement</A></SPAN>s 
 and semantic dependence on package Calendar are not allowed.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="WideHanging-Term"><A NAME="I9770"></A><span class="insert3"><A NAME="I9771"></A></span>No_Recursion 
+<div class="WideHanging-Term"><A NAME="I9791"></A><span class="insert3"><A NAME="I9792"></A></span>No_Recursion 
 </div><div class="WideHanging-Body">
 As part of the execution of a subprogram, the same subprogram is not 
 invoked.</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="WideHanging-Term"><A NAME="I9772"></A><span class="insert3"><A NAME="I9773"></A></span>No_Reentrancy 
+<div class="WideHanging-Term"><A NAME="I9793"></A><span class="insert3"><A NAME="I9794"></A></span>No_Reentrancy 
 </div><div class="WideHanging-Body">
 During the execution of a subprogram by a task, no other task invokes 
 the same subprogram.</div>
 <div class="paranum"><a name="p23.1">23.1/5</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5"><A NAME="I9774"></A><A NAME="I9775"></A>No_Unspecified_Globals</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5"><A NAME="I9795"></A><A NAME="I9796"></A>No_Unspecified_Globals</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">No library-level entity shall have a Global aspect 
 of Unspecified, either explicitly or by default. No library-level entity 
 shall have a Global'Class aspect of Unspecified, explicitly or by default, 
 if it is used as part of a dispatching call.</span></div>
 <div class="paranum"><a name="p23.2">23.2/5</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5"><A NAME="I9776"></A><A NAME="I9777"></A>No_Hidden_Indirect_Globals</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert5">When within a context where the applicable Global 
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5"><A NAME="I9797"></A><A NAME="I9798"></A>No_Hidden_Indirect_Globals</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">When within a context where an applicable global 
 aspect is neither Unspecified nor <B>in out all</B>, any execution within 
 such a context does neither of the following:</span></div>
 <div class="paranum"><a name="p23.3">23.3/5</a></div>
-<div class="Indented4Bulleted"><span class="insert5">Update a variable 
-that is reachable via a sequence of zero or more dereferences of access-to-object 
-values from a formal parameter of mode <B>in</B> (after any <B>overriding</B> 
-&ndash; see <A HREF="RM-H-7.html">H.7</A>), or from a global that is 
-not within the applicable global variable set, or has mode <B>in</B>;</span></div>
+<div class="Indented4Bulleted"><span class="insert5">Update (or return 
+a writable reference to) a variable that is reachable via a sequence 
+of zero or more dereferences of access-to-object values from a parameter 
+of a visibly access-to-constant type, from a part of a non-access-type 
+formal parameter of mode <B>in</B> (after any <B>overriding</B> &ndash; 
+see <A HREF="RM-H-7.html">H.7</A>), or from a global that has mode <B>in</B> 
+or is not within the applicable global variable set, unless the initial 
+dereference is of a part of a formal parameter or global that is visibly 
+of an access-to-variable type;</span></div>
 <div class="paranum"><a name="p23.4">23.4/5</a></div>
-<div class="Indented4Bulleted"><span class="insert5">Read a variable 
-that is updatable via a sequence of zero or more dereferences of access-to-object 
-values from a global that is not within the applicable global variable 
-set.</span>&nbsp;</div>
+<div class="Indented4Bulleted"><span class="insert5">Read (or return 
+a readable reference to) a variable that is reachable via a sequence 
+of zero or more dereferences of access-to-object values from a global 
+that is not within the applicable global variable set, unless the initial 
+dereference is of a part of a formal parameter or global that is visibly 
+of an access-to-object type.</span>&nbsp;</div>
 <div class="paranum"><a name="p23.5">23.5/5</a></div>
-<div class="WideHanging-Body"><span class="insert5">For the purposes 
-of the above rules, if an applicable global variable set includes a package 
-name, and the collection of some pool-specific access type (see <A HREF="RM-7-6-1.html">7.6.1</A>) 
-is implicitly declared in a part of the declarative region of the package 
-included within the global variable set, then all objects allocated from 
-that collection are considered included within the global variable set.</span></div>
+<div class="WideHanging-Body" style="margin-bottom: 0.4em"><span class="insert5">For 
+the purposes of the above rules:</span></div>
 <div class="paranum"><a name="p23.6">23.6/5</a></div>
+<div class="Indented4Bulleted"><span class="insert5">a part of an object 
+is <I>visibly of an access type</I><A NAME="I9799"></A> if the type of 
+the object is declared immediately within the visible part of a package 
+specification, and at the point of declaration of the type the part is 
+visible and of an access type;</span></div>
+<div class="paranum"><a name="p23.7">23.7/5</a></div>
+<div class="Indented4Bulleted"><span class="insert5">a function <I>returns 
+a writable reference to V</I><A NAME="I9800"></A> if it returns a result 
+with a part that is visibly of an access-to-variable type designating 
+<I>V</I>; similarly, a function <I>returns a readable reference to V</I><A NAME="I9801"></A> 
+if it returns a result with a part that is visibly of an access-to-constant 
+type designating <I>V</I>;</span></div>
+<div class="paranum"><a name="p23.8">23.8/5</a></div>
+<div class="Indented4Bulleted"><span class="insert5">if an applicable 
+global variable set includes a package name, and the collection of some 
+pool-specific access type (see <A HREF="RM-7-6-1.html">7.6.1</A>) is 
+implicitly declared in a part of the declarative region of the package 
+included within the global variable set, then all objects allocated from 
+that collection are considered included within the global variable set.</span> 
+</div>
+<div class="paranum"><a name="p23.9">23.9/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">The consequences 
 of violating the No_Hidden_Indirect_Globals restriction is implementation-defined. 
 Any aspects or other means for identifying such violations prior to or 
 during execution are implementation-defined.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p23.7">23.7/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5">The 
+<div class="paranum"><a name="p23.10">23.10/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert5">The 
 following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 is language defined:</span></div>
-<div class="paranum"><a name="p23.8">23.8/5</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5"><A NAME="I9778"></A><A NAME="I9779"></A>Max_Image_Length</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="paranum"><a name="p23.11">23.11/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert5"><A NAME="I9802"></A><A NAME="I9803"></A>Max_Image_Length</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">Specifies the maximum length for the result of 
 an Image, Wide_Image, or Wide_Wide_Image attribute. Violation of this 
 restriction results in the raising of Program_Error at the point of the 
-invocation of an image attribute.<A NAME="I9780"></A> <A NAME="I9781"></A><A NAME="I9782"></A></span></div>
+invocation of an image attribute.<A NAME="I9804"></A> <A NAME="I9805"></A><A NAME="I9806"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
-<div class="paranum"><a name="p23.9">23.9/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">An 
+<div class="paranum"><a name="p23.12">23.12/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert2">An 
 implementation of this Annex shall support:</span>&nbsp;</div>
-<div class="paranum"><a name="p23.10">23.10/5</a></div>
+<div class="paranum"><a name="p23.13">23.13/5</a></div>
 <div class="Bulleted"><span class="insert2">the restrictions defined 
 in this subclause; and</span></div>
-<div class="paranum"><a name="p23.11">23.11/5</a></div>
+<div class="paranum"><a name="p23.14">23.14/5</a></div>
 <div class="Bulleted"><span class="insert2">the following restrictions 
 defined in <A HREF="RM-D-7.html">D.7</A>: No_Task_Hierarchy, No_Abort_Statement, 
 No_Implicit_Heap_Allocation</span><span class="insert3">, No_Standard_Allocators_After_Elaboration</span><span class="insert2">; 
 and</span></div>
-<div class="paranum"><a name="p23.12">23.12/5</a></div>
+<div class="paranum"><a name="p23.15">23.15/5</a></div>
 <div class="Bulleted"><span class="insert2">the <B>pragma</B> Profile(Ravenscar); 
 and</span>&nbsp;</div>
-<div class="paranum"><a name="p23.13">23.13/5</a></div>
+<div class="paranum"><a name="p23.16">23.16/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert2">the 
 following uses of <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 defined in <A HREF="RM-D-7.html">D.7</A>, which are checked prior to 
 program execution:</span>&nbsp;</div>
-<div class="paranum"><a name="p23.14">23.14/5</a></div>
+<div class="paranum"><a name="p23.17">23.17/5</a></div>
 <div class="Indented2NestedBulleted"><span class="insert2">Max_Task_Entries 
 =&gt; 0,</span></div>
-<div class="paranum"><a name="p23.15">23.15/5</a></div>
+<div class="paranum"><a name="p23.18">23.18/5</a></div>
 <div class="Indented2NestedBulleted"><span class="insert2">Max_Asynchronous_Select_Nesting 
 =&gt; 0, and</span></div>
-<div class="paranum"><a name="p23.16">23.16/5</a></div>
+<div class="paranum"><a name="p23.19">23.19/5</a></div>
 <div class="Indented2NestedBulleted"><span class="insert2">Max_Tasks 
 =&gt; 0.</span>&nbsp;</div>
-<div class="paranum"><a name="p23.17">23.17/5</a></div>
+<div class="paranum"><a name="p23.20">23.20/5</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5">If a Max_Image_Length restriction 
 applies to any compilation unit in the partition, then for any subtype 
 S, S'Image, S'Wide_Image, and S'Wide_Wide_Image shall be implemented 
@@ -278,12 +302,12 @@ an overflow check performed by the processor).&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Normal"><A NAME="I9783"></A>Program execution is erroneous 
+<div class="Normal"><A NAME="I9807"></A>Program execution is erroneous 
 if pragma Restrictions(No_Exceptions) has been specified and the conditions 
 arise under which a generated language-defined runtime check would fail. 
 </div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I9784"></A>Program execution is erroneous 
+<div class="Normal"><A NAME="I9808"></A>Program execution is erroneous 
 if pragma Restrictions(No_Recursion) has been specified and a subprogram 
 is invoked as part of its own execution, or if pragma Restrictions(No_Reentrancy) 
 has been specified and during the execution of a subprogram by a task, 

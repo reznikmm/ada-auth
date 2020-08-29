@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,13 +50,13 @@ operation<span class="insert5">&nbsp;or a parallel construct</span>.&nbsp;</div>
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Detect_Blocking is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10284"></A><A NAME="I10285"></A>Detect_Blocking; 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I10311"></A><A NAME="I10312"></A>Detect_Blocking; 
 </div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<A NAME="I10286"></A><A NAME="I10287"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I10313"></A><A NAME="I10314"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Detect_Blocking is a configuration pragma.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -68,7 +68,7 @@ An implementation is required to detect a potentially blocking operation
 <span class="insert5">that occurs during the execution of</span><span class="delete5">&nbsp;within</span> 
 a protected operation<span class="insert5">&nbsp;or a parallel construct defined 
 within a compilation unit to which the pragma applies</span>, and to 
-raise<A NAME="I10288"></A> Program_Error (see <span class="insert5"><A HREF="AA-9-5.html">9.5</A></span><span class="delete5"><A HREF="AA-9-5-1.html">&nbsp;9.5.1</A></span>). 
+raise<A NAME="I10315"></A> Program_Error (see <span class="insert5"><A HREF="AA-9-5.html">9.5</A></span><span class="delete5"><A HREF="AA-9-5-1.html">&nbsp;9.5.1</A></span>). 
 </div>
 
 <H4 Class="centered">Implementation Permissions</H4>
@@ -89,12 +89,12 @@ domain is not defined to be potentially blocking, and need not be detected.
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<A NAME="I10289"></A>Pragma Detect_Blocking is new.&nbsp;</div>
+<A NAME="I10316"></A>Pragma Detect_Blocking is new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p7.b">7.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
-<A NAME="I10290"></A>Pragma Detect_Blocking now applies to parallel constructs 
+<A NAME="I10317"></A>Pragma Detect_Blocking now applies to parallel constructs 
 as well as protected actions.&nbsp;</div>
 
 <HR>

@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,11 +39,11 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
 denotes either a component of an array or an entry in a family of entries. 
-<A NAME="I2704"></A>]</div>
+<A NAME="I2705"></A>]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">indexed_component</SPAN><A NAME="I2705"></A><A NAME="S0096"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2706"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>(<A NAME="I2707"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2708"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">indexed_component</SPAN><A NAME="I2706"></A><A NAME="S0096"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2707"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>(<A NAME="I2708"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2709"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>})</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
@@ -55,7 +55,7 @@ the corresponding number of index positions, or shall resolve to denote
 an entry family of a task or protected object (in which case there shall 
 be only one <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>).</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I2709"></A>The expected type for each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+<div class="Normal"><A NAME="I2710"></A>The expected type for each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is the corresponding index type.</div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -63,7 +63,7 @@ is the corresponding index type.</div>
 <div class="Normal">When the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 denotes an array, the <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
 denotes the component of the array with the specified index value(s). 
-<A NAME="I2710"></A>The nominal subtype of the <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
+<A NAME="I2711"></A>The nominal subtype of the <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
 is the component subtype of the array type.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a/2</a></div>
 <div class="Annotations"><span class="delete2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
@@ -81,15 +81,15 @@ value.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2711"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>, 
+<div class="Normal"><A NAME="I2712"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
-are evaluated in an arbitrary order.<A NAME="I2712"></A> The value of 
+are evaluated in an arbitrary order.<A NAME="I2713"></A> The value of 
 each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
-is converted to the corresponding index type. <A NAME="I2713"></A><A NAME="I2714"></A><A NAME="I2715"></A>A 
+is converted to the corresponding index type. <A NAME="I2714"></A><A NAME="I2715"></A><A NAME="I2716"></A>A 
 check is made that each index value belongs to the corresponding index 
 range of the array or entry family denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>. 
-<A NAME="I2716"></A>Constraint_Error is raised if this check fails.</div>
+<A NAME="I2717"></A>Constraint_Error is raised if this check fails.</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p8">8</a></div>

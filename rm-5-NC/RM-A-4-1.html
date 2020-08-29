@@ -20,7 +20,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,20 +39,20 @@ to the string handling packages.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Strings has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><A NAME="I6229"></A><B>package</B>&nbsp;Ada.Strings&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6220"></A><B>package</B>&nbsp;Ada.Strings&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Strings);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6230"></A>Space&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;'&nbsp;';<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I6231"></A>Wide_Space&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Character&nbsp;:=&nbsp;'&nbsp;';<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I6232"></A>Wide_Wide_Space&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Character&nbsp;:=&nbsp;'&nbsp;';</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6221"></A>Space&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;'&nbsp;';<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6222"></A>Wide_Space&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Character&nbsp;:=&nbsp;'&nbsp;';<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6223"></A>Wide_Wide_Space&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Character&nbsp;:=&nbsp;'&nbsp;';</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6233"></A>Length_Error,&nbsp;<A NAME="I6234"></A>Pattern_Error,&nbsp;<A NAME="I6235"></A>Index_Error,&nbsp;<A NAME="I6236"></A>Translation_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6224"></A>Length_Error,&nbsp;<A NAME="I6225"></A>Pattern_Error,&nbsp;<A NAME="I6226"></A>Index_Error,&nbsp;<A NAME="I6227"></A>Translation_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6237"></A>Alignment&nbsp;&nbsp;<B>is</B>&nbsp;(Left,&nbsp;Right,&nbsp;Center);<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6238"></A>Truncation&nbsp;<B>is</B>&nbsp;(Left,&nbsp;Right,&nbsp;Error);<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6239"></A>Membership&nbsp;<B>is</B>&nbsp;(Inside,&nbsp;Outside);<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6240"></A>Direction&nbsp;&nbsp;<B>is</B>&nbsp;(Forward,&nbsp;Backward);<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6241"></A>Trim_End&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Left,&nbsp;Right,&nbsp;Both);<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6228"></A>Alignment&nbsp;&nbsp;<B>is</B>&nbsp;(Left,&nbsp;Right,&nbsp;Center);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6229"></A>Truncation&nbsp;<B>is</B>&nbsp;(Left,&nbsp;Right,&nbsp;Error);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6230"></A>Membership&nbsp;<B>is</B>&nbsp;(Inside,&nbsp;Outside);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6231"></A>Direction&nbsp;&nbsp;<B>is</B>&nbsp;(Forward,&nbsp;Backward);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6232"></A>Trim_End&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Left,&nbsp;Right,&nbsp;Both);<BR>
 <B>end</B>&nbsp;Ada.Strings;</div>
 
 <HR>

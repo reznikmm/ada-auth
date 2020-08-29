@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,20 +41,21 @@
 <div class="Normal"><span class="insert5">Certain characteristics of 
 an object of a given type are unchanged by most of the primitive operations 
 of the type. Such characteristics are called <I>stable properties</I> 
-of the type.<A NAME="I3998"></A><A NAME="I3999"></A></span></div>
+of the type.<A NAME="I4003"></A><A NAME="I4004"></A></span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal"><span class="insert5">A <I>property function</I> 
 of type <I>T</I> is a function with a single parameter of type <I>T</I> 
-or of a class-wide type that covers <I>T</I>.<A NAME="I4000"></A><A NAME="I4001"></A></span></div>
+or of a class-wide type that covers <I>T</I>.<A NAME="I4005"></A><A NAME="I4006"></A></span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal"><span class="insert5">A <I>type property aspect definition</I> 
-is <A NAME="I4002"></A>a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
+is <A NAME="I4007"></A>a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 written in the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>. 
-A <I>subprogram property aspect definition</I><A NAME="I4003"></A> is 
-a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
-preceded by an optional <B>not</B>, also written in the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</span></div>
+A <I>subprogram property aspect definition</I><A NAME="I4008"></A> is 
+a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s, 
+each optionally preceded by reserved word <B>not</B>, also written in 
+the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
 a nonformal private type, nonformal private extension, or full type that 
@@ -67,7 +68,7 @@ may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspe
 aspect definition; each <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 shall statically denote a single property function of the type. This 
 aspect defines the <I>stable property functions</I> of the associated 
-type.<A NAME="I4004"></A><A NAME="I4005"></A> <A NAME="I4006"></A><A NAME="I4007"></A><A NAME="I4008"></A></span></div>
+type.<A NAME="I4009"></A><A NAME="I4010"></A> <A NAME="I4011"></A><A NAME="I4012"></A><A NAME="I4013"></A></span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Stable_Properties'Class</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">This aspect shall be specified by a type property 
@@ -76,7 +77,7 @@ shall statically denote a single property function of the type. This
 aspect defines the <I>class-wide stable property functions</I> of the 
 associated type. Unlike most class-wide aspects, Stable_Properties'Class 
 is not inherited by descendant types and subprograms, but the enhanced 
-class-wide postconditions are inherited in the normal manner.<A NAME="I4009"></A><A NAME="I4010"></A><A NAME="I4011"></A><A NAME="I4012"></A></span></div>
+class-wide postconditions are inherited in the normal manner.<A NAME="I4014"></A><A NAME="I4015"></A><A NAME="I4016"></A><A NAME="I4017"></A></span></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
 a primitive subprogram, the following language-defined aspects may be 
@@ -151,7 +152,7 @@ postcondition expression for a subprogram <I>S</I> is the <SPAN Class="swiss"><A
 directly specified for <I>S</I> with the Post aspect. Similarly, the 
 <I>explicit</I> class-wide postcondition expression for a subprogram 
 <I>S</I> is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
-directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I4013"></A><A NAME="I4014"></A><A NAME="I4015"></A></span></div>
+directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I4018"></A><A NAME="I4019"></A><A NAME="I4020"></A></span></div>
 <div class="paranum"><a name="p22">22/5</a></div>
 <div class="Normal"><span class="insert5">For every primitive subprogram 
 <I>S</I> of a type <I>T</I> that is not a stable property function of 

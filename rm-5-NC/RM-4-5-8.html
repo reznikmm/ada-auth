@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,16 +35,16 @@
 <H1>4.5.8 Quantified Expressions</H1>
 <div class="paranum"><a name="p0.1">0.1/4</a></div>
 <div class="Normal">&nbsp;Quantified expressions provide a way to write universally 
-and existentially quantified predicates over containers and arrays.<A NAME="I3023"></A><A NAME="I3024"></A></div>
+and existentially quantified predicates over containers and arrays.<A NAME="I3025"></A><A NAME="I3026"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">quantified_expression</SPAN><A NAME="I3025"></A><A NAME="S0153"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I3026"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3027"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3028"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3029"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3030"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3031"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">quantified_expression</SPAN><A NAME="I3027"></A><A NAME="S0153"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I3028"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3029"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0181">loop_parameter_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3030"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3031"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0154">quantifier</A></SPAN>&nbsp;<A NAME="I3032"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I3033"></A><SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN></div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">quantifier</SPAN><A NAME="I3032"></A><A NAME="S0154"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>some</B></div>
+<div class="Indented1"><SPAN Class="swiss">quantifier</SPAN><A NAME="I3034"></A><A NAME="S0154"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>some</B></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">predicate</SPAN><A NAME="I3033"></A><A NAME="S0155"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>boolean_</I><A NAME="I3034"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">predicate</SPAN><A NAME="I3035"></A><A NAME="S0155"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>boolean_</I><A NAME="I3036"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">Wherever the Syntax Rules allow an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
@@ -53,7 +53,7 @@ so long as it is immediately surrounded by parentheses.</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal"><A NAME="I3035"></A>The expected type of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
+<div class="Normal"><A NAME="I3037"></A>The expected type of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 is any Boolean type. The <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 is expected to be of the same type.&nbsp;</div>
@@ -66,7 +66,7 @@ or <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A><
 is first elaborated. The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 then performs an iteration, and evaluates the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0155">predicate</A></SPAN> 
 for each value conditionally produced by the iteration (see <A HREF="RM-5-5.html">5.5</A> 
-and <A HREF="RM-5-5-2.html">5.5.2</A>).<A NAME="I3036"></A></div>
+and <A HREF="RM-5-5-2.html">5.5.2</A>).<A NAME="I3038"></A></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The value of the <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0153">quantified_expression</A></SPAN> 
 is determined as follows:</div>

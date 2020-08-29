@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,27 +35,27 @@
 <HR>
 <H1>3.5.6 Real Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1871"></A>Real types provide approximations 
+<div class="Normal"><A NAME="I1872"></A>Real types provide approximations 
 to the real numbers, with relative bounds on errors for floating point 
 types, and with absolute bounds for fixed point types.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">real_type_definition</SPAN><A NAME="I1872"></A><A NAME="S0044"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I1873"></A><SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0045">floating_point_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1874"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0047">fixed_point_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">real_type_definition</SPAN><A NAME="I1873"></A><A NAME="S0044"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I1874"></A><SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0045">floating_point_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1875"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0047">fixed_point_definition</A></SPAN></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I1875"></A>A type defined by a <SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1876"></A>A type defined by a <SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN> 
 is implicitly derived from <I>root_real</I>, an anonymous predefined 
 (specific) real type. Hence, all real types, whether floating point or 
 fixed point, are in the derivation class rooted at <I>root_real</I>. 
 </div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I1876"></A><A NAME="I1877"></A>Real literals 
+<div class="Normal"><A NAME="I1877"></A><A NAME="I1878"></A>Real literals 
 are all of the type <I>universal_real</I>, the universal type (see <A HREF="RM-3-4-1.html">3.4.1</A>) 
 for the class rooted at <I>root_real</I>, allowing their use with the 
-operations of any real type. <A NAME="I1878"></A>Certain multiplying 
+operations of any real type. <A NAME="I1879"></A>Certain multiplying 
 operators have a result type of <I>universal_fixed</I> (see <A HREF="RM-4-5-5.html">4.5.5</A>), 
 the universal type for the class of fixed point types, allowing the result 
 of the multiplication or division to be used where any specific fixed 
@@ -63,7 +63,7 @@ point type is expected.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I1879"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1880"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0047">fixed_point_definition</A></SPAN>. 
 </div>
@@ -84,7 +84,7 @@ result is produced, or the Machine_Overflows attribute of the type is
 <span class="insert2">False</span><span class="delete2">&nbsp;false</span> 
 (see <A HREF="RM-G-2.html">G.2</A>).</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I1880"></A>An implementation may provide 
+<div class="Normal"><A NAME="I1881"></A>An implementation may provide 
 <I>nonstandard real types</I>, descendants of <I>root_real</I> that are 
 declared outside of the specification of package Standard, which need 
 not have all the standard characteristics of a type defined by a <SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN>. 

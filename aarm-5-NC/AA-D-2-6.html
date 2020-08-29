@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -75,43 +75,44 @@ Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0230-1.TXT">AI12-0230-1</A></I>} 
 The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-EDF_Within_Priorities is a task dispatching policy.<A NAME="I9440"></A><A NAME="I9441"></A></div>
+EDF_Within_Priorities is a task dispatching policy.<A NAME="I9458"></A><A NAME="I9459"></A></div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
 The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0230-1.TXT">AI12-0230-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>package</B>&nbsp;Ada.Dispatching.EDF<BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><A NAME="I9442"></A><BR>
-&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9443"></A>Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time;<BR>
-&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9444"></A>Relative_Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time_Span;<BR>
-&nbsp;&nbsp;<A NAME="I9445"></A>Default_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Deadline&nbsp;:=<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B><A NAME="I9460"></A><BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9461"></A>Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time;<BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9462"></A>Relative_Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time_Span;<BR>
+&nbsp;&nbsp;<A NAME="I9463"></A>Default_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Deadline&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Last;<BR>
-&nbsp;&nbsp;<A NAME="I9446"></A>Default_Relative_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Relative_Deadline&nbsp;:=<BR>
+&nbsp;&nbsp;<A NAME="I9464"></A>Default_Relative_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Relative_Deadline&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Span_Last;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9447"></A>Set_Deadline<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9465"></A>Set_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Deadline;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9448"></A>Get_Deadline<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9466"></A>Get_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9449"></A>Set_Relative_Deadline<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9467"></A>Set_Relative_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Relative_Deadline;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9450"></A>Get_Relative_Deadline<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9468"></A>Get_Relative_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Relative_Deadline;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9451"></A>Delay_Until_And_Set_Deadline<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9469"></A>Delay_Until_And_Set_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Delay_Until_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deadline_Offset&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9452"></A>Get_Last_Release_Time<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9470"></A>Get_Last_Release_Time<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Real_Time.Time;<BR>
@@ -125,7 +126,7 @@ the following language-defined representation aspect may be specified:</div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;Relative_Deadline</div><div class="WideHanging-Body"><br clear="left">
 The aspect Relative_Deadline is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type Real_Time.Time_Span.<A NAME="I9453"></A><A NAME="I9454"></A></div>
+which shall be of type Real_Time.Time_Span.<A NAME="I9471"></A><A NAME="I9472"></A></div>
 <div class="paranum"><a name="p9.a">9.a/5</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Relative_Deadline: 
 </B>Task or protected type parameter used in Earliest Deadline First 
@@ -135,7 +136,7 @@ Dispatching.</div>
 The form of <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Generate_Deadlines is as follows:</div>
 <div class="paranum"><a name="p9.4">9.4/5</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<B>pragma</B> <A NAME="I9455"></A><A NAME="I9456"></A>Generate_Deadlines;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<B>pragma</B> <A NAME="I9473"></A><A NAME="I9474"></A>Generate_Deadlines;</div>
 <div class="paranum"><a name="p9.5">9.5/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0230-1.TXT">AI12-0230-1</A></I>} 
 The Generate_Deadlines <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -209,8 +210,8 @@ is discussed in <A HREF="AA-D-3.html">D.3</A>.</div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0230-1.TXT">AI12-0230-1</A></I>} 
-A task has both an <I>active</I><A NAME="I9457"></A><A NAME="I9458"></A><A NAME="I9459"></A> 
-and a <I>base</I><A NAME="I9460"></A><A NAME="I9461"></A><A NAME="I9462"></A> 
+A task has both an <I>active</I><A NAME="I9475"></A><A NAME="I9476"></A><A NAME="I9477"></A> 
+and a <I>base</I><A NAME="I9478"></A><A NAME="I9479"></A><A NAME="I9480"></A> 
 absolute deadline. These are the same except when the task is inheriting 
 a relative deadline during activation or a rendezvous (see below) or 
 within a protected action (see <A HREF="AA-D-3.html">D.3</A>). The procedure 
@@ -304,7 +305,7 @@ deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/A
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p31">31/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
-<A NAME="I9463"></A>If a value of Task_Id is passed as a parameter to 
+<A NAME="I9481"></A>If a value of Task_Id is passed as a parameter to 
 any of the subprograms of this package and the corresponding task object 
 no longer exists, the execution of the program is erroneous.</div>
 
@@ -339,13 +340,13 @@ absolute deadline with an alternative measure of urgency.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p34.b">34.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
-<A NAME="I9464"></A>Policy EDF_Across_Priorities and package Dispatching.EDF 
+<A NAME="I9482"></A>Policy EDF_Across_Priorities and package Dispatching.EDF 
 are new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p34.c">34.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9465"></A>Aspect Relative_Deadline is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I9483"></A>Aspect Relative_Deadline is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Relative_Deadline is now obsolescent.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -357,7 +358,7 @@ inversion in an unusual case.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p34.e">34.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0230-1.TXT">AI12-0230-1</A></I>} 
-<A NAME="I9466"></A>The policy EDF_Across_Priorities was replaced by 
+<A NAME="I9484"></A>The policy EDF_Across_Priorities was replaced by 
 EDF_Within_Priorities. A program using EDF_Across_Priorities could fail 
 to compile. However, we not are aware of any implementations of EDF_Across_Priorities, 
 so it seems unlikely that any such programs exist outside of books and 

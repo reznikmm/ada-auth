@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -54,11 +54,11 @@ may be specified:</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;Priority</div><div class="WideHanging-Body">
 The aspect Priority is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I8559"></A><A NAME="I8560"></A></div>
+which shall be of type Integer.<A NAME="I8576"></A><A NAME="I8577"></A></div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;Interrupt_Priority</div><div class="WideHanging-Body"><br clear="left">
 The aspect Interrupt_Priority is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I8561"></A><A NAME="I8562"></A></div>
+which shall be of type Integer.<A NAME="I8578"></A><A NAME="I8579"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
@@ -105,7 +105,7 @@ deleted.</I></SPAN></div>
 for a subprogram other than the main subprogram; the Priority value is 
 not associated with any task.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I8563"></A><A NAME="I8564"></A><A NAME="I8565"></A><A NAME="I8566"></A><A NAME="I8567"></A>A 
+<div class="Normal"><A NAME="I8580"></A><A NAME="I8581"></A><A NAME="I8582"></A><A NAME="I8583"></A><A NAME="I8584"></A>A 
 <I>task priority</I> is an integer value that indicates a degree of urgency 
 and is the basis for resolving competing demands of tasks for resources. 
 Unless otherwise specified, whenever tasks compete for processors or 
@@ -123,13 +123,13 @@ is used in the evaluation of another task's active priority.&nbsp;</div>
 aspect for a protected type or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0250">single_protected_declaration</A></SPAN> 
 is discussed in <A HREF="RM-D-3.html">D.3</A>.</div>
 <div class="paranum"><a name="p17">17/4</a></div>
-<div class="Normal"><A NAME="I8568"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
+<div class="Normal"><A NAME="I8585"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 specified for the Priority or Interrupt_Priority aspect of a task type 
 is evaluated each time an object of the task type is created (see <A HREF="RM-9-1.html">9.1</A>). 
 For the Priority aspect, the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 is converted to the subtype Priority; for the Interrupt_Priority aspect, 
 this value is converted to the subtype Any_Priority. The priority value 
-is then associated with the task object. <A NAME="I8569"></A><A NAME="I8570"></A></div>
+is then associated with the task object. <A NAME="I8586"></A><A NAME="I8587"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">Likewise, the priority value is associated with the 
 environment task if the aspect is specified for the main subprogram.</div>

@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +44,7 @@ declares a formal parameter of mode <B>in</B>, <B>in out</B>, or <B>out</B>.]
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4018"></A><A NAME="I4019"></A><A NAME="I4020"></A><A NAME="I4021"></A><A NAME="I4022"></A><A NAME="I4023"></A>A 
+<div class="Normal"><A NAME="I4023"></A><A NAME="I4024"></A><A NAME="I4025"></A><A NAME="I4026"></A><A NAME="I4027"></A><A NAME="I4028"></A>A 
 parameter is passed either <I>by copy</I> or <I>by reference</I>. [When 
 a parameter is passed by copy, the formal parameter denotes a separate 
 object from the actual parameter, and any information transfer between 
@@ -55,12 +55,12 @@ the formal parameter directly reference the actual parameter object.]</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<A NAME="I4024"></A>A type is a <I>by-copy type</I> if it is an elementary 
+<A NAME="I4029"></A>A type is a <I>by-copy type</I> if it is an elementary 
 type, or if it is a descendant of a private type whose full type is a 
 by-copy type. A parameter of a by-copy type is passed by copy, unless 
 the formal parameter is explicitly aliased.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4025"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4030"></A>A 
 type is a <I>by-reference type</I> if it is a descendant of one of the 
 following:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
@@ -87,7 +87,7 @@ type.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0236-1.TXT">AI12-0236-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0317-1.TXT">AI12-0317-1</A></I>} 
 A parameter of a by-reference type is passed by reference, as is an explicitly 
-aliased parameter of any type. <A NAME="I4026"></A>Each value of a by-reference 
+aliased parameter of any type. <A NAME="I4031"></A>Each value of a by-reference 
 type has an associated object.<span class="delete5">&nbsp;For a parenthesized 
 expression, <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>, 
 or view conversion, this object is the one associated with the operand.</span> 
@@ -135,10 +135,10 @@ burden.</div>
 Variable Control</A>&rdquo; says that a composite type with an atomic 
 or volatile subcomponent is a by-reference type, among other things.</div>
 <div class="paranum"><a name="p10.f">10.f</a></div>
-<div class="Annotations"><A NAME="I4027"></A>Every value of a limited 
+<div class="Annotations"><A NAME="I4032"></A>Every value of a limited 
 by-reference type is the value of one and only one limited object. The 
 <I>associated object</I> of a value of a limited by-reference type is 
-the object whose value it represents. <A NAME="I4028"></A>Two values 
+the object whose value it represents. <A NAME="I4033"></A>Two values 
 of a limited by-reference type are the <I>same</I> if and only if they 
 represent the value of the same object.</div>
 <div class="paranum"><a name="p10.g">10.g</a></div>
@@ -147,7 +147,7 @@ these statements are not always true for limited private types whose
 underlying type is nonlimited (unfortunately).&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0240-1.TXT">AI05-0240-1</A></I>} 
-<A NAME="I4029"></A>For other parameters, it is unspecified whether the 
+<A NAME="I4034"></A>For other parameters, it is unspecified whether the 
 parameter is passed by copy or by reference.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
@@ -161,7 +161,7 @@ to return by reference (see <A HREF="AA-13-9.html">13.9</A>).&nbsp;</div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0240-1.TXT">AI05-0240-1</A></I>} 
-<A NAME="I4030"></A><A NAME="I4031"></A><A NAME="I4032"></A><A NAME="I4033"></A>If 
+<A NAME="I4035"></A><A NAME="I4036"></A><A NAME="I4037"></A><A NAME="I4038"></A>If 
 one <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> denotes 
 a part of a formal parameter, and a second <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denotes a part of a distinct formal parameter or an object that is not 
@@ -174,7 +174,7 @@ via a distinct access path, unless the first access path denotes a part
 of a formal parameter that no longer exists at the point of the second 
 access [(due to leaving the corresponding callable construct).] The possible 
 consequences are that Program_Error is raised, or the newly assigned 
-value is read, or some old value of the object is read. <A NAME="I4034"></A></div>
+value is read, or some old value of the object is read. <A NAME="I4039"></A></div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For example, if we call &ldquo;P(X 
 =&gt; Global_Variable, Y =&gt; Global_Variable)&rdquo;, then within P, 
@@ -279,7 +279,7 @@ of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0216">subprogram_body</A></SPAN
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p15.a">15.a</a></div>
-<div class="Annotations"><A NAME="I4035"></A>The value of an <B>out</B> 
+<div class="Annotations"><A NAME="I4040"></A>The value of an <B>out</B> 
 parameter may be read. An <B>out</B> parameter is treated like a declared 
 variable without an explicit initial expression.&nbsp;</div>
 

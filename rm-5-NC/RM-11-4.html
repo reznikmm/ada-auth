@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,23 +36,23 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">When an exception occurrence is raised, normal program 
 execution is abandoned and control is transferred to an applicable <SPAN Class="swiss"><A HREF="RM-11-2.html#S0305">exception_handler</A></SPAN>, 
-if any. <A NAME="I4958"></A>To <I>handle</I> an exception occurrence 
-is to respond to the exceptional event. <A NAME="I4959"></A>To <I>propagate</I> 
+if any. <A NAME="I4949"></A>To <I>handle</I> an exception occurrence 
+is to respond to the exceptional event. <A NAME="I4950"></A>To <I>propagate</I> 
 an exception occurrence is to raise it again in another context; that 
 is, to fail to respond to the exceptional event in the present context. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4960"></A><A NAME="I4961"></A>Within a 
+<div class="Normal"><A NAME="I4951"></A><A NAME="I4952"></A>Within a 
 given task, if the execution of construct <I>a</I> is defined by this 
 International Standard to consist (in part) of the execution of construct 
 <I>b</I>, then while <I>b</I> is executing, the execution of <I>a</I> 
-is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I4962"></A>The 
+is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I4953"></A>The 
 <I>innermost dynamically enclosing</I> execution of a given execution 
 is the dynamically enclosing execution that started most recently.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4963"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4954"></A>When 
 an exception occurrence is raised by the execution of a given construct, 
 the rest of the execution of that construct is <I>abandoned</I>; that 
 is, any portions of the execution that have not yet taken place are not 
@@ -67,11 +67,11 @@ of a <SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statem
 that has a handler with a choice covering the exception, the occurrence 
 is handled by that handler;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I4964"></A>Otherwise, the occurrence is 
+<div class="Bulleted"><A NAME="I4955"></A>Otherwise, the occurrence is 
 <I>propagated</I> to the innermost dynamically enclosing execution, which 
 means that the occurrence is raised again in that context.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4965"></A><A NAME="I4966"></A><A NAME="I4967"></A>When 
+<div class="Normal"><A NAME="I4956"></A><A NAME="I4957"></A><A NAME="I4958"></A>When 
 an occurrence is <I>handled</I> by a given handler, the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0306">choice_parameter_specification</A></SPAN>, 
 if any, is first elaborated, which creates the choice parameter and initializes 
 it to the occurrence. Then, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0166">sequence_of_statements</A></SPAN> 

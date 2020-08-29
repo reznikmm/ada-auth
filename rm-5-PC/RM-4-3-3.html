@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,42 +50,42 @@ the components are identified by the values covered by the <SPAN Class="swiss"><
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">array_aggregate</SPAN><A NAME="I2581"></A><A NAME="S0113"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2582"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>&nbsp;|&nbsp;<span class="insert5"><A NAME="I2583"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0115">null_array_aggregate</A></SPAN>&nbsp;|&nbsp;</span><A NAME="I2584"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0116">named_array_aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">array_aggregate</SPAN><A NAME="I2583"></A><A NAME="S0113"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2584"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>&nbsp;|&nbsp;<span class="insert5"><A NAME="I2585"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0115">null_array_aggregate</A></SPAN>&nbsp;|&nbsp;</span><A NAME="I2586"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0116">named_array_aggregate</A></SPAN></div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">positional_array_aggregate</SPAN><A NAME="I2585"></A><A NAME="S0114"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2586"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>,&nbsp;<A NAME="I2587"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2588"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>})<BR>
-&nbsp;&nbsp;|&nbsp;(<A NAME="I2589"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2590"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;<A NAME="I2591"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>)<BR>
-&nbsp;&nbsp;|&nbsp;(<A NAME="I2592"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2593"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;)<span class="insert5"><BR>
-&nbsp;&nbsp;|&nbsp;'['&nbsp;<A NAME="I2594"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2595"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>}[,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;<A NAME="I2596"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]&nbsp;']'<BR>
-&nbsp;&nbsp;|&nbsp;'['&nbsp;<A NAME="I2597"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2598"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;&nbsp;']'</span></div>
+<div class="Indented1"><SPAN Class="swiss">positional_array_aggregate</SPAN><A NAME="I2587"></A><A NAME="S0114"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2588"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>,&nbsp;<A NAME="I2589"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2590"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>})<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I2591"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2592"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;<A NAME="I2593"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I2594"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2595"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;)<span class="insert5"><BR>
+&nbsp;&nbsp;|&nbsp;'['&nbsp;<A NAME="I2596"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2597"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>}[,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;<A NAME="I2598"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]&nbsp;']'<BR>
+&nbsp;&nbsp;|&nbsp;'['&nbsp;<A NAME="I2599"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2600"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;&nbsp;']'</span></div>
 <div class="paranum"><a name="p3.1">3.1/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">null_array_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2599"></A><A NAME="S0115"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">'['&nbsp;']'</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">null_array_aggregate</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2601"></A><A NAME="S0115"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">'['&nbsp;']'</span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">named_array_aggregate</SPAN><A NAME="I2600"></A><A NAME="S0116"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5">(<A NAME="I2601"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association_list</A></SPAN>)<BR>
-&nbsp;&nbsp;|&nbsp;'['&nbsp;<A NAME="I2602"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association_list</A></SPAN>&nbsp;']'</span><span class="delete5"><A NAME="I2603"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">&nbsp;array_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2604"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN>})</span></div>
+<div class="Indented1"><SPAN Class="swiss">named_array_aggregate</SPAN><A NAME="I2602"></A><A NAME="S0116"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5">(<A NAME="I2603"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association_list</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;'['&nbsp;<A NAME="I2604"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0117">array_component_association_list</A></SPAN>&nbsp;']'</span><span class="delete5"><A NAME="I2605"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">&nbsp;array_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2606"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN>})</span></div>
 <div class="paranum"><a name="p4.1">4.1/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">array_component_association_list</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2605"></A><A NAME="S0117"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2606"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2607"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN>}</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">array_component_association_list</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2607"></A><A NAME="S0117"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2608"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2609"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN>}</span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">array_component_association</SPAN><A NAME="I2608"></A><A NAME="S0118"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2609"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2610"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I2611"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;<span class="insert5"><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I2612"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0119">iterated_component_association</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss">array_component_association</SPAN><A NAME="I2610"></A><A NAME="S0118"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2611"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2612"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2613"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;<span class="insert5"><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2614"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0119">iterated_component_association</A></SPAN></span></div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterated_component_association</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2613"></A><A NAME="S0119"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I2614"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;<A NAME="I2615"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2616"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I2617"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2618"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">iterated_component_association</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2615"></A><A NAME="S0119"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I2616"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;<A NAME="I2617"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2618"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I2619"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2620"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I2619"></A>An <I>n-dimensional</I> <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I2621"></A>An <I>n-dimensional</I> <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 is one that is written as n levels of nested <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>s 
 (or at the bottom level, equivalent <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN>s). 
-<A NAME="I2620"></A>For the multidimensional case (n &gt;= 2) the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>s 
+<A NAME="I2622"></A>For the multidimensional case (n &gt;= 2) the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>s 
 (or equivalent <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN>s) 
 at the n&ndash;1 lower levels are called <I>subaggregate</I>s of the 
 enclosing n-dimensional <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
-<A NAME="I2621"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
+<A NAME="I2623"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s 
 of the bottom level subaggregates (or of the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 itself if one-dimensional) are called the <I>array component expressions</I> 
 of the enclosing n-dimensional <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
@@ -94,20 +94,20 @@ of the enclosing n-dimensional <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113"
 <div class="Normal">&nbsp;<span class="insert5">The <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0119">iterated_component_association</A></SPAN> 
 declares an <I>index parameter</I>, an object of the corresponding index 
-type.<A NAME="I2622"></A><A NAME="I2623"></A></span></div>
+type.<A NAME="I2624"></A><A NAME="I2625"></A></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Normal"><A NAME="I2624"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
-(that is not a subaggregate) shall be a single array type. <A NAME="I2625"></A>The 
+<div class="Normal"><A NAME="I2626"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+(that is not a subaggregate) shall be a single array type. <A NAME="I2627"></A>The 
 component type of this array type is the expected type for each array 
 component expression of the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2626"></A>The expected type for each <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+<div class="Normal"><A NAME="I2628"></A>The expected type for each <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 in any <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0116">named_array_aggregate</A></SPAN> 
-is the type of the <I>corresponding index</I>; <A NAME="I2627"></A>the 
+is the type of the <I>corresponding index</I>; <A NAME="I2629"></A>the 
 corresponding index for an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 that is not a subaggregate is the first index of its type; for an (n&ndash;m)-dimensional 
 subaggregate within an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
@@ -124,7 +124,7 @@ or as a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0115">null_array_aggregate</
 <div class="Normal" style="margin-bottom: 0.4em">An <B>others</B> choice 
 is allowed for an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 only if an <I>applicable index constraint</I> applies to the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
-<A NAME="I2628"></A>An applicable index constraint is a constraint provided 
+<A NAME="I2630"></A>An applicable index constraint is a constraint provided 
 by certain contexts where an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 is permitted that can be used to determine the bounds of the array value 
 specified by the aggregate. Each of the following contexts (and none 
@@ -245,7 +245,7 @@ evaluation proceeds in two steps:</span>&nbsp;</div>
 <div class="paranum"><a name="p20.3">20.3/5</a></div>
 <div class="Enumerated-Term">&nbsp;&nbsp;1.</div><div class="Enumerated-Body">
 <span class="insert5">Each <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN> 
-is elaborated (in an arbitrary order)<A NAME="I2629"></A> and an iteration 
+is elaborated (in an arbitrary order)<A NAME="I2631"></A> and an iteration 
 is performed solely to determine a maximum count for the number of values 
 produced by the iteration; all of these counts are combined to determine 
 the overall length of the array, and ultimately the limits on the bounds 
@@ -262,10 +262,10 @@ array type, and used to define the value of the next component of the
 array starting at the low bound and proceeding sequentially toward the 
 high bound. A check is made that the second iteration results in an array 
 length no greater than the maximum determined by the first iteration; 
-Constraint_Error is raised if this check<A NAME="I2630"></A><A NAME="I2631"></A> 
-fails.<A NAME="I2632"></A></span></div>
+Constraint_Error is raised if this check<A NAME="I2632"></A><A NAME="I2633"></A> 
+fails.<A NAME="I2634"></A></span></div>
 <div class="paranum"><a name="p21">21/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2633"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2635"></A>The 
 evaluation of <span class="insert5">any other</span><span class="delete5">&nbsp;an</span> 
 <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 of a given array type proceeds in two steps:&nbsp;</div>
@@ -273,14 +273,14 @@ of a given array type proceeds in two steps:&nbsp;</div>
 <div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
 Any <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
 of this aggregate and of its subaggregates are evaluated in an arbitrary 
-order, and converted to the corresponding index type;<A NAME="I2634"></A> 
-<A NAME="I2635"></A></div>
+order, and converted to the corresponding index type;<A NAME="I2636"></A> 
+<A NAME="I2637"></A></div>
 <div class="paranum"><a name="p23">23</a></div>
 <div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
 The array component expressions of the aggregate are evaluated in an 
 arbitrary order and their values are converted to the component subtype 
 of the array type; an array component expression is evaluated once for 
-each associated component. <A NAME="I2636"></A><A NAME="I2637"></A></div>
+each associated component. <A NAME="I2638"></A><A NAME="I2639"></A></div>
 <div class="paranum"><a name="p23.1">23.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;Each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">array_component_association</A></SPAN> 
@@ -302,7 +302,7 @@ with an <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification
 the value of the loop parameter of the <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0183">iterator_specification</A></SPAN> 
 is the value produced by the iteration (as described in <A HREF="RM-5-5-2.html">5.5.2</A>).</span></div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2638"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2640"></A>The 
 bounds of the index range of an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 (including a subaggregate) are determined as follows:&nbsp;</div>
 <div class="paranum"><a name="p25">25</a></div>
@@ -336,21 +336,21 @@ without an <B>others</B> choice, the bounds are determined by the smallest
 and largest index values covered by any <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Normal"><A NAME="I2639"></A><A NAME="I2640"></A>For an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
+<div class="Normal"><A NAME="I2641"></A><A NAME="I2642"></A>For an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 a check is made that the index range defined by its bounds is compatible 
 with the corresponding index subtype.&nbsp;</div>
 <div class="paranum"><a name="p29">29/3</a></div>
-<div class="Normal"><A NAME="I2641"></A><A NAME="I2642"></A>For an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I2643"></A><A NAME="I2644"></A>For an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 with an <B>others</B> choice, a check is made that no <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 or &lt;&gt; is specified for an index value outside the bounds determined 
 by the applicable index constraint.&nbsp;</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="Normal"><A NAME="I2643"></A><A NAME="I2644"></A>For a multidimensional 
+<div class="Normal"><A NAME="I2645"></A><A NAME="I2646"></A>For a multidimensional 
 <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 a check is made that all subaggregates that correspond to the same index 
 have the same bounds.&nbsp;</div>
 <div class="paranum"><a name="p31">31</a></div>
-<div class="Normal"><A NAME="I2645"></A>The exception Constraint_Error 
+<div class="Normal"><A NAME="I2647"></A>The exception Constraint_Error 
 is raised if any of the above checks fail.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>

@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <H1>A.18.20 The Generic Package Containers.Bounded_Doubly_Linked_Lists</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-The language-defined generic package Containers.Bounded_Doubly_Linked_Lists<A NAME="I8893"></A> 
+The language-defined generic package Containers.Bounded_Doubly_Linked_Lists<A NAME="I8911"></A> 
 provides a private type List and a set of operations. It provides the 
 same operations as the package Containers.Doubly_Linked_Lists (see <A HREF="AA-A-18-3.html">A.18.3</A>), 
 with the difference that the maximum storage is bounded.</div>
@@ -53,7 +53,12 @@ except:</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 The <span class="insert5">aspect</span><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
 Preelaborate is replaced with <span class="insert5">aspect</span><span class="delete5"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
-Pure.</div>
+Pure.<span class="insert5">&nbsp;Aspect Global is deleted.</span></div>
+<div class="paranum"><a name="p3.a">3.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
+<span class="insert5">The Global aspect for a Pure package is <B>null</B> 
+(see <A HREF="AA-6-1-2.html">6.1.2</A>), so we don't need to give it 
+explicitly.</span>&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The type List is 
 declared with a discriminant that specifies the capacity (maximum number 
@@ -91,15 +96,15 @@ allocation of internal storage includes a check that the capacity is
 not exceeded, and Capacity_Error is raised if this check fails.</span></div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)</span></div>
 <div class="paranum"><a name="p7.2">7.2/5</a></div>
 <div class="Bulleted-NoPrefix" style="margin-bottom: 0.3em"><span class="insert5">is 
 replaced by:</span></div>
 <div class="paranum"><a name="p7.3">7.3/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Count_Type'Last&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<SPAN Class="roman"><I>some&nbsp;length</I></SPAN>&gt;&nbsp;&lt;=&nbsp;Container.Capacity&nbsp;-&nbsp;&lt;<SPAN Class="roman"><I>some&nbsp;other&nbsp;length</I></SPAN>&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error)</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
 <span class="insert5"></span>In procedure Assign, <span class="insert5">the 
@@ -108,23 +113,24 @@ is greater than Target capacity, then Capacity_Error is propagated.</span>
 </div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Pre&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Length&nbsp;(Source)&nbsp;&lt;=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The function Copy 
 is replaced with:&nbsp;</div>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0112-1.TXT">AI12-0112-1</A></I>} 
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8894"></A>Copy&nbsp;(Source&nbsp;:&nbsp;List;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8912"></A>Copy&nbsp;(Source&nbsp;:&nbsp;List;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;List<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>or&nbsp;else</B>&nbsp;Capacity&nbsp;&gt;=&nbsp;Length&nbsp;(Source)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;<B>else</B>&nbsp;Capacity)</span>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Copy'Result)&nbsp;=&nbsp;Length&nbsp;(Source)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Elements_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Copy'Result)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy'Result.Capacity&nbsp;=&nbsp;(<B>if</B>&nbsp;Capacity&nbsp;=&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Source)&nbsp;<B>else</B>&nbsp;Capacity)</span>;</div>
 <div class="paranum"><a name="p11">11/5</a></div>
 <div class="Indented2"><span class="insert5">Returns a list whose elements 
 have the same values as the elements of Source.</span><span class="delete5">&nbsp;If 
@@ -145,32 +151,32 @@ is greater than the capacity of Target, then Splice propagates Capacity_Error.</
 the length of Target equals the capacity of Target, then Splice propagates 
 Capacity_Error.</span>&nbsp;</div>
 <div class="paranum"><a name="p13.1">13.1/5</a></div>
-<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Program_Error<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Source)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Program_Error<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Position&nbsp;=&nbsp;No_Element<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Constraint_Error<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif&nbsp;not</B>&nbsp;Has_Element&nbsp;(Source,&nbsp;Position)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Program_Error<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Before&nbsp;/=&nbsp;No_Element&nbsp;<B>and&nbsp;then</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>not</B>&nbsp;Has_Element&nbsp;(Target,&nbsp;Before)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Program_Error<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Same_Object&nbsp;(Target,&nbsp;Source)&nbsp;<B>then</B>&nbsp;True<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Length&nbsp;(Target)&nbsp;=&nbsp;Count_Type'Last<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Constraint_Error<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>elsif</B>&nbsp;Length&nbsp;(Target)&nbsp;=&nbsp;Target.Capacity<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Pre&nbsp;&nbsp;=&gt;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Target)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>not</B>&nbsp;Tampering_With_Cursors_Prohibited&nbsp;(Source)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;/=&nbsp;No_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Has_Element&nbsp;(Source,&nbsp;Position)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Before&nbsp;=&nbsp;No_Element&nbsp;<B>or&nbsp;else</B>&nbsp;Has_Element&nbsp;(Target,&nbsp;Before)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Program_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Target'Has_Same_Object&nbsp;(Source)&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Target)&nbsp;/=&nbsp;Count_Type'Last<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Constraint_Error)&nbsp;<B>and&nbsp;then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Target'Has_Same_Object&nbsp;(Source)&nbsp;<B>or&nbsp;else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;(Target)&nbsp;/=&nbsp;Target.Capacity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;Capacity_Error),</span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<A NAME="I8895"></A>It is a bounded error to assign from a bounded list 
+<A NAME="I8913"></A>It is a bounded error to assign from a bounded list 
 object while tampering with elements [or cursors] of that object is prohibited. 
 Either Program_Error is raised by the assignment, execution proceeds 
 with the target object prohibiting tampering with elements [or cursors], 
-or execution proceeds normally.<A NAME="I8896"></A>&nbsp;</div>
+or execution proceeds normally.<A NAME="I8914"></A>&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a/3</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>Tampering with elements includes 
 tampering with cursors, so we only really need to talk about tampering 
@@ -181,7 +187,7 @@ with elements here; we mention cursors for clarity.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 When a bounded list object <I>L</I> is finalized, if tampering with cursors 
 is prohibited for <I>L</I> other than due to an assignment from another 
-list, then execution is erroneous. <A NAME="I8897"></A></div>
+list, then execution is erroneous. <A NAME="I8915"></A></div>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is a tampering event, but 
 since the implementation is not allowed to use Ada.Finalization, it is 
@@ -236,13 +242,13 @@ lists.</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0184-1.TXT">AI05-0184-1</A></I>} 
-<A NAME="I8898"></A> The generic package Containers.Bounded_Doubly_Linked_Lists 
+<A NAME="I8916"></A> The generic package Containers.Bounded_Doubly_Linked_Lists 
 is new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p20.b">20.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0111-1.TXT">AI12-0111-1</A></I>} 
-<span class="insert5"><A NAME="I8899"></A><B>Corrigendum:</B> Tampering 
+<span class="insert5"><A NAME="I8917"></A><B>Corrigendum:</B> Tampering 
 with elements is now defined to be equivalent to tampering with cursors 
 for bounded containers. If a program requires tampering detection to 
 work, it might fail in Ada 202x. Needless to say, this shouldn't happen 

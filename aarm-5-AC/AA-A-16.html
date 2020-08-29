@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -61,102 +61,104 @@ use the Win32 API.</span>&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 <span class="insert2">The library package Directories has the following 
 declaration:</span>&nbsp;</div>
-<div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.IO_Exceptions;<BR>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert2"><B>with</B>&nbsp;Ada.IO_Exceptions;<BR>
 <B>with</B>&nbsp;Ada.Calendar;<BR>
-<B>package</B>&nbsp;Ada.Directories&nbsp;<B>is</B><A NAME="I8175"></A></span></div>
+<B>package</B>&nbsp;Ada.Directories&nbsp;</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;</span><span class="insert2"><B>is</B><A NAME="I8171"></A></span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Directory&nbsp;and&nbsp;file&nbsp;operations:</I></SPAN></span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8176"></A>Current_Directory&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8172"></A>Current_Directory&nbsp;<B>return</B>&nbsp;String;</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8177"></A>Set_Directory&nbsp;(Directory&nbsp;:&nbsp;in&nbsp;String);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8173"></A>Set_Directory&nbsp;(Directory&nbsp;:&nbsp;in&nbsp;String);</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8178"></A>Create_Directory&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8174"></A>Create_Directory&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8179"></A>Delete_Directory&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8175"></A>Delete_Directory&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8180"></A>Create_Path&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8176"></A>Create_Path&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8181"></A>Delete_Tree&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8177"></A>Delete_Tree&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8182"></A>Delete_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8178"></A>Delete_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8183"></A>Rename&nbsp;(Old_Name,&nbsp;New_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8179"></A>Rename&nbsp;(Old_Name,&nbsp;New_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8184"></A>Copy_File&nbsp;(Source_Name,<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8180"></A>Copy_File&nbsp;(Source_Name,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;and&nbsp;directory&nbsp;name&nbsp;operations:</I></SPAN></span></div>
 <div class="paranum"><a name="p15">15/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8185"></A>Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8181"></A>Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8186"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8182"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8187"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8183"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8188"></A>Extension&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8184"></A>Extension&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8189"></A>Base_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8185"></A>Base_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8190"></A>Compose&nbsp;(Containing_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8186"></A>Compose&nbsp;(Containing_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">;</span></div>
 <div class="paranum"><a name="p20.1">20.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8191"></A>Name_Case_Kind&nbsp;<B>is</B><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8187"></A>Name_Case_Kind&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Unknown,&nbsp;Case_Sensitive,&nbsp;Case_Insensitive,&nbsp;Case_Preserving);</span></div>
 <div class="paranum"><a name="p20.2">20.2/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8192"></A>Name_Case_Equivalence&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Name_Case_Kind;</span></div>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8188"></A>Name_Case_Equivalence&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Name_Case_Kind;</span></div>
 <div class="paranum"><a name="p21">21/2</a></div>
 <div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;and&nbsp;directory&nbsp;queries:</I></SPAN></span></div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8193"></A>File_Kind&nbsp;<B>is</B>&nbsp;(Directory,&nbsp;Ordinary_File,&nbsp;Special_File);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8189"></A>File_Kind&nbsp;<B>is</B>&nbsp;(Directory,&nbsp;Ordinary_File,&nbsp;Special_File);</span></div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8194"></A>File_Size&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8190"></A>File_Size&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8195"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8191"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8196"></A>Kind&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Kind;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8192"></A>Kind&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Kind;</span></div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8197"></A>Size&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Size;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8193"></A>Size&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Size;</span></div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8198"></A>Modification_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8194"></A>Modification_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
 <div class="paranum"><a name="p28">28/2</a></div>
 <div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Directory&nbsp;searching:</I></SPAN></span></div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8199"></A>Directory_Entry_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8195"></A>Directory_Entry_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8200"></A>Filter_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(File_Kind)&nbsp;<B>of</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8196"></A>Filter_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(File_Kind)&nbsp;<B>of</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8201"></A>Search_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8197"></A>Search_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8202"></A>Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8198"></A>Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Filter_Type&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;True));</span></div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8203"></A>End_Search&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8199"></A>End_Search&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type);</span></div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8204"></A>More_Entries&nbsp;(Search&nbsp;:&nbsp;<B>in</B>&nbsp;Search_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8200"></A>More_Entries&nbsp;(Search&nbsp;:&nbsp;<B>in</B>&nbsp;Search_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p35">35/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8205"></A>Get_Next_Entry&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8201"></A>Get_Next_Entry&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory_Entry&nbsp;:&nbsp;<B>out</B>&nbsp;Directory_Entry_Type);</span></div>
 <div class="paranum"><a name="p36">36/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0286-1.TXT">AI12-0286-1</A></I>} 
@@ -170,25 +172,25 @@ declaration:</span>&nbsp;</div>
 <div class="paranum"><a name="p37">37/2</a></div>
 <div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Operations&nbsp;on&nbsp;Directory&nbsp;Entries:</I></SPAN></span></div>
 <div class="paranum"><a name="p38">38/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8206"></A>Simple_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8202"></A>Simple_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</span></div>
 <div class="paranum"><a name="p39">39/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8207"></A>Full_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8203"></A>Full_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</span></div>
 <div class="paranum"><a name="p40">40/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8208"></A>Kind&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8204"></A>Kind&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Kind;</span></div>
 <div class="paranum"><a name="p41">41/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8209"></A>Size&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8205"></A>Size&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Size;</span></div>
 <div class="paranum"><a name="p42">42/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8210"></A>Modification_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8206"></A>Modification_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
 <div class="paranum"><a name="p43">43/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I8211"></A>Status_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Status_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8212"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Name_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8213"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Use_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8214"></A>Device_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Device_Error;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I8207"></A>Status_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Status_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8208"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Name_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8209"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Use_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8210"></A>Device_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Device_Error;</span></div>
 <div class="paranum"><a name="p44">44/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 <span class="insert2"><B>private</B><BR>
@@ -201,7 +203,7 @@ special files, or ordinary files. A <I>directory</I> is an external file
 that is a container for files on the target system. A <I>special file</I> 
 is an external file that cannot be created or read by a predefined Ada 
 input-output package. External files that are not special files or directories 
-are called <I>ordinary files</I>. <A NAME="I8215"></A><A NAME="I8216"></A><A NAME="I8217"></A></span></div>
+are called <I>ordinary files</I>. <A NAME="I8211"></A><A NAME="I8212"></A><A NAME="I8213"></A></span></div>
 <div class="paranum"><a name="p45.a">45.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>A 
 directory is an external file, although it may not have a name on some 
@@ -219,7 +221,7 @@ special files.</span>&nbsp;</div>
 <span class="insert2">A <I>file name</I> is a string identifying an external 
 file. Similarly, a <I>directory name</I> is a string identifying a directory. 
 The interpretation of file names and directory names is implementation-defined. 
-<A NAME="I8218"></A><A NAME="I8219"></A></span></div>
+<A NAME="I8214"></A><A NAME="I8215"></A></span></div>
 <div class="paranum"><a name="p46.a">46.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Implementation defined: 
 </B></span><span class="insert2">The interpretation of file names and 
@@ -235,7 +237,7 @@ The <I>simple name</I> of an external file is the name of the item, not
 including any containing directory names. Unless otherwise specified, 
 a file name or directory name parameter in a call to a predefined Ada 
 input-output subprogram can be a full name, a simple name, or any other 
-form of name supported by the implementation. <A NAME="I8220"></A><A NAME="I8221"></A></span></div>
+form of name supported by the implementation. <A NAME="I8216"></A><A NAME="I8217"></A></span></div>
 <div class="paranum"><a name="p47.a">47.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>The 
 full name on Unix is a complete path to the root. For Windows&reg;, the 
@@ -252,7 +254,7 @@ is neither a full name nor a simple name.</span>&nbsp;</div>
 <div class="paranum"><a name="p47.1">47.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0337-1.TXT">AI12-0337-1</A></I>} 
 <span class="insert5">A <I>root directory</I> is a directory that has 
-no containing directory.<A NAME="I8222"></A></span></div>
+no containing directory.<A NAME="I8218"></A></span></div>
 <div class="paranum"><a name="p47.c">47.c/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Implementation Note: 
 </B>For Unix and Unix-like systems, &quot;/&quot; is the root. For Windows&reg;, 
@@ -262,7 +264,7 @@ no containing directory.<A NAME="I8222"></A></span></div>
 <span class="insert2">The <I>default directory</I> is the directory that 
 is used if a directory or file name is not a full name (that is, when 
 the name does not fully identify all of the containing directories). 
-<A NAME="I8223"></A></span></div>
+<A NAME="I8219"></A></span></div>
 <div class="paranum"><a name="p48.a">48.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>The 
 default directory is the one maintained by the familiar &ldquo;cd&rdquo; 
@@ -273,7 +275,7 @@ natural implementation.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 <span class="insert2">A <I>directory entry</I> is a single item in a 
 directory, identifying a single external file (including directories 
-and special files). <A NAME="I8224"></A></span></div>
+and special files). <A NAME="I8220"></A></span></div>
 <div class="paranum"><a name="p50">50/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 <span class="insert2">For each function that returns a string, the lower 
@@ -672,7 +674,7 @@ special files are provided.</span></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
 type Search_Type contains the state of a directory search. A default-initialized 
 Search_Type object has no entries available (function More_Entries returns 
-False). Type Search_Type needs finalization<A NAME="I8225"></A> (see 
+False). Type Search_Type needs finalization<A NAME="I8221"></A> (see 
 <A HREF="AA-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p103">103/2</a></div>
 <div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
@@ -827,7 +829,7 @@ copy (by writing some possibly complicated Ada code).</span>&nbsp;</div>
 <div class="Normal">&nbsp;<span class="insert2">If other information about 
 a file (such as the owner or creation date) is available in a directory 
 entry, the implementation should provide functions in a child package 
-Directories.Information to retrieve it.<A NAME="I8226"></A></span>&nbsp;</div>
+Directories.Information to retrieve it.<A NAME="I8222"></A></span>&nbsp;</div>
 <div class="paranum"><a name="p124.a">124.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Implementation Advice: 
 </B></span><span class="insert2">Package Directories.Information should 
@@ -836,8 +838,10 @@ be provided to retrieve other information about a file.</span></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"><B>Implementation 
 Note:&nbsp;</B>For Windows&reg;, Directories.Information should contain at 
 least the following routines:</span></div>
-<div class="paranum"><a name="p124.c">124.c/2</a></div>
-<div class="SmallExamples"><span class="insert2"><B>package</B>&nbsp;Ada.Directories.Information&nbsp;<B>is</B><BR>
+<div class="paranum"><a name="p124.c">124.c/5</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert2"><B>package</B>&nbsp;Ada.Directories.Information&nbsp;</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;</span><span class="insert2"><B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>System-specific&nbsp;directory&nbsp;information.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Version&nbsp;for&nbsp;the&nbsp;Microsoft&reg;&nbsp;Windows&reg;&nbsp;operating&nbsp;system.</I></SPAN></span></div>
 <div class="paranum"><a name="p124.d">124.d/2</a></div>
@@ -901,8 +905,10 @@ least the following routines:</span></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2">For 
 Unix-like systems (Unix, POSIX, Linux, etc.), Directories.Information 
 should contain at least the following routines:</span></div>
-<div class="paranum"><a name="p124.dd">124.dd/2</a></div>
-<div class="SmallExamples"><span class="insert2"><B>package</B>&nbsp;Ada.Directories.Information&nbsp;<B>is</B><BR>
+<div class="paranum"><a name="p124.dd">124.dd/5</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<span class="insert2"><B>package</B>&nbsp;Ada.Directories.Information&nbsp;</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;</span><span class="insert2"><B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>System-specific&nbsp;directory&nbsp;information.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Unix&nbsp;and&nbsp;similar&nbsp;systems&nbsp;version.</I></SPAN></span></div>
 <div class="paranum"><a name="p124.ee">124.ee/2</a></div>
@@ -1051,13 +1057,13 @@ and fall back to Copy_File and Delete:</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p131.c">131.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
-<span class="insert2"><A NAME="I8227"></A>Package Ada.Directories is 
+<span class="insert2"><A NAME="I8223"></A>Package Ada.Directories is 
 new.</span>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p131.d">131.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0231-1.TXT">AI05-0231-1</A></I>} 
-<span class="insert3"><A NAME="I8228"></A><B>Correction</B>: Clarified 
+<span class="insert3"><A NAME="I8224"></A><B>Correction</B>: Clarified 
 when and which exceptions are raised for Start_Search, Search, Delete_Directory, 
 and Rename. If an implementation followed the original incorrect wording, 
 it might raise Use_Error instead of Name_Error for Start_Search and Search, 
@@ -1071,7 +1077,7 @@ to Delete_Tree (which is obvious nonsense).</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p131.e">131.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3"><A NAME="I8229"></A>A new enumeration type Name_Case_Kind 
+<span class="insert3"><A NAME="I8225"></A>A new enumeration type Name_Case_Kind 
 and a new function Name_Case_Equivalence is added to Directories. If 
 Directories is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 

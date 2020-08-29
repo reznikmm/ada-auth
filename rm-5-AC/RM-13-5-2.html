@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,12 +36,12 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5798"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5793"></A>For 
 a component C of a composite, non-array object R, the <I>storage place 
 attributes</I> are defined:&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="WideHanging-Term">R.C'Position</div><div class="WideHanging-Body">
-<A NAME="I5799"></A><A NAME="I5800"></A><span class="insert2">If the 
+<A NAME="I5794"></A><A NAME="I5795"></A><span class="insert2">If the 
 nondefault bit ordering applies to the composite type, and if a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0354">position</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>; 
@@ -50,7 +50,7 @@ value as R.C'Address &ndash; R'Address. The value of this attribute is
 of the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="WideHanging-Term">R.C'First_Bit</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5801"></A><A NAME="I5802"></A><span class="insert2">If the 
+<A NAME="I5796"></A><A NAME="I5797"></A><span class="insert2">If the 
 nondefault bit ordering applies to the composite type, and if a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0355">first_bit</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>; 
@@ -61,7 +61,7 @@ bit of a storage element is numbered zero. The value of this attribute
 is of the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="WideHanging-Term">R.C'Last_Bit</div><div class="WideHanging-Body">
-<A NAME="I5803"></A><A NAME="I5804"></A><span class="insert2">If the 
+<A NAME="I5798"></A><A NAME="I5799"></A><span class="insert2">If the 
 nondefault bit ordering applies to the composite type, and if a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN> 
 specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0356">last_bit</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0353">component_clause</A></SPAN>; 
@@ -72,7 +72,7 @@ of this attribute is of the type <I>universal_integer</I>.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5805"></A><A NAME="I5806"></A>If a component 
+<div class="Normal"><A NAME="I5800"></A><A NAME="I5801"></A>If a component 
 is represented using some form of pointer (such as an offset) to the 
 actual data of the component, and this data is contiguous with the rest 
 of the object, then the storage place attributes should reflect the place 

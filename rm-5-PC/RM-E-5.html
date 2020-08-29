@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,7 +35,7 @@
 <HR>
 <H1>E.5 Partition Communication Subsystem</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I9105"></A><A NAME="I9106"></A>The <I>Partition 
+<div class="Normal"><A NAME="I9126"></A><A NAME="I9127"></A>The <I>Partition 
 Communication Subsystem</I> (PCS) provides facilities for supporting 
 communication between the active partitions of a distributed program. 
 The package System.RPC is a language-defined interface to the PCS.&nbsp;</div>
@@ -47,42 +47,42 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Streams;&nbsp;--&nbsp;<SPAN Class="roman"><I>see&nbsp;<A HREF="RM-13-13-1.html">13.13.1</A></I></SPAN><BR>
 <B>package</B>&nbsp;System.RPC<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>&nbsp;<B>is</B><A NAME="I9107"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><A NAME="I9128"></A></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9108"></A>Partition_Id&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9129"></A>Partition_Id&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I9109"></A>Communication_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I9130"></A>Communication_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9110"></A>Params_Stream_Type&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9131"></A>Params_Stream_Type&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initial_Size&nbsp;:&nbsp;Ada.Streams.Stream_Element_Count)&nbsp;<B>is</B>&nbsp;<B>new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Streams.Root_Stream_Type&nbsp;<B>with</B>&nbsp;<B>private</B>;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9111"></A>Read(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9132"></A>Read(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Params_Stream_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Ada.Streams.Stream_Element_Array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Ada.Streams.Stream_Element_Offset);</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9112"></A>Write(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9133"></A>Write(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Params_Stream_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Streams.Stream_Element_Array);</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Synchronous&nbsp;call</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9113"></A>Do_RPC(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9134"></A>Do_RPC(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partition&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Partition_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Params&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type);</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Asynchronous&nbsp;call</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9114"></A>Do_APC(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9135"></A>Do_APC(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partition&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Partition_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Params&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type);</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;The&nbsp;handler&nbsp;for&nbsp;incoming&nbsp;RPCs</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9115"></A>RPC_Receiver&nbsp;<B>is&nbsp;access&nbsp;procedure</B>(<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9136"></A>RPC_Receiver&nbsp;<B>is&nbsp;access&nbsp;procedure</B>(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Params&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type);</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9116"></A>Establish_RPC_Receiver(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9137"></A>Establish_RPC_Receiver(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partition&nbsp;:&nbsp;<B>in</B>&nbsp;Partition_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;RPC_Receiver);</div>
 <div class="paranum"><a name="p13">13</a></div>
@@ -117,12 +117,12 @@ that it is allowed to return immediately after sending the message.</div>
 <div class="Normal">Upon normal return, the stream designated by the 
 Result parameter of Do_RPC contains the reply message.</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal"><A NAME="I9117"></A>The procedure System.RPC.Establish_RPC_Receiver 
+<div class="Normal"><A NAME="I9138"></A>The procedure System.RPC.Establish_RPC_Receiver 
 is called once, immediately after elaborating the library units of an 
 active partition (that is, right after the <I>elaboration of the partition</I>) 
 if the partition includes an RCI library unit, but prior to invoking 
 the main subprogram, if any. The Partition parameter is the Partition_Id 
-of the active partition being elaborated. <A NAME="I9118"></A>The Receiver 
+of the active partition being elaborated. <A NAME="I9139"></A>The Receiver 
 parameter designates an implementation-provided procedure called the 
 <I>RPC-receiver</I> which will handle all RPCs received by the partition 
 from the PCS. Establish_RPC_Receiver saves a reference to the RPC-receiver; 
@@ -136,7 +136,7 @@ is sent to the called partition, to request that the execution of the
 remotely called subprogram be aborted.&nbsp;</div>
 <div class="paranum"><a name="p23">23/5</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete5"><A NAME="I9119"></A><A NAME="I9120"></A>The 
+deleted.</I></SPAN><span class="delete5"><A NAME="I9140"></A><A NAME="I9141"></A>The 
 subprograms declared in System.RPC are potentially blocking operations.</span> 
 </div>
 

@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 <H1>E.4 Remote Subprogram Calls</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0359-1.TXT">AI12-0359-1</A></I>} 
-<A NAME="I9946"></A><A NAME="I9947"></A><A NAME="I9948"></A><A NAME="I9949"></A><A NAME="I9950"></A>A 
+<A NAME="I9968"></A><A NAME="I9969"></A><A NAME="I9970"></A><A NAME="I9971"></A><A NAME="I9972"></A>A 
 <I>remote subprogram call</I> is a subprogram call that invokes the execution 
 of a subprogram in another <span class="insert5">(active)&nbsp;</span>partition. 
 The partition that originates the remote subprogram call is the <I>calling 
@@ -109,7 +109,7 @@ True, either implicitly by inheritance or by explicit specification.</span>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I9951"></A><A NAME="I9952"></A><A NAME="I9953"></A>For 
+<div class="Normal"><A NAME="I9973"></A><A NAME="I9974"></A><A NAME="I9975"></A>For 
 the execution of a remote subprogram call, subprogram parameters (and 
 later the results, if any) are passed using a stream-oriented representation 
 (see <A HREF="AA-13-13-1.html">13.13.1</A>) [which is suitable for transmission 
@@ -121,7 +121,7 @@ is done in the called partition. After the remote subprogram completes,
 marshalling is performed in the called partition, and finally unmarshalling 
 is done in the calling partition.]</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I9954"></A><A NAME="I9955"></A>A <I>calling 
+<div class="Normal"><A NAME="I9976"></A><A NAME="I9977"></A>A <I>calling 
 stub</I> is the sequence of code that replaces the subprogram body of 
 a remotely called subprogram in the calling partition. A <I>receiving 
 stub</I> is the sequence of code (the &ldquo;wrapper&rdquo;) that receives 
@@ -134,7 +134,7 @@ as defined in <A HREF="AA-10-1-3.html">10.1.3</A>. The term <I>stub</I>
 is used here because it is a commonly understood term when talking about 
 the RPC paradigm.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9956"></A>Remote subprogram calls are executed 
+<div class="Normal"><A NAME="I9978"></A>Remote subprogram calls are executed 
 at most once, that is, if the subprogram call returns normally, then 
 the called subprogram's body was executed exactly once.</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -143,7 +143,7 @@ until the subprogram in the called partition returns, unless the call
 is asynchronous. For an asynchronous remote procedure call, the calling 
 task can become ready before the procedure in the called partition returns.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I9957"></A>If a construct containing a remote 
+<div class="Normal"><A NAME="I9979"></A>If a construct containing a remote 
 call is aborted, the remote subprogram call is <I>cancelled</I>. Whether 
 the execution of the remote subprogram is immediately aborted as a result 
 of the cancellation is implementation defined.&nbsp;</div>
@@ -167,7 +167,7 @@ is raised if a remote call cannot be completed due to difficulties in
 communicating with the called partition.</div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0183-1.TXT">AI12-0183-1</A></I>} 
-<A NAME="I9958"></A><A NAME="I9959"></A>All forms of remote subprogram 
+<A NAME="I9980"></A><A NAME="I9981"></A>All forms of remote subprogram 
 calls are potentially blocking operations (see <span class="insert5"><A HREF="AA-9-5.html">9.5</A></span><span class="delete5"><A HREF="AA-9-5-1.html">&nbsp;9.5.1</A></span>). 
 </div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
@@ -178,11 +178,11 @@ for the availability of shared resources to initiate the remote call.
 <div class="paranum"><a name="p18">18/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0085">8652/0085</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00215.TXT">AI95-00215-01</A></I>} 
-<A NAME="I9960"></A><A NAME="I9961"></A>In a remote subprogram call with 
+<A NAME="I9982"></A><A NAME="I9983"></A>In a remote subprogram call with 
 a formal parameter of a class-wide type, a check is made that the tag 
 of the actual parameter identifies a tagged type declared in a declared-pure 
 or shared passive library unit, or in the visible part of a remote types 
-or remote call interface library unit. <A NAME="I9962"></A>Program_Error 
+or remote call interface library unit. <A NAME="I9984"></A>Program_Error 
 is raised if this check fails. In a remote function call which returns 
 a class-wide type, the same check is made on the function result.&nbsp;</div>
 <div class="paranum"><a name="p18.a">18.a/1</a></div>
@@ -209,13 +209,13 @@ partitions. However, that interfered with other uses of tags. The new
 rule allows tags to agree in all partitions, even for those types which 
 are not &quot;safe&quot; to pass in an RPC.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal"><A NAME="I9963"></A><A NAME="I9964"></A>In a dispatching 
+<div class="Normal"><A NAME="I9985"></A><A NAME="I9986"></A>In a dispatching 
 call with two or more controlling operands that are designated by values 
 of a remote access-to-class-wide type, a check is made [(in addition 
 to the normal Tag_Check &mdash; see <A HREF="AA-11-5.html">11.5</A>)] 
 that all the remote access-to-class-wide values originated from Access 
 <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
-that were evaluated by tasks of the same active partition. <A NAME="I9965"></A>Constraint_Error 
+that were evaluated by tasks of the same active partition. <A NAME="I9987"></A>Constraint_Error 
 is raised if this check fails.&nbsp;</div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>When a remote access-to-class-wide 
@@ -343,7 +343,7 @@ target partition, etc. This approach has the advantage that less special-casing
 is required in the compiler. All access values can remain just a simple 
 address.</div>
 <div class="paranum"><a name="p20.u">20.u</a></div>
-<div class="Annotations"><A NAME="I9966"></A>For a call to Do_RPC or 
+<div class="Annotations"><A NAME="I9988"></A>For a call to Do_RPC or 
 Do_APC: The partition ID of all controlling operands are checked for 
 equality (a Constraint_Error is raised if this check fails). The partition 
 ID value is used for the Partition parameter. An index into the <I>tagged-type-descriptor</I> 
@@ -358,7 +358,7 @@ already present in the other parameters).</div>
 has transferred control to the appropriate receiving stub) the parameters 
 are first unmarshalled. Then, the tags of the controlling operands (obtained 
 by dereferencing the pointer to the object) are checked for equality. 
-<A NAME="I9967"></A>If the check fails Constraint_Error is raised and 
+<A NAME="I9989"></A>If the check fails Constraint_Error is raised and 
 propagated back to the calling partition, unless it is a result of an 
 asynchronous call. Finally, a dispatching call to the specific subprogram 
 (based on the controlling object's tag) is made. Note that since this 

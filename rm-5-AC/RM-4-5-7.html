@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,28 +47,28 @@ depending on the value of one or more corresponding conditions. The other
 kind of <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
 is the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN>, 
 which selects for evaluation one of a number of alternative <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>s; 
-the chosen alternative is determined by the value of a <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>.<A NAME="I3119"></A><A NAME="I3120"></A><A NAME="I3121"></A> 
-<A NAME="I3122"></A><A NAME="I3123"></A><A NAME="I3124"></A></span></div>
+the chosen alternative is determined by the value of a <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>.<A NAME="I3121"></A><A NAME="I3122"></A><A NAME="I3123"></A> 
+<A NAME="I3124"></A><A NAME="I3125"></A><A NAME="I3126"></A></span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">conditional_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3125"></A><A NAME="S0148"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><A NAME="I3126"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I3127"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">conditional_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3127"></A><A NAME="S0148"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><A NAME="I3128"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I3129"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN></span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">if_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3128"></A><A NAME="S0149"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><BR>
-&nbsp;&nbsp;&nbsp;<span class="insert3"><B>if</B>&nbsp;<A NAME="I3129"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B>&nbsp;<I>dependent_</I><A NAME="I3130"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<A NAME="I3131"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B>&nbsp;<I>dependent_</I><A NAME="I3132"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;[<B>else</B>&nbsp;<I>dependent_</I><A NAME="I3133"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">if_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3130"></A><A NAME="S0149"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert3"><B>if</B>&nbsp;<A NAME="I3131"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B>&nbsp;<I>dependent_</I><A NAME="I3132"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<A NAME="I3133"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN>&nbsp;<B>then</B>&nbsp;<I>dependent_</I><A NAME="I3134"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;[<B>else</B>&nbsp;<I>dependent_</I><A NAME="I3135"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>]</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">condition</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3134"></A><A NAME="S0150"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>boolean_</I><A NAME="I3135"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">condition</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3136"></A><A NAME="S0150"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>boolean_</I><A NAME="I3137"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">case_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3136"></A><A NAME="S0151"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3137"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3138"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0152">case_expression_alternative</A></SPAN>&nbsp;{,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3139"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0152">case_expression_alternative</A></SPAN>}</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">case_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3138"></A><A NAME="S0151"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3139"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3140"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0152">case_expression_alternative</A></SPAN>&nbsp;{,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3141"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0152">case_expression_alternative</A></SPAN>}</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">case_expression_alternative</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3140"></A><A NAME="S0152"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3141"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>dependent_</I><A NAME="I3142"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">case_expression_alternative</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3142"></A><A NAME="S0152"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3143"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>dependent_</I><A NAME="I3144"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN></span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented1"><span class="insert3">Wherever the Syntax Rules 
 allow an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
@@ -87,7 +87,7 @@ is expected to be of some class of types, then each <I>dependent_</I><SPAN Class
 of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
 is subject to the same expectation. If a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
 shall resolve to be of a type <I>T</I>, then each <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
-shall resolve to be of type <I>T</I>.<A NAME="I3143"></A></span></div>
+shall resolve to be of type <I>T</I>.<A NAME="I3145"></A></span></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
 possible types of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
@@ -110,13 +110,13 @@ is expected to be of type <I>T</I> or shall resolve to type <I>T</I>,
 then the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0148">conditional_expression</A></SPAN> 
 is of type <I>T</I>.</span></div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I3144"></A>A <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
+<div class="Normal"><span class="insert3"><A NAME="I3146"></A>A <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0150">condition</A></SPAN> 
 is expected to be of any boolean type.</span>&nbsp;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal"><span class="insert3">The expected type for the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 and the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
-are as for case statements (see <A HREF="RM-5-4.html">5.4</A>).<A NAME="I3145"></A> 
-<A NAME="I3146"></A><A NAME="I3147"></A></span></div>
+are as for case statements (see <A HREF="RM-5-4.html">5.4</A>).<A NAME="I3147"></A> 
+<A NAME="I3148"></A><A NAME="I3149"></A></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p16">16/3</a></div>
@@ -158,7 +158,7 @@ evaluates to True, the associated <I>dependent_</I><SPAN Class="swiss"><A HREF="
 is evaluated, converted to the type of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN>, 
 and the resulting value is the value of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN>. 
 Otherwise (when there is no <B>else</B> clause), the value of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0149">if_expression</A></SPAN> 
-is True.<A NAME="I3148"></A></span></div>
+is True.<A NAME="I3150"></A></span></div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal"><span class="insert3">For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN>, 
 the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
@@ -168,9 +168,9 @@ of some <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0152">case_expression_altern
 then the <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0152">case_expression_alternative</A></SPAN> 
 is evaluated, converted to the type of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN>, 
-and the resulting value is the value of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN>.<A NAME="I3149"></A> 
+and the resulting value is the value of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0151">case_expression</A></SPAN>.<A NAME="I3151"></A> 
 Otherwise (the value is not covered by any <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
-perhaps due to being outside the base range), Constraint_Error is raised.<A NAME="I3150"></A></span> 
+perhaps due to being outside the base range), Constraint_Error is raised.<A NAME="I3152"></A></span> 
 </div>
 
 <H4 Class="centered">Examples</H4>

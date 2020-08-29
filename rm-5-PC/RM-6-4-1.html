@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 <HR>
 <H1>6.4.1 Parameter Associations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3805"></A>A parameter association defines 
+<div class="Normal"><A NAME="I3810"></A>A parameter association defines 
 the association between an actual parameter and a formal parameter.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
@@ -48,18 +48,18 @@ the association between an actual parameter and a formal parameter.&nbsp;</div>
 <div class="Normal">The <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
 of a named <SPAN Class="swiss"><A HREF="RM-6-4.html#S0220">parameter_association</A></SPAN> 
 shall resolve to denote a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0207">parameter_specification</A></SPAN> 
-of the view being called; <A NAME="I3806"></A><A NAME="I3807"></A><A NAME="I3808"></A><A NAME="I3809"></A>this 
+of the view being called; <A NAME="I3811"></A><A NAME="I3812"></A><A NAME="I3813"></A><A NAME="I3814"></A>this 
 is the formal parameter of the association. The formal parameter for 
 a positional <SPAN Class="swiss"><A HREF="RM-6-4.html#S0220">parameter_association</A></SPAN> 
 is the parameter with the corresponding position in the formal part of 
 the view being called.</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3810"></A>The <I>actual parameter</I> is 
+<div class="Normal"><A NAME="I3815"></A>The <I>actual parameter</I> is 
 either the <SPAN Class="swiss"><A HREF="RM-6-4.html#S0221">explicit_actual_parameter</A></SPAN> 
 given in a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0220">parameter_association</A></SPAN> 
 for a given formal parameter, or the corresponding <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 if no <SPAN Class="swiss"><A HREF="RM-6-4.html#S0220">parameter_association</A></SPAN> 
-is given for the formal parameter. <A NAME="I3811"></A>The expected type 
+is given for the formal parameter. <A NAME="I3816"></A>The expected type 
 for an actual parameter is the type of the corresponding formal parameter. 
 </div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -72,21 +72,27 @@ if possible.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">If the mode is <B>in out</B> or <B>out</B>, the actual 
 shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-that denotes a variable.<A NAME="I3812"></A><A NAME="I3813"></A>&nbsp;</div>
-<div class="paranum"><a name="p5.1">5.1/4</a></div>
+that denotes a variable.<A NAME="I3817"></A><A NAME="I3818"></A>&nbsp;</div>
+<div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Normal">&nbsp;If the mode is <B>out</B>, the actual parameter 
-is a view conversion, and the type of the formal parameter is an access 
-type or a scalar type that has the Default_Value aspect specified, then 
-</div>
-<div class="paranum"><a name="p5.2">5.2/4</a></div>
-<div class="Bulleted">there shall exist a type (other than a root numeric 
-type) that is an ancestor of both the target type and the operand type; 
-and</div>
-<div class="paranum"><a name="p5.3">5.3/4</a></div>
-<div class="Bulleted">in the case of a scalar type, the type of the operand 
-of the conversion shall have the Default_Value aspect specified.&nbsp;</div>
+is a view conversion, and the type of the formal parameter is <span class="delete5">an 
+access type or&nbsp;</span>a scalar type<span class="delete5">&nbsp;that has the 
+Default_Value aspect specified</span>, then&nbsp;</div>
+<div class="paranum"><a name="p5.2">5.2/5</a></div>
+<div class="Bulleted"><span class="delete5">there shall exist a type 
+(other than a root numeric type) that is an ancestor of both&nbsp;</span>the 
+target <span class="delete5">type&nbsp;</span> and <span class="delete5">the 
+</span>operand type<span class="insert5">&nbsp;both do not have the Default_Value 
+aspect specified</span>; <span class="insert5">or</span><span class="delete5">&nbsp;and</span></div>
+<div class="paranum"><a name="p5.3">5.3/5</a></div>
+<div class="Bulleted"><span class="insert5">the target and</span><span class="delete5">&nbsp;in 
+the case of a scalar type, the type of the</span> operand <span class="insert5">type 
+both</span><span class="delete5">&nbsp;of the conversion shall</span> have 
+the Default_Value aspect specified<span class="insert5">, and there shall 
+exist a type (other than a root numeric type) that is an ancestor of 
+both the target type and the operand type</span>.&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/4</a></div>
-<div class="Normal">&nbsp;<A NAME="I3814"></A>In addition to the places where 
+<div class="Normal">&nbsp;<A NAME="I3819"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</div>
@@ -102,7 +108,7 @@ nominal subtype of the actual object; or</div>
 <div class="Bulleted">the subtype <I>F</I> shall be unconstrained, discriminated 
 in its full view, and unconstrained in any partial view.&nbsp;</div>
 <div class="paranum"><a name="p6.3">6.3/4</a></div>
-<div class="Normal">&nbsp;<A NAME="I3815"></A>In addition to the places where 
+<div class="Normal">&nbsp;<A NAME="I3820"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</div>
@@ -112,7 +118,7 @@ actual object for each explicitly aliased parameter shall not be statically
 deeper than the accessibility level of the master of the call (see <A HREF="RM-3-10-2.html">3.10.2</A>).</div>
 <div class="paranum"><a name="p6.5">6.5/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;Two <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
-are <I>known to denote the same object</I> if:<A NAME="I3816"></A></div>
+are <I>known to denote the same object</I> if:<A NAME="I3821"></A></div>
 <div class="paranum"><a name="p6.6">6.6/3</a></div>
 <div class="Bulleted">both <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 statically denote the same stand-alone object or parameter; or</div>
@@ -151,7 +157,7 @@ contains no references to variables nor calls on nonstatic functions.
 </div>
 <div class="paranum"><a name="p6.12">6.12/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;Two <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
-are <I>known to refer to the same object</I> if <A NAME="I3817"></A></div>
+are <I>known to refer to the same object</I> if <A NAME="I3822"></A></div>
 <div class="paranum"><a name="p6.13">6.13/3</a></div>
 <div class="Bulleted">The two <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 are known to denote the same object; or</div>
@@ -220,7 +226,7 @@ evaluated as part of the call is considered part of the call.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3818"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3823"></A>For 
 the evaluation of a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0220">parameter_association</A></SPAN>: 
 </div>
 <div class="paranum"><a name="p8">8</a></div>
@@ -232,38 +238,66 @@ is elaborated, which creates the anonymous access type.</div>
 <div class="Bulleted">For a parameter (of any mode) that is passed by 
 reference (see <A HREF="RM-6-2.html">6.2</A>), a view conversion of the 
 actual parameter to the nominal subtype of the formal parameter is evaluated, 
-and the formal parameter denotes that conversion. <A NAME="I3819"></A></div>
+and the formal parameter denotes that conversion. <A NAME="I3824"></A></div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Bulleted"><A NAME="I3820"></A>For an <B>in</B> or <B>in out</B> 
+<div class="Bulleted"><A NAME="I3825"></A>For an <B>in</B> or <B>in out</B> 
 parameter that is passed by copy (see <A HREF="RM-6-2.html">6.2</A>), 
 the formal parameter object is created, and the value of the actual parameter 
 is converted to the nominal subtype of the formal parameter and assigned 
-to the formal. <A NAME="I3821"></A></div>
+to the formal. <A NAME="I3826"></A></div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">For an <B>out</B> 
 parameter that is passed by copy, the formal parameter object is created, 
 and:&nbsp;</div>
-<div class="paranum"><a name="p13">13/3</a></div>
-<div class="Indented2Bulleted">For an access type, the formal parameter 
-is initialized from the value of the actual, without checking that the 
-value satisfies any constraint, any predicate, or any exclusion of the 
-null value;&nbsp;</div>
-<div class="paranum"><a name="p13.1">13.1/4</a></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Indented2Bulleted" style="margin-bottom: 0.3em"><span class="insert5"></span>For 
+an access type<span class="insert5">:</span><span class="delete5">, the 
+formal parameter is initialized from the value of the actual, without 
+checking that the value satisfies any constraint, any predicate, or any 
+exclusion of the null value;</span></div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
+<div class="Indented3Bulleted"><span class="insert5">if the designated 
+type of the actual is a class-wide type <I>T</I>'Class and the designated 
+type of the formal is neither an ancestor of <I>T</I>, nor a class-wide 
+type that covers <I>T</I>, then the formal parameter is initialized to 
+the null value of the formal type;</span></div>
+<div class="paranum"><a name="p13.2">13.2/5</a></div>
+<div class="Indented3Bulleted"><span class="insert5">if the actual is 
+a stand-alone object of an anonymous access type, and the accessibility 
+level of the formal type is not library level, then the formal parameter 
+is initialized to the null value of the formal type;</span></div>
+<div class="paranum"><a name="p13.3">13.3/5</a></div>
+<div class="Indented3Bulleted"><span class="insert5">if the call is within 
+the body of an instance of a generic unit, the actual or the formal type 
+is descended from a generic formal access type of the generic unit, and 
+the actual and formal types neither share an ancestor nor is the formal 
+type accessibility at library level, then the formal parameter is initialized 
+to the null value of the formal type;</span></div>
+<div class="paranum"><a name="p13.4">13.4/5</a></div>
+<div class="Indented3Bulleted"><span class="insert5">otherwise, the formal 
+parameter is initialized to the value of the actual parameter, without 
+checking that the value satisfies any constraint.</span></div>
+<div class="paranum"><a name="p13.5">13.5/5</a></div>
+<div class="Indented2Bulleted-NoPrefix"><span class="insert5">In all 
+of the above cases, no check is performed for any predicate or exclusion 
+of the null value that might apply to the formal type.</span></div>
+<div class="paranum"><a name="p13.6">13.6/5</a></div>
 <div class="Indented2Bulleted">For a scalar type that has the Default_Value 
 aspect specified, the formal parameter is initialized from the value 
 of the actual, without checking that the value satisfies any constraint 
-or any predicate. Furthermore, if the actual parameter is a view conversion 
-and either</div>
-<div class="paranum"><a name="p13.2">13.2/4</a></div>
-<div class="Indented3Bulleted">there exists no type (other than a root 
-numeric type) that is an ancestor of both the target type and the type 
-of the operand of the conversion; or</div>
-<div class="paranum"><a name="p13.3">13.3/4</a></div>
-<div class="Indented3Bulleted">the Default_Value aspect is unspecified 
-for the type of the operand of the conversion&nbsp;</div>
-<div class="paranum"><a name="p13.4">13.4/4</a></div>
-<div class="Indented2Bulleted-NoPrefix">then Program_Error<A NAME="I3822"></A><A NAME="I3823"></A> 
-is raised;<A NAME="I3824"></A></div>
+or any predicate<span class="insert5">;</span><span class="delete5">. 
+Furthermore, if the actual parameter is a view conversion and either</span></div>
+<div class="paranum"><a name="p13.7">13.7/5</a></div>
+<div class="Indented3Bulleted"><span class="delete5">there exists no 
+type (other than a root numeric type) that is an ancestor of both the 
+target type and the type of the operand of the conversion; or</span></div>
+<div class="paranum"><a name="p13.8">13.8/5</a></div>
+<div class="Indented3Bulleted"><span class="delete5">the Default_Value 
+aspect is unspecified for the type of the operand of the conversion</span> 
+</div>
+<div class="paranum"><a name="p13.9">13.9/5</a></div>
+<div class="Indented2Bulleted-NoPrefix"><span class="delete5">then Program_Error<A NAME="I3827"></A><A NAME="I3828"></A> 
+is raised;<A NAME="I3829"></A></span></div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Indented2Bulleted">For a composite type with discriminants 
 or that has implicit initial values for any subcomponents (see <A HREF="RM-3-3-1.html">3.3.1</A>), 
@@ -276,31 +310,46 @@ to the nominal subtype of the formal is evaluated (which might raise
 Constraint_Error), and the actual subtype of the formal is that of the 
 view conversion. If elementary, the actual subtype of the formal is given 
 by its nominal subtype.&nbsp;</div>
-<div class="paranum"><a name="p15.1">15.1/3</a></div>
+<div class="paranum"><a name="p15.1">15.1/5</a></div>
+<div class="Indented2Bulleted"><span class="insert5">Furthermore, if 
+the type is a scalar type, and the actual parameter is a view conversion, 
+then Program_Error is raised if either the target or the operand type 
+has the Default_Value aspect specified, unless they both have the Default_Value 
+aspect specified, and there is a type (other than a root numeric type) 
+that is an ancestor of both the target type and the operand type.</span></div>
+<div class="paranum"><a name="p15.2">15.2/5</a></div>
 <div class="Bulleted">In a function call, for each explicitly aliased 
 parameter, a check is made that the accessibility level of the master 
 of the actual object is not deeper than that of the  master of the call 
 (see <A HREF="RM-3-10-2.html">3.10.2</A>).&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I3825"></A><A NAME="I3826"></A>A formal 
+<div class="Normal"><A NAME="I3830"></A><A NAME="I3831"></A>A formal 
 parameter of mode <B>in out</B> or <B>out</B> with discriminants is constrained 
 if either its nominal subtype or the actual parameter is constrained.</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I3827"></A><A NAME="I3828"></A><A NAME="I3829"></A><A NAME="I3830"></A><A NAME="I3831"></A>After 
+<div class="Normal"><A NAME="I3832"></A><A NAME="I3833"></A><A NAME="I3834"></A><A NAME="I3835"></A><A NAME="I3836"></A>After 
 normal completion and leaving of a subprogram, for each <B>in out</B> 
 or <B>out</B> parameter that is passed by copy, the value of the formal 
 parameter is converted to the subtype of the variable given as the actual 
-parameter and assigned to it. <A NAME="I3832"></A>These conversions and 
-assignments occur in an arbitrary order.<A NAME="I3833"></A>&nbsp;</div>
+parameter and assigned to it. <A NAME="I3837"></A>These conversions and 
+assignments occur in an arbitrary order.<A NAME="I3838"></A>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal"><A NAME="I3834"></A>If the nominal subtype of a formal 
+<div class="Normal"><A NAME="I3839"></A>If the nominal subtype of a formal 
 parameter with discriminants is constrained or indefinite, and the parameter 
 is passed by reference, then the execution of the call is erroneous if 
 the value of any discriminant of the actual is changed while the formal 
 parameter exists (that is, before leaving the corresponding callable 
 construct).&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Normal"><span class="insert5">For an <B>out</B> parameter 
+of an access type, if the representation of the actual type and the formal 
+type differ, and there are values of the actual type that cannot be represented 
+as values of the formal type, the implementation may initialize the formal 
+parameter with the null value of the formal type.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

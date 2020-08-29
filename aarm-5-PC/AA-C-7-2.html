@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,24 +44,25 @@
 generic library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
 <B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<B>use</B>&nbsp;Ada.Task_Identification;<BR>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Attribute&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;Initial_Value&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
 <B>package</B>&nbsp;Ada.Task_Attributes<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I9403"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><A NAME="I9425"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9404"></A>Attribute_Handle&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Attribute;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9426"></A>Attribute_Handle&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Attribute;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9405"></A>Value(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9427"></A>Value(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9406"></A>Reference(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9428"></A>Reference(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute_Handle;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9407"></A>Set_Value(Val&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9429"></A>Set_Value(Val&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9408"></A>Reinitialize(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);</div>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9430"></A>Reinitialize(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Task_Attributes;</div>
 
@@ -119,7 +120,7 @@ been activated.&nbsp;</div>
 <div class="paranum"><a name="p13.2">13.2/1</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00165.TXT">AI95-00165-01</A></I>} 
-<A NAME="I9409"></A>If the package Ada.Task_Attributes is instantiated 
+<A NAME="I9431"></A>If the package Ada.Task_Attributes is instantiated 
 with a controlled type and the controlled type has user-defined Adjust 
 or Finalize operations that in turn access task attributes by any of 
 the above operations, then a call of Set_Value of the instantiated package 
@@ -129,7 +130,7 @@ all tasks of the partition.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I9410"></A>It is erroneous to dereference 
+<div class="Normal"><A NAME="I9432"></A>It is erroneous to dereference 
 the access value returned by a given call on Reference after a subsequent 
 call on Reinitialize for the same task attribute, or after the associated 
 task terminates.&nbsp;</div>
@@ -138,7 +139,7 @@ task terminates.&nbsp;</div>
 reclaimed for the object associated with an attribute upon Reinitialize 
 or task termination.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I9411"></A>If a value of Task_Id is passed 
+<div class="Normal"><A NAME="I9433"></A>If a value of Task_Id is passed 
 as a parameter to any of the operations declared in this package and 
 the corresponding task object no longer exists, the execution of the 
 program is erroneous.</div>
@@ -146,7 +147,7 @@ program is erroneous.</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00165.TXT">AI95-00165-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
-<A NAME="I9412"></A>An access to a task attribute via a value of type 
+<A NAME="I9434"></A>An access to a task attribute via a value of type 
 Attribute_Handle is erroneous if executed concurrently with another such 
 access or a call of any of the operations declared in package Task_Attributes. 
 An access to a task attribute is erroneous if executed concurrently with 
@@ -320,9 +321,6 @@ task body whose attribute is being accessed. However, when the result
 is being used by another task, the programmer must make sure that the 
 task whose attribute is being accessed is not yet terminated. Failing 
 to do so could make the program execution erroneous.</div>
-<div class="paranum"><a name="p33">33/2</a></div>
-<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
-</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
 <div class="paranum"><a name="p33.a">33.a/2</a></div>

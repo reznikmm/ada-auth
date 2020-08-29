@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -67,7 +67,7 @@ Relative_Deadline is as follows:</span></span><span class="delete3"></span>
 </div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
-<A NAME="I9056"></A><A NAME="I9057"></A>Relative_Deadline (<I>relative_deadline_</I><A NAME="I9058"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</span></span><span class="delete3"></span></div>
+<A NAME="I9077"></A><A NAME="I9078"></A>Relative_Deadline (<I>relative_deadline_</I><A NAME="I9079"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>);</span></span><span class="delete3"></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
@@ -86,7 +86,7 @@ At most one such pragma shall appear within a given construct.</span></span><spa
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal"><span class="insert2">The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">&nbsp;is a task dispatching policy.</span><span class="insert3"></span><span class="insert5"><A NAME="I9059"></A><A NAME="I9060"></A></span><span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I9061"></A><A NAME="I9062"></A></span></span><span class="insert3"></span><span class="insert2"></span></div>
+</span><span class="insert5">EDF_Within_Priorities</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;EDF_Across_Priorities</span></span><span class="insert2">&nbsp;is a task dispatching policy.</span><span class="insert3"></span><span class="insert5"><A NAME="I9080"></A><A NAME="I9081"></A></span><span class="insert3"></span><span class="insert3"><span class="delete5"><A NAME="I9082"></A><A NAME="I9083"></A></span></span><span class="insert3"></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">The 
 following language-defined library package exists:</span>&nbsp;</div>
@@ -94,38 +94,38 @@ following language-defined library package exists:</span>&nbsp;</div>
 <div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>package</B>&nbsp;Ada.Dispatching.EDF</span><span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert2">&nbsp;<B>is</B><A NAME="I9063"></A><BR>
-&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9064"></A>Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time;</span><span class="insert5"><BR>
-&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9065"></A>Relative_Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time_Span;</span><span class="insert2"><BR>
-&nbsp;&nbsp;<A NAME="I9066"></A>Default_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Deadline&nbsp;:=<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span><span class="insert2">&nbsp;<B>is</B><A NAME="I9084"></A><BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9085"></A>Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time;</span><span class="insert5"><BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I9086"></A>Relative_Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time_Span;</span><span class="insert2"><BR>
+&nbsp;&nbsp;<A NAME="I9087"></A>Default_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Deadline&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Last;</span><span class="insert5"><BR>
-&nbsp;&nbsp;<A NAME="I9067"></A>Default_Relative_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Relative_Deadline&nbsp;:=<BR>
+&nbsp;&nbsp;<A NAME="I9088"></A>Default_Relative_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Relative_Deadline&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Span_Last;</span><span class="insert2"><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9068"></A>Set_Deadline</span><span class="insert5"><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9089"></A>Set_Deadline</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert2">&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Deadline;<BR>
 </span><span class="insert2"><span class="delete5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 </span><span class="insert2"><span class="delete5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</span><span class="insert5"><BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9069"></A>Get_Deadline<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9090"></A>Get_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9070"></A>Set_Relative_Deadline<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9091"></A>Set_Relative_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Relative_Deadline;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9071"></A>Get_Relative_Deadline<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9092"></A>Get_Relative_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Relative_Deadline;</span><span class="insert2"><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9072"></A>Delay_Until_And_Set_Deadline</span><span class="insert5"><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9093"></A>Delay_Until_And_Set_Deadline</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">Delay_Until_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert2"><span class="delete5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span class="insert2">Deadline_Offset&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span)</span><span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9073"></A>Get_Last_Release_Time<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9094"></A>Get_Last_Release_Time<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Real_Time.Time;</span><span class="insert2"></span><span class="insert2"><span class="delete5">;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9074"></A>Get_Deadline&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9095"></A>Get_Deadline&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;</span></span><span class="insert2"><BR>
 <B>end</B>&nbsp;Ada.Dispatching.EDF;</span></div>
 <div class="paranum"><a name="p9.1">9.1/5</a></div>
@@ -137,14 +137,14 @@ the following language-defined representation aspect may be specified:</span></d
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Relative_Deadline</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">The aspect Relative_Deadline is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type Real_Time.Time_Span.<A NAME="I9075"></A><A NAME="I9076"></A></span></div>
+which shall be of type Real_Time.Time_Span.<A NAME="I9096"></A><A NAME="I9097"></A></span></div>
 <div class="paranum"><a name="p9.3">9.3/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">The 
 form of <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Generate_Deadlines is as follows:</span></div>
 <div class="paranum"><a name="p9.4">9.4/5</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert5"><B>pragma</B> 
-<A NAME="I9077"></A><A NAME="I9078"></A>Generate_Deadlines;</span></div>
+<A NAME="I9098"></A><A NAME="I9099"></A>Generate_Deadlines;</span></div>
 <div class="paranum"><a name="p9.5">9.5/5</a></div>
 <div class="Normal">&nbsp;<span class="insert5">The Generate_Deadlines <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 is a configuration pragma.</span></div>
@@ -200,8 +200,8 @@ a Relative_Deadline aspect for a protected type or <SPAN Class="swiss"><A HREF="
 is discussed in <A HREF="RM-D-3.html">D.3</A>.</span></div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Normal"><span class="insert2"></span><span class="insert5">A 
-task has both an <I>active</I><A NAME="I9079"></A><A NAME="I9080"></A><A NAME="I9081"></A> 
-and a <I>base</I><A NAME="I9082"></A><A NAME="I9083"></A><A NAME="I9084"></A> 
+task has both an <I>active</I><A NAME="I9100"></A><A NAME="I9101"></A><A NAME="I9102"></A> 
+and a <I>base</I><A NAME="I9103"></A><A NAME="I9104"></A><A NAME="I9105"></A> 
 absolute deadline. These are the same except when the task is inheriting 
 a relative deadline during activation or a rendezvous (see below) or 
 within a protected action (see <A HREF="RM-D-3.html">D.3</A>).&nbsp;</span><span class="insert2">The 
@@ -314,16 +314,16 @@ had at the time the activation was initiated.</span></div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p30">30/5</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span class="delete5"><A NAME="I9085"></A> If 
+deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span class="delete5"><A NAME="I9106"></A> If 
 EDF_Across_Priorities is specified for priority range <I>Low</I>..<I>High</I>, 
 it is a bounded error to declare a protected object with ceiling priority 
 <I>Low</I> or to assign the value <I>Low</I> to attribute 'Priority. 
 In either case either Program_Error is raised or the ceiling of the protected 
-object is assigned the value <I>Low</I>+1.<A NAME="I9086"></A></span></span><span class="insert2"></span></div>
+object is assigned the value <I>Low</I>+1.<A NAME="I9107"></A></span></span><span class="insert2"></span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I9087"></A>If a value 
+<div class="Normal"><span class="insert2"><A NAME="I9108"></A>If a value 
 of Task_Id is passed as a parameter to any of the subprograms of this 
 package and the corresponding task object no longer exists, the execution 
 of the program is erroneous.</span></div>

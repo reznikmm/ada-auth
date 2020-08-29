@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,7 +45,7 @@ defines the components for the value or values of the discriminant covered
 by its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I2221"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">Discrete_choice_list</A></SPAN>s 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I2222"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">Discrete_choice_list</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
 are said to <I>cover</I> values as defined below; which <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
 covers a value determines which of various alternatives is chosen. These 
@@ -65,32 +65,32 @@ those for case statements.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">variant_part</SPAN><A NAME="I2222"></A><A NAME="S0071"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>discriminant_</I><A NAME="I2223"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2224"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I2225"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">variant_part</SPAN><A NAME="I2223"></A><A NAME="S0071"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>discriminant_</I><A NAME="I2224"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2225"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I2226"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">variant</SPAN><A NAME="I2226"></A><A NAME="S0072"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I2227"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2228"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">variant</SPAN><A NAME="I2227"></A><A NAME="S0072"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I2228"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2229"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
-<SPAN Class="swiss">discrete_choice_list</SPAN><A NAME="I2229"></A><A NAME="S0073"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2230"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>&nbsp;{<span class="insert5">'|'</span><span class="delete5">&nbsp;|</span>&nbsp;<A NAME="I2231"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>}</div>
+<SPAN Class="swiss">discrete_choice_list</SPAN><A NAME="I2230"></A><A NAME="S0073"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2231"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>&nbsp;{<span class="insert5">'|'</span><span class="delete5">&nbsp;|</span>&nbsp;<A NAME="I2232"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>}</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
-<SPAN Class="swiss">discrete_choice</SPAN><A NAME="I2232"></A><A NAME="S0074"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2233"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0133">choice_expression</A></SPAN>&nbsp;|&nbsp;<I>discrete_</I><A NAME="I2234"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I2235"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>&nbsp;|&nbsp;<B>others</B></div>
+<SPAN Class="swiss">discrete_choice</SPAN><A NAME="I2233"></A><A NAME="S0074"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2234"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0133">choice_expression</A></SPAN>&nbsp;|&nbsp;<I>discrete_</I><A NAME="I2235"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I2236"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>&nbsp;|&nbsp;<B>others</B></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I2236"></A>The <I>discriminant_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+<div class="Normal"><A NAME="I2237"></A>The <I>discriminant_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 shall resolve to denote a discriminant (called the <I>discriminant of 
 the&nbsp;</I><SPAN Class="swiss"><I><A HREF="AA-3-8-1.html#S0071">variant_part</A></I></SPAN><I></I>) 
 specified in the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 that contains the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>. 
-<A NAME="I2237"></A>The expected type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+<A NAME="I2238"></A>The expected type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
 is the type of the discriminant of the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>. 
 </div>
@@ -120,7 +120,7 @@ shall be static. The <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_
 and such a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
 if it appears, shall be the last one in the enclosing construct.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2238"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2239"></A>A 
 <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 is defined to <I>cover a value</I> in the following cases:&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
@@ -165,7 +165,7 @@ range of the case expression's type, since values of numeric types (and
 undefined values of any scalar type?) can be outside their base range. 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I2239"></A>A <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+<div class="Normal"><A NAME="I2240"></A>A <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
 covers a value if one of its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
 covers the value.</div>
 <div class="paranum"><a name="p14">14</a></div>
@@ -226,7 +226,7 @@ shall not cover the same value.</div>
 of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
 is specified by <B>null</B>, the variant has no components.</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal"><A NAME="I2240"></A><A NAME="I2241"></A>The discriminant 
+<div class="Normal"><A NAME="I2241"></A><A NAME="I2242"></A>The discriminant 
 of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
 is said to <I>govern</I> the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
 and its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>s. 
@@ -257,7 +257,7 @@ appears in the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A
 of another <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
 <I>V</I>, this test is only applied if the value of the discriminant 
 governing <I>V</I> is covered by the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
-of <I>V</I>.<A NAME="I2242"></A>&nbsp;</div>
+of <I>V</I>.<A NAME="I2243"></A>&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>This is not a &ldquo;check&rdquo;; 
 it cannot be suppressed. However, in most cases it is not necessary to 
@@ -280,7 +280,7 @@ the test is required in that case.)</div>
 constraint, this test is not made during the elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Normal"><A NAME="I2243"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+<div class="Normal"><A NAME="I2244"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
 of each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
 in the order in which they appear.&nbsp;</div>
@@ -319,7 +319,7 @@ Archive&nbsp;&nbsp;:&nbsp;Disk_Unit;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p29.a">29.a</a></div>
-<div class="Annotations"><A NAME="I2244"></A>In Ada 83, the discriminant 
+<div class="Annotations"><A NAME="I2245"></A>In Ada 83, the discriminant 
 of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
 is not allowed to be of a generic formal type. This restriction is removed 
 in Ada 95; an <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
@@ -349,7 +349,7 @@ in RM83.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p29.e">29.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
-<A NAME="I2245"></A>Membership tests are no longer allowed as a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>, 
+<A NAME="I2246"></A>Membership tests are no longer allowed as a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>, 
 in order that those tests can be expanded to allow multiple tests in 
 a single expression without ambiguity. Since a membership test has a 
 boolean type, they are very unlikely to be used as a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>. 
@@ -358,7 +358,7 @@ boolean type, they are very unlikely to be used as a <SPAN Class="swiss"><A HREF
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p29.f">29.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
-<A NAME="I2246"></A>Subtypes with static predicates can be used in <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s, 
+<A NAME="I2247"></A>Subtypes with static predicates can be used in <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s, 
 and the coverage rules are modified to respect the predicates.</div>
 <div class="paranum"><a name="p29.g">29.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 

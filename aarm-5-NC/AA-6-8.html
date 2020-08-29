@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,15 +46,15 @@ return statement.&nbsp;</div>
 <div class="paranum"><a name="p2">2/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00177.TXT">AI95-0177-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
-<SPAN Class="swiss">expression_function_declaration</SPAN><A NAME="I4192"></A><A NAME="S0228"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<A NAME="I4193"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4194"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I4195"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4196"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
-&nbsp;|&nbsp;[<A NAME="I4197"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4198"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4199"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4200"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">expression_function_declaration</SPAN><A NAME="I4195"></A><A NAME="S0228"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I4196"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4197"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I4198"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4199"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];<BR>
+&nbsp;|&nbsp;[<A NAME="I4200"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4201"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0198">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4202"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4203"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/4</a></div>
@@ -63,7 +63,7 @@ return statement.&nbsp;</div>
 The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
-is the result type (see <A HREF="AA-6-5.html">6.5</A>) of the function.<A NAME="I4201"></A> 
+is the result type (see <A HREF="AA-6-5.html">6.5</A>) of the function.<A NAME="I4204"></A> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -73,8 +73,8 @@ is the result type (see <A HREF="AA-6-5.html">6.5</A>) of the function.<A NAME="
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
 An <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
-declares an <I>expression function</I>.<A NAME="I4202"></A><A NAME="I4203"></A> 
-The <I>return expression</I><A NAME="I4204"></A> of an expression function 
+declares an <I>expression function</I>.<A NAME="I4205"></A><A NAME="I4206"></A> 
+The <I>return expression</I><A NAME="I4207"></A> of an expression function 
 is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN>. 
@@ -84,7 +84,7 @@ can complete a previous declaration.</div>
 <div class="paranum"><a name="p3.2">3.2/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
 A <I>potentially static expression</I> is defined in the same way as 
-a static expression except that<A NAME="I4205"></A></div>
+a static expression except that<A NAME="I4208"></A></div>
 <div class="paranum"><a name="p3.3">3.3/5</a></div>
 <div class="Bulleted">a name denoting a formal parameter of an expression 
 function is a potentially static expression; and</div>
@@ -107,7 +107,7 @@ for an expression function:</div>
 The type of aspect Static is Boolean. When aspect Static is True for 
 an expression function, the function is a <I>static expression function</I>. 
 If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
-shall be a static<A NAME="I4206"></A><A NAME="I4207"></A> expression.<A NAME="I4208"></A><A NAME="I4209"></A></div>
+shall be a static<A NAME="I4209"></A><A NAME="I4210"></A> expression.<A NAME="I4211"></A><A NAME="I4212"></A></div>
 <div class="paranum"><a name="p3.b">3.b/5</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Static:&nbsp;</B>Specifies 
 that an associated expression function can be used in static expressions.</div>
@@ -129,7 +129,7 @@ If an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declar
 is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0195">subprogram_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>. 
 The profile of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
-that completes a declaration shall conform fully to that of the declaration.<A NAME="I4210"></A></div>
+that completes a declaration shall conform fully to that of the declaration.<A NAME="I4213"></A></div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
@@ -202,7 +202,7 @@ means that all of the dynamic wording in <A HREF="AA-6-5.html">6.5</A>
 applies as needed, and we don't have to repeat it here.&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<A NAME="I4211"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
+<A NAME="I4214"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0228">expression_function_declaration</A></SPAN> 
 has no other effect than to establish that the expression function can 
 be called without failing the Elaboration_Check.&nbsp;</div>
 
@@ -215,12 +215,12 @@ be called without failing the Elaboration_Check.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-<A NAME="I4212"></A>Expression functions are new in Ada 2012.&nbsp;</div>
+<A NAME="I4215"></A>Expression functions are new in Ada 2012.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p9.b">9.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
-<A NAME="I4213"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+<A NAME="I4216"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 can directly be the return expression of an expression function. This 
 eliminates the double parentheses that otherwise would be necessary.</div>
 <div class="paranum"><a name="p9.c">9.c/5</a></div>

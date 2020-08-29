@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,14 +46,14 @@ B</A>).]&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-[<A NAME="I4329"></A> A <I>deferred constant declaration</I> is an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+[<A NAME="I4332"></A> A <I>deferred constant declaration</I> is an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 with the reserved word <B>constant</B> but no initialization expression.] 
-<A NAME="I4330"></A>The constant declared by a deferred constant declaration 
-is called a <I>deferred constant</I>. <A NAME="I4331"></A>[Unless the 
+<A NAME="I4333"></A>The constant declared by a deferred constant declaration 
+is called a <I>deferred constant</I>. <A NAME="I4334"></A>[Unless the 
 Import aspect (see <A HREF="AA-B-1.html">B.1</A>) is True for a deferred 
 constant declaration, the ] deferred constant declaration requires a 
 completion, which shall be a full constant declaration (called the <I>full 
-declaration</I> of the deferred constant). <A NAME="I4332"></A></div>
+declaration</I> of the deferred constant). <A NAME="I4335"></A></div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>The first sentence is redundant, 
 as it is stated officially in <A HREF="AA-3-3-1.html">3.3.1</A>.</div>
@@ -125,7 +125,7 @@ the constant is frozen (see <A HREF="AA-13-14.html">13.14</A>).</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<A NAME="I4333"></A>The elaboration of a deferred constant declaration 
+<A NAME="I4336"></A>The elaboration of a deferred constant declaration 
 elaborates the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
 or (only allowed in the case of an imported constant) the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN>. 
@@ -176,7 +176,7 @@ CPU_Identifier&nbsp;:&nbsp;<B>constant</B>&nbsp;String(1..8)<BR>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><A NAME="I4334"></A>In Ada 83, a deferred constant 
+<div class="Annotations"><A NAME="I4337"></A>In Ada 83, a deferred constant 
 is required to be of a private type declared in the same visible part. 
 This restriction is removed for Ada 95; deferred constants can be of 
 any type.</div>
@@ -230,7 +230,7 @@ their own syntax, but now they are simply a special case of <SPAN Class="swiss">
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p14.j">14.j/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
-<A NAME="I4335"></A>Deferred constants were enhanced to allow the use 
+<A NAME="I4338"></A>Deferred constants were enhanced to allow the use 
 of anonymous access types in them.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>

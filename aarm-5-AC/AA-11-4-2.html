@@ -32,7 +32,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +46,7 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
 <span class="insert2">Pragma Assert is used to assert the truth of a 
-</span><span class="insert3">boolean</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Boolean</span></span><span class="insert2">&nbsp;expression at&nbsp;</span><span class="insert3">a</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;any</span></span><span class="insert2">&nbsp;point within a sequence of declarations or statements.</span><span class="insert2"><span class="delete3">&nbsp;Pragma Assertion_Policy is used to control whether such assertions<A NAME="I5711"></A> 
+</span><span class="insert3">boolean</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Boolean</span></span><span class="insert2">&nbsp;expression at&nbsp;</span><span class="insert3">a</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;any</span></span><span class="insert2">&nbsp;point within a sequence of declarations or statements.</span><span class="insert2"><span class="delete3">&nbsp;Pragma Assertion_Policy is used to control whether such assertions<A NAME="I5707"></A> 
 are to be ignored by the implementation, checked at run time, or handled 
 in some implementation-defined manner.</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p1.1">1.1/5</a></div>
@@ -56,7 +56,7 @@ in some implementation-defined manner.</span></span><span class="insert2"></span
 preconditions and postconditions (see <A HREF="AA-6-1-1.html">6.1.1</A>), 
 </span><span class="insert3"><span class="delete5">&nbsp;and</span></span><span class="insert3">&nbsp;type invariants (see <A HREF="AA-7-3-2.html">7.3.2</A>)</span><span class="insert5">, 
 and default initial conditions (see <A HREF="AA-7-3-3.html">7.3.3</A>)</span><span class="insert3">&nbsp;are collectively referred to as <I>assertions</I>; their boolean expressions 
-are referred to as <I>assertion expressions</I>.<A NAME="I5712"></A><A NAME="I5713"></A></span></div>
+are referred to as <I>assertion expressions</I>.<A NAME="I5708"></A><A NAME="I5709"></A></span></div>
 <div class="paranum"><a name="p1.a.1">1.a.1/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Glossary entry:&nbsp;</B>A 
 predicate is an assertion that is expected to be True for all objects 
@@ -95,8 +95,8 @@ or handled in some implementation-defined manner.</span>&nbsp;</div>
 Assert is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> 
-<A NAME="I5714"></A><A NAME="I5715"></A>Assert([Check =&gt;] <I>boolean_</I><A NAME="I5716"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>[, 
-[Message =&gt;] <I>string_</I><A NAME="I5717"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>]);</span></div>
+<A NAME="I5710"></A><A NAME="I5711"></A>Assert([Check =&gt;] <I>boolean_</I><A NAME="I5712"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>[, 
+[Message =&gt;] <I>string_</I><A NAME="I5713"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>]);</span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1"><span class="insert2">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert is allowed at the place where a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN> 
@@ -108,17 +108,17 @@ is allowed.</span></div>
 Assertion_Policy is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> 
-<A NAME="I5718"></A><A NAME="I5719"></A>Assertion_Policy(<I>policy_</I><A NAME="I5720"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</span></div>
+<A NAME="I5714"></A><A NAME="I5715"></A>Assertion_Policy(<I>policy_</I><A NAME="I5716"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</span></div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I5721"></A><A NAME="I5722"></A>Assertion_Policy(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I5723"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0347">aspect_mark</A></SPAN> 
-=&gt; <I>policy_</I><A NAME="I5724"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I5725"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0347">aspect_mark</A></SPAN> 
-=&gt; <I>policy_</I><A NAME="I5726"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>});</span></div>
+&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I5717"></A><A NAME="I5718"></A>Assertion_Policy(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I5719"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0347">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I5720"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I5721"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0347">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I5722"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>});</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-<span class="insert2"><A NAME="I5727"></A><A NAME="I5728"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<span class="insert2"><A NAME="I5723"></A><A NAME="I5724"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy is</span><span class="insert3">&nbsp;allowed only immediately 
 within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>, 
@@ -229,13 +229,13 @@ such Assertion_Policy pragma exists, the policy is implementation defined.</span
 <span class="insert2">The following language-defined library package 
 exists:</span></div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Examples"><span class="insert2"><A NAME="I5729"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
+<div class="Examples"><span class="insert2"><A NAME="I5725"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Assertions);</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I5730"></A>Assertion_Error&nbsp;:&nbsp;<B>exception</B>;</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I5726"></A>Assertion_Error&nbsp;:&nbsp;<B>exception</B>;</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5731"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5732"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5727"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5728"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Examples"><span class="insert2"><B>end</B>&nbsp;Ada.Assertions;</span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
@@ -258,7 +258,7 @@ instances.</span></span><span class="insert2"></span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 <span class="insert2"></span><span class="insert2"><span class="delete3">An 
-assertion policy <A NAME="I5733"></A>specifies how a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+assertion policy <A NAME="I5729"></A>specifies how a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert is interpreted by the implementation. If the assertion policy 
 is Ignore at the point of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert, the pragma is ignored.</span></span><span class="insert2">&nbsp;If 
@@ -269,7 +269,7 @@ Check</span></span><span class="insert2">&nbsp;at the&nbsp;</span><span class="i
 Assert, the elaboration of the pragma consists of evaluating the boolean 
 expression, and if the result is False, evaluating the Message argument, 
 if any, and raising the exception Assertions.Assertion_Error, with a 
-message if the Message argument is provided.<A NAME="I5734"></A><A NAME="I5735"></A></span></div>
+message if the Message argument is provided.<A NAME="I5730"></A><A NAME="I5731"></A></span></div>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 <span class="insert2">Calling the procedure Assertions.Assert without 
@@ -300,7 +300,7 @@ of an assertion expression associated with a call on, or return from,
 a protected operation. If the bounded error is detected, Program_Error 
 is raised. If not detected, execution proceeds normally, but if it is 
 invoked within a protected action, it might result in deadlock or a (nested) 
-protected action.<A NAME="I5736"></A></span>&nbsp;</div>
+protected action.<A NAME="I5732"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p23.2">23.2/5</a></div>
@@ -434,13 +434,13 @@ policy in effect will not affect normal operation of the program.</span>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p28.a">28.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
-<span class="insert2"><A NAME="I5737"></A>Pragmas Assert and Assertion_Policy, 
+<span class="insert2"><A NAME="I5733"></A>Pragmas Assert and Assertion_Policy, 
 and package Assertions are new.</span>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p28.b">28.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
-<span class="insert3"><A NAME="I5738"></A>There now is an Implementation 
+<span class="insert3"><A NAME="I5734"></A>There now is an Implementation 
 Permission to reject an assertion expression that calls a function that 
 has a side effect such that an immediate reevalution of the expression 
 could produce a different value. This means that a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -455,7 +455,7 @@ behavior.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p28.c">28.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-<span class="insert3"><A NAME="I5739"></A>Assertion_Policy pragmas are 
+<span class="insert3"><A NAME="I5735"></A>Assertion_Policy pragmas are 
 now allowed in more places and can specify behavior for individual kinds 
 of assertions.</span>&nbsp;</div>
 

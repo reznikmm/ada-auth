@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -22,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,33 +45,36 @@ form for Unbounded_Strings.&nbsp;</div>
 The library package Text_IO.Unbounded_IO has the following declaration:</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Strings.Unbounded;<BR>
-<B>package</B>&nbsp;Ada.Text_IO.Unbounded_IO&nbsp;<B>is</B><A NAME="I7791"></A></div>
+<BR>
+<B>package</B>&nbsp;Ada.Text_IO.Unbounded_IO<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B></span>&nbsp;<B>is</B><A NAME="I7787"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7792"></A>Put<BR>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7788"></A>Put<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Strings.Unbounded.Unbounded_String);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7793"></A>Put<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7789"></A>Put<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Strings.Unbounded.Unbounded_String);</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7794"></A>Put_Line<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7790"></A>Put_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Strings.Unbounded.Unbounded_String);</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7795"></A>Put_Line<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7791"></A>Put_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Strings.Unbounded.Unbounded_String);</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7796"></A>Get_Line<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7792"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Strings.Unbounded.Unbounded_String;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7797"></A>Get_Line<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7793"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Strings.Unbounded.Unbounded_String;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7798"></A>Get_Line<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7794"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Strings.Unbounded.Unbounded_String);</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7799"></A>Get_Line<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7795"></A>Get_Line<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Strings.Unbounded.Unbounded_String);</div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Text_IO.Unbounded_IO;</div>
@@ -131,7 +136,7 @@ Equivalent to Item := Get_Line;&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p29.a">29.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00301.TXT">AI95-00301-01</A></I>} 
-<A NAME="I7800"></A>Package Text_IO.Unbounded_IO is new.&nbsp;</div>
+<A NAME="I7796"></A>Package Text_IO.Unbounded_IO is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

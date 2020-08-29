@@ -36,7 +36,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,12 +47,12 @@
 <HR>
 <H1>3.10 Access Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2498"></A><A NAME="I2499"></A><A NAME="I2500"></A>A 
+<div class="Normal"><A NAME="I2499"></A><A NAME="I2500"></A><A NAME="I2501"></A>A 
 value of an access type (an <I>access value</I>) provides indirect access 
 to the object or subprogram it <I>designates</I>. Depending on its type, 
 an access value can designate either subprograms, objects created by 
 allocators (see <A HREF="AA-4-8.html">4.8</A>), or more generally <I>aliased</I> 
-objects of an appropriate type. <A NAME="I2501"></A><A NAME="I2502"></A></div>
+objects of an appropriate type. <A NAME="I2502"></A><A NAME="I2503"></A></div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 <I>denotes</I> an entity; an access value <I>designates</I> an entity. 
@@ -71,47 +71,47 @@ should be prevented by compile-time rules.&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<SPAN Class="swiss">access_type_definition</SPAN><A NAME="I2503"></A><A NAME="S0079"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2">[<A NAME="I2504"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2505"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0080">access_to_object_definition</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<span class="insert2">[<A NAME="I2506"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2507"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0082">access_to_subprogram_definition</A></SPAN></div>
+<SPAN Class="swiss">access_type_definition</SPAN><A NAME="I2504"></A><A NAME="S0079"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2">[<A NAME="I2505"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2506"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0080">access_to_object_definition</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<span class="insert2">[<A NAME="I2507"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I2508"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0082">access_to_subprogram_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">access_to_object_definition</SPAN><A NAME="I2508"></A><A NAME="S0080"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<A NAME="I2509"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0081">general_access_modifier</A></SPAN>]&nbsp;<A NAME="I2510"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">access_to_object_definition</SPAN><A NAME="I2509"></A><A NAME="S0080"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<A NAME="I2510"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0081">general_access_modifier</A></SPAN>]&nbsp;<A NAME="I2511"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">general_access_modifier</SPAN><A NAME="I2511"></A><A NAME="S0081"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>constant</B></div>
+<div class="Indented1"><SPAN Class="swiss">general_access_modifier</SPAN><A NAME="I2512"></A><A NAME="S0081"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>all</B>&nbsp;|&nbsp;<B>constant</B></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">access_to_subprogram_definition</SPAN><A NAME="I2512"></A><A NAME="S0082"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2513"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0204">parameter_profile</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I2514"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0205">parameter_and_result_profile</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">access_to_subprogram_definition</SPAN><A NAME="I2513"></A><A NAME="S0082"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2514"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0204">parameter_profile</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I2515"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0205">parameter_and_result_profile</A></SPAN></div>
 <div class="paranum"><a name="p5.1">5.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">null_exclusion</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2515"></A><A NAME="S0083"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>not</B>&nbsp;<B>null</B></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">null_exclusion</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2516"></A><A NAME="S0083"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>not</B>&nbsp;<B>null</B></span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00404.TXT">AI95-00404-01</A></I>} 
-<SPAN Class="swiss">access_definition</SPAN><A NAME="I2516"></A><A NAME="S0084"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2517"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>constant</B>]&nbsp;<A NAME="I2518"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;[<A NAME="I2519"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2520"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0204">parameter_profile</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;[<A NAME="I2521"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;<A NAME="I2522"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0205">parameter_and_result_profile</A></SPAN></span><span class="delete2"><B>&nbsp;access</B>&nbsp;<A NAME="I2523"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN></span></div>
+<SPAN Class="swiss">access_definition</SPAN><A NAME="I2517"></A><A NAME="S0084"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2518"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>constant</B>]&nbsp;<A NAME="I2519"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I2520"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>procedure</B>&nbsp;<A NAME="I2521"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0204">parameter_profile</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I2522"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<B>access</B>&nbsp;[<B>protected</B>]&nbsp;<B>function</B>&nbsp;<A NAME="I2523"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0205">parameter_and_result_profile</A></SPAN></span><span class="delete2"><B>&nbsp;access</B>&nbsp;<A NAME="I2524"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN></span></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0012">8652/0012</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00062.TXT">AI95-00062-01</A></I>} 
-<A NAME="I2524"></A><A NAME="I2525"></A><A NAME="I2526"></A><A NAME="I2527"></A>There 
+<A NAME="I2525"></A><A NAME="I2526"></A><A NAME="I2527"></A><A NAME="I2528"></A>There 
 are two kinds of access types, <I>access-to-object</I> types, whose values 
 designate objects, and <I>access-to-subprogram</I> types, whose values 
-designate subprograms. <A NAME="I2528"></A>Associated with an access-to-object 
+designate subprograms. <A NAME="I2529"></A>Associated with an access-to-object 
 type is a <I>storage pool</I>; several access types may share the same 
 storage pool. <span class="insert1">All descendants of an access type 
-share the same storage pool.</span> <A NAME="I2529"></A>A storage pool 
+share the same storage pool.</span> <A NAME="I2530"></A>A storage pool 
 is an area of storage used to hold dynamically allocated objects (called 
 <I>pool elements</I>) created by allocators[; storage pools are described 
 further in <A HREF="AA-13-11.html">13.11</A>, &ldquo;<A HREF="AA-13-11.html">Storage 
 Management</A>&rdquo;].</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2530"></A><A NAME="I2531"></A>Access-to-object 
+<div class="Normal"><A NAME="I2531"></A><A NAME="I2532"></A>Access-to-object 
 types are further subdivided into <I>pool-specific</I> access types, 
 whose values can designate only the elements of their associated storage 
 pool, and <I>general</I> access types, whose values can designate the 
@@ -131,7 +131,7 @@ of that pool.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0228-1.TXT">AI12-0228-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0324-1.TXT">AI12-0324-1</A></I>} 
-<A NAME="I2532"></A>A view of an object is defined to be <I>aliased</I> 
+<A NAME="I2533"></A>A view of an object is defined to be <I>aliased</I> 
 if it is defined by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN><span class="insert3">,</span><span class="delete3">&nbsp;or</span> <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN><span class="insert3">, 
 <SPAN Class="swiss"><A HREF="AA-6-1.html#S0207">parameter_specification</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0224">extended_return_object_declaration</A></SPAN></span> 
@@ -148,7 +148,7 @@ in its full definition is also</span></span><span class="delete3"></span>
 <span class="insert2">defined to be aliased. Finally,</span><span class="delete2">&nbsp;and</span> 
 a formal parameter or generic formal object of a tagged type <span class="insert2">is</span><span class="delete2">&nbsp;are</span> 
 defined to be aliased. [Aliased views are the ones that can be designated 
-by an access value.] <span class="delete2"><A NAME="I2533"></A><A NAME="I2534"></A><A NAME="I2535"></A>If 
+by an access value.] <span class="delete2"><A NAME="I2534"></A><A NAME="I2535"></A><A NAME="I2536"></A>If 
 the view defined by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 is aliased, and the type of the object has discriminants, then the object 
 is constrained; if its nominal subtype is unconstrained, then the object 
@@ -237,13 +237,13 @@ term &ldquo;aliased&rdquo; to refer to formal parameters that are referenced
 through multiple access paths (see <A HREF="AA-6-2.html">6.2</A>).&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">An <SPAN Class="swiss"><A HREF="AA-3-10.html#S0080">access_to_object_definition</A></SPAN> 
-defines an access-to-object type and its first subtype; <A NAME="I2536"></A><A NAME="I2537"></A>the 
+defines an access-to-object type and its first subtype; <A NAME="I2537"></A><A NAME="I2538"></A>the 
 <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 defines the <I>designated subtype</I> of the access type. If a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0081">general_access_modifier</A></SPAN> 
-appears, then the access type is a general access type. <A NAME="I2538"></A>If 
+appears, then the access type is a general access type. <A NAME="I2539"></A>If 
 the modifier is the reserved word <B>constant</B>, then the type is an 
 <I>access-to-constant type</I>[; a designated object cannot be updated 
-through a value of such a type]. <A NAME="I2539"></A>If the modifier 
+through a value of such a type]. <A NAME="I2540"></A>If the modifier 
 is the reserved word <B>all</B>, then the type is an <I>access-to-variable 
 type</I>[; a designated object can be both read and updated through a 
 value of such a type]. If no <SPAN Class="swiss"><A HREF="AA-3-10.html#S0081">general_access_modifier</A></SPAN> 
@@ -278,11 +278,11 @@ access-to-variable types are not a separately matchable subclass of types,
 since they don't have any &ldquo;extra&rdquo; operations relative to 
 all (named) access-to-variable types.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I2540"></A>An <SPAN Class="swiss"><A HREF="AA-3-10.html#S0082">access_to_subprogram_definition</A></SPAN> 
-defines an access-to-subprogram type and its first subtype; <A NAME="I2541"></A>the 
+<div class="Normal"><A NAME="I2541"></A>An <SPAN Class="swiss"><A HREF="AA-3-10.html#S0082">access_to_subprogram_definition</A></SPAN> 
+defines an access-to-subprogram type and its first subtype; <A NAME="I2542"></A>the 
 <SPAN Class="swiss"><A HREF="AA-6-1.html#S0204">parameter_profile</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0205">parameter_and_result_profile</A></SPAN> 
-defines the <I>designated profile</I> of the access type. <A NAME="I2542"></A>There 
+defines the <I>designated profile</I> of the access type. <A NAME="I2543"></A>There 
 is a <I>calling convention</I> associated with the designated profile[; 
 only subprograms with this calling convention can be designated by values 
 of the access type.] By default, the calling convention is &ldquo;<I>protected</I>&rdquo; 
@@ -368,7 +368,7 @@ is available via formal subprogram parameters to a generic.</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I2543"></A><A NAME="I2544"></A><A NAME="I2545"></A>An <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+<A NAME="I2544"></A><A NAME="I2545"></A><A NAME="I2546"></A>An <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 defines an anonymous general <span class="insert2">access type or an 
 anonymous access-to-subprogram type. For a general access type,</span><span class="delete2">&nbsp;access-to-variable 
 type;</span> the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
@@ -376,14 +376,14 @@ denotes its <I>designated subtype</I><span class="insert2">; if the <SPAN Class=
 <B>constant</B> appears, the type is an access-to-constant type; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is an access-to-variable type. For an access-to-subprogram type, the 
 <SPAN Class="swiss"><A HREF="AA-6-1.html#S0204">parameter_profile</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0205">parameter_and_result_profile</A></SPAN> 
-denotes its <I>designated profile</I>.<A NAME="I2546"></A></span><span class="delete2">. 
+denotes its <I>designated profile</I>.<A NAME="I2547"></A></span><span class="delete2">. 
 [An <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 is used in the specification of an access discriminant (see <A HREF="AA-3-7.html">3.7</A>) 
 or an access parameter (see <A HREF="AA-6-1.html">6.1</A>).]</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<A NAME="I2547"></A>For each <span class="delete2">(named)&nbsp;</span>access 
+<A NAME="I2548"></A>For each <span class="delete2">(named)&nbsp;</span>access 
 type, there is <span class="delete2">a literal <B>null</B> which has 
 </span>a null access value designating no entity at all<span class="insert2">, 
 which can be obtained by (implicitly) converting the literal <B>null</B> 
@@ -418,7 +418,7 @@ conversion will raise Constraint_Error if the value of the actual parameter
 is null.</span>&nbsp;</div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<span class="insert2"><A NAME="I2548"></A>A <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
+<span class="insert2"><A NAME="I2549"></A>A <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
 in a construct specifies that the null value does not belong to the access 
 subtype defined by the construct, that is, the access subtype <I>excludes 
 null</I>. In addition, the anonymous access subtype defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
@@ -451,7 +451,7 @@ status of the call.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0013">8652/0013</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00012.TXT">AI95-00012-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I2549"></A><A NAME="I2550"></A>[All subtypes of an access-to-subprogram 
+<A NAME="I2550"></A><A NAME="I2551"></A>[All subtypes of an access-to-subprogram 
 type are constrained.] The first subtype of a type defined by an <span class="insert1"><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></span><span class="delete1"><SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">&nbsp;access_type_definition</A></SPAN></span> 
 or an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0080">access_to_object_definition</A></SPAN> 
 is unconstrained if the designated subtype is an unconstrained array 
@@ -516,23 +516,23 @@ subtype, which we also don't allow.</span>&nbsp;</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<A NAME="I2551"></A>A <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0031">composite_constraint</A></SPAN> 
+<A NAME="I2552"></A>A <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0031">composite_constraint</A></SPAN> 
 is <I>compatible</I> with an unconstrained access subtype if it is compatible 
 with the designated subtype.<span class="insert2">&nbsp;A <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
 is compatible with any access subtype that does not exclude null.</span> 
-<A NAME="I2552"></A>An access value <I>satisfies</I> a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0031">composite_constraint</A></SPAN> 
+<A NAME="I2553"></A>An access value <I>satisfies</I> a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0031">composite_constraint</A></SPAN> 
 of an access subtype if it equals the null value of its type or if it 
 designates an object whose value satisfies the constraint.<span class="insert2">&nbsp;An access value satisfies an exclusion of the null value if it does not 
 equal the null value of its type.</span></div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I2553"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">access_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I2554"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">access_type_definition</A></SPAN> 
 creates the access type and its first subtype. For an access-to-object 
 type, this elaboration includes the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 which creates the designated subtype.</div>
 <div class="paranum"><a name="p17">17/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
-<A NAME="I2554"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+<A NAME="I2555"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 creates an anonymous<span class="delete2">&nbsp;general</span> access<span class="delete2">-to-variable</span> 
 type<span class="delete2">&nbsp;[(this happens as part of the initialization 
 of an access parameter or access discriminant)]</span>.&nbsp;</div>
@@ -586,7 +586,7 @@ Give_Message.<B>all</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p26.a">26.a</a></div>
-<div class="Annotations"><A NAME="I2555"></A>The syntax for <SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">access_type_definition</A></SPAN> 
+<div class="Annotations"><A NAME="I2556"></A>The syntax for <SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">access_type_definition</A></SPAN> 
 is changed to support general access types (including access-to-constants) 
 and access-to-subprograms. The syntax rules for <SPAN Class="swiss"><A HREF="AA-3-10.html#S0081">general_access_modifier</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
@@ -606,7 +606,7 @@ discussion.)&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p26.c">26.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<span class="insert2"><A NAME="I2556"></A>Access discriminants and noncontrolling 
+<span class="insert2"><A NAME="I2557"></A>Access discriminants and noncontrolling 
 access parameters no longer exclude null. A program which passed <B>null</B> 
 to such an access discriminant or access parameter and expected it to 
 raise Constraint_Error may fail when compiled with Ada 2005. One hopes 
@@ -628,7 +628,7 @@ than the differences caused by any major compiler upgrade.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p26.e">26.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00225.TXT">AI95-00225-01</A></I>} 
-<span class="insert2"><A NAME="I2557"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I2558"></A><B>Amendment Correction:</B> 
 The rule defining when a current instance of a limited type is considered 
 to be aliased has been tightened to apply only to types that cannot become 
 nonlimited. A program that attempts to take 'Access of the current instance 
@@ -653,7 +653,7 @@ required (for instance, subprogram renaming).</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p26.g">26.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<span class="insert2"><A NAME="I2558"></A>The <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
+<span class="insert2"><A NAME="I2559"></A>The <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
 is new. It can be used in both anonymous and named access type definitions. 
 It is most useful to declare that parameters cannot be <B>null</B>, thus 
 eliminating the need for checks on use.</span></div>
@@ -711,7 +711,7 @@ are defined to be aliased.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p26.o">26.o/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0228-1.TXT">AI12-0228-1</A></I>} 
-<span class="insert5"><A NAME="I2559"></A><B>Correction:</B> A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
+<span class="insert5"><A NAME="I2560"></A><B>Correction:</B> A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
 of an aliased object is now also aliased.</span>&nbsp;</div>
 
 <HR>

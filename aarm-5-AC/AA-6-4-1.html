@@ -35,7 +35,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +46,7 @@
 <HR>
 <H1>6.4.1 Parameter Associations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I4269"></A> A parameter association defines 
+<div class="Normal">[<A NAME="I4274"></A> A parameter association defines 
 the association between an actual parameter and a formal parameter.] 
 </div>
 
@@ -73,7 +73,7 @@ result.</span>&nbsp;</div>
 The <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 of a<span class="insert3">&nbsp;named</span> <SPAN Class="swiss"><A HREF="AA-6-4.html#S0220">parameter_association</A></SPAN> 
 shall resolve to denote a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0207">parameter_specification</A></SPAN> 
-of the view being called<span class="insert3">; <A NAME="I4270"></A><A NAME="I4271"></A><A NAME="I4272"></A><A NAME="I4273"></A>this 
+of the view being called<span class="insert3">; <A NAME="I4275"></A><A NAME="I4276"></A><A NAME="I4277"></A><A NAME="I4278"></A>this 
 is the formal parameter of the association. The formal parameter for 
 a positional <SPAN Class="swiss"><A HREF="AA-6-4.html#S0220">parameter_association</A></SPAN> 
 is the parameter with the corresponding position in the formal part of 
@@ -84,12 +84,12 @@ the view being called</span>.</div>
 position&rdquo; is calculated after any transformation of prefixed views.</span> 
 </div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4274"></A>The <I>actual parameter</I> is 
+<div class="Normal"><A NAME="I4279"></A>The <I>actual parameter</I> is 
 either the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0221">explicit_actual_parameter</A></SPAN> 
 given in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0220">parameter_association</A></SPAN> 
 for a given formal parameter, or the corresponding <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
 if no <SPAN Class="swiss"><A HREF="AA-6-4.html#S0220">parameter_association</A></SPAN> 
-is given for the formal parameter. <A NAME="I4275"></A>The expected type 
+is given for the formal parameter. <A NAME="I4280"></A>The expected type 
 for an actual parameter is the type of the corresponding formal parameter. 
 </div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
@@ -126,7 +126,7 @@ matching <B>in out</B> parameter.</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">If the mode is <B>in out</B> or <B>out</B>, the actual 
 shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that denotes a variable.<A NAME="I4276"></A><A NAME="I4277"></A>&nbsp;</div>
+that denotes a variable.<A NAME="I4281"></A><A NAME="I4282"></A>&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We no longer need &ldquo;or 
 a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0162">type_conversion</A></SPAN> 
@@ -156,25 +156,34 @@ that is a (variable) <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></S
 not a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>). 
 This requirement is a legality rule, so overload resolution fails before 
 it is considered, meaning that the call is ambiguous.&nbsp;</div>
-<div class="paranum"><a name="p5.1">5.1/4</a></div>
+<div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
 <span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0377-1.TXT">AI12-0377-1</A></I>} 
 <span class="insert4">If the mode is <B>out</B>, the actual parameter 
-is a view conversion, and the type of the formal parameter is an access 
-type or a scalar type that has the Default_Value aspect specified, then</span> 
+is a view conversion, and the type of the formal parameter is&nbsp;</span><span class="insert4"><span class="delete5">an 
+access type or&nbsp;</span></span><span class="insert4">a scalar type</span><span class="insert4"><span class="delete5">&nbsp;that has the Default_Value aspect specified</span></span><span class="insert4">, 
+then</span>&nbsp;</div>
+<div class="paranum"><a name="p5.2">5.2/5</a></div>
+<div class="Bulleted"><span class="insert4"></span><span class="insert4"><span class="delete5">there 
+shall exist a type (other than a root numeric type) that is an ancestor 
+of both&nbsp;</span></span><span class="insert4">the target&nbsp;</span><span class="insert4"><span class="delete5">type 
+</span></span><span class="insert4">&nbsp;and&nbsp;</span><span class="insert4"><span class="delete5">the 
+</span></span><span class="insert4">operand type</span><span class="insert5">&nbsp;both do not have the Default_Value aspect specified</span><span class="insert4">; 
+</span><span class="insert5">or</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;and</span></span><span class="insert4"></span></div>
+<div class="paranum"><a name="p5.3">5.3/5</a></div>
+<div class="Bulleted"><span class="insert4"></span><span class="insert5">the 
+target and</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;in 
+the case of a scalar type, the type of the</span></span><span class="insert4">&nbsp;operand&nbsp;</span><span class="insert5">type both</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;of 
+the conversion shall</span></span><span class="insert4">&nbsp;have the Default_Value 
+aspect specified</span><span class="insert5">, and there shall exist 
+a type (other than a root numeric type) that is an ancestor of both the 
+target type and the operand type</span><span class="insert4">.</span> 
 </div>
-<div class="paranum"><a name="p5.2">5.2/4</a></div>
-<div class="Bulleted"><span class="insert4">there shall exist a type 
-(other than a root numeric type) that is an ancestor of both the target 
-type and the operand type; and</span></div>
-<div class="paranum"><a name="p5.3">5.3/4</a></div>
-<div class="Bulleted"><span class="insert4">in the case of a scalar type, 
-the type of the operand of the conversion shall have the Default_Value 
-aspect specified.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
 <span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<span class="insert4"><A NAME="I4278"></A>In addition to the places where 
+<span class="insert4"><A NAME="I4283"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span></div>
@@ -191,7 +200,7 @@ parameter shall be an aliased view of an object. Further, if the formal
 parameter subtype <I>F</I> is untagged:</span><span class="delete3">&nbsp;The 
 type of the actual parameter associated with an access parameter shall 
 be convertible (see <A HREF="AA-4-6.html">4.6</A>) to its anonymous access 
-type. <A NAME="I4279"></A></span></div>
+type. <A NAME="I4284"></A></span></div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="Bulleted"><span class="insert3">the subtype <I>F</I> shall 
 statically match the nominal subtype of the actual object; or</span></div>
@@ -225,7 +234,7 @@ or derived type (see <A HREF="AA-12-5-1.html">12.5.1</A> for the formal
 definition of this rule).</span>&nbsp;</div>
 <div class="paranum"><a name="p6.3">6.3/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
-<span class="insert4"><A NAME="I4280"></A>In addition to the places where 
+<span class="insert4"><A NAME="I4285"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span></div>
@@ -260,7 +269,7 @@ other cases this check will always pass.</span>&nbsp;</div>
 <div class="paranum"><a name="p6.5">6.5/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
 <span class="insert3">Two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
-are <I>known to denote the same object</I> if:<A NAME="I4281"></A></span></div>
+are <I>known to denote the same object</I> if:<A NAME="I4286"></A></span></div>
 <div class="paranum"><a name="p6.6">6.6/3</a></div>
 <div class="Bulleted"><span class="insert3">both <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
 statically denote the same stand-alone object or parameter; or</span></div>
@@ -393,7 +402,7 @@ test S(1) vs. S(ONE), which we already know denote the same object.</span>
 <div class="paranum"><a name="p6.12">6.12/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
 <span class="insert3">Two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
-are <I>known to refer to the same object</I> if <A NAME="I4282"></A></span></div>
+are <I>known to refer to the same object</I> if <A NAME="I4287"></A></span></div>
 <div class="paranum"><a name="p6.13">6.13/3</a></div>
 <div class="Bulleted"><span class="insert3">The two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
 are known to denote the same object; or</span></div>
@@ -516,7 +525,7 @@ initialized by default in an aggregate (via &lt;&gt;).</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4283"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4288"></A>For 
 the evaluation of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0220">parameter_association</A></SPAN>: 
 </div>
 <div class="paranum"><a name="p8">8</a></div>
@@ -528,16 +537,16 @@ is elaborated, which creates the anonymous access type.</div>
 <div class="Bulleted">For a parameter [(of any mode)] that is passed 
 by reference (see <A HREF="AA-6-2.html">6.2</A>), a view conversion of 
 the actual parameter to the nominal subtype of the formal parameter is 
-evaluated, and the formal parameter denotes that conversion. <A NAME="I4284"></A></div>
+evaluated, and the formal parameter denotes that conversion. <A NAME="I4289"></A></div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We are always allowing sliding, 
 even for [<B>in</B>] <B>out</B> by-reference parameters.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Bulleted"><A NAME="I4285"></A>For an <B>in</B> or <B>in out</B> 
+<div class="Bulleted"><A NAME="I4290"></A>For an <B>in</B> or <B>in out</B> 
 parameter that is passed by copy (see <A HREF="AA-6-2.html">6.2</A>), 
 the formal parameter object is created, and the value of the actual parameter 
 is converted to the nominal subtype of the formal parameter and assigned 
-to the formal. <A NAME="I4286"></A></div>
+to the formal. <A NAME="I4291"></A></div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The conversion mentioned 
 here is a value conversion.&nbsp;</div>
@@ -545,59 +554,109 @@ here is a value conversion.&nbsp;</div>
 <div class="Bulleted" style="margin-bottom: 0.3em">For an <B>out</B> 
 parameter that is passed by copy, the formal parameter object is created, 
 and:&nbsp;</div>
-<div class="paranum"><a name="p13">13/3</a></div>
-<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0196-1.TXT">AI05-0196-1</A></I>} 
-For an access type, the formal parameter is initialized from the value 
-of the actual, without <span class="insert3">checking that the value 
-satisfies any constraint, any predicate, or any exclusion of the null 
-value</span><span class="delete3">&nbsp;a constraint check</span>;&nbsp;</div>
-<div class="paranum"><a name="p13.a">13.a</a></div>
-<div class="Annotations"><B>Reason:&nbsp;</B>This preserves the Language Design 
-Principle that an object of an access type is always initialized with 
-a &ldquo;reasonable&rdquo; value.&nbsp;</div>
-<div class="paranum"><a name="p13.1">13.1/4</a></div>
+<div class="paranum"><a name="p13">13/5</a></div>
 <div class="Indented2Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<span class="insert4"></span><span class="insert3">For a scalar type 
-that has the Default_Value aspect specified, the formal parameter is 
-initialized from the value of the actual, without checking that the value 
-satisfies any constraint or any predicate</span><span class="insert4">. 
-Furthermore, if the actual parameter is a view conversion and either</span><span class="insert3"></span><span class="insert3"><span class="delete4">;</span></span><span class="insert3"></span></div>
-<div class="paranum"><a name="p13.2">13.2/4</a></div>
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0196-1.TXT">AI05-0196-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5"></span>For an access type<span class="insert5">:</span><span class="delete5">, 
+the formal parameter is initialized from the value of the actual, without 
+</span><span class="insert3"><span class="delete5">checking that the 
+value satisfies any constraint, any predicate, or any exclusion of the 
+null value</span></span><span class="delete5"></span><span class="delete3">&nbsp;a 
+constraint check</span><span class="delete5">;</span></div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5">if the designated type of the actual is a class-wide 
+type <I>T</I>'Class and the designated type of the formal is neither 
+an ancestor of <I>T</I>, nor a class-wide type that covers <I>T</I>, 
+then the formal parameter is initialized to the null value of the formal 
+type;</span></div>
+<div class="paranum"><a name="p13.2">13.2/5</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5">if the actual is a stand-alone object of an anonymous 
+access type, and the accessibility level of the formal type is not library 
+level, then the formal parameter is initialized to the null value of 
+the formal type;</span></div>
+<div class="paranum"><a name="p13.3">13.3/5</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5">if the call is within the body of an instance of 
+a generic unit, the actual or the formal type is descended from a generic 
+formal access type of the generic unit, and the actual and formal types 
+neither share an ancestor nor is the formal type accessibility at library 
+level, then the formal parameter is initialized to the null value of 
+the formal type;</span></div>
+<div class="paranum"><a name="p13.4">13.4/5</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5">otherwise, the formal parameter is initialized 
+to the value of the actual parameter, without checking that the value 
+satisfies any constraint.</span></div>
+<div class="paranum"><a name="p13.5">13.5/5</a></div>
+<div class="Indented2Bulleted-NoPrefix">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5">In all of the above cases, no check is performed 
+for any predicate or exclusion of the null value that might apply to 
+the formal type.</span></div>
+<div class="paranum"><a name="p13.a">13.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+This preserves the Language Design Principle that an object of an access 
+type is always initialized with a &ldquo;reasonable&rdquo; value.<span class="insert5">&nbsp;When no reasonable value is available, we pass <B>null</B> instead. All 
+such cases require a view conversion of unrelated access types.</span> 
+</div>
+<div class="paranum"><a name="p13.b">13.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5">This rule means that any tag checks and accessibility 
+checks can be assumed to pass for an <B>out</B> parameter, but constraints, 
+null exclusions, and predicates cannot be assumed unless the compiler 
+can prove that the parameter has been previously written within the subprogram.</span> 
+</div>
+<div class="paranum"><a name="p13.6">13.6/5</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0377-1.TXT">AI12-0377-1</A></I>} 
+<span class="insert3">For a scalar type that has the Default_Value aspect 
+specified, the formal parameter is initialized from the value of the 
+actual, without checking that the value satisfies any constraint or any 
+predicate</span><span class="insert4"></span><span class="insert5">;</span><span class="insert4"></span><span class="insert4"><span class="delete5">. 
+Furthermore, if the actual parameter is a view conversion and either</span></span><span class="insert4"></span><span class="insert3"></span><span class="insert3"><span class="delete4">;</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p13.7">13.7/5</a></div>
 <div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
-<span class="insert4">there exists no type (other than a root numeric 
-type) that is an ancestor of both the target type and the type of the 
-operand of the conversion; or</span></div>
-<div class="paranum"><a name="p13.3">13.3/4</a></div>
+<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0377-1.TXT">AI12-0377-1</A></I>} 
+<span class="insert4"></span><span class="insert4"><span class="delete5">there 
+exists no type (other than a root numeric type) that is an ancestor of 
+both the target type and the type of the operand of the conversion; or</span></span><span class="insert4"></span></div>
+<div class="paranum"><a name="p13.8">13.8/5</a></div>
 <div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
-<span class="insert4">the Default_Value aspect is unspecified for the 
-type of the operand of the conversion</span>&nbsp;</div>
-<div class="paranum"><a name="p13.4">13.4/4</a></div>
+<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0377-1.TXT">AI12-0377-1</A></I>} 
+<span class="insert4"></span><span class="insert4"><span class="delete5">the 
+Default_Value aspect is unspecified for the type of the operand of the 
+conversion</span></span><span class="insert4"></span>&nbsp;</div>
+<div class="paranum"><a name="p13.9">13.9/5</a></div>
 <div class="Indented2Bulleted-NoPrefix">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
-<span class="insert4">then Program_Error<A NAME="I4287"></A><A NAME="I4288"></A> 
-is raised;<A NAME="I4289"></A></span></div>
-<div class="paranum"><a name="p13.b">13.b/3</a></div>
+<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0377-1.TXT">AI12-0377-1</A></I>} 
+<span class="insert4"></span><span class="insert4"><span class="delete5">then 
+Program_Error<A NAME="I4292"></A><A NAME="I4293"></A> is raised;<A NAME="I4294"></A></span></span><span class="insert4"></span></div>
+<div class="paranum"><a name="p13.c">13.c/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This preserves 
 the Language Design Principle that all objects of a type with an implicit 
 initial value are initialized. This is important so that a programmer 
 can guarantee that all objects of a scalar type have a valid value with 
 a carefully chosen Default_Value.</span>&nbsp;</div>
-<div class="paranum"><a name="p13.c">13.c/3</a></div>
+<div class="paranum"><a name="p13.d">13.d/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Implementation Note: 
 </B>This rule means that <B>out</B> parameters of a subtype <I>T</I> 
 with a specified Default_Value need to be large enough to support any 
 possible value of the base type of <I>T</I>. In contrast, a type that 
 does not have a Default_Value only need support the size of the subtype 
 (since no values are passed in).</span>&nbsp;</div>
-<div class="paranum"><a name="p13.d">13.d/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B>The 
+<div class="paranum"><a name="p13.e">13.e/5</a></div>
+<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B></span><span class="insert4"><span class="delete5">The 
 Program_Error case can only occur in the body of an instance of a generic 
 unit. Legality Rules will catch all other cases. Implementations that 
 macro-expand generics can always detect this case when the enclosing 
-instance body is expanded.</span>&nbsp;</div>
+instance body is expanded.</span></span><span class="insert4"></span> 
+</div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0333-1.TXT">AI12-0333-1</A></I>} 
 For a composite type with discriminants or that has implicit initial 
@@ -632,14 +691,28 @@ subtypes do not have any implicit initial values. The view conversion
 for composite types ensures that if the lengths don't match between an 
 actual and a formal array parameter, the Constraint_Error is raised before 
 the call, rather than after.&nbsp;</div>
-<div class="paranum"><a name="p15.1">15.1/3</a></div>
+<div class="paranum"><a name="p15.1">15.1/5</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0377-1.TXT">AI12-0377-1</A></I>} 
+<span class="insert5">Furthermore, if the type is a scalar type, and 
+the actual parameter is a view conversion, then Program_Error is raised 
+if either the target or the operand type has the Default_Value aspect 
+specified, unless they both have the Default_Value aspect specified, 
+and there is a type (other than a root numeric type) that is an ancestor 
+of both the target type and the operand type.</span></div>
+<div class="paranum"><a name="p15.b">15.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B>This 
+can only occur in the body of an instance of a generic unit. Legality 
+Rules will catch all other cases. Implementations that macro-expand generics 
+can always detect this case when the enclosing instance body is expanded.</span> 
+</div>
+<div class="paranum"><a name="p15.2">15.2/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
 <span class="insert3">In a function call, for each explicitly aliased 
 parameter, a check is made that the accessibility level of the master 
 of the actual object is not deeper than that of the  master of the call 
 (see <A HREF="AA-3-10-2.html">3.10.2</A>).</span>&nbsp;</div>
-<div class="paranum"><a name="p15.a.1">15.a.1/3</a></div>
+<div class="paranum"><a name="p15.c">15.c/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>If 
 the actual object to a call <I>C</I> is a formal parameter of some function 
 call <I>F</I>, no dynamic check against the master of the actual parameter 
@@ -650,16 +723,16 @@ distributed overhead to accurately know the dynamic accessibility of
 a formal parameter (all tagged and explicitly aliased parameters would 
 have to carry accessibility levels).</span>&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I4290"></A><A NAME="I4291"></A>A formal 
+<div class="Normal"><A NAME="I4295"></A><A NAME="I4296"></A>A formal 
 parameter of mode <B>in out</B> or <B>out</B> with discriminants is constrained 
 if either its nominal subtype or the actual parameter is constrained.</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I4292"></A><A NAME="I4293"></A><A NAME="I4294"></A><A NAME="I4295"></A><A NAME="I4296"></A>After 
+<div class="Normal"><A NAME="I4297"></A><A NAME="I4298"></A><A NAME="I4299"></A><A NAME="I4300"></A><A NAME="I4301"></A>After 
 normal completion and leaving of a subprogram, for each <B>in out</B> 
 or <B>out</B> parameter that is passed by copy, the value of the formal 
 parameter is converted to the subtype of the variable given as the actual 
-parameter and assigned to it. <A NAME="I4297"></A>These conversions and 
-assignments occur in an arbitrary order.<A NAME="I4298"></A>&nbsp;</div>
+parameter and assigned to it. <A NAME="I4302"></A>These conversions and 
+assignments occur in an arbitrary order.<A NAME="I4303"></A>&nbsp;</div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The conversions mentioned 
 above during parameter passing might raise Constraint_Error &mdash; (see 
@@ -690,31 +763,40 @@ in <A HREF="AA-4-6.html">4.6</A> will convert to S1.&nbsp;</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<span class="insert3"><A NAME="I4299"></A>If the nominal subtype of a 
+<span class="insert3"><A NAME="I4304"></A>If the nominal subtype of a 
 formal parameter with discriminants is constrained or indefinite, and 
 the parameter is passed by reference, then the execution of the call 
 is erroneous if the value of any discriminant of the actual is changed 
 while the formal parameter exists (that is, before leaving the corresponding 
 callable construct).</span>&nbsp;</div>
 
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5">For an <B>out</B> parameter of an access type, 
+if the representation of the actual type and the formal type differ, 
+and there are values of the actual type that cannot be represented as 
+values of the formal type, the implementation may initialize the formal 
+parameter with the null value of the formal type.</span>&nbsp;</div>
+
 <H4 Class="centered">Extensions to Ada 83</H4>
-<div class="paranum"><a name="p18.a">18.a</a></div>
-<div class="Annotations"><A NAME="I4300"></A>In Ada 95, a program can 
+<div class="paranum"><a name="p19.a">19.a</a></div>
+<div class="Annotations"><A NAME="I4305"></A>In Ada 95, a program can 
 rely on the fact that passing an object as an <B>out</B> parameter does 
 not &ldquo;de-initialize&rdquo; any parts of the object whose subtypes 
 have implicit initial values. (This generalizes the RM83 rule that required 
 copy-in for parts that were discriminants or of an access type.)&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
-<div class="paranum"><a name="p18.b">18.b/3</a></div>
+<div class="paranum"><a name="p19.b">19.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 We have eliminated the subclause on Default Parameters, as it is subsumed 
 by earlier <span class="delete3">clauses and&nbsp;</span>subclauses.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
-<div class="paranum"><a name="p18.c">18.c/3</a></div>
+<div class="paranum"><a name="p19.c">19.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0196-1.TXT">AI05-0196-1</A></I>} 
-<span class="insert3"><A NAME="I4301"></A><B>Correction:</B> Clarified 
+<span class="insert3"><A NAME="I4306"></A><B>Correction:</B> Clarified 
 that <B>out</B> parameters of an access type are not checked for null 
 exclusions when they are passed in (which is similar to the behavior 
 for constraints). This was unspecified in Ada 2005, so a program which 
@@ -723,9 +805,9 @@ may malfunction. But a program depending on an exception being raised
 is unlikely.</span>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
-<div class="paranum"><a name="p18.d">18.d/3</a></div>
+<div class="paranum"><a name="p19.d">19.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
-<span class="insert3"><A NAME="I4302"></A>Additional rules have been 
+<span class="insert3"><A NAME="I4307"></A>Additional rules have been 
 added to make illegal passing the same elementary object to more than 
 one <B>in out</B> or <B>out</B> parameters of the same call. In this 
 case, the result in the object could depend on the compiler version, 
@@ -737,7 +819,7 @@ new check should be rare and are easily fixed by adding a temporary object.</spa
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
-<div class="paranum"><a name="p18.e">18.e/3</a></div>
+<div class="paranum"><a name="p19.e">19.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
 <span class="insert3"><B>Correction:</B> A missing rule was added to 
 cover cases that were missed in Ada 95 and Ada 2005; specifically, that 
@@ -748,19 +830,19 @@ work would be a major change of the user model (<B>in</B> parameters
 with discriminants could no longer be assumed constant). This is not 
 an inconsistency, as compilers are not required to change any current 
 behavior.</span></div>
-<div class="paranum"><a name="p18.f">18.f/3</a></div>
+<div class="paranum"><a name="p19.f">19.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0102-1.TXT">AI05-0102-1</A></I>} 
 <span class="insert3"><B>Correction:</B> Moved implicit conversion Legality 
 Rule to <A HREF="AA-8-6.html">8.6</A>.</span></div>
-<div class="paranum"><a name="p18.g">18.g/3</a></div>
+<div class="paranum"><a name="p19.g">19.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0118-1.TXT">AI05-0118-1</A></I>} 
 <span class="insert3"><B>Correction:</B> Added a definition for positional 
 parameters, as this is missing from Ada 95 and later.</span></div>
-<div class="paranum"><a name="p18.h">18.h/3</a></div>
+<div class="paranum"><a name="p19.h">19.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
 <span class="insert3">Rules have been added defining the legality and 
 dynamic checks needed for explicitly aliased parameters (see <A HREF="AA-6-1.html">6.1</A>).</span></div>
-<div class="paranum"><a name="p18.i">18.i/3</a></div>
+<div class="paranum"><a name="p19.i">19.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
 <span class="insert3">Additional rules have been added such that passing 
 an object to an <B>in out</B> or <B>out</B> parameter of a function is 
@@ -770,21 +852,39 @@ may depend on the evaluation order), and the results could even vary
 because of optimization settings and the like. Thus they've been banned.</span> 
 </div>
 
+<H4 Class="centered">Inconsistencies With Ada 2012</H4>
+<div class="paranum"><a name="p19.j">19.j/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert5"><A NAME="I4308"></A><B>Correction:</B> Added rules 
+so that value passed into an <B>out</B> parameter for access types is 
+well-defined in the case of a view conversion. <B>Null</B> will be passed 
+in for conversions that may have problematic accessibility or tags. If 
+the accessibility or tag check(s) would have passed, and the <B>out</B> 
+parameter is read before it is written (perhaps to read a bound or discriminant), 
+Constraint_Error may be raised by Ada 202x when it would not have been 
+in Ada 2012. Additionally, if the called subprogram does not write the 
+<B>out</B> parameter at all, the actual object will be overwritten with 
+<B>null</B> (and possibly raise Constraint_Error if the object is null 
+excluding), while the object would be unchanged in Ada 2012. Such cases 
+are thought to be rare, as most <B>out</B> parameters of access types 
+are overwritten before being read. In addition, at least one widely-used 
+Ada compiler already passes <B>null</B> in these cases.</span>&nbsp;</div>
+
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
-<div class="paranum"><a name="p18.j">18.j/4</a></div>
+<div class="paranum"><a name="p19.k">19.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
 <span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<span class="insert4"><A NAME="I4303"></A><B>Corrigendum:</B> Added rules 
-to ensure that the value passed into a <B>out</B> parameter for elementary 
-types is well-defined in the case of a view conversion. The new rules 
+<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0377-1.TXT">AI12-0377-1</A></I>} 
+<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0378-1.TXT">AI12-0378-1</A></I>} 
+<span class="insert4"><A NAME="I4309"></A><B>Corrigendum:</B> Added rules 
+to ensure that the value passed into&nbsp;</span><span class="insert5">an</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;a</span></span><span class="insert4">&nbsp;<B>out</B> parameter for&nbsp;</span><span class="insert5">scalar</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;elementary</span></span><span class="insert4">&nbsp;types is well-defined in the case of a view conversion. The new rules 
 can be incompatible. For a view conversion to an unrelated type with 
 the Default_Value aspect specified, the aspect is new in Ada 2012 so 
-it should be unlikely to occur in existing code. For a view conversion 
-to an unrelated access type, the incompatibility is possible as this 
-could be written in Ada 95, but such a view conversion is thought to 
-be rare. In both cases, declaring and passing a temporary rather than 
-a view conversion will eliminate the problem.</span></div>
-<div class="paranum"><a name="p18.k">18.k/4</a></div>
+it should be unlikely to occur in existing code.</span><span class="insert5">&nbsp;Declaring</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;For a view conversion to an unrelated access type, the incompatibility 
+is possible as this could be written in Ada 95, but such a view conversion 
+is thought to be rare. In both cases, declaring</span></span><span class="insert4">&nbsp;and passing a temporary rather than a view conversion will eliminate 
+the problem.</span></div>
+<div class="paranum"><a name="p19.l">19.l/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
 <span class="insert4"><B>Corrigendum:</B> Because of a rule added in 
 <A HREF="AA-12-5-1.html">12.5.1</A>, the checks for the passing of an 
@@ -796,7 +896,7 @@ formal type. Such a program is very unlikely, especially as explicitly
 aliased parameters are a new Ada 2012 feature.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p18.l">18.l/5</a></div>
+<div class="paranum"><a name="p19.m">19.m/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0216-1.TXT">AI12-0216-1</A></I>} 
 <span class="insert5"><B>Correction:</B> The <B>in out</B> parameter 
 rule only applies to actual parameters of elementary types. While this 
@@ -804,7 +904,7 @@ allows additional programs (and thus could be considered an extension),
 it is unlikely to change anything in a real program (it could only matter 
 in a call with 4 or more parameters, and then only if two composite parameters 
 have matching actuals). Thus we document it as a wording change.</span></div>
-<div class="paranum"><a name="p18.m">18.m/5</a></div>
+<div class="paranum"><a name="p19.n">19.n/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0333-1.TXT">AI12-0333-1</A></I>} 
 <span class="insert5"><B>Correction:</B> Predicate checks are not made 
 for inbound <B>out</B> parameters. The actual rule change that has this 

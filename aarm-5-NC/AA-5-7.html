@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,8 +42,8 @@ includes a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">exit_statement</SPAN><A NAME="I3825"></A><A NAME="S0193"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>exit</B>&nbsp;[<I>loop_</I><A NAME="I3826"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>]&nbsp;[<B>when</B>&nbsp;<A NAME="I3827"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">exit_statement</SPAN><A NAME="I3829"></A><A NAME="S0193"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>exit</B>&nbsp;[<I>loop_</I><A NAME="I3830"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>]&nbsp;[<B>when</B>&nbsp;<A NAME="I3831"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
@@ -54,7 +54,7 @@ shall resolve to denote a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_s
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I3828"></A>Each <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3832"></A>Each <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
 <I>applies to</I> a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN>; 
 this is the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0178">loop_statement</A></SPAN> 
 being exited. An <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN> 
@@ -73,7 +73,7 @@ if this construct is itself enclosed by the given <SPAN Class="swiss"><A HREF="A
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I3829"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I3833"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0193">exit_statement</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>, 
 if present, is first evaluated. If the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN> 
 is True, or if there is no <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0150">condition</A></SPAN>, 

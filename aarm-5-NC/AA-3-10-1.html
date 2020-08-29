@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,18 +49,18 @@ deferring its full definition to a subsequent <SPAN Class="swiss"><A HREF="AA-3-
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
-<SPAN Class="swiss">incomplete_type_declaration</SPAN><A NAME="I2444"></A><A NAME="S0085"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>type</B>&nbsp;<A NAME="I2445"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I2446"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>];</div>
+<SPAN Class="swiss">incomplete_type_declaration</SPAN><A NAME="I2445"></A><A NAME="S0085"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>type</B>&nbsp;<A NAME="I2446"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I2447"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>];</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0137-1.TXT">AI12-0137-1</A></I>} 
-<A NAME="I2447"></A><A NAME="I2448"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+<A NAME="I2448"></A><A NAME="I2449"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 declares an <I>incomplete view</I> of a type and its first subtype; the 
 first subtype is unconstrained if a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
 appears. If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 includes the reserved word <B>tagged</B>, it declares a <I>tagged incomplete 
-view</I>.<A NAME="I2449"></A><A NAME="I2450"></A> If <I>T</I> denotes 
+view</I>.<A NAME="I2450"></A><A NAME="I2451"></A> If <I>T</I> denotes 
 a tagged incomplete view, then <I>T</I>'Class denotes a tagged incomplete 
 view. [An incomplete view of a type is a limited view of the type (see 
 <A HREF="AA-7-5.html">7.5</A>).]</div>
@@ -130,7 +130,7 @@ the point of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark<
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
-<A NAME="I2451"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+<A NAME="I2452"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 requires a completion, which shall be a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
 other than an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN>. 
 [If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
@@ -169,7 +169,7 @@ that completes it shall declare a tagged type. If an <SPAN Class="swiss"><A HREF
 has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
 then a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
 that completes it shall have a fully conforming (explicit) <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
-(see <A HREF="AA-6-3-1.html">6.3.1</A>). <A NAME="I2452"></A>[If an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+(see <A HREF="AA-6-3-1.html">6.3.1</A>). <A NAME="I2453"></A>[If an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 has no <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
 (or an <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN>), 
 then a corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
@@ -347,7 +347,7 @@ deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I2453"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I2454"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>An incomplete type has no real 
@@ -357,7 +357,7 @@ declaration in Pascal. Private types are different, because they have
 a different set of characteristics from their full type.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Notes">89&nbsp;&nbsp;<A NAME="I2454"></A>Within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+<div class="Notes">89&nbsp;&nbsp;<A NAME="I2455"></A>Within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 and a corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 cannot be separated by an intervening body. This is because a type has 
@@ -428,7 +428,7 @@ Casey.Vehicle&nbsp;:=&nbsp;Your_Car;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p23.a">23.a</a></div>
-<div class="Annotations"><A NAME="I2455"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+<div class="Annotations"><A NAME="I2456"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 that completes an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 may have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 even if the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
@@ -480,7 +480,7 @@ at all) for different designated subtypes.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p23.h">23.h/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
-<A NAME="I2456"></A>It is now illegal to use an incomplete view (type) 
+<A NAME="I2457"></A>It is now illegal to use an incomplete view (type) 
 as the parameter or result of an access-to-subprogram type unless the 
 incomplete view is completed in the same declaration list as the use. 
 This was allowed in Ada 95 for incomplete types where the completion 
@@ -499,7 +499,7 @@ Rules above.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p23.j">23.j/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
-<A NAME="I2457"></A>Tagged incomplete types are new. They are allowed 
+<A NAME="I2458"></A>Tagged incomplete types are new. They are allowed 
 in parameter declarations as well as the usual places, as tagged types 
 are always by-reference types (and thus there can be no code generation 
 issue).</div>
@@ -522,7 +522,7 @@ of a limited view.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p23.m">23.m/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0098-1.TXT">AI05-0098-1</A></I>} 
-<A NAME="I2458"></A><B>Correction:</B> Fixed the definition so that an 
+<A NAME="I2459"></A><B>Correction:</B> Fixed the definition so that an 
 anonymous access-to-subprogram type can use an incomplete view in the 
 same way that a named access-to-subprogram type can.</div>
 <div class="paranum"><a name="p23.n">23.n/3</a></div>

@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,16 +50,16 @@ Aggregates</A>&rdquo;.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">discriminant_constraint</SPAN><A NAME="I2155"></A><A NAME="S0064"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;(<A NAME="I2156"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2157"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_constraint</SPAN><A NAME="I2156"></A><A NAME="S0064"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I2157"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2158"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>})</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
-<SPAN Class="swiss">discriminant_association</SPAN><A NAME="I2158"></A><A NAME="S0065"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<I>discriminant_</I><A NAME="I2159"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;{<span class="insert5">'|'</span><span class="delete5">&nbsp;|</span>&nbsp;<I>discriminant_</I><A NAME="I2160"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>}&nbsp;=&gt;]&nbsp;<A NAME="I2161"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></div>
+<SPAN Class="swiss">discriminant_association</SPAN><A NAME="I2159"></A><A NAME="S0065"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>discriminant_</I><A NAME="I2160"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;{<span class="insert5">'|'</span><span class="delete5">&nbsp;|</span>&nbsp;<I>discriminant_</I><A NAME="I2161"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>}&nbsp;=&gt;]&nbsp;<A NAME="I2162"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><A NAME="I2162"></A>A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+<div class="Indented1"><A NAME="I2163"></A>A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
 is said to be <I>named</I> if it has one or more <I>discriminant_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>s; 
-<A NAME="I2163"></A>it is otherwise said to be <I>positional</I>. In 
+<A NAME="I2164"></A>it is otherwise said to be <I>positional</I>. In 
 a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
 any positional associations shall precede any named associations.&nbsp;</div>
 
@@ -68,14 +68,14 @@ any positional associations shall precede any named associations.&nbsp;</div>
 <div class="Normal">Each <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 of a named <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
 shall resolve to denote a discriminant of the subtype being constrained; 
-<A NAME="I2164"></A>the discriminants so named are the <I>associated 
-discriminants</I> of the named association. <A NAME="I2165"></A>For a 
+<A NAME="I2165"></A>the discriminants so named are the <I>associated 
+discriminants</I> of the named association. <A NAME="I2166"></A>For a 
 positional association, the <I>associated discriminant</I> is the one 
 whose <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN> 
 occurred in the corresponding position in the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 that defined the discriminants of the subtype being constrained.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I2166"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
+<div class="Normal"><A NAME="I2167"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
 is that of the associated discriminant(s).&nbsp;</div>
 
@@ -95,7 +95,7 @@ is legal only if any dereference of a value of the access type is known
 to be constrained (see <A HREF="AA-3-3.html">3.3</A>). In addition to 
 the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
-unit.<A NAME="I2167"></A></div>
+unit.<A NAME="I2168"></A></div>
 <div class="paranum"><a name="p7.a.1">7.a.1/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0008">8652/0008</A></I>} 
@@ -145,7 +145,7 @@ is not statically deeper than that of A. This is to avoid dangling references.</
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I2168"></A>A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I2169"></A>A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
 is <I>compatible</I> with an unconstrained discriminated subtype if each 
 discriminant value belongs to the subtype of the corresponding discriminant. 
 </div>
@@ -158,18 +158,18 @@ is performed when (and if) an object is created.</div>
 compatibility with a constrained discriminated subtype, because one is 
 not allowed to constrain it again.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I2169"></A>A composite value <I>satisfies</I> 
+<div class="Normal"><A NAME="I2170"></A>A composite value <I>satisfies</I> 
 a discriminant constraint if and only if each discriminant of the composite 
 value has the value imposed by the discriminant constraint.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I2170"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
+<div class="Normal"><A NAME="I2171"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>s 
 in the <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>s 
 are evaluated in an arbitrary order and converted to the type of the 
 associated discriminant (which might raise Constraint_Error &mdash; see 
 <A HREF="AA-4-6.html">4.6</A>); the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 of a named association is evaluated (and converted) once for each associated 
-discriminant. <A NAME="I2171"></A>The result of each evaluation and conversion 
+discriminant. <A NAME="I2172"></A>The result of each evaluation and conversion 
 is the value imposed by the constraint for the associated discriminant. 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
@@ -205,7 +205,7 @@ Illegal&nbsp;:&nbsp;Square;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Cla
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p15.a">15.a</a></div>
-<div class="Annotations"><A NAME="I2172"></A>Dependent compatibility 
+<div class="Annotations"><A NAME="I2173"></A>Dependent compatibility 
 checks are no longer performed on subtype declaration. Instead they are 
 deferred until object creation (see <A HREF="AA-3-3-1.html">3.3.1</A>). 
 This is upward compatible for a program that does not raise Constraint_Error. 
@@ -224,7 +224,7 @@ it doesn't seem worth putting it in a &quot;NOTE.&quot;&nbsp;</div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0008">8652/0008</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00168.TXT">AI95-00168-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
-<A NAME="I2173"></A>The Corrigendum added a restriction on <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s 
+<A NAME="I2174"></A>The Corrigendum added a restriction on <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s 
 for general access subtypes. Such constraints are prohibited if the designated 
 type can be treated as constrained somewhere in the program. Ada 2005 
 goes further and prohibits such <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s 

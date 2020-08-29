@@ -37,7 +37,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,12 +49,12 @@
 <H1>8.6 The Context of Overload Resolution</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-[<A NAME="I4797"></A> Because declarations can be overloaded, it is possible 
+[<A NAME="I4803"></A> Because declarations can be overloaded, it is possible 
 for an occurrence of a usage name to have more than one possible interpretation; 
 in most cases, ambiguity is disallowed. This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 describes how the possible interpretations resolve to the actual interpretation.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4798"></A>Certain rules of the language 
+<div class="Normal"><A NAME="I4804"></A>Certain rules of the language 
 (the Name Resolution Rules) are considered &ldquo;overloading rules&rdquo;. 
 If a possible interpretation violates an overloading rule, it is assumed 
 not to be the intended interpretation; some other possible interpretation 
@@ -64,7 +64,7 @@ instead, they cause the construct to be illegal. To be legal, there usually
 has to be exactly one acceptable interpretation of a construct that is 
 a &ldquo;complete context&rdquo;, not counting any nested complete contexts.</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4799"></A>The syntax rules of the language 
+<div class="Normal"><A NAME="I4805"></A>The syntax rules of the language 
 and the visibility rules given in <A HREF="AA-8-3.html">8.3</A> determine 
 the possible interpretations. Most type checking rules (rules that require 
 a particular type, or a particular class of types, for example) are overloading 
@@ -79,7 +79,7 @@ implicit conversion and dispatching operations.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4800"></A>[Overload 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4806"></A>[Overload 
 resolution is applied separately to each <I>complete context</I>, not 
 counting inner complete contexts.] Each of the following constructs is 
 a <I>complete context</I>:&nbsp;</div>
@@ -116,7 +116,7 @@ of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0173">assignment_statement</A></
 of <I>A</I> contains one or more <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0174">target_name</A></SPAN>s.</span> 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4801"></A><A NAME="I4802"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4807"></A><A NAME="I4808"></A>An 
 (overall) <I>interpretation</I> of a complete context embodies its meaning, 
 and includes the following information about the constituents of the 
 complete context, not including constituents of inner complete contexts: 
@@ -168,8 +168,8 @@ requires overload resolution to determine. Hence the term &ldquo;tentative&rdquo
 is needed for possible interpretations; otherwise, the definition would 
 be circular.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I4803"></A>A <I>possible interpretation</I> 
-is one that obeys the syntax rules and the visibility rules. <A NAME="I4804"></A><A NAME="I4805"></A><A NAME="I4806"></A>An 
+<div class="Normal"><A NAME="I4809"></A>A <I>possible interpretation</I> 
+is one that obeys the syntax rules and the visibility rules. <A NAME="I4810"></A><A NAME="I4811"></A><A NAME="I4812"></A>An 
 <I>acceptable interpretation</I> is a possible interpretation that obeys 
 the <I>overloading rules</I>[, that is, those rules that specify an expected 
 type or expected profile, or specify how a construct shall <I>resolve</I> 
@@ -186,14 +186,14 @@ Syntax Rules are written in English, instead of BNF. No rule is a Syntax
 Rule or Name Resolution Rule unless it appears under the appropriate 
 heading.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I4807"></A>The <I>interpretation</I> of 
+<div class="Normal"><A NAME="I4813"></A>The <I>interpretation</I> of 
 a constituent of a complete context is determined from the overall interpretation 
 of the complete context as a whole. [Thus, for example, &ldquo;interpreted 
 as a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>,&rdquo; 
 means that the construct's interpretation says that it belongs to the 
 syntactic category <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>.]</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4808"></A>[Each 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4814"></A>[Each 
 occurrence of] a usage name <I>denotes</I> the declaration determined 
 by its interpretation. It also denotes the view declared by its denoted 
 declaration, except in the following cases:&nbsp;</div>
@@ -204,7 +204,7 @@ and all of the views declared by those declarations.&nbsp;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00382.TXT">AI95-00382-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0287-1.TXT">AI05-0287-1</A></I>} 
-<A NAME="I4809"></A>If a usage name appears within the declarative region 
+<A NAME="I4815"></A>If a usage name appears within the declarative region 
 of a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
 and denotes that same <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
 then it denotes the <I>current instance</I> of the type (rather than 
@@ -255,7 +255,7 @@ It might really be an object (and has to be for a by-reference type),
 but that isn't discoverable by direct use of the name of the current 
 instance.</span>&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Bulleted"><A NAME="I4810"></A>If a usage name appears within 
+<div class="Bulleted"><A NAME="I4816"></A>If a usage name appears within 
 the declarative region of a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN> 
 (but not within its <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN>) 
 and it denotes that same <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN>, 
@@ -280,11 +280,11 @@ entity of that view.&nbsp;</div>
 only one declaration, and therefore one view and one entity.&nbsp;</div>
 <div class="paranum"><a name="p21">21/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<A NAME="I4811"></A>The <I>expected type</I> for a given <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
+<A NAME="I4817"></A>The <I>expected type</I> for a given <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, or other 
 construct determines, according to the <I>type resolution rules</I> given 
 below, the types considered for the construct during overload resolution. 
-<A NAME="I4812"></A>[ The type resolution rules provide support for class-wide 
+<A NAME="I4818"></A>[ The type resolution rules provide support for class-wide 
 programming, universal <span class="delete2">numeric&nbsp;</span>literals, 
 dispatching operations, and anonymous access types:]&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a</a></div>
@@ -297,7 +297,7 @@ parameter.</div>
 either the actual or expected type is universal, class-wide, or of an 
 anonymous access type.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted"><A NAME="I4813"></A><A NAME="I4814"></A>If a construct 
+<div class="Bulleted"><A NAME="I4819"></A><A NAME="I4820"></A>If a construct 
 is expected to be of any type in a class of types, or of the universal 
 or class-wide type for a class, then the type of the construct shall 
 resolve to a type in that class or to a universal type that covers the 
@@ -313,11 +313,11 @@ the class&rdquo; implies that if the expected type for an expression
 is <I>universal_fixed</I>, then an expression whose type is <I>universal_real</I> 
 (such as a real literal) is OK.&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I4815"></A>If 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I4821"></A>If 
 the expected type for a construct is a specific type <I>T</I>, then the 
 type of the construct shall resolve either to <I>T</I>, or:&nbsp;</div>
 <div class="paranum"><a name="p23.a">23.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I4816"></A>This 
+<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I4822"></A>This 
 rule is <I>not</I> intended to create a preference for the specific type 
 &mdash; such a preference would cause Beaujolais effects.&nbsp;</div>
 <div class="paranum"><a name="p24">24</a></div>
@@ -367,13 +367,13 @@ is covered by <I>D</I>; or</span></div>
 type (see <A HREF="AA-3-10.html">3.10</A>), to an access-to-subprogram 
 type whose designated profile is&nbsp;</span><span class="insert3">type conformant</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;type-conformant</span></span><span class="insert2">&nbsp;with that of <I>T</I>.</span></div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal"><A NAME="I4817"></A>In certain contexts, [such as 
+<div class="Normal"><A NAME="I4823"></A>In certain contexts, [such as 
 in a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0242">subprogram_renaming_declaration</A></SPAN>,] 
 the Name Resolution Rules define an <I>expected profile</I> for a given 
-<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; <A NAME="I4818"></A>in 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; <A NAME="I4824"></A>in 
 such cases, the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 shall resolve to the name of a callable entity whose profile is type 
-conformant with the expected profile. <A NAME="I4819"></A></div>
+conformant with the expected profile. <A NAME="I4825"></A></div>
 <div class="paranum"><a name="p27.a">27.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
 The parameter and result <I>sub</I>types are not used in overload resolution. 
@@ -385,7 +385,7 @@ but those rules are not used in overload resolution.&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p28">28/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00332.TXT">AI95-00332-01</A></I>} 
-<A NAME="I4820"></A>When <span class="delete2">the expected type for 
+<A NAME="I4826"></A>When <span class="delete2">the expected type for 
 </span>a construct is <span class="insert2">one that requires that its 
 expected type</span><span class="delete2">&nbsp;required to</span> be a <I>single</I> 
 type in a given class, the type <span class="insert2">of</span><span class="delete2">&nbsp;expected 
@@ -426,7 +426,7 @@ and renames). Otherwise, such constructs wouldn't allow <SPAN Class="swiss"><A H
 or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN> 
 is not the same as the actual type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0132">expression</A></SPAN>, 
-the actual type shall be convertible to the expected type (see <A HREF="AA-4-6.html">4.6</A>);<A NAME="I4821"></A><A NAME="I4822"></A> 
+the actual type shall be convertible to the expected type (see <A HREF="AA-4-6.html">4.6</A>);<A NAME="I4827"></A><A NAME="I4828"></A> 
 further, if the expected type is a named access-to-object type with designated 
 type <I>D1</I> and the actual type is an anonymous access-to-object type 
 with designated type <I>D2</I>, then <I>D1</I> shall cover <I>D2</I>, 
@@ -462,7 +462,7 @@ about ambiguity, are the ones that suck in all the Syntax Rules and Name
 Resolution Rules as compile-time rules. Note that this and the ambiguity 
 rule have to be Legality Rules.&nbsp;</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="Normal"><A NAME="I4823"></A>There is a <I>preference</I> 
+<div class="Normal"><A NAME="I4829"></A>There is a <I>preference</I> 
 for the primitive operators (and <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>s) 
 of the root numeric types <I>root_integer</I> and <I>root_real</I>. In 
 particular, if two acceptable interpretations of a constituent of a complete 
@@ -487,7 +487,7 @@ operators of the <I>universal_access</I> type (see <A HREF="AA-4-5-2.html">4.5.2
 If two acceptable interpretations of a constituent of a complete context 
 differ only in that one is for an equality operator of the <I>universal_access</I> 
 type, and the other is not, the interpretation using the equality operator 
-of the <I>universal_access</I> type is preferred.<A NAME="I4824"></A></span></div>
+of the <I>universal_access</I> type is preferred.<A NAME="I4830"></A></span></div>
 <div class="paranum"><a name="p30.c">30.c/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This preference 
 is necessary because of implicit conversion from an anonymous access 
@@ -499,7 +499,7 @@ of any named access type to be used to compare anonymous access values
 acceptable interpretation where each constituent's interpretation is 
 the same as or preferred (in the above sense) over those in all other 
 overall acceptable interpretations, then that one overall acceptable 
-interpretation is chosen. <A NAME="I4825"></A>Otherwise, the complete 
+interpretation is chosen. <A NAME="I4831"></A>Otherwise, the complete 
 context is <I>ambiguous</I>.</div>
 <div class="paranum"><a name="p32">32</a></div>
 <div class="Normal">A complete context other than a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN> 
@@ -509,7 +509,7 @@ shall not be ambiguous.</div>
 is allowed to be ambiguous (unless otherwise specified for the particular 
 pragma), but only if every acceptable interpretation of the pragma argument 
 is as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that statically denotes a callable entity. <A NAME="I4826"></A>Such a 
+that statically denotes a callable entity. <A NAME="I4832"></A>Such a 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> denotes 
 all of the declarations determined by its interpretations, and all of 
 the views declared by these declarations.&nbsp;</div>
@@ -561,14 +561,14 @@ but raises an exception during program execution).&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p35.a">35.a</a></div>
-<div class="Annotations"><A NAME="I4827"></A><A NAME="I4828"></A>The 
+<div class="Annotations"><A NAME="I4833"></A><A NAME="I4834"></A>The 
 new preference rule for operators of root numeric types is upward incompatible, 
 but only in cases that involved <I>Beaujolais</I> effects in Ada 83. 
 Such cases are ambiguous in Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p35.b">35.b</a></div>
-<div class="Annotations"><A NAME="I4829"></A>The rule that allows an 
+<div class="Annotations"><A NAME="I4835"></A>The rule that allows an 
 expected type to match an actual expression of a universal type, in combination 
 with the new preference rule for operators of root numeric types, subsumes 
 the Ada 83 &quot;implicit conversion&quot; rules for universal types. 
@@ -648,7 +648,7 @@ and one as an <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_componen
 These interpretations are both acceptable to the overloading rules. Therefore, 
 the complete context is ambiguous, and therefore illegal.</div>
 <div class="paranum"><a name="p35.k">35.k</a></div>
-<div class="Annotations"><A NAME="I4830"></A>It is the intent that the 
+<div class="Annotations"><A NAME="I4836"></A>It is the intent that the 
 Ada 95 preference rule for root numeric operators is more locally enforceable 
 than that of RM83-4.6(15). It should also eliminate interpretation shifts 
 due to the addition or removal of a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN> 
@@ -670,7 +670,7 @@ that explicitly allow things like &ldquo;any integer type.&rdquo;&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p35.n">35.n/2</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
-<span class="insert2"><A NAME="I4831"></A>Ada 95 allowed name resolution 
+<span class="insert2"><A NAME="I4837"></A>Ada 95 allowed name resolution 
 to distinguish between anonymous access-to-variable and access-to-constant 
 types. This is similar to distinguishing between subprograms with <B>in</B> 
 and <B>in out</B> parameters, which is known to be bad. Thus, that part 
@@ -692,7 +692,7 @@ this (such code should be rare), it will be ambiguous in Ada 2005.</span>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
-<span class="insert2"><A NAME="I4832"></A>Generalized the anonymous access 
+<span class="insert2"><A NAME="I4838"></A>Generalized the anonymous access 
 resolution rules to support the new capabilities of anonymous access 
 types (that is, access-to-subprogram and access-to-constant).</span></div>
 <div class="paranum"><a name="p35.r">35.r/2</a></div>
@@ -724,7 +724,7 @@ in qualified expressions.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p35.v">35.v/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0149-1.TXT">AI05-0149-1</A></I>} 
-<span class="insert3"><A NAME="I4833"></A>Implicit conversion is now 
+<span class="insert3"><A NAME="I4839"></A>Implicit conversion is now 
 allowed from anonymous access-to-object types to general access-to-object 
 types. Such conversions can make calls ambiguous. That can only happen 
 when there are two visible subprograms with the same name and have profiles 
@@ -738,7 +738,7 @@ same).</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p35.w">35.w/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0149-1.TXT">AI05-0149-1</A></I>} 
-<span class="insert3"><A NAME="I4834"></A>Implicit conversion is allowed 
+<span class="insert3"><A NAME="I4840"></A>Implicit conversion is allowed 
 from anonymous access-to-object types to general access-to-object types 
 if the designated type is convertible and runtime checks are minimized. 
 See also the incompatibilities section.</span>&nbsp;</div>
@@ -753,7 +753,7 @@ the Standard, we moved a single generalized version here.</span>&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p35.y">35.y/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0068-1.TXT">AI12-0068-1</A></I>} 
-<span class="insert4"><A NAME="I4835"></A><B>Corrigendum:</B> Added a 
+<span class="insert4"><A NAME="I4841"></A><B>Corrigendum:</B> Added a 
 rule to specify that the current instance of a type or subtype is a value 
 within an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>. 
 This could be inconsistent if a predicate or invariant uses the Constrained 

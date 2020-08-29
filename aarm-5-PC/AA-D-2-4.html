@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,16 +45,17 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00298.TXT">AI95-00298-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
 The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.<A NAME="I9488"></A><A NAME="I9489"></A></div>
+Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.<A NAME="I9510"></A><A NAME="I9511"></A></div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
 The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2.2">2.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
-<B>package</B>&nbsp;Ada.Dispatching.Non_Preemptive<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9490"></A><BR>
-&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Non_Preemptive);</span><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9491"></A>Yield_To_Higher;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9492"></A>Yield_To_Same_Or_Higher&nbsp;<B>renames</B>&nbsp;Yield;<BR>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0302-1.TXT">AI12-0302-1</A></I>} 
+<B>package</B>&nbsp;Ada.Dispatching.Non_Preemptive<span class="delete5">&nbsp;<B>is</B></span><A NAME="I9512"></A><BR>
+&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></span><span class="delete5">(Non_Preemptive);</span><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9513"></A>Yield_To_Higher;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9514"></A>Yield_To_Same_Or_Higher&nbsp;<B>renames</B>&nbsp;Yield;<BR>
 <B>end</B>&nbsp;Ada.Dispatching.Non_Preemptive;</div>
 <div class="paranum"><a name="p2.3">2.3/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
@@ -119,8 +120,8 @@ the ready queue.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
 For this policy, blocking or termination of a task, a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN>, 
 a call to Yield_To_Higher, and a call to Yield_To_Same_Or_Higher or Yield 
-are the only task dispatching points (see <A HREF="AA-D-2-1.html">D.2.1</A>).<A NAME="I9493"></A> 
-<A NAME="I9494"></A></div>
+are the only task dispatching points (see <A HREF="AA-D-2-1.html">D.2.1</A>).<A NAME="I9515"></A> 
+<A NAME="I9516"></A></div>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-9-6.html#S0266">delay_statement</A></SPAN> 
@@ -181,13 +182,13 @@ this case.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00298.TXT">AI95-00298-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
-<A NAME="I9495"></A>Policy Non_Preemptive_FIFO_Within_Priorities is new. 
+<A NAME="I9517"></A>Policy Non_Preemptive_FIFO_Within_Priorities is new. 
 </div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p11.b">11.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-<A NAME="I9496"></A>Package Dispatching.Non_Preemptive is new.&nbsp;</div>
+<A NAME="I9518"></A>Package Dispatching.Non_Preemptive is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

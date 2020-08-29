@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,7 +47,7 @@
 subtype S, the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Pos</div><div class="WideHanging-Body">
-<A NAME="I1858"></A><A NAME="I1859"></A>S'Pos denotes a function with 
+<A NAME="I1859"></A><A NAME="I1860"></A>S'Pos denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Pos(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -57,15 +57,15 @@ the following specification:&nbsp;</div>
 of the value of <I>Arg</I>, as a value of type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Val</div><div class="WideHanging-Body">
-<A NAME="I1860"></A><A NAME="I1861"></A>S'Val denotes a function with 
+<A NAME="I1861"></A><A NAME="I1862"></A>S'Val denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Val(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Body"><A NAME="I1862"></A><A NAME="I1863"></A>This 
+<div class="WideHanging-Body"><A NAME="I1863"></A><A NAME="I1864"></A>This 
 function returns a value of the type of S whose position number equals 
-the value of <I>Arg</I>. <A NAME="I1864"></A><A NAME="I1865"></A>For 
+the value of <I>Arg</I>. <A NAME="I1865"></A><A NAME="I1866"></A>For 
 the evaluation of a call on S'Val, if there is no value in the base range 
 of its type with the given position number, Constraint_Error is raised. 
 </div>
@@ -77,11 +77,11 @@ predicate</span></span><span class="insert3">&nbsp;of S, the following attribute
 are defined:</span></div>
 <div class="paranum"><a name="p7.2">7.2/4</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">S'First_Valid</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3"><A NAME="I1866"></A><A NAME="I1867"></A></span><span class="insert3">S'First_Valid 
+<span class="insert3"><A NAME="I1867"></A><A NAME="I1868"></A></span><span class="insert3">S'First_Valid 
 denotes the smallest value that belongs to S and satisfies the&nbsp;</span><span class="insert4">predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;predicate</span></span><span class="insert3">&nbsp;of S. The value of this attribute is of the type of S.</span></div>
 <div class="paranum"><a name="p7.3">7.3/4</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">S'Last_Valid</span></div><div class="WideHanging-Body">
-<span class="insert3"><A NAME="I1868"></A><A NAME="I1869"></A></span><span class="insert3">S'Last_Valid 
+<span class="insert3"><A NAME="I1869"></A><A NAME="I1870"></A></span><span class="insert3">S'Last_Valid 
 denotes the largest value that belongs to S and satisfies the&nbsp;</span><span class="insert4">predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;predicate</span></span><span class="insert3">&nbsp;of S. The value of this attribute is of the type of S.</span>&nbsp;</div>
 <div class="paranum"><a name="p7.4">7.4/3</a></div>
 <div class="Normal">&nbsp;<span class="insert3">First_Valid and Last_Valid 
@@ -103,7 +103,7 @@ codes specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0350">enumerati
 <div class="Notes">36&nbsp;&nbsp;Indexing and loop iteration use values 
 of discrete types.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Notes">37&nbsp;&nbsp;<A NAME="I1870"></A>The predefined operations 
+<div class="Notes">37&nbsp;&nbsp;<A NAME="I1871"></A>The predefined operations 
 of a discrete type include the assignment operation, qualification, the 
 membership tests, and the relational operators; for a boolean type they 
 include the short-circuit control forms and the logical operators; for 

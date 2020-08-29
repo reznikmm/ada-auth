@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,7 +35,7 @@
 <H2>(normative)</H2>
 <H1>Predefined Language Environment</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5926"></A><A NAME="I5927"></A>This 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5921"></A><A NAME="I5922"></A>This 
 Annex contains the specifications of library units that shall be provided 
 by every implementation. There are three root library units: Ada, Interfaces, 
 and System; other library units are children of these:</div>
@@ -306,7 +306,7 @@ and System; other library units are children of these:</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Normal">The implementation shall ensure that<span class="delete5">&nbsp;each language-defined subprogram is reentrant<A NAME="I5928"></A> in 
+<div class="Normal">The implementation shall ensure that<span class="delete5">&nbsp;each language-defined subprogram is reentrant<A NAME="I5923"></A> in 
 the sense that</span> concurrent calls on any<span class="insert5">&nbsp;two 
 (possibly the same)</span> language-defined <span class="insert5">subprograms</span><span class="delete5">&nbsp;subprogram</span> 
 perform as specified, so long as all <span class="insert5">pairs of&nbsp;</span>objects 
@@ -332,12 +332,6 @@ any inherited language-defined subprogram.&nbsp;</div>
 <div class="Normal">The implementation may restrict the replacement of 
 language-defined compilation units. The implementation may restrict children 
 of language-defined library units (other than Standard).&nbsp;</div>
-<div class="paranum"><a name="p5">5/5</a></div>
-<div class="Normal"><span class="insert5">The implementation may add 
-specifications of synchronized entities of implementation-defined packages 
-to the global specification (see  <A HREF="RM-6-1-2.html">6.1.2</A>) 
-for any language-defined entity that is not declared pure or has a global 
-specification of <B>null</B>.</span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

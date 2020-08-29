@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,24 +43,24 @@ kinds of literals as values of the type.</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
 following type-related operational aspects (collectively known as <I>user-defined 
-literal aspects</I>)<A NAME="I2516"></A> <A NAME="I2517"></A>may be specified 
+literal aspects</I>)<A NAME="I2518"></A> <A NAME="I2519"></A>may be specified 
 for any type <I>T</I>:</span></div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Integer_Literal</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that statically denotes a function with a result type of <I>T</I> and 
-one <B>in</B> parameter that is of type String and is not explictly aliased.<A NAME="I2518"></A><A NAME="I2519"></A></span></div>
+one <B>in</B> parameter that is of type String and is not explictly aliased.<A NAME="I2520"></A><A NAME="I2521"></A></span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Real_Literal</span></div><div class="WideHanging-Body">
 <span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that statically denotes a function with a result type of <I>T</I> and 
-one <B>in</B> parameter that is of type String and is not explictly aliased.<A NAME="I2520"></A><A NAME="I2521"></A></span></div>
+one <B>in</B> parameter that is of type String and is not explictly aliased.<A NAME="I2522"></A><A NAME="I2523"></A></span></div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">String_Literal</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that statically denotes a function with a result type of <I>T</I> and 
 one <B>in</B> parameter that is of type Wide_Wide_String and is not explictly 
-aliased.<A NAME="I2522"></A><A NAME="I2523"></A></span></div>
+aliased.<A NAME="I2524"></A><A NAME="I2525"></A></span></div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal"><span class="insert5">User-defined literal aspects 
 are inherited according to the rules given in <A HREF="RM-13-1.html">13.1</A>.</span></div>
@@ -77,7 +77,7 @@ having the textual representation of the original (numeric or string)
 literal.</span></div>
 <div class="paranum"><a name="p8">8/5</a></div>
 <div class="Normal"><span class="insert5">Such a literal is said to be 
-a <I>user-defined literal</I>.<A NAME="I2524"></A></span></div>
+a <I>user-defined literal</I>.<A NAME="I2526"></A></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9/5</a></div>
@@ -103,18 +103,18 @@ null extension.</span></div>
 <div class="Normal"><span class="insert5">In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
-unit.<A NAME="I2525"></A></span></div>
+unit.<A NAME="I2527"></A></span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/5</a></div>
-<div class="Normal"><span class="insert5"><A NAME="I2526"></A>It is a 
+<div class="Normal"><span class="insert5"><A NAME="I2528"></A>It is a 
 bounded error if the evaluation of a literal that has an expected type 
 with a specified user-defined literal aspect propagates an exception. 
 Either Program_Error or the exception propagated by the evaluation is 
 raised at the point of use of the value of the literal. If it is recognized 
 prior to run time that evaluation of such a literal will inevitably (if 
 executed) result in such a bounded error, then this may be reported as 
-an error prior to run time.<A NAME="I2527"></A></span></div>
+an error prior to run time.<A NAME="I2529"></A></span></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p15">15/5</a></div>
@@ -133,12 +133,12 @@ an error prior to run time.<A NAME="I2527"></A></span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="Examples"><span class="insert5"><B>function</B>&nbsp;To_Roman_Number&nbsp;(S&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Roman_Number&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;(<B>declare</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R&nbsp;:&nbsp;<B>constant&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Integer&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R&nbsp;:&nbsp;<B>constant&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Roman_Number&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>for</B>&nbsp;D&nbsp;<B>in</B>&nbsp;S'Range&nbsp;=&gt;&nbsp;Roman_Digit'Enum_Rep<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Roman_Digit'Value&nbsp;('''&nbsp;&amp;&nbsp;S(D)&nbsp;&amp;&nbsp;''')));&nbsp;--<SPAN Class="roman"><I>&nbsp;See&nbsp;<A HREF="RM-3-5-2.html">3.5.2</A>&nbsp;and&nbsp;<A HREF="RM-13-4.html">13.4</A></I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;R'Range&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>if</B>&nbsp;I&nbsp;&lt;&nbsp;R'Last&nbsp;<B>and&nbsp;then</B>&nbsp;R(I)&nbsp;&lt;&nbsp;R(I&nbsp;+&nbsp;1)&nbsp;<B>then</B>&nbsp;-1&nbsp;<B>else</B>&nbsp;1)&nbsp;*&nbsp;R(I))]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>if</B>&nbsp;I&nbsp;&lt;&nbsp;R'Last&nbsp;<B>and&nbsp;then</B>&nbsp;R(I)&nbsp;&lt;&nbsp;R(I&nbsp;+&nbsp;1)&nbsp;<B>then</B>&nbsp;-1&nbsp;<B>else</B>&nbsp;1)&nbsp;*&nbsp;R(I)]<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Reduce(&quot;+&quot;,&nbsp;0)<BR>
 &nbsp;&nbsp;&nbsp;);</span></div>
 <div class="paranum"><a name="p20">20/5</a></div>

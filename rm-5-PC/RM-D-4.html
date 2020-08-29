@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 <HR>
 <H1>D.4 Entry Queuing Policies</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><A NAME="I8743"></A>This subclause specifies a mechanism 
+<div class="Normal"><A NAME="I8764"></A>This subclause specifies a mechanism 
 for a user to choose an entry <I>queuing policy</I>. It also defines 
 <span class="insert5">three</span><span class="delete5">&nbsp;two</span> such 
 policies. Other policies are implementation defined.&nbsp;</div>
@@ -47,23 +47,23 @@ policies. Other policies are implementation defined.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Queuing_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8744"></A><A NAME="I8745"></A>Queuing_Policy(<I>policy_</I><A NAME="I8746"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8765"></A><A NAME="I8766"></A>Queuing_Policy(<I>policy_</I><A NAME="I8767"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Normal">The <I>policy_</I><A NAME="I8747"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+<div class="Normal">The <I>policy_</I><A NAME="I8768"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 shall be either FIFO_Queuing, <span class="insert5">Ordered_FIFO_Queuing, 
-</span>Priority_Queuing or an implementation-defined <A NAME="I8748"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>.</div>
+</span>Priority_Queuing or an implementation-defined <A NAME="I8769"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8749"></A><A NAME="I8750"></A>A Queuing_Policy 
+<div class="Normal"><A NAME="I8770"></A><A NAME="I8771"></A>A Queuing_Policy 
 pragma is a configuration pragma.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I8751"></A>A <I>queuing policy</I> governs 
+<div class="Normal"><A NAME="I8772"></A>A <I>queuing policy</I> governs 
 the order in which tasks are queued for entry service, and the order 
 in which different entry queues are considered for service. The queuing 
 policy is specified by a Queuing_Policy pragma.&nbsp;</div>
@@ -72,12 +72,12 @@ policy is specified by a Queuing_Policy pragma.&nbsp;</div>
 queuing policies, FIFO_Queuing<span class="insert5">, Ordered_FIFO_Queuing, 
 </span>and Priority_Queuing, are language defined. If no Queuing_Policy 
 pragma applies to any of the program units comprising the partition, 
-the queuing policy for that partition is FIFO_Queuing.<A NAME="I8752"></A><A NAME="I8753"></A> 
+the queuing policy for that partition is FIFO_Queuing.<A NAME="I8773"></A><A NAME="I8774"></A> 
 The rules for <span class="insert5">the FIFO_Queuing</span><span class="delete5">&nbsp;this</span> 
 policy are specified in <A HREF="RM-9-5-3.html">9.5.3</A> and <A HREF="RM-9-7-1.html">9.7.1</A>.</div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">The 
-Ordered_FIFO_Queuing policy is defined as follows:<A NAME="I8754"></A><A NAME="I8755"></A></span></div>
+Ordered_FIFO_Queuing policy is defined as follows:<A NAME="I8775"></A><A NAME="I8776"></A></span></div>
 <div class="paranum"><a name="p7.2">7.2/5</a></div>
 <div class="Bulleted"><span class="insert5">Calls are selected on a given 
 entry queue in order of arrival.</span></div>
@@ -101,9 +101,9 @@ is open and has queued calls, the alternative whose queue has the call
 that arrived first is selected.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The Priority_Queuing 
-policy is defined as follows:<A NAME="I8756"></A><A NAME="I8757"></A></div>
+policy is defined as follows:<A NAME="I8777"></A><A NAME="I8778"></A></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I8758"></A>The calls to an entry (including 
+<div class="Bulleted"><A NAME="I8779"></A>The calls to an entry (including 
 a member of an entry family) are queued in an order consistent with the 
 priorities of the calls. The <I>priority of an entry call</I> is initialized 
 from the active priority of the calling task at the time the call is 
@@ -170,7 +170,7 @@ or an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0257">entry_declaration</A></S
 the following language-defined representation aspect may be specified:</span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">Max_Entry_Queue_Length</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert5">The type of aspect Max_Entry_Queue_Length is Integer.<A NAME="I8759"></A><A NAME="I8760"></A></span></div>
+<span class="insert5">The type of aspect Max_Entry_Queue_Length is Integer.<A NAME="I8780"></A><A NAME="I8781"></A></span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="WideHanging-Term"><span class="insert5"></span></div><div class="WideHanging-Body">
 <span class="insert5">If directly specified, the aspect_definition shall 
@@ -184,7 +184,7 @@ has value -1 (representing no additional restriction on queue length).</span>
 aspect for a type has a nonnegative value, the Max_Entry_Queue_Length 
 aspect for every individual entry of that type shall not be greater than 
 the value of the aspect for the type. The Max_Entry_Queue_Length aspect 
-of a type is nonoverridable.</span></div>
+of a type is nonoverridable (see <A HREF="RM-13-1-1.html">13.1.1</A>).</span></div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p21">21/5</a></div>
@@ -199,13 +199,13 @@ shall not be greater than the value of the restriction.</span></div>
 specified for Max_Entry_Queue_Length for a type, and an entry call or 
 requeue would cause the queue for any entry of the type to become longer 
 than the specified value, then Program_Error is raised at the point of 
-the call or requeue.<A NAME="I8761"></A></span></div>
+the call or requeue.<A NAME="I8782"></A></span></div>
 <div class="paranum"><a name="p23">23/5</a></div>
 <div class="Normal"><span class="insert5">If a nonconfirming value is 
 specified for Max_Entry_Queue_Length for an entry, and an entry call 
 or requeue would cause the queue for an entry to become longer than the 
 specified value, then Program_Error is raised at the point of the call 
-or requeue.<A NAME="I8762"></A></span>&nbsp;</div>
+or requeue.<A NAME="I8783"></A></span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

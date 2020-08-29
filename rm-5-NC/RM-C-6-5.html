@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,28 +44,28 @@ declaration:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Atomic_Type&nbsp;<B>is&nbsp;mod</B>&nbsp;&lt;&gt;&nbsp;<B>with</B>&nbsp;Atomic;<BR>
-<B>package</B>&nbsp;System.Atomic_Operations.Modular_Arithmetic<A NAME="I8509"></A><BR>
+<B>package</B>&nbsp;System.Atomic_Operations.Modular_Arithmetic<A NAME="I8526"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8510"></A>Atomic_Add&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8527"></A>Atomic_Add&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8511"></A>Atomic_Subtract&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8528"></A>Atomic_Subtract&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p6">6/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8512"></A>Atomic_Fetch_And_Add<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8529"></A>Atomic_Fetch_And_Add<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Atomic_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p7">7/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8513"></A>Atomic_Fetch_And_Subtract<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8530"></A>Atomic_Fetch_And_Subtract<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Atomic_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Atomic_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8514"></A>Is_Lock_Free&nbsp;(Item&nbsp;:&nbsp;<B>aliased</B>&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8531"></A>Is_Lock_Free&nbsp;(Item&nbsp;:&nbsp;<B>aliased</B>&nbsp;Atomic_Type)&nbsp;<B>return</B>&nbsp;Boolean<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Examples"><B>end</B>&nbsp;System.Atomic_Operations.Modular_Arithmetic;</div>

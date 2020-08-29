@@ -25,12 +25,10 @@
     DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
     DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
     DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -181,7 +179,7 @@ new object to be built-in-place.&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0178-1.TXT">AI05-0178-1</A></I>} 
-<A NAME="I4368"></A>A view of a type is <I>limited</I> if it is one of 
+<A NAME="I4374"></A>A view of a type is <I>limited</I> if it is one of 
 the following:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00411.TXT">AI95-00411-01</A></I>} 
@@ -239,13 +237,13 @@ If the parent interface is nonlimited, the word <B>limited</B> is illegal
 by the rules in <A HREF="AA-3-4.html">3.4</A>. The net effect is that 
 the order of the interfaces doesn't matter.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4369"></A>Otherwise, the type is nonlimited.</div>
+<div class="Normal"><A NAME="I4375"></A>Otherwise, the type is nonlimited.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">[There are no predefined equality operators for a 
 limited type.]</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0052-1.TXT">AI05-0052-1</A></I>} 
-A type is <I>immutably limited</I> if it is one of the following:<A NAME="I4370"></A><A NAME="I4371"></A></div>
+A type is <I>immutably limited</I> if it is one of the following:<A NAME="I4376"></A><A NAME="I4377"></A></div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
 <div class="Bulleted">An explicitly limited record type;</div>
 <div class="paranum"><a name="p8.3">8.3/3</a></div>
@@ -288,17 +286,6 @@ is descended from the actual type corresponding to the formal, and all
 rules are rechecked in the specification. Bodies are excepted so that 
 we assume the worst there; the complex wording is required to handle 
 children of generics and unrelated bodies properly.&nbsp;</div>
-
-<H4 Class="centered">Implementation Requirements</H4>
-<div class="paranum"><a name="p8.8">8.8/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
-</div>
-<div class="paranum"><a name="p8.e">8.e/3</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
-</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Notes">17&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
@@ -319,26 +306,8 @@ only are required to be build-in-place for &ldquo;really&rdquo; limited
 types.&nbsp;</div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>Paragraphs 10 through 
 15 were deleted.</I></SPAN>&nbsp;</div>
-<div class="paranum"><a name="p10">10/2</a></div>
-<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-</div>
-<div class="paranum"><a name="p11">11/2</a></div>
-<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-</div>
-<div class="paranum"><a name="p12">12/2</a></div>
-<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-</div>
-<div class="paranum"><a name="p13">13/2</a></div>
-<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-</div>
-<div class="paranum"><a name="p14">14/2</a></div>
-<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-</div>
-<div class="paranum"><a name="p15">15/2</a></div>
-<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Notes">18&nbsp;&nbsp;<A NAME="I4372"></A><A NAME="I4373"></A><A NAME="I4374"></A>As 
+<div class="Notes">18&nbsp;&nbsp;<A NAME="I4378"></A><A NAME="I4379"></A><A NAME="I4380"></A>As 
 illustrated in <A HREF="AA-7-3-1.html">7.3.1</A>, an untagged limited 
 type can become nonlimited under certain circumstances.&nbsp;</div>
 <div class="paranum"><a name="p16.a">16.a</a></div>
@@ -412,7 +381,7 @@ and <A HREF="AA-6-5.html">6.5</A>).</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p23.a">23.a</a></div>
-<div class="Annotations"><A NAME="I4375"></A>The restrictions in RM83-7.4.4(4), 
+<div class="Annotations"><A NAME="I4381"></A>The restrictions in RM83-7.4.4(4), 
 which disallowed <B>out</B> parameters of limited types in certain cases, 
 are removed.&nbsp;</div>
 
@@ -428,7 +397,7 @@ Types and Private Extensions</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p23.c">23.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I4376"></A>Limited types now have an assignment operation, but 
+<A NAME="I4382"></A>Limited types now have an assignment operation, but 
 its use is restricted such that all uses are build-in-place. This is 
 accomplished by restricting uses to <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-6-4.html#S0218">function_call</A></SPAN>s. 
@@ -483,7 +452,7 @@ to have all of the reasons for limitedness together.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p23.k">23.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0172-1.TXT">AI12-0172-1</A></I>} 
-<span class="insert5"><A NAME="I4377"></A><B>Correction:</B> A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
+<span class="insert5"><A NAME="I4383"></A><B>Correction:</B> A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN> 
 can be used in an expression used in a limited context. This is harmless 
 (no object will be created if an exception is raised instead), useful, 
 and thus appears to have been an omission when <SPAN Class="swiss"><A HREF="AA-11-3.html#S0309">raise_expression</A></SPAN>s 

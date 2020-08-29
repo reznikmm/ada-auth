@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,14 +38,14 @@ specifies the execution of a subprogram.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">subprogram_body</SPAN><A NAME="I3737"></A><A NAME="S0216"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3738"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3739"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3740"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3741"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">subprogram_body</SPAN><A NAME="I3742"></A><A NAME="S0216"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3743"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0234">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3744"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0196">subprogram_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3745"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0346">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3746"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3742"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<A NAME="I3743"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0199">designator</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3747"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<A NAME="I3748"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0199">designator</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">If a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0199">designator</A></SPAN> 
 appears at the end of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN>, 
@@ -62,7 +62,7 @@ the completion of a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0195">subprogram_d
 or <SPAN Class="swiss"><A HREF="RM-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>. 
 The profile of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
 that completes a declaration shall conform fully to that of the declaration. 
-<A NAME="I3744"></A></div>
+<A NAME="I3749"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
@@ -72,12 +72,12 @@ or itself be the initial declaration of the subprogram.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3745"></A>The elaboration of a nongeneric 
+<div class="Normal"><A NAME="I3750"></A>The elaboration of a nongeneric 
 <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
 has no other effect than to establish that the subprogram can from then 
 on be called without failing the Elaboration_Check.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I3746"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
+<div class="Normal"><A NAME="I3751"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0216">subprogram_body</A></SPAN> 
 is invoked by a subprogram call. For this execution the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 is elaborated, and the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0304">handled_sequence_of_statements</A></SPAN> 
 is then executed.&nbsp;</div>

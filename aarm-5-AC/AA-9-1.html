@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +44,7 @@
 <HR>
 <H1>9.1 Task Units and Task Objects</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4858"></A>A task unit is declared by a 
+<div class="Normal"><A NAME="I4864"></A>A task unit is declared by a 
 <I>task declaration</I>, which has a corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>. 
 A task declaration may be a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0244">task_type_declaration</A></SPAN>, 
 in which case it declares a named task type; alternatively, it may be 
@@ -56,38 +56,38 @@ a named task object of that type.&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">task_type_declaration</SPAN><A NAME="I4859"></A><A NAME="S0244"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>type</B>&nbsp;<A NAME="I4860"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4861"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>]<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4862"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>&nbsp;[<B>is</B><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4863"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<A NAME="I4864"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN>];</div>
+<SPAN Class="swiss">task_type_declaration</SPAN><A NAME="I4865"></A><A NAME="S0244"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>type</B>&nbsp;<A NAME="I4866"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4867"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>]<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4868"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>&nbsp;[<B>is</B><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4869"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<A NAME="I4870"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00399.TXT">AI95-00399-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">single_task_declaration</SPAN><A NAME="I4865"></A><A NAME="S0245"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<A NAME="I4866"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4867"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span> [<B>is</B><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4868"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<A NAME="I4869"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN>];</div>
+<SPAN Class="swiss">single_task_declaration</SPAN><A NAME="I4871"></A><A NAME="S0245"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<A NAME="I4872"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4873"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span> [<B>is</B><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4874"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<A NAME="I4875"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN>];</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">task_definition</SPAN><A NAME="I4870"></A><A NAME="S0246"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4871"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0247">task_item</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">task_definition</SPAN><A NAME="I4876"></A><A NAME="S0246"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4877"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0247">task_item</A></SPAN>}<BR>
 &nbsp;&nbsp;[&nbsp;<B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4872"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0247">task_item</A></SPAN>}]<BR>
-&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4873"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>]</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4878"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0247">task_item</A></SPAN>}]<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4879"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>]</div>
 <div class="paranum"><a name="p5">5/1</a></div>
 <div class="Indented1">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<SPAN Class="swiss">task_item</SPAN><A NAME="I4874"></A><A NAME="S0247"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4875"></A><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>&nbsp;|&nbsp;<span class="insert1"><A NAME="I4876"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN></span><span class="delete1"><A NAME="I4877"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">&nbsp;representation_clause</A></SPAN></span></div>
+<SPAN Class="swiss">task_item</SPAN><A NAME="I4880"></A><A NAME="S0247"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4881"></A><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>&nbsp;|&nbsp;<span class="insert1"><A NAME="I4882"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN></span><span class="delete1"><A NAME="I4883"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">&nbsp;representation_clause</A></SPAN></span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<SPAN Class="swiss">task_body</SPAN><A NAME="I4878"></A><A NAME="S0248"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4879"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4880"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4881"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<SPAN Class="swiss">task_body</SPAN><A NAME="I4884"></A><A NAME="S0248"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4885"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4886"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4887"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4882"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4883"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4888"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0304">handled_sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<I>task_</I><A NAME="I4889"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Indented1">If a <I>task_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 appears at the end of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN> 
@@ -98,7 +98,7 @@ it shall repeat the <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_ide
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<span class="delete2"><A NAME="I4884"></A>A task declaration requires 
+<span class="delete2"><A NAME="I4890"></A>A task declaration requires 
 a completion[, which shall be a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>,] 
 and every <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN> 
 shall be the completion of some task declaration.</span>&nbsp;</div>
@@ -113,11 +113,11 @@ Import, if the implementation supports it.</span>&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN> 
-defines a task type and its first subtype. <A NAME="I4885"></A>The first 
+defines a task type and its first subtype. <A NAME="I4891"></A>The first 
 list of <SPAN Class="swiss"><A HREF="AA-9-1.html#S0247">task_item</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN>, 
 together with the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
-if any, is called the visible part of the task unit. [<A NAME="I4886"></A> 
+if any, is called the visible part of the task unit. [<A NAME="I4892"></A> 
 The optional list of <SPAN Class="swiss"><A HREF="AA-9-1.html#S0247">task_item</A></SPAN>s 
 after the reserved word <B>private</B> is called the private part of 
 the task unit.]&nbsp;</div>
@@ -150,7 +150,7 @@ whose profile is type conformant with the prefixed view profile of the
 inherited subprogram, the inherited subprogram is said to be <I>implemented</I> 
 by the conforming task entry</span><span class="insert3">&nbsp;using an implicitly 
 declared nonabstract subprogram which has the same profile as the inherited 
-subprogram and which overrides it<A NAME="I4887"></A></span><span class="insert2">.<A NAME="I4888"></A><A NAME="I4889"></A></span> 
+subprogram and which overrides it<A NAME="I4893"></A></span><span class="insert2">.<A NAME="I4894"></A><A NAME="I4895"></A></span> 
 </div>
 <div class="paranum"><a name="p9.b">9.b/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>The 
@@ -170,7 +170,7 @@ subprogram.</span>&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9.3">9.3/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<span class="insert2"><A NAME="I4890"></A>A task declaration requires 
+<span class="insert2"><A NAME="I4896"></A>A task declaration requires 
 a completion[, which shall be a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>,] 
 and every <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN> 
 shall be the completion of some task declaration.</span>&nbsp;</div>
@@ -206,7 +206,7 @@ primitive subprogram of a tagged task type shall not be type conformant
 with any entry of the task type, if the&nbsp;</span><span class="insert3">subprogram 
 has the same defining name as the entry and the&nbsp;</span><span class="insert2">first 
 parameter of the subprogram is of the task type or is an access parameter 
-designating the task type.<A NAME="I4891"></A></span>&nbsp;</div>
+designating the task type.<A NAME="I4897"></A></span>&nbsp;</div>
 <div class="paranum"><a name="p9.e">9.e/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>This prevents 
 the existence of two operations with the same name and profile which 
@@ -228,13 +228,13 @@ apply:</span></div>
 <span class="insert2">the inherited subprogram is overridden with a primitive 
 subprogram of the task type, in which case the overriding subprogram 
 shall be subtype conformant with the inherited subprogram and not abstract; 
-or<A NAME="I4892"></A></span></div>
+or<A NAME="I4898"></A></span></div>
 <div class="paranum"><a name="p9.8">9.8/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00397.TXT">AI95-00397-01</A></I>} 
 <span class="insert2">the inherited subprogram is implemented by a single 
 entry of the task type; in which case its prefixed view profile shall 
-be subtype conformant with that of the task entry. <A NAME="I4893"></A></span></div>
+be subtype conformant with that of the task entry. <A NAME="I4899"></A></span></div>
 <div class="paranum"><a name="p9.f">9.f/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>An 
 entry may implement two subprograms from the ancestors, one whose first 
@@ -244,7 +244,7 @@ parameter is of type <I>T</I> and one whose first parameter is of type
 entails the creation of wrappers.</span>&nbsp;</div>
 <div class="paranum"><a name="p9.9">9.9/2</a></div>
 <div class="Normal">&nbsp;<span class="insert2">If neither applies, the inherited 
-subprogram shall be a null procedure. <A NAME="I4894"></A>In addition 
+subprogram shall be a null procedure. <A NAME="I4900"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -256,9 +256,9 @@ unless the subprogram is a null procedure.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal">[<A NAME="I4895"></A> The elaboration of a task declaration 
+<div class="Normal">[<A NAME="I4901"></A> The elaboration of a task declaration 
 elaborates the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN>. 
-<A NAME="I4896"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0245">single_task_declaration</A></SPAN> 
+<A NAME="I4902"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0245">single_task_declaration</A></SPAN> 
 also creates an object of an (anonymous) task type.]&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>This is redundant with the general 
@@ -266,14 +266,14 @@ rules for the elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024"
 and an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I4897"></A>[The elaboration of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN> 
+<div class="Normal"><A NAME="I4903"></A>[The elaboration of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN> 
 creates the task type and its first subtype;] it also includes the elaboration 
 of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>s 
 in the given order.</div>
 <div class="paranum"><a name="p12">12/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<A NAME="I4898"></A>As part of the initialization of a task object, any 
+<A NAME="I4904"></A>As part of the initialization of a task object, any 
 <span class="insert1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN>s</span><span class="delete1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">&nbsp;representation_clause</A></SPAN>s</span> 
 and any per-object constraints associated with <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>s 
 of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0246">task_definition</A></SPAN> 
@@ -290,7 +290,7 @@ that allocates sequential interrupt vectors.</div>
 <div class="Annotations">We do not mention representation pragmas, since 
 each pragma may have its own elaboration rules.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I4899"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN> 
+<div class="Normal"><A NAME="I4905"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN> 
 has no effect other than to establish that tasks of the type can from 
 then on be activated without failing the Elaboration_Check.</div>
 <div class="paranum"><a name="p14">14</a></div>
@@ -397,7 +397,7 @@ Terminal&nbsp;:&nbsp;Keyboard&nbsp;:=&nbsp;<B>new</B>&nbsp;Keyboard_Driver(Term_
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p32.a">32.a/1</a></div>
-<div class="Annotations"><A NAME="I4900"></A>The syntax rules for task 
+<div class="Annotations"><A NAME="I4906"></A>The syntax rules for task 
 declarations are modified to allow a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
 and to allow a private part. They are also modified to allow <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0257">entry_declaration</A></SPAN>s 
 and <span class="insert1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0343">aspect_clause</A></SPAN>s</span><span class="delete1"><SPAN Class="swiss"><A HREF="AA-13-1.html#S0344">&nbsp;representation_clause</A></SPAN>s</span> 
@@ -428,7 +428,7 @@ can be empty.&nbsp;</div>
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00397.TXT">AI95-00397-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00399.TXT">AI95-00399-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
-<span class="insert2"><A NAME="I4901"></A>Task types and single tasks 
+<span class="insert2"><A NAME="I4907"></A>Task types and single tasks 
 can be derived from one or more interfaces. Entries of the task type 
 can implement the primitive operations of an interface. <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0234">Overriding_indicator</A></SPAN>s 
 can be used to specify whether or not an entry implements a primitive 
@@ -461,7 +461,7 @@ within itself to reflect the exception for anonymous access types.</span>
 <div class="paranum"><a name="p32.j">32.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<span class="insert3"><A NAME="I4902"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<span class="insert3"><A NAME="I4908"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0244">task_type_declaration</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0245">single_task_declaration</A></SPAN>, 
 and a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0248">task_body</A></SPAN>. 

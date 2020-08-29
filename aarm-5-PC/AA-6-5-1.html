@@ -18,7 +18,6 @@
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
     DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
     DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
@@ -26,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,21 +44,12 @@ Specifying aspect No_Return to have the value True indicates that a <span class=
 cannot return normally[; it may propagate an exception or loop forever]. 
 </div>
 <div class="paranum"><a name="p1.a">1.a/5</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>Aspect No_Deposit<A NAME="I4196"></A> 
+<div class="Annotations"><B>Discussion:&nbsp;</B>Aspect No_Deposit<A NAME="I4202"></A> 
 will have to wait for Ada <span class="insert5">2028</span><span class="delete5">&nbsp;2020</span>. 
 :-)&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 and 
 3 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
-
-<H4 Class="centered">Syntax</H4>
-<div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-</div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3.1">3.1/5</a></div>
@@ -72,7 +62,7 @@ the following language-defined representation aspect may be specified:
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;No_Return</div><div class="WideHanging-Body">
 The type of aspect No_Return is Boolean. When aspect No_Return is True 
-for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I4197"></A><A NAME="I4198"></A><A NAME="I4199"></A></div>
+for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I4203"></A><A NAME="I4204"></A><A NAME="I4205"></A></div>
 <div class="paranum"><a name="p3.3">3.3/3</a></div>
 <div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0348">aspect_definition</A></SPAN> 
 shall be a static expression. [This aspect is never inherited;] if not 
@@ -130,7 +120,7 @@ that all such return statements don't actually return a value.</span>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
 A <span class="insert5">subprogram</span><span class="delete5">&nbsp;procedure</span> 
 shall be nonreturning if it overrides a dispatching nonreturning <span class="insert5">subprogram</span><span class="delete5">&nbsp;procedure</span>. 
-<A NAME="I4200"></A>In addition to the places where Legality Rules normally 
+<A NAME="I4206"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), this rule applies also in 
 the private part of an instance of a generic unit.</div>
 <div class="paranum"><a name="p6.a">6.a/5</a></div>
@@ -150,19 +140,12 @@ the body has the same property.&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 8 was deleted.</I></SPAN> 
 </div>
 
-<H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-</div>
-
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
 If the body of a nonreturning procedure completes normally, Program_Error 
-is raised at the point of the call. <A NAME="I4201"></A></div>
+is raised at the point of the call. <A NAME="I4207"></A></div>
 <div class="paranum"><a name="p9.a">9.a/5</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
 Note that there is no name for suppressing this check, since the check 
@@ -201,19 +184,19 @@ with this neatly.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
-<A NAME="I4202"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+<A NAME="I4208"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
 No_Return is new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p10.b">10.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I4203"></A>Aspect No_Return is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I4209"></A>Aspect No_Return is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 No_Return is now obsolescent.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p10.c">10.c/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
-<span class="insert5"><A NAME="I4204"></A>Aspect No_Return can now be 
+<span class="insert5"><A NAME="I4210"></A>Aspect No_Return can now be 
 applied to functions as well as procedures.</span>&nbsp;</div>
 
 <HR>

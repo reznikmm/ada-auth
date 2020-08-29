@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,17 +46,17 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">[The evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 creates an object and yields an access value that designates the object. 
-<A NAME="I3607"></A><A NAME="I3608"></A><A NAME="I3609"></A>]</div>
+<A NAME="I3610"></A><A NAME="I3611"></A><A NAME="I3612"></A>]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<SPAN Class="swiss">allocator</SPAN><A NAME="I3610"></A><A NAME="S0164"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<span class="insert3">[<A NAME="I3611"></A><SPAN Class="swiss"><A HREF="AA-4-8.html#S0165">subpool_specification</A></SPAN>]&nbsp;</span><A NAME="I3612"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert3"><BR>
-</span>&nbsp;|&nbsp;<B>new</B>&nbsp;<span class="insert3">[<A NAME="I3613"></A><SPAN Class="swiss"><A HREF="AA-4-8.html#S0165">subpool_specification</A></SPAN>]&nbsp;</span><A NAME="I3614"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN></div>
+<SPAN Class="swiss">allocator</SPAN><A NAME="I3613"></A><A NAME="S0164"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<span class="insert3">[<A NAME="I3614"></A><SPAN Class="swiss"><A HREF="AA-4-8.html#S0165">subpool_specification</A></SPAN>]&nbsp;</span><A NAME="I3615"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert3"><BR>
+</span>&nbsp;|&nbsp;<B>new</B>&nbsp;<span class="insert3">[<A NAME="I3616"></A><SPAN Class="swiss"><A HREF="AA-4-8.html#S0165">subpool_specification</A></SPAN>]&nbsp;</span><A NAME="I3617"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN></div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">subpool_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3615"></A><A NAME="S0165"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3">(<I>subpool_handle_</I><A NAME="I3616"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)</span></div>
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">subpool_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3618"></A><A NAME="S0165"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3">(<I>subpool_handle_</I><A NAME="I3619"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)</span></div>
 <div class="paranum"><a name="p2.2">2.2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0104-1.TXT">AI05-0104-1</A></I>} 
 <span class="insert3">For an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
@@ -78,7 +78,7 @@ so it makes sense to make the uninitialized case illegal as well.</span>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<A NAME="I3617"></A>The expected type for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
+<A NAME="I3620"></A>The expected type for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 shall be a single access-to-object type <span class="insert1">with</span><span class="delete1">&nbsp;whose</span> 
 designated type <span class="insert1"><I>D</I> such that either <I>D</I></span> 
 covers the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
@@ -87,7 +87,7 @@ or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPA
 or the expected type is anonymous and the determined type is <I>D</I>'Class</span>.<span class="insert3">&nbsp;A <I>subpool_handle_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is expected to be of any type descended from Subpool_Handle, which is 
 the type used to identify a subpool, declared in package System.Storage_Pools.Subpools 
-(see <A HREF="AA-13-11-4.html">13.11.4</A>).<A NAME="I3618"></A></span> 
+(see <A HREF="AA-13-11-4.html">13.11.4</A>).<A NAME="I3621"></A></span> 
 </div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>See <A HREF="AA-8-6.html">8.6</A>, 
@@ -103,16 +103,16 @@ is allowed as a controlling parameter of a dispatching call (see <A HREF="AA-3-9
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I3619"></A>An <I>initialized</I> allocator 
+<div class="Normal"><A NAME="I3622"></A>An <I>initialized</I> allocator 
 is an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN>. 
-<A NAME="I3620"></A>An <I>uninitialized</I> allocator is one with a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+<A NAME="I3623"></A>An <I>uninitialized</I> allocator is one with a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
 In the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 of an uninitialized allocator, a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 is permitted only if the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes an [unconstrained] composite subtype; if there is no <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-shall denote a definite subtype. <A NAME="I3621"></A></div>
+shall denote a definite subtype. <A NAME="I3624"></A></div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For example, ... <B>new</B> 
 S'Class ... (with no initialization expression) is illegal, but ... <B>new</B> 
@@ -173,7 +173,7 @@ the allocated object from outliving its discriminants.</span>&nbsp;</div>
 <span class="insert2">An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 shall not be of an access type for which the Storage_Size has been specified 
 by a static expression with value zero or is defined by the language 
-to be zero.&nbsp;</span><span class="insert2"><span class="delete3"><A NAME="I3622"></A>In 
+to be zero.&nbsp;</span><span class="insert2"><span class="delete3"><A NAME="I3625"></A>In 
 addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit. This rule does not apply in the body of a generic unit or within 
@@ -226,7 +226,7 @@ want to ensure that the containing object is of a type that is always
 limited.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.6">5.6/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0052-1.TXT">AI05-0052-1</A></I>} 
-<span class="insert3"><A NAME="I3623"></A>In addition to the places where 
+<span class="insert3"><A NAME="I3626"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -249,7 +249,7 @@ otherwise, the created</span><span class="delete2">&nbsp;always constrained;
 if the designated subtype is constrained, then it provides the constraint 
 of the created object; otherwise, the</span> object is constrained by 
 its initial value [(even if the designated subtype is unconstrained with 
-defaults)]. <A NAME="I3624"></A></div>
+defaults)]. <A NAME="I3627"></A></div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>See AI83-00331.&nbsp;</div>
 <div class="paranum"><a name="p6.b">6.b/2</a></div>
@@ -276,30 +276,30 @@ other access path, and that assignment might alter the discriminants.</span>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
-<A NAME="I3625"></A>For the evaluation of an <span class="insert2">initialized 
+<A NAME="I3628"></A>For the evaluation of an <span class="insert2">initialized 
 allocator</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">&nbsp;allocator</A></SPAN></span>, 
 the <span class="delete2">elaboration of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or the&nbsp;</span>evaluation of the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
-is performed first. <A NAME="I3626"></A><A NAME="I3627"></A><span class="insert2">An</span><span class="delete2">&nbsp;For 
+is performed first. <A NAME="I3629"></A><A NAME="I3630"></A><span class="insert2">An</span><span class="delete2">&nbsp;For 
 the evaluation of an initialized allocator, an</span> object of the designated 
 type is created and the value of the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0163">qualified_expression</A></SPAN> 
-is converted to the designated subtype and assigned to the object. <A NAME="I3628"></A></div>
+is converted to the designated subtype and assigned to the object. <A NAME="I3631"></A></div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The conversion might raise 
 Constraint_Error.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3629"></A>For the evaluation of an uninitialized 
+<div class="Normal"><A NAME="I3632"></A>For the evaluation of an uninitialized 
 allocator<span class="insert2">, the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 is performed first. Then</span>:&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
-<A NAME="I3630"></A>If the designated type is elementary, an object of 
+<A NAME="I3633"></A>If the designated type is elementary, an object of 
 the designated subtype is created and any implicit initial value is assigned;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Bulleted">{<I><A HREF="defect1.html#8652/0002">8652/0002</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00171.TXT">AI95-00171-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
-<span class="delete2"><A NAME="I3631"></A></span>If the designated type 
+<span class="delete2"><A NAME="I3634"></A></span>If the designated type 
 is composite, an object of the designated type is created with tag, if 
 any, determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert2">. 
@@ -310,11 +310,11 @@ are elaborated&nbsp;</span><span class="insert1"><span class="delete2">(see
 any implicit initial values for the subcomponents of the object are obtained 
 as determined by</span> the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 <span class="insert2">to determine its nominal subtype</span><span class="delete2">&nbsp;and 
-assigned to the corresponding subcomponents</span>. <A NAME="I3632"></A><A NAME="I3633"></A><A NAME="I3634"></A><A NAME="I3635"></A>A 
+assigned to the corresponding subcomponents</span>. <A NAME="I3635"></A><A NAME="I3636"></A><A NAME="I3637"></A><A NAME="I3638"></A>A 
 check is made that the value of the object belongs to the designated 
-subtype. <A NAME="I3636"></A>Constraint_Error is raised if this check 
+subtype. <A NAME="I3639"></A>Constraint_Error is raised if this check 
 fails. This check and the initialization of the object are performed 
-in an arbitrary order.<A NAME="I3637"></A></div>
+in an arbitrary order.<A NAME="I3640"></A></div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>AI83-00150.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
@@ -342,8 +342,8 @@ is class-wide)&nbsp;</span><span class="insert2">has one or more&nbsp;</span><sp
 </span></span><span class="insert2">access discriminants, then a check 
 is made that the accessibility level of the anonymous access type of 
 each access discriminant is not deeper than that of the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>. 
-Program_Error is raised if either such check fails.<A NAME="I3638"></A><A NAME="I3639"></A> 
-<A NAME="I3640"></A></span></div>
+Program_Error is raised if either such check fails.<A NAME="I3641"></A><A NAME="I3642"></A> 
+<A NAME="I3643"></A></span></div>
 <div class="paranum"><a name="p10.b">10.b/3</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0024-1.TXT">AI05-0024-1</A></I>} 
@@ -382,7 +382,7 @@ prevents the allocated object from outliving its discriminants.</span></div>
 has a controlled or protected part, and the finalization of the collection 
 of the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 (see <A HREF="AA-7-6-1.html">7.6.1</A>) has started, Program_Error is 
-raised.<A NAME="I3641"></A><A NAME="I3642"></A> <A NAME="I3643"></A></span></div>
+raised.<A NAME="I3644"></A><A NAME="I3645"></A> <A NAME="I3646"></A></span></div>
 <div class="paranum"><a name="p10.d">10.d/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>If the 
 object has a controlled or protected part, its finalization is likely 
@@ -403,8 +403,8 @@ more likely to be deallocating objects than allocating them.</span>&nbsp;</div>
 <span class="insert2">If the object to be created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 contains any tasks, and the master of the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 is completed, and all of the dependent tasks of the master are terminated 
-(see <A HREF="AA-9-3.html">9.3</A>), then Program_Error is raised.<A NAME="I3644"></A><A NAME="I3645"></A> 
-<A NAME="I3646"></A></span></div>
+(see <A HREF="AA-9-3.html">9.3</A>), then Program_Error is raised.<A NAME="I3647"></A><A NAME="I3648"></A> 
+<A NAME="I3649"></A></span></div>
 <div class="paranum"><a name="p10.f">10.f/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>A task 
 created after waiting for tasks has finished could depend on freed data 
@@ -415,8 +415,8 @@ structures, and certainly would never be awaited.</span>&nbsp;</div>
 includes a <I>subpool_handle_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 Constraint_Error is raised if the subpool handle is <B>null</B>. Program_Error 
 is raised if the subpool does not <I>belong</I> (see <A HREF="AA-13-11-4.html">13.11.4</A>) 
-to the storage pool of the access type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>.<A NAME="I3647"></A><A NAME="I3648"></A><A NAME="I3649"></A><A NAME="I3650"></A> 
-<A NAME="I3651"></A><A NAME="I3652"></A></span></div>
+to the storage pool of the access type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>.<A NAME="I3650"></A><A NAME="I3651"></A><A NAME="I3652"></A><A NAME="I3653"></A> 
+<A NAME="I3654"></A><A NAME="I3655"></A></span></div>
 <div class="paranum"><a name="p10.g">10.g/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Implementation Note: 
 </B>This can be implemented by comparing the result of Pool_of_Subpool 
@@ -439,11 +439,11 @@ that designates the created object is returned.&nbsp;</div>
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00280.TXT">AI95-00280-01</A></I>} 
-<span class="insert2"><A NAME="I3653"></A> It is a bounded error if the 
+<span class="insert2"><A NAME="I3656"></A> It is a bounded error if the 
 finalization of the collection of the type (see <A HREF="AA-7-6-1.html">7.6.1</A>) 
 of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 has started. If the error is detected, Program_Error is raised. Otherwise, 
-the allocation proceeds normally.<A NAME="I3654"></A></span>&nbsp;</div>
+the allocation proceeds normally.<A NAME="I3657"></A></span>&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>This 
 check is required in some cases; see above.</span>&nbsp;</div>
@@ -497,7 +497,7 @@ Expr_Ptr'(<B>new</B>&nbsp;Literal'(Expression&nbsp;<B>with</B>&nbsp;3.5))&nbsp;&
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p20.a">20.a/1</a></div>
-<div class="Annotations"><A NAME="I3655"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<div class="Annotations"><A NAME="I3658"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 of an uninitialized allocator may not have an explicit <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 if the designated type is an access type. In Ada 83, this was permitted 
 even though the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
@@ -506,7 +506,7 @@ on the subtype of the created object.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p20.b">20.b</a></div>
-<div class="Annotations"><A NAME="I3656"></A>Allocators creating objects 
+<div class="Annotations"><A NAME="I3659"></A>Allocators creating objects 
 of type <I>T</I> are now overloaded on access types designating <I>T'</I>Class 
 and all class-wide types that cover <I>T</I>.</div>
 <div class="paranum"><a name="p20.c">20.c</a></div>
@@ -527,7 +527,7 @@ Management</A>&rdquo;.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p20.f">20.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
-<span class="insert2"><A NAME="I3657"></A>If the designated type has 
+<span class="insert2"><A NAME="I3660"></A>If the designated type has 
 a constrained partial view, the allocated object can be unconstrained. 
 This might cause the object to take up a different amount of memory, 
 and might cause the operations to work where they previously would have 
@@ -539,7 +539,7 @@ to be raised at a different time than in an Ada 95 program.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p20.g">20.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
-<span class="insert2"><A NAME="I3658"></A>An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
+<span class="insert2"><A NAME="I3661"></A>An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 for an access type that has Storage_Size specified to be zero is now 
 illegal. Ada 95 allowed the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>, 
 but it had to raise Storage_Error if executed. The primary impact of 
@@ -549,7 +549,7 @@ this change should be to detect bugs.</span>&nbsp;</div>
 <div class="paranum"><a name="p20.h">20.h/2</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
-<span class="insert2"><A NAME="I3659"></A><B>Corrigendum:</B> An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
+<span class="insert2"><A NAME="I3662"></A><B>Corrigendum:</B> An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN> 
 can be a controlling parameter of a dispatching call. This was an oversight 
 in Ada 95.</span></div>
 <div class="paranum"><a name="p20.i">20.i/2</a></div>
@@ -592,7 +592,7 @@ the accessibility of the object.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p20.o">20.o/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0052-1.TXT">AI05-0052-1</A></I>} 
-<span class="insert3"><A NAME="I3660"></A><B>Correction:</B> Added a 
+<span class="insert3"><A NAME="I3663"></A><B>Correction:</B> Added a 
 rule to prevent limited coextensions of nonlimited types. Allowing this 
 would have far-reaching implementation costs. Because of those costs, 
 it seems unlikely that any implementation ever supported it properly 
@@ -608,7 +608,7 @@ raising of a predefined exception should be very rare.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p20.q">20.q/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<span class="insert3"><A NAME="I3661"></A>Subpool handles (see <A HREF="AA-13-11-4.html">13.11.4</A>) 
+<span class="insert3"><A NAME="I3664"></A>Subpool handles (see <A HREF="AA-13-11-4.html">13.11.4</A>) 
 can be specified in an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0164">allocator</A></SPAN>.</span> 
 </div>
 

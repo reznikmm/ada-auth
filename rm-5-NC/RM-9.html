@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,21 +34,21 @@
 <HR>
 <H1>9 &nbsp; Tasks and Synchronization</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><A NAME="I4219"></A>The execution of an Ada program 
-consists of the execution of one or more <I>tasks</I>. <A NAME="I4220"></A><A NAME="I4221"></A>Each 
+<div class="Normal"><A NAME="I4220"></A>The execution of an Ada program 
+consists of the execution of one or more <I>tasks</I>. <A NAME="I4221"></A><A NAME="I4222"></A>Each 
 task represents a separable activity that proceeds independently and 
 concurrently between the points where it <I>interacts</I> with other 
 tasks. A single task, when within the context of a parallel construct, 
 can represent multiple <I>logical threads of control</I> which can proceed 
 in parallel; in other contexts, each task represents one logical thread 
-of control.<A NAME="I4222"></A><A NAME="I4223"></A> <A NAME="I4224"></A><A NAME="I4225"></A><A NAME="I4226"></A><A NAME="I4227"></A></div>
+of control.<A NAME="I4223"></A><A NAME="I4224"></A> <A NAME="I4225"></A><A NAME="I4226"></A><A NAME="I4227"></A><A NAME="I4228"></A></div>
 <div class="paranum"><a name="p1.1">1.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;The various forms 
 of task interaction are described in this clause, and include:</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Bulleted">the activation and termination of a task;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Bulleted"><A NAME="I4228"></A>a call on a protected subprogram 
+<div class="Bulleted"><A NAME="I4229"></A>a call on a protected subprogram 
 of a <I>protected object</I>, providing exclusive read-write access, 
 or concurrent read-only access to shared data;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -75,17 +75,17 @@ is properly synchronized through some other kind of task interaction.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I4229"></A>The properties of a task are 
+<div class="Normal"><A NAME="I4230"></A>The properties of a task are 
 defined by a corresponding task declaration and <SPAN Class="swiss"><A HREF="RM-9-1.html#S0248">task_body</A></SPAN>, 
 which together define a program unit called a <I>task unit</I>.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">Over time, tasks proceed through various <I>states</I>. 
-<A NAME="I4230"></A><A NAME="I4231"></A><A NAME="I4232"></A><A NAME="I4233"></A><A NAME="I4234"></A><A NAME="I4235"></A><A NAME="I4236"></A><A NAME="I4237"></A>A 
+<A NAME="I4231"></A><A NAME="I4232"></A><A NAME="I4233"></A><A NAME="I4234"></A><A NAME="I4235"></A><A NAME="I4236"></A><A NAME="I4237"></A><A NAME="I4238"></A>A 
 task is initially <I>inactive</I>; upon activation, and prior to its 
 <I>termination</I> it is either <I>blocked</I> (as part of some task 
-interaction) or <I>ready</I> to run. <A NAME="I4238"></A>While ready, 
+interaction) or <I>ready</I> to run. <A NAME="I4239"></A>While ready, 
 a task competes for the available <I>execution resources</I> that it 
 requires to run. In the context of a parallel construct, a single task 
 can utilize multiple processing resources simultaneously.&nbsp;</div>

@@ -31,7 +31,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -52,15 +52,15 @@ can be a type, a subprogram, or a package.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_declaration</SPAN><A NAME="I5815"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5816"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5817"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0312">generic_package_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generic_declaration</SPAN><A NAME="I5811"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5812"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5813"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0312">generic_package_declaration</A></SPAN></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">generic_subprogram_declaration</SPAN><A NAME="I5818"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5819"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5820"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5821"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">generic_subprogram_declaration</SPAN><A NAME="I5814"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5815"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5816"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0196">subprogram_specification</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5817"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_package_declaration</SPAN><A NAME="I5822"></A><A NAME="S0312"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5823"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5824"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">generic_package_declaration</SPAN><A NAME="I5818"></A><A NAME="S0312"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5819"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5820"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification</A></SPAN>;</div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 <span class="insert3">No syntax change is needed here to allow an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>; 
@@ -69,13 +69,13 @@ because a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0230">package_specification<
 allows an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_formal_part</SPAN><A NAME="I5825"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>generic</B>&nbsp;{<A NAME="I5826"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5827"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_part</SPAN><A NAME="I5821"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>generic</B>&nbsp;{<A NAME="I5822"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5823"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0235">use_clause</A></SPAN>}</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">generic_formal_parameter_declaration</SPAN><A NAME="I5828"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5829"></A><SPAN Class="swiss"><A HREF="AA-12-4.html#S0319">formal_object_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5830"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0320">formal_type_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5831"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0335">formal_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5832"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0340">formal_package_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_parameter_declaration</SPAN><A NAME="I5824"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5825"></A><SPAN Class="swiss"><A HREF="AA-12-4.html#S0319">formal_object_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5826"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0320">formal_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5827"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0335">formal_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5828"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0340">formal_package_declaration</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Indented1">The only form of <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 allowed within a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN> 
@@ -95,12 +95,12 @@ rules, and makes them more checkable at compile time.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
-<A NAME="I5833"></A><A NAME="I5834"></A><A NAME="I5835"></A><A NAME="I5836"></A>A 
+<A NAME="I5829"></A><A NAME="I5830"></A><A NAME="I5831"></A><A NAME="I5832"></A>A 
 <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN> 
 declares a generic unit &mdash; a generic package, generic procedure<span class="insert2">,</span> 
 or generic function, as appropriate.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I5837"></A>An entity is a <I>generic formal</I> 
+<div class="Normal"><A NAME="I5833"></A>An entity is a <I>generic formal</I> 
 entity if it is declared by a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>. 
 &ldquo;Generic formal,&rdquo; or simply &ldquo;formal,&rdquo; is used 
 as a prefix in referring to objects, subtypes (and types), functions, 
@@ -111,7 +111,7 @@ or a &ldquo;formal integer type declaration.&rdquo;]</div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0371-1.TXT">AI12-0371-1</A></I>} 
 <span class="insert5">The list of <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0313">generic_formal_part</A></SPAN> 
-form a <I>declaration list</I> of the generic unit.<A NAME="I5838"></A></span></div>
+form a <I>declaration list</I> of the generic unit.<A NAME="I5834"></A></span></div>
 <div class="paranum"><a name="p9.a">9.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>Aspect 
 specifications (see <A HREF="AA-13-1-1.html">13.1.1</A>) given in a generic 
@@ -120,7 +120,7 @@ those in the visible part of the generic unit.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I5839"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I5835"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0310">generic_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11</a></div>
@@ -202,7 +202,7 @@ generic declaration declaring a generic package:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p24.a">24.a</a></div>
-<div class="Annotations"><A NAME="I5840"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
+<div class="Annotations"><A NAME="I5836"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-12-1.html#S0314">generic_formal_parameter_declaration</A></SPAN> 
 is modified to allow the reserved words <B>tagged</B> and <B>abstract</B>, 
 to allow formal derived types, and to allow formal packages.</div>
 <div class="paranum"><a name="p24.b">24.b</a></div>
@@ -230,7 +230,7 @@ because of confusion with normal formal parameters of subprograms.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p24.d">24.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I5841"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
+<span class="insert3"><A NAME="I5837"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0346">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0311">generic_subprogram_declaration</A></SPAN> 
 (as well as a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0312">generic_package_declaration</A></SPAN>). 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>

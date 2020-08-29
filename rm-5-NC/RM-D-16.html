@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 25)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 26)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-4.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,14 +41,14 @@ platforms to be configured.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;System.Multiprocessors<A NAME="I8901"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking&nbsp;<B>is</B></div>
+<div class="Examples"><B>package</B>&nbsp;System.Multiprocessors<A NAME="I8918"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Preelaborate,&nbsp;Nonblocking,&nbsp;Global&nbsp;=&gt;&nbsp;<B>in&nbsp;out&nbsp;synchronized</B>&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8902"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8903"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8904"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8919"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8920"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8921"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8905"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8922"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
 <B>end</B>&nbsp;System.Multiprocessors;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">A call of Number_Of_CPUs returns the number of processors 
@@ -63,7 +63,7 @@ be specified:</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="WideHanging-Term">CPU</div><div class="WideHanging-Body">
 The aspect CPU is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0132">expression</A></SPAN>, 
-which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I8906"></A><A NAME="I8907"></A></div>
+which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I8923"></A><A NAME="I8924"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
