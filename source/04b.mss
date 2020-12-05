@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:20 $}
+@Comment{$Date: 2020/12/05 05:10:41 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @LabeledClause{Type Conversions}
 
@@ -55,10 +55,11 @@ Two types are convertible if each is convertible to the other.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00330-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
 @Defn{view conversion}
 @Defn2{Term=[conversion],Sec=(view)}
-A @nt{type_conversion} whose operand is the
-@nt<name> of an object is called a @i(view conversion) if
+A @nt{type_conversion} @Chg{Version=[5],New=[],Old=[whose operand is the
+@nt<name> of an object ]}is called a @i(view conversion) if
 @Chg{New=[both ],Old=[]}its target type
 @Chg{New=[and operand type are],Old=[is]} tagged, or if it
 appears@Chg{Version=[2],New=[ in a call],Old=[]} as an actual parameter of mode
@@ -1470,6 +1471,13 @@ as a @nt<name>.
   @ChgAdded{Version=[5],Text=[Described the objects associated with
   value conversions of elementary types. This is necessary to support
   an extension documented in @RefSecNum{Objects and Named Numbers}.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[5],Text=[@b{Correction:} Eliminated the requirement that
+  the operand of a view conversion be a simple @nt{name}. The requirement
+  could cause unintended consequences in the case where the operand of a
+  type conversion represents an object but is more complex than a simple @nt{name}
+  (such as a @nt{qualified_expression} or @nt{conditional_expression}).]}
 @end{Diffword2012}
 
 
@@ -2320,12 +2328,24 @@ a @nt{string_literal} of a static string subtype;
   the bounds or discriminants are inherent in the value).
 @end(Ramification)
 
-a @nt{name}
-that denotes the declaration
-of a named number or a static constant;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0394-1]}
+a @nt{name} that denotes the declaration
+of @Chg{Version=[5],New=[],Old=[a named number or ]}a static constant;
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0394-1]}
+@ChgAdded{Version=[5],Text=[a @nt{name} that denotes a named number, and 
+that is interpreted as a value of a numeric type;]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0394-1]}
+  @ChgAdded{Version=[5],Text=[This is referring the resolution of the named
+  number and not the @StaticSemTitle (for which all named numbers are values
+  of a universal numeric type). The word @ldquote@;interpreted@rdquote is
+  intended to make the distinction.]}
+@end{Honest}
+
 @begin{Ramification}
-Note that enumeration
-literals are covered by the @nt{function_call} case.
+  Note that enumeration literals are covered by the @nt{function_call} case.
 @end{Ramification}
 
 a @nt{function_call}
@@ -2532,15 +2552,16 @@ and if the parameter and result types are scalar.
 
 In any case, a generic formal subprogram is not a static function.
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0201-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0201-1],ARef=[AI12-0393-1]}
 @Defn2{Term=[static], Sec=(constant)}
 A @i(static constant) is
 a constant view declared by a full constant declaration
 or an @nt<object_@!renaming_@!declaration> with a static nominal subtype,
 having a value defined by a static scalar expression or by
-a static string expression@Chg{Version=[5],New=[],Old=[ whose value has a
-length not exceeding the maximum length of a @nt{string_@!literal} in the
-implementation]}.
+a static string expression@Chg{Version=[5],New=[, and which satisfies any 
+constraint or predicate that applies to the nominal subtype],Old=[ whose 
+value has a length not exceeding the maximum length of a @nt{string_@!literal}
+in the implementation]}.
 @begin{Ramification}
 A deferred constant is not static;
 the view introduced by the corresponding full constant declaration
@@ -3158,7 +3179,8 @@ raising.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0201-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Expressions
   involving string relational operators or string type conversions now can be
-  static.]}
+  static. Additionally, the length limit on static string constants was
+  removed as being a hazard without much help to implementations.]}
 @end{Extend2012}
 
 @begin{Diffword2012}
@@ -3170,9 +3192,9 @@ raising.
   @ChgAdded{Version=[5],Text=[Expression functions can be static if declared
   correctly; this is documented as an extension in @RefSecNum{Expression Functions}.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
-  @ChgAdded{Version=[5],Text=[A @nt{numeric_literal} can be non-static if
-  they are defined by an Integer_Literal or Real_Literal aspect
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0394-1]}
+  @ChgAdded{Version=[5],Text=[A @nt{numeric_literal} or named number can be 
+  non-static if they interpreted using an Integer_Literal or Real_Literal aspect
   (see @RefSecNum{User-Defined Literals}).]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0322-1]}
@@ -3186,6 +3208,11 @@ raising.
   @nt{declare_expression}s. Also moved @ldquote@;statically names@rdquote@;
   definition here and used it in array attribute prefix wording.]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0393-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that constants whose
+  values do not belong to their nominal subtype are not static. This change
+  potentially would be incompatible, but this case is considered
+  pathological and will not be checked by the ACATS.]}
 @end{Diffword2012}
 
 

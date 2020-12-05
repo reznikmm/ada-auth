@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2020/12/05 05:10:42 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.152 $}
+@Comment{$Revision: 1.153 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1692,10 +1692,13 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0041-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For a private type@Chg{Version=[4],New=[,],Old=[ or]} private
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a private 
+type@Chg{Version=[4],New=[,],Old=[ or]} private
 extension@Chg{Version=[4],New=[, or interface],Old=[]}, the following
-language-defined aspects may be specified with an
-@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+language-defined @Chg{Version=[5],New=[assertion ],Old=[]}aspects may be 
+specified with an @nt{aspect_specification} (see 
+@RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0250-1]}
@@ -2483,7 +2486,7 @@ scheduled for weekends:}]}
   overriding. This is a very unlikely situation, and will prevent problems
   with invariant checks being added to routines that assume that they don't
   have them.@Chg{Version=[5],New=[ Note: The original wording was missing
-  the restriction to the visible part of the package, this was added 
+  the restriction to the visible part of the package, this was added
   later for Ada 202x.],Old=[]}]}
 @end{Incompatible2012}
 
@@ -2529,11 +2532,11 @@ scheduled for weekends:}]}
 @LabeledAddedSubClause{Version=[5],Name=[Default Initial Conditions]}
 
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a private type or private
 extension (including a generic formal type), the following
-language-defined aspect may be specified with an @nt{aspect_specification}
-(see @RefSecNum{Aspect Specifications}):]}
+language-defined assertion aspect may be specified with an 
+@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
@@ -2550,9 +2553,9 @@ a @nt{formal_private_type_definition}, or a @nt{formal_derived_type_definition}.
   the default initialization of an object.]}]}
 @end{Description}
 
-@ChgToGlossary{Version=[5],Kind=[Added],Term=<Default Initial Condition>,
-Text=<@ChgAdded{Version=[5],Text=[A property that holds for every
-default-initialized object of a given type.]}>}
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Default initial condition>,
+Text=<@ChgAdded{Version=[5],Text=[A default initial condition is a property that
+holds for every default-initialized object of a given type.]}>}
 
 
 @begin{Resolution}
@@ -2560,6 +2563,35 @@ default-initialized object of a given type.]}>}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[5],Text=[The expected type for a default initial condition
 expression is any boolean type.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0397-1]}
+@ChgAdded{Version=[5],Text=[Within a default initial condition expression
+associated with a declaration for a type T, a name that denotes the declaration
+is interpreted as a current instance of a notional (nonabstract) formal
+derived type NT with ancestor T, that has directly visible primitive
+operations.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This is analogous to the rule for Post'Class (see
+    @RefSecNum{Preconditions and Postconditions}) and ensures that the
+    expression is well-defined for any descendant of type T.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=<The operations of NT are also nonabstract, so the
+    rule against a call of an abstract subprogram does not trigger for a
+    default initial condition for an abstract type. Note that,
+    presuming T is tagged, it is possible to call class-wide operations
+    of the type T given an object of type NT. Similarly it is possible
+    to explicitly convert an object of type NT to a subtype of T, and 
+    pass it to a nonprimitive operation expecting a parameter of type T.
+    [Note that one cannot directly convert to (the first subtype of) T
+    since it represents the current instance of the type within the
+    aspect expression, but one can convert to a subtype of T (including
+    a subtype that matches the first subtype).]>}
+@end{Ramification}
 
 @end{Resolution}
 
@@ -2583,13 +2615,20 @@ descendants of T.]}
 
 @begin{Runtime}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0397-1]}
 @ChgAdded{Version=[5],Text=[If one or more default initial condition expressions
-apply to a type T, then a default initial condition check is performed after
+apply to a @Redundant[(nonabstract)] type T, then a default initial condition
+check is performed after
 successful initialization of an object of type T by default (see
 @RefSecNum{Object Declarations}).
 In the case of a controlled type, the check is performed after the call to the
 type's Initialize procedure (see @RefSecNum{Assignment and Finalization}).]}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0397-1]}
+  @ChgAdded{Version=[5],Text=[If T is an abstract type, then there will never
+    be an initialization of an object of the type.]}
+@end{TheProof}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[5],Text=[If performing checks is required by the Default_Initial_Condition
@@ -2599,14 +2638,31 @@ corresponding @nt{aspect_specification} applicable to a given type, then
 the respective default initial condition expression is
 considered enabled.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0397-1]}
 @ChgAdded{Version=[5],Text=[The default initial condition check consists of the
 evaluation of each enabled default initial condition expression that applies to
-T. These evaluations, if there are more than one, are performed in an arbitrary
+T. Any operations within such an expression that were resolved as primitive
+operations of the (notional) formal derived type NT, are in the
+evaluation of the expression resolved as for a formal derived type in
+an instance with T as the actual type for NT (see
+@RefSecNum{Formal Private and Derived Types}). These evaluations, if there are
+more than one, are performed in an arbitrary
 order. If any of these evaluate to False, Assertions.Assertion_Error is raised
 at the point of the object initialization.@Defn{default initial condition check}@Defn2{Term=[check, language-defined],
 Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
 Sec=(raised by failure of runtime check)}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0397-1]}
+  @ChgAdded{Version=[5],Text=[Just as is true for a formal derived type (see
+    @RefSecNum{Formal Private and Derived Types}), for a tagged type T, the
+    controlling tag of a call on a primitive of NT will cause the body of
+    the corresponding primitive
+    of T to be executed. For an untagged type T, invoking a primitive
+    of NT will cause the body of the operation of the type where the
+    aspect originated to be executed, with conversions performed as for
+    an inherited subprogram.]}
+@end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0272-1]}
 @ChgAdded{Version=[5],Text=[@Redundant[For a generic formal type T, default
@@ -2650,7 +2706,7 @@ Default_Initial_Condition aspect.]}]}
 @end{Notes}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1],ARef=[AI12-0397-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Aspect Default_Initial_Condition is new.]}
 @end{Extend2012}
@@ -2665,10 +2721,10 @@ type are unchanged by most of the primitive operations of the type. Such
 characteristics are called @i{stable properties} of the
 type.@Defn{stable property}@Defn2{Term=[property],Sec=[stable]}]}
 
-@ChgToGlossary{Version=[5],Kind=[Added],Term=<Stable Property>,
-Text=<@ChgAdded{Version=[5],Text=[A characteristic associated with objects of a
-given type that is preserved by many of the primitive operations of the
-type.]}>}
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Stable property>,
+Text=<@ChgAdded{Version=[5],Text=[A stable property is a characteristic
+associated with objects of a given type that is preserved by many of the
+primitive operations of the type.]}>}
 @end{Intro}
 
 @begin{StaticSem}
@@ -3273,12 +3329,13 @@ the reserved word @key[limited] appears in the definition of a
 shall be limited.]],Old=[]}
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[The rule about the parent type being required
   to be limited can be found in @RefSecNum{Derived Types and Classes}. Rules
   about progenitor interfaces can be found in
-  @RefSecNum{Interface Types}, specifically, a nonlimited interface can appear
-  only on a nonlimited type. We repeat these rules here to gather these
-  scattered rules in one obvious place.]}
+  @RefSecNum{Interface Types}@Chg{Version=[5],New=[;],Old=[,]} specifically,
+  a nonlimited interface can appear only on a nonlimited type. We repeat
+  these rules here to gather these scattered rules in one obvious place.]}
 @end{TheProof}
 @begin{Reason}
 @leading@;This prevents tagged limited types from becoming nonlimited.
@@ -4222,12 +4279,14 @@ place. In particular:]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0232-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[This is a dynamic property and is determined by
   the specific type of the parts of the actual object. In particular, if a part
   has a class-wide type, the tag of the object might need to be examined in
   order to determine if build-in-place is required. However, we expect that most
   Ada implementations will determine this property at compile-time using some
-  assume-the-worst algorithm in order to chose the appropriate method to
+  assume-the-worst algorithm in order to
+  @Chg{Version=[5],New=[choose],Old=[chose]} the appropriate method to
   implement a given call or aggregate. In addition, there is no attribute or
   other method for a program to determine if a particular object has this
   property (or not), so there is no value to a more careful description of this
@@ -4461,10 +4520,12 @@ for limited controlled types.]}
 @end{TheProof}
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[3],Text=[The relaxations apply only to nonlimited types,
 as @nt{assignment_statement}s
 are not allowed for limited types. This is important so that the programmer
-can count on a stricter semantics for limited controlled types.]}
+can count on @Chg{Version=[5],New=[],Old=[a ]}stricter semantics for limited
+controlled types.]}
 @end{Ramification}
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
@@ -4797,9 +4858,10 @@ complete, and before it is left.
 @end{Ramification}
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Master>,
-Text=<@ChgAdded{Version=[5],Text=[The execution of a construct that includes
-waiting for tasks and finalization of objects associated with the master, prior
-to leaving the construct.]}>}
+Text=<@ChgAdded{Version=[5],Text=[A master is the execution of certain
+constructs. Each object and task is associated with a master. When a
+master is left, associated objects are finalized and associated tasks
+are awaited.]}>}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
 For the @i{finalization} of a master,
@@ -5475,7 +5537,7 @@ freezing point of the access type.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]
   will only need to @Chg{Version=[5],New=[be accessible at run time from
   the subpool header and not also from the overall access type collection
   header. That is, they only need to belong to a single list,
-  rather two],Old=[belong to the subpool and not also to the collection]}.]}
+  rather than two],Old=[belong to the subpool and not also to the collection]}.]}
   @end{ImplNote}
 
 @end{ImplPerm}

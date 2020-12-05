@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2020/12/05 05:10:42 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1438,7 +1438,7 @@ is an assertion that is expected
 to be True for all objects of a given private type when viewed from outside the
 defining package.]}>}
 
-@ChgToGlossary{Version=[4],Kind=[Added],Term=<Type Invariant>,
+@ChgToGlossary{Version=[4],Kind=[Added],Term=<Type invariant>,
 Text=<@ChgAdded{Version=[4],Text=[See Invariant.]}>}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Assertion>,
@@ -1512,13 +1512,16 @@ of a @nt{pragma} Assert is type String.]}
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0265-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0265-1],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[The
 @SynI<assertion_>@nt{aspect_mark} of a @nt{pragma} Assertion_Policy shall
-be one of Assert, Static_Predicate, Dynamic_Predicate, Pre, Pre'Class, Post,
-Post'Class, Type_Invariant, Type_Invariant'Class,
+@Chg{Version=[5],New=[identify an
+@i<assertion aspect>,@Defn{assertion aspect}@Defn2{Term=[aspect],Sec=[assertion]}
+namely],Old=[be]}  one of Assert, Static_Predicate, Dynamic_Predicate, 
+Pre, Pre'Class, Post, Post'Class, Type_Invariant, Type_Invariant'Class,
 @Chg{Version=[5],New=[Default_Initial_Condition, ],Old=[]}or some
-implementation defined @nt{aspect_mark}. ],Old=[]}The
+@Chg{Version=[5],New=[implementation-defined (assertion)],Old=[implementation defined]}
+@nt{aspect_mark}. ],Old=[]}The
 @SynI<policy_>@nt<identifier>@Chg{Version=[3],New=[],Old=[ of a @nt{pragma}
 Assertion_Policy]} shall be either Check, Ignore, or @Chg{Version=[3],New=[some],Old=[an]}
 implementation-defined @nt{identifier}.]}
@@ -1527,6 +1530,16 @@ Text=[@Chg{Version=[2],New=[Implementation-defined
 @SynI<policy_>@nt{identifier}s @Chg{Version=[3],New=[and
 @SynI<assertion_>@nt{aspect_mark}s ],Old=[]}allowed in a @nt{pragma}
 Assertion_Policy.],Old=[]}]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[@ldquote@;Assert@rdquote is considered an 
+    @ldquote@;assertion aspect@rdquote for
+    the purposes of this rule, even though there is no sort of entity
+    that has an Assert aspect. It can only be specified using an
+    Assert pragma, and applies to a particular point in the execution
+    of a logical thread of control.]}
+@end{Honest}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1556,9 +1569,11 @@ specified in the pragma, the specified policy applies to all assertion
 aspects.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[3],Text=[A @nt{pragma} Assertion_Policy applies to the named
 assertion aspects in a specific region, and applies to all assertion expressions
-specified in that region. A @nt{pragma} Assertion_Policy given in a
+@Chg{Version=[5],New=[associated with those aspects ],Old=[]}specified in that 
+region. A @nt{pragma} Assertion_Policy given in a
 @nt{declarative_part} or immediately within a @nt{package_specification} applies
 from the place of the pragma to the end of the innermost enclosing declarative
 region. The region for a @nt{pragma} Assertion_Policy given as a configuration
@@ -1866,6 +1881,10 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
   @ChgAdded{Version=[5],Text=[Added default initial conditions to the
   kinds of assertions (see @RefSecNum{Default Initial Conditions}).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a definition of assertion 
+  aspects, used in some freezing rules (see @RefSecNum{Freezing Rules}).]}
 @end{Diffword2012}
 
 
@@ -1997,8 +2016,9 @@ implementation to omit certain language-defined checks@Chg{Version=[2],
 New=[, while a @nt<pragma> Unsuppress revokes the permission to omit checks.],Old=[]}.
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Suppress>,
-Text=<@ChgAdded{Version=[5],Text=[A request to the implementation to disable a
-run-time check for a portion of the text of a program.]}>}
+Text=<@ChgAdded{Version=[5],Text=[To suppress a check is to give a request to
+the implementation to disable a run-time check for a portion of the text of a
+program.]}>}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{language-defined check}
@@ -2020,8 +2040,8 @@ in clauses and subclauses throughout the standard.
 @end{Discussion}
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Check>,
-Text=<@ChgAdded{Version=[5],Text=[A test made during execution to determine
-whether a language rule has been violated.]}>}
+Text=<@ChgAdded{Version=[5],Text=[A check is a test made during execution to
+determine whether a language rule has been violated.]}>}
 @end{Intro}
 
 @begin{Syntax}

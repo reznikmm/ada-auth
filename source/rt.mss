@@ -1,16 +1,18 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.131 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@comment{ $Revision: 1.132 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2020/08/28 03:34:22 $}
+@Comment{$Date: 2020/12/05 05:10:44 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0404-1]}
 @Defn{real-time systems}
 @Defn{embedded systems}
 This Annex specifies additional characteristics of Ada implementations
 intended for real-time systems software. To conform to this Annex, an
-implementation shall also conform to the Systems Programming Annex.
+implementation shall also conform to 
+@Chg{Version=[5],New=[@RefSec{Systems Programming}],Old=[the Systems Programming Annex]}.
 @end{Intro}
 
 @begin{Metrics}
@@ -248,6 +250,7 @@ in the @nt{declarative_part} of the @nt{subprogram_body} of]} a
 subprogram other than the main subprogram@Chg{Version=[3],New=[; the Priority
 value is not associated with any task],Old=[]}.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0404-1]}
 @Defn{task priority}
 @Defn{priority}
 @Defn{priority inheritance}
@@ -262,10 +265,11 @@ value.
 The @i{base priority} of a task is the priority with which it was
 created, or to which it was later set by Dynamic_Priorities.Set_Priority
 (see @RefSecNum{Dynamic Priorities}). At all times, a task also has
-an @i{active priority}, which generally reflects its base priority
-as well as any priority it inherits from other sources.
+an @i{active priority}, which generally @Chg{Version=[5],New=[is],Old=[reflects]}
+its base priority @Chg{Version=[5],New=[unless],Old=[as well as any priority]}
+it inherits @Chg{Version=[5],New=[a priority ],Old=[]}from other sources.
 @i{Priority inheritance} is the process by which the priority of a
-task or other entity (e.g. a protected object;
+task or other entity (@Chg{Version=[5],New=[for example,],Old=[e.g.]} a protected object;
 see @RefSecNum{Priority Ceiling Locking}) is used in the evaluation of another
 task's active priority.
 @ImplDef{Implementation-defined execution resources.}
@@ -362,17 +366,21 @@ ceiling priority of the protected object (see
 and @RefSecNum{Admission Policies}).]}
 
 @begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0276-1]}
   @ChgAdded{Version=[5],Text=[Priority inheritance is needed for FIFO_Spinning
   to ensure that lower priority tasks that initiate spin waiting earlier than
   other higher priority tasks continue to spin to ensure that they can be
   granted the resource when it becomes available in order to support FIFO
-  ordering.]}
+  ordering. Note that this rule only matters when tasks that can initiate
+  a protected action on an object P can be on a different processor than P.
+  In particular, this rule does not matter on a monoprocessor.]}
 @end{Reason}
 
-During a protected action on a protected object, a task inherits the ceiling
-priority of the protected object (see @RefSecNum{Intertask Communication} and
-@RefSecNum{Priority Ceiling Locking}).
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0404-1]}
+@Chg{Version=[5],New=[While a task executes],Old=[During]} a protected 
+action on a protected object, @Chg{Version=[5],New=[the],Old=[a]} task 
+inherits the ceiling priority of the protected object (see 
+@RefSecNum{Intertask Communication} and @RefSecNum{Priority Ceiling Locking}).
 
 @end{itemize}
 
@@ -2479,10 +2487,10 @@ Program_Error is raised if this check fails.
 
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[If the ceiling priority of a
-protected object designates one with EDF_Within_Priorities, the following
-additional rules apply:]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1],ARef=[AI12-0404-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[If the task dispatching policy
+specified for the ceiling priority of a protected object is 
+EDF_Within_Priorities, the following additional rules apply:]}
 
 @begin{Itemize}
   @ChgRef{Version=[5],Kind=[Added]}
@@ -2502,11 +2510,13 @@ additional rules apply:]}
     protected object is Ada.Real_Time.Time_Span_Zero.]}
 
   @ChgRef{Version=[5],Kind=[Added]}
-  @ChgAdded{Version=[5],Text=[While a task executes a protected action, it
-    inherits the relative deadline of the corresponding protected object so that
-    its active deadline is reduced to (if it is currently greater than) 'now'
-    plus the deadline floor of the corresponding protected object; 'now' is
-    obtained via a call on Ada.Real_Time.Clock.]}
+  @ChgAdded{Version=[5],Text=[While a task executes a protected action on a
+    protected object @i<P>, it inherits the relative deadline of @i<P>. In this 
+    case, let @i<DF> be 'now' ('now' is obtained via a call on 
+    Ada.Real_Time.Clock at the start of the action) plus the deadline floor of 
+    @i<P>. If the active deadline of the task is later than @i<DF>, its active 
+    deadline is reduced to @i<DF>@Redundant[; the active deadline is unchanged 
+    otherwise].]}
 
   @ChgRef{Version=[5],Kind=[Added]}
   @ChgAdded{Version=[5],Text=[When a task calls a protected operation, a check
@@ -2521,7 +2531,7 @@ additional rules apply:]}
 
 @begin{Bounded}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00327-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}@ChgNote{Just changed paragraph numbers}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0230-1]}@ChgNote{Just changed paragraph numbers}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Following any change of priority,
 it is a bounded error for the active priority of any task with a call queued on
 an entry of a protected object to be higher than the ceiling priority of the
@@ -2532,24 +2542,24 @@ In this case one of the following applies:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
-@ChgAdded{Version=[2],Text=[at any time prior to executing the entry body
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0404-1]}@ChgNote{Also changed paragraph numbers}
+@ChgAdded{Version=[2],Text=[at any time prior to executing the entry body@Chg{Version=[5],New=[,],Old=[]} 
 Program_Error is raised in the calling task;@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
-@ChgAdded{Version=[2],Text=[when the entry is open the entry body is executed
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0404-1]}@ChgNote{Also changed paragraph numbers}
+@ChgAdded{Version=[2],Text=[when the entry is open@Chg{Version=[5],New=[,],Old=[]}  the entry body is executed
 at the ceiling priority of the protected object;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
-@ChgAdded{Version=[2],Text=[when the entry is open the entry body is executed
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0404-1]}@ChgNote{Also changed paragraph numbers}
+@ChgAdded{Version=[2],Text=[when the entry is open@Chg{Version=[5],New=[,],Old=[]}  the entry body is executed
 at the ceiling priority of the protected object and then Program_Error is
 raised in the calling task; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
-@ChgAdded{Version=[2],Text=[when the entry is open the entry body
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0404-1]}@ChgNote{Also changed paragraph numbers}
+@ChgAdded{Version=[2],Text=[when the entry is open@Chg{Version=[5],New=[,],Old=[]} the entry body
 is executed at the ceiling priority of the protected object that was in effect
 when the entry call was queued.]}
 @end{Itemize}
@@ -3151,6 +3161,17 @@ the execution resource of the protected object in the order in which the
 busy-wait was initiated; otherwise the FIFO_Spinning policy has no effect. If no
 Admission_Policy pragma applies to any of the program units in the partition,
 the admission policy for that partition is implementation defined.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[Busy-waiting might be used for protected objects
+  that can be called from tasks running on other processors than the one the
+  protected object is on. It is unnecessary if all of the tasks that can
+  call a protected object are on the same processor as the object; in 
+  particular, it would not be used on a monoprocessor. Aspect CPU (see
+  @RefSecNum{Multiprocessor Implementation}) can be used to ensure that 
+  busy-waiting is not needed.]}
+@end{Discussion}
 
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -5673,7 +5694,7 @@ partition executes strongly depends on the assignment of tasks to CPUs.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[5],Text=[Any unit that meets the requirements of the
-Ravenscar profile also meets the requirements of the Yorvik profile.]}
+Ravenscar profile also meets the requirements of the Jorvik profile.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -7141,6 +7162,16 @@ be assigned to that processor. If the CPU value is Not_A_Specific_CPU, then the
 protected object is not assigned to a processor. A call to a protected object
 that is assigned to a processor from a task that is not assigned a processor or
 is assigned a different processor raises Program_Error.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[When a protected object is assigned to a CPU,
+  only tasks also assigned to that CPU can call it. In contrast, a protected
+  object that is not assigned to a specific CPU can be called by any task
+  on any processor (subject, of course, to visibility and ceiling priority
+  restrictions). As noted below, when the tasks and protected object
+  are necessarily on the same CPU, a simpler implementation can be used.]}
+@end{Discussion}
 
 @end{Runtime}
 

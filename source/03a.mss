@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:20 $}
+@Comment{$Date: 2020/12/05 05:10:40 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.147 $}
+@Comment{$Revision: 1.148 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -187,7 +187,7 @@ Sec=[of a type (implied)]}@Defn2{Term=[view],Sec=[of a subtype (implied)]}]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0191-1]}
   @ChgAdded{Version=[5],Text=[For example, a reference to the components of
-  an object in a rule that is interpreted at compile-time would not apply to
+  an object in a rule that is interpreted at compile time would not apply to
   components that are not visible. On the other hand, a reference
   to the components of an object in a dynamic semantics rule would
   apply to all components of the object, visible or not, including
@@ -1216,7 +1216,6 @@ is anonymous @em it has no nameable subtypes.
 The syntactic category @nt{full_type_declaration} now includes task and
 protected type declarations.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 We have generalized the concept of first-named subtype (now
 called simply @lquotes@;first subtype@rquotes@;) to cover all kinds of types, for uniformity
 of description elsewhere.
@@ -1587,6 +1586,7 @@ The description of S'Base has been moved to
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0269-1],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[3],Text=[The language-defined @i{predicate aspects}
 Static_Predicate and Dynamic_Predicate may be used to define properties of
 subtypes. A @i{predicate specification} is an @nt{aspect_specification}
@@ -1594,7 +1594,8 @@ for one of the two predicate
 aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}@AspectDefn{Static_Predicate}@AspectDefn{Dynamic_Predicate}
 General rules for aspects and @nt{aspect_specification}s are found in
 @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Aspects}
-and @RefSecNum{Aspect Specifications} respectively).]}
+and @RefSecNum{Aspect Specifications} respectively).@Chg{Version=[5],New=[ The predicate
+aspects are assertion aspects (see @RefSecNum{Pragmas Assert and Assertion_Policy}).],Old=[]}]}
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
   Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
     a given subtype; the subtype may be static.]}]}
@@ -1872,8 +1873,8 @@ violation.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}@
   @ChgRef{Version=[4],Kind=[AddedNormal]}
   @ChgAdded{Version=[4],Text=[This is the usual way around the contract model;
   this applies even in instance bodies. Note that errors in instance
-  specifications will be detected at compile-time by the "re-check" of the
-  specification, only errors in the body should raise Program_Error.]}
+  specifications will be detected at compile time by the "recheck" of the
+  specification; only errors in the body should raise Program_Error.]}
 @end{Discussion}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0071-1]}
@@ -1974,9 +1975,9 @@ given subtype, then:]}
   @ChgAdded{Version=[5],Text=[Most parameter passing is covered by the subtype
   conversion rule: all inbound @key[in] and @key[in out] parameters are converted
   to the formal subtype, and the copy-back for by-copy @key[out] and @key[in out]
-  parameters includes a conversion to the actual subtype. The remaining parameter
-  passing cases are covered by special rules: by-reference @key[out] and
-  @key[in out] parameters by the rule given above, and we don't want any
+  parameters includes a conversion to the actual subtype. The remaining
+  parameter-passing cases are covered by special rules: by-reference @key[out]
+  and @key[in out] parameters by the rule given above, and we don't want any
   predicate checks on inbound @key[out] parameters, accomplished in part
   by a special rule in @Refsecnum{Type Conversions}.]}
 @end{Ramification}
@@ -2312,11 +2313,15 @@ Unchecked_Deallocation, we want the execution of the final read to be
 erroneous.
 @end{Ramification}
 
-@Leading@;Whether a view of an object is constant or variable is determined
+@Leading@;@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+Whether a view of an object is constant or variable is determined
 by the definition of the view.
-The following (and no others) represent constants:
+The following (and no others) represent 
+@Chg{Version=[5],New=[variables],Old=[constants]}:
 @begin(itemize)
-  an object declared by an @nt<object_declaration> with the
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+  an object declared by an @nt<object_declaration> 
+  @Chg{Version=[5],New=[without],Old=[with]} the
   reserved word @key(constant);
 
 @begin{Honest}
@@ -2332,53 +2337,115 @@ The following (and no others) represent constants:
   @ChgAdded{Version=[2],Text=[is not a constant.]}
 @end{Honest}
 
-  a formal parameter or generic formal object of mode @key(in);
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+  a formal parameter @Chg{Version=[5],New=[],Old=[or generic formal object ]}of
+  mode @Chg{Version=[5],New=[@key(in out) or @key(out)],Old=[@key(in)]};
 
-  a discriminant;
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[5],Text=[generic formal object of mode @key(in out);]}
+
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+  a @Chg{Version=[5],New=[non-discriminant component of a variable],Old=[discriminant]};
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+    @ChgAdded{Version=[5],Text=[This includes both @nt<selected_component>s 
+    and @nt<indexed_component>s.]}
+  @end{Ramification}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[5],Text=[a @nt{slice} of a variable;]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
-  @ChgAdded{Version=[3],Text=[a loop parameter unless specified to be a variable
-  for a generalized loop (see @RefSecNum{Generalized Loop Iteration});]}
-
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
-  @ChgAdded{Version=[5],Text=[the index parameter of an @nt{iterated_component_association};]}
-
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0308-1]}
-  @ChgAdded{Version=[5],Text=[the chunk parameter of a @nt{chunk_specification};]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[3],Text=[a loop parameter @Chg{Version=[5],New=[that is],Old=[unless]}
+  specified to be a variable for a generalized loop (see @RefSecNum{Generalized Loop Iteration});]}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
-  a @Chg{Version=[3],New=[],Old=[loop parameter, ]}choice
-  parameter@Chg{Version=[3],New=[],Old=[,]} or entry index;
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+  a @Chg{Version=[5],New=[view conversion of a variable],Old=[@Chg{Version=[3],New=[],Old=[loop 
+  parameter, ]}choice parameter@Chg{Version=[3],New=[],Old=[,]} or entry index]};
 
-  the dereference of an access-to-constant value;
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+  @Chg{Version=[5],New=[a],Old=[the]} dereference of an 
+  @Chg{Version=[5],New=[access-to-variable],Old=[access-to-constant]} value;
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0015-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0392-1]}
   @ChgAdded{Version=[3],Text=[the return object declared by an
-  @nt{extended_return_statement} with the reserved word @key[constant];]}
+  @nt{extended_return_statement} @Chg{Version=[5],New=[without],Old=[with]}
+  the reserved word @key[constant];]}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0015-1]}
-  the @Chg{Version=[3],New=[object denoted by],Old=[result of evaluating]}
-  a @nt<function_call> or an @nt<aggregate>;
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+  the @Chg{Version=[5],New=[current instance of a type other than a protected
+    type@Redundant[, if the current instance is an object and not a value 
+    (see @RefSecNum{The Context of Overload Resolution})]],Old=[@Chg{Version=[3],New=[object
+    denoted by],Old=[result of evaluating]} a @nt<function_call> or an
+     @nt<aggregate>]};
+
+     @begin{Reason}
+       @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+       @ChgAdded{Version=[5],Text=[We exclude current instances of protected types 
+       as they are protected units and the next bullet applies.]}
+     @end{Reason}
+
+     @begin{TheProof}
+       @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+       @ChgAdded{Version=[5],Text=[This list of bullets only applies to views
+       of objects, so current instances that are not objects are not 
+       considered here.]}
+     @end{TheProof}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0226-1]}
-  @ChgAdded{Version=[3],Text=[the result of evaluating a
-    @Chg{Version=[5],New=[value conversion
-    or ],Old=[]}@nt{qualified_expression};]}
-
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0125-3]}
-  @ChgAdded{Version=[5],Text=[a @nt{target_name} of an
-  @nt{assignment_statement} when used in the @nt{expression} of the assignment
-  (see @RefSecNum{Target Name Symbols});]}
+  @ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[the result of 
+    evaluating a @nt{qualified_expression};]}]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0120-1]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0125-3]}@Comment{Just a paragraph number change.}
-  @ChgAdded{Version=[3],Text=[within the body of a protected function (or a
-  function declared immediately within a @nt{protected_body}), the current
-  instance of the enclosing protected unit;]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[the current instance 
+    of a protected unit except ],Old=[]}within the body of a protected
+    function @Chg{Version=[5],New=[of that protected unit, or 
+    within],Old=[( or]} a function declared immediately within
+    @Chg{Version=[5],New=[the body of the],Old=[a @nt{protected_body}),
+    the current instance of the enclosing]} protected unit;]}
 
-  a @nt<selected_component>, @nt<indexed_component>,
-  @nt<slice>, or view conversion of a constant.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
+  @Chg{Version=[5],New=[an @nt{attribute_reference} where the attribute is
+    defined to denote a variable (for example, the Storage_Pool attribute
+    @en see @RefSecNum{Storage Management})],Old=[a @nt<selected_component>, 
+    @nt<indexed_component>, @nt<slice>, or view conversion of a constant]}.
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[In particular, this implies 
+      that the following are not variables:]}
+    @begin{Itemize}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1],ARef=[AI12-0392-1]}
+    @ChgAdded{Version=[5],Text=[the result of evaluating a @nt{function_call},
+      an @nt{aggregate}, a value conversion, a @nt{qualified_expression}, a
+      @nt{conditional_expression}, a @nt{raise_expression}, or a 
+      parenthesized expression;]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+    @ChgAdded{Version=[5],Text=[a @nt{target_name} of an 
+      @nt{assignment_statement} (see @RefSecNum{Target Name Symbols});]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
+    @ChgAdded{Version=[5],Text=[the index parameter of an 
+      @nt{iterated_component_association};]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+    @ChgAdded{Version=[5],Text=[a choice parameter or entry index;]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0308-1]}
+    @ChgAdded{Version=[5],Text=[a chunk parameter of a @nt{chunk_specification}.]}
+    @end{Itemize}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+    @ChgAdded{Version=[5],Text=[This list of constructs that yield constant 
+      views is not exhaustive.]}
+  @end{Ramification}
+    
   @begin{Honest}
     @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00114-01]}
     @ChgNote{This is just wrong, even for Ada 95.}
@@ -2419,6 +2486,10 @@ explicit initialization @nt<expression>
 is necessary (see @RefSecNum(Object Declarations)).
 A component cannot have an indefinite nominal subtype.]
 
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Nominal subtype>,
+Text=<@ChgAdded{Version=[5],Text=[The nominal subtype of a view of an object is
+the subtype specified when the view is defined.]}>}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[A view of a composite object is
 @i<known to be constrained> if:@Defn{known to be constrained}@Defn2{Term=[constrained],Sec=[known to be]}]}
@@ -2426,8 +2497,11 @@ A component cannot have an indefinite nominal subtype.]
 @begin{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[its nominal subtype is constrained, and is not an
-untagged partial view; or]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0401-1]}
+@ChgAdded{Version=[3],Text=[its nominal subtype is
+constrained@Chg{Version=[5],New=[ and],Old=[, and is]} not an
+untagged partial view@Chg{Version=[5],New=[, and it is neither a value
+conversion nor a @nt{qualified_expression}],Old=[]}; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[its nominal subtype is indefinite; or]}
@@ -2631,13 +2705,29 @@ assigning to an enclosing object.
   @RefSecNum{Names} for details.]}@ChgNote{This is defined an extension in @RefSecNum{Names}.}
 @end{DiffWord2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0401-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Corrected the definition of @ldquote@;known to be constrained@rdquote so
+  that the status of the operand of value conversions and
+  @nt{qualified_expression}s is always used to determine whether the property
+  exists. As the rules are @key[or]ed together, a value conversion or
+  @nt{qualified_expression} with a constrained nominal subtype would have
+  always met the requirements in Ada 2012, regardless of the operand.
+  This change will mean that some conversions or qualifications (mostly of
+  variables) will no longer be considered @ldquote@;known to be constrained@rdquote
+  and therefore 'Access and renaming of such @nt{prefix}es will now be
+  illegal. This is necessary to meet the design goal that subsequent execution
+  cannot cause a renaming or 'Access to cause erroneous execution.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0228-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
   A @nt{qualified_expression} of an object that is known to be constrained
   is now also known to be constrained. This allows qualification to be used
-  to disambiguate a function call used as a prefix in a rename without making
-  the rename illegal.]}
+  to disambiguate a function call used as a prefix in a @nt{renaming_declaration}
+  without making the @nt{renaming_declaration} illegal.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1]}
   @ChgAdded{Version=[5],Text=[A value conversion of an object is an
@@ -2645,9 +2735,11 @@ assigning to an enclosing object.
 @end{Extend2012}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
-  @ChgAdded{Version=[5],Text=[Added a rule defining a @nt{target_name} as
-  a constant (see @RefSecNum{Target Name Symbols}).]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[5],Text=[@b{Correction:} Changed from a list of constants
+  to a list of variables. This makes the default to be a constant, which is
+  the more common case, and eliminates issues caused by omissions from the
+  list (such as parenthesized expressions).]}
 @end{DiffWord2012}
 
 
@@ -2757,9 +2849,9 @@ access discriminant value constrained by a per-object expression, or if it has
 an initialization expression that includes a name denoting the current instance
 of the type or denoting an access discriminant.]}]}
 @begin{Itemize}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0192-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0192-1],ARef=[AI12-0404-1]}
 @ChgAdded{Version=[5],Text=[it has an access discriminant value constrained by a
-per-object expression;]}
+per-object expression; or]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0192-1]}
 @ChgAdded{Version=[5],Text=[it has an initialization expression that includes a
@@ -3249,7 +3341,7 @@ without an initialization expression.
   @b<Correction:> Components of a protected type require late initialization if
   their initialization includes (implicitly) the current instance of the type.
   This means that the components could end up being initialized in a different
-  order. In most cases, this will have no visible effect, or even fix bugs.
+  order. In most cases, this will have no visible effect, or will even fix bugs.
   Most code for which this is an issue depends on the (unspecified) order of
   initialization, so it is at risk of failing with a new compiler version
   regardless of Ada rule changes. However, there do exist very unlikely
@@ -3290,6 +3382,21 @@ This is fully defined in @Chg{Version=[3],New=[subclause],Old=[clause]}
   Sec=(number_declaration expression)}
 The @SynI(static_)@nt{expression} given for
 a @nt{number_declaration} is expected to be of any numeric type.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0394-1]}
+@ChgAdded{Version=[5],Text=[A @nt{name} that denotes a @nt{number_declaration}
+is interpreted as a value of a universal type, unless the expected type for
+the @nt{name} is a non-numeric type with an Integer_Literal or Real_Literal
+aspect, in which case it is interpreted to be of its expected type.]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This is only a @ResolutionName; all named
+  numbers are values of a universal type (see the @StaticSemTitle below). We
+  need this rule so that named numbers can match types with user-defined
+  literals; we need the other rules so the value of the named number is
+  well-defined in all cases.]}
+@end{Honest}
 @end{Resolution}
 
 @begin{Legality}
@@ -3352,6 +3459,14 @@ in words similar to that of an @nt{object_declaration}. However, since
 there is no expression to be evaluated and no object to be created,
 it seems simpler to say that the elaboration has no effect.
 @end{DiffWord83}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0394-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Named numbers now
+  can be used with (non-numeric) types that define user-defined literals
+  (see @RefSecNum{User-Defined Literals}).]}
+@end{Extend2012}
+
 
 
 @LabeledClause{Derived Types and Classes}

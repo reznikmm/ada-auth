@@ -1,16 +1,16 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_big.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
 @Part(predefbignum, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:22 $}
+@Comment{$Date: 2020/12/05 05:10:44 $}
 
 @LabeledAddedSubclause{Version=[5],Name=[Big Numbers]}
 
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1]}
-@ChgAdded{Version=[5],Text=[Support is provided for integer arithmetic involving
-values larger than than those supported by the target machine, and for
-arbitrary-precision reals.]}
+@ChgAdded{Version=[5],Text=[Support is provided for integer arithmetic 
+involving values larger than those supported by the target machine, and for
+arbitrary-precision real numbers.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -50,14 +50,24 @@ Numerics.Big_Numbers.Big_Integers has the following declaration:]}
 @key{package} Ada.Numerics.Big_Numbers.Big_Integers@ChildUnit{Parent=[Ada.Numerics.Big_Numbers],Child=[Big_Integers]}
    @key{with} Preelaborate, Nonblocking, Global => @key{in out synchronized} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1],ARef=[AI12-0366-1],ARef=[AI12-0404-1]}
 @ChgAdded{Version=[5],Text=[   @key{type} @AdaTypeDefn{Big_Integer} @key{is private}
-     @key{with} Integer_Literal => From_String,
+     @key{with} Integer_Literal => From_Universal_Image,
           Put_Image => Put_Image;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Valid} (Arg : Big_Integer) @key{return} Boolean
       @key{with} Convention => Intrinsic;]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+   @ChgAdded{Version=[5],Text=[The result of Is_Valid on a default-initialized 
+     object of type Big_Integer is unspecified, analogous to the value of a Valid 
+     @nt{attribute_reference} applied to a default-initialized object of an 
+     integer type (see @RefSecNum{The Valid Attribute}). The language-provided 
+     functions in the Big_Integers package only return values for which Is_Valid 
+     is certain to be True.]}
+@end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{subtype} @AdaSubtypeDefn{Name=[Valid_Big_Integer],Of=[Big_Integer]} @key{is} Big_Integer
@@ -130,6 +140,10 @@ Numerics.Big_Numbers.Big_Integers has the following declaration:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_String} (Arg : String) @key{return} Valid_Big_Integer;]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0404-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Arg : String) @key{return} Valid_Big_Integer
+      @key{renames} From_String;]}
+
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Put_Image}
      (Buffer : @key{in out} Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;
@@ -167,7 +181,7 @@ Numerics.Big_Numbers.Big_Integers has the following declaration:]}
 Put and Get procedures defined in Text_IO.Integer_IO (in particular, with
 respect to the interpretation of the Width and Base parameters) except that
 Constraint_Error, not Data_Error, is propagated in error cases and the result of
-a call To_String with a Width parameter of 0 and a nonnegative Arg parameter
+a call to To_String with a Width parameter of 0 and a nonnegative Arg parameter
 does not include a leading blank. Put_Image calls To_String (passing in the
 default values for the Width and Base parameters), prepends a leading blank if
 the argument is nonnegative, and writes the resulting value to the buffer using
@@ -190,14 +204,15 @@ are performed as part of default initialization, the type Big_Integer
 is considered to have a subcomponent that has a @nt{default_expression}.]}
 
 @begin{Ramification}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0208-1]}
   @ChgAdded{Version=[5],Type=[Leading],Text=[This means that the elaboration of]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[Default_Initialized_Object : Valid_Big_Integer;]}
 @end{Example}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[is required to propagate Program_Error.]}
+  @ChgAdded{Version=[5],Text=[either produces a value for which Is_Valid is 
+    True. or it propagates Program_Error.]}
 @end{Ramification}
 @end{Runtime}
 
@@ -238,14 +253,24 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
 @key{package} Ada.Numerics.Big_Numbers.Big_Reals@ChildUnit{Parent=[Ada.Numerics.Big_Numbers],Child=[Big_Reals]}
    @key{with} Preelaborate, Nonblocking, Global => @key{in out synchronized} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1],ARef=[AI12-0366-1],ARef=[AI12-0404-1]}
 @ChgAdded{Version=[5],Text=[   @key{type} @AdaTypeDefn{Big_Real} @key{is private}
-      @key{with} Real_Literal => From_String,
+      @key{with} Real_Literal => From_Universal_Image,
            Put_Image => Put_Image;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Valid} (Arg : Big_Real) @key{return} Boolean
       @key{with} Convention => Intrinsic;]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+   @ChgAdded{Version=[5],Text=[The result of Is_Valid on a default-initialized 
+     object of type Big_Real is unspecified, analogous to the value of a Valid 
+     @nt{attribute_reference} applied to a default-initialized object of a 
+     real type (see @RefSecNum{The Valid Attribute}). The language-provided 
+     functions in the Big_Reals package only return values for which Is_Valid 
+     is certain to be True.]}
+@end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{subtype} @AdaSubtypeDefn{Name=[Valid_Big_Real],Of=[Big_Real]} @key{is} Big_Real
@@ -333,6 +358,15 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_String} (Arg   : String) @key{return} Valid_Big_Real;]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0404-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Arg : String) @key{return} Valid_Big_Real
+      @key{renames} From_String;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0404-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Num, Den : String) @key{return} Valid_Big_Real @key{is}
+      (Big_Integers.From_Universal_Image (Num) /
+       Big_Integers.From_Universal_Image (Den));]}
+
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{To_Quotient_String} (Arg : Valid_Big_Real) @key{return} String @key{is}
       (To_String (Numerator (Arg)) & " / " & To_String (Denominator (Arg)));
@@ -399,14 +433,15 @@ are performed as part of default initialization, the type Big_Real
 is considered to have a subcomponent that has a @nt{default_expression}.]}
 
 @begin{Ramification}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0208-1]}
   @ChgAdded{Version=[5],Type=[Leading],Text=[This means that the elaboration of]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[Default_Initialized_Object : Valid_Big_Real;]}
 @end{Example}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[is required to propagate Program_Error.]}
+  @ChgAdded{Version=[5],Text=[either produces a value for which Is_Valid is 
+    True. or it propagates Program_Error.]}
 @end{Ramification}
 @end{Runtime}
 

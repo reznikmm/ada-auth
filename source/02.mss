@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:20 $}
+@Comment{$Date: 2020/12/05 05:10:40 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1272,7 +1272,7 @@ implementation-defined attributes or pragma names.
   Form KC is now illegal. Ada 2012 allowed such identifiers, but their
   interpretation was implementation-defined (so the use of such
   identifiers was not portable). Identifiers that may be interpreted differently
-  by different compilers is a safety and security hazard, so we no longer
+  by different compilers are a safety and security hazard, so we no longer
   allow them.]}
 @end{Incompatible2012}
 

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:20 $}
+@Comment{$Date: 2020/12/05 05:10:41 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -56,10 +56,10 @@ Parallel loops (see @RefSecNum{Loop Statements}) and
 constructs.@IndexSee{Term=[parallel processing],See=(parallel construct)}
 @IndexSee{Term=[concurrent processing],See=(parallel construct)}],Old=[]}
 
-@ChgToGlossary{Version=[5],Kind=[Added],Term=<Parallel Construct>,
-Text=<@ChgAdded{Version=[5],Text=[An executable construct that defines multiple
-activities of a single task that can proceed in parallel, via the execution of
-multiple logical threads of control.]}>}
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Parallel construct>,
+Text=<@ChgAdded{Version=[5],Text=[A parallel construct is an executable
+construct that defines multiple activities of a single task that can proceed in
+parallel, via the execution of multiple logical threads of control.]}>}
 @end{Intro}
 
 @begin{Syntax}
@@ -1179,15 +1179,15 @@ running sequentially or concurrently with one another],Old=[]}.]
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1],ARef=[AI12-0251-1],ARef=[AI12-0266-1],ARef=[AI12-0326-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1],ARef=[AI12-0251-1],ARef=[AI12-0266-1],ARef=[AI12-0326-2],ARef=[AI12-0355-2]}
 @Syn{lhs=<iteration_scheme>,rhs="@key{while} @Syn2{condition}
    | @key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
    | @key{for} @Syn2{iterator_specification}],Old=[]}@Chg{Version=[5],New=<
-   | [@key[parallel]]
+   | [@key[parallel] [@Syn2{aspect_specification}]]
      @key{for} @Syn2{procedural_iterator}
-   | @key[parallel] [(@Syn2{chunk_specification})]
+   | @key[parallel] [(@Syn2{chunk_specification})] [@Syn2{aspect_specification}]
      @key{for} @Syn2{loop_parameter_specification}
-   | @key[parallel] [(@Syn2{chunk_specification})]
+   | @key[parallel] [(@Syn2{chunk_specification})] [@Syn2{aspect_specification}]
      @key{for} @Syn2{iterator_specification}>,Old=[]}"}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1]}
@@ -1250,10 +1250,10 @@ subtype) is that defined by the @nt{discrete_subtype_definition}.]}
 of the @nt{iterator_filter} evaluates to True for a given iteration of the
 iterator construct.@Defn{iterator filter}]}
 
-@ChgToGlossary{Version=[5],Kind=[Added],Term=<Iterator Filter>,
-Text=<@ChgAdded{Version=[5],Text=[A construct that is used to restrict the
-elements produced by an iteration to those for which a boolean condition
-evaluates to True.]}>}
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Iterator filter>,
+Text=<@ChgAdded{Version=[5],Text=[An iterator filter is a construct that is used
+to restrict the elements produced by an iteration to those for which a boolean
+condition evaluates to True.]}>}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
 @ChgAdded{Version=[5],Text=[If a @nt{sequence_of_statements} of a
@@ -1315,7 +1315,7 @@ this check fails, Program_Error is raised.@IndexCheck{Program_Error_Check}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0250-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0250-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1],ARef=[AI12-0355-2]}
 @Chg{Version=[5],New=[@PDefn2{Term=[execution],
   Sec=(loop_statement with a for loop_parameter_specification)}],
 Old=[@PDefn2{Term=[execution],
@@ -1326,7 +1326,7 @@ Old=[with @Chg{Version=[3],New=[the],Old=[a @key{for}]}]}
 @nt{iteration_scheme}@Chg{Version=[3],New=[ @Chg{Version=[5],New=[including
 a],Old=[being @key[for]]} @nt{loop_@!parameter_@!specification}],Old=[]},
 @Chg{Version=[5],New=[after
-elaborating the @nt{chunk_specification}, if any, ],Old=[]}the
+elaborating the @nt{chunk_specification} and @nt{aspect_specification}, if any, ],Old=[]}the
 @nt{loop_@!parameter_@!specification} is
 @Chg{Version=[5],New=[],Old=[first ]}elaborated. This
 @Chg{Version=[5],New=[],Old=[elaboration creates the loop parameter
@@ -1895,16 +1895,16 @@ properties:]}
 
 @begin{Erron}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0354-1]}
-@ChgAdded{Version=[5],Text=[A call on the First or Next operation on a given 
+@ChgAdded{Version=[5],Text=[A call on the First or Next operation on a given
 Parallel_Iterator object with a given Chunk value, which does not propagate an
 exception, should return a Cursor value that either yields False when passed to
-Has_Element, or that identifies an element distinct from any Cursor value 
+Has_Element, or that identifies an element distinct from any Cursor value
 returned by a call on a First or Next operation on the same Parallel_Iterator
-object with a different Chunk value. If the First or Next operations with a 
+object with a different Chunk value. If the First or Next operations with a
 Chunk parameter behave in any other manner, execution is erroneous.]}
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[This describes the expectations from a 
+  @ChgAdded{Version=[5],Text=[This describes the expectations from a
   user-written parallel iterator. If the expectations are not met, execution
   is erroneous so that implementations do not need to go to heroic efforts
   to avoid problems caused by bad iterators. This is similar to the handling
@@ -2599,7 +2599,7 @@ The body of @i<P> consists of the conditionally executed
 @end{ImplNote}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0344-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[In a procedural iterator, the 
+@ChgAdded{Version=[5],Type=[Leading],Text=[In a procedural iterator, the
 Parallel_Calls aspect (see @RefSecNum{Conflict Check Policies}) of
 the loop body procedure is True if the reserved word @key[parallel] occurs
 in the corresponding loop statement, and False otherwise.]}
@@ -2710,7 +2710,7 @@ entity identified in the @nt{iterator_procedure_call} has a Parallel_iterator
 aspect of True.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
-@ChgAdded{Version=[5],Text=[If the actual parameter of an anonymous 
+@ChgAdded{Version=[5],Text=[If the actual parameter of an anonymous
 access-to-subprogram type, passed in an explicit call of a subprogram for which
 the Parallel_Iterator aspect is True, is of the form @i<P>'Access, the
 designated subprogram @i<P> shall have a Parallel_Calls aspect True (see
@@ -2747,7 +2747,7 @@ outside the @nt{loop_statement}.]}
 @end{Legality}
 
 @begin{Runtime}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2],ARef=[AI12-0355-2]}
 @ChgAdded{Version=[5],Text=[@Redundant[For the execution of a
   @nt{loop_statement} with an @nt{iteration_scheme} that has a
   @nt{procedural_iterator}, the procedure denoted by the @nt{name} or
@@ -2757,7 +2757,8 @@ outside the @nt{loop_statement}.]}
   then calls the loop body procedure zero or more times and returns, whereupon
   the @nt{loop_statement} is complete. If the @key[parallel] reserved word is
   present, the iterating procedure might invoke the loop body procedure from
-  multiple distinct logical threads of control.]]}
+  multiple distinct logical threads of control.] The @nt{aspect_specification},
+  if any, is elaborated prior to the invocation of the iterating procedure.]}
 
 @begin{TheProof}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3000,8 +3001,8 @@ by one of the @nt{handled_sequence_of_statements}
 
 @begin{Examples}
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-@ChgAdded{Version=[5],Text=[@key[procedure] Traverse (T : Expr_Ptr) @key[is] --@Examcom{ see @RefSecNum{Tagged Types and Type Extensions}}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0404-1]}
+@ChgAdded{Version=[5],Text=[@key[procedure] Traverse (T : Expr_Ptr) @key[is] --@Examcom{ see @RefSecNum{Type Extensions}}
 @key[begin]
    @key[if] T /= @key[null] @key[and then]
       T.@key[all] @key[in] Binary_Operation'Class --@Examcom{ see @RefSecNum{Type Extensions}}

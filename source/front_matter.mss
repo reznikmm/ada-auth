@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.95 $ $Date: 2019/11/15 05:03:41 $}
+@comment{$Revision: 1.96 $ $Date: 2020/12/05 05:10:45 $}
 
 @UnNumberedSection(Foreword)
 
@@ -995,8 +995,8 @@ See @Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum{Vector and Matrix 
 @ChgRef{Version=[3],Kind=[RevisedAdded]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0313-1]}
 @Chg{Version=[5],New=[The use of numeric and string literals is generalized to
-support other sorts of types, via the new Integer_Literal, Real_Literal, and
-String_Literal aspects.],Old=[@Chg{Version=[2],New=[
+allow their use with other sorts of types, via the new aspects Integer_Literal,
+Real_Literal, and String_Literal.],Old=[@Chg{Version=[2],New=[
 The overall reliability of the language has been enhanced by
 a number of improvements. These include new syntax which detects
 accidental overloading, as well as pragmas for making assertions and
@@ -1023,7 +1023,7 @@ refer to the target of an assignment statement in the expression defining its
 new value.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0313-1]}
-@ChgAdded{Version=[5],Text=[Declare expressions are provided which permit the
+@ChgAdded{Version=[5],Text=[Declare expressions are provided that permit the
 definition and use of local constants or renamings, to allow an expression used
 within an aspect specification to be more concise and readable.]}
 
@@ -1499,7 +1499,7 @@ Ada Rapporteur Group, whose work on creating and editing the wording
 changes was critical to the entire process. Especially valuable
 contributions came from the chairman of the ARG, J. Cousins (UK), who
 guided the work; T. Taft (USA), who seems to have the ability to cut any
-Gordian knot we encounter in wording; ; J. Barnes (UK) who continues to be
+Gordian knot we encounter in wording; J. Barnes (UK) who continues to be
 able to find editorial errors invisible to most; S. Baird (USA), who
 so frequently finds obscure interactions that we now have named such things
 for him. Other ARG members who substantially contributed were:
@@ -1525,18 +1525,18 @@ ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work in all steps of the
 process, from determining problems to address, reviewing feature designs, and
 creating and editing wording changes, was critical to the entire process.
 Especially valuable contributions came from the chairman of the
-ARG through June 2018, J. Cousins
+ARG through June 2018, J. Cousins,
 who guided the work and ensured we followed defined procedures; his replacement
-as chairman, S. Baird who ably powered through obstacles to complete the work
+as chairman, S. Baird, who ably powered through obstacles to complete the work
 while continuing to find obscure interactions; T. Taft, who often solved
 difficult problems that had stumped others; B. Moore, whose frequent suggestions
 for parallel constructs greatly improved the result.
 Other ARG members who substantially contributed were:
-R. Amiard, J. Barnes, A. Burns, G. Dismukes, R. Duff, E. Fish, E. Ploedereder,
-J.P. Rosen, F. Schanda, E. Schonberg, J. Squierk, T. Vardanega, and R. Wai.]}
-@Comment{E. Fish has 2.0 meeting points as of #62 (Oct 2019). Remove his name if
-he doesn't get more. C. Dross attended meeting #62 for only a few minutes. Add
-her name if that changes in the future.}
+R. Amiard, J. Barnes, A. Burns, A. Charlet, G. Dismukes, C. Dross, R. Duff, 
+E. Ploedereder, J.P. Rosen, F. Schanda, E. Schonberg, J. Squierk, T. Vardanega, 
+and R. Wai.]}
+@Comment{E. Fish has 2.0 meeting points as of #62 (Oct 2019), he has not
+attended since. Added his name if he reappears.}
 
 @Comment{Leave the thanks for Pat until we get closer to done.
 @ChgRef{Version=[5],Kind=[Added]}

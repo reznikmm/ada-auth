@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.11 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@comment{ $Revision: 1.12 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -92,7 +92,7 @@ of @i<M>@Redundant[, as well as by a call that passes @i<M> to
 certain of the operations of this package, as indicated by the precondition
 of such an operation]. Similarly, when tampering with elements is @i<prohibited>
 for @i<M>, Program_Error is propagated by a call that passes @i<M> to
-certain of other operations of this package, as indicated by the precondition
+certain of the other operations of this package, as indicated by the precondition
 of such an operation.],Old=[]}]}
 
 @begin{NotIso}
@@ -358,9 +358,9 @@ returns False otherwise.]}
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[Various contracts elsewhere in this specification
-    require that this function is implemented with synchronized data. Moreover,
+    require that this function be implemented with synchronized data. Moreover,
     it is possible for tampering to be prohibited by multiple operations
-    (sequentiually or in parallel). Therefore, tampering needs to be
+    (sequentially or in parallel). Therefore, tampering needs to be
     implemented with an atomic or protected counter. The counter is initialized
     to zero, and is incremented when tampering is prohibited, and decremented
     when leaving an area that prohibited tampering. Function
@@ -804,7 +804,7 @@ into Target. The length of Source is 0 after a successful call to Move]}.]}
                       Length (Container)'Old;
                  @key{begin}
                    Has_Element (Container, Position) @key{and then}
-                  (@key{if} Inserted then
+                  (@key{if} Inserted @key{then}
                      Length (Container) = Original_Length + 1
                    @key{else}
                      Length (Container) = Original_Length))],Old=[]};]}
@@ -835,7 +835,7 @@ propagated and Container is not modified.]}
                       Length (Container)'Old;
                  @key{begin}
                    Has_Element (Container, Position) @key{and then}
-                  (@key{if} Inserted then
+                  (@key{if} Inserted @key{then}
                      Length (Container) = Original_Length + 1
                    @key{else}
                      Length (Container) = Original_Length))],Old=[]};]}
@@ -999,8 +999,8 @@ the node from the map; otherwise, Constraint_Error is propagated.]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete (Container : @key{in out} Map;
                   Position  : @key{in out} Cursor)@Chg{Version=[5],New=[
-   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
-                 @key{then raise} Program_Error) @key{and then}
+   @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
+                    @key{or else raise} Program_Error) @key{and then}
                 (Position /= No_Element 
                     @key{or else raise} Constraint_Error) @key{and then}
                 (Has_Element (Container, Position)
@@ -1048,8 +1048,7 @@ first node in Container.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
-        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
-                 @key{else} True)],Old=[]};]}
+        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -1107,8 +1106,8 @@ successor of the node designated by Position in Container.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Find (Container : Map;
                Key       : Key_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Find'Result = No_Element
+                    @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -1926,8 +1925,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
-           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Next} (Container : Map;
@@ -1961,8 +1959,8 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : Map;
                   Key       : Key_Type)
       @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Find'Result /= No_Element
+                    @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Container : Map;
@@ -2017,15 +2015,13 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Map} (Base : @key{not null access} Hashed_Maps.Map) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
               Variable_Indexing => Reference,
               Default_Iterator  => Iterate,
               Iterator_Element  => Element_Type,
-              Aggregate         => (Empty      => Empty,
-                                    Add_Named  => Insert),
               Stable_Properties => (Length),
 	      Global => @key[null],
               Default_Initial_Condition => Length (Map) = 0;
@@ -3068,13 +3064,15 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Element} (Container : Map)
       @key{return} Element_Type@Chg{Version=[5],New=[
-      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+      @key{with} Pre => (@key{not} Is_Empty (Container) 
+                      @key{or else raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Key} (Container : Map)
       @key{return} Key_Type@Chg{Version=[5],New=[
-      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+      @key{with} Pre => (@key{not} Is_Empty (Container) 
+                      @key{or else raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -3088,21 +3086,22 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Element} (Container : Map)
       @key{return} Element_Type@Chg{Version=[5],New=[
-      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+      @key{with} Pre => (@key{not} Is_Empty (Container) 
+                      @key{or else raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Key} (Container : Map)
       @key{return} Key_Type@Chg{Version=[5],New=[
-      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+      @key{with} Pre => (@key{not} Is_Empty (Container) 
+                      @key{or else raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Global => @key{in all}, Use_Formal => @key{null},
-           Nonblocking => True,
-           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+           Nonblocking,
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Next} (Container : Map;
@@ -3136,8 +3135,7 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element @key{then}
-                       Previous'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+                       Previous'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Previous} (Container : Map;
@@ -3171,8 +3169,8 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : Map;
                   Key       : Key_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Find'Result /= No_Element
+                    @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Container : Map;
@@ -3271,15 +3269,13 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Map} (Base : @key{not null access} Ordered_Maps.Map) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
               Variable_Indexing => Reference,
               Default_Iterator  => Iterate,
               Iterator_Element  => Element_Type,
-              Aggregate         => (Empty      => Empty,
-                                    Add_Named  => Insert),
               Stable_Properties => (Length),
               Global            => @key[null],
               Default_Initial_Condition => Length (Map) = 0;
@@ -3498,7 +3494,8 @@ from Container. Delete_Last tampers with the cursors of Container.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Element (Container : Map)
    @key{return} Element_Type@Chg{Version=[5],New=[
-   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+   @key{with} Pre => (@key{not} Is_Empty (Container) 
+                   @key{or else raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3509,7 +3506,8 @@ from Container. Delete_Last tampers with the cursors of Container.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Key (Container : Map)
    @key{return} Key_Type@Chg{Version=[5],New=[
-   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+   @key{with} Pre => (@key{not} Is_Empty (Container) 
+                   @key{or else raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3534,7 +3532,8 @@ the last node in Container. If Container is empty, returns No_Element.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Element (Container : Map)
    @key{return} Element_Type@Chg{Version=[5],New=[
-   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+   @key{with} Pre => (@key{not} Is_Empty (Container) 
+                   @key{or else raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3545,7 +3544,8 @@ the last node in Container. If Container is empty, returns No_Element.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Key (Container : Map)
    @key{return} Key_Type@Chg{Version=[5],New=[
-   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+   @key{with} Pre => (@key{not} Is_Empty (Container) 
+                   @key{or else raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3557,8 +3557,7 @@ the last node in Container. If Container is empty, returns No_Element.]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
         Post => (@key{if} Position = No_Element @key{then}
-                    Previous'Result = No_Element
-                 @key{else} True)],Old=[]};]}
+                    Previous'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3620,8 +3619,8 @@ Previous (Container, Position).]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Floor (Container : Map;
                 Key       : Key_Type) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Post => (@key{if} Floor'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Floor'Result))],Old=[]};]}
+   @key{with} Post => (@key{if} Floor'Result /= No_Element
+                 @key{then} Has_Element (Container, Floor'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3637,8 +3636,8 @@ No_Element is returned.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Ceiling (Container : Map;
                   Key       : Key_Type) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Post => (@key{if} Ceiling'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Ceiling'Result))],Old=[]};]}
+   @key{with} Post => (@key{if} Ceiling'Result /= No_Element
+                 @key{then} Has_Element (Container, Ceiling'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4281,9 +4280,9 @@ cursors is currently prohibited for Container, and returns False otherwise.]}
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[Various contracts elsewhere in this specification
-    require that this function is implemented with synchronized data. Moreover,
+    require that this function be implemented with synchronized data. Moreover,
     it is possible for tampering to be prohibited by multiple operations
-    (sequentiually or in parallel). Therefore, tampering needs to be
+    (sequentially or in parallel). Therefore, tampering needs to be
     implemented with an atomic or protected counter. The counter is initialized
     to zero, and is incremented when tampering is prohibited, and decremented
     when leaving an area that prohibited tampering. Function
@@ -4932,8 +4931,7 @@ first element in Container.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
-        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
-                 @key{else} True)],Old=[]};]}
+        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4995,8 +4993,8 @@ successor of the node designated by Position in Container.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Find (Container : Set;
                Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Find'Result /= No_Element
+                    @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 @end{Example}
 
 
@@ -5928,7 +5926,7 @@ package Containers.Hashed_Sets has the following declaration:]}
                    @key{not} Tampering_With_Cursors_Prohibited (Union'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{"@key{or}"} (Left, Right : Set) @key{return} Set @key{renames} Union;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{or}" (Left, Right : Set) @key{return} Set @key{renames} Union;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -5947,7 +5945,7 @@ package Containers.Hashed_Sets has the following declaration:]}
               @key{not} Tampering_With_Cursors_Prohibited (Intersection'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{"@key{and}"} (Left, Right : Set) @key{return} Set @key{renames} Intersection;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{and}" (Left, Right : Set) @key{return} Set @key{renames} Intersection;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -5966,7 +5964,7 @@ package Containers.Hashed_Sets has the following declaration:]}
               @key{not} Tampering_With_Cursors_Prohibited (Difference'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{"-"} (Left, Right : Set) @key{return} Set @key{renames} Difference;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "-" (Left, Right : Set) @key{return} Set @key{renames} Difference;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -5985,7 +5983,7 @@ package Containers.Hashed_Sets has the following declaration:]}
               @key{not} Tampering_With_Cursors_Prohibited (Symmetric_Difference'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{"@key{xor}"} (Left, Right : Set) @key{return} Set
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{xor}" (Left, Right : Set) @key{return} Set
      @key{renames} Symmetric_Difference;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6007,8 +6005,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null},
-           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Next} (Container : Set;
@@ -6042,8 +6039,8 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : Set;
                   Item      : Element_Type)
       @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Find'Result /= No_Element
+                    @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Set;
@@ -6155,8 +6152,8 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Find} (Container : Set;
                      Key       : Key_Type)
          @key{return} Cursor@Chg{Version=[5],New=[
-         @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                       @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+         @key{with} Post => (@key{if} Find'Result = No_Element
+                       @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Contains} (Container : Set;
@@ -6218,14 +6215,12 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Hashed_Sets.Set) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
               Default_Iterator  => Iterate,
               Iterator_Element  => Element_Type,
-              Aggregate         => (Empty       => Empty,
-                                    Add_Unnamed => Include),
               Stable_Properties => (Length),
               Global            => @key[null],
               Default_Initial_Condition => Length (Set) = 0;
@@ -7008,7 +7003,7 @@ package Containers.Ordered_Sets has the following declaration:]}
                    @key{not} Tampering_With_Cursors_Prohibited (Union'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{"@key{or}"} (Left, Right : Set) @key{return} Set @key{renames} Union;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{or}" (Left, Right : Set) @key{return} Set @key{renames} Union;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -7027,7 +7022,7 @@ package Containers.Ordered_Sets has the following declaration:]}
               @key{not} Tampering_With_Cursors_Prohibited (Intersection'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{"@key{and}"} (Left, Right : Set) @key{return} Set @key{renames} Intersection;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{and}" (Left, Right : Set) @key{return} Set @key{renames} Intersection;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -7046,7 +7041,7 @@ package Containers.Ordered_Sets has the following declaration:]}
               @key{not} Tampering_With_Cursors_Prohibited (Difference'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{"-"} (Left, Right : Set) @key{return} Set @key{renames} Difference;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "-" (Left, Right : Set) @key{return} Set @key{renames} Difference;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -7087,7 +7082,8 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Element} (Container : Set)
       @key{return} Element_Type@Chg{Version=[5],New=[
-      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+      @key{with} Pre => (@key{not} Is_Empty (Container) 
+                      @key{or else raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -7101,14 +7097,14 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Element} (Container : Set)
       @key{return} Element_Type@Chg{Version=[5],New=[
-      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+      @key{with} Pre => (@key{not} Is_Empty (Container) 
+                      @key{or else raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null},
-           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Next} (Container : Set;
@@ -7142,8 +7138,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null},
            Post => (@key{if} Position = No_Element @key{then}
-                       Previous'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+                       Previous'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Previous} (Container : Set;
@@ -7161,8 +7156,8 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-      @key{with} Global => @key{in all}, Use_Formal => @key{null},
-           Nonblocking => True],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, 
+           Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Previous} (Container : @key{in}     Set;
@@ -7178,20 +7173,20 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : Set;
                   Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Find'Result /= No_Element
+                    @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Floor} (Container : Set;
                    Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Floor'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Floor'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Floor'Result = No_Element
+                    @key{then} Has_Element (Container, Floor'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Ceiling} (Container : Set;
                      Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Ceiling'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Ceiling'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Ceiling'Result = No_Element
+                    @key{then} Has_Element (Container, Ceiling'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Set;
@@ -7339,24 +7334,24 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Find} (Container : Set;
                      Key       : Key_Type)
          @key{return} Cursor@Chg{Version=[5],New=[
-         @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                       @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+         @key{with} Post => (@key{if} Find'Result = No_Element
+                       @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Floor} (Container : Set;
                        Key       : Key_Type)
          @key{return} Cursor@Chg{Version=[5],New=[
-         @key{with} Post => (@key{if} Floor'Result = No_Element @key{then} True
-                       @key{else} Has_Element (Container, Floor'Result))],Old=[]};]}
+         @key{with} Post => (@key{if} Floor'Result = No_Element
+                       @key{then} Has_Element (Container, Floor'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Ceiling} (Container : Set;
                          Key       : Key_Type)
          @key{return} Cursor@Chg{Version=[5],New=[
-         @key{with} Post => (@key{if} Ceiling'Result = No_Element @key{then} True
-                       @key{else} Has_Element (Container, Ceiling'Result))],Old=[]};]}
+         @key{with} Post => (@key{if} Ceiling'Result = No_Element
+                       @key{then} Has_Element (Container, Ceiling'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Contains} (Container : Set;
@@ -7417,14 +7412,12 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Hashed_Sets.Set) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
               Default_Iterator  => Iterate,
               Iterator_Element  => Element_Type,
-              Aggregate         => (Empty       => Empty,
-                                    Add_Unnamed => Include),
               Stable_Properties => (Length),
               Global            => @key[null],
               Default_Initial_Condition => Length (Set) = 0;
@@ -7606,7 +7599,8 @@ from Container. Delete_Last tampers with the cursors of Container.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Element (Container : Set)
    @key{return} Element_Type@Chg{Version=[5],New=[
-   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+   @key{with} Pre => (@key{not} Is_Empty (Container) 
+                   @key{or else raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -7632,7 +7626,8 @@ the last element in Container. If Container is empty, returns No_Element.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Element (Container : Set)
    @key{return} Element_Type@Chg{Version=[5],New=[
-   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
+   @key{with} Pre => (@key{not} Is_Empty (Container) 
+                   @key{or else raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -7645,8 +7640,7 @@ Element (Last (Container)).]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
         Post => (@key{if} Position = No_Element @key{then}
-                   Previous'Result = No_Element
-                 @key{else} True)],Old=[]};]}
+                   Previous'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -7708,8 +7702,8 @@ Previous (Container, Position).]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Floor (Container : Set;
                 Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Post => (@key{if} Floor'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Floor'Result))],Old=[]};]}
+   @key{with} Post => (@key{if} Floor'Result /= No_Element
+                 @key{then} Has_Element (Container, Floor'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -7724,8 +7718,8 @@ No_Element is returned.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Ceiling (Container : Set;
                   Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Post => (@key{if} Ceiling'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Ceiling'Result))],Old=[]};]}
+   @key{with} Post => (@key{if} Ceiling'Result /= No_Element
+                 @key{then} Has_Element (Container, Ceiling'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2020/12/05 05:10:42 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -330,10 +330,11 @@ of constructs that have a declarative region.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1],ARef=[AI12-0236-1]}
-  @ChgAdded{Version=[5],Text=[Added @nt{iterated_component_association} and
-  @nt{declare_expression} to the rapidly expanding list of constructs
-  that have a declarative region.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1],ARef=[AI12-0236-1],ARef=[AI12-0308-1]}
+  @ChgAdded{Version=[5],Text=[Added @nt{iterated_component_association},
+  @nt{iterated_element_association}, and @nt{declare_expression} to
+  the rapidly expanding list of constructs that have a declarative 
+  region.]}
 @end{DiffWord2012}
 
 
@@ -925,11 +926,13 @@ are all hidden from all visibility.
   named parameter notation in a call.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[When the subprograms do not conform,
   we chose not to adopt the @lquotes@;use clause@rquotes rule which would make
   them all visible resulting in likely ambiguity. If we had used such a rule,
   any successful calls would be confusing; and the fact that there are no
-  Beaujolais-like effect to worry about means we can consider other rules.
+  Beaujolais-like @Chg{Version=[5],New=[effects],Old=[effect]} to worry about
+  means we can consider other rules.
   The hidden-from-all-visibility homographs are still inherited
   by further derivations, which avoids order-of-declaration dependencies
   and other anomalies.]}
@@ -2221,13 +2224,6 @@ declarative region of generic unit @i{G}, then],Old=[]}:]}
   instance of a generic unit]}.]}
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0287-1]}
-@ChgAdded{Version=[5],Text=[@PDefn{generic contract issue}
-In addition to the places where @LegalityTitle normally apply
-(see @RefSecNum{Generic Instantiation}),
-this rule applies also in the private part of an
-instance of a generic unit.]}
-
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0287-1],ARef=[AI12-0005-1]}
@@ -2236,8 +2232,9 @@ instance of a generic unit.]}
   @lquotes@;lying@rquotes.
   @b<Null> must never be the value of an object with an explicit
   @nt{null_exclusion}. The @Chg{Version=[5],New=[bullets are],Old=[first
-  bullet is]} an assume-the-worst rule
-  which prevents trouble in @Chg{Version=[5],New=[two],Old=[one]}
+  bullet is an]} assume-the-worst @Chg{Version=[5],New=[rules that 
+  prevent],Old=[rule which prevents]} trouble 
+  in @Chg{Version=[5],New=[two],Old=[one]}
   obscure @Chg{Version=[5],New=[cases],Old=[case]}:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2274,9 +2271,55 @@ Obj : Acc_I := @key{null};]}
   in bodies of child generics as well as in the bodies of generics.]}
 @end{Reason}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0401-1]}
+@ChgAdded{Version=[5],Text=[In the case where the @SynI[object_]@nt{name} is
+a @nt{qualified_expression} with
+a nominal subtype @i<S> and whose @nt{expression} is a @nt{name} that denotes an 
+object @i<Q>:]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[if @i<S> is an elementary subtype, then:]}
+  @begin{Itemize}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[@i<Q> shall be a constant other than a 
+      dereference of an access type; or]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[the nominal subtype of @i<Q> shall be 
+      statically compatible with @i<S>; or]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[@i<S> shall statically match the base subtype 
+      of its type if scalar, or the first subtype of its type if an access 
+      type.]}
+@end{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[if @i<S> is a composite subtype, then @i<Q> 
+    shall be known to be constrained or @i<S> shall statically match the 
+    first subtype of its type.]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[There's no restriction if the @nt{expression}
+  is a value.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[This check prevents the renamed object from 
+  violating its nominal subtype. As the subtype is only checked when the 
+  object is renamed, we make it illegal if the actual object is a variable
+  whose value could be changed afterwards to violate the subtype. This is 
+  messy as @ldquote@;known to be constrained@rdquote is only defined for 
+  composite objects, so we have to handle elementary objects and all 
+  values separately.]}
+@end{Reason}
+
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0008-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0401-1]}
 The renamed entity shall not be a subcomponent that depends on
 discriminants of @Chg{Version=[3],New=[an object],Old=[a variable]}
 whose nominal subtype is unconstrained@Chg{Version=[3],New=[],Old=[,]}
@@ -2285,12 +2328,26 @@ Old=[this subtype is indefinite, or the variable is @Chg{Version=[2],
 New=[constrained by its initial value],Old=[aliased]}]}.
 A @nt{slice} of an array shall not be renamed if
 this restriction disallows renaming of the array.
-@Chg{New=[@PDefn{generic contract issue}In addition to the places where
-Legality Rules normally apply, these rules apply also in the private part of an
+@Chg{Version=[5],New=[],Old=[@Chg{New=[@PDefn{generic contract issue}In 
+addition to the places where @LegalityTitle normally apply, these rules 
+apply also in the private part of an
 instance of a generic unit.@Chg{Version=[3],New=[],Old=[ These rules also apply for a renaming that appears
 in the body of a generic unit, with the additional requirement that even if the
 nominal subtype of the variable is indefinite, its type shall not be a
-descendant of an untagged generic formal derived type.]}],Old=[]}
+descendant of an untagged generic formal derived type.]}],Old=[]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0401-1]}
+@ChgAdded{Version=[5],Text=[@PDefn{generic contract issue}In 
+addition to the places where @LegalityTitle normally apply (see 
+@RefSecNum{Generic Instantiation}), these rules also apply in the private 
+part of an instance of a generic unit.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[This applies to all of the
+  @LegalityTitle in this subclause. Rechecks are needed for
+  most of the rules (but not the first two).]}
+@end{Discussion}
 
 @begin{Reason}
 This prevents renaming of subcomponents that might
@@ -2488,6 +2545,15 @@ using the type T2 of the previous example:]}
   generic formal functions. This means a few unlikely programs are now illegal
   that were previously allowed by original Ada 2012, while more programs that
   were previously llegal will be allowed.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0401-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a rule to ensure that a
+  renaming of a @nt{qualified_expression} of a variable is allowed only if
+  the variable will always remain within the nominal subtype of the 
+  @nt{qualified_expression}. This was not required in Ada 2012. Renamings
+  that are now illegal are at risk of causing erroneous execution if the
+  variable value is changed to a bad value; this is consistent with other
+  rules preventing renamings from changing to violate their known properties.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -3375,7 +3441,7 @@ and all of the views declared by those declarations.
   @end{Discussion}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0068-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0324-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0324-1]}
   @ChgAdded{Version=[4],NoPrefix=[T],Text=[Within an @nt{aspect_specification}
   for a type or subtype, the current instance represents a value of the type;
   it is not an object. The nominal subtype of this value is given by the

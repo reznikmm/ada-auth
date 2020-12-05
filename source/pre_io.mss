@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2020/12/05 05:10:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -1905,7 +1905,7 @@ generic packages Modular_IO and Decimal_IO are new in Ada 95.
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
   The Wide_File_Names and Wide_Wide_File_Names
   nested packages are newly added to Ada.Text_IO.
-  If an instance of Ada.Text_IO is referenced in a @nt{use_clause}, and
+  If Ada.Text_IO is referenced in a @nt{use_clause}, and
   an entity with one of those names is defined in some other package that is
   also referenced in a @nt{use_clause}, the user-defined entity may no longer be
   use-visible, resulting in errors. This should be rare and is easily fixed if
