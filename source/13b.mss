@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2020/12/05 05:10:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1797,6 +1797,20 @@ Storage_Pool is not specified for the type.]}]}
 @end{Discussion}
 @ImplDef{Whether or not the implementation
 provides user-accessible names for the standard pool type(s).}
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[@key[pragma] Default_Storage_Pool (see
+  @RefSecNum{Default Storage Pools}) can be used to specify a
+  specific pool (or none at all) to be used with access types
+  declared in a particular declaration list, rather than a
+  standard storage pool.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[Although there is no language-defined 
+  user-accessible name for the standard pool type(s), the default
+  use of a standard pool may be indicated using the identifier
+  Standard in the @key[pragma] Default_Storage_Pool.]}
+@end{Honest}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 @ChgNote{This was never true.}@Chg{Version=[2],New=[],Old=[An anonymous access
@@ -4509,6 +4523,35 @@ language defined:]}
    Sec=(No_Use_Of_Pragma)}@Defn{No_Use_Of_Pragma restriction}No_Use_Of_Pragma
    @\Identifies a @nt{pragma} which is not to be used.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0389-1]}
+@ChgAdded{Version=[5],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Unrecognized_Aspects)}@Defn{No_Unrecognized_Aspects restriction}No_Unrecognized_Aspects
+   @\There are no @nt{aspect_specification}s having an unrecognized 
+   @SynI[aspect_]@nt{identifier}. This restriction applies only to 
+   the current compilation or environment, not the entire partition.]}
+
+@begin{Ramification}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[When this restriction is in effect, unrecognized 
+     aspects cannot be ignored in the current compilation; they violate the 
+     restriction. This is true despite the @ImplPermTitle of 
+     @RefSecNum{Aspect Specifications}.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0389-1]}
+@ChgAdded{Version=[5],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Unrecognized_Pragmas)}@Defn{No_Unrecognized_Pragmas restriction}No_Unrecognized_Pragmas
+   @\There are no @nt{pragma}s having an unrecognized pragma @nt{identifier}.
+   This restriction applies only to the current compilation or environment, 
+   not the entire partition.]}
+
+@begin{Ramification}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[When this restriction is in effect, unrecognized 
+     pragmas cannot be ignored in the current compilation; they violate 
+     the restriction. This is true despite the rules of @RefSecNum{Pragmas}.]}
+@end{Ramification}
+
 @end{Description}
 @end{StaticSem}
 
@@ -4582,10 +4625,12 @@ depend semantically on the library unit identified by the
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[There is no requirement that the library unit
-  actually exist. One possible use of the pragma is to prevent the use of
-  implementation-defined units; when the program is ported to a different
-  compiler, it is perfectly reasonable that no unit with the name exist.]}
+  actually @Chg{Version=[5],New=[exists],Old=[exist]}. One possible use of
+  the pragma is to prevent the use of implementation-defined units; when the
+  program is ported to a different compiler, it is perfectly reasonable that
+  no unit with the name @Chg{Version=[5],New=[exists],Old=[exist]}.]}
 @end{Ramification}
 
 @end{LinkTime}
@@ -4639,6 +4684,12 @@ No_Implementation_Units.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
   @ChgAdded{Version=[3],Text=[Profile No_Implementation_Extensions is new.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0389-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Restrictions No_Unrecognized_Aspects and No_Unrecognized_Pragmas are new.]}
+@end{Extend2012}
 
 
 @LabeledClause{Streams}
@@ -4974,7 +5025,7 @@ allocation.]}]}
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[The Streams.Storage.Bounded package is
-  provided in orde to make available an alternative to the
+  provided in order to make available an alternative to the
   Streaams.Storage.Unbounded package which gives more predictable memory
   usage.]}
 @end{Reason}
@@ -5586,17 +5637,34 @@ unspecified how many stream elements have been read from the stream.]}
 for a type, End_Error is raised if the end of the stream is reached before the
 reading of a value of the type is completed.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0064-2]}
-@ChgAdded{Version=[5],Text=[The aspect Nonblocking is the Boolean literal False
-for the default implementations of stream-oriented attributes.]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0064-2],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[5],Text=[The Nonblocking aspect is statically True 
+and the Global aspect is @key[null] for the default implementations of 
+stream-oriented attributes for elementary types. For the default 
+implementations of stream-oriented attributes for composite types, the 
+value of the Nonblocking aspect is that of the first subtype, and
+the Global aspect defaults to that of the first subtype. A 
+default implementation of a stream-oriented attribute that has the 
+Nonblocking aspect statically True is considered a nonblocking region.
+The aspect Dispatching (see @RefSecNum{The Use_Formal and Dispatching Aspects})
+is Read(Stream) for the default 
+implementations of the stream-oriented attributes Read, Read'Class,
+Input, and Input'Class; the aspect Dispatching is Write(Stream) for
+the default implementations of the stream-oriented attributes Write,
+Write'Class, Output, and Output'Class.]}
 
-@begin{Reason}
+@begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[The underlying Read/Write operations are called
-  via dispatching calls. Since we cannot afford any incompatibility with
-  existing Ada code, the stream operations allow blocking. Thus the
-  stream-oriented attributes must allow blocking as well.]}
-@end{Reason}
+  @ChgAdded{Version=[5],Text=[If the default implementation of a stream-oriented
+   attribute @i<A> for a composite type would call other stream-oriented attribute(s) 
+   whose Global aspect was not allowed by the Global aspect of@i<A>, then the
+   @LegalityTitle of @RefSecNum{The Global and Global'Class Aspects} are 
+   violated and the type declaration is illegal.
+   If the stream-oriented attribute @i<A> is overridden, then the default
+   implementation is not created and this check is not made. A similar
+   ramification applies to the Nonblocking aspect of default implementation 
+   of a stream-oriented attribute.]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01]}
@@ -6298,9 +6366,11 @@ class-wide types descended from S.
   via an @nt{aspect_specification} as applied when it is specified via
   an @nt{attribute_definition_clause}.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0396-1]}
   @ChgAdded{Version=[5],Text=[Added the definition of Nonblocking (see
-  @RefSecnum{Intertask Communication}) for stream-oriented attributes.]}
+  @RefSecnum{Intertask Communication}) and Global 
+  (see @RefSecNum{The Global and Global'Class Aspects}) 
+  for stream-oriented attributes.]}
 @end{DiffWord2012}
 
 
@@ -6711,11 +6781,24 @@ in a record extension does not have an effect on the freezing of the interface
 type.]}
 @end{Ramification}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[3],Text=[At the freezing point of the entity associated with
-an @nt{aspect_specification}, any @nt{expression}s or @nt{name}s within the
-@nt{aspect_specification} cause freezing. Any static expressions within an
+an @nt{aspect_specification}, any 
+@Chg{Version=[5],New=[static expressions],Old=[@nt{expression}s or @nt{name}s]}
+within the @nt{aspect_specification} cause freezing@Chg{Version=[5],New=[,
+as do @nt{expression}s or @nt{name}s in @nt{aspect_definition}s for 
+representation aspects, or operational aspects that have a corresponding 
+operational attribute. Similarly, if an
+@nt{aspect_definition} for an operational aspect, other than an
+assertion aspect, could affect the Name Resolution, @StaticSemTitle, or 
+@LegalityTitle of a subsequent construct, then any @nt{expression}s or @nt{name}s 
+within the @nt{aspect_definition} cause freezing at the freezing point of the 
+associated entity],Old=[]}. Any static expressions within an
 @nt{aspect_specification} also cause freezing
-at the end of the immediately enclosing declaration list.]}
+at the end of the immediately enclosing declaration list.@Chg{Version=[5],New=[ For
+the purposes of this rule, if there is no declared entity associated with 
+an @nt{aspect_specification}, the freezing point is considered to occur 
+immediately following the @nt{aspect_specification}.],Old=[]}]}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
@@ -7056,6 +7139,22 @@ is frozen.],Old=[]}]}
   it possible to check that only subprograms with convention Ada are
   specified in @nt{attribute_definition_clause}s without jumping through hoops.]}
 @end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[5],Text=[At the place where a construct causes freezing,
+if the construct includes a check associated with some assertion aspect
+@Redundant[(independent of whether the check is enabled)], or depends 
+on the definition of some operational aspect as part of its @RunTimeTitle,
+any @nt{name}s or @nt{expression}s in the @nt{aspect_definition} for the
+aspect cause freezing.]}
+    
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Aspects such as Constant_Indexing cause
+    freezing when they are used @em the @nt{name} in a Constant_Indexing would
+    cause freezing when a @nt{generalized_indexing} that makes use of it
+    causes freezing.]}
+@end{Ramification}
 @end{Itemize}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0155-1]}
@@ -7243,8 +7342,11 @@ because of the order-of-elaboration rules.
 The freezing rules prevent elaboration of earlier declarations from
 accessing the size dope for a private type before it is initialized.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @RefSecNum{Pragmas} overrides the freezing rules in the case of
-unrecognized @nt{pragma}s.
+unrecognized @nt{pragma}s@Chg{Version=[5],New=[; similarly
+@RefSecNum{Aspect Specifications} overrides the freezing rules in the 
+case of a specification of an unrecognized aspect],Old=[]}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[An @nt{aspect_clause}],Old=[A @nt{representation_clause}]} for
@@ -7467,5 +7569,10 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0373-1]}
   @ChgAdded{Version=[5],Text=[Added missing definition of freezing of library
   units.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Improved and clarified the 
+  freezing rules for @nt{aspect_specification}s; these now depend on the kind 
+  of aspect.]}
 @end{DiffWord2012}
 

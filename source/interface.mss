@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.86 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@comment{ $Revision: 1.87 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:22 $}
+@Comment{$Date: 2020/12/05 05:10:45 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1960,7 +1960,9 @@ Old=[@Chg{Version=[3],New=[],Old=[   @key(pragma) Import(C, Strcpy, "strcpy");]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Text=[   @Examcom{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
-   @key(procedure) Printf (Format : @key(in) C.char_array)
+   @key(procedure) Printf (Format : @key(in) C.char_array;
+                     Param1 : @key(in) C.char_array;
+                     Param2 : @key(in) C.int)
       @key(with) Import => True, Convention => C_Variadic_1, External_Name => "printf";]}
 
    Chars1 :  C.char_array(1..20);

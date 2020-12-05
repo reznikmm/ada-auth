@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:20 $}
+@Comment{$Date: 2020/12/05 05:10:41 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.156 $}
+@Comment{$Revision: 1.157 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -149,9 +149,20 @@ is not significant)]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0395-1]}
 @Syn{lhs=<parameter_specification>,rhs="
-    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]] >,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]
-  | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]"}
+    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]] >,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}]>,Old=<>}
+  | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}]>,Old=<>}"}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0395-1]}
+  @ChgAdded{Version=[5],Text=[Only implementation-defined aspects are allowed
+  on formal parameters in Ada 202x. Implementers are cautioned that any
+  aspect allowed on a formal parameter will need conformance rules. If,
+  for instance, an aspect changed the representation of a parameter,
+  rules would be needed to ensure that the representation is the same for
+  the specification and body.]}
+@end{Discussion}
 
 @Syn{lhs=<mode>,rhs="[@key{in}] | @key{in} @key{out} | @key{out}"}
 @end{Syntax}
@@ -497,21 +508,27 @@ The syntax rules for @nt{defining_designator} and
   @RefSecNum{Expression Functions}) to the wording.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0395-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Parameters now
+  can have an @nt{aspect_specification}, allowing the specification of
+  (implementation-defined) aspects for individual parameters.]}
+@end{Extend2012}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Preconditions and Postconditions]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0045-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1],ARef=[AI12-0272-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1],ARef=[AI12-0272-1],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a
 @Chg{Version=[4],New=[noninstance ],Old=[]}subprogram@Chg{Version=[5],New=[
 @Redundant[(including a generic formal
 subprogram)]],Old=[]}@Chg{Version=[4],New=[,
 a generic subprogram,],Old=[]} @Chg{Version=[5],New=[],Old=[or
 ]}@Chg{Version=[4],New=[an ],Old=[]}entry,@Chg{Version=[5],New=[ or an
-access-to-subprogram type,],Old=[]} the following language-defined aspects
-may be specified with an
+access-to-subprogram type,],Old=[]} the following language-defined 
+@Chg{Version=[5],New=[assertion ],Old=[]}aspects may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Ramification}
@@ -1264,7 +1281,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0280-2]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
   @ChgAdded{Version=[3],Text=[Since the @nt{prefix} @Chg{Version=[5],New=[of an Old attribute ],Old=[]}is
   evaluated @Chg{Version=[5],New=[],Old=[unconditionally ]}when the subprogram
   is called@Chg{Version=[5],New=[ (if it is evaluated at all)],Old=[]}, we
@@ -1280,7 +1297,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   I'Old evaluated before the A(I'Old) is evaluated).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0280-2]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[An
    additional rule applies when it cannot be determined on entry to the subprogram
    whether the Old @nt<attribute_reference> will or will not be evaluated
@@ -1397,7 +1414,7 @@ type],Old=[]}}, the following attribute is defined:]}
   @Chg{Version=[5],New=[or access-to-function type ],Old=[result]} except
   within a Post'Class postcondition expression for
   a function with a controlling result or with a controlling access
-  result@Chg{Version=[5],New=[; in those cases the type of the attribute was
+  result@Chg{Version=[5],New=[; in those cases the type of the attribute is
   described above as part of the @ResolutionTitle for Post'Class],Old=[. For
   a controlling result, the type of the attribute is @i<T>'Class, where @i<T> is
   the function result type. For a controlling access result, the type of the
@@ -3230,11 +3247,19 @@ to match that of either an entry or a protected operation.]}
 @end{StaticSem}
 
 @begin{ImplPerm}
-
-An implementation may declare an operator declared in a language-defined
-library unit to be intrinsic.
-
+  An implementation may declare an operator declared in a language-defined
+  library unit to be intrinsic.
 @end{ImplPerm}
+
+@begin{Notes}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0398-1]}
+  @ChgAdded{Version=[5],Text=[Any conformance requirements between 
+  @nt{aspect_specification}s that are part of a profile or 
+  @nt{known_discriminant_part} are defined by the semantics of each 
+  particular aspect. In particular, there is no general requirement for 
+  @nt{aspect_specification}s to match in conforming profiles or discriminant 
+  parts.]}
+@end{Notes}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
@@ -4392,62 +4417,27 @@ the formal parameter object is created, and:
 @begin(itemize)
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0196-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0378-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{For conditional leading.}
-  For an access type@Chg{Version=[5],New=[:],Old=[, the formal parameter is
+  For an access type, the formal parameter is
   initialized
-  from the value of the actual, without @Chg{Version=[3],New=[checking that the
-  value satisfies any constraint, any predicate, or any exclusion of the null
-  value],Old=[a constraint check]};]}
-
-@begin{Itemize}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
-@ChgAdded{Version=[5],Text=[if the designated type of the actual is a
-  class-wide type @i<T>'Class and the designated type of the formal is
-  neither an ancestor of @i<T>, nor a class-wide type that covers @i<T>, then
-  the formal parameter is initialized to the null value of the formal type;]}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
-@ChgAdded{Version=[5],Text=[if the actual is a stand-alone object of an
-  anonymous access type, and the accessibility level of the formal type is not
-  library level, then the formal parameter is initialized to the null value
-  of the formal type;]}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
-@ChgAdded{Version=[5],Text=[if the call is within the body of an instance of
-  a generic unit, the actual or the formal type is descended from a generic
-  formal access type of the generic unit, and the actual and formal types
-  neither share an ancestor nor is the formal type accessibility at
-  library level, then the formal parameter is initialized to the null
-  value of the formal type;]}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
-@ChgAdded{Version=[5],Text=[otherwise, the formal parameter
-  is initialized to the value of the actual parameter, without checking that
-  the value satisfies any constraint.]}
-
-@end{Itemize}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0378-1]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[In all of the above cases, no check is
-performed for any predicate or exclusion of the null value that might apply to
-the formal type.]}
+  from the value of the actual, without @Chg{Version=[3],New=[checking
+  @Chg{Version=[5],New=[whether],Old=[that]} the
+  value satisfies any @Chg{Version=[5],New=[constraints, predicates, or null
+  exclusions, but including any@Redundant[ dynamic] accessibility checks 
+  associated with a conversion to the type of the formal 
+  parameter.],Old=[constraint, any predicate, or any exclusion of the null
+  value;]}],Old=[a constraint check;]}
 
 @begin{Reason}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0378-1]}
   This preserves the @MetaRulesName that an object of an access type
-  is always initialized with a @lquotes@;reasonable@rquotes@; value.@Chg{Version=[5],New=[
-  When no reasonable value is available, we pass @key[null] instead. All such
-  cases require a view conversion of unrelated access types.],Old=[]}
+  is always initialized with a @lquotes@;reasonable@rquotes@; value.
 @end{Reason}
 
-@begin{ImplNote}
+@begin{Ramification}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0378-1]}
-@ChgAdded{Version=[5],Text=[This rule means that any tag checks
-   and accessibility checks can be assumed to pass for an @key[out]
-   parameter, but constraints, null exclusions, and predicates cannot
-   be assumed unless the compiler can prove that the parameter has been
-   previously written within the subprogram.]}
-@end{ImplNote}
-
+@ChgAdded{Version=[5],Text=[The permission to pass @key[null] (see below)
+   can be used in any case where an accessibility check could fail, rather 
+   than making a check.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0228-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
@@ -4456,7 +4446,7 @@ the formal type.]}
 @ChgAdded{Version=[3],Text=[For a scalar type that has the Default_Value aspect
 specified, the formal parameter is initialized from the value of the actual,
 without checking that the value satisfies any constraint or any
-predicate@Chg{Version=[4],New=[@Chg{Version=[5],New=[;],Old=[. Furthermore,
+predicate.@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[ Furthermore,
 if the actual parameter is a view conversion and either]}],Old=[;]}]}
 
   @begin{Itemize}
@@ -4640,11 +4630,17 @@ callable construct).]}
 
 @begin{ImplPerm}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0378-1]}
-  @ChgAdded{Version=[5],Text=[For an @key[out] parameter of an access type, if
-  the representation of the actual type and the formal type differ, and there
-  are values of the actual type that cannot be represented as values of the
-  formal type, the implementation may initialize the formal parameter with
-  the null value of the formal type.]}
+  @ChgAdded{Version=[5],Text=[If the actual parameter in a 
+    @nt{parameter_association} with mode @key[out] is a view conversion 
+    between two access types that do not share a common ancestor type, 
+    the implementation may pass in the null value of the
+    type of the formal parameter instead of the value of the actual
+    parameter. It is implementation-defined under what circumstances the
+    implementation passes in the null value.]}
+@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+Text=[@ChgAdded{Version=[5],Text=[The circumstances the
+    implementation passes in the null value for a view conversion
+    of an access type used as an @key[out] parameter.]}]}
 @end{ImplPerm}
 
 @begin{Extend83}
@@ -4724,19 +4720,20 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0378-1]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
-  Added rules so that value passed into an @key[out] parameter for access
-  types is well-defined in the case of a view conversion. @key[Null] will be
-  passed in for conversions that may have problematic accessibility or tags. If
-  the accessibility or tag check(s) would have passed, and the @key[out]
-  parameter is read before it is written (perhaps to read a bound or
-  discriminant), Constraint_Error may be raised by Ada 202x when it would not
-  have been in Ada 2012. Additionally, if the called subprogram does not write
-  the @key[out] parameter at all, the actual object will be overwritten with
-  @key[null] (and possibly raise Constraint_Error if the object is null
-  excluding), while the object would be unchanged in Ada 2012. Such cases are
-  thought to be rare, as most @key[out] parameters of access types are
-  overwritten before being read. In addition, at least one widely-used Ada
-  compiler already passes @key[null] in these cases.]}
+  Added a permission to pass @key[null] so that value passed into 
+  an @key[out] parameter for access types is well-defined in the case of a view 
+  conversion. @key[Null] may be passed for any view conversion between unrelated
+  access types; this is important for conversions that may have problematic 
+  accessibility or tags. If the permission is used and the @key[out] parameter is
+  read before it is written (perhaps to read a bound or discriminant), 
+  Constraint_Error may be raised by Ada 202x when it would not have been in 
+  Ada 2012. Additionally, if the called subprogram does not write the @key[out] 
+  parameter at all, the actual object will be overwritten with @key[null] (and 
+  possibly raise Constraint_Error if the object is null excluding), while the
+  object would be unchanged in Ada 2012. Such cases are thought to be rare, as
+  most @key[out] parameters of access types are overwritten before being read. In 
+  addition, at least one widely-used Ada compiler already passes @key[null] 
+  in these cases.]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
@@ -4746,9 +4743,12 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
   Added rules to ensure that the value passed into @Chg{Version=[5],New=[an],Old=[a]}
   @key[out] parameter for @Chg{Version=[5],New=[scalar],Old=[elementary]} types is
   well-defined in the case of a view conversion.
-  The new rules can be incompatible. For a view conversion to an unrelated type
-  with the Default_Value aspect specified, the aspect is new in Ada 2012 so it
-  should be unlikely to occur in existing code.@Chg{Version=[5],New=[Declaring],Old=[ For
+  The new rules can be incompatible. @Chg{Version=[5],New=[View conversions 
+  from/],Old=[For a view conversion ]}to an unrelated type
+  with the Default_Value aspect specified @Chg{Version=[5],New=[are unlikely 
+  to occur in existing code, as],Old=[,]} the aspect is new in 
+  Ada 2012@Chg{Version=[5],New=[],Old=[ so it should be unlikely to occur in 
+  existing code]}. @Chg{Version=[5],New=[Declaring],Old=[For
   a view conversion to an unrelated access type, the incompatibility is possible
   as this could be written in Ada 95, but such a view conversion is thought
   to be rare. In both cases, declaring]} and passing a temporary rather than a
@@ -4799,9 +4799,10 @@ innermost enclosing @nt{subprogram_@!body},
 @Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[return_statement]}>,rhs="@key{return} [@Syn2{expression}];"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0277-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0398-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=[extended_return_object_declaration],Old=[]}>,
 rhs="@Chg{Version=[3],New=<
-    @Syn2{defining_identifier} : [@key{aliased}][@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]>,Old=[]}"}
+    @Syn2{defining_identifier} : [@key{aliased}][@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}>,Old=[]}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1],ARef=[AI05-0277-1],ARef=[AI05-0299-1]}
@@ -5933,6 +5934,13 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   value that does not meet the predicate of the return subtype) rather than
   leaving it hidden, so the inconsistency is tolerable.]}
 @end{Inconsistent2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0398-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Extended
+  return objects now can have an @nt{aspect_specification}, allowing the 
+  specification of (implementation-defined) aspects for return objects.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0097-1]}

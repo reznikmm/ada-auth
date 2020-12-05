@@ -29,10 +29,10 @@ I probably ought to add a style just for this purpose)
 @end{ISOOnly}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2020/08/28 03:34:20 $}
+@Comment{$Date: 2020/12/05 05:10:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -189,7 +189,8 @@ does not appear in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Vers
 @ChgAdded{Version=[3],Text=[@Extend2005Title,]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@DiffWord2005Title.]}
+@ChgRef{Version=[4],Kind=[RevisedAdded]}
+@ChgAdded{Version=[3],Text=[@DiffWord2005Title@Chg{Version=[3],New=[,],Old=[.]}]}
 
 @ChgRef{Version=[4],Kind=[Added]}
 @ChgAdded{Version=[4],Text=[@Inconsistent2012Title,]}
@@ -779,8 +780,8 @@ This material is informative.
 @begin{Discussion}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0386-1]}
 @ChgAdded{Version=[5],Text=[Names used in examples refer either to 
-language-defined entities or to entities declared in other @ExamplesName in this
-Standard. In the latter case, if the reference is to a later example, we
+language-defined entities or to entities declared in other @ExamplesTitle in 
+this Standard. In the latter case, if the reference is to a later example, we
 use a cross-reference (@ExamCom{-- See <<some clause>>.}) to show the source
 of the declaration. In theory, one could combine all of the examples (excepting
 examples of fragments like identifiers or @nt{type_definition}s) in an

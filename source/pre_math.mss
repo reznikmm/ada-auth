@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2020/12/05 05:10:43 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:22 $}
+@Comment{$Date: 2020/12/05 05:10:43 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -742,7 +742,7 @@ range ],Old=[]}is approximately uniformly distributed over the
 the result subtype]}.
 
 @begin{Discussion}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0144-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0144-1]}
   @ChgAdded{Version=[5],Text=[In this rule, @lquotes@;consecutive@rquotes@;
   means at least that there are
   no intervening explicit calls involving the same generator. This restricts
@@ -750,7 +750,7 @@ the result subtype]}.
   the generator. We don't mean to impose a requirement if there are
   intervening calls to Reset, to Random with the same generator but a different
   result range, or any other case that would affect the sequence of values
-  returned. Operations which use the resulting random values (for instance,
+  returned. Operations that use the resulting random values (for instance,
   to store them somewhere) are not considered in determining if calls are
   consecutive.]}
 @end{Discussion}

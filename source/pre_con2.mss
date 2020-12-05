@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -443,8 +443,8 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Find} (Container : Tree;
                   Item      : Element_Type)
       @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Find'Result /= No_Element
+                    @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -452,8 +452,8 @@ package Containers.Multiway_Trees has the following declaration:]}
                              Item     : Element_Type)
       @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Pre  => Position /= No_Element @key[or else raise] Constraint_Error,
-           Post => (@key{if} Find_In_Subtree'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Find_In_Subtree'Result)),
+           Post => (@key{if} Find_In_Subtree'Result = No_Element
+                    @key{then} Has_Element (Find_In_Subtree'Result)),
            Global => @key[in all]],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -465,8 +465,8 @@ package Containers.Multiway_Trees has the following declaration:]}
                       @key[or else raise] Constraint_Error) @key[and then]
                    (Meaningful_For (Container, Position)
                       @key[or else raise] Program_Error),
-           Post => (@key{if} Find_In_Subtree'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Find_In_Subtree'Result));]}
+           Post => (@key{if} Find_In_Subtree'Result /= No_Element
+                    @key{then} Has_Element (Container, Find_In_Subtree'Result));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -474,8 +474,8 @@ package Containers.Multiway_Trees has the following declaration:]}
                            Item     : Element_Type)
       @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Pre  => Position /= No_Element @key[or else raise] Constraint_Error,
-           Post => (@key{if} Ancestor_Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Ancestor_Find'Result)),
+           Post => (@key{if} Ancestor_Find'Result = No_Element
+                    @key{then} Has_Element (Ancestor_Find'Result)),
            Global => @key[in all]],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -487,8 +487,8 @@ package Containers.Multiway_Trees has the following declaration:]}
                       @key[or else raise] Constraint_Error) @key[and then]
                    (Meaningful_For (Container, Position)
                       @key[or else raise] Program_Error),
-           Post => (@key{if} Ancestor_Find'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Ancestor_Find'Result))],Old=[]};]}
+           Post => (@key{if} Ancestor_Find'Result = No_Element
+                    @key{then} Has_Element (Container, Ancestor_Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Tree;
@@ -546,8 +546,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Child_Count} (Parent : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0
-                    @key{else} True),
+      @key{with} Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0),
             Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -555,8 +554,7 @@ package Containers.Multiway_Trees has the following declaration:]}
       @key{return} Count_Type
       @key{with} Pre  => Meaningful_For (Container, Parent) 
                       @key{or else raise} Program_Error,
-           Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0
-                    @key{else} True),
+           Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0),
            Nonblocking, Global => @key{null}, Use_Formal => @key{null};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -781,7 +779,7 @@ package Containers.Multiway_Trees has the following declaration:]}
                        @key{or else raise} Constraint_Error) @key{and then}
                    (Has_Element (Source, Position)
                        @key{or else raise} Program_Error) @key{and then}
-                   (Target'Has_Same_Object (Source) @key{or else}
+                   (Target'Has_Same_Storage (Source) @key{or else}
                     Position = Before @key{or else}
                     Is_Ancestor_Of (Target, Position, Parent)
                        @key{or else raise} Constraint_Error),
@@ -790,7 +788,7 @@ package Containers.Multiway_Trees has the following declaration:]}
                           Subtree_Node_Count (Source, Position)'Old;
                        Org_Target_Count @key{renames} Node_Count (Target)'Old;
                     @key{begin}
-                      (@key{if not} Target'Has_Same_Object (Source) @key{then}
+                      (@key{if not} Target'Has_Same_Storage (Source) @key{then}
                           Node_Count (Target) = Org_Target_Count +
                              Org_Sub_Count @key{and then}
                           Node_Count (Source) = Node_Count (Source)'Old -
@@ -852,7 +850,7 @@ package Containers.Multiway_Trees has the following declaration:]}
                    (Before = No_Element @key{or else}
                     Parent (Target, Before) /= Target_Parent
                        @key{or else raise} Constraint_Error) @key{and then}
-                   (Target'Has_Same_Object (Source) (Target, Source) @key{or else}
+                   (Target'Has_Same_Storage (Source) (Target, Source) @key{or else}
                     Target_Parent = Source_Parent @key{or else}
                     Is_Ancestor_Of (Target, Source_Parent, Target_Parent)
                        @key{or else raise} Constraint_Error),
@@ -861,7 +859,7 @@ package Containers.Multiway_Trees has the following declaration:]}
                           Child_Count (Source, Source_Parent)'Old;
                        Org_Target_Count @key{renames} Node_Count (Target)'Old;
                     @key{begin}
-                      (@key{if not} Target'Has_Same_Object (Source) @key{then}
+                      (@key{if not} Target'Has_Same_Storage (Source) @key{then}
                           Node_Count (Target) = Org_Target_Count +
                              Org_Child_Count @key{and then}
                           Node_Count (Source) = Node_Count (Source)'Old -
@@ -900,8 +898,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Parent} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
            Post => (@key{if} Position = No_Element @key{or else}
-                       Is_Root (Position) @key{then} Parent'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+                       Is_Root (Position) @key{then} Parent'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Parent} (Container : Tree;
@@ -972,7 +969,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Last_Child_Element} (Parent : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
-      @key{with} Nonblocking =>,
+      @key{with} Nonblocking,
            Global => @key{in all}, Use_Formal => Element_Type,
            Pre  => (Parent /= No_Element @key{and then}
                     Last_Child (Parent) /= No_Element)
@@ -995,8 +992,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Next_Sibling} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
            Post => (@key{if} Position = No_Element
-                       @key{then} Next_Sibling'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+                       @key{then} Next_Sibling'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Next_Sibling} (Container : Tree;
@@ -1030,8 +1026,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Previous_Sibling} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
            Post => (@key{if} Position = No_Element
-                       @key{then} Previous_Sibling'Result = No_Element
-                    @key{else} True)],Old=[]};]}
+                       @key{then} Previous_Sibling'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Previous_Sibling} (Container : Tree;
@@ -1255,7 +1250,7 @@ of @i<T>@Redundant[, as well as by a call that passes @i<T> to
 certain of the operations of this package, as indicated by the precondition
 of such an operation]. Similarly, when tampering with elements is @i<prohibited>
 for @i<T>, Program_Error is propagated by a call that passes @i<T> to
-certain of other operations of this package, as indicated by the precondition
+certain of the other operations of this package, as indicated by the precondition
 of such an operation.],Old=[]}]}
 
 @begin{NotIso}
@@ -1512,9 +1507,9 @@ returns False otherwise.]}
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[Various contracts elsewhere in this specification
-    require that this function is implemented with synchronized data. Moreover,
+    require that this function be implemented with synchronized data. Moreover,
     it is possible for tampering to be prohibited by multiple operations
-    (sequentiually or in parallel). Therefore, tampering needs to be
+    (sequentially or in parallel). Therefore, tampering needs to be
     implemented with an atomic or protected counter. The counter is initialized
     to zero, and is incremented when tampering is prohibited, and decremented
     when leaving an area that prohibited tampering. Function
@@ -2013,7 +2008,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
   @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[If
   Position equals No_Element, then Constraint_Error is propagated;
   if Position does not designate an element in Container, then
-  Program_Error is propagated. ]}Otherwise, Reference returns an
+  Program_Error is propagated. Otherwise, ]}Reference returns an
   object whose discriminant is an access value that designates the element
   designated by Position. Tampering with the elements
   of Container is prohibited while the object returned by Reference exists
@@ -2210,8 +2205,8 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Find (Container : Tree;
                Item      : Element_Type)
    @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Post => (@key{if} Find'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
+   @key{with} Post => (@key{if} Find'Result /= No_Element
+                 @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0262-1]}
@@ -2229,8 +2224,8 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                           Item     : Element_Type)
    @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error,
-        Post => (@key{if} Find_In_Subtree'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Find_In_Subtree'Result)),
+        Post => (@key{if} Find_In_Subtree'Result = No_Element
+                 @key{then} Has_Element (Find_In_Subtree'Result)),
         Global => @key{in all}],Old=[]};]}
 @end{Example}
 
@@ -2259,12 +2254,12 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                           Position  : Cursor;
                           Item      : Element_Type)
    @key{return} Cursor
-   @key{with} Pre  => (Position = No_Element 
+   @key{with} Pre  => (Position /= No_Element 
                    @key{or else raise} Constraint_Error) @key{and then}
                 (Meaningful_For (Container, Position)
                    @key{or else raise} Program_Error),
-        Post => (@key{if} Find_In_Subtree'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Find_In_Subtree'Result));]}
+        Post => (@key{if} Find_In_Subtree'Result = No_Element
+                 @key{then} Has_Element (Container, Find_In_Subtree'Result));]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -2282,8 +2277,8 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                         Item     : Element_Type)
    @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error,
-        Post => (@key{if} Ancestor_Find'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Ancestor_Find'Result)),
+        Post => (@key{if} Ancestor_Find'Result = No_Element
+                 @key{then} Has_Element (Container, Ancestor_Find'Result)),
         Global => @key{in all}],Old=[]};]}
 @end{Example}
 
@@ -2309,12 +2304,12 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                         Position  : Cursor;
                         Item      : Element_Type)
    @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Pre  => (Position = No_Element 
+   @key{with} Pre  => (Position /= No_Element 
                    @key{or else raise} Constraint_Error) @key{and then}
                 (Meaningful_For (Container, Position)
                    @key{or else raise} Program_Error),
-        Post => (@key{if} Ancestor_Find'Result = No_Element @key{then} True
-                 @key{else} Has_Element (Container, Ancestor_Find'Result))],Old=[]};]}
+        Post => (@key{if} Ancestor_Find'Result = No_Element
+                 @key{then} Has_Element (Container, Ancestor_Find'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -2536,8 +2531,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Child_Count (Parent : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
-   @key{with} Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0
-                 @key{else} True),
+   @key{with} Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0),
          Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
 @end{Example}
 
@@ -2551,8 +2545,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
    @key{return} Count_Type
    @key{with} Pre  => Meaningful_For (Container, Parent) 
                    @key{or else raise} Program_Error,
-        Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0
-                 @key{else} True),
+        Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0),
         Nonblocking, Global => @key{null}, Use_Formal => @key{null};]}
 @end{Example}
 
@@ -2975,7 +2968,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                     @key{or else raise} Constraint_Error) @key{and then}
                 (Has_Element (Source, Position)
                     @key{or else raise} Program_Error) @key{and then}
-                (Target'Has_Same_Object (Source) @key{or else}
+                (Target'Has_Same_Storage (Source) @key{or else}
                  Position = Before @key{or else}
                  Is_Ancestor_Of (Target, Position, Parent)
                     @key{or else raise} Constraint_Error),
@@ -2984,7 +2977,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                         Subtree_Node_Count (Source, Position)'Old;
                     Org_Target_Count @key{renames} Node_Count (Target)'Old;
                  @key{begin}
-                   (@key{if not} Target'Has_Same_Object (Source) @key{then}
+                   (@key{if not} Target'Has_Same_Storage (Source) @key{then}
                        Node_Count (Target) = Org_Target_Count +
                           Org_Sub_Count @key{and then}
                        Node_Count (Source) = Node_Count (Source)'Old -
@@ -3140,7 +3133,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                 (Before = No_Element @key{or else}
                  Parent (Target, Before) /= Target_Parent
                     @key{or else raise} Constraint_Error) @key{and then}
-                (Target'Has_Same_Object (Source) @key{or else}
+                (Target'Has_Same_Storage (Source) @key{or else}
                  Target_Parent = Source_Parent @key{or else}
                  Is_Ancestor_Of (Target, Source_Parent, Target_Parent)
                     @key{or else raise} Constraint_Error),
@@ -3149,7 +3142,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
                        Child_Count (Source, Source_Parent)'Old;
                     Org_Target_Count @key{renames} Node_Count (Target)'Old;
                  @key{begin}
-                   (@key{if not} Target'Has_Same_Object (Source) @key{then}
+                   (@key{if not} Target'Has_Same_Storage (Source) @key{then}
                        Node_Count (Target) = Org_Target_Count +
                           Org_Child_Count @key{and then}
                        Node_Count (Source) = Node_Count (Source)'Old -
@@ -3281,8 +3274,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Parent (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
         Post => (@key{if} Position = No_Element @key{or else}
-                    Is_Root (Position) @key{then} Parent'Result = No_Element
-                 @key{else} True)],Old=[]};]}
+                    Is_Root (Position) @key{then} Parent'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -3446,8 +3438,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Next_Sibling (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
         Post => (@key{if} Position = No_Element
-                    @key{then} Next_Sibling'Result = No_Element
-                 @key{else} True)],Old=[]};]}
+                    @key{then} Next_Sibling'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -3482,8 +3473,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Previous_Sibling (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
         Post => (@key{if} Position = No_Element
-                    @key{then} Previous_Sibling'Result = No_Element
-                 @key{else} True)],Old=[]};]}
+                    @key{then} Previous_Sibling'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -3954,9 +3944,9 @@ unless specified by the operation.]}]}
 @begin{Incompatible2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
-  new subprograms, types, and even a nested package were to
+  new subprograms, types, and even a nested package were added to
   Containers.Multiway_Trees to better support contracts and stable views. If an
-  instance of Containers.Hashed_Maps
+  instance of Containers.Multiway_Trees
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
   defined in a package that is also referenced in a @nt{use_clause}, the
@@ -4123,7 +4113,7 @@ omitted from the nested package Stable.]}
   have worked in Ada 2012 so long as the loop parameter is not involved.
   We believe this to be a dubious loop structure that should be rare. Note
   that this issue only occurs for the indefinite container form, the regular
-  and bounded containers allow such operations at ay time in Ada 202x.]}
+  and bounded containers allow such operations at any time in Ada 202x.]}
 
 @end{Inconsistent2012}
 
@@ -5485,7 +5475,7 @@ holder container unless specified by the operation.]}]}
   Containers.Indefinite_Holders to better support contracts and provide
   additional functionality. If an instance of Containers.Indefinite_Holders
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
+  @nt{defining_identifier} as a new entity in Containers.Indefinite_Holders is
   defined in a package that is also referenced in a @nt{use_clause}, the
   entity @i<E> may no longer be use-visible, resulting in errors. This should
   be rare and is easily fixed if it does occur.]}
@@ -5911,10 +5901,10 @@ as Containers.Doubly_Linked_Lists except:]}
                @key{or else raise} Program_Error) @key{and then}
             (Before = No_Element @key{or else} Has_Element (Target, Before)
                @key{or else raise} Program_Error) @key{and then}
-            (Target'Has_Same_Object (Source) @key{or else}
+            (Target'Has_Same_Storage (Source) @key{or else}
              Length (Target) /= Count_Type'Last
                @key{or else raise} Constraint_Error) @key{and then}
-            (Target'Has_Same_Object (Source) @key{or else}
+            (Target'Has_Same_Storage (Source) @key{or else}
              Length (Target) /= Target.Capacity
                @key{or else raise} Capacity_Error),]}
 @end{Example}
@@ -7149,7 +7139,7 @@ semantics as Containers.Multiway_Trees except:]}
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[       (Has_Element (Source, Position)
           @key{or else raise} Program_Error) @key{and then}
-       (Target'Has_Same_Object (Source) @key{or else}
+       (Target'Has_Same_Storage (Source) @key{or else}
         Node_Count (Target) - 1 +
           Subtree_Node_Count (Source, Position) <= Target.Capacity
           @key{or else raise} Capacity_Error) @key{and then}]}
@@ -7170,7 +7160,7 @@ semantics as Containers.Multiway_Trees except:]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[      (Before = No_Element @key{or else}
        Parent (Target, Before) /= Target_Parent
          @key{or else raise} Constraint_Error) @key{and then}
-      (Target'Has_Same_Object (Source) @key{or else}
+      (Target'Has_Same_Storage (Source) @key{or else}
        Node_Count (Target) - 1 +
          Child_Count (Source, Source_Parent) <= Target.Capacity
          @key{or else raise} Capacity_Error) @key{and then}]}

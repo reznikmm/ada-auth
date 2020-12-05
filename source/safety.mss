@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.69 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@Comment{ $Revision: 1.70 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:22 $}
+@Comment{$Date: 2020/12/05 05:10:45 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1370,16 +1370,16 @@ proscribed
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1],ARef=[AI12-0403-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a type, the following
 type-related, operational aspect may be specified:]}
 
 @begin{Description}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[No_Controlled_Parts@\The type of this aspect
-  is Boolean. If True, requires that the type and any
-  descendants do not have any controlled parts. If specified, the
-  value of the expression shall be static. If not specified, the value of
+  is Boolean. If True, the type and any descendants shall not have any 
+  controlled parts. If specified, the value of the expression shall be 
+  static. If not specified, the value of
   this aspect is False.@AspectDefn{No_Controlled_Parts}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[No_Controlled_Parts],
@@ -1388,33 +1388,65 @@ type-related, operational aspect may be specified:]}
 @end{Description}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
-@ChgAdded{Version=[5],Text=[The No_Controlled_Parts aspect is nonoverridable
+@ChgAdded{Version=[5],Text=[The No_Controlled_Parts aspect is nonoverridable 
 (see @RefSecNum{Aspect Specifications}).]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
+  @ChgAdded{Version=[5],Text=[Since this is a Boolean-valued aspect, the 
+  blanket restrictions defined by @RefSecNum{Aspect Specifications}
+  apply to the specification of Boolean-valued aspects on descendants of
+  types with such aspects. But we still need rules about inheritance from
+  progenitors and about hiding the aspect; it would be too painful to
+  repeat those rules here (and have future maintenance fixes not get
+  applied to this aspect).]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{Legality}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[If No_Controlled_Parts is True for a type, no
 component of the type shall have a controlled part nor shall the type itself be
-controlled. In addition to the places where @LegalityTitle normally apply
+controlled. For the purposes of this rule, a type has a controlled part if its
+full type has a controlled part; this is applied recursively. In addition to 
+the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}), this rule also applies in the private
 part of an instance of a generic unit.@PDefn{generic contract issue}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
-@ChgAdded{Version=[5],Text=[When enforcing the above rule within a generic body,
-a generic formal private type and a generic formal derived type of a composite
-type are considered to have a controlled part.]}
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
+  @ChgAdded{Version=[5],Text=[This check breaks privacy by looking at the 
+    full definition of all of the types involved. This is more like a
+    representation aspect than an operational aspect, but representation
+    aspects are not allowed on partial views and we need this aspect
+    to be visible to clients.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1],ARef=[AI12-0407-1]}
+@ChgAdded{Version=[5],Text=[When enforcing the above rule within a generic 
+body @i<G> or within the body of a generic unit declared within the 
+declarative region of generic unit @i<G>, a generic formal private type of
+@i<G> and a generic formal derived type of @i<G> whose ancestor is a tagged
+type whose No_Controlled_Parts aspect is False are considered to have a 
+controlled part.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[This is a typical generic assume-the-worst rule.]}
 @end{Reason}
 
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
+  @ChgAdded{Version=[5],Text=[If the ancestor of the generic derived type is 
+    class-wide, the aspect in question belongs to the specific type associated 
+    with the class-wide type.]}
+@end{Honest}
+
 @end{Legality}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1],ARef=[AI12-0407-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Aspect
   No_Controlled_Parts is new.]}
 @end{Extend2012}
@@ -1824,7 +1856,7 @@ the execution of the operation. If there is no formal parameter set
 specified for an entity declared within a generic unit, it defaults
 to @key[all].]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0404-1]}
 @ChgAdded{Version=[5],Text=[The @i{dispatching operation set}@Defn{dispatching operation set}
 is identified by a set of @nt{dispatching_operation_specifier}s. It indicates
 that the Nonblocking and global effects of dispatching calls that match one
@@ -1836,11 +1868,7 @@ call statically denotes the same operation(s) as that of the
 @nt{dispatching_operation_specifier}, and at least one of the objects
 controlling the call is denoted by, or designated by, a @nt{name} that
 statically names the same object as that denoted by the @Syni[object_]@nt{name}
-of the @nt{dispatching_operation_specifier}. In the absence of any
-@nt{dispatching_operation_specifier}s, Nonblocking and global aspects checks
-are performed at the point of a dispatching call within the operation 
-using the Nonblocking and Global'Class aspects that apply to the named 
-dispatching operation.]}
+of the @nt{dispatching_operation_specifier}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1852,6 +1880,22 @@ dispatching operation.]}
     function used as a parameter to the call, or an object being
     assigned to, or a parameter of an enclosing call.]}
 @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0404-1]}
+@ChgAdded{Version=[5],Text=[In the absence of any 
+@nt{dispatching_operation_specifier}s, or if none of them 
+match a dispatching call @i<C> within an operation @i<P>,
+Nonblocking and global aspects checks are performed at the point of the call
+@i<C> within @i<P> using the Nonblocking and Global'Class aspects that
+apply to the dispatching operation named in call @i<C>. If there is a 
+match, any global access or potential blocking within the subprogram body 
+invoked by the call @i<C> is ignored at the point of call within @i<P>. Instead, 
+when the operation @i<P> itself is invoked, Nonblocking and global aspect checks 
+are performed presuming each named dispatching operation is called at least 
+once (with the named object controlling the call), but similarly ignoring 
+those dispatching calls that would match a @nt{dispatching_operation_specifier}
+applicable at the point of invocation of @i<P>.]}
+
 @end{StaticSem}
 
 @begin{Legality}
@@ -1870,23 +1914,6 @@ the formal parameter set.]}
 a Use_Formal aspect applies is invoked, Nonblocking and global aspect checks 
 are performed presuming each generic formal parameter (or corresponding actual
 parameter) of the formal parameter set is used at least once.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
-@ChgAdded{Version=[5],Text=[Within an operation to which a Dispatching aspect 
-applies, any dispatching call that does not match any
-@nt{dispatching_operation_specifier} of the dispatching operation set is
-checked using the Nonblocking and Global'Class aspect(s) applicable to
-the called dispatching operation; if there is a match, there is no
-checking against the Nonblocking or global aspects applicable at the
-point of call.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
-@ChgAdded{Version=[5],Text=[When an operation to which a Dispatching aspect 
-applies is invoked, Nonblocking and global aspect checks are performed 
-presuming each named dispatching operation is called at least once, with 
-the named object controlling the call, ignoring those dispatching calls
-that would match a @nt{dispatching_operation_specifier} applicable at the point
-of invocation of the operation.]}
 @end{Legality}
 
 @begin{Extend2012}

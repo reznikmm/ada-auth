@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2020/06/03 00:09:00 $}
+@Comment{$Date: 2020/12/05 05:10:43 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -866,13 +866,15 @@ For example, it is possible for an instance body to occur in a
 in @nt{package_specification}s.
 @end{Ramification}
 
-In an instance,
-a @nt{generic_formal_parameter_declaration} declares a view
-whose properties are identical to those of the actual,
-except as specified in
-@RefSec{Formal Objects} and @RefSec{Formal Subprograms}.
-Similarly, for a declaration within
-a @nt{generic_formal_parameter_declaration},
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0407-1]}
+In an instance, a @nt{generic_formal_parameter_declaration} declares a view
+whose properties are identical to those of the actual, except
+@Chg{Version=[5],New=[when],Old=[as]} specified @Chg{Version=[5],New=[otherwise
+(in particular, see @RefSec{Preconditions and Postconditions},],Old=[in]}
+@RefSec{Formal Objects}@Chg{Version=[5],New=[,],Old=[]} and 
+@RefSec{Formal Subprograms}@Chg{Version=[5],New=[)],Old=[]}.
+Similarly, for a declaration within a 
+@nt{generic_formal_parameter_declaration},
 the corresponding declaration in an instance declares a view whose
 properties are identical to the corresponding declaration within the
 declaration of the actual.
@@ -961,6 +963,14 @@ mechanisms (by-copy vs. by-reference) and
 @Chg{New=[@nt{aspect_clause}s],Old=[@nt{representation_clause}s]} are
 determined by the actual.
 @end{ImplNote}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
+  @ChgAdded{Version=[5],Text=[We allow differences in particular for aspects 
+  that can be specified on generic formal parameters. For instance, Pre 
+  (see @RefSecNum{Preconditions and Postconditions}) can be specified on 
+  generic formal subprograms to be added to the Pre of the actual.]}
+@end{Reason}
 
 @redundant[Implicit declarations are also copied,
 and a name that denotes an implicit declaration in the generic

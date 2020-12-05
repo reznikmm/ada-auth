@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:50 $}
+@Comment{$Date: 2020/12/05 05:10:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @LabeledClause{Array Types}
 
@@ -886,9 +886,20 @@ are indefinite subtypes.]
    (@Syn2{discriminant_specification} {; @Syn2{discriminant_specification}})"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0398-1]}
 @Syn{lhs=<discriminant_specification>,rhs="
-   @Syn2{defining_identifier_list} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}]
- | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]"}
+   @Syn2{defining_identifier_list} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}
+ | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}"}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0395-1]}
+  @ChgAdded{Version=[5],Text=[Only implementation-defined aspects are allowed
+  on discriminants in Ada 202x. Implementers are cautioned that any
+  aspect allowed on a discriminant will need conformance rules. If,
+  for instance, an aspect changed the representation of a discriminant,
+  rules would be needed to ensure that the representation is the same for
+  all views of the type (partial and full).]}
+@end{Discussion}
 
 @Syn{lhs=<default_expression>,rhs="@Syn2{expression}"}
 @end{Syntax}
@@ -1603,6 +1614,13 @@ when the discriminant is initialized.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Moved implicit conversion
   @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0398-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Discriminants now
+  can have an @nt{aspect_specification}, allowing the specification of
+  (implementation-defined) aspects for individual discriminants.]}
+@end{Extend2012}
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}

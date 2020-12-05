@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:20 $}
+@Comment{$Date: 2020/12/05 05:10:41 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.150 $}
+@Comment{$Revision: 1.151 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1341,8 +1341,9 @@ Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
     Value : Real;
   @key(end record);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0404-1]}
 @key(type) Expr_Ptr @key(is access all) Expression'Class;
-                               --@RI[ see @RefSecNum(Access Types)]
+                               --@RI[ see @Chg{Version=[5],New=[@RefSecNum{Tagged Types and Type Extensions}],Old=[@RefSecNum(Access Types)]}]
 
 @key(type) Binary_Operation @key(is new) Expression @key(with)
   @key(record)                 --@RI[ an internal node in an Expression tree]
@@ -4851,11 +4852,14 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   @end{Ramification}
 
   @ChgRef{Version=[3],Kind=[Added]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0278-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0278-1],ARef=[AI12-0390-1]}
   @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
-  is @Chg{Version=[5],New=[converted to a named access type],Old=[the operand
-  of an explicit conversion]}, the master is that of the target type of the
-  conversion;]}
+  is @Chg{Version=[5],New=[converted to a (named or anonymous) access 
+  type],Old=[the operand of an explicit conversion]}, the master is 
+  @Chg{Version=[5],New=[determined following the rules for determining the 
+  master of an object created by an allocator (even if the access result is
+  of an access-to-subprogram type)],Old=[that of the target type of the
+  conversion]};]}
 
   @begin{Ramification}
     @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0278-1]}
@@ -4866,10 +4870,12 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   @end{Ramification}
 
   @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
-  defines an access discriminant, the master is the same as that for an object
-  created by an anonymous @nt{allocator} that defines an access discriminant
-  (even if the access result is of an access-to-subprogram type).]}
+  @ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0390-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[If the result is 
+  of an anonymous access type and defines an access discriminant, the master
+  is the same as that for an object created by an anonymous @nt{allocator} 
+  that defines an access discriminant (even if the access result is of an 
+  access-to-subprogram type).]}]}
 
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0345-1],ARef=[AI12-0372-1]}
@@ -5313,6 +5319,12 @@ deeper, nor statically shallower, than any other.
 the accessibility level of the type of a stand-alone object of an anonymous
 access-to-object type; that is, such an accessibility level is not considered to
 be statically deeper, nor statically shallower, than any other.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0392-1]}
+@ChgAdded{Version=[5],Text=[The statically deeper relationship does not apply 
+to the accessibility level of a @nt{raise_expression}; that is, such an
+accessibility level is not considered to be statically deeper, nor
+statically shallower, than any other.]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6425,12 +6437,12 @@ uses of anonymous access types.]}
 @end{DiffWord2005}
 
 @begin{Inconsistent2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0278-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0278-1],ARef=[AI12-0390-1]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Defined that the accessibility of a function that returns an anonymous
-  access type is the same for implicit and explicit conversions to a named
-  access type. This could cause code that is legal and does not raise an
-  exception in original Ada 2012 to become illegal or raise
+  access type is the same for implicit and explicit conversions. This could 
+  cause code involving implicit conversions to named access types that is legal
+  and does not raise an exception in original Ada 2012 to become illegal or raise
   Program_Error because of an accessibility failure in Ada 202x. This is more
   likely to prevent a dangling pointer bug than to prevent something useful.]}
 
@@ -6563,6 +6575,11 @@ uses of anonymous access types.]}
   any such program should have failed a dynamic accessibility check.
   Thus this is not an incompatibility as it is changing the detection of
   an error from runtime to compile-time.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0392-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording to clarify that
+  the accessibility of a @nt{raise_expression} does not need any static checks
+  (it is considered to match any accessibility required).]}
 @end{DiffWord2012}
 
 

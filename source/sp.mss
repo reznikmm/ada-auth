@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.92 $ $Date: 2020/08/28 03:34:22 $ $Author: randy $ }
+@comment{ $Revision: 1.93 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2020/08/28 03:34:22 $}
+@Comment{$Date: 2020/12/05 05:10:45 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2196,7 +2196,7 @@ because the pragma was not used to mark variables as shared.
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0363-1]}
   @ChgAdded{Version=[5],Text=[Aspect Full_Access_Only is new; it can
-  be used to guarentee access to a complete device register for any operation
+  be used to guarantee access to a complete device register for any operation
   even when the register is mapped to a number of components.]}
 @end{Extend2012}
 
@@ -2302,17 +2302,18 @@ package System.Atomic_Operations.Exchange has the following declaration:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Exchange} (Item  : @key{aliased in out} Atomic_Type;
                              Value : Atomic_Type) @key{return} Atomic_Type
-     @key{with} Convention => Intrinsic;]}
+      @key{with} Convention => Intrinsic;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Compare_And_Exchange} (Item    : @key{aliased in out} Atomic_Type;
-                                         Prior   : @key{aliased in out} Atomic_Type;
-                                         Desired : Atomic_Type) @key{return} Boolean
-     @key{with} Convention => Intrinsic;]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Compare_And_Exchange} 
+     (Item    : @key{aliased in out} Atomic_Type;
+      Prior   : @key{aliased in out} Atomic_Type;
+      Desired : Atomic_Type) @key{return} Boolean
+      @key{with} Convention => Intrinsic;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Lock_Free} (Item : @key{aliased} Atomic_Type) @key{return} Boolean
-     @key{with} Convention => Intrinsic;]}
+      @key{with} Convention => Intrinsic;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Exchange;]}
@@ -2553,8 +2554,8 @@ as follows:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Add
-   (Item  : @key[aliased in out] Atomic_Type;
-    Value : Atomic_Type) @key[return] Atomic_Type
+  (Item  : @key[aliased in out] Atomic_Type;
+   Value : Atomic_Type) @key[return] Atomic_Type
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 
@@ -2565,8 +2566,8 @@ as follows:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Subtract
-   (Item  : @key[aliased in out] Atomic_Type;
-    Value : Atomic_Type) @key[return] Atomic_Type
+  (Item  : @key[aliased in out] Atomic_Type;
+   Value : Atomic_Type) @key[return] Atomic_Type
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 
@@ -2668,8 +2669,8 @@ as follows:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Add
-   (Item  : @key[aliased in out] Atomic_Type;
-    Value : Atomic_Type) @key[return] Atomic_Type
+  (Item  : @key[aliased in out] Atomic_Type;
+   Value : Atomic_Type) @key[return] Atomic_Type
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 
@@ -2680,8 +2681,8 @@ as follows:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Subtract
-   (Item  : @key[aliased in out] Atomic_Type;
-    Value : Atomic_Type) @key[return] Atomic_Type
+  (Item  : @key[aliased in out] Atomic_Type;
+   Value : Atomic_Type) @key[return] Atomic_Type
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 

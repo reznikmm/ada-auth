@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.88 $ $Date: 2020/08/28 03:34:23 $ $Author: randy $ }
+@comment{ $Revision: 1.89 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2020/08/28 03:34:23 $}
+@Comment{$Date: 2020/12/05 05:10:45 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -2298,7 +2298,7 @@ and applying To_Unbounded_String to the concatenation result string.
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[5],Text=[If the resulting string is longer than
-  Natural'Last, Constraint_Error is raised as the upper bound of the underlying
+  Natural'Last, Constraint_Error is raised because the upper bound of the underlying
   String concatenation is outside of the range of the index subtype of Natural
   (see @RefSecNum{Binary Adding Operators}). Note that the same is true for
   other operations that attempt to create an overlong string: either they are defined

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2020/12/05 05:10:43 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -41,15 +41,16 @@ Old=[items specify]} other properties of entities.]]}
 @Comment{The index entries for these glossary items are found later in this
 subclause}
 
-@ChgToGlossary{Version=[5],Kind=[Added],Term=<Operational Aspect>,
-Text=<@ChgAdded{Version=[5],Text=[An aspect that indicates a logical property of
-an entity, such as the precondition of a subprogram, or the procedure used to
-write a given type of object to a stream.]}>}
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Operational aspect>,
+Text=<@ChgAdded{Version=[5],Text=[An operational aspect is an aspect that
+indicates a logical property of an entity, such as the precondition of a
+subprogram, or the procedure used to write a given type of object to a
+stream.]}>}
 
-@ChgToGlossary{Version=[5],Kind=[Added],Term=<Representation Aspect>,
-Text=<@ChgAdded{Version=[5],Text=[An aspect that indicates how an entity is
-mapped onto the underlying hardware, for example the size or alignment of an
-object.]}>}
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Representation aspect>,
+Text=<@ChgAdded{Version=[5],Text=[A representation aspect is an aspect that
+indicates how an entity is mapped onto the underlying hardware, for example the
+size or alignment of an object.]}>}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI05-0295-1]}
 @ChgAdded{Version=[1],Text=[@Redundant[Either kind of aspect of an entity may be
@@ -343,6 +344,7 @@ An object is considered to be more concrete.
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0112-1],ARef=[AI05-0295-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1],ARef=[AI12-0407-1]}
 @RootDefn{aspect of representation}
 @Defn{representation aspect}
 @Chg{Version=[3],New=[@Defn2{Term=[directly specified],
@@ -362,14 +364,15 @@ of the subtype's type.
 @RootDefn2{Term=[type-related], Sec=(aspect)}
 @RootDefn2{term=[subtype-specific], Sec=(of an aspect)}
 A representation item that names a subtype is either
-@i(subtype-specific) (Size and Alignment clauses)
-or @i{type-related} (all others).
+@i(subtype-specific) (Size@Chg{Version=[5],New=[, Object_Size,],Old=[]}
+and Alignment clauses) or @i{type-related} (all others).@Chg{Version=[5],New=[],Old=[
 @Redundant[Subtype-specific aspects may differ for
-different subtypes of the same type.]
+different subtypes of the same type.]]}
 
 @begin{Honest}
-@i{Type-related} and @i{subtype-specific} are defined likewise for
-the corresponding aspects of representation.
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0407-1]}
+@ChgDeleted{Version=[5],Text=[@i{Type-related} and @i{subtype-specific} are 
+defined likewise for the corresponding aspects of representation.]}
 @end{Honest}
 @begin{Honest}
 Some representation items directly specify more than one aspect.
@@ -477,6 +480,9 @@ to a task or protected type)]}
 @begin{Itemize}
 Alignment clause (when applied to a first subtype)
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[5],Text=[Object_Size clause]}
+
 Size clause (when applied to a first subtype)
 @end{Itemize}
 
@@ -531,7 +537,7 @@ to a subprogram)]}
 @ChgAdded{Version=[3],Text=[While an @nt{aspect_specification} is not
 a representation item, a similar categorization applies to the aspect
 that corresponds to each of these representation items@Chg{Version=[5],New=[.
-In adition, there are representation],Old=[ (along with]}
+In addition, there are representation],Old=[ (along with]}
 aspects that do not have associated representation items@Chg{Version=[5],New=[],
 Old=[)]}.]}
 
@@ -557,7 +563,7 @@ that do not have associated representation items.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following representation aspects
-that do not have associated representation items also do not apply to subtypes, so 
+that do not have associated representation items also do not apply to subtypes, so
 they are neither type-related nor subtype-specific:]}
 @begin{Itemize}
 @ChgRef{Version=[5],Kind=[Added]}
@@ -613,6 +619,30 @@ type-related:]}
 
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0407-1]}
+@ChgAdded{Version=[5],Text=[Aspects that can be specified for types and 
+subtypes are also classified into type-related or subtype-specific aspects. 
+Representation aspects that can be specified for types and subtypes 
+are considered type-related unless specified otherwise. In contrast, 
+the classification of operational aspects are given with the 
+definition of the aspect. Type-related aspects have the same value for all 
+subtypes of (a view of) a type@Redundant[, while subtype-specific aspects may 
+differ for different subtypes of the same type].]}
+
+@begin{Discussion}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We talk about @ldquote@;type-related 
+  aspects@rdquote, which of 
+  course include both type-related representation aspects and 
+  type-related operational aspects. Aspects Size, Object_Size, and
+  Alignment are subtype-specific, as that is specified above. All 
+  other representation aspects are either type-related or not 
+  specifiable for a type or subtype. Unlike representation 
+  aspects, there is no default for operational aspects; whether they 
+  are type-related or subtype-specific should be part of the definition 
+  of the aspect.]}
+@end{Discussion}
+
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0116-1]}
@@ -652,11 +682,6 @@ after using the entity in ways that require the representation to be known.
   to complicate the wording solely to support obsolescent features.]}]}
 @end{Honest}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0181-1],ARef=[AI12-0222-1]}
-@ChgAdded{Version=[5],Text=[An @nt{expression} or @nt{name} that freezes an
-entity shall not occur within an @nt{aspect_specification} that specifies a
-representation or operational aspect of that entity.]}
-
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0116-1]}
@@ -684,17 +709,23 @@ another operational item @Chg{Version=[3],New=[or @nt{aspect_specification}
 @end{Ramification}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0116-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0181-1]}@Comment{Just a paragraph number change}
-@ChgAdded{Version=[4],Text=[If a representation item, operational item, or
-@nt{aspect_specification} is given that directly specifies an aspect of an
-entity, then it is illegal to give another representation item, operational
-item, or @nt{aspect_specification} that directly specifies the same aspect of
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[4],Text=[If a representation item, operational item,
+@Chg{Version=[5],New=[library unit pragma (see
+@RefSecNum{Pragmas and Program Units}), ],Old=[]}or @nt{aspect_specification}
+is given that directly specifies an aspect of an entity, then it is illegal 
+to give another representation item, operational item, 
+@Chg{Version=[5],New=[library unit pragma, ],Old=[]}or 
+@nt{aspect_specification} that directly specifies the same aspect of
 the entity.]}
 
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0116-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}
   @ChgAdded{Version=[4],Text=[This rule applies to all aspects, not just
-  those that are operational aspects or representation aspects. For instance,
+  those that @Chg{Version=[5],New=[have],Old=[are]} operational 
+  @Chg{Version=[5],New=[items],Old=[aspects]} or representation 
+  @Chg{Version=[5],New=[items],Old=[aspects]}. For instance,
   it applies to subtype predicates and type invariants.]}
 @end{Ramification}
 @begin{Honest}
@@ -733,18 +764,18 @@ parameter.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0109-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0376-1]}
-@Chg{Version=[5],New=[],Old=[For an untagged derived 
-type, ]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[It],Old=[it]} 
-is illegal to specify a@Chg{Version=[5],New=[ nonconfirming],Old=[]}],Old=[no]} 
+@Chg{Version=[5],New=[],Old=[For an untagged derived
+type, ]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[It],Old=[it]}
+is illegal to specify a@Chg{Version=[5],New=[ nonconfirming],Old=[]}],Old=[no]}
 type-related representation
 @Chg{Version=[3],New=[aspect],Old=[items are allowed]}
-@Chg{Version=[5],New=[for an untagged by-reference type @i<T> if it is derived 
-from ],Old=[if the parent type is]} a by-reference type, or 
+@Chg{Version=[5],New=[for an untagged by-reference type @i<T> if it is derived
+from ],Old=[if the parent type is]} a by-reference type, or
 @Chg{Version=[5],New=[if one or more types],Old=[has any user-defined primitive
-subprograms.]}@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[ Similarly, 
+subprograms.]}@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[ Similarly,
 it is illegal to specify a nonconfirming type-related representation aspect
 for an untagged by-reference type after one or more types]} have been
-derived from @Chg{Version=[5],New=[@i<T> prior 
+derived from @Chg{Version=[5],New=[@i<T> prior
 to the specification of the aspect],Old=[it]}.],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -801,11 +832,16 @@ to the specification of the aspect],Old=[it]}.],Old=[]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@Chg{New=[Operational and representation],Old=[Representation]} aspects of
-a generic formal parameter are the same as those of the actual.
-@Chg{New=[Operational and representation aspects
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0396-1]}
+@Chg{Version=[5],New=[If a type-related aspect is defined for the partial 
+view of a type, then it has the same definition for the full view of the type.
+Type-related aspects @Redundant[cannot be specified, and] are not
+defined for an incomplete view of a type. 
+Representation],Old=[@Chg{New=[Operational and representation],Old=[Representation]}]} 
+aspects of a generic formal parameter are the same as those of the actual.
+@Chg{Version=[5],New=[],Old=[@Chg{New=[Operational and representation aspects
 @Chg{Version=[2],New=[],Old=[of a partial view ]}are the
-same @Chg{Version=[2],New=[for all views of a type],Old=[as those of the full view]}.],Old=[]}
+same @Chg{Version=[2],New=[for all views of a type],Old=[as those of the full view]}.],Old=[]}]}
 @Chg{Version=[3],New=[Specification of a],Old=[A]}
 type-related representation @Chg{Version=[3],New=[aspect],Old=[item]}
 is not allowed for a descendant of a generic formal untagged type.
@@ -831,21 +867,39 @@ is not allowed for a descendant of a generic formal untagged type.
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-  @ChgAdded{Version=[2],Text=[All views of a type, including the incomplete
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI05-0396-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[All views of a 
+  type, including the incomplete
   and partial views, have the same operational and representation aspects.
   That's important so that the properties don't change when changing views.
   While most aspects are not available for an incomplete view, we don't want
-  to leave any holes by not saying that they are the same.]}
+  to leave any holes by not saying that they are the same.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0083-1]}
-  @ChgAdded{Version=[3],Text=[However, this does not apply to objects.
-  Different views of an object can have
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0396-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[Different views of an
+  entity can have different representation and operational aspects.
+  Most type-related aspects are the same for all views of a type; but
+  specific aspects may have different rules. Similarly, 
+  different],Old=[However, this does not apply to objects. Different]} views 
+  of an object can have
   different representation aspects. For instance, an actual object passed
   by reference and the associated formal parameter may have different values for
   Alignment even though the formal parameter is merely a view of the
   actual object. This is necessary to maintain the language design principle
   that Alignments are always known at compile time.]}
 @end{Ramification}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0396-1]}
+  @ChgAdded{Version=[5],Text=[The syntax of @nt{incomplete_type_declaration}s
+  and @nt{formal_incomplete_type_declaration}s do not allow for an
+  @nt{aspect_specification}. The @nt{prefix} of an @nt{attribute_reference}
+  cannot name an incomplete type (see @RefSecNum{Incomplete Type Declarations}),
+  so no @nt{attribute_definition_clause} can be used with an incomplete type.
+  Similarly, the @nt{local_name} of a representation pragma cannot name an
+  incomplete type, so no such pragmas can be used with an incomplete type.]}
+@end{TheProof}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
 @Chg{Version=[3],New=[The specification of],Old=[A
@@ -856,11 +910,22 @@ accommodate any value of the subtype.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@Chg{Version=[3],New=[If a specification of a],Old=[A]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
+@Chg{Version=[5],New=[The specification of certain language-defined aspects 
+  need not be supported by all implementations; in such an implementation, the
+  specification for such an aspect ],Old=[@Chg{Version=[3],New=[If a specification of a],Old=[A]}
 representation @Chg{New=[or operational ],Old=[]}@Chg{Version=[3],New=[aspect],
 Old=[item that]} is
-not supported by the implementation@Chg{Version=[3],New=[, it ],Old=[]}is
+not supported by the implementation@Chg{Version=[3],New=[, it ],Old=[]}]}is
 illegal@Chg{Version=[3],New=[],Old=[,]} or raises an exception at run time.
+
+@begin{Ramification}
+   @ChgAdded{Version=[5],Text=[There is an @ImplPermName below that allows
+   an implementation to put restrictions on any representation aspect;
+   this rule applies if that permission is used for an aspect. This rule
+   only applies to an operational aspect if the aspect explicitly allows the
+   aspect to not be supported. ]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
@@ -1098,27 +1163,39 @@ it is inherited by the record extension.
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1],ARef=[AI05-0295-1]}
-@ChgAdded{Version=[1],Text=[In contrast, whether operational aspects are
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[1],Text=[In contrast, whether 
+@Chg{Version=[5],New=[type-related ],Old=[]}operational aspects are
 inherited by @Chg{Version=[3],New=[a],Old=[@Chg{Version=[2],New=[an untagged],Old=[a]}]}
 derived type depends on each specific aspect@Chg{Version=[3],New=[; unless specified,
 an operational aspect is not inherited],Old=[]}. @Chg{Version=[3],New=[],
 Old=[@Chg{Version=[2],New=[@Redundant[Operational aspects are never inherited
-for a tagged type.] ],Old=[]}]}When operational aspects are
+for a tagged type.] ],Old=[]}]}When 
+@Chg{Version=[5],New=[type-related ],Old=[]}operational aspects are
 inherited by @Chg{Version=[3],New=[a],Old=[@Chg{Version=[2],New=[an untagged],Old=[a]}]} derived type,
 aspects that were directly specified @Chg{Version=[2],New=[by
 @Chg{Version=[3],New=[@nt{aspect_specification}s or ],Old=[]}operational
-items that are visible at the point],Old=[before the declaration]} of
-the derived type@Chg{Version=[2],New=[ declaration],Old=[]}, or
+items that are visible at @Chg{Version=[5],New=[any],Old=[the]} 
+point@Chg{Version=[5],New=[ within the immediate scope],Old=[]}],Old=[before 
+the declaration]} of the derived type@Chg{Version=[2],New=[ declaration],Old=[]}, or
 (in the case where the parent is derived)
-that were inherited by the parent type from the grandparent type are inherited.
-An inherited operational aspect is overridden by a subsequent
+that were inherited by the parent type from the grandparent 
+type@Chg{Version=[5],New=[,],Old=[]} are inherited.
+An inherited operational aspect is overridden by 
+@Chg{Version=[5],New=[an],Old=[a subsequent]}
 @Chg{Version=[3],New=[@nt{aspect_specification} or ],Old=[]}operational
 item that specifies the same aspect of the type.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgAdded{Version=[1],Text=[As with representation items, if an operational
-item for the parent appears after the @nt{derived_@!type_@!definition}, then
-inheritance does not happen for that operational item.]}
+  @ChgAdded{Version=[1],Text=[As with representation items, if an operational
+  item for the parent appears after the @nt{derived_@!type_@!definition}, then
+  inheritance does not happen for that operational item.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[Unlike representation aspects, operational aspects
+    can be inherited at any point in the immediate scope, and can be
+    overridden by aspect_specifications or operational items that occur
+    at a point before or after the inheritance takes place.]}
 @end{Ramification}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -1140,7 +1217,47 @@ problem that caused us to introduce @lquotes@;operational aspects@rquotes in
 the first place.)]}],Old=[]}]}
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[When a type-related operational 
+aspect is inherited, the rules for inheritance depend on the nature of the
+aspect (see @RefSecNum{Aspect Specifications}). Unless
+otherwise specified for a given aspect, these rules are as follows:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[For an operational aspect that is a value, 
+     the inherited aspect has the same value;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[For an operational aspect 
+    that is a @nt{name}:]}
+
+@begin{Itemize}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[if the @nt{name} denotes one or more 
+      primitive subprograms of the type, the inherited aspect is a 
+      @nt{name} that denotes the corresponding primitive subprogram(s)
+      of the derived type;]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[otherwise, the inherited aspect is a @nt{name}
+      that denotes the same entity or entities as the original aspect;]}
+@end{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[For an operational aspect that is an @nt{expression}
+     or an @nt{aggregate}, the inherited aspect is a corresponding 
+     @nt{expression} or @nt{aggregate} where each @nt{name} that denotes a 
+     primitive subprogram of the type denotes the
+     corresponding primitive subprogram of the derived type, and where any
+     other @nt{name} denotes the same entity as that in the original aspect;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[For an operational aspect that is an identifier
+     specific to the aspect, the inherited aspect is the same identifier.]}
+@end{Itemize}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}@Comment{Just to change paragraph number}
 @ChgAdded{Version=[2],Text=[When an aspect that is a subprogram is inherited,
 the derived type inherits the aspect in the same way that a derived type
 inherits a user-defined primitive subprogram from its parent (see
@@ -1203,14 +1320,25 @@ of the underlying object.]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[1],Text=[@Defn2{Term=[specified], Sec=(of an operational aspect of an entity)}
 If an operational aspect is @i<specified> for an entity (meaning
-that it is either directly specified or inherited), then that aspect of the
+that it is either directly specified or@Chg{Version=[5],New=[, if type-related
+or subtype-specific,],Old=[]} inherited), then that aspect of the
 entity is as specified. Otherwise, the aspect of the entity has the default
-value for that aspect.]}
+value for that aspect.@Chg{Version=[5],New=[@Redundant[ For aspects that are 
+neither type-related nor subtype-specific, the terms @ldquote@;specified@rdquote
+and @ldquote@;directly specified@rdquote are equivalent.]],Old=[]}]}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[Aspect inheritance is only defined for types
+  and subtypes.]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[An @nt{aspect_specification}
 or ],Old=[A]}representation
 item that specifies @Chg{Version=[3],New=[a],Old=[an aspect of]}
@@ -1227,7 +1355,14 @@ them.@Defn2{Term=[confirming], Sec=(representation value)}
 @Defn2{Term=[confirming], Sec=(aspect specification)}
 @Defn2{Term=[nonconfirming], Sec=(representation value)}
 @Defn2{Term=[nonconfirming], Sec=(representation item)}
-@Defn2{Term=[nonconfirming], Sec=(aspect specification)}],Old=[]}]}
+@Defn2{Term=[nonconfirming], Sec=(aspect specification)}],Old=[]}@Chg{Version=[5],New=[Similarly,
+an @nt{aspect_specification} or operational item that specifies an operational
+aspect to be the same as the definition it would have by default is
+said to be @i{confirming}; otherwise it is @i{nonconfirming}.@Defn2{Term=[confirming], Sec=(operational aspect)}
+@Defn2{Term=[confirming], Sec=(representation aspect)}
+@Defn2{Term=[nonconfirming], Sec=(operational aspect)}
+@Defn2{Term=[nonconfirming], Sec=(operational item)}
+@Defn2{Term=[nonconfirming], Sec=(representation aspect)}],Old=[]}]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1609,19 +1744,24 @@ Some of the more stringent requirements are moved to
 
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0106-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0396-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
   Specifying a language-defined aspect for a generic formal parameter is no
   longer allowed. Most aspects could not be specified on these anyway; moreover,
   this was not allowed in Ada 83, so it is unlikely that compilers are
   supporting this as a capability (and it is not likely that they have a
   consistent definition of what it means if it is allowed). Thus, we expect
-  this to occur rarely in existing programs.]}
+  this to occur rarely in existing programs.@Chg{Version=[5],New=[ Note: This 
+  correction is repealed in Ada 202x, as a number of aspects are allowed on 
+  formals in that later language version.],Old=[]}]}
 @end{Incompatible2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Defined that overriding of
-  an representation aspect only happens for a nonconfirming representation
+  @Chg{Version=[5],New=[a],Old=[an]} representation aspect only happens for
+  a nonconfirming representation
   item. This prevents a derived type from being considered to have
   only a confirming representation item when the value would be nonconfirming
   if given on a type that does not inherit any aspects of representation.
@@ -1682,15 +1822,24 @@ Some of the more stringent requirements are moved to
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0116-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that an aspect
   (any aspect) can be specified only once for an entity, no matter what
-  means of specifying it are used. We did not document this as an
-  incompatibility as only aspects that are neither operational nor
-  representation could change behavior and there is no known implementation
-  of these new aspects that allows multiple definitions.]}
+  means of specifying it are used.@Chg{Version=[5],New=[],Old=[ We did not 
+  document this as an incompatibility as only aspects that are neither 
+  operational nor representation could change behavior and there is no known 
+  implementation of these new aspects that allows multiple definitions.]}]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
   @ChgAdded{Version=[5],Text=[Added wording changes to support Object_Size.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that many of these
+  rules only make sense for type-related aspects.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified how inheritance works
+  for operational aspects that are not values.]}
 @end{DiffWord2012}
 
 
@@ -1739,7 +1888,7 @@ rhs="@Chg{Version=[5],New=[
 @begin{Display}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1],ARef=[AI12-0079-3],ARef=[AI12-0395-1],ARef=[AI12-0398-1]}
 @ChgAdded{Version=[3],Text=[@nt{basic_declaration}
   @nt{type_declaration}
     @nt{full_type_declaration}
@@ -1747,8 +1896,8 @@ rhs="@Chg{Version=[5],New=[
       @nt{task_type_declaration}*
       @nt{protected_type_declaration}*
     @nt{incomplete_type_declaration}  --  NO
-      -- @Examcom{Incomplete type aspects cannot be read by an attribute or specified by @nt{attribute_definition_clause}s }
-      -- @Examcom{(the attribute name is illegal), so it would not make sense to allow this in another way.}
+      -- @Examcom{Incomplete @Chg{Version=[5],New=[types do not have aspects by definition,],Old=[type aspects cannot be read by an attribute or specified by @nt{attribute_definition_clause}s ]}}
+      -- @Examcom{@Chg{Version=[5],New=[],Old=[(the attribute name is illegal)]}, so it would not make sense to allow @Chg{Version=[5],New=[specifying them],Old=[this in another way].}
     @nt{private_type_declaration}*
     @nt{private_extension_declaration}*
   @nt{subtype_declaration}*
@@ -1772,32 +1921,42 @@ rhs="@Chg{Version=[5],New=[
     @nt{generic_package_declaration}* -- @Examcom{via} @nt{package_specification}
   @nt{generic_instantiation}*
 @nt{enumeration_literal_specification}  --  NO
-@nt{discriminant_specification}  --  NO
+@nt{discriminant_specification}@Chg{Version=[5],New=[*
+    -- @Examcom{There are no language-defined aspects that may be specified}
+    -- @Examcom{on discriminants, but implementations might support some.}],Old=[  --  NO]}
 @nt{component_declaration}*
 @nt{loop_parameter_specification}  --  NO@Chg{Version=[5],New=[
-@nt{chunk_specification}  -- NO],Old=[]}
+@nt{chunk_specification}  -- NO - @Examcom{the enclosing construct has an} @nt{aspect_specification}],Old=[]}
 @nt{iterator_specification}  --  NO@Chg{Version=[5],New=[
 @nt{iterator_parameter_specification}  -- NO],Old=[]}
-@nt{parameter_specification}  --  NO
+@nt{parameter_specification}@Chg{Version=[5],New=[*
+    -- @Examcom{There are no language-defined aspects that may be specified}
+    -- @Examcom{on parameters, but implementations might support some.}],Old=[  --  NO]}
 @nt{subprogram_body}*  --  @Examcom{ - but language-defined aspects only if there is no explicit specification}
 @nt{entry_declaration}*
-@nt{entry_index_specification}  --  NO
+@nt{entry_index_specification}@Chg{Version=[5],New=[*
+    -- @Examcom{There are no language-defined aspects that may be specified}
+    -- @Examcom{on an entry index, but implementations might support some.}],Old=[  --  NO]}
 @nt{subprogram_body_stub}*  --  @Examcom{ - but language-defined aspects only if there is no explicit specification}
 @nt{choice_parameter_specification}  --  NO
-@nt{generic_formal_parameter_declaration}
+@nt{generic_formal_parameter_declaration}@Chg{Version=[5],New=[],Old=[
     -- @Examcom{There are no language-defined aspects that may be specified}
-    -- @Examcom{on generic formals, but implementations might support some.}
+    -- @Examcom{on generic formals, but implementations might support some.}]}
   @nt{formal_object_declaration}*
-  @nt{formal_type_declaration}*
+  @nt{formal_type_declaration}@Chg{Version=[5],New=[
+    @nt{formal_complete_type_declaration}*
+    @nt{formal_incomplete_type_declaration}  --  NO @Examcom{ - see @nt{incomplete_type_declaration} above}],Old=[*]}
   @nt{formal_subprogram_declaration}
     @nt{formal_concrete_subprogram_declaration}*
     @nt{formal_abstract_subprogram_declaration}*
   @nt{formal_package_declaration}*
-@nt{extended_return_statement}  --  NO]}
+@Chg{Version=[5],New=[@nt{extended_return_object_declaration}*
+    -- @Examcom{There are no language-defined aspects that may be specified}
+    -- @Examcom{on return objects, but implementations might support some.}],Old=[@nt{extended_return_statement}  --  NO]}}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0169-1]}
-@ChgAdded{Version=[3],Text=[-- @Examcom{We also allow @nt{aspect_specification}s on all kinds of bodies, but are no language-defined aspects}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1],ARef=[AI12-0169-1]}
+@ChgAdded{Version=[3],Text=[-- @Examcom{We also allow @nt{aspect_specification}s on all kinds of bodies, but there are no language-defined aspects}
 -- @Examcom{that may be specified on a body. These are allowed for implementation-defined aspects.}
 -- @Examcom{See above for subprogram bodies and stubs (as these can be declarations).}
 @nt{package_body}*
@@ -1921,6 +2080,26 @@ usage name in the @nt{aspect_definition} shall resolve to the same entity at the
 first freezing point as it does at the end of the immediately enclosing
 declaration list.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0181-1],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[5],Text=[An @nt{expression} or @nt{name} that causes 
+freezing of an entity shall not occur within an @nt{aspect_specification} that
+specifies a representation or operational aspect of that entity.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0181-1],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[The rule prevents an aspect of an entity from
+  depending (directly or indirectly) on properties of the entity itself.]}
+@end{Reason}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[This check needs to be deferred at least to the
+  freezing of the entity (as the @nt{aspect_definition} is not resolved until
+  then), and might be accomplished during the freezing of the 
+  @nt{aspect_definition} (since it is closely related). Keep in mind that
+  multiple other entities could be involved.]}
+@end{ImplNote}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[At most one occurrence of each @nt{aspect_mark} is
 allowed within a single @nt{aspect_specification}. The aspect identified by the
@@ -1929,13 +2108,14 @@ entity (or view of the entity defined by the associated declaration).]}
 
 @begin{Ramification}
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0116-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[4],Text=[This rule prevents multiple specifications in the same
-  @nt{aspect_specification}. Rules in @RefSecNum{Operational and Representation Aspects} prevent multiple specifications in
-  different @nt{aspect_specification}s (on different views of the same type,
-  for instance) or between operational or representation items and
-  an @nt{aspect_specification}, even for aspects that are neither operational
-  nor representation aspects.]}
-
+  @nt{aspect_specification}. Rules in @RefSecNum{Operational and Representation Aspects}
+  prevent multiple specifications in different @nt{aspect_specification}s (on
+  different views of the same type, for instance)@Chg{Version=[5],New=[,],Old=[]}
+  or between operational or representation items and
+  an @nt{aspect_specification}@Chg{Version=[5],New=[],Old=[, even for aspects 
+  that are neither operational nor representation aspects]}.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
@@ -1950,13 +2130,14 @@ aspect of a boolean type, in which case it is equivalent to the
 subprogram of a tagged type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0194-1],ARef=[AI12-0380-1]}
-@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[There are no 
-language-defined aspects that may be specified on a @nt{renaming_declaration},
-a @nt{generic_formal_parameter_declaration}, a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0194-1],ARef=[AI12-0380-1],ARef=[AI12-0407-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[Unless otherwise specified
+for a specific aspect, a],Old=[There are no]} language-defined
+@Chg{Version=[5],New=[aspect cannot],Old=[aspects that may]}
+be specified on a @nt{renaming_declaration}@Chg{Version=[5],New=[ or],Old=[,]}
+a @nt{generic_formal_parameter_declaration}@Chg{Version=[5],New=[],Old=[, a
 @nt{subunit}, a @nt{package_body}, a @nt{task_body}, a @nt{protected_body},
-or a @nt{body_stub} other
-than a @nt{subprogram_body_stub}.]}]}
+or a @nt{body_stub} other than a @nt{subprogram_body_stub}]}.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2]}
@@ -1979,7 +2160,7 @@ a],Old=[A]} language-defined aspect shall not be specified in
 an @nt{aspect_specification} given on a
 @Chg{Version=[4],New=[],Old=[@nt{subprogram_body} or
 @nt{subprogram_body_stub} that is a ]}completion of @Chg{Version=[4],New=[a
-@Chg{Version=[5],New=[program unit],Old=[subprogram or generic 
+@Chg{Version=[5],New=[program unit],Old=[subprogram or generic
 subprogram]}],Old=[another declaration]}.]}
 
 @begin{Reason}
@@ -1993,20 +2174,12 @@ subprogram]}],Old=[another declaration]}.]}
     implementation-defined aspects, so implementers need to carefully define
     whether such aspects can be applied to bodies and stubs, and what happens
     if they are specified on both the declaration and body of a unit.]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
-  @ChgAdded{Version=[5],Text=[In addition, the language does not define 
-    default aspect matching rules for generic formals; only the handful of 
-    aspects allowed on formals have such rules. (Most aspects are not
-    allowed on generic formal parameters, see @RefSecNum{Operational and Representation Aspects}.) 
-    Therefore, the implementation will need to define actual type matching 
-    rules for any aspects allowed on formal types.]}
 @end{Reason}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI12-0138-1]}
 @ChgAdded{Version=[4],Text=[If an aspect of a derived type is inherited from
-an ancestor type and has the boolean value True, the inherited value shall 
-not be overridden to have the value False for the derived type, unless 
+an ancestor type and has the boolean value True, the inherited value shall
+not be overridden to have the value False for the derived type, unless
 otherwise specified in this International Standard.]}
 
 @begin{Discussion}
@@ -2018,6 +2191,20 @@ otherwise specified in this International Standard.]}
   and nonfirst subtypes).]}
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0396-1]}
+@ChgAdded{Version=[5],Text=[If a given aspect is type-related and inherited, 
+then within an @nt{aspect_definition} for the aspect, if a @nt{name} resolves
+to denote multiple visible subprograms, all or none of the denoted subprograms
+shall be primitives of the associated type.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[This is necessary because the inheritance rules
+    for @nt{name}s denoting primitive subprograms are different from those for
+    @nt{name}s denoting other entities @em 
+    see @RefSecNum{Operational and Representation Aspects}.]}
+@end{Reason}
+
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}
 @ChgAdded{Version=[4],Text=[Certain type-related aspects are defined to be
@@ -2026,19 +2213,26 @@ using an @nt{aspect_definition} that is a
 @nt{name}]}.@Defn2{Term=[nonoverridable],Sec=[aspect]}]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1],ARef=[AI12-0211-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1],ARef=[AI12-0211-1],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[4],Text=[If a nonoverridable aspect is directly specified
 for a type @i<T>, then any explicit specification of that aspect for any
 @Chg{Version=[5],New=[],Old=[other ]}descendant of @i<T>
 @Chg{Version=[5],New=[(other than @i<T> itself) ],Old=[]}shall be
 @PDefn2{Term=[confirming],Sec=[nonoverridable aspect]}@i<confirming>@Chg{Version=[5],New=[.
-In the case of an aspect whose value is a @nt{name}, this means that],Old=[; that is,]}
+In the case of an aspect @Chg{Version=[5],New=[that],Old=[whose value]} is a 
+@nt{name}, this means that],Old=[; that is,]}
 the specified @nt{name} shall @i<match>@Defn2{Term=[match],Sec=[value of nonoverridable aspect]}
 the inherited aspect@Chg{Version=[5],New=[ in the sense that it],Old=[, meaning that
 the specified @nt{name}]} shall denote the
-same declarations as would the inherited @nt{name}.]}
+same declarations as would the inherited @nt{name}.@Chg{Version=[5],New=[ Similarly,
+for an aspect that is an @nt{expression} or an @nt{aggregate}, confirming means the
+defining @nt{expression} is fully conformant (see @RefSecNum{Conformance Rules})
+with the defining @nt{expression} for the inherited aspect, with the added rule
+that an identifier that is specific to the aspect is the same as the
+corresponding identifier in the inherited aspect.],Old=[]}]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1]}@Comment{Just to change the paragraph number}
 @ChgAdded{Version=[4],Text=[If a full type has a partial view, and a given
 nonoverridable aspect is allowed for both the full view and the partial view,
 then the given aspect for the partial view and the full view shall be the same:
@@ -2065,9 +2259,7 @@ shall be confirming of the values inherited from all other ancestors.]}
   @ChgAdded{Version=[5],Text=[If more than one progenitor of a type @i<T>
     specifies a nonoverridable aspect, they all have to specify the same
     or matching values for that aspect. Otherwise, we'd have two different
-    values for the aspect that depend on the view of the type; that would
-    violate the definition of type aspects being the same for all views of
-    a type.]}
+    values for the aspect that depend on which progenitor we inherit from.]}
 @end{Reason}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
@@ -2249,12 +2441,22 @@ for particular aspects, as specified elsewhere in this International Standard.]}
 
 @begin{Runtime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0355-2]}
 @ChgAdded{Version=[3],Text=[At the freezing point of the associated entity, the
-@nt{aspect_specification} is elaborated. The elaboration of the
-@nt{aspect_specification} includes the evaluation of the @nt{name} or
-@nt{expression}, if any, unless the aspect itself is an expression. If the
-corresponding aspect represents an expression (as in a precondition), the
-elaboration has no effect; the expression is evaluated later at points
+@nt{aspect_specification} is elaborated.@Chg{Version=[5],New=[ When appearing in
+a construct other than a declaration, an @nt{aspect_specification} is
+elaborated as part of the execution of the construct.],Old=[]}
+The elaboration of the @nt{aspect_specification}@Chg{Version=[5],New=[ consists
+of the elaboration of each @nt{aspect_definition} in an arbitrary order.
+The elaboration of an @nt{aspect_definition}],Old=[]} includes the evaluation
+of @Chg{Version=[5],New=[any],Old=[the]} @nt{name} or
+@nt{expression}@Chg{Version=[5],New=[ that is part of the
+@nt{aspect_definition}],Old=[, if any,]} unless the @Chg{Version=[5],New=[part
+is itself],Old=[aspect itself is]} an expression. If the
+corresponding aspect@Chg{Version=[5],New=[ (or part thereof)],Old=[]}
+represents an expression (as in a precondition), the
+elaboration @Chg{Version=[5],New=[of that part ],Old=[]}has no effect;
+the expression is evaluated later at points
 within the execution as specified elsewhere in this International Standard for
 the particular aspect.]}
 @end{Runtime}
@@ -2267,17 +2469,38 @@ use an implementation-defined syntax for the @nt{aspect_definition}, and may
 follow implementation-defined legality and semantics rules.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0389-1]}
   @ChgAdded{Version=[3],Text=[The intent is to allow implementations to support
   aspects that are defined, for example, by a @nt{subtype_indication} rather
   than an @nt{expression} or a @nt{name}. We chose not to try to enumerate all
   possible @nt{aspect_definition} syntaxes, but to give implementations maximum
-  freedom. Unrecognized aspects are illegal whether or not they use custom
-  syntax, so this freedom does not reduce portability.]}
+  freedom.@Chg{Version=[5],New=[],Old=[ Unrecognized aspects are illegal whether
+  or not they use custom syntax, so this freedom does not reduce portability.]}]}
 @end{Discussion}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[Implementation-defined aspects, including the syntax for specifying
 such aspects and the legality rules for such aspects.]}]}
 @end{ImplPerm}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0389-1]}
+@ChgAdded{Version=[5],Text=[An implementation may ignore the specification of
+an unrecognized aspect; if an implementation chooses to ignore such an aspect
+specification (as opposed to rejecting it), then it has no effect on
+the semantics of the program except for possibly (and this is not
+required) the rejection of syntax errors within the @nt{aspect_definition}.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0389-1]}
+  @ChgAdded{Version=[5],Text=[Identifying the textual end of an
+  @nt{aspect_definition} for an unrecognized aspect may be challenging,
+  particularly if the syntax for the unrecognized aspect's @nt{aspect_definition}
+  is implementation-defined. It is not specified how an implementation might
+  accomplish this. Note that an implementation is never @i<required> to be able
+  to do this; if an @nt{aspect_definition} for an unrecognized aspect is
+  problematic in any way, then it can always be rejected (as opposed to
+  being ignored).]}
+@end{Discussion}
+
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0229-1],ARef=[AI05-0267-1]}
@@ -2310,12 +2533,12 @@ such aspects and the legality rules for such aspects.]}]}
   no known Ada 2012 implementation has ever allowed late evaluation of
   such aspects. As such, there should be no practical incompatibility.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0220-1]}
   @ChgAdded{Version=[5],Text=[Parameters of access-to-subprogram types are
   now visible in aspect specifications. This can be incompatible if some
   entity with the same name as a parameter is used in an existing aspect
   specification. We believe that all such aspects require either static
-  expressions or statically denoting of a subprogram; since a parameter
+  expressions or a subprogram that is statically denoted; since a parameter
   can be neither of these and hides everything else, all such cases will be
   caught at compile-time. In addition, we expect such cases to be very rare.]}
 @end{Incompatible2012}
@@ -2326,6 +2549,14 @@ such aspects and the legality rules for such aspects.]}]}
   An aspect can be an unresolved @nt{aggregate}, these can be used to
   specify a list of entities, or to set a group of different but related
   properties with a single aspect.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0355-2]}
+  @ChgAdded{Version=[5],Text=[Aspect specifications can appear in,
+  and apply to, constructs other than declarations.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0389-1]}
+  @ChgAdded{Version=[5],Text=[An unrecognized aspect specification can be
+  ignored.]}
 @end{Extend2012}
 
 @begin{Diffword2012}
@@ -2357,14 +2588,24 @@ such aspects and the legality rules for such aspects.]}]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Added a rule so that the
   a nonoverridable aspect has to be the same for every ancestor of a type.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
-  @ChgAdded{Version=[5],Text=[Removed formal parameters from the list of
-  entities that don't have any language-defined aspects, since Nonblocking
-  (see @RefSecNum{Intertask Communication}) is language-defined.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0407-1]}
+  @ChgAdded{Version=[5],Text=[Revised the rules about entities that cannot
+  have specified language-defined aspects. The body portion of the rule was
+  changed to a general prohibition on specifying language-defined aspects on 
+  completions (this allows specifying aspects on bodies that act as a 
+  declaration, and eliminates the list of entities, which was a maintenance
+  nightmare). Then the remaining entities (renamings and generic formal 
+  parameters) were revised to allow specific aspects, since Nonblocking
+  (see @RefSecNum{Intertask Communication}), as well as Pre and Post, are
+  now allowed on generic formal parameters.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0373-1]}
   @ChgAdded{Version=[5],Text=[Added the missing definition for resolution of
   entities found in aspects of library units.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Defined confirming for 
+  nonoverridable aspects that are @nt{expression}s or @nt{aggregate}s.]}
 @end{Diffword2012}
 
 
@@ -3593,8 +3834,8 @@ clause.]}
 @end{Itemize}
 @ChgImplAdvice{Version=[5],Kind=[RevisedAdded],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
-Text=[If the Size of a subtype @Chg{Version=[5],New=[ is nonconfirming
-and],Old=[]}allows for efficient independent
+Text=[If the Size of a subtype @Chg{Version=[5],New=[is nonconfirming
+and ],Old=[]}allows for efficient independent
 addressability, then the @Chg{Version=[5],New=[Object_Size of the subtype
 (unless otherwise specified)],Old=[Size of most objects of the subtype]} should
 equal the Size of the subtype.]}]}
