@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:42 $}
+@Comment{$Date: 2021/01/19 06:32:45 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.141 $}
+@Comment{$Revision: 1.142 $}
 
 @begin{Intro}
 
@@ -6111,8 +6111,11 @@ executed after the @nt<abortable_part> is left.
 @end(Example)
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0098-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0418-1]}
 @ChgAdded{Version=[4],Text=[Note that these examples presume that there are
-abort completion points within the execution of the @nt{abortable_part}.]}
+abort completion points @Chg{Version=[5],New=[(see 
+@RefSecNum{Abort of a Task - Abort of a Sequence of Statements}) ],Old=[]}within
+the execution of the @nt{abortable_part}.]}
 @end{Examples}
 
 @begin{Extend83}
@@ -6364,8 +6367,8 @@ of aborting the execution of a construct, rather than just of a task.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-  @ChgAdded{Version=[5],Text=[Added parallel constructs as abort completion
-  points.]}
+  @ChgAdded{Version=[5],Text=[Added points within parallel constructs to the
+  list of abort completion points.]}
 @end{Diffword2012}
 
 
@@ -6883,7 +6886,7 @@ execution, unless all of the following are true:]}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[To properly synchronize two actions to prevent
       concurrency, a thread that does an update of a volatile object must update
-      a synchronized object afterward to indicate it has completed its update,
+      a synchronized object afterwards to indicate it has completed its update,
       and the other thread needs to test the value of the synchronized object
       before it reads the updated volatile object. In a parallel construct,
       @ldquote@;signaling@rdquote cannot be used to prevent concurrency,
@@ -6952,7 +6955,7 @@ global to the task body, unless it is a synchronized object.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[No_Conflict_Checks, Known_Conflict_Checks,
-All_Conflict_Checks@\These are short hands for (No_Parallel_Conflict_Checks,
+All_Conflict_Checks@\These are shorthands for (No_Parallel_Conflict_Checks,
 @Defn{No_Conflict_Checks conflict check policy}No_Tasking_Conflict_Checks),
 (Known_Parallel_Conflict_Checks,
 @Defn{Known_Conflict_Checks conflict check policy}Known_Tasking_Conflict_Checks),

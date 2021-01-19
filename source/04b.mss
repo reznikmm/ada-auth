@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:41 $}
+@Comment{$Date: 2021/01/19 06:32:44 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1604,14 +1604,17 @@ Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @RI[-- see @RefSecNum{Type Convers
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0100-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   A @nt{qualified_expression} now performs a predicate check for the named
   subtype (if it is enabled). Original Ada 2012 did not include that check
   (an omission). While this is formally inconsistent (an exception could
-  be raised when none would be raised by original Ada 2012), cases when this
-  could be the case are likely to be rare (the qualified expression would have
-  to have a stricter subtype than the following usage) and the check is more
-  likely to detect bugs than be unexpected.]}
+  be raised when none would be raised by original Ada 2012), cases
+  @Chg{Version=[5],New=[where],Old=[when]} this
+  @Chg{Version=[5],New=[scenario arises],Old=[could be the case]} are likely
+  to be rare (the qualified expression would have to have a stricter subtype
+  than the following usage) and the check is more likely to detect bugs than
+  be unexpected.]}
 @end{Inconsistent2012}
 
 @begin{DiffWord2012}
@@ -3668,7 +3671,7 @@ type.@AspectDefn{Put_Image}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
 @ChgAdded{Version=[5],Text=<For an array type T, the default implementation of
-  T'Put_Image generates an image based on (named, not positional) array
+  T'Put_Image generates an image based on named (not positional) array
   aggregate syntax (with '[' and ']' as the delimiters) using calls to the
   Put_Image procedures of the index type(s) and the element type to generate
   images for values of those types.>}
@@ -3773,7 +3776,7 @@ type.@AspectDefn{Put_Image}]}
 @ChgAdded{Version=[5],Text=[For an untagged record type, a specific tagged
   record type other than a type extension which meets the criteria described in
   the previous paragraph, or a protected type, the default implementation of
-  T'Put_Image generates an image based on (named, not positional) record
+  T'Put_Image generates an image based on named (not positional) record
   aggregate syntax (except that for a protected type, the initial left
   parenthesis is followed by @exam{"PROTECTED with "}). Component names are
   displayed in upper case, following the rules for the image of an enumeration

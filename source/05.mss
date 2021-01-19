@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:41 $}
+@Comment{$Date: 2021/01/19 06:32:44 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1315,7 +1315,7 @@ this check fails, Program_Error is raised.@IndexCheck{Program_Error_Check}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0250-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1],ARef=[AI12-0355-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0250-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1],ARef=[AI12-0355-2],ARef=[AI12-0416-1]}
 @Chg{Version=[5],New=[@PDefn2{Term=[execution],
   Sec=(loop_statement with a for loop_parameter_specification)}],
 Old=[@PDefn2{Term=[execution],
@@ -1356,7 +1356,10 @@ all values are covered with no overlaps.
 Within each logical thread of control, the],Old=[. These]}
 values are assigned @Chg{Version=[5],New=[to the loop parameter ],Old=[]}in
 increasing order unless the reserved word @key{reverse} is present, in which
-case the values are assigned in decreasing order.
+case the values are assigned in decreasing order.@Chg{Version=[5],New=[ In the 
+absence of a transfer of control, the associated parallel construct of
+a @nt{loop_parameter_specification} is complete when all of its logical threads
+of control are complete.],Old=[]}
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0294-1]}
   @ChgAdded{Version=[5],Text=[This wording does not describe when the loop
@@ -1401,6 +1404,13 @@ case the values are assigned in decreasing order.
 @key[end loop];]}
 @end{Example}
 @end{Reason}
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0416-1]}
+  @ChgAdded{Version=[5],Text=[The rules for completing a parallel construct when
+  there is a transfer of control are given in 
+  @RefSecNum{Simple and Compound Statements - Sequences of Statements}.]}
+@end{Discussion}
+
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
 @ChgAdded{Version=[5],Text=[If a @nt{chunk_specification} with a
@@ -2201,34 +2211,8 @@ chunks is determined in an implementation-defined manner.]}
 Text=[@ChgAdded{Version=[5],Text=[The maximum number of chunks for a parallel
 generalized iterator without a @nt{chunk_specification}.]}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[5],Text=[Upon return from Split_Into_Chunks, the actual
-number of chunks for the loop is determined by calling the Chunk_Count operation
-of the iterator, at which point one logical thread of control is initiated for
-each chunk, with an associated chunk index in the range from one to the actual
-number of chunks. Within each logical thread of control, a loop parameter is
-created. If a @nt{chunk_specification} with a @nt{discrete_subtype_definition}
-is present in the associated parallel construct, then a chunk parameter is
-created, and initialized with a value from the discrete subtype defined by the
-@nt{discrete_subtype_definition}, so that the order of the chosen chunk
-parameter values correspond to the order of the chunk indices associated with
-the logical threads of control. The operation First of the iterator type having
-a Chunk parameter is called on the loop iterator, with Chunk initialized from
-the corresponding chunk index, to produce the initial value for the loop
-parameter. If the result of calling Has_Element on this initial value is False,
-then the execution of the logical thread of control is complete. Otherwise, the
-@nt{sequence_of_statements} is conditionally executed and then the Next
-operation of the iterator type having a Chunk parameter is called, with the loop
-iterator, the current value of the loop parameter, and the corresponding chunk
-index, to produce the next value to be assigned to the loop parameter. This
-repeats until the result of calling Has_Element on the loop parameter is False,
-or the associated parallel construct is left as a consequence of a transfer of
-control. In the absence of a transfer of control, the associated parallel
-construct of a parallel generalized iterator is complete when all of its logical
-threads of control are complete.]}
-
 @begin{Discussion}
-  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[The Max_Chunks parameter of the Split_Into_Chunks
     procedure is an upper bound for the number of chunks to be associated with a
     loop. A container implementation may opt for a lower value for the number of
@@ -2236,6 +2220,39 @@ threads of control are complete.]}
     container might create the split based on the number of branches at the top
     levels of the tree.]}
 @end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0266-1],ARef=[AI12-0418-1]}
+@ChgAdded{Version=[5],Text=[Upon return from Split_Into_Chunks, the actual
+number of chunks for the loop is determined by calling the Chunk_Count operation
+of the iterator, at which point one logical thread of control is initiated for
+each chunk, with an associated chunk index in the range from one to the actual
+number of chunks.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0266-1],ARef=[AI12-0418-1]}
+@ChgAdded{Version=[5],Text=[Within each logical thread of control, a loop 
+parameter is
+created. If a @nt{chunk_specification} with a @nt{discrete_subtype_definition}
+is present in the associated parallel construct, then a chunk parameter is
+created and initialized with a value from the discrete subtype defined by the
+@nt{discrete_subtype_definition}, so that the order of the chosen chunk
+parameter values correspond to the order of the chunk indices associated with
+the logical threads of control. The operation First of the iterator type that
+has a Chunk parameter is called on the loop iterator, with Chunk initialized from
+the corresponding chunk index, to produce the initial value for the loop
+parameter. If the result of calling Has_Element on this initial value is False,
+then the execution of the logical thread of control is complete. Otherwise, the
+@nt{sequence_of_statements} is conditionally executed, and then the Next
+operation of the iterator type that has a Chunk parameter is called with the loop
+iterator, the current value of the loop parameter, and the corresponding chunk
+index, to produce the next value to be assigned to the loop parameter. This
+repeats until the result of calling Has_Element on the loop parameter is False,
+or the associated parallel construct is left as a consequence of a transfer of
+control.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0266-1],ARef=[AI12-0418-1]}
+@ChgAdded{Version=[5],Text=[In the absence of a transfer of control, the
+associated parallel construct of a parallel generalized iterator is complete
+when all of its logical threads of control are complete.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}

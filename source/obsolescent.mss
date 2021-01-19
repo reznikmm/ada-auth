@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:54 $}
+@Comment{$Date: 2021/01/19 06:32:46 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -1121,7 +1121,7 @@ is as follows:@PDefn2{Term=[representation pragma], Sec=(No_Return)}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
 @AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
-Text=[@key{pragma} @prag<No_Return> (@Chg{Version=[5],New=[@SynI[subprogram_]@Syn2[local_name]],Old=[@SynI[procedure_]@Syn2[local_name]]}{, @Chg{Version=[5],New=[@SynI[subprogram_]@Syn2[local_name]],Old=[@SynI[procedure_]@Syn2[local_name]]});]}>
+Text=[@key{pragma} @prag<No_Return> (@Chg{Version=[5],New=[@SynI[subprogram_]@Syn2[local_name]],Old=[@SynI[procedure_]@Syn2[local_name]]}{, @Chg{Version=[5],New=[@SynI[subprogram_]@Syn2[local_name]],Old=[@SynI[procedure_]@Syn2[local_name]]}});]}>
 @end{Syntax}
 
 @begin{Legality}
@@ -1887,5 +1887,53 @@ denote a declaration that may have aspect Asynchronous specified.]}
   was moved here from @RefSecNum{Asynchronous Remote Calls};
   aspect Asynchronous lives there now.]}
 @end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[Pragma Preelaborable_Initialization]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The form of a @nt{pragma}
+Preelaborable_Initialization is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<Preelaborable_Initialization> (@Syn2[direct_name]);]}>
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[5],Text=[A pragma Preelaborable_Initialization specifies
+that the Preelaborable_Initialization aspect (see 10.2.1) for a composite type
+is True. This pragma shall appear in the visible part of a package or
+generic package.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[5],Text=[If the pragma appears in the first declaration
+list of a @nt{package_specification}, then the @nt{direct_name} shall denote
+the first subtype of a composite type, and the type shall be declared
+immediately within the same package as the pragma. The composite type
+shall be one for which the Preelaborable_Initialization aspect can be
+directly specified as True. In addition to the places where @LegalityTitle
+normally apply (see @RefSecNum{Generic Instantiation}), these rules also apply
+in the private part of an instance of a generic unit.@PDefn{generic contract issue}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[5],Text=[If the pragma appears in a
+@nt{generic_formal_part}, then the @nt{direct_name} shall denote a type 
+declared in the same @nt{generic_formal_part} as the pragma, and be one for
+which the Preelaborable_Initialization aspect can be directly specified as
+True.]}
+@end{Legality}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[This subclause is new. Pragma Preelaborable_Initialization
+  was moved here from @RefSecNum{Elaboration Control};
+  aspect Preelaborable_Initialization lives there now.]}
+@end{DiffWord2012}
+
 
 

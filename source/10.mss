@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2021/01/19 06:32:45 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -96,6 +96,7 @@ See also the @lquotes@;generic contract model@rquotes@; @MetaRulesName of
 The @Chg{Version=[3],New=[clause],Old=[section]} organization mentioned above is
 different from that of RM83. @end{DiffWord83}
 
+
 @LabeledClause{Separate Compilation}
 
 @begin{Intro}
@@ -174,7 +175,7 @@ structures were actually stored in support of separate compilation.
 Indeed, implementations were encouraged to do so.
 
 In RM83, it was unclear which was the official definition of
-@lquotes@;program unit.@rquotes@;
+@lquotes@;program unit@rquotes@;.
 Definitions appeared in RM83-5, 6, 7, and 9, but not 12.
 Placing it here seems logical,
 since a program unit is sort of a potential compilation unit.
@@ -280,10 +281,10 @@ because it corresponds to common usage.
 We like to use the word @lquotes@;unit@rquotes@; for declaration-plus-body things,
 and @lquotes@;item@rquotes@; for declaration or body separately (as in
 @nt{declarative_item}).
-The terms @lquotes@;@nt{compilation_unit},@rquotes@; @lquotes@;compilation unit,@rquotes@;
+The terms @lquotes@;@nt{compilation_unit}@rquotes@;, @lquotes@;compilation unit@rquotes@;,
 and @lquotes@;@nt{subunit}@rquotes@; are exceptions to this rule.
-We considered changing @lquotes@;@nt{compilation_unit},@rquotes@; @lquotes@;compilation unit@rquotes@;
-to @lquotes@;@ntf{compilation_item},@rquotes@; @lquotes@;compilation item,@rquotes@;
+We considered changing @lquotes@;@nt{compilation_unit}@rquotes@;, @lquotes@;compilation unit@rquotes@;
+to @lquotes@;@ntf{compilation_item}@rquotes@;, @lquotes@;compilation item,@rquotes@;
 respectively, but we decided not to.
 @end{Discussion}
 
@@ -3208,12 +3209,14 @@ A @nt{pragma} Preelaborate is a library unit pragma.
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
-@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[The form of a
-@nt{pragma} Preelaborable_Initialization is as follows:]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[@Chg{Version=[5],New=[],Old=[The
+form of a @nt{pragma} Preelaborable_Initialization is as follows:]}]}
 @end{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added]}
-@AddedPragmaSyn{Version=[2],@ChgAdded{Version=[2],
-Text=<@key{pragma} @prag<Preelaborable_Initialization>(@Syn2{direct_name});>}}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[2],@ChgAdded{Version=[2],
+Text=<@Chg{Version=[5],New=[],Old=[@key{pragma} @prag<Preelaborable_Initialization>(@Syn2{direct_name});]}>}>
 @end{Syntax}
 
 @begin{Legality}
@@ -3440,19 +3443,29 @@ nested units.]}
       avoided for a given package.]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1]}
 @ChgAdded{Version=[2],Text=[@defn{preelaborable initialization}The following rules
-specify which entities have @i{preelaborable initialization}:]}
+specify which entities have @i{preelaborable initialization}@Chg{Version=[5],New=[,
+namely that the Preelaborable_Initialization aspect of the entity is True],Old=[]}:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1]}
 @ChgAdded{Version=[2],Text=[The partial view
 of a private type or private extension, a protected type without
 @nt<entry_declaration>s, a generic formal private type, or a generic formal
 derived type, @Chg{Version=[3],New=[has],Old=[have]} preelaborable
-initialization if and only if the @nt<pragma> Preelaborable_Initialization has
-been applied to them. @Redundant[A protected type with @nt{entry_declaration}s
-or a task type never has preelaborable initialization.]]}
+initialization if and only if the 
+@Chg{Version=[5],New=[],Old=[@nt<pragma> ]}Preelaborable_Initialization@Chg{Version=[5],New=[ aspect],Old=[]} has
+been @Chg{Version=[5],New=[specified True for],Old=[applied to]} them.
+@Redundant[A protected type with @nt{entry_declaration}s
+or a task type never has preelaborable initialization.]@Chg{Version=[5],New=[
+The Preelaborable_Initialization aspect of a partial
+view of a type may be specified as False, even if the full view of the
+type has preelaborable initialization. Similarly, a generic formal
+type need not be specified to have preelaborable initialization, even
+if the actual type in an instance has preelaborable initialization.],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A component (including a discriminant) of a record or
@@ -3482,40 +3495,90 @@ initialization, or an interface type.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
-@ChgAdded{Version=[2],Text=[A @nt<pragma> Preelaborable_Initialization specifies that a type has
-preelaborable initialization. This pragma shall appear in the visible part
-of a package or generic package.]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{For conditional "Leading"}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[The following attribute is 
+defined for @PrefixType{a nonformal composite subtype S declared within the 
+visible part of a package or a generic package, or a generic formal private 
+subtype or formal derived subtype}:],Old=[A @nt<pragma> 
+Preelaborable_Initialization specifies that a type has preelaborable 
+initialization. This pragma shall appear in the visible part of a package
+or generic package.]}]}
+
+@begin(description)
+@ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Preelaborable_Initialization>,
+  ARef=[AI12-0409-1], InitialVersion=[5], 
+  Text=[@Chg{Version=[5],New=[This attribute is of Boolean type, and its 
+  value reflects whether the type of S has preelaborable 
+  initialization.],Old=[]}]}@Comment{End of Annex text here.}
+  @Chg{Version=[5],New=[The value of this attribute, the type-related 
+  Preelaborable_Initialization aspect, may be specified for any type for 
+  which the attribute is defined. The value shall be specified by a 
+  static expression, unless the type is not a formal type but is nevertheless 
+  declared within a generic package. In this latter case, the value may also 
+  be specified by references to the Preelaborable_Initialization attribute 
+  of one or more formal types visible at the point of the declaration of the
+  composite type, conjoined with @b<and>.],Old=[]}]}
+
+@begin{Ramification}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+   @ChgAdded{Version=[5],Text=[@ldquote@;Formal types visible at the point of 
+    the declaration@rdquote includes all visible formal types, including those
+    that might have been declared in formal packages or in child packages.]}
+@end{Ramification}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Preelaborable_Initialization],
+    Text=[@ChgAdded{Version=[5],Text=[Declares that a type has preelaborable
+    initialization.]}]}
+
+@end(description)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01],ARef=[AI95-00345-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
-@ChgAdded{Version=[2],Text=[If the pragma appears in the first list of
-@nt{basic_declarative_item}s of a
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[If the pragma appears
+in the first list of @nt{basic_declarative_item}s of a
 @nt<package_specification>, then the @nt<direct_name> shall denote the first
 subtype of a @Chg{Version=[3],New=[composite],Old=[private]}
 type@Chg{Version=[3],New=[],Old=[, private extension, or protected type that is not
 an interface type and is without
 @nt<entry_declaration>s]}, and the type shall be declared immediately within
 the same package
-as the @nt<pragma>. If the @nt<pragma> is applied to a private type or a
+as the @nt<pragma>. ]}If the @Chg{Version=[5],New=[Preelaborable_Initialization
+aspect is specified True for],Old=[@nt<pragma> is applied to]} a private type or a
 private extension, the full view of the type shall have preelaborable
-initialization. If the @nt<pragma> is applied to a protected type,
+initialization. If the @Chg{Version=[5],New=[aspect is specified True 
+for],Old=[@nt<pragma> is applied to]} a protected type,
 @Chg{Version=[3],New=[the protected type shall not have
 entries, and ],Old=[]}each
 component of the protected type shall have preelaborable initialization.
-@Chg{Version=[3],New=[For any other composite type, the type shall have
-preelaborable initialization. ],Old=[]}@PDefn{generic contract issue}In
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[ If the aspect is specified True
+for a generic formal type, then in a @nt{generic_instantiation} the
+corresponding actual type shall have preelaborable initialization. If 
+the aspect definition includes one or more Preelaborable_Initialization
+@nt{attribute_reference}s, then the full view of the type shall have
+preelaborable initialization presuming the types mentioned in the
+@nt{prefix}es of the @nt{attribute_reference}s all have 
+preelaborable initialization. ],Old=[]}For any other composite type, the 
+@Chg{Version=[5],New=[ aspect shall be specified statically True or 
+False only if it is confirming],Old=[type shall have
+preelaborable initialization]}. ],Old=[]}@PDefn{generic contract issue}In
 addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}), these rules apply
 also in the private part of an instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
-  @ChgAdded{Version=[3],Text=[The reason why we need the pragma for private
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[3],Text=[The reason why we need @Chg{Version=[5],New=[to
+  be allowed to specify the aspect],Old=[the pragma]} for private
   types, private extensions, and protected types is fairly clear: the
   properties of the full view determine whether the type has preelaborable
   initialization or not; in order to preserve privacy we need a way to express
   on the partial view that the full view is well-behaved. The reason why we
-  need the pragma for other composite types is more subtle: a nonnull override
+  need @Chg{Version=[5],New=[to be allowed to specify the aspect],Old=[the pragma]}
+  for other composite types is more subtle: a nonnull override
   for Initialize might occur in the private part, even for a nonprivate type;
   in order to preserve privacy, we need a way to express on a type declared in
   a visible part that the private part does not contain any nasty override of
@@ -3523,18 +3586,22 @@ also in the private part of an instance of a generic unit.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
-@ChgAdded{Version=[2],Text=[If the @nt<pragma> appears in a @nt<generic_formal_part>, then the
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[If the @nt<pragma> appears 
+in a @nt<generic_formal_part>, then the
 @nt<direct_name> shall denote a generic formal private type or a generic formal
 derived type declared in the same @nt<generic_formal_part> as the @nt<pragma>.
 In a @nt<generic_instantiation> the corresponding actual type shall have
-preelaborable initialization.]}
+preelaborable initialization.]}]}
 
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Not only do protected types with
-@nt{entry_declaration}s
-and task types not have preelaborable initialization, but they cannot have
-pragma Preelaborable_Initialization applied to them.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[2],Text=[Not only do protected types with
+  @nt{entry_declaration}s and task types not have 
+  preelaborable initialization, but they cannot have
+  @Chg{Version=[5],New=[],Old=[pragma ]}Preelaborable_Initialization@Chg{Version=[5],New=[ aspect],Old=[]}
+  @Chg{Version=[5],New=[specified True for],Old=[applied to]} them.]}
 @end{Ramification}
 @end{Legality}
 
@@ -4178,6 +4245,10 @@ required to appear last.
   conversion functions to those allowed to be called during the elaboration of
   a preelaborated unit. This is necessary to allow a portable Address aspect
   in a preelaborated unit, important on small embedded systems.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[Aspect Preelaborable_Initialization is new;
+  @nt{pragma} Preelaborable_Initialization is now obsolescent.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}

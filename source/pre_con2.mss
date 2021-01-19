@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -5867,7 +5867,7 @@ as Containers.Doubly_Linked_Lists except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[Revised]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[@Chg{Version=[5],New=[Returns a
-    list whose elements have the same values as the elements of Source.],Old=[If
+    list whose elements have the same values as the elements of Source],Old=[If
     Capacity is 0, then the list capacity is the length of
     Source; if Capacity is equal to or greater than the length of Source,
     the list capacity equals the value of the Capacity parameter;

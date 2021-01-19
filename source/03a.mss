@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:40 $}
+@Comment{$Date: 2021/01/19 06:32:44 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.148 $}
+@Comment{$Revision: 1.149 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -908,7 +908,7 @@ operands to produce an effect, or yield a result, or both.
   class (even though untagged record types and untagged private types do
   form a class). In all of these cases, we can talk about the category
   of the type; for instance, we can talk about the @lquotes@;category
-  of limited types@rquotes.],
+  of limited types@rquotes],
   Old=[forms a class in the sense that it is closed
   under derivation, but the more interesting
   class, from the point of generic formal type matching, is the

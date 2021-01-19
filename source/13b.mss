@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:43 $}
+@Comment{$Date: 2021/01/19 06:32:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -399,7 +399,7 @@ definition of Alignment makes sense.
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The range of Storage_Elements.Storage_Offset, the modulus of
 Storage_Elements.Storage_Element, and the declaration of
-Storage_Elements.Integer_Address.]}.]}
+Storage_Elements.Integer_Address.]}]}
 
 Storage_Element represents a storage element.
 Storage_Offset represents an offset in storage elements.

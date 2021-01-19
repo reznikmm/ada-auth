@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.93 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
+@comment{ $Revision: 1.94 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2020/12/05 05:10:45 $}
+@Comment{$Date: 2021/01/19 06:32:46 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1296,7 +1296,7 @@ Discard_Names],Old=[]}.
 Alternatively, the pragma can be used as a configuration pragma.
 @Chg{Version=[4],New=[If the configuration pragma Discard_Names applies to a
 compilation unit, all entities with runtime name text declared in the
-compilation unit have the value True for the aspect Discard_Names.],Old=[If the
+compilation unit have the value True for the aspect Discard_Names],Old=[If the
 pragma applies to a type, then it applies also to all descendants of the type]}.
 
 @begin{Ramification}

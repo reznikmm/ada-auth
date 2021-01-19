@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:41 $}
+@Comment{$Date: 2021/01/19 06:32:44 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.160 $}
+@Comment{$Revision: 1.161 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1739,7 +1739,7 @@ be of its expected type; otherwise it is interpreted to be of type
 @i<universal_integer>. If the expected type of a real literal is a type with
 a specified Real_Literal aspect (see @RefSecNum{User-Defined Literals}),
 it is interpreted to be of its@PDefn2{Term=[expected type],Sec=(real_literal)}
-expected type; otherwise, it is interpreted to be of type @i<universal_real>.],Old=[]}.
+expected type; otherwise, it is interpreted to be of type @i<universal_real>],Old=[]}.
 @end{Resolution}
 
 @begin{Legality}
@@ -1911,7 +1911,7 @@ type-related operational aspects
 (collectively known
 as @i<user-defined literal aspects>)@Defn{user-defined literal aspect}
 @Defn2{Term={aspect},Sec=[{user-defined literal]}
-may be specified for any type @i<T>:]}
+may be specified for a type @i<T>:]}
 
 @begin{Description}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1],ARef=[AI12-0373-1]}
@@ -1947,9 +1947,10 @@ not explictly aliased.@AspectDefn{String_Literal}]}
 @end{Description}
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
-  @ChgAdded{Version=[5],Type=[Leading],Text=[The following example is legal
-    because the preceding rules are @ResolutionTitle
-    (see @RefSecNum{Aspect Specifications}):]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The following example is legal 
+    because the resolution of an @nt{aspect_definition} for an aspect that 
+    is defined to be a subprogram is based on the profile required for that
+    aspect (see @RefSecNum{Aspect Specifications}):]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[package] Pkg1 @key[is]
@@ -2746,7 +2747,7 @@ of a @nt{record_delta_aggregate} shall not:]}
 @begin{Itemize}
 
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Text=[use the compound delimiter <> (box) rather than
+@ChgAdded{Version=[5],Text=[use the box compound delimiter <> rather than
 an @nt{expression};]}
 
 @ChgRef{Version=[5],Kind=[Added]}
@@ -3421,14 +3422,16 @@ where m >= 2, each of the @nt<expression>s
 has to be an (m@en@;1)-dimensional subaggregate.
 @end(Ramification)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0418-1]}
 @Leading@;An @key(others) choice is allowed for an @nt<array_aggregate>
 only if an @i(applicable index
 constraint) applies to the @nt{array_aggregate}.
 @Defn{applicable index constraint}
 @Redundant[An applicable index constraint is
-a constraint provided by certain contexts where an @nt{array_aggregate}
-is permitted that can be used
-to determine the bounds of the array value specified by the aggregate.]
+a constraint provided by certain contexts@Chg{Version=[5],New=[],Old=[ where 
+an @nt{array_aggregate} is permitted]} that can be used
+to determine the bounds of the array value specified by 
+@Chg{Version=[5],New=[an @nt{array_aggregate}],Old=[the aggregate]}.]
 Each of the following contexts (and none other)
 defines an applicable index constraint:
 @begin(itemize)
@@ -4582,7 +4585,7 @@ for such an aggregate, either:]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The
 evaluation of a @nt{container_aggregate} starts by creating an anonymous
-object @i<A> of the expected type @i<T> initialized as follows:]}
+object @i<A> of the expected type @i<T>, initialized as follows:]}
 
 @begin{Itemize}
 
@@ -4711,7 +4714,7 @@ follows:]}
       is elaborated, then an iteration is performed, and for each value
       conditionally produced by the iteration (see
       @RefSecNum{Loop Statements} and @RefSecNum{Generalized Loop Iteration})
-      the Add_Named rocedure is invoked with the anonymous object @i<A> as
+      the Add_Named procedure is invoked with the anonymous object @i<A> as
       the first parameter, the result of evaluating the @nt{expression} as
       the third parameter, and:]}
 
@@ -4730,10 +4733,11 @@ follows:]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[for a @nt{named_container_aggregate} that is
     an indexed aggregate, the evaluation proceeds as above for the case of
-    Add_Named, but with the Assign_Indexed procedure being invoked in its stead;
-    in the case of a @nt{container_element_association} with a <> rather than an
-    @nt{expression}, the corresponding call on Assign_Indexed is not performed,
-    leaving the component as it was upon return from the New_Indexed function;]}
+    Add_Named, but with the Assign_Indexed procedure being invoked instead of 
+    Add_Named; in the case of a @nt{container_element_association} with a <> 
+    rather than an @nt{expression}, the corresponding call on Assign_Indexed
+    is not performed, leaving the component as it was upon return from the 
+    New_Indexed function;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Type=[Leading],Text=[for any other
@@ -4795,8 +4799,8 @@ Set_Type, Map_Type, and Vector_Type:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[
-   @key[procedure] Add_To_Map (M : @key[in out] Map_Type;
-                         Key : @key[in] Integer;
+   @key[procedure] Add_To_Map (M     : @key[in out] Map_Type;
+                         Key   : @key[in] Integer;
                          Value : @key[in] String);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4817,7 +4821,7 @@ Set_Type, Map_Type, and Vector_Type:]}
 @ChgAdded{Version=[5],Text=[   @key[procedure] Append_One (V : @key[in out] Vector_Type; New_Item : @key[in] String);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] Assign_Element (V : @key[in out] Vector_Type;
+@ChgAdded{Version=[5],Text=[   @key[procedure] Assign_Element (V     : @key[in out] Vector_Type;
                              Index : @key[in] Positive;
                              Item  : @key[in] String);]}
 
@@ -4878,10 +4882,11 @@ S := [@key[for] Item @key[in] 1 .. 5 => Item,
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Text=[--  @examcom<Is equivalent (assuming set semantics) to:>
 S := Empty_Set;
-@key[for] Item @key[in] -5 .. 5 @key[loop]
-   @key[if] Item /= 0 @key[then]
-      Include (S, Item);
-   @key[end if];
+@key[for] Item @key[in] 1 .. 5 @key[loop]
+   Include (S, Item);
+@key[end loop];
+@key[for] Item @key[in] -5 .. -1 @key[loop]
+   Include (S, Item);
 @key[end loop];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -5168,7 +5173,7 @@ means the operative constituent shall (or shall not) be an @nt{aggregate} or a
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[If an @nt{if_expression} does not have an
-  @key[else] clause, "True" is a opertive constituent of the @nt{expression} and
+  @key[else] clause, "True" is an opertive constituent of the @nt{expression} and
   it can be the evaluated operative constituent.]}
 @end{Honest}
 
@@ -5776,11 +5781,12 @@ type for the @nt<simple_expression> is the tested type.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0418-1]}
 @ChgAdded{Version=[3],Text=[If the tested type is tagged, then the
 @Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
 shall resolve to be of a type that is
 convertible (see @RefSecNum{Type Conversions}) to the tested
-type; if untagged, the expected type for the
+type; if untagged, the expected type @Chg{Version=[5],New=[of],Old=[for]} the
 @Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
 is the tested type. The expected type of a
 @Chg{Version=[4],New=[@SynI{choice_}@nt{simple_expression}],Old=[@nt{choice_expression}]}
@@ -6070,14 +6076,18 @@ for any other components not inherited from the parent type.
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
-@ChgAdded{Version=[3],Text=[For a derived type whose parent is an untagged
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0413-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[For a derived type 
+whose parent is an untagged
 record type, predefined equality is defined in terms of the primitive (possibly
-user-defined) equals operator of the parent type.]}
+user-defined) equals operator of the parent type.]}]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This prevents predefined equality from
-  reemerging in generic units for untagged record types. For other uses
-  the primitive equality is inherited and the inherited routine is primitive.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0413-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[This prevents
+  predefined equality from reemerging in generic units for untagged record types.
+  For other uses the primitive equality is inherited and the inherited routine
+  is primitive.]}]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
@@ -6191,13 +6201,21 @@ for those composite types covered earlier) is defined as follows:
 @end{Honest}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0413-1]}
 @ChgAdded{Version=[3],Text=[If the primitive equals operator for an untagged
 record type is abstract, then Program_Error is raised at the point of any
-(implicit) call to that abstract subprogram.]}
+@Chg{Version=[5],New=[],Old=[(implicit) ]}call to that abstract 
+subprogram@Chg{Version=[5],New=[@Redundant[, implicitly as part of an equality 
+operation on an enclosing composite object, or in an instance of a generic
+with a formal private type where the actual type is a record type with an
+abstract "="]],Old=[]}.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0413-1]}
   @ChgAdded{Version=[3],Text=[An explicit call to an abstract subprogram is
-  illegal. This rule is needed in order to define the effect of an implicit call
+  @Chg{Version=[5],New=[generally ],Old=[]}illegal. This rule is needed in
+  order to define the effect of @Chg{Version=[5],New=[a call in an instance
+  of a generic body, or ],Old=[]}an implicit call
   such as a call that is part of the predefined equality operation for an
   enclosing composite type that has a component of an untagged record type that
   has an abstract primitive equals operator. For tagged types, an abstract
@@ -6614,7 +6632,7 @@ conversions.],Old=[]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[In such a case, the limited and nonlimited views
   would use different equality operators, which would be confusing and would
-  various semantic difficulties. We believe such cases to be quite rare,
+  cause various semantic difficulties. We believe such cases to be quite rare,
   especially as such membership tests are new to Ada 2012. The workaround is
   to replace such memberships with equality tests (assuming that the
   primitive "=" is intended; the predefined "=" is hidden in such cases and
@@ -6634,6 +6652,10 @@ conversions.],Old=[]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of the
   membership tests to use the new term "satisfies the predicates"
   (see @RefSecNum{Subtype Predicates}).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0413-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that a call to an
+  abstract equality in an instance body raises Program_Error.]}
 @end{DiffWord2012}
 
 
@@ -6920,9 +6942,10 @@ root numeric types.
 @Leading@;Multiplication and division between any two fixed point types are
 provided by the following two predefined operators:
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0005-1]}
 @i(Universal_fixed) is the universal type for the class of
 fixed point types, meaning that these operators take operands
-of any fixed point types (not necessarily the same)
+of any fixed point @Chg{Version=[5],New=[type],Old=[types]} (not necessarily the same)
 and return a result that is implicitly (or explicitly) convertible to
 any fixed point type.
 @end{Ramification}
@@ -8013,19 +8036,13 @@ the @nt{reduction_attribute_reference}.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[A @i<reducer subprogram>@Defn{reducer subprogram}
-is either subtype conformant with the following specification:]}
+is subtype conformant with one of the following specifications:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[function] Reducer(Accumulator : @i<Accum_Type>;
                     Value : @i<Value_Type>) @key[return] @i<Accum_Type>;]}
-@end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Type=[Leading],NoPrefix=[T],Text=[or is
-subtype conformant with the following specification:]}
-
-@begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[procedure] Reducer(Accumulator : @key[in out] @i<Accum_Type>;
                      Value : @key[in] @i<Value_Type>);]}
@@ -8074,8 +8091,8 @@ subtype @i<Value_Type>.]}
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[A @nt{reduction_attribute_reference} denotes a
-value, with nominal subtype being the subtype of the first parameter of the
-subprogram denoted by the @SynI{reducer_}@nt{name}.]}
+value, with its nominal subtype being the subtype of the first parameter of
+the subprogram denoted by the @SynI{reducer_}@nt{name}.]}
 @end{StaticSem}
 
 @begin{Runtime}
