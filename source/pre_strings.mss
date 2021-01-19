@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.89 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
+@comment{ $Revision: 1.90 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2020/12/05 05:10:45 $}
+@Comment{$Date: 2021/01/19 06:32:46 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -34,7 +34,7 @@ is new to Ada 95.
   @ChgAdded{Version=[2],Text=[Included Wide_Wide_String in this description;
   the individual changes are documented as extensions as needed.]}
 @end{Diffword95}
-
+00238
 
 @LabeledSubClause{The Package Strings}
 @begin{Intro}
@@ -1756,7 +1756,7 @@ propagates Index_Error if Index > Length(Source).
 @Trailing@;Returns the slice at positions Low through High in the string
 represented by Source; propagates Index_Error if
 Low > Length(Source)+1@Chg{New=[ or High > Length(Source)],Old=[]}.@Chg{Version=[2],
-New=[ The bounds of the returned string are Low and High.],Old=[]}.
+New=[ The bounds of the returned string are Low and High.],Old=[]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}

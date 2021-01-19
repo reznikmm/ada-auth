@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:43 $}
+@Comment{$Date: 2021/01/19 06:32:45 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -832,9 +832,12 @@ to the specification of the aspect],Old=[it]}.],Old=[]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0396-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1],ARef=[AI12-0409-1]}
 @Chg{Version=[5],New=[If a type-related aspect is defined for the partial 
-view of a type, then it has the same definition for the full view of the type.
+view of a type, then it has the same definition for the full view of the type, except
+for certain Boolean-valued operational aspects where the language
+specifies that the partial view can have the value False even when the
+full view has the value True.
 Type-related aspects @Redundant[cannot be specified, and] are not
 defined for an incomplete view of a type. 
 Representation],Old=[@Chg{New=[Operational and representation],Old=[Representation]}]} 
@@ -867,7 +870,7 @@ is not allowed for a descendant of a generic formal untagged type.
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI05-0396-1]}
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0396-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[All views of a 
   type, including the incomplete
   and partial views, have the same operational and representation aspects.
@@ -876,7 +879,7 @@ is not allowed for a descendant of a generic formal untagged type.
   to leave any holes by not saying that they are the same.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0083-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0396-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
   @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[Different views of an
   entity can have different representation and operational aspects.
   Most type-related aspects are the same for all views of a type; but
@@ -890,8 +893,20 @@ is not allowed for a descendant of a generic formal untagged type.
   that Alignments are always known at compile time.]}
 @end{Ramification}
 
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[For type-related aspects, the aspect of the 
+  partial view (if any) and full view have to be the same, with an exception
+  for certain Boolean-valued aspects. The exception is intended for aspect
+  Preelaborable_Initialization, where it would be wildly incompatible
+  (as well as unfriendly) to require the (possibly implicit) state of the
+  full view to be repeated explicitly on the partial view. Aspect Nonblocking
+  has a similar rule for similar reasons, though it is a subtype-specific
+  aspect.]}
+@end{Discussion}
+
 @begin{TheProof}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0396-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1]}
   @ChgAdded{Version=[5],Text=[The syntax of @nt{incomplete_type_declaration}s
   and @nt{formal_incomplete_type_declaration}s do not allow for an
   @nt{aspect_specification}. The @nt{prefix} of an @nt{attribute_reference}

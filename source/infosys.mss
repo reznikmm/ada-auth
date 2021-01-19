@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2021/01/19 06:32:45 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2021/01/19 06:32:45 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -815,7 +815,7 @@ An instance of @ntf{floating_LHS_sign} maps to the string obtained as follows.
                    it occurs to the right of the leftmost @ntf{LHS_Sign}
                    character replaced according to rule 1.
 
-                  Any other Character is replaced by the space character..
+                  Any other Character is replaced by the space character.
 
                    A layout error occurs if some excess digits remain
                    after replacement via rule 1; no edited output string is

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.113 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
+@comment{ $Revision: 1.114 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:44 $}
+@Comment{$Date: 2021/01/19 06:32:46 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -20,9 +20,11 @@ Several predefined container types are provided by the children
 of package Ada.Containers (see @RefSecNum{The Package Containers}).]}>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1],ARef=[AI12-0416-1]}
 @ChgAdded{Version=[2],Text=[A variety of sequence and associative containers are
-provided. Each container includes a @i{cursor} type. A cursor is a reference
+provided. Each container@Chg{Version=[5],New=[ package defines],Old=[ includes]}
+a @i{cursor} type@Chg{Version=[5],New=[ as well as a container type],Old=[]}. A
+cursor is a reference
 to an element within a container. Many operations on cursors are common to
 all of the containers. A cursor referencing
 an element in a container is considered to be overlapping
@@ -50,6 +52,19 @@ itself.@PDefn2{Term=[cursor],Sec=[for a container]}
   of cursors each operating on mutually exclusive sets of elements from the same
   container are expected to work.]}
 @end{Ramification}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0416-1]}
+  @ChgAdded{Version=[5],Text=[We use the term @ldquote@;container@rdquote
+  alone when it is clear from context what kind of entity (package, type, or
+  object) that we are talking about. Otherwise, we use @ldquote@;container
+  package@rdquote, @ldquote@;container type@rdquote, or @ldquote@;container
+  object@rdquote. Note that "container type" is defined in 
+  @RefSecNum{Container Aggregates} for a different usage; in all of 
+  @RefSecNum{Containers} we mean @ldquote@;container type@rdquote to be one of the 
+  primary types declared in the child packages of package Containers, such as
+  Vector, List, or Map.]}
+@end{Discussion}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[Some operations of the language-defined child units
@@ -104,13 +119,28 @@ should exist a positive integer M such that for all N > M,
 t(N)/f(N) < D.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0044-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0416-1]}
 @ChgAdded{Version=[3],Text=[When a formal function is used to provide an
 ordering for a container, it is generally required to define
 a strict weak ordering. A function "<" defines
 a @i<strict weak ordering>@Defn{strict weak ordering} if it is irreflexive,
 asymmetric, transitive, and in addition, if @i<x> < @i<y> for any values
 @i<x> and @i<y>, then for all other
-values @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).]}
+values @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).@Chg{Version=[5],New=[
+Elements are in a @i<smallest first>@Defn{smallest first order} order
+using such an operator if, for every element @i<y> with a predecessor @i<x> in
+the order, (@i<y> < @i<x>) is false.],Old=[]}]}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0416-1]}
+   @ChgAdded{Version=[5],Text=[Given a "<" operator that provides a strict 
+   weak ordering, knowing that (@i<y> < @i<x>) is false is enough to know that 
+   (@i<x> <= @i<y>) is true. For a strict weak ordering, (@i<x> = @i<y>) when
+   both (@i<x> < @i<y>) and (@i<y> < @i<x>) are false.
+   Therefore, it is not necessary to use the "=" operator or test (@i<x> < @i<y>).
+   We only need to discuss adjacent elements since a strict weak ordering is
+   transitive.]}
+@end{Reason}
 
 @end{Intro}
 
@@ -401,7 +431,7 @@ of containers, when elements are created and finalized is unspecified.]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[For an instance @i<I> of a container package with a
-container type @i<C>, the specific type @i<T> of the object returned from a
+container type, the specific type @i<T> of the object returned from a
 function that returns an object of an iterator interface, as well as the
 primitive operations of @i<T>, shall be nonblocking. The Global aspect specified
 for @i<T> and the primitive operations of @i<T> shall be @exam[(@key{in all},
@@ -501,6 +531,11 @@ access to fewer global objects.]}
   so that these can be used reliably with controlled element types.
   This is not incompatible as this behavior was previously unspecified;
   code depending on specific behavior was wrong.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0416-1]}
+  @ChgAdded{Version=[5],Text=[Added a definition of @ldquote@;smallest 
+  first@rdquote ordering, so that the behavior of the sorts when
+  elements are equal is well-defined.]}
 @end{DiffWord2012}
 
 
@@ -4508,13 +4543,15 @@ of the target object to that of the source object],Old=[]}.]}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[An assignment of a Vector is a @lquotes@;deep@rquotes
   copy; that is the elements are copied as well as the data structures.
   We say @lquotes@;effect of@rquotes in order to allow the implementation to
   avoid copying elements immediately if it wishes. For instance, an
   implementation that avoided copying until one of the containers is modified
   would be allowed.@Chg{Version=[3],New=[ (Note that such an implementation
-  would be require care, as Query_Element and Constant_Reference both could be
+  would @Chg{Version=[5],New=[],Old=[be ]}require care, as Query_Element and 
+  Constant_Reference both could be
   used to access an element which later needs to be reallocated while
   the parameter or reference still exists, potentially leaving the
   parameter or reference pointing at the wrong element.)],Old=[]}]}
@@ -5215,15 +5252,16 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
                     Has_Element (Target, Before)
                       @key{or else raise} Program_Error) @key{and then}
                    (Target'Has_Same_Storage (Source) @key{or else}
-                    Length (Target) <= Count_Type'Last - 1
+                    Length (Target) <= Count_Type'Last - Length (Source)
                       @key{or else raise} Constraint_Error),
-           Post => (@key{declare}
-                      Result_Length : @key{constant} Count_Type :=
-                         Length (Source)'Old + Length (Target)'Old;
-                    @key{begin}
-                      (@key{if not} Target'Has_Same_Storage (Source)
-                       @key{then} Length (Source) = 0 @key{and then}
-                          Length (Target) = Result_Length))],Old=[]};]}
+           Post => (@key{if not} Target'Has_Same_Storage (Source)
+                    @key{then}
+                      (@key{declare}
+                         Result_Length : @key{constant} Count_Type :=
+                            Length (Source)'Old + Length (Target)'Old;
+                       @key{begin}
+                         Length (Source) = 0 @key{and then}
+                         Length (Target) = Result_Length)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -6543,15 +6581,16 @@ exchanges the nodes designated by I and J.]}
                  Has_Element (Target, Before)
                    @key{or else raise} Program_Error) @key{and then}
                 (Target'Has_Same_Storage (Source) @key{or else}
-                 Length (Target) <= Count_Type'Last - 1
+                 Length (Target) <= Count_Type'Last - Length (Source)
                    @key{or else raise} Constraint_Error),
-        Post => (@key{declare}
-                   Result_Length : @key{constant} Count_Type :=
-                      Length (Source)'Old + Length (Target)'Old;
-                 @key{begin}
-                    (@key{if not} Target'Has_Same_Storage (Source)
-                     @key{then} Length (Source) = 0 @key{and then}
-                        Length (Target) = Result_Length))],Old=[]};]}
+        Post => (@key{if not} Target'Has_Same_Storage (Source)
+                 @key{then}
+                   (@key{declare}
+                      Result_Length : @key{constant} Count_Type :=
+                         Length (Source)'Old + Length (Target)'Old;
+                    @key{begin}
+                      Length (Source) = 0 @key{and then}
+                      Length (Target) = Result_Length)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

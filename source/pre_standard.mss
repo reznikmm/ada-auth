@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:42 $}
+@Comment{$Date: 2021/01/19 06:32:46 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -484,7 +484,7 @@ the ride.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter
-  type for the Boolean operators declared in Standard..]}
+  type for the Boolean operators declared in Standard.]}
 @end{DiffWord95}
 
 @begin{DiffWord2005}

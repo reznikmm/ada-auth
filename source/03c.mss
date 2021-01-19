@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:41 $}
+@Comment{$Date: 2021/01/19 06:32:44 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.151 $}
+@Comment{$Revision: 1.152 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -847,7 +847,7 @@ innermost master is @Chg{Version=[3],New=[a],Old=[the]} master of the point of t
 Text=[@Chg{Version=[2],
 New=[Tags.Internal_Tag should return the tag of
 a type@Chg{Version=[3],New=[, if one exists,],Old=[]} whose innermost master
-is @Chg{Version=[3],New=[a],Old=[the]} master of the point of the function call.],Old=[]}.]}
+is @Chg{Version=[3],New=[a],Old=[the]} master of the point of the function call.],Old=[]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[It's not helpful if Internal_Tag returns the tag of
@@ -2436,15 +2436,26 @@ R had been a private child of Q, it would have been legal.]}
   @end{Reason}
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0413-1]}
 A call on an abstract subprogram shall be a dispatching call;
-@Redundant[nondispatching calls to an abstract subprogram are not
-allowed.]
+nondispatching calls to an abstract subprogram are not
+allowed.@Chg{Version=[5],New=[ @PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an
+instance of a generic unit.],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00310-01]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0413-1]}
   If an abstract subprogram is not a dispatching operation of
   some tagged type, then it cannot be called at
   all.@Chg{Version=[2],New=[ In Ada 2005, such subprograms are not
-  even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}
+  even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}@Chg{Version=[5],New=[
+  However, this rule is still needed for cases
+  that can arise in the instance of a generic specification where @ResolutionTitle
+  are not reapplied, but @LegalityTitle are, when the
+  equality operator for an untagged record type is abstract, while the
+  operator for the formal type is not abstract (see @RefSecNum{Formal Types}).],Old=[]}
 @end{Ramification}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0320-1]}
@@ -2747,6 +2758,23 @@ but then clients of the package would not have visibility to T.
   rules; the extension to support class-wide type better opened a hole which
   has now been plugged.]}
 @end{Diffword2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0413-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Clarified that a recheck is needed in the case of an actual that is a record 
+  type with an abstract equality. This is an incompatibility as the generic
+  boilerplate was previously omitted, meaning that such a recheck should not
+  have been performed in the private part of an instance. Usually, this would
+  just change an elaboration time raise of Program_Error into an error (a
+  good thing, as the instance will never be useful), but could break a working
+  instance if the equality usage is in a default expression that appears in
+  the private part of the generic unit and it is never used in a call. In
+  that case, Ada 202x will reject the instance while it would have worked
+  in Ada 2012. As a practical matter, it's more likely that a compiler already
+  does the recheck in the entire instance spec, or does not do it at all;
+  thus for some implementations there will be no practical incompatibility.]}
+@end{Incompatible2012}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Interface Types]}
@@ -4629,6 +4657,7 @@ is the expected type or profile for the @nt{prefix}.],Old=[]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0406-1]}
 @Defn{accessibility level}
 @Defn2{Term=[level],Sec=(accessibility)}
 @Defn2{Term=[deeper],Sec=(accessibility level)}
@@ -4641,7 +4670,8 @@ are written in terms of @i{accessibility levels},
 which reflect the run-time nesting of @i{masters}. As explained in
 @RefSecNum{Completion and Finalization},
 a master is the execution of a
-@Chg{Version=[2],New=[certain construct, such as],Old=[,@nt{task_body}, a @nt{block_statement},]}
+@Chg{Version=[2],New=[certain construct@Chg{Version=[5],New=[ (called 
+a @i{master construct})],Old=[]}, such as],Old=[,@nt{task_body}, a @nt{block_statement},]}
 a @nt{subprogram_body}@Chg{Version=[2],New=[],Old=[, an @nt{entry_body}, or an @nt{accept_statement}]}.
 An accessibility level is @i{deeper than} another if it is more
 deeply nested at run time.
@@ -4672,6 +4702,16 @@ Woe unto all who enter here (well, at least unto anyone that needs to understand
 any of these rules).
 @Defn{Heart of Darkness}@IndexSeeAlso{Term=[accessibility rules],See=[Heart of Darkness]}]}
 @end{Discussion}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Accessibility level>,
+  Text=<@ChgAdded{Version=[5],Text=[An accessibility level is a representation 
+  of the lifetime of an entity in terms of the level of dynamic nesting within 
+  which the entity is known to exist.
+  Dynamic accessibility checks ensure that a referce does not outlive the entity
+  to which it refers, by checking that the level of the reference is no deeper 
+  than the level of the reference. Based on static nesting, there are 
+  corresponding legality rules that the level of the entity is not statically
+  deeper than that of the reference.]}>}
 
 @Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
@@ -4827,8 +4867,11 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
 
 @begin{InnerItemize}
 
-  @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[If the result is used (in its entirety) to
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0402-1]}
+  @ChgAdded{Version=[3],Text=[If @Chg{Version=[5],New=[the result type at the 
+  point of the function (or access-to-function type) declaration is a composite
+  type, and ],Old=[]}the result is used (in its entirety) to
   directly initialize part of an object, the master is that of the object being
   initialized. In the case where the initialized object is a coextension
   (see below) that becomes a coextension of another object, the master is that
@@ -4850,8 +4893,25 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
     of an object, so @Chg{Version=[3],New=[this bullet does not apply],Old=[the second sentence
     applies]}.]}
   @end{Ramification}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0402-1]}
+    @ChgAdded{Version=[5],Text=[We restrict the above rule to apply only if 
+    the function result is declared to be of a composite type. This makes 
+    sense since only results of a composite type (or of an anonymous access
+    type, which are handled separately below) are potentially affected by the
+    master of the function all. Note that a private type is considered 
+    composite, so this result assumes the worst for a function returning a 
+    private type. We could have made the rule more complex, depending on 
+    whether the result might be built in place, or might have an access 
+    discriminant, but we chose to keep the rule simpler. The wording says
+    @ldquote@;the result type at the point of function declaration is a 
+    composite type@rdquote@;, to make it clear that this depends on the 
+    properties at the point of the declaration of the function, rather than
+    properties that might be known at the point of call or inside the
+    function body.]}
+  @end{Reason}
 
-  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
   @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0278-1],ARef=[AI12-0390-1]}
   @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
   is @Chg{Version=[5],New=[converted to a (named or anonymous) access 
@@ -4869,7 +4929,7 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
     @RefSecNum{The Context of Overload Resolution}).]}
   @end{Ramification}
 
-  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
   @ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0390-1]}
   @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[If the result is 
   of an anonymous access type and defines an access discriminant, the master
@@ -4877,7 +4937,7 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   that defines an access discriminant (even if the access result is of an 
   access-to-subprogram type).]}]}
 
-  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
   @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0345-1],ARef=[AI12-0372-1]}
   @ChgAdded{Version=[3],Text=[If the call itself defines the result of a
   function @Chg{Version=[5],New=[@i<F>],Old=[to which one of the above rules 
@@ -4885,7 +4945,7 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   to the result of such a function @i<F>, then the master of the call is that of the master of the
   call invoking @i<F>],Old=[these rules are applied recursively]};]}
 
-  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
   @ChgAdded{Version=[3],Text=[In other cases, the master of the call is that of
   the innermost master that evaluates the function call.]}
 
@@ -5269,20 +5329,25 @@ is used in that context.],Old=[]}]}]}
 @end{Discussion}
 
 @begin{WideAbove}
-@Leading@Defn{statically deeper}
+@Leading
+@Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
 One accessibility level is defined to be
 @i{statically deeper} than another in the following cases:
 @end{WideAbove}
 @begin{Itemize}
-For a master that is statically nested within another master,
-the accessibility level of the inner master is statically deeper than
-that of the outer master.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0406-1]}
+For a master@Chg{Version=[5],New=[ construct],Old=[]} that is statically nested
+within another master@Chg{Version=[5],New=[ construct],Old=[]},
+the accessibility level of the inner master@Chg{Version=[5],New=[ construct],Old=[]}
+is statically deeper than that of the outer 
+master@Chg{Version=[5],New=[ construct],Old=[]}.
 @begin{Honest}
-Strictly speaking, this should talk about the @i{constructs}
-(such as @ntf{subprogram_bodies})
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0406-1]}
+@ChgDeleted{Version=[5],Text=[Strictly speaking, this should talk about 
+the @i{constructs} (such as @ntf{subprogram_bodies})
 being statically nested within one another;
-the masters are really the @i{executions} of those constructs.
+the masters are really the @i{executions} of those constructs.]}
 @end{Honest}
 @begin{Honest}
 If a given accessibility level is statically deeper than another,
@@ -5307,24 +5372,43 @@ will succeed).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0082-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0406-1]}
 The statically deeper relationship does not apply to the accessibility
-level of the anonymous type of an access parameter@Chg{Version=[2],
+level of the @Chg{Version=[5],New=[following:],Old=[anonymous type of 
+an access parameter@Chg{Version=[2],
 New=[ specifying an access-to-object type],Old=[]}@Chg{Version=[3],
 New=[ nor does it apply to a descendant of a generic formal type],Old=[]};
 that is, such an accessibility level is not considered to be statically
-deeper, nor statically shallower, than any other.
+deeper, nor statically shallower, than any other.]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0406-1]}
+  @ChgAdded{Version=[5],Text=[the anonymous type of an access parameter 
+    specifying an access-to-object type;]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0406-1]}
+  @ChgAdded{Version=[5],Text=[the type of a stand-alone object of an anonymous
+    access-to-object type;]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0392-1],ARef=[AI12-0406-1]}
+  @ChgAdded{Version=[5],Text=[a @nt{raise_expression};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0406-1]}
+  @ChgAdded{Version=[5],Text=[a descendant of a generic formal type;]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0406-1]}
+  @ChgAdded{Version=[5],Text=[a descendant of a type declared in a generic 
+    formal package.]}
+@end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
-@ChgAdded{Version=[3],Text=[The statically deeper relationship does not apply to
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0406-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[]}@Comment{For a conditional NoPrefix.}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[That],Old=[The statically 
+deeper relationship does not apply to
 the accessibility level of the type of a stand-alone object of an anonymous
-access-to-object type; that is, such an accessibility level is not considered to
+access-to-object type; that]} is, such an accessibility level is not considered to
 be statically deeper, nor statically shallower, than any other.]}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0392-1]}
-@ChgAdded{Version=[5],Text=[The statically deeper relationship does not apply 
-to the accessibility level of a @nt{raise_expression}; that is, such an
-accessibility level is not considered to be statically deeper, nor
-statically shallower, than any other.]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6450,7 +6534,7 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[5],Type=[Leading],Text=[@b<Correction:> Tightened the
   cases where an explicitly aliased parameter has special accessibility, to
   avoid needing to pass the required dynamic accessibility to functions that
-  have explicitly alised parameters. The changes affects programs that use
+  have explicitly aliased parameters. The changes affects programs that use
   the dynamic accessibility of an explicitly aliased parameter within a return
   statement of a function (typically using anonymous access types). This can
   mean that a program that would have been legal and worked in Ada 2012 as
@@ -6477,7 +6561,7 @@ uses of anonymous access types.]}
   for F2 (which is defined to be the master of the call for F1). In Ada 2012,
   since the reference is inside of a return statement, the dynamic accessibility
   of A.Comp'Access is the master of the call for F1 - meaning the check at (2)
-  should pass. In Ada 202x, the the dynamic accessibility of A.Comp'Access is
+  should pass. In Ada 202x, the dynamic accessibility of A.Comp'Access is
   local for for F1 - meaning the check at (2) should fail and raise
   Program_Error.]}
 
@@ -6521,6 +6605,16 @@ uses of anonymous access types.]}
   and a simple workaround is available (rename the actual at the point of
   the instance, use that rename as the prefix of 'Access).]}
 @end{Incompatible2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0402-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Adjusted the special accessibility for functions initializing objects
+  to only apply to composite types. This makes some function calls of functions
+  that return elementary types and have aliased parameters legal that otherwise
+  would be illegal. Such a function cannot return a part of a parameter, and
+  thus one does not need parameter checks to make that possible.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0067-1]}
@@ -6580,6 +6674,11 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording to clarify that
   the accessibility of a @nt{raise_expression} does not need any static checks
   (it is considered to match any accessibility required).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0406-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Used the new term @ldquote@;master
+  construct@rdquote, to put static accessibility rules on a firmer basis,
+  including ensuring that those rules apply inside of generic bodies.]}
 @end{DiffWord2012}
 
 

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:43 $}
+@Comment{$Date: 2021/01/19 06:32:45 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -443,7 +443,7 @@ and also for the view denoted by one, or the value of one.
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0205-1]}
   @ChgAdded{Version=[5],Text=[Any matching or other @LegalityTitle that apply 
-  to a a generic actual are applied to any @nt{default_expression}, 
+  to a generic actual are applied to any @nt{default_expression}, 
   @SynI{default_}@nt{subtype_mark}, or @nt{default_name} that are used as an
   actual.]}
 @end{Ramification}
@@ -480,7 +480,8 @@ Each formal without an association shall have a
 @nt{default_expression}@Chg{Version=[5],New=[, 
 @SynI{default_}@nt{subtype_mark},],Old=[]} or @nt{subprogram_default}.
 
-In a generic unit @LegalityName@;s
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0418-1]}
+In a generic unit@Chg{Version=[5],New=[,],Old=[]} @LegalityName@;s
 are enforced at compile time of the
 @nt{generic_declaration} and generic body,
 given the properties of the formals.
@@ -655,9 +656,11 @@ instantiations of the generic unit.
 @end{Ramification}
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 The @LegalityName@;s are described here, and
 the overloading rules were described earlier in this @Chg{Version=[3],New=[subclause],Old=[clause]}.
-Presumably, every @StaticSemName is sucked in by one of those.
+Presumably, every @StaticSemName is 
+@Chg{Version=[5],New=[included indirectly],Old=[sucked in]} by one of those.
 Thus, we have covered all the compile-time rules of the language.
 There is no need to say anything special about the @LinkTimeName@;s
 or the @RunTimeName@;s.
@@ -1067,8 +1070,8 @@ the type descriptor.
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0347-1]}
-The reason for this rule is so a programmer writing an
-@Chg{Version=[5],New=[@nt{generic_instantiation}],Old=[@ntf{_instantiation}]}
+The reason for this rule is so a programmer writing
+@Chg{Version=[5],New=[a @nt{generic_instantiation}],Old=[an @ntf{_instantiation}]}
 need not look at the private part of the generic in
 order to determine which subprograms will be overridden.
 @end{Reason}
@@ -1880,6 +1883,7 @@ type.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0037],ARef=[AI95-00043-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01],ARef=[AI95-00442-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0413-1]}
 @Redundant[The formal type also belongs to each
 @Chg{Version=[2],New=[category],Old=[class]} that contains
 the determined @Chg{Version=[2],New=[category],Old=[class]}.]
@@ -1899,22 +1903,31 @@ of the formal type.]} In an instance, the copy of such an
 implicit declaration declares a view of the predefined operator
 of the actual type, even if this operator has been overridden for
 the actual type@Chg{Version=[3],New=[ and even if it is never declared
-for the actual type],Old=[]}.
+for the actual type],Old=[]}@Chg{Version=[5],New=[, unless the actual type is
+an untagged record type, in which case it declares a view of the primitive
+(equality) operator],Old=[]}.
 @Redundant[The rules specific to formal derived types are given
 in @RefSecNum{Formal Private and Derived Types}.]
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
-All properties of the type are as for any type in the @Chg{Version=[2],New=[category],Old=[class]}.
-Some examples:
-The primitive operations available are as defined by the language for each
-@Chg{Version=[2],New=[category],Old=[class]}.
-The form of @nt{constraint} applicable to a formal type in a
-@nt{subtype_indication} depends on the @Chg{Version=[2],New=[category],Old=[class]} of the type as for a
-nonformal type.
-The formal type is tagged if and only if it is declared as a tagged
-private type, or as a type derived from a (visibly) tagged type.
-(Note that the actual type might be tagged even if the formal type is
-not.)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+  All properties of the type are as for any type in the 
+  @Chg{Version=[2],New=[category],Old=[class]}. Some examples:
+  The primitive operations available are as defined by the language for each
+  @Chg{Version=[2],New=[category],Old=[class]}. The form of @nt{constraint} 
+  applicable to a formal type in a @nt{subtype_indication} depends on the
+  @Chg{Version=[2],New=[category],Old=[class]} of the type as for a
+  nonformal type. The formal type is tagged if and only if it is declared
+  as a tagged private type, or as a type derived from a (visibly) tagged type.
+  (Note that the actual type might be tagged even if the formal type is not.)
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0413-1]}
+  @ChgAdded{Version=[5],Text=[If the primitive equality operator of the
+  (actual) untagged record type is declared abstract, then
+  Program_Error will be raised if the equality operator of the formal
+  type is in fact invoked within an instance of a generic body (see
+  @RefSecNum{Relational Operators and Membership Tests}). If the operator 
+  is invoked within an instance of the generic spec, the instance is 
+  illegal.]}
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
@@ -2063,11 +2076,26 @@ had to.
   are documented as an extension in the next subclause.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0413-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b{Correction:}
+  Updated the wording to clarify that predefined record equality never reemerges
+  in a generic instantiation. This model was presumed by
+  @RefSecNum{Relational Operators and Membership Tests}, but the wording
+  wasn't right for untagged record types with user-defined equality. Therefore,
+  an implementation that strictly implemented the Ada 2012 wording would call
+  the predefined equality for an actual type that is an untagged record type
+  with a user-defined equality, while Ada 202x implementations would call the
+  primitive (user-defined) equality. This could change the runtime behavior in
+  rare cases.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0205-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Generic formal types now can include an optional default @nt{subtype_mark}.]} 
 @end{Extend2012}
+
 
 
 @LabeledSubClause{Formal Private and Derived Types}
@@ -2457,6 +2485,7 @@ Prefix=<S>, AttrName=<Definite>,ARef=[AI05-0264-1],InitialVersion=[0],
     attribute is of the predefined type Boolean.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 Whether an actual subtype is definite or indefinite may
 have a major effect on the algorithm used in a generic.
 For example, in a generic I/O package, whether to use fixed-length or
@@ -2464,7 +2493,7 @@ variable-length records could depend on whether the actual is
 definite or indefinite.
 This attribute is essentially a replacement for the Constrained
 attribute@Chg{Version=[2],New=[,],Old=[]}
-which is now considered obsolete.
+which is now @Chg{Version=[5],New=[obsolescent],Old=[considered obsolete]}.
 @end{Discussion}
 @end{Description}
 @EndPrefixType{}
@@ -3386,11 +3415,11 @@ type or of the actual type corresponding to the controlling type.]}]}
   seems inconsistent to not allow the same in explicit instantiations.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0165-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1],ARef=[AI12-0165-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[Specifically,
   since],Old=[Since]} it is possible for a formal tagged type to be
   instantiated with a class-wide type, it is possible for the
-  (real) controlling type to be class-wide in
+  (real) controlling type to be class-wide @Chg{Version=[5],New=[as ],Old=[]}in
   @Chg{Version=[5],New=[the following],Old=[one]} unusual case:]}
 
 @begin{Example}
@@ -3777,12 +3806,14 @@ follows:]}
   template.]}
 
   @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI05-0200-1]}
   @ChgAdded{Version=[3],Text=[If a @nt{formal_package_association} for a formal
   type @i<T> of the template is given by <>, then the
   @nt{formal_package_association} for any other
   @nt{generic_formal_parameter_declaration} of
-  the template that mentions @i<T> directly or indirectly must be
-  given by <> as well.]}
+  the template that mentions @i<T> directly or indirectly
+  @Chg{Version=[5],New=[shall also],Old=[must]} be
+  given by <>@Chg{Version=[5],New=[],Old=[ as well]}.]}
 
 @end{Itemize}
 @begin{Discussion}

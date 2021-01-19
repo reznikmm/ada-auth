@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:42 $}
+@Comment{$Date: 2021/01/19 06:32:45 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1718,7 +1718,7 @@ the assertion expression.]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[In other words, evaluating such an an assertion
+  @ChgAdded{Version=[5],Text=[In other words, evaluating such an assertion
   expression will not return a result of False, nor will it propagate an
   exception other than by evaluating a @nt{raise_expression} which is
   syntactically all or part of the assertion expression.]}
@@ -1749,12 +1749,12 @@ of a language-defined unit are enabled (see @RefSecNum{Subtype Predicates})
 unless suppressed.]}
 
 @begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[This allows the Standard to express runtime
   requirements on the client of a language-defined unit as preconditions or
-  predicates (which are invariably clearer than English prose would be). Some
-  such requirements can be Suppressed. Ada 2012 and earlier versions did not
-  provide a mechanism to suppress such code.]}
+  predicates (which are clearer than English prose would be). Some
+  such requirements can be suppressed with pragma Suppress. Ada 2012 and 
+  earlier versions did not provide a mechanism to suppress such code.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -2013,12 +2013,13 @@ and by parts of @Chg{Version=[3],New=[Clause],Old=[Section]}
 instructions to an implementation on handling language-defined checks.],Old=[]}
 A @nt{pragma} Suppress gives permission to an
 implementation to omit certain language-defined checks@Chg{Version=[2],
-New=[, while a @nt<pragma> Unsuppress revokes the permission to omit checks.],Old=[]}.
+New=[, while a @nt<pragma> Unsuppress revokes the permission to omit checks],Old=[]}.
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Suppress>,
-Text=<@ChgAdded{Version=[5],Text=[To suppress a check is to give a request to
-the implementation to disable a run-time check for a portion of the text of a
-program.]}>}
+Text=<@ChgAdded{Version=[5],Text=[To suppress a check is to assert that the
+check cannot fail, and to request that the compiler optimize by disabling 
+the check. The compiler is not required to honor this request. Suppressing
+checks that can fail can cause program to behave in arbitrary ways.]}>}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{language-defined check}
@@ -2620,9 +2621,10 @@ Program_Error checks was corrected to be alphabetical.]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1],ARef=[AI12-0311-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0112-1],ARef=[AI12-0311-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The various assertion
-  checks for language-defined packages are new.]}
+  checks for language-defined packages, such as Calendar_Check and Container_Check,
+  are new.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0309-1]}
   @ChgAdded{Version=[5],Text=[Program_Error_Check and Tasking_Check are new;
@@ -2936,8 +2938,10 @@ Paragraph 7 is reflected in the
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 We moved @Chg{Version=[3],New=[subclause],Old=[clause]}
-@RefSec{Suppressing Checks} from after 11.6 to
+@RefSec{Suppressing Checks} @Chg{Version=[5],New=[(which was numbered
+11.7) ],Old=[]}from after 11.6 to
 before 11.6, in order to preserve the famous number @lquotes@;11.6@rquotes@;
 (given the changes to earlier @Chg{Version=[3],New=[subclauses],Old=[clauses]} in
 @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Exceptions}).
