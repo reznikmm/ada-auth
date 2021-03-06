@@ -21,7 +21,7 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020
+    --           2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -292,6 +292,8 @@ package body ARM_Format is
     --  6/ 5/19 - RLB - Displayed Line info to the nesting stack for begin/end
     --			mismatches.
     --  5/ 7/20 - RLB - Minor cleanups in tracing code.
+    --  3/ 2/21 - RLB - Initialized Attr_Omit for regular attribute work, lest
+    --                  a bunch of attributes get omitted for no reason.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -6430,6 +6432,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        Format_Object.Attr_Change_Kind := ARM_Database.None;
 		        Format_Object.Attr_Version := '0';
 		        Format_Object.Attr_Initial_Version := '0';
+                        Format_Object.Attr_Omit := False;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Prefix" & (7..ARM_Input.Command_Name_Type'Last => ' '),
@@ -10184,6 +10187,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 			    -- We want to omit this entry; typically, this
 			    -- means it is an inserted item that we are moving
 			    -- within the RM.
+--Ada.Text_IO.Put_Line ("   Attr: Omit!!");
 			    null;
 
 			elsif Format_Object.Attr_Initial_Version = '0' then
