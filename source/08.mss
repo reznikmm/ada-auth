@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:42 $}
+@Comment{$Date: 2021/03/18 10:02:17 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -260,8 +260,8 @@ We now say that an @nt{accept_statement} has its own declarative
 region, rather than being part of the declarative region of the
 @nt{entry_declaration},
 so that declarative regions are properly nested regions of text,
-so that it makes sense to talk about "inner declarative regions,"
-and "...extends to the end of a declarative region."
+so that it makes sense to talk about "inner declarative regions",
+and "...extends to the end of a declarative region".
 Inside an @nt{accept_statement}, the @nt{name} of one of the parameters
 denotes the @nt{parameter_specification} of the @nt{accept_statement},
 not that of the @nt{entry_declaration}. If the @nt{accept_statement} is
@@ -694,7 +694,7 @@ because R does not mention Q in a @nt{with_clause}.
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0003-1]}
   @ChgAdded{Version=[4],Text=[The immediate scope of a @nt{pragma} is
-  defined as it is used in other rules in the Standard.]}
+  defined as it is used in other rules in the @StdTitle.]}
 @end{DiffWord2012}
 
 
@@ -1863,7 +1863,7 @@ at this place if the declaration of the entity is visible at this place:],Old=[]
   in @RefSec{Selected Components}
   so as to achieve the effect requested by
   the @lquotes@;principle of equivalence of @nt{use_clause}s and
-  @nt{selected_component}s.@rquotes@;
+  @nt{selected_component}s@rquotes.
   Thus, child library units and generic formal parameters of a formal
   package are
   potentially use-visible when their enclosing package is use'd.
@@ -2077,7 +2077,7 @@ the identifier, or operator symbol of this declaration denotes the
 renamed entity.@rquotes@; is incorrect. It doesn't say directly visible.
 Also, such an @nt{identifier} might resolve to something else.
 
-The verbiage about renamings being legal @lquotes@;only if exactly one...@rquotes@;,
+The verbiage about renamings being legal @lquotes@;only if exactly one...@rquotes,
 which appears in RM83-8.5(4) (for objects) and RM83-8.5(7) (for subprograms) is
 removed, because it follows from the normal rules about overload resolution.
 For language lawyers, these facts are obvious; for programmers, they are
@@ -2085,6 +2085,7 @@ irrelevant, since failing these tests is highly unlikely.
 @end{DiffWord83}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledSubClause{Object Renaming Declarations}
 
 @begin{Intro}
@@ -2468,7 +2469,7 @@ Uno @key[renames] One;  --@Examcom{ see @RefSecNum{Number Declarations}}
 @begin{DiffWord83}
 The phrase @lquotes@;subtype ... as defined in a corresponding
 object declaration, component declaration, or component subtype
-indication,@rquotes@; from RM83-8.5(5), is incorrect in Ada 95;
+indication@rquotes, from RM83-8.5(5), is incorrect in Ada 95;
 therefore we removed it.
 It is incorrect in the case of an object with an indefinite
 unconstrained nominal subtype.
@@ -2610,6 +2611,7 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @Ref
 @end{Extend2005}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledSubClause{Package Renaming Declarations}
 
 @begin{Intro}
@@ -2907,7 +2909,7 @@ waiting.
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00228-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0095-1]}
 @Chg{New=[All properties of the renamed entity are inherited by the new view
-unless otherwise stated by this International Standard. In particular, if the
+unless otherwise stated by this @IntlStdName. In particular, if the
 renamed entity is abstract@Chg{Version=[2],New=[],Old=[ or requires
 overriding (see @RefSecNum{Abstract Types and Subprograms})]}, the new view
 also is abstract@Chg{Version=[2],New=[.],Old=[ or requires overriding. (The
@@ -3194,10 +3196,10 @@ the corresponding Ada-83-based package.
 @end{Extend83}
 
 @begin{DiffWord83}
-The information in RM83-8.6, @lquotes@;The Package Standard,@rquotes@;
+The information in RM83-8.6, @lquotes@;The Package Standard@rquotes,
 has been updated for the child unit feature,
 and moved to @RefSecNum{Predefined Language Environment},
-except for the definition of @lquotes@;predefined type,@rquotes@;
+except for the definition of @lquotes@;predefined type@rquotes,
 which has been moved to @RefSecNum{Type Declarations}.
 @end{DiffWord83}
 
@@ -3388,7 +3390,7 @@ The @i{interpretation} of a constituent of a complete context is
 determined from the overall interpretation of the complete context as a
 whole.
 @Redundant{Thus,
-for example, @lquotes@;interpreted as a @nt{function_call},@rquotes@;
+for example, @lquotes@;interpreted as a @nt{function_call}@rquotes,
 means that the construct's interpretation says that it belongs
 to the syntactic category @nt{function_call}.}
 
@@ -3559,7 +3561,7 @@ type @em such a preference would cause Beaujolais effects.
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00409-01]}
       @ChgNote{We use Chg here, rather than ChgDeleted so that the prefix is
       left behind.}@Chg{Version=[2],New=[],Old=[Because it says @lquotes@;access-to-variable@rquotes@;
-      instead of @lquotes@;access-to-object,@rquotes@;
+      instead of @lquotes@;access-to-object@rquotes,
       two subprograms that differ only in that one has a parameter
       of an access-to-constant type,
       and the other has an
@@ -3859,13 +3861,13 @@ of what sorts of rules are overloading rules.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 It is not clear from RM83 what information is embodied in a @lquotes@;meaning@rquotes@;
-or an @lquotes@;interpretation.@rquotes@;
+or an @lquotes@;interpretation@rquotes.
 @lquotes@;Meaning@rquotes@; and @lquotes@;interpretation@rquotes@; were intended to be synonymous;
 we now use the latter only in defining the rules about overload
 resolution.
 @lquotes@;Meaning@rquotes@; is used only informally.
 This @Chg{Version=[3],New=[subclause],Old=[clause]} attempts to clarify what
-is meant by @lquotes@;interpretation.@rquotes@;
+is meant by @lquotes@;interpretation@rquotes.
 
 @NoPrefix@;For example,
 RM83 does not make it clear that overload resolution is required in
@@ -3944,7 +3946,7 @@ wording of RM83-5.4(3) with the notion that the expression of a
 
 Cases like the Val attribute are now handled using the normal type
 resolution rules, instead of having special cases that explicitly allow
-things like @lquotes@;any integer type.@rquotes@;
+things like @lquotes@;any integer type@rquotes.
 @end{DiffWord83}
 
 @begin{Incompatible95}
@@ -4028,7 +4030,7 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
   @ChgAdded{Version=[3],Text=[Added a requirement
   here that implicit conversions are convertible to the appropriate type.
-  This rule was scattered about the Standard, we moved a single generalized
+  This rule was scattered about the @StdTitle, we moved a single generalized
   version here.]}
 @end{DiffWord2005}
 

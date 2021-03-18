@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2019/04/09 04:56:54 $ $Author: randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:54 $}
+@Comment{$Date: 2021/03/18 10:02:19 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -35,13 +35,15 @@ This @Chg{Version=[3],New=[subclause],Old=[clause]} is new to Ada 95.
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
 @LabeledRevisedSubClause{Version=[2],New=[The Packages Characters, Wide_Characters, and Wide_Wide_Characters],Old=[The Package Characters]}
 
 @begin{StaticSem}
 @leading@keepnext@;The library package Characters has the following declaration:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Characters]}@key(package) Ada.Characters @key[is]
-  @key[pragma] Pure(Characters);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChildUnit{Parent=[Ada],Child=[Characters]}@key[package] Ada.Characters@Chg{Version=[5],New=[],Old=[ @key[is]]}
+  @Chg{Version=[5],New=[ @key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Characters);]}
 @key(end) Ada.Characters;
 @end{example}
 
@@ -50,8 +52,9 @@ This @Chg{Version=[3],New=[subclause],Old=[clause]} is new to Ada 95.
 Wide_Characters has the following declaration:]}
 @begin{example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Wide_Characters]}@key(package) Ada.Wide_Characters @key[is]
-  @key[pragma] Pure(Wide_Characters);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Wide_Characters]}@key[package] Ada.Wide_Characters@Chg{Version=[5],New=[],Old=[ @key[is]]}
+  @Chg{Version=[5],New=[ @key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Wide_Characters);]}
 @key[end] Ada.Wide_Characters;]}
 @end{example}
 
@@ -60,8 +63,9 @@ Wide_Characters has the following declaration:]}
 Wide_Wide_Characters has the following declaration:]}
 @begin{example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Wide_Wide_Characters]}@key(package) Ada.Wide_Wide_Characters @key[is]
-  @key[pragma] Pure(Wide_Wide_Characters);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Wide_Wide_Characters]}@key[package] Ada.Wide_Wide_Characters@Chg{Version=[5],New=[],Old=[ @key[is]]}
+  @Chg{Version=[5],New=[ @key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Wide_Wide_Characters);]}
 @key[end] Ada.Wide_Wide_Characters;]}
 @end{example}
 @end{StaticSem}
@@ -95,9 +99,10 @@ Wide_Characters or Wide_Wide_Characters.]}]}
 @leading@keepnext@;The library package Characters.Handling has the following declaration:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
 @Chg{Version=[2],New=[@key[with] Ada.Characters.Conversions;
-],Old=[]}@key[package] Ada.Characters.Handling @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Handling]}
-  @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Handling);
+],Old=[]}@key[package] Ada.Characters.Handling@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada.Characters],Child=[Handling]}
+  @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}@Chg{Version=[5],New=[ @key[is]],Old=[(Handling);]}
 
 @keepnext--@RI{Character classification functions}
 
@@ -477,12 +482,9 @@ are not considered lower case letters by Ada.Characters.Handling.]}
 @begin{Incompatible2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
-  Added an additional classification routine Is_NFKC. If
-  Characters.Handling is referenced in a @nt{use_clause}, and an
-  entity @i<E> with a @nt{defining_identifier} of Is_NFKC is
-  defined in a package that is also referenced in a @nt{use_clause}, the entity
-  @i<E> may no longer be use-visible, resulting in errors. This should be rare
-  and is easily fixed if it does occur.]}
+  Added an additional classification routine Is_NFKC.
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 
@@ -503,8 +505,9 @@ emphasizing the package ASCII.@end{reason}
 @leading@keepnext@;The library package Characters.Latin_1 has the following
 declaration:
 @begin{Example}
-@key[package] Ada.Characters.Latin_1 @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Latin_1]}
-    @key[pragma] Pure(Latin_1);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key[package] Ada.Characters.Latin_1@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada.Characters],Child=[Latin_1]}
+    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Latin_1);]}
 
 @keepnext--@RI{ Control characters:}@PDefn2{term=[control character],
 sec=[a category of Character]}
@@ -799,8 +802,9 @@ position value. This makes no semantic change to users of the constant.]}
 Characters.Conversions has the following declaration:]}
 @begin{example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[package] Ada.Characters.Conversions @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Conversions]}
-   @key[pragma] Pure(Conversions);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[2],Text=[@key[package] Ada.Characters.Conversions@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada.Characters],Child=[Conversions]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Conversions);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Is_Character} (Item : @key[in] Wide_Character)      @key[return] Boolean;
@@ -1023,8 +1027,9 @@ Wide_Characters.Handling has the following declaration:]}
 @begin{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1]}
-@ChgAdded{Version=[3],Text=[@key[package] Ada.Wide_Characters.Handling @key[is]@ChildUnit{Parent=[Ada.Wide_Characters],Child=[Handling]}
-   @key[pragma] Pure(Handling);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[3],Text=[@key[package] Ada.Wide_Characters.Handling@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada.Wide_Characters],Child=[Handling]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Handling);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Character_Set_Version} @key[return] String;]}
@@ -1452,12 +1457,9 @@ provided in @RefSec{String Comparison} are also available for wide strings
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1],ARef=[AI12-0260-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
   Added additional classification routines Is_Basic and Is_NFKC, and
-  additional conversion routine To_Basic. If
-  Wide_Characters.Handling is referenced in a @nt{use_clause}, and an
-  entity @i<E> with one of these @nt{defining_identifier}s is
-  defined in a package that is also referenced in a @nt{use_clause}, the entity
-  @i<E> may no longer be use-visible, resulting in errors. This should be rare
-  and is easily fixed if it does occur.]}
+  additional conversion routine To_Basic. Therefore, a use clause conflict
+  is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 

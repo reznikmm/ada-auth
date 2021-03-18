@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:45 $}
+@Comment{$Date: 2021/03/18 10:02:17 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -137,10 +137,10 @@ A protected entry is a program unit,
 but protected entries cannot be separately compiled.
 @end{Ramification}
 
-@ToGlossaryAlso{Term=<Library unit>,
+@ChgToGlossaryAlso{Version=[5],Kind=[Revised],Term=<Library unit>,
   Text=<A library unit is a separately compiled
   program unit,
-  and is always a package, subprogram, or generic unit.
+  and is @Chg{Version=[5],New=[],Old=[always ]}a package, subprogram, or generic unit.
   Library units may have other (logically nested) library units as children,
   and may have other program units physically nested within them.
   @Defn(subsystem)
@@ -284,7 +284,7 @@ and @lquotes@;item@rquotes@; for declaration or body separately (as in
 The terms @lquotes@;@nt{compilation_unit}@rquotes@;, @lquotes@;compilation unit@rquotes@;,
 and @lquotes@;@nt{subunit}@rquotes@; are exceptions to this rule.
 We considered changing @lquotes@;@nt{compilation_unit}@rquotes@;, @lquotes@;compilation unit@rquotes@;
-to @lquotes@;@ntf{compilation_item}@rquotes@;, @lquotes@;compilation item,@rquotes@;
+to @lquotes@;@ntf{compilation_item}@rquotes@;, @lquotes@;compilation item@rquotes@;,
 respectively, but we decided not to.
 @end{Discussion}
 
@@ -321,7 +321,7 @@ parent body of a library unit,
 parent declaration of a subunit,
 parent unit of a subunit.
 These are not needed,
-and might get in the way of a correct definition of @lquotes@;child.@rquotes@;
+and might get in the way of a correct definition of @lquotes@;child@rquotes@;.
 @end{Reason}
 
 @Redundant[The children of a library unit occur immediately
@@ -337,7 +337,7 @@ These definitions are worded carefully to avoid defining subunits as
 children. Only library units can be children.
 
 We use the unadorned term @lquotes@;ancestors@rquotes@; here to concisely define both
-@lquotes@;ancestor unit@rquotes@; and @lquotes@;ancestor declaration.@rquotes@;
+@lquotes@;ancestor unit@rquotes@; and @lquotes@;ancestor declaration@rquotes@;.
 @end{Reason}
 
 @Defn{public library unit}
@@ -2097,7 +2097,7 @@ units from the environment for one of the reasons listed here, or in response
 to an explicit user command to modify the environment. It is not intended that
 the act of compiling a unit is one of the
 @lquotes@;@Chg{Version=[2],New=[mechanisms],Old=[mechansisms]}@rquotes for
-removing units other than those specified by this International Standard.]}
+removing units other than those specified by this @IntlStdName.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00214-01]}
 @ChgAdded{Version=[2],Text=[These rules are intended to ensure that an
@@ -2190,12 +2190,15 @@ containing the instantiation.
 @LabeledSubClause{Pragmas and Program Units}
 
 @begin{Intro}
-@Redundant[This subclause discusses pragmas related to program units,
-library units, and @nt{compilation}s.]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
+@Redundant[This subclause discusses pragmas related
+to@Chg{Version=[5],New=[],Old=[ program units,
+library units, and]} @nt{compilation}s.]
 @end{Intro}
 
 @begin{Resolution}
-@RootDefn{program unit pragma}
+@ChgRef{Version=[5], Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Text=[@RootDefn{program unit pragma}
 @RootDefn{pragma, program unit}
 Certain @nt{pragma}s are defined to be @i{program unit pragmas}.
 @PDefn2{Term=[apply], Sec=(to a program unit by a program unit pragma)}
@@ -2204,45 +2207,53 @@ denote the declarations or renamings of one or more program
 units that occur immediately within the declarative region or @nt<compilation>
 in which the @nt<pragma> immediately occurs, or it shall resolve to denote
 the declaration of the immediately enclosing program unit (if any);
-the @nt{pragma} applies to the denoted program
-unit(s).
+the @nt{pragma} applies to the denoted program unit(s).
 If there are no @nt{name}s given as arguments,
-the @nt{pragma} applies to the immediately
-enclosing program unit.
+the @nt{pragma} applies to the immediately enclosing program unit.]}
 @begin{Ramification}
-The fact that this is a @ResolutionName means that the @nt{pragma}
-will not apply to declarations from outer declarative regions.
+  @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[5],Text=[The fact that this is a @ResolutionName means 
+  that the @nt{pragma} will not apply to declarations from outer declarative 
+  regions.]}
 @end{Ramification}
 
 @end{Resolution}
 
 @begin{Legality}
-@leading@keepnext@;A program unit pragma shall appear in one of these places:
+@ChgRef{Version=[5], Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[A program unit 
+pragma shall appear in one of these places:]}
 @begin{Itemize}
-At the place of a @nt{compilation_unit},
+@ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[5],Text=[At the place of a @nt{compilation_unit},
 in which case the @nt<pragma>
 shall immediately follow in the same @nt<compilation> (except for
 other @nt{pragma}s)
 a @nt{library_@!unit_@!declaration} that is a @nt<subprogram_@!declaration>,
 @nt<generic_@!subprogram_@!declaration>, or @nt<generic_@!instantiation>, and
 the @nt<pragma> shall have an argument that is a @nt<name> denoting
-that declaration.
+that declaration.]}
 @begin{Ramification}
-The @nt{name} has to denote the immediately preceding
-@nt{library_unit_declaration}.
+  @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[5],Text=[The @nt{name} has to denote the immediately 
+  preceding @nt{library_unit_declaration}.]}
 @end{Ramification}
 
 @ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033], ARef=[AI95-00136-01]}
-Immediately within the @Chg{New=[visible part],Old=[declaration]} of a
-program unit and before any nested declaration@Chg{New=[ (but not within a
+@ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[5],Text=[Immediately within the 
+@Chg{New=[visible part],Old=[declaration]} of a program unit and before 
+any nested declaration@Chg{New=[ (but not within a
 generic formal part)], Old=[]}, in which case the argument,
 if any, shall be a @nt{direct_name}
-that denotes the immediately enclosing program unit declaration.
+that denotes the immediately enclosing program unit declaration.]}
 @begin{Ramification}
-The argument is optional in this case.
+  @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[5],Text=[The argument is optional in this case.]}
 @end{Ramification}
 
-At the place of a declaration
+@ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[5],Text=[At the place of a declaration
 other than the first,
 of a @nt{declarative_part} or program unit declaration,
 in which case the @nt{pragma} shall have an argument,
@@ -2250,17 +2261,18 @@ which shall be a @nt{direct_name}
 that denotes one or more of the following (and nothing else):
 a @nt{subprogram_@!declaration}, a @nt{generic_@!subprogram_@!declaration},
 or a @nt{generic_@!instantiation}, of the same @nt<declarative_@!part> or
-program unit declaration.
+program unit declaration.]}
 @begin{Ramification}
-If you want to denote a @nt<subprogram_body> that is not a
-completion, or a
-@nt{package_declaration}, for example, you have to put the @nt{pragma}
-inside.
+  @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[5],Text=[If you want to denote a @nt<subprogram_body>
+  that is not a completion, or a @nt{package_declaration}, for example, you 
+  have to put the @nt{pragma} inside.]}
 @end{Ramification}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0132-1]}
-@RootDefn{library unit pragma}
+@ChgRef{Version=[5], Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Text=[@RootDefn{library unit pragma}
 @RootDefn{pragma, library unit}
 @PDefn2{Term=[program unit pragma], Sec=(library unit pragmas)}
 @PDefn2{Term=[pragma, program unit], Sec=(library unit pragmas)}
@@ -2268,23 +2280,32 @@ Certain program unit pragmas are defined to be
 @i{library unit pragmas}.
 @Chg{Version=[3],New=[If a library unit pragma applies to a program unit,
 the program unit shall be],Old=[The @nt{name}, if
-any, in a library unit pragma shall denote the declaration of]} a library unit.
+any, in a library unit pragma shall denote the declaration of]} a library
+unit.]}
 @begin{Ramification}
-This, together with the rules for program unit pragmas above,
-implies that if a library unit pragma applies to a @nt{subprogram_declaration}
-(and similar things), it has to appear immediately after the
-@nt{compilation_unit}, whereas if the @nt{pragma} applies to a
-@nt{package_declaration}, a @nt{subprogram_body} that is not a
-completion (and similar things), it has to appear inside, as the first
-@nt{declarative_item}.
+  @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[5],Text=[This, together with the rules for program unit 
+  pragmas above, implies that if a library unit pragma applies to a 
+  @nt{subprogram_declaration} (and similar things), it has to appear 
+  immediately after the @nt{compilation_unit}, whereas if the @nt{pragma}
+  applies to a @nt{package_declaration}, a @nt{subprogram_body} that is not a
+  completion (and similar things), it has to appear inside, as the first
+  @nt{declarative_item}.]}
 @end{Ramification}
 @end{Legality}
 
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 through 7
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{StaticSem}
 @ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041-01]}
-@ChgAdded{Version=[1],Text=[A library unit pragma that applies to a generic
-unit does not apply to its instances, unless a specific rule for the pragma
-specifies the contrary.]}
+@ChgRef{Version=[5], Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[5],New=[],Old=[A library unit 
+pragma that applies to a generic unit does not apply to its instances, unless
+a specific rule for the pragma specifies the contrary.]}]}
 @end{StaticSem}
 
 @begin{LinkTime}
@@ -2316,32 +2337,44 @@ selected partition-wide or system-wide options.],Old=[]}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[1], Kind=[AddedNormal], Ref=[8652/0034], ARef=[AI95-00041-01]}
-@ChgAdded{Version=[1],Text=[When applied to a generic unit, a program unit pragma that
-is not a library unit pragma should apply to each instance of the generic unit
-for which there is not an overriding pragma applied directly to the instance.]}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[When applied to a generic unit, a program unit pragma that
+@ChgRef{Version=[5], Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[5],New=[],Old=[When applied to a
+generic unit, a program unit pragma that
 is not a library unit pragma should apply to each instance of the generic unit
 for which there is not an overriding pragma applied directly to the instance.]}]}
+@Comment{Originally addednormal for version 2}
+@ChgImplAdvice{Version=[5],Kind=[Deleted],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[When applied to 
+a generic unit, a program unit pragma that
+is not a library unit pragma should apply to each instance of the generic unit
+for which there is not an overriding pragma applied directly to the instance.]}]}]}
 @end{ImplAdvice}
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraph 10
+was moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 
 @begin{DiffWord95}
   @ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0033], ARef=[AI95-00136-01]}
-  @ChgAdded{Version=[2], Text=[@B<Corrigendum:> The wording was corrected to
-  ensure that a program unit pragma cannot appear in private parts or
-  generic formal parts.]}
+  @ChgRef{Version=[5], Kind=[Deleted], ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[2], Text=[@Chg{Version=[5],New=[],Old=[@B<Corrigendum:>
+  The wording was corrected to ensure that a program unit pragma cannot 
+  appear in private parts or generic formal parts.]}]}
 
-  @ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0034],
-  ARef=[AI95-00041-01]} @ChgAdded{Version=[2], Text=[@B<Corrigendum:> The
+  @ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0034], ARef=[AI95-00041-01]}
+  @ChgRef{Version=[5], Kind=[Deleted], ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[2], Text=[@Chg{Version=[5],New=[],Old=[@B<Corrigendum:> The
   wording was clarified to explain the meaning of program unit and library unit
-  pragmas in generic units.]}
+  pragmas in generic units.]}]}
 
   @ChgRef{Version=[2], Kind=[AddedNormal]}
-  @ChgAdded{Version=[2], Text=[The Implementation Advice added by the
-  Corrigendum was moved, as it was not in the normal order. (This changes the
-  paragraph number.) It originally was directly after the new Static Semantics
-  rule.]}
+  @ChgRef{Version=[5], Kind=[Deleted], ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[2], Text=[@Chg{Version=[5],New=[],Old=[The @ImplAdviceName 
+  added by the Corrigendum was moved, as it was not in the normal order. (This 
+  changes the paragraph number.) It originally was directly after the new 
+  Static Semantics rule.]}]}
 
   @ChgRef{Version=[2], Kind=[AddedNormal], ARef=[AI95-00212-01]}
   @ChgAdded{Version=[2], Type=[Leading],Keepnext=[T],Text=[The permission to
@@ -2360,9 +2393,19 @@ for which there is not an overriding pragma applied directly to the instance.]}]
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0132-1]}
-  @ChgAdded{Version=[3], Text=[@b<Correction:> A library unit pragma must
-  apply directly to a library unit, even if no name is given in the pragma.]}
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[3], Text=[@Chg{Version=[5],New=[],Old=[@b<Correction:> A 
+  library unit pragma must apply directly to a library unit, even if no name
+  is given in the pragma.]}]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[The terms @ldquote@;program unit pragma@rdquote
+  and @ldquote@;library unit pragma@rdquote were moved to 
+  @RefSec{Obsolescent Features} (specifically to @RefSecNum{Aspect-related Pragmas})
+  as all of the @nt{pragma}s that use these terms are now in that annex.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Environment-Level Visibility Rules}
@@ -2716,13 +2759,14 @@ Old=[It would have been better to use
 See above for a definition of which @nt{library_item}s are @lquotes@;needed by@rquotes@;
 a given declaration.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 Note that elaboration dependences are among @nt{library_item}s,
 whereas the other two forms of dependence are among compilation units.
 Note that elaboration dependence includes semantic dependence.
-It's a little bit sad that pragma Elaborate_Body can't be folded into
-this mechanism.
-It follows from the definition that the elaboration dependence
-relationship is transitive.
+It's a little bit sad that @Chg{Version=[5],New=[the],Old=[pragma]}
+Elaborate_Body @Chg{Version=[5],New=[ aspect],Old=[]} can't be folded 
+into this mechanism. It follows from the definition that the elaboration
+dependence relationship is transitive.
 Note that the wording of the rule does not need to take into account
 a semantic dependence of a @nt{library_item} or one of its subunits
 upon a subunit of a different library unit,
@@ -2780,12 +2824,13 @@ the order in which they appear in the environment
   @end{Ramification}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   Any included @nt{library_unit_declaration} @Chg{Version=[3],New=[for],Old=[to]}
   which @Chg{Version=[3],New=[aspect],Old=[a @nt{pragma}]}
-  Elaborate_Body @Chg{Version=[3],New=[is True @Redundant[(including when a
-  @nt{pragma} Elaborate_Body applies)]],Old=[applies]}
-  is immediately followed by its @nt{library_unit_body},
-  if included.
+  Elaborate_Body @Chg{Version=[3],New=[is 
+  True@Chg{Version=[5],New=[],Old=[ @Redundant[(including when a
+  @nt{pragma} Elaborate_Body applies)]]}],Old=[applies]}
+  is immediately followed by its @nt{library_unit_body}, if included.
 @begin{Discussion}
   This implies that the body of such a library unit
   shall not @lquotes@;with@rquotes@; any of its own children,
@@ -2794,8 +2839,10 @@ the order in which they appear in the environment
 @end{Discussion}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Elaborate_Body sets
-  aspect Elaborate_Body, see @RefSecNum{Elaboration Control}.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@nt{Pragma} 
+  Elaborate_Body sets aspect Elaborate_Body, see
+  @RefSecNum{Elaboration Control}.]}]}
 @end{TheProof}
 
   All @nt{library_item}s declared pure occur before any
@@ -2828,10 +2875,13 @@ There shall be a total order of the @nt{library_item}s that obeys the
 above rules.
 The order is otherwise implementation defined.
 @begin{Discussion}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 The only way to violate this rule is to have
-Elaborate, Elaborate_All, or Elaborate_Body @nt{pragma}s that cause circular ordering
-requirements, thus preventing an order that has no forward
-elaboration dependences.
+Elaborate@Chg{Version=[5],New=[ or],Old=[,]} 
+Elaborate_All@Chg{Version=[5],New=[ @nt{pragma}s],Old=[,]} or
+Elaborate_Body @Chg{Version=[5],New=[aspects],Old=[@nt{pragma}s]} that 
+cause circular ordering requirements, thus preventing an order that has 
+no forward elaboration dependences.
 @end{Discussion}
 @ImplDef{The order of elaboration of @nt{library_item}s.}
 @begin{Honest}
@@ -2843,7 +2893,7 @@ completion is considered to be a @LinkTimeName
 when the declaration is that of a library unit.
 @end{Honest}
 @begin{Discussion}
-Such rules may be checked at @lquotes@;link time,@rquotes@; for example.
+Such rules may be checked at @lquotes@;link time@rquotes@;, for example.
 Rules requiring the completion to have certain properties,
 on the other hand, are checked at compile time of the completion.
 @end{Discussion}
@@ -2855,7 +2905,7 @@ given partition shall be distinct.
 @begin{Reason}
 This is a @LinkTimeName because making it a @LegalityName
 would violate the @MetaRulesName labeled
-@lquotes@;legality determinable via semantic dependences.@rquotes@;
+@lquotes@;legality determinable via semantic dependences@rquotes@;.
 @end{Reason}
 
 @leading@;The @nt{sequence_of_statements} of the environment task (see (2)
@@ -3083,6 +3133,7 @@ Partitions are not required to run in separate address spaces.
 For example, an implementation might support dynamic linking
 via the partition concept.
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
 An order of elaboration of @nt{library_item}s that is consistent with
 the partial ordering defined above does not always ensure that each
 @nt{library_unit_body} is elaborated before any other compilation unit
@@ -3091,8 +3142,8 @@ already elaborated.
 (In particular, there is no requirement that the body of a library unit
 be elaborated as soon as possible after the
 @nt{library_unit_declaration} is elaborated,
-unless the pragmas in subclause @RefSecNum{Elaboration Control} are
-used.)
+unless the pragmas@Chg{Version=[5],New=[ or aspects],Old=[]} in subclause
+@RefSecNum{Elaboration Control} are used.)
 
 A partition (active or otherwise) need not have a main subprogram.
 In such a case, all the work done by the partition would be done by
@@ -3151,9 +3202,10 @@ The program as a whole is an entirely different thing.
 @LabeledSubClause{Elaboration Control}
 
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @Redundant[@Defn{elaboration control}
-This subclause defines pragmas that help control
-the elaboration order of @nt{library_item}s.]
+This subclause defines @Chg{Version=[5],New=[aspects and ],Old=[]}pragmas that
+help control the elaboration order of @nt{library_item}s.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -3196,15 +3248,19 @@ preelaborable.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@Keepnext@;The form of a @nt{pragma} Preelaborate is as follows:
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[The form of a @nt{pragma}
+Preelaborate is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Preelaborate)[(@SynI{library_unit_}@Syn2{name})];'
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[0],@Chg{Version=[5],New=[],Old=<@key{pragma} @prag(Preelaborate)[(@SynI{library_unit_}@Syn2{name})];>}>
 
 @begin{SyntaxText}
-@PDefn2{Term=[library unit pragma], Sec=(Preelaborate)}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Text=[@PDefn2{Term=[library unit pragma], Sec=(Preelaborate)}
 @PDefn2{Term=[pragma, library unit], Sec=(Preelaborate)}
-A @nt{pragma} Preelaborate is a library unit pragma.
+A @nt{pragma} Preelaborate is a library unit pragma.]}
 @end{SyntaxText}
 
 @begin{SyntaxText}
@@ -3218,6 +3274,11 @@ form of a @nt{pragma} Preelaborable_Initialization is as follows:]}]}
 @DeletedPragmaSyn<Version=[5],InitialVersion=[2],@ChgAdded{Version=[2],
 Text=<@Chg{Version=[5],New=[],Old=[@key{pragma} @prag<Preelaborable_Initialization>(@Syn2{direct_name});]}>}>
 @end{Syntax}
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 through 4
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{Legality}
 @Leading@RootDefn2{Term=[preelaborable], Sec=(of an elaborable construct)}
@@ -3328,12 +3389,12 @@ is not preelaborable.]}
 instance would perform one of the above actions.]}
 
 @begin{Ramification}
-   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0232-1]}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0232-1],ARef=[AI12-0417-1]}
    @ChgAdded{Version=[5],Text=[A generic declaration is preelaborable unless
    there is no instance that could be declared preelaborated. For instance,
    a generic package declaration that directly contains a variable initialized
    by a non-static function that is not a formal function is not preelaborable
-   (and thus would be illegal if pragma Preelaborate were applied to it).]}
+   (and thus would be illegal if the Preelaborate aspect were applied to it).]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00403-01]}
@@ -3348,7 +3409,8 @@ formal subprogram is a user-defined subprogram.]}
 @Defn{generic contract issue}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI95-0028-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0417-1]}
 @ChgAdded{Version=[2],Text=[the actual for each@Chg{Version=[3],
 New=[ discriminated formal derived type,],Old=[]} formal private
 type@Chg{Version=[3],New=[, ],Old=[ (]}or
@@ -3356,8 +3418,9 @@ type@Chg{Version=[3],New=[, ],Old=[ (]}or
 declared within the formal part of the generic unit is
 a @Chg{Version=[3],New=[],Old=[private ]}type@Chg{Version=[3],New=[],Old=[ (or extension)]}
 that does not have preelaborable initialization@Chg{Version=[3],
-New=[, unless @nt<pragma>
-Preelaborable_Initialization has been applied to the formal type],Old=[]};]}
+New=[, unless @Chg{Version=[5],New=[the],Old=[@nt{pragma}]}
+Preelaborable_Initialization @Chg{Version=[5],New=[aspect was specified 
+for],Old=[has been applied to]} the formal type],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
 @ChgAdded{Version=[2],Text=[the actual for each formal type is nonstatic;]}
@@ -3390,13 +3453,18 @@ user-defined subprogram.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1],ARef=[AI05-0243-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @PDefn{preelaborated}
-@Chg{Version=[3],New=[A],Old=[If a]} @nt{pragma} Preelaborate (or
-@nt<pragma> Pure @em see below) @Chg{Version=[3],New=[is used to specify that],
-Old=[applies to]}
-a library unit@Chg{Version=[3],New=[],Old=[, then it]} is
-@i{preelaborated}@Chg{Version=[3],New=[, namely that the Preelaborate
-aspect@AspectDefn{Preelaborate} of the library unit is True; all
+@Chg{Version=[5],New=[When the library unit aspect (see 
+@RefSecNum{Aspect Specifications}) Preelaborate@AspectDefn{Preelaborate} of 
+a program unit is True, the],Old=[@Chg{Version=[3],New=[A],Old=[If a]} 
+@nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below) 
+@Chg{Version=[3],New=[is used to specify that], Old=[applies to]} a library]}
+unit@Chg{Version=[3],New=[],Old=[, then it]} is@Chg{Version=[5],New=[ said 
+to be],Old=[]} @i{preelaborated}@Chg{Version=[3],New=[@Chg{Version=[5],New=[.
+When the Preelaborate aspect is specified True for a library unit,],Old=[, 
+namely that the Preelaborate
+aspect@AspectDefn{Preelaborate} of the library unit is True;]} all
 compilation units of the
 library unit are preelaborated],Old=[]}.
 @Chg{Version=[3],New=[],Old=[@Redundant[
@@ -3436,11 +3504,21 @@ nested in a subprogram body, which do not need to be preelaborable even if
 the subprogram is preelaborated. However, such subunits cannot depend
 semantically on nonpreelaborated units, which is also consistent with
 nested units.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[If a unit is not preelaborated, the value of
+  the Preelaborate aspect for that unit is False.]}
 @end{Ramification}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Preelaborate],
     Text=[@ChgAdded{Version=[3],Text=[Code execution during elaboration is
       avoided for a given package.]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[Rules for specifying a library unit aspect (like Preelaborate)
+    are found in @RefSecNum{Aspect Specifications}.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1]}
@@ -3519,7 +3597,7 @@ or generic package.]}]}
   declared within a generic package. In this latter case, the value may also 
   be specified by references to the Preelaborable_Initialization attribute 
   of one or more formal types visible at the point of the declaration of the
-  composite type, conjoined with @b<and>.],Old=[]}]}
+  composite type, conjoined with @b<and>.],Old=[]}
 
 @begin{Ramification}
    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
@@ -3618,19 +3696,27 @@ should have the same representation in every elaboration
 of a given version of the package.]}]}
 @end{ImplAdvice}
 
-@begin{Syntax}
 @begin{SyntaxText}
-@leading@keepnext@;The form of a @nt{pragma} Pure is as follows:
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[The form of a @nt{pragma}
+Pure is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Pure)[(@SynI{library_unit_}@Syn2{name})];'
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[0],@Chg{Version=[5],New=[],Old=<@key{pragma} @prag(Pure)[(@SynI{library_unit_}@Syn2{name})];>}>
 
 @begin{SyntaxText}
-@PDefn2{Term=[library unit pragma], Sec=(Pure)}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Text=[@PDefn2{Term=[library unit pragma], Sec=(Pure)}
 @PDefn2{Term=[pragma, library unit], Sec=(Pure)}
-A @nt{pragma} Pure is a library unit pragma.
+A @nt{pragma} Pure is a library unit pragma.]}
 @end{SyntaxText}
-@end{Syntax}
+
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 13 through 15
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{StaticSem}
 
@@ -3677,13 +3763,16 @@ evaluates such an @nt{allocator};]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[The second half of the],Old=[This]}
   rule is needed because aggregates can specify the default initialization
   of a private type or extension using <> or the ancestor subtype of an
   extension aggregate. The
   subtype of a component could use an @nt{allocator} to initialize an access
-  discriminant; the type still could have a pragma Preelaborable_Initialization
-  given. Ada 95 did not allow such private types to have preelaborable
+  discriminant; the type still could have @Chg{Version=[5],New=[the],Old=[a 
+  pragma]} Preelaborable_Initialization 
+  @Chg{Version=[5],New=[aspect specified],Old=[given]}. Ada 95 did not allow 
+  such private types to have preelaborable
   initialization, so such a default initialization could not have occurred.
   Thus this rule is not incompatible with Ada 95.]}
 @end{Reason}
@@ -3744,11 +3833,11 @@ pure.]}
 instance would perform one of the above actions.]}
 
 @begin{Ramification}
-   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0232-1]}
+   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0232-1],ARef=[AI12-0417-1]}
    @ChgAdded{Version=[5],Text=[A generic declaration is pure unless
    there is no instance that could be declared pure. For instance,
    a generic package declaration that directly contains a variable declaration
-   is not pure (and thus would be illegal if pragma Pure is applied to it).]}
+   is not pure (and thus would be illegal if aspect Pure is specified for it).]}
 @end{Ramification}
 
 
@@ -3793,10 +3882,14 @@ task unit, or protected unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1],ARef=[AI05-0035-1],ARef=[AI05-0243-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @Defn{declared pure}
-A @nt{pragma} Pure is used to @Chg{Version=[3],New=[specify],Old=[declare]}
-that a library unit is @Chg{Version=[3],New=[@i{declared pure}, namely
-that the Pure aspect@AspectDefn{Pure} of the library unit is True; all
+@Chg{Version=[5],New=[When the library unit aspect Pure of a program unit is
+True, the],Old=[A @nt{pragma} Pure is used to @Chg{Version=[3],New=[specify],Old=[declare]}
+that a library]} unit is @Chg{Version=[5],New=[said to
+be ],Old=[]}@Chg{Version=[3],New=[@i{declared pure}@Chg{Version=[5],New=[.
+When the Pure aspect is specified True for a library unit,],Old=[, namely
+that the Pure aspect@AspectDefn{Pure} of the library unit is True;]} all
 compilation units of the library unit are declared ],Old=[]}pure.
 @Chg{Version=[3],New=[In addition, the limited view
 of any library package is declared pure. The declaration and
@@ -3845,6 +3938,10 @@ that starts @ldquote@;declared pure library unit@rdquote does not apply to a
 limited view. In particular, the 3rd and last sentences never apply to limited
 views. However, a limited view is a @nt{library_item}, so rules that discuss
 @ldquote@;declared pure @nt{library_item}s@rdquote do include limited views.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[If a unit is not declared pure, the value of
+  the Pure aspect for that unit is False.]}
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
@@ -3942,15 +4039,18 @@ writer of such a subprogram has to keep this in mind.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@Keepnext@;The form of a @nt{pragma} Elaborate, Elaborate_All, or
-Elaborate_Body is as follows:
+@Leading@Keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
+@Chg{Version=[5],New=[The following @nt{pragma}s are defined with the 
+given forms],Old=[The form of a @nt{pragma} Elaborate,
+Elaborate_All, or Elaborate_Body is as follows:]}: 
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Elaborate)(@SynI{library_unit_}@Syn2{name}{, @SynI{library_unit_}@Syn2{name}});'
 
 @PragmaSyn`@key{pragma} @prag(Elaborate_All)(@SynI{library_unit_}@Syn2{name}{, @SynI{library_unit_}@Syn2{name}});'
 
-@PragmaSyn`@key{pragma} @prag(Elaborate_Body)[(@SynI{library_unit_}@Syn2{name})];'
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0417-1]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[0],@Chg{Version=[5],New=[],Old=[@key{pragma} @prag(Elaborate_Body)[(@SynI{library_unit_}@Syn2{name})];]}>
 
 @begin{SyntaxText}
 A @nt{pragma} Elaborate or Elaborate_All is only allowed within a
@@ -3962,10 +4062,12 @@ A @nt{pragma} Elaborate or Elaborate_All is only allowed within a
   mentioned earlier.
 @end{Ramification}
 
-@PDefn2{Term=[library unit pragma], Sec=(Elaborate_Body)}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Text=[@PDefn2{Term=[library unit pragma], Sec=(Elaborate_Body)}
 @PDefn2{Term=[pragma, library unit], Sec=(Elaborate_Body)}
-A @nt{pragma} Elaborate_Body is a library unit pragma.
+A @nt{pragma} Elaborate_Body is a library unit pragma.]}
 @end{SyntaxText}
+
 @begin{Discussion}
 Hence, a @nt{pragma} Elaborate or Elaborate_All is not
 elaborated, not that it makes any practical difference.
@@ -3978,19 +4080,21 @@ pragma, nor a library unit pragma.
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@PDefn2{Term=[requires a completion], Sec=(declaration to which a @nt{pragma} Elaborate_Body applies)}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
+@Chg{Version=[5],New=[],Old=[@PDefn2{Term=[requires a completion], Sec=(declaration to which a @nt{pragma} Elaborate_Body applies)}]}
 If @Chg{Version=[3],New=[the aspect],Old=[a @nt{pragma}]} Elaborate_Body
 @Chg{Version=[3],New=[is True for],Old=[applies to]} a
-declaration@Chg{Version=[3],New=[ @Redundant[(including when @nt{pragma}
-Elaborate_Body applies)]],Old=[]},
+declaration@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[ 
+@Redundant[(including when @nt{pragma} Elaborate_Body applies)]]}],Old=[]},
 then the declaration requires a completion @Redundant[(a
 body)].@Chg{Version=[3],New=[@PDefn2{Term=[requires a completion],
 Sec=(declaration for which aspect Elaborate_Body is True)}],Old=[]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Elaborate_Body sets the
-  aspect (see below).]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@nt{Pragma} 
+  Elaborate_Body sets the aspect (see below).]}]}
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
@@ -4025,9 +4129,11 @@ The official statement of the semantics of these @nt{pragma}s is given in
 @end{TheProof}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[A @nt{pragma} Elaborate_Body sets the Elaborate_Body
-representation aspect of the library unit to which it applies to the value True.
-@Redundant[If the Elaborate_Body aspect of a library unit is True, the body of the library
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[A @nt{pragma} 
+Elaborate_Body sets the Elaborate_Body representation aspect of the library
+unit to which it applies to the value True.]}@Redundant[If the Elaborate_Body
+aspect of a library unit is True, the body of the library
 unit is elaborated immediately after its declaration.@AspectDefn{Elaborate_Body}]]}
 
 @begin{TheProof}
@@ -4036,10 +4142,16 @@ unit is elaborated immediately after its declaration.@AspectDefn{Elaborate_Body}
   aspect is given in @RefSecNum{Program Execution}.]}
 @end{TheProof}
 @begin{ImplNote}
-The presence of a @nt{pragma} Elaborate_Body simplifies the removal of
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
+The @Chg{Version=[5],New=[specification],Old=[presence]} of
+@Chg{Version=[5],New=[the],Old=[a @nt{pragma}]} 
+Elaborate_Body@Chg{Version=[5],New=[ aspect],Old=[]} simplifies the removal of
 unnecessary Elaboration_Checks.
-For a subprogram declared immediately within a library unit to which
-a @nt{pragma} Elaborate_Body applies, the only calls that can fail the
+For a subprogram declared immediately within a library 
+unit @Chg{Version=[5],New=[for],Old=[to]} which
+@Chg{Version=[5],New=[the],Old=[a @nt{pragma}]} Elaborate_Body 
+@Chg{Version=[5],New=[ aspect is specified as True],Old=[applies]}, the 
+only calls that can fail the
 Elaboration_Check are those that occur in the library unit itself,
 between the declaration and body of the called subprogram;
 if there are no such calls
@@ -4196,14 +4308,16 @@ required to appear last.
   the parent access type is legal, so is any derived type.)]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[3],Text=[Elaborate_Body is now an aspect,
-  so it can be specified by an @nt{aspect_specification} @em
-  although the pragma is still preferred by the Standard.]}
+  so it can be specified by an @nt{aspect_specification}@Chg{Version=[5],New=[],Old=[ @em
+  although the pragma is still preferred by the @StdTitle.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[3],Text=[Pure and Preelaborate are now aspects,
-  so they can be specified by an @nt{aspect_specification} @em
-  although the pragmas are still preferred by the Standard.]}
+  so they can be specified by an @nt{aspect_specification}@Chg{Version=[5],New=[],Old=[ @em
+  although the pragma is still preferred by the @StdTitle.]}]}
 @end{Extend2005}
 
 @begin{DiffWord2005}
@@ -4264,5 +4378,10 @@ required to appear last.
   @ChgAdded{Version=[5],Text=[@b<Correction:> Explicitly stated that
   the pure and preelaborate rules are recursive; that is, they apply to the
   contents of nested packages and generic packages.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[The pragmas that set aspects (Pure, Preelaborate,
+  Elaborate_Body) are now obsolescent.]}
 @end{DiffWord2012}
+
 

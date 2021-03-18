@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:44 $}
+@Comment{$Date: 2021/03/18 10:02:17 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -352,8 +352,8 @@ although RM83-5.1(6) did not take this view.
 @LabeledClause{Assignment Statements}
 
 @begin{Intro}
-@Redundant[An @nt{assignment_statement}
-replaces the current value of
+@Leading@Comment{Not really, but too much space following}@Redundant[An
+@nt{assignment_statement} replaces the current value of
 a variable with the result of evaluating an
 @nt<expression>.]
 @end{Intro}
@@ -398,7 +398,7 @@ so-and-so is the target of the assignment operation.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
-@PDefn2{Term=[expected type],
+@Leading@Comment{Not really, but too much space following}@PDefn2{Term=[expected type],
   Sec=(assignment_statement variable_name)}
 The @i(variable_)@nt<name> of an @nt<assignment_statement>
 is expected to be of any @Chg{Version=[2],New=[],Old=[nonlimited ]}type.
@@ -407,7 +407,8 @@ is expected to be of any @Chg{Version=[2],New=[],Old=[nonlimited ]}type.
 The expected type for the @nt<expression> is
 the type of the target.
 @begin{ImplNote}
-@Leading@keepnext@;An @nt<assignment_statement> as a whole is a "complete context,"
+@Leading@keepnext@;An @nt<assignment_statement> as a whole is a 
+@lquotes@;complete context@rquotes,
 so if the @i{variable_}@nt<name> of an @nt<assignment_statement> is
 overloaded, the @nt<expression> can be used to help disambiguate it.
 For example:
@@ -782,9 +783,10 @@ RHS="@Chg{Version=[3],New=[],Old=[@SynI{boolean_}@Syn2{expression}]}"}
 A @nt{condition} is expected to be of any boolean type.]}
 @end{Resolution}
 @begin{NotIso}
-@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 3 and 4
-were deleted.>}]}@Comment{This message should be
-deleted if the paragraphs are ever renumbered.}
+@ChgAdded{Version=[3],Noparanum=[T],Type=[Leading],Text=[@Shrink{@i<Paragraphs
+3 and 4 were deleted.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered. Note: We use "Leading" so there
+is less space afterwards.}
 @end{NotIso}
 
 @begin{RunTime}
@@ -1125,7 +1127,7 @@ in @RefSec{Variant Parts and Discrete Choices}.
 In the @ResolutionName for the case expression,
 we no longer need RM83-5.4(3)'s @lquotes@;which must be determinable
 independently of the context in which the expression occurs, but
-using the fact that the expression must be of a discrete type,@rquotes@;
+using the fact that the expression must be of a discrete type@rquotes,
 because the @nt{expression} is now a complete context.
 See @RefSec{The Context of Overload Resolution}.
 
@@ -1412,8 +1414,9 @@ of control are complete.],Old=[]}
 @end{Discussion}
 
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
-@ChgAdded{Version=[5],Text=[If a @nt{chunk_specification} with a
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}@Comment{Only
+non-normative paragraphs follow this, so we can use normal numbers}@ChgAdded{Version=[5],Text=[If
+a @nt{chunk_specification} with a
 @nt{discrete_subtype_definition} is present, then the logical thread of control
 associated with a given chunk has its own copy of the chunk parameter
 initialized with a distinct value from the discrete subtype defined by the
@@ -1421,14 +1424,14 @@ initialized with a distinct value from the discrete subtype defined by the
 assigned such that they increase with increasing values of the ranges covered
 by the corresponding loop parameters.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0251-1]}
 @ChgAdded{Version=[5],Text=[Whether or not a @nt{chunk_specification}
 is present in a parallel loop,
 the total number of iterations of the loop represents an upper bound
 on the number of logical threads of control devoted to the loop.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[For details about the execution of a
 @nt{loop_statement} with the @nt{iteration_scheme}
 @Chg{Version=[5],New=[including an],Old=[being @key[for]]}
@@ -1542,7 +1545,8 @@ Text=[@i{Example of a parallel loop with a chunk specification:}]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   Partial_Sum,
    Partial_Max : @key[array] (Chunk_Number) @key[of] Natural := (@key[others] => 0);
-   Partial_Min : @key[array] (Chunk_Number) @key[of] Natural := (@key[others] => Natural'Last);]}
+   Partial_Min : @key[array] (Chunk_Number) @key[of] Natural :=
+                       (@key[others] => Natural'Last);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={@key[begin]
@@ -1550,7 +1554,8 @@ Text=[@i{Example of a parallel loop with a chunk specification:}]}
    @key[for] I @key[in] Grid'Range(1) @key[loop]
       @key[declare]
          True_Count : @key[constant] Natural :=
-           [@key[for] J @key[in] Grid'Range(2) => (@key[if] Grid (I, J) @key[then] 1 @key[else] 0)]'Reduce("+",0);
+           [@key[for] J @key[in] Grid'Range(2) => 
+              (@key[if] Grid (I, J) @key[then] 1 @key[else] 0)]'Reduce("+",0);
       @key[begin]
          Partial_Sum (Chunk) := @@ + True_Count;
          Partial_Min (Chunk) := Natural'Min(@@, True_Count);
@@ -1559,9 +1564,10 @@ Text=[@i{Example of a parallel loop with a chunk specification:}]}
    @key[end loop];}}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0386-1]}
-@ChgAdded{Version=[5],Text=[   Put_Line ("Total=" & Partial_Sum'Reduce("+", 0)'Image &
-             ", Min=" & Partial_Min'Reduce(Natural'Min, Natural'Last)'Image &
-             ", Max=" & Partial_Max'Reduce(Natural'Max, 0)'Image);
+@ChgAdded{Version=[5],Text=[   Put_Line
+     ("Total=" & Partial_Sum'Reduce("+", 0)'Image &
+      ", Min=" & Partial_Min'Reduce(Natural'Min, Natural'Last)'Image &
+      ", Max=" & Partial_Max'Reduce(Natural'Max, 0)'Image);
 @key[end];]}
 
 @begin{WideAbove}
@@ -1939,11 +1945,9 @@ Chunk parameter behave in any other manner, execution is erroneous.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
   @ChgAdded{Version=[5],Text=[Various new types and subprograms are newly added
-  to Ada.Iterator_Interfaces. If an instance of Ada.Iterator_Interfaces is
-  referenced in a @nt{use_clause}, and an entity with one of the new names
-  is defined in some other package that is also referenced in a @nt{use_clause},
-  the user-defined entity may no longer be use-visible,
-  resulting in errors. This should be rare and is easily fixed if it does occur.]}
+  to Ada.Iterator_Interfaces. Therefore, a use clause conflict is possible;
+  see the introduction of @RefSecNum{Predefined Language Environment} for 
+  more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -2036,15 +2040,15 @@ of a parallel iterator type.],Old=[]}]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0151-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1],ARef=[AI12-0183-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[The subtype defined by the
-@nt{loop_parameter_subtype_indication}, if any, of a generalized iterator
+@nt{loop_@!parameter_@!subtype_@!indication}, if any, of a generalized iterator
 shall statically match the iteration cursor
 subtype. ],Old=[]}The @Chg{Version=[4],New=[subtype defined by],Old=[type of]}
-the @Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
+the @Chg{Version=[5],New=[@nt{loop_@!parameter_@!subtype_@!indication}],
 Old=[@nt{subtype_indication}]}, if any, of an array component
 iterator shall @Chg{Version=[4],New=[statically match],Old=[cover]} the
 component @Chg{Version=[4],New=[subtype],Old=[type]} of the type of the
 @SynI<iterable_>@nt{name}. The @Chg{Version=[4],New=[subtype defined
-by],Old=[type of]} the @Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
+by],Old=[type of]} the @Chg{Version=[5],New=[@nt{loop_@!parameter_@!subtype_@!indication}],
 Old=[@nt{subtype_indication}]}, if any, of a container element
 iterator shall @Chg{Version=[4],New=[statically match],Old=[cover]} the default
 element @Chg{Version=[4],New=[subtype],Old=[type]} for the type of the
@@ -2549,7 +2553,7 @@ most one @nt{iterator_parameter_association} for each formal parameter of the
 callable entity @i<C>. Each formal parameter without an
 @nt{iterator_parameter_association} shall have a
 @nt{default_expression} (in the profile of the view of @i<C> denoted by the
-@nt{name} or @nt{prefix}).]]}
+@nt{name} or @nt{prefix}).]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
 @ChgAdded{Version=[5],Text=[The formal parameter of the callable entity @i<C>
@@ -2596,7 +2600,7 @@ each formal parameter of this @nt{formal_part} with the @nt{identifier} of the
 corresponding formal parameter or element of the list of
 @nt{defining_identifier}s given in the @nt{iterator_parameter_specification}.
 The body of @i<P> consists of the conditionally executed
-@nt{sequence_of_statements}. The procedure P is called the
+@nt{sequence_@!of_@!statements}. The procedure P is called the
 @i<loop body procedure>.@Defn{loop body procedure}]}
 
 @begin{ImplNote}
@@ -3023,7 +3027,7 @@ by one of the @nt{handled_sequence_of_statements}
 @key[begin]
    @key[if] T /= @key[null] @key[and then]
       T.@key[all] @key[in] Binary_Operation'Class --@Examcom{ see @RefSecNum{Type Extensions}}
-   @key[then] --@Examcom{ recurse down the binary tree}
+   @key[then] --@Examcom{ recurse down the binary tree}@softpage
       @key[parallel do]
          Traverse (T.Left);
       @key[and]

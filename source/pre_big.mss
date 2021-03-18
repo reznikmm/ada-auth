@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_big.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 @Part(predefbignum, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:44 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @LabeledAddedSubclause{Version=[5],Name=[Big Numbers]}
 
@@ -363,9 +363,10 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
       @key{renames} From_String;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0404-1]}
-@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Num, Den : String) @key{return} Valid_Big_Real @key{is}
-      (Big_Integers.From_Universal_Image (Num) /
-       Big_Integers.From_Universal_Image (Den));]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Num, Den : String)
+      @key{return} Valid_Big_Real @key{is}
+         (Big_Integers.From_Universal_Image (Num) /
+          Big_Integers.From_Universal_Image (Den));]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{To_Quotient_String} (Arg : Valid_Big_Real) @key{return} String @key{is}

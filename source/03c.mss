@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:44 $}
+@Comment{$Date: 2021/03/18 10:02:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.152 $}
+@Comment{$Revision: 1.153 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -295,11 +295,11 @@ of the generic body result in distinct tags.@PDefn{Unspecified}
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1],ARef=[AI12-0399-1]}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @Chg{Version=[5],New=[],Old=[ @key[is]]}
     @Chg{Version=[2],New=[@Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Tag);]}
-    ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];@Chg{Version=[2],New=[
-    @key[pragma] Preelaborable_Initialization(Tag);],Old=[]}
+    ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Tag)]};],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[    @AdaObjDefn{No_Tag} : @key[constant] Tag;]}
@@ -454,7 +454,7 @@ one type that has the appropriate Ancestor and accessibility level],Old=[]}.]}
   prevent an external tag from identifying more than one type. However, an
   external tag can identify multiple types if a generic body contains a
   derivation of a tagged type declared outside of the generic, and there are
-  multiple instances at the same accessibility level as the type. (The Standard
+  multiple instances at the same accessibility level as the type. (The @StdTitle
   allows default external tags to not be unique in this case.)]}
   @end{Reason}
 
@@ -540,7 +540,7 @@ defined:
 @Attribute{Prefix=<S>, AttrName=<Class>,
   Text=[S'Class
   denotes a subtype of the class-wide type
-  (called @i(T)'Class in this International Standard) for the class
+  (called @i(T)'Class in this @IntlStdName) for the class
   rooted at @i(T) (or if S already denotes a class-wide subtype,
   then S'Class is the same as S).
 
@@ -691,7 +691,7 @@ result type is a specific tagged type @i(T) identifies @i(T).
   @lquotes@;built in place@rquotes in the ultimate result object with the
   appropriate tag.], Old=[This requires
   a runtime check for limited tagged types, since they are
-  returned "by-reference."]}
+  returned @lquotes@;by-reference@rquotes.]}
   For a nonlimited
   type, a new anonymous object with the appropriate tag
   is created as part of the function
@@ -1184,7 +1184,7 @@ We also considered trying make the accessibility level part of the
 contract; i.e. invent some way of saying (in the
 @nt{generic_declaration}) @lquotes@;all instances of this generic unit will
 have the same accessibility level as the
-@nt{generic_declaration}.@rquotes@;
+@nt{generic_declaration}@rquotes.
 Unfortunately, that doesn't solve the part of the problem having to do
 with abstract types.
 
@@ -1278,7 +1278,7 @@ The term @lquotes@;extension part@rquotes@; refers to the piece
 of text that defines the additional components (if any) the
 type extension has relative to its specified ancestor type.
 @begin(Discussion)
-  We considered other terminology, such as @lquotes@;extended type.@rquotes@;
+  We considered other terminology, such as @lquotes@;extended type@rquotes.
   However, the terms @lquotes@;private extended type@rquotes@; and @lquotes@;record extended type@rquotes@;
   did not convey the proper meaning. Hence, we have chosen
   to uniformly use the term @lquotes@;extension@rquotes@; as the type resulting
@@ -1399,7 +1399,7 @@ Type extension is a new concept.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00335-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0342-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0342-1],ARef=[AI12-0419-1]}
 @RootDefn{dispatching operation}
 @Defn2{Term=[dispatching call], Sec=(on a dispatching operation)}
 @Defn2{Term=[nondispatching call], Sec=(on a dispatching operation)}
@@ -1410,8 +1410,8 @@ Type extension is a new concept.
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
 The primitive subprograms of a tagged type@Chg{Version=[2],New=[, the
 subprograms declared by @nt{formal_@!abstract_@!subprogram_@!declaration}s,
-@Chg{Version=[5],New=[the subprograms identified by the user-defined literal
-aspects of a specific tagged type (see @RefSecNum{User-Defined Literals}),],Old=[]}
+@Chg{Version=[5],New=[the Put_Image attribute (see @RefSecNum{Image Attributes})
+of a specific tagged type,],Old=[]}
 and the stream attributes of a specific tagged type that are available (see
 @RefSecNum{Stream-Oriented Attributes}) at the end of the declaration list
 where the type is declared],Old=[]}
@@ -2124,14 +2124,15 @@ The concept of dispatching operations is new.
   rules for @nt{conditional_expression}s, as the list of exceptions to the
   usual rules appear to be exhaustive.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
-  @ChgAdded{Version=[5],Text=[Added wording to clarify that user-defined
-  literals are dispatching operations. User-defined literal aspects follow the
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0419-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to clarify that the Put_Image
+  attribute is a dispatching operation. Put_Image follows the
   model of stream-oriented attributes, and thus need to be mentioned in the
   same place.]}
 @end{Diffword2012}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledSubClause{Abstract Types and Subprograms}
 
 @begin{Intro}
@@ -3528,7 +3529,7 @@ for how to override this default.]
   interfaces. I don't much feel like trying to explain this properly.}
   @ChgDeleted{Version=[2],Text=[Essentially the same implementation issues
   arise for calls on dispatching operations of tagged types, except that
-  the static link is always known "statically."]}
+  the static link is always known @lquotes@;statically@rquotes.]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
   Note that access parameters of an
@@ -3748,7 +3749,7 @@ An object can be created in the storage pool of an
 access type by an @nt{allocator} (see @RefSecNum{Allocators})
 for the access type.
 A storage pool (roughly) corresponds to what some other languages
-call a @lquotes@;heap.@rquotes@;
+call a @lquotes@;heap@rquotes.
 See @RefSecNum{Storage Management} for a discussion of pools.
 
 Only @nt<index_constraint>s and @nt<discriminant_constraint>s
@@ -3905,7 +3906,7 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
   keyword @key[aliased] be considered aliased. This latter was a significant
   oversight in Ada 2005 @em technically, the keyword @key[aliased] had no
   effect. But of course implementations followed the intent, not the letter of
-  the Standard.]}
+  the @StdTitle.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[Explicitly aliased parameters (see
@@ -3920,6 +3921,7 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
 @end{Extend2012}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledSubClause{Incomplete Type Declarations}
 
 @begin{Intro}
@@ -4707,8 +4709,8 @@ any of these rules).
   Text=<@ChgAdded{Version=[5],Text=[An accessibility level is a representation 
   of the lifetime of an entity in terms of the level of dynamic nesting within 
   which the entity is known to exist.
-  Dynamic accessibility checks ensure that a referce does not outlive the entity
-  to which it refers, by checking that the level of the reference is no deeper 
+  Dynamic accessibility checks ensure that a reference does not outlive the entity
+  to which it refers, by checking that the level of the entity is no deeper 
   than the level of the reference. Based on static nesting, there are 
   corresponding legality rules that the level of the entity is not statically
   deeper than that of the reference.]}>}
@@ -5202,7 +5204,7 @@ is never deeper than that of the declaration of the stand-alone object].]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0240-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0070-1]}@ChgNote{Just to reflect the paragraph number change}
-@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0345-1]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0345-1]}@ChgNote{Last inserted paragraph, remove it quietly}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The accessibility level of an
 explicitly aliased (see @RefSecNum{Subprogram Declarations}) formal parameter in
 a function body is determined by the point of call; it is the same level that
@@ -5486,8 +5488,9 @@ a deeper level than that of the type.
 @end{Itemize}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0345-1]}
-@ChgAdded{Version=[5],Text=[Notwithstanding other rules given above, the
-accessibility level of an entity that is tied to that of an explicitly aliased
+@ChgAdded{Version=[5],Text=[Notwithstanding other rules given 
+above,@Defn{Notwithstanding} the accessibility level of an entity that
+is tied to that of an explicitly aliased
 formal parameter of an enclosing function is considered (both statically and
 dynamically) to be the same as that of an entity whose accessibility level is
 tied to that of the return object of that function.]}
@@ -6638,7 +6641,7 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Moved the assume the worst rule
   about constrainedness of the prefix of attribute Access to
   @RefSecNum{Formal Private and Derived Types}, as a number of places in the
-  Standard need this rule.]}
+  @StdTitle need this rule.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0157-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Ensured that the statically
@@ -6774,7 +6777,7 @@ a check is made that the @nt<protected_body> is already elaborated.
 This check and the evaluations of any actual parameters of the call
 are done in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin{Discussion}
-  A protected type has only one elaboration @lquotes@;bit,@rquotes@; rather than
+  A protected type has only one elaboration @lquotes@;bit@rquotes, rather than
   one for each operation, because one call may result in evaluating
   the barriers of other entries, and because there are no elaborable
   declarations between the bodies of the operations. In fact,
@@ -6928,7 +6931,7 @@ parts@Chg{Version=[3],New=[],Old=[ now]}.],Old=[]}
 that act as completions. Pragma Import (which is obsolescent) has the effect of
 setting aspect Import to True; such an aspect makes giving a completion illegal.
 The wording that allows pragmas as completions was left as it is harmless and
-appears in many places in this Standard.]}
+appears in many places in this @StdTitle.]}
 @end{Discussion}
 @end{Intro}
 

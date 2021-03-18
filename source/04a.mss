@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:44 $}
+@Comment{$Date: 2021/03/18 10:02:16 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.161 $}
+@Comment{$Revision: 1.162 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1005,7 +1005,7 @@ implementation-defined attribute shall differ from those of the
 language-defined
 attributes@Chg{New=[@Chg{Version=[5],New=[],Old=[ unless supplied for
 compatibility with a previous edition of
-this International Standard]}],Old=[]}.
+this @IntlStdTitle]}],Old=[]}.
 @ImplDef{Implementation-defined attributes.}
 @begin{Ramification}
 They cannot be reserved words because reserved words are not legal
@@ -1024,7 +1024,7 @@ attribute that would otherwise be illegal in the following cases:]}
 @begin{itemize}
    @ChgRef{Version=[5],Kind=[Added]}
    @ChgAdded{Version=[5],Text=[in order to support compatibility with a
-     previous edition of of this International Standard; or]}
+     previous edition of of this @IntlStdTitle; or]}
 
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0015],ARef=[AI95-00093-01]}
@@ -1035,7 +1035,7 @@ conflict with a language-defined attribute.],Old=[]}
 
    @ChgRef{Version=[5],Kind=[Added]}
    @ChgAdded{Version=[5],Text=[in the case of a language-defined attribute
-     whose @nt{prefix} is required by this International Standard to be a
+    whose @nt{prefix} is required by this @IntlStdName to be a
     floating point subtype, an implementation may accept an
     @nt{attribute_reference} whose @nt{prefix} is a fixed point
     subtype@Redundant[; the semantics of such an @nt{attribute_reference} are
@@ -1044,7 +1044,7 @@ conflict with a language-defined attribute.],Old=[]}
 @end{ImplPerm}
 
 @begin{Notes}
-Attributes are defined throughout this International Standard,
+Attributes are defined throughout this @IntlStdName,
 and are summarized in
 @RefSecNum{Language-Defined Attributes}.
 
@@ -1126,7 +1126,7 @@ The Ada 95 name resolution rules are a bit more explicit than in Ada 83.
 The Ada 83 rule said that the
   "meaning of the prefix of an attribute must be determinable
   independently of the attribute designator and independently
-  of the fact that it is the prefix of an attribute."  That isn't
+  of the fact that it is the prefix of an attribute".  That isn't
   quite right since the meaning even in Ada 83 embodies whether or not
   the prefix is interpreted as a parameterless function call,
   and in Ada 95, it also embodies whether or not the prefix is interpreted
@@ -1688,7 +1688,7 @@ the literal @key(null), or a @nt<string_literal>.
   An enumeration literal that is an @nt<identifier>
   rather than a @nt<character_literal> is not considered a @i(literal)
   in the above sense, because it involves no special notation
-  @lquotes@;suited to its kind.@rquotes@;
+  @lquotes@;suited to its kind@rquotes.
   It might more properly be called an @ntf<enumeration_identifier>,
   except for historical reasons.
 @end(Discussion)
@@ -1910,7 +1910,7 @@ values of the type.]}
 type-related operational aspects
 (collectively known
 as @i<user-defined literal aspects>)@Defn{user-defined literal aspect}
-@Defn2{Term={aspect},Sec=[{user-defined literal]}
+@Defn2{Term={aspect},Sec=[user-defined literal]}
 may be specified for a type @i<T>:]}
 
 @begin{Description}
@@ -1962,9 +1962,9 @@ not explictly aliased.@AspectDefn{String_Literal}]}
 @end{Example}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
-@ChgAdded{Version=[5],Text=[User-defined literal aspects are inherited according
-to the rules given in @RefSecNum{Operational and Representation Aspects}.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Text=[User-defined literal aspects are nonoverridable (see
+@RefSecNum{Aspect Specifications}).]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1987,9 +1987,9 @@ to the rules given in @RefSecNum{Operational and Representation Aspects}.]}
 @key[end] Pkg2;]}
 @end{Example}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0342-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0342-1],ARef=[AI12-0419-1]}
   @ChgAdded{Version=[5],Type=[Trailing],Text=[the initial value of Pkg2.X
-  is (0,0), not (1,1).]}
+  is (1,1), not (0,0).]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
@@ -2151,7 +2151,8 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
    (@key[declare]
       R : @key[constant array] (Integer @key[range] <>) @key[of] Roman_Number :=
          (@key[for] D @key[in] S'Range => Roman_Digit'Enum_Rep
-             (Roman_Digit'Wide_Wide_Value (''' & S(D) & '''))); --@Examcom{ See @RefSecNum{Character Types} and @RefSecNum{Enumeration Representation Clauses}}
+             (Roman_Digit'Wide_Wide_Value (''' & S(D) & ''')));
+                     --@Examcom{ See @RefSecNum{Character Types} and @RefSecNum{Enumeration Representation Clauses}}
     @key[begin]
       [@key[for] I @key[in] R'Range =>
          (@key[if] I < R'Last @key[and then] R(I) < R(I + 1) @key[then] -1 @key[else] 1) * R(I)]
@@ -2204,7 +2205,7 @@ or a single descendant of a ],Old=[]}record type@Chg{Version=[5],New=[],Old=[,]}
 @Chg{Version=[5],New=[of a ],Old=[]}record extension.
 @begin{Discussion}
   See @RefSec{The Context of Overload Resolution}
-  for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
+  for the meaning of @lquotes@;shall be a single ... type@rquotes.
 @end{Discussion}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
@@ -2393,6 +2394,7 @@ will work (see @RefSecNum{Assignment and Finalization}).
 @end{Incompatible2012}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledSubClause{Record Aggregates}
 
 @begin{Intro}
@@ -2746,7 +2748,7 @@ of a @nt{record_delta_aggregate} shall not:]}
 
 @begin{Itemize}
 
-@ChgRef{Version=[5],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0418-1]}
 @ChgAdded{Version=[5],Text=[use the box compound delimiter <> rather than
 an @nt{expression};]}
 
@@ -2989,7 +2991,7 @@ any components not determined by the @nt<ancestor_part>.]
 
 @begin{MetaRules}
 The model underlying this syntax is that a record extension
-can also be viewed as a regular record type with an ancestor "prefix."
+can also be viewed as a regular record type with an ancestor "prefix".
 The @nt<record_@!component_@!association_@!list> corresponds to
 exactly what would be needed
 if there were no ancestor/prefix type.
@@ -4786,10 +4788,10 @@ Set_Type, Map_Type, and Vector_Type:]}
    @key[function] Empty_Set @key[return] Set_Type;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[subtype] Small_Natural @key[is] Natural @key[range] 0..1000;]}
+@ChgAdded{Version=[5],Text=[   @key[subtype] Small_Int @key[is] Integer @key[range] -1000..1000;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] Include (S : @key[in out] Set_Type; N : @key[in] Small_Natural);]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] Include (S : @key[in out] Set_Type; N : @key[in] Small_Int);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   --  @Examcom<Map_Type is a map-like container type.>
@@ -5001,7 +5003,7 @@ V := Empty_Vector (<estimate of size of M>);
 @Defn{expression}
 An @i(expression) is a formula that defines the computation or retrieval
 of a value.
-In this International Standard, the term @lquotes@;expression@rquotes@; refers to a construct
+In this @IntlStdTitle, the term @lquotes@;expression@rquotes@; refers to a construct
 of the syntactic category @nt<expression> or of any of the
 @Chg{Version=[3],New=[following categories: @nt{choice_expression}, @nt{choice_relation},
 @nt{relation}, @nt{simple_expression}, @nt{term}, @nt{factor}, @nt{primary},
@@ -5370,7 +5372,7 @@ still have to be parenthesized when used in a bound of a range.
   @ChgAdded{Version=[5],Text=[Added the definitions of
   @ldquote@;operative constituent@rdquote and @ldquote@;newly constructed@rdquote
   to centralize definitions that are needed for various rules and definitions
-  across the Standard. In particular, @i<operative constituent> is often used
+  across the @StdTitle. In particular, @i<operative constituent> is often used
   when we want the semantics or legality to be unchanged by the presence
   of parens, qualification, or view conversions. Examples are found in
   @RefSecNum{Extension Aggregates}, @RefSecNum{Formal Parameter Modes},
@@ -6482,10 +6484,10 @@ membership tests:)
 @begin{Example}
 X /= Y
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
-@Chg{Version=[5],New=[S : String := "A";
-],Old=[]}"" < @Chg{Version=[5],New=[S],Old=["A"]} @key(and) @Chg{Version=[5],New=[S],Old=["A"]} < "Aa"     @Chg{Version=[5],New=[    ],Old=[]}--@RI[  True]
-@Chg{Version=[5],New=[S],Old=["A"]} < @Chg{Version=[5],New=["Bb"],Old=["B"]} @key(and) @Chg{Version=[5],New=[S],Old=["A"]} < "A  "  @Chg{Version=[5],New=[    ],Old=[]}--@RI[  True]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1],ARef=[AI12-0425-1]}
+@Chg{Version=[5],New=[A_String = "A"                        --@Examcom[ True (see @RefSecNum{Object Declarations})]
+],Old=[]}"" < @Chg{Version=[5],New=[A_String],Old=["A"]} @key(and) @Chg{Version=[5],New=[A_String],Old=["A"]} < "Aa"     @Chg{Version=[5],New=[],Old=[]}--@Examcom[ True]
+@Chg{Version=[5],New=[A_String],Old=["A"]} < @Chg{Version=[5],New=["Bb"],Old=["B"]} @key(and) @Chg{Version=[5],New=[A_String],Old=["A"]} < "A  "  @Chg{Version=[5],New=[],Old=[]}--@Examcom[ True]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 My_Car = @key(null)               --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.70 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
+@Comment{ $Revision: 1.71 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:45 $}
+@Comment{$Date: 2021/03/18 10:02:19 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -321,8 +321,8 @@ situations. Of course, such events could well indicate a programmer error.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00209-01]}
 For each @Chg{Version=[2],New=[read of],Old=[reference to]} a scalar object,
 an identification of the @Chg{Version=[2],New=[read],Old=[reference]} as
-either @lquotes@;known to be initialized,@rquotes@; or
-@lquotes@;possibly uninitialized,@rquotes@;
+either @lquotes@;known to be initialized@rquotes, or
+@lquotes@;possibly uninitialized@rquotes,
 independent of whether pragma Normalize_Scalars applies;
 @begin{Discussion}
 
@@ -1114,11 +1114,12 @@ S'Wide_Image, and S'Wide_Wide_Image
 shall be implemented within that partition without any dynamic allocation.]}
 
 @begin{ImplNote}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
-  @ChgAdded{Version=[5],Text=[Assuming the @ImplAdviceTitle is followed, this
-  can be accomplished by using an object of the
-  Text_Buffers.Bounded.Buffer_Type with the maximum characters as specified
-  in the Max_Image_Length restriction.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
+  @ChgAdded{Version=[5],Text=[This can be accomplished by using an object of
+  the Text_Buffers.Bounded.Buffer_Type with the maximum characters as specified
+  in the Max_Image_Length restriction, with a raise of
+  Program_Error afterward if Text_Truncated (Buf) is True after the
+  call on Put_Image (Buf, Arg).]}
 @end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1],ARef=[AI05-0272-1]}
@@ -1585,12 +1586,11 @@ Restrictions (No_Task_Hierarchy) shall also be specified for the partition.]}
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
 @ChgAdded{Version=[2],Text=[Notwithstanding@Defn{notwithstanding} what this
-International Standard
-says elsewhere, this @nt{pragma} allows partition elaboration rules concerning
-task activation and interrupt attachment to be changed. If the
+@IntlStdName says elsewhere, this @nt{pragma} allows partition elaboration rules
+concerning task activation and interrupt attachment to be changed. If the
 @SynI{policy_}@nt{identifier} is Concurrent, or if there is no pragma
 Partition_Elaboration_Policy defined for the partition, then the rules defined
-elsewhere in this Standard apply.]}
+elsewhere in this @StdTitle apply.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01],ARef=[AI95-00421-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If the partition elaboration policy

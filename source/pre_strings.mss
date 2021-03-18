@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.90 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
+@comment{ $Revision: 1.91 $ $Date: 2021/03/18 10:02:20 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2021/01/19 06:32:46 $}
+@Comment{$Date: 2021/03/18 10:02:20 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -34,7 +34,7 @@ is new to Ada 95.
   @ChgAdded{Version=[2],Text=[Included Wide_Wide_String in this description;
   the individual changes are documented as extensions as needed.]}
 @end{Diffword95}
-00238
+
 
 @LabeledSubClause{The Package Strings}
 @begin{Intro}
@@ -45,8 +45,9 @@ common to the string handling packages.
 @begin{StaticSem}
 @Leading@;The library package Strings has the following declaration:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Strings]}@key[package] Ada.Strings @key[is]
-   @key[pragma] Pure(Strings);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChildUnit{Parent=[Ada],Child=[Strings]}@key[package] Ada.Strings@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Strings);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
    @AdaObjDefn{Space}      : @key[constant] Character      := ' ';
@@ -90,13 +91,15 @@ entities needed for character sets and character-to-character mappings.
 @Leading@;The library package Strings.Maps has the following declaration:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChildUnit{Parent=[Ada.Strings],Child=[Maps]}@key[package] Ada.Strings.Maps @key[is]
-   @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Maps);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Maps]}@key[package] Ada.Strings.Maps@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}@Chg{Version=[5],New=[ @key[is]],Old=[(Maps);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
    --@Examcom{ Representation for a set of character values:}
-   @key[type] @AdaTypeDefn{Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
-   @key[pragma] Preelaborable_Initialization(Character_Set);],Old=[]}
+   @key[type] @AdaTypeDefn{Character_Set} @key[is] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Character_Set)]};],Old=[]}
 
    @AdaObjDefn{Null_Set} : @key[constant] Character_Set;
 
@@ -147,9 +150,10 @@ entities needed for character sets and character-to-character mappings.
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
    --@Examcom{ Representation for a character to character mapping:}
-   @key[type] @AdaTypeDefn{Character_Mapping} @key[is] @key[private];@Chg{Version=[2],New=[
-   @key[pragma] Preelaborable_Initialization(Character_Mapping);],Old=[]}
+   @key[type] @AdaTypeDefn{Character_Mapping} @key[is] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Character_Mapping)]};],Old=[]}
 
    @key[function] @AdaSubDefn{Value} (Map     : @key[in] Character_Mapping;
                    Element : @key[in] Character)
@@ -1939,8 +1943,9 @@ as the length does not exceed the allocated length.
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Unbounded);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   @key[type] @AdaTypeDefn{Unbounded_String} @key[is] @key[private];@Chg{Version=[2],New=[
-   @key[pragma] Preelaborable_Initialization(Unbounded_String);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+   @key[type] @AdaTypeDefn{Unbounded_String} @key[is] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Unbounded_String)]};],Old=[]}
 
    @AdaObjDefn{Null_Unbounded_String} : @key[constant] Unbounded_String;
 
@@ -2434,8 +2439,9 @@ in a preelaborable way (i.e. via aggregates versus function calls).
 
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}@key[package] Ada.Strings.Maps.Constants @key[is]
-   @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Constants);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}@key[package] Ada.Strings.Maps.Constants@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}@Chg{Version=[5],New=[ @key[is]],Old=[(Constants);]}
 
    @AdaObjDefn{Control_Set}           : @key[constant] Character_Set;
    @AdaObjDefn{Graphic_Set}           : @key[constant] Character_Set;
@@ -2547,9 +2553,10 @@ The package Strings.Wide_Maps has the following declaration.
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Wide_Maps);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
    --@Examcom{ Representation for a set of Wide_Character values:}
-   @key[type] @AdaTypeDefn{Wide_Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
-   @key[pragma] Preelaborable_Initialization(Wide_Character_Set);],Old=[]}
+   @key[type] @AdaTypeDefn{Wide_Character_Set} @key[is] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Wide_Character_Set)]};],Old=[]}
 
    @AdaObjDefn{Null_Set} : @key[constant] Wide_Character_Set;
 
@@ -2612,9 +2619,10 @@ The package Strings.Wide_Maps has the following declaration.
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
    --@Examcom{ Representation for a Wide_Character to Wide_Character mapping:}
-   @key[type] @AdaTypeDefn{Wide_Character_Mapping} @key[is] @key[private];@Chg{Version=[2],New=[
-   @key[pragma] Preelaborable_Initialization(Wide_Character_Mapping);],Old=[]}
+   @key[type] @AdaTypeDefn{Wide_Character_Mapping} @key[is] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Wide_Character_Mapping)]};],Old=[]}
 
    @key[function] @AdaSubDefn{Value} (Map     : @key[in] Wide_Character_Mapping;
                    Element : @key[in] Wide_Character)
@@ -2723,9 +2731,10 @@ this package is the identity mapping when applied to any element outside the
 Character portion of Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00362-01]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0302-1]}
-@ChgAdded{Version=[2],Text=[@nt{Pragma} Pure is replaced by
-@Chg{Version=[5],New=[aspects @Exam{@key<with> Preelaborate, Nonblocking,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Aspect],Old=[@nt{Pragma}]} 
+Pure is replaced by
+@Chg{Version=[5],New=[aspects @Exam{Preelaborate, Nonblocking,
 Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in 
 Strings.Wide_Maps.Wide_Constants.]}
 
@@ -2857,9 +2866,10 @@ for strings of Character elements.
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Wide_Wide_Maps);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[2],Text=[   -- @Examcom[Representation for a set of Wide_Wide_Character values:]
-   @key<type> @AdaTypeDefn{Wide_Wide_Character_Set} @key<is private>;
-   @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Set);]}
+   @key<type> @AdaTypeDefn{Wide_Wide_Character_Set} @key<is private>@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key<with>],Old=[@key<pragma>]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Wide_Wide_Character_Set)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Null_Set} : @key<constant> Wide_Wide_Character_Set;]}
@@ -2935,10 +2945,11 @@ for strings of Character elements.
          @key<return> Wide_Wide_Character_Sequence;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[2],Text=[   -- @Examcom[Representation for a Wide_Wide_Character to Wide_Wide_Character]
    -- @Examcom[mapping:]
-   @key<type> @AdaTypeDefn{Wide_Wide_Character_Mapping} @key<is private>;
-   @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Mapping);]}
+   @key<type> @AdaTypeDefn{Wide_Wide_Character_Mapping} @key<is private>@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key<with>],Old=[@key<pragma>]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Wide_Wide_Character_Mapping)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Map     : @key<in> Wide_Wide_Character_Mapping;
@@ -3076,9 +3087,10 @@ this package is the identity mapping when applied to any element outside the
 Character portion of Wide_Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
-@ChgAdded{Version=[2],Text=[@nt{Pragma} Pure is replaced by
-@Chg{Version=[5],New=[aspects @Exam{@key<with> Preelaborate, Nonblocking,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Aspect],Old=[@nt{Pragma}]} 
+Pure is replaced by
+@Chg{Version=[5],New=[aspects @Exam{Preelaborate, Nonblocking,
 Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in 
 Strings.Wide_Wide_Maps.Wide_Wide_Constants.]}
 
@@ -3086,8 +3098,9 @@ Strings.Wide_Wide_Maps.Wide_Wide_Constants.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-If a null Wide_Wide_Character_Mapping_Function is passed to any of the
-Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
+@ChgAdded{Version=[2],Text=[If a null Wide_Wide_Character_Mapping_Function is
+passed to any of the Wide_Wide_String handling subprograms, Constraint_Error
+is propagated.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -3136,9 +3149,10 @@ function Strings.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
-@key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type;@SubChildUnit{Parent=[Ada.Strings],Child=[Hash]}
-@key<pragma> Pure(@Chg{Version=[3],New=[Ada.Strings.Hash],Old=[Hash]});]}
+@key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type@Chg{Version=[5],New=[],Old=[;]}@SubChildUnit{Parent=[Ada.Strings],Child=[Hash]}
+@Chg{Version=[5],New=[   @key<with>],Old=[@key<pragma>]} Pure@Chg{Version=[5],New=[],Old=[(@Chg{Version=[3],New=[Ada.Strings.Hash],Old=[Hash]})]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3220,10 +3234,11 @@ Strings.Hash_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0414-1]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Hash_Case_Insensitive (Key : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Hash_Case_Insensitive]}
-   @key<return> Containers.Hash_Type;
-@key<pragma> Pure(Ada.Strings.Hash_Case_Insensitive);]}
+   @key<return> Containers.Hash_Type@Chg{Version=[5],New=[],Old=[;]}
+@Chg{Version=[5],New=[   @key<with>],Old=[@key<pragma>]} Pure@Chg{Version=[5],New=[],Old=[(Ada.Strings.Hash_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3334,9 +3349,10 @@ Strings.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Equal_Case_Insensitive (Left, Right : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Equal_Case_Insensitive]}
-   @key[return] Boolean;
-@key[pragma] Pure(Ada.Strings.Equal_Case_Insensitive);]}
+   @key[return] Boolean@Chg{Version=[5],New=[ @key[with]],Old=[;
+   @key[pragma]]} Pure@Chg{Version=[5],New=[],Old=[(Ada.Strings.Equal_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3428,9 +3444,10 @@ Strings.Less_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Less_Case_Insensitive (Left, Right : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Less_Case_Insensitive]}
-   @key[return] Boolean;
-@key[pragma] Pure(Ada.Strings.Less_Case_Insensitive);]}
+   @key[return] Boolean@Chg{Version=[5],New=[ @key[with]],Old=[;
+   @key[pragma]]} Pure@Chg{Version=[5],New=[],Old=[(Ada.Strings.Less_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3524,8 +3541,9 @@ the following declarations:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings],Child=[UTF_Encoding]}@key[package] Ada.Strings.UTF_Encoding @key[is]
-   @key[pragma] Pure (UTF_Encoding);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings],Child=[UTF_Encoding]}@key[package] Ada.Strings.UTF_Encoding@Chg{Version=[5],New=[],Old=[ @key[is]]}
+  @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[ (UTF_Encoding);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   -- @Examcom[Declarations common to the string encoding packages]
@@ -3573,8 +3591,9 @@ the following declarations:]}
 
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Conversions]}@key[package] Ada.Strings.UTF_Encoding.Conversions @key[is]
-   @key[pragma] Pure (Conversions);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Conversions]}@key[package] Ada.Strings.UTF_Encoding.Conversions@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[ (Conversions);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   -- @Examcom{Conversions between various encoding schemes}
@@ -3608,8 +3627,9 @@ the following declarations:]}
 
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Strings]}@key[package] Ada.Strings.UTF_Encoding.Strings @key[is]
-   @key[pragma] Pure (Strings);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Strings]}@key[package] Ada.Strings.UTF_Encoding.Strings@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[ (Strings);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   -- @Examcom{Encoding / decoding between String and various encoding schemes}
@@ -3640,8 +3660,9 @@ the following declarations:]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding.Strings;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Strings]}@key[package] Ada.Strings.UTF_Encoding.Wide_Strings @key[is]
-   @key[pragma] Pure (Wide_Strings);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Strings]}@key[package] Ada.Strings.UTF_Encoding.Wide_Strings@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[ (Wide_Strings);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   -- @Examcom{Encoding / decoding between Wide_String and various encoding schemes}
@@ -3672,8 +3693,9 @@ the following declarations:]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding.Wide_Strings;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Wide_Strings]}@key[package] Ada.Strings.UTF_Encoding.Wide_Wide_Strings @key[is]
-   @key[pragma] Pure (Wide_Wide_Strings);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Wide_Strings]}@key[package] Ada.Strings.UTF_Encoding.Wide_Wide_Strings@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[ (Wide_Wide_Strings);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   -- @Examcom{Encoding / decoding between Wide_Wide_String and various encoding schemes}
@@ -4105,9 +4127,10 @@ retrieve the text need not be the same.]}
 the following declarations:]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
-@ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Strings],Child=[Text_Buffers]}@key[package] Ada.Strings.Text_Buffers
-   @key[with] Pure, Nonblocking, Global => @key[null is]]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
+@ChgAdded{Version=[5],Text=[@key[with] Ada.Strings.UTF_Encoding.Wide_Wide_Strings;
+@ChildUnit{Parent=[Ada.Strings],Child=[Text_Buffers]}@key[package] Ada.Strings.Text_Buffers
+   @key[with] Pure @key[is]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Text_Buffer_Count} @key[is range] 0 .. @RI<implementation-defined>;]}
@@ -4116,142 +4139,139 @@ the following declarations:]}
 @ChgAdded{Version=[5],Text=[   @AdaObjDefn{New_Line_Count} : @key[constant] Text_Buffer_Count := @RI<implementation-defined>;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Root_Buffer_Type} @key[is abstract tagged private];]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Character_Count} (Buffer : Root_Buffer_Type)
-      @key[return] Text_Buffer_Count @key[is abstract];]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Clear} (Buffer : Root_Buffer_Type) @key[is abstract]
-      @key[with] Post'Class => Character_Count (Buffer) = 0;]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Get} (
-      Buffer : @key[in out] Root_Buffer_Type;
-      Item   : @key[out] String;
-      Last   : @key[out] Natural) @key[is abstract]
-      @key[with] Post'Class =>
-         (@key[declare]
-            Num_Read : @key[constant] Text_Buffer_Count :=
-               Text_Buffer_Count'Min
-                  (Character_Count(Buffer)'Old, Item'Length);
-          @key[begin]
-             Last = Num_Read + Item'First - 1 @key[and then]
-             Character_Count (Buffer) =
-             Character_Count (Buffer)'Old - Num_Read);]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Get} (
-      Buffer : @key[in out] Root_Buffer_Type;
-      Item   : @key[out] Wide_String;
-      Last   : @key[out] Natural) @key[is abstract]
-      @key[with] Post'Class =>
-         (@key[declare]
-            Num_Read : @key[constant] Text_Buffer_Count :=
-               Text_Buffer_Count'Min
-                  (Character_Count(Buffer)'Old, Item'Length);
-          @key[begin]
-             Last = Num_Read + Item'First - 1 @key[and then]
-             Character_Count (Buffer) =
-             Character_Count (Buffer)'Old - Num_Read);]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Wide_Get} (
-      Buffer : @key[in out] Root_Buffer_Type;
-      Item   : @key[out] Wide_Wide_String;
-      Last   : @key[out] Natural) @key[is abstract]
-      @key[with] Post'Class =>
-         (@key[declare]
-            Num_Read : @key[constant] Text_Buffer_Count :=
-               Text_Buffer_Count'Min
-                  (Character_Count(Buffer)'Old, Item'Length);
-          @key[begin]
-             Last = Num_Read + Item'First - 1 @key[and then]
-             Character_Count (Buffer) =
-             Character_Count (Buffer)'Old - Num_Read);]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{End_of_Line} (Buffer : @key[in] Root_Buffer_Type)
-      @key[return] Boolean @key[is abstract];]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Root_Buffer_Type} @key[is abstract tagged private]
+      @key[with] Default_Initial_Condition =>
+             Current_Indent (Root_Buffer_Type) = 0;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Put} (
       Buffer : @key[in out] Root_Buffer_Type;
-      Item   : @key[in]     String) @key[is abstract]
-      @key[with] Post'Class =>
-         Character_Count (Buffer) =
-         Character_Count (Buffer)'Old + Item'Length;]}
+      Item   : @key[in]     String) @key[is abstract];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Put} (
       Buffer : @key[in out] Root_Buffer_Type;
-      Item   : @key[in]     Wide_String) @key[is abstract]
-      @key[with] Post'Class =>
-         Character_Count (Buffer) =
-         Character_Count (Buffer)'Old + Item'Length;]}
+      Item   : @key[in]     Wide_String) @key[is abstract];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Wide_Put} (
       Buffer : @key[in out] Root_Buffer_Type;
-      Item   : @key[in]     Wide_Wide_String) @key[is abstract]
-      @key[with] Post'Class =>
-         Character_Count (Buffer) =
-         Character_Count (Buffer)'Old + Item'Length;]}
+      Item   : @key[in]     Wide_Wide_String) @key[is abstract];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{New_Line} (Buffer : @key[in out] Root_Buffer_Type)
-      @key[is abstract]
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Put_UTF_8} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[in]     UTF_Encoding.UTF_8_String) @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Put_UTF_16} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[in]     UTF_Encoding.UTF_16_Wide_String) @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{New_Line} (Buffer : @key[in out] Root_Buffer_Type) @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @AdaObjDefn{Standard_Indent} : @key[constant] Text_Buffer_Count := 3;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Current_Indent} (
+      Buffer : Root_Buffer_Type) @key[return] Text_Buffer_Count;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Increase_Indent} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Amount : @key[in]     Text_Buffer_Count := Standard_Indent)
       @key[with] Post'Class =>
-         Character_Count (Buffer) =
-         Character_Count (Buffer)'Old + New_Line_Count;]}
+         Current_Indent (Buffer) = Current_Indent (Buffer)'Old + Amount;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Decrease_Indent} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Amount : @key[in]     Text_Buffer_Count := Standard_Indent)
+      @key[with] Pre'Class =>
+              Current_Indent (Buffer) >= Amount
+                 @key[or else raise] Constraint_Error,
+           Post'Class =>
+              Current_Indent (Buffer) =
+                 Current_Indent (Buffer)'Old - Amount;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[private]
    ... --@Examcom{ not specified by the language}
 @key[end] Ada.Strings.Text_Buffers;]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
 @ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Strings.Text_Buffers],Child=[Unbounded]}@key[package] Ada.Strings.Text_Buffers.Unbounded
    @key[with] Preelaborate, Nonblocking, Global => @key[null is]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Buffer_Type} @key[is new] Root_Buffer_Type @key[with private]
-      @key[with] Default_Initial_Condition =>
-         Character_Count (Buffer_Type) = 0;]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Buffer_Type} @key[is new] Root_Buffer_Type @key[with private];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   --@Examcom{ Nonabstract overridings of each inherited operation are declared here.}]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Get} (
+      Buffer : @key[in out] Buffer_Type)
+      @key[return] String
+      @key[with] Post'Class => 
+         Get'Result'First = 1 @key[and then] Current_Indent (Buffer) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Wide_Get} (
+      Buffer : @key[in out] Buffer_Type)
+      @key[return] Wide_String
+      @key[with] Post'Class =>
+         Wide_Get'Result'First = 1 @key[and then] Current_Indent (Buffer) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Wide_Wide_Get} (
+      Buffer : @key[in out] Buffer_Type)
+      @key[return] Wide_Wide_String
+      @key[with] Post'Class =>
+         Wide_Wide_Get'Result'First = 1 
+            @key[and then] Current_Indent (Buffer) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Get_UTF_8} (
+      Buffer : @key[in out] Buffer_Type)
+      @key[return] UTF_Encoding.UTF_8_String
+      @key[with] Post'Class =>
+         Get_UTF_8'Result'First = 1 @key[and then] Current_Indent (Buffer) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Wide_Get_UTF_16} (
+      Buffer : @key[in out] Buffer_Type)
+      @key[return] UTF_Encoding.UTF_16_Wide_String
+      @key[with] Post'Class =>
+         Wide_Get_UTF_16'Result'First = 1
+            @key[and then] Current_Indent (Buffer) = 0;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[private]
-   ... --@Examcom{ not specified by the language}
+   ... --@Examcom{ not specified by the language, but will include nonabstract}
+       --@Examcom{ overridings of all inherited subprograms that require overriding.}
 @key[end] Ada.Strings.Text_Buffers.Unbounded;]}
 
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
 @ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Strings.Text_Buffers],Child=[Bounded]}@key[package] Ada.Strings.Text_Buffers.Bounded
    @key[with] Pure, Nonblocking, Global => @key[null is]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Buffer_Type} (Max_Characters : Text_Buffer_Count)
       @key[is new] Root_Buffer_Type @key[with private]
-      @key[with] Default_Initial_Condition =>
-         Character_Count (Buffer_Type) = 0;]}
+      @key[with] Default_Initial_Condition => @key[not] Text_Truncated (Buffer_Type);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   --@Examcom{ Nonabstract overridings of each inherited operation are declared here.}
-   --@Examcom{ For each of Put, Wide_Put, and Wide_Wide_Put,}
-   -- Pre => (@key[if] Character_Count (Buffer) + Item'Length > Buffer.Max_Characters
-   --         @key[then raise] Constraint_Error),
-   --@Examcom{ is added to the declaration. For New_Line,}
-   -- Pre => (@key[if] Character_Count (Buffer) + New_Line_Count > Buffer.Max_Characters
-   --         @key[then raise] Constraint_Error),
-   --@Examcom{ is added to the declaration.}]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Text_Truncated} (Buffer : @key[in] Buffer_Type) @key[return] Boolean;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   --@Examcom{ Get, Wide_Get, Wide_Wide_Get, Get_UTF_8, and Wide_Get_UTF_16}
+   --@Examcom{ are declared here just as in the Unbounded child.}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[private]
-   ... --@Examcom{ not specified by the language}
+   ... --@Examcom{ not specified by the language, but will include nonabstract}
+       --@Examcom{ overridings of all inherited subprograms that require overriding.}
 @key[end] Ada.Strings.Text_Buffers.Bounded;]}
 
 @end{Example}
@@ -4267,22 +4287,30 @@ currently stored in a text buffer.]}
   (Character, Wide_Character, or Wide_Wide_Character) was stored.]}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
-@ChgAdded{Version=[5],Text=[New_Line stores New_Line_Count characters that
-represent a new line into a text buffer. End_of_Line returns True if the next
-characters to be retrieved from the text buffer represent a new line.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
+@ChgAdded{Version=[5],Text=[New_Line stores New_Line_Count characters that 
+represent a new line into a text buffer. Current_Indent returns the current
+indentation associated with the buffer, with zero meaning there is no 
+indentation in effect; Increase_Indent and Decrease_Indent increase or 
+decrease the indentation associated with the buffer.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
-@ChgAdded{Version=[5],Text=[A call to Put, Wide_Put, or Wide_Wide_Put stores a
-sequence of characters into the text buffer.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
+@ChgAdded{Version=[5],Text=[A call to Put, Wide_Put, Wide_Wide_Put, Put_UTF_8,
+or Wide_Put_UTF_16 stores a sequence of characters into the text buffer, 
+preceded by Current_Indent(Buffer) spaces (Wide_Wide_Characters with position
+32) if there is at least one character in Item and it would have been the 
+first character on the current line.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
-@ChgAdded{Version=[5],Text=[A call to Get, Wide_Get, or Wide_Wide_Get returns
-the same sequence of characters as was present in the calls that stored the
-characters into the buffer. For a call to Get, if any character in the sequence
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
+@ChgAdded{Version=[5],Text=[A call to function Get, Wide_Get, Wide_Wide_Get,
+Get_UTF_8, or Wide_Get_UTF_16 returns the same sequence of characters as was
+present in the calls that stored the characters into the buffer, if
+representable. For a call to Get, if any character in the sequence
 is not defined in Character, the result is implementation defined. Similarly,
 for a call to Wide_Get, if any character in the sequence is not defined in
-Wide_Character, the result is implementation defined.]}
+Wide_Character, the result is implementation defined. As part of a call on 
+any of the Get functions, the buffer is reset to an empty state, with no 
+stored characters.]}
 
 @ChgImplDef{Version=[5],Kind=[AddedNormal],Text=[@ChgAdded{Version=[5],
 Text=[The value returned by a call to a Text_Buffer Get procedure if any
@@ -4292,13 +4320,13 @@ character in the returned sequence is not defined in Character.]}]}
 Text=[The value returned by a call to a Text_Buffer Wide_Get procedure if any
 character in the returned sequence is not defined in Wide_Character.]}]}
 
-@begin{Ramification}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
-  @ChgAdded{Version=[5],Text=[Even when the result is implementation defined,
-  the postconditions on the various Get routines require the length of the
-  returned string to match that of the number of characters removed from the
-  buffer.]}
-@end{Ramification}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0384-2]}
+@ChgAdded{Version=[5],Text=[In the case of a Buf of type 
+Text_Buffers.Bounded.Buffer_Type, Text_Truncated (Buf) returns True if the
+various Put procedures together have attempted to store more than 
+Buf.Max_Characters into Buf. If this function returns True, then the various
+Get functions return a representation of only the first Buf.Max_Characters
+characters that were stored in Buf.]}
 
 @end{StaticSem}
 
@@ -4314,7 +4342,7 @@ Text=[Bounded buffer objects should be implemented without dynamic allocation.]}
 @end{ImplAdvice}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The packages Strings.Text_Buffers, Strings.Text_Buffers.Unbounded,
   and Strings.Text_Buffers.Bounded are new.]}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2021/03/18 10:02:20 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:46 $}
+@Comment{$Date: 2021/03/18 10:02:20 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -34,8 +34,9 @@ as @i{root_real}) and for undefined information (such as
 @ImplDef{The names and characteristics of the numeric subtypes declared in
 the visible part of package Standard.}
 @begin{Example}
-@RootLibUnit{Standard}@key[package] Standard @key[is]
-   @key[pragma] Pure(Standard);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@RootLibUnit{Standard}@key[package] Standard@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Standard);]}
 
    @key[type] @AdaTypeDefn{Boolean} @key[is] (False, True);
 
@@ -226,7 +227,7 @@ the visible part of package Standard.}
 @comment{blank line}
       ' ',@\'@latin1(161)',@\'@latin1(162)',@\'@latin1(163)',@\'@latin1(164)',@\'@latin1(165)',@\'@latin1(166)',@\'@latin1(167)',@\--@RI{160 (16#A0#) .. 167 (16#A7#)}
       '@latin1(168)',@\'@latin1(169)',@\'@latin1(170)',@\'@latin1(171)',@Chg{Version=[3],New=[@\@\@\@\@\--@RI{168 (16#A8#) .. 171 (16#AB#)}
-      @latin1(172)',@\@RI[soft_hyphen],@\'@latin1(174)',@\'@latin1(175)',@\@\@\@\--@RI{172 (16#AC#) .. 175 (16#AF#)}],Old=[@\'@latin1(172)',@\'@latin1(173)',@\'@latin1(174)',@\'@latin1(175)',@\--@RI{168 (16#A8#) .. 175 (16#AF#)}]}
+      '@latin1(172)',@\@RI[soft_hyphen],@\'@latin1(174)',@\'@latin1(175)',@\@\@\@\--@RI{172 (16#AC#) .. 175 (16#AF#)}],Old=[@\'@latin1(172)',@\'@latin1(173)',@\'@latin1(174)',@\'@latin1(175)',@\--@RI{168 (16#A8#) .. 175 (16#AF#)}]}
 @comment{blank line}
       '@latin1(176)',@\'@latin1(177)',@\'@latin1(178)',@\'@latin1(179)',@\'@latin1(180)',@\'@latin1(181)',@\'@latin1(182)',@\'@latin1(183)',@\--@RI{176 (16#B0#) .. 183 (16#B7#)}
       '@latin1(184)',@\'@latin1(185)',@\'@latin1(186)',@\'@latin1(187)',@\'@latin1(188)',@\'@latin1(189)',@\'@latin1(190)',@\'@latin1(191)',@\--@RI{184 (16#B8#) .. 191 (16#BF#)}
@@ -344,14 +345,14 @@ space character (position 160)
 correspond to different values. Unless
 indicated otherwise, each occurrence of
 the character literal
-' ' in this International Standard
+' ' in this @IntlStdTitle
 refers to the space character.
 Similarly, the character literals
 for hyphen (position 45)
 and soft hyphen (position 173) correspond to different values.
 Unless indicated otherwise, each occurrence of
 the character literal
-'@en@;' in this International Standard
+'@en@;' in this @IntlStdTitle
 refers to the hyphen character.
 @end{StaticSem}
 

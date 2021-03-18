@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:44 $}
+@Comment{$Date: 2021/03/18 10:02:16 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.149 $}
+@Comment{$Revision: 1.150 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -256,7 +256,7 @@ called @i(execution).
 This process is also called @i(elaboration) for declarations
 and @i(evaluation) for expressions.
 One of the terms execution, elaboration, or evaluation is defined
-by this International Standard for each construct that has a run-time effect.
+by this @IntlStdTitle for each construct that has a run-time effect.
 @ToGlossary{Term=<Execution>,
   Text=<The process by which a construct achieves its run-time effect is
   called @i(execution).
@@ -331,7 +331,7 @@ A construct is @i(executable) if execution is defined for it.
   @Chg{Version=[2],New=[@nt{entry_index_specification}],Old=[@ntf{entry_list_iterator}]};
   and possibly @nt{discrete_range}.
   The last one is curious @em RM83 uses the term @lquotes@;evaluation of a
-  @nt{discrete_range},@rquotes@; but never defines it.
+  @nt{discrete_range}@rquotes, but never defines it.
   One might presume that the evaluation of a @nt{discrete_range}
   consists of the evaluation of the @nt{range} or the
   @nt{subtype_indication}, depending on what it is.
@@ -431,8 +431,8 @@ See @Chg{Version=[3],New=[Clause],Old=[Section]}
 
 We use the term @lquotes@;declaration@rquotes@; to cover @ntf<_specification>s that declare
 (views of) objects, such as @nt<parameter_specification>s. In Ada 83,
-these are referred to as a @lquotes@;form of declaration,@rquotes@; but it is not
-entirely clear that they are considered simply @lquotes@;declarations.@rquotes@;
+these are referred to as a @lquotes@;form of declaration@rquotes, but it is not
+entirely clear that they are considered simply @lquotes@;declarations@rquotes.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 RM83 contains an incomplete definition of "elaborated" in this
@@ -558,8 +558,9 @@ anyone complains.>
   one or more common properties, such as primitive operations. A
   category of types that is closed under derivation is also known as
   a @i<class>.]}>}
-@ToGlossary{Term=<Elementary type>,
-  Text=<An elementary type does not have components.>}
+@ChgToGlossary{Version=[5],Kind=[Revised],Term=<Elementary type>,
+  Text=<An elementary type @Chg{Version=[5],New=[is a type that ],Old=[]}does
+  not have components.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Composite type>,
   Text=<A composite type @Chg{Version=[2],New=[may have],Old=[has]} components.>}
 @ToGlossary{Term=<Scalar type>,
@@ -709,7 +710,7 @@ Discriminants can be thought of as parameters of the type.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 @Defn{subcomponent}
 The term @i(subcomponent) is used
-in this International Standard in place of the term component
+in this @IntlStdTitle in place of the term component
 to indicate either a component, or a component of another
 subcomponent. Where other subcomponents
 are excluded, the term component is used instead.
@@ -802,16 +803,16 @@ Such values @i(belong) to the subtype.@Chg{Version=[2],New=[@Defn2{Term=[values]
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 Any name of a @Chg{Version=[2],New=[category],Old=[class]} of types (such as
-@lquotes@;discrete@rquotes@;@Chg{Version=[2],New=[, ],Old=[ or]}
-@lquotes@;real@rquotes@;@Chg{Version=[2],New=[, or],Old=[), or other category of
-types (such as]} @lquotes@;limited@rquotes@;@Chg{Version=[2],New=[],
-Old=[ or @lquotes@;incomplete@rquotes@;]})
+@lquotes@;discrete@rquotes@Chg{Version=[2],New=[, ],Old=[ or]}
+@lquotes@;real@rquotes@Chg{Version=[2],New=[, or],Old=[), or other category of
+types (such as]} @lquotes@;limited@rquotes@Chg{Version=[2],New=[],
+Old=[ or @lquotes@;incomplete@rquotes]})
 is also used to qualify its subtypes, as well as its objects, values,
 declarations, and definitions, such as an @lquotes@;integer type
-declaration@rquotes@; or an @lquotes@;integer value.@rquotes@; In addition, if
-a term such as @lquotes@;parent subtype@rquotes@; or @lquotes@;index
-subtype@rquotes@; is defined, then the corresponding term for the type of the
-subtype is @lquotes@;parent type@rquotes@; or @lquotes@;index type.@rquotes@;
+declaration@rquotes or an @lquotes@;integer value@rquotes. In addition, if
+a term such as @lquotes@;parent subtype@rquotes or @lquotes@;index
+subtype@rquotes is defined, then the corresponding term for the type of the
+subtype is @lquotes@;parent type@rquotes or @lquotes@;index type@rquotes.
 @end{Honest}
 @begin{Discussion}
   We use these corresponding terms without explicitly defining them,
@@ -1083,11 +1084,11 @@ definitions as part of the declaration for an object@Chg{Version=[2],New=[],
 Old=[ (including a parameter or a discriminant)]}. The type defined by such
 a declaration is @i(anonymous) @em it has no nameable subtypes.
 @Defn2{Term=[italics],Sec=(pseudo-names of anonymous types)}
-For explanatory purposes, this International Standard sometimes refers to
+For explanatory purposes, this @IntlStdName sometimes refers to
 an anonymous type by a pseudo-name, written in italics, and
 uses such pseudo-names at places where the syntax normally requires
 an @nt<identifier>. For a named type whose first subtype is T,
-this International Standard sometimes refers to the type of T
+this @IntlStdName sometimes refers to the type of T
 as simply @lquotes@;the type T@rquotes@;.
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
@@ -1205,7 +1206,7 @@ given denotes the first subtype of the type. Other named subtypes of the
 type can be declared with @nt<subtype_declaration>s
 (see @RefSecNum{Subtype Declarations}). Although names do not directly
 denote types, a phrase like @lquotes@;the type Column@rquotes@; is sometimes used
-in this International Standard to refer to the type of Column, where Column denotes
+in this @IntlStdName to refer to the type of Column, where Column denotes
 the first subtype of the type. For an example of the definition
 of an anonymous type, see the declaration
 of the array Color_Table in @RefSecNum{Object Declarations}; its type
@@ -1457,13 +1458,13 @@ primitive subprograms.
   at run time.>}
 @begin{Honest}
   Protected subprograms are not considered to be
-  @lquotes@;primitive subprograms,@rquotes@; even though they are
+  @lquotes@;primitive subprograms@rquotes, even though they are
   subprograms, and they are inherited by derived types.
 @end{Honest}
 @begin{Discussion}
   We use the term
-  @lquotes@;primitive subprogram@rquotes@; in most of the rest of the manual.
-  The term @lquotes@;primitive operation@rquotes@; is used mostly in conceptual
+  @lquotes@;primitive subprogram@rquotes in most of the rest of the manual.
+  The term @lquotes@;primitive operation@rquotes is used mostly in conceptual
   discussions.
 @end{Discussion}
 
@@ -1586,7 +1587,7 @@ The description of S'Base has been moved to
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0269-1],ARef=[AI05-0299-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[3],Text=[The language-defined @i{predicate aspects}
 Static_Predicate and Dynamic_Predicate may be used to define properties of
 subtypes. A @i{predicate specification} is an @nt{aspect_specification}
@@ -1595,7 +1596,9 @@ aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspec
 General rules for aspects and @nt{aspect_specification}s are found in
 @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Aspects}
 and @RefSecNum{Aspect Specifications} respectively).@Chg{Version=[5],New=[ The predicate
-aspects are assertion aspects (see @RefSecNum{Pragmas Assert and Assertion_Policy}).],Old=[]}]}
+aspects are assertion aspects (see @RefSecNum{Pragmas Assert and Assertion_Policy}).
+@Redundant[The predicate aspects are not inherited, but their effects are additive, 
+as defined below.]],Old=[]}]}
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
   Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
     a given subtype; the subtype may be static.]}]}
@@ -1896,9 +1899,12 @@ satisfied:@Defn2{Term=[satisfies the predicates],Sec=(of a subtype)}@Defn{predic
 
 @begin{Itemize}
     @ChgRef{Version=[4],Kind=[Added]}
+    @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0419-1]}
     @ChgAdded{Version=[4],Text=[if @i<S> is a first subtype, the value is
       tested to determine whether it satisfies the predicates of the parent
-      and progenitor subtypes (if any) of @i<S> (in an arbitrary order);]}
+      and progenitor subtypes (if any) of @i<S> (in an arbitrary 
+      order)@Chg{Version=[5],New=[, after a (view) conversion of the value to
+      the corresponding parent or progenitor type],Old=[]};]}
 
 @begin{Ramification}
     @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -2014,14 +2020,20 @@ given subtype, then:]}
   Predicate_Failure aspect.]}]}
 @end{DescribeCode}
 
+@begin{NotIso}
+@ChgAdded{Version=[4],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs
+32 and 33 were moved above>}]}@Comment{This
+message should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0071-1]}
+@ChgRef{Version=[4],Kind=[DeletedNoDelMsg],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[A value @i<satisfies> a
 predicate if the predicate is True for that
 value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0276-1]}
-@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0071-1]}
+@ChgRef{Version=[4],Kind=[DeletedNoDelMsg],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[If any of the above
 @LegalityTitle is violated in an instance of a generic unit, Program_Error is
 raised at the point of the violation.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}]}
@@ -2287,6 +2299,26 @@ constant view of @Chg{Version=[3],New=[an],Old=[a variable]} object
 cannot be used to modify @Chg{Version=[3],New=[its value],Old=[the value
 of the variable]}. The terms constant and variable by themselves
 refer to constant and variable views of objects.
+
+@begin{Ramification}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0422-1]}
+   @ChgAdded{Version=[5],Text=[If some part of an object has a variable view, then 
+   the object as a whole has a variable view, and not all views of the object
+   are constant. That's true even if only a subcomponent has a variable view.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0422-1]}
+@ChgAdded{Version=[5],Text=[A constant object is @i<known to have no variable
+views>@Defn{known to have no variable views} if it does not have a part that
+is immutably limited, or of a controlled type, private type, or private 
+extension.]}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0422-1]}
+   @ChgAdded{Version=[5],Text=[This definition can be used in @LegalityTitle
+   as it respects privacy. It is an assume-the-worst rule, as all private 
+   types and private extensions might have a controlled component.]}
+@end{Reason}
 
 @Defn2{Term=[read], Sec=(the value of an object)}
 The value of an object
@@ -2740,6 +2772,11 @@ assigning to an enclosing object.
   to a list of variables. This makes the default to be a constant, which is
   the more common case, and eliminates issues caused by omissions from the
   list (such as parenthesized expressions).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0422-1]}
+  @ChgAdded{Version=[5],Text=[Added the term @ldquote@;known to have no
+  variable views@rdquote in order to have a definition that can be used
+  in @LegalityTitle without breaking privacy.]}
 @end{DiffWord2012}
 
 
@@ -2820,7 +2857,7 @@ is equivalent to a series of declarations each containing one
 @nt{defining_identifier} from the list,
 with the rest of the text of the declaration copied for each
 declaration in the series, in the same order as the list.
-The remainder of this International Standard relies
+The remainder of this @IntlStdTitle relies
 on this equivalence;
 explanations are given for
 declarations with a single @nt<defining_identifier>.
@@ -3060,7 +3097,7 @@ is preceded by the evaluation of the value that is to be assigned.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Duh. But we ought to say it. Note that, like
-any rule in the International Standard, it doesn't prevent
+any rule in the @IntlStdTitle, it doesn't prevent
 an @lquotes@;as-if@rquotes optimization; as long as the semantics as observed
 from the program are correct, the compiler can generate any code it wants.]}
 @end{Reason}
@@ -3182,18 +3219,18 @@ an explicit initial value is required.
 As indicated above,
 a stand-alone object is an object declared by an @nt<object_declaration>.
 Similar definitions apply to
-@lquotes@;stand-alone constant@rquotes@; and @lquotes@;stand-alone variable.@rquotes@;
+@lquotes@;stand-alone constant@rquotes and @lquotes@;stand-alone variable@rquotes.
 A subcomponent of an object is not a stand-alone object,
 nor is an object that is created by an @nt<allocator>.
 An object declared by a
-@nt<loop_parameter_specification>,
-@Chg{Version=[3],New=[@nt{iterator_specification},
-],Old=[]}@Chg{Version=[5],New=[@nt{iterated_component_association},
-@nt{chunk_specification},
-],Old=[]}@nt<parameter_specification>,
-@nt<entry_index_specification>, @nt<choice_parameter_specification>,
-@Chg{Version=[3],New=[@nt{extended_return_statement}, ],Old=[]}or
-a @nt{formal_object_declaration} @Chg{Version=[3],New=[of mode @key[in out] ],Old=[]}is
+@nt<loop_@!parameter_@!specification>,
+@Chg{Version=[3],New=[@nt{iterator_@!specification},
+],Old=[]}@Chg{Version=[5],New=[@nt{iterated_@!component_@!association},
+@nt{chunk_@!specification},
+],Old=[]}@nt<parameter_@!specification>,
+@nt<entry_@!index_@!specification>, @nt<choice_@!parameter_@!specification>,
+@Chg{Version=[3],New=[@nt{extended_@!return_@!statement}, ],Old=[]}or
+a @nt{formal_@!object_@!declaration} @Chg{Version=[3],New=[of mode @key[in out] ],Old=[]}is
 not @Chg{Version=[3],New=[considered],Old=[called]} a stand-alone object.
 
 The type of a stand-alone object cannot
@@ -3234,9 +3271,11 @@ Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String 
 @end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0425-1]}
 Limit     : @key(constant) Integer := 10_000;
 Low_Limit : @key(constant) Integer := Limit/10;
-Tolerance : @key(constant) Real := Dispersion(1.15);@Chg{Version=[2],New=[
+Tolerance : @key(constant) Real := Dispersion(1.15);@Chg{Version=[5],New=[
+A_String  : @key(constant) String := "A";],Old=[]}@Chg{Version=[2],New=[
 Hello_Msg : @key(constant access) String := Hello'Access; --@RI[ see @RefSecNum{Operations of Access Types}]],Old=[]}
 @end(Example)
 @end{Examples}
@@ -3354,6 +3393,7 @@ without an initialization expression.
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledSubClause{Number Declarations}
 
 @begin{Intro}
@@ -3858,9 +3898,9 @@ the implementation of the predefined equality operator of the record extension
 (see @RefSecNum(Relational Operators and Membership Tests)).
 @PDefn{type conformance}
 @begin{Ramification}
-  We say @lquotes@;...already exists...@rquotes@; rather than @lquotes@;is visible@rquotes@; or @lquotes@;has
-  been declared@rquotes@; because there are certain operations that are declared
-  later, but still exist at the place of the
+  We say @lquotes@;...already exists...@rquotes rather than @lquotes@;is visible@rquotes
+  or @lquotes@;has been declared@rquotes because there are certain operations that 
+  are declared later, but still exist at the place of the
   @nt{derived_type_definition},
   and there are operations that are never declared, but still exist.
   These cases are explained in @RefSecNum{Private Operations}.
@@ -4239,7 +4279,7 @@ similar, but not the same.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0110-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to clarify that
   the characteristics of derived types are formally defined here. (This is the
-  only place in the Standard that actually spells out what sorts of things
+  only place in the @StdTitle that actually spells out what sorts of things
   are actually characteristics, which is rather important.)]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0164-1]}
@@ -4248,6 +4288,7 @@ similar, but not the same.]}
 @end{DiffWord2005}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledSubClause{Derivation Classes}
 
 @begin{Intro}
@@ -4618,8 +4659,8 @@ are expected to be of the type of the @nt<range>.
 
   In some cases, it doesn't work to use expected types.
   For example, in the above rule, we say that
-  the @lquotes@;type of the @nt<range> shall resolve to ...@rquotes@;
-  rather than @lquotes@;the expected type for the @nt<range> is ...@rquotes@;.
+  the @lquotes@;type of the @nt<range> shall resolve to ...@rquotes
+  rather than @lquotes@;the expected type for the @nt<range> is ...@rquotes
   We then use @lquotes@;expected type@rquotes@; for the bounds.
   If we used @lquotes@;expected@rquotes@; at both points, there
   would be an ambiguity, since one could apply the rules of
@@ -6049,7 +6090,7 @@ enumeration literals.]}
   defined in Standard, if the @Chg{Version=[2],New=[language-defined ],
   Old=[]}names @Chg{Version=[2],New=[],Old=[FFFE and FFFF ]}were usable
   as enumeration literals, they would hide other nonoverloadable declarations
-  with the same names in @key[use]-d packages.]}
+  with the same names in @key[use]-d packages.
 
   @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
   @ChgDeleted{Version=[2],Text=[ISO 10646 has not defined the meaning of
@@ -7623,11 +7664,11 @@ or implicitly) a range that is compatible with the subtype.
   @Chg{Version=[2],New=[effect],Old=[affect]} on this fundamental rule.
   So the obsolescent forms of
   @nt<digits_constraint>s and @nt<delta_constraint>s that are
-  called @lquotes@;accuracy constraints@rquotes@; in RM83 don't really
+  called @lquotes@;accuracy constraints@rquotes in RM83 don't really
   represent constraints on the values of the subtype, but rather primarily
-  affect compatibility of the @lquotes@;constraint@rquotes@; with the subtype
-  being @lquotes@;constrained.@rquotes@; In this sense, they might better
-  be called @lquotes@;subtype assertions@rquotes@; rather than @lquotes@;constraints.@rquotes@;
+  affect compatibility of the @lquotes@;constraint@rquotes with the subtype
+  being @lquotes@;constrained@rquotes. In this sense, they might better
+  be called @lquotes@;subtype assertions@rquotes rather than @lquotes@;constraints@rquotes.
 
   Note that the @nt<digits_constraint> on a decimal fixed point subtype
   is a combination of an assertion about the @i(digits) of the

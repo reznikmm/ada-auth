@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:44 $}
+@Comment{$Date: 2021/03/18 10:02:17 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.158 $}
+@Comment{$Revision: 1.159 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -151,8 +151,10 @@ is not significant)]}.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0395-1]}
 @Syn{lhs=<parameter_specification>,rhs="
-    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]] >,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}]>,Old=<>}
-  | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}]>,Old=<>}"}
+    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]] >,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+        [@Syn2{aspect_specification}]>,Old=<>}
+  | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+        [@Syn2{aspect_specification}]>,Old=<>}"}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0395-1]}
@@ -888,23 +890,43 @@ from the associated expression as follows:@Defn2{Term=[corresponding expresssion
 @end{Itemize}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0113-1]}
-@ChgAdded{Version=[4],Text=[The primitive subprogram @i<S> is illegal if it is
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0412-1]}
+@ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[If the],Old=[The]}
+primitive subprogram @i<S> is @Chg{Version=[5],New=[not abstract, but the
+given descendant of @i<T> is abstract, then a nondispatching call on @i<S> is
+illegal if any Pre'Class or Post'Class aspect that applies to @i<S> is
+other than a static boolean expression. Similarly, a primitive
+subprogram of an abstract type @i<T>, to which a non-static Pre'Class or
+Post'Class aspect applies, shall neither be the prefix of an Access
+attribute_reference, nor shall it be a generic actual subprogram for a
+formal subprogram declared by a 
+@nt{formal_concrete_subprogram_declaration}],Old=[is illegal if it is
 not abstract and the corresponding expression for a Pre'Class or Post'Class
-aspect would be illegal.]}
+aspect would be illegal]}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[This can happen, for instance, if one of the
+  @ChgRef{Version=[5],Kind=[Deleted]}
+  @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[This can happen, 
+  for instance, if one of the
   subprograms called in the corresponding expression is abstract. We made the
   rule general so that we don't have to worry about exactly which cases
-  can cause this to happen, both now and in the future.]}
+  can cause this to happen, both now and in the future.]}]}
 @end{Ramification}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[We allow illegal corresponding expressions
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0412-1]}
+  @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[The above rules mean that 
+  a concrete primitive of an abstract type is effectively treated as abstract, 
+  if any nontrivial Pre'Class or Post'Class aspects apply to it. This makes 
+  sense because we are using a notional formal derived type model for such 
+  aspects, and an abstract type is not permitted as an actual type for such a 
+  formal type. If we didn't do this, the evaluation of the precondition or 
+  postcondition of a concrete subprogram of an abstract type could possibly
+  call abstract functions.],Old=[We allow illegal corresponding expressions
   on abstract subprograms as they could never be evaluated, and we need to
-  allow such expressions to contain calls to abstract subprograms.]}
+  allow such expressions to contain calls to abstract subprograms]}.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1],ARef=[AI05-0290-1]}
@@ -956,9 +978,9 @@ of:@Defn{Term=[known on entry],Sec=[postcondition]}],Old=[An @nt{expression} is
   @end{Reason}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0280-2]}
-  @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[a name statically denoting a
-  full constant declaration of a type for which all views are constant (see
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0280-2],ARef=[AI12-0422-1]}
+  @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[a name statically denoting
+  a full constant declaration which is known to have no variable views (see
   @RefSecNum{Objects and Named Numbers})],Old=[a @nt{predicate} of a
   @nt{quantified_expression}]};]}
 
@@ -1690,7 +1712,7 @@ applies to both dispatching and non-dispatching calls on @i<S>.]],Old=[]}]}
     expectations on the foreign code that it most likely cannot analyze.]}
 @end{ImplNote}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0195-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0195-1]}
 @ChgAdded{Version=[5],Text=[For the purposes of the above rules, a call on
 an inherited subprogram is considered to involve a call on a subprogram @i<S>'
 whose body consists only of a call (with appropriate conversions) on the
@@ -1817,7 +1839,7 @@ the postcondition expression, or both.]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   The Old attribute is defined more carefully. This changes the nominal subtype
   and place of declaration of the attribute compared to the published Ada 2012
-  Standard. In extreme cases, this could change the runtime behavior of the
+  @StdTitle. In extreme cases, this could change the runtime behavior of the
   attribute (for instance, the tag might be different). The changes are most
   likely going to prevent bugs by being more intuitive, but it is possible that
   a program that previously worked might fail.]}
@@ -1848,7 +1870,7 @@ the postcondition expression, or both.]}
   subprogram check both the original and new versions of a class-wide
   precondition. If a call on an inherited subprogram fails the original
   class-wide precondition when it passes the new class-wide precondition,
-  then the call will fail the precondition check wheras it would have passed
+  then the call will fail the precondition check whereas it would have passed
   in original Ada 2012. (A similar possibility exists for class-wide
   postconditions.) This can only happen if the overriding subprograms somehow
   fail to follow the guidelines of LSP, so this should be rare (the entire
@@ -1920,6 +1942,15 @@ the postcondition expression, or both.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1],ARef=[AI12-0272-1]}
   @ChgAdded{Version=[5],Text=[Pre and Post can be given on an
   access-to-subprogram type and on a generic formal subprogram.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0412-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> We now allow the definition of
+  a concrete subprogram @i<S> that has applicable Pre'Class or Post'Class 
+  expressions that is primitive for an abstract type @i<T> even when a 
+  Pre'Class or Post'Class may call an abstract subprogram. Rather, @i<S> is
+  treated as if it is abstract (meaning that uses that might require 
+  evaluating a statically bound Pre'Class or Post'Class expression are not
+  allowed).]}
 @end{Extend2012}
 
 @begin{Diffword2012}
@@ -1936,26 +1967,16 @@ the postcondition expression, or both.]}
 
 @LabeledAddedSubclause{Version=[5],Name=[The Global and Global'Class Aspects]}
 
-@Comment{There is no section around these, weird, but consistent with Pre and
-Type_Invariant}
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0425-1]}
+@ChgAdded{Version=[5],Text=[The Global and Global'Class aspects of a program 
+unit are used to identify
+the objects global to the unit that might be read or written during its
+execution.]}
+@end{Intro}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For a
-subprogram, an entry, an access-to-subprogram type, a task
-unit, a protected unit, or a library package or generic library package,
-the following language-defined aspect may be specified with an
-@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
-
-@begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Global@\The syntax for the
-  @nt{aspect_definition} used to define a Global aspect is as
-  follows:@AspectDefn{Global}]}
-
-@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Global],
-  Text=[@ChgAdded{Version=[5],Text=[Global object usage contract.]}]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0380-1]}
+@begin{Syntax}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0380-1],ARef=[AI12-0425-1]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_aspect_definition>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
     @key[null]
@@ -1991,12 +2012,35 @@ rhs="@Chg{Version=[5],New=<@key[all] | @key[synchronized] | @Syn2[global_name]>,
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0310-1]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_name>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<@SynI{object_}@Syn2{name} | @SynI{package_}@Syn2{name}>,Old=<>}"}
+@end{Syntax}
 
+@begin{Resolution}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0425-1]}
+@ChgAdded{Version=[5],Text=[A @nt{global_name} shall resolve to statically
+denote an object or a package (including a limited view of a package).]}
+@end{Resolution}
+
+@begin{StaticSem}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a
+subprogram, an entry, an access-to-subprogram type, a task
+unit, a protected unit, or a library package or generic library package,
+the following language-defined aspect may be specified with an
+@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0425-1]}
+@ChgAdded{Version=[5],Text=[Global@\The Global aspect shall be specified
+ with a @nt{global_aspect_definition}.@AspectDefn{Global}]}
+
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Global],
+  Text=[@ChgAdded{Version=[5],Text=[Global object usage contract.]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0422-1]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[The Global aspect identifies the set
-of variables (which, for the purposes of this clause includes all constants
-with some part being immutably limited, or of a controlled type, private
-type, or private extension) that are global to a callable entity
+of variables (which, for the purposes of this clause, includes all constants
+except those which are known to have no variable views (see 
+@RefSecNum{Objects and Named Numbers})) that are global to a callable entity
 or task body, and that are read or updated as part of the execution
 of the callable entity or task body. If specified for a protected
 unit, it refers to all of the protected operations of the protected
@@ -2019,10 +2063,9 @@ specified with an
 
 @begin{Description}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[Global'Class@\The syntax for
-   the @nt{aspect_definition} used to define a Global'Class
-   aspect is the same as that defined above for @nt{global_aspect_definition}.
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0425-1]}
+@ChgAdded{Version=[5],Text=[Global'Class@\The Global'Class aspect shall be
+   specified with a @nt{global_aspect_definition}.
    This aspect identifies an upper bound on the
    set of variables global to a dispatching operation that can be read
    or updated as a result of a dispatching call on the operation. If not
@@ -2038,15 +2081,6 @@ specified with an
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
 @ChgAdded{Version=[5],Text=[Together, we refer to the Global and Global'Class
 aspects as @i{global} aspects.@Defn{global aspect}]}
-
-@begin{Resolution}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[A @nt{global_name} shall resolve to statically
-denote an object or a package (including a limited view of a package).]}
-@end{Resolution}
-
-@begin{StaticSem}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[A @nt{global_aspect_definition} defines the
@@ -2773,7 +2807,7 @@ conformance, subtype conformance, or full conformance.]
 @Defn{calling convention}
 @Redundant[As explained in @RefSec{Interfacing Aspects},
 a @i{convention} can be specified for an entity.]
-@Chg{New=[Unless this International Standard states otherwise, the default
+@Chg{New=[Unless this @IntlStdName states otherwise, the default
 convention of an entity is Ada.],Old=[]}
 @Redundant[For a callable entity or access-to-subprogram type,
 the convention is called the @i{calling convention}.]
@@ -3978,7 +4012,7 @@ If the mode is @key(in out) or @key(out),
 the actual shall be a @nt<name> that denotes a variable.@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}
 @begin{Discussion}
   We no longer need @lquotes@;or a
-  @nt{type_conversion} whose argument is the @nt{name} of a variable,@rquotes@;
+  @nt{type_conversion} whose argument is the @nt{name} of a variable@rquotes,
   because a @nt{type_conversion} is now a @nt{name}, and a
   @nt{type_conversion} of a variable is a variable.
 @end{Discussion}
@@ -4845,7 +4879,8 @@ innermost enclosing @nt{subprogram_@!body},
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0398-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=[extended_return_object_declaration],Old=[]}>,
 rhs="@Chg{Version=[3],New=<
-    @Syn2{defining_identifier} : [@key{aliased}][@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}>,Old=[]}"}
+    @Syn2{defining_identifier} : [@key{aliased}][@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]@Chg{Version=[5],New=<
+        [@Syn2{aspect_specification}] >,Old=<>}>,Old=[]}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1],ARef=[AI05-0277-1],ARef=[AI05-0299-1]}
@@ -6080,9 +6115,13 @@ When aspect No_Return is True for an entity, the entity is said to be
 @i<nonreturning>.@Defn{nonreturning}@AspectDefn{No_Return}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0423-1]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
-@nt{aspect_definition} shall be a static expression. @Redundant[This aspect is
-never inherited;] if not directly specified, the aspect is False.]}
+@nt{aspect_definition} shall be a static expression. @Chg{Version=[5],New=[When 
+not directly specified, if the subprogram is primitive subprogram inherited by
+a derived type, then the aspect is True if any corresponding subprogram of the
+parent or progenitor types is nonreturning. Otherwise],Old=[@Redundant[This 
+aspect is never inherited;] if not directly specified]}, the aspect is False.]}
 
 @ChgAspectDesc{Version=[5],Kind=[Revised],Aspect=[No_Return],
   InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[A
@@ -6256,6 +6295,17 @@ normally, Program_Error is raised at the point of the call.
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspect No_Return is new; @nt{pragma} No_Return is now obsolescent.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0423-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Clarified that the nonreturning property is inherited by derivation. A
+  literal implementation of the Ada 2012 would mean that no overriding would
+  ever be rejected, as the inherited routine would never be nonreturning.
+  The Ada 202x requires overridings of dispatching nonreturning subprograms
+  to be rejected. This is formally incompatible, but practically such 
+  overridings have been rejected in practice.]}
+@end{Incompatible2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0269-1]}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:45 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -114,13 +114,13 @@ or generic function, as appropriate.
 
 @Defn{generic formal}
 An entity is a @i{generic formal} entity if it is declared
-by a @nt<generic_formal_parameter_declaration>. @lquotes@;Generic formal,@rquotes@;
-or simply @lquotes@;formal,@rquotes@; is used as a prefix in referring
+by a @nt<generic_formal_parameter_declaration>. @lquotes@;Generic formal@rquotes,
+or simply @lquotes@;formal@rquotes, is used as a prefix in referring
 to objects, subtypes (and types), functions, procedures and packages,
 that are generic formal entities, as well as to their respective
 declarations.
 @Redundant[Examples: @lquotes@;generic formal procedure@rquotes@;
-or a @lquotes@;formal integer type declaration.@rquotes@;]
+or a @lquotes@;formal integer type declaration@rquotes.]
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0371-1]}
 @ChgAdded{Version=[5],Text=[The list of 
@@ -272,7 +272,7 @@ The body of a generic unit (a @i{generic body})
 The syntax of a generic body is identical to that of a nongeneric body].
 @begin{Ramification}
 We also use terms like @lquotes@;generic function body@rquotes@; and
-@lquotes@;nongeneric package body.@rquotes@;
+@lquotes@;nongeneric package body@rquotes.
 @end{Ramification}
 @end{Intro}
 
@@ -512,9 +512,9 @@ then it has to be obeyed in the instance.
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[3],Text=[Ada 2012 addendum: Such @LegalityTitle are not
 as rare as the authors of Ada 95 hoped; there are more than 30 of them known
-at this point. They are indexed under "generic contract issue" and
-are associated with the boilerplate "In addition to the places where
-@LegalityTitle normally apply...". Indeed, there is only one known rule
+at this point. They are indexed under @lquotes@;generic contract issue@rquotes
+and are associated with the boilerplate @lquotes@;In addition to the places where
+@LegalityTitle normally apply...@rquotes. Indeed, there is only one known rule
 where rechecking in the specification is needed and where rechecking in the
 private part is @i<not> wanted (it is in @RefSecNum{Derived Types and Classes},
 but even it needs rechecking when tagged types are involved).]}
@@ -669,7 +669,7 @@ or the @RunTimeName@;s.
 Here is an example illustrating how this rule is checked:
 @lquotes@;In the declaration of a record extension,
 if the parent type is nonlimited, then each of the
-components of the @nt{record_extension_part} shall be nonlimited.@rquotes@;
+components of the @nt{record_extension_part} shall be nonlimited.@rquotes
 @begin{Example}
 @key[generic]
     @key[type] Parent @key[is] @key[tagged] @key[private];
@@ -832,7 +832,7 @@ of the denoted declaration.
 The overloading rules do not apply in the instance.
 @begin{Ramification}
 See @RefSec{The Context of Overload Resolution} for definitions of
-@lquotes@;interpretation@rquotes@; and @lquotes@;overloading rule.@rquotes@;
+@lquotes@;interpretation@rquotes and @lquotes@;overloading rule@rquotes.
 
 Even the @nt{generic_formal_parameter_declaration}s have corresponding
 declarations in the instance,
@@ -1232,10 +1232,10 @@ but the declaration of Bool_4 calls "="@-{5}.
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @tabclear()@tabset(P49)
 @key[procedure] Swap @key[is] @key[new] Exchange(Elem => Integer);
-@key[procedure] Swap @key[is] @key[new] Exchange(Character);  @\--@RI{  Swap is overloaded }
-@key[function] Square @key[is] @key[new] Squaring(Integer); @\--@RI{  "*" of Integer used by default}
+@key[procedure] Swap @key[is] @key[new] Exchange(Character);  @\--@Examcom{  Swap is overloaded }
+@key[function] Square @key[is] @key[new] Squaring(Integer); @\--@Examcom{  "*" of Integer used by default}
 @key[function] @Chg{Version=[5],New=[Square1],Old=[Square]} @key[is] @key[new] Squaring(Item => Matrix, "*" => Matrix_Product);
-@key[function] @Chg{Version=[5],New=[Square2],Old=[Square]} @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@RI{ same as previous}
+@key[function] @Chg{Version=[5],New=[Square2],Old=[Square]} @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@Examcom{ same as previous}
 
 @key[package] Int_Vectors @key[is] @key[new] On_Vectors(Integer, Table, "+");
 @end{Example}
@@ -1248,10 +1248,11 @@ Swap(A, B);
 A := Square(A);
 
 T : Table(1 .. 5) := (10, 20, 30, 40, 50);
-N : Integer := Int_Vectors.Sigma(T);  --@RI{  150 (see @RefSec{Generic Bodies} for the body of Sigma)}
+N : Integer := Int_Vectors.Sigma(T);  --@Examcom{  150}
+                                      --@Examcom{ (see @RefSec{Generic Bodies} for the body of Sigma)}
 
 @key[use] Int_Vectors;
-M : Integer := Sigma(T);  --@RI{  150}
+M : Integer := Sigma(T);  --@Examcom{  150}
 @end{Example}
 @end{Examples}
 
@@ -1309,13 +1310,13 @@ packages, and the declarations that occur therein.
 
 We have corrected the definition of the elaboration of a
 @nt{generic_instantiation} (RM83-12.3(17)); we don't elaborate
-entities, and the instance is not @lquotes@;implicit.@rquotes@;
+entities, and the instance is not @lquotes@;implicit@rquotes.
 
 In RM83, there is a rule saying the formal and actual shall match, and
 then there is much text defining what it means to match.
 Here, we simply state all the latter text as rules.
 For example, @lquotes@;A formal foo is matched by an actual greenish bar@rquotes@;
-becomes @lquotes@;For a formal foo, the actual shall be a greenish bar.@rquotes@;
+becomes @lquotes@;For a formal foo, the actual shall be a greenish bar@rquotes.
 This is necessary to split the @ResolutionName@;s
 from the @LegalityName@;s.
 Besides, there's really no need to define the concept of matching for
@@ -2473,6 +2474,15 @@ inherited from an interface type)],Old=[]}.
   ancestor type for a formal derived type in the same way as the characteristics
   are. Availability is rechecked in the instance specification.]}
 @end{Honest}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Text=[In an instance, the implicitly composed and
+additive aspects (see @RefSecNum{Aspect Specifications}) of a formal 
+type are those of the actual; for a nonoverridable
+aspect, a formal derived type inherits the aspect if the ancestor or
+any progenitor has the aspect, according to the rules given in 
+@RefSecNum{Operational and Representation Aspects}.]}
+
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 @Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
 @Chg{New=[@nt{prefix}],Old=[prefix]} S that denotes a formal indefinite subtype]},
@@ -3766,8 +3776,8 @@ rhs="@Chg{Version=[2],New={
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
-@ChgAdded{Version=[2],Text=[Any positional @nt{formal_package_association}s
-shall precede any named @nt{formal_package_association}s.]}
+@ChgAdded{Version=[2],Text=[Any positional @nt{formal_@!package_@!association}s
+shall precede any named @nt{formal_@!package_@!association}s.]}
 @end{SyntaxText}
 @end{Syntax}
 
@@ -3927,7 +3937,7 @@ If both were @Chg{Version=[3],New=[nameable],Old=[namable]}, one would get
 some funny anomalies since
 they denote the same entity, but, in the case of types at least,
 they might have different and inconsistent sets of primitive operators
-due to predefined operator @lquotes@;reemergence.@rquotes@; Formal derived types
+due to predefined operator @lquotes@;reemergence@rquotes, Formal derived types
 exacerbate the difference. We want the implicit declarations
 of the @nt<generic_formal_part> as well as the explicit
 declarations, so we get operations on the formal types.

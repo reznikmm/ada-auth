@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:45 $}
+@Comment{$Date: 2021/03/18 10:02:17 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.154 $}
+@Comment{$Revision: 1.155 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -168,15 +168,15 @@ language environment
 @end{Examples}
 
 @begin{Incompatible83}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @Defn{incompatibilities with Ada 83}
 In Ada 83, a library package is allowed to have a body even if
 it doesn't need one.
-In Ada 95, a library package body is either
-required or forbidden @em never optional.
-The workaround is to add @key[pragma] Elaborate_Body,
-or something else requiring a body,
-to each library package that has a body that isn't otherwise
-required.
+In Ada 95, a library package body is either required or forbidden @em never
+optional. The workaround is to add 
+@Chg{Version=[5],New=[aspect],Old=[@key[pragma]]} Elaborate_Body,
+or something else requiring a body, to each library package that has a body
+that isn't otherwise required.
 @end{Incompatible83}
 
 @begin{DiffWord83}
@@ -245,13 +245,15 @@ then this sequence of lexical elements shall repeat the
 @end{Syntax}
 
 @begin{Legality}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 A @nt{package_body} shall be the completion of a previous
 @nt{package_@!declaration} or @nt{generic_@!package_@!declaration}.
 A library @nt{package_@!declaration} or
 library @nt{generic_@!package_@!declaration}
 shall not have a body
 unless it requires a body@Redundant[;
-@key<pragma> Elaborate_Body can be used to require
+@Chg{Version=[5],New=[the],Old=[@key<pragma>]} Elaborate_Body
+@Chg{Version=[5],New=[aspect ],Old=[]}can be used to require
 a @nt<library_@!unit_@!declaration> to have a body
 (see @RefSecNum{Elaboration Control})
 if it would not otherwise require one].
@@ -461,7 +463,7 @@ generic formal private extension is also a partial view.
   Import]}, if supported by an implementation.
 @end(Honest)
 @begin{Reason}
-  We originally used the term @lquotes@;private view,@rquotes@; but this was
+  We originally used the term @lquotes@;private view@rquotes, but this was
   easily confused with the view provided @i(from) the private part, namely the
   full view.
 @end{Reason}
@@ -1135,7 +1137,7 @@ cannot have defaults.
 RM83-7.4.1(4),
 @lquotes@;Within the specification of the package that declares a private type
 and before the end of the corresponding full type declaration, a
-restriction applies....@rquotes@;,
+restriction applies....@rquotes,
 is subsumed (and corrected) by the rule that
 a type shall be completely defined before it is frozen,
 and the rule that the parent type of a derived type declaration shall be
@@ -1647,7 +1649,7 @@ doesn't work in the presence of child units, so we define that rule in
 terms of visibility.
 
 The definition of the Constrained attribute for private types
-has been moved to @lquotes@;Obsolescent Features.@rquotes@;
+has been moved to @lquotes@;Obsolescent Features@rquotes.
 (The Constrained attribute of an object has not been moved there.)
 @end{DiffWord83}
 
@@ -1716,6 +1718,7 @@ specified with an @nt{aspect_specification} (see
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0041-1],ARef=[AI12-0150-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[3],Text=[Type_Invariant'Class@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.
@@ -1726,7 +1729,9 @@ specified with an @nt{aspect_specification} (see
    interface type],Old=[]}.@AspectDefn{Type_Invariant'Class}@Chg{Version=[4],New=[
    Type_Invariant'Class determines a @i{class-wide type invariant}
    for a tagged type.@Defn{class-wide type invariant}@Defn2{Term=[type invariant],
-   Sec=[class-wide]}@Defn2{Term=[invariant],Sec=[class-wide]}],Old=[]}]}
+   Sec=[class-wide]}@Defn2{Term=[invariant],Sec=[class-wide]}@Chg{Version=[5],New=[
+   @Redundant[The Type_Invariant'Class aspect is not inherited, but its effects are
+   additive, as defined below.]],Old=[]}],Old=[]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
@@ -1796,7 +1801,7 @@ for an abstract type.]}
 @end{TheProof}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0382-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0382-1]}
 @ChgAdded{Version=[4],Text=[If a type extension occurs
 @Chg{Version=[5],New=[immediately within the visible part of
 a package specification,],Old=[]} at a point where a
@@ -1998,10 +2003,15 @@ on the specified object(s):@Defn{invariant check}]}
     check for @i<T>:],Old=[;]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
-  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0075-1]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0075-1]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[],Old=[An
   invariant is checked upon successful return from a call
   on any subprogram or entry that:]}]}
+  @begin{NotIso}
+  @ChgAdded{Version=[5],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraph 16
+  was merged above.>}]}@Comment{This message should be
+  deleted if the paragraphs are ever renumbered.}
+  @end{NotIso}
   @begin{Itemize}
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
     @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0042-1]}
@@ -2161,7 +2171,7 @@ specified above. If any of these evaluate to False,
 Assertions.Assertion_Error is raised at the point of the object
 initialization, conversion, or call.@Defn2{Term=(Assertion_Error),
 Sec=(raised by failure of runtime check)}@Defn2{Term=[check, language-defined],
-Sec=[controlled by assertion policy]}]} If a given call requires more than one
+Sec=[controlled by assertion policy]} If a given call requires more than one
 evaluation of an invariant expression, either for multiple objects of a single
 type or for multiple types with invariants, the evaluations are performed in
 an arbitrary order, and if one of them evaluates to False, it is not specified whether
@@ -2382,10 +2392,12 @@ scheduled for weekends:}]}
      (Scheduled => To_Occur, Urgency => Urgency);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] Day_Scheduled (Order : @key[in] Work_Order) @key[return] Day @key[is] (Order.Scheduled);]}
+@ChgAdded{Version=[5],Text=[   @key[function] Day_Scheduled (Order : @key[in] Work_Order) @key[return] Day @key[is]
+     (Order.Scheduled);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] Priority (Order : @key[in] Work_Order) @key[return] Level @key[is] (Order.Urgency);]}
+@ChgAdded{Version=[5],Text=[   @key[function] Priority (Order : @key[in] Work_Order) @key[return] Level @key[is]
+     (Order.Urgency);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[procedure] Change_Priority (Order        : @key[in out] Work_Order;
@@ -2449,7 +2461,7 @@ scheduled for weekends:}]}
   from a package. This is strictly inconsistent, as the Ada 2012 definition
   is missing these checks; therefore, programs could depend on using values
   that violate an invariant outside of the package of definition. These will
-  not raise Assertion_Error in Ada 2012 as defined in the Ada 2012 Standard,
+  not raise Assertion_Error in Ada 2012 as defined in the Ada 2012 @StdTitle,
   but ought to do so (as noted by this change). As these are a violation of
   the intent of invariants, we think that this change will mainly reveal bugs
   rather than cause them.]}
@@ -2529,6 +2541,7 @@ scheduled for weekends:}]}
 @end{DiffWord2012}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledAddedSubClause{Version=[5],Name=[Default Initial Conditions]}
 
 
@@ -2540,13 +2553,16 @@ language-defined assertion aspect may be specified with an
 
 @begin{Description}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[5],Text=[Default_Initial_Condition@\This aspect shall be
 specified by an @nt{expression}, called a @i<default initial condition
 expression>. Default_Initial_Condition may be specified on a
-@nt{private_type_declaration}, a @nt{private_extension_declaration},
-a @nt{formal_private_type_definition}, or a @nt{formal_derived_type_definition}.
+@nt{private_@!type_@!declaration}, a @nt{private_@!extension_@!declaration},
+a @nt{formal_@!private_@!type_@!definition}, or a @nt{formal_@!derived_@!type_@!definition}.
 @Defn{default initial condition expression}
-@AspectDefn{Default_Initial_Condition}]}
+@AspectDefn{Default_Initial_Condition}@Chg{Version=[5],New=[@Redundant[The
+Default_Initial_Condition aspect is not inherited, but its effects are
+additive, as defined below.]],Old=[]}]}
 
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Default_Initial_Condition],
   Text=[@ChgAdded{Version=[5],Text=[A condition that must hold true after
@@ -3541,7 +3557,7 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
   @key(synchronized), @key(task), or @key(protected) ],Old=[]}
   in its definition;
   @begin{Ramification}
-  Note that there is always a @lquotes@;definition,@rquotes@; conceptually,
+  Note that there is always a @lquotes@;definition@rquotes, conceptually,
   even if there is no syntactic category called @lquotes@;..._definition@rquotes@;.
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
@@ -3876,7 +3892,7 @@ rather than being a subclause of
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1],ARef=[AI05-0217-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition for
   immutably limited types, so that the fairly complex definition does
-  not need to be repeated in rules elsewhere in the Standard.]}
+  not need to be repeated in rules elsewhere in the @StdTitle.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> The built-in-place rules
@@ -3996,8 +4012,9 @@ or Finalize is applied to the containing object.
     @key[pragma] Remote_Types(Finalization);],Old=[]}]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-    @key[type] @AdaTypeDefn{Controlled} @key[is abstract tagged private];@Chg{Version=[2],New=[
-    @key{pragma} Preelaborable_Initialization(Controlled);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+    @key[type] @AdaTypeDefn{Controlled} @key[is abstract tagged private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Controlled)]};],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
     @key(procedure) @AdaSubDefn{Initialize} (Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
@@ -4005,8 +4022,9 @@ or Finalize is applied to the containing object.
     @key(procedure) @AdaSubDefn{Finalize}   (Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-    @key[type] @AdaTypeDefn{Limited_Controlled} @key[is abstract tagged limited private];@Chg{Version=[2],New=[
-    @key{pragma} Preelaborable_Initialization(Limited_Controlled);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+    @key[type] @AdaTypeDefn{Limited_Controlled} @key[is abstract tagged limited private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Limited_Controlled)]};],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
     @key(procedure) @AdaSubDefn{Initialize} (Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
@@ -4447,7 +4465,7 @@ used by the implementation).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[Notwithstanding@Defn{notwithstanding}
-what this International Standard says elsewhere, if an object is
+what this @IntlStdName says elsewhere, if an object is
 built in place:]}
 
 @begin{Itemize}
@@ -5010,7 +5028,7 @@ to the constructs or entities whose executions are being completed.
 Thus, for example,
 @lquotes@;the subprogram call or task is complete@rquotes@;
 really means
-@lquotes@;@i{the execution of} the subprogram call or task is complete.@rquotes@;
+@lquotes@;@i{the execution of} the subprogram call or task is complete@rquotes.
 @end{Honest}
 
 @leading@keepnext@RootDefn2{Term=[finalization], Sec=(of an object)}
@@ -5786,7 +5804,7 @@ all controlled types will be library-level types,
 because of the accessibility rules
 (see @RefSecNum{Operations of Access Types} and @RefSecNum{Type Extensions}).
 This ensures that the Finalize operations may be applied without
-providing any @lquotes@;display@rquotes@; or @lquotes@;static-link.@rquotes@;
+providing any @lquotes@;display@rquotes@; or @lquotes@;static-link@rquotes.
 This simplifies finalization as a result of garbage collection,
 abort, and asynchronous transfer of control.]}
 

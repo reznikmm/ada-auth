@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:40 $}
+@Comment{$Date: 2021/03/18 10:02:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @LabeledClause{Array Types}
 
@@ -738,7 +738,7 @@ these ordering operators correspond to lexicographic order
 @begin{Examples}
 @Leading@keepnext@i(Examples of string objects:)
 @begin(Example)
-@TabClear()@TabSet(P50)
+@TabClear()@TabSet(P49)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
 Question   : @key(constant) String  := "How many characters?";
 @\--@RI[ Question'First = 1, Question'Last = 20]
@@ -888,11 +888,13 @@ are indefinite subtypes.]
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0398-1]}
 @Syn{lhs=<discriminant_specification>,rhs="
-   @Syn2{defining_identifier_list} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}
- | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}"}
+   @Syn2{defining_identifier_list} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+      [@Syn2{aspect_specification}] >,Old=<>}
+ | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+      [@Syn2{aspect_specification}] >,Old=<>}"}
 
 @begin{Discussion}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0395-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0398-1]}
   @ChgAdded{Version=[5],Text=[Only implementation-defined aspects are allowed
   on discriminants in Ada 202x. Implementers are cautioned that any
   aspect allowed on a discriminant will need conformance rules. If,
@@ -968,8 +970,8 @@ denoted by the @nt<subtype_mark> of the @nt<access_definition>]}.
   discriminants just for limited types.]}
 
   Note that discriminants of a named access type are not
-  considered @lquotes@;access discriminants.@rquotes@;
-  Similarly, @lquotes@;access parameter@rquotes@;
+  considered @lquotes@;access discriminants@rquotes.
+  Similarly, @lquotes@;access parameter@rquotes
   only refers to a formal parameter defined by an @nt<access_definition>.
 @end(Reason)
 
@@ -1624,6 +1626,7 @@ when the discriminant is initialized.
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledSubClause{Discriminant Constraints}
 
 @begin{Intro}
@@ -1852,7 +1855,7 @@ initial values for discriminants, is now redundant
 with 3.3.1, 6.4.1, 8.5.1, and 12.4. Therefore, we don't
 repeat it here. Since the material is largely intuitive,
 but nevertheless complicated to state formally, it doesn't
-seem worth putting it in a "NOTE."
+seem worth putting it in a "NOTE".
 @end{DiffWord83}
 
 @begin{Incompatible95}

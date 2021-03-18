@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2020/12/05 05:10:43 $ $Author: randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:43 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -23,8 +23,9 @@ children are defined in @RefSec{Numerics}.
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00388-01]}
-@key[package] Ada.Numerics @key[is]@ChildUnit{Parent=[Ada],Child=[Numerics]}
-   @key[pragma] Pure(Numerics);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key[package] Ada.Numerics@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Numerics]}
+   @Chg{Version=[5],New=[@key[with]],Old=[ @key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Numerics);]}
    @AdaExcDefn{Argument_Error} : @key[exception];
    @AdaObjDefn{Pi} : @key[constant] :=
           3.14159_26535_89793_23846_26433_83279_50288_41971_69399_37511;@Chg{Version=[2],New=[
@@ -508,7 +509,7 @@ declaration:
 @ChgAdded{Version=[5],Text=[   @key[function] Random (Gen   : Generator;
                     First : Result_Subtype;
                     Last  : Result_Subtype) @key[return] Result_Subtype
-      @key[with] Post => Random'Result @key[in] First .. Last
+      @key[with] Post => Random'Result @key[in] First .. Last,
            Global => @key[overriding in out] Gen;]}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
