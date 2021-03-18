@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.75 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
+@comment{ $Revision: 1.76 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -100,8 +100,9 @@ Numerics.Generic_Complex_Types has the following declaration:
       @key{end} @key{record};
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   @key{type} @AdaTypeDefn{Imaginary} @key{is} @key{private};@Chg{Version=[2],New=[
-   @key{pragma} Preelaborable_Initialization(Imaginary);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI95-0399-1]}
+   @key{type} @AdaTypeDefn{Imaginary} @key{is} @key{private}@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Imaginary)]};],Old=[]}
 
    @AdaObjDefn{i} : @key{constant} Imaginary;
    @AdaObjDefn{j} : @key{constant} Imaginary;
@@ -1921,8 +1922,8 @@ let @RI{s} be 1.0.
    a value of @RI{v},
    note that it is always possible to factor
    @RI{v} as an integer
-   multiple of a @lquotes@;compatible@rquotes@; @i(small), but the integer multiple may be
-   @lquotes@;too big.@rquotes@;
+   multiple of a @lquotes@;compatible@rquotes @i(small), but the integer multiple may be
+   @lquotes@;too big@rquotes.
    If there exists a factorization in which that multiple is less than some
    implementation-defined limit, the result shall belong to the perfect result
    set; otherwise, it belongs to the close result set.
@@ -2010,7 +2011,7 @@ two cases:
   @ChgAdded{Version=[5],Text=[@b<Correction:> Reworded the fixed*integer
   accuracy requirements to clarify that the only allowed integer type in
   such operations is Standard.Integer. We make this correction as readers of
-  the Standard have been confused on this point.]}
+  the @StdTitle have been confused on this point.]}
 @end{DiffWord2012}
 
 

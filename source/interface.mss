@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.87 $ $Date: 2020/12/05 05:10:45 $ $Author: randy $ }
+@comment{ $Revision: 1.88 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:45 $}
+@Comment{$Date: 2021/03/18 10:02:19 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -557,7 +557,7 @@ defined.
 @Chg{Version=[3],New=[@PDefn2{Term=[elaboration], Sec=(declaration with a True Import aspect)}],
 Old=[@PDefn2{Term=[elaboration], Sec=(declaration named by a @nt{pragma} Import)}]}
 @Defn{notwithstanding}
-Notwithstanding what this International Standard says elsewhere,
+Notwithstanding what this @IntlStdName says elsewhere,
 the elaboration of a declaration @Chg{Version=[3],New=[with a True Import
 aspect],Old=[denoted by the
 @nt{local_name} of
@@ -888,9 +888,9 @@ and its language-defined descendants.}
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Interfaces has the following skeletal declaration:
 @begin{Example}
-@RootLibUnit{Interfaces}
-@key[package] Interfaces @key[is]
-   @key[pragma] Pure(Interfaces);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key[package] Interfaces@Chg{Version=[5],New=[],Old=[ @key[is]]}@RootLibUnit{Interfaces}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Interfaces);]}
 
    @key[type] Integer_@RI{n} @key[is] @key[range] -2**(@RI{n}-1) .. 2**(@RI{n}-1) - 1;  --@RI{2's complement}
 
@@ -967,7 +967,7 @@ which seemed like too much mechanism.
   @ChgAdded{Version=[5],Text=[@ldquote@;Shifting@rdquote and
   @ldquote@;rotating@rdquote have the conventional meaning.
   Neither of these terms is usefully defined by the usual normative references
-  of the Standard, so we provide pseudo-code here to describe the intended
+  of the @StdTitle, so we provide pseudo-code here to describe the intended
   semantics of the above wording (all operations in these examples are
   using modular semantics).]}
 
@@ -1197,8 +1197,9 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Interfaces.C has the following declaration:
 @begin{Example}
-@key(package) Interfaces.C @key(is)@ChildUnit{Parent=[Interfaces],Child=[C]}
-   @key(pragma) Pure(C);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key(package) Interfaces.C@Chg{Version=[5],New=[],Old=[ @key(is)]}@ChildUnit{Parent=[Interfaces],Child=[C]}
+   @Chg{Version=[5],New=[@key(with)],Old=[@key(pragma)]} Pure@Chg{Version=[5],New=[ @key(is)],Old=[(C);]}
 
    @RI{-- Declarations based on C's <limits.h>}
 
@@ -1227,6 +1228,10 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
    @key(type) @AdaTypeDefn{ptrdiff_t} @key(is) @key(range) @RI{implementation-defined};
 
    @key(type) @AdaTypeDefn{size_t} @key(is) @key(mod) @RI{implementation-defined};
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0411-1]}
+@ChgAdded{Version=[5],Text=[   @Examcom{-- Boolean Type}
+   @key(type) @AdaTypeDefn{C_bool} @key(is) @key(new) Boolean;]}
 
    @RI{-- Floating Point}
 
@@ -1412,15 +1417,17 @@ Interfaces.C.],Old=[]}]}
 Each of the types declared in Interfaces.C is C-compatible.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0411-1]}
 The types int, short, long, unsigned,
 ptrdiff_t, size_t, double,
 char, @Chg{Version=[2],New=[],Old=[and ]}wchar_t@Chg{Version=[2],New=[,
 char16_t, and char32_t],Old=[]}
 correspond respectively to the C types having the same names.
-The types signed_char, unsigned_@!short, unsigned_@!long, unsigned_@!char,
+The types signed_char, unsigned_@!short, unsigned_@!long,
+unsigned_@!char,@Chg{Version=[5],New=[ C_bool, ],Old=[]}
 C_float, and long_@!double correspond respectively
-to the C types signed char,
-unsigned short, unsigned long, unsigned char, float, and long double.
+to the C types signed char, unsigned short, unsigned long,
+unsigned char,@Chg{Version=[5],New=[ bool, ],Old=[]} float, and long double.
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1818,10 +1825,12 @@ the C function returns an int that is to be discarded.@end{discussion}
 An Ada function corresponds to a non-void C function.
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0135-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0411-1]}
 @ChgAdded{Version=[4],Text=[An Ada enumeration type corresponds to a C
 enumeration type with corresponding enumeration literals having the same
 internal codes, provided the internal codes fall within the range of the C int
-type.]}
+type.@Chg{Version=[5],New=[ The Ada Boolean type corresponds to the C bool 
+type.],Old=[]}]}
 
 An Ada @key[in] scalar parameter is passed as a scalar argument to a C function.
 
@@ -2042,6 +2051,15 @@ Old=[@Chg{Version=[3],New=[],Old=[   @key(pragma) Import(C, Strcpy, "strcpy");]}
   the language definition said), so little existing code should be impacted.]}
 @end{Incompatible2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0411-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}Added
+  type C_bool and (implicitly) the enumeration literals True and False to
+  the Interfaces.C package. Therefore, a use clause conflict is possible; see 
+  the introduction of @RefSecNum{Predefined Language Environment} for more
+  on this topic.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0028-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
@@ -2065,6 +2083,9 @@ Old=[@Chg{Version=[3],New=[],Old=[   @key(pragma) Import(C, Strcpy, "strcpy");]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0219-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Added advice that
   const t* map to Ada @key[in] parameters and vice versa.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0411-1]}
+  @ChgAdded{Version=[5],Text=[Added advice about mapping type Boolean.]}
 @end{DiffWord2012}
 
 
@@ -2097,8 +2118,9 @@ declaration:
    @key(type) @AdaTypeDefn{char_array_access} @key(is) @key(access) @key(all) char_array;
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   @key(type) @AdaTypeDefn{chars_ptr} @key(is) @key(private);@Chg{Version=[2],New=[
-   @key(pragma) Preelaborable_Initialization(chars_ptr);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+   @key(type) @AdaTypeDefn{chars_ptr} @key(is) @key(private)@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[   @key(with)],Old=[@key(pragma)]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(chars_ptr)]};],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00276-01]}
    @key(type) @AdaTypeDefn{chars_ptr_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @Chg{Version=[2],New=[@key(aliased) ],Old=[]}chars_ptr;
@@ -2668,6 +2690,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
 @LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Unchecked Union Types],Old=[Pragma Unchecked_Union]}
 
 @begin{Intro}
@@ -3703,10 +3726,11 @@ pass objects between Ada and Fortran programs.
 @Leading@Keepnext@;The library package Interfaces.Fortran has the following
 declaration:
 @begin{Example}
-@key[with] Ada.Numerics.Generic_Complex_Types;  @RI{-- see @RefSecNum{Complex Types}}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key[with] Ada.Numerics.Generic_Complex_Types;  -- @Examcom{see @RefSecNum{Complex Types}}
 @key[pragma] Elaborate_All(Ada.Numerics.Generic_Complex_Types);
-@key[package] Interfaces.Fortran @key[is]@ChildUnit{Parent=[Interfaces],Child=[Fortran]}
-   @key[pragma] Pure(Fortran);
+@key[package] Interfaces.Fortran@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Interfaces],Child=[Fortran]}
+   @Chg{Version=[5],New=[@key[with]],Old=[ @key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Fortran);]}
 
    @key[type] @AdaTypeDefn{Fortran_Integer} @key[is] @key[range] @RI{implementation-defined};
 
@@ -3884,8 +3908,9 @@ ISO/IEC 1594-1:2018 along with the C interfacing features defined in
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
-   @key[type] Fortran_Matrix @key[is] @key[array] (@Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>,
-                                 @Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>) @key[of] Double_Precision@Chg{Version=[3],New=[
+   @key[type] Fortran_Matrix @key[is] 
+      @key[array] (@Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>,
+             @Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>) @key[of] Double_Precision@Chg{Version=[3],New=[
       @key[with] Convention => Fortran;              ],Old=[;
    @key[pragma] Convention (Fortran, Fortran_Matrix);]}    --@RI{ stored in Fortran's}
                                                    --@RI{ column-major order}

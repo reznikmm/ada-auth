@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2021/01/19 06:32:45 $ $Author: randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:45 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -142,8 +142,9 @@ instructions that exploit the packed decimal representation.
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Decimal has the following declaration:
 @begin{Example}
-@key(package) Ada.Decimal @key(is)@ChildUnit{Parent=[Ada],Child=[Decimal]}
-   @key(pragma) Pure(Decimal);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key(package) Ada.Decimal@Chg{Version=[5],New=[],Old=[ @key(is)]}@ChildUnit{Parent=[Ada],Child=[Decimal]}
+   @Chg{Version=[5],New=[@key(with)],Old=[@key(pragma)]} Pure@Chg{Version=[5],New=[ @key(is)],Old=[(Decimal);]}
 
    @AdaObjDefn{Max_Scale} : @key(constant) := @RI{implementation-defined};
    @AdaObjDefn{Min_Scale} : @key(constant) := @RI{implementation-defined};

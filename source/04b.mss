@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:44 $}
+@Comment{$Date: 2021/03/18 10:02:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @LabeledClause{Type Conversions}
 
@@ -89,10 +89,10 @@ other @nt<type_conversion>s are called @i(value conversions).
   Sec=(type_conversion operand)}
 The operand of a @nt<type_conversion> is expected to be of any type.
 @begin{Discussion}
-  This replaces the "must be determinable" wording of Ada 83.
+  This replaces the @lquotes@;must be determinable@rquotes wording of Ada 83.
   This is equivalent to (but hopefully more intuitive than) saying
   that the operand of a @nt<type_conversion>
-  is a @lquotes@;complete context.@rquotes@;
+  is a @lquotes@;complete context@rquotes.
 @end{Discussion}
 
 The operand of a view conversion
@@ -1290,7 +1290,7 @@ as the operand of a @nt<type_conversion>, except in a NOTE.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The rules in this @Chg{Version=[3],New=[subclause],Old=[clause]} subsume the rules
-for "parameters of the form of a type conversion,"
+for "parameters of the form of a type conversion",
 and have been generalized to cover the use of a type conversion
 as a @nt<name>.
 @end{DiffWord83}
@@ -1677,7 +1677,7 @@ in package System.Storage_Pools.Subpools
 (see @RefSecNum{Storage Subpools}).@PDefn2{Term=[expected type],Sec=(subpool_handle_name)}],Old=[]}
 @begin{Discussion}
   See @RefSec(The Context of Overload Resolution) for the meaning
-  of @lquotes@;shall be a single ... type whose ...@rquotes@;
+  of @lquotes@;shall be a single ... type whose ...@rquotes.
 @end{Discussion}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010],ARef=[AI95-00127-01]}
@@ -3137,8 +3137,8 @@ raising.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
   @ChgAdded{Version=[2],Text=[Ada 95 didn't clearly define the bounds of a value of
-  a static expression for universal types and for "any integer/float/fixed
-  type". We also make it clear that we do not intend exact evaluation of
+  a static expression for universal types and for @lquotes@;any integer/float/fixed
+  type@rquotes. We also make it clear that we do not intend exact evaluation of
   static expressions in an instance body if the expressions aren't static in the
   generic body.]}
 
@@ -3474,8 +3474,9 @@ This subclause is new to Ada 95.
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[@b(procedure) S'Put_Image
-   (@RI(Buffer) : @key[in out] Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;
-    @RI(Arg)    : @key[in] T);]}
+   (@RI(Buffer) : @key[in out] 
+             Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;
+    @RI(Arg)   : @key[in] T);]}
 @end(Descexample)
 @Comment{These two paragraphs have to be Added rather than AddedNormal so that
 the paragraphs in thee Annex have the correct paragraph numbers.}
@@ -3488,11 +3489,12 @@ the paragraphs in thee Annex have the correct paragraph numbers.}
 @EndPrefixType{}
 @end{Description}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[5],NoPrefix=[T],Text=[The Put_Image attribute may be
 specified for any specific type T either via an @nt{attribute_definition_clause}
 or via an @nt{aspect_specification} specifying the Put_Image aspect of the
-type.@AspectDefn{Put_Image}]}
+type.@AspectDefn{Put_Image}@Redundant[ The Put_Image aspect is not inherited, 
+but rather is implicitly composed for derived types, as defined below.]]}
 
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Put_Image],
   Text=[@ChgAdded{Version=[5],Text=[Procedure to define the image of a
@@ -3515,10 +3517,18 @@ type.@AspectDefn{Put_Image}]}
 @end{Discussion}
 
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0340-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[The behavior of the default
-  implementation of S'Put_Image depends on the class of T. For
-  an elementary type, the implementation is equivalent to:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Text=[The behavior of the default
+  implementation of S'Put_Image depends on the class of T.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Text=[For an untagged derived type, the default 
+implementation of T'Put_Image invokes the Put_Image for its parent type on
+a conversion of the parameter of type T to the parent type.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a nonderived elementary type, 
+  the implementation is equivalent to:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[procedure] Scalar_Type'Put_Image
@@ -3531,8 +3541,9 @@ type.@AspectDefn{Put_Image}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[where the Wide_Wide_String value
-  written out to the stream is defined as follows:]}
+  written out to the text buffer is defined as follows:]}
 
+@begin{Itemize}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
 @ChgAdded{Version=[5],Text=[For an integer type, the image written out is the
   corresponding decimal literal, without underlines, leading zeros, exponent, or
@@ -3668,25 +3679,59 @@ type.@AspectDefn{Put_Image}]}
    but it can never be called (as no legal @nt{prefix} of Image has that type,
    and that type cannot be named preventing direct calls).]}
 @end{Honest}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Text=[For a type extension, the default implementation
+of T'Put_Image
+depends on whether there exists a noninterface ancestor of T (other
+than T itself) for which the Put_Image aspect has been
+directly specified. If so, then T'Put_Image will
+generate an image based on extension aggregate syntax where the
+ancestor type of the extension aggregate is the nearest ancestor type
+whose Put_Image aspect has been specified. If no such ancestor exists, 
+then the default implementation of T'Put_Image
+is the same as described below for a nonderived record type.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This might generate an image such as
+       @exam{"(This Text Was User-Generated with C1 =>  123, C2 =>  456)"}
+       where the "This Text was User-Generated" portion of the text was
+       generated by the call to the user-specified Put_Image routine.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a specific, nonderived composite type:]}
+
+@begin{Itemize}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[If the default implementation of Put_Image writes 
+  components, the order in which components are written is the same 
+  canonical order in which components of a composite type T are written out
+  by the default implementation of T'Write.  @Redundant[This is also the order
+  that is used in determining the meaning of a positional aggregate of type T.]]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0384-2]}
+   @ChgAdded{Version=[5],Text=[In general, the default implementation of
+     T'Put_Image for a composite type will involve some sequence of calls to
+     Put and its Wide and Wide_Wide variants and calls to the Put_Image 
+     procedures of component types and, in the case of an array type, index 
+     types. The Put calls may pass in either literal values (e.g., "(",
+     ")", "'(", " => ", or ", "), or other things (such as component names for
+     record values, task_id images for tasks, or the Wide_Wide_Expanded_Name of
+     the tag in the class-wide case).]}
+@end{Discussion}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[5],Text=<For an array type T, the default implementation of
   T'Put_Image generates an image based on named (not positional) array
   aggregate syntax (with '[' and ']' as the delimiters) using calls to the
   Put_Image procedures of the index type(s) and the element type to generate
   images for values of those types.>}
-
-@begin{Discussion}
-   @ChgRef{Version=[5],Kind=[AddedNormal]}
-   @ChgAdded{Version=[5],Text=[In general, the default implementation of
-     T'Put_Image for a composite type will involve some sequence of calls to
-     Wide_Wide_String'Write and calls to the Put_Image procedures of component
-     types and, in the case of an array type, index types. The
-     Wide_Wide_String'Write calls may pass in either literal values (e.g., "(",
-     ")", "'(", " => ", or ", "), or other things (such as component names for
-     record values, task_id images for tasks, or the Wide_Wide_Expanded_Name of
-     the tag in the class-wide case).]}
-@end{Discussion}
 
 @begin{Discussion}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3705,7 +3750,7 @@ type.@AspectDefn{Put_Image}]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=[The case of a null array is handled specially, using
+@ChgAdded{Version=[5],Noprefix=[T],Text=[The case of a null array is handled specially, using
   ranges for index bounds and @exam{"<>"} as a syntactic component-value
   placeholder.]}
 
@@ -3717,67 +3762,13 @@ type.@AspectDefn{Put_Image}]}
      null array and has no actual elements.]}
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=[The order in which components are written for a
-  composite type is the same canonical order in which components of a composite
-  type T are written out by the default implementation of T'Write.
-  @Redundant[This is also the order that is used in determining the meaning of a
-  positional aggregate of type T.]]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=[For a class-wide type, the default implementation of
-  T'Put_Image generates an image based on qualified expression syntax.
-  Wide_Wide_String'Write is called with Wide_Wide_Expanded_Name of @i{Arg}'Tag.
-  Then S'Put_Image is called, where S is the specific type identified by
-  @i{Arg}'Tag.]}
-
-@begin{ImplNote}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[This will typically require a dispatching
-      call.]}
-@end{ImplNote}
-
-@begin{Discussion}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Type=[Leading],Text=[This might generate an image such as:]}
-@begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text={SOME_PACKAGE.SOME_TAGGED_TYPE'
-   (COMPONENT_1 =>  123, COMPONENT_2 => 456)}}
-@end{Example}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[The parentheses in this case are generated by
-      the call to Some_Tagged_Type'Put_Image.]}
-@end{Discussion}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=[For a type extension, the default implementation of
-  T'Put_Image depends on whether there exists a noninterface ancestor of T
-  (other than T itself) for which the Put_Image aspect has been
-  @Redundant[explicitly] specified. If so, then T'Put_Image will generate an
-  image based on extension aggregate syntax where the ancestor type of the
-  extension aggregate is the nearest ancestor type whose Put_Image aspect has
-  been specified.]}
-
-@begin{Discussion}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[This might generate an image such as
-       @exam{"(This Text Was User-Generated with C1 =>  123, C2 =>  456)"}
-       where the "This Text was User-Generated" portion of the text was
-       generated by the call to the user-specified Put_Image routine.]}
-@end{Discussion}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=[If no such ancestor exists, then the default
-  implementation of T'Put_Image is the same as described below for an untagged
-  record type.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=[For an untagged record type, a specific tagged
-  record type other than a type extension which meets the criteria described in
-  the previous paragraph, or a protected type, the default implementation of
-  T'Put_Image generates an image based on named (not positional) record
-  aggregate syntax (except that for a protected type, the initial left
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Text=[For a record type (or, as indicated above, 
+  a type extension with no noninterface ancestor specifying Put_Image),
+  or a protected type, the default 
+  implementation of T'Put_Image generates an image based on named (not positional)
+  record aggregate syntax (except that for a protected type, the initial left
   parenthesis is followed by @exam{"PROTECTED with "}). Component names are
   displayed in upper case, following the rules for the image of an enumeration
   value. Component values are displayed via calls to the component type's
@@ -3793,7 +3784,7 @@ type.@AspectDefn{Put_Image}]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=[The image written out for a record having no
+@ChgAdded{Version=[5],Noprefix=[T],Text=[The image written out for a record having no
   components (including any interface type) is @exam{"(NULL@ RECORD)"}. The
   image written out for a componentless protected type is
   @exam{"(PROTECTED@ NULL@ RECORD)"}. In the case of a protected type T, a call to the default
@@ -3834,12 +3825,48 @@ default implementation of T'Put_Image also includes discriminant values, as in:]
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=["(TASK <task_id_image> with D1 =>  123, D2 =>  456)"]}
 @end{Example}
+@end{Itemize}
 
-@begin{Ramification}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0384-2]}
+@ChgAdded{Version=[5],Text=[For a class-wide type, the default implementation of
+  T'Put_Image generates an image based on qualified expression syntax.
+  Wide_Wide_Put is called with Wide_Wide_Expanded_Name of @i{Arg}'Tag.
+  Then S'Put_Image is called, where S is the specific type identified by
+  @i{Arg}'Tag.]}
+
+@begin{ImplNote}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[If T is an unchecked union type, then the
-      default implementation of T'Put_Image will raise Program_Error.]}
-@end{Ramification}
+    @ChgAdded{Version=[5],Text=[This will typically require a dispatching
+      call.]}
+@end{ImplNote}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[This might generate an image such as:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text={SOME_PACKAGE.SOME_TAGGED_TYPE'
+   (COMPONENT_1 =>  123, COMPONENT_2 => 456)}}
+@end{Example}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The parentheses in this case are generated by
+      the call to Some_Tagged_Type'Put_Image.]}
+@end{Discussion}
+
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0384-2]}
+@ChgAdded{Version=[5],Text=[@Redundant[T'Put_Image is the same for both the
+partial view and full view of T, if T has a partial view.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0384-2]}
+  @ChgAdded{Version=[5],Text=[A type-related operational aspect is the same for
+  the full view and partial view of a type. See 
+  @RefSecNum{Operational and Representation Aspects}.]}
+@end{TheProof}
+
+
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{every
@@ -3848,7 +3875,7 @@ default implementation of T'Put_Image also includes discriminant values, as in:]
 @begin{Description}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1], ARef=[AI12-0384-2],
   InitialVersion=[2], Text=[@Chg{Version=[5],New=[S'Wide_Wide_Image
      denotes a function with the following specification:],Old=[]}
 @begin(Descexample)
@@ -3863,13 +3890,13 @@ numbers come out correctly. Only the initial text gets overridden.}
       S'Put_Image passing @i<Arg>
       (which will typically store a sequence of character values
       in a text buffer) and then returns the result of retrieving the
-      contents of that buffer with Wide_Wide_Get.]}]}@Comment{End of Annex text here.}
+      contents of that buffer with function Wide_Wide_Get.]}]}@Comment{End of Annex text here.}
      @ChgRef{Version=[5],Kind=[AddedNormal]}
      @ChgAdded{Version=[5],Text=[The lower bound of the
       result is one.]}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Wide_Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1], ARef=[AI12-0384-2],
   InitialVersion=[0], Text=[@Chg{Version=[5],New=[S'Wide_Image denotes a
      function with the following specification:],Old=[]}
 @Comment{We use an InitialVersion of 0 here so this item uses the existing
@@ -3885,11 +3912,11 @@ will save a vast amount of messing around.}
      @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Wide_Image calls S'Put_Image
      passing @i<Arg> (which will typically store a sequence of character values
      in a text buffer) and then returns the result of retrieving the
-     contents of that buffer with Wide_Get.]}]}@Comment{End of Annex text here.}
+     contents of that buffer with function Wide_Get.]}]}@Comment{End of Annex text here.}
      @ChgAdded{Version=[5],Text=[The lower bound of the result is one.]}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1], ARef=[AI12-0384-2],
   InitialVersion=[0], Text=[@Chg{Version=[5],New=[S'Image denotes a function
      with the following specification:],Old=[]}
 @Comment{We use an InitialVersion of 0 here so this item uses the existing
@@ -3905,7 +3932,7 @@ will save a vast amount of messing around.}
      @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Image calls S'Put_Image
      passing @i<Arg> (which will typically store a sequence of character values
      in a text buffer) and then returns the result of retrieving the
-     contents of that buffer with Get.]}]}@Comment{End of Annex text here.}
+     contents of that buffer with function Get.]}]}@Comment{End of Annex text here.}
      @ChgAdded{Version=[5],Text=[The lower bound of the result is one.]}
 
 @EndPrefixType{}
@@ -3953,12 +3980,11 @@ subtype S in the following ways:]}
 @begin{Itemize}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[If S is a composite subtype, the leading character
-  of the image of a component value or index value is a space, and the
-  immediately preceding character is an open parenthesis or bracket, then the
-  space may be omitted. The same transformation is also permitted if the leading
-  character of the component image is a space (in which case one of the two
-  spaces may be omitted).]}
+  @ChgAdded{Version=[5],Text=[If S is a composite subtype, the leading
+  character of the image @i<M> of a component value or index value is a space,
+  and the immediately preceding character (if any) is an open parenthesis, 
+  open bracket, or space, then the leading space of the image @i<M> may be 
+  omitted.]}
 @begin{Discussion}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text={This means that it is permitted to generate
@@ -4008,11 +4034,22 @@ subtype S in the following ways:]}
        @exam{"(F1 => TRUE, F2 => TRUE)"}.]}
 @end{Discussion}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0340-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
   @ChgAdded{Version=[5],Text=[Additional spaces (Wide_Wide_Characters with
     position 32), and calls to the New_Line operation of a text buffer, may be
-    inserted to improve readability of the generated image.]}
+    inserted to improve readability of the generated image, with the spaces 
+    inserted directly or via use of the Increase_Indent and Decrease_Indent 
+    procedures.]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0384-2]}
+  @ChgAdded{Version=[5],Text=[For a string type, implementations may produce 
+    an image corresponding to a string literal.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0384-2]}
+  @ChgAdded{Version=[5],Text=[For an unchecked union type, implementations may
+    raise Program_Error or produce some recognizable image (such as 
+    "@exam{(UNCHECKED UNION)}") that does not require reading the 
+    discriminants.]}
 @end{Itemize}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0304-1]}
@@ -4112,7 +4149,7 @@ result as that Image function.]}
     implementation of the private type.]}
 
 @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
-Text=[each language-defined private type T, T'Image should generate an image
+Text=[For each language-defined private type T, T'Image should generate an image
 that would be meaningful based only on the relevant public interfaces.]}]}
 
 
@@ -4120,7 +4157,7 @@ that would be meaningful based only on the relevant public interfaces.]}]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1],ARef=[AI12-0340-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2],ARef=[AI12-0419-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Attribute
     Put_Image is new. Attributes Image, Wide_Image, and Wide_Wide_Image
     now can be used with any type, and are defined in terms of Put_Image so

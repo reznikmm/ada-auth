@@ -1,11 +1,15 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:45 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.129 $}
+@Comment{$Revision: 1.130 $}
 
-@RMNewPage
+@RMNewPageVer{Version=[0]}
+@RMNewPageVer{Version=[1]}
+@RMNewPageVer{Version=[2]}
+@RMNewPageVer{Version=[3]}
+@RMNewPageVer{Version=[4]}@Comment{Bad break for Ada 202x RM}
 @LabeledClause{The Package System}
 
 @begin{Intro}
@@ -21,8 +25,9 @@ Text=[The contents of the visible part
 of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]}.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@RootLibUnit{System}@key[package] System @key[is]
-   @key{pragma} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(System);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@RootLibUnit{System}@key[package] System@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}@Chg{Version=[5],New=[ @key[is]],Old=[(System);]}
 
    @key[type] @AdaTypeDefn{Name} @key[is] @RI{implementation-defined-enumeration-type};
    @AdaObjDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
@@ -175,7 +180,7 @@ configuration in storage elements.]
 @begin{Discussion}
 It is unspecified whether this refers to the size of the
 address space, the amount of physical memory on the machine,
-or perhaps some other interpretation of @lquotes@;memory size.@rquotes@;
+or perhaps some other interpretation of @lquotes@;memory size@rquotes.
 In any case, the value has to be given by a static expression,
 even though the amount of memory on many modern machines is
 a dynamic quantity in several ways.
@@ -207,10 +212,15 @@ and to declare uninitialized address variables.
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[2],Text=[If System.Address is defined as a private type
-  (as suggested below), it might be necessary to add a pragma
-  Preelaborable_Initialization to the specification of System in order that
-  Address have preelaborable initialization as required.]}
+  (as suggested below), it might be necessary to add 
+  @Chg{Version=[5],New=[the],Old=[a pragma]}
+  Preelaborable_Initialization @Chg{Version=[5],New=[aspect ],Old=[]}to the
+  @Chg{Version=[5],New=[declaration],Old=[specification]} of
+  @Chg{Version=[5],New=[Address],Old=[System]} in order that
+  @Chg{Version=[5],New=[it],Old=[Address]} have preelaborable initialization
+  as required.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
@@ -335,8 +345,9 @@ have been moved to the Real Time Annex.
 @Leading@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements @key[is]
-   @key{pragma} @Chg{Version=[2],New=[Pure(],Old=[Preelaborate(System.]}Storage_Elements);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with] Pure @key[is]],Old=[@key[pragma] @Chg{Version=[2],New=[Pure(],Old=[Preelaborate(System.]}Storage_Elements);]}
 
    @key[type] @AdaTypeDefn{Storage_Offset} @key[is] @key[range] @RI(implementation-defined);
 
@@ -458,7 +469,7 @@ are ever renumbered.}
 Operations in System and its children should reflect the
 target environment semantics as closely as is reasonable.
 For example, on most machines, it makes sense for address arithmetic
-to @lquotes@;wrap around.@rquotes@;
+to @lquotes@;wrap around@rquotes.
 Operations that do not make sense should raise Program_Error.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Operations in System and its children should reflect the
@@ -593,7 +604,7 @@ if the implementation has chosen to use negative component offsets
 it might not be possible to preserve the semantics,
 since negative offsets from the Address are not allowed.
 (The Address attribute always points at
-@lquotes@;the first of the storage elements....@rquotes@;)
+@lquotes@;the first of the storage elements...@rquotes.)
 Note that while the implementation knows how to convert an access
 value into an address, it might not be able to do the reverse.
 To avoid generic contract model violations,
@@ -683,7 +694,7 @@ the calling conventions, and refers to parameters and results
 accordingly.
 The implementation should document where to put the result of a
 machine code function, for example,
-@lquotes@;Scalar results are returned in register 0.@rquotes@;
+@lquotes@;Scalar results are returned in register 0@rquotes.
 @end{Discussion}
 
 Intrinsic subprograms (see @RefSec{Conformance Rules})
@@ -1456,7 +1467,7 @@ X'Valid is new in Ada 95.
 @begin{Intro}
 @redundant[The attribute Unchecked_Access is used to create access values
 in an unsafe manner @em the programmer is responsible for preventing
-@lquotes@;dangling references.@rquotes@;]
+@lquotes@;dangling references@rquotes.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -1613,12 +1624,13 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
 @key[with] System.Storage_Elements;
 @ChildUnit{Parent=[System],Child=[Storage_Pools]}@key[package] System.Storage_Pools @Chg{Version=[5],New=[
     @key[with] Pure, Nonblocking => False @key[is]],Old=[@key[is]
-    @key{pragma} Preelaborate(System.Storage_Pools);]}
+    @key[pragma] Preelaborate(System.Storage_Pools);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
     @key[type] @AdaTypeDefn{Root_Storage_Pool} @key[is]
-        @key[abstract] @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private];@Chg{Version=[2],New=[
-    @key[pragma] Preelaborable_Initialization(Root_Storage_Pool);],Old=[]}
+        @key[abstract] @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[    @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Root_Storage_Pool)]};],Old=[]}
 
     @key[procedure] @AdaSubDefn{Allocate}(
       Pool : @key[in] @key[out] Root_Storage_Pool;
@@ -1828,10 +1840,12 @@ contiguous block of memory (although each allocation returns
 a pointer to a contiguous block of memory).
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0319-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0319-1],ARef=[AI12-0424-1]}
 @ChgAdded{Version=[5],Text=[The type(s) of the standard pool(s), and the
 primitive Allocate, Deallocate, and Storage_Size subprograms for the standard
-pool(s) are nonblocking.]}
+pool(s) are nonblocking. Concurrent invocations of these subprograms do not
+conflict with one another (see @RefSecNum{Shared Variables}) when applied to
+standard storage pools.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2350,7 +2364,7 @@ User-defined storage pools are new to Ada 95.
 @begin{DiffWord83}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0190-1]}
 Ada 83 @Chg{Version=[3],New=[originally introduced the],Old=[had a]}
-concept called a @lquotes@;collection,@rquotes@;
+concept called a @lquotes@;collection@rquotes,
 which is similar to what we call a storage pool.
 All access types in the same derivation class
 @Chg{Version=[3],New=[share],Old=[shared]} the same collection.
@@ -2443,13 +2457,15 @@ objects incorrectly by missing various cases.
   the implementation-defined pool used when Storage_Size is specified. This
   is not intended to change any implementation.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1],ARef=[AI12-0424-1]}
   @ChgAdded{Version=[5],Text=[Specified that the standard pool(s), and the
-  pool(s) used to implement a specified Storage_Size, are nonblocking.
-  This was always true (which is why this is not documented as an
-  incompatibility), but it never was explicitly stated before. In the past,
-  the absence of wording defining something to be potentially blocking
-  determined if blocking was not allowed.]}
+  pool(s) used to implement a specified Storage_Size, are nonblocking and
+  support concurrent use. This was always true (which is why this is not 
+  documented as an incompatibility), but it never was explicitly stated
+  before. In the past, the absence of wording defining something to be 
+  potentially blocking determined if blocking was not allowed. Similarly,
+  the absence of a statement that allocation was not allowed in multiple
+  tasks implied that it was allowed.]}
 @end{DiffWord2012}
 
 
@@ -2558,8 +2574,8 @@ the generic procedure Unchecked_Deallocation.]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
 @SubChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name)@Chg{Version=[3],New=[
-   @key(with) @Chg{Version=[5],New=[Preelaborate, Global => @key[in out synchronized],
-        Nonblocking => Object'Nonblocking @key(and) Name'Storage_Pool'Nonblocking,
+   @key(with) @Chg{Version=[5],New=[Preelaborate, Nonblocking,
+        Global => @key[in out] Name'Storage_Pool,
         ],Old=[]}Convention => Intrinsic;],Old=[;
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);]}@Chg{Version=[5],New=[],Old=[
 @key[pragma] Preelaborate(Ada.Unchecked_Deallocation);]}
@@ -3376,14 +3392,15 @@ exists:]}
     @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Global => @key[in out synchronized] @key[is]],Old=[(Subpools);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0356-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0356-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Storage_Pool_With_Subpools} @key[is]
-      @key[abstract new] Root_Storage_Pool @key[with private];@Chg{Version=[5],New=[
-   @key[pragma] Preelaborable_Initialization (Root_Storage_Pool_With_Subpools);],Old=[]}]}
+      @key[abstract new] Root_Storage_Pool @key[with private]@Chg{Version=[5],New=[
+      @key[with] Preelaborable_Initialization],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Subpool} @key[is abstract tagged limited private];@Chg{Version=[5],New=[
-   @key[pragma] Preelaborable_Initialization (Root_Subpool);],Old=[]}]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0356-1],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Subpool} @key[is abstract tagged limited private]@Chg{Version=[5],New=[
+      @key[with] Preelaborable_Initialization],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Subpool_Handle} @key[is access all] Root_Subpool'Class;
@@ -3452,9 +3469,9 @@ exists:]}
           @key[is] (Storage_Elements.Storage_Count'Last);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[private
+@ChgAdded{Version=[3],Text=[@key[private]
    ... -- @Examcom{not specified by the language}
-end System.Storage_Pools.Subpools;]}
+@key[end] System.Storage_Pools.Subpools;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
@@ -4649,7 +4666,7 @@ depend semantically on the library unit identified by the
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
 @ChgAdded{Version=[3],Text=[For usage profile No_Implementation_Extensions,
-there shall be no @SynI{profile_}@nt{pragma_argument_association}s.]}
+there shall be no @SynI{profile_}@!@nt{pragma_@!argument_@!association}s.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The No_Implementation_Extensions
@@ -4749,8 +4766,8 @@ following declaration:]}
     @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[, Nonblocking => False @key[is]],Old=[(Streams)@Defn{unpolluted};@Comment{This *must* be a Duff joke}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-    @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private];@Chg{Version=[2],New=[
-    @key[pragma] Preelaborable_Initialization(Root_Stream_Type);],Old=[]}
+    @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[    @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Root_Stream_Type)]};],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0044],ARef=[AI95-00181-01]}
     @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @RI{implementation-defined};
@@ -4877,14 +4894,13 @@ Ada.Streams.Storage.Unbounded has the following declaration:]}
       Last   : @key[out] Stream_Element_Offset)
       @key[with] Post =>
           (@key[declare]
-             Num_Read : @key[constant] Stream_Element_Count :=
-                Stream_Element_Count'Min
-                   (Element_Count(Stream)'Old, Item'Length);
+              Num_Read : @key[constant] Stream_Element_Count :=
+                 Stream_Element_Count'Min
+                    (Element_Count(Stream)'Old, Item'Length);
            @key[begin]
-                 Last = Num_Read + Item'First - 1
-              @key[and]
-                 Element_Count (Stream) =
-                    Element_Count (Stream)'Old - Num_Read);]}
+              Last = Num_Read + Item'First - 1 @key[and]
+              Element_Count (Stream) =
+                 Element_Count (Stream)'Old - Num_Read);]}
 @begin{Discussion}
    @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],Text=[Num_Read is the number of elements read; this is
@@ -4941,14 +4957,13 @@ Ada.Streams.Storage.Bounded has the following declaration:]}
       Last   : @key[out] Stream_Element_Offset)
       @key[with] Post =>
           (@key[declare]
-             Num_Read : @key[constant] Stream_Element_Count :=
-                Stream_Element_Count'Min
-                   (Element_Count(Stream)'Old, Item'Length);
+              Num_Read : @key[constant] Stream_Element_Count :=
+                 Stream_Element_Count'Min
+                    (Element_Count(Stream)'Old, Item'Length);
            @key[begin]
-                 Last = Num_Read + Item'First - 1
-              @key[and]
-                 Element_Count (Stream) =
-                    Element_Count (Stream)'Old - Num_Read);]}
+              Last = Num_Read + Item'First - 1 @key[and]
+              Element_Count (Stream) =
+                 Element_Count (Stream)'Old - Num_Read);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[overriding]
@@ -5230,7 +5245,9 @@ the following attributes are defined.
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
-@ChgAdded{Version=[1],Text=[For @Chg{Version=[2],New=[an ],Old=[]}untagged
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI05-0419-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[5],New=[],Old=[For 
+@Chg{Version=[2],New=[an ],Old=[]}untagged
 derived @Chg{Version=[2],New=[type],Old=[types]}, the Write
 @Chg{Version=[2],New=[(resp.],Old=[and]}
 Read@Chg{Version=[2],New=[) attribute is],Old=[ attributes are]}
@@ -5242,13 +5259,14 @@ where @i{T} is declared. For a tagged derived type, these attributes are
 not inherited, but rather],Old=[; otherwise,]} the default
 implementations @Chg{Version=[2],New=[],Old=[of these attributes ]}are
 used.@Chg{Version=[2],New=[],Old=[The default implementations of Write and
-Read attributes execute as follows:]}]}
+Read attributes execute as follows:]}]}]}
 
 @begin{TheProof}
-  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
-  @ChgAdded{Version=[3],Text=[The inheritance rules of
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI05-0419-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The inheritance rules of
   @RefSecNum{Operational and Representation Aspects} say that only specified or
-  inherited aspects are inherited; we mention it again here as a clarification.]}
+  inherited aspects are inherited; we mention it again here as a clarification.]}]}
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
@@ -5257,13 +5275,15 @@ the Write and Read attributes, where available, execute as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01],ARef=[AI95-00270-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0191-1]}
-For elementary types, @Chg{Version=[2],New=[Read reads (and Write writes) the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI12-0191-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0419-1]}
+For @Chg{Version=[5],New=[nonderived ],Old=[]}elementary types,
+@Chg{Version=[2],New=[Read reads (and Write writes) the
 number of stream elements implied by the Stream_Size for the type @i<T>;],
 Old=[]} the representation @Chg{Version=[2],New=[],Old=[in terms ]}of@Chg{Version=[2],
 New=[ those],Old=[]} stream elements is implementation defined.
-For composite types, the Write or Read attribute for each component
+For @Chg{Version=[5],New=[nonderived ],Old=[]}composite types, the Write or 
+Read attribute for each component
 @Chg{Version=[5],New=[(excluding those, if any, that are not components of the
 nominal type of the object) ],Old=[]}is
 called in @Chg{New=[],Old=[a ]}canonical order@Chg{New=[, which],
@@ -5274,7 +5294,8 @@ and positional aggregate order for a record.
 Bounds are not included in the stream if @i(T) is an array type.
 If @i(T) is a discriminated type, discriminants are included only if they have
 defaults. If @i(T) is a tagged type, the tag is not included.
-@Chg{New=[For type extensions, the Write or Read attribute for the parent type
+@Chg{New=[@Chg{Version=[5],New=[],Old=[For type extensions, the Write or Read 
+attribute for the parent type
 is called, followed by the Write or Read attribute of each component of the
 extension part, in canonical order. For a limited type extension, if the
 attribute of @Chg{Version=[2],New=[the parent],Old=[any ancestor]} type
@@ -5285,7 +5306,7 @@ of @Chg{Version=[2],New=[the parent type or],Old=[any ancestor type of]} the
 type of any of the extension components
 @Chg{Version=[2],New=[is not available at the freezing point of @i<T>, then],
 Old=[which are of a limited type has not been specified,]}
-the attribute of @i(T) shall be directly specified.],Old=[]}
+the attribute of @i(T) shall be directly specified.]}],Old=[]}
 
 @ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
 Text=[The @Chg{Version=[2],New=[contents
@@ -5293,7 +5314,28 @@ of the stream elements read and written],Old=[representation used]} by the
 Read and Write attributes of elementary types@Chg{Version=[2],New=[],Old=[ in
 terms of stream elements]}.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Text=[For type extensions, the
+Write or Read attribute for the parent type is called, followed by the Write
+or Read attribute of each component of the extension part, in canonical order.
+For a limited type extension, if the attribute of the parent type or any
+progenitor type of @i<T> is available anywhere within the immediate scope of
+@i<T>, and the attribute of the parent type or the type of any of the extension
+components is not available at the freezing point of @i<T>, then the attribute
+of @i<T> shall be directly specified. For untagged derived types, the
+Write (resp. Read) attribute invokes the corresponding attribute
+of the parent type, if the attribute is available for the parent type.]}
+
+@begin{Implnote}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0419-1]}
+  @ChgAdded{Version=[5],Text=[The default implementation of a stream-oriented 
+  attribute might not be well-defined in cases where the attribute is never
+  available anywhere in the scope of the type. In such cases, the attribute
+  cannot be called and is defined (far below) to raise Program_Error.]}
+@end{Implnote}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0419-1]}@Comment{Changes the paragraph numbers only}
 @ChgAdded{Version=[3],Text=[If @i<T> is a discriminated type and its
 discriminants have defaults, then
 S'Read first reads the discriminants from the stream without modifying
@@ -5345,6 +5387,7 @@ take place for the created object.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0419-1]}@Comment{Changes the paragraph numbers only}
 @ChgAdded{Version=[2],Text=[Constraint_Error is raised by the predefined Write
 attribute if the value of the elementary item is outside the range of values
 representable using Stream_Size bits. For a signed integer type, an enumeration
@@ -5446,32 +5489,42 @@ S'Output to determine how much to read.>}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00444-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0192-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{For conditional "leading"}
 @Chg{New=[For @Chg{Version=[2],New=[an ],Old=[]}untagged derived
-@Chg{Version=[2],New=[type],Old=[types]}, the Output
-@Chg{Version=[2],New=[(resp.],Old=[and]} Input@Chg{Version=[2],New=[) attribute
-is],Old=[attributes of the parent type are]}
-inherited @Chg{Version=[2],New=[according to the rules given],
+@Chg{Version=[2],New=[type],Old=[types]}, @Chg{Version=[5],New=[the default 
+implementation of],Old=[]} the Output
+@Chg{Version=[2],New=[(resp.],Old=[and]} Input@Chg{Version=[2],New=[) 
+attribute@Chg{Version=[5],New=[],Old=[ is]}],Old=[attributes of the parent
+type are]} @Chg{Version=[5],New=[invokes the corresponding attribute of
+the parent type,],Old=[inherited @Chg{Version=[2],New=[according to the rules given],
 Old=[as specified]} in
-@RefSecNum{Operational and Representation Aspects}@Chg{Version=[2],
-New=[ if the attribute is @Chg{Version=[3],New=[@Redundant[specified and] ],
-Old=[]}available for the parent type at the point where @i{T}
-is declared. For a tagged derived type, these attributes are not
-inherited, but rather],Old=[; otherwise,]} the default
+@RefSecNum{Operational and Representation Aspects}]}@Chg{Version=[2],
+New=[ if the attribute is 
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[@Redundant[specified and] ],
+Old=[]}]}available for the parent type@Chg{Version=[5],New=[],Old=[ at the
+point where @i{T} is declared]}. For @Chg{Version=[5],New=[any other 
+type,],Old=[a tagged derived type, these attributes are not
+inherited, but rather]}],Old=[; otherwise,]} the default
 implementations@Chg{Version=[2],New=[],Old=[ of these
-attributes]} are used.@Chg{Version=[2],New=[],Old=[ The default implementations of
-Output and Input attributes execute as follows:]}],
+attributes]} @Chg{Version=[5],New=[of the Output and Input attributes, where available,
+execute as follows:],Old=[are used.@Chg{Version=[2],New=[],Old=[ The
+default implementations of Output and Input attributes execute as follows:]}]}],
 Old=[Unless overridden by an @nt<attribute_definition_clause>, these
 subprograms execute as follows:]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
-  @ChgAdded{Version=[3],Text=[See the note following the inheritance rules for
-  the Write attribute, above.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0419-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[See the note following
+  the inheritance rules for the Write attribute, above.]}]}
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The default implementations of the
-Output and Input attributes, where available, execute as follows:]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[],Old=[The default 
+implementations of the Output and Input attributes, where available, execute as 
+follows:]}]}
 @begin(Itemize)
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0269-1]}
 If @i(T) is an array type, S'Output first writes the bounds,
@@ -5850,13 +5903,17 @@ extension components.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[2],Text=[@i{T} is a limited untagged derived type, and the
-attribute was inherited for the type.]}
+attribute @Chg{Version=[5],New=[is available],Old=[was inherited]} for the
+@Chg{Version=[5],New=[parent ],Old=[]}type.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Attributes are only inherited for
-  untagged derived types, and surely we want to be able to call
-  inherited attributes.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0419-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Again, the language
+  provides a default implementation, which],Old=[Attributes are only inherited 
+  for untagged derived types, and surely]} we want to be able to 
+  call@Chg{Version=[5],New=[],Old=[inherited attributes]}.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5871,9 +5928,12 @@ available for @i<T>.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[2],Text=[The attribute has been specified via an
-@nt{attribute_definition_clause}, and the @nt{attribute_definition_clause}
-is visible.]}
+@nt{attribute_definition_clause}@Chg{Version=[5],New=[ or
+@nt{aspect_specification}],Old=[]}, and the 
+@nt{attribute_definition_clause}@Chg{Version=[5],New=[ or
+@nt{aspect_specification}],Old=[]} is visible.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We always want to allow calling a specified
@@ -5893,9 +5953,12 @@ is visible.]}
 @ChgAdded{Version=[2],Text=[@i<T> is nonlimited;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[2],Text=[the attribute has been specified via an
-@nt{attribute_definition_clause}, and the @nt{attribute_definition_clause}
-is visible; or]}
+@nt{attribute_definition_clause}@Chg{Version=[5],New=[ or
+@nt{aspect_specification}],Old=[]}, and the 
+@nt{attribute_definition_clause}@Chg{Version=[5],New=[ or
+@nt{aspect_specification}],Old=[]} is visible; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[the corresponding attribute of @i<T> is
@@ -5953,23 +6016,28 @@ part of an instance of a generic unit.],Old=[]}]}
 @end{Honest}
 
 @ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0030-1]}
-@ChgAdded{Version=[4],Text=[Unless inherited from a parent type, if any, for an
+@ChgRef{Version=[5],Kind=[RevisedAdded],Aref=[AI12-0419-1]}
+@ChgAdded{Version=[4],Text=[Unless @Chg{Version=[5],New=[available 
+for],Old=[inherited from]} a parent type, if any, for an
 untagged type having a task, protected, or explicitly limited record part, the
 default implementation of each of the Read, Write, Input, and Output attributes
 raises Program_Error and performs no other action.]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal],Aref=[AI12-0030-1]}
-  @ChgAdded{Version=[4],Text=[It might seem that there is no need to specify the
+  @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0419-1]}
+  @ChgAdded{Version=[4],Text=[It might seem that 
+  there is no need to specify the
   behavior of the default implementation of a streaming attribute of, for
   example, a task type because there is no way that it can be invoked. It is
   possible, however, to construct an example where such a stream attribute can
   be invoked. This involves using a formal untagged limited derived type for
   which some streaming attribute is available (because it was explicitly
   specified for the ancestor type) and a corresponding actual type for which the
-  attribute is unspecified (because the derivation occurred before the aspect
-  was specified for the ancestor type and the specification was therefore not
-  inherited).]}
+  attribute is unspecified (because the derivation occurred @Chg{Version=[5],
+  New=[in a place where the attribute is never available for the parent type],
+  Old=[before the aspect was specified for the ancestor type and the 
+  specification was therefore not inherited]}).]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
@@ -5982,10 +6050,12 @@ The same rule applies to the result of the Input attribute.]}
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
-@ChgAdded{Version=[3],Text=[An inherited stream attribute has a profile as
-determined by the rules for inheriting primitive subprograms (see
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0419-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[An inherited stream
+attribute has a profile as determined by the rules for inheriting primitive 
+subprograms (see
 @RefSecNum{Operational and Representation Aspects} and
-@RefSecNum{Derived Types and Classes}).]}
+@RefSecNum{Derived Types and Classes}).]}]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
@@ -6342,6 +6412,19 @@ class-wide types descended from S.
   has no effect on and is not effected by user-defined stream attributes.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0419-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}The
+  switch from inheritance to @ldquote@;implicitly composed@rdquote
+  aspects means that there exists an exceedingly unlikely case where
+  an Ada 202x will raise Constraint_Error where Ada 2012 would not.
+  That case requires deriving a constrained untagged composite type @i<C>
+  from an unconstrained parent type @i<P>, using a type conversion to
+  @i<P> of the Input attribute of @i<C>, @b<and> streaming in a value
+  that violates the constraints of @i<C>. Simply using the Input attribute
+  of @i<P> instead of that of @i<C> will restore the Ada 2012 behavior.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0106-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
@@ -6371,6 +6454,11 @@ class-wide types descended from S.
   @RefSecnum{Intertask Communication}) and Global 
   (see @RefSecNum{The Global and Global'Class Aspects}) 
   for stream-oriented attributes.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0419-1]}
+  @ChgAdded{Version=[5],Text=[Revised to define composition of stream-oriented
+  attributes for untagged derived types in order to avoid using inheritance
+  for these attributes/aspects.]}
 @end{DiffWord2012}
 
 
@@ -6381,7 +6469,7 @@ class-wide types descended from S.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} defines
 a place in the program text where each declared entity becomes
-@lquotes@;frozen.@rquotes@;
+@lquotes@;frozen@rquotes.
 A use of an entity, such as a reference to it by name,
 or (for a type) an expression of the type,
 causes freezing of the entity in some contexts,
@@ -6410,7 +6498,7 @@ them in a single pass over the @nt{compilation_unit}.
 The freezing rules ensure that.
 
 The run-time purpose of the freezing rules is called the @lquotes@;linear
-elaboration model.@rquotes@;
+elaboration model@rquotes.
 This means that declarations are elaborated in the order in which they
 appear in the program text,
 and later elaborations can depend on the results of earlier ones.
@@ -7032,7 +7120,7 @@ At the place where a @nt{range} causes freezing, the type of the
 @begin{TheProof}
 This is consequence of the facts that expressions freeze their type,
 and the Range attribute is defined to be equivalent
-to a pair of expressions separated by @lquotes@;..@rquotes@;.}
+to a pair of expressions separated by @lquotes..@rquotes.}
 @end{TheProof}
 
 @Leading@PDefn2{Term=[freezing],
@@ -7159,7 +7247,7 @@ aspect cause freezing.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0155-1]}
 @ChgAdded{Version=[5],Text=[Notwithstanding the rest of this subclause,
-freezing an incomplete view has no effect.]}
+freezing an incomplete view has no effect.@Defn{Notwithstanding}]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -7370,7 +7458,7 @@ subtypes of the type, or types or subtypes with subcomponents of the type]
 other than in a type or subtype
 declaration, a subprogram specification, an entry declaration, a deferred
 constant declaration, a @nt{pragma}, or a @ntf{representation_clause} for the type
-itself. In any case, an occurrence within an expression is always forcing.@rquotes@;
+itself. In any case, an occurrence within an expression is always forcing.@rquotes
 
 @Leading@;It seems like the wording allows things like this:
 @begin{Example}
@@ -7422,7 +7510,7 @@ has its body right there.
 
 @begin{DiffWord83}
 The concept of freezing is based on Ada 83's concept of @lquotes@;forcing
-occurrences.@rquotes@;
+occurrences@rquotes.
 The first freezing point of an entity
 corresponds roughly to the place of the first forcing occurrence, in Ada
 83 terms.

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.94 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
+@comment{ $Revision: 1.95 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2021/01/19 06:32:46 $}
+@Comment{$Date: 2021/03/18 10:02:19 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1054,7 +1054,7 @@ Device_Priority : @key[constant]
      @key[with] Attach_Handler => Int_Id],Old=[;
   @key[pragma] Attach_Handler(Handler, Int_Id)]};
   ...
-  @Chg{Version=[3],New=[],Old=[@key[pragma] Interrupt_Priority(Device_Priority(Int_Id));
+@Chg{Version=[3],New=[],Old=[  @key[pragma] Interrupt_Priority(Device_Priority(Int_Id));
 ]}@key[end] Device_Interface;@Softpage
   ...
 Device_1_Driver : Device_Interface(1);
@@ -1088,9 +1088,10 @@ Device_5_Driver : Device_Interface(5);
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
 additional implementation and documentation
-requirements for the Preelaborate pragma (see @RefSecNum{Elaboration Control}).]
+requirements for the Preelaborate @Chg{Version=[5],New=[aspect],Old=[pragma]} (see @RefSecNum{Elaboration Control}).]
 @end{Intro}
 
 @begin{ImplReq}
@@ -2094,7 +2095,7 @@ load or store instruction.]}]}
 
 An imported volatile or atomic constant behaves as a constant (i.e.
 read-only) with respect to other parts of the Ada program, but can
-still be modified by an @lquotes@;external source.@rquotes@;
+still be modified by an @lquotes@;external source@rquotes.
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
 @ChgAdded{Version=[4],Text=[Specifying the Pack aspect cannot override the
@@ -2700,6 +2701,7 @@ as follows:]}
 @end{Extend2012}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
 @LabeledRevisedClause{Version=[2],New=[Task Information],
 Old=[Task Identification and Attributes]}
 
@@ -2727,11 +2729,11 @@ termination procedures with a task or set of tasks is defined.],Old=[]}]
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1],ARef=[AI12-0399-1]}
 @key[package] Ada.Task_Identification@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Task_Identification]}@Chg{Version=[2],New=[
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Task_Identification);]}],Old=[]}
-   @key[type] @AdaTypeDefn{Task_Id} @key[is] @key{private};@Chg{Version=[2],New=[
-   @key[pragma] Preelaborable_Initialization (Task_Id);],Old=[]}
+   @key[type] @AdaTypeDefn{Task_Id} @key[is] @key{private}@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[   @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[ (Task_Id)]};],Old=[]}
    @AdaSubDefn{Null_Task_Id} : @key{constant} Task_Id;
    @key{function}  "=" (Left, Right : Task_Id) @key{return} Boolean;
 

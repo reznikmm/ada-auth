@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -269,7 +269,7 @@ elements as was written by Map'Write.]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-   @key[with] Nonblocking, Global => (@key[in all], @key[use null])],Old=[]};]}
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -1520,7 +1520,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0339-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
@@ -1535,8 +1535,8 @@ package Containers.Hashed_Maps has the following declaration:]}
            Default_Initial_Condition =>
               Length (Map) = 0 @key{and then}
               (@key{not} Tampering_With_Cursors_Prohibited (Map)) @key{and then}
-              (@key{not} Tampering_With_Elements_Prohibited (Map))],Old=[]};
-   @key{pragma} Preelaborable_Initialization(Map);]}
+              (@key{not} Tampering_With_Elements_Prohibited (Map)),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Map)]};]}
 
 @begin{Discussion}
    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
@@ -1550,8 +1550,9 @@ package Containers.Hashed_Maps has the following declaration:]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
-   @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private}@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Cursor)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Map} : @key{constant} Map;]}
@@ -1562,7 +1563,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-      @key[with] Nonblocking, Global => (@key[in all], @key[use null])],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Has_Element} (Container : Map; Position : Cursor)
@@ -1633,7 +1634,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Key} (Position : Cursor) @key{return} Key_Type@Chg{Version=[5],New=[
       @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error,
            Nonblocking,
-           Global => @key{in all}, Use_Formal => Key_Type)],Old=[]};]}
+           Global => @key{in all}, Use_Formal => Key_Type],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Key} (Container : Map;
@@ -1979,7 +1980,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Keys} (Left, Right : Cursor)
       @key{return} Boolean@Chg{Version=[5],New=[
-      @key{with} Pre    => (Left =/ No_Element @key{and then} Right /= No_Element)
+      @key{with} Pre    => (Left /= No_Element @key{and then} Right /= No_Element)
                          @key{or else raise} Constraint_Error,
            Global => @key{in all}],Old=[]};]}
 
@@ -2012,10 +2013,10 @@ package Containers.Hashed_Maps has the following declaration:]}
       @key[return] Map_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Iterator],Old=[Forward_Iterator]}'Class@Chg{Version=[5],New=[
       @key[with] Post => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Map} (Base : @key{not null access} Hashed_Maps.Map) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -2024,61 +2025,61 @@ package Containers.Hashed_Maps has the following declaration:]}
               Iterator_Element  => Element_Type,
               Stable_Properties => (Length),
 	      Global => @key[null],
-              Default_Initial_Condition => Length (Map) = 0;
-      @key{pragma} Preelaborable_Initialization(Map);]}
+              Default_Initial_Condition => Length (Map) = 0,
+              Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
-      @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private}
+      @key{with} Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_Map} : @key{constant} Map;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
          @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Map_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Hashed_Maps.Map;
                         Source : @key{in} Map)
          @key{with} Post => Length (Source) = Length (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Hashed_Maps.Map) @key{return} Map
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
             (Element : @key{not null access constant} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Reference_Type}
             (Element : @key{not null access} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
       -- @examcom{are declared here.}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{private}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2603,13 +2604,9 @@ Containers.Hashed_Maps.Reserve_Capacity should be @i{O}(@i<N>).]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Hashed_Maps to better support contracts and stable views. If an
-  instance of Containers.Hashed_Maps
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Hashed_Maps to better support contracts and stable views.
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -2672,7 +2669,7 @@ package Containers.Ordered_Maps has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
@@ -2687,12 +2684,13 @@ package Containers.Ordered_Maps has the following declaration:]}
            Default_Initial_Condition =>
               Length (Map) = 0 @key{and then}
               (@key{not} Tampering_With_Cursors_Prohibited (Map)) @key{and then}
-              (@key{not} Tampering_With_Elements_Prohibited (Map))],Old=[]};
-   @key{pragma} Preelaborable_Initialization(Map);]}
+              (@key{not} Tampering_With_Elements_Prohibited (Map)),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Map)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
-   @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private}@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Cursor)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Map} : @key{constant} Map;]}
@@ -2703,7 +2701,7 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-      @key[with] Nonblocking, Global => (@key[in all], @key[use null])],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Has_Element} (Container : Map; Position : Cursor)
@@ -3180,15 +3178,15 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Floor} (Container : Map;
                    Key       : Key_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Floor'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Floor'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Floor'Result /= No_Element
+                    @key{then} Has_Element (Container, Floor'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Ceiling} (Container : Map;
                      Key       : Key_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Ceiling'Result = No_Element @key{then} True
-                    @key{else} Has_Element (Container, Ceiling'Result))],Old=[]};]}
+      @key{with} Post => (@key{if} Ceiling'Result /= No_Element
+                    @key{then} Has_Element (Container, Ceiling'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Map;
@@ -3266,10 +3264,10 @@ package Containers.Ordered_Maps has the following declaration:]}
                       @key[or else raise] Program_Error),
            Post => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Map} (Base : @key{not null access} Ordered_Maps.Map) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -3278,61 +3276,61 @@ package Containers.Ordered_Maps has the following declaration:]}
               Iterator_Element  => Element_Type,
               Stable_Properties => (Length),
               Global            => @key[null],
-              Default_Initial_Condition => Length (Map) = 0;
-      @key{pragma} Preelaborable_Initialization(Map);]}
+              Default_Initial_Condition => Length (Map) = 0,
+              Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
-      @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private}
+         @key{with} Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_Map} : @key{constant} Map;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
          @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Map_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Ordered_Maps.Map;
                         Source : @key{in} Map)
          @key{with} Post => Length (Source) = Length (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Ordered_Maps.Map) @key{return} Map
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
             (Element : @key{not null access constant} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Reference_Type}
             (Element : @key{not null access} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
       -- @examcom{are declared here.}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{private}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3879,13 +3877,9 @@ a cursor parameter should be @i{O}(1).]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Ordered_Maps to better support contracts and stable views. If an
-  instance of Containers.Ordered_Maps
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Ordered_Maps is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Ordered_Maps to better support contracts and stable views.
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -4868,7 +4862,8 @@ Target.]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Symmetric_Difference (Left, Right : Set) @key{return} Set@Chg{Version=[5],New=[
    @key{with} Post => Length (Symmetric_Difference'Result) <= 
                    Length (Left) + Length (Right) @key{and then}
-                @key{not} Tampering_With_Cursors_Prohibited (Symmetric_Difference'Result)],Old=[]};]}
+                @key{not} Tampering_With_Cursors_Prohibited (
+                   Symmetric_Difference'Result)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5623,7 +5618,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Default_Iterator  => Iterate,
@@ -5635,8 +5630,8 @@ package Containers.Hashed_Sets has the following declaration:]}
                                  Tampering_With_Cursors_Prohibited),
            Default_Initial_Condition =>
               Length (Set) = 0 @key{and then}
-              (@key{not} Tampering_With_Cursors_Prohibited (Set))],Old=[]};
-   @key{pragma} Preelaborable_Initialization(Set);]}
+              (@key{not} Tampering_With_Cursors_Prohibited (Set)),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Set)]};]}
 
 @begin{Discussion}
    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
@@ -5650,8 +5645,9 @@ package Containers.Hashed_Sets has the following declaration:]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
-   @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private}@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Cursor)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Set} : @key{constant} Set;]}
@@ -5662,12 +5658,12 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-      @key[with] Nonblocking, Global => (@key[in all], @key[use null])],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Has_Element} (Container : Set; Position : Cursor)
       @key{return} Boolean
-      @key[with] Nonblocking, @key[null], Use_Formal => @key[null];]}
+      @key[with] Nonblocking, Global => @key[null], Use_Formal => @key[null];]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[   @key[package] @AdaPackDefn{Set_Iterator_Interfaces} @key[is new]
@@ -5900,6 +5896,14 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} Set;
+                     Item      : @key{in}     Element_Type)@Chg{Version=[5],New=[
+      @key{with} Pre  => @key{not} Tampering_With_Cursors_Prohibited (Container)
+                      @key{or else raise} Program_Error,
+           Post => Length (Container) = Length (Container)'Old - 1],Old=[]};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} Set;
                      Position  : @key{in out} Cursor)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                       @key{or else raise} Program_Error) @key{and then}
@@ -5980,7 +5984,8 @@ package Containers.Hashed_Sets has the following declaration:]}
       @key{with} Post => 
               Length (Symmetric_Difference'Result) <= 
                  Length (Left) + Length (Right) @key{and then}
-              @key{not} Tampering_With_Cursors_Prohibited (Symmetric_Difference'Result)],Old=[]};]}
+              @key{not} Tampering_With_Cursors_Prohibited (
+                 Symmetric_Difference'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "@key{xor}" (Left, Right : Set) @key{return} Set
@@ -6004,7 +6009,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null},
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -6022,7 +6027,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null}],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Next} (Container : @key{in}     Set;
@@ -6212,10 +6217,10 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Keys;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Hashed_Sets.Set) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -6223,54 +6228,54 @@ package Containers.Hashed_Sets has the following declaration:]}
               Iterator_Element  => Element_Type,
               Stable_Properties => (Length),
               Global            => @key[null],
-              Default_Initial_Condition => Length (Set) = 0;
-      @key{pragma} Preelaborable_Initialization(Set);]}
+              Default_Initial_Condition => Length (Set) = 0,
+              Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
-      @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private}
+         @key{with} Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_Set} : @key{constant} Set;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
-         @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null};]}
+         @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Set_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Hashed_Sets.Set;
                         Source : @key{in} Set)
          @key{with} Post => Length (Source) = Length (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Hashed_Sets.Set) @key{return} Set
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
             (Element : @key{not null access constant} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
       -- @examcom{are declared here.}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{private}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6638,13 +6643,9 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Hashed_Sets to better support contracts and stable views. If an
-  instance of Containers.Hashed_Sets
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Sets is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Hashed_Sets to better support contracts and stable views.
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -6704,7 +6705,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Default_Iterator  => Iterate,
@@ -6716,12 +6717,13 @@ package Containers.Ordered_Sets has the following declaration:]}
                                  Tampering_With_Cursors_Prohibited),
            Default_Initial_Condition =>
               Length (Set) = 0 @key{and then}
-              (@key{not} Tampering_With_Cursors_Prohibited (Set))],Old=[]};
-   @key{pragma} Preelaborable_Initialization(Set);]}
+              (@key{not} Tampering_With_Cursors_Prohibited (Set)),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Set)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
-   @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private}@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Cursor)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Set} : @key{constant} Set;]}
@@ -6732,7 +6734,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-      @key[with] Nonblocking, Global => (@key[in all], @key[use null])],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Has_Element} (Container : Set; Position : Cursor)
@@ -7057,7 +7059,8 @@ package Containers.Ordered_Sets has the following declaration:]}
       @key{with} Post => 
               Length (Symmetric_Difference'Result) <= 
                  Length (Left) + Length (Right) @key{and then}
-              @key{not} Tampering_With_Cursors_Prohibited (Symmetric_Difference'Result)],Old=[]};]}
+              @key{not} Tampering_With_Cursors_Prohibited (
+                 Symmetric_Difference'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "@key{xor}" (Left, Right : Set) @key{return} Set @key{renames}
@@ -7103,7 +7106,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null},
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -7121,7 +7124,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null}],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Next} (Container : @key{in}     Set;
@@ -7136,7 +7139,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{use null},
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element @key{then}
                        Previous'Result = No_Element)],Old=[]};]}
 
@@ -7179,13 +7182,13 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Floor} (Container : Set;
                    Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Floor'Result = No_Element
+      @key{with} Post => (@key{if} Floor'Result /= No_Element
                     @key{then} Has_Element (Container, Floor'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Ceiling} (Container : Set;
                      Item      : Element_Type) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Post => (@key{if} Ceiling'Result = No_Element
+      @key{with} Post => (@key{if} Ceiling'Result /= No_Element
                     @key{then} Has_Element (Container, Ceiling'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7334,7 +7337,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Find} (Container : Set;
                      Key       : Key_Type)
          @key{return} Cursor@Chg{Version=[5],New=[
-         @key{with} Post => (@key{if} Find'Result = No_Element
+         @key{with} Post => (@key{if} Find'Result /= No_Element
                        @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7342,7 +7345,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Floor} (Container : Set;
                        Key       : Key_Type)
          @key{return} Cursor@Chg{Version=[5],New=[
-         @key{with} Post => (@key{if} Floor'Result = No_Element
+         @key{with} Post => (@key{if} Floor'Result /= No_Element
                        @key{then} Has_Element (Container, Floor'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7350,7 +7353,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Ceiling} (Container : Set;
                          Key       : Key_Type)
          @key{return} Cursor@Chg{Version=[5],New=[
-         @key{with} Post => (@key{if} Ceiling'Result = No_Element
+         @key{with} Post => (@key{if} Ceiling'Result /= No_Element
                        @key{then} Has_Element (Container, Ceiling'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7409,10 +7412,10 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Keys;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0407-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Hashed_Sets.Set) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -7420,54 +7423,54 @@ package Containers.Ordered_Sets has the following declaration:]}
               Iterator_Element  => Element_Type,
               Stable_Properties => (Length),
               Global            => @key[null],
-              Default_Initial_Condition => Length (Set) = 0;
-      @key{pragma} Preelaborable_Initialization(Set);]}
+              Default_Initial_Condition => Length (Set) = 0,
+              Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
-      @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private}
+         @key{with} Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_Set} : @key{constant} Set;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
          @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Set_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Hashed_Sets.Set;
                         Source : @key{in} Set)
          @key{with} Post => Length (Source) = Length (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Hashed_Sets.Set) @key{return} Set
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
             (Element : @key{not null access constant} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
       -- @examcom{are declared here.}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{private}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 
@@ -7971,13 +7974,9 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Ordered_Sets to better support contracts and stable views. If an
-  instance of Containers.Ordered_Sets
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Ordered_Sets is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Ordered_Sets to better support contracts and stable views.
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}

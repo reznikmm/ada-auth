@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.114 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
+@comment{ $Revision: 1.115 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:46 $}
+@Comment{$Date: 2021/03/18 10:02:19 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -492,13 +492,9 @@ access to fewer global objects.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Hashed_Maps to better support contracts and stable views. If an
-  instance of Containers.Hashed_Maps
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Hashed_Maps to better support contracts and stable views. As such, 
+  a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -553,8 +549,9 @@ the containers subsystem.]}
 Containers has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} Ada.Containers @key{is}@ChildUnit{Parent=[Ada],Child=[Containers]}
-   @key{pragma} Pure(Containers);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Containers@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada],Child=[Containers]}
+   @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Pure@Chg{Version=[5],New=[ @key{is}],Old=[(Containers);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Hash_Type} @key{is mod} @RI<implementation-defined>;]}
@@ -722,7 +719,7 @@ package Containers.Vectors has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0400-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Vector} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
@@ -739,12 +736,13 @@ package Containers.Vectors has the following declaration:]}
            Default_Initial_Condition =>
               Length (Vector) = 0 @key{and then}
               (@key{not} Tampering_With_Cursors_Prohibited (Vector)) @key{and then}
-              (@key{not} Tampering_With_Elements_Prohibited (Vector))],Old=[]};
-   @key{pragma} Preelaborable_Initialization(Vector);]}
+              (@key{not} Tampering_With_Elements_Prohibited (Vector)),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Vector)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
-   @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private}@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Cursor)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Vector} : @key{constant} Vector;]}
@@ -932,7 +930,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Vector) @key{return} Boolean@Chg{Version=[5],New=[
-      @key[with] Nonblocking, Global => Use_Formal => ,
+      @key[with] Nonblocking, Global => @key{null}, Use_Formal => @key{null},
            Post => Is_Empty'Result = (Length (Container) = 0)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1711,8 +1709,8 @@ package Containers.Vectors has the following declaration:]}
                           @key{not} Target'Has_Same_Storage (Source))
                           @key{or else raise} Program_Error),
               Post => (@key{declare}
-                         Result_Length : @key{constant} Count_Type :=
-                            Length (Source)'Old + Length (Target)'Old;
+                          Result_Length : @key{constant} Count_Type :=
+                             Length (Source)'Old + Length (Target)'Old;
                        @key{begin}
                           (Length (Source) = 0 @key{and then}
                            Length (Target) = Result_Length @key{and then}
@@ -1721,10 +1719,10 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Sorting;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0400-1],ARef=[AI12-0407-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0400-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Vector} (Base : @key{not null access} Vectors.Vector) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -1733,8 +1731,8 @@ package Containers.Vectors has the following declaration:]}
               Iterator_Element  => Element_Type,
               Stable_Properties => (Length, Capacity),
               Global            => @key{null},
-              Default_Initial_Condition => Length (Vector) = 0;
-      @key{pragma} Preelaborable_Initialization(Vector);]}
+              Default_Initial_Condition => Length (Vector) = 0,
+              Preelaborable_Initialization;]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0112-1]}
@@ -1747,59 +1745,59 @@ package Containers.Vectors has the following declaration:]}
   assumed to be read and updated.]}
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
-      @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private}
+         @key{with} Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_Vector} : @key{constant} Vector;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
          @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Vector_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Vectors.Vector;
                         Source : @key{in} Vector)
          @key{with} Post => Length (Source) = Length (Target) @key{and then}
                      Capacity (Target) >= Length (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Vectors.Vector) @key{return} Vector
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
             (Element : @key{not null access constant} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Reference_Type}
             (Element : @key{not null access} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
       -- @examcom{are declared here.}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{private}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1885,7 +1883,7 @@ elements as was written by Vector'Write.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The Standard requires streaming of all
+  @ChgAdded{Version=[3],Text=[The @StdTitle requires streaming of all
   language-defined nonlimited types (including containers) to "work" (see
   @RefSecNum{Stream-Oriented Attributes}). In addition, we do not want all
   of the elements that make up the
@@ -2706,8 +2704,8 @@ Process.@key{all} is propagated.]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Query_Element
   (Position : @key{in} Cursor;
    Process  : @key{not null access procedure} (Element : @key{in} Element_Type))@Chg{Version=[5],New=[
-   @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error],Old=[]};]}
-        Global => @key{in all};]}
+   @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error
+        Global => @key{in all}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3830,7 +3828,8 @@ next element in Container, if any.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
-        Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element)],Old=[]};]}
+        Post => (@key{if} Position = No_Element 
+                 @key{then} Previous'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3911,7 +3910,7 @@ Otherwise, it returns the index of the first equal element encountered.]}
    @key{with} Pre  => Position = No_Element @key{or else}
                 Has_Element (Container, Position)
                    @key{or else raise} Program_Error,
-              Post => (@key{if} Find'Result /= No_Element
+        Post => (@key{if} Find'Result /= No_Element
                  @key{then} Has_Element (Container, Find'Result))],Old=[]};]}
 @end{Example}
 
@@ -4773,13 +4772,9 @@ value of Last_Index.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Vectors to better support contracts and stable views. If an
-  instance of Containers.Vectors
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Vectors to better support contracts and stable views. Therefore, 
+  a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0212-1],ARef=[AI12-0400-1]}
   @ChgAdded{Version=[5],Text=[Vector objects now support aggregates. This 
@@ -4891,7 +4886,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0391-1],ARef=[AI12-0400-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1],ARef=[AI12-0339-1],ARef=[AI12-0391-1],ARef=[AI12-0399-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{List} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
@@ -4906,12 +4901,13 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
            Default_Initial_Condition =>
               Length (List) = 0 @key{and then}
               (@key{not} Tampering_With_Cursors_Prohibited (List)) @key{and then}
-              (@key{not} Tampering_With_Elements_Prohibited (List))],Old=[]};
-   @key{pragma} Preelaborable_Initialization(List);]}
+              (@key{not} Tampering_With_Elements_Prohibited (List)),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(List)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
-   @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private}@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Cursor)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_List} : @key{constant} List;]}
@@ -5261,7 +5257,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
                             Length (Source)'Old + Length (Target)'Old;
                        @key{begin}
                          Length (Source) = 0 @key{and then}
-                         Length (Target) = Result_Length)],Old=[]};]}
+                         Length (Target) = Result_Length))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -5511,10 +5507,10 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Sorting;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0391-1],ARef=[AI12-0400-1],ARef=[AI12-0407-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0391-1],ARef=[AI12-0400-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{List} (Base : @key{not null access} Doubly_Linked_Lists.List) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -5523,61 +5519,61 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
               Iterator_Element  => Element_Type,
               Stable_Properties => (Length),
               Global => @key{null},
-              Default_Initial_Condition => Length (List) = 0;
-      @key{pragma} Preelaborable_Initialization(List);]}
+              Default_Initial_Condition => Length (List) = 0,
+              Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
-      @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private}
+         @key{with} Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_List} : @key{constant} List;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
-      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}]}
+         @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{List_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Doubly_Linked_Lists.List;
                         Source : @key{in} List)
          @key{with} Post => Length (Source) = Length (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Doubly_Linked_Lists.List) @key{return} List
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
             (Element : @key{not null access constant} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Reference_Type}
             (Element : @key{not null access} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null}, Use_Formal => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
       -- @examcom{are declared here.}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{private}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6590,7 +6586,7 @@ exchanges the nodes designated by I and J.]}
                          Length (Source)'Old + Length (Target)'Old;
                     @key{begin}
                       Length (Source) = 0 @key{and then}
-                      Length (Target) = Result_Length)],Old=[]};]}
+                      Length (Target) = Result_Length))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -7559,13 +7555,9 @@ probably not a stable sort.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1],ARef=[AI12-0391-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Doubly_Linked_Lists to better support contracts and stable views. If an
-  instance of Containers.Doubly_Linked_Lists
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Doubly_Linked_Lists to better support contracts and stable views. Therefore, 
+  a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}

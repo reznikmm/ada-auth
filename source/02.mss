@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:40 $}
+@Comment{$Date: 2021/03/18 10:02:16 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -77,8 +77,8 @@ rhs="@Chg{Version=[2],New=<>,Old=<@Synf{identifier_letter} | @Synf{digit} | @Syn
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
-@ChgAdded{Version=[2],Text=[A @ntf{character} is defined by this International
-Standard for each cell in the coding space described by ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]},
+@ChgAdded{Version=[2],Text=[A @ntf{character} is defined by this @IntlStdTitle
+for each cell in the coding space described by ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]},
 regardless of whether or not ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} allocates a character to that
 cell.]}
 @end{SyntaxText}
@@ -154,14 +154,14 @@ semantics of an Ada program whose text is not in Normalization Form
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 The description of the
-language definition in this International Standard uses the @Chg{Version=[2],
+language definition in this @IntlStdName uses the @Chg{Version=[2],
 New=[character properties General Category, Simple Uppercase Mapping,
 Uppercase Mapping, and Special Case Condition of the documents referenced by
 @Chg{Version=[5],New=[],Old=[the note in ]}@Chg{Version=[3],New=[Clause],Old=[section]} @Chg{Version=[5],New=[2],Old=[1]}
 of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],Old=[graphic symbols
 defined for Row 00: Basic Latin and Row 00: Latin-1 Supplement
 of the ISO 10646 BMP; these correspond to the graphic symbols of
-ISO 8859-1 (Latin-1); no graphic symbols are used in this International Standard for
+ISO 8859-1 (Latin-1); no graphic symbols are used in this @IntlStdName for
 characters outside of Row 00 of the BMP]}.
 The actual set of graphic symbols used by an implementation
 for the visual representation of
@@ -200,7 +200,7 @@ used in Ada character and string literals.]}
   @ChgDeleted{Version=[2],Text=[We use @ntf<identifier_letter>
   instead of simply @ntf<letter> because
   ISO 10646 BMP includes many other characters that would generally
-  be considered "letters."]}
+  be considered "letters".]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -421,6 +421,8 @@ not to Unicode.]}
 @end{Discussion}
 @end{Description}
 
+@newpage@Comment{Needed for version 5 forward (version 3 and 4 need hand mods to avoid this)}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
@@ -470,7 +472,7 @@ Old=[@Defn{left square bracket}
 @Chg{Version=[2],New=[@Defn{graphic symbols}@Defn{glyphs}This table
 serves to show the correspondence between
 ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} names and the graphic symbols (glyphs) used in this
-International Standard. These are the characters],
+@IntlStdName. These are the characters],
 Old=[These are the ones]}
 that play a special role in the syntax of Ada@Chg{Version=[2],New=[],
 Old=[ 95, or in the syntax rules;
@@ -635,7 +637,7 @@ or changed to conform to local conventions].]}]}
 @ChgDeleted{Version=[2],Text=[If an implementation supports
 other character sets,
 it defines which characters fall into each category,
-such as @lquotes@;@ntf{identifier_letter},@rquotes@;
+such as @lquotes@ntf{identifier_letter}@rquotes,
 and what the corresponding rules of this section are,
 such as which characters are allowed in the text of a program.]}
 
@@ -659,7 +661,7 @@ But the character set standard used cannot be older than ISO/IEC 10646:2003
 @Chg{Version=[2],New=[The characters in categories @ntf{other_control},
 @ntf{other_private_use}, and @ntf{other_surrogate} are only allowed in comments],
 Old=[Every code position of ISO 10646 BMP that is not reserved for a control
-function is defined to be a @nt<graphic_character> by this International Standard.
+function is defined to be a @nt<graphic_character> by this @IntlStdName.
 This includes all code positions other than 0000 - 001F, 007F - 009F,
 and FFFE - FFFF]}.
 
@@ -927,6 +929,7 @@ From URG recommendation.
 @end{DiffWord2012}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Identifiers}
 
 @begin{Intro}
@@ -1040,8 +1043,8 @@ characters is converted to upper case.
   have mentioned case folding of the reserved words, but as that is an identity
   function, it would have no effect.],Old=[@Chg{Version=[2],New=[],Old=[Two of
   the letters of ISO 8859-1 appear only as lower case,
-  "sharp s" and "y with diaeresis." These two letters have
-  no corresponding upper case letter (in particular, they
+  @lquotes@;sharp s@rquotes and @lquotes@;y with diaeresis@rquotes. These 
+  two letters have no corresponding upper case letter (in particular, they
   are not considered equivalent to one another).]}]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0227-1]}
@@ -1613,6 +1616,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @end{Examples}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Pragmas}
 
 @begin{Intro}
@@ -2012,7 +2016,7 @@ RM83), but it was not clear, because there was no definition of
 @PragmaSyn`@key{pragma} @prag(Optimize)(@Syn2{identifier});'
 
 @begin{SyntaxText}
-@Redundant[Other pragmas are defined throughout this International Standard,
+@Redundant[Other pragmas are defined throughout this @IntlStdTitle,
 and are summarized in
 @RefSecNum{Language-Defined Pragmas}.]
 @begin{Ramification}
@@ -2077,9 +2081,10 @@ Some compilers might even ignore the pragma altogether.
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @key[pragma] List(Off); -- @Examcom{turn off listing generation}
 @key[pragma] Optimize(Off); -- @Examcom{turn off optional optimizations}
-@Chg{Version=[3],New=[@key[pragma] Pure(Rational_Numbers); -- @Examcom{set categorization for package}
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[@key[pragma] Assertion_Policy(Check); -- @Examcom{check assertions}],Old=[@key[pragma] Pure(Rational_Numbers); -- @Examcom{set categorization for package}]}
 @key[pragma] Assert(Exists(File_Name),
               Message => "Nonexistent file"); -- @Examcom{assert file exists}],
 Old=[@key[pragma] Inline(Set_Mask); --@Examcom{ generate code for Set_Mask inline}
@@ -2116,6 +2121,7 @@ informative annex.
 @end{DiffWord2005}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Reserved Words}
 
 @begin{Syntax}
@@ -2254,7 +2260,7 @@ end of the reserved word]}.],Old=[ (ignoring upper/lower case distinctions):]}
 
 @begin{Notes}
 The reserved words appear in @key{lower case boldface}
-in this International Standard,
+in this @IntlStdName,
 except when used in the @nt{designator} of an attribute
 (see @RefSecNum(Attributes)).
 Lower case boldface is also used

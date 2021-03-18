@@ -29,10 +29,10 @@ I probably ought to add a style just for this purpose)
 @end{ISOOnly}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2020/12/05 05:10:40 $}
+@Comment{$Date: 2021/03/18 10:02:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -280,8 +280,7 @@ to.
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
-This International Standard specifies the form and meaning of programs
-written in Ada.
+This @IntlStdTitle specifies the form and meaning of programs written in Ada.
 Its purpose is to promote the portability of Ada programs to a variety
 of @Chg{Version=[3],New=[computing],Old=[data processing]} systems.
 
@@ -316,7 +315,7 @@ use of containers.]}
 @LabeledSubClause{Extent}
 
 @begin{Intro}
-@Leading@keepnext@;This International Standard specifies:
+@Leading@keepnext@;This @IntlStdTitle specifies:
 @begin(Itemize)
      The form of a program written in Ada;
 
@@ -340,7 +339,7 @@ use of containers.]}
 @end(Itemize)
 
 @begin{WideAbove}
-@Leading@keepnext@;This International Standard does not specify:
+@Leading@keepnext@;This @IntlStdTitle does not specify:
 @end{WideAbove}
 @begin(Itemize)
      The means whereby a program written in Ada is transformed into
@@ -355,7 +354,8 @@ use of containers.]}
      The form or contents of any listings produced by implementations;
      in particular, the form or contents of error or warning messages;
 
-     The effect of unspecified execution.
+@Chgref{Version=[5],Kind=[Revised],ARef=[AI12-0425-1]}
+     The effect of unspecified execution@Chg{Version=[5],New=[;],Old=[.]}
 
      The size of a program or program unit that will exceed the capacity
      of a particular conforming implementation.
@@ -366,7 +366,7 @@ use of containers.]}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-This International Standard contains thirteen @Chg{Version=[3],New=[clauses],Old=[sections]},
+This @IntlStdName contains thirteen @Chg{Version=[3],New=[clauses],Old=[sections]},
 @Chg{Version=[3],New=[fifteen],Old=[fourteen]} annexes,
 and an index.
 
@@ -374,10 +374,10 @@ and an index.
 @Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[What Ada 83 called a @ldquote@;chapter@rdquote and
 Ada 95 (and Ada 2005) called a @ldquote@;section@rdquote is called a @ldquote@;clause@rdquote
-in this Standard. Similarly, what Ada 83 called a @ldquote@;section@rdquote and
+in this @StdTitle. Similarly, what Ada 83 called a @ldquote@;section@rdquote and
 Ada 95 (and Ada 2005) called a @ldquote@;clause@rdquote is called a @ldquote@;subclause@rdquote
-in this Standard. Confused yet? This terminology is out of our hands; it is
-(and was) forced by ever-changing ISO rules for drafting Standards.]}
+in this @StdTitle. Confused yet? This terminology is out of our hands; it is
+(and was) forced by ever-changing ISO rules for drafting @StdTitle@;s.]}
 @end{Discussion}
 
 @Leading@Defn{core language}
@@ -565,7 +565,7 @@ Compile-time rules that are used in name resolution,
 including overload resolution.
 @begin{Discussion}
 These rules are observed at compile time.
-(We say @lquotes@;observed@rquotes@; rather than @lquotes@;checked,@rquotes@;
+(We say @lquotes@;observed@rquotes rather than @lquotes@;checked@rquotes,
 because these rules are not individually checked.
 They are really just part of the @LegalityName@;s in @Chg{Version=[3],New=[Clause],Old=[Section]}
 @RefSecNum{Visibility Rules} that require exactly one interpretation of each
@@ -687,12 +687,12 @@ Additional requirements for conforming implementations.
 ...as opposed to rules imposed on the programmer.
 An example might be,
 @lquotes@;The smallest representable duration, Duration'Small,
-shall not be greater than twenty milliseconds.@rquotes@;
+shall not be greater than twenty milliseconds@rquotes.
 
 It's really just an issue of how the rule is worded.
 We could write the same rule as @lquotes@;The smallest representable duration is
-an implementation-defined value less than or equal to 20 milliseconds@rquotes@;
-and then it would be under @lquotes@;@StaticSemTitle.@rquotes@;
+an implementation-defined value less than or equal to 20 milliseconds@rquotes
+and then it would be under @lquotes@;@StaticSemTitle@rquotes.
 @end{Discussion}
 @end{ImplReq}
 
@@ -720,13 +720,13 @@ of certain language constructs.
 Additional permissions given to the implementer.
 @begin{Discussion}
 For example, @lquotes@;The implementation is allowed to impose further
-restrictions on the record aggregates allowed in code statements.@rquotes@;
+restrictions on the record aggregates allowed in code statements.@rquotes
 When there are restrictions on the permission,
 those restrictions are given here also.
 For example, @lquotes@;An implementation is allowed to restrict the kinds of
 subprograms that are allowed to be main subprograms.
-However, it shall support at least parameterless procedures.@rquotes@;
-@em we don't split this up between here and @lquotes@;@ImplReqTitle.@rquotes@;
+However, it shall support at least parameterless procedures.@rquotes
+@em we don't split this up between here and @lquotes@ImplReqTitle@rquotes.
 @end{Discussion}
 @end{ImplPerm}
 
@@ -757,7 +757,7 @@ this advice.
 For example,
 @lquotes@;Whenever possible, the implementation should choose a value no
 greater than fifty microseconds for the smallest representable duration,
-Duration'Small.@rquotes@;
+Duration'Small.@rquotes
 
 We use this heading, for example, when the rule is so low level or
 implementation-oriented as to be untestable.
@@ -781,7 +781,7 @@ This material is informative.
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0386-1]}
 @ChgAdded{Version=[5],Text=[Names used in examples refer either to 
 language-defined entities or to entities declared in other @ExamplesTitle in 
-this Standard. In the latter case, if the reference is to a later example, we
+this @StdTitle. In the latter case, if the reference is to a later example, we
 use a cross-reference (@ExamCom{-- See <<some clause>>.}) to show the source
 of the declaration. In theory, one could combine all of the examples (excepting
 examples of fragments like identifiers or @nt{type_definition}s) in an
@@ -1029,7 +1029,7 @@ Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
 The next three headings list all language changes between Ada 2005
 (the language defined by the Ada 95 standard plus
 Technical Corrigendum 1 plus Amendment 1)
-and Ada 2012 (the language defined by the third edition of the Standard@Comment{was:
+and Ada 2012 (the language defined by the third edition of the @StdTitle@Comment{was:
 Ada 95 standard plus Technical Corrigendum 1 plus Amendment 1 plus Amendment 2}).
 Each language change falls into one of the following three categories:]}
 @end{Discussion}
@@ -1044,7 +1044,7 @@ is a legal Ada 2012 program with different semantics.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Inconsistencies marked with
 @b[Correction:]@Defn{Correction} are corrections to the original Ada 2005
-definition added by the third edition of the Standard.
+definition added by the third edition of the @StdTitle.
 Formally, these are
 inconsistencies caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 2005 are supposed to follow these corrections, not the
@@ -1152,7 +1152,7 @@ RM.]}
 The next three headings list all language changes between
 @Chg{Version=[5],New=[Ada 2012
 (the language defined by ISO/IEC 8652:2012(E))
-and Ada 202x (the language defined by this edition of the Standard)],Old=[original
+and Ada 202x (the language defined by this edition of the @StdTitle)],Old=[original
 Ada 2012 (the language defined by unmodified ISO/IEC 8652:2012(E)) and current
 Ada 2012 (the language defined by ISO/IEC 8652:2012(E) as
 corrected by the Corrigendum ISO/IEC 8652:2012/Cor 1:2016)]}.
@@ -1177,7 +1177,7 @@ program with different semantics.]}
 definition added by Technical Corrigendum 1 to Ada 2012.@Chg{Version=[5],
 New=[ Inconsistencies marked
 with @b[Correction:]@Defn{Correction} are corrections to the original Ada 2012
-definition added by this edition of the Standard.],Old=[]}
+definition added by this edition of the @StdTitle.],Old=[]}
 Formally, these are
 inconsistencies caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 2012 are supposed to follow these corrections, not the
@@ -1310,11 +1310,11 @@ This includes compiler, linker, operating system, hardware, etc.
 
 We first define what it means to @lquotes@;conform@rquotes@; in general @em
 basically, the implementation has to properly implement the normative
-rules given throughout the standard.
+rules given throughout the @StdTitle.
 Then we define what it means to conform to a Specialized Needs
 Annex @em the implementation must support the core features plus the
 features of that Annex.
-Finally, we define what it means to @lquotes@;conform to the Standard@rquotes@; @em
+Finally, we define what it means to @lquotes@;conform to the @StdTitle@rquotes@; @em
 this requires support for the core language,
 and allows partial (but not conflicting) support for
 the Specialized Needs Annexes.
@@ -1333,7 +1333,7 @@ the Specialized Needs Annexes.
 
      Identify all programs or program units that contain
      errors whose detection is required by this
-     International Standard;
+     @IntlStdTitle;
      @begin{Discussion}
        Note that we no longer use the term @lquotes@;rejection@rquotes@; of
        programs or program units.
@@ -1353,7 +1353,7 @@ the Specialized Needs Annexes.
      @end{Discussion}
 
      Supply all language-defined library units required by this
-     International Standard;
+     @IntlStdTitle;
      @begin{ImplNote}
        An implementation cannot add to or modify the visible part of
        a language-defined library unit,
@@ -1368,12 +1368,12 @@ the Specialized Needs Annexes.
        (The implementation might need @nt{with_clause}s in order to
        implement the private part, for example.)
        Similarly, an implementation can add a private part even in cases
-       where a private part is not shown in the standard.
+       where a private part is not shown in the @StdTitle.
        Explicit declarations can be provided implicitly or by renaming,
        provided the changes are semantically neutral.
 
        @Defn2{Term=[italics],Sec=(implementation-defined)}
-       Wherever in the standard the text of a language-defined library
+       Wherever in the @StdTitle the text of a language-defined library
        unit contains an italicized phrase starting with
        @lquotes@;@i{implementation-defined}@rquotes@;, the implementation's version
        will replace that phrase with some implementation-defined text
@@ -1384,12 +1384,12 @@ the Specialized Needs Annexes.
        in the environment that can detect the changes (such as a program
        library browser), so long as the modifications make no difference
        with respect to the static or dynamic semantics of the resulting
-       programs, as defined by the standard.
+       programs, as defined by the @StdTitle.
      @end{ImplNote}
 
      Contain no variations except
      those explicitly permitted by this
-     International Standard, or those that are impossible or impractical
+     @IntlStdTitle, or those that are impossible or impractical
      to avoid given the implementation's execution environment;
      @ImplDef{Variations from the standard that are impractical to avoid
      given the implementation's execution environment.}
@@ -1404,7 +1404,7 @@ the Specialized Needs Annexes.
      @end{Reason}
 
      Specify all such variations in the manner prescribed
-     by this International Standard.
+     by this @IntlStdTitle.
 @end(Itemize)
 
 @begin{WideAbove}
@@ -1462,11 +1462,11 @@ The following are defined as @i(external interactions):
 
 @begin{WideAbove}
 A conforming implementation
-of this International Standard shall produce for the
+of this @IntlStdTitle shall produce for the
 execution of a given Ada program
 a set of interactions with the external environment whose
 order and timing are consistent with the definitions and requirements of this
-International Standard for the semantics of the given program.
+@IntlStdTitle for the semantics of the given program.
 @end{WideAbove}
 @begin{Ramification}
   There is no need to produce any of the @lquotes@;internal effects@rquotes@;
@@ -1483,8 +1483,8 @@ International Standard for the semantics of the given program.
   are still consistent with the standard, since
   @RefSecNum(Exceptions and Optimization) is part of the standard.
 
-  Note also that we only require @lquotes@;@i(an appropriate) sequence
-  of external interactions@rquotes@; rather than @lquotes@;@i(the same) sequence...@rquotes@;
+  Note also that we only require @lquotes@i(an appropriate) sequence
+  of external interactions@rquotes rather than @lquotes@;@i(the same) sequence...@rquotes
   An optimizer may cause a different sequence of external interactions
   to be produced than would be produced without the optimizer, so
   long as the new sequence still satisfies the requirements
@@ -1515,10 +1515,10 @@ International Standard for the semantics of the given program.
   @lquotes@;exact effect@rquotes@; impractical.
 @end{Discussion}
 
-An implementation that conforms to this Standard shall support each
+An implementation that conforms to this @StdTitle shall support each
 capability required by the core language as specified.
 In addition,
-an implementation that conforms to this Standard may conform to one
+an implementation that conforms to this @StdTitle may conform to one
 or more Specialized Needs Annexes (or to none).
 Conformance to a Specialized Needs Annex means that each capability
 required by the Annex is provided as specified.
@@ -1529,8 +1529,7 @@ required by the Annex is provided as specified.
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-An implementation conforming to this International Standard
-may provide additional
+An implementation conforming to this @IntlStdTitle may provide additional
 @Chg{Version=[3],New=[aspects, ],Old=[]}attributes, library units, and pragmas.
 However, it shall not provide any
 @Chg{Version=[3],New=[aspect, ],Old=[]}attribute,
@@ -1590,9 +1589,9 @@ shall raise an exception at run time.
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[5],Text=[For an implementation that conforms to this
-Standard, the implementation of a language-defined unit shall abide by all
+@StdTitle, the implementation of a language-defined unit shall abide by all
 postconditions, type invariants, and default initial conditions specified
-for the unit by this International Standard (see
+for the unit by this @IntlStdName (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}).]}
 @end{ImplReq}
 
@@ -1612,13 +1611,13 @@ for unspecified situations.
 The implementation-defined characteristics are summarized in
 @RefSecNum{Implementation-Defined Characteristics}.
 @begin{Discussion}
-  We used to use the term @lquotes@;implementation dependent@rquotes@;
-  instead of @lquotes@;unspecified@rquotes@;.
-  However, that sounded too much like @lquotes@;implementation defined@rquotes@;.
-  Furthermore, the term @lquotes@;unspecified@rquotes@; is used in the ANSI C and
+  We used to use the term @lquotes@;implementation dependent@rquotes
+  instead of @lquotes@;unspecified@rquotes.
+  However, that sounded too much like @lquotes@;implementation defined@rquotes.
+  Furthermore, the term @lquotes@;unspecified@rquotes is used in the ANSI C and
   POSIX standards for this purpose, so that is another advantage.
-  We also use @lquotes@;not specified@rquotes@; and @lquotes@;not specified by the language@rquotes@;
-  as synonyms for @lquotes@;unspecified.@rquotes@;
+  We also use @lquotes@;not specified@rquotes and @lquotes@;not specified by the language@rquotes@;
+  as synonyms for @lquotes@;unspecified@rquotes.
   The documentation requirement is the only difference between
   implementation defined and unspecified.
 
@@ -1631,7 +1630,7 @@ either by documenting what happens in general,
 or by providing some mechanism for the user to determine what
 happens in a particular case.
 @begin(Discussion)
-For example, if the standard says that library unit elaboration order
+For example, if the @StdTitle says that library unit elaboration order
 is implementation defined,
 the implementation might describe (in its user's manual)
 the algorithm it uses to determine the elaboration order.
@@ -1664,7 +1663,7 @@ The reason we don't @i{require} Program_Error is that there are
 situations where other exceptions might make sense.
 For example, if the Real Time Systems Annex requires
 that the range of System.Priority include at least 30 values,
-an implementation could conform to the Standard
+an implementation could conform to the @StdTitle
 (but not to the Annex)
 if it supported only 12 values.
 Since the rules of the language require Constraint_Error to be raised
@@ -1695,14 +1694,14 @@ to user-defined code
 
 @begin{Notes}
 The above requirements imply that an implementation conforming
-to this Standard may support some of the capabilities required by a
+to this @StdTitle may support some of the capabilities required by a
 Specialized Needs Annex without supporting all required
 capabilities.
 @begin{Discussion}
   A conforming implementation can partially support a
   Specialized Needs Annex.
   Such an implementation does not conform to the Annex,
-  but it does conform to the Standard.
+  but it does conform to the @StdTitle.
 @end{Discussion}
 @end{Notes}
 
@@ -1786,22 +1785,22 @@ information. For example @i(subtype_)@nt<name> and
 @Defn{ambiguous grammar}
 @Defn2{Term=[grammar],Sec=(resolution of ambiguity)}
 @Defn2{Term=[grammar],Sec=(ambiguous)}
-The grammar given in @Chg{Version=[2],New=[this International Standard],
+The grammar given in @Chg{Version=[2],New=[this @IntlStdName],
 old=[the RM95]} is not LR(1).
 In fact, it is ambiguous; the ambiguities are resolved
 by the overload resolution rules
 (see @RefSecNum{The Context of Overload Resolution}).
 
-We often use @lquotes@;if@rquotes@; to mean @lquotes@;if and only if@rquotes@; in definitions.
-For example, if we define @lquotes@;photogenic@rquotes@; by saying,
-@lquotes@;A type is photogenic if it has the following properties...,@rquotes@;
+We often use @lquotes@;if@rquotes to mean @lquotes@;if and only if@rquotes in definitions.
+For example, if we define @lquotes@;photogenic@rquotes by saying,
+@lquotes@;A type is photogenic if it has the following properties...@rquotes,
 we mean that a type is photogenic if @i{and only if}
 it has those properties.
 It is usually clear from the context,
-and adding the @lquotes@;and only if@rquotes@; seems too cumbersome.
+and adding the @lquotes@;and only if@rquotes seems too cumbersome.
 
 When we say, for example, @lquotes@;a @nt{declarative_item} of a
-@nt{declarative_part}@rquotes@;, we are talking about a @nt{declarative_item}
+@nt{declarative_part}@rquotes, we are talking about a @nt{declarative_item}
 immediately within that @nt{declarative_part}. When we say @lquotes@;a
 @nt{declarative_item} in, or within, a @nt{declarative_part}@rquotes@;, we are
 talking about a @nt{declarative_item} anywhere in the
@@ -1827,7 +1826,7 @@ Duration the user might have declared.
 characters whose code @Chg{Version=[3],New=[point],Old=[position]} is
 between 16#20# and 16#7E#, inclusively.
 The special characters for which names are defined in this
-International Standard (see @RefSecNum{Character Set}) belong to the same range.
+@IntlStdName (see @RefSecNum{Character Set}) belong to the same range.
 @Redundant[For example, the character E in the definition of @Chg{Version=[3],
 New=[@nt{exponent}],Old=[exponent]} is the
 character whose name is @lquotes@;LATIN CAPITAL LETTER E@rquotes@;, not
@@ -1841,7 +1840,7 @@ ASCII characters; no characters outside of the 7-bit range are required.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0227-1],ARef=[AI05-0299-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
-@ChgAdded{Version=[2],Text=[When this International Standard mentions the
+@ChgAdded{Version=[2],Text=[When this @IntlStdName mentions the
 conversion of some character or sequence of characters to upper case, it means
 the character or sequence of characters obtained by using
 @Chg{Version=[3],New=[simple upper case mapping],Old=[locale-independent
@@ -1878,7 +1877,7 @@ of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],
 @begin{WideAbove}
 @Defn{syntactic category}
 A @i{syntactic category} is
-a nonterminal in the grammar defined in BNF under @lquotes@;@SyntaxTitle.@rquotes@;
+a nonterminal in the grammar defined in BNF under @lquotes@;@SyntaxTitle@rquotes.
 Names of syntactic categories are set in a different font,
 @ntf{like_this}.
 @end{WideAbove}
@@ -1890,7 +1889,7 @@ Names of syntactic categories are set in a different font,
 @begin{Ramification}
 For example, an @nt{expression} is a construct.
 A declaration is a construct,
-whereas the thing declared by a declaration is an @lquotes@;entity.@rquotes@;
+whereas the thing declared by a declaration is an @lquotes@;entity@rquotes.
 @end{Ramification}
 @begin{Discussion}
 @lquotes@;Explicit@rquotes@; and @lquotes@;implicit@rquotes@; don't mean exactly what you might think
@@ -1982,7 +1981,7 @@ The preferred places for other line breaks are after semicolons.
   strings.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
-  @ChgAdded{Version=[2],Text=[We now explicitly define what the Standard means
+  @ChgAdded{Version=[2],Text=[We now explicitly define what the @StdTitle means
   by upper case, as there are many possibilities for ISO 10646 characters.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -2018,7 +2017,7 @@ different categories:
      Ada implementation;
 
      @NoPrefix@;These errors correspond to any violation of a rule given in this
-     International Standard, other than those listed below.
+     @IntlStdName, other than those listed below.
      In particular, violation of any rule that uses the
      terms shall, allowed, permitted, legal, or illegal belongs to this
      category. Any program that contains such an error is not a legal
@@ -2045,7 +2044,7 @@ different categories:
 
      @begin{Metarules}
      @Chgref{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
-     @ChgAdded{Version=[5],Text=[When the Standard says that some construct
+     @ChgAdded{Version=[5],Text=[When the @StdTitle says that some construct
        @i<C1> has equivalent dynamic semantics to some other construct @i<C2>,
        then there should be a language rule that says that @i<C1> is illegal
        if @i<C2> is illegal.]}
@@ -2123,7 +2122,7 @@ different categories:
        (But implementations are encouraged to limit it as much as possible.)
 
        Suppose a program contains a pair of things that will be executed @lquotes@;in
-       an arbitrary order.@rquotes@;
+       an arbitrary order@rquotes.
        It is possible that one order will result in something sensible, whereas
        the other order will result in erroneous execution.
        If the implementation happens to choose the first order,
@@ -2132,7 +2131,7 @@ different categories:
 
        Saying that something is erroneous is semantically
        equivalent to saying that the behavior is unspecified.
-       However, @lquotes@;erroneous@rquotes@; has a slightly more disapproving
+       However, @lquotes@;erroneous@rquotes has a slightly more disapproving
        flavor.
      @end{Ramification}
 
@@ -2155,7 +2154,7 @@ satisfy certain criteria specified by the implementation.
 @Defn2{Term={mode of operation}, Sec=(standard)}
 @Defn{standard mode}
 In any case, an implementation shall support a @i(standard) mode that
-conforms to the requirements of this International Standard; in particular, in the standard
+conforms to the requirements of this @IntlStdTitle; in particular, in the standard
 mode, all legal @nt<compilation_unit>s shall be accepted.]
 @begin{Discussion}
   These permissions are designed to authorize explicitly the
@@ -2200,7 +2199,7 @@ Violating a check that is suppressed remains erroneous.
 The @lquotes@;incorrect order dependences@rquotes@; category of errors is removed.
 All such situations are simply considered potential nonportabilities.
 This category was removed due to the difficulty of defining
-what it means for two executions to have a @lquotes@;different effect.@rquotes@;
+what it means for two executions to have a @lquotes@;different effect@rquotes.
 For example, if a function with a side effect is called twice in a single
 expression, it is not in principle possible for the compiler to
 decide whether the correctness of the resulting program depends on the order
@@ -2220,7 +2219,7 @@ normatively referenced in this document and are indispensable for its
 application. For dated references, only the edition cited applies. For undated
 references, the latest edition of the referenced document (including any
 amendments) applies.],Old=[standards contain provisions which,
-through reference in this text, constitute provisions of this International
+through reference in this text, constitute provisions of this International 
 Standard. At the time of publication, the editions indicated were valid. All
 standards are subject to revision, and parties to agreements based on this
 International Standard are encouraged to investigate the possibility of applying
@@ -2408,14 +2407,14 @@ POSIX,
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
 @Defn2{Term=[italics],Sec=(terms introduced or defined)}
-Terms are defined throughout this International Standard,
+Terms are defined throughout this @IntlStdName,
 indicated by @i(italic) type.
-Terms explicitly defined in this International Standard are not to be presumed to
+Terms explicitly defined in this @IntlStdName are not to be presumed to
 refer implicitly to similar terms defined elsewhere.
-@Chg{Version=[2],New=[Mathematical terms not defined in this International
-Standard are to be interpreted according to the @i<CRC Concise Encyclopedia of
+@Chg{Version=[2],New=[Mathematical terms not defined in this @IntlStdName
+are to be interpreted according to the @i<CRC Concise Encyclopedia of
 Mathematics, Second Edition>. Other terms],Old=[Terms]} not defined in this
-International Standard are to be interpreted according to
+@IntlStdName are to be interpreted according to
 the @i(Webster's Third New International Dictionary of the
 English Language).
 Informal descriptions of some terms are also given in

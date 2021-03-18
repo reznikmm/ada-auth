@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.132 $ $Date: 2020/12/05 05:10:44 $ $Author: randy $ }
+@comment{ $Revision: 1.133 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2020/12/05 05:10:44 $}
+@Comment{$Date: 2021/03/18 10:02:19 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -884,9 +884,9 @@ Old=[The Standard Task Dispatching Policy]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
-allows a single task
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This 
+@Chg{Version=[3],New=[subclause],Old=[clause]} allows a single task
 dispatching policy to be defined for all priorities, or the range of priorities
 to be split into subranges that are assigned individual dispatching
 policies.]]}
@@ -2239,9 +2239,8 @@ had at the time the activation was initiated.]}
 @end{RunTime}
 
 @begin{Bounded}
-
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0230-1]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If EDF_Across_Priorities is specified for priority range @i<Low>..@i<High>, it
 is a bounded error to declare a protected object with ceiling priority
@@ -2249,8 +2248,12 @@ is a bounded error to declare a protected object with ceiling priority
 either Program_Error is raised or the ceiling of the protected
 object is assigned the value
 @i<Low>+1.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}]}
-
 @end{Bounded}
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraph 30 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{Erron}
 
@@ -2882,11 +2885,11 @@ but a task can be blocked on only one call at a time.
 
 A previous version of Ada 9X required queue reordering in the
 @nt{asynchronous_select} case as well.
-If the call corresponds to a @lquotes@;synchronous@rquotes@; entry call, then the task
+If the call corresponds to a @lquotes@;synchronous@rquotes entry call, then the task
 is blocked while queued, and it makes good sense to move it up in the
 queue if its priority is raised.
 
-However, if the entry call is @lquotes@;asynchronous,@rquotes@; that is, it is
+However, if the entry call is @lquotes@;asynchronous@rquotes, that is, it is
 due to an @nt{asynchronous_select} whose @nt{triggering_statement}
 is an entry call, then the task is not waiting for this
 entry call, so the placement of the entry call on the
@@ -4124,7 +4127,7 @@ Text=[The behavior when restriction Max_Storage_At_Blocking is violated.]}]}
   A value of zero prevents the use of any @nt{asynchronous_@!select}@Chg{New=[ and,
   if a program contains an @nt{asynchronous_@!select}, it is illegal.
   @ChgNote{Part of the previous rule is redundant, but it is a different part
-  [all of it for Old; from "prevents" to "and," for New] for each. So we omit it.}
+  [all of it for Old; from "prevents" to "and", for New] for each. So we omit it.}
   If an implementation chooses to detect a violation of this
   restriction for values other than zero, Storage_Error should be raised;
   @IndexCheck{Storage_Check}
@@ -4330,6 +4333,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
 
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
 @LabeledClause{Monotonic Time}
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -4957,7 +4961,7 @@ limited record type.@end{implnote}
 exists:]}
 @begin{example}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@b{with} Ada.Real_Time;
 ],Old=[]}@key{package} Ada.Synchronous_Task_Control.EDF@Chg{Version=[5],New=[
    @key{with} Nonblocking, Global => @key[in out synchronized]],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Synchronous_Task_Control],Child=[EDF]}
@@ -5142,7 +5146,7 @@ aborted when the tasks waiting on the object are released.]}
 Text=[When an aborted task that is waiting on a Synchronous_Barrier is aborted.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Wait_For_Release is
 a potentially blocking operation
 (see @RefSecNum{Protected Subprograms and Protected Actions}).]}]}
@@ -5429,7 +5433,7 @@ measured in the following way:
       Flag := True;
    @key{end} Set;
    @Key{function} Read @Key{return} Boolean
-   @key{Begin}
+   @key{begin}
       @key{return} Flag;
    @key{end} Read;
 @key{end} Lock;
@@ -5625,14 +5629,14 @@ A @nt{pragma} Profile is a configuration pragma.
 There may be more than one @nt{pragma} Profile for a partition.]}]}
 @end{Linktime}
 @begin{NotIso}
-@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 7 was
-deleted.>}]}@Comment{This message should be deleted if the paragraphs
-are ever renumbered.}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph
+7@Chg{Version=[4],New=[ and 8 were],Old=[was]} deleted.>}]}@Comment{This 
+message should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
-@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0055-1]}
+@ChgRef{Version=[4],Kind=[DeletedNoDelMsg],ARef=[AI12-0055-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[A task shall only be
 on the ready queues of one processor, and the
 processor to which a task belongs shall be defined statically.
@@ -6260,7 +6264,7 @@ immediately.@Defn2{Term=[expires], Sec=[execution timer]}]}
   @ChgAdded{Version=[2],Text=[Since an access-to-constant can designate a
   variable, the Task_Id value designated by the discriminant of a Timer
   object can be changed after the object is created. Thus, an implementation
-  cannot use the value of the Task_Id other than where this Standard specifies.
+  cannot use the value of the Task_Id other than where this @StdTitle specifies.
   For instance, the Task_Id should be read when the timer is set, but it
   should not be used when the timer expires (as it may designate a different
   task at that point).]}
@@ -6669,6 +6673,7 @@ implementation is not portable.]}
 @end{Inconsistent2005}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledAddedSubClause{Version=[3],Name=[Execution Time of Interrupt Handlers]}
 
 @begin{Intro}
@@ -7585,17 +7590,21 @@ the program can't do anything useful).]}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   The subtypes of the parameter or result of several routines were changed
   to support empty domains. These changes will cause rules requiring
   subtype conformance to fail on these routines (such as 'Access). We
   believe such uses are unlikely. In addition, type CPU_Set and function
   Get_CPU_Set, along with an overloaded Create are newly added to this package.
-  If Multiprocessors.Dispatching_Domains is referenced in a @nt{use_clause},
+  @Chg{Version=[5],New=[As such, a use clause conflict is possible; see the
+  introduction of @RefSecNum{Predefined Language Environment} for more on this 
+  topic.],Old=[If Multiprocessors.Dispatching_Domains is
+  referenced in a @nt{use_clause},
   and an entity @i<E> with the same @nt{defining_identifier} as a new entity
   in this package is defined in a package that is also referenced in a
   @nt{use_clause}, the entity @i<E> may no longer be use-visible, resulting
-  in errors. This should be rare and is easily fixed if it does occur.]}
+  in errors. This should be rare and is easily fixed if it does occur.]}]}
 @end{Incompatible2012}
 
 @begin{Diffword2012}

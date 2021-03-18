@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:45 $}
+@Comment{$Date: 2021/03/18 10:02:17 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.142 $}
+@Comment{$Revision: 1.143 $}
 
 @begin{Intro}
 
@@ -2360,11 +2360,11 @@ corresponding subprogram of each ancestor shall allow blocking.]}
 @end{Ramification}
 
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2],ARef=[AI12-0396-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2],ARef=[AI12-0396-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[5],Text=[It is illegal to directly specify aspect Nonblocking
 for the first subtype of the full view of a type that has a partial view. If the
 Nonblocking aspect of the full view is inherited, it shall have the same value as 
-that of the partial view.]}
+that of the partial view, or have the value True.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2393,6 +2393,18 @@ same value as the Nonblocking aspect of the subtype identified in the
     operation on any subtype of a type are nonblocking if the first
     subtype is nonblocking.]}
 @end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+@ChgAdded{Version=[5],Text=[For an access-to-object type that is nonblocking,
+the Allocate, Deallocate, and Storage_Size operations on its storage pool 
+shall be nonblocking.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Standard storage pools always have nonblocking
+  operations by definition (see @RefSecNum{Storage Management}), so this rule
+  only can fail for user-defined storage pools.]}
+@end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a composite type that is
@@ -3352,7 +3364,7 @@ this isn't considered propagation.
 
 Note that we say @lquotes@;propagated from the
 @nt{handled_sequence_of_statements} of an @nt{accept_statement}@rquotes@;,
-not @lquotes@;propagated from an @nt{accept_statement}.@rquotes@;
+not @lquotes@;propagated from an @nt{accept_statement}@rquotes@;.
 The latter would be wrong @em we don't want exceptions propagated by
 the @nt<entry_index> to be sent to the caller (there is none yet!).
 
@@ -3790,7 +3802,7 @@ object since the @nt<condition> was last evaluated.
   result from actions outside of a
   @Chg{Version=[4],New=[],Old=[protected procedure or entry ]}call
   @Chg{Version=[4],New=[to an exclusive protected operation of],Old=[on]} the
-  protected object need not be "noticed." For example, if
+  protected object need not be "noticed". For example, if
   a global variable is referenced by an entry barrier, it should not
   be altered (except as part of a protected action on the object) any
   time after the barrier is first evaluated.
@@ -3818,7 +3830,7 @@ is checked to see if it is open.
 @begin(ImplNote)
   It is anticipated that when the number of entries is known to be small,
   all barriers will be evaluated any time one of them needs to be,
-  to produce an "entry-open bit-vector." The appropriate bit will
+  to produce an "entry-open bit-vector". The appropriate bit will
   be tested when the entry is called, and only if the bit is false
   will a check be made to see whether the bit-vector might need to
   be recomputed. This should allow an implementation to maximize
@@ -4894,7 +4906,7 @@ environment (such as POSIX).]}
                         Minute : Minute_Number;
                         Second : Second_Number := 0;
                         Sub_Second : Second_Duration := 0.0)
-       @key<return> Day_Duration;]}
+                           @key<return> Day_Duration;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Seconds    : @key<in> Day_Duration;
@@ -4964,8 +4976,10 @@ environment (such as POSIX).]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0336-1],ARef=[AI12-0347-1]}
 @ChgAdded{Version=[5],Text=[   @key<function> @AdaSubDefn{Local_Image} (Date : Time;
-                         Include_Time_Fraction : Boolean := False) @key<return> String @key<is>
-      (Image (Date, Include_Time_Fraction, Time_Zones.Local_Time_Offset (Date)));]}
+                         Include_Time_Fraction : Boolean := False)
+      @key<return> String @key<is>
+      (Image (Date, Include_Time_Fraction, 
+              Time_Zones.Local_Time_Offset (Date)));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Date : String;
@@ -5156,7 +5170,7 @@ less than 1.0.]}
                      Minute : Minute_Number;
                      Second : Second_Number := 0;
                      Sub_Second : Second_Duration := 0.0)
-    @key<return> Day_Duration;]}
+                        @key<return> Day_Duration;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Day_Duration value for
@@ -5507,12 +5521,14 @@ be negative.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0336-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Changed the definition of Time_Offset to be compatible with most compilers.
   Also added Local_Time_Offset and Local_Image to better describe the intent.
   A program that expects the Ada 2012 definition of Time_Offset would get
   incorrect answers. However, most compilers tested use the revised definition,
-  so the likelihood of a program breaking is quite low.]}
+  so the likelihood of a program breaking is quite low. Additionally, the new
+  definitions could cause a use clause conflict; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Inconsistent2012}
 
 
@@ -6230,8 +6246,8 @@ the following are the abort-deferred operations:
 Abort is deferred during the entire assignment operation
 to an object with a controlled part,
 even if only some subcomponents are controlled.
-Note that this says "assignment operation,"
-not "@nt{assignment_statement}."
+Note that this says "assignment operation",
+not "@nt{assignment_statement}".
 Explicit calls to Initialize, Finalize, or Adjust are
 not abort-deferred.
 @end(Ramification)
@@ -6512,7 +6528,7 @@ components) is always independently addressable from any other nonoverlapping
 object. @Chg{Version=[4],New=[@nt{Aspect_specification}s and representation
 items cannot change that fact],Old=[Any @nt{aspect_specification} or
 representation item which would prevent this from being true should be rejected,
-notwithstanding what this Standard says elsewhere]}. Note, however, that the
+notwithstanding what this @StdTitle says elsewhere]}. Note, however, that the
 components of an atomic object are not necessarily atomic.]}
 @end{Ramification}
 @end{StaticSem}
@@ -6581,7 +6597,7 @@ circumstances:
     a potentially blocking operation, whose blocking is dependent on
     the first action in some way.
     Protected procedures are not potentially blocking, so they can
-    only be "signalers," they cannot be signaled.
+    only be "signalers", they cannot be signaled.
   @end(Reason)
   @begin(Ramification)
     Protected subprogram calls are not defined to signal one another,
@@ -7088,7 +7104,8 @@ objects of a type covered by Queue'Class.]}
 
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0178-1]}
-@ChgAdded{Version=[5],Text=[@key(type) Person_Name_Array @key(is array) (Positive @b<range> <>) @key(of) Person_Name; --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
+@ChgAdded{Version=[5],Text=[@key(type) Person_Name_Array @key(is array) (Positive @b<range> <>) 
+   @key(of) Person_Name;  --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(protected) Buffer @key(is)@Chg{Version=[2],New=[ @key(new) Synchronized_Queue @key(with)  --@RI[ see @RefSecNum{Interface Types}]],Old=[]}

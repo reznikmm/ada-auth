@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2021/01/19 06:32:46 $ $Author: randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -98,7 +98,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Tree} @key{is tagged private}
       @key{with} Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
@@ -111,12 +111,13 @@ package Containers.Multiway_Trees has the following declaration:]}
            Default_Initial_Condition =>
               Node_Count (Tree) = 1 @key{and then}
               (@key{not} Tampering_With_Cursors_Prohibited (Tree)) @key{and then}
-              (@key{not} Tampering_With_Elements_Prohibited (Tree))],Old=[]};
-   @key{pragma} Preelaborable_Initialization(Tree);]}
+              (@key{not} Tampering_With_Elements_Prohibited (Tree)),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Tree)]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
-   @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private}@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[   @key{with}],Old=[@key{pragma}]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Cursor)]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaObjDefn{Empty_Tree} : @key{constant} Tree;]}
@@ -193,7 +194,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Depth} (Position : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Depth} (Container : Tree; Position : Cursor)
@@ -205,7 +206,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Root} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Root} (Container : Tree; Position : Cursor)
@@ -215,7 +216,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Leaf} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Leaf} (Container : Tree; Position : Cursor)
@@ -547,7 +548,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Child_Count} (Parent : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
       @key{with} Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0),
-            Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Child_Count} (Container : Tree; Parent : Cursor)
@@ -562,7 +563,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Child_Depth} (Parent, Child : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
       @key{with} Pre  => (Parent = No_Element @key{and then} Child = No_Element)
                       @key{or else raise} Constraint_Error,
-           Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Child_Depth} (Container : Tree; Parent, Child : Cursor)
@@ -896,7 +897,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Parent} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element @key{or else}
                        Is_Root (Position) @key{then} Parent'Result = No_Element)],Old=[]};]}
 
@@ -914,7 +915,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{First_Child} (Parent : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Pre  => Parent /= No_Element @key{or else raise} Constraint_Error],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -952,7 +953,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Last_Child} (Parent : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Pre  => Parent /= No_Element @key{or else raise} Constraint_Error],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -990,7 +991,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Next_Sibling} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element
                        @key{then} Next_Sibling'Result = No_Element)],Old=[]};]}
 
@@ -1010,7 +1011,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Next_Sibling} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Next_Sibling} (Container : @key{in}     Tree;
@@ -1024,7 +1025,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Previous_Sibling} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element
                        @key{then} Previous_Sibling'Result = No_Element)],Old=[]};]}
 
@@ -1044,7 +1045,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Previous_Sibling} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Previous_Sibling} (Container : @key{in}     Tree;
@@ -1062,7 +1063,7 @@ package Containers.Multiway_Trees has the following declaration:]}
       Process : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
       @key{with} Allows_Exit,
            Pre    => Parent /= No_Element @key{or else raise} Constraint_Error,
-           Global => (@key{in all}, @key{use null})],Old=[]};]}
+           Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Iterate_Children}
@@ -1082,7 +1083,7 @@ package Containers.Multiway_Trees has the following declaration:]}
       Process : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
       @key{with} Allows_Exit,
            Pre    => Parent /= No_Element @key{or else raise} Constraint_Error,
-           Global => (@key{in all}, @key{use null})],Old=[]};]}
+           Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate_Children}
@@ -1105,10 +1106,10 @@ package Containers.Multiway_Trees has the following declaration:]}
                       @key{or else raise} Program_Error),
            Post => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Tree} (Base : @key{not null access} Multiway_Trees.Tree) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -1117,61 +1118,61 @@ package Containers.Multiway_Trees has the following declaration:]}
               Iterator_Element  => Element_Type,
               Stable_Properties => (Node_Count),
               Global            => @key[null],
-              Default_Initial_Condition => Node_Count (Tree) = 1;
-      @key{pragma} Preelaborable_Initialization(Tree);]}
+              Default_Initial_Condition => Node_Count (Tree) = 1,
+              Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
-      @key{pragma} Preelaborable_Initialization(Cursor);]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0399-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private}
+         @key{with} Preelaborable_Initialization;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_Tree} : @key{constant} Tree;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
-         @key{with} Nonblocking, Global => (@key{in all}, @key{use null});]}
+         @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null};]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Tree_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Multiway_Trees.Tree;
                         Source : @key{in} Tree)
          @key{with} Post => Node_Count (Source) = Node_Count (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Multiway_Trees.Tree) @key{return} Tree
          @key{with} Post => Node_Count (Copy'Result) = Node_Count (Source);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
             (Element : @key{not null access constant} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Reference_Type}
             (Element : @key{not null access} Element_Type) @key{is private}
          @key{with} Implicit_Dereference => Element,
               Nonblocking, Global => @key{null},
               Default_Initial_Condition => (@key{raise} Program_Error);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
       -- @examcom{are declared here.}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{private}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1391,7 +1392,7 @@ defined behavior of the body of the language-defined subprogram.],Old=[]}]}]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-   @key[with] Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1625,7 +1626,7 @@ Position],Old=[Equivalent to Node_Count (Container) = 1]}.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Depth (Position : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
@@ -1656,7 +1657,7 @@ Position],Old=[Equivalent to Node_Count (Container) = 1]}.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Root (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
@@ -1684,7 +1685,7 @@ Position],Old=[Equivalent to Node_Count (Container) = 1]}.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Leaf (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -2532,7 +2533,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Child_Count (Parent : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
    @key{with} Post => (@key{if} Parent = No_Element @key{then} Child_Count'Result = 0),
-         Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+         Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -2559,7 +2560,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Child_Depth (Parent, Child : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
    @key{with} Pre  => (Parent /= No_Element @key{and then} Child /= No_Element)
                    @key{or else raise} Constraint_Error,
-        Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+        Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0262-1]}
@@ -3272,7 +3273,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Parent (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
         Post => (@key{if} Position = No_Element @key{or else}
                     Is_Root (Position) @key{then} Parent'Result = No_Element)],Old=[]};]}
 @end{Example}
@@ -3306,7 +3307,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} First_Child (Parent : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
         Pre  => Parent /= No_Element @key{or else raise} Constraint_Error],Old=[]};]}
 @end{Example}
 
@@ -3371,7 +3372,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Last_Child (Parent : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
         Pre  => Parent /= No_Element @key{or else raise} Constraint_Error],Old=[]};]}
 @end{Example}
 
@@ -3436,7 +3437,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Next_Sibling (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
         Post => (@key{if} Position = No_Element
                     @key{then} Next_Sibling'Result = No_Element)],Old=[]};]}
 @end{Example}
@@ -3471,7 +3472,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Previous_Sibling (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null}),
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
         Post => (@key{if} Position = No_Element
                     @key{then} Previous_Sibling'Result = No_Element)],Old=[]};]}
 @end{Example}
@@ -3506,7 +3507,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Next_Sibling (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -3530,7 +3531,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Previous_Sibling (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-   @key{with} Nonblocking, Global => (@key{in all}, @key{use null})],Old=[]};]}
+   @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -3558,7 +3559,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
    Process : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
    @key{with} Allows_Exit,
         Pre    => Parent /= No_Element @key{or else raise} Constraint_Error,
-        Global => (@key{in all}, @key{use null})],Old=[]};]}
+        Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
@@ -3607,7 +3608,7 @@ Any exception raised by Process.@key{all} is propagated.]}
    Process : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
    @key{with} Allows_Exit,
         Pre  => Parent /= No_Element @key{or else raise} Constraint_Error,
-        Global => (@key{in all}, @key{use null})],Old=[]};]}
+        Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
@@ -3945,13 +3946,9 @@ unless specified by the operation.]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms, types, and even a nested package were added to
-  Containers.Multiway_Trees to better support contracts and stable views. If an
-  instance of Containers.Multiway_Trees
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  Containers.Multiway_Trees to better support contracts and stable views.
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -4768,7 +4765,7 @@ package Containers.Indefinite_Holders has the following declaration:]}
    @key[with function] "=" (Left, Right : Element_Type) @key[return] Boolean @key[is] <>;
 @key[package] Ada.Containers.Indefinite_Holders@Chg{Version=[5],New=[
    @key[with] Preelaborate, Remote_Types,
-        Nonblocking, Global => @key[@key[in out synchronized]]],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}@Chg{Version=[5],New=[],Old=[
+        Nonblocking, Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}@Chg{Version=[5],New=[],Old=[
    @key[pragma] Preelaborate(Indefinite_Holders);
    @key[pragma] Remote_Types(Indefinite_Holders);]}]}
 
@@ -4782,12 +4779,12 @@ package Containers.Indefinite_Holders has the following declaration:]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1],Aref=[AI12-0399-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Holder} @key[is tagged private] @Chg{Version=[5],New=[
       @key[with] Stable_Properties => (Is_Empty,
                                  Tampering_With_The_Element_Prohibited),
-           Default_Initial_Condition => Is_Empty (Holder)],Old=[]};
-   @key[pragma] Preelaborable_Initialization (Holder);]}
+           Default_Initial_Condition => Is_Empty (Holder),],Old=[;]}
+   @Chg{Version=[5], New=[       ],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[ (Holder)]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaObjDefn{Empty_Holder} : @key[constant] Holder;]}
@@ -5473,12 +5470,9 @@ holder container unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
   new subprograms and types were added to
   Containers.Indefinite_Holders to better support contracts and provide
-  additional functionality. If an instance of Containers.Indefinite_Holders
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Indefinite_Holders is
-  defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
+  additional functionality.
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}

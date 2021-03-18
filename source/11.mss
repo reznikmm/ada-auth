@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:45 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -42,7 +42,7 @@ numerous occurrences of this exception.
 @Defn{occurrence (of an exception)}
 When the meaning is clear from the context,
 we sometimes use @lquotes@;@i{occurrence}@rquotes@; as a
-short-hand for @lquotes@;exception occurrence.@rquotes@;
+short-hand for @lquotes@;exception occurrence@rquotes@;.
 @end{Honest}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1],ARef=[AI05-0258-1]}
@@ -204,6 +204,7 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledClause{Exception Handlers}
 
 @begin{Intro}
@@ -229,13 +230,13 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 @Syn{lhs=<exception_choice>,rhs="@SynI{exception_}@Syn2{name} | @key{others}"}
 @begin{Honest}
 @Defn{handler}
-@lquotes@;@i{Handler}@rquotes@; is an abbreviation for @lquotes@;@nt{exception_handler}.@rquotes@;
+@lquotes@;@i{Handler}@rquotes@; is an abbreviation for @lquotes@;@nt{exception_handler}@rquotes@;.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn2{term=<choice>, Sec=<of an @nt{exception_handler}>}
 Within this @Chg{Version=[3],New=[clause],Old=[section]}, we sometimes
 abbreviate
-@lquotes@;@nt{exception_choice}@rquotes@; to @lquotes@;@i{choice}.@rquotes@;
+@lquotes@;@nt{exception_choice}@rquotes@; to @lquotes@;@i{choice}@rquotes@;.
 @end{Honest}
 @end{Syntax}
 
@@ -358,6 +359,7 @@ Old=<@key{raise} [@SynI{exception_}@Syn2{name}];>}"}
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1],ARef=[AI12-0152-1]}
 @AddedSyn{Version=[4],lhs=<@Chg{Version=[4],New=<raise_expression>,Old=<>}>,rhs="@Chg{Version=[4],New=<@key{raise} @SynI{exception_}@Syn2{name} [@key{with} @SynI{string_}@Syn2{simple_expression}]>,Old=<>}"}
 
+@begin{SyntaxText}
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0152-1]}
 @ChgAdded{Version=[4],Type=[Leading],Text=[If a @nt{raise_expression} appears
 within the @nt{expression} of one of the following
@@ -481,6 +483,7 @@ C : Natural    := Func (Val => @key[raise] TBD_Error);]}
   static. We include these in this rule so that Ada text has an unambiguous
   syntax in these cases.]}
 @end{Discussion}
+@end{SyntaxText}
 
 @end{Syntax}
 
@@ -632,7 +635,7 @@ Tasking_Error; this is not propagation.
 @Defn2{Term=[dynamically enclosing], Sec=(of one execution by another)}
 @Defn2{Term=[execution], Sec=(dynamically enclosing)}
 Within a given task, if the
-execution of construct @i{a} is defined by this International Standard
+execution of construct @i{a} is defined by this @IntlStdName
 to consist (in part) of the
 execution of construct @i{b}, then while @i{b} is executing, the
 execution of @i{a} is said to @i(dynamically enclose) the execution of
@@ -762,12 +765,12 @@ are not handled by the handlers of the
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1],ARef=[AI12-0399-1]}
 @ChildUnit{Parent=[Ada],Child=[Exceptions]}@Chg{Version=[2],New=[@key[with] Ada.Streams;
 ],Old=[]}@key[package] Ada.Exceptions @Chg{Version=[5],New=[],Old=[ @key[is]]}@Chg{Version=[2],New=[
     @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Exceptions);]}],Old=[]}
-    @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private];@Chg{Version=[2],New=[
-    @key[pragma] Preelaborable_Initialization(Exception_Id);],Old=[]}
+    @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[    @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Exception_Id)]};],Old=[]}
     @AdaObjDefn{Null_Id} : @key[constant] Exception_Id;
     @key[function] @AdaSubDefn{Exception_Name}(Id : Exception_Id) @key[return] String;@Chg{Version=[2],New=[
     @key[function] @AdaSubDefn{Wide_Exception_Name}(Id : Exception_Id) @key[return] Wide_String;
@@ -775,8 +778,9 @@ are not handled by the handlers of the
         @key[return] Wide_Wide_String;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-    @key[type] @AdaTypeDefn{Exception_Occurrence} @key[is] @key[limited] @key[private];@Chg{Version=[2],New=[
-    @key[pragma] Preelaborable_Initialization(Exception_Occurrence);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+    @key[type] @AdaTypeDefn{Exception_Occurrence} @key[is] @key[limited] @key[private]@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[    @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Exception_Occurrence)]};],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Occurrence_Access} @key[is] @key[access] @key[all] Exception_Occurrence;
     @AdaObjDefn{Null_Occurrence} : @key[constant] Exception_Occurrence;
 
@@ -1392,6 +1396,7 @@ can be used to represent non-ASCII characters in exception messages.]}
 @end{DiffWord2005}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledAddedSubClause{Version=[2],Name=[Pragmas Assert and Assertion_Policy]}
 
 @begin{Intro}
@@ -1609,8 +1614,9 @@ language-defined library package exists:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Assertions]}@key[package] Ada.Assertions @key[is]
-   @key[pragma] Pure(Assertions);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Assertions]}@key[package] Ada.Assertions@Chg{Version=[5],New=[],Old=[ @key[is]]}
+    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Assertions);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaExcDefn{Assertion_Error} : @key<exception>;]}
@@ -1732,7 +1738,7 @@ the assertion expression.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[This allows the Standard to express semantic
+  @ChgAdded{Version=[5],Text=[This allows the @StdTitle to express semantic
   requirements as postconditions, invariants, or default initial conditions
   (which are invariably clearer than English prose would be) while keeping it
   clear that failing the assertion check (or any other run time check) is not
@@ -1750,7 +1756,7 @@ unless suppressed.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0112-1]}
-  @ChgAdded{Version=[5],Text=[This allows the Standard to express runtime
+  @ChgAdded{Version=[5],Text=[This allows the @StdTitle to express runtime
   requirements on the client of a language-defined unit as preconditions or
   predicates (which are clearer than English prose would be). Some
   such requirements can be suppressed with pragma Suppress. Ada 2012 and 
@@ -2019,7 +2025,7 @@ New=[, while a @nt<pragma> Unsuppress revokes the permission to omit checks],Old
 Text=<@ChgAdded{Version=[5],Text=[To suppress a check is to assert that the
 check cannot fail, and to request that the compiler optimize by disabling 
 the check. The compiler is not required to honor this request. Suppressing
-checks that can fail can cause program to behave in arbitrary ways.]}>}
+checks that can fail can cause a program to behave in arbitrary ways.]}>}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{language-defined check}
@@ -2028,7 +2034,7 @@ checks that can fail can cause program to behave in arbitrary ways.]}>}
 @Defn{run-time error}
 @Defn2{Term=[error], Sec=(run-time)}
 A @i{language-defined check} (or simply, a @lquotes@;check@rquotes@;) is
-one of the situations defined by this International Standard that requires a check to
+one of the situations defined by this @IntlStdName that requires a check to
 be made at run time to determine whether some
 condition is true.
 @Defn2{Term=[failure],Sec=(of a language-defined check)}
@@ -2657,7 +2663,7 @@ do not necessarily preserve the canonical semantics.]
 @begin{RunTime}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{canonical semantics}
-The rest of this International Standard (outside this @Chg{Version=[3],New=[subclause],Old=[clause]})
+The rest of this @IntlStdTitle (outside this @Chg{Version=[3],New=[subclause],Old=[clause]})
 defines the @i{canonical semantics} of the language.
 @Redundant[The canonical semantics of a given (legal) program determines a
 set of possible external effects that can result from the execution of
@@ -2786,7 +2792,7 @@ This follows from the canonical semantics.
   In the above code, it would be wrong to eliminate the
   raise of Constraint_Error on the "X.all" (since X is null),
   if the code to evaluate 'Last always yields 10 by presuming
-  that X.all belongs to the subtype Str10, without even "looking."
+  that X.all belongs to the subtype Str10, without even "looking".
 @end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -2868,7 +2874,7 @@ Therefore, we view this as one viable alternative.
 
 The extreme liberal rule would be @lquotes@;the language does not specify the
 execution of a program once a language-defined check has failed;
-such execution can be unpredictable.@rquotes@;
+such execution can be unpredictable@rquotes@;.
 This achieves the best efficiency.
 It sounds like a disaster from the predictability point of view,
 but in practice it might not be so bad.

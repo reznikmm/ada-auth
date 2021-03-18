@@ -1,21 +1,24 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_ada.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 00/03/08 Created by RLB to avoid Includes }
+@comment{ $Revision: 1.17 $ $Date: 00/03/08 Created by RLB to avoid Includes }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @LabeledClause{The Package Ada}
 
 @begin{StaticSem}
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
-@RootLibUnit{Ada}@key[package] Ada @key[is]
-    @key[pragma] Pure(Ada);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@RootLibUnit{Ada}@key[package] Ada@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[ @key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Ada);]}
 @key[end] Ada;
 @end{Example}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
 Ada serves as the parent of most of the other language-defined library
-units; its declaration is empty (except for the @nt{pragma} Pure).
+units; its declaration is empty@Chg{Version=[5],New=[],Old=[ (except for the
+@nt{pragma} Pure)]}.
 @end{StaticSem}
 
 @begin{Legality}

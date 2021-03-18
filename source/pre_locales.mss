@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2015/04/03 04:12:42 $ $Author: randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -19,9 +19,10 @@ other internationalization-related characteristics.]}
 Locales has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key{package} Ada.Locales @key{is}@ChildUnit{Parent=[Ada],Child=[Locales]}
-   @key{pragma} Preelaborate(Locales);
-   @key{pragma} Remote_Types(Locales);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@ChgAdded{Version=[3],Text=[@key{package} Ada.Locales@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada],Child=[Locales]}
+   @Chg{Version=[5],New=[@key{with}],Old=[ @key{pragma}]} Preelaborate@Chg{Version=[5],New=[,],Old=[(Locales);
+   @key{pragma}]} Remote_Types@Chg{Version=[5],New=[ @key{is}],Old=[(Locales);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0037-1]}

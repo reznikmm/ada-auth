@@ -1,17 +1,17 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2021/01/19 06:32:46 $}
+@Comment{$Date: 2021/03/18 10:02:19 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
 @Redundant[@Defn{obsolescent feature}
 This Annex contains descriptions of features of the
 language whose functionality is largely redundant with other features
-defined by this International Standard.
+defined by this @IntlStdTitle.
 Use of these features is not recommended in newly written programs.
 @Chg{Version=[2],New=[Use of these features can be prevented by using pragma
 Restrictions (No_Obsolescent_Features), see
@@ -766,7 +766,7 @@ enclosing declarative region, or, if the @nt{pragma} is given in a
 values of its type. A specific Suppress @nt{pragma} suppresses the named check
 for any entities to which it applies (see @RefSecNum{Suppressing Checks}).
 Which checks are associated with a specific entity is not defined by this
-International Standard.]}
+@IntlStdName.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @begin{Discussion}
@@ -855,7 +855,7 @@ library unit as the @nt<incomplete_type_declaration>.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
 @ChgAdded{Version=[2],Text=[In addition to an identifier, the reserved word
 @key{interface} is allowed as a pragma name, to provide compatibility with a prior
-edition of this International Standard.]}
+edition of this @IntlStdTitle.]}
 @end{SyntaxText}
 @end{Syntax}
 
@@ -974,17 +974,143 @@ Ada.Characters.Handling:]}
   (see @RefSecNum{The Package Characters.Conversions}).]}
 @end{DiffWord95}
 
+
 @LabeledAddedClause{Version=[3],Name=[Aspect-related Pragmas]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[Pragmas can be used as an alternative to
 aspect_specifications to specify certain aspects.]}
 
+@begin{Resolution}
+@ChgRef{Version=[5], Kind=[AddedNormal], ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{program unit pragma}
+@RootDefn{pragma, program unit}
+Certain @nt{pragma}s are defined to be @i{program unit pragmas}.
+@PDefn2{Term=[apply], Sec=(to a program unit by a program unit pragma)}
+A @nt{name} given as the argument of a program unit pragma shall resolve to
+denote the declarations or renamings of one or more program
+units that occur immediately within the declarative region or @nt<compilation>
+in which the @nt<pragma> immediately occurs, or it shall resolve to denote
+the declaration of the immediately enclosing program unit (if any);
+the @nt{pragma} applies to the denoted program
+unit(s).
+If there are no @nt{name}s given as arguments,
+the @nt{pragma} applies to the immediately
+enclosing program unit.]}
+@begin{Ramification}
+  @ChgRef{Version=[5], Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The fact that this is a @ResolutionName means that the 
+  @nt{pragma} will not apply to declarations from outer declarative regions.]}
+@end{Ramification}
+
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[5], Kind=[AddedNormal], ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[A program unit pragma shall 
+appear in one of these places:]}
+@begin{Itemize}
+@ChgRef{Version=[5], Kind=[AddedNormal], ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[At the place of a @nt{compilation_unit},
+in which case the @nt<pragma>
+shall immediately follow in the same @nt<compilation> (except for
+other @nt{pragma}s)
+a @nt{library_@!unit_@!declaration} that is a @nt<subprogram_@!declaration>,
+@nt<generic_@!subprogram_@!declaration>, or @nt<generic_@!instantiation>, and
+the @nt<pragma> shall have an argument that is a @nt<name> denoting
+that declaration.]}
+@begin{Ramification}
+  @ChgRef{Version=[5], Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The @nt{name} has to denote the immediately 
+  preceding @nt{library_unit_declaration}.]}
+@end{Ramification}
+
+@ChgRef{Version=[5], Kind=[AddedNormal], Ref=[8652/0033], ARef=[AI95-00136-01],  ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[Immediately within the visible part of a
+program unit and before any nested declaration (but not within a
+generic formal part), in which case the argument,
+if any, shall be a @nt{direct_name}
+that denotes the immediately enclosing program unit declaration.]}
+@begin{Ramification}
+  @ChgRef{Version=[5], Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The argument is optional in this case.]}
+@end{Ramification}
+
+@ChgRef{Version=[5], Kind=[AddedNormal], ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[At the place of a declaration
+other than the first,
+of a @nt{declarative_part} or program unit declaration,
+in which case the @nt{pragma} shall have an argument,
+which shall be a @nt{direct_name}
+that denotes one or more of the following (and nothing else):
+a @nt{subprogram_@!declaration}, a @nt{generic_@!subprogram_@!declaration},
+or a @nt{generic_@!instantiation}, of the same @nt<declarative_@!part> or
+program unit declaration.]}
+@begin{Ramification}
+  @ChgRef{Version=[5], Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If you want to denote a @nt<subprogram_body> 
+  that is not a completion, or a @nt{package_declaration}, 
+  for example, you have to put the @nt{pragma} inside.]}
+@end{Ramification}
+@end{Itemize}
+
+@ChgRef{Version=[5], Kind=[AddedNormal], ARef=[AI05-0132-1], ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{library unit pragma}
+@RootDefn{pragma, library unit}
+@PDefn2{Term=[program unit pragma], Sec=(library unit pragmas)}
+@PDefn2{Term=[pragma, program unit], Sec=(library unit pragmas)}
+Certain program unit pragmas are defined to be
+@i{library unit pragmas}.
+@Chg{Version=[3],New=[If a library unit pragma applies to a program unit,
+the program unit shall be],Old=[The @nt{name}, if
+any, in a library unit pragma shall denote the declaration of]} a library unit.]}
+@begin{Ramification}
+  @ChgRef{Version=[5], Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This, together with the rules for program unit 
+  pragmas above, implies that if a library unit pragma applies to a 
+  @nt{subprogram_declaration} (and similar things), it has to appear immediately 
+  after the @nt{compilation_unit}, whereas if the @nt{pragma} applies to a
+  @nt{package_declaration}, a @nt{subprogram_body} that is not a
+  completion (and similar things), it has to appear inside, as the first
+  @nt{declarative_item}.]}
+@end{Ramification}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[5], Kind=[AddedNormal], Ref=[8652/0034], ARef=[AI95-00041-01],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[A library unit pragma that applies to a generic
+unit does not apply to its instances, unless a specific rule for the pragma
+specifies the contrary.]}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[5], Kind=[AddedNormal], Ref=[8652/0034], ARef=[AI95-00041-01],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[When applied to a generic unit, a program unit pragma that
+is not a library unit pragma should apply to each instance of the generic unit
+for which there is not an overriding pragma applied directly to the instance.]}
+@ChgImplAdvice{Version=[5],Kind=[AddedNormal],Text=[@ChgAdded{Version=[5],
+Text=[When applied to a generic unit, a program unit pragma that
+is not a library unit pragma should apply to each instance of the generic unit
+for which there is not an overriding pragma applied directly to the instance.]}]}
+@end{ImplAdvice}
+
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[This subclause is new. Many existing pragmas have
   been converted into aspects; the pragmas have moved here.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0132-1],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5], Text=[@b<Correction:> A library unit pragma must
+  apply directly to a library unit, even if no name is given in the pragma.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[The terms @ldquote@;program unit pragma@rdquote
+  and @ldquote@;library unit pragma@rdquote were moved here as all of the
+  @nt{pragma}s that use these terms are now in this annex.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubClause{Version=[3],Name=[Pragma Inline]}
 
@@ -1502,9 +1628,12 @@ creation time].]}
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The form for @nt{pragma}s
-Atomic, Volatile, Independent, Atomic_Components, and
-Volatile_Components, and Independent_Components is as follows:]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0425-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The
+@Chg{Version=[5],New=[following],Old=[form for]} @nt{pragma}s
+@Chg{Version=[5],New=[are defined with the given forms],Old=[Atomic, Volatile,
+Independent, Atomic_Components, and Volatile_Components, and
+Independent_Components is as follows]}:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1685,7 +1814,7 @@ Text=[@key{pragma} @prag<Dispatching_Domain> (@nt{expression});]}>
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} is
-System.Multiprocessors.Dispatching_Domains.Dispatching_Domain.
+System.@!Multiprocessors.@!Dispatching_Domains.@!Dispatching_Domain.
 @PDefn2{Term=[expected type], Sec=(Dispatching_Domains pragma argument)}]}
 @end{Resolution}
 
@@ -1889,26 +2018,87 @@ denote a declaration that may have aspect Asynchronous specified.]}
 @end{DiffWord2005}
 
 
-@LabeledAddedSubClause{Version=[5],Name=[Pragma Preelaborable_Initialization]}
+@LabeledAddedSubClause{Version=[5],Name=[Elaboration Control Pragmas]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[5],Text=[This subclause defines pragmas that
+specify aspects that help control the elaboration order of @nt{library_item}s.]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+   @ChgAdded{Version=[5],Text=[Pragmas that do not have associated aspects 
+   still appear in @RefSecNum{Elaboration Control}. These pragmas are
+   presented in the order that the aspects are defined in 
+   @RefSecNum{Elaboration Control}.]}
+@end{Discussion}
+
+@end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[The form of a @nt{pragma}
-Preelaborable_Initialization is as follows:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following @nt{pragma}s are
+defined with the given forms:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<Preelaborate> (@SynI{library_unit_}@Syn2[name]);]}>
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
 Text=[@key{pragma} @prag<Preelaborable_Initialization> (@Syn2[direct_name]);]}>
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<Pure> (@SynI{library_unit_}@Syn2[name]);]}>
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<Elaborate_Body> (@SynI{library_unit_}@Syn2[name]);]}>
+
+@begin{SyntaxText}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=[library unit pragma], Sec=(Preelaborate)}
+@PDefn2{Term=[pragma, library unit], Sec=(Preelaborate)}@nt{Pragma}s Preelaborate, 
+Pure, and Elaborate_Body are library unit pragmas.@PDefn2{Term=[library unit pragma], Sec=(Pure)}
+@PDefn2{Term=[pragma, library unit], Sec=(Pure)}@PDefn2{Term=[library unit pragma], Sec=(Elaborate_Body)}
+@PDefn2{Term=[pragma, library unit], Sec=(Elaborate_Body)}]}
+
+@begin{Ramification}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[@nt{Pragma} Preelaborable_Initialization is @b<not>
+   a library unit pragma.]}
+@end{Ramification}
+@end{SyntaxText}
+
 @end{Syntax}
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Preelaborate specifies that a library
+unit is preelaborated, namely that the Preelaborate aspect (see 
+@RefSecNum{Elaboration Control}) of the library unit is True.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Pure specifies that a library
+unit is declared pure, namely that the Pure aspect (see 
+@RefSecNum{Elaboration Control}) of the library unit is True.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Elaborate_Body specifies that 
+@Redundant[a library unit requires a completion, namely that] the 
+Elaborate_Body aspect (see @RefSecNum{Elaboration Control}) of the 
+library unit is True.]}
+@end{StaticSem}
 
 @begin{Legality}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
-@ChgAdded{Version=[5],Text=[A pragma Preelaborable_Initialization specifies
-that the Preelaborable_Initialization aspect (see 10.2.1) for a composite type
-is True. This pragma shall appear in the visible part of a package or
-generic package.]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Preelaborable_Initialization specifies
+that the Preelaborable_Initialization aspect (see @RefSecNum{Elaboration Control})
+for a composite type is True. This pragma shall appear in the visible part of 
+a package or generic package.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
 @ChgAdded{Version=[5],Text=[If the pragma appears in the first declaration
@@ -1928,12 +2118,112 @@ which the Preelaborable_Initialization aspect can be directly specified as
 True.]}
 @end{Legality}
 
+@begin{Notes}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+@ChgAdded{Version=[5],Text=[Pragmas Elaborate and Elaborate_All, which do not
+have associated aspects, are found in @RefSecNum{Elaboration Control}.]}
+@end{Notes}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
-  @ChgAdded{Version=[5],Text=[This subclause is new. Pragma Preelaborable_Initialization
-  was moved here from @RefSecNum{Elaboration Control};
-  aspect Preelaborable_Initialization lives there now.]}
+  @ChgAdded{Version=[5],Text=[This subclause is new. These pragmas were
+  moved here from @RefSecNum{Elaboration Control}.]}
 @end{DiffWord2012}
 
+
+@LabeledAddedSubClause{Version=[5],Name=[Distribution Pragmas]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[This subclause defines pragmas that specify properties 
+of units for distributed systems.]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+   @ChgAdded{Version=[5],Text=[These pragmas are
+   presented in the order that the aspects are defined in 
+   @RefSecNum{Distributed Systems}.]}
+@end{Discussion}
+@end{Intro}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following @nt{pragma}s are
+defined with the given forms:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<Shared_Passive> (@SynI{library_unit_}@Syn2[name]);]}>
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<Remote_Types> (@SynI{library_unit_}@Syn2[name]);]}>
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<Remote_Call_Interface> (@SynI{library_unit_}@Syn2[name]);]}>
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
+Text=[@key{pragma} @prag<All_Calls_Remote> (@SynI{library_unit_}@Syn2[name]);]}>
+
+@begin{SyntaxText}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=[library unit pragma], Sec=(Shared_Passive)}
+@PDefn2{Term=[pragma, library unit], Sec=(Shared_Passive)}Each of these pragmas
+is a library unit pragma.@PDefn2{Term=[library unit pragma], Sec=(Remote_Types)}
+@PDefn2{Term=[pragma, library unit], Sec=(Remote_Types)}@PDefn2{Term=[library unit pragma], Sec=(Remote_Call_Interface)}
+@PDefn2{Term=[pragma, library unit], Sec=(Remote_Call_Interface)}@PDefn2{Term=[library unit pragma], Sec=(All_Calls_Remote)}
+@PDefn2{Term=[pragma, library unit], Sec=(All_Calls_Remote)}]}
+@end{SyntaxText}
+
+@end{Syntax}
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[A @i<categorization pragma> is a pragma that 
+specifies a corresponding categorization aspect.@Defn{categorization pragma}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[The pragmas Shared_Passive, Remote_Types, and 
+Remote_Call_Interface are categorization pragmas. In addition, the pragma Pure
+(see @RefSecNum{Elaboration Control Pragmas}) is considered a 
+categorization pragma.@PDefn2{Term=[categorization pragma], Sec=(Shared_Passive)}
+@PDefn2{Term=[pragma, categorization], Sec=(Shared_Passive)}
+@PDefn2{Term=[categorization pragma], Sec=(Remote_Types)}
+@PDefn2{Term=[pragma, categorization], Sec=(Remote_Types)}
+@PDefn2{Term=[categorization pragma], Sec=(Remote_Call_Interface)}
+@PDefn2{Term=[pragma, categorization], Sec=(Remote_Call_Interface)}
+@PDefn2{Term=[categorization pragma], Sec=(Pure)}
+@PDefn2{Term=[pragma, categorization], Sec=(Pure)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Shared_Passive specifies that a library 
+unit is a shared passive library unit, namely that the Shared_Passive aspect 
+(see @RefSecNum{Shared Passive Library Units}) of the library unit is True.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Remote_Types specifies that a library unit is a remote types
+library unit, namely that the Remote_Types aspect (see 
+@RefSecNum{Remote Types Library Units}) of the library unit is True.]}
+
+A @nt{pragma} Remote_Call_Interface specifies that a library unit is a remote call
+interface, namely that the Remote_Call_Interface aspect (see E.2.3) of the library
+unit is True.
+
+A @nt{pragma} All_Calls_Remote specifies that the All_Calls_Remote aspect 
+(see E.2.3) of the library unit is True.
+
+
+@end{StaticSem}
+
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[This subclause is new. These pragmas were
+  moved here from @RefSec{Distributed Systems}.]}
+@end{DiffWord2012}
 
 

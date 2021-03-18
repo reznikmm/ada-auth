@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.84 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
+@comment{ $Revision: 1.85 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -230,10 +230,12 @@ terminate and are later reinvoked.
 
 @begin{Notes}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 Library units are grouped into partitions after compile time,
 but before run time.
 At compile time, only the relevant library unit properties are
-identified using categorization pragmas.
+identified using categorization 
+@Chg{Version=[5],New=[aspects],Old=[pragmas]}.
 
 
 The value returned by the Partition_Id attribute can be used as a
@@ -254,6 +256,7 @@ to query information about the partition.
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Categorization of Library Units}
 
 @begin{Intro}
@@ -264,29 +267,33 @@ of a distributed program remain close to the semantics for a nondistributed
 program.]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
-@RootDefn{categorization pragma}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0417-1]}
+@Chg{Version=[5],New=[],Old=[@RootDefn{categorization pragma}
 @RootDefn{pragma, categorization}
 @PDefn2{Term=[library unit pragma], Sec=(categorization pragmas)}
-@PDefn2{Term=[pragma, library unit], Sec=(categorization pragmas)}
+@PDefn2{Term=[pragma, library unit], Sec=(categorization pragmas)}]}
 @Chg{Version=[3],New=[@Defn{categorization aspect}],Old=[]}@Defn{categorized library unit}
-A @i{categorization pragma} is a library unit pragma
-(see @RefSecNum{Pragmas and Program Units})
+@Chg{Version=[5],New=[A @i{categorization aspect} ],Old=[A @i{categorization pragma} 
+is a library unit pragma (see @RefSecNum{Pragmas and Program Units})
 that @Chg{Version=[3],New=[specifies a corresponding @i{categorization aspect}.
-A categorization aspect ],Old=[]}restricts the declarations, child units, or
+A categorization aspect ],Old=[]}]}restricts the declarations, child units, or
 semantic dependences of the library unit to which it applies. A
 @i{categorized library unit} is a library unit @Chg{Version=[3],New=[that has a
 categorization aspect that is True],Old=[to which a categorization pragma
 applies]}.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
-The pragmas Shared_Passive, Remote_Types, and Remote_Call_Interface
-are categorization pragmas@Chg{Version=[3],New=[,
-and the associated aspects are categorization aspects],Old=[]}.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0417-1]}
+The @Chg{Version=[5],New=[aspects],Old=[pragmas]} Shared_Passive, 
+Remote_Types, and Remote_Call_Interface
+are categorization @Chg{Version=[5],New=[aspects],Old=[pragmas@Chg{Version=[3],New=[,
+and the associated aspects are categorization aspects],Old=[]}]}.
 In addition, for the purposes of this Annex, the @Chg{Version=[3],New=[aspect
 Pure (see @RefSecNum{Elaboration Control}) is
-considered a categorization aspect and the],Old=[]}
-pragma Pure @Chg{Version=[3],New=[],Old=[(see @RefSecNum{Elaboration Control}) ]}is
-considered a categorization pragma.
+considered a categorization aspect@Chg{Version=[5],New=[],Old=[ and 
+the ]}],Old=[]}@Chg{Version=[5],New=[],Old=[pragma Pure 
+@Chg{Version=[3],New=[],Old=[(see @RefSecNum{Elaboration Control}) ]}is
+considered a categorization pragma]}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
@@ -400,14 +407,17 @@ representation for the type upon each elaboration of the type's declaration for
 different partitions of the same program.]}
 @end{ImplReq}
 @begin{NotIso}
-@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 13 was
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 13
+@Chg{Version=[5],New=[and 14 were],Old=[was]}
 deleted.>}]}@Comment{This message should be deleted if the paragraphs
 are ever renumbered.}
 @end{NotIso}
 
 @begin{ImplPerm}
 
-Implementations are allowed to define other categorization pragmas.
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Text=[Implementations are allowed to define other
+categorization pragmas.]}
 
 @end{ImplPerm}
 
@@ -434,6 +444,11 @@ Implementations are allowed to define other categorization pragmas.
   are documented as extensions in the subclauses where they actually are defined.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[Categorization pragmas are now obsolescent.]}
+@end{DiffWord2012}
+
 
 @LabeledSubClause{Shared Passive Library Units}
 @begin{Intro}
@@ -456,26 +471,36 @@ live in different address spaces, and have separate run-time systems.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@PDefn2{Term=[categorization pragma], Sec=(Shared_Passive)}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[@PDefn2{Term=[categorization pragma], Sec=(Shared_Passive)}
 @PDefn2{Term=[pragma, categorization], Sec=(Shared_Passive)}
-The form of a @nt{pragma} Shared_Passive is as follows:
+The form of a @nt{pragma} Shared_Passive is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Shared_Passive)[(@SynI{library_unit_}@Syn2{name})];'
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[0],@Chg{Version=[5],New=[],Old=<@key{pragma} @prag(Shared_Passive)[(@SynI{library_unit_}@Syn2{name})];>}>
 
 @end{Syntax}
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 and 3
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{Legality}
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @Defn{shared passive library unit}
-A@Chg{Version=[3],New=[ @nt{pragma} Shared_Passive is used to specify that a
-library unit is a],Old=[]} @i{shared passive library unit}@Chg{Version=[3],New=[,
-namely that the],Old=[ is
-a library unit to which a]}
-Shared_Passive
+@Chg{Version=[5],New=[When the library unit aspect (see 
+@RefSecNum{Aspect Specifications})],Old=[A]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[
+@nt{pragma}]} Shared_Passive@Chg{Version=[5],New=[@AspectDefn{Shared_Passive}
+of],Old=[ is used to specify that]} a library unit is @Chg{Version=[5],New=[True,
+the library unit is a],Old=[a]}],Old=[]}
+@i{shared passive library unit}@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[,
+namely that the],Old=[ is a library unit to which a]} Shared_Passive
 @Chg{Version=[3],New=[aspect@AspectDefn{Shared_Passive} of the library unit is
-True],Old=[pragma applies]}. The following restrictions apply to such a library
+True],Old=[pragma applies]}]}. The following restrictions apply to such a library
 unit:
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Shared_Passive],
@@ -581,10 +606,12 @@ P2 depends semantically on P1.
   depends semantically on that package. In a nondistributed
   program, all library packages are presumed to have the same lifetime.
 
-  Implementations may define additional pragmas that
-  force two library packages to be in the same partition, or to have
-  the same lifetime, which would allow this rule to be relaxed
-  in the presence of such pragmas.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
+  Implementations may define additional 
+  @Chg{Version=[5],New=[aspects or ],Old=[]}pragmas that force two library
+  packages to be in the same partition, or to have the same lifetime,
+  which would allow this rule to be relaxed in the presence of such 
+  @Chg{Version=[5],New=[aspects or ],Old=[]}pragmas.
 @end{Discussion}
 
 @end{Legality}
@@ -648,10 +675,11 @@ partitions.
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Shared_Passive
   is now a categorization aspect,
-  so it can be specified by an @nt{aspect_specification} @em
-  although the pragma is still preferred by the Standard.]}
+  so it can be specified by an @nt{aspect_specification}@Chg{Version=[5],New=[],Old=[ @em
+  although the pragma is still preferred by the @StdTitle.]}]}
 @end{Extend2005}
 
 @begin{Incompatible2012}
@@ -663,6 +691,11 @@ partitions.
   could disappear before the shared-passive partition. As such, the new
   errors are more likely to catch bugs than to cause them.]}
 @end{Incompatible2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[The pragma Shared_Passive is now obsolescent.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Remote Types Library Units}
@@ -683,26 +716,37 @@ outside the package.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@PDefn2{Term=[categorization pragma], Sec=(Remote_Types)}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[@PDefn2{Term=[categorization pragma], Sec=(Remote_Types)}
 @PDefn2{Term=[pragma, categorization], Sec=(Remote_Types)}
-The form of a @nt{pragma} Remote_Types is as follows:
+The form of a @nt{pragma} Remote_Types is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Remote_Types)[(@SynI{library_unit_}@Syn2{name})];'
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[0],@Chg{Version=[5],New=[],Old=<@key{pragma} @prag(Remote_Types)[(@SynI{library_unit_}@Syn2{name})];>}>
 
 @end{Syntax}
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 and 3
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{Legality}
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @Defn{remote types library unit}
-A@Chg{Version=[3],New=[ @nt{pragma} Remote_Types is used to specify that a library unit is a],Old=[]}
-@i{remote types library unit}@Chg{Version=[3],New=[,
-namely that the],Old=[ is a library unit to which the pragma]}
-Remote_Types
+@Chg{Version=[5],New=[When the library unit aspect (see 
+@RefSecNum{Aspect Specifications})],Old=[A]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[
+@nt{pragma}]} Remote_Types@Chg{Version=[5],New=[@AspectDefn{Remote_Types}
+of],Old=[ is used to specify that]} a library unit is @Chg{Version=[5],New=[True,
+the library unit is ],Old=[]}a],Old=[]}
+@i{remote types library unit}@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[,
+namely that the],Old=[ is a library unit to which the pragma]} Remote_Types
 @Chg{Version=[3],New=[aspect@AspectDefn{Remote_Types} of the library unit is
-True],Old=[applies]}. The following restrictions apply to the declaration of
-such a library unit:
+True],Old=[applies]}]}. The following restrictions apply to such a library
+unit:
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Remote_Types],
     Text=[@ChgAdded{Version=[3],Text=[Types in a given package may be used in
@@ -1043,10 +1087,11 @@ synchronized, protected, or task interface type.]}
   preelaborated normal units in the specification of a remote types unit.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Remote_Types
   is now a categorization aspect,
-  so it can be specified by an @nt{aspect_specification} @em
-  although the pragma is still preferred by the Standard.]}
+  so it can be specified by an @nt{aspect_specification}@Chg{Version=[5],New=[],Old=[ @em
+  although the pragma is still preferred by the @StdTitle.]}]}
 @end{Extend2005}
 
 @begin{DiffWord2012}
@@ -1075,6 +1120,10 @@ synchronized, protected, or task interface type.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0283-1]}
   @ChgAdded{Version=[5],Text=[Added a rule to ensure that potentially blocking
   remote calls are not considered nonblocking.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[The pragma Remote_Types is now obsolescent.]}
+
 @end{DiffWord2012}
 
 
@@ -1095,42 +1144,59 @@ sent between two active partitions.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@PDefn2{Term=[categorization pragma], Sec=(Remote_Call_Interface)}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[@PDefn2{Term=[categorization pragma], Sec=(Remote_Call_Interface)}
 @PDefn2{Term=[pragma, categorization], Sec=(Remote_Call_Interface)}
-The form of a @nt{pragma} Remote_Call_Interface is as follows:
+The form of a @nt{pragma} Remote_Call_Interface is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Remote_Call_Interface)[(@SynI{library_unit_}@Syn2{name})];'
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[0],@Chg{Version=[5],New=[],Old=<@key{pragma} @prag(Remote_Call_Interface)[(@SynI{library_unit_}@Syn2{name})];>}>
 
 @begin{SyntaxText}
-@Leading@;The form of a @nt{pragma} All_Calls_Remote is as follows:
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[The form of a 
+@nt{pragma} All_Calls_Remote is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(All_Calls_Remote)[(@SynI{library_unit_}@Syn2{name})];'
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@DeletedPragmaSyn<Version=[5],InitialVersion=[0],@Chg{Version=[5],New=[],Old=<@key{pragma} @prag(All_Calls_Remote)[(@SynI{library_unit_}@Syn2{name})];>}>
 
 @begin{SyntaxText}
-@PDefn2{Term=[library unit pragma], Sec=(All_Calls_Remote)}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
+@ChgDeleted{Version=[5],Text=[@PDefn2{Term=[library unit pragma], Sec=(All_Calls_Remote)}
 @PDefn2{Term=[pragma, library unit], Sec=(All_Calls_Remote)}
-A @nt{pragma} All_Calls_Remote is a library unit pragma.
+A @nt{pragma} All_Calls_Remote is a library unit pragma.]}
 @end{SyntaxText}
 
 @end{Syntax}
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 through 6
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 
 @begin{Legality}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @Defn{remote call interface}
 @Defn2{Term=[RCI],Sec=(library unit)}
 @Defn2{Term=[RCI],Sec=(package)}
 @Defn2{Term=[RCI],Sec=(generic)}
 @Defn{remote subprogram}
-A@Chg{Version=[3],New=[ @nt{pragma} Remote_Call_Interface is used to specify that a
-library unit is a],Old=[]} @i{remote call interface (RCI)}@Chg{Version=[3],New=[,
-namely that the],Old=[ is a library unit to which the pragma]}
-Remote_Call_Interface
+@Chg{Version=[5],New=[When the library unit aspect (see 
+@RefSecNum{Aspect Specifications})],Old=[A]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[
+@nt{pragma}]} Remote_Call_Interface@Chg{Version=[5],New=[@AspectDefn{Remote_Call_Interface}
+of],Old=[ is used to specify that]} a
+library unit is @Chg{Version=[5],New=[True,
+the library unit is ],Old=[]}a],Old=[]} @i{remote call interface
+(RCI)}@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[,
+namely that the],Old=[ is a library unit to which the pragma]} Remote_Call_Interface
 @Chg{Version=[3],New=[aspect@AspectDefn{Remote_Call_Interface} of the library
-unit is True],Old=[applies]}. A subprogram declared in the visible part of such
+unit is True],Old=[applies]}]}. A subprogram declared in the visible part of such
 a library unit@Chg{New=[, or declared by such a library unit,],Old=[]} is called
 a @i{remote subprogram}.
 
@@ -1244,16 +1310,18 @@ RCI subprograms.]}
 any public child of the library unit shall
 be a remote call interface library unit.
 @begin{Reason}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   No restrictions apply to the private part of an RCI package,
   and since a public child can @lquotes@;see@rquotes@; the private part
   of its parent, such a child must itself have a
-  Remote_Call_Interface pragma, and be assigned to the same partition
-  (see below).
+  Remote_Call_Interface @Chg{Version=[5],New=[aspect],Old=[pragma]},
+  and be assigned to the same partition (see below).
 @end{Reason}
 @begin{Discussion}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   We considered making the public child of an RCI package
   implicitly RCI, but it seemed better to require an explicit
-  pragma to avoid any confusion.
+  @Chg{Version=[5],New=[aspect],Old=[pragma]} to avoid any confusion.
 
   Note that there is no need for a private child to be an RCI package,
   since it can only be seen from the body of its parent
@@ -1286,10 +1354,14 @@ unit.@PDefn{generic contract issue}]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@Chg{Version=[3],New=[A],Old=[If a]} pragma All_Calls_Remote
-@Chg{Version=[3],New=[sets the All_Calls_Remote representation aspect of
-@AspectDefn{All_Calls_Remote}the],Old=[applies to a]} library unit@Chg{Version=[3],New=[ to which the pragma
-applies to the value True. If the All_Calls_Remote aspect of a library unit is True],
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[A],Old=[If a]} 
+pragma All_Calls_Remote]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[sets
+the ]}All_Calls_Remote @Chg{Version=[5],New=[is a library unit],Old=[representation]}
+aspect@AspectDefn{All_Calls_Remote}@Chg{Version=[5],New=[],Old=[ of 
+the]}],Old=[applies to a]}@Chg{Version=[5],New=[],Old=[ library 
+unit]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[ to which the pragma
+applies to the value True]}. If the All_Calls_Remote aspect of a library unit is True],
 Old=[]}, the library unit shall be a remote call interface.
 
   @ChgAspectDesc{Version=[4],Kind=[Revised],InitialVersion=[3],Aspect=[All_Calls_Remote],
@@ -1398,14 +1470,18 @@ are always local, and all the units are in the same active partition.
 @begin{ImplPerm}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 An implementation need not support the
-Remote_Call_Interface pragma @Chg{Version=[3],New=[or aspect ],Old=[]}nor
-the All_Calls_Remote pragma.
+Remote_Call_Interface @Chg{Version=[5],New=[],Old=[pragma
+]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[or ]}aspect ],Old=[]}nor
+the All_Calls_Remote @Chg{Version=[5],New=[aspect],Old=[pragma]}.
 @Redundant[Explicit message-based communication between active partitions can
 be supported as an alternative to RPC.]
 @begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   Of course, it is pointless to support the All_Calls_Remote
-  pragma if the Remote_Call_Interface pragma (or some
+  @Chg{Version=[5],New=[aspect],Old=[pragma]} if the Remote_Call_Interface
+  @Chg{Version=[5],New=[aspect],Old=[pragma]} (or some
   approximate equivalent) is not supported.
 @end{Ramification}
 
@@ -1456,16 +1532,18 @@ be supported as an alternative to RPC.]
   remote call interface unit.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[3],Text=[All_Calls_Remote
   is now a representation aspect, so it can be specified by
-  an @nt{aspect_specification} @em
-  although the pragma is still preferred by the Standard.]}
+  an @nt{aspect_specification}@Chg{Version=[5],New=[],Old=[ @em
+  although the pragma is still preferred by the @StdTitle.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[3],Text=[Remote_Call_Interface
   is now a categorization aspect, so it can be specified by
-  an @nt{aspect_specification} @em
-  although the pragma is still preferred by the Standard.]}
+  an @nt{aspect_specification}@Chg{Version=[5],New=[],Old=[ @em
+  although the pragma is still preferred by the @StdTitle.]}]}
 @end{Extend2005}
 
 @begin{Inconsistent2012}
@@ -1477,9 +1555,9 @@ be supported as an alternative to RPC.]
   the PCS, while that was not necessarily true in earlier Ada. If a program
   depended on local targets not being routed through the PCS even when
   All_Calls_Remote is used, then it might behave differently or fail in
-  Chg{Version=[5],New=[],Old=[corrected ]}Ada
+  @Chg{Version=[5],New=[],Old=[corrected ]}Ada
   2012@Chg{Version=[5],New=[ as corrected with this refinement],Old=[]}. This
-  is highly unlikely as PCS is going to be able to communicate with any
+  is highly unlikely as the PCS is going to be able to communicate with any
   partition of the program, including the local partition.]}
 @end{Inconsistent2012}
 
@@ -1496,6 +1574,10 @@ be supported as an alternative to RPC.]
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0283-1]}
   @ChgAdded{Version=[5],Text=[Added a rule to ensure that potentially blocking
   remote calls are not considered nonblocking.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
+  @ChgAdded{Version=[5],Text=[The pragmas Remote_Call_Interface and 
+  All_Calls_Remote are now obsolescent.]}
 @end{DiffWord2012}
 
 
@@ -1542,8 +1624,8 @@ program unit]}, the following attributes are defined:
 @Defn2{Term=[version], Sec=(of a compilation unit)}
 The @i{version} of a compilation unit changes whenever the
 @Chg{New=[],Old=[version changes for any ]}compilation unit
-@Chg{New=[changes in a semantically significant way. This International
-Standard does not define the exact meaning of "semantically significant"],
+@Chg{New=[changes in a semantically significant way. This @IntlStdName
+ does not define the exact meaning of "semantically significant"],
 Old=[on which it depends semantically. The version also changes whenever the
 compilation unit itself changes in a semantically significant way]}.
 It is @Chg{New=[unspecified],Old=[implementation defined]}
@@ -2181,21 +2263,24 @@ It is not clear that this rule can be tested or even defined formally.
 @Leading@i{Example of using a remote access-to-class-wide type to achieve dynamic binding
 across active partitions:}
 @begin{example}
-@key{package} Tapes @key{is}
-   @key{pragma} Pure(Tapes);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key{package} Tapes@Chg{Version=[5],New=[],Old=[ @key{is}]}
+   @Chg{Version=[5],New=[@key{with}],Old=[ @key{pragma}]} Pure@Chg{Version=[5],New=[ @key{is}],Old=[(Tapes);]}
    @key{type} Tape @key{is abstract tagged limited private};
    @RI{-- Primitive dispatching operations where}
    @RI{-- Tape is controlling operand}
-   @key{procedure} Copy (From, To : @key{access} Tape; Num_Recs : @key[in] Natural) @key{is} @key{abstract};
+   @key{procedure} Copy (From, To : @key{access} Tape;
+                   Num_Recs : @key[in] Natural) @key{is} @key{abstract};
    @key{procedure} Rewind (T : @key{access} Tape) @key{is} @key{abstract};
    @RI{-- More operations}
 @key{private}
    @key{type} Tape @key{is} ...
 @key{end} Tapes;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
 @key{with} Tapes;
-@key{package} Name_Server @key{is}
-   @key{pragma} Remote_Call_Interface;
+@key{package} Name_Server@Chg{Version=[5],New=[],Old=[ @key{is}]}
+   @Chg{Version=[5],New=[@key{with}],Old=[ @key{pragma}]} Remote_Call_Interface@Chg{Version=[5],New=[ @key{is}],Old=[;]}
    @RI{-- Dynamic binding to remote operations is achieved}
    @RI{-- using the access-to-limited-class-wide type Tape_Ptr}
    @key{type} Tape_Ptr @key{is access all} Tapes.Tape'Class;

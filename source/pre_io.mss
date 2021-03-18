@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2020/12/05 05:10:43 $}
+@Comment{$Date: 2021/03/18 10:02:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -41,7 +41,7 @@ Wide_Text_IO, and the stream input-output facilities are new in Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
-RM83-14.6, "Low Level Input-Output,"
+RM83-14.6, @lquotes@;Low Level Input-Output@rquotes,
 is removed. This has no semantic effect,
 since the package was entirely implementation defined,
 nobody actually implemented it,
@@ -304,7 +304,7 @@ a property of a file object, not of an external file.
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0130-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0302-1]}
-@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type))@Chg{Version=[5],New=[
+@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type)@Chg{Version=[5],New=[
        @key[with] Global => @key[overriding in out] File],Old=[]};]}
 
    --@RI{ Input and output operations}
@@ -429,21 +429,22 @@ any nesting depth, so this note is obsolete.}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}
   @b<Corrigendum:> The Flush procedure is newly added to Ada.Sequential_IO.
-  If an instance of Ada.Sequential_IO is referenced in a @nt{use_clause}, and
-  a procedure Flush is defined in some other package that is also referenced
-  in a @nt{use_clause}, the user-defined Flush may no longer be use-visible,
-  resulting in errors. This should be rare and is easily fixed if it does occur.]}
+  @Chg{Version=[5],New=[Therefore, a use clause conflict is possible; see the
+  introduction of @RefSecNum{Predefined Language Environment} for more on this 
+  topic.],Old=[If an instance of Ada.Sequential_IO is referenced in a
+  @nt{use_clause}, and a procedure Flush is defined in some other package that
+  is also referenced in a @nt{use_clause}, the user-defined Flush may no longer 
+  be use-visible, resulting in errors. This should be rare and is easily fixed
+  if it does occur.]}]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
   @ChgAdded{Version=[5],Text=[The Wide_File_Names and Wide_Wide_File_Names
   nested packages are newly added to Ada.Sequential_IO.
-  If an instance of Ada.Sequential_IO is referenced in a @nt{use_clause}, and
-  an entity with one of those names is defined in some other package that is
-  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
-  use-visible, resulting in errors. This should be rare and is easily fixed if
-  it does occur.]}
+  Therefore, a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 
@@ -964,21 +965,21 @@ declared in some other (nongeneric) package.],Old=[]}]}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}
   @b<Corrigendum:> The Flush procedure is newly added to Ada.Direct_IO.
-  If an instance of Ada.Direct_IO is referenced in a @nt{use_clause}, and
+  @Chg{Version=[5],New=[Therefore, a use clause conflict is possible; see the
+  introduction of @RefSecNum{Predefined Language Environment} for more on this 
+  topic.],Old=[If an instance of Ada.Direct_IO is referenced in a @nt{use_clause}, and
   a procedure Flush is defined in some other package that is also referenced
   in a @nt{use_clause}, the user-defined Flush may no longer be use-visible,
-  resulting in errors. This should be rare and is easily fixed if it does occur.]}
+  resulting in errors. This should be rare and is easily fixed if it does occur.]}]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
   @ChgAdded{Version=[5],Text=[The Wide_File_Names and Wide_Wide_File_Names
   nested packages are newly added to Ada.Direct_IO.
-  If an instance of Ada.Direct_IO is referenced in a @nt{use_clause}, and
-  an entity with one of those names is defined in some other package that is
-  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
-  use-visible, resulting in errors. This should be rare and is easily fixed if
-  it does occur.]}
+  Therefore, a use clause conflict is possible; see the introduction of
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 
@@ -1904,12 +1905,9 @@ generic packages Modular_IO and Decimal_IO are new in Ada 95.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
   The Wide_File_Names and Wide_Wide_File_Names
-  nested packages are newly added to Ada.Text_IO.
-  If Ada.Text_IO is referenced in a @nt{use_clause}, and
-  an entity with one of those names is defined in some other package that is
-  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
-  use-visible, resulting in errors. This should be rare and is easily fixed if
-  it does occur.]}
+  nested packages are newly added to Ada.Text_IO. Therefore, 
+  a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 
@@ -3552,8 +3550,8 @@ Text_IO.Unbounded_IO has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{with} Ada.Strings.Unbounded;
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Strings.Unbounded;
 @key{package} Ada.Text_IO.Unbounded_IO@Chg{Version=[5],New=[
    @key[with] Global => @key[in out synchronized]],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Text_IO],Child=[Unbounded_IO]}]}
 
@@ -3875,14 +3873,15 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key(with) Ada.IO_Exceptions;@ChildUnit{Parent=[Ada.Streams],Child=[Stream_@!IO]}
 @key(package) Ada.Streams.Stream_IO@Chg{Version=[5],New=[
-   @key(with) Preelaborate, Global => @key(in out synchronized)],Old=[]} @key(is)@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[
+    @key(with) Preelaborate, Global => @key(in out synchronized)],Old=[]} @key(is)@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[
     @key(pragma) Preelaborate(Stream_IO);]}],Old=[]}
 
     @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Root_Stream_Type'Class;
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0102-1]}
-    @key(type) @AdaTypeDefn{File_Type} @key(is) @key(limited) @key(private);@Chg{Version=[4],New=[
-    @key(pragma) Preelaborable_Initialization(File_Type);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0399-1]}
+    @key(type) @AdaTypeDefn{File_Type} @key(is) @key(limited) @key(private)@Chg{Version=[5],New=[],Old=[;]}@Chg{Version=[4],New=[
+    @Chg{Version=[5],New=[    @key(with)],Old=[@key(pragma)]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(File_Type)]};],Old=[]}
 
     @key(type) @AdaTypeDefn{File_Mode} @key(is) (In_File, Out_File, Append_File);
 
@@ -3929,7 +3928,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
     @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
                     Item : @key(out) Stream_Element_Array;
-                    Last : @key(out) Stream_Element_Offset))@Chg{Version=[5],New=[
+                    Last : @key(out) Stream_Element_Offset)@Chg{Version=[5],New=[
         @key(with) Global => @key(overriding in out) File],Old=[]};
 
 @ChgRef{Version=[1], Kind=[Deleted]}
@@ -3939,12 +3938,12 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
     -- @RI(Write array of stream elements into file)
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
                      Item : @key(in) Stream_Element_Array;
-                     To   : @key(in) Positive_Count))@Chg{Version=[5],New=[
+                     To   : @key(in) Positive_Count)@Chg{Version=[5],New=[
         @key(with) Global => @key(overriding in out) File],Old=[]};
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
-                     Item : @key(in) Stream_Element_Array))@Chg{Version=[5],New=[
+                     Item : @key(in) Stream_Element_Array)@Chg{Version=[5],New=[
         @key(with) Global => @key(overriding in out) File],Old=[]};
 
 @ChgRef{Version=[1], Kind=[Deleted]}
@@ -3953,7 +3952,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
     -- @RI(Operations on position within file)
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
-    @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count))@Chg{Version=[5],New=[
+    @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count)@Chg{Version=[5],New=[
         @key(with) Global => @key(overriding in out) File],Old=[]};
 
     @key[function] @AdaSubDefn{Index}(File : @key[in] File_Type) @key[return] Positive_Count;
@@ -4275,12 +4274,9 @@ closed file.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
   The Wide_File_Names and Wide_Wide_File_Names
-  nested packages are newly added to Ada.Streaam_IO.
-  If an instance of Ada.Stream_IO is referenced in a @nt{use_clause}, and
-  an entity with one of those names is defined in some other package that is
-  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
-  use-visible, resulting in errors. This should be rare and is easily fixed if
-  it does occur.]}
+  nested packages are newly added to Ada.Streaam_IO. Therefore, 
+  a use clause conflict is possible; see the introduction of 
+  @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -4404,8 +4400,9 @@ predefined input-output packages.
 @begin{StaticSem}
 @Leading@;The library package IO_Exceptions has the following declaration:
 @begin{Example}
-@key[package] Ada.IO_Exceptions @key[is]@ChildUnit{Parent=[Ada],Child=[IO_Exceptions]}
-   @key[pragma] Pure(IO_Exceptions);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}
+@key[package] Ada.IO_Exceptions@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[IO_Exceptions]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(IO_Exceptions);]}
 
    @AdaExcDefn{Status_Error} : @key[exception];
    @AdaExcDefn{Mode_Error}   : @key[exception];
