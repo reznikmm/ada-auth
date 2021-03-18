@@ -1,6 +1,7 @@
 Ada formatting tool.
 
-Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012, 2016, 2019
+Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012, 2016, 
+          2019, 2021
    AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
@@ -1211,6 +1212,13 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  "@ResolutionTitle".").
 	where <Grouping> is any of the paragraph grouping kinds listed above.
 
+@intlstdname  - Generates "International Standard" when ShowISO is the state, and
+                "document" when HideISO is the state.
+@intlstdtitle - Generates "International Standard" when ShowISO is the state, and
+                "Reference Manual" when HideISO is the state.
+@stdtitle     - Generates "Standard" when ShowISO is the state, and
+                "Reference Manual" when HideISO is the state.
+
 -- Character Macros:
 
 These represent characters not available in the lower 128 of Latin-1, including
@@ -1340,10 +1348,11 @@ paper.
 
 Versions:
    0-Original Ada 95 (equivalent to No-Changes)
-   1-Technical Corrigendum 1
+   1-Technical Corrigendum 1 for Ada 95
    2-Amendment 1 [Ada 2005 (standard published 2007, so could be considered Ada 2007)]
    3-3rd Edition (Ada 2012)
-   4-4th Edition (Ada 202x) - Not official yet.
+   4-Technical Corrigendum 1 for Ada 2012
+   5-4th Edition (Ada 202x) - Not official yet.
 
 Please note that there some changes to earlier versions (mostly typographical,
 but there are some that are significant) that are not preserved in the Ada 2012

@@ -19,7 +19,7 @@ package body ARM_RTF is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012,
-    --	    2013, 2016
+    --	    2013, 2016, 2021
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -150,6 +150,13 @@ package body ARM_RTF is
     --			documentation change.
     --  8/19/16 - RLB - Nasty bug in End_Hang_Item: it loses any open styles
     --			if a line break has to be inserted.
+    --  3/11/21 - RLB - Eliminated special format for Indent = 1, Normal.
+    --                  (It was not justified and had less space around.)
+    --                  It caused formatting complaints for the RM, and would
+    --                  have caused unusual formatting for other documents.
+    --  3/16/21 - RLB - Added lower case 'm' and 'w' to "large" characters
+    --			so they're treated as taking extra space (X'Wide_Image
+    --			is getting the wrong answer in End_Hang_Item).
 
 
     -- Note: We assume a lot about the Section_Names passed into
@@ -618,12 +625,15 @@ package body ARM_RTF is
 		       Font_Size => 18,
 		       Style_Indent => INDENT_UNIT*1,
 		       Style_Before => 0,
-		       Style_After => 80,
-		       Style_Justified => FALSE,
+		       Style_After => 120, --80, previously different than normal, unknown why.
+		       Style_Justified => TRUE, --FALSE, Not justified 2000-2020,
+                                --but was in Ada 95. Unknown why the difference,
+                                --now returned to Ada 95 format.
 		       Style_String_Prefix =>
 			 "\s10\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-200 \snext10 ");
-			  -- Note: Narrower space between and afterwards.
+		       --Style_String_Suffix => "\cgrid\ql\sl-200 \snext10 ");
+		       --  -- Note: Narrower space between and afterwards. -- Not anymore.
+		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext10 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Normal, 3), -- Regular indent
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -1788,12 +1798,15 @@ package body ARM_RTF is
 		       Font_Size => 22,
 		       Style_Indent => INDENT_UNIT*1,
 		       Style_Before => 0,
-		       Style_After => 100,
-		       Style_Justified => FALSE,
+		       Style_After => 120, --100, was different from other normals, unknown why
+		       Style_Justified => TRUE, --FALSE, Not justified 2000-2020,
+                                --but was in Ada 95. Unknown why the difference,
+                                --now returned to Ada 95 format.
 		       Style_String_Prefix =>
 			 "\s10\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-240 \snext10 ");
-			  -- Note: Narrower space between and afterwards.
+		       --Style_String_Suffix => "\cgrid\ql\sl-240 \snext10 ");
+			--  -- Note: Narrower space between and afterwards. -- Not anymore.
+		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext10 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Normal, 3), -- Indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -4779,7 +4792,7 @@ package body ARM_RTF is
 		   (not Output_Object.Saw_Hang_End) then
 --Ada.Text_Io.Put (Char);
 		    if Char in 'A' .. 'H' or else Char in 'J' .. 'Z' or else -- Capital 'I' is narrow.
-		       Char in '0' .. '9' or else
+		       Char in '0' .. '9' or else Char = 'm' or else Char = 'w' or else -- Small 'm' and 'w' are extra wide for lower-case characters.
 			Char = '+' or else Char = '_' or else Char = '@' or else
 			Char = '#' or else Char = '$' or else Char = '%' or else
 			Char = '&' or else Char = '*' or else Char = '<' or else
@@ -5157,12 +5170,26 @@ package body ARM_RTF is
 	    <= ((Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Hang_Width * 6 * 2) /
 		(Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Size * 5   * 5)) - 1 then
 	    -- No line break needed. (I can't find a way to get Word to do
-	    -- this properly, so we have to do it. We assume large characters
+	    -- this properly, so we have to do it.) We assume large characters
 	    -- are about 1 1/2 times normal characters, and that normal
 	    -- characters are about 5/6 the pt. size in width. Note that "Size"
 	    -- is in 1/2 pts., while "Hang_Width" is in .1 pts., so we need
-	    -- the "5" to correct the units.) The "- 1" is to allow space
-	    -- for the trailing space/tab. (Running into the text looks bad!).
+	    -- to multiply by "5" to correct the units.
+	    --
+	    -- This gives (Hang_Width / (Size*5)) * 5/6 = Num of normal characters.
+	    -- Large characters are counted in Char_Count as well, so they are
+	    -- added as 1/2. By multiplying both sides by 2 and rearranging
+	    -- terms to avoid integer truncation, we get the formal above.
+
+	    -- We subtract 1/2 character width from the hang width,
+	    -- as running into the text looks bad. As the formula is multiplied
+	    -- by two, this results in subtracting one from the result.
+
+	    -- Worst case in Ada 202x RM is X'Wide_Image, it needs a break;
+	    -- S'Wide_Image doesn't require a break, although it would be best
+	    -- to have it.
+
+
 	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 5;
 --Ada.Text_Io.Put_Line (" No_Break");

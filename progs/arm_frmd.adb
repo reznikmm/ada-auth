@@ -8,7 +8,7 @@ package body ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011, 2012  AXE Consultants. All rights reserved.
+    -- Copyright 2011, 2012, 2021  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -45,6 +45,7 @@ package body ARM_Format.Data is
     -- 10/26/11 - RLB - Added versioned break commands.
     --  3/27/12 - RLB - Added more versioned break commands.
     -- 12/17/12 - RLB - Added Ada 2012 AARM headings.
+    --  3/13/21 - RLB - Added IntlStd command.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
@@ -492,6 +493,12 @@ package body ARM_Format.Data is
 	    return Extend2012_Title;
 	elsif Canonical_Name = "diffword2012title" then
 	    return Wording2012_Title;
+        elsif Canonical_Name = "intlstdname" then
+	    return Intl_Standard_Name;
+        elsif Canonical_Name = "intlstdtitle" then
+	    return Intl_Standard_Title;
+        elsif Canonical_Name = "stdtitle" then
+	    return Standard_Title;
 	elsif Canonical_Name = "em" then
 	    return EM_Dash;
 	elsif Canonical_Name = "en" then

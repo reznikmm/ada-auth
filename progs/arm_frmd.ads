@@ -6,7 +6,7 @@ private package ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011, 2012  AXE Consultants. All rights reserved.
+    -- Copyright 2011, 2012, 2021  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -44,6 +44,7 @@ private package ARM_Format.Data is
     --  3/27/12 - RLB - Added more versioned break commands.
     -- 10/18/12 - RLB - Added more specific hanging_indent commands.
     -- 12/17/12 - RLB - Added Ada 2012 AARM headings.
+    --  3/13/21 - RLB - Added Intl_Standard_Name command.
 
 
     type LString is record
@@ -304,6 +305,7 @@ private package ARM_Format.Data is
 	Extend95_Title, Wording95_Title, Inconsistent2005_Title, Incompatible2005_Title,
 	Extend2005_Title, Wording2005_Title, Inconsistent2012_Title, Incompatible2012_Title,
 	Extend2012_Title, Wording2012_Title,
+        Intl_Standard_Name, Intl_Standard_Title, Standard_Title,
 	-- Character macros:
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
 	Latin_1, Unicode, Ceiling, Floor, Absolute, Log, Thin_Space,
