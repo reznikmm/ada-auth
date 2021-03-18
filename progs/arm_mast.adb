@@ -1139,7 +1139,7 @@ package body ARM_Master is
 			if Footer_Use_ISO_Format then
 			    Ada.Text_IO.Put_Line("RTF footer will use the ISO format (swiss font, multiple sizes)");
 			else
-			    Ada.Text_IO.Put_Line("RTF footer will use the normal format (body fond, one size)");
+			    Ada.Text_IO.Put_Line("RTF footer will use the normal format (body font, one size)");
 			end if;
 
 		        ARM_Input.Get_Char (Input_Object, Ch);
