@@ -294,6 +294,7 @@ package body ARM_Format is
     --  5/ 7/20 - RLB - Minor cleanups in tracing code.
     --  3/ 2/21 - RLB - Initialized Attr_Omit for regular attribute work, lest
     --                  a bunch of attributes get omitted for no reason.
+    --  3/13/21 - RLB - Added IntlStd command.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -2107,7 +2108,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		end case;
 	    end Make_Annotation_Preface;
 
-	begin
+	begin -- Check_Paragraph
 	    if not Format_Object.In_Paragraph then
 		-- Output subheader, if needed.
 --Ada.Text_IO.Put_Line ("Check_Paragraph, not In_Paragraph, last para subhead: " &
@@ -8951,6 +8952,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		     Incompatible2005_Title | Extend2005_Title | Wording2005_Title |
 		     Inconsistent2012_Title |
 		     Incompatible2012_Title | Extend2012_Title | Wording2012_Title |
+                     Intl_Standard_Name | Intl_Standard_Title | Standard_Title |
 		     EM_Dash | EN_Dash | LT | LE | GT | GE | NE | PI |
 		     Times | PorM | Single_Quote | Thin_Space | Left_Quote |
 		     Right_Quote | Left_Double_Quote | Right_Double_Quote |
@@ -9389,6 +9391,25 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		    Put_Title(Ada2012_Extensions);
 		when Wording2012_Title =>
 		    Put_Title(Ada2012_Wording);
+                    
+                when Intl_Standard_Name =>
+                    if Format_Object.Include_ISO then
+                        ARM_Output.Ordinary_Text (Output_Object, "International Standard");
+                    else
+                        ARM_Output.Ordinary_Text (Output_Object, "document");
+                    end if;
+                when Intl_Standard_Title =>
+                    if Format_Object.Include_ISO then
+                        ARM_Output.Ordinary_Text (Output_Object, "International Standard");
+                    else
+                        ARM_Output.Ordinary_Text (Output_Object, "Reference Manual");
+                    end if;
+                when Standard_Title =>
+                    if Format_Object.Include_ISO then
+                        ARM_Output.Ordinary_Text (Output_Object, "Standard");
+                    else
+                        ARM_Output.Ordinary_Text (Output_Object, "Reference Manual");
+                    end if;
 
 		when EM_Dash =>
 		    Check_Paragraph;
