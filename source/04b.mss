@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:17 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @LabeledClause{Type Conversions}
 
@@ -554,7 +554,9 @@ Further, if the operand type is not @i<universal_@!access>:]}
 
     @begin{Discussion}
       @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-1]}
-      @ChgAdded{Version=[4],Text=[We assume the worst in a generic body whether
+      @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0005-1]}
+      @ChgAdded{Version=[4],Text=[We assume the worst in a generic 
+      body@Chg{Version=[5],New=[ about],Old=[]} whether
       or not a formal subtype has a constrained partial view; specifically, in a
       generic body a discriminated subtype is considered to have a constrained
       partial view if it is a descendant of an untagged generic formal private
@@ -2447,13 +2449,16 @@ a static expression enclosed in parentheses.
   we mean a value specified by a static expression.
 @end(Discussion)
 @begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   The language requires a static
   expression in a @nt<number_declaration>,
-  a numeric type definition, a @nt<discrete_choice> (sometimes),
-  certain representation items, an @nt<attribute_designator>,
+  a numeric type definition, @Chg{Version=[5],New=[],Old=[a 
+  @nt<discrete_choice> (sometimes), ]}certain representation items,
+  @Chg{Version=[5],New=[and a number of other 
+  contexts],Old=[an @nt<attribute_designator>,
   and when specifying the value of a discriminant
   governing a @nt{variant_part}
-  in a @nt<record_aggregate> or @nt<extension_aggregate>.
+  in a @nt<record_aggregate> or @nt<extension_aggregate>]}.
 @end{Ramification}
 
 @Leading@Defn{statically denote}
@@ -3268,8 +3273,11 @@ of a @nt<discrete_@!subtype_@!definition>; or],Old=[]}
 match}@Defn2{Term=[statically match],Sec=[for global aspects]} if both consist of 
 a single @nt{global_aspect_definition}
 where each is the reserved word @key[null], or each is of the form
-@ldquote@;@nt{global_mode} @nt{global_designator}@rdquote with the same 
-sequence of reserved words.]}
+@ldquote@;@nt{global_mode} @nt{global_designator}@rdquote with each
+@nt{global_mode} being the same sequence of reserved words and each
+@nt{global_designator} being the same 
+reserved word, or each being a @nt{global_name} that statically denotes the 
+same entity.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
@@ -3440,6 +3448,10 @@ This subclause is new to Ada 95.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
   @ChgAdded{Version=[5],Text=[Updated wording to take nonconfirming values of
   Object_Size into account.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0374-2]}
+  @ChgAdded{Version=[5],Text=[Static matching now includes the effects of Global
+  aspects and the Nonblocking aspect.]}
 @end{Diffword2012}
 
 
@@ -3516,6 +3528,11 @@ but rather is implicitly composed for derived types, as defined below.]]}
      changes.]}
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0427-1]}
+@ChgAdded{Version=[5],Text=[For an @nt{aspect_specification} or 
+@nt{attribute_definition_clause} specifying Put_Image, the subtype of the
+@i<Arg> parameter shall be the first subtype or the base subtype if scalar,
+and the first subtype if not scalar.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[5],Text=[The behavior of the default
@@ -3893,7 +3910,8 @@ numbers come out correctly. Only the initial text gets overridden.}
       contents of that buffer with function Wide_Wide_Get.]}]}@Comment{End of Annex text here.}
      @ChgRef{Version=[5],Kind=[AddedNormal]}
      @ChgAdded{Version=[5],Text=[The lower bound of the
-      result is one.]}
+      result is one. @Redundant[Any exception propagated by the call of 
+      S'Put_Image is propagated.]]}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<T>, Prefix=<S>, AttrName=<Wide_Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1], ARef=[AI12-0384-2],
@@ -3913,7 +3931,8 @@ will save a vast amount of messing around.}
      passing @i<Arg> (which will typically store a sequence of character values
      in a text buffer) and then returns the result of retrieving the
      contents of that buffer with function Wide_Get.]}]}@Comment{End of Annex text here.}
-     @ChgAdded{Version=[5],Text=[The lower bound of the result is one.]}
+     @ChgAdded{Version=[5],Text=[The lower bound of the result is one.
+      @Redundant[Any exception propagated by the call of S'Put_Image is propagated.]]}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<T>, Prefix=<S>, AttrName=<Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1], ARef=[AI12-0384-2],
@@ -3933,7 +3952,8 @@ will save a vast amount of messing around.}
      passing @i<Arg> (which will typically store a sequence of character values
      in a text buffer) and then returns the result of retrieving the
      contents of that buffer with function Get.]}]}@Comment{End of Annex text here.}
-     @ChgAdded{Version=[5],Text=[The lower bound of the result is one.]}
+     @ChgAdded{Version=[5],Text=[The lower bound of the result is one. @Redundant[Any 
+      exception propagated by the call of S'Put_Image is propagated.]]}
 
 @EndPrefixType{}
 @end(description)
@@ -4157,7 +4177,7 @@ that would be meaningful based only on the relevant public interfaces.]}]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2],ARef=[AI12-0419-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2],ARef=[AI12-0419-1],ARef=[AI12-0427-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Attribute
     Put_Image is new. Attributes Image, Wide_Image, and Wide_Wide_Image
     now can be used with any type, and are defined in terms of Put_Image so

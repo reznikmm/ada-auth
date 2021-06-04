@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:16 $}
+@Comment{$Date: 2021/06/03 01:52:04 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.150 $}
+@Comment{$Revision: 1.151 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2374,7 +2374,7 @@ The following (and no others) represent
   mode @Chg{Version=[5],New=[@key(in out) or @key(out)],Old=[@key(in)]};
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0392-1]}
-  @ChgAdded{Version=[5],Text=[generic formal object of mode @key(in out);]}
+  @ChgAdded{Version=[5],Text=[a generic formal object of mode @key(in out);]}
 
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0392-1]}
   a @Chg{Version=[5],New=[non-discriminant component of a variable],Old=[discriminant]};
@@ -3257,11 +3257,12 @@ Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Pe
 @end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
 Count, Sum  : Integer;
 Size        : Integer @key(range) 0 .. 10_000 := 0;
 Sorted      : Boolean := False;
 Color_Table : @key(array)(1 .. Max) @key(of) Color;
-Option      : Bit_Vector(1 .. 10) := (@key(others) => True);
+Option      : Bit_Vector(1 .. 10) := (@key(others) => True);@Chg{Version=[5],New=[ -- @Examcom[see @RefSecNum{Array Types}]],Old=[]}
 Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String := "Hi, world.";@Chg{Version=[2],New=[
 @unicode(952), @unicode(966)        : Float @b<range> -@pi .. +@pi;],Old=[]}
 @end(Example)
@@ -3276,7 +3277,7 @@ Limit     : @key(constant) Integer := 10_000;
 Low_Limit : @key(constant) Integer := Limit/10;
 Tolerance : @key(constant) Real := Dispersion(1.15);@Chg{Version=[5],New=[
 A_String  : @key(constant) String := "A";],Old=[]}@Chg{Version=[2],New=[
-Hello_Msg : @key(constant access) String := Hello'Access; --@RI[ see @RefSecNum{Operations of Access Types}]],Old=[]}
+Hello_Msg : @key(constant access) String := Hello'Access; -- @Examcom[see @RefSecNum{Operations of Access Types}]],Old=[]}
 @end(Example)
 @end{Examples}
 
@@ -5624,14 +5625,23 @@ Default_Value shall be specified only on a
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
-@ChgAdded{Version=[3],Text=[If a derived type with no primitive subprograms
-inherits a boolean Default_Value aspect, the aspect may be specified to have any
-value for the derived type.]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0427-1]}
+@ChgAdded{Version=[3],Text=[If a derived type @Chg{Version=[5],New=[],Old=[with 
+no primitive subprograms ]}inherits a boolean Default_Value aspect, the aspect 
+may be specified to have any value for the derived type.@Chg{Version=[5],New=[
+If a derived type @i<T> does not inherit a Default_Value aspect, 
+it shall not specify such an aspect if it inherits a primitive subprogram 
+that has a parameter of type @i<T> of mode @key[out].],Old=[]}]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This overrides the
   @RefSecNum{Aspect Specifications} rule that says that a boolean aspect
-with a value True cannot be changed.]}
+  with a value True cannot be changed.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0427-1]}
+  @ChgAdded{Version=[5],Text=[The second sentence is to avoid violating the 
+  rules specified in @RefSecNum{Parameter Associations} about view conversions
+  of @key[out] parameters with a specified Default_Value aspect.]}
 @end{Reason}
 @end{StaticSem}
 
@@ -7081,13 +7091,16 @@ type definable by a @nt<floating_point_definition>.
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
 @Redundant[For the execution of a predefined operation of a real type,
 the implementation need not raise Constraint_Error if the result is
 outside the base range of the type, so long as the correct result
 is produced, or the Machine_Overflows attribute of the type is @Chg{Version=[2],
 New=[False],Old=[false]}
-(see @RefSecNum{Numeric Performance Requirements}).]
+(see @Chg{Version=[5],New=[@RefSecNum{Model of FLoating Point Arithmetic}],
+Old=[@RefSecNum{Numeric Performance Requirements}]}).]
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
 @Defn{nonstandard real type}
 An implementation may provide @i(nonstandard real types),
 descendants of @i(root_real) that are
@@ -7099,7 +7112,8 @@ might have an asymmetric or unsigned base range,
 or its predefined operations might wrap around or @lquotes@;saturate@rquotes@; rather
 than overflow (modular or saturating arithmetic), or it might not
 conform to the accuracy
-model (see @RefSecNum{Numeric Performance Requirements}).
+model (see @Chg{Version=[5],New=[@RefSecNum{Model of FLoating Point Arithmetic}],
+Old=[@RefSecNum{Numeric Performance Requirements}]}).
 Any type descended from a nonstandard real type is also nonstandard.
 An implementation may place arbitrary restrictions on the use of such types;
 it is implementation defined whether operators that are predefined
@@ -7884,10 +7898,11 @@ evaluation rules.]}
   a @nt<digits_constraint>, the digits is the value
   of the expression given after the reserved word @key(digits);
 
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
   For a subtype defined by a @nt<subtype_indication> without
   a @nt<digits_constraint>, the digits of the subtype
   is the same as that of the subtype denoted
-  by the @nt<subtype_mark> in the @nt<subtype_indication>.
+  by the @nt<subtype_mark> in the @nt<subtype_indication>@Chg{Version=[5],New=[;],Old=[.]}
 @begin(ImplNote)
   Although a decimal subtype can be both range-constrained
   and digits-constrained, the digits constraint is intended

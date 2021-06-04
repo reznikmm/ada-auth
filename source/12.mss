@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -969,7 +969,7 @@ determined by the actual.
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
-  @ChgAdded{Version=[5],Text=[We allow differences in particular for aspects 
+  @ChgAdded{Version=[5],Text=[In particular, we allow differences for aspects 
   that can be specified on generic formal parameters. For instance, Pre 
   (see @RefSecNum{Preconditions and Postconditions}) can be specified on 
   generic formal subprograms to be added to the Pre of the actual.]}
@@ -1985,10 +1985,11 @@ A @nt{discriminant_part} is allowed only for certain kinds of types,
 and therefore only for certain kinds of generic formal types.
 See @RefSecNum{Discriminants}.
 @begin{Ramification}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 The term @lquotes@;formal floating point type@rquotes@; refers to a type defined by a
 @nt{formal_floating_point_definition}.
-It does not include
-a formal derived type whose ancestor is floating point.
+It does not include a formal derived type whose ancestor is 
+@Chg{Version=[5],New=[a ],Old=[]}floating point@Chg{Version=[5],New=[ type],Old=[]}.
 Similar terminology applies to the other kinds of
 @nt{formal_type_definition}.
 @end{Ramification}

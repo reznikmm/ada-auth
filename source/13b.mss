@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @RMNewPageVer{Version=[0]}
 @RMNewPageVer{Version=[1]}
@@ -408,9 +408,9 @@ The @key(mod) function is needed so that the
 definition of Alignment makes sense.
 @end{Reason}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The range of Storage_Elements.Storage_Offset, the modulus of
-Storage_Elements.Storage_Element, and the declaration of
-Storage_Elements.Integer_Address.]}]}
+Text=[The range of Storage_@!Elements.@!Storage_@!Offset, the modulus of
+Storage_@!Elements.@!Storage_@!Element, and the declaration of
+Storage_@!Elements.@!Integer_@!Address.]}]}
 
 Storage_Element represents a storage element.
 Storage_Offset represents an offset in storage elements.
@@ -1717,7 +1717,7 @@ variable.@Chg{Version=[3],New=[@AspectDefn{Storage_Pool}@AspectDefn{Storage_Size
 If the nominal subtype of the @nt{name} specified for Storage_Pool is
 nonblocking (see @RefSecNum{Intertask Communication}),
 then the primitive Allocate, Deallocate, and Storage_Size subprograms of that
-type shall be nonblocking. Additionally, if the pool that is one that supports
+type shall be nonblocking. Additionally, if the pool is one that supports
 subpools (see @RefSecNum{Storage Subpools}), the primitive Default_Subpool_for_Pool,
 Allocate_From_Subpool, and Deallocate_Subpool subprograms shall be
 nonblocking.],Old=[]}
@@ -3759,13 +3759,14 @@ library procedure exists:]}
 @end{Example}
 
 @begin{Discussion}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0302-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0302-1]}
   @ChgAdded{Version=[5],Text=[The Global specification for this routine needs
   to account for the dispatching call to the user-defined Deallocate_Subpool 
-  routine. We can't use the @key[do] notation as that requires a statically
-  denoted dispatching argument (we have a function call here), so we have to
-  use @key[in out all] in order to allow the user-defined subprogram to do 
-  anything.]}
+  routine. We can't use the Dispatching aspect (see 
+  @RefSecNum{The Use_Formal and Dispatching Aspects}) as that requires a 
+  statically named object (we have a function call here), so 
+  we have to use @key[in out all] in order to allow the user-defined 
+  subprogram to do anything it needs to do.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
@@ -5041,7 +5042,7 @@ allocation.]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[The Streams.Storage.Bounded package is
   provided in order to make available an alternative to the
-  Streaams.Storage.Unbounded package which gives more predictable memory
+  Streams.Storage.Unbounded package which gives more predictable memory
   usage.]}
 @end{Reason}
 @end{ImplAdvice}
@@ -6060,7 +6061,9 @@ subprograms (see
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0007-1]}
-@ChgAdded{Version=[2],Text=[For an @nt{attribute_definition_clause} specifying
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0427-1]}
+@ChgAdded{Version=[2],Text=[For an @nt{attribute_definition_clause}@Chg{Version=[5],New=[ or
+@nt{aspect_specification}],Old=[]} specifying
 one of these attributes, the subtype of the
 @Chg{Version=[3],New=[@i<Item>],Old=[Item]} parameter shall be the
 @Chg{Version=[3],New=[first subtype or the ],Old=[]}base
@@ -6075,6 +6078,7 @@ applies to the result of the Input function.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0427-1]}
   @ChgAdded{Version=[2],Text=[The view of the type at the point of the
   @nt{attribute_definition_clause} determines whether the @Chg{Version=[3],
   New=[],Old=[first subtype or ]}base subtype is
@@ -6083,7 +6087,9 @@ applies to the result of the Input function.]}
   @Chg{Version=[3], New=[],Old=[first subtype or the ]} base subtype is
   @Chg{Version=[3], New=[allowed],Old=[required]} is
   determined by whether the @nt{attribute_definition_clause} occurs before or
-  after the full definition of the scalar type.]}
+  after the full definition of the scalar type.@Chg{Version=[5], New=[ 
+  For the same reason, the base subtype is never allowed for an attribute 
+  specified via an @nt{aspect_specification} on the partial view.],Old=[]}]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}

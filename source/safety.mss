@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.71 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
+@Comment{ $Revision: 1.72 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:19 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1740,7 +1740,7 @@ aspect of any descendant of @i<T>. If not specified, it defaults to Unspecified.
 @begin{Legality}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[For a tagged subtype @i<T>, each mode of its 
-Global aspect shall identify a subset of the variables identified by the 
+Global aspect shall identify a subset of the variables identified either by the 
 corresponding mode, or by the @key[in out] mode, of the Global'Class aspect 
 of the first subtype of any ancestor of @i<T>.]}
 @end{Legality}
@@ -1915,6 +1915,27 @@ a Use_Formal aspect applies is invoked, Nonblocking and global aspect checks
 are performed presuming each generic formal parameter (or corresponding actual
 parameter) of the formal parameter set is used at least once.]}
 @end{Legality}
+
+@begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0430-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i<An example of use of the 
+Dispatching aspect:>]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[procedure] My_Write(  --  @Examcom[see @RefSecNum{Stream-Oriented Attributes}]
+   Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
+   Item   : My_Integer'Base)
+   @key[with] Dispatching => Write(Stream);
+@key[for] My_Integer'Write @key[use] My_Write;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0430-1]}
+@ChgAdded{Version=[5],Text=[@i<For examples of use of the 
+Use_Formal aspect, see the Element functions of 
+Hashed_Sets in @RefSecNum{The Generic Package Containers.Hashed_Sets}.>]}
+
+
+@end{Examples}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}

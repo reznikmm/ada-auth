@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -548,12 +548,16 @@ that do not have associated representation items are type-related:]}
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspect Default_Value]}
 
+@ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspect Default_Component_Value]}
 
-@ChgAdded{Version=[5],Text=[aspect Exclusion_Functions]}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[aspect Exclusive_Functions]}
 
+@ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspects Link_Name and External_Name (when applied to a type)]}
 
+@ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspect Max_Entry_Queue_Length (when applied to a task or protected type)]}
 @end{Itemize}
 
@@ -569,11 +573,14 @@ they are neither type-related nor subtype-specific:]}
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspect Static (applies to expression functions)]}
 
+@ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspect Synchronization (applies to procedures)]}
 
+@ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspects Link_Name and External_Name (when applied to
 anything other than a type)]}
 
+@ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[aspect Max_Entry_Queue_Length (when applied to an entry)]}
 @end{Itemize}
 @end{Ramification}
@@ -763,20 +770,29 @@ parameter.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0109-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0376-1]}
-@Chg{Version=[5],New=[],Old=[For an untagged derived
-type, ]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[It],Old=[it]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0376-1],ARef=[AI12-0427-1]}
+@Chg{Version=[5],New=[A 
+@i<by-reference primitive>@Defn{by-reference primitive}@Defn2{Term=[primitive],Sec=[by-reference]}
+is a user-defined primitive subprogram for a type @i<T> that has an 
+access result designating type @i<T>, or that has a formal
+parameter that is an access parameter designating type @i<T> or is aliased and
+of type @i<T>. ],Old=[For an untagged derived
+type]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[It],Old=[it]}
 is illegal to specify a@Chg{Version=[5],New=[ nonconfirming],Old=[]}],Old=[no]}
 type-related representation
 @Chg{Version=[3],New=[aspect],Old=[items are allowed]}
-@Chg{Version=[5],New=[for an untagged by-reference type @i<T> if it is derived
-from ],Old=[if the parent type is]} a by-reference type, or
+@Chg{Version=[5],New=[for an untagged type @i<T> if it is derived
+from ],Old=[if the parent type is]} a by-reference type@Chg{Version=[5],New=[ or
+inherits one or more by-reference primitives],Old=[]}, or
 @Chg{Version=[5],New=[if one or more types],Old=[has any user-defined primitive
 subprograms.]}@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[ Similarly,
 it is illegal to specify a nonconfirming type-related representation aspect
 for an untagged by-reference type after one or more types]} have been
 derived from @Chg{Version=[5],New=[@i<T> prior
-to the specification of the aspect],Old=[it]}.],Old=[]}
+to the specification of the aspect and type @i<T> is a by-reference type or 
+defines one or more by-reference primitives that are inherited by these 
+descendants],Old=[it]}.],Old=[]}
+
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
@@ -789,29 +805,30 @@ to the specification of the aspect],Old=[it]}.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0295-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0109-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0376-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0376-1],ARef=[AI12-0427-1]}
   The reason for forbidding
   @Chg{Version=[3],New=[specification of ],Old=[]}type-related
   representation @Chg{Version=[3],New=[aspects],Old=[items]} on
   untagged by-reference types is because a change of representation
   is impossible when passing by reference (to an inherited
   subprogram).@Chg{Version=[4],New=[ (A by-reference object cannot be copied
-  to change its representation.)],Old=[]}@Chg{Version=[5],New=[],Old=[
+  to change its representation.)],Old=[]}
   The reason for forbidding
   @Chg{Version=[3],New=[specification of ],Old=[]}type-related
   representation @Chg{Version=[3],New=[aspects],Old=[items]} on
-  untagged types with user-defined primitive subprograms
-  was to prevent implicit change of representation for type-related
-  aspects of representation upon calling inherited subprograms,
+  untagged types with @Chg{Version=[5],New=[by-reference primitives
+  is that access parameters, access results, and aliased parameters cannot 
+  be converted as part of invoking an inherited subprogram if the 
+  representation of the designated types might be different],Old=[user-defined
+  primitive subprograms was to prevent implicit change of representation for 
+  type-related aspects of representation upon calling inherited subprograms,
   because such changes of representation are likely to be
-  expensive at run time.
-  Changes of subtype-specific representation attributes, however, are
-  likely to be cheap.]}
+  expensive at run time. Changes of subtype-specific representation attributes,
+  however, are likely to be cheap]}.
   This rule is not needed for tagged types,
   because other rules prevent a type-related representation
   @Chg{Version=[3],New=[aspect],Old=[item]}
-  from changing the representation of the parent part;
-  we want to allow
+  from changing the representation of the parent part; we want to allow
   @Chg{Version=[3],New=[specifying ],Old=[]}a type-related
   representation @Chg{Version=[3],New=[aspect],Old=[item]}
   on a type extension to specify aspects of the extension part.
@@ -1020,6 +1037,35 @@ the ancestors of a @nt{type_declaration}.]}]}
   An implementation must ensure that
   the default representations of ancestors cannot conflict.]}
 @end{ImplNote}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0427-1]}
+@ChgAdded{Version=[5],Text=[When specifying an aspect that denotes a 
+subprogram, the profile of the subprogram shall be mode conformant with
+the one required for the aspect, and the convention shall be Ada. Additional
+requirements are defined for particular aspects. 
+@Defn2{Term=[mode conformance],Sec=(required)}]}
+
+@begin{Ramification}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[As well as applying to @nt{aspect_specification}s,
+this rule applies to @nt{attribute_definition_clause}s for those aspects that
+have associated attributes.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[This rule implies, for example, 
+that if one writes:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] T @key[is] ...
+   @key[with] Read => R;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[R has to be a procedure with
+two parameters with the appropriate subtypes and modes as shown in
+@RefSecNum{Stream-Oriented Attributes}.]}
+@end{Ramification}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -1100,7 +1146,7 @@ Sizes by default, for the same reason.
   The same issues apply to Alignment.@Chg{Version=[5],New=[ Similar issues
   apply to Object_Size, Static_Predicate, and Dynamic_Predicate, but the
   chosen solution is different: explicit rules in
-  @RefSecNum{Statically Matching Constraints and Subtypes} to ensure that
+  @RefSecNum{Statically Matching Constraints and Subtypes} that ensure that
   the aspects are the same if specified.],Old=[]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
@@ -1117,7 +1163,7 @@ Sizes by default, for the same reason.
   @ChgAdded{Version=[5],Text=[We need this rule even though static matching
   explicitly excludes confirming values of Object_Size. That's because a general
   access type can designate any aliased object whose subtype statically matches
-  the the designated subtype. Since the Object_Size of a subtype determines the
+  the designated subtype. Since the Object_Size of a subtype determines the
   number of bits allocated for an aliased object of the subtype, if we allowed
   different Object_Sizes for statically matching subtypes, we'd be allowing the
   access type to designate objects with differing numbers of bits. That isn't
@@ -1379,6 +1425,24 @@ said to be @i{confirming}; otherwise it is @i{nonconfirming}.@Defn2{Term=[confir
 @Defn2{Term=[nonconfirming], Sec=(operational aspect)}
 @Defn2{Term=[nonconfirming], Sec=(operational item)}
 @Defn2{Term=[nonconfirming], Sec=(representation aspect)}],Old=[]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[As noted at the beginning of this subclause, we
+  have a @MetaRulesName that confirming aspects do not change the semantics.
+  However, it is not a @MetaRulesName principle that one can always specify a
+  confirming aspect. Some aspects can never be confirmed. For instance, the
+  default implementation of a stream-oriented attribute cannot be confirmed,
+  as any subprogram that can be specified is not the same as the default 
+  subprogram, and thus is nonconfirming. Whether the effect is the same is not
+  relevant for this purpose; it would be very difficult to formally define
+  what it means to have the same effect. (Note that one can name any 
+  implementation for a stream-oriented attribute by using the associated 
+  attribute but specifying that by name would violate the circular aspect 
+  definition rule.) This is true for any implicitly composed aspect.
+  Similarly, aspect Default_Value cannot be confirmed as the default is that
+  there is no default value; any value that can be specified is not that.]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1856,6 +1920,10 @@ Some of the more stringent requirements are moved to
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0396-1],ARef=[AI12-0419-1],ARef=[AI12-0423-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified how inheritance works
   for operational aspects that are not values.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0427-1]}
+  @ChgAdded{Version=[5],Text=[Move the general requirements for aspects that
+  are subprograms here from @RefSecNum{Operational and Representation Attributes}.]}
 @end{DiffWord2012}
 
 
@@ -2065,12 +2133,20 @@ aspect.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0373-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0373-1],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[3],Text=[The usage names in an @nt{aspect_definition}
-@Redundant[ are not resolved at the point of the associated declaration, but
+@Chg{Version=[5],New=[associated with a declaration ],Old=[]}@Redundant[ are 
+not resolved at the point of the associated declaration, but
 rather] are resolved at the end of the immediately enclosing declaration
 list@Chg{Version=[5],New=[, or in the case of the declaration of a library
 unit, at the end of the visible part of the entity],Old=[]}.]}
+
+@begin{Ramification}
+  @ChgAdded{Version=[5],Text=[If an @nt{aspect_specification} is not
+  associated with a declaration (instead being part of a @nt{statement}
+  or @nt{expression}), then it is resolved when the associated construct
+  is resolved.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0180-1],ARef=[AI12-0220-1]}
@@ -2348,12 +2424,20 @@ identified by the @nt{aspect_mark}, an @nt{aspect_definition} specifies:]}
   other kind of entity;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[an @nt{expression}, which is either evaluated to
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0427-1]}
+  @ChgAdded{Version=[3],Text=[an @nt{expression}@Chg{Version=[5],New=[ (other 
+  than an @nt{aggregate})],Old=[]}, which is either evaluated to
   produce a single value, or which (as in a precondition) is to be evaluated at
-  particular points during later execution; or]}
+  particular points during later execution;@Chg{Version=[5],New=[],Old=[ or]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[an @nt{identifier} specific to the aspect.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0427-1]}
+  @ChgAdded{Version=[3],Text=[an @nt{identifier} specific to the 
+  aspect@Chg{Version=[5],New=[; or],Old=[.]}]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0427-1]}
+  @ChgAdded{Version=[5],Text=[an @nt{aggregate}, which is positional or named,
+  and is composed of elements of any of these four kinds of constructs.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
@@ -2638,6 +2722,10 @@ required) the rejection of syntax errors within the @nt{aspect_definition}.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0211-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Added a rule so that the
   a nonoverridable aspect has to be the same for every ancestor of a type.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0355-2],ARef=[AI12-0427-1]}
+  @ChgAdded{Version=[5],Text=[Clarified when elaboration and resolution of
+  @nt{aspect_specification}s not associated with a declaration occur.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0407-1]}
   @ChgAdded{Version=[5],Text=[Revised the rules about entities that cannot
@@ -2978,8 +3066,8 @@ For example, the following kinds of things are allowed:
 @RootDefn{specifiable (of an attribute and for an entity)}
 @RootDefn2{Term=[attribute], Sec=(specifiable)}
 An @nt{attribute_designator} is allowed in an
-@nt{attribute_definition_clause} only if this @IntlStdTitle
-explicitly allows it,
+@nt{attribute_definition_clause} only if this 
+@IntlStdTitle explicitly allows it,
 or for an implementation-defined attribute
 if the implementation allows it.
 @Chg{Version=[3],New=[@PDefn2{Term=[representation aspect], Sec=(specifiable attributes)}],
@@ -3006,22 +3094,27 @@ is only allowed if T is a first subtype,
 because Component_Size is a type-related aspect.
 @end{Discussion}
 
-For an @nt{attribute_definition_clause} that specifies
-an attribute that denotes a subprogram,
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0427-1]}
+@ChgDeleted{Version=[5],Text=[For an @nt{attribute_definition_clause} that
+specifies an attribute that denotes a subprogram,
 the profile shall be mode conformant with the one
 required for the attribute,
 and the convention shall be Ada.
 Additional requirements are defined for particular attributes.
-@Defn2{Term=[mode conformance],Sec=(required)}
+@Defn2{Term=[mode conformance],Sec=(required)}]}
 @begin{Ramification}
-@Leading@;This implies, for example, that if one writes:
+@ChgRef{Version=[5],Kind=[Deleted]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[This implies, for example, 
+that if one writes:]}
 @begin{Example}
-@key[for] T'Read @key[use] R;
+@ChgRef{Version=[5],Kind=[Deleted]}
+@ChgDeleted{Version=[5],Text=[@key[for] T'Read @key[use] R;]}
 @end{Example}
 
-R has to be a procedure with two parameters with the appropriate
-subtypes and modes as shown in
-@RefSecNum{Stream-Oriented Attributes}.
+@ChgRef{Version=[5],Kind=[Deleted]}
+@ChgDeleted{Version=[5],Text=[R has to be a procedure with
+two parameters with the appropriate subtypes and modes as shown in
+@RefSecNum{Stream-Oriented Attributes}.]}
 @end{Ramification}
 @end{Legality}
 
@@ -3423,7 +3516,7 @@ designated subtype.@Chg{Version=[3],New=[@AspectDefn{Alignment (object)}],Old=[]
     Text=[@ChgAdded{Version=[3],Text=[Alignment of an object.]}]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00247-01]}
-@ChgDeleted{Version=[2],NoPrefix=[T],Text=[If an Alignment is specified
+@ChgDeleted{Version=[2],Noprefix=[T],Text=[If an Alignment is specified
 for a composite subtype or object, this
 Alignment shall be equal to the least common multiple of any
 specified Alignments of the subcomponent subtypes, or an integer
@@ -3699,8 +3792,10 @@ we would expect an Alignment of 1 to be supported for any Size.
 @end{Notes}
 
 @begin{DiffWord83}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 The nonnegative part is missing from RM83
-(for @nt{mod_clause}s, nee @ntf{alignment_clause}s,
+(for @nt{mod_clause}s, @Chg{Version=[5],New=[known in Ada 83
+as],Old=[nee]} @ntf{alignment_clause}s,
 which are an obsolete version of Alignment clauses).
 @end{DiffWord83}
 
@@ -4081,9 +4176,10 @@ My_Device : Device_Register;
 @key[for] My_Device'Address @key[use] To_Address(16#FF00#);
   @end{Example}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   The programmer might think that My_Device'Size is 8,
   and that My_Device'Address points at an 8-bit location.
-  However, this is not true.
+  However, this is not @Chg{Version=[5],New=[guaranteed to be ],Old=[]}true.
   In Ada 83 (and in Ada 95), My_Device'Size might well be 32,
   and My_Device'Address might well point at the high-order 8 bits of
   the 32-bit object, which are always all zero bits.

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:16 $}
+@Comment{$Date: 2021/06/03 01:52:04 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -77,8 +77,9 @@ rhs="@Chg{Version=[2],New=<>,Old=<@Synf{identifier_letter} | @Synf{digit} | @Syn
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
-@ChgAdded{Version=[2],Text=[A @ntf{character} is defined by this @IntlStdTitle
-for each cell in the coding space described by ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]},
+@ChgAdded{Version=[2],Text=[A @ntf{character} is defined by this 
+@IntlStdTitle for each cell in the coding space described by 
+ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]},
 regardless of whether or not ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} allocates a character to that
 cell.]}
 @end{SyntaxText}
@@ -2150,6 +2151,10 @@ end of the reserved word]}.],Old=[ (ignoring upper/lower case distinctions):]}
   Allowing identifier to include reserved words has been a source
   of confusion for some users, and differs from the way they
   are treated in the C and Pascal language definitions.
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[Reserved words are sometimes called @i<keywords>
+  @Defn{keyword} in informal material.]}
 @end{Discussion}
 @*
 

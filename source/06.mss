@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:17 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.159 $}
+@Comment{$Revision: 1.160 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -607,9 +607,10 @@ access-to-subprogram type,],Old=[]} the following language-defined
   Post'Class (below).]}
 @end{Ramification}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Pre'Class],
-  Text=[@ChgAdded{Version=[3],Text=[Precondition inherited on type
-    derivation.]}]}
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Pre'Class],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Precondition 
+    @Chg{Version=[5],New=[that applies to corresponding subprograms of
+    descendant types],Old=[inherited on type derivation]}.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}
@@ -636,9 +637,18 @@ access-to-subprogram type,],Old=[]} the following language-defined
   expression for the entity is the enumeration literal True.@AspectDefn{Post'Class}]}
 @end{Description}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Post'Class],
-  Text=[@ChgAdded{Version=[3],Text=[Postcondition inherited on type
-    derivation.]}]}
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Post'Class],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Postcondition 
+    @Chg{Version=[5],New=[that applies to corresponding subprograms of
+    descendant types],Old=[inherited on type derivation]}.]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[n the AARM notes below, we use the terms 
+  @ldquote@;inherited@rdquote and @ldquote@;inheritance@rdquote informally
+  with respect to class-wide pre/post-conditions, to mean that the aspect 
+  applies to corresponding subprograms in descendant types.]}
+@end{Discussion}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
@@ -741,7 +751,7 @@ a homograph (see @RefSecNum{Visibility}) of @i<P> from a progenitor type
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Otherwise, the subprogram @i<P>
   @i{requires overriding} and shall be overridden with a
-  nonabstract subprogram.@PDefn{requires overriding}]}
+  nonabstract subprogram.@PDefn{require overriding}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2015,9 +2025,9 @@ rhs="@Chg{Version=[5],New=<@SynI{object_}@Syn2{name} | @SynI{package_}@Syn2{name
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0425-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0425-1],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[5],Text=[A @nt{global_name} shall resolve to statically
-denote an object or a package (including a limited view of a package).]}
+name an object or a package (including a limited view of a package).]}
 @end{Resolution}
 
 @begin{StaticSem}
@@ -4046,21 +4056,21 @@ aspect specified]}, then]}
   @begin{Itemize}
     @ChgRef{Version=[4],Kind=[Added]}
     @ChgRef{Version=[5],Kind=[RevisedAdded]}
-    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[there shall exist
-      a type (other than a root numeric type) that is an ancestor of both ]}the
-      target @Chg{Version=[5],New=[],Old=[type ]} and
-      @Chg{Version=[5],New=[],Old=[the ]}operand type@Chg{Version=[5],New=[ both
-      do not have the Default_Value aspect specified],Old=[]};
+    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[neither],Old=[there shall exist
+      a type (other than a root numeric type) that is an ancestor of both]} the
+      target type @Chg{Version=[5],New=[nor],Old=[and]} the operand 
+      type@Chg{Version=[5],New=[ has the Default_Value aspect specified],Old=[]};
       @Chg{Version=[5],New=[or],Old=[and]}]}
 
     @ChgRef{Version=[4],Kind=[Added]}
     @ChgRef{Version=[5],Kind=[RevisedAdded]}
-    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[the target and],Old=[in the
-      case of a scalar type, the type of the]} operand @Chg{Version=[5],New=[type
-      both],Old=[of the conversion shall]} have the Default_Value aspect
+    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[both the target type
+      and],Old=[in the case of a scalar type, the type of]} the operand 
+      @Chg{Version=[5],New=[type],Old=[of the conversion]} shall have the 
+      Default_Value aspect
       specified@Chg{Version=[5],New=[, and there shall exist a type (other
-      than a root numeric type) that is an ancestor of both the target type and
-      the operand type],Old=[]}.]}
+      than a root numeric type) that is an ancestor of both the target type
+      and the operand type],Old=[]}.]}
   @end{Itemize}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
@@ -5136,8 +5146,9 @@ of the master that elaborated the function body.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0277-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
-@ChgAdded{Version=[3],Text=[If the keyword @key[aliased] is present in an
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0426-1]}
+@ChgAdded{Version=[3],Text=[If the @Chg{Version=[5],New=[reserved 
+word],Old=[keyword]} @key[aliased] is present in an
 @nt{extended_return_object_declaration},
 the type of the extended return object shall be immutably limited.]}
 @end{Legality}

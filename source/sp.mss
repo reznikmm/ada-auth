@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.95 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
+@comment{ $Revision: 1.96 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2021/03/18 10:02:19 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1946,12 +1946,12 @@ subcomponent of a full access object are performed by reading and/or
 writing all of the nearest enclosing full access object.]}
 
 @begin{ImplNote}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0128-1]}}
   @ChgAdded{Version=[5],Text=[For example, if a 32-bit record object has four
   nonatomic components, each occupying one byte, then an assignment to one of
   those components might normally be implemented on some target machines via
-  some sort of store_byte instruction; if the record object is atomic then
-  instead a 32-bit read-modify-write must be performed.
+  some sort of store_byte instruction; if the record object is an atomic
+  full access object then instead a 32-bit read-modify-write must be performed.
   That read-modify-write need not be atomic, although the read
   and the write must each separately be atomic. Note that it doesn't
   matter whether the store_byte instruction would have executed atomically.
@@ -2212,7 +2212,7 @@ because the pragma was not used to mark variables as shared.
 @LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations]}
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Text=[The language-defined package
 System.Atomic_Operations is the parent of a set of child
 units that provide facilities for manipulating objects of atomic types and for
@@ -2235,18 +2235,18 @@ System.Atomic_Operations has the following declaration:]}
 @key{end} System.Atomic_Operations;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Text=[System.Atomic_Operations serves as the parent of
 other language-defined library units that manipulate atomic objects; its
 declaration is empty.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Text=[A call to a subprogram is said to be @i<lock-free>
 @Defn{lock-free} if the subprogram is guaranteed to return from the call while
 keeping the processor of the logical thread of control busy for the duration of
 the call.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Text=[In each child package, a function Is_Lock_Free(...)
 is provided to check whether the operations of the child package can all be
 provided lock-free for a given object. Is_Lock_Free returns True if operations
@@ -2266,7 +2266,7 @@ Item, and Is_Lock_Free returns False otherwise.]}
 
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The language-defined generic package
 System.Atomic_Operations.Exchange provides the following operations:]}
 
@@ -2320,11 +2320,11 @@ package System.Atomic_Operations.Exchange has the following declaration:]}
 @ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Exchange;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Text=[Atomic_Exchange atomically assigns the value of
 Value to Item, and returns the previous value of Item.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[Atomic_Compare_And_Exchange first
 evaluates the value of Prior.
 Atomic_Compare_And_Exchange then performs the following steps
@@ -2346,7 +2346,7 @@ as part of a single indivisible operation:]}
 
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Text=[After these steps, if the value of Item and Prior
 did not match, Prior is assigned the original value of Item, and the function
 returns False. Otherwise, Prior is unaffected and the function returns True.]}
@@ -2355,7 +2355,7 @@ returns False. Otherwise, Prior is unaffected and the function returns True.]}
 
 @begin{Examples}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a spin
 lock using Atomic_Exchange:}]}
 

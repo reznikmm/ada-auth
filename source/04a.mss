@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:16 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.162 $}
+@Comment{$Revision: 1.163 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -655,12 +655,23 @@ then the expanded name is ambiguous, independently of the @nt<selector_name>.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0204-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0204-1],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[2],Text=[For@Chg{Version=[5],New=[ a prefixed view of],Old=[]}
-a subprogram whose first parameter is an access parameter, the
+a subprogram whose first @Chg{Version=[5],New=[formal ],Old=[]}parameter is
+an access parameter, the
 prefix@Chg{Version=[5],New=[],Old=[ of any prefixed view]}
-shall @Chg{Version=[5],New=[be legal as the prefix of an
-Access attribute reference],Old=[enote an aliased view of an object]}.]}
+shall @Chg{Version=[5],New=[be legal as the @nt{prefix} of an
+@nt{attribute_reference} with @nt{attribute_designator} Access
+appearing as the first actual parameter in a call on the unprefixed view of
+the subprogram],Old=[denote an aliased view of an object]}.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+  @ChgAdded{Version=[5],Text=[This rule prevents, for instance, using a
+  nonaliased prefix in such a prefixed view. It also prevents using
+  discriminant-dependent components as the prefix of such a prefixed
+  view if those components would not be allowed to be renamed.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00407-01]}
 @ChgAdded{Version=[2],Text=[For a subprogram whose first parameter is of mode
@@ -1295,7 +1306,7 @@ named reference object.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0268-1]}
 @ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Barrel; Key : String) @key[return] Ref_Element;
-   -- @Examcom{Return a reference to an element of a barrel.}]}
+   -- @Examcom{Returns a reference to an element of a barrel.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[B: @key[aliased] Barrel;]}
@@ -1825,7 +1836,9 @@ of the index type.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 The exception Constraint_Error is raised if either of these checks fails.
 @begin{Ramification}
-The checks on the characters need not involve more than two
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+@Chg{Version=[5],New=[If no predicates apply to the component subtype,
+the],Old=[The]} checks on the characters need not involve more than two
 checks altogether, since one need only check the characters
 of the string with the
 lowest and highest position numbers against the range of the
@@ -1992,7 +2005,7 @@ not explictly aliased.@AspectDefn{String_Literal}]}
   is (1,1), not (0,0).]}
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[5],Text=[When a numeric literal is interpreted as a value of
 a non-numeric type @i<T> or a @nt{string_literal} is interpreted a value of
 a type @i<T> that is not a string type (see @RefSecNum{Literals}), it is
@@ -2000,8 +2013,9 @@ equivalent to a call to the subprogram denoted by the corresponding aspect of
 @i<T>: the Integer_Literal aspect for an integer literal, the Real_Literal
 aspect for a real literal, and the String_Literal aspect for a
 @nt{string_literal}. The actual parameter of this notional call is a
-@nt{string_literal} having the textual representation of the original (numeric
-or string) literal.]}
+@nt{string_literal} representing a sequence of characters that is the same as 
+the sequence of characters in the original numeric literal, or the sequence 
+represented by the original string literal.]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2216,15 +2230,15 @@ or a single descendant of a ],Old=[]}record type@Chg{Version=[5],New=[],Old=[,]}
   of aggregate is being used.]}
 @end{Ramification}
 @begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0212-1],ARef=[AI12-0307-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0127-1],ARef=[AI12-0212-1],ARef=[AI12-0307-1]}
   @ChgAdded{Version=[5],Text=[Generally, we don't want to look in
   @nt{aggregate}s to resolve them. For instance, Ada 95 allowed array types
   to match @nt{extension_aggregate}s, even though those have to be record
   types. Thus, we allow any record type with any visible
   (nondiscriminant) components to match an @nt{aggregate}, even though
-  only @nt{delta_aggregate}s allow private types or extensions. Similarly,
-  we allow any container type to match an @nt{aggregate}, even though
-  only @nt{container_aggregate}s allow container types. ]}
+  only @nt{delta_aggregate}s allow private types or private extensions. 
+  Similarly, we allow any container type to match an @nt{aggregate}, even 
+  though only @nt{container_aggregate}s allow container types. ]}
 @end{Reason}
 @end{Resolution}
 
@@ -4344,9 +4358,9 @@ specified.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],Text=[The @nt{name} specified for Empty for an Aggregate
-aspect shall denote a constant of the container type, or denote a function with
-a result type of the container type that has no parameters, or that has one
-@key[in] parameter of type Integer.]}
+aspect shall denote a constant of the container type, or denote exactly one
+function with a result type of the container type that has no parameters, or 
+that has one @key[in] parameter of a signed integer type.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4817,7 +4831,7 @@ Set_Type, Map_Type, and Vector_Type:]}
                          Assign_Indexed => Assign_Element);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] Empty_Vector (Capacity : Count_Type := 0) @key[return] Vector_Type;]}
+@ChgAdded{Version=[5],Text=[   @key[function] Empty_Vector (Capacity : Integer := 0) @key[return] Vector_Type;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[procedure] Append_One (V : @key[in out] Vector_Type; New_Item : @key[in] String);]}
@@ -4971,17 +4985,6 @@ Assign_Element (V, 1, "this");
 Assign_Element (V, 2, "is");
 Assign_Element (V, 3, "a");
 Assign_Element (V, 4, "test");]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text="--  @examcom<A vector made from the elements of a map:>
-V := [@key[for] Elem @key[of] M => Elem];"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[--  @examcom<Is equivalent to:>
-V := Empty_Vector (<estimate of size of M>);
-@key[for] Elem @key[of] M @key[loop]
-   Append_One (V, Elem);
-@key[end loop];]}
 @end{Example}
 
 @end{Examples}
@@ -5009,45 +5012,6 @@ of the syntactic category @nt<expression> or of any of the
 @nt{relation}, @nt{simple_expression}, @nt{term}, @nt{factor}, @nt{primary},
 @nt{conditional_expression}, @nt{quantified_expression}],Old=[other five syntactic categories defined
 below]}.
-@Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
-@Defn{or operator}@Defn2{Term=[operator],Sec=(or)}
-@Defn{xor operator}@Defn2{Term=[operator],Sec=(xor)}
-@Defn{and then (short-circuit control form)}
-@Defn{or else (short-circuit control form)}
-@Defn{= operator}@Defn2{Term=[operator],Sec=(=)}
-@Defn{equal operator}@Defn2{Term=[operator],Sec=(equal)}
-@Defn{/= operator}@Defn2{Term=[operator],Sec=(/=)}
-@Defn{not equal operator}@Defn2{Term=[operator],Sec=(not equal)}
-@Defn{< operator}@Defn2{Term=[operator],Sec=(<)}
-@Defn{less than operator}@Defn2{Term=[operator],Sec=(less than)}
-@Defn{<= operator}@Defn2{Term=[operator],Sec=(<=)}
-@Defn{less than or equal operator}@Defn2{Term=[operator],Sec=(less than or equal)}
-@Defn{> operator}@Defn2{Term=[operator],Sec=(>)}
-@Defn{greater than operator}@Defn2{Term=[operator],Sec=(greater than)}
-@Defn{>= operator}@Defn2{Term=[operator],Sec=(>=)}
-@Defn{greater than or equal operator}@Defn2{Term=[operator],Sec=(greater than or equal)}
-@Defn{in (membership test)}
-@Defn{not in (membership test)}
-@Defn{+ operator}@Defn2{Term=[operator],Sec=(+)}
-@Defn{plus operator}@Defn2{Term=[operator],Sec=(plus)}
-@Defn{- operator}@Defn2{Term=[operator],Sec=(-)}
-@Defn{minus operator}@Defn2{Term=[operator],Sec=(minus)}
-@Defn{& operator}@Defn2{Term=[operator],Sec=(&)}
-@Defn{ampersand operator}@Defn2{Term=[operator],Sec=(ampersand)}
-@Defn{concatenation operator}@Defn2{Term=[operator],Sec=(concatenation)}
-@IndexSee{Term=[catenation operator],See=(concatenation operator)}
-@Defn{* operator}@Defn2{Term=[operator],Sec=(*)}
-@Defn{multiply operator}@Defn2{Term=[operator],Sec=(multiply)}
-@Defn{times operator}@Defn2{Term=[operator],Sec=(times)}
-@Defn{/ operator}@Defn2{Term=[operator],Sec=(/)}
-@Defn{divide operator}@Defn2{Term=[operator],Sec=(divide)}
-@Defn{mod operator}@Defn2{Term=[operator],Sec=(mod)}
-@Defn{rem operator}@Defn2{Term=[operator],Sec=(rem)}
-@Defn{** operator}@Defn2{Term=[operator],Sec=(**)}
-@Defn{exponentiation operator}@Defn2{Term=[operator],Sec=(exponentiation)}
-@Defn{abs operator}@Defn2{Term=[operator],Sec=(abs)}
-@Defn{absolute value}
-@Defn{not operator}@Defn2{Term=[operator],Sec=(not)}
 @end{Intro}
 
 @begin{Syntax}
@@ -5175,7 +5139,7 @@ means the operative constituent shall (or shall not) be an @nt{aggregate} or a
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[If an @nt{if_expression} does not have an
-  @key[else] clause, "True" is an opertive constituent of the @nt{expression} and
+  @key[else] clause, "True" is an operative constituent of the @nt{expression} and
   it can be the evaluated operative constituent.]}
 @end{Honest}
 
@@ -5390,6 +5354,45 @@ of operators (given in order of increasing
 precedence). The corresponding @nt<operator_symbol>s,
 and only those, can be used as @nt<designator>s in declarations
 of functions for user-defined operators. See @RefSec(Overloading of Operators).]
+@Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
+@Defn{or operator}@Defn2{Term=[operator],Sec=(or)}
+@Defn{xor operator}@Defn2{Term=[operator],Sec=(xor)}
+@Defn{and then (short-circuit control form)}
+@Defn{or else (short-circuit control form)}
+@Defn{= operator}@Defn2{Term=[operator],Sec=(=)}
+@Defn{equal operator}@Defn2{Term=[operator],Sec=(equal)}
+@Defn{/= operator}@Defn2{Term=[operator],Sec=(/=)}
+@Defn{not equal operator}@Defn2{Term=[operator],Sec=(not equal)}
+@Defn{< operator}@Defn2{Term=[operator],Sec=(<)}
+@Defn{less than operator}@Defn2{Term=[operator],Sec=(less than)}
+@Defn{<= operator}@Defn2{Term=[operator],Sec=(<=)}
+@Defn{less than or equal operator}@Defn2{Term=[operator],Sec=(less than or equal)}
+@Defn{> operator}@Defn2{Term=[operator],Sec=(>)}
+@Defn{greater than operator}@Defn2{Term=[operator],Sec=(greater than)}
+@Defn{>= operator}@Defn2{Term=[operator],Sec=(>=)}
+@Defn{greater than or equal operator}@Defn2{Term=[operator],Sec=(greater than or equal)}
+@Defn{in (membership test)}
+@Defn{not in (membership test)}
+@Defn{+ operator}@Defn2{Term=[operator],Sec=(+)}
+@Defn{plus operator}@Defn2{Term=[operator],Sec=(plus)}
+@Defn{- operator}@Defn2{Term=[operator],Sec=(-)}
+@Defn{minus operator}@Defn2{Term=[operator],Sec=(minus)}
+@Defn{& operator}@Defn2{Term=[operator],Sec=(&)}
+@Defn{ampersand operator}@Defn2{Term=[operator],Sec=(ampersand)}
+@Defn{concatenation operator}@Defn2{Term=[operator],Sec=(concatenation)}
+@IndexSee{Term=[catenation operator],See=(concatenation operator)}
+@Defn{* operator}@Defn2{Term=[operator],Sec=(*)}
+@Defn{multiply operator}@Defn2{Term=[operator],Sec=(multiply)}
+@Defn{times operator}@Defn2{Term=[operator],Sec=(times)}
+@Defn{/ operator}@Defn2{Term=[operator],Sec=(/)}
+@Defn{divide operator}@Defn2{Term=[operator],Sec=(divide)}
+@Defn{mod operator}@Defn2{Term=[operator],Sec=(mod)}
+@Defn{rem operator}@Defn2{Term=[operator],Sec=(rem)}
+@Defn{** operator}@Defn2{Term=[operator],Sec=(**)}
+@Defn{exponentiation operator}@Defn2{Term=[operator],Sec=(exponentiation)}
+@Defn{abs operator}@Defn2{Term=[operator],Sec=(abs)}
+@Defn{absolute value}
+@Defn{not operator}@Defn2{Term=[operator],Sec=(not)}
 @end{Intro}
 
 @begin{Syntax}
@@ -7640,7 +7643,8 @@ Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Text=[Put_Line ("Casey is " & (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
+@ChgAdded{Version=[5],Text=[Put_Line ("Casey is " & 
+      (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Text=[@key[function] Card_Color (Card : Suit) @key[return] Color @key[is] --@RI[ see @RefSecNum{Enumeration Types}]
@@ -7785,8 +7789,9 @@ routine on an array A with an index subtype T can be written:]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The assertion that a positive number
-is composite (as opposed to prime) can be written:]}
+@Chg{Version=[5],New=[N ],Old=[]}is composite (as opposed to prime) can be written:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8275,11 +8280,12 @@ For a parallel reduction expression, it is a bounded error if the reducer
 subprogram is not associative. That is, for any arbitrary values of subtype
 @i<Value_Type> @i<A>, @i<B>, @i<C> and a reducer function @i<R>, the result of
 @i<R> (@i<A>, @i<R> (@i<B>, @i<C>)) should produce a result equal to
-@i<R> (@i<R> (@i<A>, @i<B>), @i<C>)). The possible consequences
-are Program_Error, or a result that does not match the equivalent sequential
-reduction expression due to the order of calls on the reducer subprogram being
-unspecified in the overall reduction. Analogous rules apply in the case of a
-reduction procedure.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
+@i<R> (@i<R> (@i<A>, @i<B>), @i<C>)); it is a bounded error if @i<R> does not.
+The possible consequences are Program_Error, or a result that does not match 
+the equivalent sequential reduction expression due to the order of calls on 
+the reducer subprogram being unspecified in the overall reduction. Analogous
+rules apply in the case of a reduction
+procedure.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}

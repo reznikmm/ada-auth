@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:17 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.143 $}
+@Comment{$Revision: 1.144 $}
 
 @begin{Intro}
 
@@ -1583,12 +1583,13 @@ since an entry involves an implicit component @em the entry queue.
 @leading@keepnext@i{Example of a single protected declaration and corresponding body:}
 @end{WideAbove}
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
 @key(protected) Shared_Array @key(is)
-   --@RI[  Index, Item, and Item_Array are global types]
-   @key(function)  Component    (N : @key(in) Index) return Item;
+   --  @Examcom[Index, Item, and Item_Array are global types]
+   @key(function)  Component    (N : @key(in) Index) @Chg{Version=[5],New=[@key(return)],Old=[return]} Item;
    @key(procedure) Set_Component(N : @key(in) Index; E : @key(in)  Item);
 @key(private)
-   Table : Item_Array(Index) := (others => Null_Item);
+   Table : Item_Array(Index) := (@Chg{Version=[5],New=[@key(others)],Old=[others]} => Null_Item);
 @key(end) Shared_Array;
 
 @key(protected) @key(body) Shared_Array @key(is)
@@ -1975,9 +1976,8 @@ following language-defined operational aspect is defined:]}
 restriction for the entity; it
 shall be specified by a static Boolean expression. @Redundant[The
 @nt{aspect_definition} can be
-omitted from the specification of this aspect; in that case the
-nonblocking expression for the entity is the enumeration literal
-True.@AspectDefn{Nonblocking}]]}
+omitted from the specification of this aspect; in that case, the
+aspect for the entity is True.@AspectDefn{Nonblocking}]]}
 
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Nonblocking],
   InitialVersion=[5],
@@ -2039,9 +2039,10 @@ generic parameters are presumed to be @i{used} by an entity (see
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[We want to allow confirming aspects for
       instances, but nothing else. The @LegalityTitle of the generic body were
-      checked assuming the nonblocking expression of the
-      generic unit, and if that is changed, the instance body might
-      make calls that allow blocking in subprograms that are declared
+      checked assuming the Nonblocking aspect of the generic unit
+      combined with the Nonblocking aspects of the formals where they
+      are used, and if that is overridden on the instance, the instance body
+      might make calls that allow blocking in subprograms that are declared
       nonblocking.]}
   @end{Reason}
 
@@ -2160,7 +2161,7 @@ unit enclosing the entity.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[If not specified for a library unit,
-the nonblocking expression is True if the library unit is declared pure, or
+the Nonblocking aspect is True if the library unit is declared pure, or
 False otherwise.]}
 
 @end{Description}
@@ -4417,7 +4418,7 @@ represents a time as reported by a corresponding clock.
                    Month   : Month_Number;
                    Day     : Day_Number;
                    Seconds : Day_Duration := 0.0)
-   @key(return) Time;
+    @key(return) Time;
 
   @key(function) "+" (Left : Time;   Right : Duration) @key(return) Time;
   @key(function) "+" (Left : Duration; Right : Time) @key(return) Time;
@@ -4925,7 +4926,7 @@ environment (such as POSIX).]}
                      Sub_Second : Second_Duration := 0.0;
                      Leap_Second: Boolean := False;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                             @key<return> Time;]}
+                           @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
@@ -4934,7 +4935,7 @@ environment (such as POSIX).]}
                      Seconds    : Day_Duration := 0.0;
                      Leap_Second: Boolean := False;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                             @key<return> Time;]}
+                           @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
@@ -7017,10 +7018,12 @@ subprogram in a parallel iteration context.]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0298-1]}
 @ChgAdded{Version=[5],Text=[When the conflict check policy
-Known_Parallel_Conflict_Checks applies, the implementation may disallow two
+Known_Parallel_Conflict_Checks or All_Parallel_Conflict_Checks applies, the 
+implementation may disallow two
 concurrent actions appearing within parallel constructs if the implementation
 can prove they will at run-time denote the same object with uses that conflict.
-Similarly, when the conflict check policy Known_Tasking_Conflict_Checks applies,
+Similarly, when the conflict check policy Known_Tasking_Conflict_Checks or
+All_Tasking_Conflict_Checks applies,
 the implementation may disallow two concurrent actions, at least one of which
 appears within a task body but not within a parallel construct, if the
 implementation can prove they will at run-time denote the same object with uses

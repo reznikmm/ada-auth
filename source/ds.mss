@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.85 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
+@comment{ $Revision: 1.86 $ $Date: 2021/06/03 01:52:06 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -568,7 +568,7 @@ a @nt<package_body>]}.]}]}
 
     @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0320-1]}
     @ChgAdded{Version=[5],Text=[of a type with a part that is of
-    a protected type with @nt{entry_declaration}s; nor]}
+    a protected type with @nt{entry_declaration}s; or]}
 
     @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0038-1]}
     @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0320-1]}
@@ -964,8 +964,10 @@ shall not be specified for a remote access-to-class-wide type.],Old=[]}
 
   @begin{Discussion}
     @ChgRef{Version=[4],Kind=[AddedNormal]}
+    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
     @ChgAdded{Version=[4],Text=[This could be accomplished via a
-    self-referencing pointer or via squirrelling a writable pointer to a
+    self-referencing pointer or via squirrelling 
+    @Chg{Version=[5],New=[away ],Old=[]}a writable pointer to a
     controlled object.]}
   @end{Discussion}
 @end{Erron}
@@ -1624,8 +1626,8 @@ program unit]}, the following attributes are defined:
 @Defn2{Term=[version], Sec=(of a compilation unit)}
 The @i{version} of a compilation unit changes whenever the
 @Chg{New=[],Old=[version changes for any ]}compilation unit
-@Chg{New=[changes in a semantically significant way. This @IntlStdName
- does not define the exact meaning of "semantically significant"],
+@Chg{New=[changes in a semantically significant way. This 
+@IntlStdName does not define the exact meaning of "semantically significant"],
 Old=[on which it depends semantically. The version also changes whenever the
 compilation unit itself changes in a semantically significant way]}.
 It is @Chg{New=[unspecified],Old=[implementation defined]}

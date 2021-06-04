@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_big.mss,v $ }
-@comment{ $Revision: 1.5 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
+@comment{ $Revision: 1.6 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
 @Part(predefbignum, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 
 @LabeledAddedSubclause{Version=[5],Name=[Big Numbers]}
 
@@ -50,7 +50,7 @@ Numerics.Big_Numbers.Big_Integers has the following declaration:]}
 @key{package} Ada.Numerics.Big_Numbers.Big_Integers@ChildUnit{Parent=[Ada.Numerics.Big_Numbers],Child=[Big_Integers]}
    @key{with} Preelaborate, Nonblocking, Global => @key{in out synchronized} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1],ARef=[AI12-0366-1],ARef=[AI12-0404-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1],ARef=[AI12-0366-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[   @key{type} @AdaTypeDefn{Big_Integer} @key{is private}
      @key{with} Integer_Literal => From_Universal_Image,
           Put_Image => Put_Image;]}
@@ -140,7 +140,7 @@ Numerics.Big_Numbers.Big_Integers has the following declaration:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_String} (Arg : String) @key{return} Valid_Big_Integer;]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0404-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Arg : String) @key{return} Valid_Big_Integer
       @key{renames} From_String;]}
 
@@ -253,7 +253,7 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
 @key{package} Ada.Numerics.Big_Numbers.Big_Reals@ChildUnit{Parent=[Ada.Numerics.Big_Numbers],Child=[Big_Reals]}
    @key{with} Preelaborate, Nonblocking, Global => @key{in out synchronized} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1],ARef=[AI12-0366-1],ARef=[AI12-0404-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0208-1],ARef=[AI12-0366-1],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[   @key{type} @AdaTypeDefn{Big_Real} @key{is private}
       @key{with} Real_Literal => From_Universal_Image,
            Put_Image => Put_Image;]}
@@ -358,11 +358,11 @@ Numerics.Big_Numbers.Big_Reals has the following declaration:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_String} (Arg   : String) @key{return} Valid_Big_Real;]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0404-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Arg : String) @key{return} Valid_Big_Real
       @key{renames} From_String;]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0404-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{From_Universal_Image} (Num, Den : String)
       @key{return} Valid_Big_Real @key{is}
          (Big_Integers.From_Universal_Image (Num) /

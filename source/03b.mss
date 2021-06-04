@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:16 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @LabeledClause{Array Types}
 
@@ -315,9 +315,10 @@ a @nt{full_type_declaration}.@AspectDefn{Default_Component_Value}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
-@ChgAdded{Version=[3],Text=[If a derived type with no primitive subprograms
-inherits a boolean Default_Component_Value aspect, the aspect may be specified to have any
-value for the derived type.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0427-1]}
+@ChgAdded{Version=[3],Text=[If a derived type @Chg{Version=[5],New=[],Old=[with 
+no primitive subprograms ]}inherits a boolean Default_Component_Value aspect, 
+the aspect may be specified to have any value for the derived type.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This overrides the
@@ -534,11 +535,12 @@ array subtype match. See @RefSecNum(Type Conversions).
 @begin{Examples}
 @leading@keepnext@i(Examples of array declarations including an index constraint: )
 @begin(Example)
-Board     : Matrix(1 .. 8,  1 .. 8);  --@RI[  see @RefSecNum(Array Types)]
+Board     : Matrix(1 .. 8,  1 .. 8);  --  @Examcom[see @RefSecNum(Array Types)]
 Rectangle : Matrix(1 .. 20, 1 .. 30);
-Inverse   : Matrix(1 .. N,  1 .. N);  --@RI[  N need not be static ]
+Inverse   : Matrix(1 .. N,  1 .. N);  --  @Examcom[N need not be static ]
 
-Filter    : Bit_Vector(0 .. 31);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI125-0430-1]}
+Filter    : Bit_Vector(0 .. 31);      --  @Examcom[see @RefSecNum(Array Types)]
 @end(Example)
 
 @begin{WideAbove}
@@ -2170,7 +2172,7 @@ and the @nt{attribute_reference} shall appear alone.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[@Defn{explicitly limited record}
 @Defn2{Term=[record],Sec=(explicitly limited)}
 If a @Chg{Version=[3],New=[@nt{record_type_definition}],Old=[@ntf{record_type_declaration}]}
@@ -2196,10 +2198,11 @@ no components and all records of the type are @i(null records).
 A @nt<record_definition> of @key{null record} is equivalent to
 @key{record null; end record}.
 @begin{Ramification}
-
-  This short-hand is available both for declaring a record type
-  and a record extension @em see @RefSecNum(Type Extensions).
-@end{ramification}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
+  This @Chg{Version=[5],New=[shorthand],Old=[short-hand]} is available both 
+  for declaring a record type and a record extension @em see
+  @RefSecNum(Type Extensions).
+@end{Ramification}
 
 @end{StaticSem}
 
@@ -2322,10 +2325,11 @@ New=[],Old=[, unless the record type is limited]}.
 @begin{Examples}
 @Leading@keepnext@i(Examples of record type declarations: )
 @begin(Example)
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
 @key(type) Date @key(is)
    @key(record)
       Day   : Integer @key(range) 1 .. 31;
-      Month : Month_Name;
+      Month : Month_Name;@Chg{Version=[5],New=[                  -- @examcom[see @RefSecNum{Enumeration Types}]],Old=[]}
       Year  : Integer @key(range) 0 .. 4000;
    @key(end) @key(record);
 
@@ -2693,8 +2697,8 @@ of the elaboration of the @nt{component_list} of each
          @key(when) @key(others) =>
             Cylinder   : Cylinder_Index;
             Track      : Track_Number;
-         @key(end) @key(case);
-      @key(end) @key(record);
+      @key(end) @key(case);
+   @key(end) @key(record);
 @end(Example)
 
 @begin{WideAbove}

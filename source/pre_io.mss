@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -4274,7 +4274,7 @@ closed file.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
   The Wide_File_Names and Wide_Wide_File_Names
-  nested packages are newly added to Ada.Streaam_IO. Therefore, 
+  nested packages are newly added to Ada.Stream_IO. Therefore, 
   a use clause conflict is possible; see the introduction of 
   @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Incompatible2012}

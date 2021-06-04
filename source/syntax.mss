@@ -1,30 +1,34 @@
 @Part(syntax, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.20 $}
+@comment{$Revision: 1.21 $}
 
-@NoParaNum@Defn2{Term=[syntax], Sec=(complete listing)}
+@NoParaNum@;This Annex summarizes the complete syntax of the language.
+
+@LabeledClause{Syntax Rules}@ChgNote{This clause heading is new
+in Ada 202x, so we don't have a single clause}
+
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
+@Defn2{Term=[syntax], Sec=(complete listing)}
 @Defn2{Term=[grammar], Sec=(complete listing)}
 @Defn2{Term=[context free grammar], Sec=(complete listing)}
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(complete listing)}
 @Defn2{Term=[Backus-Naur Form (BNF)], Sec=(complete listing)}
-This Annex summarizes the complete syntax of the language.
-See @RefSecNum{Method of Description and Syntax Notation}
-for a description of the notation used.
+@Chg{Version=[5],New=[This subclause lists the complete syntax of
+the language in the order it appears in this 
+@IntlStdTitle. ],Old=[]}See 
+@RefSecNum{Method of Description and Syntax Notation} for a 
+description of the notation used.
 
 @SyntaxSummary
 
-@NewPage
-@NoParaNum@Heading{Syntax Cross Reference}
+@LabeledClause{Syntax Cross Reference}@ChgNote{This was not a 
+clause until Ada 202x, but it probably always should have been 
+in the TOC and a separate HTML file}
 
-@NoParaNum@Defn2{Term=[syntax], Sec=(cross reference)}
-@Defn2{Term=[grammar], Sec=(cross reference)}
-@Defn2{Term=[context free grammar], Sec=(cross reference)}
-@Defn2{Term=[BNF (Backus-Naur Form)], Sec=(cross reference)}
-@Defn2{Term=[Backus-Naur Form (BNF)], Sec=(cross reference)}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -36,5 +40,11 @@ categories that use @i{S} in their definitions. For example, the first
 listing below shows that @nt{abort_statement} appears in the definition of
 @nt{simple_statement}.]}
 @Comment{This explanation is a simplified version of the Ada 83 one.}
+@Defn2{Term=[syntax], Sec=(cross reference)}
+@Defn2{Term=[grammar], Sec=(cross reference)}
+@Defn2{Term=[context free grammar], Sec=(cross reference)}
+@Defn2{Term=[BNF (Backus-Naur Form)], Sec=(cross reference)}
+@Defn2{Term=[Backus-Naur Form (BNF)], Sec=(cross reference)}
+
 @SyntaxXRef
 

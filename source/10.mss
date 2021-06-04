@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:17 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1653,7 +1653,8 @@ can be visible within the subunits.]
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<body_stub>,rhs="@Syn2{subprogram_body_stub} | @Syn2{package_body_stub} | @Syn2{task_body_stub} | @Syn2{protected_body_stub}"}
+@Syn{lhs=<body_stub>,rhs="
+   @Syn2{subprogram_body_stub} | @Syn2{package_body_stub} | @Syn2{task_body_stub} | @Syn2{protected_body_stub}"}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
@@ -1709,8 +1710,8 @@ to a subunit of a subunit as well.]}
 @end{Reason}
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Subunit>,
-Text=<@ChgAdded{Version=[5],Text=[A body of a program unit that can be compiled
-separately from its enclosing program unit.]}>}
+Text=<@ChgAdded{Version=[5],Text=[A subunit is a body of a program unit that 
+can be compiled separately from its enclosing program unit.]}>}
 
 The parent body of a subunit shall be present in the current environment,
 and shall contain a corresponding @nt{body_stub}
@@ -2885,10 +2886,11 @@ no forward elaboration dependences.
 @end{Discussion}
 @ImplDef{The order of elaboration of @nt{library_item}s.}
 @begin{Honest}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @PDefn2{Term=[requires a completion], Sec=(library_unit_declaration)}
 @Defn{notwithstanding}
-Notwithstanding what the RM95 says elsewhere,
-each rule that requires a declaration to have a corresponding
+Notwithstanding what the @Chg{Version=[5],New=[RM],Old=[RM95]} says 
+elsewhere, each rule that requires a declaration to have a corresponding
 completion is considered to be a @LinkTimeName
 when the declaration is that of a library unit.
 @end{Honest}

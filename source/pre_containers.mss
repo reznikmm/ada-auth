@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.115 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
+@comment{ $Revision: 1.116 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:19 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -528,9 +528,9 @@ access to fewer global objects.]}
   This is not incompatible as this behavior was previously unspecified;
   code depending on specific behavior was wrong.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0416-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0416-1]}
   @ChgAdded{Version=[5],Text=[Added a definition of @ldquote@;smallest 
-  first@rdquote ordering, so that the behavior of the sorts when
+  first@rdquote ordering, so that the behavior of the Sort procedures when
   elements are equal is well-defined.]}
 @end{DiffWord2012}
 
@@ -708,7 +708,7 @@ package Containers.Vectors has the following declaration:]}
 
 @begin{Ramification}
    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
-   @ChgAdded{Version=[5],Text=[The base type of a scalar type always is
+   @ChgAdded{Version=[5],Text=[The base type of a scalar type is always
    nonblocking and has Global => @key[null]. Therefore, so long as this type
    is used in the implementation, whether or not the actual type for
    Index_Type allows blocking or side-effects does not matter. Therefore,
@@ -758,7 +758,7 @@ package Containers.Vectors has the following declaration:]}
 @begin{Discussion}
    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
    @ChgAdded{Version=[5],Text=[Any operation that takes a cursor but no vector
-   can read the vector associated with the cursor. We only know that that is
+   can read the vector associated with the cursor. We only know that there is
    some object of type Vector. Since we don't have a global specification
    that describes all objects of a specific type, we have to allow reading
    any object by specifying @key[in all]. For such functions, we don't allow
@@ -990,8 +990,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
       @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error,
-           Nonblocking,
-           Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
+           Nonblocking, Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Element} (Container : Vector;
@@ -1185,8 +1184,8 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @Chg{Version=[5],New=[@AdaSubDefn{Insert_Vector}],Old=[@AdaSubDefn{Insert}]} (Container : @key{in out} Vector;
-                     Before    : @key{in}     Extended_Index;
-                     New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
+                            Before    : @key{in}     Extended_Index;
+                            New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                       @key{or else raise} Program_Error) @key{and then}
                    (Before @key{in}
@@ -1201,8 +1200,8 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @Chg{Version=[5],New=[@AdaSubDefn{Insert_Vector}],Old=[@AdaSubDefn{Insert}]} (Container : @key{in out} Vector;
-                     Before    : @key{in}     Cursor;
-                     New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
+                            Before    : @key{in}     Cursor;
+                            New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                       @key{or else raise} Program_Error) @key{and then}
                    (Before = No_Element @key{or else}
@@ -1217,9 +1216,9 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @Chg{Version=[5],New=[@AdaSubDefn{Insert_Vector}],Old=[@AdaSubDefn{Insert}]} (Container : @key{in out} Vector;
-                     Before    : @key{in}     Cursor;
-                     New_Item  : @key{in}     Vector;
-                     Position  :    @key{out} Cursor)@Chg{Version=[5],New=[
+                            Before    : @key{in}     Cursor;
+                            New_Item  : @key{in}     Vector;
+                            Position  :    @key{out} Cursor)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                       @key{or else raise} Program_Error) @key{and then}
                    (Before = No_Element @key{or else}
@@ -1321,7 +1320,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @Chg{Version=[5],New=[@AdaSubDefn{Prepend_Vector}],Old=[@AdaSubDefn{Prepend}]} (Container : @key{in out} Vector;
-                      New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
+                             New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                       @key{or else raise} Program_Error) @key{and then}
                    (Length (Container) <= Maximum_Length - Length (New_Item)
@@ -1346,7 +1345,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @Chg{Version=[5],New=[@AdaSubDefn{Append_Vector}],Old=[@AdaSubDefn{Append}]} (Container : @key{in out} Vector;
-                     New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
+                            New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                       @key{or else raise} Program_Error) @key{and then}
                    (Length (Container) <= Maximum_Length - Length (New_Item)
@@ -2553,8 +2552,7 @@ Container parameter is not considered to overlap with any object
    @key{return} Element_Type@Chg{Version=[5],New=[
    @key{with} Pre  => Index @key{in} First_Index (Container) .. Last_Index (Container)
                    @key{or else raise} Constraint_Error,
-        Nonblocking,
-        Global => @key{null}, Use_Formal => Element_Type],Old=[]};]}
+        Nonblocking, Global => @key{null}, Use_Formal => Element_Type],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2569,8 +2567,7 @@ element at position Index.]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Element (Position  : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
    @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error,
-        Nonblocking,
-        Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
+        Nonblocking, Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2588,8 +2585,7 @@ designated by Position.]}
                    @key{or else raise} Constraint_Error) @key{and then}
                 (Has_Element (Container, Position)
                    @key{or else raise} Program_Error),
-        Nonblocking,
-        Global => @key{null}, Use_Formal => Element_Type;]}
+        Nonblocking, Global => @key{null}, Use_Formal => Element_Type;]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -3075,8 +3071,8 @@ in the original order.@Chg{Version=[5],New=[],Old=[ The length of Source is
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} @Chg{Version=[5],New=[Insert_Vector],Old=[Insert]} (Container : @key{in out} Vector;
-                  Before    : @key{in}     Extended_Index;
-                  New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
+                         Before    : @key{in}     Extended_Index;
+                         New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                    @key{or else raise} Program_Error) @key{and then}
                 (Before @key{in}
@@ -3124,8 +3120,8 @@ exception raised during the copying is propagated.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} @Chg{Version=[5],New=[Insert_Vector],Old=[Insert]} (Container : @key{in out} Vector;
-                  Before    : @key{in}     Cursor;
-                  New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
+                         Before    : @key{in}     Cursor;
+                         New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                    @key{or else raise} Program_Error) @key{and then}
                 (Before = No_Element @key{or else}
@@ -3166,9 +3162,9 @@ the call is equivalent to @Chg{Version=[5],New=[Insert_Vector],Old=[Insert]} (Co
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} @Chg{Version=[5],New=[Insert_Vector],Old=[Insert]} (Container : @key{in out} Vector;
-                  Before    : @key{in}     Cursor;
-                  New_Item  : @key{in}     Vector;
-                  Position  :    @key{out} Cursor)@Chg{Version=[5],New=[
+                         Before    : @key{in}     Cursor;
+                         New_Item  : @key{in}     Vector;
+                         Position  :    @key{out} Cursor)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                    @key{or else raise} Program_Error) @key{and then}
                 (Before = No_Element @key{or else}
@@ -3316,7 +3312,6 @@ in the positions starting at Before.]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} Vector;
                   Before    : @key{in}     Cursor;
-                  New_Item  : @key{in}     Element_Type;
                   Position  :    @key{out} Cursor;
                   Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
@@ -3354,8 +3349,8 @@ and then Position is set to To_Cursor (Container, @i<T>).]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} @Chg{Version=[5],New=[Prepend_Vector],Old=[Prepend]} (Container : @key{in out} Vector;
-                   New_Item  : @key{in}     Vector@Chg{Version=[4],New=[],Old=[;
-                   Count     : @key{in}     Count_Type := 1]})@Chg{Version=[5],New=[
+                          New_Item  : @key{in}     Vector@Chg{Version=[4],New=[],Old=[;
+                          Count     : @key{in}     Count_Type := 1]})@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                    @key{or else raise} Program_Error) @key{and then}
                 (Length (Container) <= Maximum_Length - Length (New_Item)
@@ -3389,7 +3384,7 @@ and then Position is set to To_Cursor (Container, @i<T>).]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0400-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} @Chg{Version=[5],New=[Append_Vector],Old=[Append]} (Container : @key{in out} Vector;
-                  New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
+                         New_Item  : @key{in}     Vector)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Container)
                    @key{or else raise} Program_Error) @key{and then}
                 (Length (Container) <= Maximum_Length - Length (New_Item)
@@ -4201,7 +4196,7 @@ provided. Any exception raised during evaluation of "<" is propagated.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Merge (Target  : @key{in out} Vector;
-                    Source  : @key{in out} Vector)@Chg{Version=[5],New=[
+                 Source  : @key{in out} Vector)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Target)
                    @key{or else raise} Program_Error) @key{and then}
                 (@key{not} Tampering_With_Cursors_Prohibited (Source)
@@ -4259,7 +4254,7 @@ provides a type Stable.Vector that represents
 a @i<stable> vector,@Defn2{Term=(stable),Sec=(vector)} which is one that
 cannot grow and shrink. Such a vector can be created by calling the
 To_Vector or Copy functions, or by establishing a
-@i<stabilized view> of a regular Vector.@Defn2{Term=[stabilized view],Sec=[vector]}]}
+@i<stabilized view> of an ordinary vector.@Defn2{Term=[stabilized view],Sec=[vector]}]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The subprograms of package
@@ -4276,7 +4271,7 @@ Prepend_Vector, Clear, Delete, Delete_First, Delete_Last, and Set_Length]}
 @end{Indent}
 
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Type=[Trailing],Text=[Generic package Generic_Sorting is
+@ChgAdded{Version=[5],Type=[Trailing],Text=[The generic package Generic_Sorting is
 also included with the same specification, except that Merge is omitted.]}
 
 @begin{Ramification}
@@ -4295,19 +4290,19 @@ also included with the same specification, except that Merge is omitted.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[The operations of this package are equivalent
-to those for regular Vectors, except that the calls to
+to those for ordinary vectors, except that the calls to
 Tampering_With_Cursors_Prohibited and
 Tampering_With_Elements_Prohibited that occur in preconditions are replaced
 by False, and any that occur in postconditions are replaced by True.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[If a stable vector is declared with the Base
-discriminant designating a pre-existing regular vector, the stable vector
-represents a stabilized view of the underlying regular vector, and any operation
-on the stable vector is reflected on the underlying regular vector. While a
+discriminant designating a pre-existing ordinary vector, the stable vector
+represents a stabilized view of the underlying ordinary vector, and any operation
+on the stable vector is reflected on the underlying ordinary vector. While a
 stabilized view exists, any operation that tampers with elements performed on
 the underlying vector is prohibited. The finalization of a stable vector that
-provides such a view removes this restriction on the underlying regular vector
+provides such a view removes this restriction on the underlying ordinary vector
 @Redundant[(though some other restriction might exist due to other concurrent
 iterations or stabilized views)].]}
 
@@ -4750,7 +4745,7 @@ value of Last_Index.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}Tampering
   with elements is now defined to be equivalent to tampering with
-  cursors for regular containers. If a program requires tampering detection
+  cursors for ordinary containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Specifically, if a program requires
   Program_Error to be raised by a routine that (only) tampers with elements
   in Ada 2012 (such as Replace_Element) when called in a context that does not
@@ -4972,8 +4967,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
       @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error,
-           Nonblocking,
-           Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
+           Nonblocking, Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Element} (Container : List;
@@ -4982,8 +4976,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
                       @key{raise} Constraint_Error) @key{and then}
                    (Has_Element (Container, Position) 
                       @key{or else raise} Program_Error),
-           Nonblocking,
-           Global => @key{null}, Use_Formal => Element_Type;]}
+           Nonblocking, Global => @key{null}, Use_Formal => Element_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -5250,8 +5243,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
                    (Target'Has_Same_Storage (Source) @key{or else}
                     Length (Target) <= Count_Type'Last - Length (Source)
                       @key{or else raise} Constraint_Error),
-           Post => (@key{if not} Target'Has_Same_Storage (Source)
-                    @key{then}
+           Post => (@key{if not} Target'Has_Same_Storage (Source) @key{then}
                       (@key{declare}
                          Result_Length : @key{constant} Count_Type :=
                             Length (Source)'Old + Length (Target)'Old;
@@ -5357,21 +5349,6 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
-      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
-@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Next} (Container : @key{in}     List;
-                   Position  : @key{in out} Cursor)
-      @key{with} Nonblocking, Global => @key{null}, Use_Formal => @key{null},
-           Pre  => Position = No_Element @key{or else}
-                   Has_Element (Container, Position)
-                      @key{or else raise} Program_Error,
-           Post => (@key{if} Position /= No_Element
-                    @key{then} Has_Element (Container, Position));]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
       @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null},
            Post => (@key{if} Position = No_Element @key{then} 
@@ -5389,6 +5366,21 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
                     @key{elsif} Previous'Result = No_Element @key{then}
                       Position = First (Container)
                     @key{else} Has_Element (Container, Previous'Result));]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+      @key{with} Nonblocking, Global => @key{in all}, Use_Formal => @key{null}],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Next} (Container : @key{in}     List;
+                   Position  : @key{in out} Cursor)
+      @key{with} Nonblocking, Global => @key{null}, Use_Formal => @key{null},
+           Pre  => Position = No_Element @key{or else}
+                   Has_Element (Container, Position)
+                      @key{or else raise} Program_Error,
+           Post => (@key{if} Position /= No_Element
+                    @key{then} Has_Element (Container, Position));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -5959,8 +5951,7 @@ Container.]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Element (Position : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
    @key{with} Pre  => Position /= No_Element @key{or else raise} Constraint_Error,
-        Nonblocking,
-        Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
+        Nonblocking, Global => @key{in all}, Use_Formal => Element_Type],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5977,8 +5968,7 @@ Position equals No_Element, then Constraint_Error is propagated. Otherwise,
                    @key{raise} Constraint_Error) @key{and then}
                 (Has_Element (Container, Position) 
                    @key{or else raise} Program_Error),
-        Nonblocking,
-        Global => @key{null}, Use_Formal => Element_Type;]}
+        Nonblocking, Global => @key{null}, Use_Formal => Element_Type;]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -6579,8 +6569,7 @@ exchanges the nodes designated by I and J.]}
                 (Target'Has_Same_Storage (Source) @key{or else}
                  Length (Target) <= Count_Type'Last - Length (Source)
                    @key{or else raise} Constraint_Error),
-        Post => (@key{if not} Target'Has_Same_Storage (Source)
-                 @key{then}
+        Post => (@key{if not} Target'Has_Same_Storage (Source) @key{then}
                    (@key{declare}
                       Result_Length : @key{constant} Count_Type :=
                          Length (Source)'Old + Length (Target)'Old;
@@ -6865,8 +6854,6 @@ predecessor of the element designated by Position in Container, if any.]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Equivalent to Position :=
 Previous (Container, Position).]}
 
-
-
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
@@ -7137,7 +7124,7 @@ evaluation of "<" is propagated.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Merge (Target  : @key{in out} List;
-                    Source  : @key{in out} List)@Chg{Version=[5],New=[
+                 Source  : @key{in out} List)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{not} Tampering_With_Cursors_Prohibited (Target)
                    @key{or else raise} Program_Error) @key{and then}
                 (@key{not} Tampering_With_Elements_Prohibited (Source)
@@ -7185,7 +7172,7 @@ provides a type Stable.List that represents
 a @i<stable> list,@Defn2{Term=(stable),Sec=(list)} which is one that
 cannot grow and shrink. Such a list can be created by calling the
 Copy function, or by establishing a
-@i<stabilized view> of a regular List.@Defn2{Term=[stabilized view],Sec=[list]}]}
+@i<stabilized view> of an ordinary list.@Defn2{Term=[stabilized view],Sec=[list]}]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The subprograms of package
@@ -7222,19 +7209,19 @@ Splice, Swap_Links, and Reverse_Elements]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[The operations of this package are equivalent
-to those for regular lists, except that the calls to
+to those for ordinary lists, except that the calls to
 Tampering_With_Cursors_Prohibited and
 Tampering_With_Elements_Prohibited that occur in preconditions are replaced
 by False, and any that occur in postconditions are replaced by True.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[If a stable list is declared with the Base
-discriminant designating a pre-existing regular list, the stable list
-represents a stabilized view of the underlying regular list, and any operation
-on the stable list is reflected on the underlying regular list. While a
+discriminant designating a pre-existing ordinary list, the stable list
+represents a stabilized view of the underlying ordinary list, and any operation
+on the stable list is reflected on the underlying ordinary list. While a
 stabilized view exists, any operation that tampers with elements performed on
 the underlying list is prohibited. The finalization of a stable list that
-provides such a view removes this restriction on the underlying regular list
+provides such a view removes this restriction on the underlying ordinary list
 @Redundant[(though some other restriction might exist due to other concurrent
 iterations or stabilized views)].]}
 
@@ -7545,7 +7532,7 @@ probably not a stable sort.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
-  cursors for regular containers. If a program requires tampering detection
+  cursors for ordinary containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}

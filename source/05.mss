@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:17 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -2988,7 +2988,7 @@ proceed concurrently with the others.]]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<parallel_block_statement>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
-    @key[parallel] @key[do]
+    @key[parallel] [@Syn2{aspect_specification}] @key[do]
        @Syn2{handled_sequence_of_statements}
     @key[and]
        @Syn2{handled_sequence_of_statements}
@@ -2998,12 +2998,14 @@ rhs="@Chg{Version=[5],New=<
 
 @end{Syntax}
 
-@begin{StaticSem}
+@begin{Runtime}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-@ChgAdded{Version=[5],Text=[
-Each @nt{handled_sequence_of_statements} represents a separate logical thread
-of control that proceeds independently and concurrently. The
+@ChgAdded{Version=[5],Text=[For the execution of a
+@nt{parallel_block_statement}, the @nt{aspect_specification}, if any, is
+elaborated. Then every @nt{handled_sequence_of_statements}, each of which
+represents a separate
+logical thread of control, executes independently and concurrently. The
 @nt{parallel_block_statement} is complete once every one of the
 @nt{handled_sequence_of_statements} has completed, either by reaching the end
 of its execution, or due to a transfer of control out of the construct
@@ -3018,7 +3020,7 @@ by one of the @nt{handled_sequence_of_statements}
   of control into a single physical thread of control to reduce the cost
   of creating numerous physical threads of control.]}
 @end{ImplNote}
-@end{StaticSem}
+@end{Runtime}
 
 @begin{Examples}
 @begin{Example}

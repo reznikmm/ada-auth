@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:19 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -2044,19 +2044,19 @@ defined with the given forms:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<Preelaborate> (@SynI{library_unit_}@Syn2[name]);]}>
+Text=<@key{pragma} @prag<Preelaborate>[(@SynI{library_unit_}@Syn2[name])];>}>
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<Preelaborable_Initialization> (@Syn2[direct_name]);]}>
+Text=<@key{pragma} @prag<Preelaborable_Initialization>(@Syn2[direct_name]);>}>
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<Pure> (@SynI{library_unit_}@Syn2[name]);]}>
+Text=<@key{pragma} @prag<Pure>[(@SynI{library_unit_}@Syn2[name])];>}>
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<Elaborate_Body> (@SynI{library_unit_}@Syn2[name]);]}>
+Text=<@key{pragma} @prag<Elaborate_Body>[(@SynI{library_unit_}@Syn2[name])];>}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
@@ -2155,19 +2155,19 @@ defined with the given forms:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<Shared_Passive> (@SynI{library_unit_}@Syn2[name]);]}>
+Text=<@key{pragma} @prag<Shared_Passive>[(@SynI{library_unit_}@Syn2[name])];>}>
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<Remote_Types> (@SynI{library_unit_}@Syn2[name]);]}>
+Text=<@key{pragma} @prag<Remote_Types>[(@SynI{library_unit_}@Syn2[name])];>}>
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<Remote_Call_Interface> (@SynI{library_unit_}@Syn2[name]);]}>
+Text=<@key{pragma} @prag<Remote_Call_Interface>[(@SynI{library_unit_}@Syn2[name])];>}>
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],
-Text=[@key{pragma} @prag<All_Calls_Remote> (@SynI{library_unit_}@Syn2[name]);]}>
+Text=<@key{pragma} @prag<All_Calls_Remote>[(@SynI{library_unit_}@Syn2[name])];>}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}

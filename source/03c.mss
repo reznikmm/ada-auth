@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:16 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.153 $}
+@Comment{$Revision: 1.154 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3052,7 +3052,7 @@ interface and a synchronized interface extending it:}]}
 @ChgAdded{Version=[2],Text=[@key{type} Queue @key{is limited interface};
 @key{procedure} Append(Q : @key{in out} Queue; Person : @key{in} Person_Name) @key{is abstract};
 @key{procedure} Remove_First(Q      : @key{in out} Queue;
-                       Person : @key{out} Person_Name) @key{is abstract};
+                       Person :    @key{out} Person_Name) @key{is abstract};
 @key{function} Cur_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
 @key{function} Max_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
 -- @RI[See @RefSecNum{Incomplete Type Declarations} for Person_Name.]]}
@@ -3066,9 +3066,9 @@ interface and a synchronized interface extending it:}]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]
 @key{procedure} Append_Wait(Q      : @key{in out} Synchronized_Queue;
-                      Person : @key{in} Person_Name) @key{is abstract};
+                      Person : @key{in}     Person_Name) @key{is abstract};
 @key{procedure} Remove_First_Wait(Q      : @key{in out} Synchronized_Queue;
-                            Person : @key{out} Person_Name) @key{is abstract};]}
+                            Person :    @key{out} Person_Name) @key{is abstract};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[...]}
@@ -3112,7 +3112,8 @@ protected type, and as such ensures safe concurrent access.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[@key{type} Fast_Food_Queue @key{is new} Queue @key{with record} ...;
 @key{procedure} Append(Q : @key{in out} Fast_Food_Queue; Person : @key{in} Person_Name);
-@key{procedure} Remove_First(Q : @key{in out} Fast_Food_Queue; Person : @Chg{Version=[3],New=[@key{out}],Old=[@key{in}]} Person_Name);
+@key{procedure} Remove_First(Q : @key{in out} Fast_Food_Queue; 
+                       Person : @Chg{Version=[3],New=[@key{out}],Old=[@key{in}]} Person_Name);
 @key{function} Cur_Count(Q : @key{in} Fast_Food_Queue) @key{return} Natural;
 @key{function} Max_Count(Q : @key{in} Fast_Food_Queue) @key{return} Natural;]}
 
@@ -4731,7 +4732,7 @@ certain cases involving access parameters and generic packages.]
 has an accessibility level@Chg{Version=[5],New=[; when two levels are defined to
 be the same, the accessibility levels of the two associated entities are said to
 be @i<tied>@Defn2{Term=[tied],Sec=[accessibility levels]} to each
-other],Old=[]}:
+other. Accessibility levels are defined as follows],Old=[]}:
 @begin{Itemize}
 The accessibility level of a given master is deeper than
 that of each dynamically enclosing master,
@@ -4818,7 +4819,7 @@ The accessibility level of
 a view of an object or subprogram defined by a @nt{renaming_declaration}
 is the same as that of
 the renamed view@Chg{Version=[5],New=[, unless the renaming is of a formal 
-subprogram, in that case the accessibility level is
+subprogram, in which case the accessibility level is
 that of the instance],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
@@ -4901,7 +4902,7 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
     the function result is declared to be of a composite type. This makes 
     sense since only results of a composite type (or of an anonymous access
     type, which are handled separately below) are potentially affected by the
-    master of the function all. Note that a private type is considered 
+    master of the function call. Note that a private type is considered 
     composite, so this result assumes the worst for a function returning a 
     private type. We could have made the rule more complex, depending on 
     whether the result might be built in place, or might have an access 
@@ -4918,10 +4919,10 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
   is @Chg{Version=[5],New=[converted to a (named or anonymous) access 
   type],Old=[the operand of an explicit conversion]}, the master is 
-  @Chg{Version=[5],New=[determined following the rules for determining the 
-  master of an object created by an allocator (even if the access result is
-  of an access-to-subprogram type)],Old=[that of the target type of the
-  conversion]};]}
+  @Chg{Version=[5],New=[determined following the rules given below for 
+  determining the master of an object created by an allocator (even if the 
+  access result is of an access-to-subprogram type)],Old=[that of the target
+  type of the conversion]};]}
 
   @begin{Ramification}
     @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0278-1]}
@@ -5202,6 +5203,13 @@ level of the type of the access value most recently assigned to the
 object@Redundant[; accessibility checks ensure that this
 is never deeper than that of the declaration of the stand-alone object].]}
 
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[Conversions @i<into> the anonymous access type
+  of a stand-alone object use a stricter (static) accessibility rule - see 
+@RefSecNum{Type Conversions}; these checks are the ones referred to above.]}
+@end{TheProof}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0240-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0070-1]}@ChgNote{Just to reflect the paragraph number change}
 @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0345-1]}@ChgNote{Last inserted paragraph, remove it quietly}
@@ -5406,16 +5414,19 @@ deeper, nor statically shallower, than any other.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0406-1]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[]}@Comment{For a conditional NoPrefix.}
-@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[That],Old=[The statically 
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[When the statically deeper
+relationship does not apply, the],Old=[The statically 
 deeper relationship does not apply to
 the accessibility level of the type of a stand-alone object of an anonymous
-access-to-object type; that]} is, such an accessibility level is not considered to
+access-to-object type; that is, such an]} accessibility level is not considered to
 be statically deeper, nor statically shallower, than any other.]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[In these cases, we use dynamic accessibility
-checks.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[3],Text=[In these cases, @Chg{Version=[5],New=[no static 
+accessibility checks are made, and ],Old=[]}we use dynamic accessibility
+checks@Chg{Version=[5],New=[ to prevent problems],Old=[]}.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0235-1]}

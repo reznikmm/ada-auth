@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.88 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
+@comment{ $Revision: 1.89 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:19 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1825,12 +1825,10 @@ the C function returns an int that is to be discarded.@end{discussion}
 An Ada function corresponds to a non-void C function.
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0135-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0411-1]}
 @ChgAdded{Version=[4],Text=[An Ada enumeration type corresponds to a C
 enumeration type with corresponding enumeration literals having the same
 internal codes, provided the internal codes fall within the range of the C int
-type.@Chg{Version=[5],New=[ The Ada Boolean type corresponds to the C bool 
-type.],Old=[]}]}
+type.]}
 
 An Ada @key[in] scalar parameter is passed as a scalar argument to a C function.
 

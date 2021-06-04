@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:17 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2055,12 +2055,13 @@ shorthand. Renaming with a different @nt{identifier} or
 @nt{name} and the old @nt{name} need not be visible at the same
 places.
 
-A task or protected object that is declared by an explicit
-@nt{object_declaration} can be renamed as an object. However, a
-single task or protected object cannot be renamed since the
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0427-1]}
+@ChgDeleted{Version=[5],Text=[A task or protected object that is declared
+by an explicit @nt{object_declaration} can be renamed as an object. However,
+a single task or protected object cannot be renamed since the
 corresponding type is anonymous (meaning it has no nameable subtypes).
 For similar reasons, an object of an anonymous array or access type
-cannot be renamed.
+cannot be renamed.]}
 
 @leading@keepnext@;A subtype defined without any additional constraint
 can be used to achieve the effect of renaming another subtype
@@ -3443,10 +3444,11 @@ and all of the views declared by those declarations.
   @end{Discussion}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0068-1]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0324-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0324-1],ARef=[AI12-0427-1]}
   @ChgAdded{Version=[4],NoPrefix=[T],Text=[Within an @nt{aspect_specification}
   for a type or subtype, the current instance represents a value of the type;
-  it is not an object. The nominal subtype of this value is given by the
+  it is not an object. @Chg{Version=[5],New=[Unless otherwise specified, 
+  the],Old=[The]} nominal subtype of this value is given by the
   subtype itself (the first subtype in the case of a @nt{type_declaration}),
   prior to applying any predicate specified directly on the type or subtype. If
   the type or subtype is by-reference, the associated object

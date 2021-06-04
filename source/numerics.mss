@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.76 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
+@comment{ $Revision: 1.77 $ $Date: 2021/06/03 01:52:06 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -234,9 +234,9 @@ Numerics.@!Short_@!Complex_@!Types, Numerics.@!Long_@!Complex_@!Types, etc.
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0241-1]}
-  @Chg{Version=[5],New=[A nongeneric pure unit is always nonblocking, so we
+  @Chg{Version=[5],New=[A pure unit is always nonblocking, so we
   don't need to talk about the Nonblocking aspect of these packages. Similarly,
-  a nongeneric pure unit always has the Global aspect set to @key[null], so we
+  a pure unit always has the Global aspect set to @key[null], so we
   don't need to talk about that, either.],Old=[]}
 @end{Ramification}
 

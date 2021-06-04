@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:17 $}
+@Comment{$Date: 2021/06/03 01:52:05 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.155 $}
+@Comment{$Revision: 1.156 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -3108,10 +3108,10 @@ individual membership test whose @nt{membership_choice} is a
 (see @RefSecNum{Relational Operators and Membership Tests}).]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0405-1]}
-@ChgAdded{Version=[5],Text=[The Pre expression additions described above are 
-  enabled or disabled depending on the Pre assertion policy that is in effect 
+@ChgAdded{Version=[5],Text=[The Post expression additions described above are 
+  enabled or disabled depending on the Post assertion policy that is in effect 
   at the point of declaration of the subprogram @i<S>. A similar rule applies 
-  to the Pre'Class expression additions.]}
+  to the Post'Class expression additions.]}
 @end{StaticSem}
 
 @begin{Notes}
@@ -4499,12 +4499,15 @@ built in place:]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[This @ldquote@;mutating@rdquote does not
   necessarily happen atomically with
   respect to abort and other tasks. For example, if a function call is used as
-  the parent part of an @nt{extension_aggregate}, then the tag of the anonymous
+  the @Chg{Version=[5],New=[ancestor],Old=[parent]} part of
+  an @nt{extension_aggregate}, then the tag of the anonymous
   object (the function result) will be different from the tag of the
-  newly-created object (the parent part of the @nt{extension_aggregate}). In
+  newly-created object (the @Chg{Version=[5],New=[ancestor],Old=[parent]} part
+  of the @nt{extension_aggregate}). In
   implementation terms, this involves modifying the tag field. If the current
   task is aborted during this modification, the object might become abnormal.
   Likewise, if some other task accesses the tag field during this modification,
@@ -4967,7 +4970,7 @@ complete, and before it is left.
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Master>,
 Text=<@ChgAdded{Version=[5],Text=[A master is the execution of a master 
 construct. Each object and task is associated with a master. When a master 
-is left, associated tasks are awaited and associated objects.]}>}
+is left, associated tasks are awaited and associated objects are finalized.]}>}
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Master construct>,
 Text=<@ChgAdded{Version=[5],Text=[ A master construct is one of certain 
@@ -5547,17 +5550,18 @@ For example,
 @key[end] Main;
 @end{Example}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 The @nt{goto_statement} will first cause
-Finalize(Y) to be called.
-Suppose that Finalize(Y) propagates an exception.
-Program_Error will be raised after leaving Inner_Block_Statement,
+Finalize(@Chg{Version=[5],New=[Z],Old=[Y]}) to be called.
+Suppose that Finalize(@Chg{Version=[5],New=[Z],Old=[Y]}) propagates an
+exception. Program_Error will be raised after leaving Inner_Block_Statement,
 but before leaving Main.
 Thus, handler number 1 cannot handle this Program_Error;
 it will be handled either by handler number 2 or handler number 3.
-If it is handled by handler number 2,
-then Finalize(Z) will be done before executing the handler.
-If it is handled by handler number 3,
-then Finalize(Z) and Finalize(X) will both
+If it is handled by handler number 2, then
+Finalize(@Chg{Version=[5],New=[Y],Old=[Z]}) will be done before executing the 
+handler. If it is handled by handler number 3, then 
+Finalize(@Chg{Version=[5],New=[Y],Old=[Z]}) and Finalize(X) will both
 be done before executing the handler.
 @end{Ramification}
 
@@ -5566,10 +5570,11 @@ that is due to raising an exception,
 any other finalizations due to be performed for the same master are
 performed; Program_Error is raised immediately after leaving the master.
 @begin{Ramification}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 If, in the above example, the @nt{goto_statement} were replaced by a
 @nt{raise_statement}, then the Program_Error would be handled by
 handler number 2, and
-Finalize(Z) would be done before executing the handler.
+Finalize(@Chg{Version=[5],New=[Y],Old=[Z]}) would be done before executing the handler.
 @end{Ramification}
 @begin{Reason}
 We considered treating this case in the same way as the others,
@@ -5757,9 +5762,11 @@ generic formal objects of mode @key{in}
 these are defined in terms of constant declarations; and
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @nt{aggregate}s (see @RefSecNum{Aggregates})@Chg{Version=[2],New=[, when
 the result is not built-in-place],Old=[]}
-(in this case, the value of each component, and the parent part, for an
+(in this case, the value of each component, and the 
+@Chg{Version=[5],New=[ancestor],Old=[parent]} part, for an
 @nt{extension_aggregate}, is assigned, and therefore adjusted,
 but the value of the @nt{aggregate} as a whole is not adjusted;
 neither is Initialize called);

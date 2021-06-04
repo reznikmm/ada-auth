@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -39,10 +39,12 @@ end-of-file. During the execution of a partition, there might be
 numerous occurrences of this exception.
 @end{Ramification}
 @begin{Honest}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
 @Defn{occurrence (of an exception)}
 When the meaning is clear from the context,
 we sometimes use @lquotes@;@i{occurrence}@rquotes@; as a
-short-hand for @lquotes@;exception occurrence@rquotes@;.
+@Chg{Version=[5],New=[shorthand],Old=[short-hand]} for
+@lquotes@;exception occurrence@rquotes@;.
 @end{Honest}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1],ARef=[AI05-0258-1]}
@@ -635,8 +637,8 @@ Tasking_Error; this is not propagation.
 @Defn2{Term=[dynamically enclosing], Sec=(of one execution by another)}
 @Defn2{Term=[execution], Sec=(dynamically enclosing)}
 Within a given task, if the
-execution of construct @i{a} is defined by this @IntlStdName
-to consist (in part) of the
+execution of construct @i{a} is defined by this @IntlStdName to 
+consist (in part) of the
 execution of construct @i{b}, then while @i{b} is executing, the
 execution of @i{a} is said to @i(dynamically enclose) the execution of
 @i{b}.
@@ -1050,7 +1052,9 @@ partition).]}
 @ChgNote{All of these notes (except the first) are moved from below.}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This routines are used to define the stream
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[These],Old=[This]}
+  routines are used to define the stream
   attributes (see @RefSecNum{Stream-Oriented Attributes}) for
   Exception_Occurrence.]}
 

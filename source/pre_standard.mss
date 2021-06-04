@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2021/03/18 10:02:20 $ $Author: randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:20 $}
+@Comment{$Date: 2021/06/03 01:52:07 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -345,15 +345,13 @@ space character (position 160)
 correspond to different values. Unless
 indicated otherwise, each occurrence of
 the character literal
-' ' in this @IntlStdTitle
-refers to the space character.
+' ' in this @IntlStdTitle refers to the space character.
 Similarly, the character literals
 for hyphen (position 45)
 and soft hyphen (position 173) correspond to different values.
 Unless indicated otherwise, each occurrence of
 the character literal
-'@en@;' in this @IntlStdTitle
-refers to the hyphen character.
+'@en@;' in this @IntlStdTitle refers to the hyphen character.
 @end{StaticSem}
 
 @begin{RunTime}

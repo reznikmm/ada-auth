@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2021/06/03 01:52:06 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/03 01:52:06 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -761,7 +761,7 @@ the result subtype]}.
 Numerics.Discrete_Random is
 guaranteed to yield each value in its result @Chg{Version=[5],New=[range],
 Old=[subtype]} in a finite number of calls, provided that the number of such
-values does not exceed 2 @+[15].
+values does not exceed 2@+[15].
 
 Other performance requirements for the random number generator, which apply
 only in implementations conforming to the Numerics Annex, and then only in the
