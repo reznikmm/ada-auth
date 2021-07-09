@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2021/06/12 04:55:54 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -3120,6 +3120,11 @@ protected, or synchronized interface.]}
 @end{Legality}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of the use of a generic 
+with a formal interface type, to establish a standard interface that all tasks
+need to implement so they can be managed appropriately by an 
+application-specific scheduler:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key{type} Root_Work_Item @key{is tagged private};]}
@@ -3136,10 +3141,11 @@ protected, or synchronized interface.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[This generic allows an application to establish a
-standard interface that all tasks need to implement so they can be managed
-appropriately by an application-specific scheduler.]}
-
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[This generic allows 
+an application to establish a standard interface that all tasks need to 
+implement so they can be managed appropriately by an application-specific
+scheduler.]}]}
 @end{Examples}
 
 @begin{Extend95}

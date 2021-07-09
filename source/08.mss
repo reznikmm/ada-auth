@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:53 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1652,10 +1652,13 @@ and @RefSecNum{Protected Units and Protected Objects}, respectively.]}
 
 @begin{Examples}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The use of
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[@i{Example 
+of use of an overriding indicator when declaring a security queue derived 
+from the Queue interface of @RefSecNum{Interface Types}:}],Old=[The use of
 @nt{overriding_indicator}s allows the detection of errors at compile-time that
 otherwise might not be detected at all. For instance, we might declare a
-security queue derived from the Queue interface of 3.9.4 as:]}
+security queue derived from the Queue interface of 3.9.4 as:]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1684,11 +1687,17 @@ security queue derived from the Queue interface of 3.9.4 as:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The first four subprogram declarations guarantee
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[@i{The first four subprogram 
+declarations guarantee that these subprograms will override the four
+subprograms inherited from the Queue interface. A misspelling in one of 
+these subprograms will be detected at compile time
+by the implementation. Conversely, the declaration of Arrest guarantees that
+this is a new operation.}],Old=[The first four subprogram declarations guarantee
 that these subprograms will override the four subprograms inherited from the
 Queue interface. A misspelling in one of these subprograms will be detected
 by the implementation. Conversely, the declaration of Arrest guarantees that
-this is a new operation.]}
+this is a new operation.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1769,8 +1778,8 @@ This includes formal packages.
 For each @nt{use_clause},
 there is a certain region of text called the @i{scope} of the @nt{use_clause}.
 For a @nt{use_clause} within a @nt{context_clause} of a
-@nt{library_unit_declaration}
-or @nt{library_unit_renaming_declaration},
+@nt{library_@!unit_@!declaration}
+or @nt{library_@!unit_@!renaming_@!declaration},
 the scope is the entire declarative region of the declaration.
 For a @nt{use_clause} within a @nt{context_clause} of a
 body, the scope is the entire body @Redundant[and any

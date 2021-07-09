@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2021/06/12 04:55:54 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2955,22 +2955,27 @@ predefined type.
 @end{ImplPerm}
 
 @begin{Notes}
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0038-1]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0038-1]}@Comment{For versions 3 and 4, this is "DeletedNoDelMsg"}
 @ChgDeleted{Version=[3],Text=[For Modular_IO, execution of Get propagates
 Data_Error if the sequence of
 characters read forms an integer literal outside the range
 0..Num'Last.]}
 @end{Notes}
 @begin{NotIso}
-@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 24 and 25 were
-deleted.>}]}@Comment{This message should be deleted if the paragraphs
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Chg{Version=[5],New=[],Old=[@Shrink{@i<Paragraphs 24 and 25 were
+deleted.>}]}]}@Comment{This message should be deleted if the paragraphs
 are ever renumbered. This includes the next paragraph.}
 @end{NotIso}
 
 @begin{Examples}
+
+@ChgRef{Version=[1], Kind=[Deleted]}
+@ChgRef{Version=[5], Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@Chg{Version=[5],New=[@i<Examples of use of an instantiation of 
+Text_IO.Integer_IO:>],Old=[@Chg{Version=[1],New=[],Old=<@ @;@comment{Empty 
+paragraph to hang junk paragraph number from original RM}>}]}
+
 @begin{Example}
-@ChgRef{Version=[1], Kind=[DeletedNoDelMsg]}
-@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @ChgRef{Version=[3], Kind=[Revised],ARef=[AI05-0298-1]}
 @Chg{Version=[3],New=[@key[subtype] Byte_Int @key[is] Integer @key[range] -127 .. 127;
@@ -3218,9 +3223,14 @@ same set of formats.
 @end{Notes}
 
 @begin{Examples}
-@begin{Example}
+
 @ChgRef{Version=[1], Kind=[Deleted]}
-@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgRef{Version=[5], Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@Chg{Version=[5],New=[@i<Examples of use of an instantiation of 
+Text_IO.Float_IO:>],Old=[@Chg{Version=[1],New=[],Old=<@ @;@comment{Empty 
+paragraph to hang junk paragraph number from original RM}>}]}
+
+@begin{Example}
 
 @key[package] Real_IO @key[is] @key[new] Float_IO(Real); @key[use] Real_IO;
 --@RI{ default format used at instantiation, Default_Exp = 3}

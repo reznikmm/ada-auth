@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:53 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.160 $}
+@Comment{$Revision: 1.161 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2030,6 +2030,7 @@ rhs="@Chg{Version=[5],New=<@SynI{object_}@Syn2{name} | @SynI{package_}@Syn2{name
 name an object or a package (including a limited view of a package).]}
 @end{Resolution}
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a
@@ -6286,6 +6287,9 @@ normally, Program_Error is raised at the point of the call.
 @end{ImplNote}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a specification
+of a No_Return aspect:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -6527,6 +6531,9 @@ Elaboration_Check],Old=[]}.]}
 @end{RunTime}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of the declaration of
+a null procedure:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key(procedure) Simplify(Expr : @key(in out) Expression) @key(is null); --@ExamCom[ see @RefSecNum{Tagged Types and Type Extensions}]
@@ -6786,6 +6793,9 @@ Elaboration_Check.]}
 @end{RunTime}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of an expression 
+function:}]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
 @ChgAdded{Version=[3],Text=[@key(function) Is_Origin (P : @key[in] Point) @key[return] Boolean @key[is] -- @Examcom[see @RefSecNum{Tagged Types and Type Extensions}]

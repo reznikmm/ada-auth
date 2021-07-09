@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2020/08/28 03:34:21 $ $Author: randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2020/08/28 03:34:21 $}
+@Comment{$Date: 2021/06/12 04:55:54 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -500,10 +500,10 @@ special files).]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Simple_Name (Name : @key{in} String) @key{return} String;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0337-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0337-1],ARef=[AI12-0433-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the simple name portion of
 the file name specified by Name.@Chg{Version=[5],New=[ The simple name of a
-root directory is the root itself.],Old=[]}
+root directory is a name of the root itself.],Old=[]}
 The exception Name_Error is propagated if the string given as Name does not
 allow the identification of an external file (including directories and special
 files).]}
@@ -1317,7 +1317,7 @@ should be deleted first.]}
 @end{Diffword2005}
 
 @begin{Diffword2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0337-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0337-1],ARef=[AI12-0433-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the meaning of
   Simple_Name in the case that the parameter is a root directory. This was
   not previously deescribed.]}

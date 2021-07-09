@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2021/06/12 04:55:53 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.144 $}
+@Comment{$Revision: 1.145 $}
 
 @begin{Intro}
 
@@ -2967,6 +2967,7 @@ Control.Release;
 @end{DiffWord2012}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledSubClause{Entries and Accept Statements}
 
 @begin{Intro}

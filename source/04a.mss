@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:53 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.163 $}
+@Comment{$Revision: 1.164 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1028,12 +1028,12 @@ For example, the implementation defines whether a given
 implementation-defined attribute can be used in a static expression.
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0362-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0362-2]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[An implementation may extend the
 definition of a language-defined attribute by accepting uses of that
 attribute that would otherwise be illegal in the following cases:]}
 @begin{itemize}
-   @ChgRef{Version=[5],Kind=[Added]}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],Text=[in order to support compatibility with a
      previous edition of of this @IntlStdTitle; or]}
 
@@ -1044,7 +1044,7 @@ floating types, as this was defined in Ada 83, even though the name would
 conflict with a language-defined attribute.],Old=[]}
 @end{Ramification}
 
-   @ChgRef{Version=[5],Kind=[Added]}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],Text=[in the case of a language-defined attribute
     whose @nt{prefix} is required by this @IntlStdName to be a
     floating point subtype, an implementation may accept an
@@ -1294,6 +1294,10 @@ named reference object.]}
 @end{RunTime}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification 
+and use of generalized references:}]}
+
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Barrel @key[is tagged] ...  -- @Examcom{holds objects of type Element}]}
@@ -1351,9 +1355,11 @@ may be specified:]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0428-1]}
 @ChgAdded{Version=[3],Text=[Constant_Indexing@\This aspect shall be specified by
 a @nt{name} that denotes one or more functions declared immediately within the
-same declaration list in which @i<T> is declared. All such functions shall
+same declaration list in which @i<T>@Chg{Version=[5],New=[, or the 
+declaration completed by @i<T>,],Old=[]} is declared. All such functions shall
 have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access-to-constant parameter with designated type @i<T> or
 @i<T>'Class.@AspectDefn{Constant_Indexing}]}
@@ -1363,9 +1369,11 @@ have at least two parameters, the first of which is of type @i<T> or
       user-defined @nt{indexed_component}s.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0428-1]}
 @ChgAdded{Version=[3],Text=[Variable_Indexing@\This aspect shall be specified
 by a @nt{name} that denotes one or more functions declared immediately within
-the same declaration list in which @i<T> is declared. All such functions
+the same declaration list in which @i<T>@Chg{Version=[5],New=[, or the 
+declaration completed by @i<T>,],Old=[]} is declared. All such functions
 shall have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access parameter with designated type @i<T> or @i<T>'Class.
 All such functions shall have a return type that is a reference
@@ -1617,6 +1625,11 @@ the @nt{prefix} of the prefixed view.]}
 @end{Notes}
 
 @begin{Examples}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification 
+and use of generalized indexing:}]}
+
 @begin{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1],ARef=[AI05-0292-1]}
@@ -1682,6 +1695,11 @@ IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing 
   Defined Constant_Indexing and Variable_Indexing to be nonoveridable.
   This is merely a new description for @LegalityTitle which already applied
   to these aspects.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0428-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Allowed the completion of
+  a private type to use declarations from either the visible part or the
+  private part.]}
 @end{DiffWord2012}
 
 
@@ -2142,6 +2160,10 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification
+and use of user-defined literals:}]}
+
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Text=[@key[subtype] Roman_Character @key[is] Wide_Wide_Character
@@ -2408,7 +2430,6 @@ will work (see @RefSecNum{Assignment and Finalization}).
 @end{Incompatible2012}
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledSubClause{Record Aggregates}
 
 @begin{Intro}
@@ -3281,7 +3302,7 @@ The extension aggregate syntax is new.
 @end{DiffWord2012}
 
 
-
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledSubClause{Array Aggregates}
 
 @begin{Intro}
@@ -3648,7 +3669,7 @@ evaluation proceeds in two steps:]}
 @end{Honest}
 @end{enumerate}
 
-@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
+@Leading@Keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @PDefn2{Term=[evaluation], Sec=(array_aggregate)}
 The evaluation of @Chg{Version=[5],New=[any other],Old=[an]}
 @nt{array_aggregate} of a given array type proceeds in two steps:
@@ -4245,9 +4266,9 @@ ascending order, if the @nt{discrete_choice} represents a range):]}
 
 @begin{Examples}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[Simple use in a
-postcondition:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of use 
+of delta aggregates in a postcondition:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4260,9 +4281,9 @@ postcondition:]}
    @key[with] Post => V = (V'Old @key[with delta] A .. B => 42.0, V'First => 0.0);]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1],ARef=[AI12-0379-1],ARef=[AI12-0386-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression can
-be nontrivial:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1],ARef=[AI12-0379-1],ARef=[AI12-0386-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples where the
+base expression is nontrivial:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4280,9 +4301,9 @@ be nontrivial:]}
                   @key[with delta] Month => April); --@Examcom{ see @RefSecNum{Record Types}}]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0379-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression may
-also be class-wide:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Example where the
+base expression is class-wide:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4789,9 +4810,9 @@ follows:]}
 
 @begin{Examples}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[Declarations of
-Set_Type, Map_Type, and Vector_Type:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of
+specifying the Aggregate aspect for a Set_Type, a Map_Type, and a Vector_Type:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4852,9 +4873,9 @@ Set_Type, Map_Type, and Vector_Type:]}
 
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[Examples of
-container aggregates for Set_Type, Map_Type, and Vector_Type:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of
+container aggregates for Set_Type, Map_Type, and Vector_Type:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -7641,11 +7662,22 @@ Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
 @end{Runtime}
 
 @begin{Examples}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of use of
+an} @nt{if_expression}@i{:}]}
+
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Text=[Put_Line ("Casey is " & 
       (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
+@end{Example}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of use of
+a} @nt{case_expression}@i{:}]}
+
+@begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Text=[@key[function] Card_Color (Card : Suit) @key[return] Color @key[is] --@RI[ see @RefSecNum{Enumeration Types}]
   (@key[case] Card @key[is]
@@ -7779,8 +7811,11 @@ order specified by the @nt{loop_parameter_specification}]} (see
 @begin{Examples}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The postcondition for a sorting
-routine on an array A with an index subtype T can be written:]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[@i<Example
+of a quantified expression as a postcondition for a sorting routine on 
+an array A with an index subtype T:>],Old=[The postcondition for a sorting
+routine on an array A with an index subtype T can be written:]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -7789,9 +7824,11 @@ routine on an array A with an index subtype T can be written:]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The assertion that a positive number
-@Chg{Version=[5],New=[N ],Old=[]}is composite (as opposed to prime) can be written:]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1],ARef=[AI12-0430-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[@i<Example of
+use of a quantified expression as an assertion that a positive number N is
+composite (as opposed to prime):>],Old=[The assertion that a positive number
+is composite (as opposed to prime) can be written:]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -7816,6 +7853,7 @@ routine on an array A with an index subtype T can be written:]}
 @end{DiffWord2012}
 
 
+@IsoOnlyRMNewPageVer{Version=[5]}@Comment{For ISO Ada 202x only}
 @LabeledAddedSubclause{Version=[5],Name=[Declare Expressions]}
 
 @begin{Intro}
@@ -7932,10 +7970,10 @@ the @SynI{body_}@nt{expression} is evaluated. The value of the
 
 @begin{Examples}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[The postcondition for
-Ada.Containers.Vectors."&" (see
-@RefSecNum{The Generic Package Containers.Vectors}) could have been written:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of use of a declare 
+expression as a replacement postcondition for Ada.@!Containers.@!Vectors.@!"&"
+(see @RefSecNum{The Generic Package Containers.Vectors}):>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
@@ -8315,9 +8353,9 @@ procedure.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded erro
 @end{Bounded}
 
 @begin{Examples}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[An expression function that returns
-its result as a Reduction Expression:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of an 
+expression function that returns its result as a reduction expression:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -8325,9 +8363,9 @@ its result as a Reduction Expression:]}
    ([@key[for] J @key[in] 1..N => J]'Reduce("*", 1));}}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[An expression function that computes
-the Sine of X using a Taylor expansion:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of a reduction
+expression that computes the Sine of X using a Taylor expansion:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -8336,9 +8374,9 @@ the Sine of X using a Taylor expansion:]}
       (-1.0)**(I-1) * X**(2*I-1)/Float(Factorial(2*I-1))]'Reduce("+", 0.0));}}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[A reduction expression that outputs
-the sum of squares:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a 
+reduction expression that outputs the sum of squares:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -8346,9 +8384,9 @@ the sum of squares:]}
           Integer'Image([@key[for] I @key[in] 1 .. 10 => I**2]'Reduce("+", 0)));}}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[An expression function to compute the
-value of Pi:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of a reduction
+expression used to compute the value of Pi:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -8361,37 +8399,41 @@ value of Pi:]}
               'Reduce("+", 0.0));}}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Calculate the sum of elements of an
-array of integers:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a 
+reduction expression used to calculate the sum of elements of an array 
+of integers:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[A'Reduce("+",0)  -- @Examcom{See @RefSecNum{Array Aggregates}.}]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Determine if all elements in a
-two-dimensional array of booleans are set to true:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a 
+reduction expression used to determine if all elements in a two-dimensional
+array of booleans are set to true:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[Grid'Reduce("and", True)  -- @Examcom{See @RefSecNum{Array Types}.}]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Calculate the minimum value
-of an array of integers in parallel:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
+reduction expression used to calculate the minimum value of an array of
+integers in parallel:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[A'Parallel_Reduce(Integer'Min, Integer'Last)]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[A parallel reduction expression used
-to calculate the mean of the elements of a two-dimensional array of
-subtype Matrix (see @RefSecNum{Array Types}) that are greater than 100.0:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of a parallel reduction
+expression used to calculate the mean of the elements of a two-dimensional
+array of subtype Matrix (see @RefSecNum{Array Types}) that are 
+greater than 100.0:>]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}

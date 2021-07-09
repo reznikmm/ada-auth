@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2021/06/12 04:55:54 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @RMNewPageVer{Version=[0]}
 @RMNewPageVer{Version=[1]}
@@ -941,6 +941,8 @@ followed.]}]}
 @end{Diffword2005}
 
 
+
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledSubClause{Data Validity}
 
 @begin{Intro}
@@ -5724,6 +5726,7 @@ Write'Class, Output, and Output'Class.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0039-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0106-1],ARef=[AI12-0121-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0435-1]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Input for a type)}
@@ -5741,7 +5744,10 @@ being the corresponding attribute name.] Each of the class-wide stream-oriented
 attributes may be specified using an @nt{aspect_specification} for a
 tagged type @i<T> using the name of the stream-oriented attribute followed
 by 'Class; such class-wide aspects do not
-apply to other descendants of @i<T>.],Old=[@Chg{Version=[2],New=[The
+apply to other descendants of @i<T>.@Chg{Version=[5],New=[ If not directly 
+specified, a default implementation of a stream-oriented attribute is 
+implicitly composed for a nonlimited type, and for certain limited types,
+as defined above.],Old=[]}],Old=[@Chg{Version=[2],New=[The
 subprogram name given in such a
 clause shall @Chg{Version=[3],New=[statically denote a subprogram that
 is not],Old=[not denote]} an abstract subprogram. Furthermore, if a
@@ -6045,7 +6051,7 @@ raises Program_Error and performs no other action.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0192-1]}
 @ChgAdded{Version=[2],Text=[In the @nt{parameter_and_result_profile}s for
 @Chg{Version=[3],New=[the default implementations of ],Old=[]}the
-stream-oriented attributes, the subtype of the Item parameter is the base
+stream-oriented attributes, the subtype of the @i<Item> parameter is the base
 subtype of @i<T> if @i<T> is a scalar type, and the first subtype otherwise.
 The same rule applies to the result of the Input attribute.]}
 

@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1202,9 +1202,18 @@ element. If an object of type Cursor is not otherwise initialized, it is
 initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgAdded{Version=[3],Text=[The predefined "=" operator for type Cursor returns
-True if both cursors are No_Element, or designate the same element in the same
-container.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0434-1]}
+@ChgAdded{Version=[3],Text=[The 
+@Chg{Version=[5],New=[primitive],Old=[predefined]} "=" operator for type
+Cursor returns True if both cursors are No_Element, or designate the same
+element in the same container.]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0434-1]}
+  @ChgAdded{Version=[5],Text=[@LDquote@;The primitive "=" operator@rdquote
+  is the one with two parameters of type Cursor which returns Boolean. We're
+  not talking about some other (hidden) primitive function named "=".]}
+@end{Honest}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[Execution of the default implementation of the
@@ -5406,7 +5415,7 @@ from the source holder object to the target holder object.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0350-1]}
-@ChgAdded{Version=[3],Text=[Move @Chg{Version=[5],New=[ and Swap],Old=[]} should not
+@ChgAdded{Version=[3],Text=[Move@Chg{Version=[5],New=[ and Swap],Old=[]} should not
 copy @Chg{Version=[5],New=[any elements],Old=[the element]}, and should
 minimize copying of internal data structures.]}
 @ChgImplAdvice{Version=[5],Kind=[Added],

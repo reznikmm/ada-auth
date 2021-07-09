@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2021/06/12 04:55:54 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -324,7 +324,8 @@ indicates the space character.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 The generic packages Text_IO.Decimal_IO@Chg{Version=[2],New=[,],Old=[ and]}
-Wide_Text_IO.Decimal_IO@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Decimal_IO],Old=[]}
+Wide_@!Text_IO.Decimal_IO@Chg{Version=[2],New=[, and 
+Wide_@!Wide_@!Text_IO.Decimal_IO],Old=[]}
 (see @RefSec(Input-Output for Real Types))
 provide text input and nonedited text output for decimal types.
 @end{Intro}
@@ -943,7 +944,11 @@ as follows:
 @end{RunTime}
 
 @begin{Examples}
-In the result string values shown below, 'b' represents the space character.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@Chg{Version=[5],New=[@i<Examples of use of edited output; in the result
+string values shown below, 'b' represents the space character:>],Old=[In
+the result string values shown below, 'b' represents the space character.]}
+
 @begin{Example}
 Item:         Picture and Result Strings:
 

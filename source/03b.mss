@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @LabeledClause{Array Types}
 
@@ -315,7 +315,7 @@ a @nt{full_type_declaration}.@AspectDefn{Default_Component_Value}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0427-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[3],Text=[If a derived type @Chg{Version=[5],New=[],Old=[with 
 no primitive subprograms ]}inherits a boolean Default_Component_Value aspect, 
 the aspect may be specified to have any value for the derived type.]}
@@ -1628,7 +1628,6 @@ when the discriminant is initialized.
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledSubClause{Discriminant Constraints}
 
 @begin{Intro}
@@ -2017,6 +2016,7 @@ subprogram calls.
 @end{DiffWord2005}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Record Types}
 
 @begin{Intro}

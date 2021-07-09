@@ -1,21 +1,21 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.92 $ $Date: 2021/06/04 02:42:51 $}
+@comment{$Revision: 1.93 $ $Date: 2021/06/12 04:55:55 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@b{ISO/IEC JTC 1/SC 22 N}],Old=[@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
 @Comment{CD draft text}
 
-@Noparanum@Right{@Swiss{@Chg{Version=[3],New=[Date: 2012-11-27],Old=[]}}}
+@Noparanum@Right{@Swiss{@Chg{Version=[5],New=[Date: 2021-06-11],Old=[]}}}
 
-@Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@B{ISO/IEC 8652:2012(E)}],Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@Chg{Version=[5],New=[@B{ISO/IEC 8652:202x(E)}],Old=[]}}}}
 
 @Noparanum@Right{@Swiss{@Chg{Version=[3],New=[ISO/IEC JTC 1/SC 22/WG 9],Old=[]}}}
 @end{ISOOnly}
 @begin{NotISO}
 @Comment{@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x(E)],Old=[2012(E)@Chg{Version=[4], New=[ with COR.1:2016],Old=[]}]}],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[@Chg{Version=[2],New=[2007],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 30>,Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[@Chg{Version=[2],New=[2007],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 31>,Old=[]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -51,8 +51,8 @@ End comment}
 
 @begin{ISOOnly}
 @Comment{Jim Moore wanted this deleted in the consolidated editions, as it is confusing.}
-@Noparanum@Chg{Version=[3],New=[@Swiss{Revision of second edition (ISO/IEC 8652:1995)}],Old=[@Chg{New=[@ @*@Comment{Dummy paragraph}],
-               Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}]}
+@Noparanum@Chg{Version=[5],New=[@Swiss{Revision of third edition (ISO/IEC 8652:2012)}],Old=[Chg{Version=[3],New=[@Swiss{Revision of second edition (ISO/IEC 8652:1995)}],Old=[@Chg{New=[@ @*@Comment{Dummy paragraph}],
+               Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}]}]}
 @end{ISOOnly}
 
 @Noparanum@ @*
@@ -67,10 +67,10 @@ End comment}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Grow{@Chg{Version=[5],New=[202x],Old=[@Chg{Version=[3],New=[2012],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 30>,Old=[]}}}}
+@Noparanum@Center{@Swiss{@Grow{@Chg{Version=[5],New=[202x],Old=[@Chg{Version=[3],New=[2012],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 31>,Old=[]}}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[@Grow{with 2016 corrections}]}],Old=[]}],Old=[@Chg{Version=[1], New=[@Grow{with 2001 corrections}], Old=[]}]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and 2007 Amendment}], Old=[]}]}}}
-@Comment{@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[5],New=<, Draft 30>,Old=[]}}}}}
+@Comment{@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[5],New=<, Draft 31>,Old=[]}}}}}
 @Comment{@Noparanum@Center{@Swiss{@Chg{Version=[3],New=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[@Grow{with Technical Corrigendum 1}]}],Old=[]}],Old=[@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}]}}}}
 @Comment{@Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}]}}}}
 @end{NotISO}
@@ -179,7 +179,7 @@ OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY
 GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
 EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
-@Noparanum@;@Chg{Version=[3], New=[@b{Third Edition}], Old=[]}
+@Noparanum@;@Chg{Version=[3], New=[@b{Third Edition (Ada 2012)}], Old=[]}
 
 @Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011, 2012 AXE Consultants.  All Rights Reserved.], Old=[]}
 
@@ -225,7 +225,7 @@ OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY
 GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
 EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
-@Noparanum@;@Chg{Version=[5], New=[@b{Ada 202x version}], Old=[]}
+@Noparanum@;@Chg{Version=[5], New=[@b{Fourth Edition (Ada 202x)}], Old=[]}
 
 @Noparanum@;@Chg{Version=[5], New=[Copyright @Latin1(169) 2016, 2017, 2018, 2019, 2020, 2021 AXE Consultants.  All Rights Reserved.], Old=[]}
 

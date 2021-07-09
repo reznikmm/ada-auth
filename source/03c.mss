@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.154 $}
+@Comment{$Revision: 1.155 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2132,7 +2132,6 @@ The concept of dispatching operations is new.
 @end{Diffword2012}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledSubClause{Abstract Types and Subprograms}
 
 @begin{Intro}
@@ -6697,6 +6696,7 @@ uses of anonymous access types.]}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@IsoOnlyRMNewPageVer{Version=[5]}@Comment{For ISO Ada 202x only}
 @LabeledClause{Declarative Parts}
 
 @begin{Intro}

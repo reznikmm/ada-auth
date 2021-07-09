@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:53 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -731,6 +731,11 @@ subclause @RefSecNum{Assignment Statements}.]}
 @end{RunTime}
 
 @begin{Examples}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the use of target
+name symbols:}]}
+
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Text=[Board(1, 1) := @@ + 1.0;  -- @Examcom<An abbreviation for Board(1, 1) := Board(1, 1) + 1.0;>
@@ -1726,18 +1731,18 @@ operational aspects may be specified for an indexable container type @i<T> (see
 
 @begin{Description}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0428-1]}
   @ChgAdded{Version=[3],Text=[Default_Iterator@\This aspect is specified
     by a @nt{name} that denotes exactly one function declared immediately within
-    the same declaration list in which @i<T> is declared, whose first parameter
+    the same declaration list in which @i<T>@Chg{Version=[5],New=[, or the 
+    declaration completed by @i<T>,],Old=[]} is declared, whose first parameter
     is of type @i<T> or @i<T>'Class or an access parameter whose designated type
     is type @i<T> or @i<T>'Class, whose other parameters, if any, have default
     expressions, and whose result type is an iterator type. This function is the
     @i<default iterator function> for @i<T>.@Defn{default iterator function}
     Its result subtype is the @i<default iterator subtype> for
     @i<T>.@Defn{default iterator subtype} The iteration cursor subtype for
-    the default iterator subtype is the @i<default cursor subtype>
-    for
+    the default iterator subtype is the @i<default cursor subtype> for
     @i<T>.@Defn{default cursor subtype}@AspectDefn{Default_Iterator}@Chg{Version=[5],New=[
     This aspect is inherited by descendants
     of type @i<T> (including @i<T>'Class).],Old=[]}]}
@@ -2385,21 +2390,31 @@ immediately enclosing loop statement.]}
 @end{Runtime}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel 
+generalized loop over an array:}]}
+
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Text=[-- @Examcom{Array component iterator example:}
-@Chg{Version=[5],New=[@key[parallel]
-],Old=[]}@key[for] Element @key[of] Board @key[loop]  -- @Examcom{See @RefSecNum{Index Constraints and Discrete Ranges}.}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@key[parallel]],Old=[-- @Examcom{Array component iterator example:}]}
+@key[for] Element @key[of] Board @key[loop]  -- @Examcom{See @RefSecNum{Index Constraints and Discrete Ranges}.}
    Element := Element * 2.0; -- @Examcom{Double each element of Board, a two-dimensional array.}
 @key[end loop];]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
-@ChgAdded{Version=[3],Text=[For examples of use of generalized iterators,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@i{For examples of use of 
+generalized iterators, see @RefSecNum{Example of Container Use} and the 
+corresponding container packages in 
+@RefSecNum{The Generic Package Containers.Vectors} and
+@RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}.}],Old=[For 
+examples of use of generalized iterators,
 see @RefSecNum{Example of Container Use} and the corresponding container
 packages in @RefSecNum{The Generic Package Containers.Vectors} and
-@RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}.]}
+@RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}.]}]}
+
 @end{Examples}
 
 
@@ -2837,9 +2852,9 @@ again.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]
 
 @begin{Examples}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0379-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Example of iterating over a map from
-My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of iterating over a map from
+My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2863,9 +2878,9 @@ My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):]}
 @key[end];]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Example of iterating over the
-environment variables (see @RefSecNum{The Package Environment_Variables}):]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of iterating over the
+environment variables (see @RefSecNum{The Package Environment_Variables}):}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2901,6 +2916,7 @@ environment variables (see @RefSecNum{The Package Environment_Variables}):]}
 @RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
 @RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
 @LabeledClause{Block Statements}
 
 @begin{Intro}
@@ -2975,9 +2991,9 @@ The syntax rule for @nt{block_statement} now uses the syntactic category
 
 @begin{Intro}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0436-1]}
 @ChgAdded{Version=[5],Text=[@Redundant[A @nt{parallel_block_statement}
-comprises two or more @nt{handled_sequence_of_statements} separated by
+comprises two or more @nt{sequence_of_statements} separated by
 @key[and] where each represents an independent activity that is intended to
 proceed concurrently with the others.]]}
 
@@ -2985,36 +3001,52 @@ proceed concurrently with the others.]]}
 
 @begin{Syntax}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1],ARef=[AI12-0436-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<parallel_block_statement>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
-    @key[parallel] [@Syn2{aspect_specification}] @key[do]
-       @Syn2{handled_sequence_of_statements}
+    @key[parallel] [(@Syn2{chunk_specification})] [@Syn2{aspect_specification}] @key[do]
+       @Syn2{sequence_of_statements}
     @key[and]
-       @Syn2{handled_sequence_of_statements}
+       @Syn2{sequence_of_statements}
    {@key[and]
-       @Syn2{handled_sequence_of_statements}}
+       @Syn2{sequence_of_statements}}
     @key[end do];>,Old=<>}"}
 
+@begin(SyntaxText)
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0427-1]}
+@ChgAdded{Version=[5],Text=[The @nt{chunk_specification}, if any, of a 
+@nt{parallel_block_statement} shall be an @SynI{integer_}@nt{simple_expression}.]}
+@end(SyntaxText)
 @end{Syntax}
 
 @begin{Runtime}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[5],Text=[For the execution of a
-@nt{parallel_block_statement}, the @nt{aspect_specification}, if any, is
-elaborated. Then every @nt{handled_sequence_of_statements}, each of which
-represents a separate
-logical thread of control, executes independently and concurrently. The
+@nt{parallel_block_statement}, the @nt{chunk_specification} and the 
+@nt{aspect_specification}, if any, are elaborated in an arbitrary order. 
+After elaborating the @nt{chunk_specification}, if any, a check is made that 
+the determined maximum number of chunks is greater than zero. If this check 
+fails, Program_Error is raised.@IndexCheck{Program_Error_Check}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1],ARef=[AI12-0436-1]}
+@ChgAdded{Version=[5],Text=[Then, the various @nt{sequence_of_statements} are 
+grouped into one or more @i<chunks>,@PDefn{chunk}
+each with its own logical thread of control (see clause 
+@RefSecNum{Tasks and Synchronization}), up to the maximum number
+of chunks specified by the @nt{chunk_specification}, if any. Within each chunk
+every @nt{sequence_of_statements} of the chunk is executed in turn, in an
+arbitrary order. The
 @nt{parallel_block_statement} is complete once every one of the
-@nt{handled_sequence_of_statements} has completed, either by reaching the end
+@nt{sequence_of_statements} has completed, either by reaching the end
 of its execution, or due to a transfer of control out of the construct
-by one of the @nt{handled_sequence_of_statements}
+by one of the @nt{sequence_of_statements}
 (see @RefSecNum{Simple and Compound Statements - Sequences of Statements}).]}
 
 @begin{ImplNote}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-  @ChgAdded{Version=[5],Text=[Although each @nt{handled_sequence_of_statements}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0436-1]}
+  @ChgAdded{Version=[5],Text=[Although each @nt{sequence_of_statements}
   of a parallel block represents a separate logical thread of control, the
   implementation may choose to combine two or more such logical threads
   of control into a single physical thread of control to reduce the cost
@@ -3023,6 +3055,11 @@ by one of the @nt{handled_sequence_of_statements}
 @end{Runtime}
 
 @begin{Examples}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel block 
+used to walk a binary tree in parallel:}]}
+
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0404-1]}
 @ChgAdded{Version=[5],Text=[@key[procedure] Traverse (T : Expr_Ptr) @key[is] --@Examcom{ see @RefSecNum{Type Extensions}}
@@ -3040,7 +3077,13 @@ by one of the @nt{handled_sequence_of_statements}
       @key[end do];
    @key[end if];
 @key[end] Traverse;]}
+@end{Example}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel block
+used to search two halves of a string in parallel:}]}
+
+@begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
 @ChgAdded{Version=[5],Text=[@key[function] Search (S : String; Char : Character) @key[return] Boolean @key[is]
 @key[begin]
@@ -3074,7 +3117,7 @@ by one of the @nt{handled_sequence_of_statements}
 @end{Examples}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1],ARef=[AI12-0436-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The @nt{parallel_block_statement} is new.]}
 @end{Extend2012}
@@ -3129,7 +3172,7 @@ the outer loop.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of loops with exit statements:}
+@leading@keepnext@i{Examples of loops with exit statements:}
 @begin{Example}
 @key[for] N @key[in] 1 .. Max_Num_Items @key[loop]
    Get_New_Item(New_Item);
@@ -3146,6 +3189,7 @@ Main_Cycle:
 @end{Example}
 @end{Examples}
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Goto Statements}
 
 @begin{Intro}

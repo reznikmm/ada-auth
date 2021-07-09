@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:53 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.156 $}
+@Comment{$Revision: 1.157 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2337,9 +2337,9 @@ value.]}
 @end{Notes}
 
 @begin{Examples}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Text=[@i{A work scheduler where only urgent work can be
-scheduled for weekends:}]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[5],Text=[@i{Example of a work scheduler where only urgent
+work can be scheduled for weekends:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}

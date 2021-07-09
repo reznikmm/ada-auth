@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.72 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
+@Comment{ $Revision: 1.73 $ $Date: 2021/06/12 04:55:55 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:07 $}
+@Comment{$Date: 2021/06/12 04:55:55 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1715,7 +1715,7 @@ corresponding actual parameter.]}
 defined in terms of operations that are performed by or on behalf of 
 an entity.]]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0431-1]}
 @ChgAdded{Version=[5],Text=[The Global aspect for a subtype identifies the 
 global variables that might be referenced during default initialization, 
 adjustment as part of
@@ -1726,7 +1726,8 @@ aspect defaults to that of the ancestor subtype; if not specified for a
 nonderived composite first subtype the aspect defaults to that of the enclosing
 library unit; if not specified for a nonderived elementary first subtype (or
 scalar base subtype), the aspect defaults to @key[null] in the absence of 
-a predicate, and to that of the enclosing library unit
+a predicate (or when the predicate is statically True), and to that of 
+the enclosing library unit
 otherwise. If not specified for a nonfirst subtype @i<S>, the Global
 aspect defaults to that of the subtype identified in the
 @nt{subtype_indication} defining @i<S>.]}

@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -228,9 +228,18 @@ node. If an object of type Cursor is not otherwise initialized, it is
 initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor returns
-True if both cursors are No_Element, or designate the same element in the same
-container.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0434-1]}
+@ChgAdded{Version=[2],Text=[The 
+@Chg{Version=[5],New=[primitive],Old=[predefined]} "=" operator for type
+Cursor returns True if both cursors are No_Element, or designate the same
+element in the same container.]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0434-1]}
+  @ChgAdded{Version=[5],Text=[@LDquote@;The primitive "=" operator@rdquote
+  is the one with two parameters of type Cursor which returns Boolean. We're
+  not talking about some other (hidden) primitive function named "=".]}
+@end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Execution of the default implementation of the
@@ -4143,9 +4152,18 @@ element. If an object of type Cursor is not otherwise initialized, it is
 initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor returns
-True if both cursors are No_Element, or designate the same element in the same
-container.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0434-1]}
+@ChgAdded{Version=[2],Text=[The 
+@Chg{Version=[5],New=[primitive],Old=[predefined]} "=" operator for type
+Cursor returns True if both cursors are No_Element, or designate the same
+element in the same container.]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0434-1]}
+  @ChgAdded{Version=[5],Text=[@LDquote@;The primitive "=" operator@rdquote
+  is the one with two parameters of type Cursor which returns Boolean. We're
+  not talking about some other (hidden) primitive function named "=".]}
+@end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Execution of the default implementation of the

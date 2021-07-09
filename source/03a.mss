@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:04 $}
+@Comment{$Date: 2021/06/12 04:55:52 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.151 $}
+@Comment{$Revision: 1.152 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1942,15 +1942,14 @@ given subtype, then:]}
 @begin{DescribeCode}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-2],ARef=[AI12-0071-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0301-1],ARef=[AI12-0333-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0301-1],ARef=[AI12-0333-1],ARef=[AI12-0432-1]}
   @ChgAdded{Version=[3],Text=[@Redundant[On @Chg{Version=[5],New=[a],Old=[every]}
   subtype conversion,
   @Chg{Version=[4],New=[],Old=[the predicate of the target subtype
   is evaluated, and ]}a check is performed that
   the @Chg{Version=[4],New=[operand satisfies the predicates of the target
-  subtype], Old=[predicate is True]}@Chg{Version=[5],New=[, unless it is a
-  conversion for an actual parameter of mode @key[out]
-  (see @RefSecNum{Type Conversions})],Old=[]}.@Chg{Version=[5],New=[],Old=[ This
+  subtype], Old=[predicate is True]}@Chg{Version=[5],New=[, except for certain 
+  view conversions (see @RefSecNum{Type Conversions})],Old=[]}.@Chg{Version=[5],New=[],Old=[ This
   includes all parameter passing,
   except for certain parameters passed by reference, which are covered by the
   following rule:]}] @Chg{Version=[5],New=[In addition, after],Old=[After]}
@@ -2080,15 +2079,20 @@ evaluated during the evaluation of a membership test (see
 @end{Notes}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of predicates applied
+to scalar types:}]}
+
 @begin(Example)
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
 @ChgAdded{Version=[4],Text=[@key[subtype] Basic_Letter @key[is] Character -- @examcom[See @RefSecNum{The Package Characters.Handling} for "basic letter".]
-   @key[with] Static_Predicate => Basic_Letter @key[in] 'A'..'Z' | 'a'..'z' | '@latin1(198)' | '@latin1(230)' | '@latin1(208)' | '@latin1(240)' | '@latin1(222)' | '@latin1(254)' | '@latin1(223)';]}
+   @key[with] Static_Predicate => Basic_Letter @key[in] 'A'..'Z' | 'a'..'z' | '@latin1(198)' | 
+                                '@latin1(230)' | '@latin1(208)' | '@latin1(240)' | '@latin1(222)' | '@latin1(254)' | '@latin1(223)';]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
 @ChgAdded{Version=[4],Text=[@key[subtype] Even_Integer @key[is] Integer
    @key[with] Dynamic_Predicate => Even_Integer @key[mod] 2 = 0,
-       Predicate_Failure => "Even_Integer must be a multiple of 2";]}
+        Predicate_Failure => "Even_Integer must be a multiple of 2";]}
 @end(Example)
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
@@ -2110,12 +2114,12 @@ common exceptional conditions as follows:}]}
            Predicate_Failure => @key[raise] Status_Error @key[with] "File not open";
    @key[subtype] Input_File_Type @key[is] Open_File_Type
       @key[with] Dynamic_Predicate => Mode (Input_File_Type) = In_File,
-           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot read file: " &
-              Name (Input_File_Type);
+           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot read file: "
+              & Name (Input_File_Type);
    @key[subtype] Output_File_Type @key[is] Open_File_Type
       @key[with] Dynamic_Predicate => Mode (Output_File_Type) /= In_File,
-           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot write file: " &
-              Name (Output_File_Type);]}
+           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot write file: "
+              & Name (Output_File_Type);]}@Comment{Does not fit with '&' on previous line}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
 @ChgAdded{Version=[4],Text=[   ...]}
@@ -2201,10 +2205,11 @@ common exceptional conditions as follows:}]}
   boolean operators that can be predicate-static, to eliminate confusion
   about whether @key[not] is included.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1],ARef=[AI12-0432-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Predicate checks are no
-  longer made for any inbound @key[out] parameters. The rule change for
-  this is found in @RefSecNum{Type Conversions}, so the inconsistency is
+  longer made for any inbound @key[out] parameters nor for the target of
+  an @nt{assignment_statement} when it is a view conversion. The rule change 
+  for this is found in @RefSecNum{Type Conversions}, so the inconsistency is
   documented there.]}
 @end{Diffword2012}
 
@@ -7472,6 +7477,7 @@ the Machine_Radix is 10.]}
 @end{DiffWord95}
 
 
+@RMNewPageVer{Version=[5]}@Comment{For Ada 202x RM and ISO version as well}
 @LabeledSubClause{Fixed Point Types}
 
 @begin{Intro}

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2021/06/12 04:55:54 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1488,7 +1488,9 @@ above.
 @end{Notes}
 
 @begin{Examples}
-
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of use of with 
+clauses, limited with clauses, and private with clauses:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key(package) Office @key(is)
@@ -1537,18 +1539,25 @@ above.
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[The @nt{limited_with_clause} may be used to support
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[@i{The} 
+@nt{limited_with_clause} @i{may be used to support
+mutually dependent abstractions that are split across multiple packages. In
+this case, an employee is assigned to a department, and a department has a
+manager who is an employee. If a} @nt{with_clause} @i{with the reserved word
+@key(private) appears on one library unit and mentions a second library unit,
+it provides visibility to the second library unit, but restricts that
+visibility to the private part and body of the first unit. The compiler checks
+that no use is made of the second unit in the visible part of the first 
+unit.}],Old=[The @nt{limited_with_clause} may be used to support
 mutually dependent abstractions that are split across multiple packages. In
 this case, an employee is assigned to a department, and a department has a
 manager who is an employee. If a @nt{with_clause} with the reserved word
 @key(private) appears on one library unit and mentions a second library unit,
 it provides visibility to the second library unit, but restricts that
 visibility to the private part and body of the first unit. The compiler checks
-that no use is made of the second unit in the visible part of the first unit.]}
-
+that no use is made of the second unit in the visible part of the first unit.]}]}
 @end{Examples}
-
-
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
@@ -1817,7 +1826,9 @@ The body of a protected unit can be a subunit.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@;The package Parent is first written without subunits:
+@leading@keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@Chg{Version=[5],New=[@i{Example that defines package Parent without 
+subunits:}],Old=[The package Parent is first written without subunits:]}
 @begin{Example}
 @key[package] Parent @key[is]
     @key[procedure] Inner;
@@ -1834,9 +1845,12 @@ The body of a protected unit can be a subunit.
 @end{Example}
 
 @begin{WideAbove}
-@leading@;The body of procedure Inner may be turned into a subunit by rewriting
-the package body as follows (with the declaration of Parent remaining
-the same):
+@leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@Chg{Version=[5],New=[@i{Example showing how the body of procedure Inner 
+may be turned into a subunit by rewriting the package body as follows
+(with the declaration of Parent remaining the same):}],Old=[The body of
+procedure Inner may be turned into a subunit by rewriting the package body
+as follows (with the declaration of Parent remaining the same):]}
 @end{WideAbove}
 @begin{Example}
 @key[package] @key[body] Parent @key[is]

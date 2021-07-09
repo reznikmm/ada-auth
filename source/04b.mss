@@ -1,10 +1,11 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:05 $}
+@Comment{$Date: 2021/06/12 04:55:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Type Conversions}
 
 @begin{Intro}
@@ -990,9 +991,10 @@ Sec=[controlled by assertion policy]}],Old=[]}
   New=[ The check for exclusion of null is an Access_Check.],Old=[]}
 @end{Ramification}
 @begin{Itemize}
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0333-1]}
-  @ChgAdded{Version=[5],Text=[a view conversion that is an actual
-  parameter of mode @key<out>; or]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0333-1],ARef=[AI12-0432-1]}
+  @ChgAdded{Version=[5],Text=[a view conversion that is the target of an 
+  assignment statement and is not referenced with a @nt{target_name}, or an 
+  actual parameter of mode @key<out>; or]}
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0333-1]}
   @ChgAdded{Version=[5],Text=[an implicit subtype conversion of an actual
@@ -1404,13 +1406,15 @@ as a @nt<name>.
 @end{Diffword2005}
 
 @begin{Inconsistent2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1],ARef=[AI12-0432-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Predicate checks are no longer
   made on any @key{out} parameters before a call (they're still made when the
   call returns). This was already true for elementary @key{out} parameters. If
   a program depends on a predicate check failing on an inbound @key{out}
-  composite parameter, it will get an incorrect result. This seems
-  quite unlikely, as programs (outside of ACATS tests) that depend on the
+  composite parameter, it will get an incorrect result. Similarly, predicate
+  checks are no longer made on the view conversion of a target of an
+  @nt{assignment_statement}. Both of these cases seem quite unlikely, as 
+  programs (outside of ACATS tests) that depend on the
   failure of checks are very rare, and the predicate might be checking
   uninitialized components (making check failure unreliable).]}
 @end{Inconsistent2012}
@@ -3267,7 +3271,7 @@ of a @nt<discrete_@!subtype_@!definition>; or],Old=[]}
 @nt{formal_type_declaration}.],Old=[]}
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0374-2]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0374-2],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[5],Text=[The Global or Global'Class aspects (see 
 @RefSecNum{The Global and Global'Class aspects}) of two entities @i{statically
 match}@Defn2{Term=[statically match],Sec=[for global aspects]} if both consist of 
@@ -3276,7 +3280,7 @@ where each is the reserved word @key[null], or each is of the form
 @ldquote@;@nt{global_mode} @nt{global_designator}@rdquote with each
 @nt{global_mode} being the same sequence of reserved words and each
 @nt{global_designator} being the same 
-reserved word, or each being a @nt{global_name} that statically denotes the 
+reserved word, or each being a @nt{global_name} that statically names the 
 same entity.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
@@ -3538,10 +3542,10 @@ and the first subtype if not scalar.]}
 @ChgAdded{Version=[5],Text=[The behavior of the default
   implementation of S'Put_Image depends on the class of T.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
-@ChgAdded{Version=[5],Text=[For an untagged derived type, the default 
-implementation of T'Put_Image invokes the Put_Image for its parent type on
-a conversion of the parameter of type T to the parent type.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1],ARef=[AI12-0435-1]}
+@ChgAdded{Version=[5],Text=[For an untagged derived type, or a null extension,
+the default implementation of T'Put_Image invokes the Put_Image for its parent
+type on a conversion of the parameter of type T to the parent type.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a nonderived elementary type, 
@@ -3698,9 +3702,9 @@ a conversion of the parameter of type T to the parent type.]}
 @end{Honest}
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1]}
-@ChgAdded{Version=[5],Text=[For a type extension, the default implementation
-of T'Put_Image
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0419-1],ARef=[AI12-0435-1]}
+@ChgAdded{Version=[5],Text=[For a nonnull type extension, the default
+implementation of T'Put_Image
 depends on whether there exists a noninterface ancestor of T (other
 than T itself) for which the Put_Image aspect has been
 directly specified. If so, then T'Put_Image will
@@ -3883,7 +3887,21 @@ partial view and full view of T, if T has a partial view.]]}
   @RefSecNum{Operational and Representation Aspects}.]}
 @end{TheProof}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0435-1]}
+@ChgAdded{Version=[5],Text=[In the @nt{parameter_and_result_profile} for the
+default implementation of Put_Image, the subtype of the @i<Arg> parameter is 
+the base subtype of @i<T> if @i<T> is a scalar type, and the first subtype 
+otherwise. For an @nt{aspect_specification} or
+@nt{attribute_definition_clause} specifying Put_Image, the subprogram name 
+shall denote a nonabstract procedure whose second parameter is either of the 
+first subtype of @i<T>, or as an option when @i<T> is scalar, the base 
+subtype of @i<T>.]}
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Put_Image is never an abstract routine, even for
+  an abstract type. Thus, Put_Image and Image can be called for any type.]}
+@end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{every
@@ -4177,7 +4195,7 @@ that would be meaningful based only on the relevant public interfaces.]}]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2],ARef=[AI12-0419-1],ARef=[AI12-0427-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1],ARef=[AI12-0340-1],ARef=[AI12-0384-2],ARef=[AI12-0419-1],ARef=[AI12-0427-1],ARef=[AI12-0435-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Attribute
     Put_Image is new. Attributes Image, Wide_Image, and Wide_Wide_Image
     now can be used with any type, and are defined in terms of Put_Image so
