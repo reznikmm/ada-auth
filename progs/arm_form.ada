@@ -17,7 +17,7 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, 2017, 2019, 2021
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, 2017, 2019, 2021, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -76,6 +76,8 @@ procedure ARM_Formatter is
     --  4/ 3/12 - RLB - Removed dead variable.
     --  8/31/12 - RLB - Added output path parameter.
     --  3/17/16 - RLB - Added lower version to command line.
+    --  1/29/22 - RLB - Updated copyright date.
+    --  2/ 2/22 - RLB - Updated help to use Ada 2022 and define Ada 2022 TC1.
 
     -- Standard commands for Ada standards:
     -- For Original (Ada 95) RM:
@@ -295,7 +297,8 @@ procedure ARM_Formatter is
 	    Ada.Text_IO.Put_Line ("                        2-Amendment 1");
 	    Ada.Text_IO.Put_Line ("                        3-Ada 2012");
 	    Ada.Text_IO.Put_Line ("                        4-Ada 2012 Technical Corrigendum 1");
-	    Ada.Text_IO.Put_Line ("                        5-Ada 202x");
+	    Ada.Text_IO.Put_Line ("                        5-Ada 2022");
+	    Ada.Text_IO.Put_Line ("                        6-Ada 2022 Technical Corrigendum 1(?)");
 	    Ada.Text_IO.Put_Line ("     where: <Output_Path> = it the path where to write the result files. This must");
 	    Ada.Text_IO.Put_Line ("                        end with a path separator. It defaults to ./output/");
 	    raise No_Command_Error;
@@ -305,7 +308,7 @@ procedure ARM_Formatter is
 begin
     Ada.Text_IO.Put_Line ("Ada Manual formatter");
     Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, ");
-    Ada.Text_IO.Put_Line ("            2017, 2019, 2021  AXE Consultants");
+    Ada.Text_IO.Put_Line ("            2017, 2019, 2021, 2022  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
     Get_Commands;

@@ -8,7 +8,7 @@
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2019, 2020
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2019, 2020, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -48,6 +48,7 @@
     --  5/07/09 - RLB - Changed above to load dead clauses.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     --  5/07/20 - RLB - Added additional tracing.
+    --  1/29/22 - RLB - Added Note numbering code.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -58,6 +59,13 @@ procedure Scan (Format_Object : in out Format_Type;
     -- for the section. The results are written to the contents package.
     -- Starts_New_Section is True if the file starts a new section.
     -- Section_Number is the number (or letter) of the section.
+    --
+    -- This also does two other jobs:
+    -- (1) Inserts all nonterminals into the syntax index so that we can
+    --     generate forward links to them.
+    -- (2) Generates a guesstimate of how many notes appear in a Notes
+    --     section so that ISO_2004 formatting can omit note numbers if there
+    --     is only one.
 
     type Items is record
         Command : Command_Type;
@@ -69,6 +77,59 @@ procedure Scan (Format_Object : in out Format_Type;
     Saw_a_Section_Header : Boolean := False;
 
     Input_Object : ARM_File.File_Input_Type;
+    
+    Most_Recent_Level : ARM_Contents.Level_Type;
+        -- The most recent level seen. Note that we use Format_Object.Clause_Number
+        -- to find the most recent clause number.
+    Current_Paragraph_Count : Natural; -- Number of paragraphs since last
+        -- 'interesting' command.     
+
+
+    procedure Check_Paragraph is
+	-- Open a paragraph if needed. We do this here to count the occurrence
+        -- of paragraphs.
+    begin
+	if not Format_Object.In_Paragraph then
+	    if Format_Object.Number_Paragraphs and then
+		not Format_Object.No_Para_Num then
+                -- Always displays something:
+                Format_Object.In_Paragraph := True;
+                Current_Paragraph_Count := Current_Paragraph_Count + 1;
+	    else -- No paragraph numbers (or if the paragraph
+		 -- number has been suppressed with @NoParaNum):
+
+--Ada.Text_IO.Put_Line ("Check_Paragraph, no number: format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
+--   " output style= " & ARM_Output.Paragraph_Style_Type'Image(Format_Object.Style));
+		 -- Start the paragraph:
+		 if (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) or else
+		     ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) or else
+		     ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) or else
+		     ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number)) then
+		     --ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+			-- Nothing at all should be showm.
+		     Format_Object.No_Start_Paragraph := True;
+                 else
+                     Format_Object.In_Paragraph := True;
+                     Current_Paragraph_Count := Current_Paragraph_Count + 1;
+                 end if;
+             end if;       
+        -- else already in a paragraph.
+	end if;
+    end Check_Paragraph;
+    
+
+    procedure Check_End_Paragraph is
+	-- Check for the end of a paragraph; closing it if necessary.
+	-- We will never be in a paragraph after this routine.
+    begin
+	if Format_Object.In_Paragraph then
+	    Format_Object.In_Paragraph := False;
+	    Format_Object.No_Start_Paragraph := False;
+	    Format_Object.No_Para_Num := False;
+        -- else already not in paragraph.
+        end if;
+    end Check_End_Paragraph;
+    
 
     procedure Set_Nesting_for_Command (Command : in Command_Type;
 				       Param_Ch : in Character) is
@@ -145,14 +206,17 @@ procedure Scan (Format_Object : in out Format_Type;
 			 Clause    => Format_Object.Clause_Number.Clause,
 			 Subclause => Format_Object.Clause_Number.Subclause + 1,
 			 Subsubclause => 0);
+                     Most_Recent_Level := ARM_Contents.Subclause;
 	        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subsubclause then
 		    Format_Object.Clause_Number.Subsubclause :=
 			Format_Object.Clause_Number.Subsubclause + 1;
+                     Most_Recent_Level := ARM_Contents.Subsubclause;
 	        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Clause then
 		    Format_Object.Clause_Number :=
 			(Section   => Format_Object.Clause_Number.Section,
 			 Clause    => Format_Object.Clause_Number.Clause + 1,
 			 Subclause => 0, Subsubclause => 0);
+                     Most_Recent_Level := ARM_Contents.Clause;
 	        elsif Saw_a_Section_Header then
 		    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
 			    ARM_File.Line_String (Input_Object));
@@ -162,8 +226,24 @@ procedure Scan (Format_Object : in out Format_Type;
 			(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
 			 Clause    => 0,
 			 Subclause => 0, Subsubclause => 0);
+		    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section or else
+		       Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
+                        Most_Recent_Level := ARM_Contents.Section;
+		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Annex then
+                        Most_Recent_Level := ARM_Contents.Plain_Annex;
+		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
+                        Most_Recent_Level := ARM_Contents.Normative_Annex;
+		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Informative_Annex then
+                        Most_Recent_Level := ARM_Contents.Informative_Annex;
+                    else
+		        Ada.Text_IO.Put_Line ("  ** Impossible command " &
+                            Command_Type'Image(Nesting_Stack(Nesting_Stack_Ptr).Command) &
+			    ARM_File.Line_String (Input_Object));
+                        raise Program_Error;
+		    end if;
 	        end if;
 
+		Check_End_Paragraph; -- End any paragraph that we're in.
 		begin
 		    declare
 			Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
@@ -179,31 +259,11 @@ procedure Scan (Format_Object : in out Format_Type;
 			-- OK, not previously defined.
 
 		        -- Load the title into the contents package:
-		        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subclause then
-			    ARM_Contents.Add (Title, ARM_Contents.Subclause,
-					      Format_Object.Clause_Number);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subsubclause then
-			    ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
-					      Format_Object.Clause_Number);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Clause then
-			    ARM_Contents.Add (Title, ARM_Contents.Clause,
-					      Format_Object.Clause_Number);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section or else
-			      Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
-			    ARM_Contents.Add (Title, ARM_Contents.Section,
-					      Format_Object.Clause_Number);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Annex then
-			    ARM_Contents.Add (Title, ARM_Contents.Plain_Annex,
-					      Format_Object.Clause_Number);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
-			    ARM_Contents.Add (Title, ARM_Contents.Normative_Annex,
-					      Format_Object.Clause_Number);
-		        else
-			    ARM_Contents.Add (Title, ARM_Contents.Informative_Annex,
-					      Format_Object.Clause_Number);
-		        end if;
+			ARM_Contents.Add (Title, Most_Recent_Level,
+				          Format_Object.Clause_Number);
 		end;
 
+                Current_Paragraph_Count := 0;
 	        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 
@@ -222,7 +282,9 @@ procedure Scan (Format_Object : in out Format_Type;
 		    (Section   => 0,
 		     Clause    => Format_Object.Unnumbered_Section,
 		     Subclause => 0, Subsubclause => 0);
+                Most_Recent_Level := ARM_Contents.Unnumbered_Section;
 
+		Check_End_Paragraph; -- End any paragraph that we're in.
 		begin
 		    declare
 			Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
@@ -242,6 +304,7 @@ procedure Scan (Format_Object : in out Format_Type;
 					  Format_Object.Clause_Number);
 		end;
 
+                Current_Paragraph_Count := 0;
 	        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 
@@ -330,14 +393,17 @@ procedure Scan (Format_Object : in out Format_Type;
 			     Clause    => Format_Object.Clause_Number.Clause,
 			     Subclause => Format_Object.Clause_Number.Subclause + 1,
 			     Subsubclause => 0);
+                        Most_Recent_Level := ARM_Contents.Subclause;
 		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
 		        Format_Object.Clause_Number.Subsubclause :=
 			    Format_Object.Clause_Number.Subsubclause + 1;
+                        Most_Recent_Level := ARM_Contents.Subsubclause;
 		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
 		        Format_Object.Clause_Number :=
 			    (Section   => Format_Object.Clause_Number.Section,
 			     Clause    => Format_Object.Clause_Number.Clause + 1,
 			     Subclause => 0, Subsubclause => 0);
+                        Most_Recent_Level := ARM_Contents.Clause;
 		    elsif Saw_a_Section_Header then
 		        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
 			        ARM_File.Line_String (Input_Object));
@@ -347,8 +413,23 @@ procedure Scan (Format_Object : in out Format_Type;
 			    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
 			     Clause    => 0,
 			     Subclause => 0, Subsubclause => 0);
+			if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Section then
+                            Most_Recent_Level := ARM_Contents.Section;
+			elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Annex then
+                            Most_Recent_Level := ARM_Contents.Plain_Annex;
+			elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
+                            Most_Recent_Level := ARM_Contents.Normative_Annex;
+			elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
+                            Most_Recent_Level := ARM_Contents.Informative_Annex;
+                        else
+		            Ada.Text_IO.Put_Line ("  ** Impossible command " &
+                                Command_Type'Image(Nesting_Stack(Nesting_Stack_Ptr).Command) &
+			           ARM_File.Line_String (Input_Object));
+                            raise Program_Error;
+			end if;
 		    end if;
 
+                    Check_End_Paragraph; -- End any paragraph that we're in.
 		    begin
 		        declare
 			    Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
@@ -364,68 +445,16 @@ procedure Scan (Format_Object : in out Format_Type;
 			    -- OK, not previously defined.
 
 			    -- Load the title into the contents package:
-			    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause then
-			        ARM_Contents.Add (Title, ARM_Contents.Subclause,
-						  Format_Object.Clause_Number,
-						  Version => Version);
-			        ARM_Contents.Add_Old (Old_Title,
-						  ARM_Contents.Subclause,
-						  Format_Object.Clause_Number,
+			    ARM_Contents.Add (Title, Most_Recent_Level,
+					      Format_Object.Clause_Number,
+				              Version => Version);
+                            ARM_Contents.Add_Old (Old_Title, Most_Recent_Level,
+                                                  Format_Object.Clause_Number,
 						  Version => Initial_Version);
-			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
-			        ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
-						  Format_Object.Clause_Number,
-						  Version => Version);
-			        ARM_Contents.Add_Old (Old_Title,
-						  ARM_Contents.Subsubclause,
-						  Format_Object.Clause_Number,
-						  Version => Initial_Version);
-			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
-			        ARM_Contents.Add (Title, ARM_Contents.Clause,
-						  Format_Object.Clause_Number,
-						  Version => Version);
-			        ARM_Contents.Add_Old (Old_Title,
-						  ARM_Contents.Clause,
-						  Format_Object.Clause_Number,
-						  Version => Initial_Version);
-			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Section then
-			        ARM_Contents.Add (Title, ARM_Contents.Section,
-						  Format_Object.Clause_Number,
-						  Version => Version);
-			        ARM_Contents.Add_Old (Old_Title,
-						  ARM_Contents.Section,
-						  Format_Object.Clause_Number,
-						  Version => Initial_Version);
-			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Annex then
-			        ARM_Contents.Add (Title,
-						  ARM_Contents.Plain_Annex,
-						  Format_Object.Clause_Number,
-						  Version => Version);
-			        ARM_Contents.Add_Old (Old_Title,
-						  ARM_Contents.Plain_Annex,
-						  Format_Object.Clause_Number,
-						  Version => Initial_Version);
-			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
-			        ARM_Contents.Add (Title,
-						  ARM_Contents.Normative_Annex,
-						  Format_Object.Clause_Number,
-						  Version => Version);
-			        ARM_Contents.Add_Old (Old_Title,
-						  ARM_Contents.Normative_Annex,
-						  Format_Object.Clause_Number,
-						  Version => Initial_Version);
-			    else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
-			        ARM_Contents.Add (Title,
-						  ARM_Contents.Informative_Annex,
-						  Format_Object.Clause_Number,
-						  Version => Version);
-			        ARM_Contents.Add_Old (Old_Title,
-						  ARM_Contents.Informative_Annex,
-						  Format_Object.Clause_Number,
-						  Version => Initial_Version);
-			    end if;
+
 		    end;
 
+                    Current_Paragraph_Count := 0;
 		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 	        end;
@@ -489,6 +518,7 @@ procedure Scan (Format_Object : in out Format_Type;
 		            when ARM_Contents.Not_Found_Error =>
 			        -- OK, not previously defined.
 
+                                Check_End_Paragraph; -- End any paragraph that we're in.
 			        -- Load the title into the contents package:
 			        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
 			            Format_Object.Clause_Number :=
@@ -502,6 +532,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Subclause,
 						      Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Subclause;
 			        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subsubclause then
 			            Format_Object.Clause_Number.Subsubclause :=
 				        Format_Object.Clause_Number.Subsubclause + 1;
@@ -511,6 +542,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Subsubclause,
 						      Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Subsubclause;
 			        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
 			            Format_Object.Clause_Number :=
 				        (Section   => Format_Object.Clause_Number.Section,
@@ -522,6 +554,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Clause,
 						      Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Clause;
 			        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Section then
 			            if Saw_a_Section_Header then
 				        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
@@ -539,6 +572,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Section,
 						      Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Section;
 			        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Annex then
 			            if Saw_a_Section_Header then
 				        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
@@ -556,6 +590,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Plain_Annex,
 						      Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Plain_Annex;
 			        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
 			            if Saw_a_Section_Header then
 				        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
@@ -573,7 +608,8 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Normative_Annex,
 						      Format_Object.Clause_Number);
-			        else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
+                                    Most_Recent_Level := ARM_Contents.Normative_Annex;
+			        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
 			            if Saw_a_Section_Header then
 				        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
 					        ARM_File.Line_String (Input_Object));
@@ -590,10 +626,17 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Informative_Annex,
 						      Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Informative_Annex;
+                                else
+                                    Ada.Text_IO.Put_Line ("  ** Impossible command " &
+                                        Command_Type'Image(Nesting_Stack(Nesting_Stack_Ptr).Command) &
+                                        ARM_File.Line_String (Input_Object));
+                                    raise Program_Error;
 			        end if;
 		        end;
 		    end if;
 
+                    Current_Paragraph_Count := 0;
 		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 	        end;
@@ -635,6 +678,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			Operation => ARM_Output.Deletion,
 			Text_Kind => How);
 
+                    Check_End_Paragraph; -- End any paragraph that we're in.
 --Ada.Text_IO.Put_Line ("Labeled_Deleted disp: " & ARM_Output.Change_Type'Image(How));
 		    if How = ARM_Output.None then
 			-- Normal text, number normally.
@@ -665,6 +709,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Subclause,
 						      Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Subclause;
 			        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Deleted_Subsubclause then
 			            Format_Object.Clause_Number.Subsubclause :=
 				        Format_Object.Clause_Number.Subsubclause + 1;
@@ -674,18 +719,25 @@ procedure Scan (Format_Object : in out Format_Type;
 			            ARM_Contents.Add_Old ((others => ' '),
 						      ARM_Contents.Subsubclause,
 						      Format_Object.Clause_Number);
-			    else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Deleted_Clause then
-			        Format_Object.Clause_Number :=
-				    (Section   => Format_Object.Clause_Number.Section,
-				     Clause    => Format_Object.Clause_Number.Clause + 1,
-				     Subclause => 0, Subsubclause => 0);
-			        ARM_Contents.Add (Title, ARM_Contents.Clause,
-						  Format_Object.Clause_Number,
-						  Version => '0');
-			        ARM_Contents.Add_Old ((others => ' '),
-						  ARM_Contents.Clause,
-						  Format_Object.Clause_Number);
-			    end if;
+                                    Most_Recent_Level := ARM_Contents.Subsubclause;
+                                elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Deleted_Clause then
+                                    Format_Object.Clause_Number :=
+				       (Section   => Format_Object.Clause_Number.Section,
+				        Clause    => Format_Object.Clause_Number.Clause + 1,
+				        Subclause => 0, Subsubclause => 0);
+                                    ARM_Contents.Add (Title, ARM_Contents.Clause,
+						      Format_Object.Clause_Number,
+						      Version => '0');
+			            ARM_Contents.Add_Old ((others => ' '),
+					   	          ARM_Contents.Clause,
+						          Format_Object.Clause_Number);
+                                    Most_Recent_Level := ARM_Contents.Clause;
+                                else
+                                    Ada.Text_IO.Put_Line ("  ** Impossible command " &
+                                        Command_Type'Image(Nesting_Stack(Nesting_Stack_Ptr).Command) &
+                                        ARM_File.Line_String (Input_Object));
+                                    raise Program_Error;
+			        end if;
 		        end;
 		    elsif How = ARM_Output.Insertion then
 			-- Huh? We're deleting here.
@@ -721,12 +773,14 @@ procedure Scan (Format_Object : in out Format_Type;
 					           Clause    => 1,
 					           Subclause => 0,
 					           Subsubclause => 0));
+                                Most_Recent_Level := ARM_Contents.Dead_Clause;
 		        end;
 
 		    elsif How = Do_Not_Display_Text then
 			null; -- Nothing to display/number.
 		    end if;
 
+                    Current_Paragraph_Count := 0;
 		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 	        end;
@@ -801,6 +855,9 @@ procedure Scan (Format_Object : in out Format_Type;
 		    -- else no parameter. Weird.
 		    end if;
 
+		    Check_End_Paragraph; -- End the paragraph, so the
+					 -- next rule gets its own.
+
 		    declare
 			The_Non_Terminal : constant String :=
 			    Ada.Characters.Handling.To_Lower (
@@ -862,6 +919,151 @@ procedure Scan (Format_Object : in out Format_Type;
 		ARM_File.Replace_Char (Input_Object); -- Put the close character back.
 --Ada.Text_IO.Put_Line("Comment done");
 
+            when Text_Begin =>
+		declare
+		    Type_Name : ARM_Input.Command_Name_Type;
+		    Ch : Character;
+                begin
+		    -- OK, now read the begin "type":
+		    Arm_Input.Get_Name (Input_Object, Type_Name);
+		    Arm_File.Get_Char (Input_Object, Ch);
+		    if Ch = ',' then
+		        -- Multiple parameters. The remaining
+		        -- parameters appear to be format instructions,
+		        -- which we ought to replace or remove.
+		        Ada.Text_IO.Put_Line ("  -- Multi-parameter begin, line " & ARM_File.Line_String (Input_Object));
+
+		        -- We ignore everything until the end of the
+		        -- parameter.
+			while Ch /= Nesting_Stack(Nesting_Stack_Ptr).Close_Char loop
+			    -- Ignore everything until the end character
+			    -- turns up.
+			    ARM_File.Get_Char (Input_Object, Ch);
+			end loop;
+                    end if;
+
+		    if Nesting_Stack (Nesting_Stack_Ptr).Close_Char = Ch then
+		        -- Found the end of the parameter.
+                        -- This always ends a paragraph.
+                        Check_End_Paragraph;
+                        if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "notes" then
+                            -- A "notes" header. Clear the paragraph count.
+                            -- Note: We assume that notes groups are not nested.
+                            Current_Paragraph_Count := 0;
+                        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "singlenote" then
+                            -- A "singlenote" header. Clear the paragraph count.
+                            -- Note: We assume that notes groups are not nested.
+                            Current_Paragraph_Count := 0;
+                        -- else ignore header.
+                        end if;                
+		        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
+--Ada.Text_IO.Put_Line (" &Unstack (Normal Begin)");
+                    else
+		        ARM_File.Replace_Char (Input_Object);
+		        Ada.Text_IO.Put_Line ("  ** Failed to find close for parameter to begin, line " & ARM_File.Line_String (Input_Object));
+		        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
+--Ada.Text_IO.Put_Line (" &Unstack (Bad Begin)");
+		    end if;
+		end;
+
+	    when Text_End =>
+		declare
+		    Type_Name : ARM_Input.Command_Name_Type;
+		    Ch : Character;
+		begin
+	            Arm_Input.Get_Name (Input_Object, Type_Name); -- Get the end "type".
+		    ARM_File.Get_Char (Input_Object, Ch);
+		    if Nesting_Stack (Nesting_Stack_Ptr).Close_Char = Ch then
+			 -- Found end of parameter:
+			 Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
+			     -- Remove the "End" record.
+                        -- This always ends a paragraph.
+                        Check_End_Paragraph;
+                        if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "notes" then
+                            -- A "notes" header. Determine how many paragraphs.
+                            -- Note: We assume that notes groups are not nested.
+                            declare
+                                use type ARM_Contents.Note_Info_Type;
+                                Note : ARM_Contents.Note_Info_Type :=
+                                    ARM_Contents.Lookup_Note_Info (Most_Recent_Level,
+                                                                   Format_Object.Clause_Number);
+                            begin
+                                if Note = ARM_Contents.No_Notes then
+                                    if Current_Paragraph_Count > 1 then
+                                         -- Guess that there are many notes:
+                                        ARM_Contents.Update_Note_Info (Most_Recent_Level,
+                                                                       Format_Object.Clause_Number,
+                                                                       ARM_Contents.Many_Notes);
+                                        -- Debug:
+                                        Ada.Text_IO.Put_Line ("    -- Saw notes with" &
+                                             Natural'Image(Current_Paragraph_Count) &
+                                             " paragraphs, no other notes, line " &
+                                             ARM_File.Line_String (Input_Object));
+                                    else
+                                         -- Only one (or zero) paragraph, set to single note:
+                                        ARM_Contents.Update_Note_Info (Most_Recent_Level,
+                                                                       Format_Object.Clause_Number,
+                                                                       ARM_Contents.One_Note);
+                                        -- Debug:
+                                        Ada.Text_IO.Put_Line ("    -- Saw notes with one paragraph, no other notes, line "
+                                                         & ARM_File.Line_String (Input_Object));
+                                    end if;
+                                else
+                                    ARM_Contents.Update_Note_Info (Most_Recent_Level,
+                                                                   Format_Object.Clause_Number,
+                                                                   ARM_Contents.Many_Notes);
+                                    Ada.Text_IO.Put_Line ("    -- Saw notes in clause with other notes, line "
+                                                     & ARM_File.Line_String (Input_Object));
+                                end if;
+                            end;                     
+                            Current_Paragraph_Count := 0;
+                        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "singlenote" then
+                            -- A "singlenote" header. Set note kind to be one more
+                            -- than previous.
+                            -- Note: We assume that notes groups are not nested.
+                            declare
+                                use type ARM_Contents.Note_Info_Type;
+                                Note : ARM_Contents.Note_Info_Type :=
+                                    ARM_Contents.Lookup_Note_Info (Most_Recent_Level,
+                                                                   Format_Object.Clause_Number);
+                            begin
+                                if Note = ARM_Contents.No_Notes then
+                                    ARM_Contents.Update_Note_Info (Most_Recent_Level,
+                                                                   Format_Object.Clause_Number,
+                                                                   ARM_Contents.One_Note);
+                                    -- Debug:
+                                    Ada.Text_IO.Put_Line ("    -- Saw single note, no other notes, line "
+                                                     & ARM_File.Line_String (Input_Object));
+                                else
+                                    ARM_Contents.Update_Note_Info (Most_Recent_Level,
+                                                                   Format_Object.Clause_Number,
+                                                                   ARM_Contents.Many_Notes);
+                                    Ada.Text_IO.Put_Line ("    ** Saw single note in clause with other notes, line "
+                                                     & ARM_File.Line_String (Input_Object));
+                                end if;
+                            end;
+                            Current_Paragraph_Count := 0;
+                        -- else ignore header.
+                        end if;                
+		    else
+			ARM_File.Replace_Char (Input_Object);
+			Ada.Text_IO.Put_Line ("  ** Failed to find close for parameter to end, line " & ARM_File.Line_String (Input_Object));
+		        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
+--Ada.Text_IO.Put_Line (" &Unstack (Bad End)");
+		    end if;
+		end;
+            
+            when Change | Change_Added | Change_Deleted |
+		 Change_Implementation_Defined |
+		 Change_Implementation_Advice |
+		 Change_Documentation_Requirement |
+		 Change_Aspect_Description =>
+                 -- These almost always have some displayed text. Rather than
+                 -- overworking here, we'll just assume they have text in the
+                 -- current mode. (Not always true, but a lot of work to
+                 -- figure out otherwise.)
+                 Check_Paragraph;      
+            
 	    when others =>
 	        null; -- Not in scanner.
         end case;
@@ -893,22 +1095,28 @@ procedure Scan (Format_Object : in out Format_Type;
     begin
         ARM_File.Get_Char (Input_Object, Ch);
         if Ch = '\' then
-	    -- This represents a tab (or the end of centered text). We're
-	    -- done here.
+	    -- This represents a tab (or the end of centered text). Start a
+            -- paragraph if needed, then done.
+            Check_Paragraph;
 	    return;
         elsif Ch = '=' then
 	    -- This marks the beginning of centered text.
-	    -- We're done here.
+	    -- No paragraph (just formatting). We're done here.
 	    return;
         elsif Ch = '^' then
 	    -- This represented a tab stop (these should have been
-	    -- deleted from the input). We're done here.
+	    -- deleted from the input).	No paragraph (just formatting). We're
+            -- done here.
 	    return;
         elsif Ch = '@' then
-	    -- This represents @ in the text. We're done here.
+	    -- This represents @ in the text. Start a
+            -- paragraph if needed, then done.
+            Check_Paragraph;
 	    return;
         elsif Ch = ' ' then
-	    -- This represents a hard space in the text. We're done here.
+	    -- This represents a hard space in the text. Start a
+            -- paragraph if needed, then done.
+            Check_Paragraph;
 	    return;
         elsif Ch = ';' then
 	    -- This seems to be an end of command (or substitution) marker.
@@ -927,6 +1135,7 @@ procedure Scan (Format_Object : in out Format_Type;
 	        Set_Nesting_for_Command
 		    (Command  => Unknown,
 		     Param_Ch => Ch);
+                Check_Paragraph;
 	    else -- No parameter. Weird.
 	        ARM_File.Replace_Char (Input_Object);
 	    end if;
@@ -938,6 +1147,7 @@ procedure Scan (Format_Object : in out Format_Type;
 	        Set_Nesting_for_Command
 		    (Command  => Unknown,
 		     Param_Ch => Ch);
+                Check_Paragraph;
 	    else -- No parameter. Weird.
 	        ARM_File.Replace_Char (Input_Object);
 	    end if;
@@ -997,6 +1207,21 @@ begin
 	    case Char is
 	        when '@' =>
 		    Scan_Special;
+		when Ascii.LF =>
+		    ARM_File.Get_Char (Input_Object, Char);
+		    if Char /= Ascii.LF then
+			 -- Soft line break. The details here depend on the format,
+                         -- which we won't try to do here. But this does not end
+                         -- or usually start a paragraph.
+			 ARM_File.Replace_Char (Input_Object);			
+		    else -- Hard paragraph break. Only one, no matter
+			 -- how many blank lines there are:
+			while Char = Ascii.LF loop
+			    ARM_File.Get_Char (Input_Object, Char);
+			end loop;
+			ARM_File.Replace_Char (Input_Object);
+			Check_End_Paragraph; -- End the paragraph.
+                     end if;
 	        when Ascii.SUB =>
 		    exit; -- End of file.
 	        when others =>
@@ -1006,7 +1231,8 @@ begin
     		        -- Closing a command, remove it from the stack.
 		        Handle_End_of_Command;
 		    else
-		        null; -- Ordinary characters, nothing to do.
+			-- Ordinary characters, just start a paragraph.
+                        Check_Paragraph;
 		    end if;
 	    end case;
         end;

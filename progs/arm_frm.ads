@@ -14,7 +14,7 @@ package ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012, 2016,
-    --		 2017, 2019
+    --		 2017, 2019, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -112,7 +112,9 @@ package ARM_Format is
     --  7/21/17 - RLB - Changed the prefix length.
     --  1/27/19 - RLB - Changed the attribute length so that the reduce
     --			attributes will fit.
-    --  2/15/19 - RLB - Added Attr_Omit to the attribut parameters.
+    --  2/15/19 - RLB - Added Attr_Omit to the attribute parameters.
+    --  1/29/22 - RLB - Added Num_Notes for extra note information.
+    --  2/ 2/22 - RLB - Added flag to reduce unnecessary warnings.
 
     type Format_Type is tagged limited private;
 
@@ -368,8 +370,6 @@ private
 			     -- next paragraph.
 
 	-- Paragraph numbering info:
-	Next_Note : Natural; -- The number of the next note. These are
-			     -- per-section, not per-clause (unless ISO 2004 is set).
 	Next_Paragraph : Positive; -- The number of the next paragraph. These
 			     -- are per-(sub)clause.
 	Next_Insert_Para : Positive; -- The subnumber of the next inserted
@@ -389,6 +389,14 @@ private
 			     -- valid if In_Paragraph is True).
 	Current_Paragraph_Len : Natural;
 
+        -- Notes information:
+	Next_Note : Natural; -- The number of the next note. These are
+			     -- per-section, not per-subclause (unless ISO 2004 is set).
+        Num_Notes : ARM_Contents.Note_Info_Type; -- The number of notes in this
+                             -- subclause (only used if ISO 2004 is set).
+        Notes_Deleted_Paras_Displayed : Boolean; -- Was any deleted paragraphs
+                             -- displayed in the current Notes section?
+ 
 	-- Text format info:
 	Text_Format : ARM_Output.Format_Type; -- Holds the current text format.
 

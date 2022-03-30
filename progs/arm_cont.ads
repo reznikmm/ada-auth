@@ -8,7 +8,7 @@ package ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2006, 2007, 2009, 2011, 2012
+    -- Copyright 2000, 2004, 2006, 2007, 2009, 2011, 2012, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -55,6 +55,7 @@ package ARM_Contents is
     -- 10/25/11 - RLB - Added version to Old name strings.
     --  8/30/12 - RLB - Added initialization of Section to UNKNOWN to
     --			detect bugs earlier.
+    --  1/28/22 - RLB - Added Note_Info to better support ISO 2004 notes.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
@@ -183,5 +184,21 @@ package ARM_Contents is
 	-- Call Operate for each title in the contents, in the order that
 	-- they were added to the contents. If the Quit parameter to Operate
 	-- is True when Operate returns, the iteration is abandoned.
+        
+    -- Note information:
+    type Note_Info_Type is (No_Notes, One_Note, Many_Notes);
+        -- Determine if there is more than one note in this clause. We use
+        -- this to determine whether to display a number preceding a note.
+        
+    function Lookup_Note_Info (Level : in Level_Type;
+		               Clause_Number : in Clause_Number_Type) return Note_Info_Type;
+	-- Given the level and clause numbers, return the note information.
+	-- Raises Not_Found_Error if not found.
+
+    procedure Update_Note_Info (Level : in Level_Type;
+		                Clause_Number : in Clause_Number_Type;
+                                New_Note_Info : in Note_Info_Type);
+	-- Given the level and clause numbers, update the note information to
+        -- the provided value. Raises Not_Found_Error if not found.
 
 end ARM_Contents;

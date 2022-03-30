@@ -21,7 +21,7 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021
+    --           2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -295,6 +295,10 @@ package body ARM_Format is
     --  3/ 2/21 - RLB - Initialized Attr_Omit for regular attribute work, lest
     --                  a bunch of attributes get omitted for no reason.
     --  3/13/21 - RLB - Added IntlStd command.
+    --  1/29/22 - RLB - Added warnings and suppressed note number if there is
+    --                  only one note in a Notes section.
+    --  2/ 2/22 - RLB - Added Notes_Deleted_Paras_Displayed flag to reduce
+    --                  spurious wanrings.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -391,6 +395,8 @@ package body ARM_Format is
 				        Subclause => 0, Subsubclause => 0);
 	Format_Object.Unnumbered_Section := 0;
         Format_Object.Next_Note := 1;
+        Format_Object.Num_Notes := ARM_Contents.No_Notes;
+        Format_Object.Notes_Deleted_Paras_Displayed := False;
         Format_Object.Next_Paragraph := 1;
         Format_Object.Next_Insert_Para := 1;
         Format_Object.Next_AARM_Sub := 'a';
@@ -2280,16 +2286,21 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    end;
 			else
 			    -- Output the note header (ISO 2004 format).
-		            declare
-		                NNum : constant String := Integer'Image(Format_Object.Next_Note);
-		            begin
+                            if ARM_Contents."=" (Format_Object.Num_Notes, ARM_Contents.One_Note) then
+                                -- Do not include a note number.
+		                ARM_Output.Ordinary_Text (Output_Object, "NOTE");
+	                        ARM_Output.Hard_Space (Output_Object);
+		                ARM_Output.Hard_Space (Output_Object);
+		                ARM_Output.Hard_Space (Output_Object);
+		                Format_Object.Next_Note := Format_Object.Next_Note + 1;
+                            else
 		                ARM_Output.Ordinary_Text (Output_Object,
-					                  "NOTE " & NNum(2..NNum'Last));
+					                  "NOTE" & Integer'Image(Format_Object.Next_Note));
 		                ARM_Output.Hard_Space (Output_Object);
 		                ARM_Output.Hard_Space (Output_Object);
 		                ARM_Output.Hard_Space (Output_Object);
 		                Format_Object.Next_Note := Format_Object.Next_Note + 1;
-			    end;
+                            end if;
 			end if;
 		    elsif Format_Object.Next_Paragraph_Format_Type = Single_Note and then
 		       Show_Leading_Text_for_Paragraph then
@@ -2299,11 +2310,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			else
 			    -- Output the note header (ISO 2004 format)
 			    -- without a number.
-		            ARM_Output.Ordinary_Text (Output_Object,
-					              "NOTE");
+		            ARM_Output.Ordinary_Text (Output_Object, "NOTE");
 		            ARM_Output.Hard_Space (Output_Object);
 		            ARM_Output.Hard_Space (Output_Object);
 		            ARM_Output.Hard_Space (Output_Object);
+		            Format_Object.Next_Note := Format_Object.Next_Note + 1;
 			end if;
 		    elsif (Format_Object.Next_Paragraph_Format_Type = Enumerated or else
 		        Format_Object.Next_Paragraph_Format_Type = Nested_Enumerated) and then
@@ -3061,11 +3072,13 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	    	= "notes" then
 		Format_Object.Next_Paragraph_Format_Type := Notes;
 		Format_Object.Next_Paragraph_Subhead_Type := Notes;
+                Format_Object.Notes_Deleted_Paras_Displayed := False; -- Reset this so we only are looking at Notes text.
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "singlenote" then
 		Format_Object.Next_Paragraph_Format_Type := Single_Note;
 		Format_Object.Next_Paragraph_Subhead_Type := Single_Note;
+                Format_Object.Notes_Deleted_Paras_Displayed := False; -- Reset this so we only are looking at Notes text.
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "rmonly" then
@@ -4911,6 +4924,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    declare
 			Type_Name : ARM_Input.Command_Name_Type;
 			Ch : Character;
+                        use type ARM_Contents.Note_Info_Type;
 		    begin
 	                Arm_Input.Get_Name (Input_Object, Type_Name); -- Get the end "type".
 		        ARM_Input.Get_Char (Input_Object, Ch);
@@ -4943,6 +4957,102 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 --Ada.Text_IO.Put_Line (" &Unstack (End)");
 --!!Debug:
 --Ada.Text_IO.Put_Line ("(End) Next=" & Paragraph_Type'Image(Format_Object.Next_Paragraph_Subhead_Type));
+                                -- Test if only one note in a Notes section with ISO_2004 format:
+                                -- Check if the number of notes matches expectation (if it does not, format will
+                                -- be incorrect).
+                                if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "notes" and then
+                                    Format_Object.Use_ISO_2004_Note_Format then
+                                    if Format_Object.Num_Notes = ARM_Contents.One_Note and then 
+                                       Format_Object.Next_Note /= 2 then
+                                       if Format_Object.Next_Note = 1 then
+                                           -- No notes at all, could be a deleted note.
+                                           Ada.Text_IO.Put_Line ("  -- Notes section with only one note expected but had " &
+                                               "none instead, at line " & ARM_Input.Line_String (Input_Object));
+                                               -- We have this as an "information" since it happens in practice
+                                               -- (3 times in the Ada 2022 RM) and we don't want warnings in a
+                                               -- correct document. We could call this an error if ALL of the
+                                               -- text is shown (that is, we're in Format_Object.Changes = Show_Changes
+                                               -- with the Format_Object.Base_Change_Version = '0' and the
+                                               -- Format_Object.Change_Version being the maximum of the source file).
+                                               -- But we don't have an easy way to figure out what the maximum
+                                               -- version of the source file is (we could add code to the scan
+                                               -- phase to figure it out, but that would be expensive for a rare case).
+                                       else -- Oops, too many notes.     
+                                           Ada.Text_IO.Put_Line ("  ** Notes section with only one note expected but had" &
+                                               Integer'Image (Format_Object.Next_Note-1) & " notes instead, at line " &
+                                               ARM_Input.Line_String (Input_Object));
+                                               -- This is likely a scanning problem.
+                                       end if;
+                                    elsif Format_Object.Num_Notes /= ARM_Contents.One_Note and then 
+                                          Format_Object.Next_Note = 2 then
+                                       Ada.Text_IO.Put_Line ("?? Notes section with only single note and is numbered, at line " &
+                                           ARM_Input.Line_String (Input_Object));
+                                    -- else OK.
+                                    end if;
+                                elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "singlenote" and then
+                                    Format_Object.Use_ISO_2004_Note_Format then
+                                    if Format_Object.Num_Notes /= ARM_Contents.One_Note then
+                                       if Format_Object.Num_Notes = ARM_Contents.No_Notes then
+                                          Ada.Text_IO.Put_Line ("** SingleNote section with no notes expected, at line " &
+                                              ARM_Input.Line_String (Input_Object));
+                                              -- Shouldn't be possible; most likely some scanning problem 
+                                              -- (or headers with no contents).
+                                       elsif Format_Object.Next_Note /= 2 then
+                                           if Format_Object.Changes = New_Only then
+                                               -- Not showing deletions, so this is a error where there are multiple
+                                               -- notes in a SingleNote section.
+                                               Ada.Text_IO.Put_Line ("  ** SingleNote section with multiple notes expected, " &
+                                                   "probably multiple notes sections in one subclause, at line " &
+                                                   ARM_Input.Line_String (Input_Object));
+                                                   -- This should mean that there is a second notes section of some
+                                                   -- sort in the subclause, which is a mistake.
+                                           elsif Format_Object.Notes_Deleted_Paras_Displayed then
+                                               -- We've shown some deleted paragraphs since @Begin{SingleNote}.
+                                               -- In that case, we might have extra notes in a SingleNote section,
+                                               -- so don't worry about that, just display an informational message.
+                                               Ada.Text_IO.Put_Line ("  -- SingleNote section with multiple notes expected, " &
+                                                   "likely deleted notes, at line " &
+                                                   ARM_Input.Line_String (Input_Object));
+                                           else
+                                               Ada.Text_IO.Put_Line ("  ?? SingleNote section with multiple notes expected, " &
+                                                   "probably multiple notes sections in one subclause, at line " &
+                                                   ARM_Input.Line_String (Input_Object));
+                                                   -- This should mean that there is a second notes section of some
+                                                   -- sort in the subclause, which is a mistake.
+                                            end if;
+                                       else
+                                           Ada.Text_IO.Put_Line ("  -- SingleNote section with multiple notes expected, " &
+                                              "but only one note generated, at line " & ARM_Input.Line_String (Input_Object));
+                                              -- This should mean that a single note has additional parts
+                                              -- (like an example or bullets), or deleted additional notes not
+                                              -- displayed, so the estimate is wrong.                                      
+                                       end if;
+                                    elsif Format_Object.Next_Note /= 2 then
+                                       if Format_Object.Changes = New_Only then
+                                           -- Not showing deletions, so this is a error where there are multiple
+                                           -- notes in a SingleNote section.
+                                           Ada.Text_IO.Put_Line ("  ** Singlenote section but had" &
+                                               Integer'Image (Format_Object.Next_Note-1) & " notes instead, at line " &
+                                               ARM_Input.Line_String (Input_Object));
+                                        elsif Format_Object.Notes_Deleted_Paras_Displayed then
+                                           -- We've shown some deleted paragraphs since @Begin{SingleNote}.
+                                           -- In that case, we might have extra notes in a SingleNote section,
+                                           -- so don't worry about that, just display an informational message.
+                                           Ada.Text_IO.Put_Line ("  -- Singlenote section but had" &
+                                               Integer'Image (Format_Object.Next_Note-1) & " notes " &
+                                               "instead (some deleted notes displayed), at line " &
+                                               ARM_Input.Line_String (Input_Object));
+                                       else
+                                           -- We're showing deletions, so we might have a deleted note in with
+                                           -- what is now a single note. Thus we treat this as a warning (it's
+                                           -- rare enough to use a warning rather than informative message).
+                                           Ada.Text_IO.Put_Line ("  ?? Singlenote section but had" &
+                                               Integer'Image (Format_Object.Next_Note-1) & " notes instead, at line " &
+                                               ARM_Input.Line_String (Input_Object));
+                                       end if;
+                                    end if;
+                                -- else not interesting.
+                                end if;
 			    end if;
 
 			    Check_End_Paragraph; -- End any paragraph that we're in.
@@ -6748,27 +6858,28 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				Ada.Text_IO.Put_Line ("** Unable to find header reference, line " & ARM_Input.Line_String (Input_Object));
 				Ada.Text_IO.Put_Line ("   Looking for " & Title(1..Title_Length));
 			end;
+		        -- Reset the paragraph numbers:
+		        Format_Object.Next_Paragraph := 1;
+		        Format_Object.Next_Insert_Para := 1;
+		        Format_Object.Next_AARM_Sub := 'a';
+		        if Format_Object.Use_ISO_2004_Note_Format then
+			    -- Reset the note number:
+		            Format_Object.Next_Note := 1;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section or else
+		              Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break or else
+		              Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Annex or else
+		              Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Informative_Annex or else
+		              Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
+		            -- Reset the note number, only for sections:
+		            Format_Object.Next_Note := 1;
+		        end if;
+                        Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level, Format_Object.Clause_Number);
+		        -- Reset the subhead:
+		        Format_Object.Last_Paragraph_Subhead_Type := Plain;
+		        Format_Object.Next_Paragraph_Format_Type := Plain;
+                        
+		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 		    end;
-		    -- Reset the paragraph numbers:
-		    Format_Object.Next_Paragraph := 1;
-		    Format_Object.Next_Insert_Para := 1;
-		    Format_Object.Next_AARM_Sub := 'a';
-		    if Format_Object.Use_ISO_2004_Note_Format then
-			-- Reset the note number:
-		        Format_Object.Next_Note := 1;
-		    elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section or else
-		          Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break or else
-		          Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Annex or else
-		          Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Informative_Annex or else
-		          Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
-		        -- Reset the note number, only for sections:
-		        Format_Object.Next_Note := 1;
-		    end if;
-		    -- Reset the subhead:
-		    Format_Object.Last_Paragraph_Subhead_Type := Plain;
-		    Format_Object.Next_Paragraph_Format_Type := Plain;
-
-		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 
 		when Labeled_Revised_Annex |
@@ -7020,6 +7131,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		            -- Reset the note number, only for sections:
 		            Format_Object.Next_Note := 1;
 		        end if;
+                        Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level, Format_Object.Clause_Number);
 		        -- Reset the subhead:
 		        Format_Object.Last_Paragraph_Subhead_Type := Plain;
 		        Format_Object.Next_Paragraph_Format_Type := Plain;
@@ -7175,6 +7287,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		                -- Reset the note number, only for sections:
 		                Format_Object.Next_Note := 1;
 		            end if;
+                            Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level, Format_Object.Clause_Number);
 		            -- Reset the subhead:
 		            Format_Object.Last_Paragraph_Subhead_Type := Plain;
 		            Format_Object.Next_Paragraph_Format_Type := Plain;
@@ -7269,6 +7382,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		            --    -- Reset the note number, only for sections: (no sections yet)
 		            --    Format_Object.Next_Note := 1;
 		            end if;
+                            Format_Object.Num_Notes := ARM_Contents.Many_Notes; -- Dunno, assume the worst.
+
 		            -- Reset the subhead:
 		            Format_Object.Last_Paragraph_Subhead_Type := Plain;
 		            Format_Object.Next_Paragraph_Format_Type := Plain;
@@ -8145,9 +8260,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				Format_Object.No_Para_Num := NoParanum;
 				Format_Object.Keep_with_Next := KeepNext;
 			        Format_Object.Space_After := Space_After;
+                                Format_Object.Notes_Deleted_Paras_Displayed :=
+                                    True; -- We're displaying a deleted paragraph.
+
 			    elsif Disposition = ARM_Output.Insertion then
 			        raise Program_Error; -- An insertion inside of a deletion command!
 			    else -- Deletion.
+                                Format_Object.Notes_Deleted_Paras_Displayed :=
+                                    True; -- We're displaying a deleted paragraph.
 			        if Format_Object.Changes = ARM_Format.New_Changes then
 				    -- Special case: we ignore the deleted text, but mark its presence.
 				    -- We assume that the text is non-empty;
@@ -11270,17 +11390,20 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 		Clause => 0, Subclause => 0, Subsubclause => 0);
 	    declare
 		use type ARM_Contents.Section_Number_Type;
+                Level : ARM_Contents.Level_Type;
 	    begin
 		if Section_Number = 0 then -- No title at all.
 	            ARM_Output.Section (Output_Object,
 				        Section_Title => "",
 				        Section_Name => Section_Name);
+                    Level := ARM_Contents.Unnumbered_Section;
 		elsif Section_Number < ARM_Contents.ANNEX_START then
 	            ARM_Output.Section (Output_Object,
 				        Section_Title => Ada.Strings.Fixed.Trim (
 							 ARM_Contents.Lookup_Title (ARM_Contents.Section,
 								(Section => Section_Number, others => 0)), Ada.Strings.Right),
 				        Section_Name => Section_Name);
+                    Level := ARM_Contents.Section;
 		else
 		    -- We don't have a way to tell between the three kinds of annexes, so we try them all:
 		    begin
@@ -11289,6 +11412,7 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 							     ARM_Contents.Lookup_Title (ARM_Contents.Normative_Annex,
 								    (Section => Section_Number, others => 0)), Ada.Strings.Right),
 				            Section_Name => Section_Name);
+                        Level := ARM_Contents.Normative_Annex;
 		    exception
 			when ARM_Contents.Not_Found_Error =>
 			    begin
@@ -11297,6 +11421,7 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 							             ARM_Contents.Lookup_Title (ARM_Contents.Informative_Annex,
 									    (Section => Section_Number, others => 0)), Ada.Strings.Right),
 				                    Section_Name => Section_Name);
+                                Level := ARM_Contents.Informative_Annex;
 			    exception
 				when ARM_Contents.Not_Found_Error =>
 	                            ARM_Output.Section (Output_Object,
@@ -11305,14 +11430,23 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 									        (Section => Section_Number, others => 0)), Ada.Strings.Right),
 				                        Section_Name => Section_Name);
 			            -- If this fails, too, we just propagate to the outer handler.
+                                    Level := ARM_Contents.Plain_Annex;
 			    end;
 		    end;
 		end if;
-	    exception
+	        Format_Object.Next_Note := 1;
+                if ARM_Contents."/="(Level, ARM_Contents.Unnumbered_Section) then
+                    Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level,
+                                                                              Format_Object.Clause_Number);
+                else
+                    Format_Object.Num_Notes := ARM_Contents.No_Notes; -- No way to find this out.
+                end if;
+ 	    exception
 		when ARM_Contents.Not_Found_Error =>
-		    Ada.Text_IO.Put_Line ("** Unable to find section title, line " & ARM_File.Line_String (Input_Object));
+		    Ada.Text_IO.Put_Line ("** Unable to find section title for Section" &
+                        ARM_Contents.Section_Number_Type'Image(Section_Number) &
+                        ", line " & ARM_File.Line_String (Input_Object));
 	    end;
-	    Format_Object.Next_Note := 1;
 	    Format_Object.Next_Paragraph := 1;
 	    Format_Object.Next_Insert_Para := 1;
 	    Format_Object.Next_AARM_Sub := 'a';
