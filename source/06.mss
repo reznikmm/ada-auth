@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:53 $}
+@Comment{$Date: 2021/07/09 03:01:22 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.161 $}
+@Comment{$Revision: 1.162 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -938,6 +938,17 @@ aspect would be illegal]}.]}
   on abstract subprograms as they could never be evaluated, and we need to
   allow such expressions to contain calls to abstract subprograms]}.]}
 @end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0412-1]}
+  @ChgAdded{Version=[5],Text=[As this @IntlStdTitle was frozen, a significant
+  incompatibility has come to light with the above rule. The wording makes
+  some calls to non-abstract primitives of a tagged abstract type illegal even if
+  no abstract routines are involved in the Pre'Class or Post'Class. It is
+  likely that the above rule will be adjusted; check with ARG work at 
+  @URLLink{URL=[http://www.ada_auth.org/arg.html], Text=[www.ada_auth.org/arg.html]}
+  to find the adjusted rules.]}
+@end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1],ARef=[AI05-0290-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}

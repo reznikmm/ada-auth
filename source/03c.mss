@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:52 $}
+@Comment{$Date: 2021/07/09 03:01:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.155 $}
+@Comment{$Revision: 1.156 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -454,8 +454,8 @@ one type that has the appropriate Ancestor and accessibility level],Old=[]}.]}
   prevent an external tag from identifying more than one type. However, an
   external tag can identify multiple types if a generic body contains a
   derivation of a tagged type declared outside of the generic, and there are
-  multiple instances at the same accessibility level as the type. (The @StdTitle
-  allows default external tags to not be unique in this case.)]}
+  multiple instances at the same accessibility level as the type. (The 
+  @StdTitle allows default external tags to not be unique in this case.)]}
   @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}

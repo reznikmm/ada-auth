@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:52 $}
+@Comment{$Date: 2021/07/09 03:01:22 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.152 $}
+@Comment{$Revision: 1.153 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1721,8 +1721,8 @@ an @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
 @ChgRef{Version=[4],Kind=[Added]}
-@ChgAdded{Version=[4],Text=[Predicate_Failure@\
-   This aspect shall be specified by an @nt{expression}, which
+@ChgAdded{Version=[4],Text=[Predicate_Failure@\This aspect
+   shall be specified by an @nt{expression}, which
    determines the action to be performed when a predicate check fails because a
    directly-specified predicate aspect of the subtype evaluates to
    False, as explained below.@AspectDefn{Predicate_Failure}]}

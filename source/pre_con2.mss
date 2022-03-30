@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2021/07/09 03:01:22 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -227,8 +227,8 @@ package Containers.Multiway_Trees has the following declaration:]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Ancestor_Of} (Container : Tree;
-                                          Parent   : Cursor;
-                                          Position : Cursor) @key{return} Boolean
+                            Parent   : Cursor;
+                            Position : Cursor) @key{return} Boolean
       @key{with} Pre => (Meaningful_For (Container, Position)
                       @key{or else raise} Program_Error) @key{and then}
                    (Meaningful_For (Container, Parent)
@@ -3935,7 +3935,7 @@ unless specified by the operation.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for ordinary containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
@@ -5530,6 +5530,15 @@ as Containers.Vectors except:]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Vector (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type Vector is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization]}
+@end{Example}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type Vector needs finalization if and only if
     type Element_Type needs finalization.]}
@@ -5722,7 +5731,7 @@ minimize copying does not apply to bounded vectors.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
@@ -5730,6 +5739,17 @@ minimize copying does not apply to bounded vectors.]}]}
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>A
+  bounded vector now only has Preelaborable_Initialization (abbreviated PI in
+  this note) when the actual for the Element_Type has PI. If an program used
+  a vector whose actual Element_Type does not have PI in a context when PI is
+  required (such as a library-level object in a preelaborated unit or as a 
+  component of a type with PI), the program would be illegal in Ada 202x but
+  legal in original Ada 2012. This situation is unlikely, especially as
+  some existing Ada 2012 implementations reject the instance in this case.]}
+@end{Incompatible2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Doubly_Linked_Lists]}
@@ -5772,6 +5792,15 @@ as Containers.Doubly_Linked_Lists except:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} List (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type List is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5994,7 +6023,7 @@ minimize copying does not apply to bounded lists.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
@@ -6002,6 +6031,17 @@ minimize copying does not apply to bounded lists.]}]}
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>A
+  bounded list now only has Preelaborable_Initialization (abbreviated PI in
+  this note) when the actual for the Element_Type has PI. If an program used
+  a list whose actual Element_Type does not have PI in a context when PI is
+  required (such as a library-level object in a preelaborated unit or as a 
+  component of a type with PI), the program would be illegal in Ada 202x but
+  legal in original Ada 2012. This situation is unlikely, especially as
+  some existing Ada 2012 implementations reject the instance in this case.]}
+@end{Incompatible2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Maps]}
@@ -6038,6 +6078,17 @@ as Containers.Hashed_Maps except:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type;
             Modulus  : Hash_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type Map is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization
+        @key[and]
+     Key_Type'Preelaborable_Initialization]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6258,13 +6309,26 @@ minimize copying does not apply to bounded hashed maps.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>A
+  bounded map now only has Preelaborable_Initialization (abbreviated PI in
+  this note) when the actuals for the Element_Type and the Key_Type have PI.
+  If an program used a map whose actual Element_Type or Key_Type does not have
+  PI in a context when PI is
+  required (such as a library-level object in a preelaborated unit or as a 
+  component of a type with PI), the program would be illegal in Ada 202x but
+  legal in original Ada 2012. This situation is unlikely, especially as
+  some existing Ada 2012 implementations reject the instance in this case.]}
+@end{Incompatible2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Maps]}
@@ -6299,6 +6363,17 @@ as Containers.Ordered_Maps except:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type Map is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization
+        @key[and]
+     Key_Type'Preelaborable_Initialization]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6489,13 +6564,26 @@ minimize copying does not apply to bounded ordered maps.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>A
+  bounded map now only has Preelaborable_Initialization (abbreviated PI in
+  this note) when the actuals for the Element_Type and the Key_Type have PI.
+  If an program used a map whose actual Element_Type or Key_Type does not have
+  PI in a context when PI is
+  required (such as a library-level object in a preelaborated unit or as a 
+  component of a type with PI), the program would be illegal in Ada 202x but
+  legal in original Ada 2012. This situation is unlikely, especially as
+  some existing Ada 2012 implementations reject the instance in this case.]}
+@end{Incompatible2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Sets]}
@@ -6531,6 +6619,15 @@ as Containers.Hashed_Sets except:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Set (Capacity : Count_Type;
             Modulus  : Hash_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type Set is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6742,6 +6839,18 @@ minimize copying does not apply to bounded hashed sets.]}]}
   Containers.Bounded_Hashed_Sets is new.]}
 @end{Extend2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>A
+  bounded set now only has Preelaborable_Initialization (abbreviated PI in
+  this note) when the actual for the Element_Type has PI. If an program used a
+  set whose actual Element_Type does not have PI in a context when PI is
+  required (such as a library-level object in a preelaborated unit or as a 
+  component of a type with PI), the program would be illegal in Ada 202x but
+  legal in original Ada 2012. This situation is unlikely, especially as
+  some existing Ada 2012 implementations reject the instance in this case.]}
+@end{Incompatible2012}
+
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Sets]}
 
@@ -6775,6 +6884,15 @@ as Containers.Ordered_Sets except:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Set (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type Set is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6957,6 +7075,19 @@ minimize copying does not apply to bounded ordered sets.]}]}
   Containers.Bounded_Ordered_Sets is new.]}
 @end{Extend2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>A
+  bounded set now only has Preelaborable_Initialization (abbreviated PI in
+  this note) when the actual for the Element_Type has PI. If an program used
+  a set whose actual Element_Type does not have PI in a context when PI is
+  required (such as a library-level object in a preelaborated unit or as a 
+  component of a type with PI), the program would be illegal in Ada 202x but
+  legal in original Ada 2012. This situation is unlikely, especially as
+  some existing Ada 2012 implementations reject the instance in this case.]}
+@end{Incompatible2012}
+
+
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Multiway_Trees]}
 
@@ -6993,6 +7124,15 @@ semantics as Containers.Multiway_Trees except:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Tree (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type Tree is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -7249,7 +7389,7 @@ minimize copying does not apply to bounded trees.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
@@ -7257,6 +7397,17 @@ minimize copying does not apply to bounded trees.]}]}
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>A
+  bounded tree now only has Preelaborable_Initialization (abbreviated PI in
+  this note) when the actual for the Element_Type has PI. If an program used
+  a tree whose actual Element_Type does not have PI in a context when PI is
+  required (such as a library-level object in a preelaborated unit or as a 
+  component of a type with PI), the program would be illegal in Ada 202x but
+  legal in original Ada 2012. This situation is unlikely, especially as
+  some existing Ada 2012 implementations reject the instance in this case.]}
+@end{Incompatible2012}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubclause{Version=[2],Name=[Array Sorting]}
@@ -8217,6 +8368,15 @@ semantics as Containers.Indefinite_Holders except:]}
    to be different for different containers, so making it a discriminant (as
    Capacity is) provides no useful capability.]}
 @end{Reason}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The @nt{aspect_definition} for 
+  Preelaborable_Initialization for type Holder is changed to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[  Preelaborable_Initialization =>
+     Element_Type'Preelaborable_Initialization]}
+@end{Example}
 
  @ChgRef{Version=[5],Kind=[AddedNormal]}
  @ChgAdded{Version=[5],Type=[Leading],Text=[Add to the precondition of To_Holder

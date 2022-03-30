@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2021/07/09 03:01:22 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -1462,7 +1462,7 @@ unless specified by the operation.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for ordinary containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
@@ -1481,7 +1481,7 @@ unless specified by the operation.]}]}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
-  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified that tampering checks
   precede all other checks made by a subprogram (but come after those associated
   with the call).]}
 

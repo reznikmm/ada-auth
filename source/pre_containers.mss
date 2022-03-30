@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.117 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
+@comment{ $Revision: 1.118 $ $Date: 2021/07/09 03:01:22 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:54 $}
+@Comment{$Date: 2021/07/09 03:01:22 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -7548,7 +7548,7 @@ probably not a stable sort.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for ordinary containers. If a program requires tampering detection
   to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
