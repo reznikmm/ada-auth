@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.77 $ $Date: 2021/06/03 01:52:06 $ $Author: randy $ }
+@comment{ $Revision: 1.78 $ $Date: 2022/03/30 07:20:29 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -263,7 +263,9 @@ Real'Base.}
       @RI{a} + @RI{b}*i (or @RI{a} + @RI{b}*j), if desired. Of course,
       in some contexts the sum will need to be parenthesized.
 
-      When an Ada binding to IEC 559:1989 that provides (signed) infinities
+      @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+      When an Ada binding to @Chg{Version=[5],New=[ISO/IEC 60559:2020],Old=[IEC 559:1989]}
+      that provides (signed) infinities
       as the result of operations that overflow becomes available, it will be
       important to allow arithmetic between pure-imaginary and complex operands
       without requiring the former to be represented as (or promoted to)
@@ -392,7 +394,9 @@ unspecified.
 can also be raised when a finite result overflows
 (see @RefSecNum{Accuracy Requirements for Complex Arithmetic}).]
 @begin{Discussion}
-   It is anticipated that an Ada binding to IEC 559:1989 will be developed in
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+   It is anticipated that an Ada binding to @Chg{Version=[5],New=[ISO/IEC 60559:2020],Old=[IEC 559:1989]}
+   will be developed in
    the future. As part of such a binding, the Machine_Overflows attribute of a
    conformant floating point type will be specified to yield False, which will
    permit implementations of the complex arithmetic operations to deliver
@@ -511,12 +515,14 @@ regardless of the implementation method chosen).
 @end{ImplPerm}
 
 @begin{ImplAdvice}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
 Because the usual mathematical meaning of multiplication of a complex operand
 and a real operand is that of the scaling of both components of the former by
 the latter, an implementation should not perform this operation by first
 promoting the real operand to complex type and then performing a full complex
-multiplication. In systems that, in the future, support an Ada binding to IEC
-559:1989, the latter technique will not generate the required result when one
+multiplication. In systems that, in the future, support an Ada binding to
+@Chg{Version=[5],New=[ISO/IEC 60559:2020],Old=[IEC 559:1989]}, the latter
+technique will not generate the required result when one
 of the components of the complex operand is infinite. (Explicit multiplication
 of the infinite component by the zero component obtained during promotion
 yields a NaN that propagates into the final result.) Analogous advice applies
@@ -528,12 +534,14 @@ Text=[Mixed real and complex operations (as well as pure-imaginary and complex
 operations) should not be performed by converting
 the real (resp. pure-imaginary) operand to complex.]}]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
 Likewise, because the usual mathematical meaning of addition of a complex
 operand and a real operand is that the imaginary operand remains unchanged, an
 implementation should not perform this operation by first promoting the real
 operand to complex type and then performing a full complex addition. In
 implementations in which the Signed_Zeros attribute of the component type is
-True (and which therefore conform to IEC 559:1989 in regard to the handling of
+True (and which therefore conform to @Chg{Version=[5],New=[ISO/IEC 60559:2020],Old=[IEC 559:1989]}
+in regard to the handling of
 the sign of zero in predefined arithmetic operations), the latter technique
 will not generate the required result when the imaginary component of the
 complex operand is a negatively signed zero. (Explicit addition of the
@@ -819,7 +827,9 @@ unspecified.
    it.
 @end{Reason}
 @begin{Discussion}
-   It is anticipated that an Ada binding to IEC 559:1989 will be developed
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+   It is anticipated that an Ada binding to @Chg{Version=[5],New=[ISO/IEC 60559:2020],Old=[IEC 559:1989]}
+   will be developed
    in the future. As part of such a binding, the Machine_Overflows attribute
    of a conformant floating point type will be specified to yield False, which
    will permit implementations of the complex elementary functions to deliver
@@ -1709,10 +1719,12 @@ S'Model_Emin.
 
 @begin{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
 @Defn{IEEE floating point arithmetic}
-@Defn{IEC 559:1989}
+@Chg{Version=[5],New=[@Defn{ISO/IEC 60559:2020}],Old=[@Defn{IEC 559:1989}]}
 The following table shows appropriate attribute values for IEEE basic
-single and double precision types (ANSI/IEEE Std 754-1985, IEC 559:1989).
+single and double precision types (ANSI/IEEE Std 754-1985,
+@Chg{Version=[5],New=[ISO/IEC 60559:2020],Old=[IEC 559:1989]}).
 Here, we use the names IEEE_Float_32 and IEEE_Float_64,
 the names that would typically be declared in package Interfaces,
 in an implementation that supports IEEE arithmetic.
@@ -1903,12 +1915,12 @@ let @RI{s} be 1.0.
    For a multiplication or division neither of whose operands is of type
    @i(universal_real), let @RI{l} and @RI{r}
    be the @i(smalls) of the left and right
-   operands. For a multiplication, if (@RI{l} @Times @RI{r}) / @RI{s}
+   operands. For a multiplication, if (@RI{l}@ @Times@ @RI{r})@ /@ @RI{s}
    is an integer or the
    reciprocal of an integer (the @i(smalls) are said to be @lquotes@;compatible@rquotes@; in
    this case), the result shall belong to the perfect result set; otherwise, it
    belongs to the close result set. For a division, if
-   @RI{l} / (@RI{r} @Times @RI{s}) is an
+   @RI{l}@ /@ (@RI{r}@ @Times@ @RI{s}) is an
    integer or the reciprocal of an integer (i.e., the @i(smalls) are
    compatible), the result shall belong to the perfect result set; otherwise,
    it belongs to the close result set.

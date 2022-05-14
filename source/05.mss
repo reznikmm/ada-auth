@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:53 $}
+@Comment{$Date: 2022/03/30 07:20:28 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -260,7 +260,7 @@ blocking of some or all of the logical threads of control making up the current
 task.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
-@begin{Notes}
+@begin{SingleNote}
 A @nt<statement_identifier> that appears immediately within
 the declarative region of a
 named @nt<loop_statement> or an @nt<accept_statement> is nevertheless
@@ -300,7 +300,7 @@ expanded name associated with an entity declared in the task body:
 @key(end) Compute;
 @end{Example}
 @end{Discussion}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of labeled statements:}
@@ -407,7 +407,7 @@ is expected to be of any @Chg{Version=[2],New=[],Old=[nonlimited ]}type.
 The expected type for the @nt<expression> is
 the type of the target.
 @begin{ImplNote}
-@Leading@keepnext@;An @nt<assignment_statement> as a whole is a 
+@Leading@keepnext@;An @nt<assignment_statement> as a whole is a
 @lquotes@;complete context@rquotes,
 so if the @i{variable_}@nt<name> of an @nt<assignment_statement> is
 overloaded, the @nt<expression> can be used to help disambiguate it.
@@ -530,7 +530,7 @@ nothing.
 
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 The tag of an object never changes;
 in particular, an
 @nt{assignment_statement}
@@ -556,7 +556,7 @@ access value returned by a function call, and similarly, as a
 component or slice of such a variable
 (see @RefSec{The Context of Overload Resolution}).
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of assignment statements:}
@@ -1363,7 +1363,7 @@ all values are covered with no overlaps.
 Within each logical thread of control, the],Old=[. These]}
 values are assigned @Chg{Version=[5],New=[to the loop parameter ],Old=[]}in
 increasing order unless the reserved word @key{reverse} is present, in which
-case the values are assigned in decreasing order.@Chg{Version=[5],New=[ In the 
+case the values are assigned in decreasing order.@Chg{Version=[5],New=[ In the
 absence of a transfer of control, the associated parallel construct of
 a @nt{loop_parameter_specification} is complete when all of its logical threads
 of control are complete.],Old=[]}
@@ -1414,7 +1414,7 @@ of control are complete.],Old=[]}
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0416-1]}
   @ChgAdded{Version=[5],Text=[The rules for completing a parallel construct when
-  there is a transfer of control are given in 
+  there is a transfer of control are given in
   @RefSecNum{Simple and Compound Statements - Sequences of Statements}.]}
 @end{Discussion}
 
@@ -1559,7 +1559,7 @@ Text=[@i{Example of a parallel loop with a chunk specification:}]}
    @key[for] I @key[in] Grid'Range(1) @key[loop]
       @key[declare]
          True_Count : @key[constant] Natural :=
-           [@key[for] J @key[in] Grid'Range(2) => 
+           [@key[for] J @key[in] Grid'Range(2) =>
               (@key[if] Grid (I, J) @key[then] 1 @key[else] 0)]'Reduce("+",0);
       @key[begin]
          Partial_Sum (Chunk) := @@ + True_Count;
@@ -1734,7 +1734,7 @@ operational aspects may be specified for an indexable container type @i<T> (see
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0428-1]}
   @ChgAdded{Version=[3],Text=[Default_Iterator@\This aspect is specified
     by a @nt{name} that denotes exactly one function declared immediately within
-    the same declaration list in which @i<T>@Chg{Version=[5],New=[, or the 
+    the same declaration list in which @i<T>@Chg{Version=[5],New=[, or the
     declaration completed by @i<T>,],Old=[]} is declared, whose first parameter
     is of type @i<T> or @i<T>'Class or an access parameter whose designated type
     is type @i<T> or @i<T>'Class, whose other parameters, if any, have default
@@ -1838,7 +1838,9 @@ Iterator_Element aspects.]}>}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgAdded{Version=[4],Text=[The Default_Iterator and Iterator_Element aspects
-are nonoverridable (see @RefSecNum{Aspect Specifications}).]}
+are nonoverridable (see @RefSecNum{Aspect Specifications}).
+@Defn2{Term=[nonoverridable aspect],Sec=[Default_Iterator]}
+@Defn2{Term=[nonoverridable aspect],Sec=[Iterator_Element]}]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -1951,7 +1953,7 @@ Chunk parameter behave in any other manner, execution is erroneous.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
   @ChgAdded{Version=[5],Text=[Various new types and subprograms are newly added
   to Ada.Iterator_Interfaces. Therefore, a use clause conflict is possible;
-  see the introduction of @RefSecNum{Predefined Language Environment} for 
+  see the introduction of @RefSecNum{Predefined Language Environment} for
   more on this topic.]}
 @end{Incompatible2012}
 
@@ -2238,7 +2240,7 @@ each chunk, with an associated chunk index in the range from one to the actual
 number of chunks.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0266-1],ARef=[AI12-0418-1]}
-@ChgAdded{Version=[5],Text=[Within each logical thread of control, a loop 
+@ChgAdded{Version=[5],Text=[Within each logical thread of control, a loop
 parameter is
 created. If a @nt{chunk_specification} with a @nt{discrete_subtype_definition}
 is present in the associated parallel construct, then a chunk parameter is
@@ -2391,7 +2393,7 @@ immediately enclosing loop statement.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel
 generalized loop over an array:}]}
 
 @begin{Example}
@@ -2405,11 +2407,11 @@ generalized loop over an array:}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@i{For examples of use of 
-generalized iterators, see @RefSecNum{Example of Container Use} and the 
-corresponding container packages in 
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@i{For examples of use of
+generalized iterators, see @RefSecNum{Example of Container Use} and the
+corresponding container packages in
 @RefSecNum{The Generic Package Containers.Vectors} and
-@RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}.}],Old=[For 
+@RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}.}],Old=[For
 examples of use of generalized iterators,
 see @RefSecNum{Example of Container Use} and the corresponding container
 packages in @RefSecNum{The Generic Package Containers.Vectors} and
@@ -3014,7 +3016,7 @@ rhs="@Chg{Version=[5],New=<
 
 @begin(SyntaxText)
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0427-1]}
-@ChgAdded{Version=[5],Text=[The @nt{chunk_specification}, if any, of a 
+@ChgAdded{Version=[5],Text=[The @nt{chunk_specification}, if any, of a
 @nt{parallel_block_statement} shall be an @SynI{integer_}@nt{simple_expression}.]}
 @end(SyntaxText)
 @end{Syntax}
@@ -3023,17 +3025,17 @@ rhs="@Chg{Version=[5],New=<
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[5],Text=[For the execution of a
-@nt{parallel_block_statement}, the @nt{chunk_specification} and the 
-@nt{aspect_specification}, if any, are elaborated in an arbitrary order. 
-After elaborating the @nt{chunk_specification}, if any, a check is made that 
-the determined maximum number of chunks is greater than zero. If this check 
+@nt{parallel_block_statement}, the @nt{chunk_specification} and the
+@nt{aspect_specification}, if any, are elaborated in an arbitrary order.
+After elaborating the @nt{chunk_specification}, if any, a check is made that
+the determined maximum number of chunks is greater than zero. If this check
 fails, Program_Error is raised.@IndexCheck{Program_Error_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1],ARef=[AI12-0436-1]}
-@ChgAdded{Version=[5],Text=[Then, the various @nt{sequence_of_statements} are 
+@ChgAdded{Version=[5],Text=[Then, the various @nt{sequence_of_statements} are
 grouped into one or more @i<chunks>,@PDefn{chunk}
-each with its own logical thread of control (see clause 
+each with its own logical thread of control (see clause
 @RefSecNum{Tasks and Synchronization}), up to the maximum number
 of chunks specified by the @nt{chunk_specification}, if any. Within each chunk
 every @nt{sequence_of_statements} of the chunk is executed in turn, in an
@@ -3057,7 +3059,7 @@ by one of the @nt{sequence_of_statements}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel block 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel block
 used to walk a binary tree in parallel:}]}
 
 @begin{Example}

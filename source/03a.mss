@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/07/09 03:01:22 $}
+@Comment{$Date: 2022/03/30 07:20:28 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.153 $}
+@Comment{$Revision: 1.154 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -348,7 +348,7 @@ A construct is @i(executable) if execution is defined for it.
 @end(Discussion)
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 @Defn{declare}
 At compile time, the declaration of an entity @i(declares) the entity.
 @Defn{create}
@@ -371,7 +371,7 @@ and the name of a statement.
 Identifiers are also associated with names of pragmas, arguments to
 pragmas, and with attributes, but these are not user-definable.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{DiffWord83}
 The syntax rule for @nt{defining_identifier} is new.
@@ -847,7 +847,7 @@ otherwise, the subtype is called a @i(constrained) subtype
 @end{Discussion}
 @end{StaticSem}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 @Chg{Version=[2],New=[Any set of types can be called a
 @lquotes@;category@rquotes@; of types, and any],Old=[Any]}
@@ -986,7 +986,7 @@ Old=[ and]} do not fit into the above strictly hierarchical picture.
   @lquotes@;limited@rquotes@;, and @lquotes@;nonlimited@rquotes@; (note that
   limited and nonlimited are not shown for untagged composite types).]}
 @end{Discussion}
-@end{Notes}
+@end{SingleNote}
 
 @begin{DiffWord83}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -4335,8 +4335,9 @@ any associated universal or class-wide types (defined below).
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-Every type is either a @i(specific) type, a @i(class-wide) type,
-or a @i(universal) type.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+Every type is @Chg{Version=[5],New=[one of],Old=[either]} a @i(specific) type,
+a @i(class-wide) type, or a @i(universal) type.
 @Defn{specific type}
 A specific type is
 one defined by a @nt<type_declaration>,
@@ -4536,7 +4537,7 @@ chain of derivations going back to the given ancestor.
 
 @end{StaticSem}
 
-@begin{Notes}
+@begin{SingleNote}
 Because operands of a universal type are acceptable to the
 predefined operators of any type in their class, ambiguity can
 result. For @i(universal_integer) and @i(universal_real), this
@@ -4560,7 +4561,7 @@ of other specific integer types, thereby resolving the ambiguity.
   predefined operator of a root numeric type is not @lquotes@;universal@rquotes@;
   (implicitly convertible) even if both operands were.
 @end(Ramification)
-@end{Notes}
+@end{SingleNote}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
@@ -7741,7 +7742,7 @@ of Float_IO).
 @end{ImplNote}
 @end{ImplPerm}
 
-@begin{Notes}
+@begin{SingleNote}
   @Leading@;The base range of
   an ordinary fixed point type need not include the specified bounds
   themselves
@@ -7754,7 +7755,7 @@ of Float_IO).
   signed 16-bit representation, using 1 bit for the sign
   and 15 bits for fraction, resulting in a base range of
   @en@;1.0 .. 1.0@en@;2.0**(@en@;15).
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@i(Examples of fixed point types and subtypes:)

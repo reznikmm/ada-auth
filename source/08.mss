@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:53 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -598,7 +598,7 @@ region extending from immediately after the pragma
 to the end of the declarative region immediately enclosing the pragma.]}
 @end{StaticSem}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 There are notations for denoting visible declarations
 that are not directly visible.
@@ -617,7 +617,7 @@ generics @Chg{Version=[2],New=[],Old=[cases ]}in which there is
 no such notation.
 See @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Generic Units}.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
@@ -3643,15 +3643,18 @@ in particular, the construct shall not be the operand of a
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}@ChgNote{Null no longer requires a single type}
-For example, the expected type for @Chg{Version=[2],New=[a string literal],
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}@ChgNote{String literals can also have a user-defined literal type}
+For example, the expected type for @Chg{Version=[2],New=[a 
+@Chg{Version=[5],New=[character],Old=[string]} literal],
 Old=[the literal @key{null}]} is required to be a
-single @Chg{Version=[2],New=[string],Old=[access]} type.
+single @Chg{Version=[2],New=[@Chg{Version=[5],New=[character],Old=[string]}],Old=[access]} type.
 But the expected type for the operand of a @nt{type_conversion} is
 any type.
-Therefore, @Chg{Version=[2],New=[a string literal],
-Old=[the literal @key{null}]} is not allowed as the operand of a
+Therefore, @Chg{Version=[2],New=[a @Chg{Version=[5],New=[character],Old=[string]} 
+literal],Old=[the literal @key{null}]} is not allowed as the operand of a
 @nt{type_conversion}.
-This is true even if there is only one @Chg{Version=[2],New=[string],
+This is true even if there is only one 
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[character],Old=[string]}],
 Old=[access]} type in scope@Chg{Version=[2],New=[ (which is never the
 case)],Old=[]}.
 The reason for these rules is so that the compiler will not have to
@@ -3818,7 +3821,7 @@ in case it denotes more than one callable entity.
 @end{Ramification}
 @end{Legality}
 
-@begin{Notes}
+@begin{SingleNote}
 If a usage name has only one acceptable interpretation,
 then it denotes the corresponding entity.
 However, this does not mean that the usage name is necessarily legal
@@ -3830,7 +3833,7 @@ rules, order of elaboration, and so on.
 @NoPrefix@;Similarly, subtypes are not considered for overload resolution (the
 violation of a constraint does not make a program illegal but raises an
 exception during program execution).
-@end{Notes}
+@end{SingleNote}
 
 @begin{Incompatible83}
 @Defn{incompatibilities with Ada 83}

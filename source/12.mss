@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:54 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1121,7 +1121,7 @@ kind of construct @em we don't actually @lquotes@;evaluate@rquotes@; @nt{subtype
 @end{Honest}
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 If a formal type is not tagged, then the type is treated as
 an untagged type within the generic body.
 Deriving from such a type in a generic body is permitted;
@@ -1223,7 +1223,7 @@ operators of T2, such as "=" (call it "="@-{5}) and "+".
 These operations cannot be called from within the instance,
 but the declaration of Bool_4 calls "="@-{5}.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @leading@keepnext@i{Examples of generic instantiations (see
@@ -1614,7 +1614,7 @@ the general Dynamic Semantics rule in @RefSecNum{Generic Instantiation}.
 @end{Discussion}
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 The constraints that apply to a generic formal object of mode @key{in
 out} are those of the corresponding generic actual parameter (not
 those implied by the @nt{subtype_mark} that appears in the
@@ -1627,7 +1627,7 @@ Constraint checks are done at instantiation time for formal objects of
 mode @key{in},
 but not for formal objects of mode @key{in out}.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}

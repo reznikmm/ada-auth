@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:53 $}
+@Comment{$Date: 2022/03/30 07:20:28 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.164 $}
+@Comment{$Revision: 1.165 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1243,7 +1243,8 @@ in a @nt{generalized_reference} is any reference type.@PDefn2{Term=[expected typ
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgAdded{Version=[4],Text=[The Implicit_Dereference aspect
-is nonoverridable (see @RefSecNum{Aspect Specifications}).]}
+is nonoverridable
+(see @RefSecNum{Aspect Specifications}).@Defn2{Term=[nonoverridable aspect],Sec=[Implicit_Dereference]}]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -1295,7 +1296,7 @@ named reference object.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification
 and use of generalized references:}]}
 
 @begin{Example}
@@ -1358,7 +1359,7 @@ may be specified:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0428-1]}
 @ChgAdded{Version=[3],Text=[Constant_Indexing@\This aspect shall be specified by
 a @nt{name} that denotes one or more functions declared immediately within the
-same declaration list in which @i<T>@Chg{Version=[5],New=[, or the 
+same declaration list in which @i<T>@Chg{Version=[5],New=[, or the
 declaration completed by @i<T>,],Old=[]} is declared. All such functions shall
 have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access-to-constant parameter with designated type @i<T> or
@@ -1372,7 +1373,7 @@ have at least two parameters, the first of which is of type @i<T> or
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0428-1]}
 @ChgAdded{Version=[3],Text=[Variable_Indexing@\This aspect shall be specified
 by a @nt{name} that denotes one or more functions declared immediately within
-the same declaration list in which @i<T>@Chg{Version=[5],New=[, or the 
+the same declaration list in which @i<T>@Chg{Version=[5],New=[, or the
 declaration completed by @i<T>,],Old=[]} is declared. All such functions
 shall have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access parameter with designated type @i<T> or @i<T>'Class.
@@ -1425,7 +1426,9 @@ Variable_Indexing aspects.]}>}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgAdded{Version=[4],Text=[The Constant_Indexing and Variable_Indexing aspects
-are nonoverridable (see @RefSecNum{Aspect Specifications}).]}
+are nonoverridable (see @RefSecNum{Aspect Specifications}).
+@Defn2{Term=[nonoverridable aspect],Sec=[Constant_Indexing]}
+@Defn2{Term=[nonoverridable aspect],Sec=[Variable_Indexing]}]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -1627,7 +1630,7 @@ the @nt{prefix} of the prefixed view.]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification
 and use of generalized indexing:}]}
 
 @begin{Example}
@@ -1978,8 +1981,8 @@ not explictly aliased.@AspectDefn{String_Literal}]}
 @end{Description}
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
-  @ChgAdded{Version=[5],Type=[Leading],Text=[The following example is legal 
-    because the resolution of an @nt{aspect_definition} for an aspect that 
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The following example is legal
+    because the resolution of an @nt{aspect_definition} for an aspect that
     is defined to be a subprogram is based on the profile required for that
     aspect (see @RefSecNum{Aspect Specifications}):]}
 @begin{Example}
@@ -1995,7 +1998,10 @@ not explictly aliased.@AspectDefn{String_Literal}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[5],Text=[User-defined literal aspects are nonoverridable (see
-@RefSecNum{Aspect Specifications}).]}
+@RefSecNum{Aspect Specifications}).
+@Defn2{Term=[nonoverridable aspect],Sec=[Integer_Literal]}
+@Defn2{Term=[nonoverridable aspect],Sec=[Real_Literal]}
+@Defn2{Term=[nonoverridable aspect],Sec=[String_Literal]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2025,14 +2031,14 @@ not explictly aliased.@AspectDefn{String_Literal}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1],ARef=[AI12-0427-1]}
 @ChgAdded{Version=[5],Text=[When a numeric literal is interpreted as a value of
-a non-numeric type @i<T> or a @nt{string_literal} is interpreted a value of
+a non-numeric type @i<T> or a @nt{string_literal} is interpreted as a value of
 a type @i<T> that is not a string type (see @RefSecNum{Literals}), it is
 equivalent to a call to the subprogram denoted by the corresponding aspect of
 @i<T>: the Integer_Literal aspect for an integer literal, the Real_Literal
 aspect for a real literal, and the String_Literal aspect for a
 @nt{string_literal}. The actual parameter of this notional call is a
-@nt{string_literal} representing a sequence of characters that is the same as 
-the sequence of characters in the original numeric literal, or the sequence 
+@nt{string_literal} representing a sequence of characters that is the same as
+the sequence of characters in the original numeric literal, or the sequence
 represented by the original string literal.]}
 
 @begin{Discussion}
@@ -2258,8 +2264,8 @@ or a single descendant of a ],Old=[]}record type@Chg{Version=[5],New=[],Old=[,]}
   to match @nt{extension_aggregate}s, even though those have to be record
   types. Thus, we allow any record type with any visible
   (nondiscriminant) components to match an @nt{aggregate}, even though
-  only @nt{delta_aggregate}s allow private types or private extensions. 
-  Similarly, we allow any container type to match an @nt{aggregate}, even 
+  only @nt{delta_aggregate}s allow private types or private extensions.
+  Similarly, we allow any container type to match an @nt{aggregate}, even
   though only @nt{container_aggregate}s allow container types. ]}
 @end{Reason}
 @end{Resolution}
@@ -3465,9 +3471,9 @@ only if an @i(applicable index
 constraint) applies to the @nt{array_aggregate}.
 @Defn{applicable index constraint}
 @Redundant[An applicable index constraint is
-a constraint provided by certain contexts@Chg{Version=[5],New=[],Old=[ where 
+a constraint provided by certain contexts@Chg{Version=[5],New=[],Old=[ where
 an @nt{array_aggregate} is permitted]} that can be used
-to determine the bounds of the array value specified by 
+to determine the bounds of the array value specified by
 @Chg{Version=[5],New=[an @nt{array_aggregate}],Old=[the aggregate]}.]
 Each of the following contexts (and none other)
 defines an applicable index constraint:
@@ -4267,7 +4273,7 @@ ascending order, if the @nt{discrete_choice} represents a range):]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of use 
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of use
 of delta aggregates in a postcondition:}]}
 
 @begin{Example}
@@ -4362,6 +4368,15 @@ an @nt{aggregate} of the form:@AspectDefn{Aggregate}]}
     Assign_Indexed => @SynI{procedure_}@nt{name}])"}
 @end{Display}
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI22-0020-1]}
+  @ChgAdded{Version=[5],Text=[As this aspect is described with syntax, it has
+  to be given exactly as specified here. That means it cannot be given as a
+  positional aggregate, nor can the order of the elements be changed.
+  For instance, New_Indexed always has to occur before Assign_Indexed,
+  and Empty always has to be first.]}
+@end{Ramification}
+
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],NoPrefix=[T],Text=[The type for which this aspect is
 specified is known as the @i<container type> of the Aggregate
@@ -4380,7 +4395,7 @@ specified.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],Text=[The @nt{name} specified for Empty for an Aggregate
 aspect shall denote a constant of the container type, or denote exactly one
-function with a result type of the container type that has no parameters, or 
+function with a result type of the container type that has no parameters, or
 that has one @key[in] parameter of a signed integer type.]}
 
 @begin{Reason}
@@ -4394,19 +4409,19 @@ that has one @key[in] parameter of a signed integer type.]}
   not required to do so.]}
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[5],Text=[The @SynI{procedure_}@nt{name} specified for
-Add_Unnamed for an Aggregate aspect shall denote a procedure that has
-two parameters, the first
+Add_Unnamed for an Aggregate aspect shall denote exactly one procedure that
+has two parameters, the first
 an @key[in out] parameter of the container type, and the second an @key[in] parameter of
 some nonlimited type, called the @i<element type> of the container
 type.@PDefn2{Term=[element type],Sec=[container aggregate]}]}
 
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[5],Text=[The @SynI{function_}@nt{name} specified for
-New_Indexed for an Aggregate aspect shall denote a function with a result
-type of the container type, and
+New_Indexed for an Aggregate aspect shall denote exactly one function with 
+a result type of the container type, and
 two parameters of the same discrete type, with that type being the @i<key type>
 of the container type.@PDefn2{Term=[key type],Sec=[container aggregate]}]}
 
@@ -4417,13 +4432,13 @@ of the container type.@PDefn2{Term=[key type],Sec=[container aggregate]}]}
   using the Assign_Indexed procedure.]}
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[5],Text=[The @SynI{procedure_}@nt{name} specified for
-Add_Named or Assign_Indexed for an Aggregate aspect shall denote a procedure
-that has three parameters, the first an @key[in out] parameter of the container
-type, the second an @key[in] parameter of a nonlimited type (the @i<key type> of
-the container type), and the third, an @key[in] parameter of a nonlimited type
-that is called the @i<element type> of the container
+Add_Named or Assign_Indexed for an Aggregate aspect shall denote exactly one
+procedure that has three parameters, the first an @key[in out] parameter of
+the container type, the second an @key[in] parameter of a nonlimited type (the
+@i<key type> of the container type), and the third, an @key[in] parameter of a
+nonlimited type that is called the @i<element type> of the container
 type.@PDefn2{Term=[key type],Sec=[container aggregate]}@PDefn2{Term=[element type],Sec=[container aggregate]}]}
 
 @end{Resolution}
@@ -4450,7 +4465,7 @@ type.]}
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0388-1]}
 @ChgAdded{Version=[5],Text=[The Aggregate aspect is nonoverridable (see
-@RefSecNum{Aspect Specifications}).]}
+@RefSecNum{Aspect Specifications}).@Defn2{Term=[nonoverridable aspect],Sec=[Aggregate]}]}
 @end{StaticSem}
 
 @begin{Syntax}
@@ -4515,9 +4530,9 @@ rhs="@Chg{Version=[5],New="
 
 @begin{Resolution}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[5],Text=[The expected type for a @nt{container_aggregate}
-shall be a type for which the Aggregate aspect has been specified. The
+shall be a single type for which the Aggregate aspect has been specified. The
 expected type for each @nt{expression} of a @nt{container_aggregate} is the
 element type of the expected type.]}
 
@@ -4770,10 +4785,10 @@ follows:]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[for a @nt{named_container_aggregate} that is
     an indexed aggregate, the evaluation proceeds as above for the case of
-    Add_Named, but with the Assign_Indexed procedure being invoked instead of 
-    Add_Named; in the case of a @nt{container_element_association} with a <> 
+    Add_Named, but with the Assign_Indexed procedure being invoked instead of
+    Add_Named; in the case of a @nt{container_element_association} with a <>
     rather than an @nt{expression}, the corresponding call on Assign_Indexed
-    is not performed, leaving the component as it was upon return from the 
+    is not performed, leaving the component as it was upon return from the
     New_Indexed function;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -5706,7 +5721,7 @@ either of the above checks fails.
 
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 @Leading@;The conventional meaning of the logical operators is given by the
 following truth table:
 @begin(Display)
@@ -5718,7 +5733,7 @@ following truth table:
 @\False @\True  @\False @\True  @\True
 @\False @\False @\False @\False @\False
 @end(Display)
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@i(Examples of logical operators:)
@@ -6103,7 +6118,7 @@ for any other components not inherited from the parent type.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
 @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0413-1]}
-@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[For a derived type 
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[For a derived type
 whose parent is an untagged
 record type, predefined equality is defined in terms of the primitive (possibly
 user-defined) equals operator of the parent type.]}]}
@@ -6230,8 +6245,8 @@ for those composite types covered earlier) is defined as follows:
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0413-1]}
 @ChgAdded{Version=[3],Text=[If the primitive equals operator for an untagged
 record type is abstract, then Program_Error is raised at the point of any
-@Chg{Version=[5],New=[],Old=[(implicit) ]}call to that abstract 
-subprogram@Chg{Version=[5],New=[@Redundant[, implicitly as part of an equality 
+@Chg{Version=[5],New=[],Old=[(implicit) ]}call to that abstract
+subprogram@Chg{Version=[5],New=[@Redundant[, implicitly as part of an equality
 operation on an enclosing composite object, or in an instance of a generic
 with a formal private type where the actual type is a record type with an
 abstract "="]],Old=[]}.]}
@@ -6332,6 +6347,7 @@ membership test using @key(in)]} yields the result True if:
   primitive equality for the type; otherwise, the test uses predefined equality.]}
 
   @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[We use the predefined equality operator
     if the membership test occurs where the type is nonlimited if the type
     is not a record type or record extension. However, to avoid confusion,
@@ -6487,7 +6503,7 @@ type does @i{not} meet this requirement.]}
 @end{Ramification}
 @end{ImplReq}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01]}
 @ChgDeleted{Version=[2],Text=[No exception is ever raised by a membership test,
 by a predefined ordering operator, or by a predefined equality operator for an
@@ -6500,7 +6516,7 @@ If a composite type has components that depend on discriminants, two values
 of this type have matching components if and only if their
 discriminants are equal. Two nonnull arrays have matching components
 if and only if the length of each dimension is the same for both.
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@i(Examples of expressions involving relational operators and
@@ -6781,7 +6797,7 @@ It is the only one that can return a value having controlled parts.
 @end{Ramification}
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 As for all predefined operators on modular types, the binary adding
 operators + and @en on modular types include a final
 reduction modulo the modulus if the result is outside
@@ -6795,7 +6811,7 @@ the base range can be followed by a conditional subtraction of the modulus.
 Conversely, a check after subtraction to see if a "borrow" was
 performed can be followed by a conditional addition of the modulus.
 @end{ImplNote}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@i(Examples of expressions involving binary adding operators:)
@@ -7669,7 +7685,7 @@ an} @nt{if_expression}@i{:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Text=[Put_Line ("Casey is " & 
+@ChgAdded{Version=[5],Text=[Put_Line ("Casey is " &
       (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
 @end{Example}
 
@@ -7813,7 +7829,7 @@ order specified by the @nt{loop_parameter_specification}]} (see
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[@i<Example
-of a quantified expression as a postcondition for a sorting routine on 
+of a quantified expression as a postcondition for a sorting routine on
 an array A with an index subtype T:>],Old=[The postcondition for a sorting
 routine on an array A with an index subtype T can be written:]}]}
 
@@ -7971,7 +7987,7 @@ the @SynI{body_}@nt{expression} is evaluated. The value of the
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of use of a declare 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of use of a declare
 expression as a replacement postcondition for Ada.@!Containers.@!Vectors.@!"&"
 (see @RefSecNum{The Generic Package Containers.Vectors}):>]}
 
@@ -8319,8 +8335,8 @@ subprogram is not associative. That is, for any arbitrary values of subtype
 @i<Value_Type> @i<A>, @i<B>, @i<C> and a reducer function @i<R>, the result of
 @i<R> (@i<A>, @i<R> (@i<B>, @i<C>)) should produce a result equal to
 @i<R> (@i<R> (@i<A>, @i<B>), @i<C>)); it is a bounded error if @i<R> does not.
-The possible consequences are Program_Error, or a result that does not match 
-the equivalent sequential reduction expression due to the order of calls on 
+The possible consequences are Program_Error, or a result that does not match
+the equivalent sequential reduction expression due to the order of calls on
 the reducer subprogram being unspecified in the overall reduction. Analogous
 rules apply in the case of a reduction
 procedure.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
@@ -8354,7 +8370,7 @@ procedure.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded erro
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of an 
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of an
 expression function that returns its result as a reduction expression:>]}
 
 @begin{Example}
@@ -8375,7 +8391,7 @@ expression that computes the Sine of X using a Taylor expansion:>]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a 
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
 reduction expression that outputs the sum of squares:>]}
 
 @begin{Example}
@@ -8400,8 +8416,8 @@ expression used to compute the value of Pi:>]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a 
-reduction expression used to calculate the sum of elements of an array 
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
+reduction expression used to calculate the sum of elements of an array
 of integers:>]}
 
 @begin{Example}
@@ -8410,7 +8426,7 @@ of integers:>]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a 
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
 reduction expression used to determine if all elements in a two-dimensional
 array of booleans are set to true:>]}
 
@@ -8432,7 +8448,7 @@ integers in parallel:>]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1],ARef=[AI12-0429-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of a parallel reduction
 expression used to calculate the mean of the elements of a two-dimensional
-array of subtype Matrix (see @RefSecNum{Array Types}) that are 
+array of subtype Matrix (see @RefSecNum{Array Types}) that are
 greater than 100.0:>]}
 
 @begin{Example}

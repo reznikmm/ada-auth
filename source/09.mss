@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:53 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.145 $}
+@Comment{$Revision: 1.146 $}
 
 @begin{Intro}
 
@@ -2364,7 +2364,7 @@ corresponding subprogram of each ancestor shall allow blocking.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2],ARef=[AI12-0396-1],ARef=[AI12-0399-1]}
 @ChgAdded{Version=[5],Text=[It is illegal to directly specify aspect Nonblocking
 for the first subtype of the full view of a type that has a partial view. If the
-Nonblocking aspect of the full view is inherited, it shall have the same value as 
+Nonblocking aspect of the full view is inherited, it shall have the same value as
 that of the partial view, or have the value True.]}
 
 @begin{Reason}
@@ -2397,7 +2397,7 @@ same value as the Nonblocking aspect of the subtype identified in the
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
 @ChgAdded{Version=[5],Text=[For an access-to-object type that is nonblocking,
-the Allocate, Deallocate, and Storage_Size operations on its storage pool 
+the Allocate, Deallocate, and Storage_Size operations on its storage pool
 shall be nonblocking.]}
 
 @begin{Ramification}
@@ -2428,9 +2428,9 @@ nonblocking:]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[These rules ensure that if a type is nonblocking, the
     default initialization, finalization, and assignment of the type
-    are also nonblocking. This allows the use of the nonblocking attribute
-    of a generic formal type to describe whether these operations of the type
-    allow blocking.]}
+    are also nonblocking. This ensures that if a generic formal type is
+    nonblocking, all of the basic operations of the actual type are
+    nonblocking.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[Default initialization, finalization, and
@@ -2455,11 +2455,11 @@ it is nonblocking and:]}
 
 @begin{Itemize}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[@i<T> is a record type or record extension 
+    @ChgAdded{Version=[5],Text=[@i<T> is a record type or record extension
       that has a primitive "=" that allows blocking; or]}
 
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[@i<T> is neither a record type nor a record 
+    @ChgAdded{Version=[5],Text=[@i<T> is neither a record type nor a record
       extension, and @i<T> has a predefined "=" that allows blocking.]}
 @end{Itemize}
 @end{Itemize}
@@ -4980,7 +4980,7 @@ environment (such as POSIX).]}
 @ChgAdded{Version=[5],Text=[   @key<function> @AdaSubDefn{Local_Image} (Date : Time;
                          Include_Time_Fraction : Boolean := False)
       @key<return> String @key<is>
-      (Image (Date, Include_Time_Fraction, 
+      (Image (Date, Include_Time_Fraction,
               Time_Zones.Local_Time_Offset (Date)));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5395,7 +5395,7 @@ If Elapsed_Time < 0.0, the result is Image (@key<abs> Elapsed_Time,
 Include_Time_Fraction) prefixed with a minus sign. If @key<abs> Elapsed_Time
 represents 100 hours or more, the result is implementation-defined.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The result of Calendar.Formating.Image if its argument represents more
+Text=[The result of Calendar.Formatting.Image if its argument represents more
 than 100 hours.]}]}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5529,7 +5529,7 @@ be negative.]}
   A program that expects the Ada 2012 definition of Time_Offset would get
   incorrect answers. However, most compilers tested use the revised definition,
   so the likelihood of a program breaking is quite low. Additionally, the new
-  definitions could cause a use clause conflict; see the introduction of 
+  definitions could cause a use clause conflict; see the introduction of
   @RefSecNum{Predefined Language Environment} for more on this topic.]}
 @end{Inconsistent2012}
 
@@ -6131,7 +6131,7 @@ executed after the @nt<abortable_part> is left.
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0098-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0418-1]}
 @ChgAdded{Version=[4],Text=[Note that these examples presume that there are
-abort completion points @Chg{Version=[5],New=[(see 
+abort completion points @Chg{Version=[5],New=[(see
 @RefSecNum{Abort of a Task - Abort of a Sequence of Statements}) ],Old=[]}within
 the execution of the @nt{abortable_part}.]}
 @end{Examples}
@@ -7019,7 +7019,7 @@ subprogram in a parallel iteration context.]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0298-1]}
 @ChgAdded{Version=[5],Text=[When the conflict check policy
-Known_Parallel_Conflict_Checks or All_Parallel_Conflict_Checks applies, the 
+Known_Parallel_Conflict_Checks or All_Parallel_Conflict_Checks applies, the
 implementation may disallow two
 concurrent actions appearing within parallel constructs if the implementation
 can prove they will at run-time denote the same object with uses that conflict.
@@ -7108,7 +7108,7 @@ objects of a type covered by Queue'Class.]}
 
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0178-1]}
-@ChgAdded{Version=[5],Text=[@key(type) Person_Name_Array @key(is array) (Positive @b<range> <>) 
+@ChgAdded{Version=[5],Text=[@key(type) Person_Name_Array @key(is array) (Positive @b<range> <>)
    @key(of) Person_Name;  --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}

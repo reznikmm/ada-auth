@@ -15,7 +15,7 @@
 @FilePrefix{8652}
 @ExampleFont{Fixed}
 @BodyFont{Roman}
-@NoteFormat{Ada95}
+@NoteFormat{ISO2004}
 @ContentsFormat{Ada95}
 @ListFormat{Ada95}
 @SubdivisionNames{Clause}@Comment{For Ada 95 and 2005, use "section" instead}

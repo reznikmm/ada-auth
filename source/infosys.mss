@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2022/03/30 07:20:29 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:54 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -1238,7 +1238,7 @@ if its expanded form exceeds 30 characters.
 @end{Discussion}
 @end{ImplReq}
 
-@begin{Notes}
+@begin{SingleNote}
 @Leading@;The rules for edited output are based on COBOL (ANSI X3.23:1985,
 endorsed by ISO as ISO 1989-1985), with the
 following differences:
@@ -1265,7 +1265,7 @@ To give it a number in the new version, it is marked as an insertion.}
 @ChgRef{Version=[0],Kind=[Added]}@NoPrefix
 @Chg{New=[],Old=[@Noparanum@;]}The value of 30 for Max_Picture_Length is the
 same limit as in COBOL.
-@end{Notes}
+@end{SingleNote}
 
 @begin{Reason}
 There are several reasons we have not adopted the COBOL-style permission to

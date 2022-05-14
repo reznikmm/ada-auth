@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2021/06/12 04:55:54 $ $Author: randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2022/03/30 07:20:29 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:54 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -239,7 +239,7 @@ are not special files or directories are called @i<ordinary files>.
 @ChgAdded{Version=[2],Text=[A @i<file name> is a string identifying an external
 file. Similarly, a
 @i<directory name> is a string identifying a directory. The interpretation of
-file names and directory names is implementation-defined.
+file names and directory names is implementation defined.
 @Defn{directory name}
 @Defn{file name}]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
@@ -345,7 +345,7 @@ directory.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Creates a directory with name
 New_Directory. The Form parameter can be
 used to give system-dependent characteristics of the directory; the
-interpretation of the Form parameter is implementation-defined. A null string
+interpretation of the Form parameter is implementation defined. A null string
 for Form specifies the use of the default options of the implementation of the
 new directory. The exception Name_Error is propagated if the string given as
 New_Directory does not allow the identification of a directory. The exception
@@ -379,7 +379,7 @@ nonexistent directory named by New_Directory is created.@Redundant[ For example,
 typical Unix system, Create_Path ("/usr/me/my"); would create directory "me" in
 directory "usr", then create directory "my" in directory "me".] The Form parameter
 can be used to give system-dependent characteristics of the directory; the
-interpretation of the Form parameter is implementation-defined. A null string
+interpretation of the Form parameter is implementation defined. A null string
 for Form specifies the use of the default options of the implementation of the
 new directory. The exception Name_Error is propagated if the string given as
 New_Directory does not allow the identification of any directory. The exception
@@ -454,7 +454,7 @@ external file with name Source_Name to an external file with name Target_Name.
 The resulting external file is a duplicate of the source external file. The
 Form parameter can be used to give system-dependent characteristics of the
 resulting external file; the interpretation of the Form parameter is
-implementation-defined. Exception Name_Error is propagated if the string given
+implementation defined. Exception Name_Error is propagated if the string given
 as Source_Name does not identify an existing external ordinary or special file,
 or if the string given as Target_Name does not allow the identification of an
 external file. The exception Use_Error is propagated if the external
@@ -525,7 +525,7 @@ files).]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the name of the containing
 directory of the external file
 (including directories) identified by Name. (If more than one directory can
-contain Name, the directory name returned is implementation-defined.) The
+contain Name, the directory name returned is implementation defined.) The
 exception Name_Error is propagated if the string given as Name does not allow
 the identification of an external file. The exception Use_Error is propagated
 if the external file does not have a containing directory.]}
@@ -715,12 +715,12 @@ identification of an existing external file.]}
 external file represented by Name. The size of
 an external file is the number of stream elements contained in the file.
 If the external file is not an ordinary file, the
-result is implementation-defined. The exception Name_Error is propagated if the
+result is implementation defined. The exception Name_Error is propagated if the
 string given as Name does not allow the identification of an existing external
 file. The exception Constraint_Error is propagated if the file size is not a
 value of type File_Size.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-result for Directories.Size for a directory or special file],Old=[]}]}
+result for Directories.Size for a directory or special file.],Old=[]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Trailing],Text=[We allow raising Constraint_Error,
@@ -737,7 +737,7 @@ result for Directories.Size for a directory or special file],Old=[]}]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the time that the
 external file represented by Name was most
 recently modified. If the external file is not an ordinary file, the result is
-implementation-defined. The exception Name_Error is propagated if the string
+implementation defined. The exception Name_Error is propagated if the string
 given as Name does not allow the identification of an existing external file.
 The exception Use_Error is propagated if the external environment does not
 support reading the modification time of the file with the name given by
@@ -799,7 +799,7 @@ Directory for entries matching Pattern@Chg{Version=[3],New=[ and Filter],Old=[]}
 Pattern represents a pattern for matching file names. If Pattern is
 @Chg{Version=[3],New=[the ],Old=[]}null@Chg{Version=[3],New=[ string],Old=[]},
 all items in the directory are matched; otherwise,
-the interpretation of Pattern is implementation-defined. Only items that match
+the interpretation of Pattern is implementation defined. Only items that match
 Filter will be returned. After a successful call on Start_Search, the object
 Search may have entries available, but it may have no entries available if no
 files or directories match Pattern and Filter. The exception Name_Error is
@@ -844,7 +844,7 @@ to Get_Next_Entry for the specified search object, and False otherwise.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the next Directory_Entry
 for the search described by Search
 that matches the pattern and filter. If no further matches are available,
-Status_Error is raised. It is implementation-defined as to whether the results
+Status_Error is raised. It is implementation defined as to whether the results
 returned by this @Chg{Version=[3],New=[subprogram],Old=[routine]} are altered
 if the contents of the directory are
 altered while the Search object is valid (for example, by another program). The
@@ -873,7 +873,7 @@ The subprogram designated by Process is called with each matching entry in
 turn. Pattern represents a pattern for matching file names. If Pattern is
 @Chg{Version=[3],New=[the ],Old=[]}null@Chg{Version=[3],New=[ string],Old=[]},
 all items in the directory are matched;
-otherwise, the interpretation of Pattern is implementation-defined. Only
+otherwise, the interpretation of Pattern is implementation defined. Only
 items that match Filter will be returned.
 The exception Name_Error is propagated if the string given by Directory
 does not identify an existing directory, or if Pattern does not allow the
@@ -897,7 +897,7 @@ Name_Error).]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the simple external name
 of the external file (including
 directories) represented by Directory_Entry. The format of the name returned is
-implementation-defined. The exception Status_Error is propagated if
+implementation defined. The exception Status_Error is propagated if
 Directory_Entry is invalid.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -908,7 +908,7 @@ Directory_Entry is invalid.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the full external name of
 the external file (including
 directories) represented by Directory_Entry. The format of the name returned is
-implementation-defined. The exception Status_Error is propagated if
+implementation defined. The exception Status_Error is propagated if
 Directory_Entry is invalid.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -929,7 +929,7 @@ exception Status_Error is propagated if Directory_Entry is invalid.]}
 file represented by Directory_Entry.
 The size of an external file is the number of stream elements contained in
 the file. If the external file represented by
-Directory_Entry is not an ordinary file, the result is implementation-defined.
+Directory_Entry is not an ordinary file, the result is implementation defined.
 The exception Status_Error is propagated if Directory_Entry is invalid. The
 exception Constraint_Error is propagated if the file size is not a value of
 type File_Size.]}
@@ -942,7 +942,7 @@ type File_Size.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the time that the external
 file represented by Directory_Entry
 was most recently modified. If the external file represented by Directory_Entry
-is not an ordinary file, the result is implementation-defined. The exception
+is not an ordinary file, the result is implementation defined. The exception
 Status_Error is propagated if Directory_Entry is invalid. The exception
 Use_Error is propagated if the external environment does not support
 reading the modification time of the file represented by Directory_Entry.]}
@@ -1320,7 +1320,7 @@ should be deleted first.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0337-1],ARef=[AI12-0433-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the meaning of
   Simple_Name in the case that the parameter is a root directory. This was
-  not previously deescribed.]}
+  not previously described.]}
 @end{Diffword2012}
 
 

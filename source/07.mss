@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:53 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.157 $}
+@Comment{$Revision: 1.158 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1718,7 +1718,7 @@ specified with an @nt{aspect_specification} (see
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0041-1],ARef=[AI12-0150-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0419-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[3],Text=[Type_Invariant'Class@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.
@@ -1757,6 +1757,7 @@ Sec=(invariant expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0150-1],ARef=[AI12-0159-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0199-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[Within an invariant expression, the
 identifier of the first subtype of the associated type denotes the current
 instance of the type.] Within an invariant expression
@@ -2310,7 +2311,7 @@ value.]}
 
 @end{Runtime}
 
-@begin{Notes}
+@begin{SingleNote}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0250-1],ARef=[AI05-0269-1]}
   @ChgAdded{Version=[3],Text=[For a call of a primitive subprogram of type
   @i<NT> that is inherited from type @i<T>, the specified checks of the specific
@@ -2334,7 +2335,7 @@ value.]}
   subprogram.]}
 @end{TheProof}
 
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1],ARef=[AI12-0429-1]}
@@ -2552,8 +2553,7 @@ language-defined assertion aspect may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0419-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[5],Text=[Default_Initial_Condition@\This aspect shall be
 specified by an @nt{expression}, called a @i<default initial condition
 expression>. Default_Initial_Condition may be specified on a
@@ -3264,7 +3264,7 @@ imported constant) the @nt<array_type_definition>.
 @end{Ramification}
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 The full constant declaration for a deferred constant that is of a given
 private type or private extension is not allowed before the corresponding
 @nt{full_type_declaration}. This is a consequence of the freezing
@@ -3281,7 +3281,7 @@ They are also useful for declaring
 access-to-constant objects that designate
 variables declared in the private part of a package.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @leading@keepnext@i{Examples of deferred constant declarations:}
@@ -3509,6 +3509,16 @@ or the @nt{expression} of an @nt{array_component_association} (see
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
 @ChgAdded{Version=[5],Text=[the @Syni{base_}@nt{expression} of a @nt{record_delta_aggregate}
 (see @RefSecNum{Delta Aggregates})]}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[We don't need to mention the
+  @Syni{base_}@nt{expression} of an @nt{array_delta_aggregate}
+  here, as its type cannot be limited (see @RefSecNum{Delta Aggregates}),
+  and thus neither can its @Syni{base_}@nt{expression}. Similarly, we
+  do not need any rules for components of a @nt{delta_aggregate} nor
+  the elements of a @nt{container_aggregate}, as neither are allowed to be
+  limited (see @RefSecNum{Delta Aggregates} and @RefSecNum{Container Aggregates})]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}

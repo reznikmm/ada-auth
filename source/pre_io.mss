@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:54 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -1972,7 +1972,7 @@ input file, the current default output file,
 or the current default error file.
 @end{StaticSem}
 
-@begin{Notes}
+@begin{SingleNote}
 @Leading@;An implementation can define the Form parameter of
 Create and Open to control effects including the following:
 @begin{itemize}
@@ -1982,7 +1982,7 @@ and
 the interpretation of text formats in
 a file created by a foreign program.
 @end{itemize}
-@end{Notes}
+@end{SingleNote}
 
 @LabeledSubClause{Default Input, Output, and Error Files}
 

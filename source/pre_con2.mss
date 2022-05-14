@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2021/07/09 03:01:22 $ $Author: randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1220,8 +1220,10 @@ element in the same container.]}
 Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[3],Text=[Tree'Write for a Tree object @i<T> writes
-Node_Count(@i<T>) - 1 elements of the tree to the stream. It also may write
+Node_Count(@i<T>) - 1 elements of the tree to the stream. It
+@Chg{Version=[5],New=[may ],Old=[]}also@Chg{Version=[5],New=[],Old=[ may]} write
 additional information about the tree.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
@@ -7805,7 +7807,7 @@ elements that have been in the queue at any one time.]}
 
 @end{StaticSem}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0251-1]}
 @ChgAdded{Version=[3],Text=[Unlike other language-defined containers, there are
 no queues whose element types are indefinite. Elements of an indefinite type can
@@ -7825,7 +7827,7 @@ type, or to be an explicit access type that designates the indefinite type.]}
   guess the tag and constraints of the value that will be dequeued (otherwise
   Constraint_Error would be raised), and that is rarely going to be possible.]}
   @end{Reason}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}

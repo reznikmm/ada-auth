@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.92 $ $Date: 2021/06/12 04:55:56 $ $Author: randy $ }
+@comment{ $Revision: 1.93 $ $Date: 2022/03/30 07:20:31 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2021/06/12 04:55:56 $}
+@Comment{$Date: 2022/03/30 07:20:31 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -2478,7 +2478,7 @@ character mapping in Characters.Handling
 (see @refsecnum(The Package Characters.Handling)).
 @end{StaticSem}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0114-1]}
 @ChgAdded{Version=[3],Text=[There are certain characters which are defined to be
 lower case letters by ISO 10646 and are therefore allowed in identifiers, but
@@ -2490,7 +2490,7 @@ are not considered lower case letters by Ada.Strings.Maps.Constants.]}
   Ada 95 definitions of these constants; existing correct programs could break if
   the definitions were changed in a way the programs did not anticipate.]}
 @end{Reason}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
@@ -2742,7 +2742,7 @@ Pure is replaced by
 Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in 
 Strings.Wide_Maps.Wide_Constants.]}
 
-@begin{Notes}
+@begin{SingleNote}
 If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
 
@@ -2752,7 +2752,7 @@ Strings.Wide_Maps.Wide_Constants contains no values outside the Character
 portion of Wide_Character. Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
 any element outside the Character portion of Wide_Character.]}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.134 $}
+@Comment{$Revision: 1.135 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2390,11 +2390,11 @@ these rules about nonoverridable aspects also apply in the private part
 of an instance of a generic unit.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1],ARef=[AI12-0256-1],ARef=[AI12-0373-1]}
-@ChgAdded{Version=[4],Text=[@Redundant[The Default_Iterator, Iterator_Element,
-Implicit_Dereference, Constant_Indexing, @Chg{Version=[5],New=[],Old=[and
-]}Variable_Indexing@Chg{Version=[5],New=[, Aggregate, Max_Entry_Queue_Length, and
-No_Controlled_Parts],Old=[]} aspects are nonoverridable.]]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0206-1],ARef=[AI12-0256-1],ARef=[AI12-0373-1],ARef=[AI12-0437-1]}
+@ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[@Redundant[The
+Default_Iterator, Iterator_Element,
+Implicit_Dereference, Constant_Indexing, and
+Variable_Indexing aspects are nonoverridable.]]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -2409,6 +2409,10 @@ No_Controlled_Parts],Old=[]} aspects are nonoverridable.]]}
   only allowed on task and protected types, and on entries, and there are
   not formal versions of any of those things. In the case of
   No_Controlled_Parts, we defined an assume-the-worst rule with the aspect.],Old=[]}]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0437-1]}
+  @ChgAdded{Version=[5],Text=[A list of all nonoverridable aspects can be found
+  in the index, under @ldquote@;nonoverridable aspect@rdquote.]}
 @end{Discussion}
 
 @end{Legality}
@@ -5272,7 +5276,7 @@ subtype S}, the following attributes are defined:]}
 @end{Description}
 @end{StaticSem}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0237-1]}
@@ -5311,7 +5315,7 @@ We considered allowing or requiring
 @lquotes@;@key[for] S2'Base @key[use] ...@rquotes@; in cases like this,
 but it didn't seem worth the trouble.
 @end{Discussion}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
@@ -5717,7 +5721,7 @@ Text=[The recommended level of support for @nt{record_representation_clause}s
 should be followed.]}]}
 @end{ImplAdvice}
 
-@begin{Notes}
+@begin{SingleNote}
 If no @nt{component_clause} is given for a component, then the
 choice of the storage place for the component is left to the
 implementation. If @nt{component_clause}s are given for all components,
@@ -5750,7 +5754,7 @@ protected outside the protected object (possibly with a pointer to it
 in the protected object), in order to keep implementation-defined
 components out of the way.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @leading@keepnext@i{Example of specifying the layout of a record type:}

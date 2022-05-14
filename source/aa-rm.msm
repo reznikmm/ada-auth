@@ -10,7 +10,7 @@
 @FilePrefix{RM}
 @ExampleFont{Fixed}
 @BodyFont{Roman}
-@NoteFormat{Ada95}
+@NoteFormat{ISO2004}@Comment{Was "Ada95" until just before Ada 202x release}
 @ContentsFormat{Ada95}
 @ListFormat{Ada95}
 @SubdivisionNames{Clause}@Comment{For Ada 95 and 2005, use "section" instead}

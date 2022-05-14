@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.118 $ $Date: 2021/07/09 03:01:22 $ $Author: randy $ }
+@comment{ $Revision: 1.119 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2021/07/09 03:01:22 $}
+@Comment{$Date: 2022/03/30 07:20:30 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -487,15 +487,6 @@ access to fewer global objects.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition of
   strict weak ordering.]}
 @end{DiffWord2005}
-
-@begin{Incompatible2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0339-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
-  new subprograms, types, and even a nested package were added to
-  Containers.Hashed_Maps to better support contracts and stable views. As such, 
-  a use clause conflict is possible; see the introduction of 
-  @RefSecNum{Predefined Language Environment} for more on this topic.]}
-@end{Incompatible2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
@@ -1880,8 +1871,10 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[3],Text=[Vector'Write for a Vector object @i<V> writes
-Length(@i<V>) elements of the vector to the stream. It also may write
+Length(@i<V>) elements of the vector to the stream. It
+@Chg{Version=[5],New=[may ],Old=[]}also@Chg{Version=[5],New=[],Old=[ may]} write
 additional information about the vector.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
@@ -5653,8 +5646,10 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[3],Text=[List'Write for a List object @i<L> writes
-Length(@i<L>) elements of the list to the stream. It also may write
+Length(@i<L>) elements of the list to the stream. It
+@Chg{Version=[5],New=[may ],Old=[]}also@Chg{Version=[5],New=[],Old=[ may]} write
 additional information about the list.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
@@ -7372,7 +7367,9 @@ finalized.]}
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[No storage associated with a doubly-linked List
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+@ChgAdded{Version=[2],Text=[No storage associated with a doubly-linked
+@Chg{Version=[5],New=[list],Old=[List]}
 object shall be lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

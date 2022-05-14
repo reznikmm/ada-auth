@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:04 $}
+@Comment{$Date: 2022/03/30 07:20:28 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -657,7 +657,7 @@ But the character set standard used cannot be older than ISO/IEC 10646:2003
 @end{Discussion}
 @end{ImplPerm}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Chg{Version=[2],New=[The characters in categories @ntf{other_control},
 @ntf{other_private_use}, and @ntf{other_surrogate} are only allowed in comments],
@@ -687,7 +687,7 @@ It is also the intent to allow different fonts:
 reserved words might be in bold face,
 and that should be irrelevant to the semantics.]}
 @end(Discussion)
-@end{Notes}
+@end{SingleNote}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
@@ -925,8 +925,8 @@ From URG recommendation.
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0212-1]}
   @ChgAdded{Version=[5],Text=[Added square brackets and the
-  @nt{target_name} symbol to the list
-  of delimiters (see @RefSecNum{Target Name Symbols}).]}
+  @nt{target_name} symbol (see @RefSecNum{Target Name Symbols}) to
+  the list of delimiters.]}
 @end{DiffWord2012}
 
 

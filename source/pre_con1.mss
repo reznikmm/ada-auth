@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2021/07/09 03:01:22 $ $Author: randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -255,8 +255,10 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[3],Text=[Map'Write for a Map object @i<M> writes
-Length(@i<M>) elements of the map to the stream. It also may write
+Length(@i<M>) elements of the map to the stream. It
+@Chg{Version=[5],New=[may ],Old=[]}also@Chg{Version=[5],New=[],Old=[ may]} write
 additional information about the map.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
@@ -1364,7 +1366,9 @@ finalized.]}
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[No storage associated with a Map object shall be
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+@ChgAdded{Version=[2],Text=[No storage associated with a
+@Chg{Version=[5],New=[map],Old=[Map]} object shall be
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4179,8 +4183,10 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[3],Text=[Set'Write for a Set object @i<S> writes
-Length(@i<S>) elements of the set to the stream. It also may write
+Length(@i<S>) elements of the set to the stream. It
+@Chg{Version=[5],New=[may ],Old=[]}also@Chg{Version=[5],New=[],Old=[ may]} write
 additional information about the set.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
@@ -5461,7 +5467,9 @@ finalized.]}
 @begin{ImplReq}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[No storage associated with a Set object shall be
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+@ChgAdded{Version=[2],Text=[No storage associated with a
+@Chg{Version=[5],New=[set],Old=[Set]} object shall be
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

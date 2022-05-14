@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.133 $ $Date: 2021/03/18 10:02:19 $ $Author: randy $ }
+@comment{ $Revision: 1.134 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2021/03/18 10:02:19 $}
+@Comment{$Date: 2022/03/30 07:20:30 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -11,7 +11,7 @@
 @Defn{embedded systems}
 This Annex specifies additional characteristics of Ada implementations
 intended for real-time systems software. To conform to this Annex, an
-implementation shall also conform to 
+implementation shall also conform to
 @Chg{Version=[5],New=[@RefSec{Systems Programming}],Old=[the Systems Programming Annex]}.
 @end{Intro}
 
@@ -377,9 +377,9 @@ and @RefSecNum{Admission Policies}).]}
 @end{Reason}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0404-1]}
-@Chg{Version=[5],New=[While a task executes],Old=[During]} a protected 
-action on a protected object, @Chg{Version=[5],New=[the],Old=[a]} task 
-inherits the ceiling priority of the protected object (see 
+@Chg{Version=[5],New=[While a task executes],Old=[During]} a protected
+action on a protected object, @Chg{Version=[5],New=[the],Old=[a]} task
+inherits the ceiling priority of the protected object (see
 @RefSecNum{Intertask Communication} and @RefSecNum{Priority Ceiling Locking}).
 
 @end{itemize}
@@ -885,7 +885,7 @@ Old=[The Standard Task Dispatching Policy]}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0299-1]}
-@ChgAdded{Version=[2],Text=[@Redundant[This 
+@ChgAdded{Version=[2],Text=[@Redundant[This
 @Chg{Version=[3],New=[subclause],Old=[clause]} allows a single task
 dispatching policy to be defined for all priorities, or the range of priorities
 to be split into subranges that are assigned individual dispatching
@@ -2276,7 +2276,7 @@ Text=[Any conditions that cause the completion of the setting of the deadline
 of a task to be delayed for a multiprocessor.]}]}
 @end{DocReq}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
@@ -2291,12 +2291,12 @@ specified for the single range, @i<A>..@i<C>]}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0230-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[The above rules
+@ChgDeleted{Version=[5],Text=[@Chg{Version=[2],New=[The above rules
 implement the preemption-level
 protocol (also called Stack Resource Policy protocol) for resource sharing
 under EDF dispatching. The preemption-level for a task is denoted by its base
 priority. The definition of a ceiling preemption-level for a protected object
-follows the existing rules for ceiling locking.]}]}
+follows the existing rules for ceiling locking.],Old=[]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
@@ -2305,7 +2305,7 @@ follows the existing rules for ceiling locking.]}]}
   measure of urgency.]}
 @end{ImplNote}
 
-@end{Notes}
+@end{SingleNote}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
@@ -2492,7 +2492,7 @@ Program_Error is raised if this check fails.
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1],ARef=[AI12-0404-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[If the task dispatching policy
-specified for the ceiling priority of a protected object is 
+specified for the ceiling priority of a protected object is
 EDF_Within_Priorities, the following additional rules apply:]}
 
 @begin{Itemize}
@@ -2514,11 +2514,11 @@ EDF_Within_Priorities, the following additional rules apply:]}
 
   @ChgRef{Version=[5],Kind=[Added]}
   @ChgAdded{Version=[5],Text=[While a task executes a protected action on a
-    protected object @i<P>, it inherits the relative deadline of @i<P>. In this 
-    case, let @i<DF> be 'now' ('now' is obtained via a call on 
-    Ada.Real_Time.Clock at the start of the action) plus the deadline floor of 
-    @i<P>. If the active deadline of the task is later than @i<DF>, its active 
-    deadline is reduced to @i<DF>@Redundant[; the active deadline is unchanged 
+    protected object @i<P>, it inherits the relative deadline of @i<P>. In this
+    case, let @i<DF> be 'now' ('now' is obtained via a call on
+    Ada.Real_Time.Clock at the start of the action) plus the deadline floor of
+    @i<P>. If the active deadline of the task is later than @i<DF>, its active
+    deadline is reduced to @i<DF>@Redundant[; the active deadline is unchanged
     otherwise].]}
 
   @ChgRef{Version=[5],Kind=[Added]}
@@ -2546,7 +2546,7 @@ In this case one of the following applies:]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0404-1]}@ChgNote{Also changed paragraph numbers}
-@ChgAdded{Version=[2],Text=[at any time prior to executing the entry body@Chg{Version=[5],New=[,],Old=[]} 
+@ChgAdded{Version=[2],Text=[at any time prior to executing the entry body@Chg{Version=[5],New=[,],Old=[]}
 Program_Error is raised in the calling task;@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -3032,8 +3032,8 @@ be a static expression no less than -1. If not specified, the aspect has value
 @ChgAdded{Version=[5],Text=[If the Max_Entry_Queue_Length aspect for a type has
 a nonnegative value, the Max_Entry_Queue_Length aspect for every individual
 entry of that type shall not be greater than the value of the aspect for the
-type. The Max_Entry_Queue_Length aspect of a type is nonoverridable (see 
-@RefSecNum{Aspect Specifications}).]}
+type. The Max_Entry_Queue_Length aspect of a type is nonoverridable (see
+@RefSecNum{Aspect Specifications}).@Defn2{Term=[nonoverridable aspect],Sec=[Max_Entry_Queue_Length]}]}
 
   @begin{Ramification}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3170,9 +3170,9 @@ the admission policy for that partition is implementation defined.]}
   @ChgAdded{Version=[5],Text=[Busy-waiting might be used for protected objects
   that can be called from tasks running on other processors than the one the
   protected object is on. It is unnecessary if all of the tasks that can
-  call a protected object are on the same processor as the object; in 
+  call a protected object are on the same processor as the object; in
   particular, it would not be used on a monoprocessor. Aspect CPU (see
-  @RefSecNum{Multiprocessor Implementation}) can be used to ensure that 
+  @RefSecNum{Multiprocessor Implementation}) can be used to ensure that
   busy-waiting is not needed.]}
 @end{Discussion}
 
@@ -5630,7 +5630,7 @@ There may be more than one @nt{pragma} Profile for a partition.]}]}
 @end{Linktime}
 @begin{NotIso}
 @ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph
-7@Chg{Version=[4],New=[ and 8 were],Old=[was]} deleted.>}]}@Comment{This 
+7@Chg{Version=[4],New=[ and 8 were],Old=[was]} deleted.>}]}@Comment{This
 message should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
@@ -7598,7 +7598,7 @@ the program can't do anything useful).]}
   believe such uses are unlikely. In addition, type CPU_Set and function
   Get_CPU_Set, along with an overloaded Create are newly added to this package.
   @Chg{Version=[5],New=[As such, a use clause conflict is possible; see the
-  introduction of @RefSecNum{Predefined Language Environment} for more on this 
+  introduction of @RefSecNum{Predefined Language Environment} for more on this
   topic.],Old=[If Multiprocessors.Dispatching_Domains is
   referenced in a @nt{use_clause},
   and an entity @i<E> with the same @nt{defining_identifier} as a new entity

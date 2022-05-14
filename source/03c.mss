@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/07/09 03:01:22 $}
+@Comment{$Date: 2022/03/30 07:20:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.156 $}
+@Comment{$Revision: 1.157 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -662,9 +662,10 @@ identifies @i(T).
   type conversion.
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
 @PDefn2{Term=[tag of an object], Sec=(object created by an @nt<allocator>)}
 The tag of an object created by an allocator for an
-access type with a specific designated tagged type @i(T),
+access type with a specific designated tagged type @i(T)@Chg{Version=[5],New=[],Old=[,]}
 identifies @i(T).
 @begin{Discussion}
 The tag of an object designated by a
@@ -2464,10 +2465,11 @@ instance of a generic unit.],Old=[]}
 an abstract subprogram, the subprogram shall be a dispatching subprogram.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0073-1],ARef=[AI05-0203-1]}
-The type of an @nt{aggregate}, or of an object created by an
-@nt{object_declaration} or an @nt{allocator},
-or a generic formal object of mode @key[in],
-shall not be abstract.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+The type of an @nt{aggregate}, @Chg{Version=[5],New=[],Old=[or ]}of an object 
+created by an @nt{object_declaration} or an @nt{allocator},
+or @Chg{Version=[5],New=[of ],Old=[]}a generic formal object of 
+mode @key[in], shall not be abstract.
 The type of the target of an assignment
 operation (see @RefSecNum{Assignment Statements}) shall not
 be abstract.

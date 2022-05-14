@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.89 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
+@comment{ $Revision: 1.90 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:07 $}
+@Comment{$Date: 2022/03/30 07:20:30 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1625,8 +1625,10 @@ char16_nul is used instead of nul.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The result of Is_Nul_Terminated is
-True if Item contains char16_nul, and is False otherwise.]}
+True if Item contains @Chg{Version=[5],New=[char32_nul],Old=[char16_nul]}, and is
+False otherwise.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
@@ -2367,7 +2369,7 @@ Execution of Update is erroneous if Check is False and a call with
 Check equal to True would have propagated Update_Error.
 @end{erron}
 
-@begin{Notes}
+@begin{SingleNote}
 New_Char_Array and New_String might be
 implemented either through
 the allocation function from the C environment (@lquotes@;malloc@rquotes@;) or through
@@ -2380,7 +2382,7 @@ that it may be passed to C functions;
 the allocated object should be freed by the programmer via a call of
 Free, not by a called C function.
 @end{itemize}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00242-01]}
@@ -2637,14 +2639,14 @@ Value(Source, Length) is erroneous, or copying writes past the end of
 the array containing the Element designated by Target.
 @end{erron}
 
-@begin{Notes}
+@begin{SingleNote}
 @Leading@;To compose a Pointer from an Element_Array, use 'Access on
 the first element. For example (assuming appropriate instantiations):
 @begin{example}
 Some_Array   : Element_Array(0..5) ;
 Some_Pointer : Pointer := Some_Array(0)'Access;
 @end{example}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@Keepnext@i{Example of Interfaces.C.Pointers:}
@@ -2960,7 +2962,7 @@ deleted.>}]}@Comment{This message should be deleted if the paragraphs
 are ever renumbered.}
 @end{NotIso}
 
-@begin{Notes}
+@begin{SingleNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
@@ -2988,7 +2990,7 @@ Float'Size = Integer'Size:]}
 @ChgAdded{Version=[2],Text=[X : T;
 Y : Integer := X.F2; -- @RI[erroneous]]}
 @end{Example}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}

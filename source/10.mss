@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:54 $}
+@Comment{$Date: 2022/03/30 07:20:29 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1449,7 +1449,7 @@ declarative region of the library package.]}
 
 @end{Legality}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 A @nt<library_item> mentioned in a @Chg{Version=[2],
 New=[@nt{nonlimited_with_clause}],Old=[@nt{with_clause}]} of a compilation unit
@@ -1485,7 +1485,7 @@ declarations of Y or Z visible.
 Note that this does not cause the dreaded visibility holes mentioned
 above.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
@@ -1781,7 +1781,7 @@ For each @nt{body_stub}, there shall be a subunit containing
 the corresponding @nt{proper_body}.
 @end{LinkTime}
 
-@begin{Notes}
+@begin{SingleNote}
 @leading@;The rules in @RefSec{The Compilation Process}
 say that a @nt{body_stub} is equivalent to the corresponding
 @nt{proper_body}. This implies:
@@ -1823,7 +1823,7 @@ The body of a protected operation cannot be a subunit.
 This follows from the syntax rules.
 The body of a protected unit can be a subunit.
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @leading@keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.73 $ $Date: 2021/06/12 04:55:55 $ $Author: randy $ }
+@Comment{ $Revision: 1.74 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:55 $}
+@Comment{$Date: 2022/03/30 07:20:30 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -39,22 +39,21 @@ The @nt[pragma]s Reviewable and Restrictions relate to the other
 requirements addressed by this Annex.
 @end{Intro}
 
-@begin{Notes}
+@begin{SingleNote}
 The @attr[Valid] attribute (see @RefSecNum(The Valid Attribute)) is
 also useful in addressing these needs,
 to avoid problems that could otherwise arise from scalars
 that have values outside their declared range constraints.
-@begin{Discussion}
 
-The Annex tries to provide high assurance rather than language features.
-However, it is not possible, in general, to test for high assurance. For any
-specific language feature, it is possible to demonstrate its presence by a
-functional test, as in the ACVC. One can also check for the presence of some
-documentation requirements, but it is not easy to determine objectively that
-the documentation is @lquotes@;adequate@rquotes@;.
-
-@end{Discussion}
-@end{Notes}
+  @begin{Discussion}
+    The Annex tries to provide high assurance rather than language features.
+    However, it is not possible, in general, to test for high assurance. For
+    any specific language feature, it is possible to demonstrate its presence
+    by a functional test, as in the ACVC. One can also check for the presence
+    of some documentation requirements, but it is not easy to determine
+    objectively that the documentation is @lquotes@;adequate@rquotes@;.
+  @end{Discussion}
+@end{SingleNote}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
@@ -208,35 +207,33 @@ constrained, the constraints shall be documented.]}]}
 
 @end{DocReq}
 
-@begin{Notes}
+@begin{SingleNote}
 Among the situations to be
 documented are the conventions
 chosen for parameter passing, the methods used for the management of
 run-time storage, and the method used to evaluate numeric expressions if
 this involves extended range or extra precision.
-@begin{Discussion}
 
-Look up @lquotes@;unspecified@rquotes@; and @lquotes@;erroneous execution@rquotes@;
-in the index for a list of the cases.
+  @begin{Discussion}
+    Look up @lquotes@;unspecified@rquotes@; and @lquotes@;erroneous execution@rquotes@;
+    in the index for a list of the cases.
 
-The management of run-time storage is particularly important. For safety
-applications, it is often necessary to show that a program cannot raise
-Storage_Error, and for security applications that information cannot leak
-via the run-time system. Users are likely to prefer a simple storage model
-that can be easily validated.
+    The management of run-time storage is particularly important. For safety
+    applications, it is often necessary to show that a program cannot raise
+    Storage_Error, and for security applications that information cannot leak
+    via the run-time system. Users are likely to prefer a simple storage model
+    that can be easily validated.
 
-The documentation could helpfully take into account that users may well
-adopt a subset to avoid some forms of erroneous execution, for instance, not
-using the abort statement, so that the effects of a partly completed
-@nt{assignment_statement} do not have to be considered in the validation of a
-program
-(see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements}).
-For this reason documentation linked to an actual compilation may be
-most useful. Similarly, an implementation may be able to take into
-account use of the Restrictions pragma.
-
-@end{Discussion}
-@end{Notes}
+    The documentation could helpfully take into account that users may well
+    adopt a subset to avoid some forms of erroneous execution, for instance, not
+    using the abort statement, so that the effects of a partly completed
+    @nt{assignment_statement} do not have to be considered in the validation of a
+    program (see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements}).
+    For this reason documentation linked to an actual compilation may be
+    most useful. Similarly, an implementation may be able to take into
+    account use of the Restrictions pragma.
+  @end{Discussion}
+@end{SingleNote}
 
 
 @LabeledClause{Reviewable Object Code}
@@ -790,7 +787,7 @@ and @nt{exception_handler}s are not allowed.
 No language-defined runtime checks are generated;
 however, a runtime check performed automatically by the hardware
 is permitted.@Chg{Version=[5],New=[ The callable entity associated with a
-@nt{procedural_iterator} (see @RefSecNum{Procedural Iterators}) is considered 
+@nt{procedural_iterator} (see @RefSecNum{Procedural Iterators}) is considered
 to not allow exit, independent of the value of its Allows_Exit aspect.],Old=[]}
 
 @begin{Discussion}
@@ -919,7 +916,7 @@ task invokes the same subprogram.
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0079-3]}
   @ChgAdded{Version=[5],Text=[@Defn2{Term=[restrictions],Sec=(No_Unspecified_Globals)}
-    @Defn{No_Unspecified_Globals restriction}No_Unspecified_Globals@\No 
+    @Defn{No_Unspecified_Globals restriction}No_Unspecified_Globals@\No
     library-level entity shall have a Global aspect of Unspecified,
     either explicitly or by default. No library-level entity shall
     have a Global'Class aspect of Unspecified, explicitly or by
@@ -929,7 +926,7 @@ task invokes the same subprogram.
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[Global'Class need not be specified on an
       operation if there are no dispatching calls to the operation, or if all
-      of the dispatching calls are covered by 
+      of the dispatching calls are covered by
       @nt{dispatching_operation_specifier}s for operations with such calls
       (see @RefSecNum{Extensions to Global and Global'Class Aspects}).]}
 @end{Ramification}
@@ -938,20 +935,20 @@ task invokes the same subprogram.
   @ChgAdded{Version=[5],Type=[Leading],Text=[@Defn2{Term=[restrictions],Sec=(No_Hidden_Indirect_Globals)}
     @Defn{No_Hidden_Indirect_Globals restriction}No_Hidden_Indirect_Globals@\When
       within a context where an applicable global aspect is neither
-      Unspecified nor @key[in out all], any execution within such a 
+      Unspecified nor @key[in out all], any execution within such a
       context does neither of the following:]}
 
 @begin{Itemize}
     @ChgRef{Version=[5],Kind=[Added]}
-    @ChgAdded{Version=[5],Text=[Update (or return a writable reference to) 
-      a variable that is reachable via a sequence of zero or more 
+    @ChgAdded{Version=[5],Text=[Update (or return a writable reference to)
+      a variable that is reachable via a sequence of zero or more
       dereferences of access-to-object values from a parameter of a visibly
       access-to-constant type, from a part of a non-access-type formal
-      parameter of mode @key[in] (after any @key[overriding] @en 
-      see @RefSecNum{Extensions to Global and Global'Class Aspects}), or 
+      parameter of mode @key[in] (after any @key[overriding] @en
+      see @RefSecNum{Extensions to Global and Global'Class Aspects}), or
       from a global that has mode @key[in] or is not within the applicable
-      global variable set, unless the initial dereference is of a part of a 
-      formal parameter or global that is visibly of an access-to-variable 
+      global variable set, unless the initial dereference is of a part of a
+      formal parameter or global that is visibly of an access-to-variable
       type;]}
 
     @ChgRef{Version=[5],Kind=[Added]}
@@ -969,48 +966,48 @@ task invokes the same subprogram.
       hidden indirect references are covered by the global or formal
       parameter modes that apply, and are @i{not} subject to
       alternative paths of access (such as aliasing) that could
-      result in conflicts. On the other hand, any visible access-to-object 
+      result in conflicts. On the other hand, any visible access-to-object
       parts are allowed to designate objects that are accessible via
       other means, and side-effects on such objects are permitted if the value
-      is visibly of an access-to-variable type. Such effects do not need to 
-      be covered by the applicable global aspect(s), but are rather for the 
+      is visibly of an access-to-variable type. Such effects do not need to
+      be covered by the applicable global aspect(s), but are rather for the
       caller to worry about.]}
 @end{Ramification}
-     
+
     @ChgRef{Version=[5],Kind=[Added]}
     @ChgAdded{Version=[5],Type=[Leading],NoPrefix=[T],Text=[For the purposes
       of the above rules:]}
 
 @begin{Itemize}
     @ChgRef{Version=[5],Kind=[Added]}
-    @ChgAdded{Version=[5],Text=[a part of an object is @i<visibly of an access 
+    @ChgAdded{Version=[5],Text=[a part of an object is @i<visibly of an access
       type>@Defn{visibly of an access type} if the type
       of the object is declared immediately within the visible part of
       a package specification, and at the point of declaration of the type
       the part is visible and of an access type;]}
 
     @ChgRef{Version=[5],Kind=[Added]}
-    @ChgAdded{Version=[5],Text=[a function @i<returns a writable reference 
+    @ChgAdded{Version=[5],Text=[a function @i<returns a writable reference
       to V>@Defn{returns a writable reference} if it returns a
       result with a part that is visibly of an access-to-variable type
       designating @i<V>; similarly, a function @i<returns a readable
-      reference to V>@Defn{returns a readable reference} if it returns 
+      reference to V>@Defn{returns a readable reference} if it returns
       a result with a part that is visibly of an access-to-constant type
       designating @i<V>;]}
 
     @ChgRef{Version=[5],Kind=[Added]}
     @ChgAdded{Version=[5],Text=[if an applicable global variable set includes
-       a package name, and the collection of some pool-specific access type 
+       a package name, and the collection of some pool-specific access type
        (see @RefSecNum{Completion and Finalization}) is implicitly declared in
-       a part of the declarative region of the package included within the 
-       global variable set, then all objects allocated from that collection 
+       a part of the declarative region of the package included within the
+       global variable set, then all objects allocated from that collection
        are considered included within the global variable set.]}
 @end{Itemize}
 
     @ChgRef{Version=[5],Kind=[Added]}
-    @ChgAdded{Version=[5],NoPrefix=[T],Text=[The consequences of violating the 
+    @ChgAdded{Version=[5],NoPrefix=[T],Text=[The consequences of violating the
       No_Hidden_Indirect_Globals restriction is implementation-defined. Any
-      aspects or other means for identifying such violations prior to or 
+      aspects or other means for identifying such violations prior to or
       during execution are implementation-defined.]}
     @ChgImplDef{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
        Text=[The consequences of violating No_Hidden_Indirect_Globals.]}]}
@@ -1026,7 +1023,7 @@ task invokes the same subprogram.
         an implementation might also endeavor to detect most violations,
         perhaps by providing additional aspects, thereby reducing the
         situations which result in erroneous execution. Implementations
-        might detect some but not all violations of the restrictions. 
+        might detect some but not all violations of the restrictions.
         Implementations that completely ignore the restriction should
         treat the restriction as an unsupported capability of
         @RefSec{High Integrity Systems}.]}
@@ -1236,7 +1233,7 @@ to a nonstandard mode, which is irrelevant in the Standard.}
 Text=[@ChgDeleted{Version=[2],
 Text=[Any restrictions on pragma Restrictions.]}]}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[Uses of @Syni{restriction_parameter_}@nt{identifier}
 No_Dependence defined in @RefSecNum{Language-Defined Restrictions and Profiles}:
@@ -1258,9 +1255,9 @@ systems.]}
   avoided.]}@ChgNote{Moved down from above.}
 @end{Discussion}
 
-@end{Notes}
+@end{SingleNote}
 
-@begin{comment}
+@begin{comment}@Comment{The following is not used; not sure why it was left here - RLB - 2/2/22}
 @begin{Notes}
 The standard mode for pragma Restrictions is that a
 compilation unit
@@ -1378,8 +1375,8 @@ type-related, operational aspect may be specified:]}
 @begin{Description}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[No_Controlled_Parts@\The type of this aspect
-  is Boolean. If True, the type and any descendants shall not have any 
-  controlled parts. If specified, the value of the expression shall be 
+  is Boolean. If True, the type and any descendants shall not have any
+  controlled parts. If specified, the value of the expression shall be
   static. If not specified, the value of
   this aspect is False.@AspectDefn{No_Controlled_Parts}]}
 
@@ -1389,12 +1386,12 @@ type-related, operational aspect may be specified:]}
 @end{Description}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
-@ChgAdded{Version=[5],Text=[The No_Controlled_Parts aspect is nonoverridable 
-(see @RefSecNum{Aspect Specifications}).]}
+@ChgAdded{Version=[5],Text=[The No_Controlled_Parts aspect is nonoverridable
+(see @RefSecNum{Aspect Specifications}).@Defn2{Term=[nonoverridable aspect],Sec=[No_Controlled_Parts]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
-  @ChgAdded{Version=[5],Text=[Since this is a Boolean-valued aspect, the 
+  @ChgAdded{Version=[5],Text=[Since this is a Boolean-valued aspect, the
   blanket restrictions defined by @RefSecNum{Aspect Specifications}
   apply to the specification of Boolean-valued aspects on descendants of
   types with such aspects. But we still need rules about inheritance from
@@ -1410,14 +1407,14 @@ type-related, operational aspect may be specified:]}
 @ChgAdded{Version=[5],Text=[If No_Controlled_Parts is True for a type, no
 component of the type shall have a controlled part nor shall the type itself be
 controlled. For the purposes of this rule, a type has a controlled part if its
-full type has a controlled part; this is applied recursively. In addition to 
+full type has a controlled part; this is applied recursively. In addition to
 the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}), this rule also applies in the private
 part of an instance of a generic unit.@PDefn{generic contract issue}]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
-  @ChgAdded{Version=[5],Text=[This check breaks privacy by looking at the 
+  @ChgAdded{Version=[5],Text=[This check breaks privacy by looking at the
     full definition of all of the types involved. This is more like a
     representation aspect than an operational aspect, but representation
     aspects are not allowed on partial views and we need this aspect
@@ -1425,11 +1422,11 @@ part of an instance of a generic unit.@PDefn{generic contract issue}]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1],ARef=[AI12-0407-1]}
-@ChgAdded{Version=[5],Text=[When enforcing the above rule within a generic 
-body @i<G> or within the body of a generic unit declared within the 
+@ChgAdded{Version=[5],Text=[When enforcing the above rule within a generic
+body @i<G> or within the body of a generic unit declared within the
 declarative region of generic unit @i<G>, a generic formal private type of
 @i<G> and a generic formal derived type of @i<G> whose ancestor is a tagged
-type whose No_Controlled_Parts aspect is False are considered to have a 
+type whose No_Controlled_Parts aspect is False are considered to have a
 controlled part.]}
 
 @begin{Reason}
@@ -1439,8 +1436,8 @@ controlled part.]}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0407-1]}
-  @ChgAdded{Version=[5],Text=[If the ancestor of the generic derived type is 
-    class-wide, the aspect in question belongs to the specific type associated 
+  @ChgAdded{Version=[5],Text=[If the ancestor of the generic derived type is
+    class-wide, the aspect in question belongs to the specific type associated
     with the class-wide type.]}
 @end{Honest}
 
@@ -1523,8 +1520,8 @@ and need not be detected.]}
 @end{Extend95}
 
 @begin{Extend2012}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI12-0267-1]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Pragma Detect_Blocking now applies to parallel constructs as well as
   protected actions.]}
 @end{Extend2012}
@@ -1673,7 +1670,7 @@ then this exception could be handled within a library unit.]}
 @LabeledAddedClause{Version=[5],Name=[Extensions to Global and Global'Class Aspects]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[In addition to the entities specified in 
+@ChgAdded{Version=[5],Text=[In addition to the entities specified in
 @RefSecNum{The Global and Global'Class Aspects}, the Global aspect may be
 specified for a subtype (including a formal subtype), formal package,
 formal subprogram, and formal object of an anonymous
@@ -1683,41 +1680,41 @@ access-to-subprogram type.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0380-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following additional syntax is
-provided to override the mode of a formal parameter to reflect indirect 
-effects on variables reachable from the formal parameter by one or more 
+provided to override the mode of a formal parameter to reflect indirect
+effects on variables reachable from the formal parameter by one or more
 access-value dereferences:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<extended_global_mode>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
     @key[overriding] @Syn2{basic_global_mode}>,Old=<>}"}
-     
+
 @end{Syntax}
 
 @begin{Resolution}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[The @SynI{object_}@nt{name} that is associated with 
-an @key[overriding] mode shall resolve to statically denote a formal object, or 
+@ChgAdded{Version=[5],Text=[The @SynI{object_}@nt{name} that is associated with
+an @key[overriding] mode shall resolve to statically denote a formal object, or
 a formal parameter of the associated entity.]}
 @end{Resolution}
 
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[The presence of the reserved word @b<overriding>
-in a global mode indicates that the specification is overriding the mode of a 
+in a global mode indicates that the specification is overriding the mode of a
 formal parameter with another mode to reflect the overall effect of an
 invocation of the callable entity on the state associated with the
 corresponding actual parameter.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
 @ChgAdded{Version=[5],Text=[@Redundant[As described in
-@RefSecNum{The Global and Global'Class Aspects}, the following rules are 
-defined in terms of operations that are performed by or on behalf of 
+@RefSecNum{The Global and Global'Class Aspects}, the following rules are
+defined in terms of operations that are performed by or on behalf of
 an entity.]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0431-1]}
-@ChgAdded{Version=[5],Text=[The Global aspect for a subtype identifies the 
-global variables that might be referenced during default initialization, 
+@ChgAdded{Version=[5],Text=[The Global aspect for a subtype identifies the
+global variables that might be referenced during default initialization,
 adjustment as part of
 assignment, finalization of an object of the subtype, or conversion to
 the subtype, including the evaluation of any assertion expressions that
@@ -1725,24 +1722,24 @@ apply. If not specified for the first subtype of a derived type, the
 aspect defaults to that of the ancestor subtype; if not specified for a
 nonderived composite first subtype the aspect defaults to that of the enclosing
 library unit; if not specified for a nonderived elementary first subtype (or
-scalar base subtype), the aspect defaults to @key[null] in the absence of 
-a predicate (or when the predicate is statically True), and to that of 
+scalar base subtype), the aspect defaults to @key[null] in the absence of
+a predicate (or when the predicate is statically True), and to that of
 the enclosing library unit
 otherwise. If not specified for a nonfirst subtype @i<S>, the Global
 aspect defaults to that of the subtype identified in the
 @nt{subtype_indication} defining @i<S>.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[The Global'Class aspect may be specified for the 
+@ChgAdded{Version=[5],Text=[The Global'Class aspect may be specified for the
 first subtype of a tagged type @i<T>, indicating an upper bound on the Global
 aspect of any descendant of @i<T>. If not specified, it defaults to Unspecified.]}
 @end{StaticSem}
 
 @begin{Legality}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[For a tagged subtype @i<T>, each mode of its 
-Global aspect shall identify a subset of the variables identified either by the 
-corresponding mode, or by the @key[in out] mode, of the Global'Class aspect 
+@ChgAdded{Version=[5],Text=[For a tagged subtype @i<T>, each mode of its
+Global aspect shall identify a subset of the variables identified either by the
+corresponding mode, or by the @key[in out] mode, of the Global'Class aspect
 of the first subtype of any ancestor of @i<T>.]}
 @end{Legality}
 
@@ -1756,7 +1753,7 @@ of the first subtype of any ancestor of @i<T>.]}
 @LabeledAddedSubClause{Version=[5],Name=[The Use_Formal and Dispatching Aspects]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
-@ChgAdded{Version=[5],Text=[The Use_Formal and Dispatching aspects are 
+@ChgAdded{Version=[5],Text=[The Use_Formal and Dispatching aspects are
 provided to more precisely
 describe the use of generic formal parameters and dispatching calls
 within the execution of an operation, enabling more precise checking
@@ -1772,7 +1769,7 @@ the associated entity:@Defn2{Term=[used],Sec=[generic formal parameters]}]}
 
 @begin{Description}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Use_Formal@\The aspect is specified 
+@ChgAdded{Version=[5],Type=[Leading],Text=[Use_Formal@\The aspect is specified
 with a @nt{formal_parameter_set}, with the following form:@AspectDefn{Use_Formal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Use_Formal],
@@ -1785,11 +1782,11 @@ rhs="@Chg<Version=[5],New=<
     @Syn2{formal_group_designator}
   | @Syn2{formal_parameter_name}
   | (@Syn2[formal_parameter_name]{, @Syn2[formal_parameter_name]})>,Old=<>>">
-          
+
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<formal_group_designator>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<@key[null] | @key[all]>,Old=<>}"}
-          
+
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<formal_parameter_name>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
@@ -1801,7 +1798,7 @@ rhs="@Chg{Version=[5],New=<
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0380-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For any declaration for which a
-global or Nonblocking aspect may be specified, other than for a library 
+global or Nonblocking aspect may be specified, other than for a library
 package, a generic library package, or a generic formal, the following aspect
 may be specified:]}
 
@@ -1820,7 +1817,7 @@ with the following form:@AspectDefn{Dispatching}]}
 rhs="@Chg<Version=[5],New=<
     @Syn2[dispatching_operation_specifier]
   | (@Syn2[dispatching_operation_specifier]{, @Syn2[dispatching_operation_specifier]})>,Old=<>>">
-          
+
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<dispatching_operation_specifier>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
@@ -1831,15 +1828,15 @@ rhs="@Chg{Version=[5],New=<
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
 @ChgAdded{Version=[5],Text=[A @nt{formal_parameter_name} in a Use_Formal
-aspect shall resolve to statically denote a formal subtype, a formal 
-subprogram, or a formal object of an anonymous access-to-subprogram 
+aspect shall resolve to statically denote a formal subtype, a formal
+subprogram, or a formal object of an anonymous access-to-subprogram
 type@Redundant[ of an enclosing generic unit or visible formal package].]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
-@ChgAdded{Version=[5],Text=[The @Syni{object_}@nt{name} of a 
-@nt{dispatching_operation_specifier} shall resolve to statically name an 
+@ChgAdded{Version=[5],Text=[The @Syni{object_}@nt{name} of a
+@nt{dispatching_operation_specifier} shall resolve to statically name an
 object (including possibly a formal parameter) of a tagged class-wide type
-@i<T>'Class, or of an access type designating a tagged class-wide type 
+@i<T>'Class, or of an access type designating a tagged class-wide type
 @i<T>'Class; the @SynI<dispatching_operation_>@nt{name} of
 the @nt{dispatching_operation_specifier} shall resolve to statically denote
 a dispatching operation associated with @i<T>.]}
@@ -1849,10 +1846,10 @@ a dispatching operation associated with @i<T>.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
 @ChgAdded{Version=[5],Text=[The @i{formal parameter set}@Defn{formal parameter set}
-is identified by a set of @nt{formal_parameter_name}s. Alternatively, the 
-reserved word @key[null] may be used to indicate none of the generic formal 
-parameters, or @key[all] to indicate all of the generic formal parameters, of 
-any enclosing generic unit (or visible formal package) might be used within 
+is identified by a set of @nt{formal_parameter_name}s. Alternatively, the
+reserved word @key[null] may be used to indicate none of the generic formal
+parameters, or @key[all] to indicate all of the generic formal parameters, of
+any enclosing generic unit (or visible formal package) might be used within
 the execution of the operation. If there is no formal parameter set
 specified for an entity declared within a generic unit, it defaults
 to @key[all].]}
@@ -1864,7 +1861,7 @@ that the Nonblocking and global effects of dispatching calls that match one
 of the specifiers need not be accounted for by the Nonblocking
 or global aspect, but are instead to be accounted for by the
 invoker of the operation. A dispatching call matches a
-@nt{dispatching_operation_specifier} if the @nt{name} or @nt{prefix} of the 
+@nt{dispatching_operation_specifier} if the @nt{name} or @nt{prefix} of the
 call statically denotes the same operation(s) as that of the
 @nt{dispatching_operation_specifier}, and at least one of the objects
 controlling the call is denoted by, or designated by, a @nt{name} that
@@ -1883,17 +1880,17 @@ of the @nt{dispatching_operation_specifier}.]}
 @end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0404-1]}
-@ChgAdded{Version=[5],Text=[In the absence of any 
-@nt{dispatching_operation_specifier}s, or if none of them 
+@ChgAdded{Version=[5],Text=[In the absence of any
+@nt{dispatching_operation_specifier}s, or if none of them
 match a dispatching call @i<C> within an operation @i<P>,
 Nonblocking and global aspects checks are performed at the point of the call
 @i<C> within @i<P> using the Nonblocking and Global'Class aspects that
-apply to the dispatching operation named in call @i<C>. If there is a 
-match, any global access or potential blocking within the subprogram body 
-invoked by the call @i<C> is ignored at the point of call within @i<P>. Instead, 
-when the operation @i<P> itself is invoked, Nonblocking and global aspect checks 
-are performed presuming each named dispatching operation is called at least 
-once (with the named object controlling the call), but similarly ignoring 
+apply to the dispatching operation named in call @i<C>. If there is a
+match, any global access or potential blocking within the subprogram body
+invoked by the call @i<C> is ignored at the point of call within @i<P>. Instead,
+when the operation @i<P> itself is invoked, Nonblocking and global aspect checks
+are performed presuming each named dispatching operation is called at least
+once (with the named object controlling the call), but similarly ignoring
 those dispatching calls that would match a @nt{dispatching_operation_specifier}
 applicable at the point of invocation of @i<P>.]}
 
@@ -1902,9 +1899,9 @@ applicable at the point of invocation of @i<P>.]}
 @begin{Legality}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
-@ChgAdded{Version=[5],Text=[Within an operation to which a Use_Formal aspect 
+@ChgAdded{Version=[5],Text=[Within an operation to which a Use_Formal aspect
 applies, if the formal parameter set is anything but @key[all], then the only
-generic formal subtypes that may be used, the only formal subprograms that 
+generic formal subtypes that may be used, the only formal subprograms that
 may be called, and the only formal objects of an anonymous
 access-to-subprogram type that may be dereferenced as part of a call
 or passed as the actual for an access parameter, are those included in
@@ -1912,14 +1909,14 @@ the formal parameter set.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
 @ChgAdded{Version=[5],Text=[When an operation (or instance thereof) to which
-a Use_Formal aspect applies is invoked, Nonblocking and global aspect checks 
+a Use_Formal aspect applies is invoked, Nonblocking and global aspect checks
 are performed presuming each generic formal parameter (or corresponding actual
 parameter) of the formal parameter set is used at least once.]}
 @end{Legality}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0430-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i<An example of use of the 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i<An example of use of the
 Dispatching aspect:>]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1931,8 +1928,8 @@ Dispatching aspect:>]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0430-1]}
-@ChgAdded{Version=[5],Text=[@i<For examples of use of the 
-Use_Formal aspect, see the Element functions of 
+@ChgAdded{Version=[5],Text=[@i<For examples of use of the
+Use_Formal aspect, see the Element functions of
 Hashed_Sets in @RefSecNum{The Generic Package Containers.Hashed_Sets}.>]}
 
 

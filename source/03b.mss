@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:52 $}
+@Comment{$Date: 2022/03/30 07:20:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @LabeledClause{Array Types}
 
@@ -1811,21 +1811,20 @@ value imposed by the constraint for the associated discriminant.
 
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 The rules of the language ensure that
 a discriminant of an object always has a value, either
 from explicit or implicit initialization.
-@begin(Discussion)
-Although it is illegal to constrain a class-wide tagged subtype, it
-is possible to have a partially constrained class-wide
-subtype: If the subtype S is defined by T(A => B),
-then S'Class is partially constrained in the sense that objects of
-subtype S'Class have to have discriminants corresponding
-to A equal to B,
-but there can be other discriminants defined
-in extensions that are not constrained to any particular value.
-@end(Discussion)
-@end{Notes}
+  @begin(Discussion)
+     Although it is illegal to constrain a class-wide tagged subtype, it
+     is possible to have a partially constrained class-wide
+     subtype: If the subtype S is defined by T(A => B),
+     then S'Class is partially constrained in the sense that objects of
+     subtype S'Class have to have discriminants corresponding
+     to A equal to B, but there can be other discriminants defined
+     in extensions that are not constrained to any particular value.
+  @end(Discussion)
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
