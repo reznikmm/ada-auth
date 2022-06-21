@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -171,21 +171,21 @@ expression.)
 @begin{Examples}
 @leading@keepnext@i{Examples of generic formal parts:}
 @begin{Example}
-@key[generic]     --@RI{  parameterless }
+@key[generic]     --@ExamCom{  parameterless }
 
 @key[generic]
-   Size : Natural;  --@RI{  formal object }
+   Size : Natural;  --@ExamCom{  formal object }
 
 @key[generic]
-   Length : Integer := 200;          --@RI{ formal object with a default expression}
+   Length : Integer := 200;          --@ExamCom{ formal object with a default expression}
 
-   Area   : Integer := Length*Length; --@RI{ formal object with a default expression}
+   Area   : Integer := Length*Length; --@ExamCom{ formal object with a default expression}
 
 @key[generic]
-   @key[type] Item  @key[is] @key[private];                       --@RI{ formal type}
-   @key[type] Index @key[is] (<>);                          --@RI{ formal type}
-   @key[type] Row   @key[is] @key[array](Index @key[range] <>) @key[of] Item; --@RI{ formal type}
-   @key[with] @key[function] "<"(X, Y : Item) @key[return] Boolean;    --@RI{ formal subprogram }
+   @key[type] Item  @key[is] @key[private];                       --@ExamCom{ formal type}
+   @key[type] Index @key[is] (<>);                          --@ExamCom{ formal type}
+   @key[type] Row   @key[is] @key[array](Index @key[range] <>) @key[of] Item; --@ExamCom{ formal type}
+   @key[with] @key[function] "<"(X, Y : Item) @key[return] Boolean;    --@ExamCom{ formal subprogram }
 @end{Example}
 
 @begin{WideAbove}
@@ -296,8 +296,8 @@ is always the completion of a declaration.
 @begin{Examples}
 @leading@keepnext@i{Example of a generic procedure body:}
 @begin{Example}
-@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@RI{ see @RefSecNum{Generic Declarations}}
-   T : Elem;  --@RI{  the generic formal type}
+@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@ExamCom{ see @RefSecNum{Generic Declarations}}
+   T : Elem;  --@ExamCom{  the generic formal type}
 @key[begin]
    T := U;
    U := V;
@@ -309,9 +309,9 @@ is always the completion of a declaration.
 @leading@keepnext@i{Example of a generic function body:}
 @end{WideAbove}
 @begin{Example}
-@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
+@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@ExamCom{  see @RefSecNum{Generic Declarations}}
 @key[begin]
-   @key[return] X*X;  --@RI{  the formal operator "*"}
+   @key[return] X*X;  --@ExamCom{  the formal operator "*"}
 @key[end] Squaring;
 @end{Example}
 
@@ -319,10 +319,10 @@ is always the completion of a declaration.
 @leading@keepnext@i{Example of a generic package body:}
 @end{WideAbove}
 @begin{Example}
-@key[package] @key[body] On_Vectors @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
+@key[package] @key[body] On_Vectors @key[is]  --@ExamCom{  see @RefSecNum{Generic Declarations}}
 
    @key[function] Sum(A, B : Vector) @key[return] Vector @key[is]
-      Result : Vector(A'Range); --@RI{  the formal type Vector}
+      Result : Vector(A'Range); --@ExamCom{  the formal type Vector}
       Bias   : @key[constant] Integer := B'First - A'First;
    @key[begin]
       @key[if] A'Length /= B'Length @key[then]
@@ -330,16 +330,16 @@ is always the completion of a declaration.
       @key[end] @key[if];
 
       @key[for] N @key[in] A'Range @key[loop]
-         Result(N) := Sum(A(N), B(N + Bias)); --@RI{ the formal function Sum}
+         Result(N) := Sum(A(N), B(N + Bias)); --@ExamCom{ the formal function Sum}
       @key[end] @key[loop];
       @key[return] Result;
    @key[end] Sum;
 
    @key[function] Sigma(A : Vector) @key[return] Item @key[is]
-      Total : Item := A(A'First); --@RI{  the formal type Item}
+      Total : Item := A(A'First); --@ExamCom{  the formal type Item}
    @key[begin]
       @key[for] N @key[in] A'First + 1 .. A'Last @key[loop]
-         Total := Sum(Total, A(N)); --@RI{  the formal function Sum}
+         Total := Sum(Total, A(N)); --@ExamCom{  the formal function Sum}
       @key[end] @key[loop];
       @key[return] Total;
    @key[end] Sigma;
@@ -677,7 +677,7 @@ components of the @nt{record_extension_part} shall be nonlimited.@rquotes
 @key[package] G1 @key[is]
     @key[type] Extension @key[is] @key[new] Parent @key[with]
         @key[record]
-            C : Comp; --@RI{ Illegal!}
+            C : Comp; --@ExamCom{ Illegal!}
         @key[end] @key[record];
 @key[end] G1;
 @end{Example}
@@ -692,12 +692,12 @@ the instance, because the generic itself is illegal.
 @leading@;On the other hand:
 @begin{Example}
 @key[generic]
-    @key[type] Parent @key[is] @key[tagged] @key[limited] @key[private]; --@RI{ Parent is limited.}
+    @key[type] Parent @key[is] @key[tagged] @key[limited] @key[private]; --@ExamCom{ Parent is limited.}
     @key[type] Comp @key[is] @key[limited] @key[private];
 @key[package] G2 @key[is]
     @key[type] Extension @key[is] @key[new] Parent @key[with]
         @key[record]
-            C : Comp; --@RI{ OK.}
+            C : Comp; --@ExamCom{ OK.}
         @key[end] @key[record];
 @key[end] G2;
 
@@ -712,7 +712,7 @@ the instance, because the generic itself is illegal.
 @key[package] Good_2 @key[is] @key[new] G2(Parent => Non_Limited_Tagged,
                          Comp => Non_Limited_Untagged);
 @key[package] Bad  @key[is] @key[new] G2(Parent => Non_Limited_Tagged,
-                         Comp => Limited_Untagged); --@RI{ Illegal!}
+                         Comp => Limited_Untagged); --@ExamCom{ Illegal!}
 @end{Example}
 
 The first instantiation is legal,
@@ -944,7 +944,7 @@ declaration of the actual.
     @key[type] Formal @key[is new] T1@Chg{Version=[5],New=[ @key[with private]],Old=[]};
 @key[package] G @key[is]
     @key[type] Derived_From_Formal @key[is] @key[new] Formal @key[with] @key[record] ... @key[end] @key[record];
-    @key[procedure] Foo(X : @key[in] Derived_From_Formal); --@RI{ Does not override anything.}
+    @key[procedure] Foo(X : @key[in] Derived_From_Formal); --@ExamCom{ Does not override anything.}
 @key[end] G;
 
 @key[type] T2 @key[is] @key[new] T1 @key[with] @key[record] ... @key[end] @key[record];
@@ -1051,9 +1051,9 @@ described in @RefSecNum{Visibility}.
     @key[type] Formal @key[is] @key[new] Ancestor @key[with] @key[private];
 @key[package] G @key[is]
     @key[type] T @key[is] @key[new] Formal @key[with] @key[null] @key[record];
-    @key[procedure] P(X : @key[in] T); --@RI{ (1)}
+    @key[procedure] P(X : @key[in] T); --@ExamCom{ (1)}
 @key[private]
-    @key[procedure] Q(X : @key[in] T); --@RI{ (2)}
+    @key[procedure] Q(X : @key[in] T); --@ExamCom{ (2)}
 @key[end] G;
 
 @key[type] Actual @key[is] @key[new] Ancestor @key[with] @key[null] @key[record];
@@ -1144,7 +1144,7 @@ these subprograms from outside the instance are ambiguous. For example:
 @key[end] G;
 
 @key[package] P @key[is] @key[new] G(A => Boolean, B => Boolean);
---@RI{ All calls of P.Next are ambiguous.}
+--@ExamCom{ All calls of P.Next are ambiguous.}
 @end{Example}
 @end{Ramification}
 @begin{Ramification}
@@ -1154,17 +1154,17 @@ substitution of formals and actuals:
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @key[generic]
     @key[type] T1 @key[is] @key[private];
-    --@RI{ A predefined "=" operator is implicitly declared here:}
-    --@RI{ function "="(Left, Right : T1) return Boolean;}
-    --@RI{ Call this "="@-{1}.}@Chg{Version=[5],New=[
+    --@ExamCom{ A predefined "=" operator is implicitly declared here:}
+    --@ExamCom{ function "="(Left, Right : T1) return Boolean;}
+    --@ExamCom{ Call this "="@-{1}.}@Chg{Version=[5],New=[
     ...],Old=[]}
 @key[package] G @key[is]
-    @key[subtype] S1 @key[is] T1; --@RI{ So we can get our hands on the type from}
-                      --@RI{ outside an instance.}
+    @key[subtype] S1 @key[is] T1; --@ExamCom{ So we can get our hands on the type from}
+                      --@ExamCom{ outside an instance.}
     @key[type] T2 @key[is] @key[new] T1;
-    --@RI{ An inherited "=" operator is implicitly declared here:}
-    --@RI{ function "="(Left, Right : T2) return Boolean;}
-    --@RI{ Call this "="@-{2}.}
+    --@ExamCom{ An inherited "=" operator is implicitly declared here:}
+    --@ExamCom{ function "="(Left, Right : T2) return Boolean;}
+    --@ExamCom{ Call this "="@-{2}.}
 
     T1_Obj : T1 := ...;
     Bool_1 : Boolean := T1_Obj = T1_Obj;
@@ -1177,20 +1177,20 @@ substitution of formals and actuals:
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @key[package] P @key[is]
     @key[type] My_Int @key[is] @key[new] Integer;
-    --@RI{ A predefined "=" operator is implicitly declared here:}
-    --@RI{ function "="(Left, Right : My_Int) return Boolean;}
-    --@RI{ Call this "="@-{3}.}
+    --@ExamCom{ A predefined "=" operator is implicitly declared here:}
+    --@ExamCom{ function "="(Left, Right : My_Int) return Boolean;}
+    --@ExamCom{ Call this "="@-{3}.}
     @key[function] "="(X, Y : My_Int) @key[return] Boolean;
-    --@RI{ Call this "="@-{4}.}
-    --@RI{ "="@-{3} is hidden from all visibility by "="@-{4}.}
-    --@RI{ Nonetheless, "="@-{3} can @lquotes@;reemerge@rquotes@; in certain circumstances.}
+    --@ExamCom{ Call this "="@-{4}.}
+    --@ExamCom{ "="@-{3} is hidden from all visibility by "="@-{4}.}
+    --@ExamCom{ Nonetheless, "="@-{3} can @lquotes@;reemerge@rquotes@; in certain circumstances.}
 @key[end] P;
 @key[use] P;
 ...
-@key[package] I @key[is] @key[new] G(T1 => My_Int@Chg{Version=[5],New=[, ...],Old=[]}); --@RI{ "="@-{5} is declared in I (see below).}
+@key[package] I @key[is] @key[new] G(T1 => My_Int@Chg{Version=[5],New=[, ...],Old=[]}); --@ExamCom{ "="@-{5} is declared in I (see below).}
 @key[use] I;
 
-Another_T1_Obj : S1 := 13; --@RI{ Can't denote T1, but S1 will do.}
+Another_T1_Obj : S1 := 13; --@ExamCom{ Can't denote T1, but S1 will do.}
 Bool_3 : Boolean := Another_T1_Obj = Another_T1_Obj;
 
 Another_T2_Obj : T2 := 45;
@@ -1958,7 +1958,7 @@ in @RefSecNum{Formal Private and Derived Types}.]
    @key[type] C @key[is array] (Positive @key[range] <>) @key[of] Q.T;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[package] I @key[is new] Q.G (C); --@RI{ Where is the predefined "=" for C?}
+@ChgAdded{Version=[3],Text=[   @key[package] I @key[is new] Q.G (C); --@ExamCom{ Where is the predefined "=" for C?}
 @key[end] R;]}
 @end{Example}
 
@@ -2017,7 +2017,7 @@ formal integer type:}
 @key[generic]
    @key[type] Rank @key[is] @key[range] <>;
    First  : Rank := Rank'First;
-   Second : Rank := First + 1;  --@RI{  the operator "+" of the type Rank  }
+   Second : Rank := First + 1;  --@ExamCom{  the operator "+" of the type Rank  }
 @end{Example}
 @end{Examples}
 
@@ -2561,7 +2561,7 @@ call. For example:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} NT(<>) @key{is new} T @key{with private};
-    -- @RI[Assume T has operation "]@key{function} Empty @key{return} T;@RI["]
+    -- @ExamCom[Assume T has operation "]@key{function} Empty @key{return} T;@ExamCom["]
 @key{package} G @key{is}
    @key{procedure} Test(X : @key{in out} NT);
 @key{end} G;]}
@@ -2570,14 +2570,14 @@ call. For example:]}
 @ChgAdded{Version=[2],Text=[@key{package body} G @key{is}
    @key{procedure} Test(X : @key{in out} NT) @key{is}
    @key{begin}
-      X := Empty;  -- @RI[Dispatching based on X'Tag takes]
-                   -- @RI[place if actual is class-wide.]
+      X := Empty;  -- @ExamCom[Dispatching based on X'Tag takes]
+                   -- @ExamCom[place if actual is class-wide.]
       @key{declare}
           Y : NT := Empty;
-                   -- @RI[If actual is class-wide, this raises Program_Error]
-                   -- @RI[as there is no tag provided by context.]
+                   -- @ExamCom[If actual is class-wide, this raises Program_Error]
+                   -- @ExamCom[as there is no tag provided by context.]
       @key{begin}
-          X := Y;  -- @RI[We never get this far.]
+          X := Y;  -- @ExamCom[We never get this far.]
       @key{end};
    @key{end} Test;
 @key{end} G;]}
@@ -2876,7 +2876,7 @@ then the actual's components can be either aliased or not.
 @begin{Examples}
 @Leading@Keepnext@i{Example of formal array types:}
 @begin{Example}
---@RI{  given the generic package }
+--@ExamCom{  given the generic package }
 
 @key[generic]
    @key[type] Item   @key[is] @key[private];
@@ -2887,17 +2887,17 @@ then the actual's components can be either aliased or not.
    ...
 @key[end] P;
 
---@RI{  and the types }
+--@ExamCom{  and the types }
 
 @key[type] Mix    @key[is] @key[array] (Color @key[range] <>) @key[of] Boolean;
 @key[type] Option @key[is] @key[array] (Color) @key[of] Boolean;
 
---@RI{  then Mix can match Vector and Option can match Table }
+--@ExamCom{  then Mix can match Vector and Option can match Table }
 
 @key[package] R @key[is] @key[new] P(Item   => Boolean, Index => Color,
                    Vector => Mix,     Table => Option);
 
---@RI{  Note that Mix cannot match Table and Option cannot match Vector}
+--@ExamCom{  Note that Mix cannot match Table and Option cannot match Vector}
 @end{Example}
 @end{Examples}
 
@@ -2998,7 +2998,7 @@ Old=[@Defn2{Term=[mode conformance],Sec=(required)}]}
 @begin{Examples}
 @Leading@keepnext@i{Example of formal access types:}
 @begin{Example}
---@RI{  the formal types of the generic package }
+--@ExamCom{  the formal types of the generic package }
 
 @key[generic]
    @key[type] Node @key[is] @key[private];
@@ -3007,7 +3007,7 @@ Old=[@Defn2{Term=[mode conformance],Sec=(required)}]}
    ...
 @key[end] P;
 
---@RI{  can be matched by the actual types }
+--@ExamCom{  can be matched by the actual types }
 
 @key[type] Car;
 @key[type] Car_Name @key[is] @key[access] Car;
@@ -3019,7 +3019,7 @@ Old=[@Defn2{Term=[mode conformance],Sec=(required)}]}
       Owner      : Person;
    @key[end] @key[record];
 
---@RI{  in the following generic instantiation }
+--@ExamCom{  in the following generic instantiation }
 
 @key[package] R @key[is] @key[new] P(Node => Car, Link => Car_Name);
 @end{Example}
@@ -3444,7 +3444,7 @@ type or of the actual type corresponding to the controlling type.]}]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} NT(<>) @key{is new} T @key{with private};
-   -- @RI[Presume that T has the following primitive operation:]
+   -- @ExamCom[Presume that T has the following primitive operation:]
    -- @key{@Chg{Version=[5],New=[],Old=[with ]}procedure} Bar (Obj : @key{in} T);
 @key{package} Gr ...]}
 
@@ -3649,23 +3649,23 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
 @key[with] @key[function] "+"(X, Y : Item) @key[return] Item @key[is] <>;
 @key[with] @key[function] Image(X : Enum) @key[return] String @key[is] Enum'Image;
 @key[with] @key[procedure] Update @key[is] Default_Update;@Chg{Version=[2],New=[
-@key[with] @key[procedure] Pre_Action(X : @key[in] Item) @key[is null];  --@RI[ defaults to no action]
+@key[with] @key[procedure] Pre_Action(X : @key[in] Item) @key[is null];  --@ExamCom[ defaults to no action]
 @key[with] @key[procedure] Write(S    : @key[not null access] Root_Stream_Type'Class;
                      Desc : Descriptor)
-                     @b<is abstract> Descriptor'Write;  --@RI[ see @RefSecNum{Stream-Oriented Attributes}]
---@RI[ Dispatching operation on Descriptor with default]],Old=[]}
+                     @b<is abstract> Descriptor'Write;  --@ExamCom[ see @RefSecNum{Stream-Oriented Attributes}]
+--@ExamCom[ Dispatching operation on Descriptor with default]],Old=[]}
 
---@RI{  given the generic procedure declaration }
+--@ExamCom{  given the generic procedure declaration }
 
 @key[generic]
    @key[with] @key[procedure] Action (X : @key[in] Item);
 @key[procedure] Iterate(Seq : @key[in] Item_Sequence);
 
---@RI{  and the procedure }
+--@ExamCom{  and the procedure }
 
 @key[procedure] Put_Item(X : @key[in] Item);
 
---@RI{  the following instantiation is possible }
+--@ExamCom{  the following instantiation is possible }
 
 @key[procedure] Put_List @key[is] @key[new] Iterate(Action => Put_Item);
 @end{Example}
@@ -3972,14 +3972,14 @@ package with formal package parameters:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[with] Ada.Containers.Ordered_Maps;  --@RI[ see @RefSecNum{The Generic Package Containers.Ordered_Maps}]
+@ChgAdded{Version=[2],Text=[@key[with] Ada.Containers.Ordered_Maps;  --@ExamCom[ see @RefSecNum{The Generic Package Containers.Ordered_Maps}]
 @key[generic]
    @key[with package] Mapping_1 @key[is new] Ada.Containers.Ordered_Maps(<>);
    @key[with package] Mapping_2 @key[is new] Ada.Containers.Ordered_Maps
                                     (Key_Type => Mapping_1.Element_Type,
                                      @key[others] => <>);
 @key[package] Ordered_Join @key[is]
-   --@RI[ Provide a "join" between two mappings]]}
+   --@ExamCom[ Provide a "join" between two mappings]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key[subtype] Key_Type @key[is] Mapping_1.Key_Type;

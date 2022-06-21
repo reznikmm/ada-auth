@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -121,11 +121,13 @@ was specified with a representation item or whether the compiler chose this
 value by default.]}
 @end{Metarules}
 
+@begin{Intro}
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Aspect>,
 Text=<@ChgAdded{Version=[3],Text=[An aspect is
 a specifiable property of an entity. An aspect may be specified by an
 @nt{aspect_specification} on the declaration of the entity. Some aspects may be
 queried via attributes.]}>}
+@end{Intro}
 
 @begin{Syntax}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1094,8 +1096,8 @@ are the same.
 @key[package] P1 @key[is]
    @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1@Chg{Version=[5],New=[
       @key[with] Size =>],Old=[;
-   @key[for] S1'Size @key[use]]} 16; --@RI{ Illegal!}
-      --@RI{ S1'Size would be 16 by default.}
+   @key[for] S1'Size @key[use]]} 16; --@ExamCom{ Illegal!}
+      --@ExamCom{ S1'Size would be 16 by default.}
    @key[type] A1 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S1;
    X1: A1;
 @key[end] P1;
@@ -1105,7 +1107,7 @@ are the same.
 @key[package] P2 @key[is]
    @key[subtype] S2 @key[is] Integer @key[range] 0..2**16-1@Chg{Version=[5],New=[
       @key[with] Size =>],Old=[;
-   @key[for] S2'Size @key[use]]} 32; --@RI{ Illegal!}
+   @key[for] S2'Size @key[use]]} 32; --@ExamCom{ Illegal!}
    @key[type] A2 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S2;
    X2: A2;
 @key[end] P2;
@@ -2619,7 +2621,6 @@ follow implementation-defined legality and semantics rules.]}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[Implementation-defined aspects, including the syntax for specifying
 such aspects and the legality rules for such aspects.]}]}
-@end{ImplPerm}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0389-1]}
 @ChgAdded{Version=[5],Text=[An implementation may ignore the specification of
@@ -2639,7 +2640,7 @@ required) the rejection of syntax errors within the @nt{aspect_definition}.]}
   problematic in any way, then it can always be rejected (as opposed to
   being ignored).]}
 @end{Discussion}
-
+@end{ImplPerm}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0229-1],ARef=[AI05-0267-1]}
@@ -4175,7 +4176,7 @@ reflects this representation.
   as its subtype can be confusing:
   @begin{Example}
 @key[type] Device_Register @key[is] @key[range] 0..2**8 - 1;
-@key[for] Device_Register'Size @key[use] 8; --@RI{ Confusing!}
+@key[for] Device_Register'Size @key[use] 8; --@ExamCom{ Confusing!}
 My_Device : Device_Register;
 @key[for] My_Device'Address @key[use] To_Address(16#FF00#);
   @end{Example}
@@ -4717,7 +4718,7 @@ an object]}:]}
 
 @begin(Descexample)
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@key(function) X'Has_Same_Storage (@RI{Arg} : @RI{any_type})
+@ChgAdded{Version=[3],Text=[@key(function) X'Has_Same_Storage (@VirtName{Arg} : @VirtName{any_type})
   @key(return) Boolean]}
 @end(Descexample)
 
@@ -4751,7 +4752,7 @@ denotes an object}:]}
 
 @begin(Descexample)
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@key(function) X'Overlaps_Storage (@RI{Arg} : @RI{any_type})
+@ChgAdded{Version=[3],Text=[@key(function) X'Overlaps_Storage (@VirtName{Arg} : @VirtName{any_type})
   @key(return) Boolean]}
 @end(Descexample)
 
@@ -4954,13 +4955,13 @@ Device_Register : Medium;
 @key[type] Short @key[is] @key[delta] 0.01 @key[range] -100.0 .. 100.0;
 @key[for] Short'Size @key[use] 15;
 
-@key[for] Car_Name'Storage_Size @key[use] --@RI{ specify access type's storage pool size}
-        2000*((Car'Size/System.Storage_Unit) +1); --@RI{ approximately 2000 cars}
+@key[for] Car_Name'Storage_Size @key[use] --@ExamCom{ specify access type's storage pool size}
+        2000*((Car'Size/System.Storage_Unit) +1); --@ExamCom{ approximately 2000 cars}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key[function] @Chg{Version=[2],New=[My_Input],Old=[My_Read]}(Stream : @key[@Chg{Version=[2],New=[not null ],Old=[]}access] Ada.Streams.Root_Stream_Type'Class)
    @key[return] T;
-@key(for) T'@Chg{Version=[2],New=[Input],Old=[Read]} @key(use) @Chg{Version=[2],New=[My_Input],Old=[My_Read]}; --@RI{ see @RefSecNum{Stream-Oriented Attributes}}
+@key(for) T'@Chg{Version=[2],New=[Input],Old=[Read]} @key(use) @Chg{Version=[2],New=[My_Input],Old=[My_Read]}; --@ExamCom{ see @RefSecNum{Stream-Oriented Attributes}}
 @end{Example}
 @end{Examples}
 
@@ -5307,7 +5308,7 @@ Blue). The Base attribute can be used to get at these values.
 For example:
 @begin{Example}
 @key[for] I @key[in] S2'Base @key[loop]
-    ... --@RI{ When I equals Blue, the internal code is 30.}
+    ... --@ExamCom{ When I equals Blue, the internal code is 30.}
 @key[end] @key[loop];
 @end{Example}
 
@@ -5535,10 +5536,10 @@ of a @nt{component_clause}.
     @key[record]
         X : Integer;
     @key[end] @key[record];
-X : @key[constant] := 31; --@RI{ Same defining name as the component.}
+X : @key[constant] := 31; --@ExamCom{ Same defining name as the component.}
 @key[for] T @key[use]
     @key[record]
-        X @key[at] 0 @key[range] 0..X; --@RI{ Illegal!}
+        X @key[at] 0 @key[range] 0..X; --@ExamCom{ Illegal!}
     @key[end] @key[record];
     @end{Example}
 
@@ -5759,7 +5760,7 @@ components out of the way.
 @begin{Examples}
 @leading@keepnext@i{Example of specifying the layout of a record type:}
 @begin{Example}
-Word : @key[constant] := 4;  --@RI{  storage element is byte, 4 bytes per word}
+Word : @key[constant] := 4;  --@ExamCom{  storage element is byte, 4 bytes per word}
 
 @key[type] State         @key[is] (A,M,W,P);
 @key[type] Mode          @key[is] (Fix, Dec, Exp, Signif);
@@ -5784,10 +5785,10 @@ Word : @key[constant] := 4;  --@RI{  storage element is byte, 4 bytes per word}
 @key[for] Program_Status_Word @key[use]
   @key[record]
       System_Mask      @key[at] 0*Word @key[range] 0  .. 7;
-      Protection_Key   @key[at] 0*Word @key[range] 10 .. 11; --@RI{ bits 8,9 unused}
+      Protection_Key   @key[at] 0*Word @key[range] 10 .. 11; --@ExamCom{ bits 8,9 unused}
       Machine_State    @key[at] 0*Word @key[range] 12 .. 15;
       Interrupt_Cause  @key[at] 0*Word @key[range] 16 .. 31;
-      Ilc              @key[at] 1*Word @key[range] 0  .. 1;  --@RI{ second word}
+      Ilc              @key[at] 1*Word @key[range] 0  .. 1;  --@ExamCom{ second word}
       Cc               @key[at] 1*Word @key[range] 2  .. 3;
       Program_Mask     @key[at] 1*Word @key[range] 4  .. 7;
       Inst_Address     @key[at] 1*Word @key[range] 8  .. 31;
@@ -6168,29 +6169,29 @@ by-reference],Old=[]} types.
 @begin{Examples}
 @leading@keepnext@i{Example of change of representation:}
 @begin{Example}
---@RI{ Packed_Descriptor and Descriptor are two different types}
---@RI{ with identical characteristics, apart from their}
---@RI{ representation}
+--@ExamCom{ Packed_Descriptor and Descriptor are two different types}
+--@ExamCom{ with identical characteristics, apart from their}
+--@ExamCom{ representation}
 
 @key[type] Descriptor @key[is]
     @key[record]
-      --@RI{ components of a descriptor}
+      --@ExamCom{ components of a descriptor}
     @key[end] @key[record];
 
 @key[type] Packed_Descriptor @key[is] @key[new] Descriptor;
 
 @key[for] Packed_Descriptor @key[use]
     @key[record]
-      --@RI{ component clauses for some or for all components}
+      --@ExamCom{ component clauses for some or for all components}
     @key[end] @key[record];
 
-@RI{-- Change of representation can now be accomplished by explicit type conversions:}
+@ExamCom{-- Change of representation can now be accomplished by explicit type conversions:}
 
 D : Descriptor;
 P : Packed_Descriptor;
 
-P := Packed_Descriptor(D);  --@RI{ pack D}
-D := Descriptor(P);         --@RI{ unpack P}
+P := Packed_Descriptor(D);  --@ExamCom{ pack D}
+D := Descriptor(P);         --@ExamCom{ unpack P}
 @end{Example}
 @end{Examples}
 

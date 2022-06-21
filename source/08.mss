@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:48 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -396,7 +396,7 @@ to semantic dependents.
 @key[with] P;
 @key[package] R @key[is]
     @key[package] X @key[renames] P;
-    @Chg{New=[J : Integer := ],Old=[]}X.Q.I@Chg{New=[],Old=[ := 17]}; --@RI{ Illegal!}
+    @Chg{New=[J : Integer := ],Old=[]}X.Q.I@Chg{New=[],Old=[ := 17]}; --@ExamCom{ Illegal!}
 @key[end] R;
 @end{Example}
 
@@ -668,7 +668,7 @@ It is now described in terms of [immediate] scope.
 
 @key[package] R @key[is]
     @key[package] X @key[renames] Standard;
-    X.Q.I := 17; --@RI{ Illegal!}
+    X.Q.I := 17; --@ExamCom{ Illegal!}
 @key[end] R;
 @end{Example}
 
@@ -1214,13 +1214,13 @@ Here's an example:
 @key[end] P.Q;
 
 @key[package] @key[body] P @key[is]
-    Q : Integer; --@RI{ OK; we cannot see package P.Q here.}
+    Q : Integer; --@ExamCom{ OK; we cannot see package P.Q here.}
     @key[procedure] Sub @key[is] @key[separate];
 @key[end] P;
 
 @key[with] P.Q;
 @key[separate](P)
-@key[procedure] Sub @key[is] --@RI{ Illegal.}
+@key[procedure] Sub @key[is] --@ExamCom{ Illegal.}
 @key[begin]
     @key[null];
 @key[end] Sub;
@@ -1249,12 +1249,12 @@ where both components are visible. For instance:]}
    @key[type] T @key[is tagged private];
    @key[package] B @key[is]
       @key[type] NT @key[is new] T @key[with record]
-         I: Integer; -- @RI{Illegal because T.I is visible in the body.}
-      @key[end record]; -- @RI{T.I is not visible here.}
+         I: Integer; -- @ExamCom{Illegal because T.I is visible in the body.}
+      @key[end record]; -- @ExamCom{T.I is not visible here.}
    @key[end] B;
 @key[private]
    @key[type] T @key[is tagged record]
-      I: Integer; -- @RI{Illegal because T.I is visible in the body.}
+      I: Integer; -- @ExamCom{Illegal because T.I is visible in the body.}
    @key[end record];
 @key[end] A;],Old=[]}
 
@@ -1263,24 +1263,24 @@ where both components are visible. For instance:]}
 @Chg{New=[@Chg{Version=[2],New=[],Old=[@key[package] A @key[is]
 ]}@key[package] @key[body] A @key[is]
    @key[package] @key[body] B @key[is]
-      -- @RI{T.I becomes visible here.}
+      -- @ExamCom{T.I becomes visible here.}
    @key[end] B;
 @key[end] A;],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[package] A.C @key[is]
    @key[type] NT2 @key[is new] A.T @key[with record]
-      I: Integer; -- @RI{Illegal because T.I is visible in the private part.}
-   @key[end record]; -- @RI{T.I is not visible here.}
+      I: Integer; -- @ExamCom{Illegal because T.I is visible in the private part.}
+   @key[end record]; -- @ExamCom{T.I is not visible here.}
 @key[private]
-    -- @RI{T.I is visible here.}
+    -- @ExamCom{T.I is visible here.}
 @key[end] A.C;],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[with] A;
 @key[package] D @key[is]
    @key[type] NT3 @key[is new] A.T @key[with record]
-      I: Integer; -- @RI{Legal because T.I is never visible in this package.}
+      I: Integer; -- @ExamCom{Legal because T.I is never visible in this package.}
    @key[end record];
 @key[end] D;],Old=[]}
 
@@ -1289,9 +1289,9 @@ where both components are visible. For instance:]}
 @key[package] A.E @key[is]
    @key[type] NT4 @key[is new] D.NT3 @key[with null record];
    X : NT4;
-   I1 : Integer := X.I;        -- @RI{D.NT3.I}
-   I2 : Integer := D.NT3(X).I; -- @RI{D.NT3.I}
-   I3 : Integer := A.T(X).I;   -- @RI{A.T.I}
+   I1 : Integer := X.I;        -- @ExamCom{D.NT3.I}
+   I2 : Integer := D.NT3(X).I; -- @ExamCom{D.NT3.I}
+   I3 : Integer := A.T(X).I;   -- @ExamCom{A.T.I}
 @key[end] A.E;],Old=[]}
 @end{Example}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0102],ARef=[AI95-00157-01]}
@@ -1334,7 +1334,7 @@ instantiated. This is easier to understand with an example:]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[@key{with} G1.G2;
-@key{with} I1.G2;             -- @RI{Illegal}
+@key{with} I1.G2;             -- @ExamCom{Illegal}
 @key{package} Bad @key{is} ...],Old=[]}
 @end{Example}
 
@@ -1451,8 +1451,8 @@ the following is illegal:
 X : @key[constant] Integer := 17;
 @key[package] P @key[is]
     @key[generic]
-      Z : Integer := X; --@RI{ Illegal!}
-    @key[procedure] X(Y : @key[in] Integer := X); --@RI{ Illegal!}
+      Z : Integer := X; --@ExamCom{ Illegal!}
+    @key[procedure] X(Y : @key[in] Integer := X); --@ExamCom{ Illegal!}
 @key[end] P;
 @end{Example}
 
@@ -1501,16 +1501,16 @@ case where this is not true:]}
 @key{end} G;]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} I @key{is new} G (Integer, Integer); -- @RI[Exports homographs of P.]]}
+@ChgAdded{Version=[2],Text=[@key{package} I @key{is new} G (Integer, Integer); -- @ExamCom[Exports homographs of P.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{type} D @key{is new} I.T; -- @RI[Both Ps are inherited.]]}
+@ChgAdded{Version=[2],Text=[@key{type} D @key{is new} I.T; -- @ExamCom[Both Ps are inherited.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Obj : D;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[P (Obj, Z => 10); -- @RI[Legal in Ada 95, illegal in Ada 2005.]]}
+@ChgAdded{Version=[2],Text=[P (Obj, Z => 10); -- @ExamCom[Legal in Ada 95, illegal in Ada 2005.]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The call to P would resolve in Ada 95 by using the
@@ -1812,7 +1812,7 @@ It makes @nt{use_clause}s work like this:
 @key[end] Parent;
 
 @key[package] Parent.Child @key[is]
-    Y : T; --@RI{ Illegal!}
+    Y : T; --@ExamCom{ Illegal!}
     Z : P.T;
 @key[private]
     W : T;
@@ -1938,7 +1938,7 @@ The elaboration of a @nt{use_clause} has no effect.
 @leading@keepnext@i{Example of a use type clause:}
 @end{WideAbove}
 @begin{Example}
-@key[use type] Rational_Numbers.Rational; --@RI{ see @RefSecNum{Package Specifications and Declarations}}
+@key[use type] Rational_Numbers.Rational; --@ExamCom{ see @RefSecNum{Package Specifications and Declarations}}
 Two_Thirds: Rational_Numbers.Rational := 2/3;
 @end{Example}
 
@@ -2151,7 +2151,7 @@ that determined by the @nt{subtype_mark}.@rquotes@;@*
 We changed it so that this would be illegal:
 @begin{Example}
 X: T;
-Y: T'Class @key[renames] X; --@RI{ Illegal!}
+Y: T'Class @key[renames] X; --@ExamCom{ Illegal!}
 @end{Example}
 
 @leading@;When the above was legal, it was unclear whether Y
@@ -2401,7 +2401,7 @@ Y : T2;
 @Comment{Blank line}
 @key{package} I @key{is new} G (T2, Y);
 @Comment{Blank line}
-Y := (D1 => True); -- @RI[Oops!  What happened to I.C1_Ren?]],Old=[]}
+Y := (D1 => True); -- @ExamCom[Oops!  What happened to I.C1_Ren?]],Old=[]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
@@ -2499,10 +2499,10 @@ using the type T2 of the previous example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   AT2 : @key{aliased} T2;
-   C1_Ren : Integer @key{renames} AT2.C1; -- @RI[Illegal in Ada 2005, legal in Ada 95]
-   AT2 := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95,]
-                                    -- @RI[but does not in Ada 2005, so C1_Ren becomes]
-                                    -- @RI[invalid when this is assigned.]]}
+   C1_Ren : Integer @key{renames} AT2.C1; -- @ExamCom[Illegal in Ada 2005, legal in Ada 95]
+   AT2 := (D1 => True);             -- @ExamCom[Raised Constraint_Error in Ada 95,]
+                                    -- @ExamCom[but does not in Ada 2005, so C1_Ren becomes]
+                                    -- @ExamCom[invalid when this is assigned.]]}
 @end{Example}
 @end{Incompatible95}
 
@@ -2608,7 +2608,7 @@ An @nt{exception_renaming_declaration} declares a new view
 @begin{Examples}
 @leading@keepnext@i{Example of renaming an exception:}
 @begin{Example}
-EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @RefSecNum{Exceptions in Input-Output}}
+EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @ExamCom{-- see @RefSecNum{Exceptions in Input-Output}}
 @end{Example}
 @end{Examples}
 
@@ -2966,7 +2966,7 @@ equality of untagged record types],Old=[]}.
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
     @key[function] Predefined_Equal(X, Y : T) @key[return] Boolean @key[renames] "=";
 @key[private]
-    @key[function] "="(X, Y : T) @key[return] Boolean; --@RI{ Override predefined "=".}
+    @key[function] "="(X, Y : T) @key[return] Boolean; --@ExamCom{ Override predefined "=".}
 @key[end] P;
 
 @key[with] P; @key[use] P;
@@ -3054,30 +3054,30 @@ We'll live with the oddity.
 @begin{Examples}
 @leading@keepnext@i{Examples of subprogram renaming declarations:}
 @begin{Example}
-@key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@RI{  see @RefSecNum{Selected Components}}
+@key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@ExamCom{  see @RefSecNum{Selected Components}}
 
 @key[function] Real_Plus(Left, Right : Real   ) @key[return] Real    @key[renames] "+";
 @key[function] Int_Plus (Left, Right : Integer) @key[return] Integer @key[renames] "+";
 
-@key[function] Rouge @key[return] Color @key[renames] Red;  --@RI{  see @RefSecNum{Enumeration Types}}
+@key[function] Rouge @key[return] Color @key[renames] Red;  --@ExamCom{  see @RefSecNum{Enumeration Types}}
 @key[function] Rot   @key[return] Color @key[renames] Red;
 @key[function] Rosso @key[return] Color @key[renames] Rouge;
 
-@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@RI{ see @RefSecNum{Enumeration Types}}
+@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@ExamCom{ see @RefSecNum{Enumeration Types}}
 @end{Example}
 
 @begin{WideAbove}
 @leading@keepnext@i{Example of a subprogram renaming declaration with new parameter names:}
 @end{WideAbove}
 @begin{Example}
-@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@RI{ see @RefSecNum{Subprogram Declarations}}
+@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@ExamCom{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
 @begin{WideAbove}
 @leading@keepnext@i{Example of a subprogram renaming declaration with a new default expression:}
 @end{WideAbove}
 @begin{Example}
-@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@RI{ see @RefSecNum{Subprogram Declarations}}
+@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@ExamCom{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 @end{Examples}
 
@@ -3191,7 +3191,7 @@ in particular if the renamed generic unit is a library unit
 @begin{Examples}
 @leading@keepnext@i{Example of renaming a generic unit:}
 @begin{Example}
-@key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @RI{-- see @RefSecNum{Input-Output for Enumeration Types}}
+@key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @ExamCom{-- see @RefSecNum{Input-Output for Enumeration Types}}
 @end{Example}
 @end{Examples}
 
@@ -3738,7 +3738,7 @@ For example, without the preference rule, the following would be ambiguous:
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00022}
 N : @key[constant] := 123;
-@key[if] N > 100 @key[then] --@RI{ Preference for root_integer "@Chg{New=[>],Old=[<]}" operator.}
+@key[if] N > 100 @key[then] --@ExamCom{ Preference for root_integer "@Chg{New=[>],Old=[<]}" operator.}
     ...
 @key[end] @key[if];
 @end{Example}
@@ -3918,7 +3918,7 @@ Here's an example:
 @key[type] T @key[is] @key[array](Integer @key[range] 1..10) @key[of] A;
 I : Integer := 3;
 @key[function] F(X : Integer := 7) @key[return] A;
-Y : A := F(I); --@RI{ Ambiguous? (We hope so.)}
+Y : A := F(I); --@ExamCom{ Ambiguous? (We hope so.)}
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
@@ -3977,7 +3977,7 @@ things like @lquotes@;any integer type@rquotes.
 @key{procedure} Proc (Acc : @key{access} Integer) ...
 @key{procedure} Proc (Acc : Cacc) ...
 List : Cacc := ...;
-Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
+Proc (List); -- @ExamCom[OK in Ada 95, ambiguous in Ada 2005.]]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If there is any code like this (such code should
@@ -4001,7 +4001,7 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{task body} T @key{is}
-   @key{procedure} P (X : @key{access} T) @key{is} -- @RI[Illegal in Ada 95, legal in Ada 2005]
+   @key{procedure} P (X : @key{access} T) @key{is} -- @ExamCom[Illegal in Ada 95, legal in Ada 2005]
       ...
    @key{end} P;
 @key{begin}

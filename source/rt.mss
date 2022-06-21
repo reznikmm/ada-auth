@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.134 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
+@comment{ $Revision: 1.135 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2022/03/30 07:20:30 $}
+@Comment{$Date: 2022/05/14 04:06:50 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -216,9 +216,9 @@ aspects shall be specified for a synchronized interface type.]}
 
 @leading@keepnext@;The following declarations exist in package System:
 @begin{example}
-@key{subtype} Any_Priority @key{is} Integer @key{range} @RI{implementation-defined};
+@key{subtype} Any_Priority @key{is} Integer @key{range} @VirtName{implementation-defined};
 @key{subtype} Priority @key{is} Any_Priority
-   @key{range} Any_Priority'First .. @RI{implementation-defined};
+   @key{range} Any_Priority'First .. @VirtName{implementation-defined};
 @key{subtype} Interrupt_Priority @key{is} Any_Priority
    @key{range} Priority'Last+1 .. Any_Priority'Last;
 
@@ -1613,7 +1613,7 @@ language-defined library package exists:]}
 @key{package} Ada.Dispatching.Round_Robin@Chg{Version=[5],New=[
   @key{with} Nonblocking, Global => @key[in out synchronized]],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[Round_Robin]}
   @AdaObjDefn{Default_Quantum} : @key{constant} Ada.Real_Time.Time_Span :=
-             @RI[implementation-defined];
+             @VirtName[implementation-defined];
   @key{procedure} @AdaSubDefn{Set_Quantum} (Pri     : @key{in} System.Priority;
                          Quantum : @key{in} Ada.Real_Time.Time_Span);
   @key{procedure} @AdaSubDefn{Set_Quantum} (Low, High : @key{in} System.Priority;
@@ -3255,7 +3255,7 @@ how the base priority of a task can be modified or queried at run time.]
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0302-1]}
 @key[with] System;
-@key[with] Ada.Task_Identification; @RI{-- See @RefSecNum[The Package Task_Identification]}
+@key[with] Ada.Task_Identification; @ExamCom{-- See @RefSecNum[The Package Task_Identification]}
 @key[package] Ada.Dynamic_Priorities@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}@Chg{Version=[2],New=[
     @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Dynamic_Priorities);]}],Old=[]}
 
@@ -4351,7 +4351,7 @@ a high-resolution, monotonic clock package.]
   @key[type] @AdaTypeDefn{Time} @key[is] @key[private];
   @AdaObjDefn{Time_First} : @key[constant] Time;
   @AdaObjDefn{Time_Last} : @key[constant] Time;
-  @AdaObjDefn{Time_Unit} : @key[constant] := @RI{implementation-defined-real-number};
+  @AdaObjDefn{Time_Unit} : @key[constant] := @VirtName{implementation-defined-real-number};
 
 
 
@@ -4409,13 +4409,13 @@ a high-resolution, monotonic clock package.]
   @key[function] @AdaSubDefn{Minutes}      (M  : Integer) @key{return} Time_Span;],Old=[]}
 
 
-  @key[type] @AdaTypeDefn{Seconds_Count} @key[is] @key[range] @RI{implementation-defined};
+  @key[type] @AdaTypeDefn{Seconds_Count} @key[is] @key[range] @VirtName{implementation-defined};
 
   @key{procedure} @AdaSubDefn{Split}(T : @key{in} Time; SC : @key{out} Seconds_Count; TS : @key{out} Time_Span);
   @key{function} @AdaSubDefn{Time_Of}(SC : Seconds_Count; TS : Time_Span) @key{return} Time;
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Real_Time;
 @end{example}
 @ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
@@ -4946,7 +4946,7 @@ queues.]
   @key{procedure} @AdaSubDefn{Suspend_Until_True}(S : @key{in} @key{out} Suspension_Object)@Chg{Version=[5],New=[
      @key[with] Nonblocking => False],Old=[]};
 @key{private}
-     ... -- @RI{not specified by the language}
+     ... -- @ExamCom{not specified by the language}
 @key{end} Ada.Synchronous_Task_Control;
 @end{example}
 
@@ -5091,7 +5091,7 @@ language-defined library package exists:]}
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Synchronous_Barriers);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Barrier_Limit],Of=[Positive]} @key[is] Positive @key[range] 1 .. @RI<implementation-defined>;]}
+@ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Barrier_Limit],Of=[Positive]} @key[is] Positive @key[range] 1 .. @VirtName<implementation-defined>;]}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The value of Barrier_Limit'Last in Synchronous_Barriers.]}]}
 
@@ -5106,7 +5106,7 @@ Text=[The value of Barrier_Limit'Last in Synchronous_Barriers.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[private]
-   -- @RI{not specified by the language}
+   -- @ExamCom{not specified by the language}
 @key[end] Ada.Synchronous_Barriers;]}
 @end{Example}
 
@@ -5891,7 +5891,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{CPU_Time} @key{is private};
    @AdaObjDefn{CPU_Time_First} : @key{constant} CPU_Time;
    @AdaObjDefn{CPU_Time_Last}  : @key{constant} CPU_Time;
-   @AdaObjDefn{CPU_Time_Unit}  : @key{constant} := @RI{implementation-defined-real-number};
+   @AdaObjDefn{CPU_Time_Unit}  : @key{constant} := @VirtName{implementation-defined-real-number};
    @AdaObjDefn{CPU_Tick} : @key{constant} Time_Span;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5921,18 +5921,18 @@ language-defined library package exists:]}
                      TS : Time_Span := Time_Span_Zero) @key{return} CPU_Time;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Interrupt_Clocks_Supported} : @key[constant] Boolean := @RI<implementation-defined>;]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Interrupt_Clocks_Supported} : @key[constant] Boolean := @VirtName<implementation-defined>;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[3],Text=[   @AdaObjDefn{Separate_Interrupt_Clocks_Supported} : @key[constant] Boolean :=
-     @RI<implementation-defined>;]}
+     @VirtName<implementation-defined>;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Clock_For_Interrupts} @key[return] CPU_Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
-   ... -- @RI[not specified by the language]
+   ... -- @ExamCom[not specified by the language]
 @key{end} Ada.Execution_Time;]}
 
 @end{Example}
@@ -6176,7 +6176,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
-   @RI[implementation-defined];]}
+   @VirtName[implementation-defined];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Set_Handler} (TM      : @key{in out} Timer;
@@ -6197,7 +6197,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key{end} Ada.Execution_Time.Timers;]}
 
 @end{Example}
@@ -6422,7 +6422,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @AdaObjDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
-    @RI[implementation-defined];]}
+    @VirtName[implementation-defined];]}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The value of Min_Handler_Ceiling in Execution_Time.Group_Budgets.]}]}
 
@@ -6456,7 +6456,7 @@ Text=[The value of Min_Handler_Ceiling in Execution_Time.Group_Budgets.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
-    --  @RI{not specified by the language}
+    --  @ExamCom{not specified by the language}
 @key{end} Ada.Execution_Time.Group_Budgets;]}
 
 @end{Example}
@@ -6788,7 +6788,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
-  ... -- @RI[not specified by the language]
+  ... -- @ExamCom[not specified by the language]
 @key{end} Ada.Real_Time.Timing_Events;]}
 @end{Example}
 
@@ -7064,7 +7064,7 @@ language-defined library package exists:]}
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(Multiprocessors);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{CPU_Range} @key[is range] 0 .. @RI<implementation-defined>;
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{CPU_Range} @key[is range] 0 .. @VirtName<implementation-defined>;
    @AdaObjDefn{Not_A_Specific_CPU} : @key[constant] CPU_Range := 0;
    @key[subtype] @AdaSubtypeDefn{Name=[CPU],Of=[CPU_Range]} @key[is] CPU_Range @key[range] 1 .. CPU_Range'Last;]}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
@@ -7224,11 +7224,15 @@ to a processor should not use busy-waiting.]}]}
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Multiprocessor Dispatching Domains]}
 
+@begin{Intro}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
 allows implementations on multiprocessor
 platforms to be partitioned into distinct dispatching domains during program
 startup.]}
+
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -7303,7 +7307,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[private]
-   ... -- @RI[not specified by the language]
+   ... -- @ExamCom[not specified by the language]
 @key[end] System.Multiprocessors.Dispatching_Domains;]}
 @end{Example}
 

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:28 $}
+@Comment{$Date: 2022/05/14 04:06:48 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -158,11 +158,11 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
   An example that can tell the difference is this:
   @begin{example}
 @key[declare]
-    --@RI{ Label Foo is implicitly declared here.}
+    --@ExamCom{ Label Foo is implicitly declared here.}
 @key[begin]
     @key[for] Foo @key[in] ... @key[loop]
         ...
-        <<Foo>> --@RI{ Illegal.}
+        <<Foo>> --@ExamCom{ Illegal.}
         ...
     @key[end] @key[loop];
 @key[end];
@@ -276,20 +276,20 @@ expanded name.
 expanded name associated with an entity declared in the task body:
 @begin{Example}
 @key(task body) Compute @key(is)
-   Sum : Integer := 0;                       --@RI[ Compute.Sum]
+   Sum : Integer := 0;                       --@ExamCom[ Compute.Sum]
 @key(begin)
- Outer:                                      --@RI[ Compute.Outer]
-   @key(for) I @key(in) 1..10 @key(loop)     --@RI[ Compute.Outer.I]
-    Blk:                                     --@RI[ Compute.Blk]
+ Outer:                                      --@ExamCom[ Compute.Outer]
+   @key(for) I @key(in) 1..10 @key(loop)     --@ExamCom[ Compute.Outer.I]
+    Blk:                                     --@ExamCom[ Compute.Blk]
       @key(declare)
-         Sum : Integer := 0;                 --@RI[ Compute.Blk.Sum]
+         Sum : Integer := 0;                 --@ExamCom[ Compute.Blk.Sum]
       @key(begin)
          @key(accept) Ent(I : out Integer; J : in Integer) @key(do)
-                                             --@RI[ Compute.Ent.I, Compute.Ent.J]
+                                             --@ExamCom[ Compute.Ent.I, Compute.Ent.J]
             Compute.Ent.I := Compute.Outer.I;
-          Inner:                             --@RI[ Compute.Blk.Inner]
+          Inner:                             --@ExamCom[ Compute.Blk.Inner]
             @key(for) J @key(in) 1..10 @key(loop)
-                                             --@RI[ Compute.Blk.Inner.J]
+                                             --@ExamCom[ Compute.Blk.Inner.J]
                Sum := Sum + Compute.Blk.Inner.J * Compute.Ent.J;
             @key(end loop) Inner;
          @key(end) Ent;
@@ -421,7 +421,7 @@ For example:
 
   X : R1;
 @key[begin]
-  F.all := X;  --@RI[ Right hand side helps resolve left hand side]
+  F.all := X;  --@ExamCom[ Right hand side helps resolve left hand side]
 @end{Example}
 @end{ImplNote}
 @end{Resolution}
@@ -564,12 +564,12 @@ component or slice of such a variable
 Value := Max_Value - 1;
 Shade := Blue;
 
-Next_Frame(F)(M, N) := 2.5;        --@RI{  see @RefSecNum{Indexed Components}}
-U := Dot_Product(V, W);            --@RI{  see @RefSecNum{Subprogram Bodies}}
+Next_Frame(F)(M, N) := 2.5;        --@ExamCom{  see @RefSecNum{Indexed Components}}
+U := Dot_Product(V, W);            --@ExamCom{  see @RefSecNum{Subprogram Bodies}}
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
-Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@RI{ see @RefSecNum{Variant Parts and Discrete Choices}}
-@Chg{Version=[4],New=[Next],Old=[Next_Car]}.@key[all] := (72074, @key[null]@Chg{Version=[4],New=[, Head],Old=[]});@Chg{Version=[4],New=[],Old=[ ]}   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
+Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@ExamCom{ see @RefSecNum{Variant Parts and Discrete Choices}}
+@Chg{Version=[4],New=[Next],Old=[Next_Car]}.@key[all] := (72074, @key[null]@Chg{Version=[4],New=[, Head],Old=[]});@Chg{Version=[4],New=[],Old=[ ]}   --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @begin{WideAbove}
@@ -580,9 +580,9 @@ I, J : Integer @key[range] 1 .. 10 := 5;
 K    : Integer @key[range] 1 .. 20 := 15;
  ...
 
-I := J;  --@RI{  identical ranges}
-K := J;  --@RI{  compatible ranges}
-J := K;  --@RI{  will raise Constraint_Error if K > 10}
+I := J;  --@ExamCom{  identical ranges}
+K := J;  --@ExamCom{  compatible ranges}
+J := K;  --@ExamCom{  will raise Constraint_Error if K > 10}
 @end{Example}
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -594,10 +594,10 @@ A : String(1 .. 31);
 B : String(3 .. 33);
  ...
 
-A := B;  --@RI{  same number of components}
+A := B;  --@ExamCom{  same number of components}
 
 A(1 .. 9)  := "tar sauce";
-A(4 .. 12) := A(1 .. 9);  --@RI{  A(1 .. 12) = "tartar sauce"}
+A(4 .. 12) := A(1 .. 9);  --@ExamCom{  A(1 .. 12) = "tartar sauce"}
 @end{Example}
 @end{Examples}
 
@@ -664,10 +664,12 @@ calls.]}
 
 @LabeledAddedSubClause{Version=[5],Name=[Target Name Symbols]}
 
+@begin{Intro}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
 @ChgAdded{Version=[5],Text=[@@, known as the @i<target name> of an assignment
 statement, provides an abbreviation to avoid repetition of potentially long
 names in assignment statements.@Defn{target name}]}
+@end{Intro}
 
 @begin{Syntax}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
@@ -832,7 +834,7 @@ none of them is executed.
    Put(Item);
 @key[end] @key[if];
 
-@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@RI{  see @RefSecNum{Incomplete Type Declarations}}
+@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
    Report ("Incorrect data");
 @key[end] @key[if];
 @end{Example}
@@ -1104,7 +1106,7 @@ This change makes the following @nt{case_statement} legal:
 @key[case] F @key[is]
    @key[when] 1 => ...;
    @key[when] 2 => ...;
-   --@RI{ No @key{others} needed.}
+   --@ExamCom{ No @key{others} needed.}
 @key[end] @key[case];
 @end{Example}
 
@@ -1505,7 +1507,7 @@ the subtype of the loop parameter is static.
 @leading@keepnext@i{Example of a loop statement with a @key[for] iteration scheme:}
 @end{WideAbove}
 @begin{Example}
-@key[for] J @key[in] Buffer'Range @key[loop]     --@RI{  works even with a null range}
+@key[for] J @key[in] Buffer'Range @key[loop]     --@ExamCom{  works even with a null range}
    @key[if] Buffer(J) /= Space @key[then]
       Put(Buffer(J));
    @key[end] @key[if];
@@ -1517,7 +1519,7 @@ the subtype of the loop parameter is static.
 @end{WideAbove}
 @begin{Example}
 Summation:
-   @key[while] Next /= Head @key[loop]       --@RI{ see @RefSecNum{Incomplete Type Declarations}}
+   @key[while] Next /= Head @key[loop]       --@ExamCom{ see @RefSecNum{Incomplete Type Declarations}}
       Sum  := Sum + Next.Value;
       Next := Next.Succ;
    @key[end] @key[loop] Summation;
@@ -3184,9 +3186,9 @@ the outer loop.
 
 Main_Cycle:
    @key[loop]
-      --@RI{  initial statements}
+      --@ExamCom{  initial statements}
       @key[exit] Main_Cycle @key[when] Found;
-      --@RI{  final statements}
+      --@ExamCom{  final statements}
    @key[end] @key[loop] Main_Cycle;
 @end{Example}
 @end{Examples}

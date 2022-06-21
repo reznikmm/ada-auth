@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2022/05/14 04:06:48 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -306,11 +306,11 @@ that are propagated by the @nt{sequence_of_@!statements}.]
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @key[begin]
-   Open(File, In_File, "input.txt");   --@RI[ see @RefSecNum{File Management}]
+   Open(File, In_File, "input.txt");   --@ExamCom[ see @RefSecNum{File Management}]
 @key[exception]
    @key[when] E : Name_Error =>
       Put("Cannot open input file : ");
-      Put_Line(@Chg{Version=[5],New=[Ada.Exceptions.Exception_Message],Old=[Exception_Message]}(E));  --@RI[ see @RefSecNum{The Package Exceptions}]
+      Put_Line(@Chg{Version=[5],New=[Ada.Exceptions.Exception_Message],Old=[Exception_Message]}(E));  --@ExamCom[ see @RefSecNum{The Package Exceptions}]
       @key[raise];
 @key[end];
 @end{Example}
@@ -798,13 +798,13 @@ are not handled by the handlers of the
     @key[function] @AdaSubDefn{Exception_Identity}(X : Exception_Occurrence)
                                 @key[return] Exception_Id;
     @key[function] @AdaSubDefn{Exception_Name}(X : Exception_Occurrence) @key[return] String;
-        --@RI{ Same as Exception_Name(Exception_Identity(X)).}@Chg{Version=[2],New=[
+        --@ExamCom{ Same as Exception_Name(Exception_Identity(X)).}@Chg{Version=[2],New=[
     @key[function] @AdaSubDefn{Wide_Exception_Name}(X : Exception_Occurrence)
         @key[return] Wide_String;
-        --@RI{ Same as Wide_Exception_Name(Exception_Identity(X)).}
+        --@ExamCom{ Same as Wide_Exception_Name(Exception_Identity(X)).}
     @key[function] @AdaSubDefn{Wide_Wide_Exception_Name}(X : Exception_Occurrence)
         @key[return] Wide_Wide_String;
-        --@RI{ Same as Wide_Wide_Exception_Name(Exception_Identity(X)).}],Old=[]}
+        --@ExamCom{ Same as Wide_Wide_Exception_Name(Exception_Identity(X)).}],Old=[]}
     @key[function] @AdaSubDefn{Exception_Information}(X : Exception_Occurrence) @key[return] String;
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00438-01]}
@@ -813,7 +813,7 @@ are not handled by the handlers of the
     @key[function] @AdaSubDefn{Save_Occurrence}(Source : Exception_Occurrence)
                              @key[return] Exception_Occurrence_Access;@Chg{Version=[2],New=[],Old=[
 @key[private]
-   ... --@RI{ not specified by the language}
+   ... --@ExamCom{ not specified by the language}
 @key[end] Ada.Exceptions;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
@@ -830,7 +830,7 @@ are not handled by the handlers of the
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
 @ChgAdded{Version=[2],Text=[@key[private]
-   ... --@RI{ not specified by the language}
+   ... --@ExamCom{ not specified by the language}
 @key[end] Ada.Exceptions;]}
 @end{Example}
 
@@ -906,7 +906,7 @@ returns a string with lower bound 1.]}
 
 @Leading@keepnext@;is equivalent to this call to Raise_Exception:
 @begin{Example}
-Raise_Exception(E'Identity, Message => @RI{implementation-defined-string});
+Raise_Exception(E'Identity, Message => @VirtName{implementation-defined-string});
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
@@ -1222,7 +1222,7 @@ can be allocated on the stack with exactly the right amount of space
 for the message @em none for an empty message. This is just like
 declaring a constrained object of the type:
 @begin{Example}
-Temp : Exception_Occurrence(10); --@RI{ for a 10-character message}
+Temp : Exception_Occurrence(10); --@ExamCom{ for a 10-character message}
 @end{Example}
 
 After finding the appropriate handler, the stack can be cut back,
@@ -1273,9 +1273,9 @@ variant record:
     @key[limited] @key[record]
         @key[case] Kind @key[is]
             @key[when] Normal =>
-                ... --@RI{ space for 200 characters}
+                ... --@ExamCom{ space for 200 characters}
             @key[when] As_Choice_Param =>
-                ... --@RI{ pointer to heap string}
+                ... --@ExamCom{ pointer to heap string}
         @key[end] @key[case];
     @key[end] @key[record];
 @end{Example}
@@ -1824,6 +1824,7 @@ would if the first expression had not been evaluated.]}
   subprogram does @i<not> trigger these rules unless it also changes
   the value of a reevaluation of the precondition expression.]}
 @end{Discussion}
+@end{ImplPerm}
 @begin{Metarules}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[Our intent is that any assertion expression that
@@ -1836,7 +1837,6 @@ would if the first expression had not been evaluated.]}
   compilers can reject such pathologies. Perhaps in a future version of
   Ada we'll be able to tighten this up.]}
 @end{Metarules}
-@end{ImplPerm}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
@@ -1916,11 +1916,11 @@ from the response to that error:
 
     File_Not_Found : @key[exception];
     @key[procedure] Open(F : @key[in] @key[out] File_Handle; Name : String);
-        --@RI{ raises File_Not_Found if named file does not exist}
+        --@ExamCom{ raises File_Not_Found if named file does not exist}
 
     End_Of_File : @key[exception];
     @key[procedure] Read(F : @key[in] @key[out] File_Handle; Data : @key[out] Data_Type);
-        --@RI{ raises End_Of_File if the file is not open}
+        --@ExamCom{ raises End_Of_File if the file is not open}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
     ...@Chg{Version=[5],New=[
@@ -1980,7 +1980,7 @@ from the response to that error:
 @key[procedure] Main @key[is]
 @Chg{Version=[5],New=[    Verbosity_Desired : Boolean := ...;
 ],Old=[]}@key[begin]
-    ... --@RI{ call operations in File_System}
+    ... --@ExamCom{ call operations in File_System}
 @key[exception]
     @key[when] End_Of_File =>
         Close(Some_File);
@@ -2698,7 +2698,7 @@ Unchecked_Access, or imported or exported entity
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[As explained in
-@RefSec{Conformity of an Implementation with the Standard},
+@RefSec{Conformity of an Implementation},
 the external effect of a program is defined in terms of its
 interactions with its external environment.
 Hence, the implementation can perform any internal

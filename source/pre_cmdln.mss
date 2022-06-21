@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2022/03/30 07:20:31 $ $Author: randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:31 $}
+@Comment{$Date: 2022/05/14 04:06:52 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -26,7 +26,7 @@ bounds of type Command_Line.Exit_Status],Old=[]}.]}
 
   @key[function] @AdaSubDefn{Command_Name} @key[return] String;
 
-  @key[type] @AdaTypeDefn{Exit_Status} @key[is] @RI{implementation-defined integer type};
+  @key[type] @AdaTypeDefn{Exit_Status} @key[is] @VirtName{implementation-defined integer type};
 
   @AdaObjDefn{Success} : @key[constant] Exit_Status;
   @AdaObjDefn{Failure} : @key[constant] Exit_Status;
@@ -34,7 +34,7 @@ bounds of type Command_Line.Exit_Status],Old=[]}.]}
   @key[procedure] @AdaSubDefn{Set_Exit_Status} (Code : @key[in] Exit_Status);
 
 @key[private]
-  ... -- @RI{not specified by the language}
+  ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Command_Line;
 @comment{Blank line}
 @end{example}
@@ -82,7 +82,7 @@ Command_Name returns the null string.
 @Comment{This is missing; leading the following paragraph glued to "Command_Name"}
 @begin{Example}@Keepnext
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@key[type] Exit_Status @key[is] @RI{implementation-defined integer type};],Old=[]}
+@Chg{New=[@key[type] Exit_Status @key[is] @VirtName{implementation-defined integer type};],Old=[]}
 @end{Example}
 @Trailing@;
 The type Exit_Status represents the range of exit

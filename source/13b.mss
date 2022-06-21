@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:54 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.132 $}
+@Comment{$Revision: 1.133 $}
 
 @RMNewPageVer{Version=[0]}
 @RMNewPageVer{Version=[1]}
@@ -29,38 +29,38 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
 @RootLibUnit{System}@key[package] System@Chg{Version=[5],New=[],Old=[ @key[is]]}
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}@Chg{Version=[5],New=[ @key[is]],Old=[(System);]}
 
-   @key[type] @AdaTypeDefn{Name} @key[is] @RI{implementation-defined-enumeration-type};
-   @AdaObjDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Name} @key[is] @VirtName{implementation-defined-enumeration-type};
+   @AdaObjDefn{System_Name} : @key[constant] Name := @VirtName{implementation-defined};
 
 
-   --@RI{ System-Dependent Named Numbers:}
+   --@ExamCom{ System-Dependent Named Numbers:}
 
-   @AdaObjDefn{Min_Int}               : @key[constant] := @RI{root_integer}'First;
-   @AdaObjDefn{Max_Int}               : @key[constant] := @RI{root_integer}'Last;
+   @AdaObjDefn{Min_Int}               : @key[constant] := @VirtName{root_integer}'First;
+   @AdaObjDefn{Max_Int}               : @key[constant] := @VirtName{root_integer}'Last;
 
-   @AdaObjDefn{Max_Binary_Modulus}    : @key[constant] := @RI{implementation-defined};
-   @AdaObjDefn{Max_Nonbinary_Modulus} : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Max_Binary_Modulus}    : @key[constant] := @VirtName{implementation-defined};
+   @AdaObjDefn{Max_Nonbinary_Modulus} : @key[constant] := @VirtName{implementation-defined};
 
-   @AdaObjDefn{Max_Base_Digits}       : @key[constant] := @RI{root_real}'Digits;
-   @AdaObjDefn{Max_Digits}            : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Max_Base_Digits}       : @key[constant] := @VirtName{root_real}'Digits;
+   @AdaObjDefn{Max_Digits}            : @key[constant] := @VirtName{implementation-defined};
 
-   @AdaObjDefn{Max_Mantissa}          : @key[constant] := @RI{implementation-defined};
-   @AdaObjDefn{Fine_Delta}            : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Max_Mantissa}          : @key[constant] := @VirtName{implementation-defined};
+   @AdaObjDefn{Fine_Delta}            : @key[constant] := @VirtName{implementation-defined};
 
-   @AdaObjDefn{Tick}                  : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Tick}                  : @key[constant] := @VirtName{implementation-defined};
 
 
-   --@RI{ Storage-related Declarations:}
+   --@ExamCom{ Storage-related Declarations:}
 
-   @key[type] @AdaTypeDefn{Address} @key[is] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Address} @key[is] @VirtName{implementation-defined};
    @AdaObjDefn{Null_Address} : @key[constant] Address;
 
-   @AdaObjDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
-   @AdaObjDefn{Word_Size}    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
-   @AdaObjDefn{Memory_Size}  : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Storage_Unit} : @key[constant] := @VirtName{implementation-defined};
+   @AdaObjDefn{Word_Size}    : @key[constant] := @VirtName{implementation-defined} * Storage_Unit;
+   @AdaObjDefn{Memory_Size}  : @key[constant] := @VirtName{implementation-defined};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   --@RI{ @Defn2{Term=[address], Sec=(comparison)}Address Comparison:}
+   --@ExamCom{ @Defn2{Term=[address], Sec=(comparison)}Address Comparison:}
    @key(function) "<" (Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
       @key(with) Convention => Intrinsic],Old=[]};
    @key(function) "<="(Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
@@ -72,21 +72,21 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
    @key(function) "=" (Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
       @key(with) Convention => Intrinsic],Old=[]};
 -- @key(function) "/=" (Left, Right : Address) @key(return) Boolean;
-   --@RI{ "/=" is implicitly defined}@Chg{Version=[3],New=[],Old=[
+   --@ExamCom{ "/=" is implicitly defined}@Chg{Version=[3],New=[],Old=[
    @key[pragma] Convention(Intrinsic, "<");
-   ... --@RI{ and so on for all language-defined subprograms in this package}]}
+   ... --@ExamCom{ and so on for all language-defined subprograms in this package}]}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
-   --@RI{ Other System-Dependent Declarations:}
+   --@ExamCom{ Other System-Dependent Declarations:}
    @key[type] @AdaTypeDefn{Bit_Order} @key[is] (@AdaObjDefn{High_Order_First}, @AdaObjDefn{Low_Order_First});
-   @AdaObjDefn{Default_Bit_Order} : @key[constant] Bit_Order@Chg{Version=[2],New=[ := @RI{implementation-defined}],Old=[]};
+   @AdaObjDefn{Default_Bit_Order} : @key[constant] Bit_Order@Chg{Version=[2],New=[ := @VirtName{implementation-defined}],Old=[]};
 
 
-   --@RI{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
-   @key{subtype} @AdaSubtypeDefn{Name=[Any_Priority],Of=[Integer]} @key{is} Integer @key{range} @RI{implementation-defined};
+   --@ExamCom{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
+   @key{subtype} @AdaSubtypeDefn{Name=[Any_Priority],Of=[Integer]} @key{is} Integer @key{range} @VirtName{implementation-defined};
    @key{subtype} @AdaSubtypeDefn{Name=[Priority],Of=[Any_Priority]} @key{is} Any_Priority @key{range} Any_Priority'First ..
-             @RI{implementation-defined};
+             @VirtName{implementation-defined};
    @key{subtype} @AdaSubtypeDefn{Name=[Interrupt_Priority],Of=[Any_Priority]} @key{is} Any_Priority @key{range} Priority'Last+1 ..
              Any_Priority'Last;
 
@@ -94,7 +94,7 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
              (Priority'First + Priority'Last)/2;
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] System;
 @end{Example}
 
@@ -349,19 +349,19 @@ have been moved to the Real Time Annex.
 @ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements@Chg{Version=[5],New=[],Old=[ @key[is]]}
    @Chg{Version=[5],New=[@key[with] Pure @key[is]],Old=[@key[pragma] @Chg{Version=[2],New=[Pure(],Old=[Preelaborate(System.]}Storage_Elements);]}
 
-   @key[type] @AdaTypeDefn{Storage_Offset} @key[is] @key[range] @RI(implementation-defined);
+   @key[type] @AdaTypeDefn{Storage_Offset} @key[is] @key[range] @VirtName(implementation-defined);
 
    @key[subtype] @AdaSubtypeDefn{Name=[Storage_Count],Of=[Storage_Offset]} @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
 
 
-   @key[type] @AdaTypeDefn{Storage_Element} @key[is] @key[mod] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Storage_Element} @key[is] @key[mod] @VirtName{implementation-defined};
    @key[for] Storage_Element'Size @key[use] Storage_Unit;
    @key[type] @AdaTypeDefn{Storage_Array} @key[is] @key[array]
      (Storage_Offset @key[range] <>) @key[of] @key[aliased] Storage_Element;
    @key[for] Storage_Array'Component_Size @key[use] Storage_Unit;
 
 
-   --@RI{ @Defn2{Term=[address], Sec=(arithmetic)}Address Arithmetic:}
+   --@ExamCom{ @Defn2{Term=[address], Sec=(arithmetic)}Address Arithmetic:}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(function) "+"(Left : Address; Right : Storage_Offset)@Chg{Version=[3],New=[],Old=[
@@ -384,10 +384,10 @@ have been moved to the Real Time Annex.
          @key(with) Convention => Intrinsic],Old=[]};
 
 
-   --@RI{ Conversion to/from integers:}
+   --@ExamCom{ Conversion to/from integers:}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   @key[type] @AdaTypeDefn{Integer_Address} @key[is] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Integer_Address} @key[is] @VirtName{implementation-defined};
    @key[function] @AdaSubDefn{To_Address}(Value : Integer_Address) @key[return] Address@Chg{Version=[3],New=[
       @key(with) Convention => Intrinsic],Old=[]};
    @key[function] @AdaSubDefn{To_Integer}(Value : Address) @key[return] Integer_Address@Chg{Version=[3],New=[
@@ -396,7 +396,7 @@ have been moved to the Real Time Annex.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[],Old=[   @key[pragma] Convention(Intrinsic, "+");
-      @RI(-- ...and so on for all language-defined subprograms declared in this package.)
+      @ExamCom(-- ...and so on for all language-defined subprograms declared in this package.)
 ]}@key[end] System.Storage_Elements;
 @end{Example}
 @begin{Reason}
@@ -712,10 +712,10 @@ M : Mask;
   @key[with] Inline],Old=[]};@Chg{Version=[3],New=[],Old=[ @key[pragma] Inline(Set_Mask);]}
 
 @key[procedure] Set_Mask @key[is]
-  @key[use] System.Machine_Code; --@RI{ assume @lquotes@;@key[with] System.Machine_Code;@rquotes@; appears somewhere above}
+  @key[use] System.Machine_Code; --@ExamCom{ assume @lquotes@;@key[with] System.Machine_Code;@rquotes@; appears somewhere above}
 @key[begin]
   SI_Format'(Code => SSM, B => M'Base_Reg, D => M'Disp);
-  --@RI{  Base_Reg and Disp are implementation-defined attributes}
+  --@ExamCom{  Base_Reg and Disp are implementation-defined attributes}
 @key[end] Set_Mask;
 @end{Example}
 @end{Examples}
@@ -1174,10 +1174,10 @@ are proven redundant).
 @key[type] My_Int @key[is] @key[range] 0..99;
 @key[function] Safe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Integer);
 @key[function] Unsafe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Positive);
-X : Positive := Safe_Convert(0); --@RI{ Raises Constraint_Error.}
-Y : Positive := Unsafe_Convert(0); --@Chg{Version=[2],New=[@RI{ Bounded Error, may be invalid.}
-B : Boolean  := Y'Valid; --@RI{ OK, B = False.}
-Z : Positive := Y+1; --@RI{ Erroneous to use Y.}],Old=[@RI{ Erroneous.}]}
+X : Positive := Safe_Convert(0); --@ExamCom{ Raises Constraint_Error.}
+Y : Positive := Unsafe_Convert(0); --@Chg{Version=[2],New=[@ExamCom{ Bounded Error, may be invalid.}
+B : Boolean  := Y'Valid; --@ExamCom{ OK, B = False.}
+Z : Positive := Y+1; --@ExamCom{ Erroneous to use Y.}],Old=[@ExamCom{ Erroneous.}]}
 
 @end{Example}
 
@@ -1650,7 +1650,7 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
         @key[return] Storage_Elements.Storage_Count @key[is] @key[abstract];
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] System.Storage_Pools;
 @end{Example}
 @begin{Reason}
@@ -2353,8 +2353,8 @@ the following is a possible use:
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @Chg{Version=[3],New=[My_Mark := ],Old=[]}Mark(@Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]});
-... --@RI{ Allocate objects using @lquotes@;@key[new] @Chg{Version=[3],New=[(My_Mark) ],Old=[]}Designated(...)@rquotes@;.}
-Release(@Chg{Version=[3],New=[My_Mark],Old=[MR_Pool]}); --@RI{ @Chg{Version=[3],New=[Finalize objects and reclaim],Old=[Reclaim the]} storage.}
+... --@ExamCom{ Allocate objects using @lquotes@;@key[new] @Chg{Version=[3],New=[(My_Mark) ],Old=[]}Designated(...)@rquotes@;.}
+Release(@Chg{Version=[3],New=[My_Mark],Old=[MR_Pool]}); --@ExamCom{ @Chg{Version=[3],New=[Finalize objects and reclaim],Old=[Reclaim the]} storage.}
 @end{Example}
 @end{Examples}
 
@@ -2513,8 +2513,9 @@ S'Max_Size_In_Storage_Elements might be very large.
   is of type @i{universal_integer}.],Old=[]}>}
 @EndPrefixType{}
 @end{Description}
-@end{StaticSem}
 
+@comment{The following probably should be an ImplReq, but since that wasn't
+         originally done and it would change the RM, it is part of StaticSem.}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
 @ChgAdded{Version=[3],Text=[For a type with access discriminants, if the
 implementation allocates space for a coextension in the same pool as that of the
@@ -2537,6 +2538,7 @@ should not reflect any calls on Allocate used to allocate the coextensions.]}
 are included in the values of these attributes if they are allocated from the
 same pool.]}
 @end{Ramification}
+@end{StaticSem}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
@@ -2616,7 +2618,7 @@ declared as follows:
 @begin{Example}
 @key[procedure] Free @key[is]
     @key[new] Ada.Unchecked_Deallocation(
-        @RI[object_subtype_name], @RI[access_to_variable_subtype_name]);
+        @VirtName[object_subtype_name], @VirtName[access_to_variable_subtype_name]);
 @end{Example}
 
 @begin{WideAbove}
@@ -4773,8 +4775,8 @@ following declaration:]}
     @Chg{Version=[5],New=[    @key[with]],Old=[@key[pragma]]} Preelaborable_Initialization@Chg{Version=[5],New=[],Old=[(Root_Stream_Type)]};],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0044],ARef=[AI95-00181-01]}
-    @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @RI{implementation-defined};
-    @key[type] @AdaTypeDefn{Stream_Element_Offset} @key[is] @key[range] @RI{implementation-defined};
+    @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @VirtName{implementation-defined};
+    @key[type] @AdaTypeDefn{Stream_Element_Offset} @key[is] @key[range] @VirtName{implementation-defined};
     @key[subtype] @AdaSubtypeDefn{Name=[Stream_Element_Count],Of=[Stream_Element_Offset]} @key[is]
         Stream_Element_Offset @key[range] 0..Stream_Element_Offset'Last;
     @key[type] @AdaTypeDefn{Stream_Element_Array} @key[is]
@@ -4790,7 +4792,7 @@ following declaration:]}
       Item   : @key[in] Stream_Element_Array) @key[is abstract];
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Streams;
 @end{example}
 
@@ -4870,7 +4872,7 @@ Ada.Streams.Storage has the following declaration:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Streams.Storage;]}
 @end{example}
 
@@ -4933,7 +4935,7 @@ Ada.Streams.Storage.Unbounded has the following declaration:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Streams.Storage.Unbounded;]}
 @end{example}
 
@@ -4993,7 +4995,7 @@ Ada.Streams.Storage.Bounded has the following declaration:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Streams.Storage.Bounded;]}
 @end{example}
 
@@ -5225,8 +5227,8 @@ the following attributes are defined.
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Write(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
-   @RI{Item} : @key{in} @RI(T))
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
+   @VirtName{Item} : @key{in} @VirtName(T))
 @end{DescExample}
 
 @noprefix@;S'Write writes the value of @i{Item} to @i{Stream}.>}
@@ -5236,8 +5238,8 @@ the following attributes are defined.
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Read(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
-   @RI{Item} : @key{out} @RI(T))
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
+   @VirtName{Item} : @key{out} @VirtName(T))
 @end{DescExample}
 
 @noprefix@;S'Read reads the value of @i{Item} from @i{Stream}.>}
@@ -5409,8 +5411,8 @@ specification:
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Class'Write(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
-   @RI{Item}   : @key{in} @RI(T)'Class)
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
+   @VirtName{Item}   : @key{in} @VirtName(T)'Class)
 @end{DescExample}
 
 @noprefix@;Dispatches to the subprogram denoted by the Write attribute of
@@ -5421,8 +5423,8 @@ the specific type identified by the tag of Item.>}
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Class'Read(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
-   @RI{Item} : @key{out} @RI(T)'Class)
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
+   @VirtName{Item} : @key{out} @VirtName(T)'Class)
 @end{DescExample}
 
 @noprefix@;Dispatches to the subprogram denoted by the Read attribute of
@@ -5463,8 +5465,8 @@ the following attributes are defined.
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Output(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
-   @RI{Item} : @key{in} @RI(T))
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
+   @VirtName{Item} : @key{in} @VirtName(T))
 @end{DescExample}
 
 @noprefix@;S'Output writes the value of @i{Item} to @i{Stream}, including
@@ -5479,8 +5481,8 @@ first subtype is constrained.
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(function) S'Input(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
-   @key(return) @RI(T)
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
+   @key(return) @VirtName(T)
 @end{DescExample}
 
 @noprefix@;S'Input reads and returns one value from
@@ -5583,8 +5585,8 @@ specification:
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Class'Output(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
-   @RI{Item}   : @key{in} @RI(T)'Class)
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
+   @VirtName{Item}   : @key{in} @VirtName(T)'Class)
 @end{DescExample}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
@@ -5607,8 +5609,8 @@ level deeper than that of S.],Old=[]}>}@Comment{End of S'Class'Output attribute}
 @begin{DescExample}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(function) S'Class'Input(
-   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
-   @key{return} @RI(T)'Class
+   @VirtName{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
+   @key{return} @VirtName(T)'Class
 @end{DescExample}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
@@ -6242,16 +6244,16 @@ class-wide types descended from S.
 @key(generic)
     @key(type) Msg_Type(<>) @key(is private);
 @key(package) Network_IO @key(is)
-    --@RI[ Connect/Disconnect are used to establish the stream]
+    --@ExamCom[ Connect/Disconnect are used to establish the stream]
     @key(procedure) Connect(...);
     @key(procedure) Disconnect(...);
 
-    --@RI[ Send/Receive transfer messages across the network]
+    --@ExamCom[ Send/Receive transfer messages across the network]
     @key(procedure) Send(X : @key[in] Msg_Type);
     @key(function) Receive @key(return) Msg_Type;
 @key(private)
     @key(type) Network_Stream @key(is new) Root_Stream_Type @key(with) ...
-    @key(procedure) Read(...);  --@RI[ define Read/Write for Network_Stream]
+    @key(procedure) Read(...);  --@ExamCom[ define Read/Write for Network_Stream]
     @key(procedure) Write(...);
 @key(end) Network_IO;
 
@@ -6609,7 +6611,7 @@ or will raise an exception.
     @key[end] @key[record];
 @key[function] F @key[return] T;
 @key[function] G(X : T) @key[return] Boolean;
-Y : Boolean := G(F); --@RI{ doesn't force T in Ada 83}
+Y : Boolean := G(F); --@ExamCom{ doesn't force T in Ada 83}
 @key[for] T @key[use]
     @key[record]
         ...
@@ -6626,7 +6628,7 @@ Here's a similar example, which AI83-00039 also says is legal:
     @key[type] T @key[is] @key[private];
     @key[function] F @key[return] T;
     @key[function] G(X : T) @key[return] Boolean;
-    Y : Boolean := G(F); --@RI{ doesn't force T in Ada 83}
+    Y : Boolean := G(F); --@ExamCom{ doesn't force T in Ada 83}
 @key[private]
     @key[type] T @key[is]
         @key[record]
@@ -7154,7 +7156,7 @@ then all ancestor types are also frozen.
     @key[type] A1 @key[is] @key[access] Boolean;
     @key[type] A2 @key[is] @key[new] A1;
     @key[type] A3 @key[is] @key[new] A2;
-    X : A3 := @key[new] Boolean; --@RI{ Don't know what pool yet!}
+    X : A3 := @key[new] Boolean; --@ExamCom{ Don't know what pool yet!}
     @key[for] A1'Storage_Pool @key[use] F.all;
 @key[end] P;
 @end{Example}
@@ -7476,7 +7478,7 @@ itself. In any case, an occurrence within an expression is always forcing.@rquot
 @begin{Example}
 @key[type] A @key[is] @key[array](Integer @key[range] 1..10) @key[of] Boolean;
 @key[subtype] S @key[is] Integer @key[range] A'Range;
-    --@RI{ not forcing for A}
+    --@ExamCom{ not forcing for A}
 @end{Example}
 
 Occurrences within @nt{pragma}s can cause freezing in Ada 95.
@@ -7494,8 +7496,8 @@ For example:
     @key[type] T @key[is] @key[tagged] @key[limited] @key[private];
     @key[generic]
         @key[type] T2 @key[is]
-            @key[new] T @key[with] @key[private]; --@RI{ Does not freeze T}
-                                --@RI{ in Ada 95.}
+            @key[new] T @key[with] @key[private]; --@ExamCom{ Does not freeze T}
+                                --@ExamCom{ in Ada 95.}
     @key[package] Inner @key[is]
         ...
     @key[end] Inner;

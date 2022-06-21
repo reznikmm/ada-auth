@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_big.mss,v $ }
-@comment{ $Revision: 1.6 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
+@comment{ $Revision: 1.7 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
 @Part(predefbignum, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:07 $}
+@Comment{$Date: 2022/05/14 04:06:50 $}
 
 @LabeledAddedSubclause{Version=[5],Name=[Big Numbers]}
 
@@ -22,7 +22,7 @@ Numerics.Big_Numbers has the following declaration:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key{package} Ada.Numerics.Big_Numbers@ChildUnit{Parent=[Ada.Numerics.Big_Numbers],Child=[Big_Integers]}
    @key{with} Pure, Nonblocking, Global => @key{null is}
-   @key{subtype} @AdaSubtypeDefn{Name=[Field],Of=[Integer]} @key{is} Integer @key{range} 0 .. @RI{implementation-defined};
+   @key{subtype} @AdaSubtypeDefn{Name=[Field],Of=[Integer]} @key{is} Integer @key{range} 0 .. @VirtName{implementation-defined};
    @key{subtype} @AdaSubtypeDefn{Name=[Number_Base],Of=[Integer]} @key{is} Integer @key{range} 2 .. 16;
 @key{end} Ada.Numerics.Big_Numbers;]}
 @end{Example}

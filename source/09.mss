@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:48 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.146 $}
+@Comment{$Revision: 1.147 $}
 
 @begin{Intro}
 
@@ -495,7 +495,7 @@ Old=[@RefSecNum(Task Information)]}).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(task) @key(type) Keyboard_Driver(ID : Keyboard_ID := New_ID) @key(is)@Chg{Version=[2],New=[
-      @key(new) Serial_Device @key(with)  --@RI[ see @RefSecNum{Interface Types}]],Old=[]}
+      @key(new) Serial_Device @key(with)  --@ExamCom[ see @RefSecNum{Interface Types}]],Old=[]}
    @key(entry) Read (C : @key(out) Character);
    @key(entry) Write(C : @key(in)  Character);
 @key(end) Keyboard_Driver;
@@ -504,7 +504,7 @@ Old=[@RefSecNum(Task Information)]}).
 @leading@keepnext@i{Examples of declarations of single tasks:}
 @begin{Example}
 @key(task) Controller @key(is)
-   @key(entry) Request(Level)(D : Item);  --@RI[  a family of entries]
+   @key(entry) Request(Level)(D : Item);  --@ExamCom[  a family of entries]
 @key(end) Controller;
 
 @key(task) Parser @key(is)
@@ -512,7 +512,7 @@ Old=[@RefSecNum(Task Information)]}).
    @key(entry) Next_Action(A : @key(out) Parser_Action);
 @key(end);
 
-@key(task) User;  --@RI[  has no entries]
+@key(task) User;  --@ExamCom[  has no entries]
 @end{Example}
 
 @begin{WideAbove}
@@ -789,10 +789,10 @@ exception or because it is aborted
 @leading@keepnext@i{Example of task activation:}
 @begin{Example}
 @key(procedure) P @key(is)
-   A, B : Server;    --@RI[  elaborate the task objects A, B]
-   C    : Server;    --@RI[  elaborate the task object C]
+   A, B : Server;    --@ExamCom[  elaborate the task objects A, B]
+   C    : Server;    --@ExamCom[  elaborate the task object C]
 @key(begin)
-   --@RI[  the tasks A, B, C are activated together before the first statement]
+   --@ExamCom[  the tasks A, B, C are activated together before the first statement]
    ...
 @key(end);
 @end{Example}
@@ -957,23 +957,23 @@ the abort of the task.
 @leading@keepnext@i{Example of task dependence:}
 @begin{Example}
 @key(declare)
-   @key(type) Global @key(is) @key(access) Server;        --@RI[  see @RefSecNum(Task Units and Task Objects)]
+   @key(type) Global @key(is) @key(access) Server;        --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
    A, B : Server;
    G    : Global;@Softpage
 @key(begin)
-   --@RI[  activation of A and B]
+   --@ExamCom[  activation of A and B]
    @key(declare)
       @key(type) Local @key(is) @key(access) Server;
-      X : Global := @key(new) Server;  --@RI[  activation of X.@key{all}]
-      L : Local  := @key(new) Server;  --@RI[  activation of L.@key{all}]
+      X : Global := @key(new) Server;  --@ExamCom[  activation of X.@key{all}]
+      L : Local  := @key(new) Server;  --@ExamCom[  activation of L.@key{all}]
       C : Server;@Softpage
    @key(begin)
-      --@RI[  activation of C]
-      G := X;  --@RI[  both G and X designate the same task object]
+      --@ExamCom[  activation of C]
+      G := X;  --@ExamCom[  both G and X designate the same task object]
       ...
-   @key(end;)  --@RI[  await termination of C and L.@key{all} (but not X.@key{all})]
+   @key(end;)  --@ExamCom[  await termination of C and L.@key{all} (but not X.@key{all})]
    ...
-@key(end;)  --@RI[  await termination of A, B, and G.@key{all}]
+@key(end;)  --@ExamCom[  await termination of A, B, and G.@key{all}]
 @end{Example}
 
 @end{Examples}
@@ -1774,11 +1774,11 @@ Other_Object : Some_Other_Protected_Type;
 
   @key[procedure] Op2 @key[is]
   @key[begin]
-    Op1; --@RI{ An internal call.}
-    Pt.Op1; --@RI{ Another internal call.}
-    PO.Op1; --@RI{ An external call. It the current instance is PO, then}
-            --@RI{ this is a bounded error (see @RefSecNum{Protected Subprograms and Protected Actions}).}
-    Other_Object.Some_Op; --@RI{ An external call.}
+    Op1; --@ExamCom{ An internal call.}
+    Pt.Op1; --@ExamCom{ Another internal call.}
+    PO.Op1; --@ExamCom{ An external call. It the current instance is PO, then}
+            --@ExamCom{ this is a bounded error (see @RefSecNum{Protected Subprograms and Protected Actions}).}
+    Other_Object.Some_Op; --@ExamCom{ An external call.}
   @key[end] Op2;
 @key[end] Pt;
 @end{Example}
@@ -3089,7 +3089,7 @@ a specification for an access parameter (see @RefSecNum(Access Types)).
   implementation. For example:
   @begin(Example)
 @key(task) T @key(is)
-   @key(entry) E(Z : @key(access) Integer); --@RI{ Illegal!}
+   @key(entry) E(Z : @key(access) Integer); --@ExamCom{ Illegal!}
 @key(end) T;
 
 @key(task body) T @key(is)
@@ -3105,7 +3105,7 @@ a specification for an access parameter (see @RefSecNum(Access Types)).
       @key(end) Inner;
    @key(begin)
       @key(accept) E(Z : @key(access) Integer) @key(do)
-         X := A(Z); --@RI{ Accessibility_Check}
+         X := A(Z); --@ExamCom{ Accessibility_Check}
       @key(end) E;
    @key(end);
 @key(end) T;
@@ -3461,7 +3461,7 @@ when its parameters indicate that it cannot be handled immediately.
 @begin{Example}
 @key(entry) Read(V : @key(out) Item);
 @key(entry) Seize;
-@key(entry) Request(Level)(D : Item);  --@RI[  a family of entries]
+@key(entry) Request(Level)(D : Item);  --@ExamCom[  a family of entries]
 @end{Example}
 
 @begin{WideAbove}
@@ -3932,11 +3932,11 @@ have been updated by an action performed from outside of a protected action.
 @begin{Examples}
 @leading@keepnext@i{Examples of entry calls:}
 @begin{Example}
-Agent.Shut_Down;                      --@RI[  see @RefSecNum(Task Units and Task Objects)]
-Parser.Next_Lexeme(E);                --@RI[  see @RefSecNum(Task Units and Task Objects)]
-Pool(5).Read(Next_Char);              --@RI[  see @RefSecNum(Task Units and Task Objects)]
-Controller.Request(Low)(Some_Item);   --@RI[  see @RefSecNum(Task Units and Task Objects)]
-Flags(3).Seize;                       --@RI[  see @RefSecNum(Protected Units and Protected Objects)]
+Agent.Shut_Down;                      --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
+Parser.Next_Lexeme(E);                --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
+Pool(5).Read(Next_Char);              --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
+Controller.Request(Low)(Some_Item);   --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
+Flags(3).Seize;                       --@ExamCom[  see @RefSecNum(Protected Units and Protected Objects)]
 @end{Example}
 @end{Examples}
 
@@ -4248,10 +4248,10 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @leading@keepnext@i{Examples of requeue statements:}
 @begin{Example}
 @key[requeue] Request(Medium) @key[with abort];
-                    --@RI[ requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
+                    --@ExamCom[ requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
 
 @key[requeue] Flags(I).Seize;
-                    --@RI[ requeue on an entry of an array component, see @RefSecNum{Protected Units and Protected Objects}]
+                    --@ExamCom[ requeue on an entry of an array component, see @RefSecNum{Protected Units and Protected Objects}]
 @end{Example}
 @end{Examples}
 
@@ -4434,7 +4434,7 @@ represents a time as reported by a corresponding clock.
   @AdaExcDefn{Time_Error} : @key(exception;)
 
 @key(private)
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key(end) Ada.Calendar;
 
 @end{Example}
@@ -4671,7 +4671,7 @@ are given in @RefSec(Delay Accuracy).
 @begin{Examples}
 @leading@keepnext@i{Example of a relative delay statement:}
 @begin{example}
-@key(delay) 3.0;  --@RI[ delay 3.0 seconds]
+@key(delay) 3.0;  --@ExamCom[ delay 3.0 seconds]
 @end{example}
 
 @begin{WideAbove}
@@ -4683,11 +4683,11 @@ are given in @RefSec(Delay Accuracy).
 @key(declare)
    @key(use) Ada.Calendar;
    Next_Time : Time := Clock + Period;
-                      --@RI[ Period is a global constant of type Duration]
+                      --@ExamCom[ Period is a global constant of type Duration]
 @key(begin)
-   @key(loop)               --@RI[ repeated every Period seconds]
+   @key(loop)               --@ExamCom[ repeated every Period seconds]
       @key(delay) @key(until) Next_Time;
-      ... --@RI[ perform some actions]
+      ... --@ExamCom[ perform some actions]
       Next_Time := Next_Time + Period;
    @key(end) @key(loop;)
 @key(end;)
@@ -4770,7 +4770,7 @@ environment (such as POSIX).]}
    @key(with) Nonblocking, Global => @key(in out synchronized) ],Old=[]}@key(is)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Time zone manipulation:]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Time zone manipulation:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Time_Offset} @key<is range> -28*60 .. 28*60;]}
@@ -4810,7 +4810,7 @@ environment (such as POSIX).]}
    @key(with) Nonblocking, Global => @key(in out synchronized) ],Old=[]}@key(is)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Arithmetic on days:]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Arithmetic on days:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Day_Count} @key<is range>
@@ -4852,7 +4852,7 @@ environment (such as POSIX).]}
    @key(with) Nonblocking, Global => @key(in out synchronized) ],Old=[]}@key(is)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Day of the week:]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Day of the week:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Day_Name} @key<is> (@AdaObjDefn{Monday}, @AdaObjDefn{Tuesday}, @AdaObjDefn{Wednesday}, @AdaObjDefn{Thursday},
@@ -4862,7 +4862,7 @@ environment (such as POSIX).]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Day_of_Week} (Date : Time) @key<return> Day_Name;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Hours:Minutes:Seconds access:]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Hours:Minutes:Seconds access:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<subtype> @AdaSubtypeDefn{Name=[Hour_Number],Of=[Natural]}         @key<is> Natural @key<range> 0 .. 23;
@@ -4971,7 +4971,7 @@ environment (such as POSIX).]}
                     Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Simple image and value:]
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Simple image and value:]
    @key<function> @AdaSubDefn{Image} (Date : Time;
                    Include_Time_Fraction : Boolean := False;
                    Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;]}
@@ -5448,7 +5448,7 @@ consistent with no leap seconds.]}]}
 when the target system does not; indeed, this isn't particularly
 hard (all that is required is a table of when leap seconds were inserted). As
 such, leap second support isn't @lquotes@;impossible or impractical@rquotes
-in the sense of @RefSecNum{Conformity of an Implementation with the Standard}.
+in the sense of @RefSecNum{Conformity of an Implementation}.
 However, for some purposes, it may be important to follow the target system's
 lack of leap second support (if the target is a GPS satellite, which does not
 use leap seconds, leap second support would be a handicap to work around).
@@ -5740,9 +5740,9 @@ to have several open
          Process_Work_Item(Current_Work_Item);
       @key(or)
          @key(accept) Shut_Down;
-         @key(exit);       --@RI[ Premature shut down requested]
+         @key(exit);       --@ExamCom[ Premature shut down requested]
       @key(or)
-         @key(terminate);  --@RI[ Normal shutdown at end of scope]
+         @key(terminate);  --@ExamCom[ Normal shutdown at end of scope]
       @key(end) @key(select);
    @key(end) @key(loop);
 @key(end) Server;
@@ -5883,7 +5883,7 @@ meant.]}
    Controller.Request(Medium)(Some_Item);
 @key(or)
    @key(delay) 45.0;
-   --@RI[  controller too busy, try something else]
+   --@ExamCom[  controller too busy, try something else]
 @key(end) @key(select);
 @end{Example}
 @end{Examples}
@@ -5959,14 +5959,14 @@ the entry, even if the conditional call is not selected.
 @leading@keepnext@i{Example of a conditional entry call:}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
-@key(procedure) Spin(R : @key[in] @Chg{Version=[5],New=[@key[out] ],Old=[]}Resource) @key(is)@Chg{Version=[5],New=[  --@RI[ see @RefSecNum{Protected Units and Protected Objects}]],Old=[]}
+@key(procedure) Spin(R : @key[in] @Chg{Version=[5],New=[@key[out] ],Old=[]}Resource) @key(is)@Chg{Version=[5],New=[  --@ExamCom[ see @RefSecNum{Protected Units and Protected Objects}]],Old=[]}
 @key(begin)
    @key(loop)
       @key(select)
          R.Seize;
          @key(return);
       @key(else)
-         @key(null);  --@RI[  busy waiting]
+         @key(null);  --@ExamCom[  busy waiting]
       @key(end) @key(select);
    @key(end) @key(loop);
 @key(end);
@@ -6101,7 +6101,7 @@ executed after the @nt<abortable_part> is left.
       Terminal.Wait_For_Interrupt;
       Put_Line("Interrupted");
    @key(then abort)
-      -- @RI(This will be abandoned upon terminal interrupt)
+      -- @ExamCom(This will be abandoned upon terminal interrupt)
       Put_Line("-> ");
       Get_Line(Command, Last);
       Process_Command(Command(1..Last));
@@ -6122,8 +6122,8 @@ executed after the @nt<abortable_part> is left.
    @key(delay) 5.0;
    Put_Line("Calculation does not converge");
 @key(then abort)
-   -- @RI(This calculation should finish in 5.0 seconds;)
-   -- @RI( if not, it is assumed to diverge.)
+   -- @ExamCom(This calculation should finish in 5.0 seconds;)
+   -- @ExamCom( if not, it is assumed to diverge.)
    Horribly_Complicated_Recursive_Function(X, Y);
 @key(end) @key(select);
 @end(Example)
@@ -6794,10 +6794,12 @@ independently addressable).]}
 
 @LabeledAddedSubClause{Version=[5],Name=[Conflict Check Policies]}
 
+@begin{Intro}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[This subclause determines what checks are performed
 relating to possible concurrent conflicting actions
 (see @RefSecNum{Shared Variables}).@Defn{conflict check policy}]}
+@end{Intro}
 
 @begin{Syntax}
 
@@ -7064,10 +7066,10 @@ following structure:
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(task body) Producer @key(is)
-   @Chg{Version=[2],New=[Person : Person_Name; --@RI[ see @RefSecNum{Incomplete Type Declarations}]],Old=[Char : Character;]}
+   @Chg{Version=[2],New=[Person : Person_Name; --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]],Old=[Char : Character;]}
 @key(begin)
    @key(loop)
-      ... --@RI[  @Chg{Version=[2],New=[simulate arrival of the next customer],Old=[produce the next character Char]}]
+      ... --@ExamCom[  @Chg{Version=[2],New=[simulate arrival of the next customer],Old=[produce the next character Char]}]
       Buffer.@Chg{Version=[2],New=[Append_Wait(Person)],Old=[Write(Char)]};
       @key(exit) @key(when) @Chg{Version=[2],New=[Person = @key(null)],Old=[Char = ASCII.EOT]};
    @key(end) @key(loop);
@@ -7085,7 +7087,7 @@ following structure:
    @key(loop)
       Buffer.@Chg{Version=[2],New=[Remove_First_Wait(Person)],Old=[Read(Char)]};
       @key(exit) @key(when) @Chg{Version=[2],New=[Person = @key(null)],Old=[Char = ASCII.EOT]};
-      ... --@RI[  @Chg{Version=[2],New=[simulate serving a customer],Old=[consume the character Char]}]
+      ... --@ExamCom[  @Chg{Version=[2],New=[simulate serving a customer],Old=[consume the character Char]}]
    @key(end) @key(loop);
 @key(end) Consumer;
 @end(Example)
@@ -7109,10 +7111,10 @@ objects of a type covered by Queue'Class.]}
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0178-1]}
 @ChgAdded{Version=[5],Text=[@key(type) Person_Name_Array @key(is array) (Positive @b<range> <>)
-   @key(of) Person_Name;  --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
+   @key(of) Person_Name;  --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key(protected) Buffer @key(is)@Chg{Version=[2],New=[ @key(new) Synchronized_Queue @key(with)  --@RI[ see @RefSecNum{Interface Types}]],Old=[]}
+@key(protected) Buffer @key(is)@Chg{Version=[2],New=[ @key(new) Synchronized_Queue @key(with)  --@ExamCom[ see @RefSecNum{Interface Types}]],Old=[]}
    @key(entry) @Chg{Version=[2],New=[Append_Wait(Person : @key(in) Person_Name);],Old=[Read (C : @key(out) Character);]}
    @key(entry) @Chg{Version=[2],New=[Remove_First_Wait(Person : @key(out) Person_Name);
    @key(function) Cur_Count @key(return) Natural;
@@ -7139,7 +7141,7 @@ objects of a type covered by Queue'Class.]}
 @ChgAdded{Version=[2],Text=[   @key(procedure) Append(Person : @key(in) Person_Name) @key(is)
    @key(begin)
       @key(if) Count = Pool'Length @key(then)
-         @key(raise) Queue_Error @key(with) "Buffer Full";  --@RI[ see @RefSecNum{Raise Statements and Raise Expressions}]
+         @key(raise) Queue_Error @key(with) "Buffer Full";  --@ExamCom[ see @RefSecNum{Raise Statements and Raise Expressions}]
       @key(end if);
       Pool(In_Index) := Person;
       In_Index       := (In_Index @key(mod) Pool'Length) + 1;
@@ -7160,7 +7162,7 @@ objects of a type covered by Queue'Class.]}
 @ChgAdded{Version=[2],Text=[   @key(procedure) Remove_First(Person : @key(out) Person_Name) @key(is)
    @key(begin)
       @key(if) Count = 0 @key(then)
-         @key(raise) Queue_Error @key(with) "Buffer Empty"; --@RI[ see @RefSecNum{Raise Statements and Raise Expressions}]
+         @key(raise) Queue_Error @key(with) "Buffer Empty"; --@ExamCom[ see @RefSecNum{Raise Statements and Raise Expressions}]
       @key(end if);
       Person    := Pool(Out_Index);
       Out_Index := (Out_Index @key(mod) Pool'Length) + 1;

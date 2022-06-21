@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -3742,13 +3742,18 @@ provides such a view removes this restriction on the underlying ordinary tree
 @Redundant[(though some other restriction might exist due to other concurrent
 iterations or stabilized views)].]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
 @ChgAdded{Version=[5],Text=[If a stable tree is declared without specifying
-Base, the object must be initialized. The initializing expression of the stable
-tree, @Redundant[typically a call on Copy], determines the Node_Count
+Base, the object is necessarily initialized. The initializing expression of the
+stable tree, @Redundant[typically a call on Copy], determines the Node_Count
 of the tree. The Node_Count of a stable tree never changes after
 initialization.]}
 
+@begin{TheProof}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0438-1]}
+   @ChgAdded{Version=[5],Text=[Initialization is required as the type is
+   indefinite, see @RefSecNum{Object Declarations}.]}
+@end{TheProof}
 @end{StaticSem}
 
 @begin{Bounded}
@@ -5494,6 +5499,7 @@ holder container unless specified by the operation.]}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Vectors]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Vectors@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Vectors]}
@@ -5501,6 +5507,7 @@ provides a private type Vector and a set of
 operations. It provides the same operations as the package Containers.Vectors
 (see @RefSecNum{The Generic Package Containers.Vectors}), with the difference that the
 maximum storage is bounded.]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -5756,6 +5763,7 @@ minimize copying does not apply to bounded vectors.]}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Doubly_Linked_Lists]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Doubly_Linked_Lists@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Doubly_Linked_Lists]}
@@ -5764,6 +5772,7 @@ and a set of operations. It provides the same operations as the
 package Containers.Doubly_Linked_Lists
 (see @RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}), with the
 difference that the maximum storage is bounded.]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -5823,7 +5832,7 @@ as Containers.Doubly_Linked_Lists except:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @VirtName{implementation-defined})
       @key[return] List
       @key[with] Post =>
             Empty'Result.Capacity = Capacity @key[and then]
@@ -6048,6 +6057,7 @@ minimize copying does not apply to bounded lists.]}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Maps]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Hashed_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Hashed_Maps]}
@@ -6056,6 +6066,7 @@ and a set of operations. It provides the same operations as the
 package Containers.Hashed_Maps
 (see @RefSecNum{The Generic Package Containers.Hashed_Maps}), with the
 difference that the maximum storage is bounded.]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -6335,6 +6346,7 @@ minimize copying does not apply to bounded hashed maps.]}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Maps]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Ordered_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Ordered_Maps]}
@@ -6342,6 +6354,7 @@ provides a private type Map and a set of operations. It provides the same
 operations as the package Containers.Ordered_Maps (see
 @RefSecNum{The Generic Package Containers.Ordered_Maps}), with the difference
 that the maximum storage is bounded.]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -6396,7 +6409,7 @@ as Containers.Ordered_Maps except:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @VirtName{implementation-defined})
       @key[return] Map
       @key[with] Post =>
             Empty'Result.Capacity = Capacity @key[and then]
@@ -6590,6 +6603,7 @@ minimize copying does not apply to bounded ordered maps.]}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Sets]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Hashed_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Hashed_Sets]}
@@ -6597,6 +6611,7 @@ provides a private type Set and a set of operations. It provides the same
 operations as the package Containers.Hashed_Sets
 (see @RefSecNum{The Generic Package Containers.Hashed_Sets}), with the
 difference that the maximum storage is bounded.]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -6856,6 +6871,7 @@ minimize copying does not apply to bounded hashed sets.]}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Sets]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Ordered_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Ordered_Sets]}
@@ -6863,6 +6879,7 @@ provides a private type Set and a set of operations. It provides the same
 operations as the package Containers.Ordered_Sets
 (see @RefSecNum{The Generic Package Containers.Ordered_Sets}), with the
 difference that the maximum storage is bounded.]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -6915,7 +6932,7 @@ as Containers.Ordered_Sets except:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @VirtName{implementation-defined})
       @key[return] Set
       @key[with] Post =>
             Empty'Result.Capacity = Capacity @key[and then]
@@ -7101,7 +7118,6 @@ provides a private type Tree and a set of operations. It provides the same
 operations as the package Containers.Multiway_Trees (see
 @RefSecNum{The Generic Package Containers.Multiway_Trees}), with the difference
 that the maximum storage is bounded.]}
-
 @end{Intro}
 
 @begin{StaticSem}
@@ -7155,7 +7171,7 @@ semantics as Containers.Multiway_Trees except:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[function] Empty (Capacity : Count_Type := @VirtName{implementation-defined})
       @key[return] Tree
       @key[with] Post =>
             Empty'Result.Capacity = Capacity @key[and then]

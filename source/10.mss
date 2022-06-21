@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:48 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -837,25 +837,25 @@ declarative region of package Standard.
 @begin{Examples}
 @leading@keepnext@i{Examples of library units:}
 @begin{Example}
-@key[package] Rational_Numbers.IO @key[is]  --@RI[ public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
+@key[package] Rational_Numbers.IO @key[is]  --@ExamCom[ public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
    @key[procedure] Put(R : @key[in]  Rational);
    @key[procedure] Get(R : @key[out] Rational);
 @key[end] Rational_Numbers.IO;
 
 @key[private procedure] Rational_Numbers.Reduce(R : @key[in out] Rational);
-                                --@RI[ private child of Rational_Numbers]
+                                --@ExamCom[ private child of Rational_Numbers]
 
-@key[with] Rational_Numbers.Reduce;   --@RI[ refer to a private child]
+@key[with] Rational_Numbers.Reduce;   --@ExamCom[ refer to a private child]
 @key[package body] Rational_Numbers @key[is]
    ...
 @key[end] Rational_Numbers;
 
 @key[with] Rational_Numbers.IO; @key[use] Rational_Numbers;
-@key[with] Ada.Text_io;               --@RI[ see @RefSecNum{Text Input-Output}]
-@key[procedure] Main @key[is]               --@RI[ a root library procedure]
+@key[with] Ada.Text_io;               --@ExamCom[ see @RefSecNum{Text Input-Output}]
+@key[procedure] Main @key[is]               --@ExamCom[ a root library procedure]
    R : Rational;
 @key[begin]
-   R := 5/3;                    --@RI[ construct a rational number, see @RefSecNum{Package Specifications and Declarations}]
+   R := 5/3;                    --@ExamCom[ construct a rational number, see @RefSecNum{Package Specifications and Declarations}]
    Ada.Text_IO.Put("The answer is: ");
    IO.Put(R);
    Ada.Text_IO.New_Line;
@@ -863,7 +863,7 @@ declarative region of package Standard.
 
 @key[with] Rational_Numbers.IO;
 @key[package] Rational_IO @key[renames] Rational_Numbers.IO;
-                                --@RI[ a library unit renaming declaration]
+                                --@ExamCom[ a library unit renaming declaration]
 @end{Example}
 
 Each of the above @nt{library_item}s can be submitted to the compiler
@@ -876,7 +876,7 @@ separately.
    @key[type] Element @key[is] @key[private];
    @key[with] @key[function] Image(E : Element) @key[return] String;
 @key[package] Generic_Bags @key[is]
-   @key[type] Bag @key[is] @key[limited] @key[private]; --@RI{ A bag of Elements.}
+   @key[type] Bag @key[is] @key[limited] @key[private]; --@ExamCom{ A bag of Elements.}
    @key[procedure] Add(B : @key[in] @key[out] Bag; E : Element);
    @key[function] Bag_Image(B : Bag) @key[return] String;
 @key[private]
@@ -885,11 +885,11 @@ separately.
 
 @key[generic]
 @key[package] Generic_Bags.Generic_Iterators @key[is]
-   ... --@RI{ various additional operations on Bags.}
+   ... --@ExamCom{ various additional operations on Bags.}
 
    @key[generic]
       @key[with] @key[procedure] Use_Element(E : @key[in] Element);
-         --@RI{ Called once per bag element.}
+         --@ExamCom{ Called once per bag element.}
    @key[procedure] Iterate(B : @key[in] Bag);
 @key[end] Generic_Bags.Generic_Iterators;
 @end{Example}
@@ -928,7 +928,7 @@ children:
       @key[procedure] Append_Image(E : @key[in] Element) @key[is]
          Im : @key[constant] String := Image(E);
       @key[begin]
-         @key[if] Last /= 0 @key[then] --@RI{ Insert a comma.}
+         @key[if] Last /= 0 @key[then] --@ExamCom{ Insert a comma.}
             Last := Last + 1;
             Buffer(Last) := ',';
          @key[end] @key[if];
@@ -1193,18 +1193,18 @@ This rule violates the one-pass @nt{context_clause}s
 @key[package] A.B.C.D @key[is]
 @key[end] A.B.C.D;
 
-@key[with] A.B.C; -- @RI[(1)]
+@key[with] A.B.C; -- @ExamCom[(1)]
 @key[private] @key[package] A.B.X @key[is]
 @key[end] A.B.X;
 
 @key[package] A.B.Y @key[is]
 @key[end] A.B.Y;
 
-@key[with] A.B.C; -- @RI[(2)]
+@key[with] A.B.C; -- @ExamCom[(2)]
 @key[package] @key[body] A.B.Y @key[is]
 @key[end] A.B.Y;
 
-@ChgRef{Version=[2],Kind=[Added]}@ChgAdded{Version=[2],Text=[@key[private] @key[with] A.B.C; -- @RI[(3)]
+@ChgRef{Version=[2],Kind=[Added]}@ChgAdded{Version=[2],Text=[@key[private] @key[with] A.B.C; -- @ExamCom[(3)]
 @key[package] A.B.Z @key[is]
 @key[end] A.B.Z;]}
 @end{Example}
@@ -1503,8 +1503,8 @@ clauses, limited with clauses, and private with clauses:}]}
 @key(end) Office.Locations;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[@key(limited with) Office.Departments;  --@RI[ types are incomplete]
-@key(private with) Office.Locations;    --@RI[ only visible in private part]
+@ChgAdded{Version=[2],Text=[@key(limited with) Office.Departments;  --@ExamCom[ types are incomplete]
+@key(private with) Office.Locations;    --@ExamCom[ only visible in private part]
 @key(package) Office.Employees @key(is)
    @key(type) Employee @key(is private);]}
 
@@ -2791,14 +2791,14 @@ because that can never happen.
 @leading@keepnext@;The environment task for a partition has the following
 structure:
 @begin{Example}
-@key[task] @RI{Environment_Task};
+@key[task] @ExamCom{Environment_Task};
 
-@key[task] @key[body] @RI{Environment_Task} @key[is]
-    ... (1) --@RI{ The environment }@nt{declarative_part}
-            --@RI{ (that is, the sequence of }@nt{library_item}@RI{s) goes here.}
+@key[task] @key[body] @ExamCom{Environment_Task} @key[is]
+    ... (1) --@ExamCom{ The environment }@nt{declarative_part}
+            --@ExamCom{ (that is, the sequence of }@nt{library_item}@ExamCom{s) goes here.}
 @key[begin]
-    ... (2) --@RI{ Call the main subprogram, if there is one.}
-@key[end] @RI{Environment_Task};
+    ... (2) --@ExamCom{ Call the main subprogram, if there is one.}
+@key[end] @ExamCom{Environment_Task};
 @end{Example}
 @begin{Ramification}
 The name of the environment task is written in italics here to indicate
@@ -3019,7 +3019,7 @@ same full expanded name, nor two different bodies for the same
 program unit.
 For example, suppose we compile the following:
 @begin{Example}
-@key[package] A @key[is] --@RI{ Version 1.}
+@key[package] A @key[is] --@ExamCom{ Version 1.}
     ...
 @key[end] A;
 
@@ -3027,7 +3027,7 @@ For example, suppose we compile the following:
 @key[package] B @key[is]
 @key[end] B;
 
-@key[package] A @key[is] --@RI{ Version 2.}
+@key[package] A @key[is] --@ExamCom{ Version 2.}
     ...
 @key[end] A;
 
@@ -3774,7 +3774,7 @@ evaluates such an @nt{allocator};]}
 @key[end record];]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Not_Const : @key[constant] Rec (Acc => @key[new] Integer'(2)); -- @RI{Illegal in a pure unit}.]}
+@ChgAdded{Version=[3],Text=[Not_Const : @key[constant] Rec (Acc => @key[new] Integer'(2)); -- @ExamCom{Illegal in a pure unit}.]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}

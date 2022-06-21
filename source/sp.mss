@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.96 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
+@comment{ $Revision: 1.97 $ $Date: 2022/05/14 04:06:51 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2021/06/03 01:52:07 $}
+@Comment{$Date: 2022/05/14 04:06:51 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -270,8 +270,9 @@ ceiling priority of the corresponding protected object.]
 
 @begin{ImplReq}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 The implementation shall provide a mechanism to determine the minimum
-stack space that is needed
+stack space that is @Chg{Version=[5],New=[necessary],Old=[needed]}
 for each interrupt handler and to reserve that space for
 the execution of the handler. @Redundant{This space should accommodate
 nested invocations of the handler where the system permits this.}
@@ -764,18 +765,21 @@ handlers should be detected before run time.]}]}
 @begin{Notes}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-The Attach_Handler @Chg{Version=[3],New=[aspect may],Old=[pragma can]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+The Attach_Handler @Chg{Version=[3],New=[aspect
+@Chg{Version=[5],New=[can],Old=[may]}],Old=[pragma can]}
 provide static attachment of handlers to
 interrupts if the implementation supports preelaboration of protected
 objects. (See @RefSecNum{Preelaboration Requirements}.)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-@Chg{Version=[2],New=[A],Old=[The ceiling priority of a]}
-protected object that
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[For a],Old=[A]}],Old=[The 
+ceiling priority of a]} protected object that
 @Chg{Version=[2],New=[has a (protected) procedure],
 Old=[one of its procedures is]}
-attached to an interrupt should
-@Chg{Version=[2],New=[have a ceiling priority],
+attached to an interrupt@Chg{Version=[5],New=[, the correct],Old=[should]}
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[],Old=[have a ]}ceiling priority@Chg{Version=[5],New=[ is],Old=[]}],
 Old=[be]} at least as high as the highest
 processor priority at which that interrupt will ever be delivered.
 
@@ -850,7 +854,7 @@ a protected procedure that is an interrupt handler.
 @key{with} System.Multiprocessors;],Old=[]}
 @key[package] Ada.Interrupts@Chg{Version=[5],New=[
    @key[with] Nonblocking, Global => @key[in out synchronized] ],Old=[]}@key[is]
-   @key[type] @AdaTypeDefn{Interrupt_Id} @key[is] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Interrupt_Id} @key[is] @VirtName{implementation-defined};
    @key[type] @AdaTypeDefn{Parameterless_Handler} @key[is]
       @key[access] @key[protected] @key[procedure]@Chg{Version=[5],New=[
       @key[with] Nonblocking => False],Old=[]};
@@ -887,18 +891,18 @@ a protected procedure that is an interrupt handler.
       @key{return} System.Multiprocessors.CPU_Range;]}
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @Examcom{not specified by the language}
 @key[end] Ada.Interrupts;
 
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @key[package] Ada.Interrupts.Names @Chg{Version=[5],New=[
    @key[with] Nonblocking, Global => @key[null] ],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Interrupts],Child=[Names]}
-   @RI{implementation-defined} : @key[constant] Interrupt_Id :=
-     @RI{implementation-defined};
+   @VirtName{implementation-defined} : @key[constant] Interrupt_Id :=
+     @VirtName{implementation-defined};
       . . .
-   @RI{implementation-defined} : @key[constant] Interrupt_Id :=
-     @RI{implementation-defined};
+   @VirtName{implementation-defined} : @key[constant] Interrupt_Id :=
+     @VirtName{implementation-defined};
 @key[end] Ada.Interrupts.Names;
 @end{example}
 
@@ -994,7 +998,7 @@ of the corresponding interrupt be undefined.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0320-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0320-1],ARef=[AI12-0444-1]}
 @Chg{Version=[5],New=[The implementation shall document, when],Old=[If]}
 the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect@Chg{Version=[2],New=[,],Old=[]}@Chg{Version=[5],New=[],Old=[
@@ -1005,7 +1009,8 @@ the Attach_Handler or
 Interrupt_Handler @Chg{Version=[3],New=[aspects],Old=[pragmas]},
 but @Chg{Version=[3],New=[does not specify],Old=[not]} the
 Interrupt_Priority @Chg{Version=[3],New=[aspect],Old=[pragma]}.
-@Redundant[This default need not be the same for all interrupts.]
+@Redundant[This default @Chg{Version=[5],New=[can be different],Old=[need not be the same]}
+for @Chg{Version=[5],New=[different],Old=[all]} interrupts.]
 @ChgDocReq{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
 Text=[If the Ceiling_Locking policy is in effect, the default ceiling priority
@@ -1971,17 +1976,17 @@ writing all of the nearest enclosing full access object.]}
 
 @begin{ImplReq}
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0128-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0128-1],ARef=[AI12-0439-1]}
 @PDefn2{Term=[external effect], Sec=(volatile/atomic objects)}
 The external effect of a program
-(see @RefSecNum(Conformity of an Implementation with the Standard))
+(see @RefSecNum(Conformity of an Implementation))
 is defined to include each read and update
 of a volatile or atomic object. The implementation shall not
 generate any memory reads or updates of atomic or volatile
 objects other than those specified by the program.@Chg{Version=[5],New=[
 However, there may be target-dependent cases where reading or writing a
 volatile but nonatomic object (typically a component) necessarily involves
-reading and/or writing neighboring storage, and that neighboring storage might
+reading and/or writing neighboring storage, and that neighboring storage can
 overlap a volatile object.],Old=[]}
 @begin{Discussion}
 The presumption is that volatile or atomic objects might reside in an
@@ -2101,9 +2106,9 @@ still be modified by an @lquotes@;external source@rquotes.
 @ChgAdded{Version=[4],Text=[Specifying the Pack aspect cannot override the
 effect of specifying an Atomic or Atomic_Components aspect.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0128-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0128-1],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[5],Text=[When mapping an Ada object to a memory-mapped
-hardware register, the Ada object should be declared atomic to ensure that the
+hardware register, the Ada object can be declared atomic to ensure that the
 compiler will read and write exactly the bits of the register as specified in
 the source code and no others.]}
 
@@ -2751,7 +2756,7 @@ termination procedures with a task or set of tasks is defined.],Old=[]}]
    @key[function]  @AdaSubDefn{Is_Callable}            (T : Task_Id) @key{return} Boolean;@Chg{Version=[3],New=[
    @key[function]  @AdaSubDefn{Activation_Is_Complete} (T : Task_Id) @key{return} Boolean;],Old=[]}
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Task_Identification;
 @end{example}
 @end{StaticSem}
@@ -3169,7 +3174,9 @@ Text=[The metrics for the Task_Attributes package.]}]}
 
 @begin{ImplPerm}
 
-An implementation need not actually create the object corresponding
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[can avoid],Old=[need not]} actually
+@Chg{Version=[5],New=[creating],Old=[create]} the object corresponding
 to a task attribute
 until its value is set to something other than that of Initial_Value,
 or until Reference is called for the task attribute.
@@ -3201,8 +3208,10 @@ total storage size allocated for all the attributes of a task.
 @begin{ImplAdvice}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0438-1]}
 Some implementations are targeted to domains in which memory use at run
-time must be completely deterministic. For such implementations, it is
+time @Chg{Version=[5],New=[has to],Old=[must]} be completely deterministic.
+For such implementations, it is
 recommended that the storage for task attributes will be pre-allocated
 statically and not from the heap. This can be accomplished by either
 placing restrictions on the number and the size of the @Chg{Version=[2],
@@ -3223,7 +3232,6 @@ statically and the number of attributes pre-allocated should be documented.]}]}
   repeat requirements in the Annex (they're enough work to meet without
   having to do things twice).]}
 @end{Discussion}
-@end{ImplAdvice}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00237-01]}
 @ChgAdded{Version=[2],Text=[Finalization of task attributes and reclamation of
@@ -3243,18 +3251,26 @@ termination.]}]}
   than this, as we do not want to require the overhead of an interaction with
   the tasking system to be done at a specific point.]}
 @end{Reason}
+@end{ImplAdvice}
+
 @begin{Notes}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 An attribute always exists (after instantiation), and has the initial value.
-It need not occupy memory until the first operation that potentially
-changes the attribute value. The same holds true after Reinitialize.
+@Chg{Version=[5],New=[An implementation can avoid using],Old=[It need not occupy]}
+memory @Chg{Version=[5],New=[to store the attribute value ],Old=[]}until the first
+operation that @Chg{Version=[5],New=[],Old=[potentially ]}changes the attribute
+value. The same holds true after Reinitialize.
 
-The result of the Reference function should be used with care; it is always
-safe to use that result in the task body whose attribute is being
-accessed. However, when the result is being used by another task, the
-programmer must make sure that the task whose attribute is being accessed
-is not yet terminated. Failing to do so could make the program execution
-erroneous.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+The result of the Reference function @Chg{Version=[5],New=[],Old=[should be used
+with care; it ]}is always
+safe to use @Chg{Version=[5],New=[],Old=[that result ]}in the task body whose
+attribute is being accessed. However, when the result is being used by
+another task, the programmer @Chg{Version=[5],New=[will want to],Old=[must]}
+make sure that the task whose attribute is being accessed is not yet
+terminated. Failing to do so @Chg{Version=[5],New=[can],Old=[could]} make
+the program execution erroneous.
 
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00434-01]}
 @ChgDeleted{Version=[2],Text=[As specified in

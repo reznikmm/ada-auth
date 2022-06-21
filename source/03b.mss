@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:28 $}
+@Comment{$Date: 2022/05/14 04:06:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @LabeledClause{Array Types}
 
@@ -109,8 +109,8 @@ For example:]}
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[@key[protected] @key[type] Counter_Type(Initial_Value : Integer := 1) @key[is]
    @key[procedure] Get_Next(Next_Value : @key[out] Integer);
-     --@RI{ Returns the next value on each call, bumping Count}
-     --@RI{ before returning.}
+     --@ExamCom{ Returns the next value on each call, bumping Count}
+     --@ExamCom{ before returning.}
 @key[private]
    Count : Integer := Initial_Value;
 @key[end] Counter_Type;
@@ -131,11 +131,11 @@ For example:]}
 
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Task_Array : @key[array](1..100) @key[of] @key[aliased] T;
-  --@RI{ Array of task elements, each with its own unique ID.}
-  --@RI{ We specify "aliased" so we can use Task_Array(I)'Access.}
-  --@RI{ This is safe because Task_Array is of a limited type,}
-  --@RI{ so there is no way an assignment to it could change}
-  --@RI{ the discriminants of one of its components.}]}
+  --@ExamCom{ Array of task elements, each with its own unique ID.}
+  --@ExamCom{ We specify "aliased" so we can use Task_Array(I)'Access.}
+  --@ExamCom{ This is safe because Task_Array is of a limited type,}
+  --@ExamCom{ so there is no way an assignment to it could change}
+  --@ExamCom{ the discriminants of one of its components.}]}
 @end{Example}
 @end{Reason}
 @begin{Ramification}
@@ -353,7 +353,7 @@ is of its own unique type.
 @key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
 @key(type) Matrix     @key(is) @key(array)(Integer  @key(range) <>, Integer @key(range) <>) @key(of) Real;
 @key(type) Bit_Vector @key(is) @key(array)(Integer  @key(range) <>) @key(of) Boolean;
-@key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; --@RI[ see @RefSecNum(Character Types)]
+@key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; --@ExamCom[ see @RefSecNum(Character Types)]
 @end(Example)
 
 @begin{WideAbove}
@@ -374,10 +374,10 @@ Grid @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(1 .. 80, 1 .. 100) @key(o
 Mix  @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;@Chg{Version=[2],New=[
 Msg_Table : @key(constant array)(Error_Code) @key(of access constant) String :=
       (Too_Big => @key(new) String'("Result too big"), Too_Small => ...);],Old=[]}
-Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line :=  --@RI[  an array of arrays]
-  (1 | 50  => Line'(1 | Line'Last => '+', @key(others) => '-'),  --@RI[ see @RefSecNum(Array Aggregates)]
+Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line :=  --@ExamCom[  an array of arrays]
+  (1 | 50  => Line'(1 | Line'Last => '+', @key(others) => '-'),  --@ExamCom[ see @RefSecNum(Array Aggregates)]
    2 .. 49 => Line'(1 | Line'Last => '|', @key(others) => ' '));
-    --@RI[ Page is constrained by its initial value to (1..50)]
+    --@ExamCom[ Page is constrained by its initial value to (1..50)]
 @end(Example)
 @end{Examples}
 
@@ -547,7 +547,7 @@ Filter    : Bit_Vector(0 .. 31);      --  @Examcom[see @RefSecNum(Array Types)]
 @leading@keepnext@i(Example of array declaration with a constrained array subtype: )
 @end{WideAbove}
 @begin(Example)
-My_Schedule : Schedule;  --@RI[  all arrays of type Schedule have the same bounds]
+My_Schedule : Schedule;  --@ExamCom[  all arrays of type Schedule have the same bounds]
 @end(Example)
 
 @begin{WideAbove}
@@ -559,7 +559,7 @@ My_Schedule : Schedule;  --@RI[  all arrays of type Schedule have the same bound
       Image : String(1 .. Length);
    @key(end) @key(record);
 
-Null_Line : Var_Line(0);  --@RI[  Null_Line.Image is a null array]
+Null_Line : Var_Line(0);  --@ExamCom[  Null_Line.Image is a null array]
 @end(Example)
 @end{Examples}
 
@@ -743,11 +743,11 @@ these ordering operators correspond to lexicographic order
 @TabClear()@TabSet(P49)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
 Question   : @key(constant) String  := "How many characters?";
-@\--@RI[ Question'First = 1, Question'Last = 20]
-@\--@RI[ Question'Length = 20 (the number of characters)]
+@\--@ExamCom[ Question'First = 1, Question'Last = 20]
+@\--@ExamCom[ Question'Length = 20 (the number of characters)]
 
-Ask_Twice  : String  := Question & Question;@\--@RI[ constrained to (1..40)]
-Ninety_Six : @key(constant) Roman   := "XCVI";@\--@RI[ see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
+Ask_Twice  : String  := Question & Question;@\--@ExamCom[ constrained to (1..40)]
+Ninety_Six : @key(constant) Roman   := "XCVI";@\--@ExamCom[ see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
 @end(Example)
 @end{Examples}
 
@@ -1498,7 +1498,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @begin{Examples}
 @Leading@keepnext@i(Examples of discriminated types:)
 @begin(Example)
-@key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        --@RI[ see @RefSecNum(Integer Types)]
+@key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        --@ExamCom[ see @RefSecNum(Integer Types)]
    @key(record)
       Pos   : Buffer_Size := 0;
       Value : String(1 .. Size);
@@ -1506,7 +1506,7 @@ used only for discriminants defined by an @nt<access_definition>.
 
 @key(type) Matrix_Rec(Rows, Columns : Integer) @key(is)
    @key(record)
-      Mat : Matrix(1 .. Rows, 1 .. Columns);       --@RI[ see @RefSecNum(Array Types)]
+      Mat : Matrix(1 .. Rows, 1 .. Columns);       --@ExamCom[ see @RefSecNum(Array Types)]
    @key(end) @key(record);
 
 @key(type) Square(Side : Integer) @key(is) @key(new)
@@ -1521,15 +1521,15 @@ used only for discriminants defined by an @nt<access_definition>.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[2],New=[@key(task type) Worker(Prio : System.Priority; Buf : @key(access) Buffer)@Chg{Version=[3],New=[
-   @key(with) Priority => Prio @key(is) --@RI[ see @RefSecNum{Task Priorities}]],Old=[@key(is)]}
-   --@RI[ discriminants used to parameterize the task type (see @RefSecNum{Task Units and Task Objects})]@Chg{Version=[3],New=[],Old=[
-   @key(pragma) Priority(Prio);  --@RI[ see @RefSecNum{Task Priorities}]]}
+   @key(with) Priority => Prio @key(is) --@ExamCom[ see @RefSecNum{Task Priorities}]],Old=[@key(is)]}
+   --@ExamCom[ discriminants used to parameterize the task type (see @RefSecNum{Task Units and Task Objects})]@Chg{Version=[3],New=[],Old=[
+   @key(pragma) Priority(Prio);  --@ExamCom[ see @RefSecNum{Task Priorities}]]}
    @key(entry) Fill;
    @key(entry) Drain;
 @key(end) Worker;],Old=[@key(type) Item(Number : Positive) @key(is)
    @key(record)
       Content : Integer;
-      --@RI[  no component depends on the discriminant]
+      --@ExamCom[  no component depends on the discriminant]
    @key(end) @key(record);]}
 @end(Example)
 @end{Examples}
@@ -1831,12 +1831,12 @@ from explicit or implicit initialization.
 @i{Examples (using types declared above in
 @Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum(Discriminants)):}
 @begin(Example)
-Large   : Buffer(200);  --@RI[  constrained, always 200 characters]
-                        --@RI[   (explicit discriminant value)]
-Message : Buffer;       --@RI[  unconstrained, initially 100 characters]
-                        --@RI[   (default discriminant value)]
-Basis   : Square(5);    --@RI[  constrained, always 5 by 5]
-Illegal : Square;       --@RI[  illegal, a Square has to be constrained]
+Large   : Buffer(200);  --@ExamCom[  constrained, always 200 characters]
+                        --@ExamCom[   (explicit discriminant value)]
+Message : Buffer;       --@ExamCom[  unconstrained, initially 100 characters]
+                        --@ExamCom[   (default discriminant value)]
+Basis   : Square(5);    --@ExamCom[  constrained, always 5 by 5]
+Illegal : Square;       --@ExamCom[  illegal, a Square has to be constrained]
 @end(Example)
 @end{Examples}
 
@@ -2347,7 +2347,7 @@ New=[],Old=[, unless the record type is limited]}.
 Tomorrow, Yesterday : Date;
 A, B, C : Complex;
 
---@RI[ both components of A, B, and C are implicitly initialized to zero ]
+--@ExamCom[ both components of A, B, and C are implicitly initialized to zero ]
 @end(Example)
 @end{Examples}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2021/06/03 01:52:07 $ $Author: randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:07 $}
+@Comment{$Date: 2022/05/14 04:06:52 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -41,7 +41,7 @@ the visible part of package Standard.}
    @key[type] @AdaTypeDefn{Boolean} @key[is] (False, True);
 
 
-@Keepnext   --@RI{ The predefined relational operators for this type are as follows:}
+@Keepnext   --@ExamCom{ The predefined relational operators for this type are as follows:}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028],ARef=[AI95-00145-01]}
    -- @key[function] "="   (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
@@ -52,8 +52,8 @@ the visible part of package Standard.}
    -- @key[function] ">="  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
 
 
-@Keepnext   --@RI{ The predefined logical operators and the predefined logical}
-   --@RI{ negation operator are as follows:}
+@Keepnext   --@ExamCom{ The predefined logical operators and the predefined logical}
+   --@ExamCom{ negation operator are as follows:}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028],ARef=[AI95-00145-01]}
    -- @key[function] "@key[and]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean@Chg{New=['Base],Old=[]};
@@ -66,18 +66,18 @@ the visible part of package Standard.}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-   --@RI{ The integer type root_integer @Chg{Version=[2],New=[and the],Old=[is predefined.]}}
-   --@RI{ @Chg{Version=[2],New=[],Old=[The ]}corresponding universal type @Chg{Version=[2],New=[],Old=[is ]}universal_integer@Chg{Version=[2],New=[ are predefined],Old=[]}.}
+   --@ExamCom{ The integer type root_integer @Chg{Version=[2],New=[and the],Old=[is predefined.]}}
+   --@ExamCom{ @Chg{Version=[2],New=[],Old=[The ]}corresponding universal type @Chg{Version=[2],New=[],Old=[is ]}universal_integer@Chg{Version=[2],New=[ are predefined],Old=[]}.}
 
 
-   @key[type] @AdaTypeDefn{Integer} @key[is] @key{range} @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Integer} @key[is] @key{range} @VirtName{implementation-defined};
 
 
    @key[subtype] @AdaSubtypeDefn{Name=[Natural],Of=[Integer]}  @key[is] Integer @key[range] 0 .. Integer'Last;
    @key[subtype] @AdaSubtypeDefn{Name=[Positive],Of=[Integer]} @key[is] Integer @key[range] 1 .. Integer'Last;
 
 
-@Keepnext   --@RI{ The predefined operators for type Integer are as follows:}
+@Keepnext   --@ExamCom{ The predefined operators for type Integer are as follows:}
 
    -- @key[function] "="  (Left, Right : Integer'Base) @key[return] Boolean;
    -- @key[function] "/=" (Left, Right : Integer'Base) @key[return] Boolean;
@@ -104,23 +104,23 @@ the visible part of package Standard.}
    --                  @key[return] Integer'Base;
 
 
-   --@RI{ The specification of each operator for the type}
-   --@RI{ root_integer, or for any additional predefined integer}
-   --@RI{ type, is obtained by replacing Integer by the name of the type}
-   --@RI{ in the specification of the corresponding operator of the type}
-   --@RI{ Integer. The right operand of the exponentiation operator}
-   --@RI{ remains as subtype Natural.}
+   --@ExamCom{ The specification of each operator for the type}
+   --@ExamCom{ root_integer, or for any additional predefined integer}
+   --@ExamCom{ type, is obtained by replacing Integer by the name of the type}
+   --@ExamCom{ in the specification of the corresponding operator of the type}
+   --@ExamCom{ Integer. The right operand of the exponentiation operator}
+   --@ExamCom{ remains as subtype Natural.}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-   --@RI{ The floating point type root_real @Chg{Version=[2],New=[and the],Old=[is predefined.]}}
-   --@RI{ @Chg{Version=[2],New=[],Old=[The ]}corresponding universal type @Chg{Version=[2],New=[],Old=[is ]}universal_real@Chg{Version=[2],New=[ are predefined],Old=[]}.}
+   --@ExamCom{ The floating point type root_real @Chg{Version=[2],New=[and the],Old=[is predefined.]}}
+   --@ExamCom{ @Chg{Version=[2],New=[],Old=[The ]}corresponding universal type @Chg{Version=[2],New=[],Old=[is ]}universal_real@Chg{Version=[2],New=[ are predefined],Old=[]}.}
 
 
-   @key[type] @AdaTypeDefn{Float} @key[is] @key{digits} @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Float} @key[is] @key{digits} @VirtName{implementation-defined};
 
 
-@Keepnext   --@RI{ The predefined operators for this type are as follows:}
+@Keepnext   --@ExamCom{ The predefined operators for this type are as follows:}
 
    -- @key[function] "="   (Left, Right : Float) @key[return] Boolean;
    -- @key[function] "/="  (Left, Right : Float) @key[return] Boolean;
@@ -144,142 +144,142 @@ the visible part of package Standard.}
    -- @key[function] "**"  (Left : Float; Right : Integer'Base) @key[return] Float;
 
 
-   --@RI{ The specification of each operator for the type root_real, or for}
-   --@RI{ any additional predefined floating point type, is obtained by}
-   --@RI{ replacing Float by the name of the type in the specification of the}
-   --@RI{ corresponding operator of the type Float.}
+   --@ExamCom{ The specification of each operator for the type root_real, or for}
+   --@ExamCom{ any additional predefined floating point type, is obtained by}
+   --@ExamCom{ replacing Float by the name of the type in the specification of the}
+   --@ExamCom{ corresponding operator of the type Float.}
 
 
-@Keepnext   --@RI{ In addition, the following operators are predefined for the root}
-   --@RI{ numeric types:}
+@Keepnext   --@ExamCom{ In addition, the following operators are predefined for the root}
+   --@ExamCom{ numeric types:}
 
-   @key[function] "*" (Left : @RI{root_integer}; Right : @RI{root_real})
-     @key[return] @RI{root_real};
-
-
-   @key[function] "*" (Left : @RI{root_real};    Right : @RI{root_integer})
-     @key[return] @RI{root_real};
+   @key[function] "*" (Left : @VirtName{root_integer}; Right : @VirtName{root_real})
+     @key[return] @VirtName{root_real};
 
 
-   @key[function] "/" (Left : @RI{root_real};    Right : @RI{root_integer})
-     @key[return] @RI{root_real};
+   @key[function] "*" (Left : @VirtName{root_real};    Right : @VirtName{root_integer})
+     @key[return] @VirtName{root_real};
 
 
-   --@RI{ The type universal_fixed is predefined.}
-   --@RI{ The only multiplying operators defined between}
-   --@RI{ fixed point types are}
+   @key[function] "/" (Left : @VirtName{root_real};    Right : @VirtName{root_integer})
+     @key[return] @VirtName{root_real};
 
-   @key[function] "*" (Left : @RI[universal_fixed]; Right : @RI[universal_fixed])
-     @key[return] @RI[universal_fixed];
 
-   @key[function] "/" (Left : @RI[universal_fixed]; Right : @RI[universal_fixed])
-     @key[return] @RI[universal_fixed];
+   --@ExamCom{ The type universal_fixed is predefined.}
+   --@ExamCom{ The only multiplying operators defined between}
+   --@ExamCom{ fixed point types are}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[   --@RI{ The type universal_access is predefined.}
-   --@RI{ The following equality operators are predefined:}]}
+   @key[function] "*" (Left : @VirtName[universal_fixed]; Right : @VirtName[universal_fixed])
+     @key[return] @VirtName[universal_fixed];
+
+   @key[function] "/" (Left : @VirtName[universal_fixed]; Right : @VirtName[universal_fixed])
+     @key[return] @VirtName[universal_fixed];
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] "="  (Left, Right: @RI[universal_access]) @key[return] Boolean;
-   @key[function] "/=" (Left, Right: @RI[universal_access]) @key[return] Boolean;]}
+@ChgAdded{Version=[2],Text=[   --@ExamCom{ The type universal_access is predefined.}
+   --@ExamCom{ The following equality operators are predefined:}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] "="  (Left, Right: @VirtName[universal_access]) @key[return] Boolean;
+   @key[function] "/=" (Left, Right: @VirtName[universal_access]) @key[return] Boolean;]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1],ARef=[AI05-0248-1]}
 @tabclear()@tabset(P7, P14, P21, P28, P37, P44, P51, P58, P64)
 @comment{blank line}
-      --@RI{ The declaration of type Character is based on the standard ISO 8859-1 character set.}
+      --@ExamCom{ The declaration of type Character is based on the standard ISO 8859-1 character set.}
 @comment{blank line}
-      --@RI{ There are no character literals corresponding to the positions for control characters.}
-      --@RI{ They are indicated in italics in this definition. See @refsecnum[Character Types].}
+      --@ExamCom{ There are no character literals corresponding to the positions for control characters.}
+      --@ExamCom{ They are indicated in italics in this definition. See @refsecnum[Character Types].}
 @comment[blank line]
    @key[type] @AdaTypeDefn{Character} @key[is]
-     (@RI[nul],@\@RI[soh],@\@RI[stx],@\@RI[etx],@\@RI[eot],@\@RI[enq],@\@RI[ack],@\@RI[bel],@\--@RI{0 (16#00#) .. 7 (16#07#)}
-      @RI[bs],@\@RI[ht],@\@RI[lf],@\@RI[vt],@\@RI[ff],@\@RI[cr],@\@RI[so],@\@RI[si],@\--@RI{8 (16#08#) .. 15 (16#0F#)}
+     (@VirtName[nul],@\@VirtName[soh],@\@VirtName[stx],@\@VirtName[etx],@\@VirtName[eot],@\@VirtName[enq],@\@VirtName[ack],@\@VirtName[bel],@\--@ExamCom{0 (16#00#) .. 7 (16#07#)}
+      @VirtName[bs],@\@VirtName[ht],@\@VirtName[lf],@\@VirtName[vt],@\@VirtName[ff],@\@VirtName[cr],@\@VirtName[so],@\@VirtName[si],@\--@ExamCom{8 (16#08#) .. 15 (16#0F#)}
 @comment{blank line}
-      @RI[dle],@\@RI[dc1],@\@RI[dc2],@\@RI[dc3],@\@RI[dc4],@\@RI[nak],@\@RI[syn],@\@RI[etb],@\--@RI{16 (16#10#) .. 23 (16#17#)}
-      @RI[can],@\@RI[em],@\@RI[sub],@\@RI[esc],@\@RI[fs],@\@RI[gs],@\@RI[rs],@\@RI[us],@\--@RI{24 (16#18#) .. 31 (16#1F#)}
+      @VirtName[dle],@\@VirtName[dc1],@\@VirtName[dc2],@\@VirtName[dc3],@\@VirtName[dc4],@\@VirtName[nak],@\@VirtName[syn],@\@VirtName[etb],@\--@ExamCom{16 (16#10#) .. 23 (16#17#)}
+      @VirtName[can],@\@VirtName[em],@\@VirtName[sub],@\@VirtName[esc],@\@VirtName[fs],@\@VirtName[gs],@\@VirtName[rs],@\@VirtName[us],@\--@ExamCom{24 (16#18#) .. 31 (16#1F#)}
 @comment{blank line}
-      ' ',@\'!',@\'"',@\'#',@\'$',@\'%',@\'&',@\''',@\--@RI{32 (16#20#) .. 39 (16#27#)}
-      '(',@\')',@\'*',@\'+',@\',',@\'-',@\'.',@\'/',@\--@RI{40 (16#28#) .. 47 (16#2F#)}
+      ' ',@\'!',@\'"',@\'#',@\'$',@\'%',@\'&',@\''',@\--@ExamCom{32 (16#20#) .. 39 (16#27#)}
+      '(',@\')',@\'*',@\'+',@\',',@\'-',@\'.',@\'/',@\--@ExamCom{40 (16#28#) .. 47 (16#2F#)}
 @comment{blank line}
-      '0',@\'1',@\'2',@\'3',@\'4',@\'5',@\'6',@\'7',@\--@RI{48 (16#30#) .. 55 (16#37#)}
-      '8',@\'9',@\':',@\';',@\'<',@\'=',@\'>',@\'?',@\--@RI{56 (16#38#) .. 63 (16#3F#)}
+      '0',@\'1',@\'2',@\'3',@\'4',@\'5',@\'6',@\'7',@\--@ExamCom{48 (16#30#) .. 55 (16#37#)}
+      '8',@\'9',@\':',@\';',@\'<',@\'=',@\'>',@\'?',@\--@ExamCom{56 (16#38#) .. 63 (16#3F#)}
 @comment{blank line}
-      '@@',@\'A',@\'B',@\'C',@\'D',@\'E',@\'F',@\'G',@\--@RI{64 (16#40#) .. 71 (16#47#)}
-      'H',@\'I',@\'J',@\'K',@\'L',@\'M',@\'N',@\'O',@\--@RI{72 (16#48#) .. 79 (16#4F#)}
+      '@@',@\'A',@\'B',@\'C',@\'D',@\'E',@\'F',@\'G',@\--@ExamCom{64 (16#40#) .. 71 (16#47#)}
+      'H',@\'I',@\'J',@\'K',@\'L',@\'M',@\'N',@\'O',@\--@ExamCom{72 (16#48#) .. 79 (16#4F#)}
 @comment{blank line}
-      'P',@\'Q',@\'R',@\'S',@\'T',@\'U',@\'V',@\'W',@\--@RI{80 (16#50#) .. 87 (16#57#)}
-      'X',@\'Y',@\'Z',@\'[',@\'\',@\']',@\'^',@\'_',@\--@RI{88 (16#58#) .. 95 (16#5F#)}
+      'P',@\'Q',@\'R',@\'S',@\'T',@\'U',@\'V',@\'W',@\--@ExamCom{80 (16#50#) .. 87 (16#57#)}
+      'X',@\'Y',@\'Z',@\'[',@\'\',@\']',@\'^',@\'_',@\--@ExamCom{88 (16#58#) .. 95 (16#5F#)}
 @comment{blank line}
-      '`',@\'a',@\'b',@\'c',@\'d',@\'e',@\'f',@\'g',@\--@RI{96 (16#60#) .. 103 (16#67#)}
-      'h',@\'i',@\'j',@\'k',@\'l',@\'m',@\'n',@\'o',@\--@RI{104 (16#68#) .. 111 (16#6F#)}
+      '`',@\'a',@\'b',@\'c',@\'d',@\'e',@\'f',@\'g',@\--@ExamCom{96 (16#60#) .. 103 (16#67#)}
+      'h',@\'i',@\'j',@\'k',@\'l',@\'m',@\'n',@\'o',@\--@ExamCom{104 (16#68#) .. 111 (16#6F#)}
 @comment{blank line}
-      'p',@\'q',@\'r',@\'s',@\'t',@\'u',@\'v',@\'w',@\--@RI{112 (16#70#) .. 119 (16#77#)}
-      'x',@\'y',@\'z',@\'{',@\'|',@\'}',@\'~',@\@RI[del],@\--@RI{120 (16#78#) .. 127 (16#7F#)}
+      'p',@\'q',@\'r',@\'s',@\'t',@\'u',@\'v',@\'w',@\--@ExamCom{112 (16#70#) .. 119 (16#77#)}
+      'x',@\'y',@\'z',@\'{',@\'|',@\'}',@\'~',@\@VirtName[del],@\--@ExamCom{120 (16#78#) .. 127 (16#7F#)}
 @Comment{Blank line}
-      @RI[reserved_128],@\@RI[reserved_129],@\@RI[bph],@\@RI[nbh],@\@\@\--@RI{128 (16#80#) .. 131 (16#83#)}
-      @RI[reserved_132],@\@RI[nel],@\@RI[ssa],@\@RI[esa],@\@\@\@\--@RI{132 (16#84#) .. 135 (16#87#)}
-      @RI[hts],@\@RI[htj],@\@RI[vts],@\@RI[pld],@\@RI[plu],@\@RI[ri],@\@RI[ss2],@\@RI[ss3],@\--@RI{136 (16#88#) .. 143 (16#8F#)}
+      @VirtName[reserved_128],@\@VirtName[reserved_129],@\@VirtName[bph],@\@VirtName[nbh],@\@\@\--@ExamCom{128 (16#80#) .. 131 (16#83#)}
+      @VirtName[reserved_132],@\@VirtName[nel],@\@VirtName[ssa],@\@VirtName[esa],@\@\@\@\--@ExamCom{132 (16#84#) .. 135 (16#87#)}
+      @VirtName[hts],@\@VirtName[htj],@\@VirtName[vts],@\@VirtName[pld],@\@VirtName[plu],@\@VirtName[ri],@\@VirtName[ss2],@\@VirtName[ss3],@\--@ExamCom{136 (16#88#) .. 143 (16#8F#)}
 @comment{blank line}
-      @RI[dcs],@\@RI[pu1],@\@RI[pu2],@\@RI[sts],@\@RI[cch],@\@RI[mw],@\@RI[spa],@\@RI[epa],@\--@RI{144 (16#90#) .. 151 (16#97#)}
-      @RI[sos],@\@RI[reserved_153],@\@RI[sci],@\@RI[csi],@\@\@\@\--@RI{152 (16#98#) .. 155 (16#9B#)}
-      @RI[st],@\@RI[osc],@\@RI[pm],@\@RI[apc],@\@\@\@\@\--@RI{156 (16#9C#) .. 159 (16#9F#)}
+      @VirtName[dcs],@\@VirtName[pu1],@\@VirtName[pu2],@\@VirtName[sts],@\@VirtName[cch],@\@VirtName[mw],@\@VirtName[spa],@\@VirtName[epa],@\--@ExamCom{144 (16#90#) .. 151 (16#97#)}
+      @VirtName[sos],@\@VirtName[reserved_153],@\@VirtName[sci],@\@VirtName[csi],@\@\@\@\--@VirtName{152 (16#98#) .. 155 (16#9B#)}
+      @VirtName[st],@\@VirtName[osc],@\@VirtName[pm],@\@VirtName[apc],@\@\@\@\@\--@ExamCom{156 (16#9C#) .. 159 (16#9F#)}
 @comment{blank line}
-      ' ',@\'@latin1(161)',@\'@latin1(162)',@\'@latin1(163)',@\'@latin1(164)',@\'@latin1(165)',@\'@latin1(166)',@\'@latin1(167)',@\--@RI{160 (16#A0#) .. 167 (16#A7#)}
-      '@latin1(168)',@\'@latin1(169)',@\'@latin1(170)',@\'@latin1(171)',@Chg{Version=[3],New=[@\@\@\@\@\--@RI{168 (16#A8#) .. 171 (16#AB#)}
-      '@latin1(172)',@\@RI[soft_hyphen],@\'@latin1(174)',@\'@latin1(175)',@\@\@\@\--@RI{172 (16#AC#) .. 175 (16#AF#)}],Old=[@\'@latin1(172)',@\'@latin1(173)',@\'@latin1(174)',@\'@latin1(175)',@\--@RI{168 (16#A8#) .. 175 (16#AF#)}]}
+      ' ',@\'@latin1(161)',@\'@latin1(162)',@\'@latin1(163)',@\'@latin1(164)',@\'@latin1(165)',@\'@latin1(166)',@\'@latin1(167)',@\--@ExamCom{160 (16#A0#) .. 167 (16#A7#)}
+      '@latin1(168)',@\'@latin1(169)',@\'@latin1(170)',@\'@latin1(171)',@Chg{Version=[3],New=[@\@\@\@\@\--@ExamCom{168 (16#A8#) .. 171 (16#AB#)}
+      '@latin1(172)',@\@VirtName[soft_hyphen],@\'@latin1(174)',@\'@latin1(175)',@\@\@\@\--@ExamCom{172 (16#AC#) .. 175 (16#AF#)}],Old=[@\'@latin1(172)',@\'@latin1(173)',@\'@latin1(174)',@\'@latin1(175)',@\--@ExamCom{168 (16#A8#) .. 175 (16#AF#)}]}
 @comment{blank line}
-      '@latin1(176)',@\'@latin1(177)',@\'@latin1(178)',@\'@latin1(179)',@\'@latin1(180)',@\'@latin1(181)',@\'@latin1(182)',@\'@latin1(183)',@\--@RI{176 (16#B0#) .. 183 (16#B7#)}
-      '@latin1(184)',@\'@latin1(185)',@\'@latin1(186)',@\'@latin1(187)',@\'@latin1(188)',@\'@latin1(189)',@\'@latin1(190)',@\'@latin1(191)',@\--@RI{184 (16#B8#) .. 191 (16#BF#)}
+      '@latin1(176)',@\'@latin1(177)',@\'@latin1(178)',@\'@latin1(179)',@\'@latin1(180)',@\'@latin1(181)',@\'@latin1(182)',@\'@latin1(183)',@\--@ExamCom{176 (16#B0#) .. 183 (16#B7#)}
+      '@latin1(184)',@\'@latin1(185)',@\'@latin1(186)',@\'@latin1(187)',@\'@latin1(188)',@\'@latin1(189)',@\'@latin1(190)',@\'@latin1(191)',@\--@ExamCom{184 (16#B8#) .. 191 (16#BF#)}
 @comment{blank line}
-      '@latin1(192)',@\'@latin1(193)',@\'@latin1(194)',@\'@latin1(195)',@\'@latin1(196)',@\'@latin1(197)',@\'@latin1(198)',@\'@latin1(199)',@\--@RI{192 (16#C0#) .. 199 (16#C7#)}
-      '@latin1(200)',@\'@latin1(201)',@\'@latin1(202)',@\'@latin1(203)',@\'@latin1(204)',@\'@latin1(205)',@\'@latin1(206)',@\'@latin1(207)',@\--@RI{200 (16#C8#) .. 207 (16#CF#)}
+      '@latin1(192)',@\'@latin1(193)',@\'@latin1(194)',@\'@latin1(195)',@\'@latin1(196)',@\'@latin1(197)',@\'@latin1(198)',@\'@latin1(199)',@\--@ExamCom{192 (16#C0#) .. 199 (16#C7#)}
+      '@latin1(200)',@\'@latin1(201)',@\'@latin1(202)',@\'@latin1(203)',@\'@latin1(204)',@\'@latin1(205)',@\'@latin1(206)',@\'@latin1(207)',@\--@ExamCom{200 (16#C8#) .. 207 (16#CF#)}
 @comment{blank line}
-      '@latin1(208)',@\'@latin1(209)',@\'@latin1(210)',@\'@latin1(211)',@\'@latin1(212)',@\'@latin1(213)',@\'@latin1(214)',@\'@latin1(215)',@\--@RI{208 (16#D0#) .. 215 (16#D7#)}
-      '@latin1(216)',@\'@latin1(217)',@\'@latin1(218)',@\'@latin1(219)',@\'@latin1(220)',@\'@latin1(221)',@\'@latin1(222)',@\'@latin1(223)',@\--@RI{216 (16#D8#) .. 223 (16#DF#)}
+      '@latin1(208)',@\'@latin1(209)',@\'@latin1(210)',@\'@latin1(211)',@\'@latin1(212)',@\'@latin1(213)',@\'@latin1(214)',@\'@latin1(215)',@\--@ExamCom{208 (16#D0#) .. 215 (16#D7#)}
+      '@latin1(216)',@\'@latin1(217)',@\'@latin1(218)',@\'@latin1(219)',@\'@latin1(220)',@\'@latin1(221)',@\'@latin1(222)',@\'@latin1(223)',@\--@ExamCom{216 (16#D8#) .. 223 (16#DF#)}
 @comment{blank line}
-      '@latin1(224)',@\'@latin1(225)',@\'@latin1(226)',@\'@latin1(227)',@\'@latin1(228)',@\'@latin1(229)',@\'@latin1(230)',@\'@latin1(231)',@\--@RI{224 (16#E0#) .. 231 (16#E7#)}
-      '@latin1(232)',@\'@latin1(233)',@\'@latin1(234)',@\'@latin1(235)',@\'@latin1(236)',@\'@latin1(237)',@\'@latin1(238)',@\'@latin1(239)',@\--@RI{232 (16#E8#) .. 239 (16#EF#)}
+      '@latin1(224)',@\'@latin1(225)',@\'@latin1(226)',@\'@latin1(227)',@\'@latin1(228)',@\'@latin1(229)',@\'@latin1(230)',@\'@latin1(231)',@\--@ExamCom{224 (16#E0#) .. 231 (16#E7#)}
+      '@latin1(232)',@\'@latin1(233)',@\'@latin1(234)',@\'@latin1(235)',@\'@latin1(236)',@\'@latin1(237)',@\'@latin1(238)',@\'@latin1(239)',@\--@ExamCom{232 (16#E8#) .. 239 (16#EF#)}
 @comment{blank line}
-      '@latin1(240)',@\'@latin1(241)',@\'@latin1(242)',@\'@latin1(243)',@\'@latin1(244)',@\'@latin1(245)',@\'@latin1(246)',@\'@latin1(247)',@\--@RI{240 (16#F0#) .. 247 (16#F7#)}
-      '@latin1(248)',@\'@latin1(249)',@\'@latin1(250)',@\'@latin1(251)',@\'@latin1(252)',@\'@latin1(253)',@\'@latin1(254)',@\'@latin1(255)'@Chg{Version=[2],New=[);],Old=[,@\]}--@RI{248 (16#F8#) .. 255 (16#FF#)}
+      '@latin1(240)',@\'@latin1(241)',@\'@latin1(242)',@\'@latin1(243)',@\'@latin1(244)',@\'@latin1(245)',@\'@latin1(246)',@\'@latin1(247)',@\--@ExamCom{240 (16#F0#) .. 247 (16#F7#)}
+      '@latin1(248)',@\'@latin1(249)',@\'@latin1(250)',@\'@latin1(251)',@\'@latin1(252)',@\'@latin1(253)',@\'@latin1(254)',@\'@latin1(255)'@Chg{Version=[2],New=[);],Old=[,@\]}--@ExamCom{248 (16#F8#) .. 255 (16#FF#)}
 
 
-   --@RI{ The predefined operators for the type Character are the same as for}
-   --@RI{ any enumeration type.}
+   --@ExamCom{ The predefined operators for the type Character are the same as for}
+   --@ExamCom{ any enumeration type.}
 @Softpage@;
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}@Comment{Odd missing paragraph number here}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
-@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@RI{ The declaration of type Wide_Character is based on the standard @Chg{Version=[2],New=[ISO/IEC],Old=[ISO]} 10646@Chg{Version=[2],New=[:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],Old=[]} BMP character@Chg{Version=[2],New=[],Old=[ set.]}}
-   --@RI{ @Chg{Version=[2],New=[set. ],Old=[]}The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@ExamCom{ The declaration of type Wide_Character is based on the standard @Chg{Version=[2],New=[ISO/IEC],Old=[ISO]} 10646@Chg{Version=[2],New=[:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],Old=[]} BMP character@Chg{Version=[2],New=[],Old=[ set.]}}
+   --@ExamCom{ @Chg{Version=[2],New=[set. ],Old=[]}The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
 @comment[blank line]
-   @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[@Chg{Version=[2],New=[Hex_0000FFFE],Old=[FFFE]}], @RI[@Chg{Version=[2],New=[Hex_0000FFFF],Old=[FFFF]}]);
+   @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@VirtName[nul], @VirtName[soh] ... @VirtName[@Chg{Version=[2],New=[Hex_0000FFFE],Old=[FFFE]}], @VirtName[@Chg{Version=[2],New=[Hex_0000FFFF],Old=[FFFF]}]);
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
-@ChgAdded{Version=[2],Text=[   --@RI[ The declaration of type Wide_Wide_Character is based on the full]
-   --@RI[ ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} character set. The first 65536 positions have the]
-   --@RI[ same contents as type Wide_Character. See @refsecnum[Character types].]
+@ChgAdded{Version=[2],Text=[   --@ExamCom[ The declaration of type Wide_Wide_Character is based on the full]
+   --@ExamCom[ ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} character set. The first 65536 positions have the]
+   --@ExamCom[ same contents as type Wide_Character. See @refsecnum[Character types].]
 @comment[blank line]
-   @key[type] @AdaTypeDefn{Wide_Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[Hex_7FFFFFFE], @RI[Hex_7FFFFFFF]);
+   @key[type] @AdaTypeDefn{Wide_Wide_Character} @key[is] (@VirtName[nul], @VirtName[soh] ... @VirtName[Hex_7FFFFFFE], @VirtName[Hex_7FFFFFFF]);
    @key[for] Wide_Wide_Character'Size @key[use] 32;]}
 
 @ChgRef{Version=[2],Kind=[Added]}@Comment{Odd missing paragraph number here}
-@Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] @AdaPackDefn{ASCII} @key[is] ... @key[end] ASCII;  --@RI{Obsolescent; see @RefSecNum[ASCII]}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] @AdaPackDefn{ASCII} @key[is] ... @key[end] ASCII;  --@ExamCom{Obsolescent; see @RefSecNum[ASCII]}
 @Defn2{Term=[ASCII], Sec=(package physically nested within the declaration of Standard)}
 @comment[blank line]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   --@RI{ Predefined string types:}
+   --@ExamCom{ Predefined string types:}
 @comment[blank line]
    @key[type] @AdaTypeDefn{String} @key[is] @key[array](Positive @key[range] <>) @key[of] Character@Chg{Version=[3],New=[
       @key[with] Pack],Old=[;
    @key[pragma] Pack(String)]};
 
-@Keepnext   --@RI{ The predefined operators for this type are as follows:}
+@Keepnext   --@ExamCom{ The predefined operators for this type are as follows:}
 
    --     @key[function] "="  (Left, Right: String) @key[return] Boolean;
    --     @key[function] "/=" (Left, Right: String) @key[return] Boolean;@Softpage
@@ -300,7 +300,7 @@ the visible part of package Standard.}
       @key[with] Pack],Old=[;
    @key[pragma] Pack(Wide_String)]};
 
-   --@RI{ The predefined operators for this type correspond to those for String.}
+   --@ExamCom{ The predefined operators for this type correspond to those for String.}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
@@ -310,16 +310,16 @@ the visible part of package Standard.}
    @key[pragma] Pack (Wide_Wide_String)]};]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   --@RI[ The predefined operators for this type correspond to those for String.]]}
+@ChgAdded{Version=[2],Text=[   --@ExamCom[ The predefined operators for this type correspond to those for String.]]}
 
 
-   @key[type] @AdaTypeDefn{Duration} @key[is] @key[delta] @RI{implementation-defined} @key[range] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Duration} @key[is] @key[delta] @VirtName{implementation-defined} @key[range] @VirtName{implementation-defined};
 
-      --@RI{ The predefined operators for the type Duration are the same as for}
-      --@RI{ any fixed point type.}
+      --@ExamCom{ The predefined operators for the type Duration are the same as for}
+      --@ExamCom{ any fixed point type.}
 
 
-@Keepnext   --@RI{ The predefined exceptions:}
+@Keepnext   --@ExamCom{ The predefined exceptions:}
 
    @AdaExcDefn{Constraint_Error}: @key[exception];
    @AdaExcDefn{Program_Error}   : @key[exception];

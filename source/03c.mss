@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:28 $}
+@Comment{$Date: 2022/05/14 04:06:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.157 $}
+@Comment{$Revision: 1.158 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -331,7 +331,7 @@ of the generic body result in distinct tags.@PDefn{Unspecified}
     @AdaExcDefn{Tag_Error} : @key[exception];
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Tags;
 @end{Example}
 @begin{Reason}
@@ -903,7 +903,7 @@ the library unit in which the incomplete type is declared
   @key(end record);
 
 @key(type) Expression @key(is tagged null record);
-  --@RI[ Components will be added by each extension]
+  --@ExamCom[ Components will be added by each extension]
 @end(Example)
 @end{Examples}
 
@@ -1127,7 +1127,7 @@ as in the following example:
 @ChgRef{Version=[2],Kind=[Revised]}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
-    @key[function] F @key[return] T; --@RI{ Inherited versions will @Chg{Version=[2],New=[require overriding],Old=[be abstract]}.}
+    @key[function] F @key[return] T; --@ExamCom{ Inherited versions will @Chg{Version=[2],New=[require overriding],Old=[be abstract]}.}
 @key[end] P;
 
 @key[generic]
@@ -1139,11 +1139,11 @@ as in the following example:
 
 @ChgRef{Version=[2],Kind=[Revised]}
 @key[package] @key[body] Gp @key[is]
-    @key[type] NT2 @key[is] @key[new] NT @key[with] @key[null] @key[record]; --@RI{ Illegal!}
+    @key[type] NT2 @key[is] @key[new] NT @key[with] @key[null] @key[record]; --@ExamCom{ Illegal!}
     @key[procedure] Q(X : @key[in] NT2) @key[is] @key[begin] @key[null]; @key[end] Q;
-    --@RI{ Is this legal or not? Can't decide because}
-    --@RI{ we don't know whether TT had any functions that @Chg{Version=[2],New=[require],Old=[go abstract]}}
-    --@RI{ @Chg{Version=[2],New=[overriding ],Old=[]}on extension.}
+    --@ExamCom{ Is this legal or not? Can't decide because}
+    --@ExamCom{ we don't know whether TT had any functions that @Chg{Version=[2],New=[require],Old=[go abstract]}}
+    --@ExamCom{ @Chg{Version=[2],New=[overriding ],Old=[]}on extension.}
 @key[end] Gp;
 
 @key[package] I @key[is] @key[new] Gp(TT => P.T);
@@ -1333,29 +1333,29 @@ from the parent type or declared in the
   @key(record)
     Paint : Color := White;
   @key(end record);
-    --@RI[ Components X and Y are inherited]
+    --@ExamCom[ Components X and Y are inherited]
 
 Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
 
 @key(type) Literal @key(is new) Expression @key(with)
-  @key(record)                 --@RI[ a leaf in an Expression tree]
+  @key(record)                 --@ExamCom[ a leaf in an Expression tree]
     Value : Real;
   @key(end record);
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0404-1]}
 @key(type) Expr_Ptr @key(is access all) Expression'Class;
-                               --@RI[ see @Chg{Version=[5],New=[@RefSecNum{Tagged Types and Type Extensions}],Old=[@RefSecNum(Access Types)]}]
+                               --@ExamCom[ see @Chg{Version=[5],New=[@RefSecNum{Tagged Types and Type Extensions}],Old=[@RefSecNum(Access Types)]}]
 
 @key(type) Binary_Operation @key(is new) Expression @key(with)
-  @key(record)                 --@RI[ an internal node in an Expression tree]
+  @key(record)                 --@ExamCom[ an internal node in an Expression tree]
     Left, Right : Expr_Ptr;
   @key(end record);
 
 @key(type) Addition @key(is new) Binary_Operation @key(with null record);
 @key(type) Subtraction @key(is new) Binary_Operation @key(with null record);
-  --@RI[ No additional components needed for these extensions]
+  --@ExamCom[ No additional components needed for these extensions]
 
-Tree : Expr_Ptr :=         --@RI[ A tree representation of @lquotes@;5.0 + (13.0@en@;7.0)@rquotes@;]
+Tree : Expr_Ptr :=         --@ExamCom[ A tree representation of @lquotes@;5.0 + (13.0@en@;7.0)@rquotes@;]
    @key(new) Addition'(
       Left  => @key(new) Literal'(Value => 5.0),
       Right => @key(new) Subtraction'(
@@ -1969,10 +1969,10 @@ For example:
     X : @Chg{New=[P2.],Old=[]}T2;
     Y : @Chg{New=[P1.],Old=[]}T1'Class := X;
 @key[begin]
-    P2.Op_A(Param => X); --@RI{ Nondispatching call@Chg{New=[ to a dispatching operation],Old=[]}.}
-    P1.Op_A(Arg => Y); --@RI{ Dispatching call.}
-    P2.Op_B(Arg => X); --@RI{ Nondispatching call@Chg{New=[ to a dispatching operation],Old=[]}.}
-    P1.Op_B(Arg => Y); --@RI{ Dispatching call.}
+    P2.Op_A(Param => X); --@ExamCom{ Nondispatching call@Chg{New=[ to a dispatching operation],Old=[]}.}
+    P1.Op_A(Arg => Y); --@ExamCom{ Dispatching call.}
+    P2.Op_B(Arg => X); --@ExamCom{ Nondispatching call@Chg{New=[ to a dispatching operation],Old=[]}.}
+    P1.Op_B(Arg => Y); --@ExamCom{ Dispatching call.}
 @key[end] Main;
 @end{Example}
 
@@ -2233,9 +2233,9 @@ then the tagged type shall be abstract.
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[abstract] @key[tagged] @key[private];
-    @key[function] Foo (X : T) @key[return] Boolean @key[is] @key[abstract]; --@RI{ Illegal!}
+    @key[function] Foo (X : T) @key[return] Boolean @key[is] @key[abstract]; --@ExamCom{ Illegal!}
 @key[private]
-    @key[type] T @key[is] @key[tagged] @key[null] @key[record]; --@RI{ Illegal!}
+    @key[type] T @key[is] @key[tagged] @key[null] @key[record]; --@ExamCom{ Illegal!}
     X : T;
     Y : Boolean := Foo (T'Class (X));
 @key[end] P;
@@ -2263,7 +2263,7 @@ The two lines marked "--@i{ Illegal!}" are illegal when taken together.
   . . .
 @key[package] Q @key[is]
    @key[type] My_Field_Size @key[is] @key[new] Field_Size;
-   --@RI{ implicit declaration of Print(X : T; F : My_Field_Size := 0) @Chg{New=[@key[is abstract]],Old=[is abstract]};}
+   --@ExamCom{ implicit declaration of Print(X : T; F : My_Field_Size := 0) @Chg{New=[@key[is abstract]],Old=[is abstract]};}
 @key[end] Q;
 @end{Example}
 
@@ -2313,7 +2313,7 @@ function with a controlling result, then:
 @ChgAdded{Version=[3],Text=[@key[with] P;
 @key[package] Q @key[is]
    @key[type] T @key[is abstract new] P.I @key[with private];
-   -- @RI[Op inherited here.]
+   -- @ExamCom[Op inherited here.]
 @key[private]
    @key[type] T @key[is abstract new] P.I @key[with null record];
    @key[procedure] Op (X : T) @key[is null];
@@ -2323,7 +2323,7 @@ function with a controlling result, then:
 @ChgAdded{Version=[3],Text=[@key[with] Q;
 @key[package] R @key[is]
    @key[type] T2 @key[is new] Q.T @key[with null record];
-   -- @RI[Illegal. Op inherited here, but requires overriding.]
+   -- @ExamCom[Illegal. Op inherited here, but requires overriding.]
 @key[end] R;]}
 @end{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2389,19 +2389,19 @@ R had been a private child of Q, it would have been legal.]}
 @key[with] Pack1; @key[use] Pack1;
 @key[package] Pack2 @key[is]
     @key[type] T1 @key[is] @key[new] Ancestor @key[with] @key[record] ...;
-        --@RI{ A concrete type.}
-    @key[procedure] Do_Something(X : @key[in] T1); --@RI{ Have to override.}
+        --@ExamCom{ A concrete type.}
+    @key[procedure] Do_Something(X : @key[in] T1); --@ExamCom{ Have to override.}
 @key[end] Pack2;
 
 @key[with] Pack1; @key[use] Pack1;
 @key[with] Pack2; @key[use] Pack2;
 @key[package] Pack3 @key[is]
     @key[type] T2 @key[is] @key[new] Ancestor @key[with] @key[private];
-        --@RI{ A concrete type.}
+        --@ExamCom{ A concrete type.}
 @key[private]
-    @key[type] T2 @key[is] @key[new] T1 @key[with] --@RI{ Parent different from ancestor.}
+    @key[type] T2 @key[is] @key[new] T1 @key[with] --@ExamCom{ Parent different from ancestor.}
       @key[record] ... @key[end] @key[record];
-    --@RI{ Here, we inherit Pack2.Do_Something.}
+    --@ExamCom{ Here, we inherit Pack2.Do_Something.}
 @key[end] Pack3;
     @end{Example}
 
@@ -2530,24 +2530,24 @@ not be abstract.
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} P1 @key{is}
    @key{type} T1 @key{is abstract tagged null record};
-   @key{procedure} P (X : T1); -- @RI[(1)]
+   @key{procedure} P (X : T1); -- @ExamCom[(1)]
 @key{end} P1;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} P2 @key{is}
    @key{type} T2 @key{is abstract new} P1.T1 @key{with null record};
-   -- @RI[@key{procedure} P (X : T2); -- (2)]
+   -- @ExamCom[@key{procedure} P (X : T2); -- (2)]
    @key{procedure} P (X : T2) @key{is abstract}; -- (3)
 end P2;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} D @key{is abstract new} P1.T1 @key{with private};
-   -- @RI[@key{procedure} P (X : D); -- (4)]
+   -- @ExamCom[@key{procedure} P (X : D); -- (4)]
 @key{procedure} G (X : D);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{procedure} I @key{is new} G (P2.T2); -- @RI[Illegal.]]}
+@ChgAdded{Version=[2],Text=[@key{procedure} I @key{is new} G (P2.T2); -- @ExamCom[Illegal.]]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3056,16 +3056,16 @@ interface and a synchronized interface extending it:}]}
                        Person :    @key{out} Person_Name) @key{is abstract};
 @key{function} Cur_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
 @key{function} Max_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
--- @RI[See @RefSecNum{Incomplete Type Declarations} for Person_Name.]]}
+-- @ExamCom[See @RefSecNum{Incomplete Type Declarations} for Person_Name.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[Queue_Error : @key{exception};
---@RI[ Append raises Queue_Error if @Chg{Version=[3],New=[Cur_Count],Old=[Count]}(Q) = Max_Count(Q)]
---@RI[ Remove_First raises Queue_Error if @Chg{Version=[3],New=[Cur_Count],Old=[Count]}(Q) = 0]]}
+--@ExamCom[ Append raises Queue_Error if @Chg{Version=[3],New=[Cur_Count],Old=[Count]}(Q) = Max_Count(Q)]
+--@ExamCom[ Remove_First raises Queue_Error if @Chg{Version=[3],New=[Cur_Count],Old=[Count]}(Q) = 0]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]
+@ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@ExamCom[ see @RefSecNum{Example of Tasking and Synchronization}]
 @key{procedure} Append_Wait(Q      : @key{in out} Synchronized_Queue;
                       Person : @key{in}     Person_Name) @key{is abstract};
 @key{procedure} Remove_First_Wait(Q      : @key{in out} Synchronized_Queue;
@@ -3127,9 +3127,9 @@ protected type, and as such ensures safe concurrent access.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[2],Text=[...
---@RI[ Add @Chg{Version=[5],New=[Casey],Old=[George]} (see @RefSecNum{Incomplete Type Declarations}) to the cashier's queue:]
+--@ExamCom[ Add @Chg{Version=[5],New=[Casey],Old=[George]} (see @RefSecNum{Incomplete Type Declarations}) to the cashier's queue:]
 Append (Cashier, @Chg{Version=[5],New=[Casey],Old=[George]});
---@RI[ After payment, move @Chg{Version=[5],New=[Casey],Old=[George]} to the sandwich counter queue:]
+--@ExamCom[ After payment, move @Chg{Version=[5],New=[Casey],Old=[George]} to the sandwich counter queue:]
 Transfer (Cashier, Counter);
 ...]}
 @end{Example}
@@ -3147,7 +3147,7 @@ the implementations of Append and Remove_First for type Fast_Food_Queue.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{type} Serial_Device @key{is task interface};  --@RI[ see @RefSecNum{Task Units and Task Objects}]
+@ChgAdded{Version=[2],Text=[@key{type} Serial_Device @key{is task interface};  --@ExamCom[ see @RefSecNum{Task Units and Task Objects}]
 @key{procedure} Read (Dev : @key{in} Serial_Device; C : @key{out} Character) @key{is abstract};
 @key{procedure} Write(Dev : @key{in} Serial_Device; C : @key{in}  Character) @key{is abstract};]}
 @end{Example}
@@ -3349,8 +3349,8 @@ either by the designated subtype, or by its initial value.]]}
 @key(type) T2 @key(is new) T1 @key(with) ...;
 @key(procedure) P(X : @key(access) T2) @key(is)
 @key(begin)
-    P(T1(X.@key(all))'Access);  --@RI[ hand off to T1's P]
-    . . .     --@RI[ now do extra T2-specific processing]
+    P(T1(X.@key(all))'Access);  --@ExamCom[ hand off to T1's P]
+    . . .     --@ExamCom[ now do extra T2-specific processing]
 @key(end) P;
 @end{Example}
 
@@ -3765,17 +3765,17 @@ can be applied to access types
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
-@Chg{Version=[4],New=[@key[type] Frame @key<is access> Matrix;    --@RI[  see @RefSecNum{Array Types}]
-],Old=[]}@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@Chg{Version=[4],New=[@key[type] Frame @key<is access> Matrix;    --@ExamCom[  see @RefSecNum{Array Types}]
+],Old=[]}@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
-                                           --@RI[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
+                                           --@ExamCom[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
 @begin{WideAbove}
 @leading@keepnext@i{Example of an access subtype:}
 @end{WideAbove}
 @begin{Example}
-@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
 @begin{WideAbove}
@@ -3790,8 +3790,8 @@ Give_Message : Message_Procedure := Default_Message_Procedure'Access;
 ...
 Give_Message := Other_Procedure'Access;
 ...
-Give_Message("File not found.");  --@RI{ call with parameter (.@key[all] is optional)}
-Give_Message.@key[all];                 --@RI{ call with no parameters}
+Give_Message("File not found.");  --@ExamCom{ call with parameter (.@key[all] is optional)}
+Give_Message.@key[all];                 --@ExamCom{ call with no parameters}
 @end{Example}
 @end{Examples}
 
@@ -4013,10 +4013,10 @@ visible at the point of the dereference],Old=[]}.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
 @Chg{Version=[2],New=[@Key{with} P.C;
 @Key{package body} P @Key{is}
-    -- @RI{Ptr.all'Size is not legal here, but @Chg{Version=[3],New=[we are within],Old=[it is in]} the scope}
-    -- @RI{of a @nt{nonlimited_with_clause} @RI{for P.}}
+    -- @ExamCom{Ptr.all'Size is not legal here, but @Chg{Version=[3],New=[we are within],Old=[it is in]} the scope}
+    -- @ExamCom{of a @nt{nonlimited_with_clause} @ExamCom{for P.}}
 @Key{type} T @Key{is} ...
-    --  @RI{Ptr.all'Size is legal here.}
+    --  @ExamCom{Ptr.all'Size is legal here.}
 @Key{end} P;],Old=[]}
 @end{Example}
 @end{Discussion}
@@ -4287,7 +4287,7 @@ is dynamically tagged.]}
    @key[type] T @key[is tagged];
    @key[function] F @key[return access] T'Class;
    @key[function] G (X : @key[access] T) @key[return] Integer;
-   I : Integer := G (F);                 -- @RI{Illegal by above rule.}
+   I : Integer := G (F);                 -- @ExamCom{Illegal by above rule.}
    @key[type] T @key[is tagged null record];
 @key[end] Pack;]}
 @end{Example}
@@ -4358,7 +4358,7 @@ an assignment statement cannot be of an incomplete view.]}
 @begin{Examples}
 @Leading@keepnext@i(Example of a recursive type:)
 @begin(Example)
-@key(type) Cell;  --@RI[  incomplete type declaration]
+@key(type) Cell;  --@ExamCom[  incomplete type declaration]
 @key(type) Link @key(is) @key(access) Cell;
 
 @key(type) Cell @key(is)
@@ -4375,8 +4375,8 @@ Next   : Link  := Head.Succ;
 @i(Examples of mutually dependent access types:)
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key(type) Person(<>);    --@RI[ incomplete type declaration]
-@key(type) Car@Chg{Version=[2],New=[ @key{is tagged};],Old=[;          ]} --@RI[ incomplete type declaration]
+@key(type) Person(<>);    --@ExamCom[ incomplete type declaration]
+@key(type) Car@Chg{Version=[2],New=[ @key{is tagged};],Old=[;          ]} --@ExamCom[ incomplete type declaration]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(type) Person_Name @key(is) @key(access) Person;
@@ -4403,7 +4403,7 @@ Next   : Link  := Head.Succ;
    @key(end) @key(record);
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
-My_Car, Your_Car, Next_Car : Car_Name := @key[new] Car;  --@RI[ see @RefSecNum{Allocators}]
+My_Car, Your_Car, Next_Car : Car_Name := @key[new] Car;  --@ExamCom[ see @RefSecNum{Allocators}]
 @Chg{Version=[5],New=[Casey],Old=[George]} : Person_Name := @key[new] Person(M);
    ...
 @Chg{Version=[5],New=[Casey],Old=[George]}.Vehicle := Your_Car;
@@ -4447,14 +4447,14 @@ as illustrated by Example 4 of AI83-00039:
     X : Pri;
 @key[end] Pack;
 
-@key[package] @key[body] Pack @key[is] --@RI{ Could be separately compiled!}
+@key[package] @key[body] Pack @key[is] --@ExamCom{ Could be separately compiled!}
     @key[type] Sep @key[is] ...;
     X := @key[new] Sep;
 @key[end] Pack;
 
 @key[pragma] Elaborate(Pack);
 @key[private] @key[package] Pack.Child @key[is]
-    I : Integer := X.@key{all}'Size; --@RI{ Legal, by AI-00039.}
+    I : Integer := X.@key{all}'Size; --@ExamCom{ Legal, by AI-00039.}
 @key[end] Pack.Child;
 @end{example}
 
@@ -4647,13 +4647,13 @@ is the expected type or profile for the @nt{prefix}.],Old=[]}
 @key{type} Float_Ptr @key{is access all} Float;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{function} Zap (Val : Int_Ptr) @key{return} Float;   -- @RI[(1)]
-@key{function} Zap (Val : Float_Ptr) @key{return} Float; -- @RI[(2)]
-@key{function} Zop @key{return} Int_Ptr;  -- @RI[(3)]
-@key{function} Zop @key{return} Char_Ptr; -- @RI[(4)]],Old=[]}
+@Chg{Version=[2],New=[@key{function} Zap (Val : Int_Ptr) @key{return} Float;   -- @ExamCom[(1)]
+@key{function} Zap (Val : Float_Ptr) @key{return} Float; -- @ExamCom[(2)]
+@key{function} Zop @key{return} Int_Ptr;  -- @ExamCom[(3)]
+@key{function} Zop @key{return} Char_Ptr; -- @ExamCom[(4)]],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Result : Float := Zap (Zop.@key{all}'Access); -- @RI[Resolves to Zap (1) and Zop (3).]],Old=[]}
+@Chg{Version=[2],New=[Result : Float := Zap (Zop.@key{all}'Access); -- @ExamCom[Resolves to Zap (1) and Zop (3).]],Old=[]}
 @end{Example}
 @end(Discussion)
 @end{Resolution}
@@ -5820,14 +5820,14 @@ is the library level.
     @key[procedure] P(X: @Chg{Version=[3],New=[@key[in out] ],Old=[]}T) @key[is]
         Y: @key[aliased] T;
         @key[type] A1 @key[is] @key[access] @key[all] T;
-        Ptr0: A0 := Global; --@RI{ OK.}
-        Ptr1: A1 := X'Access; --@RI{ OK.}
+        Ptr0: A0 := Global; --@ExamCom{ OK.}
+        Ptr1: A1 := X'Access; --@ExamCom{ OK.}
     @key[begin]
-        Ptr1 := Y'Access; --@RI{ OK;}
-        Ptr0 := A0(Ptr1); --@RI{ Illegal type conversion!}
-        Ptr0 := X'Access; --@RI{ Illegal reference to Access attribute!}
-        Ptr0 := Y'Access; --@RI{ Illegal reference to Access attribute!}
-        Global := Ptr0; --@RI{ OK.}
+        Ptr1 := Y'Access; --@ExamCom{ OK;}
+        Ptr0 := A0(Ptr1); --@ExamCom{ Illegal type conversion!}
+        Ptr0 := X'Access; --@ExamCom{ Illegal reference to Access attribute!}
+        Ptr0 := Y'Access; --@ExamCom{ Illegal reference to Access attribute!}
+        Global := Ptr0; --@ExamCom{ OK.}
     @key[end] P;
 @key[end] Lib_Unit;
 @end{Example}
@@ -5851,8 +5851,8 @@ parameters@Chg{Version=[2],New=[ of an access-to-object type],Old=[]}:
     @key[procedure] P(X: @key[access] Integer) @key[is]
         @key[type] Nested_Type @key[is] @key[access] @key[all] Integer;
     @key[begin]
-        ... Nested_Type(X) ... --@RI{ (1)}
-        ... Level_1_Type(X) ... --@RI{ (2)}
+        ... Nested_Type(X) ... --@ExamCom{ (1)}
+        ... Level_1_Type(X) ... --@ExamCom{ (2)}
     @key[end] P;
 
     @key[procedure] Q(X: @key[access] Integer) @key[is]
@@ -5867,12 +5867,12 @@ parameters@Chg{Version=[2],New=[ of an access-to-object type],Old=[]}:
     @key[procedure] R @key[is]
         Level_2: @key[aliased] Integer;
     @key[begin]
-        Q(Level_2'Access); --@RI{ (3)}
+        Q(Level_2'Access); --@ExamCom{ (3)}
     @key[end] R;
 
     Level_1: @key[aliased] Integer;
 @key[begin]
-    Q(Level_1'Access); --@RI{ (4)}
+    Q(Level_1'Access); --@ExamCom{ (4)}
     R;
 @key[end] Main;
 @end{Example}
@@ -5896,9 +5896,9 @@ For example:
     @key[function] G(X: @key[access] Rec) @key[return] Boolean;
     @key[type] Rec(D: @key[access] Integer) @key[is]
         @Chg{Version=[3],New=[@key[limited] ],Old=[]}@key[record]
-            C1: Int_Ptr := Int_Ptr(D); --@RI{ Illegal!}
-            C2: Rec_Ptr := Rec'Access; --@RI{ Illegal!}
-            C3: Boolean := F(Rec'Access); --@RI{ Illegal!}
+            C1: Int_Ptr := Int_Ptr(D); --@ExamCom{ Illegal!}
+            C2: Rec_Ptr := Rec'Access; --@ExamCom{ Illegal!}
+            C3: Boolean := F(Rec'Access); --@ExamCom{ Illegal!}
             C4: Boolean := G(Rec'Access);
         @key[end] @key[record];
 @key[end] P;
@@ -6351,7 +6351,7 @@ comparison.@end{ramification}
 @Leading@keepnext@i{Example of use of the Access attribute:}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
-@Chg{Version=[5],New=[Becky],Old=[Martha]} : Person_Name := @key[new] Person(F);       --@RI[ see @RefSecNum{Incomplete Type Declarations}]
+@Chg{Version=[5],New=[Becky],Old=[Martha]} : Person_Name := @key[new] Person(F);       --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]
 Cars  @Chg{Version=[5],New=[],Old=[ ]}: @key[array] (1..2) @key[of] @key[aliased] Car;
    ...
 @Chg{Version=[5],New=[Becky],Old=[Martha]}.Vehicle := Cars(1)'Access;
@@ -6394,10 +6394,10 @@ legality of 'Access didn't change for them. For example:],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[A_T : @key{aliased} T1;
-Ptr : Acc_Int := A_T.C1'Access; -- @RI[Illegal in Ada 2005, legal in Ada 95]
-A_T := (D1 => True);            -- @RI[Raised Constraint_Error in Ada 95, but does not]
-                                -- @RI[in Ada 2005, so Ptr would become invalid when this]
-                                -- @RI[is assigned (thus Ptr is illegal).]],Old=[]}
+Ptr : Acc_Int := A_T.C1'Access; -- @ExamCom[Illegal in Ada 2005, legal in Ada 95]
+A_T := (D1 => True);            -- @ExamCom[Raised Constraint_Error in Ada 95, but does not]
+                                -- @ExamCom[in Ada 2005, so Ptr would become invalid when this]
+                                -- @ExamCom[is assigned (thus Ptr is illegal).]],Old=[]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
@@ -6446,8 +6446,8 @@ Access attribute to resolve. For example:]}
 @ChgAdded{Version=[2],Text=[Value : @key{aliased} Integer := 10;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Result1 : Float := Zap (Value'access); -- @RI[Ambiguous in Ada 95; resolves in Ada 2005.]
-Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and Ada 2005.]]}
+@ChgAdded{Version=[2],Text=[Result1 : Float := Zap (Value'access); -- @ExamCom[Ambiguous in Ada 95; resolves in Ada 2005.]
+Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @ExamCom[Resolves in Ada 95 and Ada 2005.]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This change is upward compatible; any expression

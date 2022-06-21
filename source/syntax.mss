@@ -1,16 +1,17 @@
 @Part(syntax, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:07 $}
+@Comment{$Date: 2022/05/14 04:06:51 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.21 $}
+@comment{$Revision: 1.22 $}
 
 @NoParaNum@;This Annex summarizes the complete syntax of the language.
 
 @LabeledClause{Syntax Rules}@ChgNote{This clause heading is new
 in Ada 202x, so we don't have a single clause}
 
+@begin{Intro}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
 @Defn2{Term=[syntax], Sec=(complete listing)}
 @Defn2{Term=[grammar], Sec=(complete listing)}
@@ -22,6 +23,7 @@ the language in the order it appears in this
 @IntlStdTitle. ],Old=[]}See 
 @RefSecNum{Method of Description and Syntax Notation} for a 
 description of the notation used.
+@end{Intro}
 
 @SyntaxSummary
 
@@ -29,7 +31,7 @@ description of the notation used.
 clause until Ada 202x, but it probably always should have been 
 in the TOC and a separate HTML file}
 
-
+@begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[In the following syntax cross reference, each
@@ -45,6 +47,7 @@ listing below shows that @nt{abort_statement} appears in the definition of
 @Defn2{Term=[context free grammar], Sec=(cross reference)}
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(cross reference)}
 @Defn2{Term=[Backus-Naur Form (BNF)], Sec=(cross reference)}
+@end{Intro}
 
 @SyntaxXRef
 

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:28 $}
+@Comment{$Date: 2022/05/14 04:06:48 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.163 $}
+@Comment{$Revision: 1.164 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -395,19 +395,19 @@ concurrently from multiple tasks.
 @begin{Example}
 @key[procedure] Traverse_Tree;
 @key[procedure] Increment(X : @key[in] @key[out] Integer);
-@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@RI{  see @RefSecNum{Integer Types}}
-@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@RI{  see @RefSecNum{Incomplete Type Declarations}}
+@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@ExamCom{  see @RefSecNum{Integer Types}}
+@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
 
-@key[function] Random @key[return] Probability;                      --@RI{  see @RefSecNum{Floating Point Types}}
+@key[function] Random @key[return] Probability;                      --@ExamCom{  see @RefSecNum{Floating Point Types}}
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
-@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@RI{  see @RefSecNum{Incomplete Type Declarations}}
-@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@RI{  see @RefSecNum{Access Types}}
-@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@RI{  see @RefSecNum{Array Types}}@Chg{Version=[4],New=[
+@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
+@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@ExamCom{  see @RefSecNum{Access Types}}
+@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@ExamCom{  see @RefSecNum{Array Types}}@Chg{Version=[4],New=[
 @key[function] Find(B : @key[aliased in out] Barrel; Key : String) @key[return] Real;
-                                                         --@RI{  see @RefSecNum{User-Defined References}}],Old=[]}
+                                                         --@ExamCom{  see @RefSecNum{User-Defined References}}],Old=[]}
 
-@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@RI{  see @RefSecNum{Array Types}}
+@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@ExamCom{  see @RefSecNum{Array Types}}
 @end{Example}
 
 @begin{WideAbove}
@@ -415,7 +415,7 @@ concurrently from multiple tasks.
 @end{WideAbove}
 @begin{Example}
 @key[procedure] Print_Header(Pages  : @key[in] Natural;
-            Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@RI{  see @RefSecNum{Array Types}}
+            Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@ExamCom{  see @RefSecNum{Array Types}}
             Center : @key[in] Boolean := True);
 @end{Example}
 @end{Examples}
@@ -520,6 +520,7 @@ The syntax rules for @nt{defining_designator} and
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Preconditions and Postconditions]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0045-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1],ARef=[AI12-0272-1],ARef=[AI12-0396-1]}
@@ -649,6 +650,7 @@ access-to-subprogram type,],Old=[]} the following language-defined
   with respect to class-wide pre/post-conditions, to mean that the aspect
   applies to corresponding subprograms in descendant types.]}
 @end{Discussion}
+@end{Intro}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
@@ -2596,7 +2598,7 @@ in standard Ada:
                  Drop    : @key[in]  Truncation := Error;
                  Justify : @key[in]  Alignment  := Left;
                  Pad     : @key[in]  Character  := Space);
---@RI{ Copies elements from Source to Target (safely if they overlap)}
+--@ExamCom{ Copies elements from Source to Target (safely if they overlap)}
 @end{Example}
 
 This is from the standard string handling package.
@@ -2889,19 +2891,19 @@ The default calling convention is Intrinsic for the following:
     ...
     X: Formal := ...;
     ...
-    Proc(X); -- @RI[This is a dispatching call in Instance, because]
-             -- @RI[the actual type for Formal is class-wide.]
+    Proc(X); -- @ExamCom[This is a dispatching call in Instance, because]
+             -- @ExamCom[the actual type for Formal is class-wide.]
     ...
-    -- @RI[Proc'Access would be illegal here, because it is of]
-    -- @RI[convention Intrinsic, by the above rule.]
+    -- @ExamCom[Proc'Access would be illegal here, because it is of]
+    -- @ExamCom[convention Intrinsic, by the above rule.]
 @key[end] G;]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[@key[type] Actual @key[is new] Root @key[with] ...;
 @key[procedure] Proc(X: Actual);
 @key[package] Instance @key[is new] G(Formal => Actual'Class);
-    -- @RI[It is legal to pass in a class-wide actual, because Formal]
-    -- @RI[has unknown discriminants.]]}
+    -- @ExamCom[It is legal to pass in a class-wide actual, because Formal]
+    -- @ExamCom[has unknown discriminants.]]}
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Added]}
@@ -3821,21 +3823,21 @@ function@Chg{Version=[2],New=[ result],Old=[]}.
 @begin{Examples}
 @leading@keepnext@i{Examples of procedure calls:}
 @begin{Example}
-Traverse_Tree;                                               --@RI{  see @RefSecNum{Subprogram Declarations}}
-Print_Header(128, Title, True);                              --@RI{  see @RefSecNum{Subprogram Declarations}}
+Traverse_Tree;                                               --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(128, Title, True);                              --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
 
-Switch(From => X, To => Next);                               --@RI{  see @RefSecNum{Subprogram Declarations}}
-Print_Header(128, Header => Title, Center => True);          --@RI{  see @RefSecNum{Subprogram Declarations}}
-Print_Header(Header => Title, Center => True, Pages => 128); --@RI{  see @RefSecNum{Subprogram Declarations}}
+Switch(From => X, To => Next);                               --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(128, Header => Title, Center => True);          --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(Header => Title, Center => True, Pages => 128); --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
 @begin{WideAbove}
 @leading@keepnext@i{Examples of function calls:}
 @end{WideAbove}
 @begin{Example}
-Dot_Product(U, V)   --@RI{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
-Clock               --@RI{  see @RefSecNum{Delay Statements, Duration, and Time}}
-F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
+Dot_Product(U, V)   --@ExamCom{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
+Clock               --@ExamCom{  see @RefSecNum{Delay Statements, Duration, and Time}}
+F.@key[all]               --@ExamCom{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
 @end{Example}
 
 @begin{WideAbove}
@@ -3848,7 +3850,7 @@ F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type
                    Prior   : @key[in] Boolean := False);
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person@Chg{Version=[3],New=[(M)],Old=[]});   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
+@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person@Chg{Version=[3],New=[(M)],Old=[]});   --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @begin{WideAbove}
@@ -3894,8 +3896,8 @@ Set(Tint   => Red);
 Set(Signal => Red);
 Set(Color'(Red));
 
---@RI{  Set(Red) would be ambiguous since Red may}
---@RI{  denote a value either of type Color or of type Light}
+--@ExamCom{  Set(Red) would be ambiguous since Red may}
+--@ExamCom{  denote a value either of type Color or of type Light}
 @end{Example}
 @end{Examples}
 
@@ -4051,7 +4053,7 @@ the actual shall be a @nt<name> that denotes a variable.@Defn2{Term=[variable],S
 procedure Print(X : @key[in] Integer; Y : @key[in] Boolean := True);
 procedure Print(Z : @key[in out] Integer);
 . . .
-Print(3); --@RI{ Ambiguous!}
+Print(3); --@ExamCom{ Ambiguous!}
   @end{Example}
 
   The above call to Print is ambiguous even though the call is
@@ -6087,6 +6089,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedSubClause{Version=[5],InitialVersion=[2],New=[Nonreturning Subprograms],Old=[Pragma No_Return]}
 
+@begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1],ARef=[AI12-0418-1]}
@@ -6109,6 +6112,7 @@ Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2028],Old=[2020]}],Old=[2017]}. 
 and 3 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
+@end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.119 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
+@comment{ $Revision: 1.120 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:30 $}
+@Comment{$Date: 2022/05/14 04:06:50 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -545,10 +545,10 @@ Containers has the following declaration:]}
    @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Pure@Chg{Version=[5],New=[ @key{is}],Old=[(Containers);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Hash_Type} @key{is mod} @RI<implementation-defined>;]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Hash_Type} @key{is mod} @VirtName<implementation-defined>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Count_Type} @key{is range} 0 .. @RI<implementation-defined>;]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Count_Type} @key{is range} 0 .. @VirtName<implementation-defined>;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[   @AdaExcDefn{Capacity_Error} : @key[exception];]}
@@ -797,7 +797,7 @@ package Containers.Vectors has the following declaration:]}
       @key[with] Nonblocking, Global => @key[null], Use_Formal => @key[null];]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0339-1]}
-@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Empty} (Capacity : Count_Type := @RI<implementation-defined>)
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Empty} (Capacity : Count_Type := @VirtName<implementation-defined>)
       @key{return} Vector
       @key[with] Pre  => Capacity <= Maximum_Length
                       @key[or else raise] Constraint_Error,
@@ -1794,7 +1794,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[2],Text=[   ... -- @ExamCom[not specified by the language]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Vectors;]}
@@ -2214,7 +2214,7 @@ index type.]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Empty (Capacity : Count_Type := @RI<implementation-defined>)
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Empty (Capacity : Count_Type := @VirtName<implementation-defined>)
    @key{return} Vector
    @key[with] Pre  => Capacity <= Maximum_Length
                    @key[or else raise] Constraint_Error,
@@ -4308,12 +4308,18 @@ provides such a view removes this restriction on the underlying ordinary vector
 @Redundant[(though some other restriction might exist due to other concurrent
 iterations or stabilized views)].]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
 @ChgAdded{Version=[5],Text=[If a stable vector is declared without specifying
-Base, the object must be initialized. The initializing expression of the stable
-vector, @Redundant[typically a call on To_Vector or Copy], determines the Length
-of the vector. The Length of a stable vector never changes after
+Base, the object is necessarily initialized. The initializing expression of the
+stable vector, @Redundant[typically a call on To_Vector or Copy], determines
+the Length of the vector. The Length of a stable vector never changes after
 initialization.]}
+
+@begin{TheProof}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0438-1]}
+   @ChgAdded{Version=[5],Text=[Initialization is required as the type is
+   indefinite, see @RefSecNum{Object Declarations}.]}
+@end{TheProof}
 
 @end{StaticSem}
 
@@ -4833,6 +4839,7 @@ value of Last_Index.]}
 @LabeledAddedSubclause{Version=[2],
 Name=[The Generic Package Containers.Doubly_Linked_Lists]}
 
+@begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package
 Containers.Doubly_Linked_Lists provides private types List and Cursor, and a
@@ -4852,6 +4859,7 @@ container.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The @i{length} of a list is the number of elements
 it contains.@Defn2{Term=[length],Sec=(of a list container)}]}
+@end{Intro}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5574,7 +5582,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[2],Text=[   ... -- @ExamCom[not specified by the language]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Doubly_Linked_Lists;]}
@@ -7238,13 +7246,18 @@ provides such a view removes this restriction on the underlying ordinary list
 @Redundant[(though some other restriction might exist due to other concurrent
 iterations or stabilized views)].]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
 @ChgAdded{Version=[5],Text=[If a stable list is declared without specifying
-Base, the object must be initialized. The initializing expression of the stable
-list, @Redundant[typically a call on Copy], determines the Length
+Base, the object is necessarily initialized. The initializing expression of the
+stable list, @Redundant[typically a call on Copy], determines the Length
 of the list. The Length of a stable list never changes after
 initialization.]}
 
+@begin{TheProof}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0438-1]}
+   @ChgAdded{Version=[5],Text=[Initialization is required as the type is
+   indefinite, see @RefSecNum{Object Declarations}.]}
+@end{TheProof}
 @end{StaticSem}
 
 @begin{Bounded}

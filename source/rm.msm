@@ -9,10 +9,12 @@
 @Title{Version=[0],Text=[Ada Reference Manual]}@Comment{Same title for all versions}
 @FilePrefix{RM}
 @ExampleFont{Fixed}
+@ExampleCommentFont{Roman}
 @BodyFont{Roman}
-@NoteFormat{ISO2004}@Comment{Was "Ada95" until just before Ada 202x release}
+@NoteFormat{ISO2004}@Comment{Was "Ada95" until just before Ada 2022 release}
 @ContentsFormat{Ada95}
 @ListFormat{Ada95}
+@SelfRefFormat{RM}
 @SubdivisionNames{Clause}@Comment{For Ada 95 and 2005, use "section" instead}
 
 @Comment{RTF properties}
@@ -24,8 +26,9 @@
 @Comment{PDFs: }@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:2012(E)]}
 @Comment{Springer: @RTFHeaderPrefix{Version=[3],Text=[Ada Reference Manual - 2012 Edition]}}
 @Comment{PDFs: }@RTFHeaderPrefix{Version=[4],Text=[ISO/IEC 8652:2012(E) with COR.1:2016]}
-@Comment{Final form: @RTFHeaderPrefix{Version=[5],Text=[ISO/IEC 8652:202x(E) Draft 32]}}
-@Comment{Working (No ISO)}@RTFHeaderPrefix{Version=[5],Text=[Ada 202x Draft 32]}
+@Comment{ISO form: @RTFHeaderPrefix{Version=[5],Text=[ISO/IEC 8652:2022(E) Draft 33]}}
+@Comment{Usual (No ISO)}@RTFHeaderPrefix{Version=[5],Text=[Ada 2022 Draft 33]}
+@Comment{Usual (No ISO)}@RTFHeaderPrefix{Version=[6],Text=[Ada 2022 with Corr 1 Draft 1]}
 @RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
 @RTFPageSize{Ada95}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
@@ -34,7 +37,8 @@
 @RTFVersionName{Version=[2],Text=[Amendment 1]}
 @RTFVersionName{Version=[3],Text=[Ada 2012]}
 @RTFVersionName{Version=[4],Text=[Ada 2012 Corrigendum 1]}
-@RTFVersionName{Version=[5],Text=[Ada 202x]}
+@RTFVersionName{Version=[5],Text=[Ada 2022]}
+@RTFVersionName{Version=[6],Text=[Ada 2022 Corrigendum 1]}
 
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
@@ -52,8 +56,19 @@
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<Ttl>,SectionNumber=[0],NewSection=[T]}
 @TOC @Comment{The table of contents goes here in the collating order}
-@Source{Name=<Front_Matter.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T]}
-@Source{Name=<01.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
+@Source{Name=<RM_Foreword.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T]}
+@Source{Name=<Foreword_Tail.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[F]}
+@Source{Name=<Intro.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[F]}
+@Source{Name=<Other_Front_Matter.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[F]}
+@Source{Name=<General.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
+@Source{Name=<RM_Scope.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<Extent.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<General_Body.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<RM_Refs.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<Refs.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<RM_Bib.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<Biblio.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<RM_Term.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
 @Source{Name=<02.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
 @Source{Name=<03A.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
 @Source{Name=<03B.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[F]}

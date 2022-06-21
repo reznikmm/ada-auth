@@ -19,7 +19,7 @@
 @NoteFormat{ISO2004}
 @ContentsFormat{Ada95}
 @ListFormat{Ada95}
-@SelfRefFormat{ISO1989}
+@SelfRefFormat{ISO2018}
 @SubdivisionNames{Clause}@Comment{For Ada 95 and 2005, use "section" instead}
 
 @Comment{RTF properties}
@@ -30,7 +30,7 @@
 @RTFFooterText{Version=[2],Text=[\'a9 ISO/IEC 2007 \endash  All rights reserved]}
 @RTFFooterText{Version=[3],Text=[\'a9 ISO/IEC 2012 \endash  All rights reserved]}
 @RTFFooterText{Version=[4],Text=[\'a9 ISO/IEC 2016 \endash  All rights reserved]}
-@RTFFooterText{Version=[5],Text=[\'a9 ISO/IEC 2021 \endash  All rights reserved]}
+@RTFFooterText{Version=[5],Text=[\'a9 ISO/IEC 2022 \endash  All rights reserved]}
 @RTFFooter{UseDate=[F],UseClauseName=[F],UseISOFormat=[T]}
 @RTFPageSize{A4}
 @RTFFonts{Serif=[Times],SansSerif=[Helvetica]}@Comment{ISO requires the latter}
@@ -39,8 +39,10 @@
 @RTFVersionName{Version=[2],Text=[Amendment 1]}
 @RTFVersionName{Version=[3],Text=[Ada 2012]}
 @RTFVersionName{Version=[4],Text=[Ada 2012 Corrigendum 1]}
-@RTFVersionName{Version=[5],Text=[Ada 202x]}
+@RTFVersionName{Version=[5],Text=[Ada 2022]}
 
+@Comment{Text properties}
+@SingleTextOutputFile @Comment{One large file for easier searching}
 
 @Comment{HTML properties - generally, no HTML version is made of the ISO version,
          so these settings aren't important}
@@ -58,24 +60,32 @@
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<Ttl>,SectionNumber=[0],NewSection=[T]}
 @TOC @Comment{The table of contents goes here in the collating order}
-@Source{Name=<Front_Matter.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T]}
-@Source{Name=<01.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
-@Source{Name=<02.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
-@Source{Name=<03A.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
-@Source{Name=<03B.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[F]}
-@Source{Name=<03C.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[F]}
-@Source{Name=<04A.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
-@Source{Name=<04B.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[F]}
-@Source{Name=<05.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
-@Source{Name=<06.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
-@Source{Name=<07.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T]}
-@Source{Name=<08.MSS>,SectionName=<08>,SectionNumber=[8],NewSection=[T]}
-@Source{Name=<09.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
-@Source{Name=<10.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T]}
-@Source{Name=<11.MSS>,SectionName=<11>,SectionNumber=[11],NewSection=[T]}
-@Source{Name=<12.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T]}
-@Source{Name=<13A.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T]}
-@Source{Name=<13B.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[F]}
+@Source{Name=<ISO_Foreword.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T]}
+@Source{Name=<Foreword_Tail.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[F]}
+@Source{Name=<Intro.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[F]}
+@Source{Name=<ISO_Scope.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
+@Source{Name=<Extent.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[F]}
+@Source{Name=<ISO_Refs.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
+@Source{Name=<Refs.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[F]}
+@Source{Name=<ISO_Term.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
+@Source{Name=<General.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
+@Source{Name=<General_Body.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[F]}
+@Source{Name=<02.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
+@Source{Name=<03A.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
+@Source{Name=<03B.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[F]}
+@Source{Name=<03C.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[F]}
+@Source{Name=<04A.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T]}
+@Source{Name=<04B.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[F]}
+@Source{Name=<05.MSS>,SectionName=<08>,SectionNumber=[8],NewSection=[T]}
+@Source{Name=<06.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
+@Source{Name=<07.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T]}
+@Source{Name=<08.MSS>,SectionName=<11>,SectionNumber=[11],NewSection=[T]}
+@Source{Name=<09.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T]}
+@Source{Name=<10.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T]}
+@Source{Name=<11.MSS>,SectionName=<14>,SectionNumber=[14],NewSection=[T]}
+@Source{Name=<12.MSS>,SectionName=<15>,SectionNumber=[15],NewSection=[T]}
+@Source{Name=<13A.MSS>,SectionName=<16>,SectionNumber=[16],NewSection=[T]}
+@Source{Name=<13B.MSS>,SectionName=<16>,SectionNumber=[16],NewSection=[F]}
 @Comment{Now, the "Standard Libraries" separator page}
 @Source{Name=<LIBRARY.MSS>,SectionName=<Lib>,SectionNumber=[0],NewSection=[T]}
 @Comment{Annex A; all of the files starting with "Pre_" are part of Annex A.}
@@ -103,15 +113,14 @@
 @Source{Name=<InfoSys.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T]}
 @Source{Name=<Numerics.MSS>,SectionName=<G>,SectionNumber=[G],NewSection=[T]}
 @Source{Name=<Safety.MSS>,SectionName=<H>,SectionNumber=[H],NewSection=[T]}
-@Comment{We don't use Annex I, as ISO requires skipping I and O}
-@Source{Name=<Obsolescent.MSS>,SectionName=<J>,SectionNumber=[J],NewSection=[T]}
+@Source{Name=<Obsolescent.MSS>,SectionName=<I>,SectionNumber=[I],NewSection=[T]}
 @Comment{Informative annexes:}
-@Source{Name=<Attribs.MSS>,SectionName=<K>,SectionNumber=[K],NewSection=[T]}
-@Source{Name=<Pragmas.MSS>,SectionName=<L>,SectionNumber=[L],NewSection=[T]}
-@Source{Name=<Impldef.MSS>,SectionName=<M>,SectionNumber=[M],NewSection=[T]}
-@Source{Name=<Glossary.MSS>,SectionName=<N>,SectionNumber=[N],NewSection=[T]}
-@Comment{We don't use Annex O, as ISO requires skipping I and O}
-@Source{Name=<Syntax.MSS>,SectionName=<P>,SectionNumber=[P],NewSection=[T]}
-@Source{Name=<Langdef.MSS>,SectionName=<Q>,SectionNumber=[Q],NewSection=[T]}
+@Source{Name=<Attribs.MSS>,SectionName=<J>,SectionNumber=[J],NewSection=[T]}
+@Source{Name=<Pragmas.MSS>,SectionName=<K>,SectionNumber=[K],NewSection=[T]}
+@Source{Name=<Impldef.MSS>,SectionName=<L>,SectionNumber=[L],NewSection=[T]}
+@Source{Name=<Syntax.MSS>,SectionName=<M>,SectionNumber=[M],NewSection=[T]}
+@Source{Name=<Langdef.MSS>,SectionName=<N>,SectionNumber=[N],NewSection=[T]}
+@Source{Name=<ISO_Bib.MSS>,SectionName=<BIB>,SectionNumber=[0],NewSection=[T]}
+@Source{Name=<Biblio.MSS>,SectionName=<BIB>,SectionNumber=[0],NewSection=[F]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 

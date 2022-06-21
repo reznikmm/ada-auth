@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2021/06/12 04:55:53 $}
+@Comment{$Date: 2022/05/14 04:06:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
 @LabeledClause{Type Conversions}
@@ -1202,9 +1202,9 @@ generic formal @key(in out) objects).
 @begin{Examples}
 @Leading@keepnext@i(Examples of numeric type conversion:)
 @begin{Example}
-Real(2*J)      @RI[--  value is converted to floating point]
-Integer(1.6)   @RI[--  value is 2]
-Integer(-0.4)  @RI[--  value is 0]
+Real(2*J)      @ExamCom[--  value is converted to floating point]
+Integer(1.6)   @ExamCom[--  value is 2]
+Integer(-0.4)  @ExamCom[--  value is 0]
 @end{Example}
 
 @begin{WideAbove}
@@ -1217,7 +1217,7 @@ X : A_Form;
 Y : B_Form;
 
 X := A_Form(Y);
-Y := B_Form(X);  @RI[--  the reverse conversion ]
+Y := B_Form(X);  @ExamCom[--  the reverse conversion ]
 @end{Example}
 
 @begin{WideAbove}
@@ -1229,9 +1229,9 @@ Y := B_Form(X);  @RI[--  the reverse conversion ]
 @key(subtype) Dozen @key(is) Sequence(1 .. 12);
 Ledger : @key(array)(1 .. 100) @key(of) Integer;
 
-Sequence(Ledger)            @RI[--  bounds are those of Ledger]
-Sequence(Ledger(31 .. 42))  @RI[--  bounds are 31 and 42]
-Dozen(Ledger(31 .. 42))     @RI[--  bounds are those of Dozen ]
+Sequence(Ledger)            @ExamCom[--  bounds are those of Ledger]
+Sequence(Ledger(31 .. 42))  @ExamCom[--  bounds are 31 and 42]
+Dozen(Ledger(31 .. 42))     @ExamCom[--  bounds are those of Dozen ]
 @end{Example}
 @end{Examples}
 
@@ -1591,14 +1591,14 @@ might be necessary to qualify the operand to resolve its type.
 @key(type) Mask @key(is) (Fix, Dec, Exp, Signif);
 @key(type) Code @key(is) (Fix, Cla, Dec, Tnz, Sub);
 
-Print (Mask'(Dec));  @RI[--  Dec is of type Mask]
-Print (Code'(Dec));  @RI[--  Dec is of type Code ]
+Print (Mask'(Dec));  @ExamCom[--  Dec is of type Mask]
+Print (Code'(Dec));  @ExamCom[--  Dec is of type Code ]
 
-@key(for) J @key(in) Code'(Fix) .. Code'(Dec) @key(loop) ... @RI[-- qualification needed for either Fix or Dec]
-@key(for) J @key(in) Code @key(range) Fix .. Dec @key(loop) ...    @RI[-- qualification unnecessary]
-@key(for) J @key(in) Code'(Fix) .. Dec @key(loop) ...        @RI[-- qualification unnecessary for Dec]
+@key(for) J @key(in) Code'(Fix) .. Code'(Dec) @key(loop) ... @ExamCom[-- qualification needed for either Fix or Dec]
+@key(for) J @key(in) Code @key(range) Fix .. Dec @key(loop) ...    @ExamCom[-- qualification unnecessary]
+@key(for) J @key(in) Code'(Fix) .. Dec @key(loop) ...        @ExamCom[-- qualification unnecessary for Dec]
 
-Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @RI[-- see @RefSecNum{Type Conversions} ]
+Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @ExamCom[-- see @RefSecNum{Type Conversions} ]
 @end{Example}
 @end{Examples}
 
@@ -1985,10 +1985,10 @@ if either such check fails.@IndexCheck{Accessibility_Check}
 @key[begin]
    @key[accept] E(X : T'Class) @key[do]
       P := @key[new] T'Class'(X);
-         @RI[--  Master check on tag of X.]
-         @RI[--  Can't use "accessibility levels" since they might be incomparable.]
-         @RI[--  Must revert to checking that the master of the type identified by]
-         @RI[--  X'tag includes the elaboration of Acc_TC, so it is sure to outlive it.]
+         @ExamCom[--  Master check on tag of X.]
+         @ExamCom[--  Can't use "accessibility levels" since they might be incomparable.]
+         @ExamCom[--  Must revert to checking that the master of the type identified by]
+         @ExamCom[--  X'tag includes the elaboration of Acc_TC, so it is sure to outlive it.]
    @key[end] E;]}
 @end{Example}
 
@@ -2118,18 +2118,18 @@ to provide garbage collection@Chg{Version=[3],New=[],Old=[
 @begin{Examples}
 @Leading@keepnext@i{Examples of allocators:}
 @begin{Example}
-@key(new) Cell'(0, @key(null), @key(null))                          @RI[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
-@key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @RI[-- initialized explicitly]
-@key(new) Cell                                          @RI[-- not initialized]
+@key(new) Cell'(0, @key(null), @key(null))                          @ExamCom[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
+@key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @ExamCom[-- initialized explicitly]
+@key(new) Cell                                          @ExamCom[-- not initialized]
 
-@key(new) Matrix(1 .. 10, 1 .. 20)                      @RI[-- the bounds only are given]
-@key(new) Matrix'(1 .. 10 => (1 .. 20 => 0.0))          @RI[-- initialized explicitly]
+@key(new) Matrix(1 .. 10, 1 .. 20)                      @ExamCom[-- the bounds only are given]
+@key(new) Matrix'(1 .. 10 => (1 .. 20 => 0.0))          @ExamCom[-- initialized explicitly]
 
-@key(new) Buffer(100)                                   @RI[-- the discriminant only is given]
-@key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A')) @RI[-- initialized explicitly]
+@key(new) Buffer(100)                                   @ExamCom[-- the discriminant only is given]
+@key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A')) @ExamCom[-- initialized explicitly]
 
-Expr_Ptr'(@key(new) Literal)                  @RI[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
-Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5))      @RI[-- initialized explicitly]
+Expr_Ptr'(@key(new) Literal)                  @ExamCom[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
+Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5))      @ExamCom[-- initialized explicitly]
 
 @end{Example}
 @end{Examples}
@@ -2654,12 +2654,12 @@ For example:
 @key[begin]
     @key[case] F @key[is]
         @key[when] 1..10 => @key[null];
-        --@RI{ Illegal!}
+        --@ExamCom{ Illegal!}
     @key[end] @key[case];
 @key[end] G;
 
 X : Integer @key[range] 1..20;
-@key[procedure] I @key[is] @key[new] G(F => X); --@RI{ OK.}
+@key[procedure] I @key[is] @key[new] G(F => X); --@ExamCom{ OK.}
 @end{Example}
 
 The @nt{case_statement} is illegal, because the subtype of F is not
@@ -2841,7 +2841,7 @@ do not apply if the expected type is a descendant of a formal scalar type
   @Leading@;Short-circuit control forms are a special case:
 @begin{Example}
 N: @key[constant] := 0.0;
-X: @key[constant] Boolean := (N = 0.0) @key[or] @key[else] (1.0/N > 0.5); --@RI{ Static.}
+X: @key[constant] Boolean := (N = 0.0) @key[or] @key[else] (1.0/N > 0.5); --@ExamCom{ Static.}
 @end{Example}
 
 The declaration of X is legal, since the divide-by-zero part of the
@@ -3004,16 +3004,16 @@ between two integers, the rounding is performed away from zero.
 @begin{Examples}
 @Leading@keepnext@i(Examples of static expressions:)
 @begin{Example}
-1 + 1       @RI[-- 2]
-@key(abs)(-10)*3  @RI[-- 30]
+1 + 1       @ExamCom[-- 2]
+@key(abs)(-10)*3  @ExamCom[-- 30]
 
 Kilo : @key(constant) := 1000;
-Mega : @key(constant) := Kilo*Kilo;   @RI[-- 1_000_000]
+Mega : @key(constant) := Kilo*Kilo;   @ExamCom[-- 1_000_000]
 Long : @key(constant) := Float'Digits*2;
 
-Half_Pi    : @key(constant) := Pi/2;           @RI[-- see @RefSecNum(Number Declarations)]
+Half_Pi    : @key(constant) := Pi/2;           @ExamCom[-- see @RefSecNum(Number Declarations)]
 Deg_To_Rad : @key(constant) := Half_Pi/90;
-Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad; @RI[-- equivalent to 1.0/((3.14159_26536/2)/90)]
+Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad; @ExamCom[-- equivalent to 1.0/((3.14159_26536/2)/90)]
 @end{Example}
 @end{Examples}
 
@@ -3112,7 +3112,7 @@ Ada 83 terminology.
 exception.
 Thus, for example:
 @begin{Example}
-Bad: @key[constant] := 1/0; --@RI{ Illegal!}
+Bad: @key[constant] := 1/0; --@ExamCom{ Illegal!}
 @end{Example}
 
 was illegal because 1/0 was not static.
@@ -3490,9 +3490,9 @@ This subclause is new to Ada 95.
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[@b(procedure) S'Put_Image
-   (@RI(Buffer) : @key[in out] 
+   (@VirtName(Buffer) : @key[in out] 
              Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;
-    @RI(Arg)   : @key[in] T);]}
+    @VirtName(Arg)   : @key[in] T);]}
 @end(Descexample)
 @Comment{These two paragraphs have to be Added rather than AddedNormal so that
 the paragraphs in thee Annex have the correct paragraph numbers.}
@@ -3500,7 +3500,7 @@ the paragraphs in thee Annex have the correct paragraph numbers.}
     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The
       default implementation of S'Put_Image writes
       (using Wide_Wide_Put) an @i<image> of the value of
-      @i<Arg>.]}]}@Comment{End of Annex text here.}
+      @VirtName<Arg>.]}]}@Comment{End of Annex text here.}
 
 @EndPrefixType{}
 @end{Description}
@@ -3915,14 +3915,14 @@ subtype of @i<T>.]}
      denotes a function with the following specification:],Old=[]}
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Text=[@b(function) S'Wide_Wide_Image(@RI(Arg) : S'Base)
+@ChgAdded{Version=[5],Text=[@b(function) S'Wide_Wide_Image(@VirtName(Arg) : S'Base)
   @b(return) Wide_Wide_String]}
 @end(Descexample)
 @Comment{We have to use "Added" on these two so that the annex paragraph
 numbers come out correctly. Only the initial text gets overridden.}
      @ChgRef{Version=[5],Kind=[Added]}
      @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Wide_Wide_Image calls
-      S'Put_Image passing @i<Arg>
+      S'Put_Image passing @VirtName<Arg>
       (which will typically store a sequence of character values
       in a text buffer) and then returns the result of retrieving the
       contents of that buffer with function Wide_Wide_Get.]}]}@Comment{End of Annex text here.}
@@ -3940,13 +3940,13 @@ paragraph numbers in the Annex. It will leave the prefix uninserted, but that
 will save a vast amount of messing around.}
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[@b(function) S'Wide_Image(@RI(Arg) : S'Base)
+@ChgAdded{Version=[5],Text=[@b(function) S'Wide_Image(@VirtName(Arg) : S'Base)
   @b(return) Wide_String]}
 @end(Descexample)
 
      @ChgRef{Version=[5],Kind=[AddedNormal]}
      @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Wide_Image calls S'Put_Image
-     passing @i<Arg> (which will typically store a sequence of character values
+     passing @VirtName<Arg> (which will typically store a sequence of character values
      in a text buffer) and then returns the result of retrieving the
      contents of that buffer with function Wide_Get.]}]}@Comment{End of Annex text here.}
      @ChgAdded{Version=[5],Text=[The lower bound of the result is one.
@@ -3961,13 +3961,13 @@ paragraph numbers in the Annex. It will leave the prefix uninserted, but that
 will save a vast amount of messing around.}
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[@b(function) S'Image(@RI(Arg) : S'Base)
+@ChgAdded{Version=[5],Text=[@b(function) S'Image(@VirtName(Arg) : S'Base)
   @b(return) String]}
 @end(Descexample)
 
      @ChgRef{Version=[5],Kind=[AddedNormal]}
      @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Image calls S'Put_Image
-     passing @i<Arg> (which will typically store a sequence of character values
+     passing @VirtName<Arg> (which will typically store a sequence of character values
      in a text buffer) and then returns the result of retrieving the
      contents of that buffer with function Get.]}]}@Comment{End of Annex text here.}
      @ChgAdded{Version=[5],Text=[The lower bound of the result is one. @Redundant[Any 

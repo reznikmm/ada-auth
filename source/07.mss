@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:48 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.158 $}
+@Comment{$Revision: 1.159 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -153,7 +153,7 @@ whose bodies can occur in @nt{package_specification}s.
 
    @key[function] "="(X,Y : Rational) @key[return] Boolean;
 
-   @key[function] "/"  (X,Y : Integer)  @key[return] Rational;  --@RI{  to construct a rational number}
+   @key[function] "/"  (X,Y : Integer)  @key[return] Rational;  --@ExamCom{  to construct a rational number}
 
    @key[function] "+"  (X,Y : Rational) @key[return] Rational;
    @key[function] "-"  (X,Y : Rational) @key[return] Rational;
@@ -338,7 +338,7 @@ takes place before the elaboration of the
 
    @key[procedure] Same_Denominator (X,Y : @key[in] @key[out] Rational) @key[is]
    @key[begin]
-      --@RI{  reduces X and Y to the same denominator:}
+      --@ExamCom{  reduces X and Y to the same denominator:}
       ...
    @key[end] Same_Denominator;
 
@@ -558,8 +558,8 @@ that seemed like too much mechanism.
     @key[type] T1 @key[is] @key[tagged] @key[limited] @key[private];
     @key[procedure] Foo(X : @key[in] T1'Class);
 @key[private]
-    @key[type] T1 @key[is] @key[tagged] @key[null] @key[record]; --@RI{ Illegal!}
-        --@RI{ This should say @lquotes@;@key[tagged limited null record]@rquotes@;.}
+    @key[type] T1 @key[is] @key[tagged] @key[null] @key[record]; --@ExamCom{ Illegal!}
+        --@ExamCom{ This should say @lquotes@;@key[tagged limited null record]@rquotes@;.}
 @key[end] P1;
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
@@ -569,17 +569,17 @@ that seemed like too much mechanism.
     @key[procedure] Foo(X : @key[in] T1'Class) @key[is]
     @key[begin]
         Global := @key[new] T1'Class'(X);
-            --@RI{ This would be illegal if the full view of}
-            --@RI{ T1 were limited, like it's supposed to be.}
+            --@ExamCom{ This would be illegal if the full view of}
+            --@ExamCom{ T1 were limited, like it's supposed to be.}
     @key[end] @Chg{New=[Foo],Old=[A]};
 @key[end] P1;
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}@key[with] P1;
 @key[package] P2 @key[is]
-    @key[type] T2(D : @key[access] Integer)@Chg{Version=[2],New=[],Old=[ --@RI{ Trouble!}]}
+    @key[type] T2(D : @key[access] Integer)@Chg{Version=[2],New=[],Old=[ --@ExamCom{ Trouble!}]}
             @key[is] @key[new] P1.T1 @key[with]
         @key[record]
-            My_Task : Some_Task_Type; --@RI{ @Chg{Version=[2],New=[Trouble],Old=[More trouble]}!}
+            My_Task : Some_Task_Type; --@ExamCom{ @Chg{Version=[2],New=[Trouble],Old=[More trouble]}!}
         @key[end] @key[record];
 @key[end] P2;
 
@@ -630,10 +630,10 @@ and even at places that can see the parent:
 
 @key[with] Q; @key[use] Q;
 @key[package] @key[body] P @key[is]
-    ... T'Class ... --@RI{ Illegal!}
+    ... T'Class ... --@ExamCom{ Illegal!}
     Object: T;
-    ... Object.X ... --@RI{ Illegal!}
-    ... Parent(Object).X ... --@RI{ OK.}
+    ... Object.X ... --@ExamCom{ Illegal!}
+    ... Parent(Object).X ... --@ExamCom{ OK.}
 @key[end] P;
 @end{Example}
 
@@ -687,17 +687,17 @@ interface type.]}
 @ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_1 @key{with private};
 @key{private}
    @key{type} Parent_2 @key{is new} Parent_1 @key{and} Pkg.Ifc @key{with null record};
-   @key{procedure} Foo (X : Parent_2); -- @RI[Foo #1]]}
+   @key{procedure} Foo (X : Parent_2); -- @ExamCom[Foo #1]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_2 @key{with null record}; -- @RI[Illegal.]
+@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_2 @key{with null record}; -- @ExamCom[Illegal.]
 @key{end} P;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} P;
 @key{package} P_Client @key{is}
    @key{type} T2 @key{is new} P.T1 @key{and} P.Pkg.Ifc @key{with null record};
-   @key{procedure} Foo (X : T2); -- @RI[Foo #2]
+   @key{procedure} Foo (X : T2); -- @ExamCom[Foo #2]
    X : T2;
 @key{end} P_Client;]}
 
@@ -710,12 +710,12 @@ interface type.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} Bar (X : T1'Class) @key{is}
    @key{begin}
-      Pkg.Foo (@Chg{Version=[5],New=[Pkg.Ifc'Class (X)],Old=[X]}); -- @RI[should call Foo #1 or an override thereof]
+      Pkg.Foo (@Chg{Version=[5],New=[Pkg.Ifc'Class (X)],Old=[X]}); -- @ExamCom[should call Foo #1 or an override thereof]
    @key{end};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{begin}
-   Pkg.Foo (Pkg.Ifc'Class (P_Client.X));      -- @RI[should call Foo #2]
+   Pkg.Foo (Pkg.Ifc'Class (P_Client.X));      -- @ExamCom[should call Foo #2]
    Bar (T1'Class (P_Client.X));
 @key{end} P;]}
 @end{Example}
@@ -826,7 +826,7 @@ the parent subtype of the full view is required to be constrained
 @key[package] P @key[is]
     @key[type] T(D : Integer) @key[is] @key[private];
 @key[private]
-    @key[type] T @key[is] @key[new] Some_Other_Type; --@RI{ Illegal!}
+    @key[type] T @key[is] @key[new] Some_Other_Type; --@ExamCom{ Illegal!}
 @key[end] P;
   @end{Example}
   even if Some_Other_Type has an integer discriminant called D.
@@ -897,7 +897,7 @@ matching constraint on those discriminants.
 @key[package] P @key[is]
     @key[type] T2 @key[is] @key[new] T1(Discrim => 3) @key[with] @key[private];
 @key[private]
-    @key[type] T2 @key[is] @key[new] T1(Discrim => 999) --@RI{ Illegal!}
+    @key[type] T2 @key[is] @key[new] T1(Discrim => 999) --@ExamCom{ Illegal!}
         @key[with] @key[record] ...;
 @key[end] P;
 @end{Example}
@@ -1410,7 +1410,7 @@ derived type) is declared within the declarative region of that package
 
 @key[package] Parent.Child @key[is]
     @key[type] T3 @key[is] @key[new] Root @key[with] @key[null] @key[record];
-    --@RI{ Op1(T3) implicitly declared here.}
+    --@ExamCom{ Op1(T3) implicitly declared here.}
 
     @key[package] Nested @key[is]
         @key[type] T4 @key[is] @key[new] Root @key[with] @key[null] @key[record];
@@ -1418,14 +1418,14 @@ derived type) is declared within the declarative region of that package
         ...
     @key[end] Nested;
 @key[private]
-    --@RI{ Op2(T3) implicitly declared here.}
+    --@ExamCom{ Op2(T3) implicitly declared here.}
     ...
 @key[end] Parent.Child;
 
 @key[with] Unrelated; @key[use] Unrelated;
 @key[package] @key[body] Parent.Child @key[is]
     @key[package] @key[body] Nested @key[is]
-        --@RI{ Op2(T4) implicitly declared here.}
+        --@ExamCom{ Op2(T4) implicitly declared here.}
     @key[end] Nested;
 
     @key[type] T5 @key[is] @key[new] T2 @key[with] @key[null] @key[record];
@@ -1491,21 +1491,21 @@ in more than one place:
         @key[type] A @key[is] @key[array](Integer @key[range] <>) @key[of] Comp2;
     @key[private]
         @key[type] Comp2 @key[is] @key[new] Comp1;
-        --@RI{ A becomes nonlimited here.}
-        --@RI{ "="(A, A) return Boolean is implicitly declared here.}
+        --@ExamCom{ A becomes nonlimited here.}
+        --@ExamCom{ "="(A, A) return Boolean is implicitly declared here.}
         ...
     @key[end] R;
 @key[private]
-    --@RI{ Now we find out what Comp1 really is, which reveals}
-    --@RI{ more information about Comp2, but we're not within}
-    --@RI{ the immediate scope of Comp2, so we don't do anything}
-    --@RI{ about it yet.}
+    --@ExamCom{ Now we find out what Comp1 really is, which reveals}
+    --@ExamCom{ more information about Comp2, but we're not within}
+    --@ExamCom{ the immediate scope of Comp2, so we don't do anything}
+    --@ExamCom{ about it yet.}
 @key[end] P.Q;
 
 @key[package] @key[body] P.Q @key[is]
     @key[package] @key[body] R @key[is]
-        --@RI{ Things like "@key[xor]"(A,A) return A are implicitly}
-        --@RI{ declared here.}
+        --@ExamCom{ Things like "@key[xor]"(A,A) return A are implicitly}
+        --@ExamCom{ declared here.}
     @key[end] R;
 @key[end] P.Q;
 @end{Example}
@@ -1597,7 +1597,7 @@ are also defined for discriminants and inherited components.
 @begin{Example}
 @key[package] Key_Manager @key[is]
    @key[type] Key @key[is] @key[private];
-   Null_Key : @key[constant] Key; --@RI{ a deferred constant declaration (see @RefSecNum{Deferred Constants})}
+   Null_Key : @key[constant] Key; --@ExamCom{ a deferred constant declaration (see @RefSecNum{Deferred Constants})}
    @key[procedure] Get_Key(K : @key[out] Key);
    @key[function] "<" (X, Y : Key) @key[return] Boolean;
 @key[private]
@@ -1692,6 +1692,7 @@ has been moved to @lquotes@;Obsolescent Features@rquotes.
 
 @LabeledAddedSubClause{Version=[3],Name=[Type Invariants]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0041-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
@@ -1748,6 +1749,7 @@ specified with an @nt{aspect_specification} (see
       objects in a class of types.]}]}
 
 @end{Description}
+@end{Intro}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
@@ -2546,6 +2548,7 @@ work can be scheduled for weekends:}]}
 @LabeledAddedSubClause{Version=[5],Name=[Default Initial Conditions]}
 
 
+@begin{Intro}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a private type or private
 extension (including a generic formal type), the following
@@ -2572,7 +2575,7 @@ additive, as defined below.]],Old=[]}]}
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Default initial condition>,
 Text=<@ChgAdded{Version=[5],Text=[A default initial condition is a property that
 holds for every default-initialized object of a given type.]}>}
-
+@end{Intro}
 
 @begin{Resolution}
 
@@ -3286,12 +3289,12 @@ variables declared in the private part of a package.
 @begin{Examples}
 @leading@keepnext@i{Examples of deferred constant declarations:}
 @begin{Example}
-Null_Key : @key[constant] Key;      --@RI[ see @RefSecNum{Private Operations}]
+Null_Key : @key[constant] Key;      --@ExamCom[ see @RefSecNum{Private Operations}]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 CPU_Identifier : @key[constant] String(1..8)@Chg{Version=[3],New=[],Old=[;]}
 @Chg{Version=[3],New=[   @key[with]],Old=[@key[pragma]]} Import@Chg{Version=[3],New=[ => True, Convention => ],Old=[(]}Assembler, @Chg{Version=[3],New=[],Old=[CPU_Identifier, ]}Link_Name => "CPU_ID"@Chg{Version=[3],New=[],Old=[)]};
-                              --@RI[ see @RefSecNum{Interfacing Aspects}]
+                              --@ExamCom[ see @RefSecNum{Interfacing Aspects}]
 @end{Example}
 @end{Examples}
 
@@ -3446,12 +3449,12 @@ Otherwise, the following could happen:
 @key[package] P @key[is]
     @key[type] T @key[is] @key[limited] @key[private];
     @key[type] R @key[is] @key[tagged]
-        @key[record] --@RI{ Illegal!}
-               --@RI{ This should say @lquotes@;@key[limited record]@rquotes@;.}
+        @key[record] --@ExamCom{ Illegal!}
+               --@ExamCom{ This should say @lquotes@;@key[limited record]@rquotes@;.}
             X : T;
         @key[end] @key[record];
 @key[private]
-    @key[type] T @key[is] @key[new] Integer; --@RI{ R becomes nonlimited here.}
+    @key[type] T @key[is] @key[new] Integer; --@ExamCom{ R becomes nonlimited here.}
 @key[end] P;
 
 @ChgRef{Version=[2],Kind=[Revised]}
@@ -4040,7 +4043,7 @@ or Finalize is applied to the containing object.
     @key(procedure) @AdaSubDefn{Initialize} (Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
     @key(procedure) @AdaSubDefn{Finalize}   (Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
 @key(private)
-    ... -- @RI{not specified by the language}
+    ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Finalization;
 @end{Example}
 
@@ -4176,13 +4179,13 @@ unless that Initialize procedure is abstract.
 @begin{Example}
 @key[type] T1 @key[is] @key[new] Controlled @key[with]
     @key[record]
-        ... --@RI{ some components might have defaults}
+        ... --@ExamCom{ some components might have defaults}
     @key[end] @key[record];
 
 @key[type] T2 @key[is] @key[new] Controlled @key[with]
     @key[record]
-        X : T1; --@RI{ no default}
-        Y : T1 := ...; --@RI{ default}
+        X : T1; --@ExamCom{ no default}
+        Y : T1 := ...; --@ExamCom{ default}
     @key[end] @key[record];
 
 A : T2;
@@ -5329,8 +5332,8 @@ For example,]}
 @ChgRef{Version=[2],Kind=[Deleted]}
 @ChgDeleted{Version=[2],Text=[@key[declare]
     X : Some_Controlled_Type := F(G(...));
-    --@RI{ The anonymous objects created for F and G are finalized}
-    --@RI{ no later than this point.}
+    --@ExamCom{ The anonymous objects created for F and G are finalized}
+    --@ExamCom{ no later than this point.}
     Y : ...
 @key[begin]
     ...
@@ -5550,13 +5553,13 @@ For example,
         @key[begin]
             @key[goto] The_Label;
         @key[exception]
-            @key[when] Program_Error => ... --@RI{ Handler number 1.}
+            @key[when] Program_Error => ... --@ExamCom{ Handler number 1.}
         @key[end];
     @key[exception]
-        @key[when] Program_Error => ... --@RI{ Handler number 2.}
+        @key[when] Program_Error => ... --@ExamCom{ Handler number 2.}
     @key[end];
 @key[exception]
-    @key[when] Program_Error => ... --@RI{ Handler number 3.}
+    @key[when] Program_Error => ... --@ExamCom{ Handler number 3.}
 @key[end] Main;
 @end{Example}
 

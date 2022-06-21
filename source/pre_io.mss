@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -119,7 +119,7 @@ An open file has a @i{current mode}, which is a value of one of the
 following enumeration types:
 @begin{DescribeCode}
 @begin{Example}
-@key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);  --@RI{  for Direct_IO}
+@key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);  --@ExamCom{  for Direct_IO}
 @end{Example}
 
 These values correspond respectively to the cases where only reading,
@@ -127,7 +127,7 @@ both reading and writing, or only writing are to be performed.
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
---@RI{  for Sequential_IO, Text_IO, Wide_Text_IO, @Chg{Version=[2],New=[Wide_Wide_Text_IO, ],
+--@ExamCom{  for Sequential_IO, Text_IO, Wide_Text_IO, @Chg{Version=[2],New=[Wide_Wide_Text_IO, ],
 Old=[]}and Stream_IO}
 @end{Example}
 
@@ -279,7 +279,7 @@ a property of a file object, not of an external file.
 
    @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Out_File, Append_File);
 
-   @RI{-- File management}
+   --@ExamCom{ File management}
 
    @key[procedure] @AdaSubDefn{Create}(File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode := Out_File;
@@ -307,7 +307,7 @@ a property of a file object, not of an external file.
 @ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type)@Chg{Version=[5],New=[
        @key[with] Global => @key[overriding in out] File],Old=[]};]}
 
-   --@RI{ Input and output operations}
+   --@ExamCom{ Input and output operations}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Read}  (File : @key[in] File_Type; Item : @key[out] Element_Type)@Chg{Version=[5],New=[
@@ -317,7 +317,7 @@ a property of a file object, not of an external file.
 
    @key[function] @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
 
-@keepnext   --@RI{ Exceptions}
+@keepnext   --@ExamCom{ Exceptions}
 
    @AdaExcDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    @AdaExcDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -384,7 +384,7 @@ a property of a file object, not of an external file.
 
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Sequential_IO;
 @end{Example}
 
@@ -463,7 +463,7 @@ additional effects described in subclause
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key[procedure] Create(File : @key[in] @key[out] File_Type;
-                 Mode : @key[in] File_Mode := @RI{default_mode};
+                 Mode : @key[in] File_Mode := @VirtName{default_mode};
                  Name : @key[in] String := "";
                  Form : @key[in] String := "");
 @end{Example}
@@ -799,10 +799,10 @@ The exception Mode_Error is propagated if the mode is not In_File.
    @key[type] @AdaTypeDefn{File_Type} @key[is] @key[limited] @key[private];
 
    @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Inout_File, Out_File);
-   @key[type] @AdaTypeDefn{Count}     @key[is] @key[range] 0 .. @RI[implementation-defined];
+   @key[type] @AdaTypeDefn{Count}     @key[is] @key[range] 0 .. @VirtName[implementation-defined];
    @key[subtype] @AdaSubtypeDefn{Name=[Positive_Count],Of=[Count]} @key[is] Count @key[range] 1 .. Count'Last;
 
-   --@RI{ File management}
+   --@ExamCom{ File management}
 
    @key[procedure] @AdaSubDefn{Create}(File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode := Inout_File;
@@ -830,7 +830,7 @@ The exception Mode_Error is propagated if the mode is not In_File.
 @ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type)@Chg{Version=[5],New=[
       @key[with] Global => @key[overriding in out] File],Old=[]};]}
 
-   --@RI{ Input and output operations}
+   --@ExamCom{ Input and output operations}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Read} (File : @key[in] File_Type; Item : @key[out] Element_Type;
@@ -855,7 +855,7 @@ The exception Mode_Error is propagated if the mode is not In_File.
 
    @key[function] @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
 
-@keepnext   --@RI{ Exceptions}
+@keepnext   --@ExamCom{ Exceptions}
 
    @AdaExcDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    @AdaExcDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -923,7 +923,7 @@ The exception Mode_Error is propagated if the mode is not In_File.
 
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Direct_IO;
 @end{Example}
 @begin{Reason}
@@ -1099,17 +1099,17 @@ the construction of user-defined input-output packages.
    @key[pragma] Preelaborate(Storage_IO);]}
 
    @AdaObjDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count :=
-      @RI(implementation-defined);
+      @VirtName(implementation-defined);
    @key(subtype) @AdaSubtypeDefn{Name=[Buffer_Type],Of=[Storage_Array]} @key(is)
       System.Storage_Elements.Storage_Array(1..Buffer_Size);
 
-   --@RI{ Input and output operations}
+   --@ExamCom{ Input and output operations}
 
    @key[procedure] @AdaSubDefn{Read} (Buffer : @key[in]  Buffer_Type; Item : @key[out] Element_Type);
 
    @key[procedure] @AdaSubDefn{Write}(Buffer : @key[out] Buffer_Type; Item : @key[in]  Element_Type);
 
-@keepnext   --@RI{ Exceptions}
+@keepnext   --@ExamCom{ Exceptions}
 
    @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 @key[end] Ada.Storage_IO;
@@ -1269,7 +1269,7 @@ is the number of the current page. These numbers are values of the
 subtype Positive_Count of the type Count (by convention, the value zero
 of the type Count is used to indicate special conditions).
 @begin{Example}
-@Trailing@key[type] Count @key[is] @key[range] 0 .. @RI[implementation-defined];
+@Trailing@key[type] Count @key[is] @key[range] 0 .. @VirtName[implementation-defined];
 @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
 @end{Example}
 
@@ -1309,16 +1309,16 @@ Append_File is new in Ada 95.
 
    @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Out_File, Append_File);
 
-   @key[type] @AdaTypeDefn{Count} @key[is] @key[range] 0 .. @RI[implementation-defined];
+   @key[type] @AdaTypeDefn{Count} @key[is] @key[range] 0 .. @VirtName[implementation-defined];
    @key[subtype] @AdaSubtypeDefn{Name=[Positive_Count],Of=[Count]} @key[is] Count @key[range] 1 .. Count'Last;
-   @AdaObjDefn{Unbounded} : @key[constant] Count := 0; --@RI{ line and page length}
+   @AdaObjDefn{Unbounded} : @key[constant] Count := 0; --@ExamCom{ line and page length}
 
-   @key[subtype] @AdaSubtypeDefn{Name=[Field],Of=[Integer]}       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
+   @key[subtype] @AdaSubtypeDefn{Name=[Field],Of=[Integer]}       @key[is] Integer @key[range] 0 .. @VirtName[implementation-defined];
    @key[subtype] @AdaSubtypeDefn{Name=[Number_Base],Of=[Integer]} @key[is] Integer @key[range] 2 .. 16;
 
    @key[type] @AdaTypeDefn{Type_Set} @key[is] (Lower_Case, Upper_Case);
 
-   --@RI{ File Management}
+   --@ExamCom{ File Management}
 
    @key[procedure] @AdaSubDefn{Create} (File : @key[in] @key[out] File_Type;
                      Mode : @key[in] File_Mode := Out_File;
@@ -1341,7 +1341,7 @@ Append_File is new in Ada 95.
 
    @key[function]  @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@RI{ Control of default input and output files}
+   --@ExamCom{ Control of default input and output files}
 
    @key[procedure] @AdaSubDefn{Set_Input} (File : @key[in] File_Type);
    @key[procedure] @AdaSubDefn{Set_Output}(File : @key[in] File_Type);
@@ -1368,14 +1368,14 @@ Append_File is new in Ada 95.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051],ARef=[AI95-00057-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
---@RI{Buffer control}
+--@ExamCom{Buffer control}
    @key[procedure] @AdaSubDefn{Flush} (File : @key[in] @Chg{New=[],Old=[@key[out] ]}File_Type)@Chg{Version=[5],New=[
       @key[with] Global => @key[overriding in out] File],Old=[]};
    @key[procedure] @AdaSubDefn{Flush}@Chg{Version=[5],New=[
       @key[with] Global => @key[in out all]],Old=[]};
 
 
-   --@RI{ Specification of line and page lengths}
+   --@ExamCom{ Specification of line and page lengths}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Set_Line_Length}(File : @key[in] File_Type; To : @key[in] Count)@Chg{Version=[5],New=[
@@ -1399,7 +1399,7 @@ Append_File is new in Ada 95.
    @key[function]  @AdaSubDefn{Page_Length} @key[return] Count@Chg{Version=[5],New=[
       @key[with] Global => @key[in all]],Old=[]};
 
-   --@RI{ Column, Line, and Page Control}
+   --@ExamCom{ Column, Line, and Page Control}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{New_Line}   (File    : @key[in] File_Type;
@@ -1468,7 +1468,7 @@ Append_File is new in Ada 95.
    @key[function] @AdaSubDefn{Page} @key[return] Positive_Count@Chg{Version=[5],New=[
       @key[with] Global => @key[in all]],Old=[]};
 
-   --@RI{ Character Input-Output}
+   --@ExamCom{ Character Input-Output}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] Character)@Chg{Version=[5],New=[
@@ -1507,7 +1507,7 @@ Append_File is new in Ada 95.
                            Available : @key[out] Boolean)@Chg{Version=[5],New=[
       @key[with] Global => @key[in out all]],Old=[]};
 
-   --@RI{ String Input-Output}
+   --@ExamCom{ String Input-Output}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
    @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] String)@Chg{Version=[5],New=[
@@ -1542,7 +1542,7 @@ Append_File is new in Ada 95.
    @key[procedure] @AdaSubDefn{Put_Line}(Item : @key[in]  String)@Chg{Version=[5],New=[
       @key[with] Global => @key[in out all]],Old=[]};
 
---@RI{ Generic packages for Input-Output of Integer Types}
+--@ExamCom{ Generic packages for Input-Output of Integer Types}
 
    @key[generic]
       @key[type] Num @key[is] @key[range] <>;
@@ -1618,7 +1618,7 @@ Append_File is new in Ada 95.
 
    @key[end] Modular_IO;
 
-   --@RI{ Generic packages for Input-Output of Real Types}
+   --@ExamCom{ Generic packages for Input-Output of Real Types}
 
    @key[generic]
       @key[type] Num @key[is] @key[digits] <>;
@@ -1746,7 +1746,7 @@ Append_File is new in Ada 95.
          @key[with] Nonblocking],Old=[]};
    @key[end] Decimal_IO;
 
-   --@RI{ Generic package for Input-Output of Enumeration Types}
+   --@ExamCom{ Generic package for Input-Output of Enumeration Types}
 
    @key[generic]
       @key[type] Enum @key[is] (<>);
@@ -1784,7 +1784,7 @@ Append_File is new in Ada 95.
          @key[with] Nonblocking],Old=[]};
    @key[end] Enumeration_IO;
 
-@keepnext@;--@RI{ Exceptions}
+@keepnext@;--@ExamCom{ Exceptions}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0021-1]}
    @AdaExcDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
@@ -1796,7 +1796,7 @@ Append_File is new in Ada 95.
    @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
    @AdaExcDefn{Layout_Error} : @key[exception] @key[renames] IO_Exceptions.Layout_Error;@Chg{Version=[5],New=[],Old=[
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Text_IO;]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
@@ -1856,7 +1856,7 @@ Append_File is new in Ada 95.
 
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[@key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Text_IO;]}
 @end{Example}
 
@@ -2585,11 +2585,11 @@ N : Integer;
 Get(N);
 
 @tabclear()@tabset(P4, P22, P38)
-@RI[--  @\Characters at input @\Sequence input @\Value of N]
+@ExamCom[--  @\Characters at input @\Sequence input @\Value of N]
 @Comment{Blank line.}
-@RI[--  @\bb@en@|12535b @\@en@|12535 @\@en@|12535]
-@RI[--  @\bb12_535e1b @\12_535e1 @\125350]
-@RI[--  @\bb12_535e; @\12_535e @\(none) Data_Error raised]
+@ExamCom[--  @\bb@en@|12535b @\@en@|12535 @\@en@|12535]
+@ExamCom[--  @\bb12_535e1b @\12_535e1 @\125350]
+@ExamCom[--  @\bb12_535e; @\12_535e @\(none) Data_Error raised]
 @end{Example}
 
 @begin{WideAbove}
@@ -2597,7 +2597,7 @@ Get(N);
 @end{WideAbove}
 
 @begin{Example}
-Put(Item => -23, Width => 2);  --@RI{  "@en@|23"}
+Put(Item => -23, Width => 2);  --@ExamCom{  "@en@|23"}
 @end{Example}
 @end{Examples}
 
@@ -2980,12 +2980,12 @@ paragraph to hang junk paragraph number from original RM}>}]}
 @ChgRef{Version=[3], Kind=[Revised],ARef=[AI05-0298-1]}
 @Chg{Version=[3],New=[@key[subtype] Byte_Int @key[is] Integer @key[range] -127 .. 127;
 ],Old=[]}@key[package] Int_IO @key[is] @key[new] Integer_IO(@Chg{Version=[3],New=[Byte_Int],Old=[Small_Int]}); @key[use] Int_IO;
---@RI{ default format used at instantiation,}
---@RI{ Default_Width = 4, Default_Base = 10}
+--@ExamCom{ default format used at instantiation,}
+--@ExamCom{ Default_Width = 4, Default_Base = 10}
 
-Put(126);                            --@RI{ "b126"}
-Put(-126, 7);                        --@RI{ "bbb@en@|126"}
-Put(126, Width => 13, Base => 2);    --@RI{ "bbb2#1111110#"}
+Put(126);                            --@ExamCom{ "b126"}
+Put(-126, 7);                        --@ExamCom{ "bbb@en@|126"}
+Put(126, Width => 13, Base => 2);    --@ExamCom{ "bbb2#1111110#"}
 @end{Example}
 @end{Examples}
 
@@ -3233,14 +3233,14 @@ paragraph to hang junk paragraph number from original RM}>}]}
 @begin{Example}
 
 @key[package] Real_IO @key[is] @key[new] Float_IO(Real); @key[use] Real_IO;
---@RI{ default format used at instantiation, Default_Exp = 3}
+--@ExamCom{ default format used at instantiation, Default_Exp = 3}
 
-X : Real := -123.4567;  --@RI{  digits 8      (see @RefSecNum{Floating Point Types})}
+X : Real := -123.4567;  --@ExamCom{  digits 8      (see @RefSecNum{Floating Point Types})}
 
 @tabclear()@tabset(P50)
-Put(X);  @RI[-- default format] @\@RI["@en@|1.2345670E+02"]
-Put(X, Fore => 5, Aft => 3, Exp => 2); @\@RI[-- "bbb@en@|1.235E+2"]
-Put(X, 5, 3, 0);             @\@RI[-- "b@en@|123.457"]
+Put(X);  @ExamCom[-- default format] @\@ExamCom["@en@|1.2345670E+02"]
+Put(X, Fore => 5, Aft => 3, Exp => 2); @\@ExamCom[-- "bbb@en@|1.235E+2"]
+Put(X, 5, 3, 0);             @\@ExamCom[-- "b@en@|123.457"]
 @end{Example}
 @end{Examples}
 
@@ -3367,10 +3367,10 @@ is not defined by the language.
 There is a difference between Put defined for characters, and for
 enumeration values. Thus
 @begin{Example}
-   Ada.Text_IO.Put('A');  --@RI{  outputs the character A}
+   Ada.Text_IO.Put('A');  --@ExamCom{  outputs the character A}
 
    @key[package] Char_IO @key[is] @key[new] Ada.Text_IO.Enumeration_IO(Character);
-   Char_IO.Put('A');  --@RI{  outputs the character 'A', between apostrophes}
+   Char_IO.Put('A');  --@ExamCom{  outputs the character 'A', between apostrophes}
 @end{Example}
 
 The type Boolean is an enumeration type, hence Enumeration_IO can be
@@ -3895,9 +3895,9 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 
     @key(type) @AdaTypeDefn{File_Mode} @key(is) (In_File, Out_File, Append_File);
 
-    @key[type]    @AdaTypeDefn{Count}          @key[is] @key[range] 0 .. @RI[implementation-defined];
+    @key[type]    @AdaTypeDefn{Count}          @key[is] @key[range] 0 .. @VirtName[implementation-defined];
     @key[subtype] @AdaSubtypeDefn{Name=[Positive_Count],Of=[Count]} @key[is] Count @key[range] 1 .. Count'Last;
-      -- @RI(Index into file, in stream elements.)
+      -- @ExamCom(Index into file, in stream elements.)
 
     @key(procedure) @AdaSubDefn{Create} (File : @key(in) @key(out) File_Type;
                       Mode : @key(in) File_Mode := Out_File;
@@ -3922,13 +3922,13 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
     @key(function) @AdaSubDefn{End_Of_File} (File : @key(in) File_Type) @key(return) Boolean;
 
     @key(function) @AdaSubDefn{Stream} (File : @key(in) File_Type) @key(return) Stream_Access;
-        -- @RI(Return stream access for use with T'Input and T'Output)
+        -- @ExamCom(Return stream access for use with T'Input and T'Output)
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
-    -- @RI(Read array of stream elements from file)
+    -- @ExamCom(Read array of stream elements from file)
     @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
                     Item : @key(out) Stream_Element_Array;
                     Last : @key(out) Stream_Element_Offset;
@@ -3945,7 +3945,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
-    -- @RI(Write array of stream elements into file)
+    -- @ExamCom(Write array of stream elements into file)
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
                      Item : @key(in) Stream_Element_Array;
                      To   : @key(in) Positive_Count)@Chg{Version=[5],New=[
@@ -3959,7 +3959,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
-    -- @RI(Operations on position within file)
+    -- @ExamCom(Operations on position within file)
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
     @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count)@Chg{Version=[5],New=[
@@ -3974,7 +3974,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
     @key(procedure) @AdaSubDefn{Flush}(File : @key(in) @Chg{New=[],Old=[@key(out) ]}File_Type);
 
 
-    -- @RI(exceptions)
+    -- @ExamCom(exceptions)
     @AdaExcDefn{Status_Error} : @key(exception) @key(renames) IO_Exceptions.Status_Error;
     @AdaExcDefn{Mode_Error}   : @key(exception) @key(renames) IO_Exceptions.Mode_Error;
     @AdaExcDefn{Name_Error}   : @key(exception) @key(renames) IO_Exceptions.Name_Error;
@@ -4039,7 +4039,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @ChgAdded{Version=[5],Text=[   @key[end] Wide_Wide_File_Names;]}
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key(end) Ada.Streams.Stream_IO;
 @end(example)
 

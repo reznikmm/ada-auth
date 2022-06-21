@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2021/06/03 01:52:06 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2022/05/14 04:06:50 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -438,7 +438,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @key[package] Ada.Numerics.Float_Random@Chg{Version=[5],New=[
    @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]@ChildUnit{Parent=[Ada.Numerics],Child=[Float_@!Random]}
 
-   -- @RI{Basic facilities}
+   -- @ExamCom{Basic facilities}
 
    @key[type] @AdaTypeDefn{Generator} @key[is] @key[limited] @key[private];
 
@@ -457,7 +457,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
       @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
-   -- @RI{Advanced facilities}
+   -- @ExamCom{Advanced facilities}
 
    @key[type] @AdaTypeDefn{State} @key[is] @key[private];
 
@@ -470,7 +470,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
       @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
-   @AdaObjDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
+   @AdaObjDefn{Max_Image_Width} : @key[constant] := @ExamCom{implementation-defined integer value};
 
 
    @key[function] @AdaSubDefn{Image} (Of_State    : State)  @key[return] String;
@@ -478,7 +478,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
 
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Numerics.Float_Random;
 @end{Example}
 
@@ -496,7 +496,7 @@ declaration:
 @key[package] Ada.Numerics.Discrete_Random@Chg{Version=[5],New=[
    @key[with] Global => @key[in out synchronized]],Old=[]} @key[is]
 
-   -- @RI{Basic facilities}
+   -- @ExamCom{Basic facilities}
 
    @key[type] @AdaTypeDefn{Generator} @key[is] @key[limited] @key[private];
 
@@ -520,7 +520,7 @@ declaration:
       @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
-   -- @RI{Advanced facilities}
+   -- @ExamCom{Advanced facilities}
 
    @key[type] @AdaTypeDefn{State} @key[is] @key[private];
 
@@ -533,7 +533,7 @@ declaration:
       @key[with] Global => @key[overriding in out] Gen],Old=[]};
 
 
-   @AdaObjDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
+   @AdaObjDefn{Max_Image_Width} : @key[constant] := @VirtName{implementation-defined integer value};
 
 
    @key[function] @AdaSubDefn{Image} (Of_State    : State)  @key[return] String;
@@ -541,7 +541,7 @@ declaration:
 
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key[end] Ada.Numerics.Discrete_Random;
 @end{Example}
 @ImplDef{The value of Numerics.Float_Random.Max_Image_Width.}
@@ -878,9 +878,9 @@ value.
    G : Generator;
    D : Dice;@Softpage
 @key[begin]@Softpage
-   Reset (G);  -- @RI{Start the generator in a unique state in each run}
+   Reset (G);  -- @ExamCom{Start the generator in a unique state in each run}
    @key[loop]
-      -- @RI{Roll a pair of dice; sum and process the results}
+      -- @ExamCom{Roll a pair of dice; sum and process the results}
       D := Random(G) + Random(G);
       ...
    @key[end] @key[loop];@Softpage
@@ -896,9 +896,9 @@ value.
    @key[use] Random_Coin;
    G : Generator;@Softpage
 @key[begin]@Softpage
-   Reset (G);  -- @RI{Start the generator in a unique state in each run}
+   Reset (G);  -- @ExamCom{Start the generator in a unique state in each run}
    @key[loop]
-      -- @RI{Toss a coin and process the result}
+      -- @ExamCom{Toss a coin and process the result}
       @key[case] Random(G) @key[is]
           @key[when] Heads =>
              ...
@@ -935,11 +935,11 @@ with a separate generator of event probabilities in each task:}
       @key[end] @key[loop];
    @key[end] Worker;@Softpage
 @key[begin]@Softpage
-   -- @RI{Initialize the generators in the Worker tasks to different states}
+   -- @ExamCom{Initialize the generators in the Worker tasks to different states}
    @key[for] I @key[in] W'Range @key[loop]
       W(I).Initialize_Generator (I);
    @key[end] @key[loop];
-   ... -- @RI{Wait for the Worker tasks to terminate}@Softpage
+   ... -- @ExamCom{Wait for the Worker tasks to terminate}@Softpage
 @key[end] Parallel_Simulation;
 @end{Example}
 @end{Examples}

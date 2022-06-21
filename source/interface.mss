@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.90 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
+@comment{ $Revision: 1.91 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:30 $}
+@Comment{$Date: 2022/05/14 04:06:52 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -40,8 +40,7 @@ raise an exception at run time.]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The intent is that the same rules apply for
   the optional parts of language interfacing as apply for Specialized
-  Needs Annexes. See
-  @RefSecNum{Conformity of an Implementation with the Standard} for a
+  Needs Annexes. See @RefSecNum{Conformity of an Implementation} for a
   discussion of the purpose of these rules.]}
 @end{Discussion}
 @end{ImplReq}
@@ -892,20 +891,20 @@ and its language-defined descendants.}
 @key[package] Interfaces@Chg{Version=[5],New=[],Old=[ @key[is]]}@RootLibUnit{Interfaces}
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Interfaces);]}
 
-   @key[type] Integer_@RI{n} @key[is] @key[range] -2**(@RI{n}-1) .. 2**(@RI{n}-1) - 1;  --@RI{2's complement}
+   @key[type] Integer_@VirtName{n} @key[is] @key[range] -2**(@VirtName{n}-1) .. 2**(@VirtName{n}-1) - 1;  --@ExamCom{2's complement}
 
-   @key[type] Unsigned_@RI{n} @key[is] @key[mod] 2**@RI{n};
+   @key[type] Unsigned_@VirtName{n} @key[is] @key[mod] 2**@VirtName{n};
 
-   @key[function] Shift_Left  (Value : Unsigned_@RI{n}; Amount : Natural)
-      @key[return] Unsigned_@RI{n};
-   @key[function] Shift_Right (Value : Unsigned_@RI{n}; Amount : Natural)
-      @key[return] Unsigned_@RI{n};
-   @key[function] Shift_Right_Arithmetic (Value : Unsigned_@RI{n}; Amount : Natural)
-      @key[return] Unsigned_@RI{n};
-   @key[function] Rotate_Left  (Value : Unsigned_@RI{n}; Amount : Natural)
-      @key[return] Unsigned_@RI{n};
-   @key[function] Rotate_Right (Value : Unsigned_@RI{n}; Amount : Natural)
-      @key[return] Unsigned_@RI{n};
+   @key[function] Shift_Left  (Value : Unsigned_@VirtName{n}; Amount : Natural)
+      @key[return] Unsigned_@VirtName{n};
+   @key[function] Shift_Right (Value : Unsigned_@VirtName{n}; Amount : Natural)
+      @key[return] Unsigned_@VirtName{n};
+   @key[function] Shift_Right_Arithmetic (Value : Unsigned_@VirtName{n}; Amount : Natural)
+      @key[return] Unsigned_@VirtName{n};
+   @key[function] Rotate_Left  (Value : Unsigned_@VirtName{n}; Amount : Natural)
+      @key[return] Unsigned_@VirtName{n};
+   @key[function] Rotate_Right (Value : Unsigned_@VirtName{n}; Amount : Natural)
+      @key[return] Unsigned_@VirtName{n};
    ...@Defn{Shift_Left}@Defn{Shift_Right}@Defn{Shift_Right_Arithmetic}@Defn{Rotate_Left}@Defn{Rotate_Right}
 @key[end] Interfaces;
 @end{Example}
@@ -1201,53 +1200,53 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
 @key(package) Interfaces.C@Chg{Version=[5],New=[],Old=[ @key(is)]}@ChildUnit{Parent=[Interfaces],Child=[C]}
    @Chg{Version=[5],New=[@key(with)],Old=[@key(pragma)]} Pure@Chg{Version=[5],New=[ @key(is)],Old=[(C);]}
 
-   @RI{-- Declarations based on C's <limits.h>}
+   --@ExamCom{ Declarations based on C's <limits.h>}
 
-   @AdaObjDefn{CHAR_BIT}  : @key(constant) := @RI{implementation-defined};  @RI{-- typically 8}
-   @AdaObjDefn{SCHAR_MIN} : @key(constant) := @RI{implementation-defined};  @RI{-- typically @en@;128}
-   @AdaObjDefn{SCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 127}
-   @AdaObjDefn{UCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
+   @AdaObjDefn{CHAR_BIT}  : @key(constant) := @VirtName{implementation-defined};  @ExamCom{-- typically 8}
+   @AdaObjDefn{SCHAR_MIN} : @key(constant) := @VirtName{implementation-defined};  @ExamCom{-- typically @en@;128}
+   @AdaObjDefn{SCHAR_MAX} : @key(constant) := @VirtName{implementation-defined};  @ExamCom{-- typically 127}
+   @AdaObjDefn{UCHAR_MAX} : @key(constant) := @VirtName{implementation-defined};  @ExamCom{-- typically 255}
 
-   @RI{-- Signed and Unsigned Integers}
-   @key(type) @AdaTypeDefn{int}   @key(is) @key(range) @RI{implementation-defined};
-   @key(type) @AdaTypeDefn{short} @key(is) @key(range) @RI{implementation-defined};
-   @key(type) @AdaTypeDefn{long}  @key(is) @key(range) @RI{implementation-defined};
+   --@ExamCom{ Signed and Unsigned Integers}
+   @key(type) @AdaTypeDefn{int}   @key(is) @key(range) @VirtName{implementation-defined};
+   @key(type) @AdaTypeDefn{short} @key(is) @key(range) @VirtName{implementation-defined};
+   @key(type) @AdaTypeDefn{long}  @key(is) @key(range) @VirtName{implementation-defined};
 
    @key(type) @AdaTypeDefn{signed_char} @key(is) @key(range) SCHAR_MIN .. SCHAR_MAX;
    @key(for) signed_char'Size @key(use) CHAR_BIT;
 
-   @key(type) @AdaTypeDefn{unsigned}       @key(is) @key(mod) @RI{implementation-defined};
-   @key(type) @AdaTypeDefn{unsigned_short} @key(is) @key(mod) @RI{implementation-defined};
-   @key(type) @AdaTypeDefn{unsigned_long}  @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{unsigned}       @key(is) @key(mod) @VirtName{implementation-defined};
+   @key(type) @AdaTypeDefn{unsigned_short} @key(is) @key(mod) @VirtName{implementation-defined};
+   @key(type) @AdaTypeDefn{unsigned_long}  @key(is) @key(mod) @VirtName{implementation-defined};
 
    @key(type) @AdaTypeDefn{unsigned_char} @key(is) @key(mod) (UCHAR_MAX+1);
    @key(for) unsigned_char'Size @key(use) CHAR_BIT;
 
-   @key(subtype) @AdaTypeDefn{plain_char} @key(is) @RI{implementation-defined};
+   @key(subtype) @AdaTypeDefn{plain_char} @key(is) @VirtName{implementation-defined};
 
-   @key(type) @AdaTypeDefn{ptrdiff_t} @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{ptrdiff_t} @key(is) @key(range) @VirtName{implementation-defined};
 
-   @key(type) @AdaTypeDefn{size_t} @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{size_t} @key(is) @key(mod) @VirtName{implementation-defined};
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0411-1]}
 @ChgAdded{Version=[5],Text=[   @Examcom{-- Boolean Type}
    @key(type) @AdaTypeDefn{C_bool} @key(is) @key(new) Boolean;]}
 
-   @RI{-- Floating Point}
+   --@ExamCom{ Floating Point}
 
-   @key(type) @AdaTypeDefn{C_float}     @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{C_float}     @key(is) @key(digits) @VirtName{implementation-defined};
 
-   @key(type) @AdaTypeDefn{double}      @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{double}      @key(is) @key(digits) @VirtName{implementation-defined};
 
-   @key(type) @AdaTypeDefn{long_double} @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{long_double} @key(is) @key(digits) @VirtName{implementation-defined};
 
 
-   @RI{-- Characters and Strings }
+   --@ExamCom{ Characters and Strings }
 
-   @key(type) @AdaTypeDefn{char} @key(is) @RI{<implementation-defined character type>};
+   @key(type) @AdaTypeDefn{char} @key(is) @VirtName{<implementation-defined character type>};
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
-   @AdaObjDefn{nul} : @key(constant) char := @Chg{New=[@RI{implementation-defined}],Old=[char'First]};
+   @AdaObjDefn{nul} : @key(constant) char := @Chg{New=[@VirtName{implementation-defined}],Old=[char'First]};
 
    @key[function] @AdaSubDefn{To_C}   (Item : @key[in] Character) @key[return] char;
 
@@ -1279,14 +1278,14 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
                      Count    : @key(out) Natural;
                      Trim_Nul : @key(in)  Boolean := True);
 
-   @RI{-- Wide Character and Wide String}
+   --@ExamCom{ Wide Character and Wide String}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
-   @key(type) @AdaTypeDefn{wchar_t} @key(is) @Chg{New=[@RI{<implementation-defined character type>}],
-Old=[@RI{implementation-defined}]};
+   @key(type) @AdaTypeDefn{wchar_t} @key(is) @Chg{New=[@VirtName{<implementation-defined character type>}],
+Old=[@VirtName{implementation-defined}]};
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
-   @AdaObjDefn{wide_nul} : @key(constant) wchar_t := @Chg{New=[@RI{implementation-defined}],Old=[wchar_t'First]};
+   @AdaObjDefn{wide_nul} : @key(constant) wchar_t := @Chg{New=[@VirtName{implementation-defined}],Old=[wchar_t'First]};
 
    @key(function) @AdaSubDefn{To_C}   (Item : @key(in) Wide_Character) @key(return) wchar_t;
    @key(function) @AdaSubDefn{To_Ada} (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
@@ -1319,13 +1318,13 @@ Old=[@RI{implementation-defined}]};
                      Trim_Nul : @key(in)  Boolean := True);
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   -- @RI[ISO/IEC 10646:2003 compatible types defined by ISO/IEC TR 19769:2004.]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[ISO/IEC 10646:2003 compatible types defined by ISO/IEC TR 19769:2004.]]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_t} @key<is> @RI{<implementation-defined character type>};]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_t} @key<is> @VirtName{<implementation-defined character type>};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @AdaObjDefn{char16_nul} : @key<constant> char16_t := @RI{implementation-defined};]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{char16_nul} : @key<constant> char16_t := @VirtName{implementation-defined};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_C} (Item : @key<in> Wide_Character) @key<return> char16_t;
@@ -1364,10 +1363,10 @@ Old=[@RI{implementation-defined}]};
                      Trim_Nul : @key<in>  Boolean := True);]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char32_t} @key<is> @RI{<implementation-defined character type>};]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char32_t} @key<is> @VirtName{<implementation-defined character type>};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @AdaObjDefn{char32_nul} : @key<constant> char32_t := @RI{implementation-defined};]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{char32_nul} : @key<constant> char32_t := @VirtName{implementation-defined};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_C} (Item : @key<in> Wide_Wide_Character) @key<return> char32_t;
@@ -2166,7 +2165,7 @@ declaration:
 
 
 @key(private)
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key(end) Interfaces.C.Strings;
 @end{Example}
 @begin{discussion}
@@ -2471,7 +2470,7 @@ following declaration:
 
    @AdaExcDefn{Pointer_Error} : @key(exception);
 
-   @RI{-- C-style Pointer arithmetic}
+   --@ExamCom{ C-style Pointer arithmetic}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(function) "+" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer@Chg{Version=[3],New=[
@@ -2988,7 +2987,7 @@ Float'Size = Integer'Size:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[X : T;
-Y : Integer := X.F2; -- @RI[erroneous]]}
+Y : Integer := X.F2; -- @ExamCom[erroneous]]}
 @end{Example}
 @end{SingleNote}
 
@@ -3073,29 +3072,29 @@ either an internal or external COBOL representation
 @key[package] Interfaces.COBOL @Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Interfaces],Child=[COBOL]}
    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking, Global => @key[in out synchronized] @key[is]],Old=[(COBOL);]}
 
-@RI{-- Types and operations for internal data representations}
+--@ExamCom{ Types and operations for internal data representations}
 
-   @key(type) @AdaTypeDefn{Floating}      @key(is) @key(digits) @RI{implementation-defined};
-   @key(type) @AdaTypeDefn{Long_Floating} @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Floating}      @key(is) @key(digits) @VirtName{implementation-defined};
+   @key(type) @AdaTypeDefn{Long_Floating} @key(is) @key(digits) @VirtName{implementation-defined};
 
-   @key(type) @AdaTypeDefn{Binary}      @key(is) @key(range) @RI{implementation-defined};
-   @key(type) @AdaTypeDefn{Long_Binary} @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Binary}      @key(is) @key(range) @VirtName{implementation-defined};
+   @key(type) @AdaTypeDefn{Long_Binary} @key(is) @key(range) @VirtName{implementation-defined};
 
-   @AdaObjDefn{Max_Digits_Binary}      : @key(constant) := @RI{implementation-defined};
-   @AdaObjDefn{Max_Digits_Long_Binary} : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Max_Digits_Binary}      : @key(constant) := @VirtName{implementation-defined};
+   @AdaObjDefn{Max_Digits_Long_Binary} : @key(constant) := @VirtName{implementation-defined};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   @key(type) @AdaTypeDefn{Decimal_Element}  @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Decimal_Element}  @key(is) @key(mod) @VirtName{implementation-defined};
    @key(type) @AdaTypeDefn{Packed_Decimal} @key(is) @key(array) (Positive @key(range) <>) @key(of) Decimal_Element@Chg{Version=[3],New=[
       @key[with] Pack],Old=[;
    @key(pragma) Pack(Packed_Decimal)]};
 
 
-   @key(type) @AdaTypeDefn{COBOL_Character} @key(is) @RI{implementation-defined character type};
+   @key(type) @AdaTypeDefn{COBOL_Character} @key(is) @VirtName{implementation-defined character type};
 
-   @AdaObjDefn{Ada_To_COBOL} : @key(array) (Character) @key(of) COBOL_Character := @RI{implementation-defined};
+   @AdaObjDefn{Ada_To_COBOL} : @key(array) (Character) @key(of) COBOL_Character := @VirtName{implementation-defined};
 
-   @AdaObjDefn{COBOL_To_Ada} : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
+   @AdaObjDefn{COBOL_To_Ada} : @key(array) (COBOL_Character) @key(of) Character := @VirtName{implementation-defined};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(type) @AdaTypeDefn{Alphanumeric} @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character@Chg{Version=[3],New=[
@@ -3118,7 +3117,7 @@ either an internal or external COBOL representation
       @key[with] Pack],Old=[;
    @key(pragma) Pack(Numeric)]};
 
-@RI{-- Formats for COBOL data representations}
+--@ExamCom{ Formats for COBOL data representations}
 
    @key(type) @AdaTypeDefn{Display_Format} @key(is) @key(private);
 
@@ -3140,7 +3139,7 @@ either an internal or external COBOL representation
    @AdaObjDefn{Packed_Signed}     : @key(constant) Packed_Format;
 
 
-@RI{-- Types for external representation of COBOL binary data}
+--@ExamCom{ Types for external representation of COBOL binary data}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(type) @AdaTypeDefn{Byte} @key(is) @key(mod) 2**COBOL_Character'Size;
@@ -3154,7 +3153,7 @@ either an internal or external COBOL representation
       @key(type) Num @key(is) @key(delta) <> @key(digits) <>;
    @key(package) @AdaPackDefn{Decimal_Conversions} @key(is)
 
-      @RI{-- Display Formats: data values are represented as Numeric}
+      --@ExamCom{ Display Formats: data values are represented as Numeric}
 
       @key(function) @AdaSubDefn{Valid} (Item   : @key(in) Numeric;
                       Format : @key(in) Display_Format) @key(return) Boolean;
@@ -3169,7 +3168,7 @@ either an internal or external COBOL representation
                            Format : @key(in) Display_Format) @key(return) Numeric;
 
 
-      @RI{-- Packed Formats: data values are represented as Packed_Decimal}
+      --@ExamCom{ Packed Formats: data values are represented as Packed_Decimal}
 
       @key(function) @AdaSubDefn{Valid} (Item   : @key(in) Packed_Decimal;
                       Format : @key(in) Packed_Format) @key(return) Boolean;
@@ -3183,7 +3182,7 @@ either an internal or external COBOL representation
                           Format : @key(in) Packed_Format) @key(return) Packed_Decimal;
 
 
-      @RI{-- Binary Formats: external data values are represented as Byte_Array}
+      --@ExamCom{ Binary Formats: external data values are represented as Byte_Array}
 
       @key(function) @AdaSubDefn{Valid} (Item   : @key(in) Byte_Array;
                       Format : @key(in) Binary_Format) @key(return) Boolean;
@@ -3195,7 +3194,7 @@ either an internal or external COBOL representation
       @key(function) @AdaSubDefn{To_Binary} (Item   : @key(in) Num;
                         Format : @key(in) Binary_Format) @key(return) Byte_Array;
 
-      @RI{-- Internal Binary formats: data values are of type Binary or Long_Binary}
+      --@ExamCom{ Internal Binary formats: data values are of type Binary or Long_Binary}
 
       @key(function) @AdaSubDefn{To_Decimal} (Item : @key(in) Binary)      @key(return) Num;
       @key(function) @AdaSubDefn{To_Decimal} (Item : @key(in) Long_Binary) @key(return) Num;
@@ -3206,7 +3205,7 @@ either an internal or external COBOL representation
    @key(end) Decimal_Conversions;
 
 @key(private)
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @key(end) Interfaces.COBOL;
 @end{Example}
 @ChgImplDef{Version=[1],Kind=[Revised],InitialVersion=[0],
@@ -3571,14 +3570,14 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 @key(with) Interfaces.COBOL;
 @key(procedure) Test_Call @key(is)
 
-   @RI{-- Calling a foreign COBOL program}
-   @RI{-- Assume that a COBOL program PROG has the following declaration}
-   @RI{--  in its LINKAGE section:}
-   @RI{--  01 Parameter-Area}
-   @RI{--     05 NAME   PIC X(20).}
-   @RI{--     05 SSN    PIC X(9).}
-   @RI{--     05 SALARY PIC 99999V99 USAGE COMP.}
-   @RI{-- The effect of PROG is to update SALARY based on some algorithm}
+   @ExamCom{-- Calling a foreign COBOL program}
+   @ExamCom{-- Assume that a COBOL program PROG has the following declaration}
+   @ExamCom{--  in its LINKAGE section:}
+   @ExamCom{--  01 Parameter-Area}
+   @ExamCom{--     05 NAME   PIC X(20).}
+   @ExamCom{--     05 SSN    PIC X(9).}
+   @ExamCom{--     05 SALARY PIC 99999V99 USAGE COMP.}
+   @ExamCom{-- The effect of PROG is to update SALARY based on some algorithm}
 
    @key(package) COBOL @key(renames) Interfaces.COBOL;
 
@@ -3589,7 +3588,7 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
       @key(record)
          Name   : COBOL.Numeric(1..20);
          SSN    : COBOL.Numeric(1..9);
-         Salary : COBOL.Binary;  @RI{-- Assume Binary = 32 bits}
+         Salary : COBOL.Binary;  @ExamCom{-- Assume Binary = 32 bits}
       @key(end) @key(record)@Chg{Version=[3],New=[
       @key[with] Convention => COBOL],Old=[;
    @key(pragma) Convention (COBOL, COBOL_Record)]};
@@ -3616,19 +3615,19 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 
 @begin{Example}
 @key(with) Interfaces.COBOL;
-@key(with) COBOL_Sequential_IO; @RI{-- Assumed to be supplied by implementation}
+@key(with) COBOL_Sequential_IO; @ExamCom{-- Assumed to be supplied by implementation}
 @key(procedure) Test_External_Formats @key(is)
 
-   @RI{-- Using data created by a COBOL program}
-   @RI{-- Assume that a COBOL program has created a sequential file with}
-   @RI{--  the following record structure, and that we need to}
-   @RI{--  process the records in an Ada program}
-   @RI{--  01 EMPLOYEE-RECORD}
-   @RI{--     05 NAME    PIC X(20).}
-   @RI{--     05 SSN     PIC X(9).}
-   @RI{--     05 SALARY  PIC 99999V99 USAGE COMP.}
-   @RI{--     05 ADJUST  PIC S999V999 SIGN LEADING SEPARATE.}
-   @RI{-- The COMP data is binary (32 bits), high-order byte first}
+   @ExamCom{-- Using data created by a COBOL program}
+   @ExamCom{-- Assume that a COBOL program has created a sequential file with}
+   @ExamCom{--  the following record structure, and that we need to}
+   @ExamCom{--  process the records in an Ada program}
+   @ExamCom{--  01 EMPLOYEE-RECORD}
+   @ExamCom{--     05 NAME    PIC X(20).}
+   @ExamCom{--     05 SSN     PIC X(9).}
+   @ExamCom{--     05 SALARY  PIC 99999V99 USAGE COMP.}
+   @ExamCom{--     05 ADJUST  PIC S999V999 SIGN LEADING SEPARATE.}
+   @ExamCom{-- The COMP data is binary (32 bits), high-order byte first}
 
    @key(package) COBOL @key(renames) Interfaces.COBOL;
 
@@ -3636,12 +3635,12 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
    @key(type) Adjustments_Type @key(is) @key(delta) 0.001 @key(digits) 6;
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   @key(type) COBOL_Employee_Record_Type @key(is)  @RI{-- External representation}
+   @key(type) COBOL_Employee_Record_Type @key(is)  @ExamCom{-- External representation}
       @key(record)
          Name    : COBOL.Alphanumeric(1..20);
          SSN     : COBOL.Alphanumeric(1..9);
          Salary  : COBOL.Byte_Array(1..4);
-         Adjust  : COBOL.Numeric(1..7);  @RI{-- Sign and 6 digits}
+         Adjust  : COBOL.Numeric(1..7);  @ExamCom{-- Sign and 6 digits}
       @key(end) @key(record)@Chg{Version=[3],New=[
       @key[with] Convention => COBOL],Old=[;
    @key(pragma) Convention (COBOL, COBOL_Employee_Record_Type)]};
@@ -3652,7 +3651,7 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 
    COBOL_File : File_Type;
 
-   @key(type) Ada_Employee_Record_Type @key(is)  @RI{-- Internal representation}
+   @key(type) Ada_Employee_Record_Type @key(is)  @ExamCom{-- Internal representation}
       @key(record)
          Name    : String(1..20);
          SSN     : String(1..9);
@@ -3684,7 +3683,7 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
         To_Decimal(COBOL_Record.Salary, COBOL.High_Order_First);
      Ada_Record.Adjust :=
         To_Decimal(COBOL_Record.Adjust, COBOL.Leading_Separate);
-     ... --@RI{ Process Ada_Record}
+     ... --@ExamCom{ Process Ada_Record}
    @key(end) @key(loop);
 @key(exception)
    @key[when] End_Error => ...
@@ -3732,10 +3731,10 @@ declaration:
 @key[package] Interfaces.Fortran@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Interfaces],Child=[Fortran]}
    @Chg{Version=[5],New=[@key[with]],Old=[ @key[pragma]]} Pure@Chg{Version=[5],New=[ @key[is]],Old=[(Fortran);]}
 
-   @key[type] @AdaTypeDefn{Fortran_Integer} @key[is] @key[range] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Fortran_Integer} @key[is] @key[range] @VirtName{implementation-defined};
 
-   @key[type] @AdaTypeDefn{Real}             @key[is] @key[digits] @RI{implementation-defined};
-   @key[type] @AdaTypeDefn{Double_Precision} @key[is] @key[digits] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Real}             @key[is] @key[digits] @VirtName{implementation-defined};
+   @key[type] @AdaTypeDefn{Double_Precision} @key[is] @key[digits] @VirtName{implementation-defined};
 
    @key[type] @AdaTypeDefn{Logical} @key[is] @key[new] Boolean;
 
@@ -3758,7 +3757,7 @@ declaration:
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
 @ChgAdded{Version=[5],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Double_Imaginary],Of=[Imaginary]} @key[is] Double_Precision_Complex_Types.Imaginary;]}
 
-   @key[type] @AdaTypeDefn{Character_Set} @key[is] @RI{implementation-defined character type};
+   @key[type] @AdaTypeDefn{Character_Set} @key[is] @VirtName{implementation-defined character type};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] @AdaTypeDefn{Fortran_Character} @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Set@Chg{Version=[3],New=[
@@ -3912,11 +3911,11 @@ ISO/IEC 1594-1:2018 along with the C interfacing features defined in
       @key[array] (@Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>,
              @Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>) @key[of] Double_Precision@Chg{Version=[3],New=[
       @key[with] Convention => Fortran;              ],Old=[;
-   @key[pragma] Convention (Fortran, Fortran_Matrix);]}    --@RI{ stored in Fortran's}
-                                                   --@RI{ column-major order}
+   @key[pragma] Convention (Fortran, Fortran_Matrix);]}    --@ExamCom{ stored in Fortran's}
+                                                   --@ExamCom{ column-major order}
    @key[procedure] Invert (Rank : @key[in] Fortran_Integer; X : @key[in] @key[out] Fortran_Matrix)@Chg{Version=[3],New=[
       @key[with] Import => True, Convention => Fortran;],Old=[;
-   @key[pragma] Import (Fortran, Invert);              ]} --@RI{ a Fortran subroutine}
+   @key[pragma] Import (Fortran, Invert);              ]} --@ExamCom{ a Fortran subroutine}
 
    Rank      : @key[constant] Fortran_Integer := 100;
    My_Matrix : Fortran_Matrix (1 .. Rank, 1 .. Rank);

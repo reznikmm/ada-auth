@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.58 $ $Date: 2022/03/30 07:20:29 $ $Author: randy $ }
+@comment{ $Revision: 1.59 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -38,7 +38,7 @@ Directories has the following declaration:]}
    @key{with} Global => @key{in out synchronized} ],Old=[]}@key{is}@ChildUnit{Parent=[Ada],Child=[Directories]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Directory and file operations:]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Directory and file operations:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Current_Directory} @key{return} String;]}
@@ -72,7 +72,7 @@ Directories has the following declaration:]}
                         Form        : @key{in} String := "");]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[File and directory name operations:]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[File and directory name operations:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
@@ -114,13 +114,13 @@ Directories has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Name_Case_Equivalence} (Name : @key{in} String) @key{return} Name_Case_Kind;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{File and directory queries:}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{File and directory queries:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{File_Kind} @key{is} (Directory, Ordinary_File, Special_File);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{File_Size} @key{is range} 0 .. @RI{implementation-defined};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{File_Size} @key{is range} 0 .. @VirtName{implementation-defined};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Exists} (Name : @key{in} String) @key{return} Boolean;]}
@@ -135,7 +135,7 @@ Directories has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Modification_Time} (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Directory searching:}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Directory searching:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Directory_Entry_Type} @key{is limited private};]}
@@ -173,7 +173,7 @@ Directories has the following declaration:]}
       @key[with] Allows_Exit],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Operations on Directory Entries:}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Operations on Directory Entries:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Simple_Name} (Directory_Entry : @key{in} Directory_Entry_Type)
@@ -204,7 +204,7 @@ Directories has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[@key{private}
-    @Chg{Version=[3],New=[... ],Old=[]}-- @RI{@Chg{Version=[3],New=[not],Old=[Not]} specified by the language@Chg{Version=[3],New=[],Old=[.]}}
+    @Chg{Version=[3],New=[... ],Old=[]}-- @ExamCom{@Chg{Version=[3],New=[not],Old=[Not]} specified by the language@Chg{Version=[3],New=[],Old=[.]}}
 @key{end} Ada.Directories;]}
 
 @end{Example}
@@ -680,7 +680,7 @@ queries and types are provided:]}
 kind of file represented by an external file or directory.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{type} File_Size @key{is range} 0 .. @RI<implementation-defined>;]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{type} File_Size @key{is range} 0 .. @VirtName<implementation-defined>;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The type File_Size represents the
@@ -991,8 +991,8 @@ Directories.Information should contain at least the following routines:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @Chg{Version=[5],New=[
    @key{with} Global => @key{in out synchronized} ],Old=[]}@key{is}
-    -- @RI[System-specific directory information.]
-    -- @RI[Version for the Microsoft@latin1(174) Windows@latin1(174) operating system.]]}
+    -- @ExamCom[System-specific directory information.]
+    -- @ExamCom[Version for the Microsoft@latin1(174) Windows@latin1(174) operating system.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Creation_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
@@ -1005,8 +1005,8 @@ Directories.Information should contain at least the following routines:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Needs_Archiving (Name : @key{in} String) @key{return} Boolean;
-        -- @RI[This generally means that the file needs to be backed up.]
-        -- @RI[The flag is only cleared by backup programs.]]}
+        -- @ExamCom[This generally means that the file needs to be backed up.]
+        -- @ExamCom[The flag is only cleared by backup programs.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Is_Compressed (Name : @key{in} String) @key{return} Boolean;]}
@@ -1045,8 +1045,8 @@ Directories.Information should contain at least the following routines:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Needs_Archiving (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;
-        -- @RI[This generally means that the file needs to be backed up.]
-        -- @RI[The flag is only cleared by backup programs.]]}
+        -- @ExamCom[This generally means that the file needs to be backed up.]
+        -- @ExamCom[The flag is only cleared by backup programs.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Is_Compressed (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
@@ -1073,7 +1073,7 @@ Directories.Information should contain at least the following routines:]}
 @ChgAdded{Version=[2],Text=[    @key{function} Is_Not_Indexed (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[    -- @RI[Additional implementation-defined subprograms allowed here.]
+@ChgAdded{Version=[2],Text=[    -- @ExamCom[Additional implementation-defined subprograms allowed here.]
 @key{end} Ada.Directories.Information;]}
 @end{Example}
 
@@ -1088,8 +1088,8 @@ following routines:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @Chg{Version=[5],New=[
    @key{with} Global => @key{in out synchronized} ],Old=[]}@key{is}
-    -- @RI[System-specific directory information.]
-    -- @RI[Unix and similar systems version.]]}
+    -- @ExamCom[System-specific directory information.]
+    -- @ExamCom[Unix and similar systems version.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Last_Access_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
@@ -1112,16 +1112,16 @@ following routines:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Owner (Name : @key{in} String) @key{return} String;
-        -- @RI[Returns the image of the User_Id. If a definition of User_Id]
-        -- @RI[is available, an implementation-defined version of Owner]
-        -- @RI[returning User_Id should also be defined.]]}
+        -- @ExamCom[Returns the image of the User_Id. If a definition of User_Id]
+        -- @ExamCom[is available, an implementation-defined version of Owner]
+        -- @ExamCom[returning User_Id should also be defined.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[2],Text=[    @key{function} Group (Name : @key{in} String) @key{return} String;
-        -- @RI[Returns the image of the @Chg{Version=[3],New=[Group_Id],Old=[User_Id]}. If a definition of Group_Id]
-        -- @RI[is available, an implementation-defined version of Group]
-        -- @RI[returning Group_Id should also be defined.]]}
+        -- @ExamCom[Returns the image of the @Chg{Version=[3],New=[Group_Id],Old=[User_Id]}. If a definition of Group_Id]
+        -- @ExamCom[is available, an implementation-defined version of Group]
+        -- @ExamCom[returning Group_Id should also be defined.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Is_Block_Special_File (Name : @key{in} String) @key{return} Boolean;]}
@@ -1152,11 +1152,11 @@ following routines:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Owner (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} String;
-       -- @RI[See Owner above.]]}
+       -- @ExamCom[See Owner above.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Group (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} String;
-       -- @RI[See Group above.]]}
+       -- @ExamCom[See Group above.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Is_Block_Special_File (Directory_Entry : @key{in} Directory_Entry_Type)
@@ -1177,7 +1177,7 @@ following routines:]}
 @ChgAdded{Version=[2],Text=[    @key{function} Is_Socket (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[    -- @RI[Additional implementation-defined subprograms allowed here.]
+@ChgAdded{Version=[2],Text=[    -- @ExamCom[Additional implementation-defined subprograms allowed here.]
 @key{end} Ada.Directories.Information;]}
 @end{Example}
 

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.86 $ $Date: 2021/06/03 01:52:06 $ $Author: randy $ }
+@comment{ $Revision: 1.87 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2021/06/03 01:52:06 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -2269,12 +2269,12 @@ across active partitions:}
 @key{package} Tapes@Chg{Version=[5],New=[],Old=[ @key{is}]}
    @Chg{Version=[5],New=[@key{with}],Old=[ @key{pragma}]} Pure@Chg{Version=[5],New=[ @key{is}],Old=[(Tapes);]}
    @key{type} Tape @key{is abstract tagged limited private};
-   @RI{-- Primitive dispatching operations where}
-   @RI{-- Tape is controlling operand}
+   @ExamCom{-- Primitive dispatching operations where}
+   @ExamCom{-- Tape is controlling operand}
    @key{procedure} Copy (From, To : @key{access} Tape;
                    Num_Recs : @key[in] Natural) @key{is} @key{abstract};
    @key{procedure} Rewind (T : @key{access} Tape) @key{is} @key{abstract};
-   @RI{-- More operations}
+   @ExamCom{-- More operations}
 @key{private}
    @key{type} Tape @key{is} ...
 @key{end} Tapes;
@@ -2283,19 +2283,19 @@ across active partitions:}
 @key{with} Tapes;
 @key{package} Name_Server@Chg{Version=[5],New=[],Old=[ @key{is}]}
    @Chg{Version=[5],New=[@key{with}],Old=[ @key{pragma}]} Remote_Call_Interface@Chg{Version=[5],New=[ @key{is}],Old=[;]}
-   @RI{-- Dynamic binding to remote operations is achieved}
-   @RI{-- using the access-to-limited-class-wide type Tape_Ptr}
+   @ExamCom{-- Dynamic binding to remote operations is achieved}
+   @ExamCom{-- using the access-to-limited-class-wide type Tape_Ptr}
    @key{type} Tape_Ptr @key{is access all} Tapes.Tape'Class;
-   @RI{-- The following statically bound remote operations}
-   @RI{-- allow for a name-server capability in this example}
+   @ExamCom{-- The following statically bound remote operations}
+   @ExamCom{-- allow for a name-server capability in this example}
    @key{function}  Find     (Name : String) @key{return} Tape_Ptr;
    @key{procedure} Register (Name : @key[in] String; T : @key[in] Tape_Ptr);
    @key{procedure} Remove   (T : @key[in] Tape_Ptr);
-   @RI{-- More operations}
+   @ExamCom{-- More operations}
 @key{end} Name_Server;
 
 @key{package} Tape_Driver @key{is}
-  @RI{-- Declarations are not shown, they are irrelevant here}
+  @ExamCom{-- Declarations are not shown, they are irrelevant here}
 @key{end} Tape_Driver;
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0347-1]}
@@ -2314,8 +2314,8 @@ across active partitions:}
    @key{begin}
       . . .
    @key{end} Rewind;
-   @RI{-- Objects remotely accessible through use}
-   @RI{-- of Name_Server operations}
+   @ExamCom{-- Objects remotely accessible through use}
+   @ExamCom{-- of Name_Server operations}
    Tape1, Tape2 : @key[aliased] New_Tape;
 @key{begin}
    Name_Server.Register ("NINE-TRACK",  Tape1'Access);
@@ -2323,7 +2323,7 @@ across active partitions:}
 @key{end} Tape_Driver;
 
 @key{with} Tapes, Name_Server;
-@RI{-- Tape_Driver is not needed and thus not mentioned in the @nt{with_clause}}
+@ExamCom{-- Tape_Driver is not needed and thus not mentioned in the @nt{with_clause}}
 @key{procedure} Tape_Client @key{is}
    T1, T2 : Name_Server.Tape_Ptr;
 @key{begin}
@@ -2405,7 +2405,7 @@ and its acronym are more familiar.
 @key(package) System.RPC@Chg{Version=[5],New=[
    @key(with) Nonblocking => False, Global => @key[in out synchronized]],Old=[]} @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
 
-   @key(type) @AdaTypeDefn{Partition_Id} @key(is range) 0 .. @RI(implementation-defined);
+   @key(type) @AdaTypeDefn{Partition_Id} @key(is range) 0 .. @VirtName(implementation-defined);
 
    @AdaExcDefn{Communication_Error} : @key(exception);
 
@@ -2423,18 +2423,18 @@ and its acronym are more familiar.
       Item : @key(in) Ada.Streams.Stream_Element_Array);
 
 
-   @RI(-- Synchronous call)
+   @ExamCom(-- Synchronous call)
    @key(procedure) @AdaSubDefn{Do_RPC}(
       Partition  : @key(in) Partition_Id;
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
 
-   @RI(-- Asynchronous call)
+   @ExamCom(-- Asynchronous call)
    @key(procedure) @AdaSubDefn{Do_APC}(
       Partition  : @key(in) Partition_Id;
       Params     : @key(access) Params_Stream_Type);
 
-   @RI(-- The handler for incoming RPCs)
+   @ExamCom(-- The handler for incoming RPCs)
    @key(type) @AdaTypeDefn{RPC_Receiver} @key(is access procedure)(
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
@@ -2444,7 +2444,7 @@ and its acronym are more familiar.
       Receiver  : @key(in) RPC_Receiver);
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @ExamCom{not specified by the language}
 @b(end) System.RPC;
 @end{example}
 

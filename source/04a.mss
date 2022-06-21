@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:28 $}
+@Comment{$Date: 2022/05/14 04:06:47 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.165 $}
+@Comment{$Revision: 1.166 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -178,23 +178,23 @@ denotes the object or subprogram designated by the value of the @nt{name}.
 @Leading@keepnext@i(Examples of direct names:)
 @begin(Example)
 @tabclear()@tabset(P9, P47)
-Pi @\@RI(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
-Limit @\@RI(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
-Count @\@RI(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
-Board @\@RI(-- the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
-Matrix @\@RI(-- the direct name of a type) @\(see @RefSecNum(Array Types))
-Random @\@RI(-- the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
-Error @\@RI(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
+Pi @\@ExamCom(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
+Limit @\@ExamCom(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
+Count @\@ExamCom(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
+Board @\@ExamCom(-- the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
+Matrix @\@ExamCom(-- the direct name of a type) @\(see @RefSecNum(Array Types))
+Random @\@ExamCom(-- the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
+Error @\@ExamCom(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
 @end(Example)
 
 @begin{WideAbove}
 @leading@keepnext@i{Examples of dereferences:}
 @end{WideAbove}
 @begin{Example}@tabclear()@tabset(P19)
-Next_Car.@key[all]@\--@RI[  explicit dereference denoting the object designated by]
-               @\--@RI[  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
-Next_Car.Owner @\--@RI[  selected component with implicit dereference;]
-               @\--@RI[  same as Next_Car.@key[all].Owner]
+Next_Car.@key[all]@\--@ExamCom[  explicit dereference denoting the object designated by]
+               @\--@ExamCom[  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
+Next_Car.Owner @\--@ExamCom[  selected component with implicit dereference;]
+               @\--@ExamCom[  same as Next_Car.@key[all].Owner]
 @end{Example}
 @end{Examples}
 
@@ -384,12 +384,12 @@ Constraint_Error is raised if this check fails.
 @Leading@keepnext@i(Examples of indexed components:)
 @begin{Example}
 @tabclear()@tabset(P64)
- My_Schedule(Sat)     --@RI[  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)             --@RI[  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
- Board(M, J + 1)      --@RI[  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)(20)         --@RI[  a component of a component @\(see @RefSecNum{Array Types})]
- Request(Medium)      --@RI[  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
- Next_Frame(L)(M, N)  --@RI[  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
+ My_Schedule(Sat)     --@ExamCom[  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)             --@ExamCom[  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
+ Board(M, J + 1)      --@ExamCom[  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)(20)         --@ExamCom[  a component of a component @\(see @RefSecNum{Array Types})]
+ Request(Medium)      --@ExamCom[  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
+ Next_Frame(L)(M, N)  --@ExamCom[  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
 @end{Example}
 @end{Examples}
 
@@ -480,13 +480,13 @@ component of the array A and has the corresponding component type.
 @Leading@keepnext@i(Examples of slices:)
 @begin{Example}
 @tabclear()@tabset(P58)
-  Stars(1 .. 15)        --@RI[  a slice of 15 characters @\(see @RefSecNum{String Types})]
-  Page(10 .. 10 + Size) --@RI[  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
-  Page(L)(A .. B)       --@RI[  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
-  Stars(1 .. 0)         --@RI[  a null slice @\(see @RefSecNum{String Types})]
-  My_Schedule(Weekday)  --@RI[  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
-  Stars(5 .. 15)(K)     --@RI[  same as Stars(K) @\(see @RefSecNum{String Types})]
-                        --@RI[  provided that K is in 5 .. 15]
+  Stars(1 .. 15)        --@ExamCom[  a slice of 15 characters @\(see @RefSecNum{String Types})]
+  Page(10 .. 10 + Size) --@ExamCom[  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
+  Page(L)(A .. B)       --@ExamCom[  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
+  Stars(1 .. 0)         --@ExamCom[  a null slice @\(see @RefSecNum{String Types})]
+  My_Schedule(Weekday)  --@ExamCom[  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
+  Stars(5 .. 15)(K)     --@ExamCom[  same as Stars(K) @\(see @RefSecNum{String Types})]
+                        --@ExamCom[  provided that K is in 5 .. 15]
 @end{Example}
 @end{Examples}
 
@@ -709,16 +709,16 @@ The exception Constraint_Error is raised if this check fails.
 @tabclear()@tabset(P60)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178]}
-  Tomorrow.Month     --@RI[  a record component @\(see @RefSecNum{Record Types})]
-  Next_Car.Owner     --@RI[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-  Next_Car.Owner.Age --@RI[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-                     --@RI[  the previous two lines involve implicit dereferences]
-  Writer.Unit        --@RI[  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
-  Min_Cell(H).Value  --@RI[  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
-                     --@RI[  of the function call Min_Cell(H)]
-@Chg{Version=[2],New=<  Cashier.Append     --@RI[  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
->,Old=<>}  Control.Seize      --@RI[  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
-  Pool(K).Write      --@RI[  an entry of the task Pool(K) @\(see @Chg{Version=[5],New=[@RefSecNum{Task Units and Task Objects}],Old=[@RefSecNum{Protected Units and Protected Objects}]})]
+  Tomorrow.Month     --@ExamCom[  a record component @\(see @RefSecNum{Record Types})]
+  Next_Car.Owner     --@ExamCom[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
+  Next_Car.Owner.Age --@ExamCom[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
+                     --@ExamCom[  the previous two lines involve implicit dereferences]
+  Writer.Unit        --@ExamCom[  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
+  Min_Cell(H).Value  --@ExamCom[  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
+                     --@ExamCom[  of the function call Min_Cell(H)]
+@Chg{Version=[2],New=<  Cashier.Append     --@ExamCom[  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
+>,Old=<>}  Control.Seize      --@ExamCom[  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
+  Pool(K).Write      --@ExamCom[  an entry of the task Pool(K) @\(see @Chg{Version=[5],New=[@RefSecNum{Task Units and Task Objects}],Old=[@RefSecNum{Protected Units and Protected Objects}]})]
 @end{Example}
 
 @begin{WideAbove}
@@ -726,12 +726,12 @@ The exception Constraint_Error is raised if this check fails.
 @end{WideAbove}
 @begin{Example}
 @tabclear()@tabset(P67)
-  Key_Manager."<"      --@RI[  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
-  Dot_Product.Sum      --@RI[  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
-  Buffer.Pool          --@RI[  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Buffer.Read          --@RI[  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Swap.Temp            --@RI[  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
-  Standard.Boolean     --@RI[  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
+  Key_Manager."<"      --@ExamCom[  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
+  Dot_Product.Sum      --@ExamCom[  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
+  Buffer.Pool          --@ExamCom[  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Buffer.Read          --@ExamCom[  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Swap.Temp            --@ExamCom[  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
+  Standard.Boolean     --@ExamCom[  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
 @end{Example}
 @end{Examples}
 
@@ -896,8 +896,8 @@ function, it is interpreted as a parameterless @nt<function_call>.
   for instance, given the following declarations:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[  @key[function] Get_It @key[return] Integer @key[is] ... -- @RI[(1)]
-  @key[function] Get_It @key[return] Some_Record_Type @key[is] ... -- @RI[(2)]]}
+@ChgAdded{Version=[2],Text=[  @key[function] Get_It @key[return] Integer @key[is] ... -- @ExamCom[(1)]
+  @key[function] Get_It @key[return] Some_Record_Type @key[is] ... -- @ExamCom[(2)]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[the following @nt{attribute_reference} cannot be
@@ -1094,14 +1094,14 @@ conformant with the designated profile of the access type.
 @Leading@keepnext@i(Examples of attributes:)
 @begin{Example}
 @tabclear()@tabset(P64)
-Color'First        --@RI[ minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
-Rainbow'Base'First --@RI[ same as Color'First @\(see @RefSecNum{Enumeration Types})]
-Real'Digits        --@RI[ precision of the type Real @\(see @RefSecNum{Floating Point Types})]
-Board'Last(2)      --@RI[ upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Board'Range(1)     --@RI[ index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Pool(K)'Terminated --@RI[ True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
-Date'Size          --@RI[ number of bits for records of type Date @\(see @RefSecNum{Record Types})]
-Message'Address    --@RI[ address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
+Color'First        --@ExamCom[ minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
+Rainbow'Base'First --@ExamCom[ same as Color'First @\(see @RefSecNum{Enumeration Types})]
+Real'Digits        --@ExamCom[ precision of the type Real @\(see @RefSecNum{Floating Point Types})]
+Board'Last(2)      --@ExamCom[ upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Board'Range(1)     --@ExamCom[ index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Pool(K)'Terminated --@ExamCom[ True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
+Date'Size          --@ExamCom[ number of bits for records of type Date @\(see @RefSecNum{Record Types})]
+Message'Address    --@ExamCom[ address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
 @end{Example}
 @end{Examples}
 
@@ -1880,10 +1880,10 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 @Leading@keepnext@i(Examples of literals:)
 @begin{Example}
 @tabclear()@tabset(P16)
-3.14159_26536 @\--@RI[  a real literal]
-1_345 @\--@RI[  an integer literal]
-'A' @\--@RI[  a character literal]
-"Some Text" @\--@RI[  a string literal ]
+3.14159_26536 @\--@ExamCom[  a real literal]
+1_345 @\--@ExamCom[  an integer literal]
+'A' @\--@ExamCom[  a character literal]
+"Some Text" @\--@ExamCom[  a string literal ]
 @end{Example}
 @end{Examples}
 
@@ -1952,7 +1952,7 @@ may be specified for a type @i<T>:]}
 @ChgAdded{Version=[5],Text=[Integer_Literal@\This aspect is specified by a
 @SynI{function_}@nt{name} that statically denotes a function with a result type
 of @i<T> and one @key[in] parameter that is of type String and is
-not explictly aliased.@AspectDefn{Integer_Literal}]}
+not explicitly aliased.@AspectDefn{Integer_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Integer_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined integer literals.]}]}
@@ -1961,7 +1961,7 @@ not explictly aliased.@AspectDefn{Integer_Literal}]}
 @ChgAdded{Version=[5],Text=[Real_Literal@\This aspect is specified by a
 @SynI{function_}@nt{name} that statically denotes a function with a result type
 of @i<T> and one @key[in] parameter that is of type String and is
-not explictly aliased, and optionally a second
+not explicitly aliased, and optionally a second
 function @Redundant[(overloading the first) ]with a result type of
 @i<T> and two @key[in] parameters of type
 String that are not explicitly aliased.@AspectDefn{Real_Literal}]}
@@ -1973,7 +1973,7 @@ String that are not explicitly aliased.@AspectDefn{Real_Literal}]}
 @ChgAdded{Version=[5],Text=[String_Literal@\This aspect is specified by a
 @SynI{function_}@nt{name} that statically denotes a function with a result type
 of @i<T> and one @key[in] parameter that is of type Wide_Wide_String and is
-not explictly aliased.@AspectDefn{String_Literal}]}
+not explicitly aliased.@AspectDefn{String_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[String_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined string literals.]}]}
@@ -2396,7 +2396,7 @@ will work (see @RefSecNum{Assignment and Finalization}).
 @key{procedure} P(X: Not_Lim);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[P((Comp => 123)); -- @RI[Illegal in Ada 2005, legal in Ada 95]]}
+@ChgAdded{Version=[2],Text=[P((Comp => 123)); -- @ExamCom[Illegal in Ada 2005, legal in Ada 95]]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]} @ChgAdded{Version=[2],Text=[The call
@@ -2896,7 +2896,7 @@ be in the same order as in the @nt<known_discriminant_part>.
 @begin{Examples}
 @Leading@keepnext@i(Example of a record aggregate with positional associations:)
 @begin{Example}
-(4, July, 1776)                                       --@RI[  see @RefSecNum{Record Types} ]
+(4, July, 1776)                                       --@ExamCom[  see @RefSecNum{Record Types} ]
 @end{Example}
 
 @begin{WideAbove}
@@ -2906,7 +2906,7 @@ be in the same order as in the @nt<known_discriminant_part>.
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
 
-(Disk, Closed, Track => 5, Cylinder => 12)            --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
+(Disk, Closed, Track => 5, Cylinder => 12)            --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
@@ -2918,15 +2918,15 @@ several choices:)
 @end{WideAbove}
 @begin{Example}
 @tabclear()@tabset(P50)
-(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\--@RI[  see @RefSecNum{Incomplete Type Declarations}]
+(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\--@ExamCom[  see @RefSecNum{Incomplete Type Declarations}]
 
- --@RI[  The allocator is evaluated twice: Succ and Pred designate different cells]
-
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>) @\--@RI[  see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
+ --@ExamCom[  The allocator is evaluated twice: Succ and Pred designate different cells]
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[ --@RI[  Succ and Pred will be set to @key{null}]],Old=[]}
+@Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>) @\--@ExamCom[  see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[ --@ExamCom[  Succ and Pred will be set to @key{null}]],Old=[]}
 
 @end{Example}
 
@@ -3237,7 +3237,7 @@ Painted_Point'(Point @key{with} Red)
 (Expression @key{with} Left => @Chg{Version=[5],New=[ @key{new} Literal'(Value => ],Old=[]}1.2@Chg{Version=[5],New=[)],Old=[]},@Chg{Version=[5],New=[
                 ],Old=[]} Right => @Chg{Version=[5],New=[@key{new} Literal'(Value => ],Old=[]}3.4@Chg{Version=[5],New=[)],Old=[]})
 Addition'(Binop @key{with null record})
-             --@RI[ presuming Binop is of type Binary_Operation]
+             --@ExamCom[ presuming Binop is of type Binary_Operation]
 @end(example)
 
 @end{Examples}
@@ -3882,7 +3882,7 @@ specify an array with a single component.
 @Leading@keepnext@i(Examples of array aggregates with positional associations:)
 @begin{Example}
 (7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
-Table'(5, 8, 4, 1, @key(others) => 0)  --@RI[  see @RefSecNum{Array Types} ]
+Table'(5, 8, 4, 1, @key(others) => 0)  --@ExamCom[  see @RefSecNum{Array Types} ]
 @end{Example}
 
 @begin{WideAbove}
@@ -3890,21 +3890,21 @@ Table'(5, 8, 4, 1, @key(others) => 0)  --@RI[  see @RefSecNum{Array Types} ]
 @end{WideAbove}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
-(1 .. 5 => (1 .. 8 => 0.0))      --@RI[  two-dimensional]
-@Chg{Version=[5],New=<[>,Old=<(>}1 .. N => @key(new) Cell@Chg{Version=[5],New=<]>,Old=<)>}             --@RI[  N new cells, in particular for N = 0]
+(1 .. 5 => (1 .. 8 => 0.0))      --@ExamCom[  two-dimensional]
+@Chg{Version=[5],New=<[>,Old=<(>}1 .. N => @key(new) Cell@Chg{Version=[5],New=<]>,Old=<)>}             --@ExamCom[  N new cells, in particular for N = 0]
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 Table'(2 | 4 | 10 => 1, @key(others) => 0)
-Schedule'(Mon .. Fri => True,  @key(others) => False)  --@RI[  see @RefSecNum{Array Types}]
+Schedule'(Mon .. Fri => True,  @key(others) => False)  --@ExamCom[  see @RefSecNum{Array Types}]
 Schedule'@Chg{Version=[5],New=<[>,Old=<(>}Wed | Sun  => False, @key(others) => True@Chg{Version=[5],New=<]>,Old=<)>}
-Vector'(1 => 2.5)                                --@RI[  single-component vector]
+Vector'(1 => 2.5)                                --@ExamCom[  single-component vector]
 @end{Example}
 
 @begin{WideAbove}
 @leading@keepnext@i(Examples of two-dimensional array aggregates:)
 @end{WideAbove}
 @begin{Example}
---@RI[ Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
+--@ExamCom[ Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
@@ -3916,22 +3916,22 @@ Vector'(1 => 2.5)                                --@RI[  single-component vector
 @leading@keepnext@i(Examples of aggregates as initial values:)
 @end{WideAbove}
 @begin{Example}
-A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        --@RI[ A(1)=7, A(10)=0]
-B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        --@RI[ B(1)=0, B(10)=1]
-C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); --@RI[ C'Last(1)=5, C'Last(2)=8]
+A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        --@ExamCom[ A(1)=7, A(10)=0]
+B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        --@ExamCom[ B(1)=0, B(10)=1]
+C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); --@ExamCom[ C'Last(1)=5, C'Last(2)=8]
 
-D : Bit_Vector(M .. N) := (M .. N => True);         --@RI[ see @RefSecNum{Array Types}]
+D : Bit_Vector(M .. N) := (M .. N => True);         --@ExamCom[ see @RefSecNum{Array Types}]
 E : Bit_Vector(M .. N) := (@key(others) => True);
-F : String(1 .. 1) := (1 => 'F');  --@RI[ a one component aggregate: same as "F"]
+F : String(1 .. 1) := (1 => 'F');  --@ExamCom[ a one component aggregate: same as "F"]
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
 @ChgAdded{Version=[5],Text=[G : @key[constant] Matrix :=
     (@key[for] I @key[in] 1 .. 4 =>
        (@key[for] J @key[in] 1 .. 4 =>
-          (@key[if] I=J @key[then] 1.0 @key[else] 0.0))); --@RI[ Identity matrix]]}
+          (@key[if] I=J @key[then] 1.0 @key[else] 0.0))); --@ExamCom[ Identity matrix]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Text=<Empty_Matrix : @b<constant> Matrix := []; --@RI[ A matrix without elements]>}
+@ChgAdded{Version=[5],Text=<Empty_Matrix : @b<constant> Matrix := []; --@ExamCom[ A matrix without elements]>}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -3942,7 +3942,7 @@ provided by an enclosing record aggregate:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
-@ChgAdded{Version=[2],Text=[Buffer'(Size => 50, Pos => 1, Value => @Chg{Version=[5],New=[],Old=[String']}('x', @key(others) => <>))  --@RI[ see @RefSecNum{Discriminants}]]}
+@ChgAdded{Version=[2],Text=[Buffer'(Size => 50, Pos => 1, Value => @Chg{Version=[5],New=[],Old=[String']}('x', @key(others) => <>))  --@ExamCom[ see @RefSecNum{Discriminants}]]}
 @end{Example}
 @end{Examples}
 
@@ -3960,7 +3960,7 @@ legal in Ada 83 are illegal in Ada 95. For example:]}
    @key[with function] F (The_S3 : @key[in] S3) @key[return] Integer;
 @key[package] Gp @key[is]
    I : constant Integer := F ((1 => '!', others => '?'));
-       -- @RI{The aggregate is legal in Ada 83, illegal in Ada 95.}
+       -- @ExamCom{The aggregate is legal in Ada 83, illegal in Ada 95.}
 @key[end] Gp;],Old=[]}
 @end{Example}
 @ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00016}
@@ -4342,10 +4342,9 @@ elements are combined to form the container.@Defn{container aggregate}]}
 Text=<@ChgAdded{Version=[5],Text=[A container aggregate is a construct used to
 define a value of a type that represents a collection of elements, by explicitly
 specifying the elements in the collection.]}>}
-@end{Intro}
 
-@Comment{@begin{StaticSem} - This is not in any section, weird,
-   but it matches Pre and Type_Invariant.}
+@Comment{This is weird that it is part of the Intro, but it matches Pre
+         and Type_Invariant.}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For a type other
 than an array type, the following type-related operational aspect may be
@@ -4388,7 +4387,7 @@ specified. Either both or neither of New_Indexed and Assign_Indexed shall be
 specified.]}
 
 @end{Description}
-@Comment{@end{StaticSem} - Not in any section.}
+@end{Intro}
 
 @begin{Resolution}
 
@@ -5253,33 +5252,33 @@ or return the value of the object.
 @begin{Examples}
 @Leading@keepnext@i(Examples of primaries:)
 @begin{Example}
-@Trailing@;4.0                --@RI[  real literal]
-Pi                 --@RI[  named number]
-(1 .. 10 => 0)     --@RI[  array aggregate]
-Sum                --@RI[  variable]
-Integer'Last       --@RI[  attribute]
-Sine(X)            --@RI[  function call]
-Color'(Blue)       --@RI[  qualified expression]
-Real(M*N)          --@RI[  conversion]
-(Line_Count + 10)  --@RI[  parenthesized expression ]
+@Trailing@;4.0                --@ExamCom[  real literal]
+Pi                 --@ExamCom[  named number]
+(1 .. 10 => 0)     --@ExamCom[  array aggregate]
+Sum                --@ExamCom[  variable]
+Integer'Last       --@ExamCom[  attribute]
+Sine(X)            --@ExamCom[  function call]
+Color'(Blue)       --@ExamCom[  qualified expression]
+Real(M*N)          --@ExamCom[  conversion]
+(Line_Count + 10)  --@ExamCom[  parenthesized expression ]
 @end{Example}
 
 @leading@keepnext@i(Examples of expressions:)
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-Volume                      --@RI[ primary]
-@key(not) Destroyed               --@RI[ factor]
-2*Line_Count                --@RI[ term]
--4.0                        --@RI[ simple expression]
--4.0 + A                    --@RI[ simple expression]
-B**2 - 4.0*A*C              --@RI[ simple expression]@Chg{Version=[2],New=[
-R*Sin(@unicode<952>)*Cos(@unicode<966>)             --@RI[ simple expression]],Old=[]}
-Password(1 .. 3) = "Bwv"    --@RI[ relation]
-Count @key(in) Small_Int          --@RI[ relation]
-Count @key(not) @key(in) Small_Int      --@RI[ relation]
-Index = 0 @key(or) Item_Hit       --@RI[ expression]
-(Cold @key(and) Sunny) @key(or) Warm    --@RI[ expression (parentheses are required)]
-A**(B**C)                   --@RI[ expression (parentheses are required)]
+Volume                      --@ExamCom[ primary]
+@key(not) Destroyed               --@ExamCom[ factor]
+2*Line_Count                --@ExamCom[ term]
+-4.0                        --@ExamCom[ simple expression]
+-4.0 + A                    --@ExamCom[ simple expression]
+B**2 - 4.0*A*C              --@ExamCom[ simple expression]@Chg{Version=[2],New=[
+R*Sin(@unicode<952>)*Cos(@unicode<966>)             --@ExamCom[ simple expression]],Old=[]}
+Password(1 .. 3) = "Bwv"    --@ExamCom[ relation]
+Count @key(in) Small_Int          --@ExamCom[ relation]
+Count @key(not) @key(in) Small_Int      --@ExamCom[ relation]
+Index = 0 @key(or) Item_Hit       --@ExamCom[ expression]
+(Cold @key(and) Sunny) @key(or) Warm    --@ExamCom[ expression (parentheses are required)]
+A**(B**C)                   --@ExamCom[ expression (parentheses are required)]
 @end{Example}
 @end{Examples}
 
@@ -5563,14 +5562,14 @@ as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @begin{Examples}
 @Leading@keepnext@i(Examples of precedence:)
 @begin{Example}
-@key(not) Sunny @key(or) Warm    --@RI[  same as (not Sunny) or Warm]
-X > 4.0 @key(and) Y > 0.0  --@RI[  same as (X > 4.0) and (Y > 0.0)]
+@key(not) Sunny @key(or) Warm    --@ExamCom[  same as (not Sunny) or Warm]
+X > 4.0 @key(and) Y > 0.0  --@ExamCom[  same as (X > 4.0) and (Y > 0.0)]
 
--4.0*A**2            --@RI[  same as @en@;(4.0 * (A**2))]
-@key(abs)(1 + A) + B       --@RI[  same as (abs (1 + A)) + B]
-Y**(-3)              --@RI[  parentheses are necessary]
-A / B * C            --@RI[  same as (A/B)*C]
-A + (B + C)          --@RI[  evaluate B + C before adding it to A ]
+-4.0*A**2            --@ExamCom[  same as @en@;(4.0 * (A**2))]
+@key(abs)(1 + A) + B       --@ExamCom[  same as (abs (1 + A)) + B]
+Y**(-3)              --@ExamCom[  parentheses are necessary]
+A / B * C            --@ExamCom[  same as (A/B)*C]
+A + (B + C)          --@ExamCom[  evaluate B + C before adding it to A ]
 @end{Example}
 @end{Examples}
 
@@ -5617,14 +5616,14 @@ component type is a boolean type:
 @IndexSee{Term=[bit string],See=(logical operators on boolean arrays)}
 @begin{example}
 @tabclear()
-@key[function] "@key(and)"(Left, Right : @RI(T)) @key[return] @RI(T)
-@key[function] "@key(or)" (Left, Right : @RI(T)) @key[return] @RI(T)
-@key[function] "@key(xor)"(Left, Right : @RI(T)) @key[return] @RI(T)
+@key[function] "@key(and)"(Left, Right : @VirtName(T)) @key[return] @VirtName(T)
+@key[function] "@key(or)" (Left, Right : @VirtName(T)) @key[return] @VirtName(T)
+@key[function] "@key(xor)"(Left, Right : @VirtName(T)) @key[return] @VirtName(T)
 @end{example}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00145-01]}
   @ChgDeleted{Version=[2],Text=[For predefined operators, the parameter
-  and result subtypes shown as @i(T) are actually the unconstrained
+  and result subtypes shown as @VirtName(T) are actually the unconstrained
   subtype of the type.]}
   @ChgNote{Sorry, Bob, but there is no "honesty" issue here. And
   "unconstrained" is wrong.}
@@ -5739,14 +5738,14 @@ following truth table:
 @Leading@keepnext@i(Examples of logical operators:)
 @begin{Example}
 Sunny @key(or) Warm
-Filter(1 .. 10) @key(and) Filter(15 .. 24)   --@RI[   see @RefSecNum{Index Constraints and Discrete Ranges} ]
+Filter(1 .. 10) @key(and) Filter(15 .. 24)   --@ExamCom[   see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
 @begin{WideAbove}
 @leading@keepnext@i(Examples of short-circuit control forms:)
 @end{WideAbove}
 @begin{Example}
-Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   --@RI[   see @RefSecNum{Incomplete Type Declarations}]
+Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   --@ExamCom[   see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
 @end{Example}
 @end{Examples}
@@ -5910,8 +5909,8 @@ type @i(T) that is not limited,
 and not an anonymous access type,
 with the following specifications:
 @begin(example)
-@key(function) "=" (Left, Right : @RI(T)) @key(return) Boolean
-@key(function) "/="(Left, Right : @RI(T)) @key(return) Boolean
+@key(function) "=" (Left, Right : @VirtName(T)) @key(return) Boolean
+@key(function) "/="(Left, Right : @VirtName(T)) @key(return) Boolean
 @end(example)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
@@ -5929,10 +5928,10 @@ anonymous access types:]}
 scalar type @i(T), and for every discrete array type
 @i(T), with the following specifications:
 @begin(example)
-@key(function) "<" (Left, Right : @RI(T)) @key(return) Boolean
-@key(function) "<="(Left, Right : @RI(T)) @key(return) Boolean
-@key(function) ">" (Left, Right : @RI(T)) @key(return) Boolean
-@key(function) ">="(Left, Right : @RI(T)) @key(return) Boolean
+@key(function) "<" (Left, Right : @VirtName(T)) @key(return) Boolean
+@key(function) "<="(Left, Right : @VirtName(T)) @key(return) Boolean
+@key(function) ">" (Left, Right : @VirtName(T)) @key(return) Boolean
+@key(function) ">="(Left, Right : @VirtName(T)) @key(return) Boolean
 @end(example)
 @end{StaticSem}
 
@@ -6530,17 +6529,17 @@ X /= Y
 @Chg{Version=[5],New=[A_String],Old=["A"]} < @Chg{Version=[5],New=["Bb"],Old=["B"]} @key(and) @Chg{Version=[5],New=[A_String],Old=["A"]} < "A  "  @Chg{Version=[5],New=[],Old=[]}--@Examcom[ True]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-My_Car = @key(null)               --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
-My_Car = Your_Car           --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if we both share the same car]
-My_Car.@key[all] = Your_Car.@key[all]   --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if the two cars are identical]
+My_Car = @key(null)               --@ExamCom[ @Chg{Version=[3],New=[True],Old=[true]} if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
+My_Car = Your_Car           --@ExamCom[ @Chg{Version=[3],New=[True],Old=[true]} if we both share the same car]
+My_Car.@key[all] = Your_Car.@key[all]   --@ExamCom[ @Chg{Version=[3],New=[True],Old=[true]} if the two cars are identical]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
-N @key(not) @key(in) 1 .. 10            --@RI[ range membership test]
-Today @key(in) Mon .. Fri         --@RI[ range membership test]
-Today @key(in) Weekday            --@RI[ subtype membership test (see @RefSecNum{Enumeration Types})]@Chg{Version=[3],New=[
-Card @key(in) Clubs | Spades      --@RI[ list membership test (see @RefSecNum{Enumeration Types})]],Old=[]}
-Archive @key(in) Disk_Unit        --@RI[ subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
-Tree.@key(all) @key(in) Addition'Class  --@RI[ class membership test (see @RefSecNum{Type Extensions})]
+N @key(not) @key(in) 1 .. 10            --@ExamCom[ range membership test]
+Today @key(in) Mon .. Fri         --@ExamCom[ range membership test]
+Today @key(in) Weekday            --@ExamCom[ subtype membership test (see @RefSecNum{Enumeration Types})]@Chg{Version=[3],New=[
+Card @key(in) Clubs | Spades      --@ExamCom[ list membership test (see @RefSecNum{Enumeration Types})]],Old=[]}
+Archive @key(in) Disk_Unit        --@ExamCom[ subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
+Tree.@key(all) @key(in) Addition'Class  --@ExamCom[ class membership test (see @RefSecNum{Type Extensions})]
 @end{Example}
 @end{Examples}
 
@@ -6715,8 +6714,8 @@ for every specific numeric type @i(T) with their
 conventional meaning.
 They have the following specifications:
 @begin(example)
-@key(function) "+"(Left, Right : @RI(T)) @key(return) @RI(T)
-@key(function) "-"(Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "+"(Left, Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "-"(Left, Right : @VirtName(T)) @key(return) @VirtName(T)
 @end(example)
 
 @Leading@Defn{& operator}@Defn2{Term=[operator],Sec=(&)}
@@ -6728,10 +6727,10 @@ every nonlimited,
 one-dimensional array type @i(T) with component type @i(C).
 They have the following specifications:
 @begin(example)
-@key(function) "&"(Left : @RI(T); Right : @RI(T)) @key(return) @RI(T)
-@key(function) "&"(Left : @RI(T); Right : @RI(C)) @key(return) @RI(T)
-@key(function) "&"(Left : @RI(C); Right : @RI(T)) @key(return) @RI(T)
-@key(function) "&"(Left : @RI(C); Right : @RI(C)) @key(return) @RI(T)
+@key(function) "&"(Left : @VirtName(T); Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "&"(Left : @VirtName(T); Right : @VirtName(C)) @key(return) @VirtName(T)
+@key(function) "&"(Left : @VirtName(C); Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "&"(Left : @VirtName(C); Right : @VirtName(C)) @key(return) @VirtName(T)
 @end(example)
 @end{StaticSem}
 
@@ -6816,11 +6815,11 @@ performed can be followed by a conditional addition of the modulus.
 @begin{Examples}
 @Leading@keepnext@i(Examples of expressions involving binary adding operators:)
 @begin{Example}
-Z + 0.1      --@RI[  Z has to be of a real type ]
+Z + 0.1      --@ExamCom[  Z has to be of a real type ]
 
-"A" & "BCD"  --@RI[  concatenation of two string literals]
-'A' & "BCD"  --@RI[  concatenation of a character literal and a string literal]
-'A' & 'A'    --@RI[  concatenation of two character literals ]
+"A" & "BCD"  --@ExamCom[  concatenation of two string literals]
+'A' & "BCD"  --@ExamCom[  concatenation of a character literal and a string literal]
+'A' & 'A'    --@ExamCom[  concatenation of two character literals ]
 @end{Example}
 @end{Examples}
 
@@ -6867,8 +6866,8 @@ for every specific numeric type @i(T) with their
 conventional meaning.
 They have the following specifications:
 @begin(example)
-@key(function) "+"(Right : @RI(T)) @key(return) @RI(T)
-@key(function) "-"(Right : @RI(T)) @key(return) @RI(T)
+@key(function) "+"(Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "-"(Right : @VirtName(T)) @key(return) @VirtName(T)
 @end(example)
 @end{StaticSem}
 
@@ -6892,12 +6891,12 @@ for a zero operand, the result is zero.
 @Defn{rem operator}@Defn2{Term=[operator],Sec=(rem)}
 The multiplying operators * (multiplication), / (division),
 @key(mod) (modulus), and @key(rem) (remainder)
-are predefined for every specific integer type @i(T):
+are predefined for every specific integer type @VirtName(T):
 @begin(example)
-@key(function) "*"  (Left, Right : @RI(T)) @key(return) @RI(T)
-@key(function) "/"  (Left, Right : @RI(T)) @key(return) @RI(T)
-@key(function) "@key(mod)"(Left, Right : @RI(T)) @key(return) @RI(T)
-@key(function) "@key(rem)"(Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "*"  (Left, Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "/"  (Left, Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "@key(mod)"(Left, Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "@key(rem)"(Left, Right : @VirtName(T)) @key(return) @VirtName(T)
 @end(example)
 
 Signed integer multiplication has its conventional meaning.
@@ -6937,19 +6936,19 @@ because of the difference in effect of negation.
 @end{WideAbove}
 
 @Leading@;Multiplication and division operators are predefined for
-every specific floating point type @i(T):
+every specific floating point type @VirtName(T):
 @begin(example)
-@key(function) "*"(Left, Right : @RI(T)) @key(return) @RI(T)
-@key(function) "/"(Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "*"(Left, Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "/"(Left, Right : @VirtName(T)) @key(return) @VirtName(T)
 @end(example)
 
 @Leading@;The following multiplication and division operators, with
 an operand of the predefined type Integer, are predefined
-for every specific fixed point type @i(T):
+for every specific fixed point type @VirtName(T):
 @begin(example)
-@key(function) "*"(Left : @RI(T); Right : Integer) @key(return) @RI(T)
-@key(function) "*"(Left : Integer; Right : @RI(T)) @key(return) @RI(T)
-@key(function) "/"(Left : @RI(T); Right : Integer) @key(return) @RI(T)
+@key(function) "*"(Left : @VirtName(T); Right : Integer) @key(return) @VirtName(T)
+@key(function) "*"(Left : Integer; Right : @VirtName(T)) @key(return) @VirtName(T)
+@key(function) "/"(Left : @VirtName(T); Right : Integer) @key(return) @VirtName(T)
 @end(example)
 
 @Leading@Redundant[All of the above multiplying operators
@@ -6973,12 +6972,12 @@ operands of a universal type, or the specified
 root numeric types.
 @end{Ramification}
 @begin(example)
-@key(function) "*"(Left, Right : @RI(root_real)) @key(return) @RI(root_real)
-@key(function) "/"(Left, Right : @RI(root_real)) @key(return) @RI(root_real)
+@key(function) "*"(Left, Right : @VirtName(root_real)) @key(return) @VirtName(root_real)
+@key(function) "/"(Left, Right : @VirtName(root_real)) @key(return) @VirtName(root_real)
 
-@key(function) "*"(Left : @RI(root_real); Right : @RI(root_integer)) @key(return) @RI(root_real)
-@key(function) "*"(Left : @RI(root_integer); Right : @RI(root_real)) @key(return) @RI(root_real)
-@key(function) "/"(Left : @RI(root_real); Right : @RI(root_integer)) @key(return) @RI(root_real)
+@key(function) "*"(Left : @VirtName(root_real); Right : @VirtName(root_integer)) @key(return) @VirtName(root_real)
+@key(function) "*"(Left : @VirtName(root_integer); Right : @VirtName(root_real)) @key(return) @VirtName(root_real)
+@key(function) "/"(Left : @VirtName(root_real); Right : @VirtName(root_integer)) @key(return) @VirtName(root_real)
 @end(example)
 
 @Leading@;Multiplication and division between any two fixed point types are
@@ -6992,8 +6991,8 @@ and return a result that is implicitly (or explicitly) convertible to
 any fixed point type.
 @end{Ramification}
 @begin(example)
-@key(function) "*"(Left, Right : @RI(universal_fixed)) @key(return) @RI(universal_fixed)
-@key(function) "/"(Left, Right : @RI(universal_fixed)) @key(return) @RI(universal_fixed)
+@key(function) "*"(Left, Right : @VirtName(universal_fixed)) @key(return) @VirtName(universal_fixed)
+@key(function) "/"(Left, Right : @VirtName(universal_fixed)) @key(return) @VirtName(universal_fixed)
 @end(example)
 @end{StaticSem}
 
@@ -7149,10 +7148,10 @@ I : Integer := 1;
 J : Integer := 2;
 K : Integer := 3;
 
-X : Real := 1.0;                      --@RI[     see @RefSecNum{Floating Point Types}]
+X : Real := 1.0;                      --@ExamCom[     see @RefSecNum{Floating Point Types}]
 Y : Real := 2.0;
 
-F : Fraction := 0.25;                 --@RI[     see @RefSecNum{Fixed Point Types}]
+F : Fraction := 0.25;                 --@ExamCom[     see @RefSecNum{Fixed Point Types}]
 G : Fraction := 0.5;
 @end{Example}
 @begin{Example}
@@ -7241,7 +7240,7 @@ The highest precedence unary operator @key(abs) (absolute value)
 is predefined for every specific numeric type @i(T),
 with the following specification:
 @begin(example)
-@key(function) "@key(abs)"(Right : @RI(T)) @key(return) @RI(T)
+@key(function) "@key(abs)"(Right : @VirtName(T)) @key(return) @VirtName(T)
 @end(example)
 
 @Leading@Defn{not operator}@Defn2{Term=[operator],Sec=(not)}
@@ -7253,7 +7252,7 @@ and for every one-dimensional array type @i(T) whose
 components are of a boolean type,
 with the following specification:
 @begin(example)
-@key(function) "@key(not)"(Right : @RI(T)) @key(return) @RI(T)
+@key(function) "@key(not)"(Right : @VirtName(T)) @key(return) @VirtName(T)
 @end(example)
 
 The result of the operator @key(not) for a modular type is
@@ -7285,7 +7284,7 @@ The highest precedence @i(exponentiation) operator ** is predefined
 for every specific integer type @i(T)
 with the following specification:
 @begin(example)
-@key(function) "**"(Left : @RI(T); Right : Natural) @key(return) @RI(T)
+@key(function) "**"(Left : @VirtName(T); Right : Natural) @key(return) @VirtName(T)
 @end(example)
 
 @Leading@;Exponentiation is also predefined for
@@ -7294,7 +7293,7 @@ as well as @i{root_real},
 with the following specification (where @i(T) is @i{root_real}
 or the floating point type):
 @begin(example)
-@key(function) "**"(Left : @RI(T); Right : Integer'Base) @key(return) @RI(T)
+@key(function) "**"(Left : @VirtName(T); Right : Integer'Base) @key(return) @VirtName(T)
 @end(example)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0088-1]}
@@ -7686,7 +7685,7 @@ an} @nt{if_expression}@i{:}]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Text=[Put_Line ("Casey is " &
-      (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
+      (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
@@ -7695,7 +7694,7 @@ a} @nt{case_expression}@i{:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Text=[@key[function] Card_Color (Card : Suit) @key[return] Color @key[is] --@RI[ see @RefSecNum{Enumeration Types}]
+@ChgAdded{Version=[5],Text=[@key[function] Card_Color (Card : Suit) @key[return] Color @key[is] --@ExamCom[ see @RefSecNum{Enumeration Types}]
   (@key[case] Card @key[is]
       @key[when] Clubs  | Spades   => Black,
       @key[when] Hearts | Diamonds => Red);]}
@@ -7711,10 +7710,12 @@ a} @nt{case_expression}@i{:}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[Quantified Expressions]}
 
+@begin{Intro}
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0158-1]}
 @ChgAdded{Version=[4],Text=[Quantified expressions provide a way to write
 universally and existentially quantified predicates over containers and
 arrays.@defn{quantified expression}@Defn2{Term=[expression],Sec=[quantified]}]}
+@end{Intro}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
@@ -7850,7 +7851,7 @@ is composite (as opposed to prime) can be written:]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for some] X @key[in] 2 .. N @Chg{Version=[5],New=[@key[when] X * X <= N],Old=[ / 2]} => N @key[mod] X = 0);@Chg{Version=[5],New=[
-   --@RI[ see ]@nt{iterator_filter}@RI[ in @RefSecNum{Loop Statements}]],Old=[]}]}
+   --@ExamCom[ see ]@nt{iterator_filter}@ExamCom[ in @RefSecNum{Loop Statements}]],Old=[]}]}
 @end{Example}
 
 @end{Examples}
@@ -8454,7 +8455,7 @@ greater than 100.0:>]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[type] Accumulator @key[is record]
-   Sum   : Real; --@RI[ See @RefSecNum{Floating Point Types}.]
+   Sum   : Real; --@ExamCom[ See @RefSecNum{Floating Point Types}.]
    Count : Integer;
 @key[end record];]}
 

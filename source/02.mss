@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:28 $}
+@Comment{$Date: 2022/05/14 04:06:47 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -88,7 +88,7 @@ cell.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0079-1],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0444-1]}
 The@Chg{Version=[2],New=[],Old=[ character repertoire for the text of
 an Ada program consists of the
 collection of characters
@@ -98,8 +98,9 @@ ISO 10646]} Universal Multiple-Octet Coded Character Set, plus a set
 of @ntf<format_effector>s and, in comments only,
 a set of @ntf<other_control_function>s; the]} coded representation for
 @Chg{Version=[2],New=[],Old=[these ]}characters is implementation defined
-@Redundant[(it need not be a
-representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],
+@Redundant[(it @Chg{Version=[5],New=[can],Old=[need not]} be a
+representation @Chg{Version=[5],New=[that is not ],Old=[]}defined
+within @Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],
 Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ A character whose relative
 code @Chg{Version=[3],New=[point],Old=[position]} in its plane
 is 16#FFFE# or 16#FFFF# is not allowed anywhere
@@ -762,7 +763,7 @@ permitted in identifiers (in the standard mode).]}
   as the ACATS, it seems unlikely that there are any implementations that
   don't meet this requirement. Moreover, other representations are still
   permitted, and the "impossible or impractical" loophole (see
-  @RefSecnum{Conformity of an Implementation with the Standard}) can be
+  @RefSecnum{Conformity of an Implementation}) can be
   invoked for any implementations that cannot directly process the ACATS.]}
 @end{Diffword2005}
 
@@ -1139,7 +1140,7 @@ to accommodate local conventions].
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[D@capdottedi@;YARBAKIR],Old=[diyarbak@smldotlessi@;r]} -- @RI[The first i is dotted, the second isn't.]]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[D@capdottedi@;YARBAKIR],Old=[diyarbak@smldotlessi@;r]} -- @ExamCom[The first i is dotted, the second isn't.]]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[Revised]}
@@ -1149,7 +1150,7 @@ to accommodate local conventions].
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[diyarbak@smldotlessi@;r],Old=[DIYARBAKIR -- @RI[Both Is are dotless.]]}]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[diyarbak@smldotlessi@;r],Old=[DIYARBAKIR -- @ExamCom[Both Is are dotless.]]}]}
 @end{Example}
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[However, locale-independent simple case folding (and thus Ada)
@@ -1188,7 +1189,7 @@ d@smldotlessi@;yarbak@smldotlessi@;r]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[D@capdottedi@;YARBAKIR -- @RI[The first I is dotted, the second isn't.]]}]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[D@capdottedi@;YARBAKIR -- @ExamCom[The first I is dotted, the second isn't.]]}]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
@@ -1218,9 +1219,9 @@ Snobol_4   X1   Page_Count    Store_Next_Item
 @begin{Example}
 Count      X    Get_Symbol   Ethelyn   Marion
 Snobol_4   X1   Page_Count   Store_Next_Item@Chg{Version=[2],New=[
-@unicode(928)@unicode(955)@unicode(940)@unicode(964)@unicode(969)@unicode(957)      --@RI[ Plato]
-@unicode(1063)@unicode(1072)@unicode(1081)@unicode(1082)@unicode(1086)@unicode(1074)@unicode(1089)@unicode(1082)@unicode(1080)@unicode(1081)  --@RI[ Tchaikovsky]
-@unicode(952)  @unicode(966)        --@RI[ Angles]],Old=[]}
+@unicode(928)@unicode(955)@unicode(940)@unicode(964)@unicode(969)@unicode(957)      --@ExamCom[ Plato]
+@unicode(1063)@unicode(1072)@unicode(1081)@unicode(1082)@unicode(1086)@unicode(1074)@unicode(1089)@unicode(1082)@unicode(1080)@unicode(1081)  --@ExamCom[ Tchaikovsky]
+@unicode(952)  @unicode(966)        --@ExamCom[ Angles]],Old=[]}
 @end{Example}
 @end{Examples}
 
@@ -1355,9 +1356,9 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 12.0      0.0    0.456  3.14159_26 @\--@i{  real literals}
 @end{Display}}
 @begin{Example}
-12        0      1E6    123_456    --@RI{  integer literals}
+12        0      1E6    123_456    --@ExamCom{  integer literals}
 @Comment{Blank line}
-12.0      0.0    0.456  3.14159_26 --@RI{  real literals}
+12.0      0.0    0.456  3.14159_26 --@ExamCom{  real literals}
 @end{Example}
 @end{Examples}
 
@@ -1432,9 +1433,9 @@ lower case or in upper case, with the same meaning.
 16#F.FF#E+2 @\2#1.1111_1111_1110#E11 @\--@i{  real literals of value 4095.0}
 @end{Display}}
 @begin{Example}
-2#1111_1111#  16#FF#       016#0ff#   --@RI{  integer literals of value 255}
-16#E#E1       2#1110_0000#            --@RI{  integer literals of value 224}
-16#F.FF#E+2   2#1.1111_1111_1110#E11  --@RI{  real literals of value 4095.0}
+2#1111_1111#  16#FF#       016#0ff#   --@ExamCom{  integer literals of value 255}
+16#E#E1       2#1110_0000#            --@ExamCom{  integer literals of value 224}
+16#F.FF#E+2   2#1.1111_1111_1110#E11  --@ExamCom{  real literals of value 4095.0}
 @end{Example}
 @end{Examples}
 
@@ -1468,8 +1469,8 @@ of a character type. See @RefSecNum(Character Types).
 @end{Display}}
 @begin{Example}
 'A'     '*'     '''     ' '@Chg{Version=[2],New=[
-'L'     '@Unicode(1051)'     '@Unicode(923)'    --@RI[ Various els.]
-'@Unicode(8734)'     '@Unicode(1488)'            --@RI[ Big numbers - infinity and aleph.]],Old=[]}
+'L'     '@Unicode(1051)'     '@Unicode(923)'    --@ExamCom[ Various els.]
+'@Unicode(8734)'     '@Unicode(1488)'            --@ExamCom[ Big numbers - infinity and aleph.]],Old=[]}
 @end{Example}
 @end{Examples}
 
@@ -1543,8 +1544,8 @@ sequence of characters of a @nt{string_literal}.]}
 @begin{Example}
 "Message of the day:"
 @comment{Blank line}
-""                    --@RI{  a null string literal}
-" "   "A"   """"      --@RI{  three string literals of length 1}
+""                    --@ExamCom{  a null string literal}
+" "   "A"   """"      --@ExamCom{  three string literals of length 1}
 @comment{Blank line}
 "Characters such as $, %, and } are allowed in string literals"
 @Chg{Version=[2],New=["Archimedes said ""@unicode(917)@unicode(973)@unicode(961)@unicode(951)@unicode(954)@unicode(945)"""
@@ -1594,25 +1595,16 @@ of a program; their sole purpose is the enlightenment of the human reader.
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of comments:}
-@ChgNote{Original version: @begin{Display}
---@i{  the last sentence above echoes the Algol 68 report }
-@comment{Blank line}
-@key[end];  --@i{  processing of Line is complete }
-@comment{Blank line}
---@i{  a long comment may be split onto}
---@i{  two or more consecutive lines   }
-@comment{Blank line}
-----------------@i{  the first two hyphens start the comment  }
-@end{Display}}
 @begin{Example}
---@RI[  the last sentence above echoes the Algol 68 report ]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+--@ExamCom[  the last sentence above echoes the Algol 68 report ]
 @comment{Blank line}
-@key[end];  --@RI[  processing of Line is complete ]
+@key[end];  --@ExamCom[  processing of Line is complete ]
 @comment{Blank line}
---@RI[  a long comment may be split onto]
---@RI[  two or more consecutive lines   ]
+--@ExamCom[  a long comment @Chg{Version=[5],New=[can],Old=[may]} be split onto]
+--@ExamCom[  two or more consecutive lines   ]
 @comment{Blank line}
-----------------@RI[  the first two hyphens start the comment  ]
+----------------@ExamCom[  the first two hyphens start the comment  ]
 @end{Example}
 @end{Examples}
 
@@ -1898,7 +1890,7 @@ for error-free programs.]}]}
 @begin{Ramification}
 Note that @lquotes@;semantics@rquotes@; is not the same as @lquotes@;effect;@rquotes@;
 as explained in
-@RefSecNum{Conformity of an Implementation With the Standard},
+@RefSecNum{Conformity of an Implementation},
 the semantics defines a set of possible effects.
 
 Note that adding a @nt{pragma} to a program might cause an error
@@ -2264,6 +2256,7 @@ end of the reserved word]}.],Old=[ (ignoring upper/lower case distinctions):]}
 @end{Syntax}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 The reserved words appear in @key{lower case boldface}
 in this @IntlStdName,
 except when used in the @nt{designator} of an attribute
@@ -2271,8 +2264,8 @@ except when used in the @nt{designator} of an attribute
 Lower case boldface is also used
 for a reserved word in a
 @nt{string_literal} used as an @nt{operator_symbol}.
-This is merely a convention @em programs may be written in whatever
-typeface is desired and available.
+This is merely a convention @em programs @Chg{Version=[5],New=[can],Old=[may]}
+be written in whatever typeface is desired and available.
 @end{Notes}
 
 @begin{Incompatible83}

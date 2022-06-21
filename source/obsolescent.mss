@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2021/06/03 01:52:07 $}
+@Comment{$Date: 2022/05/14 04:06:52 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -99,7 +99,7 @@ The following @nt{library_unit_renaming_declaration}s exist:
 @key[package] Calendar @key[renames] Ada.Calendar;
 
 @key[with] System.Machine_Code;
-@key[package] Machine_Code @key[renames] System.Machine_Code; --@RI{ If supported.}
+@key[package] Machine_Code @key[renames] System.Machine_Code; --@ExamCom{ If supported.}
 @end{Example}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
@@ -352,30 +352,30 @@ Standard:
 @key[package] ASCII @key[is]
 
 
-  --@RI{  Control characters:}
+  --@ExamCom{  Control characters:}
 
 
 @tabclear()@tabset(P47)
-  NUL   : @key[constant] Character := @RI{nul}; @\SOH   : @key[constant] Character := @RI{soh};
-  STX   : @key[constant] Character := @RI{stx}; @\ETX   : @key[constant] Character := @RI{etx};
-  EOT   : @key[constant] Character := @RI{eot}; @\ENQ   : @key[constant] Character := @RI{enq};
-  ACK   : @key[constant] Character := @RI{ack}; @\BEL   : @key[constant] Character := @RI{bel};
-  BS    : @key[constant] Character := @RI{bs}; @\HT    : @key[constant] Character := @RI{ht};
-  LF    : @key[constant] Character := @RI{lf}; @\VT    : @key[constant] Character := @RI{vt};
-  FF    : @key[constant] Character := @RI{ff}; @\CR    : @key[constant] Character := @RI{cr};
-  SO    : @key[constant] Character := @RI{so}; @\SI    : @key[constant] Character := @RI{si};
-  DLE   : @key[constant] Character := @RI{dle}; @\DC1   : @key[constant] Character := @RI{dc1};
-  DC2   : @key[constant] Character := @RI{dc2}; @\DC3   : @key[constant] Character := @RI{dc3};
-  DC4   : @key[constant] Character := @RI{dc4}; @\NAK   : @key[constant] Character := @RI{nak};
-  SYN   : @key[constant] Character := @RI{syn}; @\ETB   : @key[constant] Character := @RI{etb};
-  CAN   : @key[constant] Character := @RI{can}; @\EM    : @key[constant] Character := @RI{em};
-  SUB   : @key[constant] Character := @RI{sub}; @\ESC   : @key[constant] Character := @RI{esc};
-  FS    : @key[constant] Character := @RI{fs}; @\GS    : @key[constant] Character := @RI{gs};
-  RS    : @key[constant] Character := @RI{rs}; @\US    : @key[constant] Character := @RI{us};
-  DEL   : @key[constant] Character := @RI{del};
+  NUL   : @key[constant] Character := @VirtName{nul}; @\SOH   : @key[constant] Character := @VirtName{soh};
+  STX   : @key[constant] Character := @VirtName{stx}; @\ETX   : @key[constant] Character := @VirtName{etx};
+  EOT   : @key[constant] Character := @VirtName{eot}; @\ENQ   : @key[constant] Character := @VirtName{enq};
+  ACK   : @key[constant] Character := @VirtName{ack}; @\BEL   : @key[constant] Character := @VirtName{bel};
+  BS    : @key[constant] Character := @VirtName{bs}; @\HT    : @key[constant] Character := @VirtName{ht};
+  LF    : @key[constant] Character := @VirtName{lf}; @\VT    : @key[constant] Character := @VirtName{vt};
+  FF    : @key[constant] Character := @VirtName{ff}; @\CR    : @key[constant] Character := @VirtName{cr};
+  SO    : @key[constant] Character := @VirtName{so}; @\SI    : @key[constant] Character := @VirtName{si};
+  DLE   : @key[constant] Character := @VirtName{dle}; @\DC1   : @key[constant] Character := @VirtName{dc1};
+  DC2   : @key[constant] Character := @VirtName{dc2}; @\DC3   : @key[constant] Character := @VirtName{dc3};
+  DC4   : @key[constant] Character := @VirtName{dc4}; @\NAK   : @key[constant] Character := @VirtName{nak};
+  SYN   : @key[constant] Character := @VirtName{syn}; @\ETB   : @key[constant] Character := @VirtName{etb};
+  CAN   : @key[constant] Character := @VirtName{can}; @\EM    : @key[constant] Character := @VirtName{em};
+  SUB   : @key[constant] Character := @VirtName{sub}; @\ESC   : @key[constant] Character := @VirtName{esc};
+  FS    : @key[constant] Character := @VirtName{fs}; @\GS    : @key[constant] Character := @VirtName{gs};
+  RS    : @key[constant] Character := @VirtName{rs}; @\US    : @key[constant] Character := @VirtName{us};
+  DEL   : @key[constant] Character := @VirtName{del};
 
 
-  --@RI{ Other characters:}
+  --@ExamCom{ Other characters:}
 
   Exclam   : @key[constant] Character:= '!';@\Quotation : @key[constant] Character:= '"';
   Sharp    : @key[constant] Character:= '#';@\Dollar    : @key[constant] Character:= '$';
@@ -388,7 +388,7 @@ Standard:
   L_Brace  : @key[constant] Character:= '{';@\Bar       : @key[constant] Character:= '|';
   R_Brace  : @key[constant] Character:= '}';@\Tilde     : @key[constant] Character:= '~';
 
-  --@RI{ Lower case letters:}
+  --@ExamCom{ Lower case letters:}
 
 
   LC_A: @key[constant] Character:= 'a';
@@ -635,16 +635,16 @@ was replaced by @nt{accept_statement}.], Old=[]}
 @leading@keepnext@;A @nt{record_representation_clause} of the form:
 @begin{example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
-@key[for] @RI{r} @key[use]
-    @key[record] @key[at] @key[mod] @RI{a}@Chg{Version=[3],New=[;],Old=[]}
+@key[for] @VirtName{r} @key[use]
+    @key[record] @key[at] @key[mod] @VirtName{a}@Chg{Version=[3],New=[;],Old=[]}
         ...
     @key[end] @key[record];
 @end{example}
 
 @leading@keepnext@;is equivalent to:
 @begin{example}
-@key[for] @RI{r}'Alignment @key[use] @RI{a};
-@key[for] @RI{r} @key[use]
+@key[for] @VirtName{r}'Alignment @key[use] @VirtName{a};
+@key[for] @VirtName{r} @key[use]
     @key[record]
         ...
     @key[end] @key[record];
@@ -790,8 +790,10 @@ specific Suppress @nt{pragma}s.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@ChgAdded{Version=[2],Text=[An implementation may support a similar On parameter on
-@nt{pragma} Unsuppress (see @RefSecNum{Suppressing Checks}).]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+@ChgAdded{Version=[2],Text=[An implementation @Chg{Version=[5],New=[can],Old=[may]}
+support a similar On parameter on @nt{pragma} Unsuppress
+(see @RefSecNum{Suppressing Checks}).]}
 @end{Notes}
 
 @begin{DiffWord95}
@@ -977,9 +979,11 @@ Ada.Characters.Handling:]}
 
 @LabeledAddedClause{Version=[3],Name=[Aspect-related Pragmas]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[Pragmas can be used as an alternative to
 aspect_specifications to specify certain aspects.]}
+@end{Intro}
 
 @begin{Resolution}
 @ChgRef{Version=[5], Kind=[AddedNormal], ARef=[AI12-0417-1]}
@@ -1193,7 +1197,9 @@ that has an argument which is a @nt{direct_name} denoting a
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[The name in a @nt{pragma} Inline may denote more
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+@ChgAdded{Version=[3],Text=[The name in a @nt{pragma} Inline 
+@Chg{Version=[5],New=[can],Old=[may]} denote more
 than one entity in the case of overloading. Such a @nt{pragma} applies to
 all of the denoted entities.]}
 @end{Notes}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2022/03/30 07:20:29 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -146,13 +146,13 @@ instructions that exploit the packed decimal representation.
 @key(package) Ada.Decimal@Chg{Version=[5],New=[],Old=[ @key(is)]}@ChildUnit{Parent=[Ada],Child=[Decimal]}
    @Chg{Version=[5],New=[@key(with)],Old=[@key(pragma)]} Pure@Chg{Version=[5],New=[ @key(is)],Old=[(Decimal);]}
 
-   @AdaObjDefn{Max_Scale} : @key(constant) := @RI{implementation-defined};
-   @AdaObjDefn{Min_Scale} : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Max_Scale} : @key(constant) := @VirtName{implementation-defined};
+   @AdaObjDefn{Min_Scale} : @key(constant) := @VirtName{implementation-defined};
 
    @AdaObjDefn{Min_Delta} : @key(constant) := 10.0**(-Max_Scale);
    @AdaObjDefn{Max_Delta} : @key(constant) := 10.0**(-Min_Scale);
 
-   @AdaObjDefn{Max_Decimal_Digits} : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Max_Decimal_Digits} : @key(constant) := @VirtName{implementation-defined};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(generic)
@@ -583,7 +583,7 @@ above rules, can occur in two consecutive positions in a picture String.
 
 @Leading@;A @i{Character replication} is a String
 @begin{example}
-@RI{char} & '(' & @RI{spaces} & @RI{count_string} & ')'
+@VirtName{char} & '(' & @VirtName{spaces} & @VirtName{count_string} & ')'
 @end{example}
 where @i{char} is a replicable Character,
 @i{spaces} is a String (possibly empty) comprising only space Character values,
@@ -1019,7 +1019,7 @@ in @RefSecNum(Edited Output Generation).
    @key(function) @AdaSubDefn{Pic_String}      (Pic : @key(in) Picture) @key(return) String;
    @key(function) @AdaSubDefn{Blank_When_Zero} (Pic : @key(in) Picture) @key(return) Boolean;
 
-   @AdaObjDefn{Max_Picture_Length}  : @key(constant) := @RI{implementation_defined};
+   @AdaObjDefn{Max_Picture_Length}  : @key(constant) := @VirtName{implementation_defined};
 
    @AdaExcDefn{Picture_Error}       : @key(exception);
 
@@ -1082,7 +1082,7 @@ in @RefSecNum(Edited Output Generation).
                      Radix_Mark : @key(in) Character := Default_Radix_Mark);
    @key(end) Decimal_Output;
 @key(private)
-   ... @RI{-- not specified by the language}
+   ... @ExamCom{-- not specified by the language}
 @key(end) Ada.Text_IO.Editing;
 @end{Example}
 @ImplDef{The value of Max_Picture_Length in the package Text_IO.Editing}

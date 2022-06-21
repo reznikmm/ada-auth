@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.78 $ $Date: 2022/03/30 07:20:29 $ $Author: randy $ }
+@comment{ $Revision: 1.79 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:29 $}
+@Comment{$Date: 2022/05/14 04:06:49 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -260,7 +260,7 @@ Real'Base.}
    @Leading@;The Imaginary type and the constants i and j are provided for two reasons:
    @begin{itemize}
       They allow complex @lquotes@;literals@rquotes@; to be written in the alternate form of
-      @RI{a} + @RI{b}*i (or @RI{a} + @RI{b}*j), if desired. Of course,
+      @VirtName{a} + @VirtName{b}*i (or @VirtName{a} + @VirtName{b}*j), if desired. Of course,
       in some contexts the sum will need to be parenthesized.
 
       @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
@@ -270,11 +270,11 @@ Real'Base.}
       important to allow arithmetic between pure-imaginary and complex operands
       without requiring the former to be represented as (or promoted to)
       complex values with a real component of zero. For example, the
-      multiplication of @RI{a} + @RI{b}*i by @RI{d}*i should yield
-      @en@RI{b}@Times @RI{d} + @RI{a}@Times @RI{d}*i, but if one cannot avoid representing the
-      pure-imaginary value @RI{d}*i as the complex value
-      0.0 + @RI{d}*i, then a NaN ("Not-a-Number") could be produced
-      as the result of multiplying @RI{a} by 0.0 (e.g., when @RI{a} is
+      multiplication of @VirtName{a} + @VirtName{b}*i by @VirtName{d}*i should yield
+      @en@VirtName{b}@Times @VirtName{d} + @VirtName{a}@Times @VirtName{d}*i, but if one cannot avoid representing the
+      pure-imaginary value @VirtName{d}*i as the complex value
+      0.0 + @VirtName{d}*i, then a NaN ("Not-a-Number") could be produced
+      as the result of multiplying @VirtName{a} by 0.0 (e.g., when @VirtName{a} is
       infinite); the NaN could later trigger an exception.
       Providing the Imaginary type and overloadings of the
       arithmetic operators for mixtures of Imaginary and Complex operands
@@ -708,12 +708,12 @@ following conventions:
    The real @Chg{Version=[2],New=[],Old=[(resp., imaginary) ]}component of the
    result of the Arctan @Chg{Version=[2],New=[and],Old=[(resp.,]}
    Arcsinh@Chg{Version=[2], New=[ functions],Old=[) function]} is discontinuous
-   as the parameter X crosses the imaginary axis below @en@RI{i} or above @RI{i}.
+   as the parameter X crosses the imaginary axis below @en@VirtName{i} or above @VirtName{i}.
 
    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
    The real component of the result of the Arccot function is discontinuous as
    the parameter X crosses the imaginary axis @Chg{Version=[2],New=[below],
-   Old=[between]} @en@RI{i} @Chg{Version=[2],New=[or above],Old=[and]} @RI{i}.
+   Old=[between]} @en@VirtName{i} @Chg{Version=[2],New=[or above],Old=[and]} @VirtName{i}.
 
    The imaginary component of the Arccosh function is discontinuous as the
    parameter X crosses the real axis to the left of 1.0.
@@ -804,7 +804,7 @@ Complex_Types.Real'Machine_Overflows is True:
    of real type) is negative;
 
    by the Arctan and Arccot functions, when the value of the parameter X is
-   @PorM @RI{i};
+   @PorM @VirtName{i};
 
    by the Arctanh and Arccoth functions, when the value of the parameter X is
    @PorM 1.0.
@@ -876,11 +876,11 @@ raised:
    When the parameter X has the value @en@;1.0, the Sqrt function yields the
    result
    @begin{InnerItemize}
-      @RI{i} (resp., @en@RI{i}), when the sign of the imaginary component of
+      @VirtName{i} (resp., @en@VirtName{i}), when the sign of the imaginary component of
       X is positive (resp., negative), if Complex_Types.Real'Signed_Zeros is
       True;
 
-      @RI{i}, if Complex_Types.Real'Signed_Zeros is False;
+      @VirtName{i}, if Complex_Types.Real'Signed_Zeros is False;
    @end{InnerItemize}
 
    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
@@ -888,7 +888,7 @@ raised:
    Old=[]}the Log function yields an imaginary result; and the Arcsin and Arccos
    functions yield a real result.
 
-   When the parameter X has the value @PorM @RI{i}, the Log function yields
+   When the parameter X has the value @PorM @VirtName{i}, the Log function yields
    an imaginary result.
 
    Exponentiation by a zero exponent yields the value one. Exponentiation by
@@ -1612,18 +1612,18 @@ S'@Attr{Model_Mantissa} @\Yields the number of digits in the mantissa of
 the canonical form of the model numbers of @i{T}
 (see @RefSecNum{Attributes of Floating Point Types}). The
 value of this attribute shall be greater than or equal to@Chg{Version=[2],New=[],
-Old=[ @Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + 1, where @RI{d}
+Old=[ @Ceiling{@VirtName{d} @Times @Log(10) / @Log(@VirtName{T}'@R{Machine_Radix})} + 1, where @VirtName{d}
 is the requested decimal precision of @i{T}. In addition, it
 shall be less than or equal to the value of
 @i{T}'Machine_Mantissa. This attribute yields a value of the
 type @i{universal_integer}.]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + @RI{g}]}
+@ChgAdded{Version=[2],Text=[@Ceiling{@VirtName{d} @Times @Log(10) / @Log(@VirtName{T}'@R{Machine_Radix})} + @VirtName{g}]}
 @end{Display}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],NoPrefix=[T],Text=[where @RI{d}
-is the requested decimal precision of @i{T}, and @RI{g} is 0 if
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[where @VirtName{d}
+is the requested decimal precision of @i{T}, and @VirtName{g} is 0 if
 @i{T}'Machine_Radix
 is a positive power of 10 and 1 otherwise. In addition, @i{T}'Model_Mantissa
 shall be less than or equal to the value of
@@ -1657,10 +1657,10 @@ than or equal to the lower bound of the base range of @i{T}.
 In addition, if @i{T} is declared by a
 @nt{floating_point_definition} or is derived from such a type,
 and the @nt{floating_point_definition} includes a
-@nt{real_range_specification} specifying a lower bound of @RI{lb},
+@nt{real_range_specification} specifying a lower bound of @VirtName{lb},
 then the value of this attribute shall be less than or
-equal to @RI{lb}; otherwise, it shall be less than or equal to
-@en@;10.0 @+[4 @Times @RI{d}], where @RI{d} is the requested decimal precision
+equal to @VirtName{lb}; otherwise, it shall be less than or equal to
+@en@;10.0 @+[4 @Times @VirtName{d}], where @VirtName{d} is the requested decimal precision
 of @i{T}. This attribute yields a value of the type
 @i{universal_real}.
 
@@ -1670,10 +1670,10 @@ than or equal to the upper bound of the base range of @i{T}.
 In addition, if @i{T} is declared by a
 @nt{floating_point_definition} or is derived from such a type,
 and the @nt{floating_point_definition} includes a
-@nt{real_range_specification} specifying an upper bound of @RI{ub},
+@nt{real_range_specification} specifying an upper bound of @VirtName{ub},
 then the value of this attribute shall be greater than or
-equal to @RI{ub}; otherwise, it shall be greater than or equal
-to 10.0 @+[4 @Times @RI{d}], where d is the requested decimal
+equal to @VirtName{ub}; otherwise, it shall be greater than or equal
+to 10.0 @+[4 @Times @VirtName{d}], where d is the requested decimal
 precision of @i{T}. This attribute yields a value of the type
 @i{universal_real}.
 
@@ -1840,48 +1840,48 @@ a floating point type.
 @end{Discussion}
 
 @Leading@;For a fixed point multiplication or division whose (exact)
-mathematical result is @RI{v}, and for the conversion of a value
-@RI{v} to a fixed point type, the perfect result set and close result set
+mathematical result is @VirtName{v}, and for the conversion of a value
+@VirtName{v} to a fixed point type, the perfect result set and close result set
 are defined as follows:
 @begin(itemize)
       @Leading@Keepnext@;If the result type is an ordinary fixed point
-      type with a @i(small) of @RI{s},
+      type with a @i(small) of @VirtName{s},
       @begin(InnerItemize)
-         if @RI{v} is an integer multiple of
-         @RI{s},
+         if @VirtName{v} is an integer multiple of
+         @VirtName{s},
          then the perfect result set contains only the value
-         @RI{v};
+         @VirtName{v};
 
          otherwise, it contains the integer multiple of
-         @RI{s} just below
-         @RI{v} and the
-         integer multiple of @RI{s} just above
-         @RI{v}.
+         @VirtName{s} just below
+         @VirtName{v} and the
+         integer multiple of @VirtName{s} just above
+         @VirtName{v}.
       @end(InnerItemize)
 
       @NoPrefix@;The close result set is an implementation-defined set of consecutive
-      integer multiples of @RI{s} containing the perfect
+      integer multiples of @VirtName{s} containing the perfect
       result set as a subset.
 
       @Leading@Keepnext@;If the result type is a decimal type with a @i(small) of
-      @RI{s},
+      @VirtName{s},
       @begin(InnerItemize)
-         if @RI{v} is an integer multiple of
-         @RI{s},
+         if @VirtName{v} is an integer multiple of
+         @VirtName{s},
          then the perfect result set contains
-         only the value @RI{v};
+         only the value @VirtName{v};
 
          @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
          otherwise, if truncation applies@Chg{Version=[3],New=[,],Old=[]}
          then it contains only the integer
-         multiple of @RI{s} in the direction toward zero,
+         multiple of @VirtName{s} in the direction toward zero,
          whereas if rounding applies@Chg{Version=[3],New=[,],Old=[]}
          then it contains only the nearest integer multiple of
-         @RI{s} (with ties broken by rounding away from zero).
+         @VirtName{s} (with ties broken by rounding away from zero).
       @end(InnerItemize)
 
       @NoPrefix@;The close result set is an implementation-defined set of consecutive
-      integer multiples of @RI{s} containing the perfect
+      integer multiples of @VirtName{s} containing the perfect
       result set as a subset.
       @begin{Ramification}
         As a consequence of subsequent rules, this case does not arise
@@ -1890,12 +1890,12 @@ are defined as follows:
 
       @Leading@Keepnext@;If the result type is an integer type,
       @begin(InnerItemize)
-         if @RI{v} is an integer,
+         if @VirtName{v} is an integer,
          then the perfect result set contains only the
-         value @RI{v};
+         value @VirtName{v};
 
          otherwise, it contains the integer nearest to the value
-         @RI{v} (if @RI{v} lies
+         @VirtName{v} (if @VirtName{v} lies
          equally distant from two consecutive integers, the perfect result set
          contains the one that is further from zero).
       @end(InnerItemize)
@@ -1908,19 +1908,19 @@ The result of a fixed point multiplication or division shall belong either to
 the perfect result set or to the close result set, as described below, if
 overflow does not occur. In the following
 cases, if the result type is a fixed point type,
-let @RI{s} be its @i(small);
+let @VirtName{s} be its @i(small);
 otherwise, i.e. when the result type is an integer type,
-let @RI{s} be 1.0.
+let @VirtName{s} be 1.0.
 @begin(itemize)
    For a multiplication or division neither of whose operands is of type
-   @i(universal_real), let @RI{l} and @RI{r}
+   @i(universal_real), let @VirtName{l} and @VirtName{r}
    be the @i(smalls) of the left and right
-   operands. For a multiplication, if (@RI{l}@ @Times@ @RI{r})@ /@ @RI{s}
+   operands. For a multiplication, if (@VirtName{l}@ @Times@ @VirtName{r})@ /@ @VirtName{s}
    is an integer or the
    reciprocal of an integer (the @i(smalls) are said to be @lquotes@;compatible@rquotes@; in
    this case), the result shall belong to the perfect result set; otherwise, it
    belongs to the close result set. For a division, if
-   @RI{l}@ /@ (@RI{r}@ @Times@ @RI{s}) is an
+   @VirtName{l}@ /@ (@VirtName{r}@ @Times@ @VirtName{s}) is an
    integer or the reciprocal of an integer (i.e., the @i(smalls) are
    compatible), the result shall belong to the perfect result set; otherwise,
    it belongs to the close result set.
@@ -1931,9 +1931,9 @@ let @RI{s} be 1.0.
    @end{Ramification}
 
    For a multiplication or division having one @i(universal_real) operand with
-   a value of @RI{v},
+   a value of @VirtName{v},
    note that it is always possible to factor
-   @RI{v} as an integer
+   @VirtName{v} as an integer
    multiple of a @lquotes@;compatible@rquotes @i(small), but the integer multiple may be
    @lquotes@;too big@rquotes.
    If there exists a factorization in which that multiple is less than some
@@ -2042,9 +2042,9 @@ shall be as specified here.
 When an exception is not raised, the result of evaluating a function in an
 instance @i{EF} of Numerics.Generic_Elementary_Functions belongs to a @i{result
 interval}, defined as the smallest model interval of @i{EF}.Float_Type that
-contains all the values of the form @RI{f} @Times (1.0 + @RI{d}), where @RI{f} is the
+contains all the values of the form @VirtName{f} @Times (1.0 + @VirtName{d}), where @VirtName{f} is the
 exact value of the corresponding mathematical function at the given parameter
-values, @RI{d} is a real number, and @Abs[@RI{d}] is less than or equal to
+values, @VirtName{d} is a real number, and @Abs[@VirtName{d}] is less than or equal to
 the function's @i{maximum relative error}.
 @IndexCheck{Overflow_Check}
 The function delivers a value that belongs to the result interval when both of
@@ -2064,20 +2064,20 @@ its bounds belong to the safe range of @i{EF}.Float_Type; otherwise,
 
 @Leading@;The maximum relative error exhibited by each function is as follows:
 @begin{Itemize}
-   2.0 @Times @RI{EF}@R[.Float_Type'Model_Epsilon], in the case of the Sqrt, Sin,
+   2.0 @Times @VirtName{EF}@R[.Float_Type'Model_Epsilon], in the case of the Sqrt, Sin,
    and Cos functions;
 
-   4.0 @Times @RI{EF}@R[.Float_Type'Model_Epsilon], in the case of the Log, Exp,
+   4.0 @Times @VirtName{EF}@R[.Float_Type'Model_Epsilon], in the case of the Log, Exp,
    Tan, Cot, and inverse trigonometric functions; and
 
-   8.0 @Times @RI{EF}@R[.Float_Type'Model_Epsilon], in the case of the forward and
+   8.0 @Times @VirtName{EF}@R[.Float_Type'Model_Epsilon], in the case of the forward and
    inverse hyperbolic functions.
 @end{Itemize}
 
 The maximum relative error exhibited by the exponentiation operator, which
 depends on the values of the operands, is
 (4.0 + @Abs{@R[Right] @Times @Log(@R[Left])} / 32.0) @Times
-@RI{EF}@R[.Float_Type'Model_Epsilon].
+@VirtName{EF}@R[.Float_Type'Model_Epsilon].
 
 The maximum relative error given above applies throughout the domain of
 the forward trigonometric functions when the Cycle parameter is specified.
@@ -2086,7 +2086,7 @@ When the Cycle parameter is omitted, the maximum relative error given above
 applies only when the absolute value of the angle parameter X is less than or
 equal to some implementation-defined @i{angle threshold}, which shall be at
 least
-@RI{EF}@R[.Float_@!Type'Machine_@!Radix] @+<@Floor(@RI{EF}@R[.Float_@!Type'Machine_@!Mantissa]/2)>.
+@VirtName{EF}@R[.Float_@!Type'Machine_@!Radix] @+<@Floor(@VirtName{EF}@R[.Float_@!Type'Machine_@!Mantissa]/2)>.
 Beyond the angle threshold, the accuracy of the forward trigonometric functions
 is implementation defined.
 @ImplDef{The value of the @i{angle threshold}, within which certain elementary
@@ -2232,29 +2232,29 @@ fewer than 5.
    categories.
    @begin{itemize}
       Proportional Distribution Test (a variant of the Equidistribution Test).
-      The interval 0.0 .. 1.0 is partitioned into @RI{K} subintervals.
-      @RI{K} is chosen randomly between 4 and 25 for each repetition of the
+      The interval 0.0 .. 1.0 is partitioned into @VirtName{K} subintervals.
+      @VirtName{K} is chosen randomly between 4 and 25 for each repetition of the
       test, along with the boundaries of the subintervals (subject to the
       constraint that at least 2 of the subintervals have a width of 0.001 or
       more). 5000 random floating point numbers are generated. The counts of
       random numbers falling into each subinterval are tallied and compared
       with the expected counts, which are proportional to the widths of the
       subintervals. The number of degrees of freedom for the chi-square test
-      is @RI{K}@en@;1.
+      is @VirtName{K}@en@;1.
 
-      Gap Test. The bounds of a range @RI{A} .. @RI{B}, with
-      0.0 @leq @RI{A} @Lt @RI{B} @leq 1.0, are chosen randomly for each repetition
-      of the test, subject to the constraint that 0.2 @leq @RI{B}@en@RI{A} @leq 0.6.
+      Gap Test. The bounds of a range @VirtName{A} .. @VirtName{B}, with
+      0.0 @leq @VirtName{A} @Lt @VirtName{B} @leq 1.0, are chosen randomly for each repetition
+      of the test, subject to the constraint that 0.2 @leq @VirtName{B}@en@VirtName{A} @leq 0.6.
       Random floating point numbers are generated until 5000 falling into the
-      range @RI{A} .. @RI{B} have been encountered. Each of these 5000 is
+      range @VirtName{A} .. @VirtName{B} have been encountered. Each of these 5000 is
       preceded by a @lquotes@;gap@rquotes@; (of length greater than or equal to 0) of
       consecutive random numbers not falling into the range
-      @RI{A} .. @RI{B}. The counts of gaps of each length from 0 to 15,
+      @VirtName{A} .. @VirtName{B}. The counts of gaps of each length from 0 to 15,
       and of all lengths greater than 15 lumped together, are tallied and
-      compared with the expected counts. Let @RI{P} = @RI{B}@en@RI{A}. The
-      probability that a gap has a length of @RI{L} is (1@en@RI{P}) @+[@RI{L}]
-      @Times @RI{P} for @RI{L} @leq 15, while the probability that a gap has a
-      length of 16 or more is (1@en@RI{P}) @+[16]. The number of degrees of
+      compared with the expected counts. Let @VirtName{P} = @VirtName{B}@en@VirtName{A}. The
+      probability that a gap has a length of @VirtName{L} is (1@en@VirtName{P}) @+[@VirtName{L}]
+      @Times @VirtName{P} for @VirtName{L} @leq 15, while the probability that a gap has a
+      length of 16 or more is (1@en@VirtName{P}) @+[16]. The number of degrees of
       freedom for the chi-square test is 16.
 
       Permutation Test. 5000 tuples of 4 different random floating point
@@ -2277,7 +2277,7 @@ fewer than 5.
       counts of increasing runs of each length from 1 to 4, and of all lengths
       greater than 4 lumped together, are tallied and compared with the
       expected counts. The probability that an increasing run has a length of
-      @RI{L} is 1/@RI{L}! @en 1/(@RI{L}+1)! for @RI{L} @leq 4, while
+      @VirtName{L} is 1/@VirtName{L}! @en 1/(@VirtName{L}+1)! for @VirtName{L} @leq 4, while
       the probability that an increasing run has a length of 5 or more is
       1/5!. The number of degrees of freedom for the chi-square test
       is 4.
@@ -2285,7 +2285,7 @@ fewer than 5.
       Decreasing-Runs Test. The test is similar to the Increasing Runs Test,
       but with decreasing runs.
 
-      Maximum-of-@RI{t} Test (with @RI{t} = 5). 5000 tuples of
+      Maximum-of-@VirtName{t} Test (with @VirtName{t} = 5). 5000 tuples of
       5 random floating point numbers are generated. The maximum of the
       components of each 5-tuple is determined and raised to the 5th power.
       The uniformity of the resulting values over the range 0.0 .. 1.0 is
@@ -2301,33 +2301,33 @@ fewer than 5.
    necessary combination of measurement categories with small expected counts,
    as described above.
    @begin{Itemize}
-      Equidistribution Test. In each repetition of the test, a number @RI{R}
+      Equidistribution Test. In each repetition of the test, a number @VirtName{R}
       between 2 and 30 is chosen randomly, and Numerics.Discrete_Random is
-      instantiated with an integer subtype whose range is 1 .. @RI{R}. 5000
+      instantiated with an integer subtype whose range is 1 .. @VirtName{R}. 5000
       integers are generated randomly from this range. The counts of
       occurrences of each integer in the range are tallied and compared with
       the expected counts, which have equal probabilities. The number of
-      degrees of freedom for the chi-square test is @RI{R}@en@;1.
+      degrees of freedom for the chi-square test is @VirtName{R}@en@;1.
 
       Simplified Poker Test. Numerics.Discrete_Random is instantiated once
       with an enumeration subtype representing the 13 denominations (Two
       through Ten, Jack, Queen, King, and Ace) of an infinite deck of playing
       cards. 2000 @lquotes@;poker@rquotes@; hands (5-tuples of values of this subtype) are
-      generated randomly. The counts of hands containing exactly @RI{K}
-      different denominations (1 @leq @RI{K} @leq 5) are tallied and compared
+      generated randomly. The counts of hands containing exactly @VirtName{K}
+      different denominations (1 @leq @VirtName{K} @leq 5) are tallied and compared
       with the expected counts. The probability that a hand contains exactly
-      @RI{K} different denominations is given by a formula in Knuth. The
+      @VirtName{K} different denominations is given by a formula in Knuth. The
       number of degrees of freedom for the chi-square test is 4.
 
       Coupon Collector's Test. Numerics.Discrete_Random is instantiated in
       each repetition of the test with an integer subtype whose range is
-      1 .. @RI{R}, where @RI{R} varies systematically from 2 to 11.
+      1 .. @VirtName{R}, where @VirtName{R} varies systematically from 2 to 11.
       Integers are generated randomly from this range until each value in the
-      range has occurred, and the number @RI{K} of integers generated is
+      range has occurred, and the number @VirtName{K} of integers generated is
       recorded. This constitutes a @lquotes@;coupon collector's segment@rquotes@; of length
-      @RI{K}. 2000 such segments are generated. The counts of segments of
-      each length from @RI{R} to @RI{R}+29, and of all lengths greater than
-      @RI{R}+29 lumped together, are tallied and compared with the expected
+      @VirtName{K}. 2000 such segments are generated. The counts of segments of
+      each length from @VirtName{R} to @VirtName{R}+29, and of all lengths greater than
+      @VirtName{R}+29 lumped together, are tallied and compared with the expected
       counts. The probability that a segment has any given length is given by
       formulas in Knuth. The number of degrees of freedom for the chi-square
       test is 30.
@@ -2343,20 +2343,20 @@ fewer than 5.
       the game is won if and only if the point is rolled again before a 7 is
       rolled.) The counts of games of each length from 1 to 18, and of all
       lengths greater than 18 lumped together, are tallied and compared with
-      the expected counts. For 2 @leq @RI{S} @leq 12, let
-      @RI{D} @-{@RI{S}} be the probability that a roll of a pair of dice shows
-      the sum @RI{S}, and let
-      @RI{Q} @-[@RI{S}](@RI{L}) = @RI{D} @-[@RI{S}] @Times
-      (1 @en (@RI{D} @-[@RI{S}] + @RI{D} @-[7])) @+[@RI{L}@en@;2] @Times
-      (@RI{D} @-[@RI{S}] + @RI{D} @-[7]). Then, the probability that a
-      game has a length of 1 is @RI{D} @-[7] +
-      @RI{D} @-[11] + @RI{D} @-[2] +
-      @RI{D} @-[3] + @RI{D} @-[12]
-      and, for @RI{L} @Gt 1, the probability that a game has a length of
-      @RI{L} is @RI{Q} @-[4](@RI{L}) +
-      @RI{Q} @-[5](@RI{L}) + @RI{Q} @-[6](@RI{L}) + @RI{Q} @-[8](@RI{L})
-      + @RI{Q} @-[9](@RI{L}) + @RI{Q}
-      @-[10](@RI{L}). The number of degrees of freedom for the chi-square test
+      the expected counts. For 2 @leq @VirtName{S} @leq 12, let
+      @VirtName{D} @-{@VirtName{S}} be the probability that a roll of a pair of dice shows
+      the sum @VirtName{S}, and let
+      @VirtName{Q} @-[@VirtName{S}](@VirtName{L}) = @VirtName{D} @-[@VirtName{S}] @Times
+      (1 @en (@VirtName{D} @-[@VirtName{S}] + @VirtName{D} @-[7])) @+[@VirtName{L}@en@;2] @Times
+      (@VirtName{D} @-[@VirtName{S}] + @VirtName{D} @-[7]). Then, the probability that a
+      game has a length of 1 is @VirtName{D} @-[7] +
+      @VirtName{D} @-[11] + @VirtName{D} @-[2] +
+      @VirtName{D} @-[3] + @VirtName{D} @-[12]
+      and, for @VirtName{L} @Gt 1, the probability that a game has a length of
+      @VirtName{L} is @VirtName{Q} @-[4](@VirtName{L}) +
+      @VirtName{Q} @-[5](@VirtName{L}) + @VirtName{Q} @-[6](@VirtName{L}) + @VirtName{Q} @-[8](@VirtName{L})
+      + @VirtName{Q} @-[9](@VirtName{L}) + @VirtName{Q}
+      @-[10](@VirtName{L}). The number of degrees of freedom for the chi-square test
       is 18.
 
       Craps Test (Lengths of Passes). This test is similar to the last, but
@@ -2364,9 +2364,9 @@ fewer than 5.
       followed by a loss is called a @i{pass}, and its length is the
       number of wins preceding the loss. The counts of passes of each length
       from 0 to 7, and of all lengths greater than 7 lumped together, are
-      tallied and compared with the expected counts. For @RI{L} @geq 0, the
-      probability that a pass has a length of @RI{L} is
-      @RI{W} @+[@RI{L}] @Times (1@en@RI{W}), where @RI{W}, the probability that a game
+      tallied and compared with the expected counts. For @VirtName{L} @geq 0, the
+      probability that a pass has a length of @VirtName{L} is
+      @VirtName{W} @+[@VirtName{L}] @Times (1@en@VirtName{W}), where @VirtName{W}, the probability that a game
       ends in a win, is 244.0/495.0. The number of degrees of freedom for the
       chi-square test is 8.
 
@@ -2417,9 +2417,9 @@ corresponding mathematical function.
         Sec=[for a component of the result of evaluating a complex function]}
 When defined by maximum box error, the result interval for a component of the
 result is the smallest model interval of @i{CT}.Real that contains all the
-values of the corresponding part of @RI{f} @Times (1.0 + @RI{d}), where @RI{f} is the
+values of the corresponding part of @VirtName{f} @Times (1.0 + @VirtName{d}), where @VirtName{f} is the
 exact complex value of the corresponding mathematical function at the given
-parameter values, @RI{d} is complex, and @Abs{@RI{d}} is less than or equal
+parameter values, @VirtName{d} is complex, and @Abs{@VirtName{d}} is less than or equal
 to the given maximum box error.
 @IndexCheck{Overflow_Check}
 The function delivers a value that belongs to the result interval (or a value
@@ -2432,8 +2432,8 @@ otherwise,
 @end{Discussion}
 @begin{Discussion}
   Note that
-  @RI{f} @Times (1.0 + @RI{d}) defines a small circular region of the complex
-  plane centered at @RI{f}, and the result intervals for
+  @VirtName{f} @Times (1.0 + @VirtName{d}) defines a small circular region of the complex
+  plane centered at @VirtName{f}, and the result intervals for
   the real and imaginary
   components of the result define a small rectangular box containing that
   circle.
@@ -2648,7 +2648,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
    @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Pure@Chg{Version=[5],New=[, Nonblocking @key{is}],Old=[(Generic_Real_Arrays);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Types}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Types}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Real_Vector} @key{is array} (Integer @key{range} <>) @key{of} Real'Base;
@@ -2656,10 +2656,10 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
                                                    @key{of} Real'Base;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Real_Vector types}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Subprograms for Real_Vector types}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Real_Vector arithmetic operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Real_Vector arithmetic operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "+"   (Right : Real_Vector)       @key{return} Real_Vector;
@@ -2677,7 +2677,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} "@key{abs}" (Right : Real_Vector)       @key{return} Real'Base;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Real_Vector scaling operations]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Real_Vector scaling operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Vector)
@@ -2688,7 +2688,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
       @key{return} Real_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Other Real_Vector operations]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Other Real_Vector operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Vector} (Index : Integer;
@@ -2696,10 +2696,10 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
                          First : Integer := 1) @key{return} Real_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Subprograms for Real_Matrix types]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Subprograms for Real_Matrix types]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix arithmetic operations]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Real_Matrix arithmetic operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "+"       (Right : Real_Matrix) @key{return} Real_Matrix;
@@ -2722,7 +2722,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
       @key{return} Real_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix scaling operations]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Real_Matrix scaling operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Matrix)
@@ -2733,7 +2733,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
       @key{return} Real_Matrix;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix inversion and related operations]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Real_Matrix inversion and related operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Real_Matrix; X : Real_Vector) @key{return} Real_Vector;
@@ -2742,7 +2742,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
    @key{function} @AdaSubDefn{Determinant} (A : Real_Matrix) @key{return} Real'Base;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Eigenvalues and vectors of a real symmetric matrix]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Eigenvalues and vectors of a real symmetric matrix]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Eigenvalues} (A : Real_Matrix) @key{return} Real_Vector;]}
@@ -2753,7 +2753,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
                           Vectors : @key{out} Real_Matrix);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Other Real_Matrix operations]]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[Other Real_Matrix operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Matrix} (Order            : Positive;
@@ -3302,7 +3302,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
    @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Pure@Chg{Version=[5],New=[, Nonblocking @key{is}],Old=[(Generic_Complex_Arrays);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Types}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Types}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Complex_Vector} @key{is array} (Integer @key{range} <>) @key{of} Complex;
@@ -3310,10 +3310,10 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
                                  Integer @key{range} <>) @key{of} Complex;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Complex_Vector types}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Subprograms for Complex_Vector types}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Vector selection, conversion and composition operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Complex_Vector selection, conversion and composition operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Re} (X : Complex_Vector) @key{return} Real_Vector;
@@ -3347,7 +3347,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
       @key{return} Complex_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Vector arithmetic operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Complex_Vector arithmetic operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "+"       (Right  : Complex_Vector) @key{return} Complex_Vector;
@@ -3366,7 +3366,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} "@key{abs}"     (Right : Complex_Vector) @key{return} @Chg{Version=[3],New=[Real'Base],Old=[Complex]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Mixed Real_Vector and Complex_Vector arithmetic operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Mixed Real_Vector and Complex_Vector arithmetic operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "+" (Left  : Real_Vector;
@@ -3385,7 +3385,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
       @key{return} Complex;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Vector scaling operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Complex_Vector scaling operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Complex;
@@ -3404,7 +3404,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
                  Right : Real'Base)      @key{return} Complex_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Other Complex_Vector operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Other Complex_Vector operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Vector} (Index : Integer;
@@ -3412,10 +3412,10 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
                          First : Integer := 1) @key{return} Complex_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Complex_Matrix types}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Subprograms for Complex_Matrix types}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix selection, conversion and composition operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Complex_Matrix selection, conversion and composition operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Re} (X : Complex_Matrix) @key{return} Real_Matrix;
@@ -3451,7 +3451,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
       @key{return} Complex_Matrix;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix arithmetic operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Complex_Matrix arithmetic operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "+"       (Right : Complex_Matrix) @key{return} Complex_Matrix;
@@ -3474,7 +3474,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
                  Right : Complex_Vector) @key{return} Complex_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Mixed Real_Matrix and Complex_Matrix arithmetic operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Mixed Real_Matrix and Complex_Matrix arithmetic operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "+" (Left  : Real_Matrix;
@@ -3507,7 +3507,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
                  Right : Real_Vector)    @key{return} Complex_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix scaling operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Complex_Matrix scaling operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Complex;
@@ -3526,7 +3526,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
                  Right : Real'Base)      @key{return} Complex_Matrix;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix inversion and related operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Complex_Matrix inversion and related operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Complex_Matrix; X : Complex_Vector)
@@ -3536,7 +3536,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
    @key{function} @AdaSubDefn{Determinant} (A : Complex_Matrix) @key{return} Complex;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Eigenvalues and vectors of a Hermitian matrix}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Eigenvalues and vectors of a Hermitian matrix}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Eigenvalues}(A : Complex_Matrix) @key{return} Real_Vector;]}
@@ -3547,7 +3547,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
                          Vectors : @key{out} Complex_Matrix);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI{Other Complex_Matrix operations}]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom{Other Complex_Matrix operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Matrix} (Order            : Positive;

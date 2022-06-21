@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.93 $ $Date: 2022/03/30 07:20:31 $ $Author: randy $ }
+@comment{ $Revision: 1.94 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2022/03/30 07:20:31 $}
+@Comment{$Date: 2022/05/14 04:06:52 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -2725,7 +2725,6 @@ Strings.Wide_Maps.Wide_Constants:
 --@Examcom{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
 --],Old=[]}@Examcom{Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
 @end{example}
-@end{StaticSem}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Text=[Each Wide_Character_Set constant in the package
@@ -2741,6 +2740,7 @@ Pure is replaced by
 @Chg{Version=[5],New=[aspects @Exam{Preelaborate, Nonblocking,
 Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in 
 Strings.Wide_Maps.Wide_Constants.]}
+@end{StaticSem}
 
 @begin{SingleNote}
 If a null Wide_Character_Mapping_Function is passed to any of the
@@ -2819,6 +2819,7 @@ any element outside the Character portion of Wide_Character.]}
 
 @LabeledAddedSubClause{Version=[2],Name=[Wide_Wide_String Handling]}
 
+@begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0286-1]}
 @ChgAdded{Version=[2],Text=[Facilities for handling strings of
@@ -2857,6 +2858,7 @@ for strings of Character elements.
 @SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash_Case_Insensitive]}
 @SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash_Case_Insensitive]}],Old=[]}
 @ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -3530,12 +3532,14 @@ Strings.Less_Case_Insensitive (To_String (Left), To_String (Right));]}
 
 @LabeledAddedSubClause{Version=[3],Name=[String Encoding]}
 
+@begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Text=[Facilities for encoding, decoding, and converting strings in various character
 encoding schemes are provided by packages Strings.@!UTF_Encoding,
 Strings.@!UTF_Encoding.@!Conversions, Strings.@!UTF_Encoding.@!Strings,
 Strings.@!UTF_Encoding.@!Wide_Strings, and
 Strings.@!UTF_Encoding.@!Wide_Wide_Strings.]}
+@end{Intro}
 
 @begin{StaticSem}
 
@@ -4137,10 +4141,10 @@ the following declarations:]}
    @key[with] Pure @key[is]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Text_Buffer_Count} @key[is range] 0 .. @RI<implementation-defined>;]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Text_Buffer_Count} @key[is range] 0 .. @VirtName<implementation-defined>;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @AdaObjDefn{New_Line_Count} : @key[constant] Text_Buffer_Count := @RI<implementation-defined>;]}
+@ChgAdded{Version=[5],Text=[   @AdaObjDefn{New_Line_Count} : @key[constant] Text_Buffer_Count := @VirtName<implementation-defined>;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Root_Buffer_Type} @key[is abstract tagged private]

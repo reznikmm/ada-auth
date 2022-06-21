@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2022/03/30 07:20:30 $ $Author: randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -1259,13 +1259,18 @@ provides such a view removes this restriction on the underlying ordinary map
 @Redundant[(though some other restriction might exist due to other concurrent
 iterations or stabilized views)].]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
 @ChgAdded{Version=[5],Text=[If a stable map is declared without specifying
-Base, the object must be initialized. The initializing expression of the stable
-map, @Redundant[typically a call on Copy], determines the Length
+Base, the object is necessarily initialized. The initializing expression of the
+stable map, @Redundant[typically a call on Copy], determines the Length
 of the map. The Length of a stable map never changes after
 initialization.]}
 
+@begin{TheProof}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0438-1]}
+   @ChgAdded{Version=[5],Text=[Initialization is required as the type is
+   indefinite, see @RefSecNum{Object Declarations}.]}
+@end{TheProof}
 @end{StaticSem}
 
 @begin{Bounded}
@@ -1603,7 +1608,7 @@ package Containers.Hashed_Maps has the following declaration:]}
       @key[with] Nonblocking, Global => @key[null], Use_Formal => @key[null];]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0339-1]}
-@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Empty} (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Empty} (Capacity : Count_Type := @VirtName{implementation-defined})
       @key[return] Map
       @key[with] Post =>
               Capacity (Empty'Result) >= Capacity @key[and then]
@@ -2100,7 +2105,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[2],Text=[   ... -- @ExamCom[not specified by the language]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Hashed_Maps;]}
@@ -2227,7 +2232,7 @@ described in @RefSecNum{Maps}.@PDefn{unspecified}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Empty (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Empty (Capacity : Count_Type := @VirtName{implementation-defined})
    @key[return] Map
    @key[with] Post =>
            Capacity (Empty'Result) >= Capacity @key[and then]
@@ -3346,7 +3351,7 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[2],Text=[   ... -- @ExamCom[not specified by the language]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Ordered_Maps;]}
@@ -5357,14 +5362,18 @@ provides such a view removes this restriction on the underlying ordinary set
 @Redundant[(though some other restriction might exist due to other concurrent
 iterations or stabilized views)].]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
 @ChgAdded{Version=[5],Text=[If a stable set is declared without specifying
-Base, the object must be initialized. The initializing expression of the stable
-set, @Redundant[typically a call on Copy], determines the Length
+Base, the object is necessarily initialized. The initializing expression of the
+stable set, @Redundant[typically a call on Copy], determines the Length
 of the set. The Length of a stable set never changes after
 initialization.]}
 
-@end{StaticSem}
+@begin{TheProof}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0438-1]}
+   @ChgAdded{Version=[5],Text=[Initialization is required as the type is
+   indefinite, see @RefSecNum{Object Declarations}.]}
+@end{TheProof}@end{StaticSem}
 
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1],ARef=[AI05-0248-1]}
@@ -5699,7 +5708,7 @@ package Containers.Hashed_Sets has the following declaration:]}
       @key[with] Nonblocking, Global => @key[null], Use_Formal => @key[null];]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0339-1]}
-@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Empty} (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Empty} (Capacity : Count_Type := @VirtName{implementation-defined})
       @key[return] Set
       @key[with] Post =>
               Capacity (Empty'Result) >= Capacity @key[and then]
@@ -6299,7 +6308,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[2],Text=[   ... -- @ExamCom[not specified by the language]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Hashed_Sets;]}
@@ -6369,7 +6378,7 @@ unspecified, other than the general semantics described in
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Empty (Capacity : Count_Type := @RI{implementation-defined})
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Empty (Capacity : Count_Type := @VirtName{implementation-defined})
    @key[return] Set
    @key[with] Post =>
            Capacity (Empty'Result) >= Capacity @key[and then]
@@ -7492,7 +7501,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[2],Text=[   ... -- @ExamCom[not specified by the language]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Ordered_Sets;]}

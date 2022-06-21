@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/03/30 07:20:28 $}
+@Comment{$Date: 2022/05/14 04:06:47 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.154 $}
+@Comment{$Revision: 1.155 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1371,14 +1371,14 @@ only if the composite subtype is unconstrained
 @Leading@keepnext@i(Examples of subtype declarations:)
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        --@RI[  see @RefSecNum(Type Declarations)]
+@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        --@ExamCom[  see @RefSecNum(Type Declarations)]
 @key(subtype) Red_Blue  @key(is) Rainbow;
 @key(subtype) Int       @key(is) Integer;
 @key(subtype) Small_Int @key(is) Integer @key(range) -10 .. 10;
-@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;            --@RI[  see @RefSecNum(Type Declarations)]
-@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);       --@RI[  see @RefSecNum(Array Types)]
-@key(subtype) Male      @key(is) Person(Sex => M);               --@RI[  see @RefSecNum(Incomplete Type Declarations)]@Chg{Version=[2],New=[
-@key(subtype) Binop_Ref @key(is not null) Binop_Ptr;             --@RI[  see @RefSecNum(Access Types)]],Old=[]}
+@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;            --@ExamCom[  see @RefSecNum(Type Declarations)]
+@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);       --@ExamCom[  see @RefSecNum(Array Types)]
+@key(subtype) Male      @key(is) Person(Sex => M);               --@ExamCom[  see @RefSecNum(Incomplete Type Declarations)]@Chg{Version=[2],New=[
+@key(subtype) Binop_Ref @key(is not null) Binop_Ptr;             --@ExamCom[  see @RefSecNum(Access Types)]],Old=[]}
 @end(Example)
 
 @end{Examples}
@@ -3245,12 +3245,12 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @begin{Examples}
 @Leading@keepnext@i(Example of a multiple object declaration:)
 @begin(Example)
---@RI[  the multiple object declaration ]
+--@ExamCom[  the multiple object declaration ]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);  --@RI[  see @RefSecNum(Incomplete Type Declarations)]
+John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);  --@ExamCom[  see @RefSecNum(Incomplete Type Declarations)]
 
---@RI[  is equivalent to the two single object declarations in the order given]
+--@ExamCom[  is equivalent to the two single object declarations in the order given]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 John : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
@@ -3475,13 +3475,13 @@ The elaboration of a @nt<number_declaration> has no effect.
 @begin{Examples}
 @Leading@keepnext@i(Examples of number declarations:)
 @begin(Example)
-Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@RI[ a real number (see @RefSecNum{The Numerics Packages})]
+Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@ExamCom[ a real number (see @RefSecNum{The Numerics Packages})]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-Max           : @key(constant) := 500;                   --@RI[ an integer number]
-Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}                 --@RI[ the integer 83]
-Power_16      : @key(constant) := 2**16;                 --@RI[ the integer 65_536]
-One, Un, Eins : @key(constant) := 1;                     --@RI[ three different names for 1]
+Max           : @key(constant) := 500;                   --@ExamCom[ an integer number]
+Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}                 --@ExamCom[ the integer 83]
+Power_16      : @key(constant) := 2**16;                 --@ExamCom[ the integer 65_536]
+One, Un, Eins : @key(constant) := 1;                     --@ExamCom[ three different names for 1]
 @end(Example)
 @end{Examples}
 
@@ -3645,7 +3645,7 @@ the parent type is a tagged type.]],Old=[]}
 @key{end} P;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} I @key{is new} P (Some_Tagged_Type); -- @RI[illegal]]}
+@ChgAdded{Version=[2],Text=[@key{package} I @key{is new} P (Some_Tagged_Type); -- @ExamCom[illegal]]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
   @ChgAdded{Version=[2],Text=[The instantiation is illegal because a tagged
@@ -4130,11 +4130,11 @@ subtype of the derived type.
 @begin(example)
 @key(type) T1 @key(is range) 1..100;
 @key(subtype) S1 @key(is) T1 @key(range) 1..10;
-@key(procedure) P(X : @key[in] S1);  @RI{-- P is a primitive subprogram}
+@key(procedure) P(X : @key[in] S1);  @ExamCom{-- P is a primitive subprogram}
 @key(type) T2 @key(is new) T1 @key(range) 11..20;
-@RI(-- implicitly declared:)
-@RI{-- @key(procedure) P(X : @key[in] T2'Base @key(range) 1..10);}
-@RI{--      X cannot be in T2'First .. T2'Last}
+@ExamCom(-- implicitly declared:)
+@ExamCom{-- @key(procedure) P(X : @key[in] T2'Base @key(range) 1..10);}
+@ExamCom{--      X cannot be in T2'First .. T2'Last}
 @end(example)
 @end(TheProof)
 
@@ -4166,14 +4166,14 @@ A @nt{derived_type_definition}, however, never defines an interface type.]}
 @begin{Examples}
 @Leading@keepnext@i(Examples of derived type declarations:)
 @begin(Example)
-@key(type) Local_Coordinate @key(is) @key(new) Coordinate;   --@RI[  two different types]
-@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  --@RI[  see @RefSecNum(Enumeration Types)]
-@key(type) Counter @key(is) @key(new) Positive;              --@RI[  same range as Positive ]
+@key(type) Local_Coordinate @key(is) @key(new) Coordinate;   --@ExamCom[  two different types]
+@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  --@ExamCom[  see @RefSecNum(Enumeration Types)]
+@key(type) Counter @key(is) @key(new) Positive;              --@ExamCom[  same range as Positive ]
 
-@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;   --@RI[  see @RefSecNum(Private Operations)]
-  --@RI[ the inherited subprograms have the following specifications: ]
-  --@RI[         procedure Get_Key(K : out Special_Key);]
-  --@RI[         function "<"(X,Y : Special_Key) return Boolean;]
+@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;   --@ExamCom[  see @RefSecNum(Private Operations)]
+  --@ExamCom[ the inherited subprograms have the following specifications: ]
+  --@ExamCom[         procedure Get_Key(K : out Special_Key);]
+  --@ExamCom[         function "<"(X,Y : Special_Key) return Boolean;]
 @end(Example)
 @end{Examples}
 
@@ -4201,18 +4201,18 @@ this:
       @key[type] T @key[is] (A, B, C, D);
       @key[function] F( X : T := A ) @key[return] Integer;
       @key[type] NT @key[is] @key[new] T;
-      --@RI{ inherits F as}
-      --@RI{ function F( X : NT := A ) return Integer;}
-      --@RI{ in Ada 95 only}
+      --@ExamCom{ inherits F as}
+      --@ExamCom{ function F( X : NT := A ) return Integer;}
+      --@ExamCom{ in Ada 95 only}
       ...
    @key[end] P;
    ...
-   @key[use] P;  --@RI{ Only one declaration of F from P is use-visible in}
-           --@RI{ Ada 83;  two declarations of F are use-visible in}
-           --@RI{ Ada 95.}
+   @key[use] P;  --@ExamCom{ Only one declaration of F from P is use-visible in}
+           --@ExamCom{ Ada 83;  two declarations of F are use-visible in}
+           --@ExamCom{ Ada 95.}
 @key[begin]
    ...
-   @key[if] F > 1 @key[then] ... --@RI{ legal in Ada 83, ambiguous in Ada 95}
+   @key[if] F > 1 @key[then] ... --@ExamCom{ legal in Ada 83, ambiguous in Ada 95}
 @end{Example}
 @end{Incompatible83}
 
@@ -4794,7 +4794,7 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
 @AttributeLeading{Prefix=<S>, AttrName=<Min>,
   Text=[S'Min denotes a function with the following specification:
 @begin(Descexample)
-@b(function) S'Min(@RI(Left), @RI(Right) : S'Base)
+@b(function) S'Min(@VirtName(Left), @VirtName(Right) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
@@ -4814,7 +4814,7 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
 @AttributeLeading{Prefix=<S>, AttrName=<Max>,
   Text=[S'Max denotes a function with the following specification:
 @begin(Descexample)
-@b(function) S'Max(@RI(Left), @RI(Right) : S'Base)
+@b(function) S'Max(@VirtName(Left), @VirtName(Right) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
@@ -4823,61 +4823,63 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
 @AttributeLeading{Prefix=<S>, AttrName=<Succ>,
   Text=[S'Succ denotes a function with the following specification:
 @begin(Descexample)
-@b(function) S'Succ(@RI(Arg) : S'Base)
+@b(function) S'Succ(@VirtName(Arg) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
      @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
      For an enumeration type, the function returns the value
-     whose position number is one more than that of the value of @i(Arg);
+     whose position number is one more than that of the value of @VirtName(Arg);
      @IndexCheck{Range_Check}
      Constraint_Error is raised if there is no such value of the type.
      For an integer type, the function returns the result of
-     adding one to the value of @i(Arg).
+     adding one to the value of @VirtName(Arg).
      For a fixed point type, the function returns the result of
-     adding @i(small) to the value of @i(Arg).
+     adding @i(small) to the value of @VirtName(Arg).
      For a floating point type, the
      function returns the machine number (as defined
      in @RefSecNum(Floating Point Types))
-     immediately above the value of @i(Arg);
+     immediately above the value of @VirtName(Arg);
      @IndexCheck{Range_Check}
      Constraint_Error is raised if there is no such machine number.]}
      @begin{Ramification}
-S'Succ for a modular integer subtype wraps around
-       if the value of @i(Arg) is S'Base'Last. S'Succ for a signed integer
-       subtype might raise Constraint_Error if the value of @i(Arg) is
+       S'Succ for a modular integer subtype wraps around if the value of
+       @VirtName(Arg) is S'Base'Last. S'Succ for a signed integer
+       subtype might raise Constraint_Error if the value of @VirtName(Arg) is
        S'Base'Last, or it might return the out-of-base-range value
-       S'Base'Last+1, as is permitted for all predefined numeric operations.@end{ramification}
+       S'Base'Last+1, as is permitted for all predefined numeric operations.
+     @end{ramification}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Pred>,
   Text=[S'Pred denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Pred(@RI(Arg) : S'Base)
+@b(function) S'Pred(@VirtName(Arg) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
      @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
      For an enumeration type, the function returns the value
-     whose position number is one less than that of the value of @i(Arg);
+     whose position number is one less than that of the value of @VirtName(Arg);
      @IndexCheck{Range_Check}
      Constraint_Error is raised if there is no such value of the type.
      For an integer type, the function returns the result of
-     subtracting one from the value of @i(Arg).
+     subtracting one from the value of @VirtName(Arg).
      For a fixed point type, the function returns the result of
-     subtracting @i(small) from the value of @i(Arg).
+     subtracting @i(small) from the value of @VirtName(Arg).
      For a floating point type, the
      function returns the machine number (as defined
      in @RefSecNum(Floating Point Types))
-     immediately below the value of @i(Arg);
+     immediately below the value of @VirtName(Arg);
      @IndexCheck{Range_Check}
      Constraint_Error is raised if there is no such machine number.]}
      @begin{Ramification}
-S'Pred for a modular integer subtype wraps around
-       if the value of @i(Arg) is S'Base'First. S'Pred for a signed integer
-       subtype might raise Constraint_Error if the value of @i(Arg) is
+       S'Pred for a modular integer subtype wraps around if the value of
+       @VirtName(Arg) is S'Base'First. S'Pred for a signed integer
+       subtype might raise Constraint_Error if the value of @VirtName(Arg) is
        S'Base'First, or it might return the out-of-base-range value
-       S'Base'First@en@;1, as is permitted for all predefined numeric operations.@end{ramification}
+       S'Base'First@en@;1, as is permitted for all predefined numeric operations.
+     @end{ramification}
 
 @ChgAttribute{Version=[5],Kind=[DeletedAddedNoDelMsg],ChginAnnex=[T],
   Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI12-0020-1],
@@ -4888,7 +4890,7 @@ S'Pred for a modular integer subtype wraps around
 @begin(Descexample)
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@b(function) S'Wide_Wide_Image(@RI(Arg) : S'Base)
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@b(function) S'Wide_Wide_Image(@VirtName(Arg) : S'Base)
   @b(return) Wide_Wide_String]}]}
 @end(Descexample)
 
@@ -4896,7 +4898,7 @@ S'Pred for a modular integer subtype wraps around
      @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0020-1]}
      @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
      @Defn2{Term=[image], Sec=(of a value)}function returns an @i(image)
-     of the value of @i(Arg),
+     of the value of @VirtName(Arg),
      that is, a sequence of characters representing the value in display
      form.]}]}]}@Comment{End of Annex text here.}
      @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
@@ -5029,7 +5031,7 @@ S'Pred for a modular integer subtype wraps around
 
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[5],Text=[@b(function) S'Wide_Image(@RI(Arg) : S'Base)
+@ChgDeleted{Version=[5],Text=[@b(function) S'Wide_Image(@VirtName(Arg) : S'Base)
   @b(return) Wide_String]}
 @end(Descexample)
 
@@ -5038,7 +5040,7 @@ S'Pred for a modular integer subtype wraps around
      @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0020-1]}
      @ChgDeleted{Version=[5],NoPrefix=[T],Text=[@Defn2{Term=[image], Sec=(of a value)}
      The function returns an @Chg{Version=[2],New=[image],Old=[@i(image)]} of
-     the value of @i(Arg)@Chg{Version=[2],New=[ as a Wide_String],Old=[,
+     the value of @VirtName(Arg)@Chg{Version=[2],New=[ as a Wide_String],Old=[,
      that is, a sequence of characters representing the value in display
      form]}.]}]}@Comment{End of Attribute Annex text}
      @ChgDeleted{Version=[5],Text=[The lower bound of the result is
@@ -5176,14 +5178,15 @@ message should be deleted if the paragraphs are ever renumbered.}
 
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[5],Text=[@b(function) S'Image(@RI(Arg) : S'Base)
+@ChgDeleted{Version=[5],Text=[@b(function) S'Image(@VirtName(Arg) : S'Base)
   @b(return) String]}
 @end(Descexample)
 
      @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
      @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
      @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0020-1]}
-     @ChgDeleted{Version=[5],NoPrefix=[T],Text=[The function returns an image of the value of @i(Arg)
+     @ChgDeleted{Version=[5],NoPrefix=[T],Text=[The function returns an image
+     of the value of @VirtName(Arg)
      as a String.]}]}@Comment{End of Attribute Annex text.}
      @ChgDeleted{Version=[5],Text=[The lower bound of the result is one. The
      image has the same sequence of graphic characters as that defined
@@ -5192,7 +5195,7 @@ message should be deleted if the paragraphs are ever renumbered.}
      otherwise@Chg{Version=[3],New=[,],Old=[]}
      the sequence of characters is implementation defined (but
      no shorter than that of S'@Chg{Version=[2],New=[Wide_Wide_Image],
-     Old=[Wide_Image]} for the same value of @i(Arg)).]}
+     Old=[Wide_Image]} for the same value of @VirtName(Arg)).]}
 
      @ChgImplDef{Version=[5],Kind=[DeletedNoDelMsg],
      InitialVersion=[0],Text=[@Chg{Version=[5],New=[],Old=[The
@@ -5233,7 +5236,7 @@ message should be deleted if the paragraphs are ever renumbered.}
      with the following specification:],Old=[]}
 @begin(Descexample)
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@b(function) S'Wide_Wide_Value(@RI(Arg) : Wide_Wide_String)
+@ChgAdded{Version=[2],Text=[@b(function) S'Wide_Wide_Value(@VirtName(Arg) : Wide_Wide_String)
   @b(return) S'Base]}
 @end(Descexample)
     @ChgRef{Version=[2],Kind=[Added]}
@@ -5348,7 +5351,7 @@ message should be deleted if the paragraphs are ever renumbered.}
   Text=[S'Wide_Value denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Wide_Value(@RI(Arg) : Wide_String)
+@b(function) S'Wide_Value(@VirtName(Arg) : Wide_String)
   @b(return) S'Base
 @end(Descexample)
 
@@ -5373,9 +5376,9 @@ message should be deleted if the paragraphs are ever renumbered.}
     @IndexCheck{Range_Check}
     otherwise@Chg{Version=[3],New=[,],Old=[]} Constraint_Error is raised.
     @Chg{Version=[2],New=[For a numeric subtype S,
-    the evaluation of a call on S'Wide_Value with @i(Arg) of type Wide_String
-    is equivalent to a call on S'Wide_Wide_Value for a corresponding
-    @i(Arg) of type Wide_Wide_String.],Old=[]}
+    the evaluation of a call on S'Wide_Value with @VirtName(Arg) of type
+    Wide_String is equivalent to a call on S'Wide_Wide_Value for a corresponding
+    @VirtName(Arg) of type Wide_Wide_String.],Old=[]}
     @begin{Discussion}
       @ChgRef{Version=[2],Kind=[Deleted]}
       @ChgDeleted{Version=[2],Text=[It's not crystal clear that Range_Check
@@ -5482,7 +5485,7 @@ paragraphs are ever renumbered.}
   Text=[S'Value denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Value(@RI(Arg) : String)
+@b(function) S'Value(@VirtName(Arg) : String)
   @b(return) S'Base
 @end(Descexample)
 
@@ -5506,9 +5509,9 @@ paragraphs are ever renumbered.}
     @IndexCheck{Range_Check}
     otherwise@Chg{Version=[3],New=[,],Old=[]} Constraint_Error is raised.
     For a numeric subtype S,
-    the evaluation of a call on S'Value with @i(Arg) of type String
+    the evaluation of a call on S'Value with @VirtName(Arg) of type String
     is equivalent to a call on S'@Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} for a corresponding
-    @i(Arg) of type @Chg{Version=[2],New=[Wide_Wide_String],Old=[Wide_String]}.
+    @VirtName(Arg) of type @Chg{Version=[2],New=[Wide_Wide_String],Old=[Wide_String]}.
     @begin(Reason)
       @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
        S'Value is subtly different from S'@Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} for enumeration
@@ -5698,9 +5701,9 @@ Constraint_Error.
 -10 .. 10
 X .. X + 1
 0.0 .. 2.0*Pi
-Red .. Green     --@RI[ see @RefSecNum{Enumeration Types}]
-1 .. 0           --@RI[ a null range]
-Table'Range      --@RI[ a range attribute reference (see @RefSecNum{Array Types})]
+Red .. Green     --@ExamCom[ see @RefSecNum{Enumeration Types}]
+1 .. 0           --@ExamCom[ a null range]
+Table'Range      --@ExamCom[ a range attribute reference (see @RefSecNum{Array Types})]
 
 @end{Example}
 @Leading@keepnext@i(Examples of range constraints:)
@@ -6537,7 +6540,7 @@ the following @Chg{Version=[2],New=[attributes are],Old=[attribute is]} defined:
 
 @begin(Descexample)
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@key{function} S'Mod (@RI{Arg} : @RI{universal_integer})
+@ChgAdded{Version=[2],Text=[@key{function} S'Mod (@VirtName{Arg} : @VirtName{universal_integer})
   @key{return} S'Base]}
 @end(Descexample)
 
@@ -6749,8 +6752,8 @@ signed integer types match "@key(type) T @key(is range) <>;"
 @key(subtype) Column_Ptr  @key(is) Line_Size @key(range) 1 .. 10;
 @key(subtype) Buffer_Size @key(is) Integer   @key(range) 0 .. Max;
 
-@key(type) Byte        @key(is) @key(mod) 256; --@RI[ an unsigned byte]
-@key(type) Hash_Index  @key(is) @key(mod) 97;  --@RI[ modulus is prime]
+@key(type) Byte        @key(is) @key(mod) 256; --@ExamCom[ an unsigned byte]
+@key(type) Hash_Index  @key(is) @key(mod) 97;  --@ExamCom[ modulus is prime]
 @end(Example)
 @end{Examples}
 
@@ -6831,24 +6834,24 @@ the following attributes are defined:
 @AttributeLeading{Prefix=<S>, AttrName=<Pos>,
   Text=[S'Pos denotes a function with the following specification:
 @begin(Descexample)
-@b(function) S'Pos(@RI(Arg) : S'Base)
-  @b(return) @RI(universal_integer)
+@b(function) S'Pos(@VirtName(Arg) : S'Base)
+  @b(return) @VirtName(universal_integer)
 @end(Descexample)
 
      @NoPrefix@;This function returns the position number of the value
-     of @i(Arg), as a value of type @i(universal_integer).]}
+     of @VirtName(Arg), as a value of type @i(universal_integer).]}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Val>,
   Text=[S'Val denotes a function with the following specification:
 @begin(Descexample)
-@b(function) S'Val(@RI(Arg) : @RI(universal_integer))
+@b(function) S'Val(@VirtName(Arg) : @VirtName(universal_integer))
   @b(return) S'Base
 @end(Descexample)
 
      @NoPrefix@PDefn2{Term=(evaluation), Sec=(Val)}
      @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
      This function returns a value of the type of S
-     whose position number equals the value of @i(Arg).]}
+     whose position number equals the value of @VirtName(Arg).]}
      @IndexCheck{Range_Check}
      For the evaluation of a call on S'Val, if there
      is no value in the base range of its type with the given
@@ -6983,7 +6986,7 @@ are satisfied (in the absence of an exception) by these attributes:
 @begin{Examples}
 @Leading@keepnext@i(Examples of attributes of discrete subtypes: )
 @begin(Example)
---@RI[  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
+--@ExamCom[  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
 
 --  Color'First   = White,   Color'Last   = Black
 --  Rainbow'First = Red,     Rainbow'Last = Blue
@@ -7380,7 +7383,7 @@ Overflow_Checks, never Range_Checks.
 @key(type) Real @key(is) @key(digits) 8;
 @key(type) Mass @key(is) @key(digits) 7 @key(range) 0.0 .. 1.0E35;
 
-@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;   --@RI[   a subtype with a smaller range]
+@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;   --@ExamCom[   a subtype with a smaller range]
 @end(Example)
 @end{Examples}
 
@@ -7762,14 +7765,14 @@ of Float_IO).
 @begin(Example)
 @key(type) Volt @key(is) @key(delta) 0.125 @key(range) 0.0 .. 255.0;
 
-  -- @RI[A pure fraction which requires all the available]
-  -- @RI[space in a word can be declared as the type Fraction:]
+  -- @ExamCom[A pure fraction which requires all the available]
+  -- @ExamCom[space in a word can be declared as the type Fraction:]
 @key(type) Fraction @key(is) @key(delta) System.Fine_Delta @key(range) -1.0 .. 1.0;
-  -- @RI[Fraction'Last = 1.0 @en System.Fine_Delta]
+  -- @ExamCom[Fraction'Last = 1.0 @en System.Fine_Delta]
 
-@key(type) Money @key(is) @key(delta) 0.01 @key(digits) 15;  -- @RI[decimal fixed point]
+@key(type) Money @key(is) @key(delta) 0.01 @key(digits) 15;  -- @ExamCom[decimal fixed point]
 @key(subtype) Salary @key(is) Money @key(digits) 10;
-  -- @RI[Money'Last = 10.0**13 @en 0.01, Salary'Last = 10.0**8 @en 0.01]
+  -- @ExamCom[Money'Last = 10.0**13 @en 0.01, Salary'Last = 10.0**8 @en 0.01]
 @end(Example)
 @end{Examples}
 
@@ -7941,7 +7944,7 @@ evaluation rules.]}
   Text=[S'Round denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Round(@RI(X) : @RI(universal_real))
+@b(function) S'Round(@VirtName(X) : @VirtName(universal_real))
   @b(return) S'Base
 @end(Descexample)
 
