@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/07/06 03:35:26 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.137 $}
+@Comment{$Revision: 1.138 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -55,7 +55,7 @@ size or alignment of an object.]}>}
   Def=[an aspect that indicates a logical property 
        of an entity, such as the precondition of a subprogram, or the 
        procedure used to write a given type of object to a stream]}
-@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[representation aspect],
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[representation aspect],
   Def=[an aspect that indicates how an entity is mapped onto the underlying 
        hardware, for example the size or alignment of an object]}
 

@@ -1,8 +1,8 @@
 @Part(RM_Term, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2022/07/06 03:35:26 $}
 @Comment{$Source: e:\\cvsroot/ARM/Source/rm_term.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @Comment{The RM version of "Terms and Definitions". Note that the ISO version 
 only shares generated content, so we don't try to share any part of this
@@ -121,7 +121,7 @@ tests was previously known as the Ada Compiler Validation Capability (ACVC).],Ol
 
 @AddedTermList{Version=[5],Group=[S]}
 
-@LabeledAddedSubClause{Version=[5],Name=[Other Syntactic constructs]}
+@LabeledAddedSubClause{Version=[5],Name=[Other Syntactic Constructs]}
 
 @AddedTermList{Version=[5],Group=[C]}
 

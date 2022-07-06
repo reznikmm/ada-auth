@@ -1,6 +1,6 @@
 @Part(iso_foreword, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/iso_foreword.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2022/05/14 04:06:52 $}
+@comment{$Revision: 1.2 $ $Date: 2022/07/06 03:35:26 $}
 
 @UnNumberedSection(Foreword)
 
@@ -25,7 +25,7 @@ The procedures used to develop this document and those intended for its further
 maintenance are described in the ISO/IEC Directives, Part 1. In particular, the
 different approval criteria needed for the different types of document should
 be noted. This document was drafted in accordance with the editorial rules of
-the ISO/IEC Directives, Part 2 (see @Urllink{URL=[https://www.iso.org/directives],
+the ISO/IEC Directives, Part@ 2 (see @Urllink{URL=[https://www.iso.org/directives],
 Text=[www.iso.org/directives]} or @Urllink{URL=[https://www.iec.ch/members_experts/refdocs],
 Text=[www.iec.ch/members_experts/refdocs]}).
 
@@ -48,9 +48,9 @@ Technical Barriers to Trade (TBT) see
 In the IEC, see @Urllink{URL=[https://www.iec.ch/understanding-standards],
 Text=[www.iec.ch/understanding-standards]}.
 
-This document was prepared by Joint Technical Committee ISO/IEC JTC 1, 
-Information technology, Subcommittee SC 22, Programming languages, their 
-environments and system software interfaces. This fourth edition cancels 
+This document was prepared by Joint Technical Committee ISO/IEC JTC@ 1,
+Information technology, Subcommittee SC@ 22, Programming languages, their
+environments and system software interfaces. This fourth edition cancels
 and replaces the third edition (ISO/IEC 8652:2012), which has been technically
 revised. It also incorporates Technical Corrigendum ISO/IEC 8652:2012:Cor.1:2016.
 
@@ -58,4 +58,3 @@ revised. It also incorporates Technical Corrigendum ISO/IEC 8652:2012:Cor.1:2016
 
 @end{ISOOnly}@Comment{End ISO boilerplate}
 @end{Intro}
-

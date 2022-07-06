@@ -1,8 +1,8 @@
 @Part(RM_Term, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2022/07/06 03:35:26 $}
 @Comment{$Source: e:\\cvsroot/ARM/Source/iso_term.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @Comment{The ISO version of "Terms and Definitions". Note that the RM version 
 only shares generated content, so we don't try to share any part of this
@@ -41,7 +41,7 @@ in standardization at the following addresses:]}
 
 @AddedTermList{Version=[5],Group=[S]}
 
-@LabeledAddedClause{Version=[5],Name=[Other Syntactic constructs]}
+@LabeledAddedClause{Version=[5],Name=[Other Syntactic Constructs]}
 
 @AddedTermList{Version=[5],Group=[C]}
 

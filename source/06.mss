@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/07/06 03:35:26 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.165 $}
+@Comment{$Revision: 1.166 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -6172,7 +6172,7 @@ When aspect No_Return is True for an entity, the entity is said to be
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0423-1]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
 @nt{aspect_definition} shall be a static expression. @Chg{Version=[5],New=[When
-not directly specified, if the subprogram is primitive subprogram inherited by
+not directly specified, if the subprogram is a primitive subprogram inherited by
 a derived type, then the aspect is True if any corresponding subprogram of the
 parent or progenitor types is nonreturning. Otherwise],Old=[@Redundant[This
 aspect is never inherited;] if not directly specified]}, the aspect is False.]}

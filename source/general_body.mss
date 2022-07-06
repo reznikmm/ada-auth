@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2022/07/06 03:35:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/general_body.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @Comment{The clause header is found in General.Mss. Other parts are found
 in other files, depending upon the version. Note that the subclause labeled
@@ -12,10 +12,16 @@ in other files, depending upon the version. Note that the subclause labeled
 @LabeledRevisedSubClauseISOCLause{Version=[0],New=[Structure],Old=[Structure]}
 
 @begin{Intro}
+@begin{NotISO}@Comment{The organization differs from ISO and non-ISO versions, so we need different versions of this text}
 @Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 This @IntlStdName contains thirteen @Chg{Version=[3],New=[clauses],Old=[sections]},
 @Chg{Version=[3],New=[fifteen],Old=[fourteen]} annexes,
 and an index.
+@end{NotISO}
+@begin{ISOOnly}
+This @IntlStdName contains sixteen clauses,
+fourteen annexes, a bibliography, and an index.
+@end{ISOOnly}
 
 @begin{Discussion}
 @Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
@@ -30,8 +36,13 @@ in this @StdTitle. Confused yet? This terminology is out of our hands; it is
 @Leading@Defn{core language}
 The @i{core} of the Ada language consists of:
 @begin{Itemize}
+@begin{NotISO}@Comment{The organization differs from ISO and non-ISO versions, so we need different versions of this text}
 @Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Chg{Version=[3],New=[Clauses],Old=[Sections]} 1 through 13
+@end{NotISO}
+@begin{ISOOnly}
+Clauses 1 through 16
+@end{ISOOnly}
 
 @RefSec{Predefined Language Environment}
 

@@ -1,6 +1,6 @@
 @Part(foreword_tail, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/foreword_tail.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2022/05/14 04:06:52 $}
+@comment{$Revision: 1.2 $ $Date: 2022/07/06 03:35:26 $}
 
 @Comment{This file contains the ending shared part of the Foreword.}
 @Comment{The beginning of the Foreword is found in ISO_Forward.mss and RM_Forward.mss}
@@ -42,7 +42,7 @@ Default_Initial_Condition aspect.]}
 @ChgAdded{Version=[5],Text=[The behavior of many predefined container operations
 is now more precisely specified by using pre- and postcondition specifications
 instead of English descriptions; a restricted (@lquotes@;stable@rquotes)
-view for most containers is introduced to support more efficient 
+view for most containers is introduced to support more efficient
 iteration.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0313-1],ARef=[AI12-0441-1]}
@@ -79,7 +79,7 @@ new value.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0313-1],ARef=[AI12-0441-1]}
 @ChgAdded{Version=[5],Text=[Declare expressions are provided that permit the
-definition and use of local constants or renamings, to allow a large expression 
+definition and use of local constants or renamings, to allow a large expression
 to be simplified by defining common parts as named entities.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0313-1],ARef=[AI12-0441-1]}
@@ -108,7 +108,7 @@ profile.]}
 
 @begin{ISOOnly}@Comment{Rest of ISO boilerplate}
 
-Any feedback or questions on this document should be directed to the user’s 
+Any feedback or questions on this document should be directed to the user's
 national standards body. A complete listing of these bodies can be found at
 @Urllink{URL=[https://www.iso.org/members.html],Text=[www.iso.org/members.html]}
 and @Urllink{URL=[https://www.iec.ch/national-committees],
