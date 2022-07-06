@@ -1,10 +1,10 @@
 @Part(01, Root="ada.mss")
 
 @LabeledSection{General}
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/general.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -40,7 +40,7 @@ number generation.]}
 This Annotated Ada Reference Manual (AARM) contains the entire text of
 the @Chg{Version=[3],New=[third edition of the ],Old=[]}Ada Reference
 Manual @Chg{Version=[5],New=[as updated
-for Ada 202x (referred to here as the Ada 202x RM)],
+for Ada 2022 (referred to here as the Ada 2022 RM)],
 Old=[@Chg{Version=[4],New=[as updated by Technical Corrigendum 1],
 Old=[]}@Chg{Version=[3],New=[ (the
 Ada 2012 RM],Old=[@Chg{Version=[2],New=[with
@@ -52,7 +52,7 @@ and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
 Differences between Ada 83@Chg{Version=[2],New=[, Ada 95,
-@Chg{Version=[3],New=[],Old=[and ]}Ada 2005@Chg{Version=[3],New=[@Chg{Version=[5],New=[, Ada 2012, and Ada 202x],Old=[, and Ada
+@Chg{Version=[3],New=[],Old=[and ]}Ada 2005@Chg{Version=[3],New=[@Chg{Version=[5],New=[, Ada 2012, and Ada 2022],Old=[, and Ada
 2012]}],Old=[]}],Old=[ and Ada 95]} are listed.
 (The text you are reading now is an annotation.)
 
@@ -63,7 +63,7 @@ readability and understandability.
 We're not trying to make the language @lquotes@;appear@rquotes@; simple here;
 on the contrary, we're trying to expose hidden complexities,
 so we can more easily detect language bugs.
-The @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}, on the other hand, is intended to be a more
+The @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}, on the other hand, is intended to be a more
 readable document for programmers.
 
 @Leading@keepnext@;The annotations in the AARM are as follows:
@@ -73,12 +73,12 @@ readable document for programmers.
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
 Technically, such text could be written as a @NotesName
-in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[2005]} RM
+in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[2005]} RM
 (and the Ada 95 @Chg{Version=[3],New=[and 2005 RMs],Old=[RM]} before it)],Old=[RM95]},
 since it is really a theorem that can
 be proven from the nonredundant rules of the language.
 We use the square brackets instead when it seems to make the
-@Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]} more readable.
+@Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[2005]} RM],Old=[RM95]} more readable.
 
 The rules of the language (and some AARM-only text) are categorized,
 and placed under certain @i{sub-headings} that indicate
@@ -125,7 +125,7 @@ The unlabeled text at the beginning of each clause or subclause,
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
 Text under the following sub-headings
-does not appear in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}:
+does not appear in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}:
 @begin(Inneritemize)
 @MetaRulesTitle,
 
@@ -220,13 +220,20 @@ These are the only annotations that could be considered part of the
 language definition.
 @end{Honest}
 @begin{GlossaryMarker}
-The text of a Glossary entry @em this text will also appear
-in @RefSec{Glossary}.
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0443-1]}
+@ChgDeleted{Version=[5],Text=[The text of a Glossary entry @em this text will
+also appear in @RefSec{Glossary}.]}@ChgNote{The Glossary is replaced by
+Terms and Definitions starting in Ada 2022}
 @end{GlossaryMarker}
+@begin{TermMarker}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0443-1]}
+@ChgAdded{Version=[5],Text=[The text of a Term and Definition entry @em this
+text will also appear in @RefSec{Terms and Definitions}.]}
+@end{TermMarker}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
-In general, @Chg{Version=[2],New=[the Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]} text appears in the normal font,
+In general, @Chg{Version=[2],New=[the Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[2005]} RM],Old=[RM95]} text appears in the normal font,
 whereas AARM-only text appears in a smaller font.
 @NotesName@;s also appear in the smaller font,
 as recommended by ISO/IEC style guidelines.

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.79 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
+@comment{ $Revision: 1.80 $ $Date: 2022/06/21 06:08:02 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:49 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -17,9 +17,11 @@ The Numerics Annex specifies
    to other numeric performance requirements, which the Numerics Annex also
    specifies;
 
-   a mode (@lquotes@;relaxed mode@rquotes@;), in which no accuracy or other numeric performance
-   requirements need be satisfied, as for implementations not conforming to the
-   Numerics Annex;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
+   a mode (@lquotes@;relaxed mode@rquotes@;), in which
+   @Chg{Version=[5],New=[there are ],Old=[]}no accuracy or other numeric
+   performance requirements @Chg{Version=[5],New=[to],Old=[need]} be
+   satisfied, as for implementations not conforming to the Numerics Annex;
 
    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00296-01]}
    models of floating point and fixed point arithmetic on which the accuracy
@@ -493,8 +495,10 @@ or function in Numerics.Generic_Complex_Types, when Real'Signed_Zeros is True.}
 @end{ImplReq}
 
 @begin{ImplPerm}
-The nongeneric equivalent packages may, but need not, be actual
-instantiations of the generic package for the appropriate predefined type.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+The nongeneric equivalent packages @Chg{Version=[5],New=[can],Old=[may, but need not,]}
+be actual instantiations of the generic package for the appropriate predefined
+type@Chg{Version=[5],New=[, though that is not required],Old=[]}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0091]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
@@ -918,9 +922,11 @@ Complex_Types.Real'Signed_Zeros is True.}
 @end{ImplReq}
 
 @begin{ImplPerm}
-The nongeneric equivalent packages may, but need not, be actual
-instantiations of the generic package with the appropriate predefined
-nongeneric equivalent of Numerics.Generic_Complex_Types; if they are, then the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+The nongeneric equivalent packages @Chg{Version=[5],New=[can],Old=[may, but need not,]}
+be actual instantiations of the generic package with the appropriate predefined
+nongeneric equivalent of Numerics.Generic_Complex_Types@Chg{Version=[5],New=[, 
+though that is not required],Old=[]}; if they are, then the
 latter shall have been obtained by actual instantiation of
 Numerics.Generic_Complex_Types.
 
@@ -1381,7 +1387,9 @@ Implementations shall also provide the opposing mode, which is known as the
 Either mode may be the default mode.
 @ImplDef{Whether the strict mode or the relaxed mode is the default.}
 
-The two modes need not actually be different.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+The two modes @Chg{Version=[5],New=[can be one and the same],Old=[need not
+actually be different]}.
 @end{ImplPerm}
 
 @begin{Extend83}
@@ -3208,9 +3216,11 @@ Numerics.Generic_Real_Arrays shall be documented.]}]}
 @begin{ImplPerm}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[The nongeneric equivalent packages may, but need
-not, be actual instantiations of the generic package for the appropriate
-predefined type.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[The nongeneric equivalent packages
+@Chg{Version=[5],New=[can],Old=[may, but need not,]} be actual instantiations
+of the generic package for the appropriate predefined
+type@Chg{Version=[5],New=[, though that is not required],Old=[]}.]}
 
 @end{ImplPerm}
 
@@ -4333,14 +4343,21 @@ Numerics.Generic_Complex_Arrays shall be documented.]}]}
 @begin{ImplPerm}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[The nongeneric equivalent packages may, but need
-not, be actual instantiations of the generic package for the appropriate
-predefined type.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[The nongeneric equivalent packages
+@Chg{Version=[5],New=[can],Old=[may, but need not,]} be actual instantiations
+of the generic package for the appropriate predefined 
+type@Chg{Version=[5],New=[, though that is not required],Old=[]}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[2],Text=[Although many operations are defined in terms of
-operations from numerics.@!generic_complex_types, they need not be implemented by
-calling those operations provided that the effect is the same.]}
+operations from 
+@Chg{Version=[5],New=[Numerics.@!Generic_Complex_Types],Old=[numerics.@!generic_complex_types]},
+they @Chg{Version=[5],New=[can],Old=[need not]} be implemented by
+@Chg{Version=[5],New=[other operations that have],Old=[calling those
+operations provided that the effect is]} the
+same@Chg{Version=[5],New=[ effect],Old=[]}.]}
 @end{ImplPerm}
 
 @begin{ImplAdvice}

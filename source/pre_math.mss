@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:50 $}
+@Comment{$Date: 2022/06/21 06:08:03 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -355,8 +355,10 @@ shall be as follows:
 @end{ImplReq}
 
 @begin{ImplPerm}
-The nongeneric equivalent packages may, but need not, be actual
-instantiations of the generic package for the appropriate predefined type.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+The nongeneric equivalent packages @Chg{Version=[5],New=[can],Old=[may, but need not,]}
+be actual instantiations of the generic package for the appropriate
+predefined type@Chg{Version=[5],New=[, though that is not required],Old=[]}.
 @end{ImplPerm}
 
 @begin{DiffWord83}
@@ -601,8 +603,10 @@ testing or debugging purposes.
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0280-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 An object of the private type State can be used to hold the internal state of a
-generator. Such objects are only needed if the application is designed to
+generator. Such objects are only @Chg{Version=[5],New=[necessary],Old=[needed]}
+if the application is designed to
 save and restore generator states or to examine or manufacture
 them.@Chg{Version=[3],New=[ The implicit initial value of type State
 corresponds to the implicit initial value of all generators.],Old=[]}
@@ -716,14 +720,18 @@ image of any generator state raises Constraint_Error.]}
 
 @begin{Bounded}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0050],ARef=[AI95-00089]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[1],Text=[It is a bounded error to invoke Value with a
 string that is not the image of any generator
 state.@PDefn2{Term=(bounded error),Sec=(cause)}
 If the error is detected, Constraint_Error or
 Program_Error is raised. Otherwise, a call to Reset with the resulting state
 will produce a generator such that calls to Random with this generator will
-produce a sequence of values of the appropriate subtype, but which might not
-be random in character. That is, the sequence of values might not fulfill the
+produce a sequence of values of the appropriate subtype, but which
+@Chg{Version=[5],New=[are],Old=[might]} not
+@Chg{Version=[5],New=[necessarily],Old=[be]} random in character. That is,
+the sequence of values @Chg{Version=[5],New=[do],Old=[might]}
+not@Chg{Version=[5],New=[ necessarily],Old=[]} fulfill the
 implementation requirements of this subclause.]}
 @end{Bounded}
 
@@ -833,25 +841,54 @@ Different sequences of random numbers can be obtained from a given generator in
 different program executions by explicitly initializing the generator to a
 time-dependent state.
 
-A given implementation of the Random function in Numerics.Float_Random may or
-may not be capable of delivering the values 0.0 or 1.0. Portable applications
-should assume that these values, or values sufficiently close to them to behave
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+A given implementation of the Random function in Numerics.Float_Random 
+@Chg{Version=[5],New=[is not guaranteed to],Old=[may or may not]} be capable
+of delivering the values 0.0 or 1.0. @Chg{Version=[5],New=[Applications will be
+more portable if they],Old=[Portable applications should]} assume that these
+values, or values sufficiently close to them to behave
 indistinguishably from them, can occur. If a sequence of random integers from
-some fixed range is needed, the application should use the Random function in
+some @Chg{Version=[5],New=[],Old=[fixed ]}range is
+@Chg{Version=[5],New=[necessary],Old=[needed]}, @Chg{Version=[5],New=[it is 
+preferred that ],Old=[]}the
+application @Chg{Version=[5],New=[uses one of],Old=[should use]} the Random
+@Chg{Version=[5],New=[functions],Old=[function]} in
 an appropriate instantiation of Numerics.Discrete_Random, rather than
-transforming the result of the Random function in Numerics.Float_Random.
-However, some applications with unusual requirements, such as for a sequence of
+transforming the result of the Random function in 
+Numerics.Float_Random.@Chg{Version=[5],New=[],Old=[However, some applications
+with unusual requirements, such as for a sequence of
 random integers each drawn from a different range, will find it more convenient
 to transform the result of the floating point Random function. For
-@R[M] @geq 1, the expression
+@R[M] @geq 1, the expression]}
 @begin{Example}
-   Integer(Float(M) * Random(G)) mod M
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0442-1]}
+@ChgDeleted{Version=[5],Text=[   Integer(Float(M) * Random(G)) mod M]}
 @end{Example}
-
-@NoPrefix@;transforms the result of Random(G) to an integer uniformly distributed over the
-range 0 .. @R[M]@en@;1; it is valid even if Random delivers 0.0 or 1.0.
-Each value of the result range is possible, provided that M is not too large.
-Exponentially distributed (floating point) random numbers with mean and
+@begin{Reason}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0442-1]}
+@ChgAdded{Version=[5],Text=[One might think that a simple transformation of the
+result of the floating point Random function such as 
+@exam{Integer(Float(M) * Random(G)) @key[mod] M}
+would give a uniform distribution. But this is only true if the period
+of the underlying generator is a multiple of @exam{M}. (This usually requires
+that @exam{M} be a power of two.) In other cases, the @key[mod] operation maps slightly
+more random values to a some result values than others. It is easy to see
+this: consider a 4-bit random integer (with a range of 0 .. 15). If one @key[mod]s
+this by 6 to get a value in 0 .. 5 (to which one would add 1 to get the
+value of a die roll), 3 values would be mapped to each value 0 .. 3, but
+only 2 values would be mapped to 4 and 5. Even when the input is uniformly
+distributed, the output clearly is not. A similar effect occurs
+regardless of the number of bits in the random integer. Since it takes
+care to get this right, users should use the provided functions (which
+presumably do this correctly @en @AILink{AI=[AI12-0144-1],Text=[AI12-0144-1]}
+contains a correct algorithm) and resist the urge to @lquotes@;roll-their-own@rquotes.]}
+@end{Reason}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}@ChgNote{The remainder becomes a separate note in Ada 2022}
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[transforms the result of Random(G)
+to an integer uniformly distributed over the range 0 .. @R[M]@en@;1; it is valid
+even if Random delivers 0.0 or 1.0. Each value of the result range is possible,
+provided that M is not too large. ]}Exponentially distributed
+(floating point) random numbers with mean and
 standard deviation 1.0 can be obtained by the transformation
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}

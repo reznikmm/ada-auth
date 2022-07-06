@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -35,7 +35,7 @@ This @Chg{Version=[3],New=[subclause],Old=[clause]} is new to Ada 95.
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledRevisedSubClause{Version=[2],New=[The Packages Characters, Wide_Characters, and Wide_Wide_Characters],Old=[The Package Characters]}
 
 @begin{StaticSem}
@@ -276,8 +276,8 @@ character with position 95 ('_', known as Low_Line or Underscore).]}
 @ChgAdded{Version=[3],Text=[Is_Space@\True if Item is a character with
 position 32 (' ') or 160 (No_Break_Space).]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1]}
-@ChgAdded{Version=[5],Text=[Is_NFKC@\True if Item could be present in a string
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1],ARef=[AI12-0439-1]}
+@ChgAdded{Version=[5],Text=[Is_NFKC@\True if Item can be present in a string
 normalized to Normalization Form KC (as defined by Clause 21 of ISO/IEC
 10646:2017); this includes all characters except those with positions 160, 168,
 170, 175, 178, 179, 180, 181, 184, 185, 186, 188, 189, and 190.]}
@@ -1279,9 +1279,9 @@ False.]}
 @ChgAdded{Version=[5],Keepnext=[T],Text=[@key[function] Is_NFKC (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item could be present in a string normalized to Normalization Form
+designated by Item can be present in a string normalized to Normalization Form
 KC (as defined by Clause 21 of ISO/IEC 10646:2017), otherwise returns False.]}
 
 @begin{Reason}
@@ -1437,7 +1437,9 @@ standards in an ISO standard.)>}
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0266-1]}
-@ChgAdded{Version=[3],Text=[The results returned by these functions may depend
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+@ChgAdded{Version=[3],Text=[The results returned by these functions
+@Chg{Version=[5],New=[can],Old=[may]} depend
 on which particular version of the 10646 standard is supported by the
 implementation (see @RefSecNum{Character Set}).]}
 

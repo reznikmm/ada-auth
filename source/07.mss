@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:48 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.159 $}
+@Comment{$Revision: 1.160 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -19,6 +19,14 @@
 @IndexSee{Term=[encapsulation],See=(package)}
 @IndexSee{Term=[module],See=(package)}
 @IndexSeeAlso{Term=[class],See=(package)}]
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[package],
+  Def=[a program unit that defines the interface to a group of 
+       logically related entities, along with their implementation],
+  Note1=[Typically, a package contains the declaration of a type (often a
+         private type or private extension) along with the declarations of
+         primitive subprograms of the type, which can be called from outside
+         the package, while their inner workings remain hidden from outside
+         users.]}
 @end{Intro}
 
 @LabeledClause{Package Specifications and Declarations}
@@ -1007,11 +1015,12 @@ partial view of a type.
 @end{RunTime}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 The partial view of a type as declared by a @nt<private_type_declaration>
 is defined to be a composite view (in @RefSecNum{Types and Subtypes}).
-The full view of the type might or might not be composite.
-A private extension is also composite,
-as is its full view.
+The full view of the type @Chg{Version=[5],New=[can],Old=[might or might not]}
+be @Chg{Version=[5],New=[elementary or ],Old=[]}composite.
+A private extension is also composite, as is its full view.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 Declaring a private type with an @nt{unknown_discriminant_part} is a
@@ -1068,10 +1077,12 @@ a specific type.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 The ancestor type specified in a @nt<private_extension_declaration>
 and the parent type specified in the corresponding declaration
-of a record extension given in the private part need not be the
-same@Chg{Version=[2],New=[. If the ancestor
+of a record extension given in the private part @Chg{Version=[5],New=[can be
+different],Old=[need not be the
+same]}@Chg{Version=[2],New=[. If the ancestor
 type is not an interface type,],Old=[ @em]} the parent type of the full view
 can be any descendant of the ancestor type.
 In this case, for a primitive subprogram that is inherited from the
@@ -1083,13 +1094,16 @@ of the parent type of the full view.
 See @RefSecNum{Dispatching Operations of Tagged Types}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[If the ancestor type specified in a
 @nt{private_extension_declaration} is an
 interface type, the parent type can be any type so long as the full view is a
 descendant of the ancestor type. The progenitor types specified in a
 @nt{private_extension_declaration} and the progenitor types specified in the
-corresponding declaration of a record extension given in the private part need
-not be the same @em the only requirement is that the private extension and the
+corresponding declaration of a record extension given in the private part
+@Chg{Version=[5],New=[are not necessarily],Old=[need not be]}
+the same @em @Chg{Version=[5],New=[it is only necessary],Old=[the only
+requirement is]} that the private extension and the
 record extension be descended from the same set of interfaces.]}
 @end{Notes}
 
@@ -1367,12 +1381,13 @@ dispatch to an],Old=[An]} inherited subprogram that is not declared at
 all@Chg{Version=[3],New=[],Old=[cannot be named in a call and cannot be
 overridden, but for a tagged type, it is possible to dispatch to it]}.]
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 For a @nt{private_extension_declaration}, each inherited subprogram is
 declared immediately after the @nt{private_extension_declaration}
 if the corresponding declaration from the ancestor is visible at that
-place.
-Otherwise, the inherited subprogram is not declared for the private
-extension, @Redundant[though it might be for the full type].
+place. Otherwise, the inherited subprogram is not declared for the private
+extension, @Redundant[though it @Chg{Version=[5],New=[can],Old=[might]} be
+for the full type].
 @begin{Reason}
   @ChgRef{Version=[1],Kind=[Revised]}
   There is no need for the @lquotes@;earliest place
@@ -1562,7 +1577,8 @@ those defined by the visible part.
 Within these outside program units the type is just a private type
 or private extension,
 and any language rule that applies only to another class of types
-does not apply. The fact that the full declaration might implement
+does not apply. The fact that the full declaration
+@Chg{Version=[5],New=[can],Old=[might]} implement
 a private type with a type of a particular class (for example, as
 an array type) is relevant only
 within the declarative region of the package itself
@@ -1635,8 +1651,8 @@ operators.
 body of the function, an explicit conversion of X and Y to the
 subtype Natural is necessary to invoke the "<" operator of the parent
 type.
-Alternatively, the result of the function could be written as not (X
->= Y), since the operator ">=" is not redefined.
+Alternatively, the result of the function @Chg{Version=[5],New=[can],Old=[could]} 
+be written as @key[not] (X >= Y), since the operator ">=" is not redefined.
 
 @NoPrefix@;The value of the variable Last_Key, declared in the package body,
 remains unchanged between calls of the procedure Get_Key. (See also
@@ -1714,7 +1730,7 @@ specified with an @nt{aspect_specification} (see
    extension.@AspectDefn{Type_Invariant}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Type_Invariant],
-    Text=[@ChgAdded{Version=[3],Text=[A condition that must hold true for all
+    Text=[@ChgAdded{Version=[3],Text=[A condition that will hold true for all
       objects of a type.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
@@ -1745,10 +1761,15 @@ specified with an @nt{aspect_specification} (see
 @end{Reason}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Type_Invariant'Class],
-    Text=[@ChgAdded{Version=[3],Text=[A condition that must hold true for all
+    Text=[@ChgAdded{Version=[3],Text=[A condition that will hold true for all
       objects in a class of types.]}]}
 
 @end{Description}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[type invariant],
+  Def=[see invariant]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[invariant],
+  Def=[an assertion that is expected to be True for all objects of a given
+       private type when viewed from outside the defining package]}
 @end{Intro}
 
 @begin{Resolution}
@@ -2502,7 +2523,7 @@ work can be scheduled for weekends:}]}
   with invariant checks being added to routines that assume that they don't
   have them.@Chg{Version=[5],New=[ Note: The original wording was missing
   the restriction to the visible part of the package, this was added
-  later for Ada 202x.],Old=[]}]}
+  later for Ada 2022.],Old=[]}]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -2544,7 +2565,7 @@ work can be scheduled for weekends:}]}
 @end{DiffWord2012}
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledAddedSubClause{Version=[5],Name=[Default Initial Conditions]}
 
 
@@ -2568,13 +2589,15 @@ Default_Initial_Condition aspect is not inherited, but its effects are
 additive, as defined below.]],Old=[]}]}
 
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Default_Initial_Condition],
-  Text=[@ChgAdded{Version=[5],Text=[A condition that must hold true after
+  Text=[@ChgAdded{Version=[5],Text=[A condition that will hold true after
   the default initialization of an object.]}]}
 @end{Description}
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Default initial condition>,
 Text=<@ChgAdded{Version=[5],Text=[A default initial condition is a property that
 holds for every default-initialized object of a given type.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[default initial condition],
+  Def=[a property that holds for every default-initialized object of a given type]}
 @end{Intro}
 
 @begin{Resolution}
@@ -2744,8 +2767,10 @@ type.@Defn{stable property}@Defn2{Term=[property],Sec=[stable]}]}
 Text=<@ChgAdded{Version=[5],Text=[A stable property is a characteristic
 associated with objects of a given type that is preserved by many of the
 primitive operations of the type.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[stable property],
+  Def=[a characteristic associated with objects of a given type that is
+       preserved by many of the primitive operations of the type]}
 @end{Intro}
-
 @begin{StaticSem}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
@@ -3229,12 +3254,14 @@ corresponding full declaration:
 @end(itemize)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Redundant[A deferred constant declaration
   @Chg{Version=[3],New=[for which the],Old=[that is completed by
-  a @nt{pragma}]} Import @Chg{Version=[3],New=[aspect is True ],Old=[]}need
-  not appear in the visible part of a @nt{package_specification},
+  a @nt{pragma}]} Import @Chg{Version=[3],New=[aspect is 
+  True ],Old=[]}@Chg{Version=[5],New=[can],Old=[need not]} appear
+  @Chg{Version=[5],New=[anywhere that an @nt{object_declaration} is
+  allowed],Old=[in the visible part of a @nt{package_specification}]},
   and has no full constant declaration.]
-
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 The completion of a deferred constant declaration shall occur
@@ -3421,8 +3448,11 @@ make both the partial @i{and} full views limited.
   A nonlimited type is a @Chg{Version=[2],New=[],Old=[(view of a) ]}type for
   which
   @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[limited type],
+  Def=[a type for which copying (such as in an @nt{assignment_statement})
+       is not allowed],
+  Note1=[A nonlimited type is a type for which copying is allowed.]}
 @end{Intro}
-
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
@@ -3736,10 +3766,13 @@ we want to minimize disruption to Ada 95 implementations and users.],Old=[]}]}
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @Chg{Version=[2],New=[While it is allowed to write initializations of limited
 objects, such initializations never copy a limited object. The source of such an
-assignment operation must be an @nt<aggregate> or @nt<function_call>, and such
-@nt<aggregate>s and @nt<function_call>s must be built directly in the target
+assignment operation @Chg{Version=[5],New=[will],Old=[must]} be an
+@nt<aggregate> or @nt<function_call>, and such
+@nt<aggregate>s and @nt<function_call>s @Chg{Version=[5],New=[will],Old=[must]}
+be built directly in the target
 object@Chg{Version=[3],New=[ (see @RefSecNum{Assignment and Finalization})],Old=[]}.],
 Old=[@leading@keepnext@;The following are consequences of the rules for limited types:]}
 @begin{Honest}
@@ -3839,9 +3872,11 @@ circumstances.
 @end{Examples}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @i{Notes on the example:}
 In the example above, an outside subprogram making use of IO_Package
-may obtain a file name by calling Open and later use it in calls to
+@Chg{Version=[5],New=[can],Old=[may]} obtain a file name by calling Open and
+later use it in calls to
 Read and Write. Thus, outside the package, a file name obtained from
 Open acts as a kind of password; its internal properties (such as
 containing a numeric value) are not known and no other operations
@@ -3991,6 +4026,9 @@ a (nonlimited) controlled object.]
   Text=<A controlled type supports user-defined assignment and
   finalization.
   Objects are always finalized before being destroyed.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[controlled type],
+  Def=[a type that supports user-defined assignment and finalization],
+  Note1=[Objects are always finalized before being destroyed.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01],ARef=[AI95-00287-01]}
 Here's the basic idea of initialization, value adjustment, and finalization,
@@ -4357,11 +4395,13 @@ contract model violations.
 
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[When a function call
 or @nt{aggregate} is used to initialize an object, the
 result of the function call or @nt{aggregate} is an anonymous object, which
 is assigned into the newly-created object. For such an assignment,
-the anonymous object might be @i<built in place>,@Defn{built in place}@Seeother{Primary=[build-in-place],Other=[built in place]}
+the anonymous object @Chg{Version=[5],New=[may],Old=[might]} be
+@i<built in place>,@Defn{built in place}@Seeother{Primary=[build-in-place],Other=[built in place]}
 in which case the assignment does not involve any copying.
 Under certain circumstances, the anonymous object is required to be built in
 place. In particular:]}
@@ -4649,9 +4689,11 @@ controlled types.]}
 @end{Ramification}
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Chg{Version=[3],New=[If],Old=[For an @nt{assignment_statement} that assigns to]}
 an object @Chg{Version=[3],New=[is assigned ],Old=[]}the value of that same
-object, the implementation need not do anything.
+object, the implementation @Chg{Version=[5],New=[may omit the 
+entire assignment],Old=[need not do anything]}.
 @begin{Ramification}
   In other words, even if an object is controlled and a combination
   of Finalize and Adjust on the object might have a net
@@ -4685,6 +4727,7 @@ component assignments is not harmful.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00147-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Chg{Version=[3],New=[The],Old=[For an @nt{aggregate} or function call whose
 value is assigned into a target object,
 the implementation need not create a separate anonymous object if
@@ -4692,11 +4735,12 @@ it can safely create the value of
 the @nt{aggregate} or function call
 directly in the target object.
 Similarly, for an @nt{assignment_@!statement}, the]}
-implementation need not create an anonymous object if
+implementation @Chg{Version=[5],New=[may avoid creating],Old=[need not create]}
+an anonymous object if
 the value being assigned is the result of evaluating a @nt{name}
 denoting an object (the source object) whose storage cannot overlap
-with the target. If the source object might overlap with the
-target object, then the implementation can avoid the need for
+with the target. If the source object @Chg{Version=[5],New=[can],Old=[might]}
+overlap with the target object, then the implementation can avoid the need for
 an intermediary anonymous object by exercising one of the
 above permissions and perform the assignment one component
 at a time (for an overlapping array assignment), or not at all
@@ -4984,13 +5028,22 @@ complete, and before it is left.
 Text=<@ChgAdded{Version=[5],Text=[A master is the execution of a master 
 construct. Each object and task is associated with a master. When a master 
 is left, associated tasks are awaited and associated objects are finalized.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[R],Term=[master],
+  Def=[the execution of a master construct],
+  Note1=[Each object and task is associated with a master. When a master is
+         left, associated tasks are awaited and associated objects are
+         finalized.]}
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Master construct>,
 Text=<@ChgAdded{Version=[5],Text=[ A master construct is one of certain 
 executable constructs listed in @RefSecNum{Completion and Finalization}. 
 Execution of a master construct is a master, with which objects and tasks 
 are associated for the purposes of waiting and finalization.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[master construct],
+  Def=[one of certain executable constructs for which 
+       there can be objects or tasks whose lifetime ends when the construct
+       completes],
+  Note1=[Execution of a master construct is a master, with which objects and
+         tasks are associated for the purposes of waiting and finalization.]}
 @Defn2{Term=[finalization], Sec=(of a master)}
 For the @i{finalization} of a master,
 dependent tasks are first awaited,
@@ -5447,12 +5500,15 @@ Program_Error is raised at that point.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @Chg{New=[For an Adjust invoked as part of @Chg{Version=[2],New=[assignment
 operations other than those invoked as part of an @nt{assignment_statement}],
-Old=[the initialization of a controlled object]}, other adjustments due to be
-performed might or might not be performed, and then Program_Error is raised.
-During its propagation, finalization might or
-might not be applied to objects whose Adjust failed.],Old=[]}
+Old=[the initialization of a controlled object]},
+@Chg{Version=[5],New=[some of the],Old=[other]} adjustments due to be
+performed @Chg{Version=[5],New=[can],Old=[might or might not]} be performed,
+and then Program_Error is raised.
+During its propagation, finalization @Chg{Version=[5],New=[may],Old=[might or
+might not]} be applied to objects whose Adjust failed.],Old=[]}
 @Defn2{Term=[Program_Error],Sec=(raised by failed finalization)}
 For an Adjust invoked as part of an @Chg{Version=[2],New=[@nt{assignment_statement}],
 Old=[assignment @Chg{New=[statement],Old=[operation]}]}, any other adjustments
@@ -5707,9 +5763,9 @@ a controlled object, even if Finalize was called earlier,
 either explicitly or as part of an assignment; hence,
 if a controlled type is visibly controlled (implying that its Finalize
 primitive is directly callable), or is nonlimited (implying that
-assignment is allowed), its Finalize procedure should be
-designed to have no ill effect if it is applied a second time
-to the same object.
+assignment is allowed), its Finalize procedure
+@Chg{Version=[5],New=[is ideally],Old=[should be]} designed to have no
+ill effect if it is applied a second time to the same object.
 @begin{Discussion}
   Or equivalently, a Finalize procedure
   should be @lquotes@;idempotent@rquotes@;;

@@ -1,11 +1,11 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:47 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Type Conversions}
 
 @begin{Intro}
@@ -1035,20 +1035,22 @@ performed as above for a value conversion.
   and has discriminants that were not inherited from
   the target type;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
   If the target type is tagged, then an assignment to the
   view assigns to the corresponding part of the object denoted
   by the operand; otherwise, an assignment to the view
   assigns to the object, after converting
   the assigned value to the subtype of the object (which
-  might raise Constraint_Error);
+  @Chg{Version=[5],New=[can],Old=[might]} raise Constraint_Error);
   @PDefn2{Term=[implicit subtype conversion],Sec=(assignment to view conversion)}
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0074-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
   Reading the value of the view yields the result of converting
   the value of the operand object to the target subtype
-  (which might raise Constraint_Error), except if the object
-  is of an @Chg{Version=[4],New=[elementary],Old=[access]} type and the
-  view conversion is passed as an @key(out) parameter;
+  (which @Chg{Version=[5],New=[can],Old=[might]} raise Constraint_Error),
+  except if the object is of an @Chg{Version=[4],New=[elementary],Old=[access]}
+  type and the view conversion is passed as an @key(out) parameter;
   in this latter case, the value of the operand object
   @Chg{Version=[4],New=[may be],Old=[is]} used to initialize the
   formal parameter without checking against any constraint of the
@@ -1578,11 +1580,12 @@ of the subtype.],Old=[]}
 @end{RunTime}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 When a given context does not uniquely identify an expected type,
 a @nt<qualified_expression> can be used to do so.
 In particular, if an overloaded @nt<name> or
 @nt<aggregate> is passed to an overloaded subprogram, it
-might be necessary to qualify the operand to resolve its type.
+@Chg{Version=[5],New=[can],Old=[might]} be necessary to qualify the operand to resolve its type.
 @end{Notes}
 
 @begin{Examples}
@@ -1594,7 +1597,7 @@ might be necessary to qualify the operand to resolve its type.
 Print (Mask'(Dec));  @ExamCom[--  Dec is of type Mask]
 Print (Code'(Dec));  @ExamCom[--  Dec is of type Code ]
 
-@key(for) J @key(in) Code'(Fix) .. Code'(Dec) @key(loop) ... @ExamCom[-- qualification needed for either Fix or Dec]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}@key(for) J @key(in) Code'(Fix) .. Code'(Dec) @key(loop) ... @ExamCom[-- qualification @Chg{Version=[5],New=[is necessary],Old=[needed]} for either Fix or Dec]
 @key(for) J @key(in) Code @key(range) Fix .. Dec @key(loop) ...    @ExamCom[-- qualification unnecessary]
 @key(for) J @key(in) Code'(Fix) .. Dec @key(loop) ...        @ExamCom[-- qualification unnecessary for Dec]
 
@@ -2089,17 +2092,18 @@ If any part of the created object is controlled, the initialization
 includes calls on corresponding Initialize or Adjust procedures.
 See @RefSecNum{Assignment and Finalization}.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 As explained in @RefSec{Storage Management},
 the storage for an object allocated by an @nt{allocator} comes from a
 storage pool (possibly user defined).
 The exception Storage_Error is raised by an @nt<allocator> if there
-is not enough storage.
-Instances of Unchecked_Deallocation may be used to explicitly reclaim
-storage.
+is not enough storage. Instances of Unchecked_Deallocation
+@Chg{Version=[5],New=[can],Old=[may]} be used to explicitly reclaim storage.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-Implementations are permitted, but not required,
-to provide garbage collection@Chg{Version=[3],New=[],Old=[
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+Implementations @Chg{Version=[5],New=[can, if desired,],Old=[are permitted, 
+but not required, to]} provide garbage collection@Chg{Version=[3],New=[],Old=[
 (see @RefSecNum{Default Storage Pools})]}.
 @begin{Ramification}
   Note that in an @nt<allocator>,

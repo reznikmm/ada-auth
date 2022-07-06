@@ -47,7 +47,7 @@
    UseButtons=[T],OnTop=[T],OnBottom=[T]}
 @Comment{We let the program link to the index}
 @HTMLTabs{EmulateFixedOnly}
-@HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 32)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>}
+@HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 33)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>}
 @HTMLFooter{<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>}
 @HTMLColor{Text=[#000000],Background=[#FFFFF0],Link=[#000080],VLink=[#330033],ALink=[#0000FF]}

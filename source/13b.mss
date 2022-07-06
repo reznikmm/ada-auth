@@ -1,15 +1,15 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:49 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @RMNewPageVer{Version=[0]}
 @RMNewPageVer{Version=[1]}
 @RMNewPageVer{Version=[2]}
 @RMNewPageVer{Version=[3]}
-@RMNewPageVer{Version=[4]}@Comment{Bad break for Ada 202x RM}
+@RMNewPageVer{Version=[4]}@Comment{Bad break for Ada 2022 RM}
 @LabeledClause{The Package System}
 
 @begin{Intro}
@@ -679,8 +679,10 @@ An implementation is not required to provide package System.Machine_Code.
 @end{ImplPerm}
 
 @begin{Notes}
-An implementation may provide implementation-defined pragmas
-specifying register conventions and calling conventions.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+An implementation @Chg{Version=[5],New=[can],Old=[may]} provide
+implementation-defined pragmas specifying register conventions and
+calling conventions.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 Machine code functions are exempt from the rule that a
@@ -942,7 +944,7 @@ followed.]}]}
 
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledSubClause{Data Validity}
 
 @begin{Intro}
@@ -1376,13 +1378,14 @@ use of an object whose Address has been specified.
 @end{Itemize}
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @Chg{Version=[4],New=[Determining whether X is normal and has a valid
 representation as part of the evaluation of ],Old=[]}X'Valid is not considered
 to @Chg{Version=[4],New=[include an evaluation],Old=[be a read]} of X;
 hence, it is not an error to check the validity
 of @Chg{Version=[4],New=[an object that is invalid or abnormal.
 Determining whether X satisfies the predicates of its nominal
-subtype may include an evaluation of X, but only after
+subtype @Chg{Version=[5],New=[can],Old=[may]} include an evaluation of X, but only after
 it has been determined that X has a valid representation],Old=[invalid data]}.
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
@@ -1398,12 +1401,15 @@ X'Valid is considered a read of X.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
-@ChgAdded{Version=[2],Text=[The Valid attribute may be used to check the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@ChgAdded{Version=[2],Text=[The Valid attribute
+@Chg{Version=[5],New=[can],Old=[may]} be used to check the
 result of calling an instance of Unchecked_Conversion (or any other
 operation that can return invalid values). However, an exception handler
-should also be provided because implementations are permitted to raise
-Constraint_Error or Program_Error if they detect the use of an invalid
-representation (see @RefSecNum{Data Validity}).]}
+@Chg{Version=[5],New=[is still useful],Old=[should also be provided]} because
+implementations are permitted to raise Constraint_Error or Program_Error
+if they detect the use of an invalid representation
+(see @RefSecNum{Data Validity}).]}
 
 @begin{Ramification}
 If X is of an enumeration type with a representation clause, then
@@ -1599,7 +1605,12 @@ storage pool object. The storage for an object created by an @nt{allocator}
 comes from the storage pool of the type of the @nt{allocator}. Some storage
 pools may be partitioned into subpools in order to support finer-grained storage
 management.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[storage pool object],
+  Def=[an object associated with one or more access 
+       types from which the storage for objects created by allocators of
+       the access type(s) is obtained],
+  Note1=[Some storage pools can be partitioned into subpools in order to
+        support finer-grained storage management.]}
 @end{Intro}
 
 @begin{Legality}
@@ -2026,11 +2037,14 @@ the call.]]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
-@ChgAdded{Version=[3],Text=[The number of calls to Allocate needed to implement
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0445-1]}
+@ChgAdded{Version=[3],Text=[The number of calls to Allocate
+@Chg{Version=[5],New=[that will be used],Old=[needed]} to implement
 an @nt{allocator} for any particular type is unspecified.@PDefn{unspecified}
 @PDefn{contiguous representation}
 @PDefn{discontiguous representation}
-The number of calls to Deallocate needed to implement an instance of
+The number of calls to Deallocate
+@Chg{Version=[5],New=[that will be used],Old=[needed]} to implement an instance of
 Unchecked_Deallocation (see @RefSecNum{Unchecked Storage Deallocation}) for any
 particular object is the same as the number of Allocate calls for that object.]}
 
@@ -2089,11 +2103,11 @@ call.]}
 @end{ImplReq}
 
 @begin{DocReq}
-An implementation shall document
-the set of values that a user-defined Allocate procedure needs
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
+An implementation shall document the set of values that a user-defined
+Allocate procedure @Chg{Version=[5],New=[has],Old=[needs]}
 to accept for the Alignment parameter.
-An implementation shall document
-how the standard storage pool is chosen,
+An implementation shall document how the standard storage pool is chosen,
 and how storage is allocated by standard storage pools.
 @ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
 Text=[@ChgDeleted{Version=[2],
@@ -2193,17 +2207,20 @@ of the conversion. If the call is itself defining the result of a function with
 an access result, this rule is applied recursively;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[2],Text=[Otherwise, a default storage pool should be
 created at the point where the anonymous access type is elaborated; such
-a storage pool need not support deallocation of individual objects.]}
+a storage pool @Chg{Version=[5],New=[may have no mechanism for
+the],Old=[need not support]} deallocation of individual objects.]}
 @end{Itemize}
 
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Usually, a storage pool for an access discriminant or access parameter
 should be created at the point of an @nt{allocator}, and be reclaimed when
 the designated object becomes inaccessible. For other anonymous access types,
-the pool should be created at the point where the type is elaborated and need
-not support deallocation of individual objects.]}]}
+the pool should be created at the point where the type is elaborated and
+@Chg{Version=[5],New=[may have no mechanism for
+the],Old=[need not support]} deallocation of individual objects.]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
@@ -2234,17 +2251,17 @@ not support deallocation of individual objects.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 A user-defined storage pool type can be obtained by extending the
 Root_Storage_Pool type,
 and overriding the primitive subprograms Allocate, Deallocate, and
-Storage_Size.
-A user-defined storage pool can then be obtained by declaring
-an object of the type extension.
-The user can override Initialize and Finalize if there is any need
-for nontrivial initialization and finalization for a user-defined
-pool type.
-For example, Finalize might reclaim blocks of storage that are allocated
-separately from the pool object itself.
+Storage_Size. A user-defined storage pool can then be obtained by
+declaring an object of the type extension.
+The user can override Initialize and Finalize if there is any
+@Chg{Version=[5],New=[desire],Old=[need]} for nontrivial initialization
+and finalization for a user-defined pool type. For example, Finalize
+@Chg{Version=[5],New=[can],Old=[might]} reclaim blocks of storage that
+are allocated separately from the pool object itself.
 
 @Leading@;The writer of the user-defined allocation and deallocation
 procedures, and users of @nt{allocator}s for the associated access
@@ -2308,7 +2325,9 @@ Pool_Object : Some_Storage_Pool_Type;
 @end{Example}
 
 @begin{WideAbove}
-@Leading@;Another access type may be added to an existing storage pool, via:
+@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+Another access type @Chg{Version=[5],New=[can],Old=[may]} be added to an
+existing storage pool, via:
 @end{WideAbove}
 @begin{Example}
 @key[for] T2'Storage_Pool @key[use] T'Storage_Pool;
@@ -2323,8 +2342,10 @@ If T2 is not of that size, then the above will probably not work.
 @end{Reason}
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
-As usual, a derivative of Root_Storage_Pool may define additional
-operations. For example, @Chg{Version=[3],New=[consider the],Old=[presuming that]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+As usual, a derivative of Root_Storage_Pool
+@Chg{Version=[5],New=[can],Old=[may]} define additional operations. For
+example, @Chg{Version=[3],New=[consider the],Old=[presuming that]}
 Mark_Release_Pool_Type @Chg{Version=[3],New=[defined in
 @RefSecNum{Storage Subpool Example}, that ],Old=[]}has
 two additional operations, Mark and Release,
@@ -2486,14 +2507,15 @@ useful in writing user-defined pool types.]
 For @PrefixType{every subtype S},
 the following @Chg{Version=[3],New=[attributes are],Old=[attribute is]} defined:
 @begin{Description}
-@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
+@ChgAttribute{Version=[5],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
-  ARef=[AI95-00256-01],ARef=[AI95-00416-01],ARef=[AI05-0193-1],
+  ARef=[AI95-00256-01],ARef=[AI95-00416-01],ARef=[AI05-0193-1], ARef=[AI12-0439-1],
   InitialVersion=[0], Text=<Denotes the maximum value for
 Size_In_Storage_Elements
-that @Chg{Version=[2],New=[could],Old=[will]} be requested @Chg{Version=[2],
-New=[by the implementation ],Old=[]}via Allocate for an access type whose
-designated subtype is S.@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[ For a type with access
+that @Chg{Version=[2],New=[@Chg{Version=[5],New=[can],Old=[could]}],Old=[will]}
+be requested @Chg{Version=[2],New=[by the implementation ],Old=[]}via Allocate
+for an access type whose designated subtype is
+S.@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[ For a type with access
 discriminants, if the implementation allocates space for a coextension
 in the same pool as that of the object having the access discriminant,
 then this accounts for any calls on Allocate that could be performed to
@@ -2505,23 +2527,24 @@ or an unconstrained subtype with discriminants,
 S'Max_Size_In_Storage_Elements might be very large.
 @end{Ramification}
 
-@ChgAttribute{Version=[3], Kind=[AddedNormal], ChginAnnex=[T], Leading=[F],
-  Prefix=<S>, AttrName=<Max_Alignment_For_Allocation>, ARef=[AI05-0193-1],
+@ChgAttribute{Version=[5], Kind=[AddedNormal], ChginAnnex=[T], Leading=[F],
+  Prefix=<S>, AttrName=<Max_Alignment_For_Allocation>, ARef=[AI05-0193-1], ARef=[AI12-0439-1],
   InitialVersion=[3], Text=<@Chg{Version=[3],New=[Denotes the maximum value for
-  Alignment that could be requested by the implementation via Allocate for
-  an access type whose designated subtype is S. The value of this attribute
-  is of type @i{universal_integer}.],Old=[]}>}
+  Alignment that @Chg{Version=[5],New=[can],Old=[could]} be requested by the
+  implementation via Allocate for an access type whose designated subtype is S.
+  The value of this attribute is of type @i{universal_integer}.],Old=[]}>}
 @EndPrefixType{}
 @end{Description}
 
 @comment{The following probably should be an ImplReq, but since that wasn't
          originally done and it would change the RM, it is part of StaticSem.}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[3],Text=[For a type with access discriminants, if the
 implementation allocates space for a coextension in the same pool as that of the
 object having the access discriminant, then these attributes account for any
-calls on Allocate that could be performed to provide space for such
-coextensions.]}
+calls on Allocate that @Chg{Version=[5],New=[can],Old=[could]} be performed to
+provide space for such coextensions.]}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
 @ChgAdded{Version=[3],Text=[The values of these attributes should reflect only
@@ -2631,6 +2654,7 @@ Free(X), when X is already equal to @key{null}, has no effect.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 Free(X), when X is not equal to @key{null} first
 performs finalization@Chg{Version=[2],New=[ of the object designated by X (and
 any coextensions of the object @em see @RefSecNum{Operations of Access Types})],
@@ -2648,7 +2672,8 @@ corresponding Allocate call.
 Size_In_@!Storage_@!Elements and Alignment are the same values passed to the
 corresponding Allocate call]}.
 There is one exception: if the object being freed contains tasks,
-the object might not be deallocated.
+@Chg{Version=[5],New=[it is unspecified whether ],Old=[]}the object
+@Chg{Version=[5],New=[is],Old=[might not be]} deallocated.
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1]}
 Free calls only the specified Deallocate procedure
@@ -3058,9 +3083,9 @@ access types within an instance.@AspectDefn{Default_Storage_Pool}
 @Chg{Version=[4],New=[],Old=[The expected type for the
 Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
 must be a @nt{name} that denotes a variable. This aspect overrides any
-Default_Storage_Pool pragma that might apply to the generic unit; if the aspect
-is not specified, the default pool of the instance is that defined for the
-generic unit]}],
+Default_Storage_Pool pragma that might apply 
+to the generic unit; if the aspect is not specified, the default pool of the
+instance is that defined for the generic unit]}],
 Old=[@PDefn2{Term=[representation pragma], Sec=(Controlled)}
 @PDefn2{Term=[pragma, representation], Sec=(Controlled)}
 A @nt{pragma} Controlled is a representation pragma
@@ -3077,12 +3102,14 @@ Standard. In this case, there shall not be a declaration with
 of the aspect specification, other than package Standard itself.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0003-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[4],Text=[Otherwise, the expected type for the
-Default_Storage_Pool aspect is Root_Storage_Pool'Class and the @nt{aspect_definition}
-shall be a @nt{name} that denotes a variable. This aspect overrides any
-Default_Storage_Pool pragma that might apply to the generic unit; if the aspect
-is not specified, the default pool of the instance is that defined for the
-generic unit.]}
+Default_Storage_Pool aspect is Root_Storage_Pool'Class and the
+@nt{aspect_definition} shall be a @nt{name} that denotes a variable. This
+aspect overrides any Default_Storage_Pool pragma that
+@Chg{Version=[5],New=[applies],Old=[might apply]} to the generic unit; if
+the aspect is not specified, the default pool of the instance is that defined
+for the generic unit.]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Storage_Pool],
     Text=[@ChgAdded{Version=[3],Text=[Default storage pool for a generic instance.]}]}
@@ -3304,8 +3331,10 @@ which case, a pragma Controlled has no effect]}.
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
-@ChgAdded{Version=[3],Text=[Default_Storage_Pool may be used with restrictions No_Coextensions and
-No_Access_Parameter_Allocators (see @RefSecNum{High Integrity Restrictions})
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+@ChgAdded{Version=[3],Text=[Default_Storage_Pool
+@Chg{Version=[5],New=[can],Old=[may]} be used with restrictions No_Coextensions
+and No_Access_Parameter_Allocators (see @RefSecNum{High Integrity Restrictions})
 to ensure that all @nt{allocator}s use the default pool.]}
 @end{Notes}
 
@@ -3490,9 +3519,11 @@ Root_Storage_Pool_With_Subpools. A subpool is created by calling Create_Subpool
 or a similar constructor; the constructor returns the subpool handle.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[3],Text=[A @i<subpool object> is an object of a type
 descended from Root_Subpool. @Redundant[Typically, subpool objects are
-managed by the containing storage pool; only the handles need be exposed to
+managed by the containing storage pool; only the handles
+@Chg{Version=[5],New=[have to],Old=[need]} be exposed to
 clients of the storage pool. Subpool objects are designated by subpool handles,
 and are the run-time representation of a subpool.]]}
 
@@ -3689,30 +3720,38 @@ overridden.]]}
 @begin{Notes}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[3],Text=[A user-defined storage pool type that supports
 subpools can be implemented by extending the Root_Storage_Pool_With_Subpools
 type, and overriding the primitive subprograms Create_Subpool,
-Allocate_From_Subpool, and Deallocate_Subpool. Create_Subpool should call
-Set_Pool_Of_Subpool before returning the subpool handle. To make use of such a
-pool, a user would declare an object of the type extension, use it to define the
-Storage_Pool attribute of one or more access types, and then call Create_Subpool
-to obtain subpool handles associated with the pool.]}
+Allocate_From_Subpool, and Deallocate_Subpool. Create_Subpool
+@Chg{Version=[5],New=[is expected to],Old=[should]} call Set_Pool_Of_Subpool
+before returning the subpool handle. To make use of such a pool, a user
+@Chg{Version=[5],New=[can],Old=[would]} declare an object of the type
+extension, use it to define the Storage_Pool attribute of one or more access
+types, and then call Create_Subpool to obtain subpool handles associated with
+the pool.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[3],Text=[A user-defined storage pool type that supports
-subpools may define additional subpool constructors similar to Create_Subpool
-(these typically will have additional parameters).]}
+subpools @Chg{Version=[5],New=[can],Old=[may]} define additional subpool 
+constructors similar to Create_Subpool (these typically will have additional
+parameters).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgAdded{Version=[3],Text=[The pool implementor should override
-Default_Subpool_For_Pool if the pool is to support a default subpool for the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@ChgAdded{Version=[3],Text=[The pool implementor @Chg{Version=[5],New=[can],Old=[should]} override
+Default_Subpool_For_Pool if @Chg{Version=[5],New=[they want ],Old=[]}the pool
+@Chg{Version=[5],New=[],Old=[is ]}to support a default subpool for the
 pool. The implementor can override Deallocate if individual object reclamation
 is to be supported, and can override Storage_Size if there is some limit on the
 total size of the storage pool. The implementor can override Initialize and
-Finalize if there is any need for nontrivial initialization and finalization
-for the pool as a whole. For example, Finalize might reclaim blocks of storage
+Finalize if there is any @Chg{Version=[5],New=[desire],Old=[need]} for
+nontrivial initialization and finalization for the pool as a whole. For example,
+Finalize @Chg{Version=[5],New=[can],Old=[might]} reclaim blocks of storage
 that are allocated over and above the space occupied by the pool object itself.
-The pool implementor may extend the Root_Subpool type as necessary to carry
+The pool implementor @Chg{Version=[5],New=[can],Old=[may]} extend the Root_Subpool type as necessary to carry
 additional information with each subpool provided by Create_Subpool.]}
 
 @end{Notes}
@@ -4580,10 +4619,13 @@ language defined:]}
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[2],Text=[The @nt{restriction_parameter_argument} of a
 No_Dependence restriction shall be a @nt{name}; the @nt{name} shall have
-the form of a full expanded name of a library unit, but need not denote a unit
-present in the environment.]}
+the form of a full expanded name of a library unit, but
+@Chg{Version=[5],New=[can be a name that has no corresponding],Old=[need not
+denote a]} unit @Chg{Version=[5],New=[currently ],Old=[]}present in the
+environment.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4735,7 +4777,10 @@ but that is not required.
 Text=<@ChgAdded{Version=[3],Text=[A stream is a sequence of elements that can be
 used, along with the stream-oriented attributes, to support marshalling and
 unmarshalling of values of most types.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[stream],
+  Def=[a sequence of elements that can be used, along with the 
+       stream-oriented attributes, to support marshalling and unmarshalling
+       of values of most types]}
 @end{Intro}
 
 @begin{Extend83}
@@ -5017,10 +5062,10 @@ elements from the given stream.]}
 
 @begin{ImplPerm}
 @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0044],ARef=[AI95-00181-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0293-1]}@Comment{Just renumbered.}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[1],Text=[If Stream_Element'Size is not a multiple of
-System.Storage_Unit, then the components of Stream_@!Element_@!Array need
-not be aliased.]}
+System.Storage_Unit, then the components of Stream_@!Element_@!Array
+@Chg{Version=[5],New=[will],Old=[need]} not be aliased.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[AddedNormal]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
@@ -5615,12 +5660,13 @@ level deeper than that of S.],Old=[]}>}@Comment{End of S'Class'Output attribute}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0109-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @noprefix@;First reads the external tag from @i{Stream} and determines
 the corresponding internal tag
 (by calling Tags.@Chg{Version=[2],New=[Descendant_Tag],
 Old=[Internal_Tag]}(String'Input(@i{Stream})@Chg{Version=[2],New=[, S'Tag],Old=[]})
-@Chg{Version=[2],New=[which might raise Tag_Error ],Old=[]}@em
-see @RefSecNum{Tagged Types and Type Extensions})
+@Chg{Version=[2],New=[which @Chg{Version=[5],New=[can],Old=[might]} raise
+Tag_Error ],Old=[]}@em see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Input attribute of
 the specific type identified by the internal tag;
 returns that result.@Chg{Version=[2],New=[ If the specific type identified
@@ -6162,24 +6208,29 @@ exist in the partition at the time of the call, execution is erroneous.]}
 @begin{ImplPerm}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
   @ChgAdded{Version=[2],Text=[The number of calls performed by the predefined
   implementation of the stream-oriented attributes on the Read and Write
   operations of the stream type is unspecified. An implementation may take
   advantage of this permission to perform internal buffering. However, all the
-  calls on the Read and Write operations of the stream type needed to implement
-  an explicit invocation of a stream-oriented attribute
+  calls on the Read and Write operations of the stream type
+  @Chg{Version=[5],New=[used],Old=[needed]} to implement an explicit
+  invocation of a stream-oriented attribute
   @Chg{Version=[3],New=[shall],Old=[must]} take place before
   this invocation returns. An explicit invocation is one appearing explicitly
   in the program text, possibly through a generic instantiation (see
   @RefSecNum{Generic Instantiation}).]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1],ARef=[AI05-0264-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0445-1]}
   @ChgAdded{Version=[3],Text=[If @i<T> is a discriminated type and its
   discriminants have defaults, then in two cases an execution of the default
   implementation of S'Read is not required to create an anonymous object of
   type @i<T>: If the discriminant values that are read in are equal to the
-  corresponding discriminant values of @i<Item>, then no object of type @i<T>
-  need be created and @i<Item> may be used instead. If they are not equal and
+  corresponding discriminant values of @i<Item>, then
+  @Chg{Version=[5],New=[creation of a new],Old=[no]} object of type @i<T>
+  @Chg{Version=[5],New=[may be bypassed],Old=[need be created]} and
+  @i<Item> may be used instead. If they are not equal and
   @i<Item> is a constrained variable, then Constraint_Error may be raised at
   that point, before any further values are read from the stream and before
   the object of type @i<T> is created.]}
@@ -6217,12 +6268,13 @@ exist in the partition at the time of the call, execution is erroneous.]}
 @end{ImplPerm}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 For a definite subtype S of a type @i(T), only @i(T)'Write and @i(T)'Read
-are needed to pass
+are @Chg{Version=[5],New=[necessary],Old=[needed]} to pass
 an arbitrary value of the subtype through a stream.
 For an indefinite subtype S of a type @i(T), @i(T)'Output and @i(T)'Input
-will normally be needed, since @i(T)'Write and @i(T)'Read do not
-pass bounds, discriminants, or tags.
+will normally be @Chg{Version=[5],New=[necessary],Old=[needed]}, since
+@i(T)'Write and @i(T)'Read do not pass bounds, discriminants, or tags.
 
 User-specified attributes of S'Class are not inherited by other
 class-wide types descended from S.
@@ -6431,7 +6483,7 @@ class-wide types descended from S.
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}The
   switch from inheritance to @ldquote@;implicitly composed@rdquote
   aspects means that there exists an exceedingly unlikely case where
-  an Ada 202x will raise Constraint_Error where Ada 2012 would not.
+  Ada 2022 code will raise Constraint_Error where Ada 2012 code would not.
   That case requires deriving a constrained untagged composite type @i<C>
   from an unconstrained parent type @i<P>, using a type conversion to
   @i<P> of the Input attribute of @i<C>, @b<and> streaming in a value
@@ -6883,7 +6935,7 @@ in a record extension does not have an effect on the freezing of the interface
 type.]}
 @end{Ramification}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1],ARef=[AI12-0407-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0396-1],ARef=[AI12-0407-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[3],Text=[At the freezing point of the entity associated with
 an @nt{aspect_specification}, any 
 @Chg{Version=[5],New=[static expressions],Old=[@nt{expression}s or @nt{name}s]}
@@ -6892,7 +6944,7 @@ as do @nt{expression}s or @nt{name}s in @nt{aspect_definition}s for
 representation aspects, or operational aspects that have a corresponding 
 operational attribute. Similarly, if an
 @nt{aspect_definition} for an operational aspect, other than an
-assertion aspect, could affect the Name Resolution, @StaticSemTitle, or 
+assertion aspect, can affect the Name Resolution, @StaticSemTitle, or 
 @LegalityTitle of a subsequent construct, then any @nt{expression}s or @nt{name}s 
 within the @nt{aspect_definition} cause freezing at the freezing point of the 
 associated entity],Old=[]}. Any static expressions within an

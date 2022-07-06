@@ -1,18 +1,20 @@
 @Part(impldef, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 @LabeledRevisedInformativeAnnex{Version=[2],New=[Summary of Documentation Requirements],Old=[Implementation-Defined Characteristics]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.18 $}
+@comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[@Defn{documentation requirements}
 The Ada language allows for certain target machine dependences in a controlled
-manner. Each Ada implementation must document many characteristics and
-properties of the target system. This @IntlStdTitle contains
+manner. Each Ada implementation @Chg{Version=[5],New=[is required
+to],Old=[must]} document many characteristics and properties of the target
+system. This @IntlStdTitle contains
 specific documentation requirements. In addition, many characteristics
 that require documentation
 are identified throughout this @IntlStdTitle as being
@@ -27,10 +29,12 @@ summaries of these documentation requirements.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[documentation requirements], Sec=(summary of requirements)}
 @Defn{documentation (required of an implementation)}
 In addition to implementation-defined characteristics, each Ada implementation
-must document various properties of the implementation:]}
+@Chg{Version=[5],New=[is required to],Old=[must]} document various properties
+of the implementation:]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Most of the items in this list require
@@ -46,12 +50,13 @@ Annexes.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @Defn2{Term=[implementation defined], Sec=(summary of characteristics)}
 The Ada language allows for certain machine dependences in a controlled
 manner.
 @Defn{documentation (required of an implementation)}
-Each Ada implementation must document all implementation-defined
-characteristics:
+Each Ada implementation @Chg{Version=[5],New=[is required to],Old=[must]}
+document all implementation-defined characteristics:
 @begin{Ramification}
 @Defn{unspecified}
 @Defn{specified (not!)}
@@ -67,11 +72,13 @@ implementations that conform to Specialized Needs Annexes.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[implementation advice], Sec=(summary of advice)}
 @Defn{documentation (required of an implementation)}
 This @IntlStdTitle sometimes gives advice about handling certain
-target machine dependences. Each Ada implementation must document whether
-that advice is followed:]}
+target machine dependences. Each Ada implementation
+@Chg{Version=[5],New=[is required to],Old=[must]} document whether that
+advice is followed:]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Some of the items in this list require documentation only for

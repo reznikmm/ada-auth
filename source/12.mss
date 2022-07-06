@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:49 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -30,7 +30,15 @@ generic unit.
   That is, the declaration of a generic unit represents a contract
   between the body of the generic and instances of the generic.
   Generic units can be used to perform the role that macros
-  sometimes play in other languages.>}@ChgNote{Correction for AI-00024, no mechism to correct glossary entries.}
+  sometimes play in other languages.>}@ChgNote{Correction for AI-00024, no mechanism to correct glossary entries.}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[generic unit],
+  Def=[a template for a (nongeneric) program unit],
+  Note1=[The template can be parameterized by objects, types, subprograms,
+         and packages.],
+  Note2=[Generic units can be used to perform the role that macros sometimes
+         play in other languages.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[generic instance],
+  Def=[a nongeneric unit created by the instantiation of a generic unit]}
 
 @redundant[A generic unit is declared by a @nt{generic_declaration}. This form
 of declaration has a @nt{generic_@!formal_@!part} declaring any generic
@@ -2087,7 +2095,7 @@ had to.
   wasn't right for untagged record types with user-defined equality. Therefore,
   an implementation that strictly implemented the Ada 2012 wording would call
   the predefined equality for an actual type that is an untagged record type
-  with a user-defined equality, while Ada 202x implementations would call the
+  with a user-defined equality, while Ada 2022 implementations would call the
   primitive (user-defined) equality. This could change the runtime behavior in
   rare cases.]}
 @end{Inconsistent2012}
@@ -2105,6 +2113,7 @@ had to.
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @Redundant[@Chg{Version=[2],New=[In its most general form, the category],
 Old=[The class]}
 determined for a formal private type @Chg{Version=[2],New=[is all types,
@@ -2114,7 +2123,9 @@ Old=[can be either limited or nonlimited, and either tagged or untagged;
 no more specific class is known for such a type]}.@Chg{Version=[3],New=[
 Similarly, the category for a formal incomplete type is all types but the
 category can be restricted to only tagged types; unlike other formal types,
-the actual type does not need to be able to be frozen (see @RefSecNum{Freezing Rules}).],Old=[]}
+the actual type @Chg{Version=[5],New=[can be incompletely defined, and
+not ready],Old=[does not need to be able]}
+to be frozen (see @RefSecNum{Freezing Rules}).],Old=[]}
 The @Chg{Version=[2],New=[category],Old=[class]} determined for a formal
 derived type is the derivation class rooted at the ancestor type.]
 @begin{TheProof}
@@ -2210,13 +2221,14 @@ are synchronized.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00443-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0087-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0036-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[The actual type for a formal derived type
 shall be a descendant of @Redundant[the ancestor type and] every progenitor of
-the formal type. @Chg{Version=[3],New=[If the formal type is nonlimited,
-the actual type shall be nonlimited. @Chg{Version=[4],New=[The actual type for
-a formal derived type shall be tagged if and only if the formal derived type
-is a private extension. ],Old=[]}],Old=[]}If the reserved word
-@key[synchronized] appears
+the formal type. @Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[If the formal
+type is nonlimited, the actual type shall be nonlimited. ]}@Chg{Version=[4],New=[The
+actual type for a formal derived type shall be tagged if and only if the
+formal derived type is a private extension. ],Old=[]}],Old=[]}If the
+reserved word @key[synchronized] appears
 in the declaration of the formal derived type, the actual
 type shall be a synchronized tagged type.]}
 @begin{TheProof}
@@ -2265,13 +2277,20 @@ type shall be a synchronized tagged type.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 If @Chg{Version=[3],New=[a],Old=[the]} formal@Chg{Version=[3],New=[ private or
 derived],Old=[]} subtype is definite, then the actual subtype shall
-also be definite.
+also be definite.@Chg{Version=[5],New=[ If the formal
+type is nonlimited, the actual type shall be nonlimited.],Old=[]}
 @begin{Ramification}
 On the other hand, for an indefinite formal subtype,
 the actual can be either definite or indefinite.
 @end{Ramification}
+@begin{Discussion}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0442-1]}
+@ChgAdded{Version=[5],Text=[The rule about nonlimited formals applies
+to both private and derived formal types.]}
+@end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0213-1]}
 @ChgAdded{Version=[3],Text=[A @nt{formal_incomplete_type_declaration} declares
@@ -2361,10 +2380,11 @@ We rejected that idea, because it would require implicit (inherited)
 @end{Reason}
 @end{Itemize}
 
-@Redundant[For a generic formal type with an
-@nt{unknown_discriminant_part},
-the actual may, but need not, have discriminants,
-and may be definite or indefinite.]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@Redundant[For a generic formal type with an @nt{unknown_discriminant_part},
+the actual may@Chg{Version=[5],New=[],Old=[, but need not,]} have
+discriminants, @Chg{Version=[5],New=[though that is not 
+required, ],Old=[]}and may be definite or indefinite.]
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-1]}
 @ChgAdded{Version=[4],Text=[When enforcing @LegalityTitle@;, for the purposes of
@@ -2590,15 +2610,21 @@ call. For example:]}
 @end{RunTime}
 
 @begin{Notes}
-@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
-In accordance with the general rule that the actual type shall
-belong to the @Chg{Version=[2],New=[category],Old=[class]} determined for the formal
-(see @RefSec(Formal Types)):
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0442-1]}@ChgNote{We let note 
+paragraph numbers change, and nothing else follows this.}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[In accordance with the general
+rule that the actual type shall belong to the
+@Chg{Version=[2],New=[category],Old=[class]} determined for the formal
+(see @RefSec(Formal Types)):]}
 @begin(itemize)
-  If the formal type is nonlimited, then so shall be the actual;
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0442-1]}
+@ChgDeleted{Version=[5],Text=[If the formal type is nonlimited, then so shall
+be the actual;]}
 
-  For a formal derived type, the actual shall be in the class rooted
-  at the ancestor subtype.
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0442-1]}
+@ChgDeleted{Version=[5],Text=[For a formal derived type, the actual shall be
+in the class rooted at the ancestor subtype.]}
 @end(itemize)
 
 The actual type can be abstract only if the formal type is abstract
@@ -2732,7 +2758,7 @@ runtime check to a compile-time check.
   subtype are considered part of the contract for a formal derived type, even
   if the ancestor subtype is unconstrained. This means, for instance, if the
   ancestor subtype is a subtype of Float with a predicate, then an actual
-  subtype with a different predicate is illegal in Ada 202x while it would have
+  subtype with a different predicate is illegal in Ada 2022 while it would have
   been allowed in Ada 2012. Cases like this are quite unlikely and will be
   detected at compile-time if they occur.]}
 @end{Incompatible2012}
@@ -2804,10 +2830,11 @@ might disallow anything).
 @end{Legality}
 
 @begin{Notes}
-The actual type shall be in the class of types implied
-by the syntactic category of the formal type definition
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0442-1]}
+@ChgDeleted{Version=[5],Text=[The actual type shall be in the class of types
+implied by the syntactic category of the formal type definition
 (see @RefSec(Formal Types)). For example, the actual for a
-@nt<formal_modular_type_definition> shall be a modular type.
+@nt<formal_modular_type_definition> shall be a modular type.]}
 @end{Notes}
 
 @begin{DiffWord95}
@@ -3120,11 +3147,11 @@ protected, or synchronized interface.]}
 @end{Legality}
 
 @begin{Examples}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1],ARef=[AI12-0442-1]}@Comment{OK to renumber non-normative paragraphs}
 @ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of the use of a generic 
 with a formal interface type, to establish a standard interface that all tasks
-need to implement so they can be managed appropriately by an 
-application-specific scheduler:}]}
+will implement so they can be managed appropriately by an application-specific
+scheduler:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key{type} Root_Work_Item @key{is tagged private};]}
@@ -3582,14 +3609,15 @@ formal subprograms are never primitive operations.]}
 @end{StaticSem}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 The matching rules for formal subprograms state requirements that are
 similar to those applying to @nt{subprogram_renaming_declaration}s
 (see @RefSecNum{Subprogram Renaming Declarations}).
-In particular, the name of a parameter of the formal subprogram need not
-be the same as that of the corresponding parameter of the actual
-subprogram;
-similarly, for these parameters, @nt{default_expression}s need not
-correspond.
+In particular, the name of a parameter of the formal subprogram
+@Chg{Version=[5],New=[can be different from],Old=[need not
+be the same as]} that of the corresponding parameter of the actual
+subprogram; similarly, for these parameters, @nt{default_expression}s
+@Chg{Version=[5],New=[can be different],Old=[need not correspond]}.
 
 The constraints that apply to a parameter of a formal subprogram are
 those of the corresponding formal parameter of the matching actual
@@ -3625,10 +3653,12 @@ the formal subprogram is a @nt{formal_@!abstract_@!subprogram_@!declaration}],
 Old=[]} (see @RefSecNum{Abstract Types and Subprograms}).
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[The subprogram declared by a
 @nt{formal_@!abstract_@!subprogram_@!declaration} is an abstract subprogram.
 All calls on a subprogram declared by a
-@nt{formal_@!abstract_@!subprogram_@!declaration} must be dispatching calls.
+@nt{formal_@!abstract_@!subprogram_@!declaration} @Chg{Version=[5],New=[are
+limited to],Old=[must be]} dispatching calls.
 See @RefSecNum{Abstract Types and Subprograms}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
@@ -3724,7 +3754,7 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   Added a rule to ensure that for an actual subprogram that is a prefixed
   view, the prefix continues to exist during the life of the instantiation.
   If the prefix is a subcomponent that depends on discriminants, Ada 2005 and
-  2012 would have allowed the prefix while Ada 202x would not. Without this
+  2012 would have allowed the prefix while Ada 2022 would not. Without this
   change, explicit forms (renaming the object and then using that in
   instantiations) would be safer than directly using the prefixed view;
   that's inconsistent with other kinds of actual subprograms.]}

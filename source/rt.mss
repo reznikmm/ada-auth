@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.135 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
+@comment{ $Revision: 1.136 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2022/05/14 04:06:50 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -409,7 +409,8 @@ is re-evaluated. This is in addition to other instances described in this
 Annex for such re-evaluation.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
-An implementation may provide a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+An implementation @Chg{Version=[5],New=[can],Old=[may]} provide a
 @Chg{Version=[3],New=[nonstandard],Old=[non-standard]} mode in which tasks
 inherit priorities under conditions other than those specified above.
 @begin{Ramification}
@@ -789,8 +790,10 @@ task activation and termination, delay statements, and entry calls.
 @PDefn{blocked}
 When a task is not ready, it is said to be blocked.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 An example of a possible implementation-defined execution
-resource is a page of physical memory, which needs to be loaded
+resource is a page of physical memory, which
+@Chg{Version=[5],New=[must],Old=[needs to]} be loaded
 with a particular page of virtual memory before a task can
 continue execution.
 
@@ -859,7 +862,7 @@ deferred while the affected task performs a protected action.]}
   task dispatching points to only allow adding task dispatching points. If an
   implementation was using this permission to remove task dispatching points,
   and a program depended on that behavior to work, it could fail when used with
-  Ada 202x. We are not aware of any such implementations, and such behavior was
+  Ada 2022. We are not aware of any such implementations, and such behavior was
   never portable to other implementations, so we do not expect this to matter
   in practice.]}
 @end{Inconsistent2012}
@@ -1159,12 +1162,17 @@ Text=[Implementation-defined aspects of priority inversion.]}]}
 @begin{ImplPerm}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 Implementations are allowed to define other task dispatching policies, but
-need not support more than one @Chg{Version=[2],New=[task dispatching],
+@Chg{Version=[5],New=[are not required to],Old=[need not]} 
+support@Chg{Version=[5],New=[ specifying],Old=[]} 
+more than one @Chg{Version=[2],New=[task dispatching],
 Old=[such]} policy per partition.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00355-01]}
-@Chg{Version=[2],New=[An implementation need not support @nt{pragma}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@Chg{Version=[2],New=[An implementation
+@Chg{Version=[5],New=[is not required to],Old=[need not]} support @nt{pragma}
 Priority_Specific_Dispatching if it is infeasible to support it in the
 target environment.],
 Old=[@Redundant[For optimization purposes,]
@@ -1745,9 +1753,10 @@ for round robin dispatching.]}]}
 @begin{Notes}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[Due to implementation constraints, the quantum
-value returned by Actual_Quantum might not be identical to that set with
-Set_Quantum.]}
+value returned by Actual_Quantum @Chg{Version=[5],New=[can differ
+from],Old=[might not be identical to]} that set with Set_Quantum.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[A task that executes continuously with an inherited
@@ -1768,9 +1777,11 @@ priority will not be subject to round robin dispatching.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[2],Text=[The deadline of a task is an indication of the
 urgency of the task; it represents a point on an ideal physical time line.
-The deadline might affect how resources are allocated to the task.]}
+The deadline @Chg{Version=[5],New=[can],Old=[might]} affect how resources are 
+allocated to the task.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
@@ -2604,9 +2615,11 @@ boundary between normal and interrupt priorities.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 Implementations are allowed to define other locking policies,
-but need not support more than one @Chg{Version=[2],New=[locking],Old=[such]}
-policy per partition.
+but @Chg{Version=[5],New=[are not required to],Old=[need not]} 
+support@Chg{Version=[5],New=[ specifying],Old=[]} more than one
+@Chg{Version=[2],New=[locking],Old=[such]} policy per partition.
 
 @Redundant[Since implementations are allowed to place restrictions
 on code that runs at an interrupt-level active priority
@@ -2661,14 +2674,16 @@ The ceiling priority of a protected object has to be in the
 Interrupt_Priority range if one of its procedures is to be used as
 an interrupt handler (see @RefSecNum{Interrupt Support}).
 
-When specifying the ceiling of a protected object, one should
-choose a value that is at least as high as the highest active priority
-at which tasks can be executing when they call
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+When specifying the ceiling of a protected object,
+@Chg{Version=[5],New=[a correct],Old=[one should choose a]} value
+@Chg{Version=[5],New=[is one ],Old=[]}that is at least as high as
+the highest active priority at which tasks can be executing when they call
 protected operations of that object. In determining this
 value the following factors, which can affect active priority,
-should be considered: the effect of Set_Priority, nested
-protected operations, entry calls, task activation, and other
-implementation-defined factors.
+@Chg{Version=[5],New=[are relevant],Old=[should be considered]}: the effect
+of Set_Priority, nested protected operations, entry calls, task activation,
+and other implementation-defined factors.
 
 Attaching a protected procedure whose ceiling is below the
 interrupt hardware priority to an interrupt causes the execution of the
@@ -2955,9 +2970,11 @@ is selected.
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 Implementations are allowed to define other queuing policies, but
-need not support more than one @Chg{Version=[2],New=[queuing],Old=[such]}
-policy per partition.
+@Chg{Version=[5],New=[are not required to],Old=[need not]}
+support@Chg{Version=[5],New=[ specifying],Old=[]} more than one
+@Chg{Version=[2],New=[queuing],Old=[such]} policy per partition.
 @begin{Discussion}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0116],ARef=[AI95-00069-01]}
   @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00256-01]}
@@ -3198,10 +3215,10 @@ the admission policy for that partition is implementation defined.]}
 
 @begin{ImplPerm}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[5],Text=[Implementations are allowed to define other
-admission policies, but need not support more than one admission policy per
-partition.]}
+admission policies, but are not required to support specifying more than
+one admission policy per partition.]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3482,11 +3499,13 @@ task is allowed, so long as the task is not yet
 terminated@Chg{Version=[3],New=[, and setting the priority of a task
 is allowed for any task state (including for terminated tasks)],Old=[]}.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 Changing the priorities of a set of tasks can be performed by a
-series of calls to Set_Priority for each task separately. For
-this to work reliably, it should be done within a protected
-operation that has high enough ceiling priority to guarantee that
-the operation completes without being preempted by any of the
+series of calls to Set_Priority for each task separately.
+@Chg{Version=[5],New=[This can be done],Old=[For
+this to work]} reliably@Chg{Version=[5],New=[],Old=[, it should be done]}
+within a protected operation that has high enough ceiling priority to
+guarantee that the operation completes without being preempted by any of the
 affected tasks.
 
 @end{Notes}
@@ -4333,7 +4352,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
 
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledClause{Monotonic Time}
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -4623,13 +4642,16 @@ Text=[Any synchronization of package Real_Time with external time references.]}]
 
 @ChgRef{Version=[1],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 The implementation shall document any aspects of the @Chg{New=[], Old=[the]}
 @chgnote{Correct typo as noted at Potsdam ARG meeting}
-external environment that could interfere with the clock behavior as defined
+external environment that @Chg{Version=[5],New=[can],Old=[could]} interfere
+with the clock behavior as defined
 in this @Chg{Version=[3],New=[subclause],Old=[clause]}.
-@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[Any aspects of the external environment that could interfere with
-package Real_Time.]}]}
+@ChgDocReq{Version=[5],Kind=[Added],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
+Text=[Any aspects of the external environment that
+@Chg{Version=[5],New=[can],Old=[could]} interfere with package Real_Time.]}]}
 @begin{Discussion}
 For example, the implementation is allowed to rely on the time services of
 an underlying operating system, and this operating system clock can
@@ -4691,9 +4713,11 @@ Text=[The metrics for package Real_Time.]}]}
 @end{Metrics}
 
 @begin{ImplPerm}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 Implementations targeted to machines with word size smaller than 32
-bits need not support the full range and granularity of the
-Time and Time_Span types.
+bits @Chg{Version=[5],New=[may omit],Old=[need not]}
+support@Chg{Version=[5],New=[ for],Old=[]} 
+the full range and granularity of the Time and Time_Span types.
 @begin{Discussion}
 These requirements are based on machines with a word size of 32 bits.
 
@@ -4746,7 +4770,8 @@ Real_Time.Clock.]}]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The rules in this @Chg{Version=[3],New=[subclause],Old=[clause]} do not imply
 that the implementation can protect the user from operator or installation
-errors which could result in the clock being set incorrectly.
+errors @Chg{Version=[5],New=[that can],Old=[which could]} result in the
+clock being set incorrectly.
 
 Time_Unit is the granularity of the Time type. In contrast,
 Tick represents the granularity of Real_Time.Clock.
@@ -4861,24 +4886,26 @@ An upper bound on the execution time, in processor clock cycles, of a
 less than or equal to the value of Real_Time.Clock at the
 time of executing the statement. Similarly, for Calendar.Clock.
 
-@Defn{lateness}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}@Defn{lateness}
 @Defn{actual duration}
 An upper bound on the @i{lateness} of a @nt{delay_relative_statement},
 for a positive value of the delay expression, in a situation
 where the task has sufficient priority to preempt the processor as
-soon as it becomes ready, and does not need to
-wait for any other execution resources. The upper bound is
-expressed as a function of the value of the delay expression.
+soon as it becomes ready, and @Chg{Version=[5],New=[can proceed without
+waiting],Old=[does not need to wait]} for any other execution resources.
+The upper bound is expressed as a function of the value of the delay expression.
 The lateness is obtained by subtracting the value of the delay expression
 from the @i{actual duration}. The actual duration is measured from a point
 immediately before a task executes the @nt{delay_statement} to a point
 immediately after the task resumes execution following this statement.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 An upper bound on the lateness of a @nt{delay_until_statement}, in a
 situation where the value of the requested expiration time is after the time
 the task begins executing the statement, the task has sufficient priority
 to preempt the processor as soon as it becomes ready, and
-it does not need to wait for any other execution resources. The upper
+it @Chg{Version=[5],New=[can proceed without waiting],Old=[does not need
+to wait]} for any other execution resources. The upper
 bound is expressed as a function of the difference between the requested
 expiration time and the clock value at the time the statement begins
 execution. The lateness of a @nt{delay_until_statement} is obtained by
@@ -5026,11 +5053,14 @@ is a potentially blocking operation.]}]}
 
 @begin{Bounded}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0171-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[It is a bounded error for two or more tasks to call
 Suspend_Until_True on the same Suspension_Object concurrently. For each task,
-Program_Error might be raised, the task might proceed without suspending, or the
-task might suspend, potentially indefinitely. The state of the suspension object
-might end up either True or
+Program_Error @Chg{Version=[5],New=[can],Old=[might]} be raised, the task
+@Chg{Version=[5],New=[can],Old=[might]} proceed without suspending, or the
+task @Chg{Version=[5],New=[can],Old=[might]} suspend, potentially indefinitely.
+The state of the suspension object @Chg{Version=[5],New=[can],Old=[might]}
+end up either True or
 False.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
@@ -5274,8 +5304,10 @@ program is erroneous.
 
 @begin{ImplPerm}
 
-An implementation need not support Asynchronous_Task_Control if it is
-infeasible to support it in the target environment.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[may omit],Old=[need not]}
+support@Chg{Version=[5],New=[ for],Old=[]} Asynchronous_Task_Control if it
+is infeasible to support it in the target environment.
 @begin{Reason}
 A direct implementation of the Asynchronous_Task_Control semantics using
 priorities is not necessarily efficient enough.
@@ -6097,9 +6129,11 @@ Text=[The metrics for execution time.]}]}
 @begin{ImplPerm}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[2],Text=[Implementations targeted to machines with word size
-smaller than 32 bits need not support the full range and granularity of the
-CPU_Time type.]}
+smaller than 32 bits @Chg{Version=[5],New=[may omit],Old=[need not]} 
+support@Chg{Version=[5],New=[ for],Old=[]} the full range and granularity
+of the CPU_Time type.]}
 
 @end{ImplPerm}
 
@@ -6673,7 +6707,7 @@ implementation is not portable.]}
 @end{Inconsistent2005}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledAddedSubClause{Version=[3],Name=[Execution Time of Interrupt Handlers]}
 
 @begin{Intro}
@@ -6748,10 +6782,11 @@ value equal to Ada.Execution_Time.Time_Of(0).]}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
 describes a language-defined package to
 allow user-defined protected procedures to be executed at a specified time
-without the need for a task or a delay statement.]}
+without the @Chg{Version=[5],New=[use of],Old=[need for]} a task or a delay statement.]}
 @end{Intro}
 
 @begin{StaticSem}

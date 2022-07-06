@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:49 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.136 $}
+@Comment{$Revision: 1.137 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -51,6 +51,13 @@ stream.]}>}
 Text=<@ChgAdded{Version=[5],Text=[A representation aspect is an aspect that
 indicates how an entity is mapped onto the underlying hardware, for example the
 size or alignment of an object.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[operational aspect],
+  Def=[an aspect that indicates a logical property 
+       of an entity, such as the precondition of a subprogram, or the 
+       procedure used to write a given type of object to a stream]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[representation aspect],
+  Def=[an aspect that indicates how an entity is mapped onto the underlying 
+       hardware, for example the size or alignment of an object]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI05-0295-1]}
 @ChgAdded{Version=[1],Text=[@Redundant[Either kind of aspect of an entity may be
@@ -127,6 +134,10 @@ Text=<@ChgAdded{Version=[3],Text=[An aspect is
 a specifiable property of an entity. An aspect may be specified by an
 @nt{aspect_specification} on the declaration of the entity. Some aspects may be
 queried via attributes.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[aspect],
+  Def=[a specifiable property of an entity],
+  Note1=[An aspect can be specified by an @nt{aspect_specification} on the
+         declaration of the entity. Some aspects can be queried via attributes.]}
 @end{Intro}
 
 @begin{Syntax}
@@ -234,6 +245,7 @@ This is subtle, but it seems like the least confusing set of rules.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @Defn{representation of an object}
 @Defn2{Term=[size], Sec=(of an object)}The @i{representation} of an
 object consists of a certain
@@ -252,12 +264,14 @@ New=[, the additional bits are padding bits.],Old=[.
 @Defn{gaps}]}
 @Defn{padding bits}
 @Chg{Version=[2],New=[For an elementary object, these],Old=[Such]} padding bits
-@Chg{Version=[2],New=[],Old=[are considered to be part of the representation of the
-object, rather than being gaps between objects,
+@Chg{Version=[2],New=[],Old=[are considered to be part of the representation of
+the object, rather than being gaps between objects,
 if these bits ]}are normally read and updated@Chg{Version=[2],New=[ along
-with the others. For a
-composite object, padding bits might not be read or updated in any given
-composite operation, depending on the implementation],Old=[]}.
+with the others. For a composite object, 
+@Chg{Version=[5],New=[it is unspecified whether ],Old=[]}padding 
+bits @Chg{Version=[5],New=[are],Old=[might not be]} read or updated in any
+given composite operation@Chg{Version=[5],New=[],Old=[, depending on 
+the implementation]}],Old=[]}.
 
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
@@ -944,14 +958,15 @@ accommodate any value of the subtype.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1],ARef=[AI12-0444-1]}
 @Chg{Version=[5],New=[The specification of certain language-defined aspects 
-  need not be supported by all implementations; in such an implementation, the
-  specification for such an aspect ],Old=[@Chg{Version=[3],New=[If a specification of a],Old=[A]}
-representation @Chg{New=[or operational ],Old=[]}@Chg{Version=[3],New=[aspect],
-Old=[item that]} is
-not supported by the implementation@Chg{Version=[3],New=[, it ],Old=[]}]}is
-illegal@Chg{Version=[3],New=[],Old=[,]} or raises an exception at run time.
+  is not required to be supported by all implementations; in such an 
+  implementation, the specification for such an 
+  aspect ],Old=[@Chg{Version=[3],New=[If a specification of a],Old=[A]}
+  representation @Chg{New=[or operational ],Old=[]}@Chg{Version=[3],New=[aspect],
+  Old=[item that]} is
+  not supported by the implementation@Chg{Version=[3],New=[, it ],Old=[]}]}is
+  illegal@Chg{Version=[3],New=[],Old=[,]} or raises an exception at run time.
 
 @begin{Ramification}
    @ChgAdded{Version=[5],Text=[There is an @ImplPermName below that allows
@@ -1527,8 +1542,9 @@ should be supported.]}
 @end{Honest}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-An implementation need not support @Chg{Version=[3],New=[the specification for
-a ],Old=[]}representation
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[is not required to],Old=[need not]}
+support @Chg{Version=[3],New=[the specification for a ],Old=[]}representation
 @Chg{Version=[3],New=[aspect that contains],Old=[items containing]}
 nonstatic expressions,
 @Chg{Version=[3],New=[unless],Old=[except that an implementation should
@@ -1570,8 +1586,9 @@ but their value might be known at compile time anyway
 in many cases.
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
-An implementation need not support a specification for the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[is not required to],Old=[need not]}
+support a specification for the
 @Chg{Version=[5],New=[Object_Size or ],Old=[]}Size for a given composite
 subtype, nor the size or storage place for an object
 (including a component) of a given composite subtype, unless the constraints
@@ -1588,10 +1605,12 @@ are all static constraints.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@Chg{Version=[2],New=[An implementation need not support
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@Chg{Version=[2],New=[An implementation @Chg{Version=[5],New=[is not 
+required to],Old=[need not]} support
 @Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
 representation @Chg{Version=[3],New=[aspect value],Old=[item]}
-if it could cause an aliased object or an object of a
+if it @Chg{Version=[5],New=[can],Old=[could]} cause an aliased object or an object of a
 by-reference type to be allocated at a nonaddressable location or, when the
 alignment attribute of the subtype of such an object is nonzero, at an address
 that is not an integral multiple of that alignment.],Old=[An aliased component,
@@ -1622,10 +1641,13 @@ when a bit-aligned component is passed as a parameter.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@ChgAdded{Version=[2],Text=[An implementation need not support
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[An implementation @Chg{Version=[5],New=[is not 
+required to],Old=[need not]} support
 @Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
 representation @Chg{Version=[3],New=[aspect value],Old=[item]}
-if it could cause an aliased object of an elementary type
+if it @Chg{Version=[5],New=[can],Old=[could]} cause an aliased object of
+an elementary type
 to have a size other than that which would have been chosen by default.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1636,12 +1658,14 @@ to have a size other than that which would have been chosen by default.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@ChgAdded{Version=[2],Text=[An implementation need not support
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[An implementation @Chg{Version=[5],New=[is not
+required to],Old=[need not]} support
 @Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
 representation @Chg{Version=[3],New=[aspect value],Old=[item]}
-if it could cause an aliased object of a composite type, or
-an object whose type is by-reference, to have a size smaller than that which
-would have been chosen by default.]}
+if it @Chg{Version=[5],New=[can],Old=[could]} cause an aliased object of a
+composite type, or an object whose type is by-reference, to have a size
+smaller than that which would have been chosen by default.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Unlike elementary objects, there is no
@@ -1659,7 +1683,9 @@ would have been chosen by default.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@ChgAdded{Version=[2],Text=[An implementation need not support
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[An implementation @Chg{Version=[5],New=[is not
+required to],Old=[need not]} support
 @Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
 subtype-specific representation @Chg{Version=[3],New=[aspect value
 for],Old=[item specifying an aspect of representation of]}
@@ -1689,13 +1715,15 @@ Atomic components have similar restrictions
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[2],Text=[For purposes of these rules, the determination of
 whether @Chg{Version=[3],New=[specifying ],Old=[]}a
 representation @Chg{Version=[3],New=[aspect value for],Old=[item applied to]}
-a type @i{could cause} an object to have
+a type @i{@Chg{Version=[5],New=[can@Defn{can cause}],Old=[could]} cause} an object to have
 some property is based solely on the properties of the type itself, not on any
 available information about how the type is used. In particular, it presumes
-that minimally aligned objects of this type might be declared at some point.]}
+that minimally aligned objects of this type @Chg{Version=[5],New=[can],Old=[might]}
+be declared at some point.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for all representation items should be
 followed.]}]}
@@ -1834,7 +1862,7 @@ Some of the more stringent requirements are moved to
   supporting this as a capability (and it is not likely that they have a
   consistent definition of what it means if it is allowed). Thus, we expect
   this to occur rarely in existing programs.@Chg{Version=[5],New=[ Note: This 
-  correction is repealed in Ada 202x, as a number of aspects are allowed on 
+  correction is repealed in Ada 2022, as a number of aspects are allowed on 
   formals in that later language version.],Old=[]}]}
 @end{Incompatible2005}
 
@@ -2915,14 +2943,15 @@ Pack@Chg{Version=[3],New=[ aspect],Old=[]} is:
   @end{Ramification}
 
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0001-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
   For a packed record type, the components should be packed as tightly as
   possible subject to @Chg{Version=[4],New=[the above alignment
   requirements, ],Old=[]}the Sizes of the component subtypes, and
   @Chg{Version=[4],New=[],Old=[subject to ]}any
   @nt{record_representation_clause} that applies to the type; the implementation
-  may, but need not, reorder components or cross aligned word boundaries to
-  improve the packing. A component whose Size is greater than the word size may
-  be allocated an integral number of words.
+  @Chg{Version=[5],New=[is allowed to],Old=[may, but need not,]} reorder components
+  or cross aligned word boundaries to improve the packing. A component whose Size
+  is greater than the word size may be allocated an integral number of words.
 
   @begin{Ramification}
     The implementation can always allocate an integral number of words for a
@@ -3611,8 +3640,9 @@ a power of two],Old=[specified Alignments that are factors and multiples of
 the number of storage elements per word]}, subject to the following:
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
-An implementation need not support
-@Chg{Version=[2], New=[an Alignment clause for a signed
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[is not required to],Old=[need not]}
+support @Chg{Version=[2], New=[an Alignment clause for a signed
 integer type specifying an Alignment greater than the largest
 Alignment value that is ever chosen by default by the implementation
 for any signed integer type. A corresponding limitation may be
@@ -3622,18 +3652,23 @@ of Sizes and Alignments that cannot be easily loaded and
 stored by available machine instructions]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
-An implementation need not support
-@Chg{Version=[2],New=[a nonconfirming Alignment clause which could enable the
-creation of an object of an elementary type which cannot be easily loaded and
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[is not required to],Old=[need not]}
+support @Chg{Version=[2],New=[a nonconfirming Alignment clause
+@Chg{Version=[5],New=[that can cause],Old=[which could enable]} the
+creation of an object of an elementary type
+@Chg{Version=[5],New=[that],Old=[which]} cannot be easily loaded and
 stored by available machine instructions.],
 Old=[specified Alignments that are greater than the maximum
-Alignment the implementation ever returns
-by default.]}
+Alignment the implementation ever returns by default.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[An implementation need not support an
-Alignment specified for a derived tagged type which is not a multiple of the
-Alignment of the parent type. An implementation need not support a
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[An implementation @Chg{Version=[5],New=[is not 
+required to],Old=[need not]} support an Alignment specified for a
+derived tagged type @Chg{Version=[5],New=[that],Old=[which]} is not a multiple of the
+Alignment of the parent type. An implementation @Chg{Version=[5],New=[is not
+required to],Old=[need not]} support a
 nonconfirming Alignment specified for a derived untagged by-reference type.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
@@ -3673,7 +3708,9 @@ least support the alignments supported for their
 subtype, subject to the following:]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[An implementation need not support Alignments
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[An implementation @Chg{Version=[5],New=[is not
+required to],Old=[need not]} support Alignments
 specified for objects of a by-reference type or for objects of types containing
 aliased subcomponents if the specified Alignment is not a multiple of the
 Alignment of the subtype of the object.]}
@@ -3843,12 +3880,13 @@ its bounds.]}
 Text=[The Size of an array object should not include its bounds.]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02],ARef=[AI95-00291-02]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[]}@Comment{A fake to get a conditional Leading}
 @PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
 of objects is@Chg{Version=[2],New=[ the same as for subtypes (see below),
-except that only a confirming Size clause need be supported for an aliased
-elementary object.],Old=[:]}
+except that only a confirming Size clause @Chg{Version=[5],New=[is required
+to],Old=[need]} be supported for an aliased elementary object.],Old=[:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00051-02]}
 @ChgDeleted{Version=[2],Text=[A Size clause should be supported for an object
@@ -4076,11 +4114,12 @@ The recommended level of support for the Size attribute
 of subtypes is:
 @begin{Itemize}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 The Size (if not specified) of a static discrete or fixed point subtype
-should be the number of bits needed to represent each value belonging to
+should be the number of bits @Chg{Version=[5],New=[necessary],Old=[needed]}
+to represent each value belonging to
 the subtype using an unbiased representation,
-leaving space for a sign bit only if the subtype contains negative
-values.
+leaving space for a sign bit only if the subtype contains negative values.
 If such a subtype is a first subtype,
 then an implementation should support a specified Size for it that
 reflects this representation.
@@ -4251,7 +4290,9 @@ subject to the following:]}
 @begin{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00051-02]}
-@ChgAdded{Version=[2],Text=[An implementation need not support a Size clause
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[2],Text=[An implementation @Chg{Version=[5],New=[is not 
+required to],Old=[need not]} support a Size clause
 for a signed integer type specifying a Size greater than that of the largest
 signed integer type supported by the implementation in the absence of a size
 clause (that is, when the size is chosen by default). A corresponding
@@ -4279,8 +4320,10 @@ enumeration types, record types, and array types.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[2],Text=[A nonconfirming size clause for the first subtype
-of a derived untagged by-reference type need not be supported.]}
+of a derived untagged by-reference type @Chg{Version=[5],New=[is not required
+to],Old=[need not]} be supported.]}
 @end{InnerItemize}
 @end{Itemize}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -4467,7 +4510,7 @@ the Object_Size attribute of subtypes is:]}
 
   @ChgRef{Version=[5],Kind=[Added]}
   @ChgAdded{Version=[5],Text=[If S is some other subtype, only confirming
-  specifications of Object_Size need be supported.]}
+  specifications of Object_Size are required to be supported.]}
 @end{Itemize}
 
 @ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
@@ -4671,8 +4714,10 @@ For an array object A, A'Component_Size = A(I)'Size for any index I.
 @Leading@PDefn2{Term=[recommended level of support], Sec=(Component_Size attribute)}
 The recommended level of support for the Component_Size attribute is:
 @begin{Itemize}
-An implementation need not support specified Component_Sizes that
-are less than the Size of the component subtype.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[is not required to],Old=[need not]}
+support specified Component_Sizes that are less than the Size of the component
+subtype.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 An implementation should support specified Component_Sizes that
@@ -5203,8 +5248,10 @@ its position number.
 @Leading@PDefn2{Term=[recommended level of support], Sec=(@nt{enumeration_representation_clause})}
 The recommended level of support for @nt{enumeration_representation_clause}s is:
 @begin{Itemize}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 An implementation should support at least the internal codes in the
-range System.Min_Int .. System.Max_Int. An implementation need not support
+range System.Min_Int .. System.Max_Int. An implementation
+@Chg{Version=[5],New=[is not required to],Old=[need not]} support
 @nt{enumeration_@!representation_@!clause}s for boolean types.
 @begin{Ramification}
 The implementation may support numbers outside the above
@@ -5280,16 +5327,18 @@ subtype S}, the following attributes are defined:]}
 @begin{SingleNote}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0237-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0237-1],ARef=[AI12-0442-1]}
 @Chg{Version=[5],New=[Attribute Enum_Rep],Old=[Unchecked_Conversion]}
-may be used to query the internal codes used
-for an enumeration type@Chg{Version=[5],New=[; attribute Enum_Val may be used
+@Chg{Version=[5],New=[can],Old=[may]} be used to query the internal codes used
+for an enumeration type@Chg{Version=[5],New=[; attribute Enum_Val
+@Chg{Version=[5],New=[can],Old=[may]} be used
 to convert from an internal code to an enumeration value],Old=[]}. The
 @Chg{Version=[5],New=[other ],Old=[]}attributes of the type, such as Succ, Pred,
-and Pos, are unaffected by the
+and Pos, are unaffected by @Chg{Version=[5],New=[an],Old=[the]}
 @Chg{New=[@nt{enumeration_representation_clause}],Old=[@nt{representation_clause}]}.
-For example, Pos always returns the position number, @i{not} the internal
-integer code that might have been specified in @Chg{New=[an
+For example, Pos always returns the position number, @i{not}
+@Chg{Version=[5],New=[an],Old=[the]} internal integer code that
+@Chg{Version=[5],New=[was],Old=[might have been]} specified in @Chg{New=[an
 @nt{enumeration_representation_clause}],
 Old=[a @nt{representation_clause}]}@Chg<Version=[3],New=[],Old=[}]>.
 @begin{Discussion}
@@ -5703,8 +5752,9 @@ that place.
 Similar permission for other dope is not granted.
 @end{Ramification}
 
-An implementation need not support a
-@nt{component_clause} for a component of an extension part
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[is not required to],Old=[need not]}
+support a @nt{component_clause} for a component of an extension part
 if the storage place is not after the storage places of all components
 of the parent type, whether or not those storage places had been specified.
 @begin{Reason}
@@ -6133,23 +6183,25 @@ The Bit_Order attribute is new to Ada 95.
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @redundant[@Defn{change of representation}
 @Defn2{Term=[representation], Sec=(change of)}
 A @nt{type_conversion} (see @RefSecNum{Type Conversions})
 can be used to convert between two different
 representations of the same array or record.
 To convert an array from one representation to another,
-two array types need to be declared with
-matching component subtypes, and convertible index types.
+two array types @Chg{Version=[5],New=[],Old=[need to be declared ]}with
+matching component subtypes@Chg{Version=[5],New=[],Old=[,]} and
+convertible index types@Chg{Version=[5],New=[ are required],Old=[]}.
 If one type has @Chg{Version=[3],New=[Pack],Old=[packing]}
 specified and the other does not,
 then explicit conversion can be used to pack or unpack an array.
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0425-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0425-1],ARef=[AI12-0445-1]}
 To convert @Chg{Version=[5],New=[an untagged],Old=[a]} record from one
 representation to another, two record types with a common ancestor type
-need to be declared@Chg{Version=[5],New=[],Old=[, with no inherited 
-subprograms]}. Distinct representations can then
+@Chg{Version=[5],New=[are required],Old=[need to be declared, with no
+inherited subprograms]}. Distinct representations can then
 be specified for the record types, and explicit conversion between
 the types can be used to effect a change in representation.]
 @begin{Ramification}

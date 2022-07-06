@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:48 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.164 $}
+@Comment{$Revision: 1.165 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -34,6 +34,18 @@ returns a result and can be called as part of an expression.]}>}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Procedure>,
 Text=<@ChgAdded{Version=[2],Text=[A procedure is a form of subprogram that
 does not return a result and can only be called by a @nt{statement}.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[subprogram],
+  Def=[a unit of a program that can be brought into execution in various
+       contexts, with the invocation being a subprogram call that can 
+       parameterize the effect of the subprogram through the passing of operands],
+  Note1=[There are two forms of subprograms: functions, 
+         which return values, and procedures, which do not.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[function],
+  Def=[a form of subprogram that returns a result and can be 
+       called as part of an expression]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[procedure],
+  Def=[a form of subprogram that does not return a result and 
+       can only be invoked by a statement]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{callable entity}
@@ -159,7 +171,7 @@ is not significant)]}.
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0395-1]}
   @ChgAdded{Version=[5],Text=[Only implementation-defined aspects are allowed
-  on formal parameters in Ada 202x. Implementers are cautioned that any
+  on formal parameters in Ada 2022. Implementers are cautioned that any
   aspect allowed on a formal parameter will need conformance rules. If,
   for instance, an aspect changed the representation of a parameter,
   rules would be needed to ensure that the representation is the same for
@@ -573,9 +585,9 @@ access-to-subprogram type,],Old=[]} the following language-defined
   involved.]}
 @end{Honest}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Pre],
-  Text=[@ChgAdded{Version=[3],Text=[Precondition; a condition that must hold
-    true before a call.]}]}
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Pre],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Precondition; a condition that
+    @Chg{Version=[5],New=[is expected to],Old=[must]} hold true before a call.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0418-1]}
@@ -623,9 +635,9 @@ access-to-subprogram type,],Old=[]} the following language-defined
   If not specified for an entity, the specific postcondition
   expression for the entity is the enumeration literal True.@AspectDefn{Post}]}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Post],
-  Text=[@ChgAdded{Version=[3],Text=[Postcondition; a condition that must hold
-    true after a call.]}]}
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Post],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Postcondition; a condition that
+    @Chg{Version=[5],New=[will],Old=[must]} hold true after a call.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0418-1]}
@@ -650,6 +662,12 @@ access-to-subprogram type,],Old=[]} the following language-defined
   with respect to class-wide pre/post-conditions, to mean that the aspect
   applies to corresponding subprograms in descendant types.]}
 @end{Discussion}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[precondition],
+  Def=[an assertion that is expected to be True when a given 
+       subprogram is called]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[postcondition],
+  Def=[an assertion that is expected to be True when a given 
+       subprogram returns normally]}
 @end{Intro}
 
 @begin{Resolution}
@@ -1841,9 +1859,11 @@ the postcondition expression, or both.]}
 
 @begin{Notes}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
   @ChgAdded{Version=[3],Text=[A precondition is checked just before the call. If
   another task can change any value that the precondition expression depends on,
-  the precondition need not hold within the subprogram or entry body.]}
+  the precondition @Chg{Version=[5],New=[can evaluate to False],Old=[need not hold]}
+  within the subprogram or entry body.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
   @ChgAdded{Version=[5],Text=[For an example of the use of these aspects and
@@ -1991,11 +2011,10 @@ the postcondition expression, or both.]}
 @LabeledAddedSubclause{Version=[5],Name=[The Global and Global'Class Aspects]}
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0425-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0425-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[The Global and Global'Class aspects of a program
-unit are used to identify
-the objects global to the unit that might be read or written during its
-execution.]}
+unit are used to identify the objects global to the unit that can be read or
+written during its execution.]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2043,7 +2062,7 @@ rhs="@Chg{Version=[5],New=<@SynI{object_}@Syn2{name} | @SynI{package_}@Syn2{name
 name an object or a package (including a limited view of a package).]}
 @end{Resolution}
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a
@@ -2116,16 +2135,16 @@ associated with a dispatching operation of type @i{T} represents a
 restriction on the Global aspect on a corresponding operation of any
 descendant of type @i{T}.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0416-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0416-1],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[5],Text=[The Global aspect for a callable entity defines the
-global variables that might be referenced as part of a call on the entity,
+global variables that can be referenced as part of a call on the entity,
 including any assertion expressions that apply to the call (even if not
-enabled), including preconditions, postconditions, predicates, and type
+enabled), such as preconditions, postconditions, predicates, and type
 invariants.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[The Global aspect for an access-to-subprogram
-object (or subtype) identifies the global variables that might be referenced
+object (or subtype) identifies the global variables that can be referenced
 when calling via the object (or any object of that subtype) including
 assertion expressions that apply.]}
 
@@ -2295,10 +2314,10 @@ ancestor of @i<T>, unless the aspect of that ancestor is Unspecified.]}
 
 @begin{ImplPerm}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
-@ChgAdded{Version=[5],Text=[An implementation need not require that all
-references to a constant object be accounted for by the Global or
-Global'Class aspect when it is considered a variable in the above rules
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[5],Text=[An implementation can allow some
+references to a constant object which are not accounted for by the Global or
+Global'Class aspect when it is considered a variable in the above rules,
 if the implementation can determine that the object is in fact immutable.]}
 
 @begin{Ramification}
@@ -2641,9 +2660,10 @@ view (see @RefSecNum{Objects and Named Numbers});
 it cannot be updated within the @nt{subprogram_body}.
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0056-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[4],Text=[A formal parameter of mode @key(out)
-might be uninitialized at the start of the @nt{subprogram_body} (see
-@RefSecNum{Parameter Associations}).]}
+@Chg{Version=[5],New=[can],Old=[might]} be uninitialized at the start of the
+@nt{subprogram_body} (see @RefSecNum{Parameter Associations}).]}
 @end{Notes}
 
 @begin{Extend83}
@@ -2711,8 +2731,10 @@ it shall repeat the @nt{defining_designator} of the @nt{subprogram_specification
 @end{Syntax}
 
 @begin{Legality}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Redundant[In contrast to other bodies,]
-a @nt{subprogram_body} need not be the completion of a previous
+a @nt{subprogram_body} @Chg{Version=[5],New=[is allowed to be defined 
+without it being],Old=[need not be]} the completion of a previous
 declaration@Redundant[,
 in which case the body declares the subprogram].
 If the body is a completion, it shall be the completion of a
@@ -3896,7 +3918,8 @@ Set(Tint   => Red);
 Set(Signal => Red);
 Set(Color'(Red));
 
---@ExamCom{  Set(Red) would be ambiguous since Red may}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+--@ExamCom{  Set(Red) would be ambiguous since Red @Chg{Version=[5],New=[can],Old=[may]}}
 --@ExamCom{  denote a value either of type Color or of type Light}
 @end{Example}
 @end{Examples}
@@ -4622,10 +4645,11 @@ is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]
   of subtype conversion in @RefSecNum{Type Conversions}.]}
 @end{TheProof}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
   For any other type, the formal parameter is uninitialized.
   If composite, a view conversion of the actual
   parameter to the nominal subtype of the formal is evaluated
-  @Redundant[(which might raise Constraint_Error)],
+  @Redundant[(which @Chg{Version=[5],New=[can],Old=[might]} raise Constraint_Error)],
   and the actual subtype of the formal is that of the
   view conversion. If elementary, the actual subtype of the formal
   is given by its nominal subtype.
@@ -4830,7 +4854,7 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
   access types; this is important for conversions that may have problematic
   accessibility or tags. If the permission is used and the @key[out] parameter is
   read before it is written (perhaps to read a bound or discriminant),
-  Constraint_Error may be raised by Ada 202x when it would not have been in
+  Constraint_Error may be raised by Ada 2022 when it would not have been in
   Ada 2012. Additionally, if the called subprogram does not write the @key[out]
   parameter at all, the actual object will be overwritten with @key[null] (and
   possibly raise Constraint_Error if the object is null excluding), while the
@@ -5186,12 +5210,12 @@ constant object.],Old=[]}]}
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0439-1]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[execution], Sec=(extended_return_statement)}
 For the execution of an @nt{extended_return_statement}, the
 @nt{subtype_indication} or @nt{access_definition} is elaborated. This creates
 the nominal subtype of the return object. If there is an @nt{expression}, it
-is evaluated and converted to the nominal subtype (which might raise
+is evaluated and converted to the nominal subtype (which @Chg{Version=[5],New=[can],Old=[might]} raise
 Constraint_Error @em see @RefSecNum{Type Conversions}@PDefn2{Term=[implicit subtype conversion],Sec=(function return)});
 the return object is created and the converted value is assigned to
 the return object. Otherwise, the return object is created and initialized
@@ -6335,7 +6359,7 @@ of a No_Return aspect:}]}
   Clarified that the nonreturning property is inherited by derivation. A
   literal implementation of the Ada 2012 would mean that no overriding would
   ever be rejected, as the inherited routine would never be nonreturning.
-  The Ada 202x requires overridings of dispatching nonreturning subprograms
+  Ada 2022 requires overridings of dispatching nonreturning subprograms
   to be rejected. This is formally incompatible, but practically such
   overridings have been rejected in practice.]}
 @end{Incompatible2012}
@@ -6430,8 +6454,10 @@ the purposes of inheritance, that is anything other than predefined operators.
 @end{StaticSem}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 The operators "+" and "@en@;" are both unary and binary operators,
-and hence may be overloaded with both one- and two-parameter functions.
+and hence @Chg{Version=[5],New=[can],Old=[may]} be overloaded with 
+both one- and two-parameter functions.
 @end{Notes}
 
 @begin{Examples}
@@ -6554,8 +6580,9 @@ Elaboration_Check],Old=[]}.]}
 a null procedure:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[@key(procedure) Simplify(Expr : @key(in out) Expression) @key(is null); --@ExamCom[ see @RefSecNum{Tagged Types and Type Extensions}]
---@ExamCom[ By default, Simplify does nothing, but it may be overridden in extensions of Expression]]}
+--@ExamCom[ By default, Simplify does nothing, but it @Chg{Version=[5],New=[can],Old=[may]} be overridden in extensions of Expression]]}
 @end{Example}
 @end{Examples}
 

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:47 $}
+@Comment{$Date: 2022/06/21 06:08:00 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.155 $}
+@Comment{$Revision: 1.156 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -81,6 +81,12 @@ declaration).>}
   used primarily when allowing explicit declarations to override
   implicit declarations, as part of a type declaration.
 @end{Discussion}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[declaration],
+Def=[a language construct that associates a name with (a view of) an entity],
+Note1=[A declaration can appear explicitly in the program text (an
+explicit declaration), or can be supposed to occur at a given place
+in the text as a consequence of the semantics of another construct
+(an implicit declaration).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0255-1],ARef=[AI05-0277-1]}
@@ -137,6 +143,11 @@ but instead defines a view of an existing entity
 Text=<@Chg{Version=[2],New=[A view of an entity reveals some or all of the
 properties of the entity. A single entity may have multiple views.],
 Old=[(See @b[Definition].)]}>}
+@ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[view of an entity],
+    Def=[a representation of an entity that reveals some 
+          or all of the properties of the entity],
+    Note1=[A single entity can have multiple views.]}
+
 @begin{Discussion}
   Most declarations define a view (of some entity) whose
   view-specific characteristics are unchanging for the
@@ -264,6 +275,10 @@ by this @IntlStdTitle for each construct that has a run-time effect.
   @Defn(evaluation)
   Execution of a declaration is also called @i(elaboration).
   Execution of an expression is also called @i(evaluation).>}
+@ChgTermDef{Version=[5],Kind=(Added),Group=[R],Term=[execution],
+    Def=[the process by which a construct achieves its run-time effect],
+    Note1=[Execution of a declaration is also called
+           elaboration. Execution of an expression is also called evaluation.]}
 @begin{Honest}
 The term elaboration is also used for the execution of certain
 constructs that are not declarations,
@@ -310,6 +325,12 @@ execution.]}>}
 Text=<@ChgAdded{Version=[2],Text=[The process by which an expression achieves
 its run-time effect is called evaluation. Evaluation is one of the forms of
 execution.]}>}
+@ChgTermDef{Version=[5],Kind=(Added),Group=[R],Term=[elaboration],
+    Def=[the process by which a declaration achieves its run-time effect],
+    Note1=[Elaboration is one of the forms of execution.]}
+@ChgTermDef{Version=[5],Kind=(Added),Group=[R],Term=[evaluation],
+    Def=[the process by which an expression achieves its run-time effect],
+    Note1=[Evaluation is one of the forms of execution.]}
 @begin{Honest}
 @Defn{elaborable}
 A construct is @i(elaborable) if elaboration is defined for it.
@@ -516,6 +537,16 @@ a value of the type.
   the values of the subtype to satisfy @Chg{Version=[3],New=[],Old=[a ]}certain
   @Chg{Version=[3],New=[conditions],Old=[condition]}. The values of a subtype
   are a subset of the values of its type.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[type],
+Def=[a defining characteristic of each object and expression of the 
+     language, with an associated set of values, and a set of primitive
+     operations that implement the fundamental aspects of its semantics],
+Note1=[Types are grouped into categories. Most language-defined categories
+       of types are also classes of types.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[subtype],
+Def=[a type together with optional constraints, null exclusions,
+     and predicates, which constrain the values of the type to the subset
+     that satisfies the implied conditions]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 @Chg{Version=[2],New=[@Defn2{Term=[category], Sec=(of types)}],
@@ -637,6 +668,73 @@ anyone complains.>
   that reveals only some of its properties. The remaining properties are
   provided by the full view given elsewhere. Incomplete types can be used
   for defining recursive data structures.]}>}
+
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[class of types],
+  Def=[a set of types that is @Defn(closed under derivation)closed under
+       derivation, which means that if a given type is in the class, then
+       all types derived from that type are also in the class],
+  Note1=[The set of types of a class share common properties, such as their
+         primitive operations.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[category of types],
+  Def=[a set of types with one or more common properties, such as
+       primitive operations],
+  Note1=[A category of types that is closed under derivation is also known
+         as a class.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[elementary type],
+  Def=[a type that does not have components]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[composite type],
+  Def=[a type with components, such as an array or record]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[scalar type],
+  Def=[either a discrete type or a real type]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[access type],
+  Def=[a type that has values that designate aliased objects],
+  Note1=[Access types correspond to @ldquote@;pointer types@rdquote or 
+         @ldquote@;reference types@rdquote in some other languages.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[discrete type],
+  Def=[a type that is either an integer type or an enumeration type]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[real type],
+  Def=[a type that has values that are approximations of the real numbers],
+  Note1=[Floating point and fixed point types are real types.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[integer type],
+  Def=[a type that represents signed or modular integers],
+  Note1=[A signed integer type has a base range that includes both positive and
+    negative numbers, and has operations that can raise an exception when the
+    result is outside the base range. A modular type has a base range whose
+    lower bound is zero, and has operations with @ldquote@;wraparound@rdquote
+    semantics. Modular types subsume what are called @ldquote@;unsigned types@rdquote
+   in some other languages.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[enumeration type],
+  Def=[a type defined by an enumeration of its values,
+       which can be denoted by identifiers or character literals]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[character type],
+  Def=[an enumeration type whose values include characters]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[record type],
+  Def=[a composite type consisting of zero or more named components, possibly
+       of different types]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[record extension],
+  Def=[a type that extends another type optionally with additional components]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[array type],
+  Def=[a composite type whose components are all of the same type]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[task type],
+  Def=[a composite type used to represent active entities which execute 
+    concurrently and that can communicate via queued task entries],
+  Note1=[The top-level task of a partition is called the environment task.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[protected type],
+  Def=[a composite type whose components are accessible only through one of 
+       its protected operations, which synchronize concurrent access by
+       multiple tasks]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[private type],
+  Def=[a view of a type that reveals only some of its properties],
+  Note1=[The remaining properties are provided by the full view given
+    elsewhere. Private types can be used for defining abstractions that hide
+    unnecessary details from their clients.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[private extension],
+  Def=[a type that extends another type, with the additional properties hidden
+    from its clients]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[incomplete type],
+  Def=[a view of a type that reveals only a few of its properties],
+  Note1=[The remaining properties are provided by the full view given elsewhere.],
+  Note2=[Incomplete types can be used for defining recursive data structures.]}
 
 @Defn{scalar type}
 The elementary types are the @i(scalar) types (@i(discrete) and @i(real))
@@ -764,6 +862,7 @@ excludes the null value (see @RefSecNum{Access Types}).],Old=[]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00415-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @Defn{subtype}
 A @i(subtype) of a given type is a combination of the type,
 a constraint on values of the type, and certain
@@ -781,7 +880,9 @@ null value],
 Old=[]}.
 @Defn2{Term=[belong], Sec=(to a subtype)}
 Such values @i(belong) to the subtype.@Chg{Version=[2],New=[@Defn2{Term=[values], Sec=(belonging to a subtype)}
-@Defn2{Term=[subtype], Sec=(values belonging to)}],Old=[]}
+@Defn2{Term=[subtype], Sec=(values belonging to)}],Old=[]}@Chg{Version=[5],New=[The
+other values of the type are @i{outside} the subtype.@Defn2{Term=[outside], Sec=(a subtype)}
+@Defn2{Term=[subtype], Sec=(values outside of)}],Old=[]}
 @begin{Discussion}
   We make a strong distinction between a type and its
   subtypes.
@@ -1357,13 +1458,15 @@ Other @nt<constraint>s do not.
 @end{RunTime}
 
 @begin{Notes}
-A @nt<scalar_constraint> may be applied to a subtype of an appropriate
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+A @nt<scalar_constraint> @Chg{Version=[5],New=[can],Old=[may]} be applied
+to a subtype of an appropriate
 scalar type (see @RefSecNum{Scalar Types}, @RefSecNum{Fixed Point Types},
 and @RefSecNum{Reduced Accuracy Subtypes}), even if the subtype
 is already constrained. On the other hand, a @nt<composite_constraint>
-may be applied to a composite subtype (or an access-to-composite subtype)
-only if the composite subtype is unconstrained
-(see @RefSecNum{Index Constraints and Discrete Ranges} and
+@Chg{Version=[5],New=[can],Old=[may]} be applied to a composite subtype
+(or an access-to-composite subtype) only if the composite subtype is 
+unconstrained (see @RefSecNum{Index Constraints and Discrete Ranges} and
 @RefSecNum{Discriminant Constraints}).
 @end{Notes}
 
@@ -1456,6 +1559,12 @@ primitive subprograms.
   using a dispatching call,
   in which case the subprogram body invoked is determined
   at run time.>}
+@ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[primitive operations of a type],
+    Def=[the operations (such as subprograms) 
+          declared together with the type declarations],
+    Note1=[Primitive operations are inherited by other types
+           in the same derivation class of types.]}
+
 @begin{Honest}
   Protected subprograms are not considered to be
   @lquotes@;primitive subprograms@rquotes, even though they are
@@ -1599,12 +1708,14 @@ and @RefSecNum{Aspect Specifications} respectively).@Chg{Version=[5],New=[ The p
 aspects are assertion aspects (see @RefSecNum{Pragmas Assert and Assertion_Policy}).
 @Redundant[The predicate aspects are not inherited, but their effects are additive, 
 as defined below.]],Old=[]}]}
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
-  Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Static_Predicate],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Condition that
+    @Chg{Version=[5],New=[will],Old=[must]} hold true for objects of
     a given subtype; the subtype may be static.]}]}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Dynamic_Predicate],
-  Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Dynamic_Predicate],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Condition that
+    @Chg{Version=[5],New=[will],Old=[must]} hold true for objects of
     a given subtype; the subtype is not static.]}]}
 @end{Intro}
 
@@ -2147,7 +2258,7 @@ common exceptional conditions as follows:}]}
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[We didn't change the language-defined Text_IO
-  this way for Ada 202x as it would be incompatible in marginal cases: these
+  this way for Ada 2022 as it would be incompatible in marginal cases: these
   subprogram specifications would not be subtype conformant with existing
   access-to-subprogram types, so Put_Line'Access (for instance) would become
   illegal in existing code. The gain would not be worth the disruption.]}
@@ -2170,7 +2281,7 @@ common exceptional conditions as follows:}]}
   specified. This is consistent with the handling of constraint checks for
   such objects; it is thought that the omission was unintended. However,
   a program that declares such an object and depends on there not being a
-  predicate check in original Ada 2012 will fail in Ada 202x. As these
+  predicate check in original Ada 2012 will fail in Ada 2022. As these
   attributes were new in Ada 2012, their use is uncommon, so we believe
   that this inconsistency will be rare and more likely to catch a bug than
   create one.]}
@@ -2240,6 +2351,12 @@ All of the following are objects:
   or by an @nt(allocator).
   A formal parameter is (a view of) an object.
   A subcomponent of an object is an object.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[object],
+    Def=[an entity that contains a value, and is either a constant or a variable],
+    Note1=[An object is created by an @nt(object_declaration) 
+       or by an @nt(allocator). A formal parameter is (a view of) an object.
+       A subcomponent of an object is an object.]}
+
 @begin(itemize)
   the entity declared by
   an @nt<object_declaration>;
@@ -2526,6 +2643,9 @@ A component cannot have an indefinite nominal subtype.]
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Nominal subtype>,
 Text=<@ChgAdded{Version=[5],Text=[The nominal subtype of a view of an object is
 the subtype specified when the view is defined.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],
+    Term=[nominal subtype of a view of an object],
+    Def=[the subtype specified when the view is defined]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[A view of a composite object is
@@ -2949,9 +3069,11 @@ its nominal subtype, as follows:
   null value of the access type.
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0439-1]}
   @ChgAdded{Version=[3],Text=[The implicit initial value for a scalar subtype
   that has the Default_Value aspect specified is the value of that aspect
-  converted to the nominal subtype (which might raise Constraint_Error @em see
+  converted to the nominal subtype (which @Chg{Version=[5],New=[can],Old=[might]}
+  raise Constraint_Error @em see 
   @RefSec{Type Conversions});@PDefn2{Term=[implicit subtype conversion],
   Sec=(default value of a scalar)}]}
 
@@ -2967,12 +3089,13 @@ its nominal subtype, as follows:
   of a constrained discriminated subtype is defined by the subtype.
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0228-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
   For a (definite) composite subtype,
   the implicit initial value of each component
   with a @nt<default_expression> is obtained by
   evaluation of this expression and conversion to the
-  component's nominal subtype (which might raise
-  Constraint_Error@Chg{Version=[3],New=[],Old=[ @em see
+  component's nominal subtype (which @Chg{Version=[5],New=[can],Old=[might]}
+  raise Constraint_Error@Chg{Version=[3],New=[],Old=[ @em see
   @RefSec{Type Conversions}]}), unless the component is a
   discriminant of a constrained subtype (the previous case),
   or is in an excluded @nt<variant>
@@ -3009,10 +3132,12 @@ sequence of steps:
   This creates the nominal subtype (and the anonymous type in the
   @Chg{Version=[2],New=[last four],Old=[latter three]} cases).
 
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
   If the @nt<object_declaration> includes an initialization expression,
   the (explicit) initial value is obtained by evaluating the
-  expression and converting it to the nominal subtype (which might
-  raise Constraint_Error @em see @RefSecNum(Type Conversions)).
+  expression and converting it to the nominal subtype (which
+  @Chg{Version=[5],New=[can],Old=[might]} raise Constraint_Error @em see
+  @RefSecNum(Type Conversions)).
   @PDefn2{Term=[implicit subtype conversion],Sec=(initialization expression)}
 
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
@@ -3181,14 +3306,16 @@ component, @RefSecNum{Data Validity} defines the execution to be erroneous.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0228-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @Redundant[There is no implicit initial
 value defined for a scalar subtype@Chg{Version=[3],New=[ unless the
 Default_Value aspect has been specified for the type],Old=[]}.]
 @PDefn{uninitialized variables}
 In the absence of an explicit initialization@Chg{Version=[3],New=[ or the
 specification of the Default_Value aspect],Old=[]}, a newly created
-scalar object might have a value that does not belong to its subtype
-(see @RefSecNum{Data Validity} and @RefSecNum{Pragma Normalize_Scalars}).
+scalar object @Chg{Version=[5],New=[can],Old=[might]} have a value that does 
+not belong to its subtype (see @RefSecNum{Data Validity} and 
+@RefSecNum{Pragma Normalize_Scalars}).
 @begin{Honest}
 It could even be represented by a bit pattern that doesn't
 actually represent any value of the type at all,
@@ -3399,7 +3526,7 @@ without an initialization expression.
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledSubClause{Number Declarations}
 
 @begin{Intro}
@@ -3538,6 +3665,13 @@ Old=[@i(parent type)]}.
   primitive operations from the parent@Chg{Version=[2],New=[ and progenitors],Old=[]}.
   A type together with the types derived from it
   (directly or indirectly) form a derivation class.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[derived type],
+    Def=[a type defined in terms of a parent type and zero or
+         more progenitor types given in a derived type definition],
+    Note1=[A derived type inherits properties such as components and primitive
+           operations from its parent and progenitors.],
+    Note2=[A type together with the types derived from
+           it (directly or indirectly) form a derivation class.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00442-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[class],Sec=[of types]}
@@ -3580,7 +3714,10 @@ has one parent type and zero or more progenitor types.],Old=[]}
   Text=<@ChgAdded{Version=[2],Text=[The parent of a derived type is the
   first type given in the definition of the derived type. The parent
   can be almost any kind of type, including an interface type.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[parent of a derived type],
+    Def=[the first ancestor type given in the definition of the derived type],
+    Note1=[The parent can be almost any kind of type, including an
+          interface type.]}
 
 A type shall be completely defined
 (see @RefSecNum(Completions of Declarations))
@@ -4118,9 +4255,11 @@ predefined exponentiation operator is of the predefined type Integer
 Any discriminants of the parent type are either all inherited, or
 completely replaced with a new set of discriminants.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 For an inherited subprogram, the subtype of a formal parameter
-of the derived type need not have any value in common with the first
-subtype of the derived type.
+of the derived type @Chg{Version=[5],New=[can be such that it has 
+no],Old=[need not have any]} value in common with the first subtype of the
+derived type.
 @begin(TheProof)
   @Leading@;This happens when the parent subtype is constrained to a range
   that does not overlap with the range of a subtype of the parent
@@ -4294,7 +4433,7 @@ similar, but not the same.]}
 @end{DiffWord2005}
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledSubClause{Derivation Classes}
 
 @begin{Intro}
@@ -4386,12 +4525,12 @@ will be legal.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-@Defn{universal type}Universal types
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}@Defn{universal type}Universal types
 @\Universal types
 are defined for @Redundant[(and belong to)] the integer,
 real, @Chg{Version=[2],New=[],Old=[and ]}fixed point@Chg{Version=[2],
-New=[, and access],Old=[]} classes,
-and are referred to in this standard as respectively,
+New=[, and access],Old=[]} classes, and are referred to in 
+this @Chg{Version=[5],New=[@IntlStdName],Old=[standard]} as respectively, 
 @i(universal_integer), @i(universal_real), @Chg{Version=[2],New=[],
 Old=[and ]}@i(universal_fixed)@Chg{Version=[2],
 New=[, and @i(universal_access)@Chg{Version=[3],
@@ -4527,6 +4666,16 @@ has a unique ultimate ancestor.],Old=[]}
   Text=<@ChgAdded{Version=[2],Text=[A type is a descendant of itself, its
   parent and progenitor types, and their ancestors. Note that descendant and
   ancestor are inverse relationships.]}>}
+
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[ancestor of a type],
+    Def=[the type itself or, in the case of a type derived from other types,
+         its parent type or one of its progenitor types or one of their
+         ancestors],
+    Note1=[Ancestor and descendant are inverse relationships.]}
+
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[descendant of a type],
+    Def=[the type itself or a type derived (directly or indirectly) from it],
+    Note1=[Descendant and ancestor are inverse relationships.]}
 
 @Defn2{Term=[inherited], Sec=(from an ancestor type)}
 An inherited component @Redundant[(including an inherited discriminant)] of a
@@ -5678,10 +5827,12 @@ assigned to a variable of subtype S.
   the ultimately chosen base range).
 @end(Discussion)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 For a subtype of a scalar type, the result delivered by the attributes
-Succ, Pred, and Value might not belong to the subtype; similarly,
-the actual parameters
-of the attributes Succ, Pred, and Image need not belong to the subtype.
+Succ, Pred, and Value @Chg{Version=[5],New=[can be outside],Old=[might not 
+belong]} to the subtype; similarly, the actual parameters
+of the attributes Succ, Pred, and Image @Chg{Version=[5],New=[can also 
+be outside],Old=[need not belong to]} the subtype.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0020-1]}
@@ -6366,11 +6517,13 @@ rhs="@key(range) @SynI{static_}@Syn2{simple_expression} .. @SynI{static_}@Syn2{s
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @PDefn2{Term=[expected type],
   Sec=(signed_integer_type_definition simple_expression)}
 Each @nt<simple_expression> in a
 @nt<signed_integer_type_definition> is expected to be of any integer type;
-they need not be of the same type.
+they @Chg{Version=[5],New=[can be of different integer types],Old=[need not 
+be of the same type]}.
 @PDefn2{Term=[expected type],
   Sec=(modular_type_definition expression)}
 The @nt<expression> in a
@@ -6592,10 +6745,11 @@ System.Max_Binary_Modulus shall be at least 2**16.
 @end{ImplReq}
 
 @begin{ImplPerm}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 For the execution of a predefined operation of a signed integer type,
-the implementation need not raise Constraint_Error if the result is
-outside the base range of the type, so long as the correct result
-is produced.
+@Chg{Version=[5],New=[it is optional to],Old=[the implementation need not]}
+raise Constraint_Error if the result is outside the base range of the type,
+so long as the correct result is produced.
 @begin{Discussion}
   Constraint_Error is never raised for operations on modular types,
   except for divide-by-zero (and @key[rem]/@key[mod]-by-zero).
@@ -6603,6 +6757,7 @@ is produced.
 
 @Defn{Long_Integer}
 @Defn{Short_Integer}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 An implementation may provide additional predefined signed integer
 types@Redundant[, declared in the visible part of Standard], whose first
 subtypes have names of the form Short_Integer,
@@ -6612,20 +6767,23 @@ However, the range of Integer should be no wider than that of Long_Integer.
 Similarly, the range of Short_Integer (if provided) should be no wider
 than Integer.
 Corresponding recommendations apply to any other predefined integer types.
-There need not be a named integer type corresponding to each
-distinct base range supported by an implementation.
+@Chg{Version=[5],New=[An implementation may support],Old=[There need not be
+a named integer type corresponding to each distinct]} base
+@Chg{Version=[5],New=[ranges for which there is no corresponding named integer
+type],Old=[range supported by an implementation]}.
 The range of each first subtype should be the base range of its type.
 @ImplDef{The predefined integer types declared in Standard.}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Defn{nonstandard integer type}
 An implementation may provide @i(nonstandard integer types),
 descendants of @i(root_integer) that are
 declared outside of the specification of package Standard,
-which need not have all the standard characteristics
-of a type defined by an @nt<integer_type_definition>.
-For example, a nonstandard integer type
-might have an asymmetric base range
-or it might not be allowed as
+which @Chg{Version=[5],New=[may have different],Old=[need not have all the 
+standard]} characteristics @Chg{Version=[5],New=[than],Old=[of]} a type 
+defined by an @nt<integer_type_definition>. For example, a nonstandard integer
+type @Chg{Version=[5],New=[can],Old=[might]} have an asymmetric base range
+or it @Chg{Version=[5],New=[can be disallowed],Old=[might not be allowed]} as
 an array or loop index (a very long integer).
 Any type descended from a nonstandard integer type is also nonstandard.
 An implementation may place arbitrary restrictions on the use of such types;
@@ -6973,9 +7131,12 @@ The other predefined operations are described in
 As for all types, objects of a discrete type
 have Size and Address attributes (see @RefSecNum(Operational and Representation Attributes)).
 
-@Leading@;For a subtype of a discrete type, the result delivered by the
-attribute Val might not belong to the subtype; similarly, the actual parameter
-of the attribute Pos need not belong to the subtype. The following relations
+@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+For a subtype of a discrete type, the result delivered by the
+attribute Val @Chg{Version=[5],New=[can be outside],Old=[might not belong to]}
+the subtype; similarly, the actual parameter
+of the attribute Pos @Chg{Version=[5],New=[can also 
+be outside],Old=[need not belong to]} the subtype. The following relations
 are satisfied (in the absence of an exception) by these attributes:
 @begin(Example)
    S'Val(S'Pos(X)) = X
@@ -7100,34 +7261,39 @@ type definable by a @nt<floating_point_definition>.
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1],ARef=[AI12-0444-1]}
 @Redundant[For the execution of a predefined operation of a real type,
-the implementation need not raise Constraint_Error if the result is
+@Chg{Version=[5],New=[it is optional to],Old=[the implementation need not]} 
+raise Constraint_Error if the result is
 outside the base range of the type, so long as the correct result
 is produced, or the Machine_Overflows attribute of the type is @Chg{Version=[2],
 New=[False],Old=[false]}
 (see @Chg{Version=[5],New=[@RefSecNum{Model of FLoating Point Arithmetic}],
 Old=[@RefSecNum{Numeric Performance Requirements}]}).]
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1],ARef=[AI12-0444-1]}
 @Defn{nonstandard real type}
 An implementation may provide @i(nonstandard real types),
 descendants of @i(root_real) that are
 declared outside of the specification of package Standard,
-which need not have all the standard characteristics
-of a type defined by a @nt<real_type_definition>. For
-example, a nonstandard real type
-might have an asymmetric or unsigned base range,
-or its predefined operations might wrap around or @lquotes@;saturate@rquotes@; rather
-than overflow (modular or saturating arithmetic), or it might not
-conform to the accuracy
-model (see @Chg{Version=[5],New=[@RefSecNum{Model of FLoating Point Arithmetic}],
+which @Chg{Version=[5],New=[may have different],Old=[need not have all the 
+standard]} characteristics @Chg{Version=[5],New=[than],Old=[of]} a type 
+defined by a @nt<real_type_definition>. For example, a nonstandard real type
+@Chg{Version=[5],New=[can],Old=[might]} have an asymmetric or unsigned base 
+range, or its predefined operations @Chg{Version=[5],New=[can],Old=[might]}
+wrap around or @lquotes@;saturate@rquotes@; rather than overflow (modular or
+saturating arithmetic), or it @Chg{Version=[5],New=[can have a 
+different],Old=[might not conform to the]} accuracy model 
+@Chg{Version=[5],New=[than is standard ],Old=[]}(see 
+@Chg{Version=[5],New=[@RefSecNum{Model of FLoating Point Arithmetic}],
 Old=[@RefSecNum{Numeric Performance Requirements}]}).
 Any type descended from a nonstandard real type is also nonstandard.
 An implementation may place arbitrary restrictions on the use of such types;
 it is implementation defined whether operators that are predefined
-for @lquotes@;any real type@rquotes@; are defined for a particular nonstandard real type.
-@Redundant[In any case, such types are not permitted as @nt{explicit_generic_actual_parameter}s for formal scalar types @em see @RefSecNum(Formal Scalar Types).]
+for @lquotes@;any real type@rquotes@; are defined for a particular 
+nonstandard real type. @Redundant[In any case, such types are not permitted 
+as @nt{explicit_generic_actual_parameter}s for formal scalar types @em see
+@RefSecNum(Formal Scalar Types).]
 @ImplDef{Any nonstandard real types and the operators defined for them.}
 @end{ImplPerm}
 
@@ -7188,10 +7354,12 @@ the reserved word @key(digits).
 This @nt<expression>
 is expected to be of any integer type.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @PDefn2{Term=[expected type], Sec=(real_range_specification bounds)}
 Each @nt<simple_expression> of a
 @nt<real_range_specification> is expected to be of any real
-type@Redundant[; the types need not be the same].
+type@Redundant[; the types @Chg{Version=[5],New=[can],Old=[need not]} be
+@Chg{Version=[5],New=[different],Old=[the same]}].
 @end{Resolution}
 
 @begin{Legality}
@@ -7262,6 +7430,7 @@ In most cases,
   certain predefined operations. For such hardware, the safe
   range would omit such values.@end{implnote}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @PDefn2{Term=[base decimal precision], Sec=(of a floating point type)}
 A @nt<floating_point_definition> defines a floating point type
 whose base decimal precision is no less than the requested
@@ -7276,7 +7445,7 @@ given in the @nt<real_range_specification>.
 If a @nt<real_range_specification> is not given,
 the safe (and base) range of the type includes at least the values of the range
 @en@;10.0**(4*D) .. +10.0**(4*D) where D is the requested decimal precision.
-@Redundant[The safe range might include
+@Redundant[The safe range @Chg{Version=[5],New=[can],Old=[might]} include
 other values as well. The attributes Safe_First and Safe_Last
 give the actual bounds of the safe range.]
 
@@ -7324,6 +7493,7 @@ requested decimal precision shall be at least 11.
 @end{ImplReq}
 
 @begin{ImplPerm}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Defn{Short_Float}
 @Defn{Long_Float}
 An implementation is
@@ -7338,8 +7508,10 @@ Similarly, the precision of Short_Float (if provided) should be no greater
 than Float.
 Corresponding recommendations apply to any other predefined floating point
 types.
-There need not be a named floating point type corresponding to each
-distinct base decimal precision supported by an implementation.
+@Chg{Version=[5],New=[An implementation may support],Old=[There need not be
+a named floating point type corresponding to each distinct]} base decimal
+@Chg{Version=[5],New=[precisions for which there is no corresponding named
+floating point type],Old=[precision supported by an implementation]}.
 @ImplDef{The predefined floating point types declared in Standard.}
 @end{ImplPerm}
 
@@ -7481,7 +7653,7 @@ the Machine_Radix is 10.]}
 @end{DiffWord95}
 
 
-@RMNewPageVer{Version=[5]}@Comment{For Ada 202x RM and ISO version as well}
+@RMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM and ISO version as well}
 @LabeledSubClause{Fixed Point Types}
 
 @begin{Intro}
@@ -7746,17 +7918,20 @@ of Float_IO).
 @end{ImplPerm}
 
 @begin{SingleNote}
-  @Leading@;The base range of
-  an ordinary fixed point type need not include the specified bounds
-  themselves
+  @Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+  The @Chg{Version=[5],New=[specified bounds themselves can be outside 
+  the ],Old=[]}base range of
+  an ordinary fixed point type@Chg{Version=[5],New=[],Old=[ need not 
+  include the specified bounds themselves]}
   so that the range specification can be given in a natural way, such as:
   @leading@begin(Example)
    @b(type) Fraction @b(is delta) 2.0**(-15) @b(range) -1.0 .. 1.0;
   @end(Example)
 
-  @NoPrefix@;With 2's complement hardware, such a type could have a
-  signed 16-bit representation, using 1 bit for the sign
-  and 15 bits for fraction, resulting in a base range of
+  @NoPrefix@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+  With 2's complement hardware, such a type @Chg{Version=[5],New=[would
+  typically],Old=[could]} have a signed 16-bit representation, using 1 bit
+  for the sign and 15 bits for fraction, resulting in a base range of
   @en@;1.0 .. 1.0@en@;2.0**(@en@;15).
 @end{SingleNote}
 

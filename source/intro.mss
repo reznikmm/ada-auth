@@ -1,6 +1,6 @@
 @Part(intro, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/intro.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2022/05/14 04:06:52 $}
+@comment{$Revision: 1.2 $ $Date: 2022/06/21 06:08:04 $}
 
 
 @UnNumberedSection{Introduction}
@@ -14,8 +14,8 @@ This is the Annotated Ada Reference Manual.
 @ChgRef{Version=[5],Kind=[Revised]}
 This document is the Annotated Ada Reference Manual (AARM).
 It contains the entire text of the Ada
-@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[95]} standard
-(ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}),
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[95]} standard
+(ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[1995]}),
 plus various annotations.
 It is intended primarily for compiler writers,
 validation test writers, and other language lawyers.

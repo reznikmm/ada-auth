@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.120 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
+@comment{ $Revision: 1.121 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:50 $}
+@Comment{$Date: 2022/06/21 06:08:03 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -18,6 +18,11 @@ Text=<@ChgAdded{Version=[3],Text=[A container is an object that contain other
 objects all of the same type, which could be class-wide.
 Several predefined container types are provided by the children
 of package Ada.Containers (see @RefSecNum{The Package Containers}).]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[container],
+  Def=[a structured object that represents a collection of elements all of the
+       same (potentially class-wide) type, such as a vector or a tree],
+  Note1=[Several predefined container types are provided by the children
+         of package Ada.Containers (see @RefSecNum{The Package Containers}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1],ARef=[AI12-0416-1]}
@@ -66,14 +71,14 @@ itself.@PDefn2{Term=[cursor],Sec=[for a container]}
   Vector, List, or Map.]}
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[Some operations of the language-defined child units
 of Ada.Containers have access-to-subprogram parameters. To ensure such
 operations are well-defined, they guard against certain actions by the
-designated subprogram. An action on a container that might add or remove an
+designated subprogram. An action on a container that can add or remove an
 element is considered to @i{tamper with cursors},@PDefn{tamper with cursors} and
 these are prohibited during all such operations. An action on a container that
-might replace an element with one of a different size is considered to @i{tamper
+can replace an element with one of a different size is considered to @i{tamper
 with elements}, and these are prohibited during certain of such
 operations.@PDefn{tamper with elements} The details of the specific actions that
 are considered to tamper with cursors or elements are defined for each child
@@ -4297,7 +4302,7 @@ Tampering_With_Cursors_Prohibited and
 Tampering_With_Elements_Prohibited that occur in preconditions are replaced
 by False, and any that occur in postconditions are replaced by True.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[If a stable vector is declared with the Base
 discriminant designating a pre-existing ordinary vector, the stable vector
 represents a stabilized view of the underlying ordinary vector, and any operation
@@ -4305,7 +4310,7 @@ on the stable vector is reflected on the underlying ordinary vector. While a
 stabilized view exists, any operation that tampers with elements performed on
 the underlying vector is prohibited. The finalization of a stable vector that
 provides such a view removes this restriction on the underlying ordinary vector
-@Redundant[(though some other restriction might exist due to other concurrent
+@Redundant[(though some other restriction can exist due to other concurrent
 iterations or stabilized views)].]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
@@ -4672,9 +4677,10 @@ unless specified by the operation.]}]}
 @begin{Notes}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[All elements of a vector occupy locations in the
-internal array. If a sparse container is required, a Hashed_Map should be used
-rather than a vector.]}
+internal array. If a sparse container is required, a Hashed_Map
+@Chg{Version=[5],New=[can],Old=[should]} be used rather than a vector.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If Index_Type'Base'First = Index_Type'First an
@@ -4754,11 +4760,11 @@ value of Last_Index.]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}Tampering
   with elements is now defined to be equivalent to tampering with
   cursors for ordinary containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Specifically, if a program requires
+  to work, it might fail in Ada 2022. Specifically, if a program requires
   Program_Error to be raised by a routine that (only) tampers with elements
   in Ada 2012 (such as Replace_Element) when called in a context that does not
   allow tampering with elements (such as Update_Element), the routine will
-  work as defined instead of raising Program_Error in Ada 202x. Needless to say,
+  work as defined instead of raising Program_Error in Ada 2022. Needless to say,
   this shouldn't happen outside of test programs. Note that such contexts still
   prohibit tampering with cursors, so routines like Insert and Delete will
   still raise Program_Error in this case.]}
@@ -4785,7 +4791,7 @@ value of Last_Index.]}
   the "&" operations defined in this package. If the Element_Type of the 
   vector is a type that allows aggregates (such as a record type), then calls
   to the "&" operations with an aggregate element will become ambiguous in 
-  Ada 202x, while they would have been legal in Ada 2012. This can be fixed by
+  Ada 2022, while they would have been legal in Ada 2012. This can be fixed by
   qualifying the aggregate with the element type.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0400-1]}
@@ -7235,7 +7241,7 @@ Tampering_With_Cursors_Prohibited and
 Tampering_With_Elements_Prohibited that occur in preconditions are replaced
 by False, and any that occur in postconditions are replaced by True.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[If a stable list is declared with the Base
 discriminant designating a pre-existing ordinary list, the stable list
 represents a stabilized view of the underlying ordinary list, and any operation
@@ -7243,7 +7249,7 @@ on the stable list is reflected on the underlying ordinary list. While a
 stabilized view exists, any operation that tampers with elements performed on
 the underlying list is prohibited. The finalization of a stable list that
 provides such a view removes this restriction on the underlying ordinary list
-@Redundant[(though some other restriction might exist due to other concurrent
+@Redundant[(though some other restriction can exist due to other concurrent
 iterations or stabilized views)].]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
@@ -7481,10 +7487,12 @@ unless specified by the operation.]}]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[Sorting a list never copies elements, and is a
 stable sort (equal elements remain in the original order). This is different
-than sorting an array or vector, which may need to copy elements, and is
-probably not a stable sort.]}
+than sorting an array or vector, which
+@Chg{Version=[5],New=[will often],Old=[may need to]} copy elements, and
+@Chg{Version=[5],New=[hence ],Old=[]}is probably not a stable sort.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -7561,7 +7569,7 @@ probably not a stable sort.]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for ordinary containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}

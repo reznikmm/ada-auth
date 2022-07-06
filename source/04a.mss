@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:47 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.166 $}
+@Comment{$Revision: 1.167 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -808,7 +808,7 @@ My_Object.Do_Something_Else (Flag => True);]}
   attribute can be illegal are covered by the rule for the implicit Access
   attribute of a prefixed view. If the object is a subcomponent
   that depends on discriminants or fails a static accessibility check, Ada 2012
-  would have allowed the prefix while Ada 202x would not. This violated the
+  would have allowed the prefix while Ada 2022 would not. This violated the
   principle that a prefixed view and a normal call have the same semantics;
   practically, the code may not have worked anyway if a compiler implemented
   generalized indexing by code expansion into the canonical form. Thus, such
@@ -827,6 +827,9 @@ or a @nt<range_@!attribute_@!reference>.]
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Attribute>,
 Text=<@ChgAdded{Version=[5],Text=[An attribute is a characteristic or property
 of an entity that can be queried, and in some cases specified.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[attribute],
+  Def=[a characteristic or property of an entity that can be queried, and in
+       some cases specified]}
 @end{Intro}
 
 @begin{Syntax}
@@ -1221,6 +1224,9 @@ reference discriminant of the reference object.]]}
 Text=<@ChgAdded{Version=[3],Text=[A reference type is one that has user-defined
 behavior for @ldquote.@key[all]@rdquote, defined by the
 Implicit_Dereference aspect.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[reference type],
+  Def=[a type that has user-defined behavior for @ldquote@;.all@rdquote,
+       defined by the Implicit_Dereference aspect]}
 @end{StaticSem}
 
 @begin{Syntax}
@@ -1423,6 +1429,9 @@ Constant_Indexing or Variable_Indexing aspect.]]}
 Text=<@ChgAdded{Version=[3],Text=[An indexable container type is one that has
 user-defined behavior for indexing, via the Constant_Indexing or
 Variable_Indexing aspects.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[indexable container type],
+  Def=[a type that has user-defined behavior for indexing, via the
+       Constant_Indexing or Variable_Indexing aspects]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgAdded{Version=[4],Text=[The Constant_Indexing and Variable_Indexing aspects
@@ -1681,7 +1690,7 @@ IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing 
   Added a rule that a generalized indexing is illegal if the equivalent
   prefixed view would be illegal. If the prefixed view would be illegal for
   any reason, Ada 2012 would have allowed the generalized indexing while
-  Ada 202x does not. This violated the principle that a generalized indexing
+  Ada 2022 does not. This violated the principle that a generalized indexing
   and the equivalent prefixed view have the same semantics; practically, the
   code may not have worked anyway if a compiler implemented generalized
   indexing by code expansion into the canonical form. Thus, such code wasn't
@@ -2227,6 +2236,10 @@ into a composite value of an array type, record type, or record extension.]
 Text=<@ChgAdded{Version=[5],Text=[An aggregate is a construct used to define a
 value of a composite type by specifying the values of the components of the
 type.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[aggregate],
+  Def=[a construct used to define a value of a composite type by
+          specifying the values of the components of the type]}
+
 @end{Intro}
 
 @begin{Syntax}
@@ -2431,7 +2444,7 @@ will work (see @RefSecNum{Assignment and Finalization}).
   My_Vector is an instance of Ada.Containers.Vectors with an
   element type of Not_Lim as defined above, and V is an object of My_Vector.Vector,
   then My_Vector.Append (V, (Comp => 123)); will be illegal in Ada
-  202x and legal in Ada 2012. This can easily be fixed by qualifying the
+  2022 and legal in Ada 2012. This can easily be fixed by qualifying the
   @nt{aggregate} with the correct type.]}
 @end{Incompatible2012}
 
@@ -2567,6 +2580,9 @@ can be given by static expressions.
   giving the same component twice and giving components from two different
   variants.]}
 @end{Reason}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[needed component],
+  Def=[a component of a record type or record extension that is required
+       to have its value specified within a given aggregate]}
 
 @Leading@Keepnext@PDefn2{Term=[expected type],
   Sec=(record_component_association expression)}
@@ -3308,7 +3324,7 @@ The extension aggregate syntax is new.
 @end{DiffWord2012}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledSubClause{Array Aggregates}
 
 @begin{Intro}
@@ -3863,15 +3879,16 @@ checks fail.
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1],ARef=[AI12-0440-1]}
 In an @nt<array_aggregate>@Chg{Version=[5],New=[ delimited by
-parentheses],Old=[]}, positional notation may only be used
-with two or more @nt<expression>s; a single @nt<expression>
+parentheses],Old=[]}, positional notation @Chg{Version=[5],New=[can],Old=[may]}
+only be used with two or more @nt<expression>s; a single @nt<expression>
 in parentheses is interpreted as a
 @Chg{Version=[3],New=[parenthesized expression],Old=[@ntf{parenthesized_expression}]}.
 @Chg{Version=[5],New=[An @nt{array_aggregate} delimited by square
-brackets],Old=[A @nt<named_array_aggregate>, such as (1 => X),]} may be used to
-specify an array with a single component.
+brackets],Old=[A @nt<named_array_aggregate>, such as
+(1 => X),]} @Chg{Version=[5],New=[can],Old=[may]} be used to specify an array
+with a single component.
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
 @ChgAdded{Version=[5],Text=[An index parameter is a constant object (see
@@ -4342,6 +4359,10 @@ elements are combined to form the container.@Defn{container aggregate}]}
 Text=<@ChgAdded{Version=[5],Text=[A container aggregate is a construct used to
 define a value of a type that represents a collection of elements, by explicitly
 specifying the elements in the collection.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[container aggregate],
+  Def=[a construct used to define a value of a type that
+          represents a collection of elements, by explicitly specifying the
+          elements in the collection]}
 
 @Comment{This is weird that it is part of the Intro, but it matches Pre
          and Type_Invariant.}
@@ -4985,7 +5006,7 @@ Keys : @key[constant array](Positive @key[range] <>) @key[of] Integer := [2, 3, 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text="--  @examcom<A map aggregate where the values produced by the>
 --  @nt{iterated_element_association}@examcom< are of the same type as the key>
---  @examcom<(eliminating the need for a separate key_>@nt{expression}@examcom<):>
+--  @examcom<(hence a separate key_>@nt{expression}@examcom< is unnecessary):>
 M := [@key[for] Key @key[of] Keys => Integer'Image (Key)];"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -7870,7 +7891,7 @@ is composite (as opposed to prime) can be written:]}]}
 @end{DiffWord2012}
 
 
-@IsoOnlyRMNewPageVer{Version=[5]}@Comment{For ISO Ada 202x only}
+@IsoOnlyRMNewPageVer{Version=[5]}@Comment{For ISO Ada 2022 only}
 @LabeledAddedSubclause{Version=[5],Name=[Declare Expressions]}
 
 @begin{Intro}
@@ -8029,6 +8050,10 @@ Text=<@ChgAdded{Version=[5],Text=[A reduction expression is an expression that
 defines how to map or transform a collection of values into a new set of values,
 and then summarize the values by applying an operation to reduce the set to a
 single value.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[reduction expression],
+  Def=[an expression that defines how to map or transform a collection of 
+       values into a new set of values, and then summarize the values by 
+       applying an operation to reduce the set to a single value]}
 @end{Intro}
 
 @begin{Syntax}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:48 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -15,6 +15,7 @@ the program are described in this @Chg{Version=[3],New=[clause],Old=[section]}.
 The formulation of these rules uses the notion of a declarative region.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 As explained in @Chg{Version=[3],New=[Clause],Old=[Section]}
 @RefSecNum{Declarations and Types},
 a declaration declares a view of an entity
@@ -24,8 +25,8 @@ and possibly additional properties.
 A usage name denotes a declaration.
 It also denotes the view declared by that declaration,
 and denotes the entity of that view.
-Thus, two different usage names might denote two different views of
-the same entity; in this case they denote the same entity.]
+Thus, two different usage names @Chg{Version=[5],New=[can],Old=[might]} denote
+two different views of the same entity; in this case they denote the same entity.]
 @begin{Honest}
 In some cases, a usage name that denotes a declaration
 does not denote the view declared by that declaration,
@@ -196,13 +197,16 @@ They are @i{not} inside the
 declaration or body of Standard,
 but they @i{are} inside its declarative region.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 For a declarative region that comes in multiple parts,
-the text of the declarative region does not contain any text that might appear
-between the parts.
+the text of the declarative region does not @Chg{Version=[5],New=[include
+any of the],Old=[contain any]} text that
+@Chg{Version=[5],New=[appears],Old=[might appear]} between the parts.
 Thus, when a portion of a declarative region is said to extend from one
-place to another in the declarative region,
-the portion does not contain any text that
-might appear between the parts of the declarative region.
+place to another in the declarative region, the portion does not 
+contain any @Chg{Version=[5],New=[of the ],Old=[]}text that
+@Chg{Version=[5],New=[appears],Old=[might appear]} between the parts of
+the declarative region.
 @begin{Discussion}
 It is necessary for the things that have a declarative region to
 include
@@ -797,6 +801,9 @@ their profiles are type conformant.
 Text=[@ChgAdded{Version=[2],Text=[An overriding operation
 is one that replaces an inherited primitive operation. Operations may be marked
 explicitly as overriding or not overriding.]}]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[overriding operation],
+  Def=[an operation that replaces an inherited primitive operation],
+  Note1=[Operations can be marked explicitly as overriding or not overriding.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
 @leading@Redundant[Two homographs are not generally allowed
@@ -2033,7 +2040,9 @@ completion of a previous @nt{subprogram_declaration}.]
 Text=<@ChgAdded{Version=[2],Text=[A @nt{renaming_declaration} is a declaration
 that does not define a new entity, but instead defines a view of an existing
 entity.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[renaming],
+  Def=[a declaration that does not define a new entity, but 
+       instead defines a new view of an existing entity]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2058,11 +2067,13 @@ denotes (a new view of) the renamed entity.]
 @end{RunTime}
 
 @begin{Notes}
-Renaming may be used to resolve name conflicts and to act as a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+Renaming @Chg{Version=[5],New=[can],Old=[may]} be used to resolve name
+conflicts and to act as a
 shorthand. Renaming with a different @nt{identifier} or
 @nt{operator_symbol} does not hide the old @nt{name}; the new
-@nt{name} and the old @nt{name} need not be visible at the same
-places.
+@nt{name} and the old @nt{name} @Chg{Version=[5],New=[can],Old=[need not]}
+be visible at @Chg{Version=[5],New=[different],Old=[the same]} places.
 
 @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0427-1]}
 @ChgDeleted{Version=[5],Text=[A task or protected object that is declared
@@ -2095,7 +2106,7 @@ irrelevant, since failing these tests is highly unlikely.
 @end{DiffWord83}
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledSubClause{Object Renaming Declarations}
 
 @begin{Intro}
@@ -2621,7 +2632,7 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @ExamCom{-- see
 @end{Extend2005}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledSubClause{Package Renaming Declarations}
 
 @begin{Intro}
@@ -3139,7 +3150,7 @@ We'll live with the oddity.
   Added a rule to ensure that the prefix of a renaming of a prefixed view
   continues to exist during the life of a renames. If the prefix is a
   subcomponent that depends on discriminants, Ada 2005 and 2012
-  would have allowed the prefix while Ada 202x would not. Without this change,
+  would have allowed the prefix while Ada 2022 would not. Without this change,
   explicit forms (renaming the object and then using that in calls) would be
   safer than the renaming; that's inconsistent with other kinds of renaming.]}
 @end{Incompatible2012}
@@ -3180,10 +3191,11 @@ A @nt{generic_renaming_declaration} declares a new view
 @end{StaticSem}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 Although the properties of the new view are the same as those of the
 renamed view, the place where the @nt<generic_renaming_declaration> occurs
-may affect the legality of subsequent renamings and instantiations
-that denote the @nt<generic_renaming_declaration>,
+@Chg{Version=[5],New=[can],Old=[may]} affect the legality of subsequent 
+renamings and instantiations that denote the @nt<generic_renaming_declaration>,
 in particular if the renamed generic unit is a library unit
 (see @RefSecNum{Compilation Units - Library Units}).
 @end{Notes}

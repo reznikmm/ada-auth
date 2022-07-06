@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.75 $ $Date: 2022/05/14 04:06:51 $ $Author: randy $ }
+@Comment{ $Revision: 1.76 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:51 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -22,7 +22,8 @@ Understanding program execution;
 
 Reviewing object code;
 
-Restricting language constructs whose usage might
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
+Restricting language constructs whose usage @Chg{Version=[5],New=[can],Old=[might]}
 complicate the demonstration of program correctness
 @end{Itemize}
 @ChgNote{The following paragraph is missing a number in the original version.
@@ -40,9 +41,10 @@ requirements addressed by this Annex.
 @end{Intro}
 
 @begin{SingleNote}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 The @attr[Valid] attribute (see @RefSecNum(The Valid Attribute)) is
-also useful in addressing these needs,
-to avoid problems that could otherwise arise from scalars
+also useful in addressing these needs, to avoid problems that
+@Chg{Version=[5],New=[can],Old=[could]} otherwise arise from scalars
 that have values outside their declared range constraints.
 
   @begin{Discussion}
@@ -168,9 +170,10 @@ since initialization of an imported object is performed
 solely by the foreign language environment
  (see @RefSecNum[Interfacing Aspects]).
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 The use of pragma Normalize_Scalars in conjunction with
-Pragma Restrictions(No_Exceptions) may result in erroneous execution
-(see @RefSecNum[High Integrity Restrictions]).
+Pragma Restrictions(No_Exceptions) @Chg{Version=[5],New=[can],Old=[may]}
+result in erroneous execution (see @RefSecNum[High Integrity Restrictions]).
 @begin{Discussion}
 
 Since the effect of an access to an out of range value will often be to
@@ -185,6 +188,7 @@ arbitrary store location, having unpredictable effects.
 @LabeledClause{Documentation of Implementation Decisions}
 
 @begin{DocReq}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @PDefn{unspecified}
 The implementation shall document the range of effects for each
 situation that the language rules identify as either a
@@ -192,7 +196,7 @@ bounded error or as having an unspecified effect.
 If the implementation can constrain the effects of erroneous
 execution for a given construct,
 then it shall document such constraints.
-@Redundant[The documentation might be provided either
+@Redundant[The documentation @Chg{Version=[5],New=[may],Old=[might]} be provided either
 independently of any compilation unit or partition, or as part of an annotated
 listing for a given unit or partition.
 See also @RefSecNum(Conformity of an Implementation), and
@@ -1235,12 +1239,13 @@ Text=[Any restrictions on pragma Restrictions.]}]}
 
 @begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[Uses of @Syni{restriction_parameter_}@nt{identifier}
 No_Dependence defined in @RefSecNum{Language-Defined Restrictions and Profiles}:
 No_Dependence => Ada.@!Unchecked_@!Deallocation and No_Dependence =>
-Ada.@!Unchecked_@!Conversion may be appropriate for high-integrity systems.
-Other uses of No_Dependence can also be appropriate for high-integrity
-systems.]}
+Ada.@!Unchecked_@!Conversion @Chg{Version=[5],New=[can],Old=[may]} be appropriate
+for high-integrity systems. Other uses of No_Dependence can also be appropriate
+for high-integrity systems.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The specific mention of these two uses
@@ -1346,7 +1351,7 @@ proscribed
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
   Restriction No_IO now excludes use of Ada.Directories. If a program using
   No_IO used Ada.Directories, it would be legal in Ada 2012 and illegal
-  in Ada 202x. However, given the role of Ada.Directories as a support package
+  in Ada 2022. However, given the role of Ada.Directories as a support package
   for the other packages that are excluded by No_IO, it seems unlikely that
   any use of the restriction would use this package (and it's possible that
   implementations wouldn't support its use with No_IO anyway).]}
@@ -1508,9 +1513,10 @@ occurring within the compilation unit],Old=[]}.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[An operation that causes a task to be blocked
 within a foreign language domain is not defined to be potentially blocking,
-and need not be detected.]}
+and @Chg{Version=[5],New=[is unlikely to],Old=[need not]} be detected.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -1653,10 +1659,12 @@ hazard posed by continuing to execute with a subset of the tasks being active.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00421-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[If any deferred task activation fails, the
 environment task is unable to handle the Tasking_Error exception and completes
 immediately. By contrast, if the partition elaboration policy is Concurrent,
-then this exception could be handled within a library unit.]}
+then this exception @Chg{Version=[5],New=[can],Old=[could]} be handled within
+a library unit.]}
 @end{Notes}
 
 
@@ -1714,9 +1722,9 @@ corresponding actual parameter.]}
 defined in terms of operations that are performed by or on behalf of
 an entity.]]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0431-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3],ARef=[AI12-0431-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[The Global aspect for a subtype identifies the
-global variables that might be referenced during default initialization,
+global variables that can be referenced during default initialization,
 adjustment as part of
 assignment, finalization of an object of the subtype, or conversion to
 the subtype, including the evaluation of any assertion expressions that
@@ -1848,22 +1856,22 @@ a dispatching operation associated with @i<T>.]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[The @i{formal parameter set}@Defn{formal parameter set}
 is identified by a set of @nt{formal_parameter_name}s. Alternatively, the
 reserved word @key[null] may be used to indicate none of the generic formal
 parameters, or @key[all] to indicate all of the generic formal parameters, of
-any enclosing generic unit (or visible formal package) might be used within
+any enclosing generic unit (or visible formal package) can be used within
 the execution of the operation. If there is no formal parameter set
 specified for an entity declared within a generic unit, it defaults
 to @key[all].]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0404-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0380-1],ARef=[AI12-0404-1],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[5],Text=[The @i{dispatching operation set}@Defn{dispatching operation set}
 is identified by a set of @nt{dispatching_operation_specifier}s. It indicates
 that the Nonblocking and global effects of dispatching calls that match one
-of the specifiers need not be accounted for by the Nonblocking
-or global aspect, but are instead to be accounted for by the
+of the specifiers, rather than being accounted for by the Nonblocking
+or global aspect, are instead to be accounted for by the
 invoker of the operation. A dispatching call matches a
 @nt{dispatching_operation_specifier} if the @nt{name} or @nt{prefix} of the
 call statically denotes the same operation(s) as that of the

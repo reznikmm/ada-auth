@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.87 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
+@comment{ $Revision: 1.88 $ $Date: 2022/06/21 06:08:02 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2022/05/14 04:06:49 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -57,17 +57,16 @@ a distributed system be homogeneous.
 @begin{Notes}
 
 
-The partitions comprising a program may be executed on differently
-configured distributed systems or on a nondistributed system without
-requiring recompilation.
-A distributed program may be partitioned differently from the same set of
-library units without recompilation.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+The partitions comprising a program @Chg{Version=[5],New=[can],Old=[may]} be
+executed on differently configured distributed systems or on a nondistributed
+system without requiring recompilation.
+A distributed program @Chg{Version=[5],New=[can],Old=[may]} be partitioned
+differently from the same set of library units without recompilation.
 The resulting execution is semantically equivalent.
 
 A distributed program retains the same type safety
 as the equivalent single partition program.
-
-
 
 @end{Notes}
 
@@ -217,8 +216,10 @@ a consistent state of the partition to other active partitions.
   nor the actual level of consistency preserved.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 In an implementation, the partitions of a distributed
-program need not be loaded and elaborated all at the same time;
+program @Chg{Version=[5],New=[may],Old=[need not]} be loaded and
+elaborated @Chg{Version=[5],New=[at different times],Old=[all at the same time]};
 they may be loaded and elaborated one at a time over an extended
 period of time. An implementation may provide facilities to abort
 and reload a partition during the execution of a distributed program.
@@ -256,7 +257,7 @@ to query information about the partition.
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Categorization of Library Units}
 
 @begin{Intro}
@@ -973,10 +974,10 @@ shall not be specified for a remote access-to-class-wide type.],Old=[]}
 @end{Erron}
 
 @begin{Notes}
-A remote types library unit
-need not be pure, and the types it defines may
-include levels of indirection implemented by using access types.
-User-specified Read and Write attributes
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}A remote types library unit
+@Chg{Version=[5],New=[is not necessarily],Old=[need not be]} pure, and the types
+it defines @Chg{Version=[5],New=[can],Old=[may]} include levels of indirection
+implemented by using access types. User-specified Read and Write attributes
 (see @RefSecNum{Stream-Oriented Attributes})
 provide for sending values of such a type
 between active partitions, with Write marshalling the
@@ -989,8 +990,10 @@ interface can designate an object of a nonlimited type derived from the
 interface.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
-@ChgAdded{Version=[3],Text=[A remote access type may designate a class-wide
-synchronized, protected, or task interface type.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+@ChgAdded{Version=[3],Text=[A remote access type
+@Chg{Version=[5],New=[can],Old=[may]} designate a class-wide synchronized,
+protected, or task interface type.]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Synchronized, protected, and task interfaces
@@ -1472,10 +1475,12 @@ are always local, and all the units are in the same active partition.
 @begin{ImplPerm}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
-An implementation need not support the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1],ARef=[AI12-0444-1]}
+An implementation @Chg{Version=[5],New=[may omit],Old=[need not]}
+support@Chg{Version=[5],New=[ for],Old=[]} the
 Remote_Call_Interface @Chg{Version=[5],New=[],Old=[pragma
-]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[or ]}aspect ],Old=[]}nor
+]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[or ]}aspect
+],Old=[]}@Chg{Version=[5],New=[or],Old=[nor]}
 the All_Calls_Remote @Chg{Version=[5],New=[aspect],Old=[pragma]}.
 @Redundant[Explicit message-based communication between active partitions can
 be supported as an alternative to RPC.]
@@ -2365,10 +2370,12 @@ through the services of the Name_Server. This allows for tape devices to be
 dynamically added, removed or replaced without requiring the modification of
 the clients' code.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 The Tape_Client procedure references only declarations in the Tapes and
-Name_Server packages. Before using a tape for the first time, it needs to
-query the Name_Server for a system-wide identity for that tape. From then on,
-it can use that identity to access the tape device.
+Name_Server packages. Before using a tape for the first time, it 
+@Chg{Version=[5],New=[will],Old=[needs to]} query the Name_Server for 
+a system-wide identity for that tape. From then on, it can use that identity
+to access the tape device.
 
 Values of remote access type Tape_Ptr include the necessary information to
 complete the remote dispatching operations that result from
@@ -2610,8 +2617,9 @@ detailed error status, etc. These
 additional interfaces should be provided in child packages of System.RPC.
 @ImplDef{Implementation-defined interfaces in the PCS.}
 
-A body for the package System.RPC need not be supplied by the
-implementation.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+A body for the package System.RPC @Chg{Version=[5],New=[is not required
+to],Old=[need not]} be supplied by the implementation.
 @begin{Reason}
   It is presumed that a body for the package System.RPC might be
   extremely environment specific. Therefore, we do not require

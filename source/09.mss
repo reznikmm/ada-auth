@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:48 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.147 $}
+@Comment{$Revision: 1.148 $}
 
 @begin{Intro}
 
@@ -41,7 +41,9 @@ Text=<@ChgAdded{Version=[5],Text=[A logical thread of control is an
 activity within the execution of a program
 that can proceed in parallel with other activities of the same task, or of
 separate tasks.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[R],Term=[logical thread of control],
+  Def=[an activity within the execution of a program that can proceed in 
+       parallel with other activities of the same task, or of separate tasks]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0119-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The
 various forms of task interaction are described in this clause, and include:]}
@@ -124,15 +126,15 @@ multiple processing resources simultaneously.],Old=[]}
 @end{RunTime}
 
 @begin{Notes}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
-Concurrent task execution may be implemented on
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0440-1]}
+Concurrent task execution @Chg{Version=[5],New=[can],Old=[may]} be implemented on
 multicomputers, multiprocessors, or with interleaved execution on a single
 physical processor. On the other hand, whenever an implementation can
 determine that the required semantic effects can be achieved when
 parts of the execution of a
 @Chg{Version=[5],New=[single logical thread of control],Old=[given task]}
 are performed by different physical processors acting in
-parallel, it may choose to perform them in this way.
+parallel, it @Chg{Version=[5],New=[can],Old=[may]} choose to perform them in this way.
 
 @end{Notes}
 
@@ -469,10 +471,13 @@ denotes the corresponding discriminant of the current instance
 of the unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 A task type is a limited type (see @RefSecNum(Limited Types)),
 and hence @Chg{Version=[2],New=[precludes use of @nt{assignment_statement}s and],
 Old=[has neither an assignment operation nor]} predefined equality operators.
-If an application needs to store and exchange task identities, it
+If @Chg{Version=[5],New=[a programmer wants to write ],Old=[]}an 
+application @Chg{Version=[5],New=[that stores and exchanges],Old=[needs to
+store and exchange]} task identities, @Chg{Version=[5],New=[they],Old=[it]}
 can do so by defining an access type designating the corresponding
 task objects and by using access values for identification purposes.
 Assignment is available for such an access type as for any
@@ -776,8 +781,10 @@ never activated.
 
 An entry of a task can be called before the task has been activated.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 If several tasks are activated together, the execution of any of these
-tasks need not await the end of the activation of the other tasks.
+tasks @Chg{Version=[5],New=[can proceed without waiting until],Old=[need
+not await]} the end of the activation of the other tasks.
 
 A task can become completed during its activation either because of an
 exception or because it is aborted
@@ -925,11 +932,13 @@ such a type creates dependences according to the full type.
 An @nt<object_renaming_declaration> defines a new view of an
 existing entity and hence creates no further dependence.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 The rules given for the collective completion of a group
 of tasks all blocked on @nt<select_statement>s with
 open @nt<terminate_alternative>s ensure that the collective
 completion can occur only when there are no remaining active
-tasks that could call one of the tasks being collectively completed.
+tasks that @Chg{Version=[5],New=[can],Old=[could]} call one of the tasks
+being collectively completed.
 
 If two or more tasks are blocked on @nt<select_statement>s
 with open @nt{terminate_alternative}s, and become
@@ -1917,10 +1926,11 @@ representation aspect may be specified with an @nt{aspect_specification} (see
 @ChgAdded{Version=[3],Text=[Synchronization@\If specified, the aspect definition
 shall be a @nt{synchronization_kind}.@AspectDefn{Synchronization}]}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Synchronization],
-  Text=[@ChgAdded{Version=[3],Text=[Defines whether a given primitive operation
-    of a synchronized interface must be implemented by an entry or protected
-    procedure.]}]}
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Synchronization],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Defines whether a 
+    given primitive operation of a synchronized interface
+    @Chg{Version=[5],New=[will],Old=[must]} be implemented by an entry or
+    protected procedure.]}]}
 
 @end{Description}
 
@@ -2006,9 +2016,9 @@ parameters.]}
       itself not a predefined operator or an enumeration literal.]}
   @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2],ARef=[AI12-0439-1]}}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[When aspect Nonblocking is False for
-an entity, the entity might contain a potentially blocking operation; such an
+an entity, the entity can contain a potentially blocking operation; such an
 entity @i{allows blocking}. If the aspect is True for an entity, the entity
 is said to be
 @i{nonblocking}.@Defn{allows blocking}@Defn{nonblocking}@Defn2{Term=[blocking],Sec=[allows]}@Defn2{Term=[blocking],Sec=[non-]}]}
@@ -2812,10 +2822,11 @@ potentially blocking operation.]}
 @end(Reason)
 @end{itemize}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
 If the bounded error is detected, Program_Error is raised.
 If not detected, the bounded error
-might result in deadlock or a (nested)
+@Chg{Version=[5],New=[can],Old=[might]} result in deadlock or a (nested)
 protected action on the same target object.
 
 @begin{Discussion}
@@ -2864,19 +2875,20 @@ was the resolution of a ramification.}
 @end{Bounded}
 
 @begin{Notes}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0276-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0276-1],ARef=[AI12-0440-1]}
 If two tasks both try to start a protected action
 on a protected object, and at most one is calling
 a protected @Chg{Version=[5],New=[nonexclusive ],Old=[]}function,
 then only one of the tasks can proceed.
 Although the other task cannot proceed, it is not considered
-blocked, and it might be consuming processing resources while it
+blocked, and it @Chg{Version=[5],New=[can],Old=[might]} be consuming processing
+resources while it
 awaits its turn. @Chg{Version=[5],New=[Unless there is an admission
 policy (see @RefSecNum{Admission Policies}) in effect, there],Old=[There]}
 is no language-defined ordering or queuing
 presumed for tasks competing to start a protected action @em
-on a multiprocessor such tasks might use busy-waiting; for
-@Chg{Version=[5],New=[further ],Old=[]}monoprocessor
+on a multiprocessor such tasks @Chg{Version=[5],New=[can],Old=[might]} use
+busy-waiting; for @Chg{Version=[5],New=[further ],Old=[]}monoprocessor
 @Chg{Version=[5],New=[and multiprocessor ],Old=[]}considerations,
 see @RefSec{Priority Ceiling Locking}.
 @begin{Discussion}
@@ -2884,8 +2896,10 @@ The intended implementation on a multi-processor is in terms of
 @lquotes@;spin locks@rquotes@; @em the waiting task will spin.
 @end{Discussion}
 
-The body of a protected unit may contain declarations and bodies for local
-subprograms. These are not visible outside the protected unit.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+The body of a protected unit @Chg{Version=[5],New=[can],Old=[may]} contain
+declarations and bodies for local subprograms. These are not visible outside
+the protected unit.
 
 The body of a protected function can contain internal calls
 on other protected functions, but not protected procedures,
@@ -2909,12 +2923,12 @@ target object is not considered a potentially blocking operation.
 @end(Reason)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[The aspect Nonblocking can
 be specified True on the definition of a protected unit in order to reject
 most attempts to use potentially blocking operations
 within the protected unit (see @RefSecNum{Intertask Communication}). ],Old=[]}
-The @nt{pragma} Detect_Blocking may be used to
+The @nt{pragma} Detect_Blocking @Chg{Version=[5],New=[can],Old=[may]} be used to
 ensure that @Chg{Version=[5],New=[any remaining],Old=[all]} executions of
 potentially blocking operations during a
 protected action raise Program_Error.
@@ -2967,7 +2981,7 @@ Control.Release;
 @end{DiffWord2012}
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledSubClause{Entries and Accept Statements}
 
 @begin{Intro}
@@ -3419,10 +3433,11 @@ A consequence of the rule regarding the allowed placements of
 only for its own entries.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 A @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}
 (see @RefSecNum(Return Statements))
 or a @nt<requeue_statement> (see @RefSecNum(Requeue Statements))
-may be used to complete the execution of
+@Chg{Version=[5],New=[can],Old=[may]} be used to complete the execution of
 an @nt<accept_statement> or an @nt<entry_body>.
 @begin{Ramification}
 An @nt<accept_statement> need not have a @nt<handled_sequence_of_statements>
@@ -3439,9 +3454,10 @@ can be renamed as a procedure as explained in
 @RefSecNum{Subprogram Renaming Declarations}.
 @end{Ramification}
 
-The @nt<condition> in the @nt{entry_barrier} may reference
-anything visible except the formal parameters of the entry.
-This
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+The @nt<condition> in the @nt{entry_barrier}
+@Chg{Version=[5],New=[can],Old=[may]} reference
+anything visible except the formal parameters of the entry. This
 includes the entry index (if any), the components (including discriminants) of
 the protected object, the Count attribute of an entry of that protected object,
 and data global to the protected unit.
@@ -3772,9 +3788,10 @@ of a @nt<select_statement>.
 
 @begin{ImplPerm}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 An implementation may perform the sequence of steps of a protected action
-using any thread of control; it need not be that of the task
-that started the protected action.
+using any thread of control; it @Chg{Version=[5],New=[can be a thread other
+than],Old=[need not be]} that of the task that started the protected action.
 If an @nt<entry_body> completes without requeuing, then the
 corresponding calling task may be made ready
 without waiting for the entire protected action to complete.
@@ -3789,10 +3806,11 @@ without waiting for the entire protected action to complete.
 @end(Reason)
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0129-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 When the entry of a protected object is checked to see whether it
-is open, the implementation need not reevaluate
-the @nt<condition> of the corresponding @nt<entry_barrier>
-if no variable or attribute referenced by
+is open, the implementation @Chg{Version=[5],New=[can bypass 
+reevaluating],Old=[need not reevaluate]} the @nt<condition> of the
+corresponding @nt<entry_barrier> if no variable or attribute referenced by
 the @nt<condition> (directly or indirectly)
 has been altered by the execution (or cancellation) of a
 @Chg{Version=[4],New=[],Old=[protected procedure or entry ]}call
@@ -3868,12 +3886,14 @@ is checked to see if it is open.
   on each entry queue acting as the queue header.
 @end(ImplNote)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 When an attempt is made to cancel an entry call, the implementation
-need not make the attempt using the thread of control of the
+@Chg{Version=[5],New=[can use a],Old=[need not make the attempt using the]}
+thread of control @Chg{Version=[5],New=[other than that ],Old=[]}of the
 task (or interrupt) that initiated the cancellation; in particular,
 it may use the thread of control of the caller itself to attempt the
-cancellation, even if this might allow the entry call to be
-selected in the interim.
+cancellation, even if this @Chg{Version=[5],New=[can],Old=[might]} allow
+the entry call to be selected in the interim.
 @begin{Reason}
   Because cancellation of a protected entry call is a protected
   action (which helps make the Count attribute of a protected
@@ -3920,13 +3940,17 @@ A task can call its own entries, but
 the task will deadlock if the call is a simple entry call.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 The @nt<condition> of an @nt<entry_barrier> is allowed to be evaluated by
 an implementation more often than strictly necessary, even if the
-evaluation might have side effects. On the other hand, an implementation
-need not reevaluate the @nt<condition> if nothing it references was
+evaluation @Chg{Version=[5],New=[can],Old=[might]} have side effects.
+On the other hand, an implementation
+@Chg{Version=[5],New=[can avoid reevaluating],Old=[need not reevaluate]}
+the @nt<condition> if nothing it references was
 updated by an intervening protected action on the protected object,
-even if the @nt<condition> references some global variable that might
-have been updated by an action performed from outside of a protected action.
+even if the @nt<condition> references some global variable that
+@Chg{Version=[5],New=[is],Old=[might have been]} updated by an action
+performed from outside of a protected action.
 @end{Notes}
 
 @begin{Examples}
@@ -4625,8 +4649,10 @@ Duration'Small should be no greater than 100 microseconds.
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The value of Duration'Small should be no greater than 100 microseconds.]}]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 The time base for @nt{delay_relative_statement}s should be monotonic;
-it need not be the same time base as used for Calendar.Clock.
+it @Chg{Version=[5],New=[can be different than the],Old=[need not be the same]}
+time base as used for Calendar.Clock.
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The time base for @nt{delay_relative_statement}s should be monotonic.]}]}
 
@@ -4637,8 +4663,10 @@ Text=[The time base for @nt{delay_relative_statement}s should be monotonic.]}]}
 A @nt{delay_relative_statement} with a negative value of the
 @i(delay_)@nt<expression> is equivalent to one with a zero value.
 
-A @nt{delay_statement} may be executed by the environment task;
-consequently @nt{delay_statement}s may be executed as part of
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+A @nt{delay_statement} @Chg{Version=[5],New=[can],Old=[may]} be executed 
+by the environment task; consequently @nt{delay_statement}s
+@Chg{Version=[5],New=[can],Old=[may]} be executed as part of
 the elaboration of a @nt{library_item} or the execution of the main subprogram.
 Such statements delay the environment task (see @RefSecNum(Program Execution)).
 
@@ -5385,9 +5413,11 @@ given string as a Time value.]}
                 Include_Time_Fraction : Boolean := False) @key<return> String;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a string form of the Elapsed_Time.
 The format is "Hour:Minute:Second", where all values are
-2-digit values, including a leading zero, if needed.
+2-digit values, including a leading zero, if
+@Chg{Version=[5],New=[necessary],Old=[needed]}.
 The separators between the values are colons.
 If Include_Time_Fraction is True, the integer part of Sub_Seconds*100 is
 suffixed to the string as a point followed by a 2-digit value.
@@ -5461,9 +5491,9 @@ leap seconds on such targets.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[The implementation-defined time zone of package Calendar
-may, but need not, be the local time zone.
+@Chg{Version=[5],New=[can],Old=[may, but need not,]} be the local time zone.
 @Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]} always returns the
 difference relative to the implementation-defined time zone of package
 Calendar. If @Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]}
@@ -5762,12 +5792,13 @@ with @nt<accept_alternative>.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @redundant[A @nt{timed_entry_call} issues an entry call that is
 cancelled if the call (or a requeue-with-abort of the call)
 is not selected before the expiration time is
 reached.@Chg{Version=[2],New=[ A procedure call may appear rather than
-an entry call for cases where the procedure might be implemented by
-an entry.],Old=[]}
+an entry call for cases where the procedure @Chg{Version=[5],New=[can],Old=[might]}
+be implemented by an entry.],Old=[]}
 @IndexSee{Term=[time-out],See=(timed_entry_call)}]
 @end{Intro}
 
@@ -5915,12 +5946,13 @@ so we can define conditional entry calls in terms of timed entry calls.
 @begin{Intro}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @Redundant[A @nt{conditional_entry_call} issues an entry call that is
 then cancelled if it is not selected immediately (or if a requeue-with-abort
 of the call is not selected immediately).@Chg{Version=[2],New=[ A procedure
-call may appear rather than
-an entry call for cases where the procedure might be implemented by
-an entry.],Old=[]}]
+call may appear rather than an entry call
+for cases where the procedure @Chg{Version=[5],New=[can],Old=[might]}
+be implemented by an entry.],Old=[]}]
 @begin(Honest)
   In the case of an entry call on a protected object, it is OK if the entry
   is closed at the start of the corresponding protected action, so long as
@@ -5950,8 +5982,10 @@ same @nt<sequence_of_@!statements> as given after the reserved word @key(else).
 
 @begin{Notes}
 
-A @nt{conditional_entry_call} may briefly increase the Count attribute of
-the entry, even if the conditional call is not selected.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+A @nt{conditional_entry_call} @Chg{Version=[5],New=[can],Old=[may]} briefly
+increase the Count attribute of the entry, even if the conditional call is
+not selected.
 
 @end{Notes}
 
@@ -6118,11 +6152,12 @@ executed after the @nt<abortable_part> is left.
 @Defn2{Term=[timer interrupt],Sec=(example)}
 @end{WideAbove}
 @begin(Example)
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @key(select)
    @key(delay) 5.0;
    Put_Line("Calculation does not converge");
 @key(then abort)
-   -- @ExamCom(This calculation should finish in 5.0 seconds;)
+   -- @ExamCom(This calculation @Chg{Version=[5],New=[is expected to],Old=[should]} finish in 5.0 seconds;)
    -- @ExamCom( if not, it is assumed to diverge.)
    Horribly_Complicated_Recursive_Function(X, Y);
 @key(end) @key(select);
@@ -6166,9 +6201,11 @@ causes a @nt{sequence_of_@!statements} to be aborted.]
 
 @begin{Resolution}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @PDefn2{Term=[expected type], Sec=(abort_statement task_name)}
 Each @SynI{task_}@nt{name} is expected to be of any task
-type@Redundant[; they need not all be of the same task type.]
+type@Redundant[; @Chg{Version=[5],New=[each can be of a different],Old=[they 
+need not all be of the same]} task type.]
 
 @end{Resolution}
 
@@ -6323,6 +6360,7 @@ the following are abort completion points for an execution:
 
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @PDefn2{Term=(bounded error),Sec=(cause)}
 An attempt to execute an @nt<asynchronous_select> as
 part of the execution of an abort-deferred operation is a bounded error.
@@ -6333,8 +6371,8 @@ an abort-deferred operation is a bounded error.
 In both cases, Program_Error is raised if the error is detected
 by the implementation; otherwise@Chg{Version=[3],New=[,],Old=[]} the
 operations proceed as they would outside an abort-deferred operation, except
-that an abort of the @nt<abortable_part>
-or the created task might or might not have an effect.
+that an abort of the @nt<abortable_part> or the created task
+@Chg{Version=[5],New=[does not necessarily],Old=[might or might not]} have an effect.
 @begin(Reason)
   An @nt<asynchronous_select> relies on an abort of the
   @nt<abortable_part> to effect the
@@ -6367,8 +6405,9 @@ as explained in @RefSecNum{Data Validity}.
 
 @begin{Notes}
 
-An @nt{abort_statement} should be used only in situations
-requiring unconditional termination.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+An @nt{abort_statement} @Chg{Version=[5],New=[is best],Old=[should be]} used
+only in situations requiring unconditional termination.
 
 A task is allowed to abort any task it can name, including itself.
 
@@ -6450,14 +6489,19 @@ For the Count attribute, the entry can be either a single entry or an
 entry of a family. The name of the entry or entry
 family can be either a @nt<direct_name> or an expanded name.
 
-Within task units, algorithms interrogating the attribute E'Count should
-take precautions to allow for the increase of the value of this attribute
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+Within task units, @Chg{Version=[5],New=[by],Old=[algorithms]} interrogating
+the attribute E'Count @Chg{Version=[5],New=[an algorithm can],Old=[should
+take precautions to]} allow for the increase of the value of this attribute
 for incoming entry calls, and its decrease, for example with
-@nt{timed_entry_call}s. Also, a @nt{conditional_entry_call} may briefly
+@nt{timed_entry_call}s. @Chg{Version=[5],New=[A],Old=[Also, a]}
+@nt{conditional_entry_call} @Chg{Version=[5],New=[can also],Old=[may]} briefly
 increase this value, even if the conditional call is not accepted.
 
-Within protected units, algorithms interrogating the attribute E'Count
-in the @nt<entry_barrier> for the entry E should take precautions to
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+Within protected units, @Chg{Version=[5],New=[by],Old=[algorithms]}
+interrogating the attribute E'Count in the @nt<entry_barrier> for the entry
+E @Chg{Version=[5],New=[an algorithm can],Old=[should take precautions to]}
 allow for the evaluation of the @nt<condition> of the barrier both before
 and after queuing a given caller.
 @end{Notes}
@@ -6631,7 +6675,7 @@ of the same logical thread of control, and the language rules permit
 action A1 to precede action A2, or if action A1 potentially signals some
 action that in turn potentially signals A2.@Defn{potentially signal}]}
 
-@ChgNote{Prior to Ada 202x (by AI12-0267-1) these two section changes were here
+@ChgNote{Prior to Ada 2022 (by AI12-0267-1) these two section changes were here
 @end{RunTime}
 
 @begin{Erron} -- end ChgNote}
@@ -6748,17 +6792,17 @@ is an object of a task or protected type, an atomic object (see
 necessarily sequential with respect to one another, and hence are never
 considered to conflict.]]}
 
-@ChgNote{Prior to Ada 202x (by AI12-0267-1) this was end{Erron}}
+@ChgNote{Prior to Ada 2022 (by AI12-0267-1) this was end{Erron}}
 @end{Runtime}
 
-@begin{Erron}@ChgNote{New for Ada 202x}
+@begin{Erron}@ChgNote{New for Ada 2022}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[The execution of two concurrent actions is
 erroneous@PDefn2{Term=(erroneous execution),Sec=(cause)} if the actions make
 conflicting uses of a shared variable (or neighboring variables that are not
 independently addressable).]}
 
-@end{Erron}@ChgNote{New for Ada 202x}
+@end{Erron}@ChgNote{New for Ada 2022}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0031],ARef=[AI95-00118-01]}
@@ -7007,7 +7051,7 @@ inherited as True, the Parallel_Calls aspect of a subprogram is False.]}
 to be True for a subprogram indicates that the subprogram can be safely called in
 parallel. Conflict checks (if required by the Conflict_Check_Policy in effect)
 are made on the subprogram assuming that multiple concurrent calls
-exist.@Redundant[ Such checks need not be repeated at each call of the
+exist.@Redundant[ Such checks can then be omitted on a call of the
 subprogram in a parallel iteration context.]]}
 
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Parallel_Calls],
@@ -7055,11 +7099,12 @@ that conflict.]}
 
 @begin{Examples}
 
-@Leading@;The following example defines a buffer protected object
+@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+The following example defines a buffer protected object
 to smooth variations between
 the speed of output of a producing task and the speed of input of some
-consuming task. For instance, the producing task might have the
-following structure:
+consuming task. For instance, the producing task
+@Chg{Version=[5],New=[can],Old=[might]} have the following structure:
 
 @begin(Example)
 @key(task) Producer;
@@ -7076,7 +7121,8 @@ following structure:
 @key(end) Producer;
 @end(Example)
 
-@leading@keepnext@;and the consuming task might have the following structure:
+@leading@keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+and the consuming task @Chg{Version=[5],New=[can],Old=[might]} have the following structure:
 
 @begin(Example)
 @key(task) Consumer;

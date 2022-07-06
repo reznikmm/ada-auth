@@ -1,6 +1,6 @@
 @Part(otherfrontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/other_front_matter.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2022/05/14 04:06:52 $}
+@comment{$Revision: 1.2 $ $Date: 2022/06/21 06:08:04 $}
 
 @comment{These parts appear after the Introduction in RM and AARM versions only.}
 
@@ -28,7 +28,7 @@ Comments should use the following format:
 @ChgRef{Version=[3],Kind=[Revised]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @TabSet(L6)@\@b(!topic) @i[Title summarizing comment]
-@\@b(!reference) @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95-]}@i{ss.ss(pp)}
+@\@b(!reference) @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[2005]} RM],Old=[RM95-]}@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)
@@ -361,7 +361,7 @@ E. Schonberg (USA), and T. Vardanega (Italy).]}
 standardization process.],Old=[]} @Comment{The financial contributors
 wanted to remain anonymous, so they are not mentioned here.}
 
-@AddedSubHeading{Version=[5],Acknowledgements for the Ada 202x version}
+@AddedSubHeading{Version=[5],Acknowledgements for the Ada 2022 version}
 
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=<The editor [R. Brukardt] would like to thank the
@@ -400,7 +400,7 @@ wanted to remain anonymous, so they are not mentioned here.}}
 @begin{Intro}
 @AddedSubHeading{Version=[1],Using this version of the Ada Reference Manual}
 
-@ChgNote{The following text should be redone once we decide what form Ada 202x
+@ChgNote{The following text should be redone once we decide what form Ada 2022
 will take.}
 
 @begin{RMOnly}
@@ -412,7 +412,7 @@ will take.}
 @Chg{New=[This document has been revised with @Chg{Version=[4],New=[
 the corrections specified in Technical Corrigendum 1 for Ada 2012
 (which corresponds to ISO/IEC 8652:2012/COR.1:2016)@Chg{Version=[5],New=[ 
-and other changes specifically for Ada 202x],Old=[]}],
+and other changes specifically for Ada 2022],Old=[]}],
 Old=[the corrections specified in Technical Corrigendum 1 for Ada 95
 (which corresponds to ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and
 Amendment 1 (which corresponds to ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[,
@@ -428,7 +428,7 @@ In addition, a variety of editorial errors have been corrected.],Old=[]}
 @Chg{New=[This document has been revised with @Chg{Version=[4],New=[
 the corrections specified in Technical Corrigendum 1 for Ada 2012
 (which corresponds to ISO/IEC 8652:2012/COR.1:2016)@Chg{Version=[5],New=[ 
-and other changes specifically for Ada 202x],Old=[]}],
+and other changes specifically for Ada 2022],Old=[]}],
 Old=[the corrections specified in Technical Corrigendum 1
 (which corresponds to ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and
 Amendment 1 (which corresponds to ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[,
@@ -457,7 +457,7 @@ more recent editorial corrections],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Parag
 with a version number of /4 are changed by Technical Corrigendum 1 for Ada 2012
 or were editorial corrections at that time.],Old=[]}@Chg{Version=[5],New=[ Paragraphs
 with a version number of /5 are changes or
-editorial corrections for Ada 202x.],Old=[]}
+editorial corrections for Ada 2022.],Old=[]}
 Paragraphs not so marked are unchanged since the original 1995 edition of
 the Ada Reference Manual, and have the same paragraph numbers as in that
 edition. In addition, some versions of this document include revision bars 
@@ -491,7 +491,7 @@ more recent editorial corrections],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Parag
 with a version number of /4 are changed by Technical Corrigendum 1 for Ada 2012
 or were editorial corrections at that time.],Old=[]}@Chg{Version=[5],New=[ Paragraphs
 with a version number of /5 are changes or
-editorial corrections for Ada 202x.],Old=[]}
+editorial corrections for Ada 2022.],Old=[]}
 Paragraphs not so marked are unchanged since the original 1995 edition of
 the Annotated Ada Reference Manual, and have the same paragraph numbers as in that
 edition. Inserted text is indicated

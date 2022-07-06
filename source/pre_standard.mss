@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -367,7 +367,8 @@ this body appears in the environment @nt{declarative_part}
 @begin{ImplPerm}
  An implementation may provide additional predefined integer
  types and additional predefined floating point types.
-  Not all of these types need have names.
+ @Chg{Version=[5],New=[Some or],Old=[Not]} all of these types
+ @Chg{Version=[5],New=[may be anonymous],Old=[need have names]}.
 @begin{Honest}
 
   An implementation may add representation items to package Standard, for

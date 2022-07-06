@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:48 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -46,6 +46,11 @@ we sometimes use @lquotes@;@i{occurrence}@rquotes@; as a
 @Chg{Version=[5],New=[shorthand],Old=[short-hand]} for
 @lquotes@;exception occurrence@rquotes@;.
 @end{Honest}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[exception],
+  Def=[a kind of exceptional situation]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[exception occurrence],
+  Def=[a run-time occurrence of an exceptional situation]}
+
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1],ARef=[AI05-0258-1]}
 @redundant[An @nt{exception_declaration} declares a name for an exception.
@@ -150,13 +155,14 @@ are not predefined.
 @PDefn2{Term=[elaboration], Sec=(exception_declaration)}
 The elaboration of an @nt{exception_declaration} has no effect.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @IndexCheck{Storage_Check}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
 The execution of any construct raises Storage_Error if there is
 insufficient storage for that execution.
 @PDefn{unspecified}
-The amount of storage needed for the execution of constructs is
-unspecified.
+The amount of storage @Chg{Version=[5],New=[necessary],Old=[needed]} for the
+execution of constructs is unspecified.
 @begin{Ramification}
 Note that any execution whatsoever can raise Storage_Error.
 This allows much implementation freedom in storage management.
@@ -206,7 +212,7 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledClause{Exception Handlers}
 
 @begin{Intro}
@@ -550,6 +556,9 @@ Exception_Occurrence, but instead propagates the same
 Exception_Occurrence value.
 This allows the original cause of the exception to be determined.
 @end{ImplNote}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[raise an exception],
+  Def=[to abandon normal program execution so as to draw attention 
+       to the fact that the corresponding situation has arisen]}
 @end{RunTime}
 
 @begin{Notes}
@@ -600,7 +609,7 @@ any force.
   The @nt{raise_expression} is new. This construct is necessary to
   allow conversion of existing specifications to use preconditions and
   predicates without changing the exceptions raised. It is considered important
-  enough to be added to Ada 2012 rather than waiting for Ada 202x.]}
+  enough to be added to Ada 2012 rather than waiting for Ada 2022.]}
 @end{Extend2012}
 
 
@@ -753,6 +762,8 @@ Although abnormal termination of tasks is not necessarily an error,
 abnormal termination of a partition due to an exception @i{is} an
 error.
 @end{Ramification}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[handle an exception],
+  Def=[performing some actions in response to the arising of an exception]}
 @end{RunTime}
 
 @begin{Notes}
@@ -1400,7 +1411,7 @@ can be used to represent non-ASCII characters in exception messages.]}
 @end{DiffWord2005}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledAddedSubClause{Version=[2],Name=[Pragmas Assert and Assertion_Policy]}
 
 @begin{Intro}
@@ -1455,6 +1466,10 @@ Text=<@ChgAdded{Version=[3],Text=[An assertion is a boolean expression that
 appears in any of the following: a @nt{pragma} Assert, a predicate, a
 precondition, a postcondition, an invariant, a constraint, or a null exclusion.
 An assertion is expected to be True at run time at certain specified places.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[R],Term=[assertion],
+  Def=[a boolean expression that is expected to be True at run time at certain
+       specified places],
+  Note1=[Certain pragmas and aspects define various kinds of assertions.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
 @ChgAdded{Version=[3],Text=[Pragma Assertion_Policy is used to control whether
@@ -1694,13 +1709,14 @@ effects independently of the assertion policy in effect.]}
 
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[3],Text=[It is a bounded error to invoke a potentially
 blocking operation (see @RefSecNum{Protected Subprograms and Protected Actions})
 during the evaluation of an assertion expression associated with a call on, or
 return from, a protected operation. If the bounded error is
 detected, Program_Error is raised. If not detected, execution proceeds normally,
-but if it is invoked within a protected action, it might result in deadlock or a
-(nested) protected
+but if it is invoked within a protected action, it @Chg{Version=[5],New=[can],Old=[might]}
+result in deadlock or a (nested) protected
 action.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
@@ -1783,22 +1799,27 @@ would be incorrect, as Exception_Name would return the wrong name.]}
 @ChgAdded{Version=[2],Text=[Implementations may define their own assertion policies.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0274-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[3],Text=[If the result of a function call in an assertion is
-not needed to determine the value of the assertion expression, an implementation
-is permitted to omit the function call. @Redundant[This permission applies even
-if the function has side effects.]]}
+not @Chg{Version=[5],New=[used],Old=[needed]} to determine the value of the
+assertion expression, an implementation is permitted to omit the function call.
+@Redundant[This permission applies even if the function has side effects.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0274-1]}
-@ChgAdded{Version=[3],Text=[An implementation need not allow the specification
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[3],Text=[An implementation
+@Chg{Version=[5],New=[may disallow],Old=[need not allow]} the specification
 of an assertion expression if the evaluation of the expression has a side effect
-such that an immediate reevaluation of the expression could produce a different
-value. Similarly, an implementation need not allow the specification of an
+such that an immediate reevaluation of the expression
+@Chg{Version=[5],New=[can],Old=[could]} produce a different value. Similarly,
+an implementation @Chg{Version=[5],New=[may disallow],Old=[need not allow]}
+the specification of an
 assertion expression that is checked as part of a call on or return from a
 callable entity @i<C>, if the evaluation of the expression has a side effect
 such that the evaluation of some other assertion expression associated with the
-same call of (or return from) @i<C> could produce a different value than it
-would if the first expression had not been evaluated.]}
-
+same call of (or return from) @i<C> @Chg{Version=[5],New=[can],Old=[could]}
+produce a different value than @Chg{Version=[5],New=[in the case when],Old=[it
+would if]} the first expression had not been evaluated.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This allows an implementation to reject such
@@ -1840,10 +1861,12 @@ would if the first expression had not been evaluated.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[Normally, the boolean expression in a @nt{pragma}
-Assert should not call functions that have significant side effects when the
-result of the expression is True, so that the particular assertion policy in
-effect will not affect normal operation of the program.]}
+Assert @Chg{Version=[5],New=[does],Old=[should]} not call functions that have
+significant side effects when the result of the expression is True, so that
+the particular assertion policy in effect will not affect normal operation
+of the program.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -1903,8 +1926,9 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @LabeledSubClause{Example of Exception Handling}
 
 @begin{Examples}
-@Leading@;Exception handling may be used to separate the detection of an error
-from the response to that error:
+@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+Exception handling @Chg{Version=[5],New=[can],Old=[may]} be used to separate
+the detection of an error from the response to that error:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
@@ -1998,13 +2022,14 @@ from the response to that error:
 @key[end] Main;
 @end{Example}
 
-
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 In the above example, the File_System package contains information about
 detecting certain exceptional situations,
 but it does not specify how to handle those situations.
 Procedure Main specifies how to handle them;
-other clients of File_System might have different handlers,
-even though the exceptional situations arise from the same basic causes.
+other clients of File_System @Chg{Version=[5],New=[can],Old=[might]} have
+different handlers, even though the exceptional situations arise from the
+same basic causes.
 @end{Examples}
 
 @begin{DiffWord83}
@@ -2030,6 +2055,11 @@ Text=<@ChgAdded{Version=[5],Text=[To suppress a check is to assert that the
 check cannot fail, and to request that the compiler optimize by disabling 
 the check. The compiler is not required to honor this request. Suppressing
 checks that can fail can cause a program to behave in arbitrary ways.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[suppress a check],
+  Def=[to assert that the check cannot fail, and to 
+       request that the compiler optimize by disabling the check],
+  Note1=[The compiler is not required to honor this request. Suppressing
+         checks that can fail can cause a program to behave in arbitrary ways.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{language-defined check}
@@ -2053,6 +2083,9 @@ in clauses and subclauses throughout the standard.
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Check>,
 Text=<@ChgAdded{Version=[5],Text=[A check is a test made during execution to
 determine whether a language rule has been violated.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[check],
+  Def=[a test made during execution to determine whether a language
+       rule has been violated]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2510,10 +2543,12 @@ suppress the check.
 @end{ImplAdvice}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @Defn{optimization}
 @Defn{efficiency}
 There is no guarantee that a suppressed check is actually removed;
-hence a @nt{pragma} Suppress should be used only for efficiency reasons.
+hence a @nt{pragma} Suppress @Chg{Version=[5],New=[is useful only to
+improve],Old=[should be used only for]} efficiency@Chg{Version=[5],New=[],Old=[ reasons]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[It is possible to give both a @nt{pragma} Suppress
@@ -2723,14 +2758,15 @@ circumstances.
 @Leading@;The following additional permissions are granted to the
 implementation:
 @begin{Itemize}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Defn{extra permission to avoid raising exceptions}
 @Defn{undefined result}
-An implementation need not always
-raise an exception when a language-defined check fails.
+An implementation @Chg{Version=[5],New=[can omit raising],Old=[need not always
+raise]} an exception when a language-defined check fails.
 Instead, the operation that failed the check can simply yield
-an @i{undefined result}. The exception need be raised
-by the implementation only if, in the absence of raising it,
-the value of this undefined result would have some effect on
+an @i{undefined result}. The exception @Chg{Version=[5],New=[is required
+to],Old=[need]} be raised by the implementation only if, in the absence of
+raising it, the value of this undefined result would have some effect on
 the external interactions of the program.
 In determining this, the implementation shall not presume that
 an undefined result has a value that belongs to its subtype,
@@ -2800,19 +2836,19 @@ This follows from the canonical semantics.
 @end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @Defn{extra permission to reorder actions}
 If an exception is raised due to the failure
 of a language-defined check,
 then upon
 reaching the corresponding @nt<exception_handler> (or the
 termination of the task, if none), the external interactions
-that have occurred need reflect only that the exception was
-raised somewhere within
+that have occurred @Chg{Version=[5],New=[have to],Old=[need]} reflect only
+that the exception was raised somewhere within
 the execution of the @nt<sequence_of_statements> with the handler
 (or the @nt<task_body>), possibly earlier (or later
 if the interactions are independent of the result of the checked
-operation)
-than that defined
+operation) than that defined
 by the canonical semantics, but not within the execution of some
 abort-deferred operation or @i(independent) subprogram
 that does not dynamically enclose the execution of the construct

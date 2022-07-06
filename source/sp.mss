@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.97 $ $Date: 2022/05/14 04:06:51 $ $Author: randy $ }
+@comment{ $Revision: 1.98 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2022/05/14 04:06:51 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -91,12 +91,13 @@ even if not otherwise referenced from the Ada code.
 The implementation should assume that any call to a machine code or
 assembler subprogram is allowed to read or update every object that is
 specified as exported.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[If an entity is exported to assembly language, then the implementation
 should allocate it at an addressable location even if not otherwise referenced
 from the Ada code. A call to a machine code or assembler subprogram should
-be treated as if it could read or update every object that is
-specified as exported.]}]}
+be treated as if it @Chg{Version=[5],New=[can],Old=[could]} read or update
+every object that is specified as exported.]}]}
 @end{ImplAdvice}
 
 @begin{DocReq}
@@ -2706,7 +2707,7 @@ as follows:]}
 @end{Extend2012}
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledRevisedClause{Version=[2],New=[Task Information],
 Old=[Task Identification and Attributes]}
 

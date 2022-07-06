@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -3731,7 +3731,7 @@ Tampering_With_Cursors_Prohibited and
 Tampering_With_Elements_Prohibited that occur in preconditions are replaced
 by False, and any that occur in postconditions are replaced by True.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[If a stable tree is declared with the Base
 discriminant designating a pre-existing ordinary tree, the stable tree
 represents a stabilized view of the underlying ordinary tree, and any operation
@@ -3739,7 +3739,7 @@ on the stable tree is reflected on the underlying ordinary tree. While a
 stabilized view exists, any operation that tampers with elements performed on
 the underlying tree is prohibited. The finalization of a stable tree that
 provides such a view removes this restriction on the underlying ordinary tree
-@Redundant[(though some other restriction might exist due to other concurrent
+@Redundant[(though some other restriction can exist due to other concurrent
 iterations or stabilized views)].]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
@@ -3945,7 +3945,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for ordinary containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -4114,11 +4114,11 @@ omitted from the nested package Stable.]}
   being prohibited only during the lifetimes of references to the loop
   parameter. Thus, if a container element iterator does an operation that
   tampers with elements on the iterated container, that operation will fail a
-  tampering check in Ada 202x (and thus raise Program_Error), while it would
+  tampering check in Ada 2022 (and thus raise Program_Error), while it would
   have worked in Ada 2012 so long as the loop parameter is not involved.
   We believe this to be a dubious loop structure that should be rare. Note
   that this issue only occurs for the indefinite container form, the ordinary
-  and bounded containers allow such operations at any time in Ada 202x.]}
+  and bounded containers allow such operations at any time in Ada 2022.]}
 
 @end{Inconsistent2012}
 
@@ -4230,7 +4230,7 @@ The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 202x for code that
+  situation where Program_Error will be raised in Ada 2022 for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -4352,7 +4352,7 @@ The generic package Containers.Indefinite_Hashed_Maps is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 202x for code that
+  situation where Program_Error will be raised in Ada 2022 for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -4473,7 +4473,7 @@ The generic package Containers.Indefinite_Ordered_Maps is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 202x for code that
+  situation where Program_Error will be raised in Ada 2022 for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -4735,7 +4735,7 @@ omitted from the nested package Stable.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 202x for code that
+  situation where Program_Error will be raised in Ada 2022 for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -5743,7 +5743,7 @@ minimize copying does not apply to bounded vectors.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -5755,7 +5755,7 @@ minimize copying does not apply to bounded vectors.]}]}
   this note) when the actual for the Element_Type has PI. If an program used
   a vector whose actual Element_Type does not have PI in a context when PI is
   required (such as a library-level object in a preelaborated unit or as a 
-  component of a type with PI), the program would be illegal in Ada 202x but
+  component of a type with PI), the program would be illegal in Ada 2022 but
   legal in original Ada 2012. This situation is unlikely, especially as
   some existing Ada 2012 implementations reject the instance in this case.]}
 @end{Incompatible2012}
@@ -6037,7 +6037,7 @@ minimize copying does not apply to bounded lists.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -6049,7 +6049,7 @@ minimize copying does not apply to bounded lists.]}]}
   this note) when the actual for the Element_Type has PI. If an program used
   a list whose actual Element_Type does not have PI in a context when PI is
   required (such as a library-level object in a preelaborated unit or as a 
-  component of a type with PI), the program would be illegal in Ada 202x but
+  component of a type with PI), the program would be illegal in Ada 2022 but
   legal in original Ada 2012. This situation is unlikely, especially as
   some existing Ada 2012 implementations reject the instance in this case.]}
 @end{Incompatible2012}
@@ -6325,7 +6325,7 @@ minimize copying does not apply to bounded hashed maps.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -6338,7 +6338,7 @@ minimize copying does not apply to bounded hashed maps.]}]}
   If an program used a map whose actual Element_Type or Key_Type does not have
   PI in a context when PI is
   required (such as a library-level object in a preelaborated unit or as a 
-  component of a type with PI), the program would be illegal in Ada 202x but
+  component of a type with PI), the program would be illegal in Ada 2022 but
   legal in original Ada 2012. This situation is unlikely, especially as
   some existing Ada 2012 implementations reject the instance in this case.]}
 @end{Incompatible2012}
@@ -6582,7 +6582,7 @@ minimize copying does not apply to bounded ordered maps.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -6595,7 +6595,7 @@ minimize copying does not apply to bounded ordered maps.]}]}
   If an program used a map whose actual Element_Type or Key_Type does not have
   PI in a context when PI is
   required (such as a library-level object in a preelaborated unit or as a 
-  component of a type with PI), the program would be illegal in Ada 202x but
+  component of a type with PI), the program would be illegal in Ada 2022 but
   legal in original Ada 2012. This situation is unlikely, especially as
   some existing Ada 2012 implementations reject the instance in this case.]}
 @end{Incompatible2012}
@@ -6863,7 +6863,7 @@ minimize copying does not apply to bounded hashed sets.]}]}
   this note) when the actual for the Element_Type has PI. If an program used a
   set whose actual Element_Type does not have PI in a context when PI is
   required (such as a library-level object in a preelaborated unit or as a 
-  component of a type with PI), the program would be illegal in Ada 202x but
+  component of a type with PI), the program would be illegal in Ada 2022 but
   legal in original Ada 2012. This situation is unlikely, especially as
   some existing Ada 2012 implementations reject the instance in this case.]}
 @end{Incompatible2012}
@@ -7101,7 +7101,7 @@ minimize copying does not apply to bounded ordered sets.]}]}
   this note) when the actual for the Element_Type has PI. If an program used
   a set whose actual Element_Type does not have PI in a context when PI is
   required (such as a library-level object in a preelaborated unit or as a 
-  component of a type with PI), the program would be illegal in Ada 202x but
+  component of a type with PI), the program would be illegal in Ada 2022 but
   legal in original Ada 2012. This situation is unlikely, especially as
   some existing Ada 2012 implementations reject the instance in this case.]}
 @end{Incompatible2012}
@@ -7410,7 +7410,7 @@ minimize copying does not apply to bounded trees.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -7422,7 +7422,7 @@ minimize copying does not apply to bounded trees.]}]}
   this note) when the actual for the Element_Type has PI. If an program used
   a tree whose actual Element_Type does not have PI in a context when PI is
   required (such as a library-level object in a preelaborated unit or as a 
-  component of a type with PI), the program would be illegal in Ada 202x but
+  component of a type with PI), the program would be illegal in Ada 2022 but
   legal in original Ada 2012. This situation is unlikely, especially as
   some existing Ada 2012 implementations reject the instance in this case.]}
 @end{Incompatible2012}
@@ -8475,10 +8475,10 @@ Text=[Bounded holder objects should be implemented without dynamic allocation.]}
    that allocation only occurs at a high-water mark location.]}
 @end{ImplNote}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0350-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0350-1],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[5],Text=[The @ImplAdviceTitle about the Move and Swap
 operations is deleted for bounded holders; these operations can copy elements
-as needed.]}
+as necessary.]}
 
 @begin{Reason}
    @ChgRef{Version=[5],Kind=[AddedNormal]}

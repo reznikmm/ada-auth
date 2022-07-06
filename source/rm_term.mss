@@ -1,8 +1,8 @@
 @Part(RM_Term, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:53 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 @Comment{$Source: e:\\cvsroot/ARM/Source/rm_term.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @Comment{The RM version of "Terms and Definitions". Note that the ISO version 
 only shares generated content, so we don't try to share any part of this
@@ -41,13 +41,33 @@ The index contains an entry for every defined term.
 Mathematics, Second Edition> can be accessed on
 @URLLink{URL=[http://www.mathworld.com],Text=[http://www.mathworld.com]}.
 The ISBN number of the book is ISBN 1584883472.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0443-1]}
+@ChgAdded{Version=[5],Text=[The definitions found in this subclause are
+short, descriptive definitions. These are most useful for comprehension when
+an exact meaning is not needed. More formal, detailed definitions are found in
+the body of the @IntlStdTitle; these are needed to determine the exact
+application of rules to constructs and entities.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0443-1]}
+@ChgAdded{Version=[5],Text=[To see the difference, consider
+@ldquote@;aliased view@rdquote. The descriptive definition is
+@ldquote@;a view of an object that can be designated by an access value@rdquote.
+The formal definition is a lengthy paragraph in @RefSecNum{Access Types} that
+defines 10 separate constructs as aliased views. In order to reason about
+a language rule that requires an aliased view in a particular context, one
+needs to look at the list of constructs in order to determine if the object
+in hand is actually an aliased view. The descriptive definition is no help
+in this case.]}
 @end{Discussion}
 @begin{GlossaryMarker}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0443-1]}
-Each term defined in
-@Chg{Version=[5],New=[this subclause],Old=[@RefSecNum{Glossary}]}
-is marked like this.
+Each term defined in @RefSecNum{Glossary} is marked like this.
 @end{GlossaryMarker}
+@begin{TermMarker}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0443-1]}
+@ChgAdded{Version=[5],Text=[Each term defined in this subclause is marked
+like this in the body of the AARM near its detailed formal definition.]}
+@end{TermMarker}
 @end{Intro}
 
 @begin{Discussion}
@@ -91,19 +111,25 @@ to check the conformity of Ada implementations to this standard. This set of
 tests was previously known as the Ada Compiler Validation Capability (ACVC).],Old=[]}
 @end{Discussion}
 
+@Comment{The automatically generated terms and definitions (used to be the Glossary) follow.}
 
-@Comment{The automatically generated terms and definitions (used to be the Glossary) go here}.
+@LabeledAddedSubClause{Version=[5],Name=[Types, Objects, and their Properties]}
 
-@Comment{The following is temporary: it is just the old Glossary unchanged.}
+@AddedTermList{Version=[5],Group=[T]}
 
-@begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0443-1]}
-@ChgAdded{Version=[5],Text=[Following are informal descriptions 
-of some of the terms used in this @IntlStdTitle.
-The index provides references to more formal definitions
-of all of the terms used in this @IntlStdTitle.]}
-@end{Intro}
+@LabeledAddedSubClause{Version=[5],Name=[Subprograms and their Properties]}
 
-@Comment{@GlossaryList}@Comment{This changes the index and does not work anyway.}
+@AddedTermList{Version=[5],Group=[S]}
 
-@Comment{End temporary part}.
+@LabeledAddedSubClause{Version=[5],Name=[Other Syntactic constructs]}
+
+@AddedTermList{Version=[5],Group=[C]}
+
+@LabeledAddedSubClause{Version=[5],Name=[Runtime Actions]}
+
+@AddedTermList{Version=[5],Group=[R]}
+
+@LabeledAddedSubClause{Version=[5],Name=[Exceptional Situations]}
+
+@AddedTermList{Version=[5],Group=[E]}
+

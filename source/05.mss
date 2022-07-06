@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:48 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -60,6 +60,10 @@ constructs.@IndexSee{Term=[parallel processing],See=(parallel construct)}
 Text=<@ChgAdded{Version=[5],Text=[A parallel construct is an executable
 construct that defines multiple activities of a single task that can proceed in
 parallel, via the execution of multiple logical threads of control.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[parallel construct],
+  Def=[an executable construct that defines multiple 
+       activities of a single task that can proceed in parallel, via the 
+       execution of multiple logical threads of control]}
 @end{Intro}
 
 @begin{Syntax}
@@ -249,13 +253,13 @@ reaches an exception handler that is outside such an abort-deferred operation.]}
 @end{RunTime}
 
 @begin{Bounded}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 During the execution of a parallel construct, it is
 a bounded error to invoke an operation that is potentially blocking (see
 @RefSecNum{Intertask Communication}). Program_Error is raised if the error is
 detected by the implementation; otherwise, the execution of the potentially
-blocking operation might proceed normally, or it might result in the indefinite
+blocking operation can either proceed normally, or it can result in the indefinite
 blocking of some or all of the logical threads of control making up the current
 task.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
@@ -482,9 +486,10 @@ are first evaluated in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[al
   if this check fails, Constraint_Error is raised.
 @end(itemize)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 The value of the @nt<expression> is converted to the subtype of the
-target. @Redundant[The conversion might raise an exception
-(see @RefSecNum{Type Conversions}).]
+target. @Redundant[The conversion @Chg{Version=[5],New=[can],Old=[might]}
+raise an exception (see @RefSecNum{Type Conversions}).]
 @PDefn2{Term=[implicit subtype conversion],Sec=(assignment_statement)}
 @begin{Ramification}
   @RefSec(Type Conversions) defines what actions
@@ -497,9 +502,10 @@ target. @Redundant[The conversion might raise an exception
   so long as it is the same length.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 In cases involving controlled types, the target is finalized,
-and an anonymous object might be used as an intermediate in the assignment,
-as described in @RefSec{Completion and Finalization}.
+and an anonymous object @Chg{Version=[5],New=[can],Old=[might]} be used as
+an intermediate in the assignment, as described in @RefSec{Completion and Finalization}.
 @Defn{assignment operation}
 @Defn2{Term=[assignment operation],
 Sec=(during execution of an @nt{assignment_statement})}
@@ -739,7 +745,7 @@ subclause @RefSecNum{Assignment Statements}.]}
 name symbols:}]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0379-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0379-1],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[5],Text=[Board(1, 1) := @@ + 1.0;  -- @Examcom<An abbreviation for Board(1, 1) := Board(1, 1) + 1.0;>
                        -- @Examcom<(Board is declared in @RefSecNum{Index Constraints and Discrete Ranges}).>]}
 
@@ -749,7 +755,7 @@ name symbols:}]}
 -- @Examcom<Square the element in the Count (see @RefSecNum{Object Declarations}) position:>
 My_Complex_Array (Count) := (Re => @@.Re**2 - @@.Im**2,
                              Im => 2.0 * @@.Re * @@.Im);
-   -- @Examcom<A target_name can be used multiple times and as a prefix if needed.>]}
+   -- @Examcom<A target_name can be used multiple times and as a prefix if desired.>]}
 @end{Example}
 @end{Examples}
 
@@ -1031,11 +1037,12 @@ Constraint_Error is raised.
 @end{RunTime}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 The execution of a @nt{case_statement} chooses one and only one
 alternative.
 Qualification of the expression of a @nt{case_statement} by a static
-subtype can often be used to limit the number of choices that need be
-given explicitly.
+subtype can often be used to limit the number of choices that
+@Chg{Version=[5],New=[can],Old=[need]} be given explicitly.
 @end{Notes}
 
 @begin{Examples}
@@ -1263,6 +1270,10 @@ iterator construct.@Defn{iterator filter}]}
 Text=<@ChgAdded{Version=[5],Text=[An iterator filter is a construct that is used
 to restrict the elements produced by an iteration to those for which a boolean
 condition evaluates to True.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[iterator filter],
+  Def=[a construct that is used to restrict the elements
+       produced by an iteration to those for which a boolean condition 
+       evaluates to True]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
 @ChgAdded{Version=[5],Text=[If a @nt{sequence_of_statements} of a
@@ -1456,8 +1467,10 @@ it cannot be updated within the
 @nt{sequence_of_statements} of the loop
 (see @RefSecNum{Objects and Named Numbers}).
 
-An @nt{object_declaration} should not be given for a loop parameter,
-since the loop parameter is automatically declared by
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@Chg{Version=[5],New=[No separate],Old=[An]} @nt{object_declaration} 
+@Chg{Version=[5],New=[is expected],Old=[should not be given]} for a loop
+parameter, since the loop parameter is automatically declared by
 the @nt{loop_parameter_specification}.
 The scope of a loop parameter extends from the
 @nt{loop_parameter_specification} to the end of the
@@ -1837,6 +1850,9 @@ parallel iterable container type.@Defn{parallel iterable container object}],Old=
 Text=<@ChgAdded{Version=[3],Text=[An iterable container type is one that has
 user-defined behavior for iteration, via the Default_Iterator and
 Iterator_Element aspects.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[iterable container type],
+  Def=[a type that has user-defined behavior for 
+       iteration, via the Default_Iterator and Iterator_Element aspects]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgAdded{Version=[4],Text=[The Default_Iterator and Iterator_Element aspects
@@ -2021,6 +2037,11 @@ otherwise it is called a
 Text=<@ChgAdded{Version=[3],Text=[An iterator is a construct that is used to
 loop over the elements of an array or container. Iterators may be user defined,
 and may perform arbitrary computations to access elements from a container.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[iterator],
+  Def=[a construct that is used to loop over the elements of an 
+       array or container],
+  Note1=[Iterators can be user defined, and can perform
+         arbitrary computations to access elements from a container.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
@@ -2703,10 +2724,10 @@ anonymous access-to-subprogram type:]}
      not specified or inherited as True, the Parallel_Iterator aspect of a
      callable entity is False.]}
 
-   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0442-1]}
    @ChgAdded{Version=[5],NoPrefix=[T],Text=[Specifying the Parallel_Iterator
-     aspect to be True for a callable entity indicates that the entity might
-     invoke the loop body procedure from multiple distinct logical threads of
+     aspect to be True for a callable entity indicates that the entity is
+     allowed to invoke the loop body procedure from multiple distinct logical threads of
      control. The Parallel_Iterator aspect for a subprogram shall be statically
      False if the subprogram allows exit.]}
 
@@ -2787,7 +2808,7 @@ outside the @nt{loop_statement}.]}
 @end{Legality}
 
 @begin{Runtime}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2],ARef=[AI12-0355-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2],ARef=[AI12-0355-2],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[5],Text=[@Redundant[For the execution of a
   @nt{loop_statement} with an @nt{iteration_scheme} that has a
   @nt{procedural_iterator}, the procedure denoted by the @nt{name} or
@@ -2796,7 +2817,7 @@ outside the @nt{loop_statement}.]}
   designating the loop body procedure as a parameter. The iterating procedure
   then calls the loop body procedure zero or more times and returns, whereupon
   the @nt{loop_statement} is complete. If the @key[parallel] reserved word is
-  present, the iterating procedure might invoke the loop body procedure from
+  present, the iterating procedure is allowed to invoke the loop body procedure from
   multiple distinct logical threads of control.] The @nt{aspect_specification},
   if any, is elaborated prior to the invocation of the iterating procedure.]}
 
@@ -2809,7 +2830,7 @@ outside the @nt{loop_statement}.]}
 @end{Runtime}
 
 @begin{Bounded}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If the callable entity identified in the @nt{iterator_procedure_call} allows
 exit, then it is a bounded error for a call of the loop body procedure
@@ -2818,11 +2839,11 @@ to be performed from within an abort-deferred operation (see
 unless the entire @nt{loop_statement} was within the same abort-deferred
 operation. If detected, Program_Error is raised at the point of the
 call; otherwise, a transfer of control from the @nt{sequence_of_statements}
-of the @nt{loop_statement} might not terminate the @nt{loop_statement}, and the
-loop body procedure might be called
+of the @nt{loop_statement} will not necessarily terminate the @nt{loop_statement}, and the
+loop body procedure can be called
 again.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2],ARef=[AI12-0445-1]}
 @ChgAdded{Version=[5],Text=[If a @nt{loop_statement} with the
 @nt{procedural_iterator} as its @nt{iteration_scheme}
 (see @RefSecNum{Loop Statements}) does not begin with the reserved word
@@ -2833,8 +2854,8 @@ conflicts associated with concurrent executions of the loop body
 procedure can occur without being detected by the applicable conflict
 check policy (see @RefSecNum{Conflict Check Policies}). Furthermore, propagating
 an exception or making an attempt to exit in the presence of multiple threads of
-control might not terminate the @nt{loop_statement}, deadlock might occur, or
-the loop body procedure might be called
+control will not necessarily terminate the @nt{loop_statement}, deadlock can occur, or
+the loop body procedure can be called
 again.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
   @begin{Discussion}
@@ -2913,14 +2934,14 @@ environment variables (see @RefSecNum{The Package Environment_Variables}):}]}
     ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0294-1],ARef=[AI12-0326-2],ARef=[AI12-0344-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Procedural
   iterators, and the Allows_Exit and Parallel_Iterator aspects are
-  new in Ada 202x.]}
+  new in Ada 2022.]}
 @end{Extend2012}
 
 
 @RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
 @RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledClause{Block Statements}
 
 @begin{Intro}
@@ -3193,7 +3214,7 @@ Main_Cycle:
 @end{Example}
 @end{Examples}
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Goto Statements}
 
 @begin{Intro}

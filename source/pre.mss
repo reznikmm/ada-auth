@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:19 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.63 $}
+@comment{$Revision: 1.64 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -322,7 +322,7 @@ nonportable under System.
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0200-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0200-1],ARef=[AI12-0439-1]}
 The implementation shall ensure that@Chg{Version=[5],New=[],Old=[ each
 language@Chg{Version=[2],New=[-],Old=[]}defined subprogram is
 reentrant@Chg{Version=[2],New=[@Defn{reentrant}],Old=[]}@ChgNote{Suggested by Gary Dismukes} in
@@ -332,8 +332,8 @@ Old=[the same]} @Chg{Version=[5],New=[subprograms],Old=[subprogram]}
 perform as specified,
 so long as all@Chg{Version=[4],New=[ @Chg{Version=[5],New=[pairs of ],Old=[]}objects
 @Chg{Version=[5],New=[(one from each call)],Old=[]} that
-are@Chg{Version=[5],New=[ either],Old=[]} denoted by],Old=[]}
-parameters that could be passed by reference@Chg{Version=[5],New=[,],Old=[]}
+are@Chg{Version=[5],New=[ either],Old=[]} denoted by],Old=[]} parameters that
+@Chg{Version=[5],New=[can],Old=[could]} be passed by reference@Chg{Version=[5],New=[,],Old=[]}
 @Chg{Version=[4],New=[or @Chg{Version=[5],New=[are ],Old=[]}designated by
 parameters of an access type@Chg{Version=[5],New=[,],Old=[]}
 are],Old=[denote]} nonoverlapping@Chg{Version=[4],New=[],Old=[ objects]}.

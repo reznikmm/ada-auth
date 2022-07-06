@@ -1,6 +1,6 @@
 @Part(rm_foreword, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/rm_foreword.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2022/05/14 04:06:53 $}
+@comment{$Revision: 1.2 $ $Date: 2022/06/21 06:08:04 $}
 
 @Comment{This version of the Foreword file is only used in non-ISO documents.}
 
@@ -68,7 +68,7 @@ prototyping period for this revision, extending the delivery to no earlier
 than late 2020. The draft standard was delivered to WG 9 in July 2021, with
 publication expected in the summer of 2022.
 @Comment{For the purposes of this document, we'll call this
-Ada 202x, even though the final timing and form has not yet been determined.}],Old=[]}],Old=[In
+Ada 2022, even though the final timing and form has not yet been determined.}],Old=[]}],Old=[In
 October 2002, WG 9 approved a schedule and
 guidelines for the preparation of an Amendment to the International Standard.
 WG 9 approved the scope of the Amendment in June 2004. In April 2006, WG 9
@@ -82,7 +82,7 @@ by early]} 2007.]}]}
 @ChgRef{Version=[4],Kind=[RevisedAdded]}
 @ChgRef{Version=[5],Kind=[RevisedAdded]}
 @ChgAdded{Version=[2],Text=[This version of the Ada Reference Manual shows the current
-state of Ada@Chg{Version=[5],New=[ 202x. As Ada 202x is still under development, features
+state of Ada@Chg{Version=[5],New=[ 2022. As Ada 2022 is still under development, features
 are still subject to change],Old=[@Chg{Version=[3],New=[ 2012@Chg{Version=[4],New=[ 
 including the changes included in Technical Corrigendum 1],Old=[]}],Old=[, 
 including the changes of Technical Corrigendum 1 and Amendment 1]}]}.]}

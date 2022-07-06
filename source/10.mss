@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:48 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -27,6 +27,16 @@ computer.
   A program may contain just one partition.
   A distributed program typically contains multiple partitions,
   which can execute concurrently.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[program],
+  Def=[a set of partitions, each of which can execute in a 
+       separate address space, possibly on a separate computer]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[partition],
+  Def=[a part of a program, which consists of a set of 
+       interdependent library units],
+  Note1=[Each partition can run in a separate address 
+         space, possibly on a separate computer. A program can contain 
+         just one partition, or it can be distributed across multiple 
+         partitions, which can execute concurrently.]}
 
 @Defn2{Term=[library unit],Sec=(informal introduction)}
 @Defn2{Term=[library_item],Sec=(informal introduction)}
@@ -110,6 +120,13 @@ different from that of RM83. @end{DiffWord83}
   Certain kinds of program units can be separately compiled.
   Alternatively, they can appear physically nested within
   other program units.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[program unit],
+  Def=[a language construct that is a package, a task unit, a
+       protected unit, a protected entry, a generic unit, or an explicitly 
+       declared subprogram other than an enumeration literal],
+  Note1=[Certain kinds of program units can be separately compiled.
+         Alternatively, they can appear physically nested within other
+         program units.]}
 
 @ToGlossaryAlso{Term=<Compilation unit>,
   Text=<The text of a program can be submitted to the compiler in one or
@@ -117,6 +134,10 @@ different from that of RM83. @end{DiffWord83}
   Each @nt(compilation) is a succession of @nt(compilation_unit)s.
   A @nt(compilation_unit) contains either
   the declaration, the body, or a renaming of a program unit.>}]
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[compilation unit],
+  Def=[a program unit that is separately compiled],
+  Note1=[A @nt(compilation_unit) contains either
+  the declaration, the body, or a renaming of a program unit.]}
 The representation for a @nt<compilation> is implementation-defined.
 @ImplDef{The representation for a @nt{compilation}.}
 @begin{Ramification}
@@ -146,7 +167,13 @@ but protected entries cannot be separately compiled.
   @Defn(subsystem)
   A root library unit, together with its children and grandchildren
   and so on, form a @i(subsystem).>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[library unit],
+  Def=[a separately compiled program unit, which is a
+       package, a subprogram, or a generic unit],
+  Note1=[Library units can have other (logically nested)
+         library units as children, and can have other program units
+         physically nested within them. A root library unit, together
+         with its children and grandchildren and so on, form a subsystem.]}
 @end{Intro}
 
 @begin{ImplPerm}
@@ -643,12 +670,14 @@ renaming-as-declaration, not a renaming-as-body.
 @leading@keepnext@redundant[There are two kinds of dependences among
 compilation units:]
 @begin{Itemize}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @redundant[The @i{semantic dependences}
 (see below)
-are the ones needed to check the
+are the ones @Chg{Version=[5],New=[necessary],Old=[needed]} to check the
 compile-time rules across compilation unit boundaries;
 a compilation unit depends semantically on
-the other compilation units needed to determine its legality.
+the other compilation units @Chg{Version=[5],New=[necessary],Old=[needed]}
+to determine its legality.
 The visibility rules are based on the semantic dependences.
 
 The @i{elaboration dependences}
@@ -738,9 +767,11 @@ view of a package has no effect.]}
 @end{RunTime}
 
 @begin{Notes}
-A simple program may consist of a single compilation unit.
-A @nt{compilation} need not have any compilation units;
-for example, its text can consist of @nt{pragma}s.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+A simple program @Chg{Version=[5],New=[can],Old=[may]} consist of a single
+compilation unit.
+A @nt{compilation} @Chg{Version=[5],New=[can have no],Old=[need not have any]} 
+compilation units; for example, its text can consist of @nt{pragma}s.
 @begin{Ramification}
 Such @nt{pragma}s cannot have any arguments that are @nt{name}s,
 by a previous rule of this subclause.
@@ -1539,9 +1570,9 @@ clauses, limited with clauses, and private with clauses:}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[@i{The} 
-@nt{limited_with_clause} @i{may be used to support
+@nt{limited_with_clause} @i{can be used to support
 mutually dependent abstractions that are split across multiple packages. In
 this case, an employee is assigned to a department, and a department has a
 manager who is an employee. If a} @nt{with_clause} @i{with the reserved word
@@ -1721,6 +1752,9 @@ to a subunit of a subunit as well.]}
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Subunit>,
 Text=<@ChgAdded{Version=[5],Text=[A subunit is a body of a program unit that 
 can be compiled separately from its enclosing program unit.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[subunit],
+  Def=[the body of a program unit that can be compiled 
+       separately from its enclosing program unit]}
 
 The parent body of a subunit shall be present in the current environment,
 and shall contain a corresponding @nt{body_stub}
@@ -1738,9 +1772,9 @@ a @nt{task_@!body_@!stub} shall be the completion of a
 a @nt{protected_@!body_stub} shall be the completion of a
 @Chg{Version=[3],New=[protected declaration],Old=[@ntf{protected_@!declaration}]}.
 
-In contrast,
-a @nt{subprogram_body_stub} need not be the completion of a previous
-declaration,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
+In contrast, a @nt{subprogram_body_stub} @Chg{Version=[5],New=[can be defined
+without it  being],Old=[need not be]} the completion of a previous declaration,
 @Redundant[in which case the @ntf{_stub} declares the subprogram].
 If the @ntf{_stub} is a completion, it shall be the completion of a
 @nt{subprogram_declaration} or @nt{generic_subprogram_declaration}.
@@ -1845,9 +1879,9 @@ subunits:}],Old=[The package Parent is first written without subunits:]}
 @end{Example}
 
 @begin{WideAbove}
-@leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
+@leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1],ARef=[AI12-0440-1]}
 @Chg{Version=[5],New=[@i{Example showing how the body of procedure Inner 
-may be turned into a subunit by rewriting the package body as follows
+can be turned into a subunit by rewriting the package body as follows
 (with the declaration of Parent remaining the same):}],Old=[The body of
 procedure Inner may be turned into a subunit by rewriting the package body
 as follows (with the declaration of Parent remaining the same):]}
@@ -1919,14 +1953,15 @@ The environment is really just a portion of a @nt{declarative_part},
 since there might, for example, be bodies that do not yet exist.
 @end{Honest}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 The @nt{declarative_item}s of the environment
 are @nt{library_item}s appearing in an order
 such that there are no forward semantic dependences.
 Each included subunit
 occurs in place of the corresponding stub.
 The visibility rules apply as if the environment were the outermost
-declarative region,
-except that @nt{with_@!clause}s are needed to make
+declarative region, except that @nt{with_@!clause}s are
+@Chg{Version=[5],New=[necessary],Old=[needed]} to make
 declarations of library units visible
 (see @RefSecNum{Context Clauses - With Clauses}).
 
@@ -2133,15 +2168,17 @@ Note that @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{General}
 requires an implementation to detect illegal compilation units at compile time.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @Defn{library}
-An implementation may support a concept of a @i{library},
-which contains @nt{library_item}s.
-If multiple libraries are supported,
-the implementation has to define how a single environment is
+An implementation @Chg{Version=[5],New=[can],Old=[may]} support a concept
+of a @i{library}, which contains @nt{library_item}s.
+If multiple libraries are supported, the implementation
+@Chg{Version=[5],New=[can document],Old=[has to define]} how a single
+environment is
 constructed when a compilation unit is submitted to the compiler.
-Naming conflicts between different libraries might be resolved by
-treating each library as the root of a hierarchy of child library
-units.
+Naming conflicts between different libraries
+@Chg{Version=[5],New=[can, for example,],Old=[might]} be resolved by
+treating each library as the root of a hierarchy of child library units.
 @IndexSee{Term=[program library],See=(library)}
 @begin{ImplNote}
 Alternatively, naming conflicts could be resolved via some sort of
@@ -2617,13 +2654,14 @@ and possibly on a separate computer.]
 
 @begin{LinkTime}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @RootDefn{partition}
 @Defn{partition building}
 A partition is a program or part of a program
 that can be invoked from outside
 the Ada implementation.
 @Redundant[For example, on many systems,
-a partition might be an executable file
+a partition @Chg{Version=[5],New=[can],Old=[might]} be an executable file
 generated by the system linker.]
 @Defn{explicitly assign}
 The user can @i{explicitly assign} library units to a partition.
@@ -2659,6 +2697,11 @@ pragmas, and in fact @RefSec{Distributed Systems} defines some
 pragmas whose semantics includes reducing the set of
 compilation units described here.
 @end{Discussion}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[needed compilation unit],
+  Def=[a compilation unit that is necessary to produce an executable partition,
+       because some entity declared or defined within the unit is used
+       elsewhere in the partition]}
+
 @begin{Itemize}
 A compilation unit needs itself;
 
@@ -2947,9 +2990,10 @@ above) consists of either:
   @end{Discussion}
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 The mechanisms for building and running partitions are implementation
 defined.
-@Redundant[These might be combined into one operation,
+@Redundant[These @Chg{Version=[5],New=[can],Old=[might]} be combined into one operation,
 as, for example, in dynamic linking, or @lquotes@;load-and-go@rquotes@; systems.]
 @ImplDef{The mechanisms for building and running partitions.}
 @end{LinkTime}
@@ -3130,7 +3174,8 @@ can have modes that provide other behaviors in addition.
 @end{ImplPerm}
 
 @begin{Notes}
-An implementation may provide inter-partition
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+An implementation @Chg{Version=[5],New=[can],Old=[may]} provide inter-partition
 communication mechanism(s) via special packages and pragmas.
 Standard pragmas for distribution and methods for specifying
 inter-partition communication are defined in @RefSec{Distributed Systems}.
@@ -3145,9 +3190,10 @@ consistency of library units elaborated in different partitions;
 @RefSec{Distributed Systems} does so.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 Partitions are not required to run in separate address spaces.
-For example, an implementation might support dynamic linking
-via the partition concept.
+For example, an implementation @Chg{Version=[5],New=[can],Old=[might]} support
+dynamic linking via the partition concept.
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
 An order of elaboration of @nt{library_item}s that is consistent with
@@ -3161,11 +3207,12 @@ be elaborated as soon as possible after the
 unless the pragmas@Chg{Version=[5],New=[ or aspects],Old=[]} in subclause
 @RefSecNum{Elaboration Control} are used.)
 
-A partition (active or otherwise) need not have a main subprogram.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+A partition (active or otherwise) @Chg{Version=[5],New=[does not
+necessarily],Old=[need not]} have a main subprogram.
 In such a case, all the work done by the partition would be done by
 elaboration of various @nt{library_item}s, and by tasks created by that
-elaboration.
-Passive partitions, which cannot have main subprograms,
+elaboration. Passive partitions, which cannot have main subprograms,
 are defined in @RefSec{Distributed Systems}.
 @begin{Ramification}
 The environment task is the outermost semantic level
@@ -3545,7 +3592,7 @@ namely that the Preelaborable_Initialization aspect of the entity is True],Old=[
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1],ARef=[AI12-0444-1]}
 @ChgAdded{Version=[2],Text=[The partial view
 of a private type or private extension, a protected type without
 @nt<entry_declaration>s, a generic formal private type, or a generic formal
@@ -3558,7 +3605,7 @@ or a task type never has preelaborable initialization.]@Chg{Version=[5],New=[
 The Preelaborable_Initialization aspect of a partial
 view of a type may be specified as False, even if the full view of the
 type has preelaborable initialization. Similarly, a generic formal
-type need not be specified to have preelaborable initialization, even
+type may be specified with Preelaborable_Initialization False, even
 if the actual type in an instance has preelaborable initialization.],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -4192,8 +4239,9 @@ or Elaborate_All has to denote a library unit mentioned by a
 previous @nt{with_clause} of the same @nt{context_clause}.
 @end{Discussion}
 
-  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Elaborate_Body],
-    Text=[@ChgAdded{Version=[3],Text=[A given package must have a body, and that
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Elaborate_Body],
+    InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[A given package 
+      @Chg{Version=[5],New=[will],Old=[must]} have a body, and that
       body is elaborated immediately after the declaration.]}]}
 
 @end{StaticSem}

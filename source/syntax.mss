@@ -1,15 +1,15 @@
 @Part(syntax, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:51 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.22 $}
+@comment{$Revision: 1.23 $}
 
 @NoParaNum@;This Annex summarizes the complete syntax of the language.
 
 @LabeledClause{Syntax Rules}@ChgNote{This clause heading is new
-in Ada 202x, so we don't have a single clause}
+in Ada 2022, so we don't have a single clause}
 
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0426-1]}
@@ -28,7 +28,7 @@ description of the notation used.
 @SyntaxSummary
 
 @LabeledClause{Syntax Cross Reference}@ChgNote{This was not a 
-clause until Ada 202x, but it probably always should have been 
+clause until Ada 2022, but it probably always should have been 
 in the TOC and a separate HTML file}
 
 @begin{Intro}

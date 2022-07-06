@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:47 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @LabeledClause{Array Types}
 
@@ -182,6 +182,7 @@ and upper bounds for each index belong to
 the corresponding index subtype of its type, except for null arrays
 (see @RefSecNum(Index Constraints and Discrete Ranges))].
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Defn2{Term=[constrained], Sec=(subtype)}
 @Defn2{Term=[unconstrained], Sec=(subtype)}
 An @nt{unconstrained_array_definition} defines an array type with
@@ -192,7 +193,8 @@ by the @nt{subtype_@!mark}.
 @redundant[@PDefn2{Term=[box], Sec=(compound delimiter)}
 The compound delimiter <> (called a @i(box)) of an
 @nt<index_subtype_definition> stands for an undefined range
-(different objects of the type need not have the same bounds).]
+(different objects of the type @Chg{Version=[5],New=[can],Old=[need not]}
+have @Chg{Version=[5],New=[different],Old=[the same]} bounds).]
 
 @Defn2{Term=[constrained], Sec=(subtype)}
 @Defn2{Term=[unconstrained], Sec=(subtype)}
@@ -535,9 +537,10 @@ array subtype match. See @RefSecNum(Type Conversions).
 @begin{Examples}
 @leading@keepnext@i(Examples of array declarations including an index constraint: )
 @begin(Example)
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 Board     : Matrix(1 .. 8,  1 .. 8);  --  @Examcom[see @RefSecNum(Array Types)]
 Rectangle : Matrix(1 .. 20, 1 .. 30);
-Inverse   : Matrix(1 .. N,  1 .. N);  --  @Examcom[N need not be static ]
+Inverse   : Matrix(1 .. N,  1 .. N);  --  @Examcom[N @Chg{Version=[5],New=[can be nonstatic],Old=[need not be static]}]
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI125-0430-1]}
 Filter    : Bit_Vector(0 .. 31);      --  @Examcom[see @RefSecNum(Array Types)]
@@ -829,6 +832,11 @@ are indefinite subtypes.]
   an array@Chg{Version=[2],New=[],Old=[ type]}.
   A discriminant @Chg{Version=[2],New=[for],Old=[of]} a task type can be
   used to pass data to a task of the type upon creation.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[discriminant],
+  Def=[a parameter for a composite type, which can control,
+          for example, the bounds of a component that is an array],
+  Note1=[A discriminant for a task type can be used to
+         pass data to a task of the type upon its creation.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   @PDefn{unknown discriminants}
@@ -898,7 +906,7 @@ are indefinite subtypes.]
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0398-1]}
   @ChgAdded{Version=[5],Text=[Only implementation-defined aspects are allowed
-  on discriminants in Ada 202x. Implementers are cautioned that any
+  on discriminants in Ada 2022. Implementers are cautioned that any
   aspect allowed on a discriminant will need conformance rules. If,
   for instance, an aspect changed the representation of a discriminant,
   rules would be needed to ensure that the representation is the same for
@@ -1793,11 +1801,12 @@ A composite value @i(satisfies) a discriminant constraint if and only
 if each discriminant of the composite value has the value imposed
 by the discriminant constraint.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @PDefn2{Term=[elaboration], Sec=(discriminant_constraint)}
 For the elaboration of a @nt{discriminant_constraint}, the @nt{expression}s
 in the @nt{discriminant_association}s are evaluated in an arbitrary
 order and converted to the type of the associated
-discriminant (which might raise Constraint_Error @em
+discriminant (which @Chg{Version=[5],New=[can],Old=[might]} raise Constraint_Error @em
 see @RefSecNum{Type Conversions});
 the @nt{expression} of a named association is evaluated
 (and converted) once for each associated discriminant.
@@ -2015,7 +2024,7 @@ subprogram calls.
 @end{DiffWord2005}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Record Types}
 
 @begin{Intro}

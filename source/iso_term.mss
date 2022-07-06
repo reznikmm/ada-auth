@@ -1,8 +1,8 @@
 @Part(RM_Term, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 @Comment{$Source: e:\\cvsroot/ARM/Source/iso_term.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @Comment{The ISO version of "Terms and Definitions". Note that the RM version 
 only shares generated content, so we don't try to share any part of this
@@ -10,9 +10,9 @@ clause.}
 
 @LabeledRevisedSection{Version=[3],New=[Terms and Definitions],Old=[Definitions]}
 
-@Comment{ISO Required Boilerplate here}
 @begin{Intro}
 @begin{ISOOnly}
+@Comment{ISO Required Boilerplate}
 
 @ChgAdded{Version=[5],Text=[For the purposes of this document, the following 
 terms and definitions apply.]}
@@ -31,19 +31,25 @@ in standardization at the following addresses:]}
 @end{ISOOnly}
 @end{Intro}
 
-@Comment{The automatically generated terms and definitions (used to be the Glossary) go here}
+@Comment{The automatically generated terms and definitions (used to be the Glossary) go here.}
 
-@Comment{The following is temporary: it is just the old Glossary unchanged.}
+@LabeledAddedClause{Version=[5],Name=[Types, Objects, and their Properties]}
 
-@begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0443-01]}
-@Defn{Glossary}
-@ChgAdded{Version=[5],Text=[Following are informal descriptions of 
-some of the terms used in this @IntlStdTitle.
-The index provides references to more formal definitions
-of all of the terms used in this @IntlStdTitle.]}
-@end{Intro}
+@AddedTermList{Version=[5],Group=[T]}
 
-@GlossaryList
+@LabeledAddedClause{Version=[5],Name=[Subprograms and their Properties]}
 
-@Comment{End temporary part}.
+@AddedTermList{Version=[5],Group=[S]}
+
+@LabeledAddedClause{Version=[5],Name=[Other Syntactic constructs]}
+
+@AddedTermList{Version=[5],Group=[C]}
+
+@LabeledAddedClause{Version=[5],Name=[Runtime Actions]}
+
+@AddedTermList{Version=[5],Group=[R]}
+
+@LabeledAddedClause{Version=[5],Name=[Exceptional Situations]}
+
+@AddedTermList{Version=[5],Group=[E]}
+

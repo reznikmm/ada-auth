@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/general_body.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @Comment{The clause header is found in General.Mss. Other parts are found
 in other files, depending upon the version. Note that the subclause labeled
@@ -40,6 +40,12 @@ The @i{core} of the Ada language consists of:
 @RefSec{Obsolescent Features}
 @end{Itemize}
 
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[core language],
+    Def=[a clause or annex in which are defined language constructs or
+         capabilities that are provided by all conforming implementations],
+    Note1=[A construct is said to be part of the core language
+           if it is defined in a core language clause or annex.]}
+
 @begin{WideAbove}
 @Leading@Defn{Specialized Needs Annexes}
 @Defn2{Term=[Annex],Sec=(Specialized Needs)}
@@ -61,6 +67,11 @@ application areas:
 
 @RefSec{High Integrity Systems}
 @end{Itemize}
+
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[specialized needs annex],
+    Def=[an annex in which are defined language 
+          constructs or capabilities that are not necessarily provided by all
+          conforming implementations]}
 
 @begin{WideAbove}
 @Leading@Defn{normative}
@@ -192,7 +203,7 @@ such cases are explained.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada
-@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}.
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}.
 @end{MetaRules}
 
 @begin{Syntax}
@@ -473,7 +484,7 @@ we are asking whether the set of behaviors changes.)
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
 Ada 2005@Chg{Version=[3],New=[@Chg{Version=[5],New=[, Ada 2012,
-or Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
+or Ada 2022],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
@@ -491,7 +502,7 @@ into an exception, or into an illegality, to be upwardly incompatible.
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
 Ada 2005@Chg{Version=[3],New=[@Chg{Version=[5],New=[, Ada 2012, or
-Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
+Ada 2022],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 @end{Incompatible83}
 
 @begin{Extend83}
@@ -508,7 +519,7 @@ The vast majority of language changes fall into this category.
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
 Ada 2005@Chg{Version=[3],New=[@Chg{Version=[5],New=[, Ada 2012, or
-Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
+Ada 2022],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 
 @Leading@ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
@@ -531,7 +542,7 @@ changes, but only the @lquotes@;interesting@rquotes@; ones.
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
 Ada 2005@Chg{Version=[3],New=[@Chg{Version=[5],New=[, Ada 2012, or
-Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
+Ada 2022],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 @end{DiffWord83}
 
 @begin{Discussion}
@@ -574,7 +585,7 @@ document these for completeness.]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
 and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[5],New=[,
-Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
+Ada 2012, or Ada 2022],Old=[or Ada 2012]}],Old=[]} RM.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -610,7 +621,7 @@ for completeness.]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
 and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[5],New=[,
-Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
+Ada 2012, or Ada 2022],Old=[or Ada 2012]}],Old=[]} RM.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -645,7 +656,7 @@ Therefore, we document these for completeness.]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
 and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[5],New=[,
-Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
+Ada 2012, or Ada 2022],Old=[or Ada 2012]}],Old=[]} RM.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
@@ -668,7 +679,7 @@ come from Amendment 1.],Old=[]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
 and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[5],New=[,
-Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
+Ada 2012, or Ada 2022],Old=[or Ada 2012]}],Old=[]} RM.]}
 @end{DiffWord95}
 
 
@@ -708,7 +719,7 @@ document these for completeness.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 202x],Old=[]}
+and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 2022],Old=[]}
 RM.]}
 @end{Inconsistent2005}
 
@@ -738,7 +749,7 @@ for completeness.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 202x],Old=[]}
+and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 2022],Old=[]}
 RM.]}
 @end{Incompatible2005}
 
@@ -767,7 +778,7 @@ support the extensions. Therefore, we document these for completeness.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 202x],Old=[]}
+and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 2022],Old=[]}
 RM.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -789,7 +800,7 @@ only belong to Ada 2012.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 202x],Old=[]}
+and does not appear in the Ada 2012@Chg{Version=[5],New=[ or Ada 2022],Old=[]}
 RM.]}
 @end{DiffWord2005}
 
@@ -802,7 +813,7 @@ RM.]}
 The next three headings list all language changes between
 @Chg{Version=[5],New=[Ada 2012
 (the language defined by ISO/IEC 8652:2012(E))
-and Ada 202x (the language defined by this edition of the @StdTitle)],Old=[original
+and Ada 2022 (the language defined by this edition of the @StdTitle)],Old=[original
 Ada 2012 (the language defined by unmodified ISO/IEC 8652:2012(E)) and current
 Ada 2012 (the language defined by ISO/IEC 8652:2012(E) as
 corrected by the Corrigendum ISO/IEC 8652:2012/Cor 1:2016)]}.
@@ -814,9 +825,9 @@ Each language change falls into one of the following three categories:]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
 This heading lists all of the upward inconsistencies between
-@Chg{Version=[5],New=[Ada 2012 and Ada 202x],Old=[original and current Ada 2012]}.
+@Chg{Version=[5],New=[Ada 2012 and Ada 2022],Old=[original and current Ada 2012]}.
 Upward inconsistencies are situations in which a legal
-@Chg{Version=[5],New=[Ada 2012 program is a legal Ada 202x],Old=[
+@Chg{Version=[5],New=[Ada 2012 program is a legal Ada 2022],Old=[
 original Ada 2012 program is a legal current Ada 2012]}
 program with different semantics.]}
 
@@ -832,11 +843,11 @@ Formally, these are
 inconsistencies caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 2012 are supposed to follow these corrections, not the
 original flawed language definition. Thus, these strictly speaking are not
-inconsistencies between @Chg{Version=[5],New=[Ada 2012 and Ada 202x],Old=[current
+inconsistencies between @Chg{Version=[5],New=[Ada 2012 and Ada 2022],Old=[current
 and original Ada 2012]}. Practically, however, they very
 well may be, as early Ada 2012 implementations might not follow the recommendation.
 Inconsistencies so marked are not portable between Ada 2012
-implementations@Chg{Version=[5],New=[, while usually Ada 202x will have
+implementations@Chg{Version=[5],New=[, while usually Ada 2022 will have
 more clearly defined behavior],Old=[]}. Therefore, we
 document these for completeness.]}
 
@@ -850,10 +861,10 @@ and does not appear in any version of the Ada RM.]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}
 This heading lists all of the upward incompatibilities between
-@Chg{Version=[5],New=[Ada 2012 and Ada 202x],Old=[original and current Ada 2012]},
+@Chg{Version=[5],New=[Ada 2012 and Ada 2022],Old=[original and current Ada 2012]},
 except for the ones listed under @lquotes@;@Inconsistent2012Title@rquotes@;
 above. These are the situations in which a legal
-@Chg{Version=[5],New=[Ada 2012 program is illegal in Ada 202x],Old=[
+@Chg{Version=[5],New=[Ada 2012 program is illegal in Ada 2022],Old=[
 original Ada 2012 program is illegal in current Ada 2012]}.]}
 
 
@@ -871,11 +882,11 @@ incompatibilities caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 2012 are supposed to follow these corrections, not the
 original flawed language definition. Thus,
 these strictly speaking are not incompatibilities between
-@Chg{Version=[5],New=[Ada 2012 and Ada 202x],Old=[current and original Ada 2012]}.
+@Chg{Version=[5],New=[Ada 2012 and Ada 2022],Old=[current and original Ada 2012]}.
 Practically, however, they very well may be, as early Ada 2012 implementations
 might not follow the recommendation. Therefore, some Ada 2012 implementations
 may be able to compile the examples, while others might
-not.@Chg{Version=[5],New=[ In contrast, Ada 202x compilers will have
+not.@Chg{Version=[5],New=[ In contrast, Ada 2022 compilers will have
 consistent behavior.],Old=[]} Therefore, we document these
 for completeness.]}
 
@@ -891,7 +902,7 @@ and does not appear in any version of the Ada RM.]}
 This heading is used to list all upward compatible language changes;
 that is, language extensions.
 These are the situations in which a legal
-@Chg{Version=[5],New=[Ada 202x program is not a legal Ada 202x],Old=[
+@Chg{Version=[5],New=[Ada 2022 program is not a legal Ada 2012],Old=[
 current Ada 2012 program is not a legal original Ada 2012]} program.
 The vast majority of language changes fall into this category.]}
 
@@ -911,7 +922,7 @@ extensions of Ada 2012; they're part of Ada 2012. Practically, however, they
 very well may be extensions, as early Ada 2012 implementations might not implement
 the extension. Therefore, some Ada 2012 implementations may be able to compile
 the examples, while others might not.@Chg{Version=[5],New=[ In contrast,
-Ada 202x compilers will always support the extensions.],Old=[]}
+Ada 2022 compilers will always support the extensions.],Old=[]}
 Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -930,7 +941,7 @@ As explained above, the next heading does not represent any language change:]}
 @ChgAdded{Version=[4],Text=[@Defn{wording changes from Ada 2012}
 This heading lists some of the nonsemantic changes between the
 @Chg{Version=[5],New=[Ada 2012 RM and
-the Ada 202x RM],Old=[original and corrected Ada 2012 RM]}. This heading lists
+the Ada 2022 RM],Old=[original and corrected Ada 2012 RM]}. This heading lists
 only @lquotes@;interesting@rquotes@; changes
 (for instance, editorial corrections are not listed). Items marked
 @b[Corrigendum:]@Defn{Corrigendum} are included in Corrigendum 1 to Ada
@@ -938,7 +949,7 @@ only @lquotes@;interesting@rquotes@; changes
 In both cases, the],Old=[. These]}
 items come from Ada Issues classified
 as Binding Interpretations and strictly speaking belong to Ada
-2012@Chg{Version=[5],New=[; other items only belong to Ada 202x],Old=[]}.]}
+2012@Chg{Version=[5],New=[; other items only belong to Ada 2022],Old=[]}.]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
 @ChgAdded{Version=[4],Text=[This is not part of the definition of the language,
@@ -1539,6 +1550,9 @@ Names of syntactic categories are set in a different font,
   Text=<A @i(construct) is a piece of text
   (explicit or implicit) that is an instance of a syntactic category
   defined under @lquotes@;@SyntaxTitle@rquotes@;.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[construct],
+        Def=[a piece of text (explicit or implicit) that is an instance
+          of a syntactic category defined under @SyntaxTitle]}
 @begin{Ramification}
 For example, an @nt{expression} is a construct.
 A declaration is a construct,

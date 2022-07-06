@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.91 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
+@comment{ $Revision: 1.92 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -130,9 +130,10 @@ column-major order.
     Text=[@ChgAdded{Version=[3],Text=[Calling convention or other convention
       used for interfacing to other languages.]}]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 A @nt{pragma} Linker_Options is used to specify the system linker
-parameters needed when a given compilation unit is included in a
-partition.
+parameters @Chg{Version=[5],New=[necessary],Old=[needed]} when a given
+compilation unit is included in a partition.
 
 @end{Intro}
 
@@ -644,17 +645,21 @@ when @Chg{Version=[3],New=[specifying the],Old=[@nt[pragma]]} Export
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0135-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 For each supported convention @i[L] other than Intrinsic,
 an implementation should support @Chg{Version=[3],New=[specifying
 the ],Old=[]}Import and Export @Chg{Version=[3],New=[aspects],Old=[@nt{pragma}s]}
 for objects of @i[L]-compatible types and for
-subprograms, and @Chg{Version=[3],New=[the],Old=[@nt(pragma)]}
-Convention @Chg{Version=[3],New=[aspect ],Old=[]}for @i[L]-eligible types and for subprograms,
+subprograms, and @Chg{Version=[3],New=[the],Old=[@nt(pragma)]} Convention
+@Chg{Version=[3],New=[aspect ],Old=[]}for @i[L]-eligible types and for subprograms,
 presuming the other language has corresponding features.
 @Chg{Version=[3],New=[Specifying the ],Old=[@nt{Pragma}]} Convention
-@Chg{Version=[3],New=[aspect ],Old=[]}need not be supported for scalar
-types@Chg{Version=[4],New=[, other than enumeration types whose internal codes
-fall within the range 0 .. 2**15@en@;1],Old=[]}.
+@Chg{Version=[3],New=[aspect ],Old=[]}@Chg{Version=[5],New=[should],Old=[need not]}
+be supported for @Chg{Version=[5],New=[],Old=[scalar
+types]}@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[, other than]}
+enumeration types whose internal codes
+fall within the range 0 .. 2**15@en@;1@Chg{Version=[5],New=[, but no
+recommendation is made for other scalar types],Old=[]}],Old=[]}.
 @ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
 Text=[For each supported convention @i[L] other than Intrinsic,
@@ -691,8 +696,9 @@ standard.]}
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-Implementations may place restrictions on interfacing
-@Chg{Version=[3],New=[aspects],Old=[pragmas]};
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+Implementations @Chg{Version=[5],New=[can],Old=[may]} place restrictions on
+interfacing @Chg{Version=[3],New=[aspects],Old=[pragmas]};
 for example, requiring each exported entity to be declared
 at the library level.
 @begin{TheProof}
@@ -719,12 +725,12 @@ interface to an assembly language routine that obeys the
 Ada compiler's calling conventions.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 To obtain @lquotes@;call-back@rquotes@; to an Ada subprogram from a foreign
-language
-environment, @Chg{Version=[3],New=[the],Old=[@key(pragma)]} Convention
-@Chg{Version=[3],New=[aspect ],Old=[]}should be specified both for the
-access-to-subprogram type and the specific subprogram(s) to which 'Access
-is applied.
+language environment, @Chg{Version=[3],New=[the],Old=[@key(pragma)]} Convention
+@Chg{Version=[3],New=[aspect ],Old=[]}@Chg{Version=[5],New=[can],Old=[should]} 
+be specified both for the access-to-subprogram type and the specific
+subprogram(s) to which 'Access is applied.
 
 @begin{NotIso}
 @ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 45
@@ -1073,10 +1079,9 @@ implementation before run time or shall raise an exception at run time.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The intent is that
-  the same rules apply for
-  language interfacing as apply for Specialized Needs Annexes. See
-  @RefSecNum{Conformity of an Implementation with the Standard} for a
-  discussion of the purpose of these rules.]}]}
+  the same rules apply for language interfacing as apply for Specialized Needs
+  Annexes. See @RefSecNum{Conformity of an Implementation} for a discussion 
+  of the purpose of these rules.]}]}
 @end{Discussion}
 @end{ImplReq}
 
@@ -1773,8 +1778,10 @@ An implementation may provide additional declarations in the C
 interface packages.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[An implementation need not support
-specifying the Convention aspect with @SynI<convention_>@nt{identifier} C in the
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0444-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[An implementation
+@Chg{Version=[5],New=[is not required to],Old=[need not]} support specifying
+the Convention aspect with @SynI<convention_>@nt{identifier} C in the
 following cases:]}
 
 @begin{Itemize}
@@ -2369,17 +2376,21 @@ Check equal to True would have propagated Update_Error.
 @end{erron}
 
 @begin{SingleNote}
-New_Char_Array and New_String might be
-implemented either through
-the allocation function from the C environment (@lquotes@;malloc@rquotes@;) or through
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+New_Char_Array and New_String @Chg{Version=[5],New=[can],Old=[might]} be
+implemented either through the allocation function from the C environment
+(@lquotes@;malloc@rquotes@;) or through
 Ada dynamic memory allocation (@lquotes@;new@rquotes@;). The key points are
 @begin{itemize}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 the returned value (a chars_ptr) is
 represented as a C @lquotes@;char *@rquotes@; so
-that it may be passed to C functions;
+that it @Chg{Version=[5],New=[can],Old=[may]} be passed to C functions;
 
-the allocated object should be freed by the programmer via a call of
-Free, not by a called C function.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+the allocated object @Chg{Version=[5],New=[can],Old=[should]} be freed by the
+programmer via a call of Free, @Chg{Version=[5],New=[rather than by calling
+a],Old=[not by a called]} C function.
 @end{itemize}
 @end{SingleNote}
 
@@ -2439,9 +2450,10 @@ type Pointer as a pointer to the first element of an array, so that for
 example, adding 1 to Ptr yields a pointer to the
 second element of the array.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 The generic allows two styles of usage: one in which the array is
 terminated by a special terminator element; and another in which the
-programmer needs to keep track of the length.
+programmer @Chg{Version=[5],New=[keeps],Old=[needs to keep]} track of the length.
 @end{Intro}
 
 @begin{StaticSem}
@@ -2689,7 +2701,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 
 
 
-@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 202x RM}
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Unchecked Union Types],Old=[Pragma Unchecked_Union]}
 
 @begin{Intro}
@@ -3055,10 +3067,11 @@ COBOL types of the supported COBOL implementation
 (so-called @lquotes@;internal COBOL representations@rquotes@;),
 allowing Ada data to be passed as parameters to COBOL programs
 
-A set of types and constants reflecting external data representations
-such as might be found in files or databases, allowing COBOL-generated
-data to be read by an Ada program, and Ada-generated data to be read
-by COBOL programs
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
+A set of types and constants reflecting external data representations such as
+@Chg{Version=[5],New=[can],Old=[might]} be found in files or databases,
+allowing COBOL-generated data to be read by an Ada program, and Ada-generated
+data to be read by COBOL programs
 
 A generic package for converting between an Ada decimal type value and
 either an internal or external COBOL representation
@@ -3556,10 +3569,12 @@ for access types, nor is it required to support
 Export@Chg{Version=[3],New=[,],Old=[]} or Convention for functions.
 @begin{reason}
 COBOL does not have a pointer facility, and a COBOL program
-does not return a value.@end{reason}
+does not return a value.
+@end{reason}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 If an Ada subprogram is exported to COBOL, then a call from COBOL
-call may specify
+call @Chg{Version=[5],New=[can],Old=[may]} specify
 either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 @end[Notes]
 
@@ -3618,9 +3633,10 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 @key(with) COBOL_Sequential_IO; @ExamCom{-- Assumed to be supplied by implementation}
 @key(procedure) Test_External_Formats @key(is)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
    @ExamCom{-- Using data created by a COBOL program}
    @ExamCom{-- Assume that a COBOL program has created a sequential file with}
-   @ExamCom{--  the following record structure, and that we need to}
+   @ExamCom{--  the following record structure, and that we @Chg{Version=[5],New=[want],Old=[need to]}}
    @ExamCom{--  process the records in an Ada program}
    @ExamCom{--  01 EMPLOYEE-RECORD}
    @ExamCom{--     05 NAME    PIC X(20).}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.94 $ $Date: 2022/05/14 04:06:52 $ $Author: randy $ }
+@comment{ $Revision: 1.95 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/06/21 06:08:04 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -83,8 +83,10 @@ common to the string handling packages.
 @RMNewPageVer{Version=[1]}@Comment{Insert page break so printed Ada 95 w/ Corr RM looks better.}
 @LabeledSubClause{The Package Strings.Maps}
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 The package Strings.Maps defines the types, operations, and other
-entities needed for character sets and character-to-character mappings.
+entities @Chg{Version=[5],New=[necessary],Old=[needed]} for character sets and
+character-to-character mappings.
 @end{Intro}
 
 @begin{StaticSem}
@@ -1190,10 +1192,13 @@ string if Left = 0 and @Chg{New=[otherwise ],Old=[]}is
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 In the Index and Count functions taking Pattern and Mapping parameters,
-the actual String parameter passed to Pattern should comprise characters
-occurring as target characters of the mapping.
-Otherwise@Chg{Version=[3],New=[,],Old=[]} the pattern will not match.
+@Chg{Version=[5],New=[for there to be a match, ],Old=[]}the actual String
+parameter passed to Pattern
+@Chg{Version=[5],New=[can contain only],Old=[should comprise]} characters
+occurring as target characters of the mapping.@Chg{Version=[5],New=[],Old=[
+Otherwise@Chg{Version=[3],New=[,],Old=[]} the pattern will not match.]}
 
 In the Insert subprograms, inserting at the end of a string is obtained
 by passing Source'Last+1 as the Before parameter.
@@ -1246,16 +1251,17 @@ string handling subprograms, Constraint_Error is propagated.
 
 @LabeledSubClause{Bounded-Length String Handling}
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 The language-defined package Strings.Bounded provides a generic package
 each of whose instances yields a private type Bounded_String and a
 set of operations. An object of a particular Bounded_String type
 represents a String whose low bound is 1 and whose length
-can vary conceptually
-between 0 and a maximum size established at the
+can vary conceptually between 0 and a maximum size established at the
 generic instantiation.
 The subprograms for fixed-length string handling
 are either overloaded directly for Bounded_String, or are modified as
-needed to reflect the variability in length. Additionally, since the
+@Chg{Version=[5],New=[necessary],Old=[needed]} to reflect the variability
+in length. Additionally, since the
 Bounded_String type is private, appropriate constructor and selector
 operations are provided.
 @begin{reason}
@@ -1918,6 +1924,7 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 
 @LabeledSubClause{Unbounded-Length String Handling}
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 The language-defined package Strings.Unbounded provides a
  private type Unbounded_String and a
 set of operations. An object of type Unbounded_String represents a String
@@ -1925,9 +1932,9 @@ whose low bound is 1 and whose length
 can vary conceptually between 0 and Natural'Last.
 The subprograms for fixed-length string handling
 are either overloaded directly for Unbounded_String, or are modified as
-needed to reflect the flexibility in length. Since the
-Unbounded_String type is private, relevant constructor and selector
-operations are provided.
+@Chg{Version=[5],New=[necessary],Old=[needed]} to reflect the flexibility
+in length. Since the Unbounded_String type is private, relevant constructor
+and selector operations are provided.
 @begin{reason}
 The transformation operations for fixed- and bounded-length strings that
 are not necessarily length preserving are supplied for Unbounded_String
@@ -4122,10 +4129,10 @@ Decode to convert all of the lines to an internal format.]}
 @LabeledAddedSubClause{Version=[5],Name=[Universal Text Buffers]}
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[A universal text buffer can be used to save and
 retrieve text of any language-defined string type. The types used to save and
-retrieve the text need not be the same.]}
+retrieve the text can be different.]}
 @end{Intro}
 
 @begin{StaticSem}

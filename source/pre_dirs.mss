@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2022/06/21 06:08:02 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:49 $}
+@Comment{$Date: 2022/06/21 06:08:02 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -1192,9 +1192,11 @@ these as possible.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0231-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[2],Text=[Start_Search and Search should raise
-@Chg{Version=[3],New=[Name_Error],Old=[Use_Error]} if Pattern is malformed, but
-not if it could represent a file in the directory but does not actually do so.]}
+@Chg{Version=[3],New=[Name_Error],Old=[Use_Error]} if Pattern is malformed,
+but not if it @Chg{Version=[5],New=[can],Old=[could]} represent a file in
+the directory but does not actually do so.]}
 
 @ChgImplAdvice{Version=[3],Kind=[Revised],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
@@ -1224,10 +1226,12 @@ external file.]}]}
 @begin{Notes}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[The operations Containing_Directory,
 Full_Name, Simple_Name,
 Base_Name, Extension, and Compose operate on file names, not external files.
-The files identified by these operations do not need to exist. Name_Error is
+The files identified by these operations do not
+@Chg{Version=[5],New=[necessarily],Old=[need to]} exist. Name_Error is
 raised only if the file name is malformed and cannot possibly identify a file.
 Of these operations, only the result of Full_Name depends on the current
 default directory; the result of the others depends only on their parameters.]}
@@ -1252,10 +1256,12 @@ deletion of directories, then Create_Directory, Create_Path, Delete_Directory,
 and Delete_Tree will always propagate Use_Error.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[To move a file or directory to a different
 location, use Rename. Most target systems will allow renaming of files from one
-directory to another. If the target file or directory might already exist, it
-should be deleted first.]}
+directory to another. If the target file or directory
+@Chg{Version=[5],New=[can],Old=[might]} already exist,
+@Chg{Version=[5],New=[delete it],Old=[it should be deleted]} first.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[While Rename is only guaranteed to
@@ -1624,11 +1630,12 @@ on other systems.]}]}
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1]}
-@ChgAdded{Version=[3],Text=[These operations operate on file names, not external
-files. The files identified by these operations do not need to exist. Name_Error
-is raised only as specified or if the file name is malformed and cannot possibly
-identify a file. The result of these operations depends only on their
-parameters.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@ChgAdded{Version=[3],Text=[These operations operate on file names, not
+external files. The files identified by these operations do not
+@Chg{Version=[5],New=[necessarily],Old=[need to]} exist. Name_Error is raised
+only as specified or if the file name is malformed and cannot possibly identify
+a file. The result of these operations depends only on their parameters.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1]}
 @ChgAdded{Version=[3],Text=[Containing_Directory raises Use_Error if Name does

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:47 $}
+@Comment{$Date: 2022/06/21 06:08:00 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -931,7 +931,7 @@ From URG recommendation.
 @end{DiffWord2012}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Identifiers}
 
 @begin{Intro}
@@ -1609,7 +1609,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @end{Examples}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Pragmas}
 
 @begin{Intro}
@@ -1619,6 +1619,12 @@ of a program; their sole purpose is the enlightenment of the human reader.
   for optimization, listing control, etc.
   An implementation may support additional
   (implementation-defined) pragmas.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[pragma],
+Def=[a compiler directive to provide control over and above that 
+provided by the other syntactic constructs of the language],
+Note1=[There are language-defined pragmas that give 
+instructions for optimization, listing control, etc. An 
+implementation can support additional (implementation-defined) pragmas.]}
 @end{Intro}
 
 @begin{MetaRules}
@@ -2114,7 +2120,7 @@ informative annex.
 @end{DiffWord2005}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Reserved Words}
 
 @begin{Syntax}
@@ -2319,7 +2325,7 @@ Replacements of Characters@rquotes@; has been moved to
 @begin{Incompatible2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}The
-  following word is not reserved in Ada 2012, but is reserved in Ada 202x:
+  following word is not reserved in Ada 2012, but is reserved in Ada 2022:
   @key{parallel}. Uses of this word as an identifier will need
   to be changed, but we do not expect them to be common.]}
 @end{Incompatible2012}

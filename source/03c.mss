@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:47 $}
+@Comment{$Date: 2022/06/21 06:08:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.158 $}
+@Comment{$Revision: 1.159 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -181,6 +181,11 @@ or in a generic formal part
   Nondispatching calls, in which the subprogram body to invoke
   is determined at compile time, are also allowed.
   Tagged types may be extended with additional components.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[tagged type],
+  Def=[a type whose objects each have a run-time type tag, 
+       which indicates the specific type for which the object was 
+       originally created],
+  Note1=[Tagged types can be extended with additional components.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
 If a tagged type is declared other than in a @nt{package_specification},
@@ -865,12 +870,13 @@ is @Chg{Version=[3],New=[a],Old=[the]} master of the point of the function call.
 @end{ImplAdvice}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 A type declared with the reserved word @key[tagged]
-should normally be declared in a @nt{package_specification},
+@Chg{Version=[5],New=[is],Old=[should]} normally
+@Chg{Version=[5],New=[],Old=[be ]}declared in a @nt{package_specification},
 so that new primitive subprograms can be declared for it.
 
-Once an object has been created,
-its tag never changes.
+Once an object has been created, its tag never changes.
 
 Class-wide types are defined to have unknown discriminants
 (see @RefSecNum(Discriminants)). This means that objects of a class-wide
@@ -2155,6 +2161,9 @@ dispatches to some overriding body.]
   Text=<@ChgAdded{Version=[2],Text=[An abstract type is a tagged type
   intended for use as an ancestor of other types, but which is not allowed to
   have objects of its own.]}>}
+@ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[abstract type],
+  Def=[a tagged type intended for use as an ancestor of
+       other types, but which is not allowed to have objects of its own]}
 @end{Intro}
 
 @begin{MetaRules}
@@ -2352,6 +2361,7 @@ R had been a private child of Q, it would have been legal.]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
   Otherwise, the subprogram shall be overridden with a nonabstract
   subprogram@Chg{Version=[2],New=[ or, in the case of a private extension
   inheriting a @Chg{Version=[4],New=[nonabstract ],Old=[]}function with a
@@ -2361,7 +2371,8 @@ R had been a private child of Q, it would have been legal.]}
   @Chg{Version=[2],New=[Such a subprogram is said to
   @i{require overriding}.@Defn{require overriding} ],Old=[]}However,
   if the type is a generic formal type,
-  the subprogram need not be overridden for the formal type itself;
+  the subprogram @Chg{Version=[5],New=[is allowed to be inherited as is,
+  without being],Old=[need not be]} overridden for the formal type itself;
   @Redundant[a nonabstract version will necessarily be provided by the
   actual type.]
   @begin{Reason}
@@ -2657,12 +2668,15 @@ some nonabstract type in the class.
 @end{Examples}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @i(Notes on the example:)
-Given the above abstract type, one could then derive
-various (nonabstract) extensions of the type, representing
-alternative implementations of a set. One might use a bit
+Given the above abstract type, one @Chg{Version=[5],New=[can],Old=[could then]}
+derive various (nonabstract) extensions of the type, representing
+alternative implementations of a set. One @Chg{Version=[5],New=[possibility is 
+to],Old=[might]} use a bit
 vector, but impose an upper bound on the largest element representable,
-while another might use a hash table, trading off space for flexibility.
+while another @Chg{Version=[5],New=[possible implementation is],Old=[might
+use]} a hash table, trading off space for flexibility.
 @begin{Discussion}
 One way to export a type from a package with some components visible
 and some components private is as follows:
@@ -2772,10 +2786,10 @@ but then clients of the package would not have visibility to T.
   good thing, as the instance will never be useful), but could break a working
   instance if the equality usage is in a default expression that appears in
   the private part of the generic unit and it is never used in a call. In
-  that case, Ada 202x will reject the instance while it would have worked
+  that case, Ada 2022 will reject the instance while it would have worked
   in Ada 2012. As a practical matter, it's more likely that a compiler already
   does the recheck in the entire instance spec, or does not do it at all;
-  thus for some implementations there will be no practical incompatibility.]}
+  thus for many implementations there will be no practical incompatibility.]}
 @end{Incompatible2012}
 
 
@@ -2794,6 +2808,12 @@ ancestors.]]}
   composing other interfaces and tagged types and thereby
   provide multiple inheritance. Only an interface type can be used as a
   progenitor of another type.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[interface type],
+  Def=[an abstract tagged type that has no components or concrete operations 
+       except possibly null procedures],
+  Note1=[Interface types are used for composing other interfaces and tagged
+         types and thereby provide multiple inheritance. Only an interface
+         type can be used as a progenitor of another type.]}
 @end{Intro}
 
 @begin{MetaRules}
@@ -2857,6 +2877,11 @@ interfaces.]}
   that will work safely with multiple tasks at one time. A synchronized
   interface can be an ancestor of a task or a protected type. Such a
   task or protected type is called a synchronized tagged type.]}>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[synchronized entity],
+  Def=[an entity that can be safely operated on by multiple tasks concurrently],
+  Note1=[A synchronized interface can be an ancestor of a task or a 
+         protected type. Such a task or protected type is called a
+         synchronized tagged type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00443-01]}
 @ChgAdded{Version=[2],Text=[@Defn{synchronized tagged type}
@@ -2932,7 +2957,11 @@ primitive subprograms from its progenitor types
   one of the types given in the definition of the derived type other
   than the first. A progenitor is always an interface type.
   Interfaces, tasks, and protected types may also have progenitors.]}>}
-
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[progenitor of a derived type],
+  Def=[one of the types given in the definition of the derived type other
+       than the first],
+  Note1=[A progenitor is always an interface type. Interfaces, tasks, and
+         protected types can also have progenitors.]}
 @end{StaticSem}
 
 @begin{Legality}
@@ -3036,10 +3065,12 @@ the interface type and its first subtype],Old=[has no effect]}.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00411-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[Nonlimited interface types have predefined
-nonabstract equality operators. These may be overridden with user-defined
-abstract equality operators. Such operators will then require
-an explicit overriding for any nonabstract descendant of the interface.]}
+nonabstract equality operators. These @Chg{Version=[5],New=[can],Old=[may]}
+be overridden with user-defined abstract equality operators. Such operators
+will then require an explicit overriding for any nonabstract descendant of
+the interface.]}
 @end{Notes}
 
 @begin{Examples}
@@ -3088,22 +3119,28 @@ interface and a synchronized interface extending it:}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[This defines a Queue interface defining a queue of
-people. (A similar design could be created to define any kind of queue simply
+people. (A similar design @Chg{Version=[5],New=[is possible],Old=[could be created]}
+to define any kind of queue simply
 by replacing Person_Name by an appropriate type.) The Queue interface has four
 dispatching operations, Append, Remove_First, Cur_Count, and Max_Count. The
 body of a class-wide operation, Transfer is also shown. Every nonabstract
-extension of Queue must provide implementations for at least its four
+extension of Queue @Chg{Version=[5],New=[will],Old=[must]} provide
+implementations for at least its four
 dispatching operations, as they are abstract. Any object of a type derived from
-Queue may be passed to Transfer as either the From or the To operand. The two
-operands need not be of the same type in any given call.]}
+Queue @Chg{Version=[5],New=[can],Old=[may]} be passed to Transfer as either the
+From or the To operand. The two operands @Chg{Version=[5],New=[can be of
+different types in a],Old=[need not be of the same type in any]} given call.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 @ChgAdded{Version=[2],Text=[The Synchronized_Queue interface inherits the four
 dispatching operations from Queue and adds two additional dispatching
 operations, which wait if necessary rather than raising the Queue_Error
-exception. This synchronized interface may only be implemented by a task or
-protected type, and as such ensures safe concurrent access.]}
+exception. This synchronized interface @Chg{Version=[5],New=[can],Old=[may]}
+only be implemented by a task or protected type, and as such ensures safe
+concurrent access.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example use of the interface:}]}
@@ -3135,11 +3172,13 @@ Transfer (Cashier, Counter);
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @ChgAdded{Version=[2],Text=[An interface such as Queue can be used directly as
 the parent of a new type (as shown here), or can be used as a progenitor when a
 type is derived. In either case, the primitive operations of the
 interface are inherited. For Queue, the implementation of the four inherited
-routines must be provided. Inside the call of Transfer, calls will dispatch to
+routines @Chg{Version=[5],New=[will necessarily],Old=[must]} be provided.
+Inside the call of Transfer, calls will dispatch to
 the implementations of Append and Remove_First for type Fast_Food_Queue.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -3310,6 +3349,12 @@ either by the designated subtype, or by its initial value.]]}
   the reserved word @key(aliased).
   The Access attribute can be used to create an access value
   designating an aliased object.>}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[aliased view],
+  Def=[a view of an object that can be designated by an access value],
+  Note1=[Objects allocated by allocators are aliased. Objects can also be
+         explicitly declared as aliased with the reserved word aliased. The
+         Access attribute can be used to create an access value designating
+         an aliased object.]}
 @begin(Ramification)
   The current instance of a nonlimited type is not aliased.
 
@@ -3923,7 +3968,7 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
 @end{Extend2012}
 
 
-@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 202x RM only}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledSubClause{Incomplete Type Declarations}
 
 @begin{Intro}
@@ -4716,7 +4761,9 @@ any of these rules).
   than the level of the reference. Based on static nesting, there are 
   corresponding legality rules that the level of the entity is not statically
   deeper than that of the reference.]}>}
-
+@ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[accessibility level],
+  Def=[a representation of the lifetime of an entity in terms of the level of 
+       dynamic nesting within which the entity is known to exist]}
 @Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
 @Redundant[A given accessibility level is said to be @i{statically
@@ -5478,10 +5525,12 @@ body@Chg{Version=[4],New=[ of @i<F>],Old=[]}]}.]}
 @end{Honest}
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
 @Redundant[For determining whether one level is statically deeper than another
 when within a generic package body, the generic package is presumed to be
 instantiated at the same level as where it was declared;
-runtime checks are needed in the case of more deeply nested instantiations.]
+runtime checks are @Chg{Version=[5],New=[required],Old=[needed]} in the
+case of more deeply nested instantiations.]
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0082-1]}
   @ChgAdded{Version=[3],Text=[A generic package does not introduce a new master,
@@ -6140,11 +6189,12 @@ denotes an aliased view of an object}:
     the checks associated with them are all compile-time checks.
   @end(ImplNote)
 
-  @NoPrefix@PDefn2{Term=[implicit subtype conversion],Sec=(Access attribute)}
+  @NoPrefix@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
+  @PDefn2{Term=[implicit subtype conversion],Sec=(Access attribute)}
   If the nominal subtype of X does not statically match the designated
   subtype of @i(A), a view conversion of X to the designated subtype
-  is evaluated (which might raise Constraint_Error @em
-  see @RefSecNum(Type Conversions))
+  is evaluated (which @Chg{Version=[5],New=[can],Old=[might]} raise
+  Constraint_Error @em see @RefSecNum(Type Conversions))
   and the value of X'Access designates that view.
 @end(description)
 
@@ -6309,16 +6359,17 @@ See @RefSecNum{Dispatching Operations of Tagged Types}.
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
-@Defn{downward closure}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}@Defn{downward closure}
 @Defn2{Term=[closure],Sec=(downward)}
 @Chg{Version=[2],New=[The],Old=[The accessibility rules imply that it
 is not possible to use the]} Access
 attribute@Chg{Version=[2],New=[ for subprograms and parameters of an
-anonymous access-to-subprogram type may together be used],Old=[]}
+anonymous access-to-subprogram type @Chg{Version=[5],New=[can be 
+used],Old=[may]} together@Chg{Version=[5],New=[],Old=[ be used]}],Old=[]}
 to implement @lquotes@;downward closures@rquotes@; @em that is,
 to pass a more-nested subprogram as a parameter to a
-less-nested subprogram, as might be @Chg{Version=[2],
-New=[appropriate],Old=[desired for example]} for an
+less-nested subprogram, as @Chg{Version=[5],New=[can],Old=[might]} be
+@Chg{Version=[2],New=[appropriate],Old=[desired for example]} for an
 iterator abstraction@Chg{Version=[2],New=[ or numerical integration.
 Downward],Old=[. Instead, downward]}
 closures can @Chg{Version=[2],New=[also ],Old=[]}be implemented using
@@ -6330,21 +6381,23 @@ an access-to-class-wide tagged type with a dispatching operation
 is a potentially more structured alternative to using an
 access-to-subprogram type.
 
-An implementation may consider
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+An implementation @Chg{Version=[5],New=[can],Old=[may]} consider
 two access-to-subprogram values to be unequal,
-even though they designate the same subprogram. This might
-be because one points directly to the subprogram,
+even though they designate the same subprogram. @Chg{Version=[5],New=[For
+instance, this can happen],Old=[This might
+be]} because one points directly to the subprogram,
 while the other points to a special prologue that
 performs an Elaboration_Check and then jumps to the subprogram.
 See @RefSecNum(Relational Operators and Membership Tests).
 @begin{Ramification}
-
-If equality of
-access-to-subprogram values is important to the logic
-of a program, a reference to the Access attribute of a subprogram
-should be evaluated only once
-and stored in a global constant for subsequent use and equality
-comparison.@end{ramification}
+  If equality of
+  access-to-subprogram values is important to the logic
+  of a program, a reference to the Access attribute of a subprogram
+  should be evaluated only once
+  and stored in a global constant for subsequent use and equality
+  comparison.
+@end{ramification}
 @end{Notes}
 
 @begin{Examples}
@@ -6542,7 +6595,7 @@ uses of anonymous access types.]}
   access type is the same for implicit and explicit conversions. This could 
   cause code involving implicit conversions to named access types that is legal
   and does not raise an exception in original Ada 2012 to become illegal or raise
-  Program_Error because of an accessibility failure in Ada 202x. This is more
+  Program_Error because of an accessibility failure in Ada 2022. This is more
   likely to prevent a dangling pointer bug than to prevent something useful.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0345-1]}
@@ -6553,7 +6606,7 @@ uses of anonymous access types.]}
   the dynamic accessibility of an explicitly aliased parameter within a return
   statement of a function (typically using anonymous access types). This can
   mean that a program that would have been legal and worked in Ada 2012 as
-  defined would raise Program_Error or be rejected in Ada 202x. One such
+  defined would raise Program_Error or be rejected in Ada 2022. One such
   example is:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -6576,7 +6629,7 @@ uses of anonymous access types.]}
   for F2 (which is defined to be the master of the call for F1). In Ada 2012,
   since the reference is inside of a return statement, the dynamic accessibility
   of A.Comp'Access is the master of the call for F1 - meaning the check at (2)
-  should pass. In Ada 202x, the dynamic accessibility of A.Comp'Access is
+  should pass. In Ada 2022, the dynamic accessibility of A.Comp'Access is
   local for for F1 - meaning the check at (2) should fail and raise
   Program_Error.]}
 
@@ -6591,7 +6644,7 @@ uses of anonymous access types.]}
   so that using a part of a return object in a return expression does not
   break the connection between the inner and outer function calls. This
   means that some cases that (unnecessarily) failed an accessibility check in
-  Ada 2012 will not do so in Ada 202x. This change will mostly remove latent
+  Ada 2012 will not do so in Ada 2022. This change will mostly remove latent
   problems from Ada code; very little code depends on an accessibility check
   failing.]}
 @end{Inconsistent2012}
@@ -6698,7 +6751,7 @@ uses of anonymous access types.]}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@IsoOnlyRMNewPageVer{Version=[5]}@Comment{For ISO Ada 202x only}
+@IsoOnlyRMNewPageVer{Version=[5]}@Comment{For ISO Ada 2022 only}
 @LabeledClause{Declarative Parts}
 
 @begin{Intro}

@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2022/05/14 04:06:50 $ $Author: randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -1248,7 +1248,7 @@ Tampering_With_Cursors_Prohibited and
 Tampering_With_Elements_Prohibited that occur in preconditions are replaced
 by False, and any that occur in postconditions are replaced by True.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[If a stable map is declared with the Base
 discriminant designating a pre-existing ordinary map, the stable map
 represents a stabilized view of the underlying ordinary map, and any operation
@@ -1256,7 +1256,7 @@ on the stable map is reflected on the underlying ordinary map. While a
 stabilized view exists, any operation that tampers with elements performed on
 the underlying map is prohibited. The finalization of a stable map that
 provides such a view removes this restriction on the underlying ordinary map
-@Redundant[(though some other restriction might exist due to other concurrent
+@Redundant[(though some other restriction can exist due to other concurrent
 iterations or stabilized views)].]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
@@ -1474,7 +1474,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for ordinary containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 2022. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -5351,7 +5351,7 @@ to those for ordinary sets, except that the calls to
 Tampering_With_Cursors_Prohibited that occur in preconditions are replaced
 by False, and any that occur in postconditions are replaced by True.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Text=[If a stable set is declared with the Base
 discriminant designating a pre-existing ordinary set, the stable set
 represents a stabilized view of the underlying ordinary set, and any operation
@@ -5359,7 +5359,7 @@ on the stable set is reflected on the underlying ordinary set. While a
 stabilized view exists, any operation that tampers with cursors performed on
 the underlying set is prohibited. The finalization of a stable set that
 provides such a view removes this restriction on the underlying ordinary set
-@Redundant[(though some other restriction might exist due to other concurrent
+@Redundant[(though some other restriction can exist due to other concurrent
 iterations or stabilized views)].]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0438-1]}
@@ -7438,8 +7438,8 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1],ARef=[AI12-0407-1]}
-@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Hashed_Sets.Set) @key{is}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0339-1],ARef=[AI12-0399-1],ARef=[AI12-0407-1],ARef=[AI12-0445-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Ordered_Sets.Set) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
               Default_Iterator  => Iterate,
@@ -7467,13 +7467,13 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Set_Iterator_Interfaces} @key[is new]
          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Hashed_Sets.Set;
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0445-1]}
+@ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Ordered_Sets.Set;
                         Source : @key{in} Set)
          @key{with} Post => Length (Source) = Length (Target);]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
-@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Hashed_Sets.Set) @key{return} Set
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1],ARef=[AI12-0445-1]}
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Ordered_Sets.Set) @key{return} Set
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
