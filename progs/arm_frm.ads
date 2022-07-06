@@ -1,9 +1,9 @@
 with ARM_Output,
+     ARM_Paragraph,
      ARM_Contents;
---private -- Ada 2005
-with ARM_Input,
-     ARM_Database,
-     ARM_Subindex;
+private with ARM_Input,
+             ARM_Database,
+             ARM_Subindex;
 package ARM_Format is
 
     --
@@ -115,6 +115,12 @@ package ARM_Format is
     --  2/15/19 - RLB - Added Attr_Omit to the attribute parameters.
     --  1/29/22 - RLB - Added Num_Notes for extra note information.
     --  2/ 2/22 - RLB - Added flag to reduce unnecessary warnings.
+    --  4/ 8/22 - RLB - Added Example_Comment_Font.
+    --  4/13/22 - RLB - Added Include_Group, moved Paragraph_Type to ARM_Paragraph.
+    --  5/11/22 - RLB - Added Self_Ref_Format.
+    --  5/25/22 - RLB - Added Term DBs.
+    --  5/27/22 - RLB - Moved the Term_DBs to the body as they must persist
+    --                  through the life of the program (like the Contents).
 
     type Format_Type is tagged limited private;
 
@@ -139,6 +145,9 @@ package ARM_Format is
 	-- equivalent to this version's Show_Changes with
 	-- Base_Change_Version = 1.)
 
+    type Self_Ref_Kind is (RM, ISO_1989, ISO_2018);
+        -- Types of self references.
+        
     procedure Create (Format_Object : in out Format_Type;
 		      Changes : in ARM_Format.Change_Kind;
 		      Change_Version : in ARM_Contents.Change_Version_Type;
@@ -148,10 +157,13 @@ package ARM_Format is
 		      Include_ISO : in Boolean;
 		      Link_Non_Terminals : in Boolean;
 		      Number_Paragraphs : in Boolean;
+                      Include_Group : in ARM_Paragraph.Grouping_Array;
 		      Examples_Font : in ARM_Output.Font_Family_Type;
+		      Example_Comment_Font : in ARM_Output.Font_Family_Type;
 		      Use_ISO_2004_Note_Format : in Boolean;
 		      Use_ISO_2004_Contents_Format : in Boolean;
 		      Use_ISO_2004_List_Format : in Boolean;
+                      Self_Ref_Format : in Self_Ref_Kind;
 		      Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind);
 	-- Initialize an input object. Changes, Change_Version, and
 	-- Base_Change_Version determine
@@ -166,14 +178,20 @@ package ARM_Format is
 	-- each Non_Terminal, linking it to its definition.
 	-- If Number_Paragraphs is true, paragraphs will be numbered (per
 	-- subclause); otherwise they will not be.
+        -- Include_Group specifies which document groups should be included
+        -- in the output. This should include any effect on paragraphs of
+        -- Include_ISO and Include_Annotations.
 	-- Example_Font specifies the font that examples will be set in.
+	-- Example_Comment_Font specifies the font that example comment and
+        -- example virtual names will be set in.
 	-- If Use_ISO_2004_Note_Format is true, that format will be used;
 	-- else the Ada95 standard's format will be used for notes.
 	-- If Use_ISO_2004_Contents_Format is true, that format will be used;
 	-- else the Ada95 standard's format will be used for the table of contents.
 	-- If Use_ISO_2004_List_Format is true, then lists will be lettered;
 	-- else the Ada95 standard's numbering format will be used for
-	-- enumerated lists.
+	-- enumerated lists. The format of Self References is specified by
+        -- Self_Ref_Format.
 	-- The top-level (and other) subdivision names are as specified
 	-- in Top_Level_Subdivision_Name.
 
@@ -224,33 +242,6 @@ package ARM_Format is
 	-- are generating a document with annotations.
 
 private
-    type Paragraph_Type is (Plain, Introduction,
-	Language_Design, -- AARM-only.
-	Syntax, Resolution, Legality,
-	Static_Semantics, Link_Time, Run_Time, Bounded_Errors,
-	Erroneous, Requirements, Documentation, Metrics, Permissions, Advice,
-	Notes, Single_Note, Examples,
-	Ada83_Inconsistencies, Ada83_Incompatibilities, -- AARM-only.
-	Ada83_Extensions, Ada83_Wording, -- AARM-only.
-	Ada95_Inconsistencies, Ada95_Incompatibilities, -- AARM-only.
-	Ada95_Extensions, Ada95_Wording, -- AARM-only.
-	Ada2005_Inconsistencies, Ada2005_Incompatibilities, -- AARM-only.
-	Ada2005_Extensions, Ada2005_Wording, -- AARM-only.
-	Ada2012_Inconsistencies, Ada2012_Incompatibilities, -- AARM-only.
-	Ada2012_Extensions, Ada2012_Wording, -- AARM-only.
-	Element_Ref, Child_Ref, Usage_Note, -- For ASIS (AASIS-only).
-	-- AARM annotations (no headers)
-	Reason, Ramification, Proof, Imp_Note, Corr_Change, Discussion,
-	Honest, Glossary_Marker, Bare_Annotation,
-	-- Format only:
-	Wide_Above, Example_Text, Child_Example_Text,
-	Indented_Example_Text, Code_Indented, Indent, Bulleted, Nested_Bulleted,
-        Nested_X2_Bulleted,
-	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
-	Enumerated, Nested_Enumerated,
-        Hanging_Indented_1, Hanging_Indented_2, Hanging_Indented_3,
-        Hanging_Indented_4, Small, Title, In_Table);
-
     type Reference;
     type Reference_Ptr is access Reference;
     type Reference is record
@@ -330,10 +321,13 @@ private
 	Include_ISO : Boolean;
 	Link_Non_Terminals : Boolean;
 	Number_Paragraphs : Boolean;
+        Include_Group : ARM_Paragraph.Grouping_Array;
 	Examples_Font : ARM_Output.Font_Family_Type;
+	Example_Comment_Font : ARM_Output.Font_Family_Type;
 	Use_ISO_2004_Note_Format : Boolean;
 	Use_ISO_2004_Contents_Format : Boolean;
 	Use_ISO_2004_List_Format : Boolean;
+        Self_Ref_Format : Self_Ref_Kind;
 	Top_Level_Subdivision_Name : ARM_Output.Top_Level_Subdivision_Name_Kind;
 
 	-- Clause numbers:
@@ -341,6 +335,7 @@ private
 	     -- The current clause number (Section, clause, subclause, subsubclause).
 	Unnumbered_Section : Natural; -- The current (if any) clause number
 		-- for unnumbered sections.
+        Subnumber : Natural; -- The current subnumber for the current clause.
 
 	-- Paragraph format info:
 	Next_Paragraph_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
@@ -349,13 +344,13 @@ private
 	Next_Paragraph_Version : ARM_Contents.Change_Version_Type;
 			     -- If the kind is not "None", this is the version
 			     -- number of the changed paragraph.
-	Last_Paragraph_Subhead_Type : Paragraph_Type;
+	Last_Paragraph_Subhead_Type : ARM_Paragraph.Paragraph_Type;
 			     -- The last paragraph subhead generated.
-	Next_Paragraph_Subhead_Type : Paragraph_Type;
+	Next_Paragraph_Subhead_Type : ARM_Paragraph.Paragraph_Type;
 			     -- The next paragraph subhead to generate (not
 			     -- necessarily the same as Next_Paragraph_Format_Type).
 			     -- This indicates the current paragraph type.
-	Next_Paragraph_Format_Type : Paragraph_Type;
+	Next_Paragraph_Format_Type : ARM_Paragraph.Paragraph_Type;
 			     -- The format type of the next paragraph to
 			     -- generate. We keep this separately so that the
 			     -- first paragraph of a grouping can be in a
@@ -459,7 +454,7 @@ private
 	-- Glossary:
 	Glossary_Info : Glossary_Info_Type;
 	Glossary_DB : ARM_Database.Database_Type;
-
+        
 	-- Aspects:
 	Aspect_DB : ARM_Database.Database_Type;
 	    -- Also see Impdef_Info, below.

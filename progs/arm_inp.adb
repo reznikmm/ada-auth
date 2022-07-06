@@ -178,7 +178,8 @@ package body ARM_Input is
 		exit;
 	    end if;
 	    if Len >= Buffer'Length then
-	        Ada.Text_IO.Put_Line ("  ** String buffer overflow on line " &
+	        Ada.Text_IO.Put_Line ("  ** String buffer overflow (buffer len=" &
+                        Natural'Image(Buffer'Length) & ") on line " &
 			ARM_Input.Line_String (Input_Object));
 ----Debug:
 --raise Program_Error; -- Where the heck are we??

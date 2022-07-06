@@ -11,7 +11,7 @@ package ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -90,14 +90,18 @@ package ARM_Text is
     --  8/31/12 - RLB - Added Output_Path.
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
+    --  4/20/22 - RLB - Added Big_Files parameter.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
     procedure Create (Output_Object : in out Text_Output_Type;
-		      File_Prefix : in String;
-		      Output_Path : in String;
-		      Title : in String := "");
+		      Big_Files     : in Boolean;
+		      File_Prefix   : in String;
+		      Output_Path   : in String;
+		      Title         : in String := "");
 	-- Create an Output_Object for a document.
+	-- Generate a few large output files if
+	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 5 characters allowed in file names.
 	-- The result files will be written to Output_Path.
@@ -422,7 +426,7 @@ package ARM_Text is
 private
 
     subtype Buffer_String is String (1 .. 120);
-    subtype Prefix_String is String(1..5);
+    subtype Prefix_String is String(1..8);
     type Text_Output_Type is new ARM_Output.Output_Type with record
 	Is_Valid : Boolean := False;
 	Is_In_Paragraph : Boolean := False;
@@ -438,6 +442,7 @@ private
 			-- move the text in the buffer to the next line.
 	Output_Buffer_Space_Before : Boolean := False;
 			-- Do we need to output a space before the buffer?
+        Big_File : Boolean := False; -- Generate a single file.
 	Output_File : Ada.Text_IO.File_Type;
 	Output_Path : Buffer_String;
 	Output_Path_Len : Natural := 0;

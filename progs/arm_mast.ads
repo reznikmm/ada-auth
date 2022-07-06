@@ -8,7 +8,7 @@ package ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2011, 2012, 2016
+    -- Copyright 2006, 2011, 2012, 2016, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -42,8 +42,9 @@ package ARM_Master is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     --  8/31/12 - RLB - Added Output_Path.
     --  3/17/16 - RLB - Added Base_Change_Version.
+    --  4/ 8/22 - RLB - Added ReST output format.
 
-    type Output_Format_Type is (HTML, RTF, Text, Corr, Info);
+    type Output_Format_Type is (HTML, RTF, Text, Corr, Info, ReST);
 
     procedure Read_and_Process_Master_File (
 	File_Name : in String;

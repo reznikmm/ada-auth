@@ -6,7 +6,7 @@ private package ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011, 2012, 2021  AXE Consultants. All rights reserved.
+    -- Copyright 2011, 2012, 2021, 2022  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -45,174 +45,12 @@ private package ARM_Format.Data is
     -- 10/18/12 - RLB - Added more specific hanging_indent commands.
     -- 12/17/12 - RLB - Added Ada 2012 AARM headings.
     --  3/13/21 - RLB - Added Intl_Standard_Name command.
-
-
-    type LString is record
-	Length : Natural;
-	Str : String(1..40);
-    end record;
-    Paragraph_Kind_Name : constant array (Paragraph_Type) of LString :=
-	(Plain		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Introduction	 => (Length => 17, Str => "Introductory Text                       "), -- IntroName
-	 Language_Design => (Length => 25, Str => "Language Design Principle               "), -- MetaRulesName
-	 Syntax		 => (Length => 11, Str => "Syntax Rule                             "), -- SyntaxName
-	 Resolution	 => (Length => 20, Str => "Name Resolution Rule                    "), -- ResolutionName
-	 Legality	 => (Length => 13, Str => "Legality Rule                           "), -- LegalityName
-	 Static_Semantics=> (Length => 20, Str => "Static Semantic Item                    "), -- StaticSemName
-	 Link_Time	 => (Length => 21, Str => "Post-Compilation Rule                   "), -- LinkTimeName
-	 Run_Time	 => (Length => 21, Str => "Dynamic Semantic Item                   "), -- RunTimeName
-	 Bounded_Errors  => (Length => 24, Str => "Bounded (Run-Time) Error                "), -- BoundedName
-	 Erroneous	 => (Length => 19, Str => "Erroneous Execution                     "), -- ErronName
-	 Requirements	 => (Length => 26, Str => "Implementation Requirement              "), -- ImplReqName
-	 Documentation	 => (Length => 25, Str => "Documentation Requirement               "), -- DocReqName
-	 Metrics	 => (Length =>  6, Str => "Metric                                  "), -- MetricsName
-	 Permissions	 => (Length => 25, Str => "Implementation Permission               "), -- ImplPermName
-	 Advice		 => (Length => 21, Str => "Implementation Advice                   "), -- ImplAdviceName
-	 Notes		 => (Length =>  4, Str => "Note                                    "), -- NotesName
-	 Single_Note	 => (Length =>  4, Str => "Note                                    "), -- SimpleNoteName
-	 Examples	 => (Length =>  7, Str => "Example                                 "), -- ExamplesName
-	 Ada83_Inconsistencies
-			 => (Length => 25, Str => "Inconsistency with Ada 83               "), -- Inconsistent83Name
-	 Ada83_Incompatibilities
-			 => (Length => 27, Str => "Incompatibility with Ada 83             "), -- Incompatible83Name
-	 Ada83_Extensions=> (Length => 19, Str => "Extension to Ada 83                     "), -- Extend83Name
-	 Ada83_Wording	 => (Length => 26, Str => "Wording Change from Ada 83              "), -- DiffWord83Name
-	 Ada95_Inconsistencies
-			 => (Length => 25, Str => "Inconsistency with Ada 95               "), -- Inconsistent95Name
-	 Ada95_Incompatibilities
-			 => (Length => 27, Str => "Incompatibility with Ada 95             "), -- Incompatible95Name
-	 Ada95_Extensions=> (Length => 19, Str => "Extension to Ada 95                     "), -- Extend95Name
-	 Ada95_Wording	 => (Length => 26, Str => "Wording Change from Ada 95              "), -- DiffWord95Name
-	 Ada2005_Inconsistencies
-			 => (Length => 27, Str => "Inconsistency with Ada 2005             "), -- Inconsistent2005Name
-	 Ada2005_Incompatibilities
-			 => (Length => 29, Str => "Incompatibility with Ada 2005           "), -- Incompatible2005Name
-	 Ada2005_Extensions
-			 => (Length => 21, Str => "Extension to Ada 2005                   "), -- Extend2005Name
-	 Ada2005_Wording => (Length => 28, Str => "Wording Change from Ada 2005            "), -- DiffWord2005Name
-	 Ada2012_Inconsistencies
-			 => (Length => 27, Str => "Inconsistency with Ada 2012             "), -- Inconsistent2012Name
-	 Ada2012_Incompatibilities
-			 => (Length => 29, Str => "Incompatibility with Ada 2012           "), -- Incompatible2012Name
-	 Ada2012_Extensions
-			 => (Length => 21, Str => "Extension to Ada 2012                   "), -- Extend2012Name
-	 Ada2012_Wording => (Length => 28, Str => "Wording Change from Ada 2012            "), -- DiffWord2012Name
-	 Element_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Child_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Usage_Note	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Reason		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Ramification	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Proof		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Imp_Note	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Corr_Change	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Discussion	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Honest		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Glossary_Marker => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Bare_Annotation => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Wide_Above	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Example_Text	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Child_Example_Text => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indented_Example_Text=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indent		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
-	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_1=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_2=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_3=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_4=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Small		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
-
-    Paragraph_Kind_Title : constant array (Paragraph_Type) of LString :=
-	(Plain		 => (Length =>  0, Str => (others => ' ')),
-	 Introduction	 => (Length =>  0, Str => (others => ' ')), -- IntroTitle (deleted).
-	 Language_Design => (Length => 26, Str => "Language Design Principles              "), -- MetaRulesTitle
-	 Syntax		 => (Length =>  6, Str => "Syntax                                  "), -- SyntaxTitle
-	 Resolution	 => (Length => 21, Str => "Name Resolution Rules                   "), -- ResolutionTitle
-	 Legality	 => (Length => 14, Str => "Legality Rules                          "), -- LegalityTitle
-	 Static_Semantics=> (Length => 16, Str => "Static Semantics                        "), -- StaticSemTitle
-	 Link_Time	 => (Length => 22, Str => "Post-Compilation Rules                  "), -- LinkTimeTitle
-	 Run_Time	 => (Length => 17, Str => "Dynamic Semantics                       "), -- RunTimeTitle
-	 Bounded_Errors  => (Length => 25, Str => "Bounded (Run-Time) Errors               "), -- BoundedTitle
-	 Erroneous	 => (Length => 19, Str => "Erroneous Execution                     "), -- ErronTitle
-	 Requirements	 => (Length => 27, Str => "Implementation Requirements             "), -- ImplReqTitle
-	 Documentation	 => (Length => 26, Str => "Documentation Requirements              "), -- DocReqTitle
-	 Metrics	 => (Length =>  7, Str => "Metrics                                 "), -- MetricsTitle
-	 Permissions	 => (Length => 26, Str => "Implementation Permissions              "), -- ImplPermTitle
-	 Advice		 => (Length => 21, Str => "Implementation Advice                   "), -- ImplAdviceTitle
-	 Notes		 => (Length =>  5, Str => "NOTES                                   "), -- NotesTitle
-	 Single_Note	 => (Length =>  5, Str => "NOTES                                   "), -- SimpleNoteTitle
-	 Examples	 => (Length =>  8, Str => "Examples                                "), -- ExamplesTitle
-	 Ada83_Inconsistencies
-			 => (Length => 27, Str => "Inconsistencies With Ada 83             "), -- Inconsistent83Title
-	 Ada83_Incompatibilities
-			 => (Length => 29, Str => "Incompatibilities With Ada 83           "), -- Incompatible83Title
-	 Ada83_Extensions=> (Length => 20, Str => "Extensions to Ada 83                    "), -- Extend83Title
-	 Ada83_Wording	 => (Length => 27, Str => "Wording Changes from Ada 83             "), -- DiffWord83Title
-	 Ada95_Inconsistencies
-			 => (Length => 27, Str => "Inconsistencies With Ada 95             "), -- Inconsistent95Title
-	 Ada95_Incompatibilities
-			 => (Length => 29, Str => "Incompatibilities With Ada 95           "), -- Incompatible95Title
-	 Ada95_Extensions=> (Length => 20, Str => "Extensions to Ada 95                    "), -- Extend95Title
-	 Ada95_Wording	 => (Length => 27, Str => "Wording Changes from Ada 95             "), -- DiffWord95Title
-	 Ada2005_Inconsistencies
-			 => (Length => 29, Str => "Inconsistencies With Ada 2005           "), -- Inconsistent2005Title
-	 Ada2005_Incompatibilities
-			 => (Length => 31, Str => "Incompatibilities With Ada 2005         "), -- Incompatible2005Title
-	 Ada2005_Extensions
-			 => (Length => 22, Str => "Extensions to Ada 2005                  "), -- Extend2005Title
-	 Ada2005_Wording => (Length => 29, Str => "Wording Changes from Ada 2005           "), -- DiffWord2005Title
-	 Ada2012_Inconsistencies
-			 => (Length => 29, Str => "Inconsistencies With Ada 2012           "), -- Inconsistent2012Title
-	 Ada2012_Incompatibilities
-			 => (Length => 31, Str => "Incompatibilities With Ada 2012         "), -- Incompatible2012Title
-	 Ada2012_Extensions
-			 => (Length => 22, Str => "Extensions to Ada 2012                  "), -- Extend2012Title
-	 Ada2012_Wording => (Length => 29, Str => "Wording Changes from Ada 2012           "), -- DiffWord2012Title
-	 Element_Ref	 => (Length => 19, Str => "Element Reference:                      "), -- Paragraph start.
-	 Child_Ref	 => (Length => 28, Str => "Child Elements returned by:             "), -- Paragraph start.
-	 Usage_Note	 => (Length => 12, Str => "Usage Note:                             "), -- Paragraph start.
-	 Reason		 => (Length =>  8, Str => "Reason:                                 "), -- Paragraph start.
-	 Ramification	 => (Length => 14, Str => "Ramification:                           "), -- Paragraph start.
-	 Proof		 => (Length =>  7, Str => "Proof:                                  "), -- Paragraph start.
-	 Imp_Note	 => (Length => 21, Str => "Implementation Note:                    "), -- Paragraph start.
-	 Corr_Change	 => (Length =>  8, Str => "Change:                                 "), -- Paragraph start.
-	 Discussion	 => (Length => 12, Str => "Discussion:                             "), -- Paragraph start.
-	 Honest		 => (Length => 14, Str => "To be honest:                           "), -- Paragraph start.
-	 Glossary_Marker => (Length => 16, Str => "Glossary entry:                         "), -- Paragraph start.
-	 Bare_Annotation => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Wide_Above	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Example_Text	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Child_Example_Text => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indented_Example_Text=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indent		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
-	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_1=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_2=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_3=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented_4=>(Length => 0, Str => (others => ' ')), -- Not used.
-	 Small		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
-
+    --  4/ 8/22 - RLB - Added Virtual_Name command.
+    --  4/13/22 - RLB - Moved the Paragraph_Kind_xxx arrays to ARM_Paragraph.
+    --  4/18/22 - RLB - Added Ada 2022 AARM headings.
+    --  5/ 8/22 - RLB - Added Deleted_Subheading.
+    --  5/11/22 - RLB - Added LabeledRevisedSubClauseIsoClause.
+    --  5/26/22 - RLB - Added ChgTermDef, AddedTermList, and Subnumber.
 
     type Command_Type is (
 	-- Paragraphs:
@@ -224,7 +62,7 @@ private package ARM_Format.Data is
 	Bold, Italic, Roman, Swiss, Fixed, Roman_Italic, Shrink, Grow,
 	Black, Red, Green, Blue,
 	Keyword, Non_Terminal, Non_Terminal_Format,
-	Example_Text, Example_Comment,
+	Example_Text, Example_Comment, Virtual_Name,
 	No_Prefix, No_Para_Num, Keep_with_Next,
         Leading, Trailing, Up, Down, Thin_Line, Thick_Line, Tab_Clear, Tab_Set,
 	-- Tables:
@@ -242,7 +80,8 @@ private package ARM_Format.Data is
 	-- Clause labels:
 	Labeled_Section, Labeled_Section_No_Break, Labeled_Clause,
 	Labeled_Subclause, Labeled_Subsubclause,
-	Labeled_Revised_Section, Labeled_Revised_Clause, Labeled_Revised_Subclause, Labeled_Revised_Subsubclause,
+	Labeled_Revised_Section, Labeled_Revised_Clause, Labeled_Revised_Subclause, 
+        Labeled_Revised_Subsubclause, Labeled_Revised_Subclause_ISO_Clause, 
         Labeled_Added_Section, Labeled_Added_Clause, Labeled_Added_Subclause, Labeled_Added_Subsubclause,
         Labeled_Deleted_Clause, Labeled_Deleted_Subclause, Labeled_Deleted_Subsubclause,
 	Preface_Section,
@@ -252,7 +91,7 @@ private package ARM_Format.Data is
 	Labeled_Normative_Annex, Labeled_Revised_Normative_Annex,
         Labeled_Added_Normative_Annex,
 	Unnumbered_Section, Subheading, Heading, Center, Right,
-        Added_Subheading,
+        Added_Subheading, Deleted_Subheading,
 	-- Clause references:
 	Ref_Section, Ref_Section_Number, Ref_Section_by_Number,
 	-- Links:
@@ -266,6 +105,7 @@ private package ARM_Format.Data is
 	Change_To_Glossary, Change_To_Glossary_Also,
 	Glossary_Text_Param, -- This is a parameter of the last four.
 	Glossary_List,
+        Change_Term_Def, Added_Term_List,
         Prefix_Type, Reset_Prefix_Type, Attribute, Attribute_Leading, Attribute_Text_Param, -- The last is a parameter of Attribute.
 	Attribute_List,
 	Pragma_Syntax, Pragma_List, Added_Pragma_Syntax, Deleted_Pragma_Syntax,
@@ -296,6 +136,7 @@ private package ARM_Format.Data is
 	Inconsistent95_Name, Incompatible95_Name, Extend95_Name, Wording95_Name,
 	Inconsistent2005_Name, Incompatible2005_Name, Extend2005_Name, Wording2005_Name,
 	Inconsistent2012_Name, Incompatible2012_Name, Extend2012_Name, Wording2012_Name,
+	Inconsistent2022_Name, Incompatible2022_Name, Extend2022_Name, Wording2022_Name,
 	Syntax_Title, Resolution_Title, Legality_Title, Static_Title,
 	Link_Title, Run_Title, Bounded_Title, Erroneous_Title, Req_Title,
 	Doc_Title, Metrics_Title, Permission_Title, Advice_Title, Notes_Title,
@@ -304,8 +145,9 @@ private package ARM_Format.Data is
 	Extend83_Title, Wording83_Title, Inconsistent95_Title, Incompatible95_Title,
 	Extend95_Title, Wording95_Title, Inconsistent2005_Title, Incompatible2005_Title,
 	Extend2005_Title, Wording2005_Title, Inconsistent2012_Title, Incompatible2012_Title,
-	Extend2012_Title, Wording2012_Title,
-        Intl_Standard_Name, Intl_Standard_Title, Standard_Title,
+	Extend2012_Title, Wording2012_Title, Inconsistent2022_Title, Incompatible2022_Title,
+	Extend2022_Title, Wording2022_Title,
+        Intl_Standard_Name, Intl_Standard_Title, Standard_Title, Subnumber,
 	-- Character macros:
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
 	Latin_1, Unicode, Ceiling, Floor, Absolute, Log, Thin_Space,

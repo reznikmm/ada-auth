@@ -13,7 +13,7 @@ package body ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -114,6 +114,7 @@ package body ARM_Text is
     -- 10/18/12 - RLB - Added additional hanging styles.
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
+    --  4/20/22 - RLB - Added Big_Files parameter.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -131,10 +132,13 @@ package body ARM_Text is
 
 
     procedure Create (Output_Object : in out Text_Output_Type;
-		      File_Prefix : in String;
-		      Output_Path : in String;
-		      Title : in String := "") is
+		      Big_Files     : in Boolean;
+		      File_Prefix   : in String;
+		      Output_Path   : in String;
+		      Title         : in String := "") is
 	-- Create an Output_Object for a document.
+	-- Generate a few large output files if
+	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 5 characters allowed in file names.
 	-- The result files will be written to Output_Path.
@@ -150,7 +154,16 @@ package body ARM_Text is
 	Ada.Strings.Fixed.Move (Target => Output_Object.Output_Path,
 				Source => Output_Path);
         Output_Object.Output_Path_Len := Output_Path'Length;
+        Output_Object.Big_File := Big_Files;
 	-- We don't use the title.
+        if Output_Object.Big_File then
+            -- Only one big file. Create it now.
+            Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+                    Output_Object.Output_Path(1..Output_Object.Output_Path_Len) &
+                    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+                ".TXT");
+        -- else only one file for the entire document, and it's open already.
+        end if;
     end Create;
 
 
@@ -184,15 +197,20 @@ package body ARM_Text is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Section in paragraph");
 	end if;
-	if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	    Ada.Text_IO.Close (Output_Object.Output_File);
-	end if;
-	-- Create a new file for this section:
-	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-            Output_Object.Output_Path(1..Output_Object.Output_Path_Len) &
-	        Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-		"-" & Section_Name & ".TXT");
-	Ada.Text_IO.New_Line (Output_Object.Output_File);
+        if not Output_Object.Big_File then
+            -- One file per section.
+            -- Close any existing file:
+            if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
+                Ada.Text_IO.Close (Output_Object.Output_File);
+            end if;
+            -- Create a new file for this section:
+            Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+                    Output_Object.Output_Path(1..Output_Object.Output_Path_Len) &
+                    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+                "-" & Section_Name & ".TXT");
+        -- else only one file for the entire document, and it's open already.
+        end if;
+        Ada.Text_IO.New_Line (Output_Object.Output_File);
     end Section;
 
 

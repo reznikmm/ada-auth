@@ -49,6 +49,8 @@
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     --  5/07/20 - RLB - Added additional tracing.
     --  1/29/22 - RLB - Added Note numbering code.
+    --  5/11/22 - RLB - Added LabeledRevisedSubClauseIsoClause.
+    --  5/27/22 - RLB - Added ChgTermDef.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -60,12 +62,14 @@ procedure Scan (Format_Object : in out Format_Type;
     -- Starts_New_Section is True if the file starts a new section.
     -- Section_Number is the number (or letter) of the section.
     --
-    -- This also does two other jobs:
+    -- This also does three other jobs:
     -- (1) Inserts all nonterminals into the syntax index so that we can
     --     generate forward links to them.
     -- (2) Generates a guesstimate of how many notes appear in a Notes
     --     section so that ISO_2004 formatting can omit note numbers if there
     --     is only one.
+    -- (3) Collects all of the term definitions so that they are available
+    --     when the Terms and Definitions clause is generated.
 
     type Items is record
         Command : Command_Type;
@@ -186,6 +190,68 @@ procedure Scan (Format_Object : in out Format_Type;
 	    -- else no parameter. Weird.
 	    end if;
         end Get_Change_Version;
+
+
+        procedure Get_Change_Kind (Kind : out ARM_Database.Paragraph_Change_Kind_Type) is
+            -- Get a parameter named "Kind", containing a word representing
+            -- a change kind.
+            Kind_Name : ARM_Input.Command_Name_Type;
+            Ch, Close_Ch : Character;
+        begin
+            ARM_Input.Check_Parameter_Name (Input_Object,
+                Param_Name => "Kind" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+                Is_First => False,
+                Param_Close_Bracket => Close_Ch);
+            if Close_Ch /= ' ' then
+                -- Get the kind word:
+                Arm_Input.Get_Name (Input_Object, Kind_Name);
+                ARM_File.Get_Char (Input_Object, Ch);
+                if Ch /= Close_Ch then
+                    Ada.Text_IO.Put_Line ("  ** Bad close for change kind on line " & ARM_File.Line_String (Input_Object));
+                    Arm_File.Replace_Char (Input_Object);
+                end if;
+                begin
+                     Kind := ARM_Paragraph.Get_Change_Kind (Kind_Name);
+                exception
+                    when Program_Error =>
+                    Ada.Text_IO.Put_Line ("  ** Bad kind for change kind: " &
+                        Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right) &
+                        " on line " & ARM_File.Line_String (Input_Object));
+                end;
+            -- else no parameter. Weird.
+            end if;
+        end Get_Change_Kind;
+
+
+        procedure Get_Term_Group (Group : out ARM_Paragraph.Term_Group_Index) is
+            -- Get a parameter named "Group",
+            -- containing a character representing the term grouping.
+            Ch, Close_Ch : Character;
+            Grp_Ch : Character;
+        begin
+            ARM_Input.Check_Parameter_Name (Input_Object,
+                Param_Name => "Group" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+                Is_First => False,
+                Param_Close_Bracket => Close_Ch);
+            if Close_Ch /= ' ' then
+                -- Get the version character:
+                Arm_File.Get_Char (Input_Object, Grp_Ch);
+                ARM_File.Get_Char (Input_Object, Ch);
+                if Ch /= Close_Ch then
+                    Ada.Text_IO.Put_Line ("  ** Bad close for term group on line " &
+                         ARM_File.Line_String (Input_Object));
+                    Arm_File.Replace_Char (Input_Object);
+                end if;
+            -- else no parameter. Weird.
+            end if;
+            begin
+                Group := ARM_Paragraph.Get_Term_Group (Grp_Ch);
+            exception
+                when Program_Error =>
+                    Ada.Text_IO.Put_Line ("  ** Bad group name " & Grp_Ch & " on line " &
+                        ARM_File.Line_String (Input_Object));
+            end;
+        end Get_Term_Group;
 
     begin
         case Nesting_Stack(Nesting_Stack_Ptr).Command is
@@ -314,6 +380,7 @@ procedure Scan (Format_Object : in out Format_Type;
 		 Labeled_Revised_Section |
 		 Labeled_Revised_Clause |
 		 Labeled_Revised_Subclause |
+		 Labeled_Revised_Subclause_ISO_Clause |
 		 Labeled_Revised_Subsubclause =>
 	        declare
 		    Old_Title : ARM_Contents.Title_Type;
@@ -394,6 +461,21 @@ procedure Scan (Format_Object : in out Format_Type;
 			     Subclause => Format_Object.Clause_Number.Subclause + 1,
 			     Subsubclause => 0);
                         Most_Recent_Level := ARM_Contents.Subclause;
+		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause_ISO_Clause then
+		        if Format_Object.Include_ISO then
+                            Format_Object.Clause_Number :=
+                                (Section   => Format_Object.Clause_Number.Section,
+                                 Clause    => Format_Object.Clause_Number.Clause + 1,
+                                 Subclause => 0, Subsubclause => 0);
+                            Most_Recent_Level := ARM_Contents.Clause;
+                        else -- No ISO, a subclause.                        
+                            Format_Object.Clause_Number :=
+                                (Section   => Format_Object.Clause_Number.Section,
+                                 Clause    => Format_Object.Clause_Number.Clause,
+                                 Subclause => Format_Object.Clause_Number.Subclause + 1,
+                                 Subsubclause => 0);
+                            Most_Recent_Level := ARM_Contents.Subclause;
+                        end if;
 		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
 		        Format_Object.Clause_Number.Subsubclause :=
 			    Format_Object.Clause_Number.Subsubclause + 1;
@@ -1063,6 +1145,244 @@ procedure Scan (Format_Object : in out Format_Type;
                  -- current mode. (Not always true, but a lot of work to
                  -- figure out otherwise.)
                  Check_Paragraph;      
+                 
+	    when Change_Term_Def =>
+		-- This is a change term and definition command.
+		-- It is of the form
+		-- @ChgTermDef{Version=[<version>],Kind=(<kind>),Group=[<group>],Term=[<term>],
+                --    [InitialVersion=[<version>],]Def=[<text>]
+                --    [,Note1=[<n1text>][,Note2=[<n2text>][,Note3=[<n3text>]]]]}
+                -- We process this and store the term and definition and notes
+                -- if any. We do this so that the terms can be generated early
+                -- in the document.
+                
+		declare
+		    Close_Ch, Ch : Character;
+                    Key : ARM_Index.Index_Key;
+                    Kind : ARM_Database.Paragraph_Change_Kind_Type;
+                    Group : ARM_Paragraph.Term_Group_Index;
+                    Our_Version : ARM_Contents.Change_Version_Type;
+                    Initial_Version : ARM_Contents.Change_Version_Type := '0';
+                    use type ARM_Database.Paragraph_Change_Kind_Type;
+                    Term : String(1..40);
+                    Term_Length : Natural;
+                    Def : String(1..250);
+                    Def_Length : Natural;
+                    Note1 : String(1..500);
+                    Note1_Length : Natural := 0;
+                    Note2 : String(1..300);
+                    Note2_Length : Natural := 0;
+                    Note3 : String(1..250);
+                    Note3_Length : Natural := 0;
+		begin
+		    Get_Change_Version (Is_First => True,
+			Version => Our_Version);
+			-- Read a parameter named "Version".
+                    Initial_Version := Our_Version; -- This defaults to the
+                        -- Version parameter if not given.
+
+		    Get_Change_Kind (Kind);
+			-- Read a parameter named "Kind".
+
+		    Get_Term_Group (Group => Group);
+		        -- Read a parameter named "Group".
+
+		    -- Get the "Term" parameter:
+                    ARM_Input.Check_Parameter_Name (Input_Object,
+		        Param_Name => "Term" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+		        Is_First => False,
+		        Param_Close_Bracket => Ch);
+		    if Ch /= ' ' then
+		        -- There is a parameter:
+		        -- Load the new title into the Title string:
+		        ARM_Input.Copy_to_String_until_Close_Char (
+			    Input_Object,
+			    Ch,
+			    Term, Term_Length);
+		        Term(Term_Length+1 .. Term'Last) :=
+			    (others => ' ');
+		    end if;
+
+		    -- Check for the optional "InitialVersion" parameter,
+		    -- stopping when we reach "Def":
+		    declare
+			Which_Param : ARM_Input.Param_Num;
+			Ch		: Character;
+		    begin
+			-- If there is no InitialVersion command, use the same
+			-- version of the rest of the command.
+			loop
+		            ARM_Input.Check_One_of_Parameter_Names (Input_Object,
+			         Param_Name_1 => "InitialVersion" & (15..ARM_Input.Command_Name_Type'Last => ' '),
+			         Param_Name_2 => "Def" & (4..ARM_Input.Command_Name_Type'Last => ' '),
+			         Is_First => False,
+			         Param_Found => Which_Param,
+			         Param_Close_Bracket => Close_Ch);
+
+			    if Which_Param = 1 and then Close_Ch /= ' ' then
+				-- Found InitialVersion
+			        ARM_File.Get_Char (Input_Object, Ch);
+				Initial_Version := Ch;
+			        ARM_File.Get_Char (Input_Object, Ch);
+			        if Ch /= Close_Ch then
+				    Ada.Text_IO.Put_Line ("  ** Bad close for InitialVersion parameter on line " &
+				        ARM_File.Line_String (Input_Object));
+				    ARM_File.Replace_Char (Input_Object);
+			        end if;
+			    else -- We found "Def" (or an error)
+				exit; -- Handling of Def is below.
+			    end if;
+			end loop;
+		    end;
+
+		    -- Process the Def parameter:
+		    if Ch /= ' ' then
+		        -- There is a parameter:
+		        -- Load the new title into the Title string:
+		        ARM_Input.Copy_to_String_until_Close_Char (
+			    Input_Object,
+			    Ch,
+			    Def, Def_Length);
+		        Def(Def_Length+1 .. Def'Last) :=
+			    (others => ' ');
+		    end if;
+
+		    Arm_File.Get_Char (Input_Object, Ch);
+		    Arm_File.Replace_Char (Input_Object);
+		    if Ch = ',' then
+                        ARM_Input.Check_Parameter_Name (Input_Object,
+                            Param_Name => "Note1" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+                            Is_First => False,
+                            Param_Close_Bracket => Ch);
+                        if Ch /= ' ' then
+                            -- There is a parameter:
+                            -- Load the new title into the Title string:
+                            ARM_Input.Copy_to_String_until_Close_Char (
+                                Input_Object,
+                                Ch,
+                                Note1, Note1_Length);
+                            Note1(Note1_Length+1 .. Note1'Last) :=
+                                (others => ' ');
+                            -- Check for another parameter:
+                            Arm_File.Get_Char (Input_Object, Ch);
+                            Arm_File.Replace_Char (Input_Object);
+                            if Ch = ',' then
+                                ARM_Input.Check_Parameter_Name (Input_Object,
+                                    Param_Name => "Note2" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+                                    Is_First => False,
+                                    Param_Close_Bracket => Ch);
+                                if Ch /= ' ' then
+                                    -- There is a parameter:
+                                    -- Load the new title into the Title string:
+                                    ARM_Input.Copy_to_String_until_Close_Char (
+                                        Input_Object,
+                                        Ch,
+                                        Note2, Note2_Length);
+                                    Note2(Note2_Length+1 .. Note2'Last) :=
+                                        (others => ' ');
+                                    -- Check for another parameter:
+                                    Arm_File.Get_Char (Input_Object, Ch);
+                                    Arm_File.Replace_Char (Input_Object);
+                                    if Ch = ',' then
+                                        ARM_Input.Check_Parameter_Name (Input_Object,
+                                            Param_Name => "Note3" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+                                            Is_First => False,
+                                            Param_Close_Bracket => Ch);
+                                        if Ch /= ' ' then
+                                            -- There is a parameter:
+                                            -- Load the new title into the Title string:
+                                            ARM_Input.Copy_to_String_until_Close_Char (
+                                                Input_Object,
+                                                Ch,
+                                                Note3, Note3_Length);
+                                            Note3(Note3_Length+1 .. Note3'Last) :=
+                                                (others => ' ');
+                                        end if;
+                                    -- else no more note parameters.
+                                    end if;
+                                end if;
+                            -- else no more note parameters.
+                            end if;
+                        end if;
+                    -- else not more parameters (no notes).
+                    end if;
+                    
+		    -- Now, close the command.
+		    Arm_File.Get_Char (Input_Object, Ch);
+		    if Ch /= Nesting_Stack(Nesting_Stack_Ptr).Close_Char then
+			Ada.Text_IO.Put_Line ("  ** Bad close for ChgTermDef on line " & ARM_File.Line_String (Input_Object));
+			Arm_File.Replace_Char (Input_Object);
+		    end if;
+		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
+		        -- Remove the "Change_Term_Def" record.
+                        
+                    -- OK, all of the data is in place.
+
+                    -- How the term is handled depends primarily on the
+                    -- InitialVersion and its relationship to the version
+                    -- we're generating. It only depends on the (current)
+                    -- change kind to determine whether the item is deleted
+                    -- (it is treated as inserted otherwise).
+                    --
+                    -- Here, we only care about the cases where the item isn't
+                    -- displayed at all.
+
+		    declare
+			Insert_Disposition : ARM_Output.Change_Type;
+			Delete_Disposition : ARM_Output.Change_Type;
+			use type ARM_Output.Change_Type;
+		    begin
+			-- First, we calculate the insertion
+			-- disposition. This only depends upon the
+			-- original number and what we're generating:
+			if Initial_Version = '0' then -- Original,
+						      -- never inserted.
+			    Insert_Disposition := ARM_Output.None;
+			else
+		            Calc_Change_Disposition (
+			        Format_Object => Format_Object,
+			        Version   => Initial_Version,
+			        Operation => ARM_Output.Insertion,
+			        Text_Kind => Insert_Disposition);
+			end if;
+
+			if (ARM_Database."=" (Kind, ARM_Database.Deleted_No_Delete_Message) or else
+			    ARM_Database."=" (Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) or else
+			    ARM_Database."=" (Kind, ARM_Database.Deleted) or else
+			    ARM_Database."=" (Kind, ARM_Database.Deleted_Inserted_Number)) then
+			    -- The current version is some sort of delete:
+		            Calc_Change_Disposition (
+                                Format_Object => Format_Object,
+			        Version   => Our_Version,
+			        Operation => ARM_Output.Deletion,
+			        Text_Kind => Delete_Disposition);
+			else
+			    Delete_Disposition := ARM_Output.None;
+			end if;
+
+		        if Delete_Disposition = Do_Not_Display_Text or else
+		           (Delete_Disposition = ARM_Output.None and then
+			    Insert_Disposition = Do_Not_Display_Text) then
+                            null; -- This item is not shown at all, so don't
+                                  -- insert it into the DB.
+Ada.Text_IO.Put_Line ("-- Term not shown on line " & ARM_File.Line_String (Input_Object));
+                        else
+                            -- Otherwise, insert this into the DB:
+                            ARM_Database.Insert (Term_DBs(Group),
+		                Sort_Key    => Term(1..Term_Length),
+                                Hang_Item   => Term(1..Term_Length),
+		                Text        => Def(1..Def_Length),
+                                Note1_Text  => Note1(1..Note1_Length),
+                                Note2_Text  => Note2(1..Note2_Length),
+                                Note3_Text  => Note3(1..Note3_Length),
+                                Change_Kind => Kind,
+                                Version     => Our_Version,
+                                Initial_Version => Initial_Version);
+Ada.Text_IO.Put_Line ("-- Term inserted to Group" & Group'Image & " on line " & ARM_File.Line_String (Input_Object));
+                        end if;
+                    end;
+                end;
+                
             
 	    when others =>
 	        null; -- Not in scanner.

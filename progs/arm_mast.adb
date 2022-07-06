@@ -11,7 +11,7 @@ with ARM_Input,
      ARM_HTML,
      ARM_RTF,
      ARM_Corr,
-     ARM_Master,
+     ARM_Paragraph,
      ARM_Contents;
 package body ARM_Master is
 
@@ -22,7 +22,7 @@ package body ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2007, 2009, 2011, 2012, 2013, 2016
+    -- Copyright 2006, 2007, 2009, 2011, 2012, 2013, 2016, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -74,6 +74,10 @@ package body ARM_Master is
     --  3/26/13 - RLB - Added HTMLScript.
     --  3/17/16 - RLB - Added Base_Change_Version.
     --  4/20/16 - RLB - Added HTML_New_Revision_Colors.
+    --  4/ 8/22 - RLB - Added Example_Comment_Font.
+    --  4/18/22 - RLB - Added Include/Exclude commands.
+    --  4/20/22 - RLB - Added SingleTextOutputFile command.
+    --  5/11/22 - RLB - Added SelfRefFormat command.
 
     type Command_Type is (
 	-- Source commands:
@@ -90,12 +94,19 @@ package body ARM_Master is
 	Title,
 	File_Prefix,
 	Example_Font,
+	Example_Comment_Font,
 	Body_Font,
 	Note_Format,
 	Contents_Format,
+        Self_Ref_Format,
 	List_Format,
 	Subdivision_Names,
+        Include_Groups,
+        Exclude_Groups,
 
+        -- Text properties:
+	Single_Text_Output_File,
+        
 	-- HTML properties:
 	Single_HTML_Output_File,
 	Use_MS_DOS_Names,
@@ -155,6 +166,8 @@ package body ARM_Master is
     Should_Number_Paragraphs : Boolean := False; -- Should paragraphs be numbered?
     Font_of_Examples : ARM_Output.Font_Family_Type :=
 	ARM_Output.Fixed; -- Which font should be used for examples?
+    Font_of_Example_Comments : ARM_Output.Font_Family_Type :=
+	ARM_Output.Roman; -- Which font should be used for examples?
     Font_of_Body : ARM_Output.Font_Family_Type :=
 	ARM_Output.Roman; -- Which font should be used for the body?
     Use_ISO_2004_Note_Format : Boolean := True;
@@ -166,8 +179,19 @@ package body ARM_Master is
     Use_ISO_2004_List_Format : Boolean := True;
 	-- Should we use the ISO 2004 list format, or the one used in the
 	-- Ada 95 standard??
+    Self_Reference_Format : ARM_Format.Self_Ref_Kind := ARM_Format.RM;
+        -- Specifies the format of self-references.
+
     Subdivision_Name_Kind : ARM_Output.Top_Level_Subdivision_Name_Kind :=
 		ARM_Output.Section;
+                
+    Groupings_Set_Up : Boolean := False;
+        -- Have we set up the groupings yet?
+    Included_Groupings : ARM_Paragraph.Grouping_Array;
+        -- The included groupings.
+  
+    -- Text properties:
+    Use_Large_Text_Files : Boolean := False; -- Use small output files by default.
 
     -- HTML properties:
     Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
@@ -241,6 +265,8 @@ package body ARM_Master is
 	    return File_Prefix;
 	elsif Canonical_Name = "examplefont" then
 	    return Example_Font;
+	elsif Canonical_Name = "examplecommentfont" then
+	    return Example_Comment_Font;
 	elsif Canonical_Name = "bodyfont" then
 	    return Body_Font;
 	elsif Canonical_Name = "noteformat" then
@@ -249,8 +275,18 @@ package body ARM_Master is
 	    return Contents_Format;
 	elsif Canonical_Name = "listformat" then
 	    return List_Format;
+	elsif Canonical_Name = "selfrefformat" then
+	    return Self_Ref_Format;
 	elsif Canonical_Name = "subdivisionnames" then
 	    return Subdivision_Names;
+  	elsif Canonical_Name = "include" then
+	    return Include_Groups;
+	elsif Canonical_Name = "exclude" then
+	    return Exclude_Groups;
+
+	elsif Canonical_Name = "singletextoutputfile" then
+	    return Single_Text_Output_File;
+          
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "usemsdosfilenames" then
@@ -294,7 +330,7 @@ package body ARM_Master is
 
 
     function Get_Versioned_String (Item_Details : in ARM_Contents.Versioned_String;
-			         For_Version  : in ARM_Contents.Change_Version_Type)
+			           For_Version  : in ARM_Contents.Change_Version_Type)
 	return String is
 	-- Get a versioned item for the appropriate version.
 	use type Ada.Strings.Unbounded.Unbounded_String;
@@ -865,21 +901,37 @@ package body ARM_Master is
 
 		when Show_Annotations =>
 		    -- @ShowAnnotations
-		    Include_Annotations := True;
+                    if Groupings_Set_Up then
+		        Ada.Text_IO.Put_Line ("** ShowAnnotations has to appear before " &
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                    end if;
+                    Include_Annotations := True;
 		    Ada.Text_IO.Put_Line("Show Annotations");
 
 		when Hide_Annotations =>
 		    -- @HideAnnotations
+                    if Groupings_Set_Up then
+		        Ada.Text_IO.Put_Line ("** HideAnnotations has to appear before " &
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                    end if;
 		    Include_Annotations := False;
 		    Ada.Text_IO.Put_Line("Hide Annotations");
 
 		when Show_ISO =>
 		    -- @ShowISO
+                    if Groupings_Set_Up then
+		        Ada.Text_IO.Put_Line ("** ShowISO has to appear before " &
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                    end if;
 		    Include_ISO_Text := True;
 		    Ada.Text_IO.Put_Line("Show ISO Text");
 
 		when Hide_ISO =>
 		    -- @HideISO
+                    if Groupings_Set_Up then
+		        Ada.Text_IO.Put_Line ("** HideISO has to appear before " &
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                    end if;
 		    Include_ISO_Text := False;
 		    Ada.Text_IO.Put_Line("Hide ISO Text");
 
@@ -919,6 +971,28 @@ package body ARM_Master is
 			elsif Font_Name = "roman" then
 			    Font_of_Examples := ARM_Output.Roman;
 			    Ada.Text_IO.Put_Line("Examples in roman font");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown example font name: " & Font_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
+		when Example_Comment_Font =>
+		    -- @ExampleCommentFont{Swiss|Fixed|Roman}
+		    declare
+			Font_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Font_Name = "swiss" then
+			    Font_of_Example_Comments := ARM_Output.Swiss;
+			    Ada.Text_IO.Put_Line("Example comments in swiss font");
+			elsif Font_Name = "fixed" then
+			    Font_of_Example_Comments := ARM_Output.Fixed;
+			    Ada.Text_IO.Put_Line("Example comments in fixed-width font");
+			elsif Font_Name = "roman" then
+			    Font_of_Example_Comments := ARM_Output.Roman;
+			    Ada.Text_IO.Put_Line("Example comments in roman font");
 			else
 		            Ada.Text_IO.Put_Line ("** Unknown example font name: " & Font_Name &
 						  " on line" & ARM_Input.Line_String (Input_Object));
@@ -1001,6 +1075,28 @@ package body ARM_Master is
 			end if;
 		    end;
 
+		when Self_Ref_Format =>
+		    -- @SelfRefFormat{RM|ISO1989|ISO2018}
+		    declare
+			Format_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Format_Name = "rm" then
+			    Self_Reference_Format := ARM_Format.RM;
+			    Ada.Text_IO.Put_Line("Self References in Reference Manual format");
+			elsif Format_Name = "iso1989" then
+			    Self_Reference_Format := ARM_Format.ISO_1989;
+			    Ada.Text_IO.Put_Line("Self References in ISO 1989 format");
+			elsif Format_Name = "iso2018" then
+			    Self_Reference_Format := ARM_Format.ISO_2018;
+			    Ada.Text_IO.Put_Line("Self References in ISO 2018 format");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown self reference format name: " & Format_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
 		when Subdivision_Names =>
 		    -- @SubdivisionNames{Chapter|Section|Clause}
 		    declare
@@ -1022,6 +1118,157 @@ package body ARM_Master is
 						  " on line" & ARM_Input.Line_String (Input_Object));
 			end if;
 		    end;
+                    
+                    
+                when Include_Groups =>
+                    if Groupings_Set_Up then
+		        Ada.Text_IO.Put_Line ("** Include cannot appear with Exclude or another " &
+                           "Include; on line" & ARM_Input.Line_String (Input_Object));                        
+                    end if;
+                    Groupings_Set_Up := True;
+                    Included_Groupings := (others => False); -- Nothing included here.
+                    
+                    -- Read list of groups.
+                    Get_Open_Char;
+                    declare
+                        Name : ARM_Input.Command_Name_Type;
+                        Kind : ARM_Paragraph.Paragraph_Type;
+                        Sep_Ch : Character;
+                        use ARM_Paragraph; -- For enumeration literals; "use all type ARM_Paragraph.Paragraph_Type;"
+                    begin
+                        loop
+                            -- Skip any leading blanks or line breaks (these are
+                            -- common in long lists):
+                            loop
+                                ARM_Input.Get_Char (Input_Object, Sep_Ch);
+                                if Sep_Ch = ' ' then
+                                    null;
+                                elsif Sep_Ch = Ascii.LF then
+                                    null;
+                                else
+                                    ARM_Input.Replace_Char (Input_Object);
+                                    exit;
+                                end if;
+                            end loop;                            
+                            ARM_Input.Get_Name (Input_Object, Name);
+                            Kind := ARM_Paragraph.Get_Paragraph_Kind (Name);
+                            if Kind in ARM_Paragraph.Format_Kinds then
+                                Ada.Text_IO.Put_Line ("** Formatting kind " & Kind'Image &
+                                   " not allowed in Include; on line" & ARM_Input.Line_String (Input_Object));                        
+                            elsif Kind = Unknown then
+                                Ada.Text_IO.Put_Line ("** Unknown kind " & Name &
+                                   " in Include; on line" & ARM_Input.Line_String (Input_Object));
+                            else
+                                Included_Groupings(Kind) := True; -- Include this group.
+                            end if;
+                            ARM_Input.Get_Char (Input_Object, Sep_Ch);
+                            if Sep_Ch = ',' then
+                                null; -- Skip a separator.
+                            elsif Sep_Ch = Close_Ch then
+                                -- Reached the end of the list.
+                                exit;
+                            elsif Sep_Ch = Ascii.SUB then
+                                Ada.Text_IO.Put_Line ("** Unexpected end of file in group list " &
+                                   " in Include; on line" & ARM_Input.Line_String (Input_Object));
+                                exit;
+                            else
+                                ARM_Input.Replace_Char (Input_Object);
+                                Ada.Text_IO.Put_Line ("** Unusual character '" & Sep_Ch & "' in group list " &
+                                   " in Include; on line" & ARM_Input.Line_String (Input_Object));
+                                exit;
+                            end if; 
+                        end loop;
+                    end;
+                    
+                when Exclude_Groups =>
+                    if Groupings_Set_Up then
+		        Ada.Text_IO.Put_Line ("** Exclude cannot appear with Include or another " &
+                           "Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                    end if;
+                    Groupings_Set_Up := True;
+                    Included_Groupings (ARM_Paragraph.RM_Groupings) :=
+                        (ARM_Paragraph.RM_Groupings => True);
+                    if Include_Annotations then
+                        Included_Groupings (ARM_Paragraph.AARM_Groupings) :=
+                             (ARM_Paragraph.AARM_Groupings => True);
+                        Included_Groupings (ARM_Paragraph.AARM_Annotations) :=
+                              (ARM_Paragraph.AARM_Annotations => True);
+                        Included_Groupings (ARM_Paragraph.RM_Only) := False;
+                        Included_Groupings (ARM_Paragraph.AARM_Only) := True;
+                    else
+                        Included_Groupings (ARM_Paragraph.AARM_Groupings) :=
+                             (ARM_Paragraph.AARM_Groupings => False);
+                        Included_Groupings (ARM_Paragraph.AARM_Annotations) :=
+                             (ARM_Paragraph.AARM_Annotations => False);
+                        Included_Groupings (ARM_Paragraph.AARM_Only) := False;
+                        Included_Groupings (ARM_Paragraph.RM_Only) := True;           
+                    end if;
+                    if Include_ISO_Text then
+                        Included_Groupings (ARM_Paragraph.Not_ISO) := False;
+                        Included_Groupings (ARM_Paragraph.ISO_Only) := True;
+                    else
+                        Included_Groupings (ARM_Paragraph.Not_ISO) := True;
+                        Included_Groupings (ARM_Paragraph.ISO_Only) := False;
+                    end if;
+                
+                    -- Read list of groups.
+                    Get_Open_Char;
+                    declare
+                        Name : ARM_Input.Command_Name_Type;
+                        Kind : ARM_Paragraph.Paragraph_Type;
+                        Sep_Ch : Character;
+                        use ARM_Paragraph; -- For enumeration literals; "use all type ARM_Paragraph.Paragraph_Type;"
+                    begin
+                        loop
+                            -- Skip any leading blanks or line breaks (these are
+                            -- common in long lists):
+                            loop
+                                ARM_Input.Get_Char (Input_Object, Sep_Ch);
+                                if Sep_Ch = ' ' then
+                                    null;
+                                elsif Sep_Ch = Ascii.LF then
+                                    null;
+                                else
+                                    ARM_Input.Replace_Char (Input_Object);
+                                    exit;
+                                end if;
+                            end loop;                            
+                            ARM_Input.Get_Name (Input_Object, Name);
+                            Kind := ARM_Paragraph.Get_Paragraph_Kind (Name);
+                            if Kind in ARM_Paragraph.Format_Kinds then
+                                Ada.Text_IO.Put_Line ("** Formatting kind " & Kind'Image &
+                                   " not allowed in Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                            elsif Kind = Unknown then
+                                Ada.Text_IO.Put_Line ("** Unknown kind " & Name &
+                                   " in Exclude; on line" & ARM_Input.Line_String (Input_Object));
+                            else
+                                Included_Groupings(Kind) := False; -- Exclude this group.
+                            end if;
+                            ARM_Input.Get_Char (Input_Object, Sep_Ch);
+                            if Sep_Ch = ',' then
+                                null; -- Skip a separator.
+                            elsif Sep_Ch = Close_Ch then
+                                -- Reached the end of the list.
+                                exit;
+                            elsif Sep_Ch = Ascii.SUB then
+                                Ada.Text_IO.Put_Line ("** Unexpected end of file in group list " &
+                                   " in Exclude; on line" & ARM_Input.Line_String (Input_Object));
+                                exit;
+                            else
+                                ARM_Input.Replace_Char (Input_Object);
+                                Ada.Text_IO.Put_Line ("** Unusual character '" & Sep_Ch & "' in group list " &
+                                   " in Exclude; on line" & ARM_Input.Line_String (Input_Object));
+                                exit;
+                            end if; 
+                        end loop;
+                    end;                   
+
+		-- Text properties:
+
+		when Single_Text_Output_File =>
+		    -- @Single_Text_Output_File
+		    Use_Large_Text_Files := True;
+		    Ada.Text_IO.Put_Line("Single Text Output File");
 
 		-- HTML properties:
 
@@ -1241,6 +1488,34 @@ package body ARM_Master is
     procedure Create_Format (Format_Object : in out ARM_Format.Format_Type) is
 	-- Create an appropriate format object.
     begin
+        if not Groupings_Set_Up then
+            Groupings_Set_Up := True;
+            Included_Groupings (ARM_Paragraph.RM_Groupings) :=
+                (ARM_Paragraph.RM_Groupings => True);
+            if Include_Annotations then
+                Included_Groupings (ARM_Paragraph.AARM_Groupings) :=
+                     (ARM_Paragraph.AARM_Groupings => True);
+                Included_Groupings (ARM_Paragraph.AARM_Annotations) :=
+                     (ARM_Paragraph.AARM_Annotations => True);
+                Included_Groupings (ARM_Paragraph.RM_Only) := False;
+                Included_Groupings (ARM_Paragraph.AARM_Only) := True;
+            else
+                Included_Groupings (ARM_Paragraph.AARM_Groupings) :=
+                     (ARM_Paragraph.AARM_Groupings => False);
+                Included_Groupings (ARM_Paragraph.AARM_Annotations) :=
+                     (ARM_Paragraph.AARM_Annotations => False);
+                Included_Groupings (ARM_Paragraph.AARM_Only) := False;
+                Included_Groupings (ARM_Paragraph.RM_Only) := True;           
+            end if;
+            if Include_ISO_Text then
+                Included_Groupings (ARM_Paragraph.Not_ISO) := False;
+                Included_Groupings (ARM_Paragraph.ISO_Only) := True;
+            else
+                Included_Groupings (ARM_Paragraph.Not_ISO) := True;
+                Included_Groupings (ARM_Paragraph.ISO_Only) := False;
+            end if;
+        -- else already done.           
+        end if;        
 	ARM_Format.Create (Format_Object, Change_Kind, Change_Version,
                 Base_Change_Version   => Base_Change_Version,
 		Display_Index_Entries => Display_Index_Entries,
@@ -1248,10 +1523,13 @@ package body ARM_Master is
 		Include_ISO	      => Include_ISO_Text,
 		Link_Non_Terminals    => Should_Link_Non_Terminals,
 		Number_Paragraphs     => Should_Number_Paragraphs,
+                Include_Group         => Included_Groupings,
 		Examples_Font	      => Font_of_Examples,
+		Example_Comment_Font  => Font_of_Example_Comments,
 		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format,
 		Use_ISO_2004_Contents_Format => Use_ISO_2004_Contents_Format,
 		Use_ISO_2004_List_Format => Use_ISO_2004_List_Format,
+                Self_Ref_Format       => Self_Reference_Format,
 		Top_Level_Subdivision_Name => Subdivision_Name_Kind);
     end Create_Format;
 
@@ -1421,6 +1699,7 @@ package body ARM_Master is
 		    ARM_Text.Create (Output,
 				     File_Prefix => +Output_File_Prefix,
 				     Output_Path => Output_Path,
+                                     Big_Files => Use_Large_Text_Files,
 				     Title => Get_Versioned_String (Document_Title, Change_Version));
 		    Generate_Sources (Output);
 		    ARM_Text.Close (Output);
@@ -1447,6 +1726,19 @@ package body ARM_Master is
 	            Generate_Sources (Output);
 	            ARM_TexInfo.Close (Output);
 	        end;
+            when ReST =>
+                -- *** TBD.
+		Ada.Text_IO.Put_Line ("** ReST output not yet implemented - sorry.");
+	        --declare
+	        --    Output : ARM_Rest.Rest_Output_Type;
+	        --begin
+		--    ARM_TexInfo.Create (Output,
+		--		        File_Prefix => +Output_File_Prefix,
+		--		        Output_Path => Output_Path,
+		--		        Title => Get_Versioned_String (Document_Title, Change_Version));
+	        --    Generate_Sources (Output);
+	        --    ARM_Rest.Close (Output);
+	        --end;
         end case;
 
     end Read_and_Process_Master_File;

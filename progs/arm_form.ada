@@ -78,6 +78,7 @@ procedure ARM_Formatter is
     --  3/17/16 - RLB - Added lower version to command line.
     --  1/29/22 - RLB - Updated copyright date.
     --  2/ 2/22 - RLB - Updated help to use Ada 2022 and define Ada 2022 TC1.
+    --  4/ 8/22 - RLB - Added ReST format for future use.
 
     -- Standard commands for Ada standards:
     -- For Original (Ada 95) RM:
@@ -256,6 +257,8 @@ procedure ARM_Formatter is
 		    Format := ARM_Master.Corr;
 		elsif Format_Arg = "info" then
 		    Format := ARM_Master.Info;
+		elsif Format_Arg = "rest" then
+		    Format := ARM_Master.Rest;
 		else
 		    Ada.Text_IO.Put_Line ("** Unrecognized format: " & Format_Arg);
 		    raise No_Command_Error;
@@ -283,6 +286,8 @@ procedure ARM_Formatter is
 	    Ada.Text_IO.Put_Line ("     where: <Format> = 'Text' (text files),");
 	    Ada.Text_IO.Put_Line ("                       'HTML' (HTML files),");
 	    Ada.Text_IO.Put_Line ("                       'RTF' (RTF files for Word 97 or later),");
+	    Ada.Text_IO.Put_Line ("                       'Info' (Info files for some help systems),");
+	    Ada.Text_IO.Put_Line ("                       'ReST' (ReST files),");
 	    Ada.Text_IO.Put_Line ("                       'Corr' (Corrigendum-style command files for comparisons);");
 	    Ada.Text_IO.Put_Line ("     where: <Changes> = 'No-Changes' (Original RM text),");
 	    Ada.Text_IO.Put_Line ("                        'New-Only' (Revised RM text only up to <ChgVers>),");

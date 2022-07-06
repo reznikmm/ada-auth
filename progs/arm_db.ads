@@ -7,7 +7,7 @@ package ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006, 2011
+    -- Copyright 2000, 2004, 2005, 2006, 2011, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -48,6 +48,7 @@ package ARM_Database is
     -- 10/18/06 - RLB - Added No_Deleted_Paragraph_Messages to Report.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/20/11 - RLB - Added Initial_Version parameter.
+    --  5/25/22 - RLB - Added note strings to Insert for Terms DBs.
 
     type Database_Type is tagged limited private;
 
@@ -69,6 +70,9 @@ package ARM_Database is
 		      Sort_Key : in String;
 		      Hang_Item : in String;
 		      Text : in String;
+                      Note1_Text : in String := "";
+                      Note2_Text : in String := "";
+                      Note3_Text : in String := "";
 		      Change_Kind : in Paragraph_Change_Kind_Type := ARM_Database.None;
 		      Version : in Character := '0';
 		      Initial_Version : in Character := '0');
@@ -76,12 +80,14 @@ package ARM_Database is
 	-- Sort_Key is the string on which this item will be sorted (if it
 	-- is sorted). Hang_Item is the item which hangs out for the item
 	-- in the report (if any). Text is the text for the item; the text
-	-- may include formatting codes. Change_Kind and Version are the
-	-- revision status for this item. Initial_Version is the version of
-	-- the initial text for this item.
+	-- may include formatting codes. Note1_Text, Note2_Text, and Note3_Text
+        -- are optional note text, these also may include formatting codes.
+        -- Change_Kind and Version are the revision status for this item.
+        -- Initial_Version is the version of the initial text for this item.
 
     type Format_Type is
-	(Normal_List, Normal_Indexed_List, Bullet_List, Hanging_List);
+	(Normal_List, Normal_Indexed_List, Bullet_List, Hanging_List,
+         T_and_D_List, Numbered_T_and_D_List);
 
     generic
 	with procedure Format_Text (Text : in String;
@@ -100,7 +106,7 @@ package ARM_Database is
 	-- (This is intended to be used to output the items to
 	-- appropriate Format and Output objects; but we can't do that
 	-- directly because that would make this unit recursive with
-	-- ARM_Format.
+	-- ARM_Format.)
 	-- No paragraphs will be have deleted paragraph messages if
 	-- No_Deleted_Paragraph_Messages is True.
 private

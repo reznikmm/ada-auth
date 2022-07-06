@@ -8,7 +8,7 @@ package body ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011, 2012, 2021  AXE Consultants. All rights reserved.
+    -- Copyright 2011, 2012, 2021, 2022  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -46,6 +46,11 @@ package body ARM_Format.Data is
     --  3/27/12 - RLB - Added more versioned break commands.
     -- 12/17/12 - RLB - Added Ada 2012 AARM headings.
     --  3/13/21 - RLB - Added IntlStd command.
+    --  4/ 8/22 - RLB - Added VirtName command.
+    --  4/18/22 - RLB - Added Ada 2022 AARM headings.
+    --  5/ 8/22 - RLB - Added Deleted_Subheading.
+    --  5/11/22 - RLB - Added LabeledRevisedSubClauseIsoClause.
+    --  5/25/22 - RLB - Added ChgTermDef and AddedTermList.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
@@ -145,6 +150,8 @@ package body ARM_Format.Data is
 	    return Example_Text;
 	elsif Canonical_Name = "examcom" then
 	    return Example_Comment;
+	elsif Canonical_Name = "virtname" then
+	    return Virtual_Name;
 	elsif Canonical_Name = "indexlist" then
 	    return Index_List;
 	elsif Canonical_Name = "defn" then
@@ -221,6 +228,10 @@ package body ARM_Format.Data is
 	    return Change_To_Glossary_Also;
 	elsif Canonical_Name = "glossarylist" then
 	    return Glossary_List;
+	elsif Canonical_Name = "chgtermdef" then
+	    return Change_Term_Def;
+	elsif Canonical_Name = "addedtermlist" then
+	    return Added_Term_List;
 	elsif Canonical_Name = "prefixtype" then
 	    return Prefix_Type;
 	elsif Canonical_Name = "chgprefixtype" then
@@ -309,6 +320,8 @@ package body ARM_Format.Data is
 	    return Labeled_Revised_Subclause;
 	elsif Canonical_Name = "labeledrevisedsubsubclause" then
 	    return Labeled_Revised_Subsubclause;
+	elsif Canonical_Name = "labeledrevisedsubclauseisoclause" then
+	    return Labeled_Revised_Subclause_ISO_Clause;
 	elsif Canonical_Name = "labeledaddedsection" then
 	    return Labeled_Added_Section;
 	elsif Canonical_Name = "labeledaddedclause" then
@@ -327,6 +340,8 @@ package body ARM_Format.Data is
 	    return Subheading;
 	elsif Canonical_Name = "addedsubheading" then
 	    return Added_Subheading;
+	elsif Canonical_Name = "deletedsubheading" then
+	    return Deleted_Subheading;
 	elsif Canonical_Name = "heading" then
 	    return Heading;
 	elsif Canonical_Name = "center" then
@@ -427,6 +442,14 @@ package body ARM_Format.Data is
 	    return Extend2012_Name;
 	elsif Canonical_Name = "diffword2012name" then
 	    return Wording2012_Name;
+	elsif Canonical_Name = "inconsistent2022name" then
+	    return Inconsistent2022_Name;
+	elsif Canonical_Name = "incompatible2022name" then
+	    return Incompatible2022_Name;
+	elsif Canonical_Name = "extend2022name" then
+	    return Extend2022_Name;
+	elsif Canonical_Name = "diffword2022name" then
+	    return Wording2022_Name;
 	elsif Canonical_Name = "syntaxtitle" then
 	    return Syntax_Title;
 	elsif Canonical_Name = "resolutiontitle" then
@@ -493,12 +516,22 @@ package body ARM_Format.Data is
 	    return Extend2012_Title;
 	elsif Canonical_Name = "diffword2012title" then
 	    return Wording2012_Title;
+	elsif Canonical_Name = "inconsistent2022title" then
+	    return Inconsistent2022_Title;
+	elsif Canonical_Name = "incompatible2022title" then
+	    return Incompatible2022_Title;
+	elsif Canonical_Name = "extend2022title" then
+	    return Extend2022_Title;
+	elsif Canonical_Name = "diffword2022title" then
+	    return Wording2022_Title;
         elsif Canonical_Name = "intlstdname" then
 	    return Intl_Standard_Name;
         elsif Canonical_Name = "intlstdtitle" then
 	    return Intl_Standard_Title;
         elsif Canonical_Name = "stdtitle" then
 	    return Standard_Title;
+        elsif Canonical_Name = "subnumber" then
+	    return Subnumber;
 	elsif Canonical_Name = "em" then
 	    return EM_Dash;
 	elsif Canonical_Name = "en" then

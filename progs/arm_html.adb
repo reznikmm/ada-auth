@@ -16,7 +16,7 @@ package body ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-    --		 2008, 2009, 2011, 2012, 2013, 2016, 2018, 2019
+    --		 2008, 2009, 2011, 2012, 2013, 2016, 2018, 2019, 2022
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -196,6 +196,7 @@ package body ARM_HTML is
     --		      - Added Force_New_Revision_Colors.
     --  3/ 8/18 - RLB - Increased the size of the HTML re-read line buffer.
     --  2/19/19 - RLB - Added some (commented out) hang tracing.
+    --  2/ 4/22 - RLB - Added AI22 links.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -2147,6 +2148,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	end Paranum_Anchor;
 
     begin
+--Ada.Text_IO.Put_Line ("Start_Para for Style=" & Style'Image & " and Indent=" & Indent'Image);
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not valid object");
@@ -2809,7 +2811,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Header in paragraph");
 	end if;
-
+--Ada.Text_IO.Put_Line ("Start Clause: " & Clause_Number);
 	if not Output_Object.Big_Files then
 	    if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
 	        End_HTML_File (Output_Object);
@@ -2962,6 +2964,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Header in paragraph");
 	end if;
+--Ada.Text_IO.Put_Line ("Start Revised Clause: " & Clause_Number);
 
 	if not Output_Object.Big_Files then
 	    if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
@@ -4941,7 +4944,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	-- generate a link; for other formats, the text alone is generated.
 	--
 	-- We assume AI number is of the form:
-	-- ZZZZ-nnnn-m whre ZZZZ=AI05, AI12, or SI99, nnnn is a four digit number,
+	-- ZZZZ-nnnn-m whre ZZZZ=AI05, AI12, AI22, or SI99, nnnn is a four digit number,
 	-- and -m is an optional number (-1 is used if it is omitted); or
 	-- AIzz-nnnnn-mm where AIzz=AI95 or AI (meaning AI95);
 	-- nnnnn is a five digit number, and -mm is an optional two digit number.
@@ -4956,6 +4959,33 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		"Not in paragraph");
 	end if;
 	if AI_Number'Length > 5 and then
+	    AI_Number(AI_Number'First..AI_Number'First+4) = "AI22-" then
+	    -- AI22:
+	    if AI_Number'Length >= 9 then
+		if AI_Number(AI_Number'First+5) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+6) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+7) not in '0'..'9' or else
+	           AI_Number(AI_Number'First+8) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad number in AI22 number: " & AI_Number);
+		end if;
+	    end if;
+	    if AI_Number'Length = 9 then
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI22s/");
+                Output_Text (Output_Object, AI_Number & "-1");
+	    elsif AI_Number'Length = 11 then
+		if AI_Number(AI_Number'Last-1) /= '-' or else
+	           AI_Number(AI_Number'Last) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad sequence number in AI22 number: " & AI_Number);
+		end if;
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI22s/");
+                Output_Text (Output_Object, AI_Number);
+	    else
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "Bad AI22 number: " & AI_Number);
+	    end if;
+	elsif AI_Number'Length > 5 and then
 	    AI_Number(AI_Number'First..AI_Number'First+4) = "AI12-" then
 	    -- AI12:
 	    if AI_Number'Length >= 9 then
