@@ -1,6 +1,6 @@
 @Part(intro, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/intro.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2022/06/21 06:08:04 $}
+@comment{$Revision: 1.3 $ $Date: 2022/07/06 04:52:24 $}
 
 
 @UnNumberedSection{Introduction}
@@ -36,11 +36,14 @@ RLB - 2000-05-17}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0245-1]}
-@Chg{Version=[3],New=[Ada 2012 Rationale. This gives an introduction to the changes and
-new features in Ada 2012, and explains the rationale behind them.
-Programmers should read this rationale before reading @StdTitle in depth.
-Rationales for Ada 83, Ada 95, and Ada 2005 are also
-available.],Old=[@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
+@ChgRef{Version=[5],Kind=[Revised]}
+@Chg{Version=[3],New=[Ada @Chg{Version=[5],New=[2022 Overview],Old=[2012 Rationale]}.
+This gives an introduction to the changes and
+new features in Ada @Chg{Version=[5],New=[2022],Old=[2012, and explains the
+rationale behind them]}. Programmers should read this
+@Chg{Version=[5],New=[overview],Old=[rationale]} before reading @StdTitle in
+depth.@Chg{Version=[5],New=[],Old=[ Rationales for Ada 83, Ada 95, and Ada 2005 are also
+available.]}],Old=[@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition
 of this@StdTitle],Old=[]}, and explains the rationale behind them.
@@ -69,7 +72,8 @@ lists in detail the changes made to the 1987 edition of the standard.]}
 
 @ChgRef{Version=[3],Kind=[Revised]}
 The Ada Reference Manual (RM).
-This directly corresponds to the International Standard @em ISO/IEC 8652:@Chg{Version=[3],New=[2012],Old=[1995]}.
+This directly corresponds to the International Standard @em
+ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[1995]}.
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
@@ -97,11 +101,13 @@ documents into a single document.]}]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0245-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0441-1]}
-@Chg{Version=[3],New=[Ada 2012 Rationale. This gives an introduction to the changes and
-new features in Ada 2012, and explains the rationale behind them.
-Programmers should read this rationale before reading this @StdTitle in depth.
-Rationales for Ada 83, Ada 95, and Ada 2005 are also
-available.],Old=[@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
+@Chg{Version=[3],New=[Ada @Chg{Version=[5],New=[2022 Overview],Old=[2012 Rationale]}.
+This gives an introduction to the changes and
+new features in Ada @Chg{Version=[5],New=[2022],Old=[2012, and explains the
+rationale behind them]}. Programmers should read this
+@Chg{Version=[5],New=[overview],Old=[rationale]} before reading @StdTitle in
+depth.@Chg{Version=[5],New=[],Old=[ Rationales for Ada 83, Ada 95, and Ada 2005 are also
+available.]}],Old=[@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition
 of this @StdTitle],Old=[]}, and explains the rationale behind them.
