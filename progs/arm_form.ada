@@ -254,6 +254,8 @@ procedure ARM_Formatter is
 		    Format := ARM_Master.Corr;
 		elsif Format_Arg = "info" then
 		    Format := ARM_Master.Info;
+		elsif Format_Arg = "rest" then
+		    Format := ARM_Master.ReST;
 		else
 		    Ada.Text_IO.Put_Line ("** Unrecognized format: " & Format_Arg);
 		    raise No_Command_Error;

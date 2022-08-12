@@ -10,6 +10,7 @@ with ARM_Input,
      ARM_Texinfo,
      ARM_HTML,
      ARM_RTF,
+     ARM_ReST,
      ARM_Corr,
      ARM_Master,
      ARM_Contents;
@@ -1338,6 +1339,14 @@ package body ARM_Master is
 
 	-- Create the appropriate output object, then generate the results:
 	case Output_Format is
+            when ReST =>
+	        declare
+		    Output : ARM_ReST.ReST_Output_Type;
+	        begin
+		    ARM_ReST.Create (Output, Output_Path, +Output_File_Prefix);
+		    Generate_Sources (Output);
+	            Output.Close;
+	        end;
 	    when HTML =>
 	        declare
 		    Output : ARM_HTML.HTML_Output_Type;

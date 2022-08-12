@@ -43,7 +43,7 @@ package ARM_Master is
     --  8/31/12 - RLB - Added Output_Path.
     --  3/17/16 - RLB - Added Base_Change_Version.
 
-    type Output_Format_Type is (HTML, RTF, Text, Corr, Info);
+    type Output_Format_Type is (HTML, RTF, Text, Corr, Info, ReST);
 
     procedure Read_and_Process_Master_File (
 	File_Name : in String;
