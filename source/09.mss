@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.149 $}
+@Comment{$Revision: 1.150 $}
 
 @begin{Intro}
 
@@ -3032,9 +3032,17 @@ tasks and protected objects.
 @Syn{lhs=<entry_barrier>,
   rhs="@key{when} @Syn2{condition}"}
 
+@begin{NotISO}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0398-1]}
-@Syn{lhs=<entry_index_specification>,
-  rhs="@key{for} @Syn2{defining_identifier} @key{in} @Syn2{discrete_subtype_definition}@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}"}
+@Syn{lhs=<entry_index_specification>,rhs="@Chg{Version=[5],New=<
+    >,Old=<>}@key{for} @Syn2{defining_identifier} @key{in} @Syn2{discrete_subtype_definition}@Chg{Version=[5],New=< [@Syn2{aspect_specification}] >,Old=<>}"}
+@end{NotISO}
+@begin{ISOOnly}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0398-1]}
+@Syn{lhs=<entry_index_specification>,rhs="@Chg{Version=[5],New=<
+    >,Old=<>}@key{for} @Syn2{defining_identifier} @key{in} @Syn2{discrete_subtype_definition}@Chg{Version=[5],New=<
+       [@Syn2{aspect_specification}] >,Old=<>}"}
+@end{ISOOnly}
 
 @begin{SyntaxText}
 If an @SynI{entry_}@nt{identifier} appears at the end of an

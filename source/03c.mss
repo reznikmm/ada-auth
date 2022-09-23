@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.160 $}
+@Comment{$Revision: 1.161 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3980,8 +3980,8 @@ to a subsequent @nt<full_type_declaration>.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
-@Syn{lhs=<incomplete_type_declaration>,
-rhs="@key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}]@Chg{Version=[2],New=< [@key{is tagged}]>,Old=<>};"}
+@Syn{lhs=<incomplete_type_declaration>,rhs="
+   @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}]@Chg{Version=[2],New=< [@key{is tagged}]>,Old=<>};"}
 @end{Syntax}
 
 @begin{StaticSem}

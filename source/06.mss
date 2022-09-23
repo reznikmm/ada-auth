@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.167 $}
+@Comment{$Revision: 1.168 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -97,16 +97,18 @@ rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{subprogram_specification} @key{is} @key{
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<procedure_specification>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<@key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}>,Old=<>}"}
+rhs="@Chg{Version=[2],New=<
+    @key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<function_specification>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<@key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}>,Old=<>}"}
+rhs="@Chg{Version=[2],New=<
+    @key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}>,Old=<>}"}
 
 @Syn{lhs=<designator>,rhs="[@Syn2{parent_unit_name} . ]@Syn2{identifier} | @Syn2{operator_symbol}"}
 
-@Syn{lhs=<defining_designator>,
-   rhs="@Syn2{defining_program_unit_name} | @Syn2{defining_operator_symbol}"}
+@Syn{lhs=<defining_designator>,rhs="
+    @Syn2{defining_program_unit_name} | @Syn2{defining_operator_symbol}"}
 
 @Syn{lhs=<defining_program_unit_name>,rhs="[@Syn2{parent_unit_name} . ]@Syn2{defining_identifier}"}
 
@@ -159,6 +161,7 @@ is not significant)]}.
 @Syn{lhs=<formal_part>,rhs="
    (@Syn2{parameter_specification} {; @Syn2{parameter_specification}})"}
 
+@begin{NotISO}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0395-1]}
@@ -167,6 +170,17 @@ is not significant)]}.
         [@Syn2{aspect_specification}]>,Old=<>}
   | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
         [@Syn2{aspect_specification}]>,Old=<>}"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<parameter_specification>,rhs="
+    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]] >,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark}
+        [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+            [@Syn2{aspect_specification}]>,Old=<>}
+  | @Syn2{defining_identifier_list} : @Syn2{access_definition}
+        [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+            [@Syn2{aspect_specification}]>,Old=<>}"}
+@end{ISOOnly}
+
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0395-1]}
@@ -4914,12 +4928,21 @@ innermost enclosing @nt{subprogram_@!body},
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[return_statement]}>,rhs="@key{return} [@Syn2{expression}];"}
 
+@begin{NotISO}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0277-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0398-1],ARef=[AI12-0446-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=[extended_return_object_declaration],Old=[]}>,
 rhs="@Chg{Version=[3],New=<
     @Syn2{defining_identifier} : [@key{aliased}]@Chg{Version=[5],New={ },Old={}}[@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]@Chg{Version=[5],New=<
         [@Syn2{aspect_specification}] >,Old=<>}>,Old=[]}"}
+@end{NotISO}
+@begin{ISOOnly}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=[extended_return_object_declaration],Old=[]}>,
+rhs="@Chg{Version=[3],New=<
+    @Syn2{defining_identifier} : [@key{aliased}]@Chg{Version=[5],New={ },Old={}}[@key{constant}] @Syn2{return_subtype_indication}
+        [:= @Syn2{expression}]@Chg{Version=[5],New=<
+           [@Syn2{aspect_specification}] >,Old=<>}>,Old=[]}"}
+@end{ISOOnly}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1],ARef=[AI05-0277-1],ARef=[AI05-0299-1]}

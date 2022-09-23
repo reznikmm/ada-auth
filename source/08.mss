@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2045,11 +2045,11 @@ entity.]}>}
 
 @begin{Syntax}
 @Syn{lhs=<renaming_declaration>,rhs="
-      @Syn2{object_renaming_declaration}
-    | @Syn2{exception_renaming_declaration}
-    | @Syn2{package_renaming_declaration}
-    | @Syn2{subprogram_renaming_declaration}
-    | @Syn2{generic_renaming_declaration}"}
+     @Syn2{object_renaming_declaration}
+   | @Syn2{exception_renaming_declaration}
+   | @Syn2{package_renaming_declaration}
+   | @Syn2{subprogram_renaming_declaration}
+   | @Syn2{generic_renaming_declaration}"}
 @end{Syntax}
 
 @begin{RunTime}
@@ -2601,8 +2601,9 @@ using the type T2 of the previous example:]}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
-@Syn{lhs=<exception_renaming_declaration>,rhs="@Syn2{defining_identifier} : @key{exception} @key{renames} @SynI{exception_}@Syn2{name}@Chg{Version=[3],New=<
-   [@Syn2{aspect_specification}]>,Old=[]};"}
+@Syn{lhs=<exception_renaming_declaration>,rhs="
+    @Syn2{defining_identifier} : @key{exception} @key{renames} @SynI{exception_}@Syn2{name}@Chg{Version=[3],New=<
+      [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2639,8 +2640,9 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @ExamCom{-- see
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
-@Syn{lhs=<package_renaming_declaration>,rhs="@key{package} @Syn2{defining_program_unit_name} @key{renames} @SynI{package_}@Syn2{name}@Chg{Version=[3],New=<
-   [@Syn2{aspect_specification}]>,Old=[]};"}
+@Syn{lhs=<package_renaming_declaration>,rhs="
+    @key{package} @Syn2{defining_program_unit_name} @key{renames} @SynI{package_}@Syn2{name}@Chg{Version=[3],New=<
+       [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Legality}

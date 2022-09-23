@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1981,6 +1981,7 @@ an @nt{iterator_specification}.]}
 @end{Intro}
 
 @begin{Syntax}
+@begin{NotISO}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1],ARef=[AI12-0250-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
@@ -1989,6 +1990,15 @@ rhs="@Chg{Version=[3],New=<
       [@Syn2{iterator_filter}]>,Old=<>}
   | @Syn2{defining_identifier} [: @Chg{Version=[5],New=<@Syn2{loop_parameter_subtype_indication}>,Old=<@Syn2{subtype_indication}>}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}@Chg{Version=[5],New=<
       [@Syn2{iterator_filter}]>,Old=<>}"}
+@end{NotISO}
+@begin{ISOOnly}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<
+    @Syn2{defining_identifier} @Chg{Version=[5],New=<[: @Syn2{loop_parameter_subtype_indication}] >,Old=<>}@key[in] [@key{reverse}]
+      @SynI{iterator_}@Syn2{name}@Chg{Version=[5],New=< [@Syn2{iterator_filter}]>,Old=<>}
+  | @Syn2{defining_identifier} [: @Chg{Version=[5],New=<@Syn2{loop_parameter_subtype_indication}>,Old=<@Syn2{subtype_indication}>}] @key[of]
+      [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}@Chg{Version=[5],New=< [@Syn2{iterator_filter}]>,Old=<>}"}
+@end{ISOOnly}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0156-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<loop_parameter_subtype_indication>,Old=<>}>,

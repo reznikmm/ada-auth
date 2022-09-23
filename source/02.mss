@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1640,8 +1640,15 @@ implementation can support additional (implementation-defined) pragmas.]}
 @end{MetaRules}
 
 @begin{Syntax}
+@begin{NotISO}
 @Syn{lhs=<pragma>,rhs="
    @key{pragma} @Syn2{identifier} [(@Syn2{pragma_argument_association} {, @Syn2{pragma_argument_association}})];"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<pragma>,rhs="
+    @key{pragma} @Syn2{identifier}
+        [(@Syn2{pragma_argument_association} {, @Syn2{pragma_argument_association}})];"}
+@end{ISOOnly}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @Syn{lhs=<pragma_argument_association>,rhs="

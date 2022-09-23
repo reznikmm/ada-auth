@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @LabeledClause{Array Types}
 
@@ -23,13 +23,27 @@ value consisting of the values of the components.
    @Syn2{unconstrained_array_definition} | @Syn2{constrained_array_definition}"}
 
 
+@begin{NotISO}
 @Syn{lhs=<unconstrained_array_definition>,rhs="
    @key{array}(@Syn2{index_subtype_definition} {, @Syn2{index_subtype_definition}}) @key{of} @Syn2{component_definition}"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<unconstrained_array_definition>,rhs="
+   @key{array}(@Syn2{index_subtype_definition} {, @Syn2{index_subtype_definition}})
+      @key{of} @Syn2{component_definition}"}
+@end{ISOOnly}
 
 @Syn{lhs=<index_subtype_definition>,rhs="@Syn2{subtype_mark} @key{range} <>"}
 
+@begin{NotISO}
 @Syn{lhs=<constrained_array_definition>,rhs="
    @key{array} (@Syn2{discrete_subtype_definition} {, @Syn2{discrete_subtype_definition}}) @key{of} @Syn2{component_definition}"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<constrained_array_definition>,rhs="
+   @key{array} (@Syn2{discrete_subtype_definition} {, @Syn2{discrete_subtype_definition}}) 
+      @key{of} @Syn2{component_definition}"}
+@end{ISOOnly}
 
 @Syn{lhs=<discrete_subtype_definition>,rhs="@SynI{discrete_}@Syn2{subtype_indication} | @Syn2{range}"}
 
@@ -895,6 +909,7 @@ are indefinite subtypes.]
 @Syn{lhs=<known_discriminant_part>,rhs="
    (@Syn2{discriminant_specification} {; @Syn2{discriminant_specification}})"}
 
+@begin{NotISO}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0398-1]}
 @Syn{lhs=<discriminant_specification>,rhs="
@@ -902,6 +917,16 @@ are indefinite subtypes.]
       [@Syn2{aspect_specification}] >,Old=<>}
  | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
       [@Syn2{aspect_specification}] >,Old=<>}"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<discriminant_specification>,rhs="
+   @Syn2{defining_identifier_list} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark}
+      [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+          [@Syn2{aspect_specification}] >,Old=<>}
+ | @Syn2{defining_identifier_list} : @Syn2{access_definition}
+      [:= @Syn2{default_expression}]@Chg{Version=[5],New=<
+          [@Syn2{aspect_specification}] >,Old=<>}"}
+@end{ISOOnly}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0398-1]}
@@ -2482,7 +2507,8 @@ parallel those for case statements.
 @Syn{lhs=<discrete_choice_list>,rhs="@Syn2{discrete_choice} {@Chg{Version=[5],New=['|'],Old=[|]} @Syn2{discrete_choice}}"}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
-@Syn{lhs=<discrete_choice>,rhs="@Chg{Version=[3],New=[@Syn2{choice_expression}],Old=[@Syn2{expression}]} | @Chg{Version=[3],New=[@SynI{discrete_}@Syn2{subtype_indication} | @Syn2{range}],Old=[@Syn2{discrete_range}]} | @key{others}"}
+@Syn{lhs=<discrete_choice>,rhs="
+   @Chg{Version=[3],New=[@Syn2{choice_expression}],Old=[@Syn2{expression}]} | @Chg{Version=[3],New=[@SynI{discrete_}@Syn2{subtype_indication} | @Syn2{range}],Old=[@Syn2{discrete_range}]} | @key{others}"}
 @end{Syntax}
 
 @begin{Resolution}

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2022/09/23 04:34:04 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1692,15 +1692,16 @@ can be visible within the subunits.]
 
 @begin{Syntax}
 @Syn{lhs=<body_stub>,rhs="
-   @Syn2{subprogram_body_stub} | @Syn2{package_body_stub} | @Syn2{task_body_stub} | @Syn2{protected_body_stub}"}
+    @Syn2{subprogram_body_stub} | @Syn2{package_body_stub}
+  | @Syn2{task_body_stub} | @Syn2{protected_body_stub}"}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<subprogram_body_stub>,rhs="@Chg{Version=[2],New=<
-   [@Syn2{overriding_indicator}]
-   >,Old=[]}@Syn2{subprogram_specification} @key{is} @key{separate}@Chg{Version=[3],New=<
-      [@Syn2{aspect_specification}]>,Old=[]};"}
+    [@Syn2{overriding_indicator}]
+    >,Old=[]}@Syn2{subprogram_specification} @key{is} @key{separate}@Chg{Version=[3],New=<
+       [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @begin{Discussion}
 Although this syntax allows a @nt{parent_unit_name},

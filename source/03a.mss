@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.157 $}
+@Comment{$Revision: 1.158 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2225,12 +2225,12 @@ to describe some common exceptional conditions as follows:}]}
            Predicate_Failure => @key[raise] Status_Error @key[with] "File not open";
    @key[subtype] Input_File_Type @key[is] Open_File_Type
       @key[with] Dynamic_Predicate => Mode (Input_File_Type) = In_File,
-           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot read file: "
-              & Name (Input_File_Type);
+           Predicate_Failure => @key[raise] Mode_Error
+              @key[with] "Cannot read file: " & Name (Input_File_Type);
    @key[subtype] Output_File_Type @key[is] Open_File_Type
       @key[with] Dynamic_Predicate => Mode (Output_File_Type) /= In_File,
-           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot write file: "
-              & Name (Output_File_Type);]}@Comment{Does not fit with '&' on previous line}
+           Predicate_Failure => @key[raise] Mode_Error
+              @key[with] "Cannot write file: " & Name (Output_File_Type);]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
 @ChgAdded{Version=[4],Text=[   ...]}
@@ -2924,6 +2924,7 @@ of the (anonymous) type of the object.
 @end{Intro}
 
 @begin{Syntax}
+@begin{NotISO}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01],ARef=[AI95-00406-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<object_declaration>,rhs="
@@ -2935,6 +2936,21 @@ of the (anonymous) type of the object.
         [@Syn2{aspect_specification}]>,Old=[]};
   | @Syn2{single_task_declaration}
   | @Syn2{single_protected_declaration}"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<object_declaration>,rhs="
+    @Syn2{defining_identifier_list} :
+        [@key{aliased}] [@key{constant}] @Syn2{subtype_indication} [:= @Syn2{expression}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};@Chg{Version=[2],New=<
+  | @Syn2{defining_identifier_list} :
+        [@key{aliased}] [@key{constant}] @Syn2{access_definition} [:= @Syn2{expression}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}
+  | @Syn2{defining_identifier_list} : 
+        [@key{aliased}] [@key{constant}] @Syn2{array_type_definition} [:= @Syn2{expression}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};
+  | @Syn2{single_task_declaration}
+  | @Syn2{single_protected_declaration}"}
+@end{ISOOnly}
 
 @Syn{lhs=<defining_identifier_list>,rhs="
   @Syn2{defining_identifier} {, @Syn2{defining_identifier}}"}
@@ -3695,9 +3711,16 @@ categories of types, but not classes of types.]}
 @end{Intro}
 
 @begin{Syntax}
+@begin{NotISO}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
 @Syn{lhs=<derived_type_definition>,rhs="@Chg{Version=[2],New=<
     >,Old=<>}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited}] >,Old=<>}@key{new} @SynI{parent_}@Syn2{subtype_indication} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}@Syn2{record_extension_part}]"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<derived_type_definition>,rhs="
+    [@key{abstract}] @key{limited}] @key{new} @SynI{parent_}@Syn2{subtype_indication}
+        [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}@Syn2{record_extension_part}]"}
+@end{ISOOnly}
 @end{Syntax}
 
 @begin{Legality}
@@ -5995,8 +6018,8 @@ An @nt<enumeration_type_definition> defines an enumeration type.]
    (@Syn2{enumeration_literal_specification} {, @Syn2{enumeration_literal_specification}})"}
 
 
-@Syn{lhs=<enumeration_literal_specification>,
-  rhs=" @Syn2{defining_identifier} | @Syn2{defining_character_literal}"}
+@Syn{lhs=<enumeration_literal_specification>,rhs="
+    @Syn2{defining_identifier} | @Syn2{defining_character_literal}"}
 
 @Syn{lhs=<defining_character_literal>,rhs="@Syn2{character_literal}"}
 @end{Syntax}
@@ -6492,11 +6515,11 @@ type with wrap-around semantics.
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<integer_type_definition>,
-  rhs="@Syn2{signed_integer_type_definition} | @Syn2{modular_type_definition}"}
+@Syn{lhs=<integer_type_definition>,rhs="
+    @Syn2{signed_integer_type_definition} | @Syn2{modular_type_definition}"}
 
-@Syn{lhs=<signed_integer_type_definition>,
-rhs="@key(range) @SynI{static_}@Syn2{simple_expression} .. @SynI{static_}@Syn2{simple_expression}"}
+@Syn{lhs=<signed_integer_type_definition>,rhs="
+    @key(range) @SynI{static_}@Syn2{simple_expression} .. @SynI{static_}@Syn2{simple_expression}"}
 @begin{Discussion}
   We don't call this a @nt<range_constraint>,
   because it is rather different @em not only is
@@ -6513,7 +6536,7 @@ rhs="@key(range) @SynI{static_}@Syn2{simple_expression} .. @SynI{static_}@Syn2{s
 @end{Discussion}
 
 @Syn{lhs=<modular_type_definition>,
-  rhs="@key(mod) @SynI{static_}@Syn2{expression}"}
+    rhs="@key(mod) @SynI{static_}@Syn2{expression}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -7190,7 +7213,7 @@ point types.
 
 @begin{Syntax}
 @Syn{lhs=<real_type_definition>,rhs="
-   @Syn2{floating_point_definition} | @Syn2{fixed_point_definition}"}
+    @Syn2{floating_point_definition} | @Syn2{fixed_point_definition}"}
 @end{Syntax}
 
 @begin{StaticSem}
@@ -7337,10 +7360,10 @@ digits.
 
 @begin{Syntax}
 @Syn{lhs=<floating_point_definition>,rhs="
-  @key{digits} @SynI{static_}@Syn2{expression} [@Syn2{real_range_specification}]"}
+    @key{digits} @SynI{static_}@Syn2{expression} [@Syn2{real_range_specification}]"}
 
 @Syn{lhs=<real_range_specification>,rhs="
-  @key{range} @SynI{static_}@Syn2{simple_expression} .. @SynI{static_}@Syn2{simple_expression}"}
+    @key{range} @SynI{static_}@Syn2{simple_expression} .. @SynI{static_}@Syn2{simple_expression}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -7668,18 +7691,18 @@ absolute value, called the @i(delta) of the fixed point type.
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<fixed_point_definition>,rhs="@Syn2{ordinary_fixed_point_definition} | @Syn2{decimal_fixed_point_definition}"}
-
+@Syn{lhs=<fixed_point_definition>,rhs="
+    @Syn2{ordinary_fixed_point_definition} | @Syn2{decimal_fixed_point_definition}"}
 
 @Syn{lhs=<ordinary_fixed_point_definition>,rhs="
-   @key{delta} @SynI{static_}@Syn2{expression}  @Syn2{real_range_specification}"}
+    @key{delta} @SynI{static_}@Syn2{expression}  @Syn2{real_range_specification}"}
 
 @Syn{lhs=<decimal_fixed_point_definition>,rhs="
-   @key{delta} @SynI{static_}@Syn2{expression} @key{digits} @SynI{static_}@Syn2{expression} [@Syn2{real_range_specification}]"}
+    @key{delta} @SynI{static_}@Syn2{expression} @key{digits} @SynI{static_}@Syn2{expression} [@Syn2{real_range_specification}]"}
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 @Syn{lhs=<digits_constraint>,rhs="
-   @key{digits} @SynI{static_}@Chg{Version=[4],New=[@Syn2{simple_expression}],Old=[@Syn2{expression}]} [@Syn2{range_constraint}]"}
+    @key{digits} @SynI{static_}@Chg{Version=[4],New=[@Syn2{simple_expression}],Old=[@Syn2{expression}]} [@Syn2{range_constraint}]"}
 @end{Syntax}
 
 @begin{Resolution}

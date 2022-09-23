@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2022/09/23 04:34:04 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -68,16 +68,16 @@ a subprogram, or a package.]
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<generic_declaration>,rhs="@Syn2{generic_subprogram_declaration} | @Syn2{generic_package_declaration}"}
-
+@Syn{lhs=<generic_declaration>,rhs="
+    @Syn2{generic_subprogram_declaration} | @Syn2{generic_package_declaration}"}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<generic_subprogram_declaration>,rhs="
-     @Syn2{generic_formal_part}  @Syn2{subprogram_specification}@Chg{Version=[3],New=<
-        [@Syn2{aspect_specification}]>,Old=[]};"}
+    @Syn2{generic_formal_part} @Syn2{subprogram_specification}@Chg{Version=[3],New=<
+       [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @Syn{lhs=<generic_package_declaration>,rhs="
-     @Syn2{generic_formal_part}  @Syn2{package_specification};"}
+    @Syn2{generic_formal_part}  @Syn2{package_specification};"}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
@@ -86,13 +86,14 @@ a subprogram, or a package.]
   because a @nt{package_specification} allows an @nt{aspect_specification}.]}
 @end{Ramification}
 
-@Syn{lhs=<generic_formal_part>,rhs="@key{generic} {@Syn2{generic_formal_parameter_declaration} | @Syn2{use_clause}}"}
+@Syn{lhs=<generic_formal_part>,rhs="
+    @key{generic} {@Syn2{generic_formal_parameter_declaration} | @Syn2{use_clause}}"}
 
 @Syn{lhs=<generic_formal_parameter_declaration>,rhs="
-      @Syn2{formal_object_declaration}
-    | @Syn2{formal_type_declaration}
-    | @Syn2{formal_subprogram_declaration}
-    | @Syn2{formal_package_declaration}"}
+    @Syn2{formal_object_declaration}
+  | @Syn2{formal_type_declaration}
+  | @Syn2{formal_subprogram_declaration}
+  | @Syn2{formal_package_declaration}"}
 @begin{SyntaxText}
 The only form of @nt{subtype_indication} allowed within a
 @nt{generic_formal_part} is a @nt{subtype_mark}
@@ -1366,6 +1367,7 @@ of the @nt{explicit_generic_actual_parameter}.
 @end{MetaRules}
 
 @begin{Syntax}
+@begin{NotISO}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00423-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0183-1]}
 @Syn{lhs=<formal_object_declaration>,rhs="
@@ -1373,6 +1375,16 @@ of the @nt{explicit_generic_actual_parameter}.
         [@Syn2{aspect_specification}]>,Old=[]};@Chg{Version=[2],New=<
   @Chg{Version=[3],New=[|],Old=[ ]}  @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[3],New=<
         [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<formal_object_declaration>,rhs="
+    @Syn2{defining_identifier_list} : @Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark}
+        [:= @Syn2{default_expression}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};@Chg{Version=[2],New=<
+  @Chg{Version=[3],New=[|],Old=[ ]}  @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{access_definition}
+        [:= @Syn2{default_expression}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
+@end{ISOOnly}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2138,11 +2150,19 @@ derived type is the derivation class rooted at the ancestor type.]
 @Syn{lhs=<formal_private_type_definition>,
   rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}"}
 
+@begin{NotISO}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
 @Syn{lhs=<formal_derived_type_definition>,
   rhs="@Chg{Version=[2],New=[
      ],Old=[]}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited} | @key{synchronized}] >,Old=[]}@key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]@Chg{Version=[5],New={ },Old={}}>,Old=<>}@key{with} @key{private}]"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<formal_derived_type_definition>,
+  rhs="@Chg{Version=[2],New=[
+     ],Old=[]}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited} | @key{synchronized}] >,Old=[]}@key{new}
+        @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]@Chg{Version=[5],New={ },Old={}}>,Old=<>}@key{with} @key{private}]"}
+@end{ISOOnly}
 @end{Syntax}
 
 @begin{Legality}
@@ -3782,17 +3802,26 @@ of that generic package.]
 @end{Intro}
 
 @begin{Syntax}
+@begin{NotISO}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<formal_package_declaration>,rhs="
-    @key{with} @key{package} @Syn2{defining_identifier} @key{is} @key{new} @SynI{generic_package_}@Syn2{name}  @Syn2{formal_package_actual_part}@Chg{Version=[3],New=<
+    @key{with} @key{package} @Syn2{defining_identifier} @key{is} @key{new} @SynI{generic_package_}@Syn2{name} @Syn2{formal_package_actual_part}@Chg{Version=[3],New=<
         [@Syn2{aspect_specification}]>,Old=[]};"}
+@end{NotISO}
+@begin{ISOOnly}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@Syn{lhs=<formal_package_declaration>,rhs="
+    @key{with} @key{package} @Syn2{defining_identifier} @key{is} @key{new}
+        @SynI{generic_package_}@Syn2{name} @Syn2{formal_package_actual_part}@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};"}
+@end{ISOOnly}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 @Syn{lhs=<formal_package_actual_part>,rhs="
     @Chg{Version=[2],New=`([@key{others} =>] <>)
   | [@Syn2{generic_actual_part}]
   | (@Syn2{formal_package_association} {, @Syn2{formal_package_association}} [, @key{others} => <>])',
-Old=[(<>) | [@Syn2{generic_actual_part}]]}"}
+Old=`(<>) | [@Syn2{generic_actual_part}]'}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<formal_package_association>,Old=<>}>,

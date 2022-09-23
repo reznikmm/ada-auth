@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:40 $}
+@Comment{$Date: 2022/09/23 04:34:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/general_body.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @Comment{The clause header is found in General.Mss. Other parts are found
 in other files, depending upon the version. Note that the subclause labeled
@@ -1422,9 +1422,16 @@ rules for constructs.
 The context-free syntax of the language is described using a simple variant
 of Backus-Naur Form. In particular:
 @begin(Itemize)
+@begin{NotISO}
 @leading@keepnext@;Lower case words in a sans-serif font,
 some containing embedded underlines, are used to
 denote syntactic categories, for example:
+@end{NotISO}
+@begin{ISOOnly}
+@leading@keepnext@;Lower case words in a fixed-width font,
+some containing embedded underlines, are used to
+denote syntactic categories, for example:
+@end{ISOOnly}
 @begin(Display)
 @nt<case_statement>
 @end(Display)
@@ -1465,10 +1472,19 @@ in which case it stands for itself]}:
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For symbols used in this
 notation (square brackets, curly brackets, and the vertical line), the symbols
 when surrounded by ' represent themselves, for example:]}
+@begin{NotISO}
 @begin(Display)
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}@ChgAdded{Version=[5],Text=<@nt<discrete_choice_list> ::= @nt<discrete_choice> {'|' @nt<discrete_choice>}
 @nt<named_container_aggregate> ::= '[' @nt<container_element_association_list> ']'>}
 @end(Display)
+@end{NotISO}
+@begin{ISOOnly}
+@begin(Display)
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}@ChgAdded{Version=[5],Text=<@nt<discrete_choice_list> ::= @nt<discrete_choice> {'|' @nt<discrete_choice>}
+@nt<named_container_aggregate> ::=
+    '[' @nt<container_element_association_list> ']'>}
+@end(Display)
+@end{ISOOnly}
 
 @Defn2{Term=[italics],Sec=(syntax rules)}
 If the name of any syntactic category starts with an italicized

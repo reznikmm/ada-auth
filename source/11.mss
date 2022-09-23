@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2022/09/23 04:34:04 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -227,11 +227,19 @@ We explicitly define elaboration for @nt{exception_declaration}s.
      @Syn2{exception_handler}
     {@Syn2{exception_handler}}]"}
 
-
+@begin{NotISO}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @Syn{lhs=<exception_handler>,rhs="
   @key{when} [@Syn2{choice_parameter_specification}:] @Syn2{exception_choice} {@Chg{Version=[5],New=['|'],Old=[|]} @Syn2{exception_choice}} =>
      @Syn2{sequence_of_statements}"}
+@end{NotISO}
+@begin{ISOOnly}
+@Syn{lhs=<exception_handler>,rhs="
+  @key{when} [@Syn2{choice_parameter_specification}:] 
+     @Syn2{exception_choice} {@Chg{Version=[5],New=['|'],Old=[|]} @Syn2{exception_choice}} =>
+         @Syn2{sequence_of_statements}"}
+@end{ISOOnly}
+
 
 @Syn{lhs=<choice_parameter_specification>,rhs="@Syn2{defining_identifier}"}
 

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2022/09/23 04:34:03 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.168 $}
+@Comment{$Revision: 1.169 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -5094,7 +5094,8 @@ rhs="@Chg{Version=[3],New=<@Syn2{membership_choice} {@Chg{Version=[5],New=['|'],
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<membership_choice>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<@Chg{Version=[4],New=<@SynI{choice_}@Syn2{simple_expression}>,Old=<@Syn2{choice_expression}>} | @Syn2{range} | @Syn2{subtype_mark}>,Old=<>}"}
 
-@Syn{lhs=<simple_expression>,rhs="[@Syn2{unary_adding_operator}] @Syn2{term} {@Syn2{binary_adding_operator} @Syn2{term}}"}
+@Syn{lhs=<simple_expression>,rhs="
+    [@Syn2{unary_adding_operator}] @Syn2{term} {@Syn2{binary_adding_operator} @Syn2{term}}"}
 
 
 @Syn{lhs=<term>,rhs="@Syn2{factor} {@Syn2{multiplying_operator} @Syn2{factor}}"}
@@ -7725,7 +7726,8 @@ arrays.@defn{quantified expression}@Defn2{Term=[expression],Sec=[quantified]}]}
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<quantified_expression>,Old=<>}>,
-rhs="@Chg{Version=[3],New=[@key[for] @Syn2{quantifier} @Syn2{loop_parameter_specification} => @Syn2{predicate}
+rhs="@Chg{Version=[3],New=[
+    @key[for] @Syn2{quantifier} @Syn2{loop_parameter_specification} => @Syn2{predicate}
   | @key[for] @Syn2{quantifier} @Syn2{iterator_specification} => @Syn2{predicate}],Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8055,7 +8057,8 @@ rhs="@Chg{Version=[5],New=<
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<reduction_attribute_designator>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<@SynI{reduction_}@Syn2{identifier}(@Syn2{reduction_specification})>,Old=<>}"}
+rhs="
+    @Chg{Version=[5],New=<@SynI{reduction_}@Syn2{identifier}(@Syn2{reduction_specification})>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<reduction_specification>,Old=<>}>,
