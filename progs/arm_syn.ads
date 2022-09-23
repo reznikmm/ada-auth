@@ -7,7 +7,7 @@ package ARM_Syntax is
     -- cross-reference.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2006, 2011
+    -- Copyright 2000, 2006, 2011, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -45,6 +45,7 @@ package ARM_Syntax is
     -- 10/13/06 - RLB - Added Defined flag to cross-references to eliminate
     --			junk errors from not-quite-non-terminals.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  9/19/22 - RLB - Added Two_Column_Format parameter to XRef.
 
     procedure Create;
 	-- Initialize the syntax database.
@@ -98,12 +99,12 @@ package ARM_Syntax is
     generic
 	with procedure Format_Text (Text : in String;
 				    Text_Name : in String);
-    procedure XRef;
+    procedure XRef (Two_Column_Format : in Boolean);
 	-- Output the fully formatted syntax cross-reference to the
 	-- "Format_Text" routine. "Format_Text" allows all commands
 	-- for the full formatter. (Text_Name is an identifying name
-	-- for error messages).
+	-- for error messages). The result is formatted in two columns
+        -- if Two_Column_Format is True, and one column otherwise.
 
 end ARM_Syntax;
-
 

@@ -51,6 +51,7 @@ private package ARM_Format.Data is
     --  5/ 8/22 - RLB - Added Deleted_Subheading.
     --  5/11/22 - RLB - Added LabeledRevisedSubClauseIsoClause.
     --  5/26/22 - RLB - Added ChgTermDef, AddedTermList, and Subnumber.
+    --  9/15/22 - RLB - Added NewExample.
 
     type Command_Type is (
 	-- Paragraphs:
@@ -80,8 +81,8 @@ private package ARM_Format.Data is
 	-- Clause labels:
 	Labeled_Section, Labeled_Section_No_Break, Labeled_Clause,
 	Labeled_Subclause, Labeled_Subsubclause,
-	Labeled_Revised_Section, Labeled_Revised_Clause, Labeled_Revised_Subclause, 
-        Labeled_Revised_Subsubclause, Labeled_Revised_Subclause_ISO_Clause, 
+	Labeled_Revised_Section, Labeled_Revised_Clause, Labeled_Revised_Subclause,
+        Labeled_Revised_Subsubclause, Labeled_Revised_Subclause_ISO_Clause,
         Labeled_Added_Section, Labeled_Added_Clause, Labeled_Added_Subclause, Labeled_Added_Subsubclause,
         Labeled_Deleted_Clause, Labeled_Deleted_Subclause, Labeled_Deleted_Subsubclause,
 	Preface_Section,
@@ -147,7 +148,7 @@ private package ARM_Format.Data is
 	Extend2005_Title, Wording2005_Title, Inconsistent2012_Title, Incompatible2012_Title,
 	Extend2012_Title, Wording2012_Title, Inconsistent2022_Title, Incompatible2022_Title,
 	Extend2022_Title, Wording2022_Title,
-        Intl_Standard_Name, Intl_Standard_Title, Standard_Title, Subnumber,
+        Intl_Standard_Name, Intl_Standard_Title, Standard_Title, Subnumber, New_Example,
 	-- Character macros:
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
 	Latin_1, Unicode, Ceiling, Floor, Absolute, Log, Thin_Space,

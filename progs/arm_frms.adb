@@ -51,6 +51,7 @@
     --  1/29/22 - RLB - Added Note numbering code.
     --  5/11/22 - RLB - Added LabeledRevisedSubClauseIsoClause.
     --  5/27/22 - RLB - Added ChgTermDef.
+    --  9/20/22 - RLB - Added code to skip non-shown syntax and terms.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -62,13 +63,17 @@ procedure Scan (Format_Object : in out Format_Type;
     -- Starts_New_Section is True if the file starts a new section.
     -- Section_Number is the number (or letter) of the section.
     --
-    -- This also does three other jobs:
+    -- This also does four other jobs:
     -- (1) Inserts all nonterminals into the syntax index so that we can
     --     generate forward links to them.
     -- (2) Generates a guesstimate of how many notes appear in a Notes
-    --     section so that ISO_2004 formatting can omit note numbers if there
+    --     group so that ISO_2004 formatting can omit note numbers if there
     --     is only one.
-    -- (3) Collects all of the term definitions so that they are available
+    -- (3) Determines how many examples appear in Examples group(s) so that
+    --     ISO_2021 formatting can omit example numbers if there is only one.
+    --     (Since these use explicit starts, the number is known exactly, no
+    --      guessing required as is needed for notes.)
+    -- (4) Collects all of the term definitions so that they are available
     --     when the Terms and Definitions clause is generated.
 
     type Items is record
@@ -81,13 +86,15 @@ procedure Scan (Format_Object : in out Format_Type;
     Saw_a_Section_Header : Boolean := False;
 
     Input_Object : ARM_File.File_Input_Type;
-    
+
     Most_Recent_Level : ARM_Contents.Level_Type;
         -- The most recent level seen. Note that we use Format_Object.Clause_Number
         -- to find the most recent clause number.
     Current_Paragraph_Count : Natural; -- Number of paragraphs since last
-        -- 'interesting' command.     
-
+        -- 'interesting' command.
+    Skip_Current_Text : Boolean := False;
+        -- The current text will be completely skipped, so don't process it
+        -- in any way that has an effect.
 
     procedure Check_Paragraph is
 	-- Open a paragraph if needed. We do this here to count the occurrence
@@ -116,11 +123,11 @@ procedure Scan (Format_Object : in out Format_Type;
                      Format_Object.In_Paragraph := True;
                      Current_Paragraph_Count := Current_Paragraph_Count + 1;
                  end if;
-             end if;       
+             end if;
         -- else already in a paragraph.
 	end if;
     end Check_Paragraph;
-    
+
 
     procedure Check_End_Paragraph is
 	-- Check for the end of a paragraph; closing it if necessary.
@@ -133,7 +140,7 @@ procedure Scan (Format_Object : in out Format_Type;
         -- else already not in paragraph.
         end if;
     end Check_End_Paragraph;
-    
+
 
     procedure Set_Nesting_for_Command (Command : in Command_Type;
 				       Param_Ch : in Character) is
@@ -468,7 +475,7 @@ procedure Scan (Format_Object : in out Format_Type;
                                  Clause    => Format_Object.Clause_Number.Clause + 1,
                                  Subclause => 0, Subsubclause => 0);
                             Most_Recent_Level := ARM_Contents.Clause;
-                        else -- No ISO, a subclause.                        
+                        else -- No ISO, a subclause.
                             Format_Object.Clause_Number :=
                                 (Section   => Format_Object.Clause_Number.Section,
                                  Clause    => Format_Object.Clause_Number.Clause,
@@ -956,7 +963,11 @@ procedure Scan (Format_Object : in out Format_Type;
 				Non_Terminal(1..NT_Len) & " in " & Clause_String (Format_Object));
 			elsif The_Non_Terminal = "" then
 			    null; -- Deleted Non-Terminal, nothing to do.
-			else
+			elsif Skip_Current_Text then
+                            -- This text won't be included in the document, don't
+                            -- register a dead item.
+                            null;
+                        else
 			    -- Save the non-terminal:
 			    declare
 			        Link_Target : ARM_Syntax.Target_Type;
@@ -975,6 +986,10 @@ procedure Scan (Format_Object : in out Format_Type;
 			    null; -- This non-terminal is already defined;
 				-- that presumably is a *new* definition,
 				-- we'll use that instead of this one.
+			elsif Skip_Current_Text then
+                            -- This text won't be included in the document, don't
+                            -- register a dead item.
+                            null;
 			else
 			    -- Save the non-terminal:
 			    declare
@@ -1004,6 +1019,7 @@ procedure Scan (Format_Object : in out Format_Type;
             when Text_Begin =>
 		declare
 		    Type_Name : ARM_Input.Command_Name_Type;
+                    Kind : ARM_Paragraph.Paragraph_Type; use type ARM_Paragraph.Paragraph_Type;
 		    Ch : Character;
                 begin
 		    -- OK, now read the begin "type":
@@ -1028,16 +1044,28 @@ procedure Scan (Format_Object : in out Format_Type;
 		        -- Found the end of the parameter.
                         -- This always ends a paragraph.
                         Check_End_Paragraph;
-                        if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "notes" then
+                        Kind := ARM_Paragraph.Get_Paragraph_Kind (Type_Name);
+                        if Kind = ARM_Paragraph.Notes then
                             -- A "notes" header. Clear the paragraph count.
                             -- Note: We assume that notes groups are not nested.
                             Current_Paragraph_Count := 0;
-                        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "singlenote" then
+                        elsif Kind = ARM_Paragraph.Single_Note then
                             -- A "singlenote" header. Clear the paragraph count.
                             -- Note: We assume that notes groups are not nested.
                             Current_Paragraph_Count := 0;
+                        -- Note: in here, we only need to count New_Example commands per clause.
+                        -- So we need no special code for "Examples" groupings.
+                        elsif Kind in ARM_Paragraph.Classification_Kinds then
+                            -- A classification header. If we're not doing the
+                            -- appropriate version, then skip any effects until
+                            -- the matching end. (We'll assume proper use here,
+                            -- it will be checked in the main formatter.)
+                            if not Format_Object.Include_Group(Kind) then
+                                Skip_Current_Text := True;
+                            -- else include this.
+                            end if;
                         -- else ignore header.
-                        end if;                
+                        end if;
 		        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Normal Begin)");
                     else
@@ -1051,6 +1079,7 @@ procedure Scan (Format_Object : in out Format_Type;
 	    when Text_End =>
 		declare
 		    Type_Name : ARM_Input.Command_Name_Type;
+                    Kind : ARM_Paragraph.Paragraph_Type; use type ARM_Paragraph.Paragraph_Type;
 		    Ch : Character;
 		begin
 	            Arm_Input.Get_Name (Input_Object, Type_Name); -- Get the end "type".
@@ -1061,21 +1090,22 @@ procedure Scan (Format_Object : in out Format_Type;
 			     -- Remove the "End" record.
                         -- This always ends a paragraph.
                         Check_End_Paragraph;
-                        if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "notes" then
+                        Kind := ARM_Paragraph.Get_Paragraph_Kind (Type_Name);
+                        if Kind = ARM_Paragraph.Notes then
                             -- A "notes" header. Determine how many paragraphs.
                             -- Note: We assume that notes groups are not nested.
                             declare
-                                use type ARM_Contents.Note_Info_Type;
-                                Note : ARM_Contents.Note_Info_Type :=
+                                use type ARM_Contents.Group_Info_Type;
+                                Note : ARM_Contents.Group_Info_Type :=
                                     ARM_Contents.Lookup_Note_Info (Most_Recent_Level,
                                                                    Format_Object.Clause_Number);
                             begin
-                                if Note = ARM_Contents.No_Notes then
+                                if Note = ARM_Contents.No_Items then
                                     if Current_Paragraph_Count > 1 then
                                          -- Guess that there are many notes:
                                         ARM_Contents.Update_Note_Info (Most_Recent_Level,
                                                                        Format_Object.Clause_Number,
-                                                                       ARM_Contents.Many_Notes);
+                                                                       ARM_Contents.Many_Items);
                                         -- Debug:
                                         Ada.Text_IO.Put_Line ("    -- Saw notes with" &
                                              Natural'Image(Current_Paragraph_Count) &
@@ -1085,7 +1115,7 @@ procedure Scan (Format_Object : in out Format_Type;
                                          -- Only one (or zero) paragraph, set to single note:
                                         ARM_Contents.Update_Note_Info (Most_Recent_Level,
                                                                        Format_Object.Clause_Number,
-                                                                       ARM_Contents.One_Note);
+                                                                       ARM_Contents.One_Item);
                                         -- Debug:
                                         Ada.Text_IO.Put_Line ("    -- Saw notes with one paragraph, no other notes, line "
                                                          & ARM_File.Line_String (Input_Object));
@@ -1093,40 +1123,49 @@ procedure Scan (Format_Object : in out Format_Type;
                                 else
                                     ARM_Contents.Update_Note_Info (Most_Recent_Level,
                                                                    Format_Object.Clause_Number,
-                                                                   ARM_Contents.Many_Notes);
+                                                                   ARM_Contents.Many_Items);
                                     Ada.Text_IO.Put_Line ("    -- Saw notes in clause with other notes, line "
                                                      & ARM_File.Line_String (Input_Object));
                                 end if;
-                            end;                     
+                            end;
                             Current_Paragraph_Count := 0;
-                        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "singlenote" then
+                        elsif Kind = ARM_Paragraph.Single_Note then
                             -- A "singlenote" header. Set note kind to be one more
                             -- than previous.
                             -- Note: We assume that notes groups are not nested.
                             declare
-                                use type ARM_Contents.Note_Info_Type;
-                                Note : ARM_Contents.Note_Info_Type :=
+                                use type ARM_Contents.Group_Info_Type;
+                                Note : ARM_Contents.Group_Info_Type :=
                                     ARM_Contents.Lookup_Note_Info (Most_Recent_Level,
                                                                    Format_Object.Clause_Number);
                             begin
-                                if Note = ARM_Contents.No_Notes then
+                                if Note = ARM_Contents.No_Items then
                                     ARM_Contents.Update_Note_Info (Most_Recent_Level,
                                                                    Format_Object.Clause_Number,
-                                                                   ARM_Contents.One_Note);
+                                                                   ARM_Contents.One_Item);
                                     -- Debug:
                                     Ada.Text_IO.Put_Line ("    -- Saw single note, no other notes, line "
                                                      & ARM_File.Line_String (Input_Object));
                                 else
                                     ARM_Contents.Update_Note_Info (Most_Recent_Level,
                                                                    Format_Object.Clause_Number,
-                                                                   ARM_Contents.Many_Notes);
+                                                                   ARM_Contents.Many_Items);
                                     Ada.Text_IO.Put_Line ("    ** Saw single note in clause with other notes, line "
                                                      & ARM_File.Line_String (Input_Object));
                                 end if;
                             end;
                             Current_Paragraph_Count := 0;
+                        elsif Kind in ARM_Paragraph.Classification_Kinds then
+                            -- A classification header. Reset any skipping if needed.
+                            -- This might "unskip" too soon if there are nested
+                            -- classifications, but that seems unlikely. (Really
+                            -- should stack this.)
+                            if not Format_Object.Include_Group(Kind) then
+                                Skip_Current_Text := False;
+                            -- else include this.
+                            end if;
                         -- else ignore header.
-                        end if;                
+                        end if;
 		    else
 			ARM_File.Replace_Char (Input_Object);
 			Ada.Text_IO.Put_Line ("  ** Failed to find close for parameter to end, line " & ARM_File.Line_String (Input_Object));
@@ -1134,7 +1173,7 @@ procedure Scan (Format_Object : in out Format_Type;
 --Ada.Text_IO.Put_Line (" &Unstack (Bad End)");
 		    end if;
 		end;
-            
+
             when Change | Change_Added | Change_Deleted |
 		 Change_Implementation_Defined |
 		 Change_Implementation_Advice |
@@ -1144,8 +1183,8 @@ procedure Scan (Format_Object : in out Format_Type;
                  -- overworking here, we'll just assume they have text in the
                  -- current mode. (Not always true, but a lot of work to
                  -- figure out otherwise.)
-                 Check_Paragraph;      
-                 
+                 Check_Paragraph;
+
 	    when Change_Term_Def =>
 		-- This is a change term and definition command.
 		-- It is of the form
@@ -1155,7 +1194,7 @@ procedure Scan (Format_Object : in out Format_Type;
                 -- We process this and store the term and definition and notes
                 -- if any. We do this so that the terms can be generated early
                 -- in the document.
-                
+
 		declare
 		    Close_Ch, Ch : Character;
                     Key : ARM_Index.Index_Key;
@@ -1306,7 +1345,7 @@ procedure Scan (Format_Object : in out Format_Type;
                         end if;
                     -- else not more parameters (no notes).
                     end if;
-                    
+
 		    -- Now, close the command.
 		    Arm_File.Get_Char (Input_Object, Ch);
 		    if Ch /= Nesting_Stack(Nesting_Stack_Ptr).Close_Char then
@@ -1315,7 +1354,7 @@ procedure Scan (Format_Object : in out Format_Type;
 		    end if;
 		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 		        -- Remove the "Change_Term_Def" record.
-                        
+
                     -- OK, all of the data is in place.
 
                     -- How the term is handled depends primarily on the
@@ -1362,7 +1401,8 @@ procedure Scan (Format_Object : in out Format_Type;
 
 		        if Delete_Disposition = Do_Not_Display_Text or else
 		           (Delete_Disposition = ARM_Output.None and then
-			    Insert_Disposition = Do_Not_Display_Text) then
+			    Insert_Disposition = Do_Not_Display_Text) or else
+                            Skip_Current_Text then
                             null; -- This item is not shown at all, so don't
                                   -- insert it into the DB.
 Ada.Text_IO.Put_Line ("-- Term not shown on line " & ARM_File.Line_String (Input_Object));
@@ -1382,9 +1422,8 @@ Ada.Text_IO.Put_Line ("-- Term inserted to Group" & Group'Image & " on line " & 
                         end if;
                     end;
                 end;
-                
-            
-	    when others =>
+
+ 	    when others =>
 	        null; -- Not in scanner.
         end case;
     end Scan_Command_with_Parameter;
@@ -1500,9 +1539,35 @@ Ada.Text_IO.Put_Line ("-- Term inserted to Group" & Group'Image & " on line " & 
 	        (Command  => Command (Ada.Characters.Handling.To_Lower (Command_Name)),
 		 Param_Ch => Ch);
 	    Scan_Command_with_Parameter;
-        else
+        else -- Parameterless commands.
 	    ARM_File.Replace_Char (Input_Object);
-	    -- We're not interested in commands with no parameters.
+            if Command (Ada.Characters.Handling.To_Lower (Command_Name)) = New_Example then
+                -- Marks the start of a new example in an examples grouping.
+                -- This should only appear in an examples grouping, and at least one
+                -- should appear in each such grouping.
+                declare
+                    use type ARM_Contents.Group_Info_Type;
+                    Examples : ARM_Contents.Group_Info_Type :=
+                        ARM_Contents.Lookup_Example_Info (Most_Recent_Level,
+                                                          Format_Object.Clause_Number);
+                begin
+                    if Examples = ARM_Contents.No_Items then
+                        ARM_Contents.Update_Example_Info (Most_Recent_Level,
+                                                          Format_Object.Clause_Number,
+                                                          ARM_Contents.One_Item);
+                        -- Debug:
+                        Ada.Text_IO.Put_Line ("    -- Saw first @newexample command in subclause, line "
+                                                     & ARM_File.Line_String (Input_Object));
+                    else
+                        ARM_Contents.Update_Example_Info (Most_Recent_Level,
+                                                          Format_Object.Clause_Number,
+                                                          ARM_Contents.Many_Items);
+                        Ada.Text_IO.Put_Line ("    -- Saw addition @newexample command in subclause, line "
+                                             & ARM_File.Line_String (Input_Object));
+                    end if;
+                 end;
+            -- else we're not interested in other commands with no parameters.
+            end if;
         end if;
     end Scan_Special;
 
@@ -1533,7 +1598,7 @@ begin
 			 -- Soft line break. The details here depend on the format,
                          -- which we won't try to do here. But this does not end
                          -- or usually start a paragraph.
-			 ARM_File.Replace_Char (Input_Object);			
+			 ARM_File.Replace_Char (Input_Object);
 		    else -- Hard paragraph break. Only one, no matter
 			 -- how many blank lines there are:
 			while Char = Ascii.LF loop

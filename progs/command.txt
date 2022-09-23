@@ -190,13 +190,29 @@ Global properties:
      This specifies which font is used to display the body of the document.
      This changes all styles that are not defined to use a specific font.
      By default, the Roman font is used.
-@NoteFormat{Ada95|ISO2004}
-     This specifies the format of notes sections.
+@NonterminalFont{Roman|Swiss|Fixed}
+    Specify the font used for non-terminals in the text (as in commands like
+    @nt and @syn). If not specified, "Swiss" is the default.
+@NoteFormat{Ada95|ISO2004|ISO2021}
+     This specifies the format of notes groups.
      If Ada95, the word "NOTES" is on a separate line, and each note is
      numbered, with the numbers starting at 1 for each section.
      If ISO2004, each note starts with the word "NOTE", and a number,
      with the numbers starting from 1 for each subclause.
      If there is only one note in a subclause, the number should be omitted.
+     If ISO2021, the format is the same as ISO2004, except that the text is
+     NOT indented.
+@ExamplesFormat(Ada95|ISO2021)
+     This specifies the format of examples groups. (Do not confuse the
+     "examples" group with the "example" format, which is controlled
+     by the ExampleFont and ExampleCommentFont commands.)
+     If Ada95, there is a group header, no numbers, and the size is the
+     normal size.
+     If ISO2021, it is formatted like a notes group, with no group header,
+     the word "EXAMPLE" and a possibly a number starting it, and the size
+     is the small size. Note: Unlike other items, the prefix setting has
+     no effect on these; rather we have an explicit command (@NewExample)
+     to start a new example in the middle of a group.
 @ContentsFormat{Ada95|ISO2004}
      This specifies the format of contents sections.
      If Ada95, the title is "Table of Contents".
@@ -388,9 +404,17 @@ RTF Output properties:
      Specifies the size of the RTF output; Letter is used if this is not
      specified. Letter is 8.5"x11"; A4 is European standard size; HalfLetter
      is 5.5"x8.5"; Ada95 is 7"x9".
-@RTFFonts{Serif=[Times|Souvenir],SansSerif=[Arial|Helvetica]}
+@RTFSizes{Small|Normal|ISO2021}
+    Specifies the font/line sizes for the output file. "Small" is the usual
+    Ada 95 sizes, used on HalfLetter and Ada95 pages. "Normal" is the usual
+    AARM sizes, used on letter and A4 pages. "ISO2021" are the sizes recently
+    required by ISO. If not specified, Normal is used.
+@RTFFonts{Serif=[Times|Souvenir|Cambria],SansSerif=[Arial|Helvetica]}
      Specifies the specific fonts used for the Serif and Sans Serif fonts.
      If not specified, Times ("Times New Roman") and Arial are used.
+@RTFBulletFormat{Normal|ISO2021}
+     Specifies the bullet format. "Normal" uses round solid bullets as one would
+     expect. ISO2021 uses emdashes, no idea why (they are ugly).
 @RTFVersionName{Version=[<version>],Text=[<title_text>]}
      The specified text names the version as the "author" of any revisions.
      For instance, for the Ada Standard, @RTFVersionName{Version=[2],Text=[Amendment 1]}
@@ -691,22 +715,27 @@ Text commands:
 	should have been defined by a @LocalTarget command). <text> will be
 	generated as the body of the link, using the current formatting (no
 	formatting in <text>).
-@URLLink{URL=[<URL>],Text=[<text>]} - Generates a link to the URL specified;
-	<text> will be the body of the link, using the current formatting (no
-	formatting in <text>). The URL should be a complete URL, including
-	"http://".
+@URLLink{URL=[<URL>],Text=[<text>][,AllFormats=[T|F]}
+	Generates a link to the URL specified; <text> will be the body of the link,
+	using the current formatting (no formatting allowed in <text>). The URL
+	should be a complete URL, including "http://". If All_Formats is given
+	and True, then the link is generated in any format that can support a
+	link, otherwise (including when the parameter All_Formats is not given),
+	it is only generated in formats that are primarily hyperlinked (such as
+	HTML).
 @AILink{AI=[<AI>],Text=[<text>]} - Generates a link to the AI specified;
 	<text> will be the body of the link, using the current formatting (no
 	formatting in <text>). The AI should be an AI number in the full
 	format (AI95-0yyyy-zz, AI05-yyyy-z, or SI99-yyyy-z).
 
 -- Ada specific commands:
-@nt{<text>} - A non-terminal in normal text. This will be set in a Swiss
-	      (sans-serif) font. Also, for HTML, this will linked to the
-              definition text; use @ntf instead if this is not a real
+@nt{<text>} - A non-terminal in normal text. This will be set in the font
+	      specified for non-terminals in the master file (usually a
+              Swiss (sans-serif) font). Also, for HTML, this will linked to
+	      the definition text; use @ntf instead if this is not a real
               non-terminal.
 @ntf{<text>} - Format as a non-terminal in normal text. This will be set
-              in a Swiss (sans-serif) font.
+              in the font specified for non-terminals in the master file.
 @key{<text>} - A keyword in normal text. This will be set in boldface.
 @exam{<text>} - Example text occurring in normal text. This will be set
         in the example font (which is selected in the master file). (By
@@ -1149,22 +1178,24 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 -- Paragraph kinds:
 --
 -- When nesting is allowed, characteristics are not preserved unless
--- specifically marked below). Nesting is allowed for formatting kinds.
+-- specifically marked below. Nesting is allowed for formatting kinds.
 --
--- Nesting is *not* allowed for grouping kinds, as that makes
+-- Nesting is *not* allowed for RM and AARM grouping kinds, as that makes
 -- it ambiguous as to which header text applies to text (especially if there
 -- is any after the inner @end). It also could cause @included nested groupings
--- to be left out of the final documented if the outer grouping is not
+-- to be left out of the final document if the outer grouping is not
 -- included.
 --
--- Annotations can (and often are) nested in RM groupings. Note, however, that
+-- Annotations can be (and often are) nested in RM groupings. Note, however, that
 -- such nested annotations can be excluded along with their outer grouping.
 
 
     Pure formatting:
 	Comment - The text is never output into the document.
 	WideAbove- The paragraph has wider than usual space above, but is
-		  otherwise normal.
+		  otherwise normal. (This should be considered obsolete;
+                  mark the previous paragraph as "trailing" instead -
+                  that works with any format paragraph, not just "normal".)
 	DescribeCode -
 		  The text is indented 2 units.
 	Example - The text is formatted in the example font (which is selected
@@ -1268,16 +1299,19 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Metrics	  - Metrics.
 	ImplPerm  - Implementation Permissions.
 	ImplAdvice- Implementation Advice.
-	Notes	  - Notes. (Each of these is numbered and indented 1 unit.
+	Notes	  - Notes. (Each of these is numbered and indented 1 unit.)
 		    The format is controlled by the @NoteFormat command
-		    in the master file.)
-	SingleNote - A single note (it is indented 1 unit, but not numbered.
+		    in the master file.
+	SingleNote - A single note (it is indented 1 unit, but not numbered.)
 		    The format is controlled by the @NoteFormat command
-		    in the master file.)
+		    in the master file.
 	Examples  - Examples. (Do not confuse this with the text format
 		    "Example". This is a grouping with a subhead. It is in
 		    the normal font by default; often an "Example" is found
 		    inside of "Examples".)
+		    The format is controlled by the @ExamplesFormat command
+		    in the master file. Each group contains a single example
+                    unless a @NewExample command occurs inside of the group.
 
     AARM-only groupings: (not shown if HideAnnotations is used)
 	MetaRules - Language Design Principles.
@@ -1330,6 +1364,14 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
         incremented each time this command is encountered. For instance, if
         we are in subclause 3.2, this command will generate 3.2.1 for the first
         occurrence, 3.2.2 for the second occurrence, and so on.
+
+@NewExample - Starts a new example in an Examples grouping. What this
+        command does depends upon the ExamplesFormat selected. If that format
+        is Ada95, this command does nothing. If that format is ISO2021, then
+        a new EXAMPLES header with a number is generated.
+        @NewExample can only appear in an Examples grouping, and at least
+        one must appear. Generally, one needs to appear at the start of the
+        grouping; this is not automatic.
 
 The following are controlled by the @SelfRefFormat master command:
 

@@ -121,6 +121,9 @@ package ARM_Format is
     --  5/25/22 - RLB - Added Term DBs.
     --  5/27/22 - RLB - Moved the Term_DBs to the body as they must persist
     --                  through the life of the program (like the Contents).
+    --  8/ 4/22 - RLB - Added and used Note_Format_Kind.
+    --  8/22/22 - RLB - Added Nonterminal_Font.
+    --  9/15/22 - RLB - Added Examples_Format, renamed Group_Format_Kind.
 
     type Format_Type is tagged limited private;
 
@@ -147,7 +150,10 @@ package ARM_Format is
 
     type Self_Ref_Kind is (RM, ISO_1989, ISO_2018);
         -- Types of self references.
-        
+
+    type Group_Format_Kind is (Ada95, ISO2004, ISO2021);
+        -- Types of group formats.
+
     procedure Create (Format_Object : in out Format_Type;
 		      Changes : in ARM_Format.Change_Kind;
 		      Change_Version : in ARM_Contents.Change_Version_Type;
@@ -160,7 +166,9 @@ package ARM_Format is
                       Include_Group : in ARM_Paragraph.Grouping_Array;
 		      Examples_Font : in ARM_Output.Font_Family_Type;
 		      Example_Comment_Font : in ARM_Output.Font_Family_Type;
-		      Use_ISO_2004_Note_Format : in Boolean;
+		      Nonterminal_Font : in ARM_Output.Font_Family_Type;
+		      Note_Format : in Group_Format_Kind;
+                      Examples_Format : in Group_Format_Kind;
 		      Use_ISO_2004_Contents_Format : in Boolean;
 		      Use_ISO_2004_List_Format : in Boolean;
                       Self_Ref_Format : in Self_Ref_Kind;
@@ -184,8 +192,10 @@ package ARM_Format is
 	-- Example_Font specifies the font that examples will be set in.
 	-- Example_Comment_Font specifies the font that example comment and
         -- example virtual names will be set in.
-	-- If Use_ISO_2004_Note_Format is true, that format will be used;
-	-- else the Ada95 standard's format will be used for notes.
+	-- Nonterminal_Font specifies the font that nonterminals (as in the
+        -- @nt and @syn commands) will be set in.
+	-- The note format is specified by Note_Format. The examples format is
+        -- specified by Examples_Format.
 	-- If Use_ISO_2004_Contents_Format is true, that format will be used;
 	-- else the Ada95 standard's format will be used for the table of contents.
 	-- If Use_ISO_2004_List_Format is true, then lists will be lettered;
@@ -324,7 +334,9 @@ private
         Include_Group : ARM_Paragraph.Grouping_Array;
 	Examples_Font : ARM_Output.Font_Family_Type;
 	Example_Comment_Font : ARM_Output.Font_Family_Type;
-	Use_ISO_2004_Note_Format : Boolean;
+        Nonterminal_Font : ARM_Output.Font_Family_Type;
+	Note_Format : Group_Format_Kind;
+	Examples_Format : Group_Format_Kind;
 	Use_ISO_2004_Contents_Format : Boolean;
 	Use_ISO_2004_List_Format : Boolean;
         Self_Ref_Format : Self_Ref_Kind;
@@ -387,11 +399,17 @@ private
         -- Notes information:
 	Next_Note : Natural; -- The number of the next note. These are
 			     -- per-section, not per-subclause (unless ISO 2004 is set).
-        Num_Notes : ARM_Contents.Note_Info_Type; -- The number of notes in this
+        Num_Notes : ARM_Contents.Group_Info_Type; -- The number of notes in this
                              -- subclause (only used if ISO 2004 is set).
         Notes_Deleted_Paras_Displayed : Boolean; -- Was any deleted paragraphs
                              -- displayed in the current Notes section?
- 
+
+        -- Examples information
+        Next_Example : Natural; -- The number of the next example. These are
+                                -- per-subclause (and only used in the ISO 2021 format).
+        Num_Examples : ARM_Contents.Group_Info_Type; -- The number of examples in
+                                -- this subclause (only used if ISO 2021 is set).
+
 	-- Text format info:
 	Text_Format : ARM_Output.Format_Type; -- Holds the current text format.
 
@@ -417,11 +435,10 @@ private
 	Unit_Len : Natural := 0;
 
 	-- Syntax:
-	Syntax_NT : String (1..80); -- Syntax non-terminal; used only during the
-				    -- processing of the Syn command.
+        -- These are only used during the processing of the Syn and related commands.
+	Syntax_NT : String (1..80); -- Syntax non-terminal.
 	Syntax_NT_Len : Natural := 0;
-	Syntax_Tab : String (1..40); -- Syntax tab string; used only during the
-				    -- processing of the Syn command.
+	Syntax_Tab : String (1..40); -- Syntax tab string.
 	Syntax_Tab_Len : Natural := 0;
 
 	-- Attributes:
@@ -454,7 +471,7 @@ private
 	-- Glossary:
 	Glossary_Info : Glossary_Info_Type;
 	Glossary_DB : ARM_Database.Database_Type;
-        
+
 	-- Aspects:
 	Aspect_DB : ARM_Database.Database_Type;
 	    -- Also see Impdef_Info, below.

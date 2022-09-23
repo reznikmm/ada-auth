@@ -55,6 +55,7 @@ package body ARM_Syntax is
     -- 10/13/06 - RLB - Added Defined flag to cross-references to eliminate
     --			junk errors from not-quite-non-terminals.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  9/19/22 - RLB - Added Two_Column_Format parameter to XRef.
 
     type String_Ptr is access String;
     type Rule_Type;
@@ -327,11 +328,12 @@ package body ARM_Syntax is
     --generic
     --	with procedure Format_Text (Text : in String;
     --				    Text_Name : in String);
-    procedure XRef is
+    procedure XRef (Two_Column_Format : in Boolean) is
 	-- Output the fully formatted syntax cross-reference to the
 	-- "Format_Text" routine. "Format_Text" allows all commands
 	-- for the full formatter. (Text_Name is an identifying name
-	-- for error messages).
+	-- for error messages). The result is formatted in two columns
+        -- if Two_Column_Format is True, and one column otherwise.
 	Temp : XRef_Ptr;
 	Last : XRef_Ptr := null;
 	Items : array (1..XRef_Count) of XRef_Ptr;
@@ -387,8 +389,12 @@ package body ARM_Syntax is
 
 
 	Format_Text ("@begin(syntaxdisplay)" & Ascii.LF, "Prefix");
-	Format_Text ("@tabclear()@tabset(P4, P38)" & Ascii.LF, "Prefix");
-	Format_Text ("@begin(twocol)" & Ascii.LF, "Prefix");
+        if Two_Column_Format then
+            Format_Text ("@tabclear()@tabset(P4, P38)" & Ascii.LF, "Prefix");
+	    Format_Text ("@begin(twocol)" & Ascii.LF, "Prefix");
+        else -- One column, make wider.
+            Format_Text ("@tabclear()@tabset(P4, P52)" & Ascii.LF, "Prefix");
+        end if;
 	Temp := XRef_List;
 	while Temp /= null loop
 	    if Last = null or else
@@ -441,12 +447,14 @@ package body ARM_Syntax is
 	    end if;
 	    Temp := Temp.Next;
 	end loop;
-	Format_Text ("@end(twocol)" & Ascii.LF, "Suffix");
+        if Two_Column_Format then
+	    Format_Text ("@end(twocol)" & Ascii.LF, "Suffix");
+        -- else nothing needed for one column.
+        end if;
 	Format_Text ("@end(syntaxdisplay)" & Ascii.LF, "Suffix");
 	-- Should free the XRef list here, but we won't do anything
 	-- afterwards, so doing so doesn't matter.
     end XRef;
 
 end ARM_Syntax;
-
 

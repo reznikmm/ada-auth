@@ -57,6 +57,7 @@ package body ARM_Contents is
     -- 10/25/11 - RLB - Added version to Old name strings.
     --  8/30/12 - RLB - Added traps if we're reading Section = UNKNOWN.
     --  1/28/22 - RLB - Added Note_Info to better support ISO 2004 notes.
+    --  9/15/22 - RLB - Added Examples_Info to better support ISO 2021 examples.
 
     function "<" (Left, Right : Clause_Number_Type) return Boolean is
 	-- True if Left comes before Right in the collating order.
@@ -111,7 +112,8 @@ package body ARM_Contents is
 	Level : Level_Type;
 	Clause_Number : Clause_Number_Type;
         Version : ARM_Contents.Change_Version_Type := '0';
-        Note_Info : Note_Info_Type := No_Notes;
+        Note_Info : Group_Info_Type := No_Items;
+        Example_Info : Group_Info_Type := No_Items;
     end record;
 
     Title_List : array (1 .. 900) of Title_Record;
@@ -154,7 +156,8 @@ package body ARM_Contents is
 	     Level => Level,
 	     Clause_Number => Clause_Number,
              Version => Version,
-             Note_Info => No_Notes);
+             Note_Info => No_Items,
+             Example_Info => No_Items);
 --Ada.Text_IO.Put_Line ("  Add " & Title &
 -- " Index=" & Natural'Image(Last_Title) & " Level=" & Level_Type'Image(Level));
 --Ada.Text_IO.Put_Line ("    Section" & Section_Number_Type'Image(Clause_Number.Section) &
@@ -191,7 +194,8 @@ package body ARM_Contents is
 	     Level => Level,
 	     Clause_Number => Clause_Number,
              Version => Version,
-             Note_Info => No_Notes);
+             Note_Info => No_Items,
+             Example_Info => No_Items);
 --Ada.Text_IO.Put_Line ("  Add_Old " & Old_Title &
 -- " Index=" & Natural'Image(Last_Old_Title) & " Level=" & Level_Type'Image(Level));
 --Ada.Text_IO.Put_Line ("    Section" & Section_Number_Type'Image(Section_Number) &
@@ -672,7 +676,7 @@ package body ARM_Contents is
 
 
     function Lookup_Note_Info (Level : in Level_Type;
-		               Clause_Number : in Clause_Number_Type) return Note_Info_Type is
+		               Clause_Number : in Clause_Number_Type) return Group_Info_Type is
 	-- Given the level and clause numbers, return the note information.
 	-- Raises Not_Found_Error if not found.
     begin
@@ -688,11 +692,11 @@ package body ARM_Contents is
 	end loop;
 	raise Not_Found_Error;
     end Lookup_Note_Info;
-    
-    
+
+
     procedure Update_Note_Info (Level : in Level_Type;
 		                Clause_Number : in Clause_Number_Type;
-                                New_Note_Info : in Note_Info_Type) is
+                                New_Note_Info : in Group_Info_Type) is
 	-- Given the level and clause numbers, update the note information to
         -- the provided value. Raises Not_Found_Error if not found.
     begin
@@ -709,5 +713,46 @@ package body ARM_Contents is
 	end loop;
 	raise Not_Found_Error;
     end Update_Note_Info;
+
+
+    function Lookup_Example_Info (Level : in Level_Type;
+		                  Clause_Number : in Clause_Number_Type) return Group_Info_Type is
+	-- Given the level and clause numbers, return the example information.
+	-- Raises Not_Found_Error if not found.
+    begin
+	if Clause_Number.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "unknown section number";
+	-- else not unknown
+	end if;
+	for I in 1 .. Last_Title loop
+	    if Title_List(I).Level = Level and then
+	       Title_List(I).Clause_Number = Clause_Number then
+		return Title_List(I).Example_Info;
+	    end if;
+	end loop;
+	raise Not_Found_Error;
+    end Lookup_Example_Info;
+
+
+    procedure Update_Example_Info (Level : in Level_Type;
+		                   Clause_Number    : in Clause_Number_Type;
+                                   New_Example_Info : in Group_Info_Type) is
+	-- Given the level and clause numbers, update the example information to
+        -- the provided value. Raises Not_Found_Error if not found.
+    begin
+	if Clause_Number.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "unknown section number";
+	-- else not unknown
+	end if;
+	for I in 1 .. Last_Title loop
+	    if Title_List(I).Level = Level and then
+	       Title_List(I).Clause_Number = Clause_Number then
+		Title_List(I).Example_Info := New_Example_Info;
+                return;
+	    end if;
+	end loop;
+	raise Not_Found_Error;
+    end Update_Example_Info;
+
 
 end ARM_Contents;

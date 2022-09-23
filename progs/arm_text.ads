@@ -91,6 +91,7 @@ package ARM_Text is
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
     --  4/20/22 - RLB - Added Big_Files parameter.
+    --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -400,11 +401,14 @@ package ARM_Text is
 
     procedure URL_Link (Output_Object : in out Text_Output_Type;
 			Text : in String;
-			URL : in String);
+			URL : in String;
+                        All_Formats : in Boolean);
 	-- Generate a link to the URL given.
 	-- Text is the text of the link.
-	-- For hyperlinked formats, this should generate a link;
-	-- for other formats, only the text is generated.
+        -- If All_Formats is True, then the link is generated in any format that
+        -- can support a link. Otherwise, a link is only generated in formats
+        -- that are primarily hyperlinked (such as HTML). If no link is
+        -- generated, the text still should be generated.
 
     procedure Picture  (Output_Object : in out Text_Output_Type;
 			Name  : in String;

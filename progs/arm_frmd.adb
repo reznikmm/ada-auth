@@ -532,6 +532,8 @@ package body ARM_Format.Data is
 	    return Standard_Title;
         elsif Canonical_Name = "subnumber" then
 	    return Subnumber;
+        elsif Canonical_Name = "newexample" then
+	    return New_Example;
 	elsif Canonical_Name = "em" then
 	    return EM_Dash;
 	elsif Canonical_Name = "en" then

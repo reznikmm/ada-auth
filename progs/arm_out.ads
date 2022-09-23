@@ -13,7 +13,7 @@ package ARM_Output is
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -110,6 +110,7 @@ package ARM_Output is
     --			hang amounts.
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
+    --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -599,9 +600,14 @@ package ARM_Output is
 
     procedure URL_Link (Output_Object : in out Output_Type;
 			Text : in String;
-			URL : in String) is abstract;
+			URL : in String;
+                        All_Formats : in Boolean) is abstract;
 	-- Generate a link to the URL given.
 	-- Text is the text of the link.
+        -- If All_Formats is True, then the link is generated in any format that
+        -- can support a link. Otherwise, a link is only generated in formats
+        -- that are primarily hyperlinked (such as HTML). If no link is
+        -- generated, the text still should be generated.
 	-- For hyperlinked formats, this should generate a link;
 	-- for other formats, only the text is generated.
 

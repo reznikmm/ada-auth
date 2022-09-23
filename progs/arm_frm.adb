@@ -309,12 +309,16 @@ package body ARM_Format is
     --                - Added LabeledRevisedSubClauseIsoClause.
     --  5/25/22 - RLB - Added Term_Marker.
     --  5/26/22 - RLB - Added ChgTermDef, AddedTermList, and Subnumber.
+    --  8/ 4/22 - RLB - Added and used Note_Format_Kind.
+    --  8/22/22 - RLB - Added AllFormats parameter to URL_Link.
+    --                - Added Nonterminal_Font.
+    --  9/15/22 - RLB - Added Examples_Format, renamed Group_Format_Kind.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
     use ARM_Format.Data; -- use all type ARM_Format.Data.Command_Type;
 	-- Make the enumeration literals visible.
-        
+
     -- Terms:
     type Term_DB_Array is array (ARM_Paragraph.Term_Group_Index) of
         ARM_Database.Database_Type;
@@ -370,7 +374,9 @@ package body ARM_Format is
                       Include_Group : in ARM_Paragraph.Grouping_Array;
 		      Examples_Font : in ARM_Output.Font_Family_Type;
 		      Example_Comment_Font : in ARM_Output.Font_Family_Type;
-		      Use_ISO_2004_Note_Format : in Boolean;
+		      Nonterminal_Font : in ARM_Output.Font_Family_Type;
+		      Note_Format : in Group_Format_Kind;
+                      Examples_Format : in Group_Format_Kind;
 		      Use_ISO_2004_Contents_Format : in Boolean;
 		      Use_ISO_2004_List_Format : in Boolean;
                       Self_Ref_Format : in Self_Ref_Kind;
@@ -394,8 +400,10 @@ package body ARM_Format is
 	-- Example_Font specifies the font that examples will be set in.
 	-- Example_Comment_Font specifies the font that example comment and
         -- example virtual names will be set in.
-	-- If Use_ISO_2004_Note_Format is true, that format will be used;
-	-- else the Ada95 standard's format will be used for notes.
+	-- Nonterminal_Font specifies the font that nonterminals (as in the
+        -- @nt and @syn commands) will be set in.
+	-- The note format is specified by Note_Format. The examples format is
+        -- specified by Examples_Format.
 	-- If Use_ISO_2004_Contents_Format is true, that format will be used;
 	-- else the Ada95 standard's format will be used for the table of contents.
 	-- If Use_ISO_2004_List_Format is true, then lists will be lettered;
@@ -416,7 +424,12 @@ package body ARM_Format is
         Format_Object.Include_Group := Include_Group;
 	Format_Object.Examples_Font := Examples_Font;
 	Format_Object.Example_Comment_Font := Example_Comment_Font;
-	Format_Object.Use_ISO_2004_Note_Format := Use_ISO_2004_Note_Format;
+        Format_Object.Nonterminal_Font := Nonterminal_Font;
+	Format_Object.Note_Format := Note_Format;
+	Format_Object.Examples_Format := Examples_Format;
+        if Examples_Format = ISO2004 then
+            raise Program_Error with "ISO2004 is not a valid example format";
+        end if;
 	Format_Object.Use_ISO_2004_Contents_Format := Use_ISO_2004_Contents_Format;
 	Format_Object.Use_ISO_2004_List_Format := Use_ISO_2004_List_Format;
         Format_Object.Self_Ref_Format := Self_Ref_Format;
@@ -427,8 +440,10 @@ package body ARM_Format is
 	Format_Object.Unnumbered_Section := 0;
         Format_Object.Subnumber := 0;
         Format_Object.Next_Note := 1;
-        Format_Object.Num_Notes := ARM_Contents.No_Notes;
+        Format_Object.Num_Notes := ARM_Contents.No_Items;
         Format_Object.Notes_Deleted_Paras_Displayed := False;
+        Format_Object.Next_Example := 1;
+        Format_Object.Num_Examples := ARM_Contents.No_Items;
         Format_Object.Next_Paragraph := 1;
         Format_Object.Next_Insert_Para := 1;
         Format_Object.Next_AARM_Sub := 'a';
@@ -1551,7 +1566,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 				    when Syntax =>
 				        return 1; -- One unit.
 				    when Notes | Single_Note => -- Notes (only the numbering varies)
-				        return 1; -- One unit.
+				        if Format_Object.Note_Format /= ISO2021 then
+                                            return 1; -- One unit.
+                                        else
+                                            return 0; -- No indent.
+                                        end if;
 				    when Element_Ref | Child_Ref | Usage_Note => -- Similar to an AARM note.
 				        return 2; -- Normal indent for annotations.
 				    when Language_Design | -- "MetaRules"
@@ -1642,11 +1661,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    return Nested_Indent (Format_State.Nesting_Stack_Ptr);
 		end Enclosing_Indent;
 
+
 	        function Is_Small_Format_Paragraph (Subhead_Kind : in ARM_Paragraph.Paragraph_Type) return Boolean is
-		    -- AARM annotations are in the small font, as are user notes.
+		    -- AARM annotations are in the small font, as are user notes,
+                    -- and (in some formats), examples.
 	        begin
 		    if Is_AARM_Paragraph (Subhead_Kind) then
 			return True; -- AARM paragraphs are always small.
+                    elsif Subhead_Kind = Notes or else Subhead_Kind = Single_Note then
+                        return True; -- Notes are always small, regardless of the format.
+                    elsif Subhead_Kind = Examples and then Format_Object.Examples_Format /= Ada95 then
+                        return True; -- Examples are small in non-Ada95 formats.
 		    else -- Check the enclosing formatting for "small" or
 			 -- other styles that imply that.
 		        for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
@@ -1657,9 +1682,15 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 				         Static_Semantics | Link_Time |
 				         Run_Time | Bounded_Errors |
 				         Erroneous | Requirements | Documentation |
-				         Metrics | Permissions | Advice | Examples =>
+				         Metrics | Permissions | Advice =>
 				        return False;
-			            when Language_Design | Ada83_Inconsistencies |
+			            when Examples =>
+                                        if Format_Object.Examples_Format = Ada95 then
+				            return False;
+                                        else -- ISO_2021 is in the small fonts.
+         				    return True;
+                                        end if;
+                                    when Language_Design | Ada83_Inconsistencies |
 				         Ada83_Incompatibilities | Ada83_Extensions |
 				         Ada83_Wording | Ada95_Inconsistencies |
 				         Ada95_Incompatibilities | Ada95_Extensions |
@@ -1717,9 +1748,16 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Documentation | -- DocReq
 		         Metrics |
 		         Permissions | -- ImplPerm
-		         Advice | -- ImplAdvice
-		         Examples =>
+		         Advice => -- ImplAdvice
 			Format_Object.Style := ARM_Output.Normal;
+			Format_Object.Indent := 0; -- No indent.
+			Format_Object.No_Breaks := False;
+                    when Examples =>
+                        if Format_Object.Examples_Format = Ada95 then
+			    Format_Object.Style := ARM_Output.Normal;
+                        else -- ISO_2021 is in the small format.
+            		    Format_Object.Style := ARM_Output.Small;
+                        end if;
 			Format_Object.Indent := 0; -- No indent.
 			Format_Object.No_Breaks := False;
 		    when Wide_Above =>
@@ -1729,7 +1767,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		        elsif Format_Object.Last_Paragraph_Subhead_Type = Notes or else
 			      Format_Object.Last_Paragraph_Subhead_Type = Single_Note then
 			    Format_Object.Style  := ARM_Output.Small_Wide_Above;
-			    Format_Object.Indent := 1; -- One unit.
+			    if Format_Object.Note_Format = ISO2021 then
+			        Format_Object.Indent := 0; -- No indent.
+                            else
+                                Format_Object.Indent := 1; -- One unit.
+                            end if;
 			else
 			    Format_Object.Style  := ARM_Output.Wide_Above;
 			    Format_Object.Indent := 0; -- No indent.
@@ -1741,7 +1783,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			Format_Object.No_Breaks := True;
 		    when Notes | Single_Note | Small => -- Notes (only the numbering varies)
 			Format_Object.Style  := ARM_Output.Small;
-			Format_Object.Indent := 1; -- One unit.
+			if Format_Object.Note_Format = ISO2021 then
+			    Format_Object.Indent := 0; -- No indent.
+                        else
+                            Format_Object.Indent := 1; -- One unit.
+                        end if;
 			Format_Object.No_Breaks := False;
 		    when Element_Ref | Child_Ref | Usage_Note => -- Similar to an AARM note.
 			Format_Object.Style  := ARM_Output.Small;
@@ -1814,7 +1860,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			        Format_Object.Indent := 6; -- Fixed indent.
 			    elsif Format_Object.Last_Paragraph_Subhead_Type = Notes or else
 			          Format_Object.Last_Paragraph_Subhead_Type = Single_Note then
-			        Format_Object.Indent := 5; -- Fixed indent.
+			        if Format_Object.Note_Format = ISO2021 then
+			            Format_Object.Indent := 4; -- Fixed indent.
+                                else
+                                    Format_Object.Indent := 5; -- Fixed indent.
+                                end if;
 			    else
 			        Format_Object.Indent := 4; -- Fixed indent.
 			    end if;
@@ -1823,7 +1873,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			        Format_Object.Indent := 3; -- Fixed indent.
 			    elsif Format_Object.Last_Paragraph_Subhead_Type = Notes or else
 			          Format_Object.Last_Paragraph_Subhead_Type = Single_Note then
-			        Format_Object.Indent := 2; -- Fixed indent.
+			        if Format_Object.Note_Format = ISO2021 then
+			            Format_Object.Indent := 1; -- Fixed indent.
+                                else
+                                    Format_Object.Indent := 2; -- Fixed indent.
+                                end if;
 			    else
 			        Format_Object.Indent := 1; -- Fixed indent.
 			    end if;
@@ -1836,7 +1890,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		        elsif Format_Object.Last_Paragraph_Subhead_Type = Notes or else
 			      Format_Object.Last_Paragraph_Subhead_Type = Single_Note then
 			    Format_Object.Style  := ARM_Output.Small;
-			    Format_Object.Indent := 3; -- Three units.
+                            if Format_Object.Note_Format = ISO2021 then
+			        Format_Object.Indent := 4; -- Two units.
+                            else
+                                Format_Object.Indent := 3; -- Three units.
+                            end if;
 		        elsif Format_Object.Last_Paragraph_Subhead_Type = Small then
 			    Format_Object.Style  := ARM_Output.Small;
 			    Format_Object.Indent := 2; -- Two units.
@@ -2051,13 +2109,21 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Documentation | -- DocReq
 		         Metrics |
 		         Permissions | -- ImplPerm
-		         Advice | -- ImplAdvice
-		         Examples =>
-			ARM_Output.Category_Header (Output_Object, 
+		         Advice => -- ImplAdvice
+			ARM_Output.Category_Header (Output_Object,
                             ARM_Paragraph.Paragraph_Kind_Title(For_Type).Str(1..ARM_Paragraph.Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
+                    when Examples =>
+                        if Format_Object.Examples_Format = Ada95 then
+			    ARM_Output.Category_Header (Output_Object,
+                                ARM_Paragraph.Paragraph_Kind_Title(For_Type).Str(1..ARM_Paragraph.Paragraph_Kind_Title(For_Type).Length));
+			    Format_Object.Last_Paragraph_Subhead_Type := For_Type;
+                        else -- ISO_2021. There is no subheader; the intro tags
+                             -- are created by the @NewExample command.
+                            null;
+                        end if;
 		    when Notes | Single_Note => -- Notes
-			if not Format_Object.Use_ISO_2004_Note_Format then
+			if Format_Object.Note_Format = Ada95 then
 			    -- The Notes header looks different from the others.
 		            ARM_Output.Start_Paragraph (Output_Object,
 					                Style  => ARM_Output.Small_Header,
@@ -2209,7 +2275,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		-- Output subheader, if needed.
 --Ada.Text_IO.Put_Line ("Check_Paragraph, not In_Paragraph, last para subhead: " &
 --Format_Object.Last_Paragraph_Subhead_Type'Image &
---"; next para subhead: " & Format_Object.Last_Paragraph_Subhead_Type'Image & 
+--"; next para subhead: " & Format_Object.Last_Paragraph_Subhead_Type'Image &
 --"; format= " & Format_Object.Next_Paragraph_Format_Type'Image &
 --"; on line " & Arm_Input.Line_String(Input_Object));
 		if Format_Object.Next_Paragraph_Subhead_Type /=
@@ -2363,7 +2429,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		if not Format_Object.No_Prefix then
 		    if Format_Object.Next_Paragraph_Format_Type = Notes and then
 		       Show_Leading_Text_for_Paragraph then
-			if not Format_Object.Use_ISO_2004_Note_Format then
+			if Format_Object.Note_Format = Ada95 then
 			    -- Output the note number (Ada95 format).
 		            declare
 		                NNum : constant String := Integer'Image(Format_Object.Next_Note);
@@ -2375,8 +2441,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		                Format_Object.Next_Note := Format_Object.Next_Note + 1;
 			    end;
 			else
-			    -- Output the note header (ISO 2004 format).
-                            if ARM_Contents."=" (Format_Object.Num_Notes, ARM_Contents.One_Note) then
+			    -- Output the note header (ISO 2004/2021 format).
+                            if ARM_Contents."=" (Format_Object.Num_Notes, ARM_Contents.One_Item) then
                                 -- Do not include a note number.
 		                ARM_Output.Ordinary_Text (Output_Object, "NOTE");
 	                        ARM_Output.Hard_Space (Output_Object);
@@ -2394,11 +2460,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			end if;
 		    elsif Format_Object.Next_Paragraph_Format_Type = Single_Note and then
 		       Show_Leading_Text_for_Paragraph then
-			if not Format_Object.Use_ISO_2004_Note_Format then
+			if Format_Object.Note_Format = Ada95 then
 			    -- No note number, and nothing else needed.
 			    null;
 			else
-			    -- Output the note header (ISO 2004 format)
+			    -- Output the note header (ISO 2004/2021 format)
 			    -- without a number.
 		            ARM_Output.Ordinary_Text (Output_Object, "NOTE");
 		            ARM_Output.Hard_Space (Output_Object);
@@ -2410,7 +2476,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        Format_Object.Next_Paragraph_Format_Type = Nested_Enumerated) and then
 		       Show_Leading_Text_for_Paragraph then
 		        -- Output the item number.
-			if Format_Object.Use_ISO_2004_Note_Format then
+			if Format_Object.Use_ISO_2004_List_Format then
 			    if Format_Object.Enumerated_Level <= 1 then -- Outer list.
 				-- Lower case letters for list:
 		                ARM_Output.Ordinary_Text (Output_Object,
@@ -2604,6 +2670,74 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	    -- else not displayed.
 	    end if;
 	end Display_Index_Entry;
+
+
+	procedure Modify_Tab_Stops (Stops : in out String;
+                                    Adjust : in Float := 1.0) is
+	    -- Modify the stop locations in the tab string "Stops".
+            -- Adjust the stops by the adjustment amount (usually should be
+            -- a value near 1.0, certainly must be greater than 0.3).
+            -- Note: We assume this does not change the length of the
+            -- string; if it does, we'll raise Program_Error.
+	    Loc : Natural := Stops'First;
+            NLoc : Natural;
+            The_Stop : ARM_Output.Tab_Location := 0;
+	begin
+            if Adjust < 0.3 then
+                raise Program_Error with "** Bad adjustment in Parse_Tab_Stops";
+            -- else OK.
+            end if;
+	    -- Parse tab stops:
+	    -- <tab_stop> ::= <modifier><pica_count_literal>
+	    -- <modifier> ::= L | P
+	    -- <tab_stops> ::= <tab_stop> {, <tab_stop>}
+	    while Loc <= Stops'Length loop
+		if Stops(Loc) = 'l' or Stops(Loc) = 'L' then
+		    Loc := Loc + 1;
+		elsif Stops(Loc) = 'p' or Stops(Loc) = 'P' then
+		    Loc := Loc + 1;
+		-- else nothing to read.
+		end if;
+		NLoc := Loc; -- Save start of number.
+                while Loc <= Stops'Length loop
+		    if Stops(Loc) in '0' .. '9' then
+		        The_Stop :=
+		            The_Stop * 10 +
+			    Character'Pos(Stops(Loc)) - Character'Pos('0');
+			Loc := Loc + 1;
+		    else
+			exit; -- Number ended.
+		    end if;
+		end loop;
+                -- Adjust the stop as requested:
+                The_Stop := ARM_Output.Tab_Location(Float(The_Stop) * Adjust);
+                declare
+                    Simage : constant String := The_Stop'Image;
+                begin
+                    if Simage'Length - 1 /= Loc - NLoc then
+                        raise Program_Error with "Adjusted tab stop does not fit!";
+                    end if;
+--Ada.Text_IO.Put_Line ("Modify Tabs: NLoc=" & NLoc'Image & "; Loc=" & Loc'Image & "; SImage=" & SImage & "; Stops=" & Stops);
+                    Stops(NLoc .. Loc - 1) :=
+                        SImage(SImage'Last + NLoc - (Loc - 1) .. SImage'Last);
+                end;
+		if Loc > Stops'Length then
+		    exit; -- Finished.
+		elsif Stops(Loc) = ',' then
+		    Loc := Loc + 1;
+		    if Loc > Stops'Length then
+		        Ada.Text_IO.Put_Line ("  ** Bad tab stop set format, ends with comma in [" &
+			    Stops & "] from line " &
+		            ARM_Input.Line_String (Input_Object));
+		        exit; -- Give up on this tabset.
+		    end if;
+	        end if;
+		-- Skip any blanks in between.
+		while Loc <= Stops'Length and then Stops(Loc) = ' ' loop
+		    Loc := Loc + 1;
+		end loop;
+	    end loop;
+	end Modify_Tab_Stops;
 
 
 	procedure Parse_Tab_Stops (Stops : in String;
@@ -2833,7 +2967,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Close_Ch,
 		    Parent,
 		    PLen);
-	    -- else no parameter. Weird.
+	    -- else no parameter. An error message has already been produced.
 	    end if;
 
 	    ARM_Input.Check_Parameter_Name (Input_Object,
@@ -2847,7 +2981,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Close_Ch,
 		    Child,
 		    CLen);
-	    -- else no parameter. Weird.
+	    -- else no parameter. An error message has already been produced.
 	    end if;
 
 	    -- Set the current unit for future use:
@@ -2912,7 +3046,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 	procedure Process_Begin is
 	    -- Process a "begin". The "begin" has been stacked.
-            
+
             use ARM_Paragraph; -- For enumeration literals, could have been "use all type ARM_Paragraph.Paragraph_Type;"
             Kind : ARM_Paragraph.Paragraph_Type := Unknown;
 
@@ -2920,14 +3054,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		-- This skips *everything* until the matching end. This includes
 		-- index references, section references, and the like. We use a
                 -- fairly simple text skip. Anything that shouldn't be skipped
-                -- should be moved to a different kind of paragraph.  
+                -- should be moved to a different kind of paragraph.
                 --
                 -- For instance, this is used to skip AARM-specific code.
                 -- Anything that should appear in the RM shouldn't be in such
                 -- a paragraph.
 		Ch : Character;
 		Close_Ch : Character;
-		Command_Name : ARM_Input.Command_Name_Type;                
+		Command_Name : ARM_Input.Command_Name_Type;
 	    begin
 		-- Skip everything up to the next @end{<Paragraph_Kind_Name...
 		-- then pop the stack and return.
@@ -3008,13 +3142,13 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    := False;
             else
                 Kind := ARM_Paragraph.Get_Paragraph_Kind (Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name);
-                
+
                 if Kind = Unknown then
 		    Ada.Text_IO.Put_Line ("  ** Unknown 'begin' type - " &
 		        Ada.Strings.Fixed.Trim (Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right) &
 		        " on line " & ARM_Input.Line_String (Input_Object));
                 elsif Kind = Comment then
-		    Toss_Entire_Contents ("comment");                
+		    Toss_Entire_Contents ("comment");
                 elsif Kind in ARM_Paragraph.Ada_Groupings then
                     -- Check that we are not nested in any other Ada_Groupings:
                     for I in 1 .. Format_State.Nesting_Stack_Ptr loop
@@ -3040,7 +3174,7 @@ end if;
                         -- else OK.
                         end if;
                     end loop; -- Note: This includes checking the item itself.
-                              
+
                     if not Format_Object.Include_Group(Kind) then
                         -- Don't include this group in the output. This includes
                         -- AARM paragraphs when generating an RM, ISOOnly paragraphs
@@ -3050,13 +3184,13 @@ end if;
                     else
                         Format_Object.Next_Paragraph_Format_Type := Kind;
                         Format_Object.Next_Paragraph_Subhead_Type := Kind;
-                        
+
                         if Kind = Notes or else Kind = Single_Note then
                             Format_Object.Notes_Deleted_Paras_Displayed := False;
                                 -- Reset this so we only are looking at Notes text.
                         -- No special initialization needed.
                         end if;
-                    end if;                   
+                    end if;
                 elsif Kind in ARM_Paragraph.AARM_Annotations then
                     -- Check that we are not nested in any other AARM_Annotations:
                     for I in 1 .. Format_State.Nesting_Stack_Ptr loop
@@ -3082,7 +3216,7 @@ end if;
                         end if;
                     end loop; -- Note: This will be a zero-trip loop if we're
                               -- the outermost @begin.
-                              
+
                     if not Format_Object.Include_Group(Kind) then
                         -- Don't include this group in the output. This includes
                         -- AARM paragraphs when generating an RM, ISOOnly paragraphs
@@ -3092,7 +3226,7 @@ end if;
                     else
                         Format_Object.Next_Paragraph_Format_Type := Kind;
                         Format_Object.Next_Paragraph_Subhead_Type := Kind;
-                    end if;                   
+                    end if;
                 elsif Kind in ARM_Paragraph.Classification_Kinds then
                     -- Check that we are not nested in any (other) Classification:
                     for I in 1 .. Format_State.Nesting_Stack_Ptr loop
@@ -3128,12 +3262,12 @@ end if;
                         --    we may want to revisit this. - RLB - 4/15/22
 --!!Debug:
 ---Ada.Text_IO.Put_Line ("Next=" & Format_Object.Next_Paragraph_Subhead_Type'Image);
-                    end if;                 
+                    end if;
                 elsif Kind = Enumerated or else Kind = Nested_Enumerated then
                     -- Special case, need to set up numbering.
                     Format_Object.Next_Paragraph_Format_Type := Kind;
                     Format_Object.Next_Enumerated_Num := 1;
-                    Format_Object.Enumerated_Level := Format_Object.Enumerated_Level + 1;                    
+                    Format_Object.Enumerated_Level := Format_Object.Enumerated_Level + 1;
                 else -- Other normal kinds of formatting.
                     -- Note that these cannot be excluded themselves, although
                     -- something surrounding them could exclude them.
@@ -3150,7 +3284,7 @@ end if;
 	    -- Process the start of a command with a parameter.
 	    -- The parameter character has been processed, and
 	    -- a stack item pushed.
-            
+
             use type ARM_Paragraph.Paragraph_Type; -- for "=".
 
 	    function Get_NT return String is
@@ -3191,7 +3325,7 @@ end if;
 			Ada.Text_IO.Put_Line ("  ** Bad close for change version on line " & ARM_Input.Line_String (Input_Object));
 			ARM_Input.Replace_Char (Input_Object);
 		    end if;
-		-- else no parameter. Weird.
+		-- else no parameter. An error message has already been produced.
 		end if;
 	    end Get_Change_Version;
 
@@ -3222,16 +3356,34 @@ end if;
                             Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right) &
                             " on line " & ARM_Input.Line_String (Input_Object));
                     end;
-		-- else no parameter. Weird.
+		-- else no parameter. An error message has already been produced.
 		end if;
 	    end Get_Change_Kind;
 
 
 	    procedure Get_Boolean (Param_Name : in ARM_Input.Command_Name_Type;
-				   Result : out Boolean) is
+				   Result : out Boolean;
+                                   Optional : in Boolean) is
 		-- Get a boolean value from a parameter named Param_Name.
+                -- The parameter is an optional last parameter if
+                -- Optional is True.
 		Ch, Close_Ch : Character;
 	    begin
+                if Optional then
+                    -- Check if there is a comma:
+                    ARM_Input.Get_Char (Input_Object, Ch);
+                    if Ch = ',' then
+                        -- There is a comma, so a parameter follows. Continue.
+                        ARM_Input.Replace_Char (Input_Object);
+                    else -- No comma, no parameter (hopefully).
+                        -- We'd check if this was a possible close character,
+                        -- but we don't have Is_Close_Char as an operation.
+                        ARM_Input.Replace_Char (Input_Object);
+                        Result := False;
+                        return;
+                    end if;
+                -- else not optional.
+                end if;
 		ARM_Input.Check_Parameter_Name (Input_Object,
 		    Param_Name => Param_Name,
 		    Is_First => False,
@@ -3256,7 +3408,7 @@ end if;
 			    " on line " & ARM_Input.Line_String (Input_Object));
 			ARM_Input.Replace_Char (Input_Object);
 		    end if;
-		-- else no parameter. Weird.
+		-- else no parameter, an error message has already been produced.
 		end if;
 	    end Get_Boolean;
 
@@ -3319,7 +3471,7 @@ end if;
 			end if;
 	            -- else don't display it.
 		    end if;
-	        -- else no parameter. Weird.
+	        -- else no parameter. An error message has already been produced.
 	        end if;
 	    end Gen_Ref_or_ARef_Parameter;
 
@@ -3342,7 +3494,7 @@ end if;
 			Ada.Text_IO.Put_Line ("  ** Bad close for term group on line " & ARM_Input.Line_String (Input_Object));
 			ARM_Input.Replace_Char (Input_Object);
 		    end if;
-		-- else no parameter. Weird.
+		-- else no parameter. An error message has already been produced.
 		end if;
                 begin
                     Group := ARM_Paragraph.Get_Term_Group (Grp_Ch);
@@ -3667,7 +3819,7 @@ end if;
 		        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 		    end if;
 
-	        -- else no parameter. Weird.
+	        -- else no parameter. An error message has already been produced.
 	        end if;
 	    end Gen_Chg_xxxx;
 
@@ -3707,7 +3859,7 @@ end if;
 		            Close_Ch,
 			    Format_Object.Syntax_Tab,
 			    Format_Object.Syntax_Tab_Len);
-		    -- else no parameter. Weird.
+		    -- else no parameter. An error message has already been produced.
 		    end if;
 		else
 		    Format_Object.Syntax_Tab_Len := 0;
@@ -3724,7 +3876,7 @@ end if;
 		        Close_Ch,
 			Format_Object.Syntax_NT,
 			Format_Object.Syntax_NT_Len);
-		-- else no parameter. Weird.
+		-- else no parameter. An error message has already been produced.
 		end if;
 
 		ARM_Input.Check_Parameter_Name (Input_Object,
@@ -3740,7 +3892,7 @@ end if;
 		-- for explicitly generated text. All of the parameters have been
 		-- read in; the close character for the RHS parameter is
 		-- RHS_Close_Ch.
-		use type ARM_Output.Change_Type;
+		use type ARM_Output.Change_Type, ARM_Output.Font_Family_Type;
 		Org_Tabs : ARM_Output.Tab_Info;
 		Key : ARM_Index.Index_Key;
 	    begin
@@ -3775,18 +3927,53 @@ end if;
 		    Org_Tabs := Format_Object.Paragraph_Tab_Stops;
 		    Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 		    if Format_Object.Syntax_Tab_Len /= 0 then
-		        Parse_Tab_Stops (Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len),
+                        if Format_Object.Nonterminal_Font = ARM_Output.Fixed then
+                            -- The fixed font is wider, so adjust the tab stops.
+                            Modify_Tab_Stops (Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len), Adjust => 1.2);
+                        -- else leave them alone.
+                        end if;
+                        Parse_Tab_Stops (Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len),
 			    Format_Object.Paragraph_Tab_Stops);
 		    end if;
 
 		    Check_Paragraph;
-		    ARM_Format.Format (Format_Object,
-				       "@s{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) & "}",
-				       Output_Object,
-				       Text_Name => "@Syn(LHS=",
-				       No_Annotations => False);
-		        -- We use Format here so we can support changes in
-		        -- the non-terminal.
+
+                    -- Special case: If the font is "Fixed", the syntax is generally too large,
+                    -- so use a smaller size.
+                    if Format_Object.Nonterminal_Font = ARM_Output.Fixed then
+                        declare -- This is essentially a "shrink" command.
+                            use type ARM_Output.Size_Type;
+                        begin
+                            Format_Object.Text_Format.Size :=
+                                Format_Object.Text_Format.Size - 1;
+                            ARM_Output.Text_Format (Output_Object,
+                                                    Format => Format_Object.Text_Format);
+                        end;
+                    -- else no special size change needed.
+                    end if;
+
+		    -- We use Format here so we can support changes in
+		    -- the non-terminal. But we have to use the correct font for
+                    -- the non-terminal.
+                    if Format_Object.Nonterminal_Font = ARM_Output.Swiss then
+		        ARM_Format.Format (Format_Object,
+				           "@s{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) & "}",
+				           Output_Object,
+				           Text_Name => "@Syn(LHS=",
+				           No_Annotations => False);
+                    elsif Format_Object.Nonterminal_Font = ARM_Output.Fixed then
+		        ARM_Format.Format (Format_Object,
+				           "@f{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) & "}",
+				           Output_Object,
+				           Text_Name => "@Syn(LHS=",
+				           No_Annotations => False);
+                    else
+		        ARM_Format.Format (Format_Object,
+				           "@r{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) & "}",
+				           Output_Object,
+				           Text_Name => "@Syn(LHS=",
+				           No_Annotations => False);
+                    end if;
 
 		    -- Index the non-terminal:
 		    ARM_Index.Add (Term => Get_NT,
@@ -3842,24 +4029,24 @@ end if;
 			end;
 		    end if;
 
-		    -- Set the font for the "::=". Note that we use @s{}
-		    -- above, so that any font changes in the Non-Terminal
-		    -- (as in a @Chg command) are respected.
+		    -- Set the font for the "::=". Note that we use an explicit
+                    -- font setting like @s{} above, so that any font changes in
+                    -- the Non-Terminal (as in a @Chg command) are respected.
 		    -- This command includes any needed insertion or deletion.
 
 		    declare
-			Swiss_Format : ARM_Output.Format_Type :=
+			Nonterm_Format : ARM_Output.Format_Type :=
 			    Format_Object.Text_Format;
 		    begin
-		        Swiss_Format.Font := ARM_Output.Swiss;
+		        Nonterm_Format.Font := Format_Object.Nonterminal_Font;
 			if Disposition = ARM_Output.None then
 			    null;
 		        else
-		            Swiss_Format.Change := Disposition;
-		            Swiss_Format.Version := Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version;
+		            Nonterm_Format.Change := Disposition;
+		            Nonterm_Format.Version := Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version;
 		        end if;
 		        ARM_Output.Text_Format (Output_Object,
-					        Swiss_Format);
+					        Nonterm_Format);
 		    end;
 		    ARM_Output.Ordinary_Text (Output_Object, " ::= ");
 		    ARM_Output.Text_Format (Output_Object,
@@ -3882,7 +4069,7 @@ end if;
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Org_Tabs;
 		        Format_Object.Next_Paragraph_Format_Type := ARM_Paragraph.Syntax_Production;
 		        -- Tab stops are already set.
-		    -- else no parameter, weird.
+		    -- else no parameter, An error message has already been produced.
 		    end if;
 		end if;
 	    end Gen_Syntax_Rule;
@@ -4019,7 +4206,7 @@ end if;
 		when Non_Terminal_Format =>
 		    -- No linking here.
 		    Check_Paragraph;
-		    Format_Object.Text_Format.Font := ARM_Output.Swiss;
+		    Format_Object.Text_Format.Font := Format_Object.Nonterminal_Font;
 		    ARM_Output.Text_Format (Output_Object,
 					    Format => Format_Object.Text_Format);
 
@@ -4079,7 +4266,7 @@ end if;
 		    declare
 			Name : String(1..120);
 			Len : Natural;
-			Swiss_Format : ARM_Output.Format_Type :=
+			Nonterm_Format : ARM_Output.Format_Type :=
 			    Format_Object.Text_Format;
 		    begin
 		        ARM_Input.Copy_to_String_until_Close_Char (
@@ -4090,9 +4277,12 @@ end if;
 		        -- Set the appropriate style:
 		        Check_Paragraph;
 
-		        Swiss_Format.Font := ARM_Output.Swiss;
-		        ARM_Output.Text_Format (Output_Object,
-					        Format => Swiss_Format);
+		        if ARM_Output."/=" (Format_Object.Text_Format.Font, Format_Object.Nonterminal_Font) then
+                            Nonterm_Format.Font := Format_Object.Nonterminal_Font;
+		            ARM_Output.Text_Format (Output_Object,
+					            Format => Nonterm_Format);
+                        -- else does not change.
+                        end if;
 			if Format_Object.Link_Non_Terminals then
 			    if Ada.Strings.Fixed.Index (Name(1..Len), "@") /= 0 then
 			        -- Embedded commands. We have to clean the
@@ -4196,7 +4386,8 @@ end if;
 				ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
 			    end if;
 			end if;
-		        ARM_Output.Text_Format (Output_Object,
+		        -- Restore format:
+                        ARM_Output.Text_Format (Output_Object,
 					        Format => Format_Object.Text_Format);
 			Format_Object.Last_Non_Space := True;
 		    end;
@@ -4287,7 +4478,7 @@ end if;
 					Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
 					" on line " & ARM_Input.Line_String (Input_Object));
 			    end if;
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 		        ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4322,9 +4513,9 @@ end if;
 			    end if;
 			end if;
 
-			Get_Boolean ("NoBreak" & (8..ARM_Input.Command_Name_Type'Last => ' '), No_Page_Break);
-			Get_Boolean ("Border" & (7..ARM_Input.Command_Name_Type'Last => ' '), Has_Border);
-			Get_Boolean ("SmallSize" & (10..ARM_Input.Command_Name_Type'Last => ' '), Small_Text);
+			Get_Boolean ("NoBreak" & (8..ARM_Input.Command_Name_Type'Last => ' '), No_Page_Break, Optional => False);
+			Get_Boolean ("Border" & (7..ARM_Input.Command_Name_Type'Last => ' '), Has_Border, Optional => False);
+			Get_Boolean ("SmallSize" & (10..ARM_Input.Command_Name_Type'Last => ' '), Small_Text, Optional => False);
 
 		        -- Set to the table format:
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
@@ -4423,17 +4614,17 @@ end if;
 				                (Command => Table_Param_Body,
 					         Close_Ch => Close_Ch);
 
-					-- else no parameter, weird.
+					-- else no parameter, an error message has already been produced.
 					end if;
 
 				    end if;
 
-				-- else no parameter, weird.
+				-- else no parameter, an error message has already been produced.
 				end if;
 
                             end if;
 
-			-- else no parameter, weird.
+			-- else no parameter, an error message has already been produced.
 			end if;
 		    end;
 
@@ -4492,7 +4683,7 @@ end if;
 					    Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
 					    " on line " & ARM_Input.Line_String (Input_Object));
 			        end if;
-			    -- else no parameter. Weird.
+			    -- else no parameter. An error message has already been produced.
 			    end if;
 
 		        else -- Picture_Inline.
@@ -4525,7 +4716,7 @@ end if;
 					    Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
 					    " on line " & ARM_Input.Line_String (Input_Object));
 			        end if;
-			    -- else no parameter. Weird.
+			    -- else no parameter. An error message has already been produced.
 			    end if;
 
 		        end if;
@@ -4557,7 +4748,7 @@ end if;
 				        Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
 				        " on line " & ARM_Input.Line_String (Input_Object));
 			    end if;
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 
 		        ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4578,7 +4769,7 @@ end if;
 			            Ada.Text_IO.Put_Line ("  ** Bad picture height: " &
 				            Name(1..NLen) & " on line " & ARM_Input.Line_String (Input_Object));
 			    end;
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 
 		        ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4599,7 +4790,7 @@ end if;
 			            Ada.Text_IO.Put_Line ("  ** Bad picture width: " &
 				            Name(1..NLen) & " on line " & ARM_Input.Line_String (Input_Object));
 			    end;
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 
 		        ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4613,7 +4804,7 @@ end if;
 			        Close_Ch,
 			        Name,
 			        NLen);
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 
 		        ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4627,7 +4818,7 @@ end if;
 			        Close_Ch,
 			        Descr,
 			        DLen);
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 
 			ARM_Output.Picture (
@@ -4707,7 +4898,7 @@ end if;
 		    declare
 			Type_Name : ARM_Input.Command_Name_Type;
 			Ch : Character;
-                        use type ARM_Contents.Note_Info_Type;
+                        use type ARM_Contents.Group_Info_Type;
 		    begin
 	                Arm_Input.Get_Name (Input_Object, Type_Name); -- Get the end "type".
 		        ARM_Input.Get_Char (Input_Object, Ch);
@@ -4744,8 +4935,8 @@ end if;
                                 -- Check if the number of notes matches expectation (if it does not, format will
                                 -- be incorrect).
                                 if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "notes" and then
-                                    Format_Object.Use_ISO_2004_Note_Format then
-                                    if Format_Object.Num_Notes = ARM_Contents.One_Note and then 
+                                    Format_Object.Note_Format /= Ada95 then
+                                    if Format_Object.Num_Notes = ARM_Contents.One_Item and then
                                        Format_Object.Next_Note /= 2 then
                                        if Format_Object.Next_Note = 1 then
                                            -- No notes at all, could be a deleted note.
@@ -4760,25 +4951,28 @@ end if;
                                                -- But we don't have an easy way to figure out what the maximum
                                                -- version of the source file is (we could add code to the scan
                                                -- phase to figure it out, but that would be expensive for a rare case).
-                                       else -- Oops, too many notes.     
+                                       else -- Oops, too many notes.
                                            Ada.Text_IO.Put_Line ("  ** Notes section with only one note expected but had" &
                                                Integer'Image (Format_Object.Next_Note-1) & " notes instead, at line " &
                                                ARM_Input.Line_String (Input_Object));
                                                -- This is likely a scanning problem.
                                        end if;
-                                    elsif Format_Object.Num_Notes /= ARM_Contents.One_Note and then 
+                                    elsif Format_Object.Num_Notes /= ARM_Contents.One_Item and then
                                           Format_Object.Next_Note = 2 then
-                                       Ada.Text_IO.Put_Line ("?? Notes section with only single note and is numbered, at line " &
+                                       Ada.Text_IO.Put_Line ("  -- Notes section with only single note and is numbered, at line " &
                                            ARM_Input.Line_String (Input_Object));
+                                           -- This can happen if there are multiple notes sections. This happens in the
+                                           -- RM (once, in 5.2), so we have this as an "information" as we don't
+                                           -- want warnings in a correct document.
                                     -- else OK.
                                     end if;
                                 elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "singlenote" and then
-                                    Format_Object.Use_ISO_2004_Note_Format then
-                                    if Format_Object.Num_Notes /= ARM_Contents.One_Note then
-                                       if Format_Object.Num_Notes = ARM_Contents.No_Notes then
+                                    Format_Object.Note_Format /= Ada95 then
+                                    if Format_Object.Num_Notes /= ARM_Contents.One_Item then
+                                       if Format_Object.Num_Notes = ARM_Contents.No_Items then
                                           Ada.Text_IO.Put_Line ("** SingleNote section with no notes expected, at line " &
                                               ARM_Input.Line_String (Input_Object));
-                                              -- Shouldn't be possible; most likely some scanning problem 
+                                              -- Shouldn't be possible; most likely some scanning problem
                                               -- (or headers with no contents).
                                        elsif Format_Object.Next_Note /= 2 then
                                            if Format_Object.Changes = New_Only then
@@ -4808,7 +5002,7 @@ end if;
                                               "but only one note generated, at line " & ARM_Input.Line_String (Input_Object));
                                               -- This should mean that a single note has additional parts
                                               -- (like an example or bullets), or deleted additional notes not
-                                              -- displayed, so the estimate is wrong.                                      
+                                              -- displayed, so the estimate is wrong.
                                        end if;
                                     elsif Format_Object.Next_Note /= 2 then
                                        if Format_Object.Changes = New_Only then
@@ -4833,6 +5027,36 @@ end if;
                                                Integer'Image (Format_Object.Next_Note-1) & " notes instead, at line " &
                                                ARM_Input.Line_String (Input_Object));
                                        end if;
+                                    end if;
+                                -- else not interesting.
+                                end if;
+                                -- Check number of examples:
+                                if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) = "examples" then
+                                    if Format_Object.Num_Examples = ARM_Contents.No_Items then
+                                        -- No examples at all, this is a missing @NewExample.
+                                        Ada.Text_IO.Put_Line ("  ** Examples section without @NewExample command, at line " & ARM_Input.Line_String (Input_Object));
+                                    elsif Format_Object.Num_Examples = ARM_Contents.One_Item and then
+                                       Format_Object.Next_Example /= 2 then
+                                       if Format_Object.Next_Example = 1 then
+                                           -- No examples at all, could be a deleted example.
+                                           Ada.Text_IO.Put_Line ("  -- Examples section with only one example expected but had " &
+                                               "none instead, at line " & ARM_Input.Line_String (Input_Object));
+                                               -- We have this as an "information" since it happens for notes,
+                                               -- it ought to happen for examples, and we don't want warnings in a
+                                               -- correct document. We could call this an error if ALL of the
+                                               -- text is shown, but that's a lot of work (see Notes above).
+                                       else -- Oops, too many examples.
+                                           Ada.Text_IO.Put_Line ("  ** Examples section with only one example expected but had" &
+                                               Integer'Image (Format_Object.Next_Example-1) & " examples instead, at line " &
+                                               ARM_Input.Line_String (Input_Object));
+                                               -- This is likely a scanning problem.
+                                       end if;
+                                    elsif Format_Object.Num_Examples /= ARM_Contents.One_Item and then
+                                          Format_Object.Next_Example = 2 then
+                                       Ada.Text_IO.Put_Line ("?? Examples section with only single example and is numbered, at line " &
+                                           ARM_Input.Line_String (Input_Object));
+                                           -- This probably means that a subexample was deleted.
+                                    -- else OK.
                                     end if;
                                 -- else not interesting.
                                 end if;
@@ -4957,7 +5181,7 @@ end if;
 			        Close_Ch,
 				Term,
 				TLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4971,7 +5195,7 @@ end if;
 			        Close_Ch,
 				Subterm,
 				SLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Index.Add (Term => Term(1..TLen),
@@ -5016,7 +5240,7 @@ end if;
 			        Close_Ch,
 				Term,
 				TLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -5030,7 +5254,7 @@ end if;
 			        Close_Ch,
 				Subterm,
 				SLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Index.Add (Term => Term(1..TLen),
@@ -5070,7 +5294,7 @@ end if;
 			        Close_Ch,
 				Term,
 				TLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -5084,7 +5308,7 @@ end if;
 			        Close_Ch,
 				See,
 				SLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Index.Add (Term => Term(1..TLen),
@@ -5123,7 +5347,7 @@ end if;
 			        Close_Ch,
 				Term,
 				TLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -5137,7 +5361,7 @@ end if;
 			        Close_Ch,
 				See,
 				SLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Index.Add (Term => Term(1..TLen),
@@ -5177,7 +5401,7 @@ end if;
 			        Close_Ch,
 				Term,
 				TLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -5191,7 +5415,7 @@ end if;
 			        Close_Ch,
 				See,
 				SLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Index.Add (Term => Term(1..TLen),
@@ -5228,7 +5452,7 @@ end if;
 			        Close_Ch,
 				Term,
 				TLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -5242,7 +5466,7 @@ end if;
 			        Close_Ch,
 				See,
 				SLen);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Index.Add (Term => Term(1..TLen),
@@ -5389,7 +5613,7 @@ end if;
 			        Close_Ch,
 			        Subtype_Name,
 			        SLen);
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 
 		        ARM_Input.Check_Parameter_Name (Input_Object,
@@ -5403,7 +5627,7 @@ end if;
 			        Close_Ch,
 			        Type_Name,
 			        TLen);
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 
 		        Check_Paragraph;
@@ -5823,12 +6047,15 @@ end if;
 		        -- Set the appropriate style:
 		        Check_Paragraph;
 			declare
-			    Swiss_Format : ARM_Output.Format_Type :=
+			    Nonterm_Format : ARM_Output.Format_Type :=
 				Format_Object.Text_Format;
 			begin
-			    Swiss_Format.Font := ARM_Output.Swiss;
-		            ARM_Output.Text_Format (Output_Object,
-						    Swiss_Format);
+			    if ARM_Output."/=" (Format_Object.Text_Format.Font, Format_Object.Nonterminal_Font) then
+                                Nonterm_Format.Font := Format_Object.Nonterminal_Font;
+		                ARM_Output.Text_Format (Output_Object,
+						        Nonterm_Format);
+                            -- else font unchanged.
+                            end if;
 			end;
 			if not Defined then
 			    -- No linking to do.
@@ -5907,7 +6134,7 @@ end if;
 			        Close_Ch,
 				Format_Object.Glossary_Info.Term,
 				Format_Object.Glossary_Info.Term_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -6138,7 +6365,7 @@ end if;
 			        Close_Ch,
 				Format_Object.Glossary_Info.Term,
 				Format_Object.Glossary_Info.Term_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -6393,9 +6620,9 @@ end if;
 		        end if;
 		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 		            -- Remove the "Change_Term_Def" record.
-                            
+
                         -- Now create an AARM annotation:
-                        
+
                         -- How the term is handled depends primarily on the
                         -- InitialVersion and its relationship to the version
                         -- we're generating. It only depends on the (current)
@@ -6470,7 +6697,7 @@ end if;
 			           if Delete_Disposition = ARM_Output.None and then
 				         Insert_Disposition = ARM_Output.None then
                                         -- No format change needed.
-                                        null;  
+                                        null;
 Ada.Text_IO.Put_Line ("-- Term unformatted on line " & ARM_Input.Line_String (Input_Object));
                                    elsif Delete_Disposition = ARM_Output.None and then
 				       Insert_Disposition = ARM_Output.Insertion then -- Normal insertion.
@@ -6518,11 +6745,11 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		                       ARM_Output.Text_Format (Output_Object,
 					                       Format_Object.Text_Format);
                                     end if;
-                                    
+
                                     -- Output the contents of the AARM note here:
-                                    Format (Format_Object, Text => "@b{" & Term(1..Term_Length) & "} @em ", 
+                                    Format (Format_Object, Text => "@b{" & Term(1..Term_Length) & "} @em ",
                                             Output_Object => Output_Object, Text_Name => "Term", No_Annotations => True);
-                                    Format (Format_Object, Text => Def(1..Def_Length), 
+                                    Format (Format_Object, Text => Def(1..Def_Length),
                                             Output_Object => Output_Object, Text_Name => "Term-Def", No_Annotations => True);
                                     if Note1_Length /= 0 then
                                         if Note2_Length = 0 and then Note3_Length = 0 then
@@ -6551,11 +6778,11 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		                       ARM_Output.Text_Format (Output_Object,
 					                       Format_Object.Text_Format);
                                     end if;
-                                    
+
                                     Check_End_Paragraph; -- Close the AARM note:
-                                    
+
 				end if;
-                             
+
                                 -- Reset to the state before the AARM annotation:
                                 if Format_Object.Next_Paragraph_Subhead_Type /=
                                     Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph then
@@ -6700,7 +6927,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Format_Object.Attr_Prefix,
 				Format_Object.Attr_Prefix_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -6714,7 +6941,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Format_Object.Attr_Name,
 				Format_Object.Attr_Name_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			-- Output <Prefix>'<Name> as the hanging text.
@@ -7007,7 +7234,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		        Format_Object.Next_Insert_Para := 1;
 		        Format_Object.Next_AARM_Sub := 'a';
                         Format_Object.Subnumber := 0; -- ISO numbering scheme for terms.
-		        if Format_Object.Use_ISO_2004_Note_Format then
+		        if Format_Object.Note_Format /= Ada95 then
 			    -- Reset the note number:
 		            Format_Object.Next_Note := 1;
 		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section or else
@@ -7019,10 +7246,13 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		            Format_Object.Next_Note := 1;
 		        end if;
                         Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level, Format_Object.Clause_Number);
+		        Format_Object.Next_Example := 1;
+                        Format_Object.Num_Examples :=
+                              ARM_Contents.Lookup_Example_Info (Level, Format_Object.Clause_Number);
 		        -- Reset the subhead:
 		        Format_Object.Last_Paragraph_Subhead_Type := ARM_Paragraph.Plain;
 		        Format_Object.Next_Paragraph_Format_Type :=  ARM_Paragraph.Plain;
-                        
+
 		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 		    end;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
@@ -7125,14 +7355,14 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
                                      Clause    => Format_Object.Clause_Number.Clause + 1,
                                      Subclause => 0, Subsubclause => 0);
                                 Level := ARM_Contents.Clause;
-                            else -- No ISO, a subclause.                        
+                            else -- No ISO, a subclause.
                                 Format_Object.Clause_Number :=
                                     (Section   => Format_Object.Clause_Number.Section,
                                      Clause    => Format_Object.Clause_Number.Clause,
                                      Subclause => Format_Object.Clause_Number.Subclause + 1,
                                      Subsubclause => 0);
                                 Level := ARM_Contents.Subclause;
-                            end if;                      
+                            end if;
 		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
 			    Format_Object.Clause_Number.Subsubclause :=
 				Format_Object.Clause_Number.Subsubclause + 1;
@@ -7283,7 +7513,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		        Format_Object.Next_Insert_Para := 1;
 		        Format_Object.Next_AARM_Sub := 'a';
                         Format_Object.Subnumber := 0; -- ISO numbering scheme for terms.
-		        if Format_Object.Use_ISO_2004_Note_Format then
+		        if Format_Object.Note_Format /= Ada95 then
 			    -- Reset the note number:
 		            Format_Object.Next_Note := 1;
 		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Section or else
@@ -7294,6 +7524,8 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		            Format_Object.Next_Note := 1;
 		        end if;
                         Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level, Format_Object.Clause_Number);
+		        Format_Object.Next_Example := 1;
+                        Format_Object.Num_Examples := ARM_Contents.Lookup_Example_Info (Level, Format_Object.Clause_Number);
 		        -- Reset the subhead:
 		        Format_Object.Last_Paragraph_Subhead_Type := ARM_Paragraph.Plain;
 		        Format_Object.Next_Paragraph_Format_Type :=  ARM_Paragraph.Plain;
@@ -7440,7 +7672,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		            Format_Object.Next_Insert_Para := 1;
 		            Format_Object.Next_AARM_Sub := 'a';
                             Format_Object.Subnumber := 0; -- ISO numbering scheme for terms.
-		            if Format_Object.Use_ISO_2004_Note_Format then
+		            if Format_Object.Note_Format /= Ada95 then
 			        -- Reset the note number:
 		                Format_Object.Next_Note := 1;
 		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Section or else
@@ -7451,6 +7683,8 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		                Format_Object.Next_Note := 1;
 		            end if;
                             Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level, Format_Object.Clause_Number);
+		            Format_Object.Next_Example := 1;
+                            Format_Object.Num_Examples := ARM_Contents.Lookup_Example_Info (Level, Format_Object.Clause_Number);
 		            -- Reset the subhead:
 		            Format_Object.Last_Paragraph_Subhead_Type := ARM_Paragraph.Plain;
 		            Format_Object.Next_Paragraph_Format_Type :=  ARM_Paragraph.Plain;
@@ -7535,7 +7769,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		            Format_Object.Next_Paragraph := 1;
 		            Format_Object.Next_Insert_Para := 1;
 		            Format_Object.Next_AARM_Sub := 'a';
-		            if Format_Object.Use_ISO_2004_Note_Format then
+		            if Format_Object.Note_Format /= Ada95 then
 			        -- Reset the note number:
 		                Format_Object.Next_Note := 1;
 		            --elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Section or else
@@ -7545,7 +7779,10 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		            --    -- Reset the note number, only for sections: (no sections yet)
 		            --    Format_Object.Next_Note := 1;
 		            end if;
-                            Format_Object.Num_Notes := ARM_Contents.Many_Notes; -- Dunno, assume the worst.
+                            Format_Object.Num_Notes := ARM_Contents.Many_Items; -- Dunno, assume the worst.
+		            -- Reset example numbers:
+                            Format_Object.Next_Example := 1;
+                            Format_Object.Num_Examples := ARM_Contents.Many_Items; -- Dunno, assume the worst.
 
 		            -- Reset the subhead:
 		            Format_Object.Last_Paragraph_Subhead_Type := ARM_Paragraph.Plain;
@@ -7632,8 +7869,15 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 
 		    Format_Object.Text_Format := ARM_Output.NORMAL_FORMAT;
 		    Format_Object.Text_Format.Bold := True;
-		    Format_Object.Text_Format.Font := ARM_Output.Swiss;
-		    Format_Object.Text_Format.Size := 2;
+                    -- *** Hack: This should be controlled some other way.
+                    if Format_Object.Include_ISO then -- Use ISO 2021 format.
+                        Format_Object.Text_Format.Font := ARM_Output.Roman;
+		        Format_Object.Text_Format.Size := 1;
+
+		    else
+                        Format_Object.Text_Format.Font := ARM_Output.Swiss;
+		        Format_Object.Text_Format.Size := 2;
+                    end if;
 		    ARM_Output.Text_Format (Output_Object,
 					    Format_Object.Text_Format);
 
@@ -7879,7 +8123,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Target,
 				Target_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -7893,7 +8137,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Text,
 				Text_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 		        Check_Paragraph;
@@ -7929,7 +8173,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Target,
 				Target_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -7945,7 +8189,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Title_Length);
 			    Title(Title_Length+1 .. Title'Last) :=
 			        (others => ' ');
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -7959,7 +8203,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Text,
 				Text_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			begin
@@ -7986,13 +8230,14 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		    -- get rid of it.
 
 		when URL_Link =>
-		    -- @URLLink{URL=[<URL>],Text=[<text>]}
+		    -- @URLLink{URL=[<URL>],Text=[<text>][,AllFormats=[T|F]}
 		    declare
 			Close_Ch : Character;
 			URL : String(1..80);
 			URL_Len : Natural;
 			Text : String(1..100);
 			Text_Len : Natural;
+                        All_Formats : Boolean := False;
 		    begin
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "URL" & (4..ARM_Input.Command_Name_Type'Last => ' '),
@@ -8005,7 +8250,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				URL,
 				URL_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -8019,13 +8264,17 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Text,
 				Text_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
+
+       		        Get_Boolean ("AllFormats" & (11..ARM_Input.Command_Name_Type'Last => ' '),
+                            All_Formats, Optional => True);
 
 		        Check_Paragraph;
 		        ARM_Output.URL_Link (Output_Object,
 			    Text => Text(1..Text_Len),
-			    URL => URL(1..URL_Len));
+			    URL => URL(1..URL_Len),
+                            All_Formats => All_Formats);
 			if Text_Len /= 0 and then Text(Text_Len) /= ' ' then
 		            Format_Object.Last_Non_Space := True;
 			end if;
@@ -8053,7 +8302,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				AI,
 				AI_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -8067,7 +8316,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Text,
 				Text_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 		        Check_Paragraph;
@@ -8219,7 +8468,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 					end if;
 			        end case;
 			    end if;
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 		    end;
 
@@ -8745,7 +8994,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 			end if;
 
 			Get_Boolean ("ChginAnnex" & (11..ARM_Input.Command_Name_Type'Last => ' '),
-				     Chg_in_Annex);
+				     Chg_in_Annex, Optional => False);
 			    -- Read a boolean parameter.
 
 			if Chg_in_Annex then
@@ -8758,7 +9007,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 			end if;
 
 			Get_Boolean ("Leading" & (8..ARM_Input.Command_Name_Type'Last => ' '),
-				     Is_Leading);
+				     Is_Leading, Optional => False);
 			    -- Read a boolean parameter.
 
 			if Is_Leading then
@@ -8780,7 +9029,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Format_Object.Attr_Prefix,
 				Format_Object.Attr_Prefix_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -8794,7 +9043,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				Close_Ch,
 				Format_Object.Attr_Name,
 				Format_Object.Attr_Name_Len);
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 
 			-- Handle the Ref, ARef, and InitialVersion parameters,
@@ -9071,7 +9320,7 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				 Close_Ch => Close_Ch);
 
 			    ARM_Input.Start_Recording (Input_Object);
-		        -- else no parameter. Weird.
+		        -- else no parameter. An error message has already been produced.
 		        end if;
 		    end;
 
@@ -9273,7 +9522,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		     Inconsistent2022_Title |
 		     Incompatible2022_Title | Extend2022_Title | Wording2022_Title |
                      Intl_Standard_Name | Intl_Standard_Title | Standard_Title |
-                     Subnumber | 
+                     Subnumber | New_Example |
 		     EM_Dash | EN_Dash | LT | LE | GT | GE | NE | PI |
 		     Times | PorM | Single_Quote | Thin_Space | Left_Quote |
 		     Right_Quote | Left_Double_Quote | Right_Double_Quote |
@@ -9296,9 +9545,9 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 	procedure Process_Command_without_Parameter (Name : in ARM_Input.Command_Name_Type) is
 	    -- Process the start of a command without a parameter. The name
 	    -- of the command is Name.
-            
+
             use ARM_Paragraph; -- For enum literals, could have been "use type ARM_Paragraph.Paragraph_Type".
-            
+
 	    procedure Put_Name (Kind : ARM_Paragraph.Paragraph_Type) is
 	    begin
 	        Check_Paragraph;
@@ -9418,7 +9667,10 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 
 		when Syntax_XRef =>
 --Ada.Text_IO.Put_Line ("%% Generate Syntax xref");
-		    Syn_XRef;
+		    Syn_XRef (Two_Column_Format =>
+                        ARM_Output."/=" (Format_Object.Nonterminal_Font, ARM_Output.Fixed));
+                        -- The fixed font is much wider than the others, the two
+                        -- column format doesn't work.
 
 		when Glossary_List =>
 		    DB_Report  (Format_Object.Glossary_DB,
@@ -9511,7 +9763,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		     Labeled_Added_Informative_Annex |
 		     Labeled_Normative_Annex | Labeled_Revised_Normative_Annex |
 		     Labeled_Added_Normative_Annex |
-		     Unnumbered_Section | Subheading | Added_Subheading | 
+		     Unnumbered_Section | Subheading | Added_Subheading |
                      Deleted_Subheading | Heading |
 		     Center | Right |
 		     Preface_Section | Ref_Section | Ref_Section_Number | Ref_Section_by_Number |
@@ -9734,7 +9986,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		    Put_Title(Ada2022_Extensions);
 		when Wording2022_Title =>
 		    Put_Title(Ada2022_Wording);
-                    
+
                 when Intl_Standard_Name =>
                     if Format_Object.Self_Ref_Format = ISO_1989 then
                             ARM_Output.Ordinary_Text (Output_Object, "International Standard");
@@ -9762,6 +10014,15 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
                 when Subnumber =>
                     Format_Object.Subnumber := Format_Object.Subnumber + 1;
 		    Check_Paragraph;
+                    -- Set format to bold:
+		    declare
+			Format_Bold : ARM_Output.Format_Type :=
+			    Format_Object.Text_Format;
+		    begin
+			Format_Bold.Bold := True;
+		        ARM_Output.Text_Format (Output_Object,
+                                                Format => Format_Bold);
+		    end;
                     ARM_Output.Ordinary_Text (Output_Object, Clause_String (Format_Object));
                     declare
                         Sub_Image : String := Natural'Image(Format_Object.Subnumber);
@@ -9769,8 +10030,55 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
                         Sub_Image(1) := '.'; -- Should be replacing a space.
                         ARM_Output.Ordinary_Text (Output_Object, Sub_Image);
                     end;
-                    
-		when EM_Dash =>
+		    -- Return to previous format:
+                    ARM_Output.Text_Format (Output_Object,
+					    Format => Format_Object.Text_Format);
+
+                when New_Example =>
+                    -- Check if we're in an examples grouping:
+                    if Format_Object.Next_Paragraph_Format_Type /= Examples then
+                        -- Not directly in an examples grouping, check nested items.
+                        for I in 1 .. Format_State.Nesting_Stack_Ptr loop
+                            if Format_State.Nesting_Stack(I).Kind = Begin_Word and then
+                               Format_State.Nesting_Stack(I).Old_Next_Paragraph_Format
+                                   = Examples then
+                               -- There is an enclosing @Begin with an Ada_Grouping
+                               -- of Examples, so we're OK.
+                               exit; -- Continue.
+                            elsif I = Format_State.Nesting_Stack_Ptr then
+                               -- Did not find any enclosing "Examples" grouping.
+                               Ada.Text_IO.Put_Line ("  ** NewExample command not in Examples grouping, " &
+                                    "on line " & ARM_Input.Line_String (Input_Object));
+                               exit; -- Done checking, but just continue anyway.
+                            -- else OK.
+                            end if;
+                        end loop;
+                    -- else we are directly in an Examples grouping, OK.
+                    end if;
+                    if Format_Object.Examples_Format = Ada95 then
+                        null; -- This command does nothing.
+                    else
+                        Check_Paragraph;
+			-- Output the example header (ISO 2021 format).
+                        if ARM_Contents."=" (Format_Object.Num_Examples, ARM_Contents.One_Item) then
+                            -- Do not include a note number.
+		            ARM_Output.Ordinary_Text (Output_Object, "EXAMPLE");
+                            ARM_Output.Hard_Space (Output_Object);
+		            ARM_Output.Hard_Space (Output_Object);
+		            ARM_Output.Hard_Space (Output_Object);
+                        else
+		            ARM_Output.Ordinary_Text (Output_Object,
+					              "EXAMPLE" & Integer'Image(Format_Object.Next_Example));
+		            ARM_Output.Hard_Space (Output_Object);
+		            ARM_Output.Hard_Space (Output_Object);
+		            ARM_Output.Hard_Space (Output_Object);
+                        end if;
+                    end if;
+                    -- Update the example number (even if we're not showing it, so
+                    -- that we still get errors if this command is omitted).
+		    Format_Object.Next_Example := Format_Object.Next_Example + 1;
+
+ 		when EM_Dash =>
 		    Check_Paragraph;
 		    ARM_Output.Special_Character (Output_Object, ARM_Output.EM_Dash);
 		    Format_Object.Last_Non_Space := True;
@@ -9868,7 +10176,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 	procedure Handle_End_of_Command is
 	    -- Unstack and handle the end of Commands.
             use type ARM_Paragraph.Paragraph_Type; -- For "=".
-            
+
 	    procedure Finish_and_DB_Entry (DB : in out ARM_Database.Database_Type) is
 		-- Close the text parameter for a number of commands
 		-- (impdef, chgimpdef, chgimpladv, chgdocreg)
@@ -10198,7 +10506,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 
 			    -- No processing needed here.
 
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 			return; -- We've already done the unstacking.
 		    end;
@@ -10228,7 +10536,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 
 			    -- No processing needed here.
 
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 			return; -- We've already done the unstacking.
 		    end;
@@ -10306,6 +10614,19 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 			            Tabset => Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len));
 			    end if;
 			    -- Note: The LHS non-terminals aren't linked as usual.
+
+                            if ARM_Output."="(Format_Object.Nonterminal_Font, ARM_Output.Fixed) then
+                                declare -- Undo the "shrink" command, used to make
+                                        -- syntax smaller.
+                                    use type ARM_Output.Size_Type;
+                                begin
+                                    Format_Object.Text_Format.Size :=
+                                        Format_Object.Text_Format.Size + 1;
+                                    ARM_Output.Text_Format (Output_Object,
+                                                            Format => Format_Object.Text_Format);
+                                end;
+                            -- else no special size change needed.
+                            end if;
 
 			    Check_End_Paragraph; -- End the paragraph, so the
 					         -- next rule gets its own.
@@ -11070,7 +11391,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 			    end if;
 			    Format_Object.In_Change := True;
 
-			-- else no parameter. Weird.
+			-- else no parameter. An error message has already been produced.
 			end if;
 			return; -- We've already done the unstacking.
 		    end;
@@ -11280,7 +11601,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		    Format_Object.Text_Format.Location := ARM_Output.Subscript;
 		    ARM_Output.Text_Format (Output_Object,
 					    Format_Object.Text_Format);
-		else -- No parameter. Weird.
+		else -- No parameter. An error message has already been produced.
 		    ARM_Input.Replace_Char (Input_Object);
 		    Ada.Text_IO.Put_Line ("  ** Failed to find parameter for subscript, line " & ARM_Input.Line_String (Input_Object));
 		end if;
@@ -11299,7 +11620,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		    Format_Object.Text_Format.Location := ARM_Output.Superscript;
 		    ARM_Output.Text_Format (Output_Object,
 					    Format_Object.Text_Format);
-		else -- No parameter. Weird.
+		else -- No parameter. An error message has already been produced.
 		    ARM_Input.Replace_Char (Input_Object);
 		    Ada.Text_IO.Put_Line ("  ** Failed to find parameter for superscript, line " & ARM_Input.Line_String (Input_Object));
 		end if;
@@ -11688,7 +12009,14 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
                     Format_Object.Num_Notes := ARM_Contents.Lookup_Note_Info (Level,
                                                                               Format_Object.Clause_Number);
                 else
-                    Format_Object.Num_Notes := ARM_Contents.No_Notes; -- No way to find this out.
+                    Format_Object.Num_Notes := ARM_Contents.No_Items; -- No way to find this out.
+                end if;
+	        Format_Object.Next_Example := 1;
+                if ARM_Contents."/="(Level, ARM_Contents.Unnumbered_Section) then
+                    Format_Object.Num_Examples := ARM_Contents.Lookup_Example_Info
+                                        (Level, Format_Object.Clause_Number);
+                else
+                    Format_Object.Num_Examples := ARM_Contents.No_Items; -- No way to find this out.
                 end if;
  	    exception
 		when ARM_Contents.Not_Found_Error =>

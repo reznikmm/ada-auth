@@ -150,17 +150,17 @@ package body ARM_Database is
 	    -- the size larger.
 	Temp_Item.Text := new String'(Text);
         if Note1_Text /= "" then
-	    Temp_Item.Note1_Text := new String'(Note1_Text);        
+	    Temp_Item.Note1_Text := new String'(Note1_Text);
         else
             Temp_Item.Note1_Text := null;
         end if;
         if Note2_Text /= "" then
-	    Temp_Item.Note2_Text := new String'(Note2_Text);        
+	    Temp_Item.Note2_Text := new String'(Note2_Text);
         else
             Temp_Item.Note2_Text := null;
         end if;
         if Note3_Text /= "" then
-	    Temp_Item.Note3_Text := new String'(Note3_Text);        
+	    Temp_Item.Note3_Text := new String'(Note3_Text);
         else
             Temp_Item.Note3_Text := null;
         end if;
@@ -413,11 +413,14 @@ package body ARM_Database is
 		Format_Text ("@begin(intro)" & Ascii.LF, "Prefix");
 		Temp := Database_Object.List;
 		while Temp /= null loop
- 		    Format_Text ("@subnumber" & Ascii.LF & Ascii.LF, "number for " & Temp.Sort_Key);
+ 		    --Format_Text ("@subnumber@*", "number for " & Temp.Sort_Key); -- Included below.
                         -- For ISO, these need to be numbered, based on the
                         -- enclosing subclause number. The subnumber command was
-                        -- added for this purpose.
-                    -- First, the item name:                   
+                        -- added for this purpose. Also, note that the number,
+                        -- term, and definition should not have spacing between
+                        -- them (we use "@*" rather than a paragraph end for
+                        -- separating), but the notes are separated.
+                    -- First, the item name:
 		    case Temp.Change_Kind is
 			when None |
 			     Inserted | Inserted_Normal_Number |
@@ -426,20 +429,28 @@ package body ARM_Database is
 --Ada.Text_IO.Put_Line("Format " & Change_if_Needed (Temp) &
 --			"@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}");
 			    -- Index this item.
-		            Format_Text (Change_if_Needed (Temp) &
-			        "@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}@b{" & 
-                                Temp.Hang(1..Temp.Hang_Len) & "}" & Ascii.LF & Ascii.LF, Temp.Sort_Key);
+		            --Format_Text (Change_if_Needed (Temp) &
+			    --    "@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}@b{" &
+                            --    Temp.Hang(1..Temp.Hang_Len) & "}@*", Temp.Sort_Key);
+		            Format_Text ("@subnumber@*" & Change_if_Needed (Temp) &
+			        "@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}@b{" &
+                                Temp.Hang(1..Temp.Hang_Len) & "}@*" &
+                                Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
 			when Deleted | Deleted_Inserted_Number |
 			     Deleted_No_Delete_Message |
 			     Deleted_Inserted_Number_No_Delete_Message =>
 --** Debug:
 --Ada.Text_IO.Put_Line("Format " & Change_if_Needed (Temp));
 			    -- Don't index deleted items.
-		            Format_Text (Change_if_Needed (Temp) & "@b{" & 
-                                Temp.Hang(1..Temp.Hang_Len) & "}" & Ascii.LF & Ascii.LF, Temp.Sort_Key);
+		            --Format_Text (Change_if_Needed (Temp) & "@b{" &
+                            --    Temp.Hang(1..Temp.Hang_Len) & "}@*", Temp.Sort_Key);
+		            Format_Text ("@subnumber@*" & Change_if_Needed (Temp) & "@b{" &
+                                Temp.Hang(1..Temp.Hang_Len) & "}@*" &
+                                Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
 		    end case;
                     -- Now, the definition:
-	            Format_Text (Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
+	            --Format_Text (Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key); - Included above.
+                    -- Finally, the notes:
                     if Temp.Note1_Text /= null or else
                        Temp.Note2_Text /= null or else
                        Temp.Note3_Text /= null then
@@ -465,7 +476,7 @@ package body ARM_Database is
 		Format_Text ("@begin(hang1list)" & Ascii.LF, "Prefix");
 		Temp := Database_Object.List;
 		while Temp /= null loop
-                    -- First, the item name and definition:                   
+                    -- First, the item name and definition:
 		    case Temp.Change_Kind is
 			when None |
 			     Inserted | Inserted_Normal_Number |
@@ -474,8 +485,8 @@ package body ARM_Database is
 --Ada.Text_IO.Put_Line("Format " & Change_if_Needed (Temp) &
 --			"@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}");
 			    -- Index this item.
-                            Format_Text (Insert_and_Change_if_Needed (Temp) & 
-                                "@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}@b{" & 
+                            Format_Text (Insert_and_Change_if_Needed (Temp) &
+                                "@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}@b{" &
                                 Temp.Hang(1..Temp.Hang_Len) & "}@\" & Temp.Text.all &
                                 Close_Insert_and_Change_if_Needed (Temp) & Ascii.LF & Ascii.LF, Temp.Sort_Key);
 			when Deleted | Deleted_Inserted_Number |
@@ -484,8 +495,8 @@ package body ARM_Database is
 --** Debug:
 --Ada.Text_IO.Put_Line("Format " & Change_if_Needed (Temp));
 			    -- Don't index deleted items.
-		            Format_Text (Insert_and_Change_if_Needed (Temp) & "@b{" & 
-                                Temp.Hang(1..Temp.Hang_Len) & "}@\" & Temp.Text.all & 
+		            Format_Text (Insert_and_Change_if_Needed (Temp) & "@b{" &
+                                Temp.Hang(1..Temp.Hang_Len) & "}@\" & Temp.Text.all &
                                 Close_Insert_and_Change_if_Needed (Temp) & Ascii.LF & Ascii.LF, Temp.Sort_Key);
 		    end case;
                     if Temp.Note1_Text /= null or else

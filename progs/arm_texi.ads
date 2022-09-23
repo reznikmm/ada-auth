@@ -42,6 +42,7 @@ package ARM_Texinfo is
    --  8/31/12 - RLB - Added Output_Path.
    -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
    --		       Revised_Clause_Header.
+   --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
 
    type Texinfo_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -243,7 +244,8 @@ package ARM_Texinfo is
    procedure URL_Link
      (Output_Object : in out Texinfo_Output_Type;
       Text          : in     String;
-      URL           : in     String);
+      URL           : in     String;
+      All_Formats   : in     Boolean);
 
    -- overriding
    procedure Picture

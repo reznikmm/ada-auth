@@ -35,6 +35,7 @@ package body ARM_Texinfo is
    -- 10/18/12 - RLB - Added additional hanging styles.
    -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
    --		       Revised_Clause_Header.
+   --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
 
 
    use Ada.Text_IO;
@@ -1884,7 +1885,8 @@ package body ARM_Texinfo is
    procedure URL_Link
      (Output_Object : in out Texinfo_Output_Type;
       Text          : in     String;
-      URL           : in     String)
+      URL           : in     String;
+      All_Formats   : in     Boolean)
    is begin
       Put (Output_Object.File, "@uref{" & URL & "," & Text & "}");
    end URL_Link;

@@ -14,7 +14,7 @@ package ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2013,
-    --     2016
+    --     2016, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -106,6 +106,7 @@ package ARM_HTML is
     --			code as needed.
     --  4/20/16 - RLB - Added Force_New_Revision_Colors.
     --  8/18/16 - RLB - Added a more column text to avoid overflow.
+    --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -498,11 +499,14 @@ package ARM_HTML is
 
     procedure URL_Link (Output_Object : in out HTML_Output_Type;
 			Text : in String;
-			URL : in String);
+			URL : in String;
+                        All_Formats : in Boolean);
 	-- Generate a link to the URL given.
 	-- Text is the text of the link.
-	-- For hyperlinked formats, this should generate a link;
-	-- for other formats, only the text is generated.
+        -- If All_Formats is True, then the link is generated in any format that
+        -- can support a link. Otherwise, a link is only generated in formats
+        -- that are primarily hyperlinked (such as HTML). If no link is
+        -- generated, the text still should be generated.
 
     procedure Picture  (Output_Object : in out HTML_Output_Type;
 			Name  : in String;

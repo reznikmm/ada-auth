@@ -197,6 +197,7 @@ package body ARM_HTML is
     --  3/ 8/18 - RLB - Increased the size of the HTML re-read line buffer.
     --  2/19/19 - RLB - Added some (commented out) hang tracing.
     --  2/ 4/22 - RLB - Added AI22 links.
+    --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -5214,11 +5215,14 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 
     procedure URL_Link (Output_Object : in out HTML_Output_Type;
 			Text : in String;
-			URL : in String) is
+			URL : in String;
+                        All_Formats : in Boolean) is
 	-- Generate a link to the URL given.
 	-- Text is the text of the link.
-	-- For hyperlinked formats, this should generate a link;
-	-- for other formats, only the text is generated.
+        -- If All_Formats is True, then the link is generated in any format that
+        -- can support a link. Otherwise, a link is only generated in formats
+        -- that are primarily hyperlinked (such as HTML). If no link is
+        -- generated, the text still should be generated.
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,

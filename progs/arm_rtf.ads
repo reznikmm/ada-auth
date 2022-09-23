@@ -13,7 +13,7 @@ package ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012, 2022
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -87,6 +87,10 @@ package ARM_RTF is
     --  8/31/12 - RLB - Added Output_Path.
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
+    --  8/ 4/22 - RLB - Added Cambria to Serif_Fonts.
+    --  8/ 5/22 - RLB - Added Font_Sizes setting.
+    --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
+    --  8/23/22 - RLB - Added Use_ISO_Bullets setting.
 
     type RTF_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -95,12 +99,20 @@ package ARM_RTF is
 	-- Letter is standard American letter size (8.5x11).
 	-- Half_Letter is standard America half size (5.5x8.5).
 	-- Ada95 is the size of the existing Ada 95 standard (7x9).
+        
+    type Sizes_Kind is (Small, Normal, ISO2021);
+        -- The sizes for fonts, line spacing, and paragraph spacing.
+        -- Small is the usual Ada 95 sizes, most appropriate for Half_Letter
+        -- and Ada95 page sizes. Normal is the usual AARM sizes, most
+        -- appropriate for A4 and Letter page sizes. ISO2021 is the 2021
+        -- ISO rules, used mainly with A4 and Letter page sizes.
 
-    type Serif_Fonts is (Times_New_Roman, Souvenir);
+    type Serif_Fonts is (Times_New_Roman, Souvenir, Cambria);
     type Sans_Serif_Fonts is (Arial, Helvetica);
 
     procedure Create (Output_Object : in out RTF_Output_Type;
 		      Page_Size : in ARM_RTF.Page_Size;
+                      Font_Sizes : in ARM_RTF.Sizes_Kind;
 		      Includes_Changes : in Boolean;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
@@ -108,6 +120,7 @@ package ARM_RTF is
 		      Primary_Sans_Serif_Font : in Sans_Serif_Fonts := Arial;
 		      Primary_Serif_Font : in Serif_Fonts := Times_New_Roman;
 		      Body_Font : in ARM_Output.Font_Family_Type := ARM_Output.Roman;
+                      Use_ISO_Bullets : in Boolean;
 		      Header_Prefix : in String := "";
 		      Footer_Use_Date : in Boolean;
 		      Footer_Use_Clause_Name : in Boolean;
@@ -134,6 +147,8 @@ package ARM_RTF is
 	-- The primary font used for the Sans_Serif text, and for the Serif
 	-- text, is as specified.
 	-- Which font is used for the body is specified by Body_Font.
+        -- Whether to use ISO bullets (emdashes) or the usual black circle
+        -- is selected by Use_ISO_Bullets.
 	-- The author names of the various versions is specified by the
 	-- Version_Names.
 
@@ -432,9 +447,14 @@ package ARM_RTF is
 
     procedure URL_Link (Output_Object : in out RTF_Output_Type;
 			Text : in String;
-			URL : in String);
+			URL : in String;
+                        All_Formats : in Boolean);
 	-- Generate a link to the URL given.
 	-- Text is the text of the link.
+        -- If All_Formats is True, then the link is generated in any format that
+        -- can support a link. Otherwise, a link is only generated in formats
+        -- that are primarily hyperlinked (such as HTML). If no link is
+        -- generated, the text still should be generated.
 	-- For hyperlinked formats, this should generate a link;
 	-- for other formats, only the text is generated.
 
@@ -479,12 +499,13 @@ private
         Footer_Use_ISO_Format : Boolean;
 	Footer_Text : Ada.Strings.Unbounded.Unbounded_String;
 	Page_Size : ARM_RTF.Page_Size;
+        Font_Sizes : ARM_RTF.Sizes_Kind;
 	Version_Names : ARM_Contents.Versioned_String;
 	Includes_Changes : Boolean;
 	Primary_Sans_Serif_Font : Sans_Serif_Fonts;
 	Primary_Serif_Font : Serif_Fonts;
 	Body_Font : ARM_Output.Font_Family_Type;
-	For_ISO : Boolean;
+        Use_ISO_Bullets : Boolean;
 	Char_Count : Natural := 0; -- Characters on current line.
 	Saw_Hang_End : Boolean := False; -- If we are in a hanging paragraph,
 			       -- have we seen the end of the hanging part yet?

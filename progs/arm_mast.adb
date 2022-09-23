@@ -78,6 +78,12 @@ package body ARM_Master is
     --  4/18/22 - RLB - Added Include/Exclude commands.
     --  4/20/22 - RLB - Added SingleTextOutputFile command.
     --  5/11/22 - RLB - Added SelfRefFormat command.
+    --  8/ 4/22 - RLB - Added Cambria to possible RTF fonts.
+    --          - RLB - Added ISO2021 to note formats.
+    --  8/ 5/22 - RLB - Added RTFSizes command.
+    --  8/22/22 - RLB - Added NonterminalFont command.
+    --  8/23/22 - RLB - Added RTFBulletFormat command.
+    --  9/15/22 - RLB - Added ExamplesFormat command.
 
     type Command_Type is (
 	-- Source commands:
@@ -96,7 +102,9 @@ package body ARM_Master is
 	Example_Font,
 	Example_Comment_Font,
 	Body_Font,
+        Nonterminal_Font,
 	Note_Format,
+	Examples_Format,
 	Contents_Format,
         Self_Ref_Format,
 	List_Format,
@@ -106,7 +114,7 @@ package body ARM_Master is
 
         -- Text properties:
 	Single_Text_Output_File,
-        
+
 	-- HTML properties:
 	Single_HTML_Output_File,
 	Use_MS_DOS_Names,
@@ -124,7 +132,9 @@ package body ARM_Master is
 	RTF_Footer_Text,
 	RTF_Footer,
 	RTF_Page_Size,
+	RTF_Sizes,
 	RTF_Fonts,
+        RTF_Bullet_Format,
 	RTF_Version_Name,
 	-- Other commands:
 	Comment, Unknown);
@@ -170,9 +180,12 @@ package body ARM_Master is
 	ARM_Output.Roman; -- Which font should be used for examples?
     Font_of_Body : ARM_Output.Font_Family_Type :=
 	ARM_Output.Roman; -- Which font should be used for the body?
-    Use_ISO_2004_Note_Format : Boolean := True;
-	-- Should we use the ISO 2004 note format, or the one used in the
-	-- Ada 95 standard??
+    Font_of_Nonterminals : ARM_Output.Font_Family_Type :=
+	ARM_Output.Swiss; -- Which font should be used for nonterminals?
+    Note_Format_Setting : ARM_Format.Group_Format_Kind := ARM_Format.Ada95;
+	-- What note format should we use??
+    Examples_Format_Setting : ARM_Format.Group_Format_Kind := ARM_Format.Ada95;
+	-- What examples group format should we use??
     Use_ISO_2004_Contents_Format : Boolean := True;
 	-- Should we use the ISO 2004 contents format, or the one used in the
 	-- Ada 95 standard??
@@ -184,12 +197,12 @@ package body ARM_Master is
 
     Subdivision_Name_Kind : ARM_Output.Top_Level_Subdivision_Name_Kind :=
 		ARM_Output.Section;
-                
+
     Groupings_Set_Up : Boolean := False;
         -- Have we set up the groupings yet?
     Included_Groupings : ARM_Paragraph.Grouping_Array;
         -- The included groupings.
-  
+
     -- Text properties:
     Use_Large_Text_Files : Boolean := False; -- Use small output files by default.
 
@@ -224,9 +237,12 @@ package body ARM_Master is
     Footer_Use_ISO_Format : Boolean := False; -- Use the normal format.
     Version_Name  : ARM_Contents.Versioned_String;
 
-    Page_Size : ARM_RTF.Page_Size := ARM_RTF.Letter; -- Use Letter size by default.
+    Page_Size  : ARM_RTF.Page_Size := ARM_RTF.Letter; -- Use Letter size by default.
+    Font_Sizes : ARM_RTF.Sizes_Kind := ARM_RTF.Normal; -- Use Normal size by default.
     Serif_Font : ARM_RTF.Serif_Fonts := ARM_RTF.Times_New_Roman; -- Use Times by default.
     Sans_Serif_Font : ARM_RTF.Sans_Serif_Fonts := ARM_RTF.Arial; -- Use Arial by default.
+
+    Use_ISO_Bullets : Boolean := False; -- Use usual bullets by default.
 
     function "+" (Source : Ada.Strings.Unbounded.Unbounded_String) return String
         renames Ada.Strings.Unbounded.To_String;
@@ -269,8 +285,12 @@ package body ARM_Master is
 	    return Example_Comment_Font;
 	elsif Canonical_Name = "bodyfont" then
 	    return Body_Font;
+	elsif Canonical_Name = "nonterminalfont" then
+	    return Nonterminal_Font;
 	elsif Canonical_Name = "noteformat" then
 	    return Note_Format;
+	elsif Canonical_Name = "examplesformat" then
+	    return Examples_Format;
 	elsif Canonical_Name = "contentsformat" then
 	    return Contents_Format;
 	elsif Canonical_Name = "listformat" then
@@ -286,7 +306,7 @@ package body ARM_Master is
 
 	elsif Canonical_Name = "singletextoutputfile" then
 	    return Single_Text_Output_File;
-          
+
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "usemsdosfilenames" then
@@ -317,8 +337,12 @@ package body ARM_Master is
 	    return RTF_Footer;
 	elsif Canonical_Name = "rtfpagesize" then
 	    return RTF_Page_Size;
+	elsif Canonical_Name = "rtfsizes" then
+	    return RTF_Sizes;
 	elsif Canonical_Name = "rtffonts" then
 	    return RTF_Fonts;
+	elsif Canonical_Name = "rtfbulletformat" then
+	    return RTF_Bullet_Format;
 	elsif Canonical_Name = "rtfversionname" then
 	    return RTF_Version_Name;
 	elsif Canonical_Name = "comment" then
@@ -476,7 +500,7 @@ package body ARM_Master is
  	    end Process_Versioned_String;
 
 	    procedure Process_RTF_Fonts is
-	        -- @RTFFonts{Serif=[Times|Souvenir]},SansSerif=[Arial|Helvetica]}
+	        -- @RTFFonts{Serif=[Times|Souvenir|Cambria]},SansSerif=[Arial|Helvetica]}
 	        Param_Close_Ch : Character;
 	        Item : String(1..80);
 	        ILen : Natural := 0;
@@ -503,6 +527,8 @@ package body ARM_Master is
 			    Serif_Font := ARM_RTF.Times_New_Roman;
 			elsif Name = "souvenir" then
 			    Serif_Font := ARM_RTF.Souvenir;
+			elsif Name = "cambria" then
+			    Serif_Font := ARM_RTF.Cambria;
 			else
 		            Ada.Text_IO.Put_Line ("** Unknown serif font name: " & Name &
 						  " on line" & ARM_Input.Line_String (Input_Object));
@@ -903,7 +929,7 @@ package body ARM_Master is
 		    -- @ShowAnnotations
                     if Groupings_Set_Up then
 		        Ada.Text_IO.Put_Line ("** ShowAnnotations has to appear before " &
-                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));
                     end if;
                     Include_Annotations := True;
 		    Ada.Text_IO.Put_Line("Show Annotations");
@@ -912,7 +938,7 @@ package body ARM_Master is
 		    -- @HideAnnotations
                     if Groupings_Set_Up then
 		        Ada.Text_IO.Put_Line ("** HideAnnotations has to appear before " &
-                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));
                     end if;
 		    Include_Annotations := False;
 		    Ada.Text_IO.Put_Line("Hide Annotations");
@@ -921,7 +947,7 @@ package body ARM_Master is
 		    -- @ShowISO
                     if Groupings_Set_Up then
 		        Ada.Text_IO.Put_Line ("** ShowISO has to appear before " &
-                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));
                     end if;
 		    Include_ISO_Text := True;
 		    Ada.Text_IO.Put_Line("Show ISO Text");
@@ -930,7 +956,7 @@ package body ARM_Master is
 		    -- @HideISO
                     if Groupings_Set_Up then
 		        Ada.Text_IO.Put_Line ("** HideISO has to appear before " &
-                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                           "Include or Exclude; on line" & ARM_Input.Line_String (Input_Object));
                     end if;
 		    Include_ISO_Text := False;
 		    Ada.Text_IO.Put_Line("Hide ISO Text");
@@ -1018,21 +1044,65 @@ package body ARM_Master is
 			end if;
 		    end;
 
+		when Nonterminal_Font =>
+		    -- @NonterminalFont{Swiss|Fixed|Roman}
+		    declare
+			Font_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Font_Name = "swiss" then
+			    Font_of_Nonterminals := ARM_Output.Swiss;
+			    Ada.Text_IO.Put_Line("Nonterminals in swiss font");
+			elsif Font_Name = "fixed" then
+			    Font_of_Nonterminals := ARM_Output.Fixed;
+			    Ada.Text_IO.Put_Line("Nonterminals in fixed-width font");
+			elsif Font_Name = "roman" then
+			    Font_of_Nonterminals := ARM_Output.Roman;
+			    Ada.Text_IO.Put_Line("Nonterminals in roman font");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown example font name: " & Font_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
 		when Note_Format =>
-		    -- @NoteFormat{Ada95|ISO2004}
+		    -- @NoteFormat{Ada95|ISO2004|ISO2021}
 		    declare
 			Format_Name : constant String :=
 			    Ada.Characters.Handling.To_Lower (
 				Get_Single_String);
 		    begin
 			if Format_Name = "ada95" then
-			    Use_ISO_2004_Note_Format := False;
+			    Note_Format_Setting := ARM_Format.Ada95;
 			    Ada.Text_IO.Put_Line("Notes in Ada 95 standard format");
 			elsif Format_Name = "iso2004" then
-			    Use_ISO_2004_Note_Format := True;
+			    Note_Format_Setting := ARM_Format.ISO2004;
 			    Ada.Text_IO.Put_Line("Notes in ISO 2004 standard format");
+			elsif Format_Name = "iso2021" then
+			    Note_Format_Setting := ARM_Format.ISO2021;
+			    Ada.Text_IO.Put_Line("Notes in ISO 2021 standard format");
 			else
 		            Ada.Text_IO.Put_Line ("** Unknown note format name: " & Format_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
+		when Examples_Format =>
+		    -- @ExamplesFormat{Ada95|ISO2021}
+		    declare
+			Format_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Format_Name = "ada95" then
+			    Examples_Format_Setting := ARM_Format.Ada95;
+			    Ada.Text_IO.Put_Line("Examples in Ada 95 standard format");
+			elsif Format_Name = "iso2021" then
+			    Examples_Format_Setting := ARM_Format.ISO2021;
+			    Ada.Text_IO.Put_Line("Examples in ISO 2021 standard format");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown example format name: " & Format_Name &
 						  " on line" & ARM_Input.Line_String (Input_Object));
 			end if;
 		    end;
@@ -1118,16 +1188,16 @@ package body ARM_Master is
 						  " on line" & ARM_Input.Line_String (Input_Object));
 			end if;
 		    end;
-                    
-                    
+
+
                 when Include_Groups =>
                     if Groupings_Set_Up then
 		        Ada.Text_IO.Put_Line ("** Include cannot appear with Exclude or another " &
-                           "Include; on line" & ARM_Input.Line_String (Input_Object));                        
+                           "Include; on line" & ARM_Input.Line_String (Input_Object));
                     end if;
                     Groupings_Set_Up := True;
                     Included_Groupings := (others => False); -- Nothing included here.
-                    
+
                     -- Read list of groups.
                     Get_Open_Char;
                     declare
@@ -1149,12 +1219,12 @@ package body ARM_Master is
                                     ARM_Input.Replace_Char (Input_Object);
                                     exit;
                                 end if;
-                            end loop;                            
+                            end loop;
                             ARM_Input.Get_Name (Input_Object, Name);
                             Kind := ARM_Paragraph.Get_Paragraph_Kind (Name);
                             if Kind in ARM_Paragraph.Format_Kinds then
                                 Ada.Text_IO.Put_Line ("** Formatting kind " & Kind'Image &
-                                   " not allowed in Include; on line" & ARM_Input.Line_String (Input_Object));                        
+                                   " not allowed in Include; on line" & ARM_Input.Line_String (Input_Object));
                             elsif Kind = Unknown then
                                 Ada.Text_IO.Put_Line ("** Unknown kind " & Name &
                                    " in Include; on line" & ARM_Input.Line_String (Input_Object));
@@ -1176,14 +1246,14 @@ package body ARM_Master is
                                 Ada.Text_IO.Put_Line ("** Unusual character '" & Sep_Ch & "' in group list " &
                                    " in Include; on line" & ARM_Input.Line_String (Input_Object));
                                 exit;
-                            end if; 
+                            end if;
                         end loop;
                     end;
-                    
+
                 when Exclude_Groups =>
                     if Groupings_Set_Up then
 		        Ada.Text_IO.Put_Line ("** Exclude cannot appear with Include or another " &
-                           "Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                           "Exclude; on line" & ARM_Input.Line_String (Input_Object));
                     end if;
                     Groupings_Set_Up := True;
                     Included_Groupings (ARM_Paragraph.RM_Groupings) :=
@@ -1201,7 +1271,7 @@ package body ARM_Master is
                         Included_Groupings (ARM_Paragraph.AARM_Annotations) :=
                              (ARM_Paragraph.AARM_Annotations => False);
                         Included_Groupings (ARM_Paragraph.AARM_Only) := False;
-                        Included_Groupings (ARM_Paragraph.RM_Only) := True;           
+                        Included_Groupings (ARM_Paragraph.RM_Only) := True;
                     end if;
                     if Include_ISO_Text then
                         Included_Groupings (ARM_Paragraph.Not_ISO) := False;
@@ -1210,7 +1280,7 @@ package body ARM_Master is
                         Included_Groupings (ARM_Paragraph.Not_ISO) := True;
                         Included_Groupings (ARM_Paragraph.ISO_Only) := False;
                     end if;
-                
+
                     -- Read list of groups.
                     Get_Open_Char;
                     declare
@@ -1232,12 +1302,12 @@ package body ARM_Master is
                                     ARM_Input.Replace_Char (Input_Object);
                                     exit;
                                 end if;
-                            end loop;                            
+                            end loop;
                             ARM_Input.Get_Name (Input_Object, Name);
                             Kind := ARM_Paragraph.Get_Paragraph_Kind (Name);
                             if Kind in ARM_Paragraph.Format_Kinds then
                                 Ada.Text_IO.Put_Line ("** Formatting kind " & Kind'Image &
-                                   " not allowed in Exclude; on line" & ARM_Input.Line_String (Input_Object));                        
+                                   " not allowed in Exclude; on line" & ARM_Input.Line_String (Input_Object));
                             elsif Kind = Unknown then
                                 Ada.Text_IO.Put_Line ("** Unknown kind " & Name &
                                    " in Exclude; on line" & ARM_Input.Line_String (Input_Object));
@@ -1259,9 +1329,9 @@ package body ARM_Master is
                                 Ada.Text_IO.Put_Line ("** Unusual character '" & Sep_Ch & "' in group list " &
                                    " in Exclude; on line" & ARM_Input.Line_String (Input_Object));
                                 exit;
-                            end if; 
+                            end if;
                         end loop;
-                    end;                   
+                    end;
 
 		-- Text properties:
 
@@ -1424,9 +1494,50 @@ package body ARM_Master is
 			    ARM_RTF.Page_Size'Image(Page_Size));
 		    end;
 
+		when RTF_Sizes =>
+		    -- @RTFSizes{Small|Normal|ISO2021}
+		    declare
+			Size : constant String :=
+			    Ada.Characters.Handling.To_Lower (Get_Single_String);
+		    begin
+			if Size = "small" then
+			    Font_Sizes := ARM_RTF.Small;
+			elsif Size = "normal" then
+			    Font_Sizes := ARM_RTF.Normal;
+			elsif Size = "iso2021" then
+			    Font_Sizes := ARM_RTF.ISO2021;
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown font sizes name: " & Size &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		        Ada.Text_IO.Put_Line("RTF Font Size is " &
+			    ARM_RTF.Sizes_Kind'Image(Font_Sizes));
+		    end;
+
 		when RTF_Fonts =>
 		    -- @RTFFonts{Serif=[Times|Souvenir]},SansSerif=[Arial|Helvetica]}
 		    Process_RTF_Fonts;
+
+                when RTF_Bullet_Format =>
+                    --@RTFBulletFormat{Normal|ISO2021}
+ 		    declare
+			Format : constant String :=
+			    Ada.Characters.Handling.To_Lower (Get_Single_String);
+		    begin
+			if Format = "normal" then
+			    Use_ISO_Bullets := False;
+			elsif Format = "iso2021" then
+			    Use_ISO_Bullets := True;
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown bullet format name: " & Format &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		        if Use_ISO_Bullets then
+                            Ada.Text_IO.Put_Line("Use ISO 2021 bullets");
+                        else
+                            Ada.Text_IO.Put_Line("Use normal bullets");
+                        end if;
+		    end;
 
 		-- Source files:
 
@@ -1505,7 +1616,7 @@ package body ARM_Master is
                 Included_Groupings (ARM_Paragraph.AARM_Annotations) :=
                      (ARM_Paragraph.AARM_Annotations => False);
                 Included_Groupings (ARM_Paragraph.AARM_Only) := False;
-                Included_Groupings (ARM_Paragraph.RM_Only) := True;           
+                Included_Groupings (ARM_Paragraph.RM_Only) := True;
             end if;
             if Include_ISO_Text then
                 Included_Groupings (ARM_Paragraph.Not_ISO) := False;
@@ -1514,8 +1625,8 @@ package body ARM_Master is
                 Included_Groupings (ARM_Paragraph.Not_ISO) := True;
                 Included_Groupings (ARM_Paragraph.ISO_Only) := False;
             end if;
-        -- else already done.           
-        end if;        
+        -- else already done.
+        end if;
 	ARM_Format.Create (Format_Object, Change_Kind, Change_Version,
                 Base_Change_Version   => Base_Change_Version,
 		Display_Index_Entries => Display_Index_Entries,
@@ -1526,7 +1637,9 @@ package body ARM_Master is
                 Include_Group         => Included_Groupings,
 		Examples_Font	      => Font_of_Examples,
 		Example_Comment_Font  => Font_of_Example_Comments,
-		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format,
+		Nonterminal_Font      => Font_of_Nonterminals,
+		Note_Format           => Note_Format_Setting,
+		Examples_Format       => Examples_Format_Setting,
 		Use_ISO_2004_Contents_Format => Use_ISO_2004_Contents_Format,
 		Use_ISO_2004_List_Format => Use_ISO_2004_List_Format,
                 Self_Ref_Format       => Self_Reference_Format,
@@ -1657,6 +1770,7 @@ package body ARM_Master is
 		       Change_Version = '0' then
 		        ARM_RTF.Create (Output,
 				        Page_Size => Page_Size,
+				        Font_Sizes => Font_Sizes,
 				        Includes_Changes => False,
 				        Big_Files => Use_Large_RTF_Files,
 				        Output_Path => Output_Path,
@@ -1670,10 +1784,12 @@ package body ARM_Master is
 					Footer_Use_ISO_Format=> Footer_Use_ISO_Format,
 				        Footer_Text => Get_Versioned_String (Footer_Text, Change_Version),
 				        Body_Font => Font_of_Body,
+                                        Use_ISO_Bullets => Use_ISO_Bullets,
 					Version_Names => Version_Name);
 		    else
 		        ARM_RTF.Create (Output,
 				        Page_Size => Page_Size,
+				        Font_Sizes => Font_Sizes,
 				        Includes_Changes => True,
 				        Big_Files => Use_Large_RTF_Files,
 				        Output_Path => Output_Path,
@@ -1687,6 +1803,7 @@ package body ARM_Master is
 					Footer_Use_ISO_Format=> Footer_Use_ISO_Format,
 				        Footer_Text => Get_Versioned_String (Footer_Text, Change_Version),
 				        Body_Font => Font_of_Body,
+                                        Use_ISO_Bullets => Use_ISO_Bullets,
 					Version_Names => Version_Name);
 		    end if;
 		    Generate_Sources (Output);
