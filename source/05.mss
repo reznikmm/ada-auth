@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -307,7 +307,7 @@ expanded name associated with an entity declared in the task body:
 @end{SingleNote}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of labeled statements:}
+@Leading@keepnext@NewExample@i{Examples of labeled statements:}
 @begin{Example}
 <<Here>> <<Ici>> <<Aqui>> <<Hier>> @key[null];
 
@@ -536,7 +536,7 @@ nothing.
 
 @end{RunTime}
 
-@begin{SingleNote}
+@begin{Notes}
 The tag of an object never changes;
 in particular, an
 @nt{assignment_statement}
@@ -562,10 +562,10 @@ access value returned by a function call, and similarly, as a
 component or slice of such a variable
 (see @RefSec{The Context of Overload Resolution}).
 @end{Ramification}
-@end{SingleNote}
+@end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of assignment statements:}
+@Leading@keepnext@NewExample@i{Examples of assignment statements:}
 @begin{Example}
 Value := Max_Value - 1;
 Shade := Blue;
@@ -573,14 +573,12 @@ Shade := Blue;
 Next_Frame(F)(M, N) := 2.5;        --@ExamCom{  see @RefSecNum{Indexed Components}}
 U := Dot_Product(V, W);            --@ExamCom{  see @RefSecNum{Subprogram Bodies}}
 
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
+@Trailing@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
 Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@ExamCom{ see @RefSecNum{Variant Parts and Discrete Choices}}
 @Chg{Version=[4],New=[Next],Old=[Next_Car]}.@key[all] := (72074, @key[null]@Chg{Version=[4],New=[, Head],Old=[]});@Chg{Version=[4],New=[],Old=[ ]}   --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
-@begin{WideAbove}
-@Leading@keepnext@i{Examples involving scalar subtype conversions:}
-@end{WideAbove}
+@Leading@keepnext@NewExample@i{Examples involving scalar subtype conversions:}
 @begin{Example}
 I, J : Integer @key[range] 1 .. 10 := 5;
 K    : Integer @key[range] 1 .. 20 := 15;
@@ -592,9 +590,7 @@ J := K;  --@ExamCom{  will raise Constraint_Error if K > 10}
 @end{Example}
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@begin{WideAbove}
-@leading@keepnext@i{Examples involving array subtype conversions:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples involving array subtype conversions:}
 @begin{Example}
 A : String(1 .. 31);
 B : String(3 .. 33);
@@ -741,7 +737,7 @@ subclause @RefSecNum{Assignment Statements}.]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the use of target
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of the use of target
 name symbols:}]}
 
 @begin{Example}
@@ -823,7 +819,7 @@ none of them is executed.
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of if statements:}
+@Leading@keepnext@NewExample@i{Examples of if statements:}
 @begin{Example}
 @key[if] Month = December @key[and] Day = 31 @key[then]
    Month := January;
@@ -1046,7 +1042,7 @@ subtype can often be used to limit the number of choices that
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of case statements:}
+@Leading@keepnext@NewExample@i{Examples of case statements:}
 @begin{Example}
 @tabclear()@tabset(P22)
 @key[case] Sensor @key[is]
@@ -1498,65 +1494,55 @@ the subtype of the loop parameter is static.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Example of a loop statement without an iteration scheme:}
+@Leading@keepnext@NewExample@i{Example of a loop statement without an iteration scheme:}
 @begin{Example}
-@key[loop]
+@Trailing@key[loop]
    Get(Current_Character);
    @key[exit] @key[when] Current_Character = '*';
 @key[end] @key[loop];
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a loop statement with a @key[while] iteration scheme:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a loop statement with a @key[while] iteration scheme:}
 @begin{Example}
-@key[while] Bid(N).Price < Cut_Off.Price @key[loop]
+@Trailing@key[while] Bid(N).Price < Cut_Off.Price @key[loop]
    Record_Bid(Bid(N).Price);
    N := N + 1;
 @key[end] @key[loop];
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a loop statement with a @key[for] iteration scheme:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a loop statement with a @key[for] iteration scheme:}
 @begin{Example}
-@key[for] J @key[in] Buffer'Range @key[loop]     --@ExamCom{  works even with a null range}
+@Trailing@key[for] J @key[in] Buffer'Range @key[loop]     --@ExamCom{  works even with a null range}
    @key[if] Buffer(J) /= Space @key[then]
       Put(Buffer(J));
    @key[end] @key[if];
 @key[end] @key[loop];
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a loop statement with a name:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a loop statement with a name:}
 @begin{Example}
-Summation:
+@Trailing@;Summation:
    @key[while] Next /= Head @key[loop]       --@ExamCom{ see @RefSecNum{Incomplete Type Declarations}}
       Sum  := Sum + Next.Value;
       Next := Next.Succ;
    @key[end] @key[loop] Summation;
 @end{Example}
 
-@begin{WideAbove}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Type=[Leading],KeepNext=[T],
-Text=[@i{Example of a simple parallel loop:}]}
-@end{WideAbove}
+Text=[@NewExample@i{Example of a simple parallel loop:}]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[-- @ExamCom{see @RefSecNum{Array Types}}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[-- @ExamCom{see @RefSecNum{Array Types}}
 @key[parallel]
 @key[for] I @key[in] Grid'Range(1) @key[loop]
    Grid(I, 1) := (@key[for all] J @key[in] Grid'Range(2) => Grid(I,J) = True);
 @key[end loop];]}
 @end{Example}
 
-@begin{WideAbove}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Type=[Leading],KeepNext=[T],
-Text=[@i{Example of a parallel loop with a chunk specification:}]}
-@end{WideAbove}
+Text=[@NewExample@i{Example of a parallel loop with a chunk specification:}]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[declare]
@@ -1584,18 +1570,16 @@ Text=[@i{Example of a parallel loop with a chunk specification:}]}
    @key[end loop];}}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0386-1]}
-@ChgAdded{Version=[5],Text=[   Put_Line
+@ChgAdded{Version=[5],Type=[Trailing],Text=[   Put_Line
      ("Total=" & Partial_Sum'Reduce("+", 0)'Image &
       ", Min=" & Partial_Min'Reduce(Natural'Min, Natural'Last)'Image &
       ", Max=" & Partial_Max'Reduce(Natural'Max, 0)'Image);
 @key[end];]}
-
-@begin{WideAbove}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Text=[@i{For an example of an} @nt{iterator_filter}@i{,
-see @RefSecNum{Quantified Expressions}.}]}
-@end{WideAbove}
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[@NewExample@i{For an example of an} @nt{iterator_filter}@i{,
+see @RefSecNum{Quantified Expressions}.}]}
 @end{Examples}
 
 @begin{DiffWord83}
@@ -2416,11 +2400,11 @@ immediately enclosing loop statement.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of a parallel
 generalized loop over an array:}]}
 
 @begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
+@Trailing@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1],ARef=[AI12-0429-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@key[parallel]],Old=[-- @Examcom{Array component iterator example:}]}
 @key[for] Element @key[of] Board @key[loop]  -- @Examcom{See @RefSecNum{Index Constraints and Discrete Ranges}.}
@@ -2430,7 +2414,7 @@ generalized loop over an array:}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@i{For examples of use of
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@NewExample@i{For examples of use of
 generalized iterators, see @RefSecNum{Example of Container Use} and the
 corresponding container packages in
 @RefSecNum{The Generic Package Containers.Vectors} and
@@ -2878,7 +2862,7 @@ again.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of iterating over a map from
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of iterating over a map from
 My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):}]}
 
 @begin{Example}
@@ -2904,7 +2888,7 @@ My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of iterating over the
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of iterating over the
 environment variables (see @RefSecNum{The Package Environment_Variables}):}]}
 
 @begin{Example}
@@ -2984,7 +2968,7 @@ its @nt{handled_sequence_of_statements}.
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i{Example of a block statement with a local variable:}
+@Leading@keepnext@NewExample@i{Example of a block statement with a local variable:}
 @begin{Example}
 Swap:
    @key[declare]
@@ -3082,7 +3066,7 @@ by one of the @nt{sequence_of_statements}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel block
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of a parallel block
 used to walk a binary tree in parallel:}]}
 
 @begin{Example}
@@ -3105,7 +3089,7 @@ used to walk a binary tree in parallel:}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a parallel block
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of a parallel block
 used to search two halves of a string in parallel:}]}
 
 @begin{Example}
@@ -3197,7 +3181,7 @@ the outer loop.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of loops with exit statements:}
+@leading@keepnext@NewExample@i{Examples of loops with exit statements:}
 @begin{Example}
 @key[for] N @key[in] 1 .. Max_Num_Items @key[loop]
    Get_New_Item(New_Item);
@@ -3263,12 +3247,12 @@ enclosing @nt{sequence_of_statements} but not the reverse. Similarly,
 they prohibit transfers of control such as between alternatives of a
 @nt{case_statement}, @nt{if_statement}, or @nt{select_statement};
 between @nt{exception_handler}s; or from an @nt{exception_handler} of
-a @nt{handled_sequence_of_statements}
-back to its @nt{sequence_of_statements}.
+a @nt{handled_@!sequence_of_@!statements}
+back to its @nt{sequence_of_@!statements}.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Example of a loop containing a goto statement:}
+@Leading@keepnext@NewExample@i{Example of a loop containing a goto statement:}
 @begin{Example}
 <<Sort>>
 @key[for] I @key[in] 1 .. N-1 @key[loop]

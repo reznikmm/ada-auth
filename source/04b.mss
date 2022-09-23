@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Type Conversions}
@@ -1202,18 +1202,16 @@ generic formal @key(in out) objects).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of numeric type conversion:)
+@Leading@keepnext@NewExample@i(Examples of numeric type conversion:)
 @begin{Example}
-Real(2*J)      @ExamCom[--  value is converted to floating point]
+@Trailing@;Real(2*J)      @ExamCom[--  value is converted to floating point]
 Integer(1.6)   @ExamCom[--  value is 2]
 Integer(-0.4)  @ExamCom[--  value is 0]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Example of conversion between derived types:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Example of conversion between derived types:)
 @begin{Example}
-@key(type) A_Form @key(is) @key(new) B_Form;
+@Trailing@;@key(type) A_Form @key(is) @key(new) B_Form;
 
 X : A_Form;
 Y : B_Form;
@@ -1222,9 +1220,7 @@ X := A_Form(Y);
 Y := B_Form(X);  @ExamCom[--  the reverse conversion ]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Examples of conversions between array types:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of conversions between array types:)
 
 @begin{Example}
 @key(type) Sequence @key(is) @key(array) (Integer @key(range) <>) @key(of) Integer;
@@ -1589,7 +1585,7 @@ In particular, if an overloaded @nt<name> or
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of disambiguating expressions using qualification:)
+@Leading@keepnext@NewExample@i(Examples of disambiguating expressions using qualification:)
 @begin{Example}
 @key(type) Mask @key(is) (Fix, Dec, Exp, Signif);
 @key(type) Code @key(is) (Fix, Cla, Dec, Tnz, Sub);
@@ -2120,7 +2116,7 @@ but not required, to]} provide garbage collection@Chg{Version=[3],New=[],Old=[
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of allocators:}
+@Leading@keepnext@NewExample@i{Examples of allocators:}
 @begin{Example}
 @key(new) Cell'(0, @key(null), @key(null))                          @ExamCom[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
 @key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @ExamCom[-- initialized explicitly]
@@ -3006,7 +3002,7 @@ between two integers, the rounding is performed away from zero.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of static expressions:)
+@Leading@keepnext@NewExample@i(Examples of static expressions:)
 @begin{Example}
 1 + 1       @ExamCom[-- 2]
 @key(abs)(-10)*3  @ExamCom[-- 30]

@@ -1,6 +1,6 @@
 @Part(intro, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/intro.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2022/07/06 04:52:24 $}
+@comment{$Revision: 1.4 $ $Date: 2022/09/17 06:51:40 $}
 
 
 @UnNumberedSection{Introduction}
@@ -240,7 +240,7 @@ ability to compile units separately, allows a program to be
 designed, written, and tested as a set of largely
 independent software components.
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0438-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
 An Ada program will normally make use of a library of
 program units of general utility. The language provides
 means whereby individual organizations can construct their
@@ -248,8 +248,7 @@ own libraries. All libraries are structured in a
 hierarchical manner; this enables the logical decomposition
 of a subsystem into individual components. The text of a
 separately compiled program unit
-@Chg{Version=[5],New=[has to],Old=[must]} name the library units it requires.
-
+@Chg{Version=[5],New=[names],Old=[must name]} the library units it requires.
 
 @keepnext@i(Program Units)
 
@@ -289,16 +288,17 @@ unit @Chg{Version=[5],New=[can],Old=[may]} define either a single executing
 task or a task type permitting the creation of any number of similar tasks.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0438-1],ARef=[AI12-0441-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0441-1],ARef=[AI12-0446-1]}
 A protected unit is the basic unit for defining protected
 operations for the coordinated use of data shared between
 tasks. Simple mutual exclusion is provided automatically,
 and more elaborate sharing protocols can be defined. A
 protected operation can either be a subprogram or an entry.
 A protected entry specifies a Boolean expression (an entry
-barrier) that @Chg{Version=[5],New=[has to],Old=[must]} be
-@Chg{Version=[2],New=[True],Old=[true]} before the body of the entry is
-executed. A protected unit @Chg{Version=[5],New=[can],Old=[may]} define a
+barrier) that @Chg{Version=[5],New=[blocks the execution of the body until
+it evaluates to True],Old=[must be @Chg{Version=[2],New=[True],Old=[true]}
+before the body of the entry is executed]}. A protected unit
+@Chg{Version=[5],New=[can],Old=[may]} define a
 single protected object or a protected type permitting the creation of
 several similar objects.
 
@@ -331,10 +331,12 @@ Case statements and if statements allow the selection of an
 enclosed sequence of statements based on the value of an
 expression or on the value of a condition.
 
-The loop statement provides the basic iterative mechanism in
-the language. A loop statement specifies that a sequence of
-statements is to be executed repeatedly as directed by an
-iteration scheme, or until an exit statement is encountered.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
+The loop statement provides the basic iterative mechanism in the language.
+A loop statement specifies @Chg{Version=[5],New=[],Old=[that ]}a sequence of
+statements @Chg{Version=[5],New=[that are],Old=[is to be]} executed
+repeatedly as directed by an iteration scheme, or until an exit statement
+is encountered.
 
 A block statement comprises a sequence of statements
 preceded by the declaration of local entities used by the

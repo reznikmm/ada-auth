@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2022/05/14 04:06:49 $ $Author: randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:49 $}
+@Comment{$Date: 2022/09/17 06:51:39 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -123,7 +123,7 @@ instructions that exploit the packed decimal representation.
 @end{discussion}
 
 @begin{Examples}
-@Leading@Keepnext@i{Example of Machine_Radix attribute definition clause:}
+@Leading@Keepnext@NewExample@i{Example of Machine_Radix attribute definition clause:}
 @begin{example}
 @key[type] Money @key[is] @key[delta] 0.01 @key[digits] 15;
 @key[for] Money'Machine_Radix @key[use] 10;
@@ -945,7 +945,7 @@ as follows:
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
-@Chg{Version=[5],New=[@i<Examples of use of edited output; in the result
+@Chg{Version=[5],New=[@NewExample@i<Examples of use of edited output; in the result
 string values shown below, 'b' represents the space character:>],Old=[In
 the result string values shown below, 'b' represents the space character.]}
 

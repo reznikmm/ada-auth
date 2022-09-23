@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @LabeledClause{Array Types}
 
@@ -350,7 +350,7 @@ is of its own unique type.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of type declarations with unconstrained array definitions: )
+@Leading@keepnext@NewExample@i(Examples of type declarations with unconstrained array definitions: )
 @begin(Example)
 @key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
 @key(type) Matrix     @key(is) @key(array)(Integer  @key(range) <>, Integer @key(range) <>) @key(of) Real;
@@ -359,7 +359,7 @@ is of its own unique type.
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of type declarations with constrained array definitions: )
+@leading@keepnext@NewExample@i(Examples of type declarations with constrained array definitions: )
 @end{WideAbove}
 @begin(Example)
 @key(type) Table    @key(is) @key(array)(1 .. 10) @key(of) Integer;
@@ -368,7 +368,7 @@ is of its own unique type.
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of object declarations with array type definitions: )
+@leading@keepnext@NewExample@i(Examples of object declarations with array type definitions: )
 @end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
@@ -535,7 +535,7 @@ array subtype match. See @RefSecNum(Type Conversions).
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i(Examples of array declarations including an index constraint: )
+@leading@keepnext@NewExample@i(Examples of array declarations including an index constraint: )
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 Board     : Matrix(1 .. 8,  1 .. 8);  --  @Examcom[see @RefSecNum(Array Types)]
@@ -547,14 +547,14 @@ Filter    : Bit_Vector(0 .. 31);      --  @Examcom[see @RefSecNum(Array Types)]
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Example of array declaration with a constrained array subtype: )
+@leading@keepnext@NewExample@i(Example of array declaration with a constrained array subtype: )
 @end{WideAbove}
 @begin(Example)
 My_Schedule : Schedule;  --@ExamCom[  all arrays of type Schedule have the same bounds]
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Example of record type with a component that is an array: )
+@leading@keepnext@NewExample@i(Example of record type with a component that is an array: )
 @end{WideAbove}
 @begin(Example)
 @key(type) Var_Line(Length : Natural) @key(is)
@@ -696,7 +696,7 @@ a character type.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
+@Leading@keepnext@NewExample@i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
 @begin(Example)
 --  Filter'First      =   0   Filter'Last       =  31   Filter'Length =  32
 --  Rectangle'Last(1) =  20   Rectangle'Last(2) =  30
@@ -741,7 +741,7 @@ these ordering operators correspond to lexicographic order
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of string objects:)
+@Leading@keepnext@NewExample@i(Examples of string objects:)
 @begin(Example)
 @TabClear()@TabSet(P49)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
@@ -1504,7 +1504,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of discriminated types:)
+@Leading@keepnext@NewExample@i(Examples of discriminated types:)
 @begin(Example)
 @key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        --@ExamCom[ see @RefSecNum(Integer Types)]
    @key(record)
@@ -1837,7 +1837,7 @@ from explicit or implicit initialization.
 
 @begin{Examples}
 @Leading@keepnext@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@i{Examples (using types declared above in
+@NewExample@i{Examples (using types declared above in
 @Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum(Discriminants)):}
 @begin(Example)
 Large   : Buffer(200);  --@ExamCom[  constrained, always 200 characters]
@@ -2331,7 +2331,7 @@ New=[],Old=[, unless the record type is limited]}.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of record type declarations: )
+@Leading@keepnext@NewExample@i(Examples of record type declarations: )
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
 @key(type) Date @key(is)
@@ -2350,7 +2350,7 @@ New=[],Old=[, unless the record type is limited]}.
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of record variables: )
+@leading@keepnext@NewExample@i(Examples of record variables: )
 @end{WideAbove}
 @begin(Example)
 Tomorrow, Yesterday : Date;
@@ -2691,7 +2691,7 @@ of the elaboration of the @nt{component_list} of each
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i(Example of record type with a variant part: )
+@Leading@keepnext@NewExample@i(Example of record type with a variant part: )
 @begin(Example)
 @key(type) Device @key(is) (Printer, Disk, Drum);
 @key(type) State  @key(is) (Open, Closed);
@@ -2710,7 +2710,7 @@ of the elaboration of the @nt{component_list} of each
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of record subtypes:)
+@leading@keepnext@NewExample@i(Examples of record subtypes:)
 @end{WideAbove}
 @begin(Example)
 @key(subtype) Drum_Unit @key(is) Peripheral(Drum);
@@ -2718,7 +2718,7 @@ of the elaboration of the @nt{component_list} of each
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of constrained record variables:)
+@leading@keepnext@NewExample@i(Examples of constrained record variables:)
 @end{WideAbove}
 @begin(Example)
 Writer   : Peripheral(Unit  => Printer);

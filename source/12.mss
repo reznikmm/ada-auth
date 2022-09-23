@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -177,7 +177,7 @@ expression.)
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of generic formal parts:}
+@leading@keepnext@NewExample@i{Examples of generic formal parts:}
 @begin{Example}
 @key[generic]     --@ExamCom{  parameterless }
 
@@ -189,32 +189,28 @@ expression.)
 
    Area   : Integer := Length*Length; --@ExamCom{ formal object with a default expression}
 
-@key[generic]
+@trailing@key[generic]
    @key[type] Item  @key[is] @key[private];                       --@ExamCom{ formal type}
    @key[type] Index @key[is] (<>);                          --@ExamCom{ formal type}
    @key[type] Row   @key[is] @key[array](Index @key[range] <>) @key[of] Item; --@ExamCom{ formal type}
    @key[with] @key[function] "<"(X, Y : Item) @key[return] Boolean;    --@ExamCom{ formal subprogram }
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of generic declarations declaring generic subprograms
+@leading@keepnext@NewExample@i{Examples of generic declarations declaring generic subprograms
 Exchange and Squaring:}
-@end{WideAbove}
 @begin{Example}
 @key[generic]
    @key[type] Elem @key[is] @key[private];
 @key[procedure] Exchange(U, V : @key[in] @key[out] Elem);
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+@Trailing@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @key[generic]
    @key[type] Item @Chg{Version=[5],New=[(<>) ],Old=[]}@key[is] @key[private];
    @key[with] @key[function] "*"(U, V : Item) @key[return] Item @key[is] <>;
 @key[function] Squaring(X : Item) @key[return] Item;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a generic declaration declaring a generic package:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a generic declaration declaring a generic package:}
 @begin{Example}
 @key[generic]
    @key[type] Item   @key[is] @key[private];
@@ -302,9 +298,9 @@ is always the completion of a declaration.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a generic procedure body:}
+@leading@keepnext@NewExample@i{Example of a generic procedure body:}
 @begin{Example}
-@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@ExamCom{ see @RefSecNum{Generic Declarations}}
+@trailing@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@ExamCom{ see @RefSecNum{Generic Declarations}}
    T : Elem;  --@ExamCom{  the generic formal type}
 @key[begin]
    T := U;
@@ -313,19 +309,15 @@ is always the completion of a declaration.
 @key[end] Exchange;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a generic function body:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a generic function body:}
 @begin{Example}
-@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@ExamCom{  see @RefSecNum{Generic Declarations}}
+@trailing@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@ExamCom{  see @RefSecNum{Generic Declarations}}
 @key[begin]
    @key[return] X*X;  --@ExamCom{  the formal operator "*"}
 @key[end] Squaring;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a generic package body:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a generic package body:}
 @begin{Example}
 @key[package] @key[body] On_Vectors @key[is]  --@ExamCom{  see @RefSecNum{Generic Declarations}}
 
@@ -1234,7 +1226,7 @@ but the declaration of Bool_4 calls "="@-{5}.
 @end{SingleNote}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of generic instantiations (see
+@leading@keepnext@NewExample@i{Examples of generic instantiations (see
 @RefSecNum{Generic Declarations}):}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
@@ -1245,12 +1237,10 @@ but the declaration of Bool_4 calls "="@-{5}.
 @key[function] @Chg{Version=[5],New=[Square1],Old=[Square]} @key[is] @key[new] Squaring(Item => Matrix, "*" => Matrix_Product);
 @key[function] @Chg{Version=[5],New=[Square2],Old=[Square]} @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@Examcom{ same as previous}
 
-@key[package] Int_Vectors @key[is] @key[new] On_Vectors(Integer, Table, "+");
+@trailing@key[package] Int_Vectors @key[is] @key[new] On_Vectors(Integer, Table, "+");
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of uses of instantiated units:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of uses of instantiated units:}
 @begin{Example}
 Swap(A, B);
 A := Square(A);
@@ -2004,7 +1994,7 @@ Similar terminology applies to the other kinds of
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of generic formal types:}
+@leading@keepnext@NewExample@i{Examples of generic formal types:}
 @begin{Example}
 @key[type] Item @key[is] @key[private];
 @key[type] Buffer(Length : Natural) @key[is] @key[limited] @key[private];
@@ -2014,13 +2004,11 @@ Similar terminology applies to the other kinds of
 @key[type] Angle @key[is] @key[delta] <>;
 @key[type] Mass  @key[is] @key[digits] <>;
 
-@key[type] Table @key[is] @key[array] (Enum) @key[of] Item;
+@trailing@key[type] Table @key[is] @key[array] (Enum) @key[of] Item;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a generic formal part declaring a
+@leading@keepnext@NewExample@i{Example of a generic formal part declaring a
 formal integer type:}
-@end{WideAbove}
 @begin{Example}
 @key[generic]
    @key[type] Rank @key[is] @key[range] <>;
@@ -2151,9 +2139,10 @@ derived type is the derivation class rooted at the ancestor type.]
   rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
 @Syn{lhs=<formal_derived_type_definition>,
   rhs="@Chg{Version=[2],New=[
-     ],Old=[]}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited} | @key{synchronized}] >,Old=[]}@key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]>,Old=<>}@key{with} @key{private}]"}
+     ],Old=[]}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited} | @key{synchronized}] >,Old=[]}@key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]@Chg{Version=[5],New={ },Old={}}>,Old=<>}@key{with} @key{private}]"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2901,7 +2890,7 @@ then the actual's components can be either aliased or not.
 @end{Legality}
 
 @begin{Examples}
-@Leading@Keepnext@i{Example of formal array types:}
+@Leading@Keepnext@NewExample@i{Example of formal array types:}
 @begin{Example}
 --@ExamCom{  given the generic package }
 
@@ -3023,7 +3012,7 @@ Old=[@Defn2{Term=[mode conformance],Sec=(required)}]}
 @end{Legality}
 
 @begin{Examples}
-@Leading@keepnext@i{Example of formal access types:}
+@Leading@keepnext@NewExample@i{Example of formal access types:}
 @begin{Example}
 --@ExamCom{  the formal types of the generic package }
 
@@ -3148,7 +3137,7 @@ protected, or synchronized interface.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1],ARef=[AI12-0442-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of the use of a generic 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of the use of a generic 
 with a formal interface type, to establish a standard interface that all tasks
 will implement so they can be managed appropriately by an application-specific
 scheduler:}]}
@@ -3673,7 +3662,7 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
 @end{Notes}
 
 @begin{Examples}
-@Leading@Keepnext@i{Examples of generic formal subprograms:}
+@Leading@Keepnext@NewExample@i{Examples of generic formal subprograms:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key[with] @key[function] "+"(X, Y : Item) @key[return] Item @key[is] <>;
@@ -3997,7 +3986,7 @@ template included in the visible part of @i<A>.]}
 
 @begin{Examples}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of a generic
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Example of a generic
 package with formal package parameters:}]}
 
 @begin{Example}
@@ -4019,13 +4008,13 @@ package with formal package parameters:}]}
 @ChgAdded{Version=[2],Text=[   @key[function] Lookup(Key : Key_Type) @key[return] Element_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   ...
+@ChgAdded{Version=[2],Type=[Trailing],Text=[   ...
 @key[end] Ordered_Join;]}
 @end{Example}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Example of
 an instantiation of a package with formal packages:}]}
 
 @begin{Example}
@@ -4116,14 +4105,13 @@ an instantiation of a package with formal packages:}]}
 
 @LabeledClause{Example of a Generic Package}
 
-@begin{Intro}
-The following example provides a possible formulation of stacks by means
+@begin{Examples}
+
+@NewExample@;The following example provides a possible formulation of stacks by means
 of a generic package.
 The size of each stack and the type of the stack elements are provided
 as generic formal parameters.
-@end{Intro}
 
-@begin{Examples}
 @Leading
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
@@ -4161,32 +4149,26 @@ as generic formal parameters.
       Index := Index - 1;
    @key[end] Pop;
 
-@key[end] Stack;
+@trailing@key[end] Stack;
 @end{Example}
 
-@begin{WideAbove}
 @Leading@Keepnext@;Instances of this generic package can be obtained as follows:
-@end{WideAbove}
 @begin{Example}
-@key[package] Stack_Int  @key[is] @key[new] Stack(Size => 200, Item => Integer);
+@trailing@key[package] Stack_Int  @key[is] @key[new] Stack(Size => 200, Item => Integer);
 @key[package] Stack_Bool @key[is] @key[new] Stack(100, Boolean);
 @end{Example}
 
-@begin{WideAbove}
 @Leading@Keepnext@;Thereafter, the procedures of the instantiated packages can be called as
 follows:
-@end{WideAbove}
 @begin{Example}
-Stack_Int.Push(N);
+@trailing@;Stack_Int.Push(N);
 Stack_Bool.Push(True);
 @end{Example}
 
-@begin{WideAbove}
 @Leading@Keepnext@;Alternatively, a generic formulation of the type Stack can be given as
 follows (package body omitted):
-@end{WideAbove}
 @begin{Example}
-@key[generic]
+@trailing@key[generic]
    @key[type] Item @key[is] @key[private];
 @key[package] On_Stacks @key[is]
    @key[type] Stack(Size : Positive) @key[is] @key[limited] @key[private];
@@ -4203,10 +4185,8 @@ follows (package body omitted):
 @key[end] On_Stacks;
 @end{Example}
 
-@begin{WideAbove}
 @Leading@Keepnext@;In order to use such a package, an instance has to be created and
 thereafter stacks of the corresponding type can be declared:
-@end{WideAbove}
 @begin{Example}
 @key[declare]
    @key[package] Stack_Real @key[is] @key[new] On_Stacks(Real); @key[use] Stack_Real;

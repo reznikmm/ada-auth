@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1660,7 +1660,7 @@ and @RefSecNum{Protected Units and Protected Objects}, respectively.]}
 @begin{Examples}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[@i{Example 
+@ChgAdded{Version=[2],Type=[Leading],Text=[@NewExample@Chg{Version=[5],New=[@i{Example 
 of use of an overriding indicator when declaring a security queue derived 
 from the Queue interface of @RefSecNum{Interface Types}:}],Old=[The use of
 @nt{overriding_indicator}s allows the detection of errors at compile-time that
@@ -1936,14 +1936,12 @@ The elaboration of a @nt{use_clause} has no effect.
 
 @begin{Examples}
 
-@leading@keepnext@i{Example of a use clause in a context clause:}
+@leading@keepnext@NewExample@i{Example of a use clause in a context clause:}
 @begin{Example}
-@key[with] Ada.Calendar; @key[use] Ada;
+@trailing@key[with] Ada.Calendar; @key[use] Ada;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a use type clause:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a use type clause:}
 @begin{Example}
 @key[use type] Rational_Numbers.Rational; --@ExamCom{ see @RefSecNum{Package Specifications and Declarations}}
 Two_Thirds: Rational_Numbers.Rational := 2/3;
@@ -2469,9 +2467,9 @@ renamed entity, inheriting the original properties.]}
 @end{StaticSem}
 
 @begin{Examples}
-@leading@keepnext@i{Example of renaming an object:}
+@leading@keepnext@NewExample@i{Example of renaming an object:}
 @begin{Example}
-@key[declare]
+@trailing@key[declare]
    L : Person @key[renames] Leftmost_Person; --@Examcom{ see @RefSecNum{Incomplete Type Declarations}}
 @key[begin]
    L.Age := L.Age + 1;
@@ -2479,7 +2477,7 @@ renamed entity, inheriting the original properties.]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0383-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Example of renaming a value:]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of renaming a value:}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0383-1]}
 @begin{Example}
@@ -2617,7 +2615,7 @@ An @nt{exception_renaming_declaration} declares a new view
 @end{StaticSem}
 
 @begin{Examples}
-@leading@keepnext@i{Example of renaming an exception:}
+@leading@keepnext@NewExample@i{Example of renaming an exception:}
 @begin{Example}
 EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @ExamCom{-- see @RefSecNum{Exceptions in Input-Output}}
 @end{Example}
@@ -2682,7 +2680,7 @@ limited view of the renamed package is visible, a @nt{name} that denotes the
 @end{StaticSem}
 
 @begin{Examples}
-@leading@keepnext@i{Example of renaming a package:}
+@leading@keepnext@NewExample@i{Example of renaming a package:}
 @begin{Example}
 @key[package] TM @key[renames] Table_Manager;
 @end{Example}
@@ -3063,7 +3061,7 @@ We'll live with the oddity.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of subprogram renaming declarations:}
+@leading@keepnext@newexample@i{Examples of subprogram renaming declarations:}
 @begin{Example}
 @key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@ExamCom{  see @RefSecNum{Selected Components}}
 
@@ -3074,21 +3072,17 @@ We'll live with the oddity.
 @key[function] Rot   @key[return] Color @key[renames] Red;
 @key[function] Rosso @key[return] Color @key[renames] Rouge;
 
-@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@ExamCom{ see @RefSecNum{Enumeration Types}}
+@trailing@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@ExamCom{ see @RefSecNum{Enumeration Types}}
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a subprogram renaming declaration with new parameter names:}
-@end{WideAbove}
+@leading@keepnext@newexample@i{Example of a subprogram renaming declaration with new parameter names:}
 @begin{Example}
-@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@ExamCom{ see @RefSecNum{Subprogram Declarations}}
+@trailing@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@ExamCom{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a subprogram renaming declaration with a new default expression:}
-@end{WideAbove}
+@leading@keepnext@newexample@i{Example of a subprogram renaming declaration with a new default expression:}
 @begin{Example}
-@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@ExamCom{ see @RefSecNum{Subprogram Declarations}}
+@trailing@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@ExamCom{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 @end{Examples}
 
@@ -3201,7 +3195,7 @@ in particular if the renamed generic unit is a library unit
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of renaming a generic unit:}
+@leading@keepnext@NewExample@i{Example of renaming a generic unit:}
 @begin{Example}
 @key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @ExamCom{-- see @RefSecNum{Input-Output for Enumeration Types}}
 @end{Example}

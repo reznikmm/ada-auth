@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.167 $}
+@Comment{$Revision: 1.168 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -175,9 +175,9 @@ denotes the object or subprogram designated by the value of the @nt{name}.
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of direct names:)
+@Leading@keepnext@NewExample@i(Examples of direct names:)
 @begin(Example)
-@tabclear()@tabset(P9, P47)
+@tabclear()@tabset(P9, P47)@trailing
 Pi @\@ExamCom(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
 Limit @\@ExamCom(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
 Count @\@ExamCom(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
@@ -187,9 +187,7 @@ Random @\@ExamCom(-- the direct name of a function) @\(see @RefSecNum(Subprogram
 Error @\@ExamCom(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
 @end(Example)
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of dereferences:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of dereferences:}
 @begin{Example}@tabclear()@tabset(P19)
 Next_Car.@key[all]@\--@ExamCom[  explicit dereference denoting the object designated by]
                @\--@ExamCom[  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
@@ -260,6 +258,7 @@ For example, there is no need to syntactically forbid (say) @lquotes@;X: "Rem";@
 because it is impossible to declare a type whose name is an
 @nt{operator_symbol} in the first place.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0005-1]}
 The syntax rules for @nt{explicit_dereference}
 and @nt{implicit_dereference} are new;
 this makes other rules simpler, since dereferencing an access value has
@@ -268,7 +267,8 @@ We also use @nt{name} instead of @nt{prefix} in the
 @nt{explicit_dereference} rule
 since that seems clearer. Note that these rules rely on the
 fact that function calls are now names, so we don't need to
-use prefix to allow functions calls in front of .@key{all}.
+use prefix to allow @Chg{Version=[5],New=[function],Old=[functions]} calls in
+front of .@key{all}.
 @begin{Discussion}
 Actually, it would be reasonable to allow any @nt{primary} in front
 of .@key{all}, since only the value is needed, but that would be a bit
@@ -381,7 +381,7 @@ Constraint_Error is raised if this check fails.
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of indexed components:)
+@Leading@keepnext@NewExample@i(Examples of indexed components:)
 @begin{Example}
 @tabclear()@tabset(P64)
  My_Schedule(Sat)     --@ExamCom[  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
@@ -477,7 +477,7 @@ component of the array A and has the corresponding component type.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of slices:)
+@Leading@keepnext@NewExample@i(Examples of slices:)
 @begin{Example}
 @tabclear()@tabset(P58)
   Stars(1 .. 15)        --@ExamCom[  a slice of 15 characters @\(see @RefSecNum{String Types})]
@@ -704,9 +704,9 @@ The exception Constraint_Error is raised if this check fails.
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of selected components:)
+@Leading@keepnext@NewExample@i(Examples of selected components:)
 @begin{Example}
-@tabclear()@tabset(P60)
+@tabclear()@tabset(P60)@trailing
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178]}
   Tomorrow.Month     --@ExamCom[  a record component @\(see @RefSecNum{Record Types})]
@@ -721,9 +721,7 @@ The exception Constraint_Error is raised if this check fails.
   Pool(K).Write      --@ExamCom[  an entry of the task Pool(K) @\(see @Chg{Version=[5],New=[@RefSecNum{Task Units and Task Objects}],Old=[@RefSecNum{Protected Units and Protected Objects}]})]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Examples of expanded names:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of expanded names:)
 @begin{Example}
 @tabclear()@tabset(P67)
   Key_Manager."<"      --@ExamCom[  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
@@ -1094,7 +1092,7 @@ conformant with the designated profile of the access type.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of attributes:)
+@Leading@keepnext@NewExample@i(Examples of attributes:)
 @begin{Example}
 @tabclear()@tabset(P64)
 Color'First        --@ExamCom[ minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
@@ -1302,7 +1300,7 @@ named reference object.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of the specification
 and use of generalized references:}]}
 
 @begin{Example}
@@ -1639,7 +1637,7 @@ the @nt{prefix} of the prefixed view.]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of the specification
 and use of generalized indexing:}]}
 
 @begin{Example}
@@ -1886,7 +1884,7 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of literals:)
+@Leading@keepnext@NewExample@i(Examples of literals:)
 @begin{Example}
 @tabclear()@tabset(P16)
 3.14159_26536 @\--@ExamCom[  a real literal]
@@ -2176,7 +2174,7 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of the specification
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of the specification
 and use of user-defined literals:}]}
 
 @begin{Example}
@@ -2910,28 +2908,24 @@ be in the same order as in the @nt<known_discriminant_part>.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Example of a record aggregate with positional associations:)
+@Leading@keepnext@NewExample@i(Example of a record aggregate with positional associations:)
 @begin{Example}
-(4, July, 1776)                                       --@ExamCom[  see @RefSecNum{Record Types} ]
+@trailing@;(4, July, 1776)                                       --@ExamCom[  see @RefSecNum{Record Types} ]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Examples of record aggregates with named associations:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of record aggregates with named associations:)
 @begin{Example}
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
 
-(Disk, Closed, Track => 5, Cylinder => 12)            --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@trailing@;(Disk, Closed, Track => 5, Cylinder => 12)            --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
-@begin{WideAbove}
 @leading@keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
-@i(@Chg{Version=[2],New=[Examples],Old=[Example]} of component
+@NewExample@i(@Chg{Version=[2],New=[Examples],Old=[Example]} of component
 @Chg{Version=[2],New=[associations],Old=[association]} with
 several choices:)
-@end{WideAbove}
 @begin{Example}
 @tabclear()@tabset(P50)
 (Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\--@ExamCom[  see @RefSecNum{Incomplete Type Declarations}]
@@ -2941,16 +2935,14 @@ several choices:)
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>) @\--@ExamCom[  see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@Trailing@ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[ --@ExamCom[  Succ and Pred will be set to @key{null}]],Old=[]}
 
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of record aggregates for tagged types
+@leading@keepnext@NewExample@i{Examples of record aggregates for tagged types
 (see @RefSecNum(Tagged Types and Type Extensions)
 and @RefSecNum{Type Extensions}):}
-@end{WideAbove}
 @begin{Example}
 Expression'(@key{null record})
 Literal'(Value => 0.0)
@@ -3244,7 +3236,7 @@ unless the Initialize procedure is abstract
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of extension aggregates (for types defined in @RefSecNum{Type Extensions}):}
+@Leading@keepnext@NewExample@i{Examples of extension aggregates (for types defined in @RefSecNum{Type Extensions}):}
 @begin(example)
 Painted_Point'(Point @key{with} Red)
 (Point'(P) @key{with} Paint => Black)
@@ -3549,14 +3541,14 @@ RM83 omitted this
   case, presumably as an oversight. We want to minimize situations
   where an @nt{expression} becomes illegal if parenthesized.
 @end{Discussion}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AAI05-0147-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0236-1]}
 @ChgAdded{Version=[3],Text=[For a @nt{conditional_expression}@Chg{Version=[5],New=[
 (see @RefSecNum{Conditional Expressions})],Old=[]}, the
 applicable index constraint for each @SynI<dependent_>@nt{expression} is that,
 if any, defined for the @nt{conditional_expression}@Chg{Version=[5],New=[;],Old=[.]}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0147-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0236-1]}
 @ChgAdded{Version=[5],Text=[For a @nt{declare_expression} (see @RefSecNum{Declare Expressions}),
 the applicable index constraint for the @SynI<body_>@nt{expression} is that,
 if any, defined for the @nt{declare_expression}.]}
@@ -3896,42 +3888,36 @@ with a single component.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of array aggregates with positional associations:)
+@Leading@keepnext@NewExample@i(Examples of array aggregates with positional associations:)
 @begin{Example}
-(7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
+@trailing@;(7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
 Table'(5, 8, 4, 1, @key(others) => 0)  --@ExamCom[  see @RefSecNum{Array Types} ]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Examples of array aggregates with named associations:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of array aggregates with named associations:)
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 (1 .. 5 => (1 .. 8 => 0.0))      --@ExamCom[  two-dimensional]
 @Chg{Version=[5],New=<[>,Old=<(>}1 .. N => @key(new) Cell@Chg{Version=[5],New=<]>,Old=<)>}             --@ExamCom[  N new cells, in particular for N = 0]
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
+@trailing@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 Table'(2 | 4 | 10 => 1, @key(others) => 0)
 Schedule'(Mon .. Fri => True,  @key(others) => False)  --@ExamCom[  see @RefSecNum{Array Types}]
 Schedule'@Chg{Version=[5],New=<[>,Old=<(>}Wed | Sun  => False, @key(others) => True@Chg{Version=[5],New=<]>,Old=<)>}
 Vector'(1 => 2.5)                                --@ExamCom[  single-component vector]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Examples of two-dimensional array aggregates:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of two-dimensional array aggregates:)
 @begin{Example}
 --@ExamCom[ Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
+@trailing@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
 (1 => @Chg{Version=[5],New=<[>,Old=<(>}1.1, 1.2, 1.3@Chg{Version=[5],New=<]>,Old=<)>}, 2 => @Chg{Version=[5],New=<[>,Old=<(>}2.1, 2.2, 2.3@Chg{Version=[5],New=<]>,Old=<)>})
 @Chg{Version=[5],New=<[>,Old=<(>}1 => (1 => 1.1, 2 => 1.2, 3 => 1.3), 2 => (1 => 2.1, 2 => 2.2, 3 => 2.3)@Chg{Version=[5],New=<]>,Old=<)>}
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Examples of aggregates as initial values:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of aggregates as initial values:)
 @begin{Example}
 A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        --@ExamCom[ A(1)=7, A(10)=0]
 B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        --@ExamCom[ B(1)=0, B(10)=1]
@@ -3952,7 +3938,7 @@ F : String(1 .. 1) := (1 => 'F');  --@ExamCom[ a one component aggregate: same a
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[@i{Example of an array
+@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[@NewExample@i{Example of an array
 aggregate with defaulted others choice and with an applicable index constraint
 provided by an enclosing record aggregate:}]}
 
@@ -4290,7 +4276,7 @@ ascending order, if the @nt{discrete_choice} represents a range):]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of use
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Examples of use
 of delta aggregates in a postcondition:}]}
 
 @begin{Example}
@@ -4305,7 +4291,7 @@ of delta aggregates in a postcondition:}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1],ARef=[AI12-0379-1],ARef=[AI12-0386-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples where the
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Examples where the
 base expression is nontrivial:}]}
 
 @begin{Example}
@@ -4325,7 +4311,7 @@ base expression is nontrivial:}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Example where the
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Example where the
 base expression is class-wide:}]}
 
 @begin{Example}
@@ -4846,7 +4832,7 @@ follows:]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Examples of
 specifying the Aggregate aspect for a Set_Type, a Map_Type, and a Vector_Type:}]}
 
 @begin{Example}
@@ -4909,7 +4895,7 @@ specifying the Aggregate aspect for a Set_Type, a Map_Type, and a Vector_Type:}]
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i{Examples of
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Examples of
 container aggregates for Set_Type, Map_Type, and Vector_Type:}]}
 
 @begin{Example}
@@ -5271,7 +5257,7 @@ or return the value of the object.
 @end{ImplPerm}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of primaries:)
+@Leading@keepnext@NewExample@i(Examples of primaries:)
 @begin{Example}
 @Trailing@;4.0                --@ExamCom[  real literal]
 Pi                 --@ExamCom[  named number]
@@ -5284,7 +5270,7 @@ Real(M*N)          --@ExamCom[  conversion]
 (Line_Count + 10)  --@ExamCom[  parenthesized expression ]
 @end{Example}
 
-@leading@keepnext@i(Examples of expressions:)
+@leading@keepnext@NewExample@i(Examples of expressions:)
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Volume                      --@ExamCom[ primary]
@@ -5581,7 +5567,7 @@ as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of precedence:)
+@Leading@keepnext@NewExample@i(Examples of precedence:)
 @begin{Example}
 @key(not) Sunny @key(or) Warm    --@ExamCom[  same as (not Sunny) or Warm]
 X > 4.0 @key(and) Y > 0.0  --@ExamCom[  same as (X > 4.0) and (Y > 0.0)]
@@ -5756,15 +5742,13 @@ following truth table:
 @end{SingleNote}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of logical operators:)
+@Leading@keepnext@NewExample@i(Examples of logical operators:)
 @begin{Example}
-Sunny @key(or) Warm
+@trailing@;Sunny @key(or) Warm
 Filter(1 .. 10) @key(and) Filter(15 .. 24)   --@ExamCom[   see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i(Examples of short-circuit control forms:)
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of short-circuit control forms:)
 @begin{Example}
 Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   --@ExamCom[   see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
@@ -6539,7 +6523,7 @@ if and only if the length of each dimension is the same for both.
 @end{SingleNote}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of expressions involving relational operators and
+@Leading@keepnext@NewExample@i(Examples of expressions involving relational operators and
 membership tests:)
 @begin{Example}
 X /= Y
@@ -6834,7 +6818,7 @@ performed can be followed by a conditional addition of the modulus.
 @end{SingleNote}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of expressions involving binary adding operators:)
+@Leading@keepnext@NewExample@i(Examples of expressions involving binary adding operators:)
 @begin{Example}
 Z + 0.1      --@ExamCom[  Z has to be of a real type ]
 
@@ -7163,7 +7147,7 @@ illustrated by the following table:
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of expressions involving multiplying operators:)
+@Leading@keepnext@NewExample@i(Examples of expressions involving multiplying operators:)
 @begin{Example}
 I : Integer := 1;
 J : Integer := 2;
@@ -7700,17 +7684,17 @@ Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of use of
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of use of
 an} @nt{if_expression}@i{:}]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Text=[Put_Line ("Casey is " &
       (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of use of
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of use of
 a} @nt{case_expression}@i{:}]}
 
 @begin{Example}
@@ -7850,20 +7834,20 @@ order specified by the @nt{loop_parameter_specification}]} (see
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[@i<Example
+@ChgAdded{Version=[3],Type=[Leading],Text=[@NewExample@Chg{Version=[5],New=[@i<Example
 of a quantified expression as a postcondition for a sorting routine on
 an array A with an index subtype T:>],Old=[The postcondition for a sorting
 routine on an array A with an index subtype T can be written:]}]}
 
 @begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Post => (A'Length < 2 @key[or else]
    (@key[for all] I @key[in] A'First .. T'Pred(A'Last) => A (I) <= A (T'Succ (I))))]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1],ARef=[AI12-0430-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[@i<Example of
+@ChgAdded{Version=[3],Type=[Leading],Text=[@NewExample@Chg{Version=[5],New=[@i<Example of
 use of a quantified expression as an assertion that a positive number N is
 composite (as opposed to prime):>],Old=[The assertion that a positive number
 is composite (as opposed to prime) can be written:]}]}
@@ -8009,7 +7993,7 @@ the @SynI{body_}@nt{expression} is evaluated. The value of the
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of use of a declare
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i<Example of use of a declare
 expression as a replacement postcondition for Ada.@!Containers.@!Vectors.@!"&"
 (see @RefSecNum{The Generic Package Containers.Vectors}):>]}
 
@@ -8396,42 +8380,42 @@ procedure.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded erro
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of an
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i<Example of an
 expression function that returns its result as a reduction expression:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={@key[function] Factorial(N : Natural) @key[return] Natural @key[is]
    ([@key[for] J @key[in] 1..N => J]'Reduce("*", 1));}}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of a reduction
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i<Example of a reduction
 expression that computes the Sine of X using a Taylor expansion:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={@key[function] Sine (X : Float; Num_Terms : Positive := 5) @key[return] Float @key[is]
    ([@key[for] I @key[in] 1..Num_Terms =>
       (-1.0)**(I-1) * X**(2*I-1)/Float(Factorial(2*I-1))]'Reduce("+", 0.0));}}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i<Example of a
 reduction expression that outputs the sum of squares:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={Put_Line ("Sum of Squares is" &
           Integer'Image([@key[for] I @key[in] 1 .. 10 => I**2]'Reduce("+", 0)));}}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of a reduction
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i<Example of a reduction
 expression used to compute the value of Pi:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={--  @Examcom{See @RefSecNum{Floating Point Types}.}
 @key[function] Pi (Number_Of_Steps : Natural := 10_000) @key[return] Real @key[is]
   (1.0 / Real (Number_Of_Steps) *
@@ -8442,43 +8426,43 @@ expression used to compute the value of Pi:>]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i<Example of a
 reduction expression used to calculate the sum of elements of an array
 of integers:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[A'Reduce("+",0)  -- @Examcom{See @RefSecNum{Array Aggregates}.}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i<Example of a
 reduction expression used to determine if all elements in a two-dimensional
 array of booleans are set to true:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[Grid'Reduce("and", True)  -- @Examcom{See @RefSecNum{Array Types}.}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example of a
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i<Example of a
 reduction expression used to calculate the minimum value of an array of
 integers in parallel:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[A'Parallel_Reduce(Integer'Min, Integer'Last)]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i<Example of a parallel reduction
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i<Example of a parallel reduction
 expression used to calculate the mean of the elements of a two-dimensional
 array of subtype Matrix (see @RefSecNum{Array Types}) that are
 greater than 100.0:>]}
 
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[type] Accumulator @key[is record]
    Sum   : Real; --@ExamCom[ See @RefSecNum{Floating Point Types}.]
    Count : Integer;

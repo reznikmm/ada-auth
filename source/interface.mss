@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.92 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
+@comment{ $Revision: 1.93 $ $Date: 2022/09/17 06:51:40 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2022/09/17 06:51:40 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -785,7 +785,7 @@ that violates Ada semantics.]}
 
 @begin{Examples}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
-@leading@keepnext@i{Example of interfacing
+@leading@keepnext@NewExample@i{Example of interfacing
 @Chg{Version=[4],New=[aspects],Old=[pragmas]}:}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
@@ -1939,9 +1939,9 @@ specific numbers and types of parameters.
 @end{Notes}
 
 @begin{Examples}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
-@Leading@Keepnext@i{Example of using the Interfaces.C package:}
+@Leading@Keepnext@NewExample@i{Example of using the Interfaces.C package:}
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
 @Examcom{--Calling the C Library @Chg{Version=[5],New=[Functions],Old=[Function]} strcpy@Chg{Version=[5],New=[ and printf],Old=[]}}
 @key(with) Interfaces.C;
 @key(procedure) Test @key(is)
@@ -2660,7 +2660,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 @end{SingleNote}
 
 @begin{Examples}
-@Leading@Keepnext@i{Example of Interfaces.C.Pointers:}
+@Leading@Keepnext@NewExample@i{Example of Interfaces.C.Pointers:}
 @begin{Example}
 @key(with) Interfaces.C.Pointers;
 @key(with) Interfaces.C.Strings;
@@ -3580,7 +3580,7 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Examples}
-@Leading@Keepnext@i{Examples of Interfaces.COBOL:}
+@Leading@Keepnext@NewExample@i{Examples of Interfaces.COBOL:}
 @begin{Example}
 @key(with) Interfaces.COBOL;
 @key(procedure) Test_Call @key(is)
@@ -3915,7 +3915,7 @@ ISO/IEC 1594-1:2018 along with the C interfacing features defined in
 
 @end[Notes]
 @begin{Examples}
-@Leading@Keepnext@i{Example of Interfaces.Fortran:}
+@Leading@Keepnext@NewExample@i{Example of Interfaces.Fortran:}
 @begin{Example}
 @key[with] Interfaces.Fortran;
 @key[use] Interfaces.Fortran;

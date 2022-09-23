@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.88 $ $Date: 2022/06/21 06:08:02 $ $Author: randy $ }
+@comment{ $Revision: 1.89 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/09/17 06:51:39 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -2267,7 +2267,7 @@ It is not clear that this rule can be tested or even defined formally.
 @LabeledSubClause{Example of Use of a Remote Access-to-Class-Wide Type}
 
 @begin{Examples}
-@Leading@i{Example of using a remote access-to-class-wide type to achieve dynamic binding
+@Leading@NewExample@i{Example of using a remote access-to-class-wide type to achieve dynamic binding
 across active partitions:}
 @begin{example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0414-1]}

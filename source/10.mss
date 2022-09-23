@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -866,7 +866,7 @@ declarative region of package Standard.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of library units:}
+@leading@keepnext@NewExample@i{Examples of library units:}
 @begin{Example}
 @key[package] Rational_Numbers.IO @key[is]  --@ExamCom[ public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
    @key[procedure] Put(R : @key[in]  Rational);
@@ -892,7 +892,7 @@ declarative region of package Standard.
    Ada.Text_IO.New_Line;
 @key[end] Main;
 
-@key[with] Rational_Numbers.IO;
+@trailing@key[with] Rational_Numbers.IO;
 @key[package] Rational_IO @key[renames] Rational_Numbers.IO;
                                 --@ExamCom[ a library unit renaming declaration]
 @end{Example}
@@ -925,9 +925,7 @@ separately.
 @key[end] Generic_Bags.Generic_Iterators;
 @end{Example}
 
-@begin{WideAbove}
 @leading@keepnext@;A package that instantiates the above generic units:
-@end{WideAbove}
 @begin{Example}
 @key[with] Generic_Bags;
 @key[with] Generic_Bags.Generic_Iterators;
@@ -1520,7 +1518,7 @@ above.
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of use of with 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of use of with 
 clauses, limited with clauses, and private with clauses:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -1861,14 +1859,14 @@ The body of a protected unit can be a subunit.
 
 @begin{Examples}
 @leading@keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
-@Chg{Version=[5],New=[@i{Example that defines package Parent without 
+@Chg{Version=[5],New=[@NewExample@i{Example that defines package Parent without 
 subunits:}],Old=[The package Parent is first written without subunits:]}
 @begin{Example}
 @key[package] Parent @key[is]
     @key[procedure] Inner;
 @key[end] Parent;
 
-@key[with] Ada.Text_IO;
+@trailing@key[with] Ada.Text_IO;
 @key[package] @key[body] Parent @key[is]
     Variable : String := "Hello, there.";
     @key[procedure] Inner @key[is]
@@ -1878,14 +1876,12 @@ subunits:}],Old=[The package Parent is first written without subunits:]}
 @key[end] Parent;
 @end{Example}
 
-@begin{WideAbove}
 @leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1],ARef=[AI12-0440-1]}
-@Chg{Version=[5],New=[@i{Example showing how the body of procedure Inner 
+@Chg{Version=[5],New=[@NewExample@i{Example showing how the body of procedure Inner 
 can be turned into a subunit by rewriting the package body as follows
 (with the declaration of Parent remaining the same):}],Old=[The body of
 procedure Inner may be turned into a subunit by rewriting the package body
 as follows (with the declaration of Parent remaining the same):]}
-@end{WideAbove}
 @begin{Example}
 @key[package] @key[body] Parent @key[is]
     Variable : String := "Hello, there.";

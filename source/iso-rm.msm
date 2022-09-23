@@ -33,6 +33,7 @@
 @RTFFooterText{Version=[5],Text=[\'a9 ISO/IEC 2021 \endash  All rights reserved]}
 @RTFFooter{UseDate=[F],UseClauseName=[F],UseISOFormat=[T]}
 @RTFPageSize{A4}
+@RTFSizes{Normal}
 @RTFFonts{Serif=[Times],SansSerif=[Helvetica]}@Comment{ISO requires the latter}
 @RTFVersionName{Version=[0],Text=[Original Text]}
 @RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}

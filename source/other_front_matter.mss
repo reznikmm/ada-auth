@@ -1,6 +1,6 @@
 @Part(otherfrontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/other_front_matter.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2022/06/21 06:08:04 $}
+@comment{$Revision: 1.3 $ $Date: 2022/09/17 06:51:40 $}
 
 @comment{These parts appear after the Introduction in RM and AARM versions only.}
 
@@ -9,18 +9,44 @@
 @SubHeading(Instructions for Comment Submission)
 
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0446-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@Defn{instructions for comment submission}
+@Defn{comments, instructions for submission}Informal comments on this
+@IntlStdTitle can be submitted in three ways:]}
 
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[via e-mail to:]}
+@begin{Indent}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@b{ada-comment@@ada-auth.org}]}
+@end{Indent}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[by filling out a web form at:]}
+@begin{Indent}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@b{@URLLink{URL=[https://arg.adaic.org/community-input],
+Text=[https://arg.adaic.org/community-input]}}]}
+@end{Indent}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[by creating a new
+@ldquote@;issue@rdquote on the ARG GitHub site:]}
+@begin{Indent}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@b{@URLLink{URL=[https://github.com/Ada-Rapporteur-Group/User-Community-Input],
+Text=[https://github.com/Ada-Rapporteur-Group/User-Community-Input]}}]}
+@end{Indent}
+@end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0441-1]}
-@Defn{instructions for comment submission}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
+@Chg{Version=[5],New=[],Old=[@Defn{instructions for comment submission}
 @Defn{comments, instructions for submission}
-Informal comments on this @IntlStdTitle @Chg{Version=[5],New=[can],Old=[may]} be sent via
+Informal comments on this @IntlStdTitle may be sent via
 e-mail to @Chg{New=[@b(ada-comment@@ada-auth.org)],
 Old=[@b(ada-comment@@sw-eng.falls-church.va.us)]}.
-If appropriate, the Project Editor will initiate
+]}If appropriate, the Project Editor will initiate
 the defect correction procedure.
-
 
 Comments should use the following format:
 @begin(display)
@@ -43,9 +69,12 @@ and @i(yy-mm-dd) is the date the comment was sent.
 The date is optional, as is the @b(!keywords) line.
 
 @ChgRef{Version=[1],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
 @Chg{New=[], Old=[Multiple comments per e-mail message are acceptable.]}
-Please use a descriptive @lquotes@;Subject@rquotes@; in your e-mail
-message@Chg{New=[, and limit each message to a single comment.], Old=[.]}
+Please use a descriptive @lquotes@;Subject@rquotes@;
+@Chg{Version=[5],New=[when sending an],Old=[in your]} e-mail
+message@Chg{New=[, @Chg{Version=[5],New=[or title when creating a new
+issue, ],Old=[]}and limit each message to a single comment.], Old=[.]}
 
 When correcting typographical errors or making minor wording
 suggestions, please put the correction directly as the topic of the
@@ -58,14 +87,14 @@ additional information in the body of the comment, for example:
 @\@b(!topic) it[']s meaning is not defined
 @end{Display}
 
-
-Formal requests for interpretations and for reporting defects in the
-International Standard may be made in accordance with the ISO/IEC
-JTC 1 Directives and the ISO/IEC JTC 1/SC 22 policy for interpretations.
-National Bodies may submit a Defect Report to ISO/IEC JTC 1/SC 22 for resolution
-under the JTC 1 procedures.
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0446-1]}
+@ChgDeleted{Version=[5],Text=[Formal requests for interpretations and for
+reporting defects in the International Standard may be made in accordance with
+the ISO/IEC JTC 1 Directives and the ISO/IEC JTC 1/SC 22 policy for
+interpretations. National Bodies may submit a Defect Report to
+ISO/IEC JTC 1/SC 22 for resolution under the JTC 1 procedures.
 A response will be provided and, if appropriate,
-a Technical Corrigendum will be issued in accordance with the procedures.
+a Technical Corrigendum will be issued in accordance with the procedures.]}
 
 @end{Intro}
 @end{NotISO}

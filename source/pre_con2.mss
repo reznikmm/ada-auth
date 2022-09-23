@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -8502,7 +8502,7 @@ as necessary.]}
 @begin{Examples}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[The following example is an implementation of
+@ChgAdded{Version=[3],Text=[@NewExample@;The following example is an implementation of
 Dijkstra's shortest path algorithm in a directed graph with positive distances.
 The graph is represented by a map from nodes to sets of edges.]}
 

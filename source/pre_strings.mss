@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.95 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
+@comment{ $Revision: 1.96 $ $Date: 2022/09/17 06:51:40 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2022/09/17 06:51:40 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -368,7 +368,7 @@ access-to-subprogram type.
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{We let the paragraph numbers change in non-normative material}
-@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@i<Example
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i<Example
 of use of Strings.Maps.To_Mapping:>]}
 
 To_Mapping("ABCD", "ZZAB") returns a Character_Mapping that maps 'A'

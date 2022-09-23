@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:00 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.156 $}
+@Comment{$Revision: 1.157 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1284,7 +1284,7 @@ creates a distinct type and its first subtype.
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of type definitions:)
+@Leading@keepnext@NewExample@i(Examples of type definitions:)
 @begin(Example)
 (White, Red, Yellow, Green, Blue, Brown, Black)
 @key(range) 1 .. 72
@@ -1292,7 +1292,7 @@ creates a distinct type and its first subtype.
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of type declarations:)
+@leading@keepnext@NewExample@i(Examples of type declarations:)
 @end{WideAbove}
 @begin(Example)
 @key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
@@ -1471,7 +1471,7 @@ unconstrained (see @RefSecNum{Index Constraints and Discrete Ranges} and
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of subtype declarations:)
+@Leading@keepnext@NewExample@i(Examples of subtype declarations:)
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        --@ExamCom[  see @RefSecNum(Type Declarations)]
@@ -2191,8 +2191,8 @@ evaluated during the evaluation of a membership test (see
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Examples of predicates applied
-to scalar types:}]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of
+predicates applied to scalar types:}]}
 
 @begin(Example)
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
@@ -2207,9 +2207,9 @@ to scalar types:}]}
 @end(Example)
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
-@ChgAdded{Version=[4],Type=[Leading],Text=[@i{Text_IO (see
-@RefSecNum{The Package Text_IO}) could have used predicates to describe some
-common exceptional conditions as follows:}]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[@NewExample@i{Text_IO (see
+@RefSecNum{The Package Text_IO}) could have used predicates
+to describe some common exceptional conditions as follows:}]}
 
 @begin(Example)
 @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -3370,7 +3370,7 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Example of a multiple object declaration:)
+@Leading@keepnext@NewExample@i(Example of a multiple object declaration:)
 @begin(Example)
 --@ExamCom[  the multiple object declaration ]
 
@@ -3385,7 +3385,7 @@ Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Pe
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of variable declarations:)
+@leading@keepnext@NewExample@i(Examples of variable declarations:)
 @end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
@@ -3400,7 +3400,7 @@ Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String 
 @end(Example)
 
 @begin{WideAbove}
-@leading@keepnext@i(Examples of constant declarations:)
+@leading@keepnext@NewExample@i(Examples of constant declarations:)
 @end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
@@ -3600,7 +3600,7 @@ The elaboration of a @nt<number_declaration> has no effect.
 @end{RunTime}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of number declarations:)
+@Leading@keepnext@NewExample@i(Examples of number declarations:)
 @begin(Example)
 Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@ExamCom[ a real number (see @RefSecNum{The Numerics Packages})]
 
@@ -4303,7 +4303,7 @@ A @nt{derived_type_definition}, however, never defines an interface type.]}
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of derived type declarations:)
+@Leading@keepnext@NewExample@i(Examples of derived type declarations:)
 @begin(Example)
 @key(type) Local_Coordinate @key(is) @key(new) Coordinate;   --@ExamCom[  two different types]
 @key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  --@ExamCom[  see @RefSecNum(Enumeration Types)]
@@ -5847,7 +5847,7 @@ Constraint_Error.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of ranges:)
+@Leading@keepnext@NewExample@i(Examples of ranges:)
 @begin{Example}
 -10 .. 10
 X .. X + 1
@@ -5857,7 +5857,7 @@ Red .. Green     --@ExamCom[ see @RefSecNum{Enumeration Types}]
 Table'Range      --@ExamCom[ a range attribute reference (see @RefSecNum{Array Types})]
 
 @end{Example}
-@Leading@keepnext@i(Examples of range constraints:)
+@Leading@keepnext@NewExample@i(Examples of range constraints:)
 @begin{Example}
 @key(range) -999.0 .. +999.0
 @key(range) S'First+1 .. S'Last-1
@@ -6099,7 +6099,7 @@ the ambiguity (see @RefSecNum(Qualified Expressions)).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of enumeration types and subtypes: )
+@Leading@keepnext@NewExample@i(Examples of enumeration types and subtypes: )
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0386-1]}
 @key(type) Day        @key(is) (Mon, Tue, Wed, Thu, Fri, Sat, Sun);@Chg{Version=[5],New=[
@@ -6322,7 +6322,7 @@ by an @nt<enumeration_representation_clause> as explained in
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Example of a character type: )
+@Leading@keepnext@NewExample@i(Example of a character type: )
 @begin(Example)
 @key(type) Roman_Digit @key(is) ('I', 'V', 'X', 'L', 'C', 'D', 'M');
 @end(Example)
@@ -6901,7 +6901,7 @@ signed integer types match "@key(type) T @key(is range) <>;"
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of integer types and subtypes: )
+@Leading@keepnext@NewExample@i(Examples of integer types and subtypes: )
 @begin(Example)
 @key(type) Page_Num  @key(is) @key(range) 1 .. 2_000;
 @key(type) Line_Size @key(is) @key(range) 1 .. Max_Line_Size;
@@ -7145,7 +7145,7 @@ are satisfied (in the absence of an exception) by these attributes:
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of attributes of discrete subtypes: )
+@Leading@keepnext@NewExample@i(Examples of attributes of discrete subtypes: )
 @begin(Example)
 --@ExamCom[  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
 
@@ -7548,7 +7548,7 @@ Overflow_Checks, never Range_Checks.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of floating point types and subtypes:)
+@Leading@keepnext@NewExample@i(Examples of floating point types and subtypes:)
 @begin(Example)
 @key(type) Coefficient @key(is) @key(digits) 10 @key(range) -1.0 .. 1.0;
 
@@ -7936,7 +7936,7 @@ of Float_IO).
 @end{SingleNote}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of fixed point types and subtypes:)
+@Leading@keepnext@NewExample@i(Examples of fixed point types and subtypes:)
 @begin(Example)
 @key(type) Volt @key(is) @key(delta) 0.125 @key(range) 0.0 .. 255.0;
 

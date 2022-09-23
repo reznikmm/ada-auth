@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:00 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1209,7 +1209,7 @@ d@smldotlessi@;yarbak@smldotlessi@;r]}
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of identifiers:}
+@Leading@keepnext@NewExample@i{Examples of identifiers:}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgNote{Old version:@begin{Display}
 Count      X    Get_Symbol   Ethelyn   Marion
@@ -1348,7 +1348,7 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 @end{StaticSem}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of decimal literals:}
+@Leading@keepnext@NewExample@i{Examples of decimal literals:}
 @ChgNote{ Old version: @begin{Display}
 @tabclear()@tabset(P31)
 12        0      1E6    123_456 @\--@i{  integer literals}
@@ -1425,7 +1425,7 @@ lower case or in upper case, with the same meaning.
 @end{StaticSem}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of based literals:}
+@Leading@keepnext@NewExample@i{Examples of based literals:}
 @ChgNote{ Old version: @begin{Display}
 @tabclear()@tabset(P16, P45)
 2#1111_1111# @\16#FF#       016#0ff# @\--@i{  integer literals of value 255}
@@ -1462,7 +1462,7 @@ of a character type. See @RefSecNum(Character Types).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of character literals:}
+@Leading@keepnext@NewExample@i{Examples of character literals:}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgNote{ Orginal version: @begin{Display}
 'A'@ @ @ @ @ '*'@ @ @ @ @ '''@ @ @ @ @ '@ '
@@ -1530,7 +1530,7 @@ sequence of characters of a @nt{string_literal}.]}
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of string literals:}
+@Leading@keepnext@NewExample@i{Examples of string literals:}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgNote< Original version: @begin{Display}
 @tabclear()@tabset(P16)
@@ -1594,7 +1594,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @end{StaticSem}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of comments:}
+@Leading@keepnext@NewExample@i{Examples of comments:}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 --@ExamCom[  the last sentence above echoes the Algol 68 report ]
@@ -2076,7 +2076,7 @@ Some compilers might even ignore the pragma altogether.
 @end{StaticSem}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of pragmas:}
+@Leading@keepnext@NewExample@i{Examples of pragmas:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.160 $}
+@Comment{$Revision: 1.161 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -149,7 +149,7 @@ whose bodies can occur in @nt{package_specification}s.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a package declaration:}
+@leading@keepnext@NewExample@i{Example of a package declaration:}
 @begin{Example}
 @key[package] Rational_Numbers @key[is]
 
@@ -339,7 +339,7 @@ takes place before the elaboration of the
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a package body
+@leading@keepnext@NewExample@i{Example of a package body
 (see @RefSecNum{Package Specifications and Declarations}):}
 @begin{Example}
 @key[package] @key[body] Rational_Numbers @key[is]
@@ -1108,15 +1108,13 @@ record extension be descended from the same set of interfaces.]}
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of private type declarations:}
+@leading@keepnext@NewExample@i{Examples of private type declarations:}
 @begin{Example}
-@key[type] Key @key[is] @key[private];
+@trailing@key[type] Key @key[is] @key[private];
 @key[type] File_Name @key[is] @key[limited] @key[private];
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a private extension declaration:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a private extension declaration:}
 @begin{Example}
 @key[type] List @key[is] @key[new] Ada.Finalization.Controlled @key[with] @key[private];
 @end{Example}
@@ -1609,7 +1607,7 @@ are also defined for discriminants and inherited components.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a type with private operations:}
+@leading@keepnext@NewExample@i{Example of a type with private operations:}
 @begin{Example}
 @key[package] Key_Manager @key[is]
    @key[type] Key @key[is] @key[private];
@@ -2362,7 +2360,7 @@ value.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Text=[@i{Example of a work scheduler where only urgent
+@ChgAdded{Version=[5],Text=[@NewExample@i{Example of a work scheduler where only urgent
 work can be scheduled for weekends:}]}
 
 @begin{Example}
@@ -3314,7 +3312,7 @@ variables declared in the private part of a package.
 @end{SingleNote}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of deferred constant declarations:}
+@leading@keepnext@NewExample@i{Examples of deferred constant declarations:}
 @begin{Example}
 Null_Key : @key[constant] Key;      --@ExamCom[ see @RefSecNum{Private Operations}]
 
@@ -3839,7 +3837,7 @@ circumstances.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a package with a limited type:}
+@leading@keepnext@NewExample@i{Example of a package with a limited type:}
 @begin{Example}
 @key[package] IO_Package @key[is]
    @key[type] File_Name @key[is] @key[limited] @key[private];

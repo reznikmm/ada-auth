@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:03 $}
+@Comment{$Date: 2022/09/17 06:51:39 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -904,7 +904,7 @@ value.
 @end{Notes}
 
 @begin{Examples}
-@Leading@Keepnext@i{Example of a program that plays a simulated dice game:}
+@Leading@Keepnext@NewExample@i{Example of a program that plays a simulated dice game:}
 @begin{Example}@Trailing
 @key[with] Ada.Numerics.Discrete_Random;
 @key[procedure] Dice_Game @key[is]@Softpage
@@ -924,7 +924,7 @@ value.
 @key[end] Dice_Game;
 @end{Example}
 
-@Leading@Keepnext@i{Example of a program that simulates coin tosses:}
+@Leading@Keepnext@NewExample@i{Example of a program that simulates coin tosses:}
 @begin{Example}@Trailing
 @key[with] Ada.Numerics.Discrete_Random;
 @key[procedure] Flip_A_Coin @key[is]@Softpage
@@ -947,7 +947,7 @@ value.
 @key[end] Flip_A_Coin;
 @end{Example}
 
-@Leading@Keepnext@i{Example of a parallel simulation of a physical system,
+@Leading@Keepnext@NewExample@i{Example of a parallel simulation of a physical system,
 with a separate generator of event probabilities in each task:}
 @begin{Example}
 @key[with] Ada.Numerics.Float_Random;

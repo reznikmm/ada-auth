@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:01 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.159 $}
+@Comment{$Revision: 1.160 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -901,7 +901,7 @@ the library unit in which the incomplete type is declared
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Examples of tagged record types:)
+@Leading@keepnext@NewExample@i(Examples of tagged record types:)
 @begin(Example)
 @key(type) Point @key(is tagged)
   @key(record)
@@ -1333,7 +1333,8 @@ from the parent type or declared in the
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of record extensions (of types defined above in @RefSecNum(Tagged Types and Type Extensions)):}
+@Leading@keepnext@NewExample@i{Examples of record extensions
+(of types defined above in @RefSecNum(Tagged Types and Type Extensions)):}
 @begin(Example)
 @key(type) Painted_Point @key(is new) Point @key(with)
   @key(record)
@@ -2652,7 +2653,7 @@ some nonabstract type in the class.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Example of an abstract type representing a set of natural numbers:)
+@Leading@keepnext@NewExample@i(Example of an abstract type representing a set of natural numbers:)
 @begin{Example}
 @key(package) Sets @key(is)
     @key(subtype) Element_Type @key(is) Natural;
@@ -3076,7 +3077,7 @@ the interface.]}
 @begin{Examples}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example of a limited
+@ChgAdded{Version=[2],Type=[Leading],Text=[@NewExample@i{Example of a limited
 interface and a synchronized interface extending it:}]}
 
 @begin{Example}
@@ -3182,7 +3183,7 @@ Inside the call of Transfer, calls will dispatch to
 the implementations of Append and Remove_First for type Fast_Food_Queue.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example of a task interface:}]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@NewExample@i{Example of a task interface:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3806,9 +3807,9 @@ can be applied to access types
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples of access-to-object types:}
+@Leading@keepnext@NewExample@i{Examples of access-to-object types:}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@Trailing@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
 @Chg{Version=[4],New=[@key[type] Frame @key<is access> Matrix;    --@ExamCom[  see @RefSecNum{Array Types}]
 ],Old=[]}@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
@@ -3816,16 +3817,12 @@ can be applied to access types
                                            --@ExamCom[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of an access subtype:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of an access subtype:}
 @begin{Example}
-@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@Trailing@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of an access-to-subprogram type:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of an access-to-subprogram type:}
 @begin{Example}
 @key[type] Message_Procedure @key[is] @key[access] @key[procedure] (M : @key[in] String := "Error!");
 @key[procedure] Default_Message_Procedure(M : @key[in] String);
@@ -4401,7 +4398,7 @@ an assignment statement cannot be of an incomplete view.]}
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i(Example of a recursive type:)
+@Leading@keepnext@NewExample@i(Example of a recursive type:)
 @begin(Example)
 @key(type) Cell;  --@ExamCom[  incomplete type declaration]
 @key(type) Link @key(is) @key(access) Cell;
@@ -4417,7 +4414,7 @@ Head   : Link  := @key(new) Cell'(0, @key(null), @key(null));
 Next   : Link  := Head.Succ;
 @end(Example)
 
-@i(Examples of mutually dependent access types:)
+@NewExample@i(Examples of mutually dependent access types:)
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(type) Person(<>);    --@ExamCom[ incomplete type declaration]
@@ -6401,7 +6398,7 @@ See @RefSecNum(Relational Operators and Membership Tests).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Example of use of the Access attribute:}
+@Leading@keepnext@NewExample@i{Example of use of the Access attribute:}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
 @Chg{Version=[5],New=[Becky],Old=[Martha]} : Person_Name := @key[new] Person(F);       --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]

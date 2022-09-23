@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:51 $}
+@Comment{$Date: 2022/09/17 06:51:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/extent.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @Comment{The subclause header, if any, is found in ISO_Scope.Mss and RM_Scope.Mss.}
 
@@ -14,8 +14,9 @@
 
      The effect of translating and executing such a program;
 
-     The manner in which program units may be combined to form Ada
-     programs;
+@Chgref{Version=[5],Kind=[Revised]}@ChgNote{This is considered a typo fix.}
+     The manner in which program units @Chg{Version=[5],New=[can],Old=[may]}
+     be combined to form Ada programs;
 
      The language-defined library units that a conforming implementation
      is required to supply;

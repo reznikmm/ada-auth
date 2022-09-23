@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.76 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
+@Comment{ $Revision: 1.77 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2022/09/17 06:51:39 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1928,7 +1928,7 @@ parameter) of the formal parameter set is used at least once.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0430-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i<An example of use of the
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i<An example of use of the
 Dispatching aspect:>]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1943,7 +1943,6 @@ Dispatching aspect:>]}
 @ChgAdded{Version=[5],Text=[@i<For examples of use of the
 Use_Formal aspect, see the Element functions of
 Hashed_Sets in @RefSecNum{The Generic Package Containers.Hashed_Sets}.>]}
-
 
 @end{Examples}
 

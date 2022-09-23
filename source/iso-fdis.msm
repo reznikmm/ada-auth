@@ -16,8 +16,10 @@
 @ExampleFont{Fixed}
 @ExampleCommentFont{Fixed}@Comment{From ISO comment #22 on Ada 2022}
 @BodyFont{Roman}
-@NoteFormat{ISO2004}
-@ContentsFormat{Ada95}
+@NonterminalFont{Fixed}
+@NoteFormat{ISO2021}
+@ExamplesFormat{ISO2021}
+@ContentsFormat{ISO2004}
 @ListFormat{Ada95}
 @SelfRefFormat{ISO2018}
 @SubdivisionNames{Clause}@Comment{For Ada 95 and 2005, use "section" instead}
@@ -33,7 +35,9 @@
 @RTFFooterText{Version=[5],Text=[\'a9 ISO/IEC 2022 \endash  All rights reserved]}
 @RTFFooter{UseDate=[F],UseClauseName=[F],UseISOFormat=[T]}
 @RTFPageSize{A4}
-@RTFFonts{Serif=[Times],SansSerif=[Helvetica]}@Comment{ISO requires the latter}
+@RTFSizes{ISO2021}
+@RTFFonts{Serif=[Cambria],SansSerif=[Helvetica]}@Comment{ISO requires these (and generally does not allow use of the latter}
+@RTFBulletFormat{ISO2021}
 @RTFVersionName{Version=[0],Text=[Original Text]}
 @RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}
 @RTFVersionName{Version=[2],Text=[Amendment 1]}
@@ -52,9 +56,8 @@
    UseButtons=[T],OnTop=[T],OnBottom=[T]}
 @Comment{We let the program link to the index}
 @HTMLTabs{EmulateFixedOnly}
-@HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="8652-TTL.html"><B>Legal Information</B></A></DIV>}
-@HTMLFooter{<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
-<SPAN Style="vertical-align: middle">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>}
+@HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>ISO/IEC 8652</B></SPAN> &mdash; <A HREF="8652-TTL.html"><B>Legal Information</B></A></DIV>}
+@HTMLFooter{<DIV Style="margin-top:0.0em"></DIV>}
 @HTMLColor{Text=[#000000],Background=[#FFFFF0],Link=[#000080],VLink=[#330033],ALink=[#0000FF]}
 
 @Comment{Source files and related items, in collating order}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.98 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
+@comment{ $Revision: 1.99 $ $Date: 2022/09/17 06:51:40 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2022/09/17 06:51:40 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1046,7 +1046,7 @@ the implementation.
 @end{Notes}
 
 @begin{Examples}
-@Leading@Keepnext@i{Example of interrupt handlers:}
+@Leading@Keepnext@NewExample@i{Example of interrupt handlers:}
 @begin{example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
@@ -2362,7 +2362,7 @@ returns False. Otherwise, Prior is unaffected and the function returns True.]}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a spin
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of a spin
 lock using Atomic_Exchange:}]}
 
 @begin{Example}

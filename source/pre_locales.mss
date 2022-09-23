@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2021/03/18 10:02:18 $ $Author: randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2021/03/18 10:02:18 $}
+@Comment{$Date: 2022/09/17 06:51:39 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -70,8 +70,26 @@ partition of the current task.]}
 @end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
-@ChgAdded{Version=[3],Text=[Language_Code is a lower-case string representation
-of an ISO 639-3 alpha-3 code that identifies a language.]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0446-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Language_Code
+is a lower-case string representation
+of an ISO 639-3 alpha-3 code that identifies a language.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0446-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Country_Code
+is an upper-case string representation
+of an ISO 3166-1 alpha-2 code that identifies a country.]}]}
+
+
+@begin{NotISO}@Comment{ISO version is different (at least for now)}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
+@ChgAdded{Version=[3],Text=[Function Language returns the code of the language
+associated with the active locale. If the Language_Code associated with the
+active locale cannot be determined from the environment, then Language returns
+Language_Unknown.@Chg{Version=[5],New=[ Otherwise, the result is a lower-case
+string representation of an ISO 639-3:2007 alpha-3 code that identifies a language.],Old=[]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -83,9 +101,14 @@ of an ISO 639-3 alpha-3 code that identifies a language.]}
   languages are important enough to include.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
-@ChgAdded{Version=[3],Text=[Country_Code is an upper-case string representation
-of an ISO 3166-1 alpha-2 code that identifies a country.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
+@ChgAdded{Version=[3],Text=[Function Country returns the code of the country
+associated with the active locale. If the Country_Code associated with the
+active locale cannot be determined from the environment, then Country returns
+Country_Unknown.@Chg{Version=[5],New=[ Otherwise, the result is an upper-case 
+string representation of an ISO 3166-1:2006 alpha-2 code that identifies a
+country.],Old=[]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -96,18 +119,20 @@ of an ISO 3166-1 alpha-2 code that identifies a country.]}
   country constants for the same reasons that we didn't include any language
   constants.]}
 @end{Discussion}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
+@end{NotISO}
+@begin{ISOOnly}
 @ChgAdded{Version=[3],Text=[Function Language returns the code of the language
 associated with the active locale. If the Language_Code associated with the
 active locale cannot be determined from the environment, then Language returns
-Language_Unknown.]}
+Language_Unknown. Otherwise, the result shall be a lower-case string
+representation of an ISO 639-3:2007 alpha-3 code that identifies a language.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Function Country returns the code of the country
 associated with the active locale. If the Country_Code associated with the
 active locale cannot be determined from the environment, then Country returns
-Country_Unknown.]}
+Country_Unknown. Otherwise, the result shall be an upper-case string
+representation of an ISO 3166-1:2006 alpha-2 code that identifies a country.]}
+@end{ISOOnly}
 
 @end{StaticSem}
 

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2022/07/06 03:35:26 $}
+@Comment{$Date: 2022/09/17 06:51:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.166 $}
+@Comment{$Revision: 1.167 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -403,7 +403,7 @@ concurrently from multiple tasks.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of subprogram declarations:}
+@leading@keepnext@NewExample@i{Examples of subprogram declarations:}
 @begin{Example}
 @key[procedure] Traverse_Tree;
 @key[procedure] Increment(X : @key[in] @key[out] Integer);
@@ -419,12 +419,10 @@ concurrently from multiple tasks.
 @key[function] Find(B : @key[aliased in out] Barrel; Key : String) @key[return] Real;
                                                          --@ExamCom{  see @RefSecNum{User-Defined References}}],Old=[]}
 
-@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@ExamCom{  see @RefSecNum{Array Types}}
+@trailing@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@ExamCom{  see @RefSecNum{Array Types}}
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of @key[in] parameters with default expressions:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of @key[in] parameters with default expressions:}
 @begin{Example}
 @key[procedure] Print_Header(Pages  : @key[in] Natural;
             Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@ExamCom{  see @RefSecNum{Array Types}}
@@ -2771,9 +2769,9 @@ For this execution the @nt{declarative_part} is elaborated, and the
 @end{RunTime}
 
 @begin{Examples}
-@leading@keepnext@i{Example of procedure body:}
+@leading@keepnext@NewExample@i{Example of procedure body:}
 @begin{Example}
-@key[procedure] Push(E : @key[in] Element_Type; S : @key[in] @key[out] Stack) @key[is]
+@trailing@key[procedure] Push(E : @key[in] Element_Type; S : @key[in] @key[out] Stack) @key[is]
 @key[begin]
    @key[if] S.Index = S.Size @key[then]
       @key[raise] Stack_Overflow;
@@ -2784,9 +2782,7 @@ For this execution the @nt{declarative_part} is elaborated, and the
 @key[end] Push;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a function body:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a function body:}
 @begin{Example}
 @key[function] Dot_Product(Left, Right : Vector) @key[return] Real @key[is]
    Sum : Real := 0.0;
@@ -3843,28 +3839,24 @@ function@Chg{Version=[2],New=[ result],Old=[]}.
 @end{RunTime}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of procedure calls:}
+@leading@keepnext@NewExample@i{Examples of procedure calls:}
 @begin{Example}
 Traverse_Tree;                                               --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
 Print_Header(128, Title, True);                              --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
 
-Switch(From => X, To => Next);                               --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
+@trailing@;Switch(From => X, To => Next);                               --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
 Print_Header(128, Header => Title, Center => True);          --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
 Print_Header(Header => Title, Center => True, Pages => 128); --@ExamCom{  see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of function calls:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of function calls:}
 @begin{Example}
-Dot_Product(U, V)   --@ExamCom{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
+@trailing@;Dot_Product(U, V)   --@ExamCom{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
 Clock               --@ExamCom{  see @RefSecNum{Delay Statements, Duration, and Time}}
 F.@key[all]               --@ExamCom{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of procedures with default expressions:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of procedures with default expressions:}
 @begin{Example}
 @key[procedure] Activate(Process : @key[in] Process_Name;
                    After   : @key[in] Process_Name := No_Process;
@@ -3872,12 +3864,10 @@ F.@key[all]               --@ExamCom{  presuming F is of an access-to-subprogram
                    Prior   : @key[in] Boolean := False);
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person@Chg{Version=[3],New=[(M)],Old=[]});   --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
+@trailing@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person@Chg{Version=[3],New=[(M)],Old=[]});   --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of their calls:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of their calls:}
 @begin{Example}
 Activate(X);
 Activate(X, After => Y);
@@ -3898,18 +3888,16 @@ examples, the two calls of Pair are equivalent.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of overloaded subprograms:}
+@leading@keepnext@NewExample@i{Examples of overloaded subprograms:}
 @begin{Example}
 @key[procedure] Put(X : @key[in] Integer);
 @key[procedure] Put(X : @key[in] String);
 
-@key[procedure] Set(Tint   : @key[in] Color);
+@trailing@key[procedure] Set(Tint   : @key[in] Color);
 @key[procedure] Set(Signal : @key[in] Light);
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of their calls:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of their calls:}
 @begin{Example}
 Put(28);
 Put("no possible ambiguity here");
@@ -4927,10 +4915,10 @@ innermost enclosing @nt{subprogram_@!body},
 @Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[return_statement]}>,rhs="@key{return} [@Syn2{expression}];"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0277-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0398-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0398-1],ARef=[AI12-0446-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=[extended_return_object_declaration],Old=[]}>,
 rhs="@Chg{Version=[3],New=<
-    @Syn2{defining_identifier} : [@key{aliased}][@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]@Chg{Version=[5],New=<
+    @Syn2{defining_identifier} : [@key{aliased}]@Chg{Version=[5],New={ },Old={}}[@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]@Chg{Version=[5],New=<
         [@Syn2{aspect_specification}] >,Old=<>}>,Old=[]}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
@@ -5829,7 +5817,7 @@ subtype of this object.]}]}
 @end{ImplPerm}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of return statements:}
+@leading@keepnext@NewExample@i{Examples of return statements:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @key[return];                         --@ExamCom{ in a procedure body, }@nt{entry_body}@ExamCom{,}@Chg{Version=[2],New=[
@@ -6330,7 +6318,7 @@ normally, Program_Error is raised at the point of the call.
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a specification
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of a specification
 of a No_Return aspect:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -6461,7 +6449,7 @@ both one- and two-parameter functions.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of user-defined operators:}
+@leading@keepnext@NewExample@i{Examples of user-defined operators:}
 @begin{Example}
 @key[function] "+" (Left, Right : Matrix) @key[return] Matrix;
 @key[function] "+" (Left, Right : Vector) @key[return] Vector;
@@ -6576,7 +6564,7 @@ Elaboration_Check],Old=[]}.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of the declaration of
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of the declaration of
 a null procedure:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -6839,7 +6827,7 @@ Elaboration_Check.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of an expression
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of an expression
 function:}]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}

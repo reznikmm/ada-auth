@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:52 $}
+@Comment{$Date: 2022/09/17 06:51:40 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -598,7 +598,7 @@ associated interrupt entry as one or more parameters of mode @key[in].
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of an interrupt entry:}
+@leading@keepnext@NewExample@i{Example of an interrupt entry:}
 @begin{example}
 @key[task] Interrupt_Handler @key[is]
   @key[entry] Done;

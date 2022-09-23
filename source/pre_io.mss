@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/09/17 06:51:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2580,7 +2580,7 @@ string is insufficient for the output of the item.
 @end{StaticSem}
 
 @begin{Examples}
-In the examples, here and in subclauses
+@NewExample@;In the examples, here and in subclauses
 @RefSecNum{Input-Output for Integer Types}
 and @RefSecNum{Input-Output for Real Types}, the string
 quotes and the lower case letter b are not transferred: they are shown
@@ -2591,7 +2591,7 @@ N : Integer;
    ...
 Get(N);
 
-@tabclear()@tabset(P4, P22, P38)
+@tabclear()@tabset(P4, P22, P38)@trailing
 @ExamCom[--  @\Characters at input @\Sequence input @\Value of N]
 @Comment{Blank line.}
 @ExamCom[--  @\bb@en@|12535b @\@en@|12535 @\@en@|12535]
@@ -2599,9 +2599,7 @@ Get(N);
 @ExamCom[--  @\bb12_535e; @\12_535e @\(none) Data_Error raised]
 @end{Example}
 
-@begin{WideAbove}
-@Leading@;Example of overridden width parameter:
-@end{WideAbove}
+@Leading@NewExample@;Example of overridden width parameter:
 
 @begin{Example}
 Put(Item => -23, Width => 2);  --@ExamCom{  "@en@|23"}
@@ -2979,7 +2977,7 @@ are ever renumbered. This includes the next paragraph.}
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgRef{Version=[5], Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@Chg{Version=[5],New=[@i<Examples of use of an instantiation of 
+@Chg{Version=[5],New=[@NewExample@i<Examples of use of an instantiation of 
 Text_IO.Integer_IO:>],Old=[@Chg{Version=[1],New=[],Old=<@ @;@comment{Empty 
 paragraph to hang junk paragraph number from original RM}>}]}
 
@@ -3235,7 +3233,7 @@ same set of formats.
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgRef{Version=[5], Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@Chg{Version=[5],New=[@i<Examples of use of an instantiation of 
+@Chg{Version=[5],New=[@NewExample@i<Examples of use of an instantiation of 
 Text_IO.Float_IO:>],Old=[@Chg{Version=[1],New=[],Old=<@ @;@comment{Empty 
 paragraph to hang junk paragraph number from original RM}>}]}
 

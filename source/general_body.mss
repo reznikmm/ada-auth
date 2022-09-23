@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2022/07/06 03:35:26 $}
+@Comment{$Date: 2022/09/17 06:51:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/general_body.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @Comment{The clause header is found in General.Mss. Other parts are found
 in other files, depending upon the version. Note that the subclause labeled
@@ -33,8 +33,15 @@ in this @StdTitle. Confused yet? This terminology is out of our hands; it is
 (and was) forced by ever-changing ISO rules for drafting @StdTitle@;s.]}
 @end{Discussion}
 
+@begin{NotISO}@Comment{The text differs from ISO and non-ISO versions}
 @Leading@Defn{core language}
 The @i{core} of the Ada language consists of:
+@end{NotISO}
+@begin{ISOOnly}
+@Leading@Defn{core language}
+All implementations shall conform to the @i{core} of the Ada language, which
+consists of: 
+@end{ISOOnly}
 @begin{Itemize}
 @begin{NotISO}@Comment{The organization differs from ISO and non-ISO versions, so we need different versions of this text}
 @Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -57,6 +64,7 @@ Clauses 1 through 16
     Note1=[A construct is said to be part of the core language
            if it is defined in a core language clause or annex.]}
 
+@begin{NotISO}@Comment{The text differs from ISO and non-ISO versions}
 @begin{WideAbove}
 @Leading@Defn{Specialized Needs Annexes}
 @Defn2{Term=[Annex],Sec=(Specialized Needs)}
@@ -65,6 +73,18 @@ The following @i{Specialized Needs Annexes}
 define features that are needed by certain
 application areas:
 @end{WideAbove}
+@end{NotISO}
+@begin{ISOOnly}
+@begin{WideAbove}
+@Leading@Defn{Specialized Needs Annexes}
+@Defn2{Term=[Annex],Sec=(Specialized Needs)}
+@Defn{application areas}
+In addition, an implementation may conform separately to one or more
+@i{Specialized Needs Annexes}, which define features that are needed
+by certain application areas: 
+@end{WideAbove}
+@end{ISOOnly}
+
 @begin{Itemize}
 @RefSec{Systems Programming}
 
@@ -99,9 +119,11 @@ is informative:
     with the word @lquotes@;Example@rquotes@; or @lquotes@;Examples@rquotes@;.
 @end(Itemize)
 
+@begin{NotISO}@Comment{This is given above in ISO versions}
 All implementations shall conform to the core language.
 In addition, an implementation may conform separately to one or more
 Specialized Needs Annexes.
+@end{NotISO}
 
 @begin{WideAbove}
 @Leading@Keepnext@Defn{informative}
@@ -447,7 +469,7 @@ This material is informative.
 @end{Notes}
 
 @begin{Examples}
-Examples illustrate the possible forms of the constructs described.
+@NewExample@;Examples illustrate the possible forms of the constructs described.
 This material is informative.
 @begin{Discussion}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0386-1]}

@@ -1,6 +1,6 @@
 @Part(foreword_tail, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/foreword_tail.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2022/07/06 03:35:26 $}
+@comment{$Revision: 1.3 $ $Date: 2022/09/17 06:51:40 $}
 
 @Comment{This file contains the ending shared part of the Foreword.}
 @Comment{The beginning of the Foreword is found in ISO_Forward.mss and RM_Forward.mss}
@@ -110,9 +110,9 @@ profile.]}
 
 Any feedback or questions on this document should be directed to the user's
 national standards body. A complete listing of these bodies can be found at
-@Urllink{URL=[https://www.iso.org/members.html],Text=[www.iso.org/members.html]}
+@Urllink{URL=[https://www.iso.org/members.html],Text=[www.iso.org/members.html],AllFormats=[T]}
 and @Urllink{URL=[https://www.iec.ch/national-committees],
-Text=[www.iec.ch/national-committees]}.
+Text=[www.iec.ch/national-committees],AllFormats=[T]}.
 @end{ISOOnly}@Comment{End ISO boilerplate}
 
 @end{Intro}

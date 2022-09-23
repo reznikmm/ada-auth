@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/07/06 03:35:26 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.138 $}
+@Comment{$Revision: 1.139 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1316,6 +1316,28 @@ otherwise specified for a given aspect, these rules are as follows:]}
       primitive subprograms of the type, the inherited aspect is a 
       @nt{name} that denotes the corresponding primitive subprogram(s)
       of the derived type;]}
+
+@begin{Discussion}
+      @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+      @ChgAdded{Version=[5],Text=[A primitive subprogram that is declared after
+      the end of the enclosing declaration list of a derived type (in particular,
+      in the private part of a package if the derived type is declared in the
+      package's visible part) is not the @ldquote@;corresponding primitive
+      subprogram@rdquote in the sense of this rule. In a case like this, the
+      corresponding primitive subprogram is actually the inherited subprogram.
+      This doesn't make a difference for tagged types, because of the
+      @ldquote@;dispatching@rdquote semantics used, which means a 
+      call on the inherited subprogram actually @ldquote@;reaches@rdquote the
+      body of the overriding. But for untagged types, overriding an inherited
+      subprogram of an untagged derived type in the private part is
+      @ldquote@;too late@rdquote to have an effect on external uses of the
+      primitive, since non-visible overridings are not generally reachable, and
+      a call that only @ldquote@;sees@rdquote the inherited subprogram
+      goes to the body of the parent's operation, effectively ignoring the
+      private overriding. This same rule applies to aspects that denote an 
+      inherited subprogram of an untagged derived type @em the private
+      overriding is effectively ignored.]}
+@end{Discussion}
 
     @ChgRef{Version=[5],Kind=[Added]}
     @ChgAdded{Version=[5],Text=[otherwise, the inherited aspect is a @nt{name}
@@ -4984,7 +5006,7 @@ specifiable if it isn't.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of attribute definition clauses:}
+@leading@keepnext@NewExample@i{Examples of attribute definition clauses:}
 @begin{Example}
 Byte : @key[constant] := 8;
 Page : @key[constant] := 2**12;
@@ -5369,7 +5391,7 @@ but it didn't seem worth the trouble.
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
-@leading@keepnext@i{@Chg{Version=[5],New=[Examples],Old=[Example]} of
+@leading@keepnext@NewExample@i{@Chg{Version=[5],New=[Examples],Old=[Example]} of
 @Chg{Version=[5],New=[],Old=[an ]}enumeration representation
 @Chg{Version=[5],New=[clauses],Old=[clause]}:}
 @begin{Example}
@@ -5808,7 +5830,7 @@ components out of the way.
 @end{SingleNote}
 
 @begin{Examples}
-@leading@keepnext@i{Example of specifying the layout of a record type:}
+@leading@keepnext@NewExample@i{Example of specifying the layout of a record type:}
 @begin{Example}
 Word : @key[constant] := 4;  --@ExamCom{  storage element is byte, 4 bytes per word}
 
@@ -6219,7 +6241,7 @@ by-reference],Old=[]} types.
 @end{Intro}
 
 @begin{Examples}
-@leading@keepnext@i{Example of change of representation:}
+@leading@keepnext@NewExample@i{Example of change of representation:}
 @begin{Example}
 --@ExamCom{ Packed_Descriptor and Descriptor are two different types}
 --@ExamCom{ with identical characteristics, apart from their}

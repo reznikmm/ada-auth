@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.148 $}
+@Comment{$Revision: 1.149 $}
 
 @begin{Intro}
 
@@ -177,9 +177,10 @@ a named task object of that type.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00399-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
 @Syn{lhs=<single_task_declaration>,rhs="
    @key{task} @Syn2{defining_identifier} @Chg{Version=[3],New=<
-        [@Syn2{aspect_specification}]>,Old=[]}[@key{is}@Chg{Version=[2],New=<
+        [@Syn2{aspect_specification}]@Chg{Version=[5],New={ },Old={}}>,Old=[]}[@key{is}@Chg{Version=[2],New=<
      [@key{new} @Syn2{interface_list} @key{with}]
     >,Old=<>} @Syn2{task_definition}];"}
 
@@ -491,14 +492,14 @@ Old=[@RefSecNum(Task Information)]}).
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of declarations of task types:}
+@leading@keepnext@NewExample@i{Examples of declarations of task types:}
 @begin{Example}
 @key(task) @key(type) Server @key(is)
    @key(entry) Next_Work_Item(WI : @key(in) Work_Item);
    @key(entry) Shut_Down;
 @key(end) Server;
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@Trailing@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(task) @key(type) Keyboard_Driver(ID : Keyboard_ID := New_ID) @key(is)@Chg{Version=[2],New=[
       @key(new) Serial_Device @key(with)  --@ExamCom[ see @RefSecNum{Interface Types}]],Old=[]}
    @key(entry) Read (C : @key(out) Character);
@@ -506,7 +507,7 @@ Old=[@RefSecNum(Task Information)]}).
 @key(end) Keyboard_Driver;
 @end{Example}
 
-@leading@keepnext@i{Examples of declarations of single tasks:}
+@leading@keepnext@NewExample@i{Examples of declarations of single tasks:}
 @begin{Example}
 @key(task) Controller @key(is)
    @key(entry) Request(Level)(D : Item);  --@ExamCom[  a family of entries]
@@ -517,21 +518,17 @@ Old=[@RefSecNum(Task Information)]}).
    @key(entry) Next_Action(A : @key(out) Parser_Action);
 @key(end);
 
-@key(task) User;  --@ExamCom[  has no entries]
+@trailing@key(task) User;  --@ExamCom[  has no entries]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of task objects:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of task objects:}
 @begin{Example}
-Agent    : Server;
+@trailing@;Agent    : Server;
 Teletype : Keyboard_Driver(TTY_ID);
 Pool     : @key(array)(1 .. 10) @key(of) Keyboard_Driver;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of access type designating task objects:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of access type designating task objects:}
 @begin{Example}
 @key(type) Keyboard @key(is) @key(access) Keyboard_Driver;
 Terminal : Keyboard := @key(new) Keyboard_Driver(Term_ID);
@@ -793,7 +790,7 @@ exception or because it is aborted
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of task activation:}
+@leading@keepnext@NewExample@i{Example of task activation:}
 @begin{Example}
 @key(procedure) P @key(is)
    A, B : Server;    --@ExamCom[  elaborate the task objects A, B]
@@ -963,7 +960,7 @@ the abort of the task.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of task dependence:}
+@leading@keepnext@NewExample@i{Example of task dependence:}
 @begin{Example}
 @key(declare)
    @key(type) Global @key(is) @key(access) Server;        --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
@@ -1566,7 +1563,7 @@ since an entry involves an implicit component @em the entry queue.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of declaration of protected type and corresponding body:}
+@leading@keepnext@NewExample@i{Example of declaration of protected type and corresponding body:}
 @begin{Example}
 @key(protected) @key(type) Resource @key(is)
    @key(entry) Seize;
@@ -1581,16 +1578,14 @@ since an entry involves an implicit component @em the entry queue.
       Busy := True;
    @key(end) Seize;
 
-   @key(procedure) Release @key(is)
+@trailing   @key(procedure) Release @key(is)
    @key(begin)
       Busy := False;
    @key(end) Release;
 @key(end) Resource;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Example of a single protected declaration and corresponding body:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Example of a single protected declaration and corresponding body:}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
 @key(protected) Shared_Array @key(is)
@@ -1607,16 +1602,14 @@ since an entry involves an implicit component @em the entry queue.
       @key(return) Table(N);
    @key(end) Component;
 
-   @key(procedure) Set_Component(N : @key(in) Index; E : @key(in) Item) @key(is)
+@trailing   @key(procedure) Set_Component(N : @key(in) Index; E : @key(in) Item) @key(is)
    @key(begin)
       Table(N) := E;
    @key(end) Set_Component;
 @key(end) Shared_Array;
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of protected objects:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of protected objects:}
 @begin{Example}
 Control  : Resource;
 Flags    : @key(array)(1 .. 100) @key(of) Resource;
@@ -2016,7 +2009,7 @@ parameters.]}
       itself not a predefined operator or an enumeration literal.]}
   @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2],ARef=[AI12-0439-1]}}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-2],ARef=[AI12-0439-1]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[When aspect Nonblocking is False for
 an entity, the entity can contain a potentially blocking operation; such an
 entity @i{allows blocking}. If the aspect is True for an entity, the entity
@@ -2942,7 +2935,7 @@ See @RefSecNum{Pragma Detect_Blocking}.]}
 @end{Notes}
 
 @begin{Examples}
-@leading@i{Examples of protected subprogram calls
+@leading@NewExample@i{Examples of protected subprogram calls
 (see @RefSecNum(Protected Units and Protected Objects)):}
 @begin{Example}
 Shared_Array.Set_Component(N, E);
@@ -3473,16 +3466,14 @@ when its parameters indicate that it cannot be handled immediately.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of entry declarations:}
+@leading@keepnext@NewExample@i{Examples of entry declarations:}
 @begin{Example}
-@key(entry) Read(V : @key(out) Item);
+@trailing@key(entry) Read(V : @key(out) Item);
 @key(entry) Seize;
 @key(entry) Request(Level)(D : Item);  --@ExamCom[  a family of entries]
 @end{Example}
 
-@begin{WideAbove}
-@leading@keepnext@i{Examples of accept statements:}
-@end{WideAbove}
+@leading@keepnext@NewExample@i{Examples of accept statements:}
 @begin{Example}
 @key(accept) Shut_Down;
 
@@ -3954,7 +3945,7 @@ performed from outside of a protected action.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of entry calls:}
+@leading@keepnext@NewExample@i{Examples of entry calls:}
 @begin{Example}
 Agent.Shut_Down;                      --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
 Parser.Next_Lexeme(E);                --@ExamCom[  see @RefSecNum(Task Units and Task Objects)]
@@ -4269,7 +4260,7 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of requeue statements:}
+@leading@keepnext@NewExample@i{Examples of requeue statements:}
 @begin{Example}
 @key[requeue] Request(Medium) @key[with abort];
                     --@ExamCom[ requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
@@ -4697,16 +4688,14 @@ are given in @RefSec(Delay Accuracy).
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a relative delay statement:}
+@leading@keepnext@NewExample@i{Example of a relative delay statement:}
 @begin{example}
-@key(delay) 3.0;  --@ExamCom[ delay 3.0 seconds]
+@trailing@key(delay) 3.0;  --@ExamCom[ delay 3.0 seconds]
 @end{example}
 
-@begin{WideAbove}
-@leading@keepnext@Defn2{Term=[periodic task],Sec=(example)}
+@leading@keepnext@NewExample@Defn2{Term=[periodic task],Sec=(example)}
 @IndexSee{Term=[periodic task],See=(delay_until_statement)}
 @i{Example of a periodic task:}
-@end{WideAbove}
 @begin{example}
 @key(declare)
    @key(use) Ada.Calendar;
@@ -5582,7 +5571,7 @@ transfer of control.]
 @end{Syntax}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a select statement:}
+@leading@keepnext@NewExample@i{Example of a select statement:}
 @begin{Example}
 @key(select)
    @key(accept) Driver_Awake_Signal;
@@ -5757,7 +5746,7 @@ to have several open
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a task body with a selective accept:}
+@leading@keepnext@NewExample@i{Example of a task body with a selective accept:}
 @begin{Example}
 @key(task) @key(body) Server @key(is)
    Current_Work_Item : Work_Item;
@@ -5908,7 +5897,7 @@ meant.]}
 @end{RunTime}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a timed entry call:}
+@leading@keepnext@NewExample@i{Example of a timed entry call:}
 @begin{Example}
 @key(select)
    Controller.Request(Medium)(Some_Item);
@@ -5990,7 +5979,7 @@ not selected.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a conditional entry call:}
+@leading@keepnext@NewExample@i{Example of a conditional entry call:}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @key(procedure) Spin(R : @key[in] @Chg{Version=[5],New=[@key[out] ],Old=[]}Resource) @key(is)@Chg{Version=[5],New=[  --@ExamCom[ see @RefSecNum{Protected Units and Protected Objects}]],Old=[]}
@@ -6125,12 +6114,12 @@ executed after the @nt<abortable_part> is left.
 @end{RunTime}
 
 @begin{Examples}
-@leading@keepnext@Defn2{Term=[signal handling], Sec=(example)}
+@leading@keepnext@NewExample@Defn2{Term=[signal handling], Sec=(example)}
 @Defn2{Term=[interrupt],Sec=(example using @nt<asynchronous_select>)}
 @Defn2{Term=[terminal interrupt], Sec=(example)}
 @i(Example of a main command loop for a command interpreter:)
 @begin(Example)
-@key(loop)
+@trailing@key(loop)
    @key(select)
       Terminal.Wait_For_Interrupt;
       Put_Line("Interrupted");
@@ -6143,14 +6132,12 @@ executed after the @nt<abortable_part> is left.
 @key(end) @key(loop);
 @end(Example)
 
-@begin{WideAbove}
-@leading@keepnext@i(Example of a time-limited calculation:)
+@leading@keepnext@NewExample@i(Example of a time-limited calculation:)
 @IndexSee{Term=[time-out],See=(asynchronous_select)}
 @Defn2{Term=[time-out],Sec=(example)}
 @Defn2{Term=[time limit],Sec=(example)}
 @Defn2{Term=[interrupt],Sec=(example using @nt<asynchronous_select>)}
 @Defn2{Term=[timer interrupt],Sec=(example)}
-@end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 @key(select)
@@ -7099,7 +7086,7 @@ that conflict.]}
 
 @begin{Examples}
 
-@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+@Leading@NewExample@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 The following example defines a buffer protected object
 to smooth variations between
 the speed of output of a producing task and the speed of input of some

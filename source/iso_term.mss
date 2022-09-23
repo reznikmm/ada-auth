@@ -1,8 +1,8 @@
 @Part(RM_Term, Root="ada.mss")
 
-@Comment{$Date: 2022/07/06 03:35:26 $}
+@Comment{$Date: 2022/09/17 06:51:40 $}
 @Comment{$Source: e:\\cvsroot/ARM/Source/iso_term.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @Comment{The ISO version of "Terms and Definitions". Note that the RM version 
 only shares generated content, so we don't try to share any part of this
@@ -22,10 +22,10 @@ in standardization at the following addresses:]}
 @begin{Itemize}
 
    @ChgAdded{Version=[5],Text=[ISO Online browsing platform: available at
-   @URLLink{URL=[https://www.iso.org/obp],Text=[https://www.iso.org/obp]}]}
+   @URLLink{URL=[https://www.iso.org/obp],Text=[https://www.iso.org/obp],AllFormats=[T]}]}
 
    @ChgAdded{Version=[5],Text=[IEC Electropedia: available at
-   @URLLink{URL=[https://www.electropedia.org],Text=[https://www.electropedia.org]}]}
+   @URLLink{URL=[https://www.electropedia.org],Text=[https://www.electropedia.org],AllFormats=[T]}]}
 
 @end{Itemize}
 @end{ISOOnly}

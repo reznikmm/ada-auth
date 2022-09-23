@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.134 $}
+@Comment{$Revision: 1.135 $}
 
 @RMNewPageVer{Version=[0]}
 @RMNewPageVer{Version=[1]}
@@ -706,7 +706,7 @@ using the features in @RefSec{Interface to Other Languages}.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of a code statement:}
+@leading@keepnext@NewExample@i{Example of a code statement:}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 M : Mask;
@@ -2312,7 +2312,7 @@ code.
 @end{Notes}
 
 @begin{Examples}
-@Leading@;To associate an access type with a storage pool object, the user
+@Leading@NewExample@;To associate an access type with a storage pool object, the user
 first declares a pool object of some type derived from
 Root_Storage_Pool. Then, the user defines its Storage_Pool
 attribute, as follows:
@@ -2320,15 +2320,13 @@ attribute, as follows:
 @begin{Example}
 Pool_Object : Some_Storage_Pool_Type;
 
-@key[type] T @key[is] @key[access] Designated;
+@trailing@key[type] T @key[is] @key[access] Designated;
 @key[for] T'Storage_Pool @key[use] Pool_Object;
 @end{Example}
 
-@begin{WideAbove}
 @Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
 Another access type @Chg{Version=[5],New=[can],Old=[may]} be added to an
 existing storage pool, via:
-@end{WideAbove}
 @begin{Example}
 @key[for] T2'Storage_Pool @key[use] T'Storage_Pool;
 @end{Example}
@@ -3915,7 +3913,7 @@ happen when the collection of the access type is finalized).]}
 @begin{Examples}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The following example is a simple but
+@ChgAdded{Version=[3],Type=[Leading],Text=[@NewExample@;The following example is a simple but
 complete implementation of the classic Mark/Release pool using subpools:]}
 
 @begin{Example}
@@ -6281,7 +6279,7 @@ class-wide types descended from S.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of user-defined Write attribute:}
+@leading@keepnext@NewExample@i{Example of user-defined Write attribute:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key[procedure] My_Write(

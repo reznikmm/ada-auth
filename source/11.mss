@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2022/09/17 06:51:38 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -170,7 +170,7 @@ This allows much implementation freedom in storage management.
 @end{RunTime}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of user-defined exception declarations:}
+@leading@keepnext@NewExample@i{Examples of user-defined exception declarations:}
 @begin{Example}
 Singular : @key[exception];
 Error    : @key[exception];
@@ -308,7 +308,7 @@ that are propagated by the @nt{sequence_of_@!statements}.]
 @end{RunTime}
 
 @begin{Examples}
-@leading@keepnext@i{Example of an exception handler:}
+@leading@keepnext@NewExample@i{Example of an exception handler:}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @key[begin]
@@ -571,7 +571,7 @@ This allows the original cause of the exception to be determined.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Examples of raise statements:}
+@leading@keepnext@NewExample@i{Examples of raise statements:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key[raise] Ada.IO_Exceptions.Name_Error;   --@Examcom[ see @RefSecNum{Exceptions In Input-Output}]@Chg{Version=[2],New=[
@@ -1927,8 +1927,8 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 
 @begin{Examples}
 @Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
-Exception handling @Chg{Version=[5],New=[can],Old=[may]} be used to separate
-the detection of an error from the response to that error:
+@NewExample@;Exception handling @Chg{Version=[5],New=[can],Old=[may]} be used to
+separate the detection of an error from the response to that error:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
@@ -2561,7 +2561,7 @@ unsuppressed by giving a @nt{pragma} Suppress in an inner declarative region.]}
 
 @begin{Examples}
 @Leading@Keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
-@i{Examples of suppressing @Chg{Version=[2],New=[and unsuppressing ],Old=[]}checks:}
+@NewExample@i{Examples of suppressing @Chg{Version=[2],New=[and unsuppressing ],Old=[]}checks:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
 @key[pragma] Suppress(@Chg{Version=[2],New=[Index_Check);
