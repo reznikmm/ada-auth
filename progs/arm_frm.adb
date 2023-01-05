@@ -313,6 +313,9 @@ package body ARM_Format is
     --  8/22/22 - RLB - Added AllFormats parameter to URL_Link.
     --                - Added Nonterminal_Font.
     --  9/15/22 - RLB - Added Examples_Format, renamed Group_Format_Kind.
+    -- 11/11/22 - RLB - Added ISO_Diff.
+    -- 12/20/22 - RLB - Added RefSecFullNum.
+
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -7998,7 +8001,8 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 		    Format_Object.In_Paragraph := True;
 		    Format_Object.No_Start_Paragraph := False;
 
-		when Ref_Section | Ref_Section_Number =>
+		when Ref_Section | Ref_Section_Full |
+                     Ref_Section_Number | Ref_Section_Full_Number =>
 		    -- Load the title into the Title string:
 		    declare
 			Ch : Character;
@@ -8020,8 +8024,39 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 			        Clause_Number_Text : constant String :=
 				    ARM_Contents.Lookup_Clause_Number (Title);
 			    begin
-			        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section then
+			        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section or else
+			           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Full then                                   
 				    Check_Paragraph;
+                                    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Full then 
+                                        -- Add the prefix:    
+                                        case ARM_Contents.Lookup_Level (Title) is
+                                            -- Determine the prefix needed, if any.
+                                            when ARM_Contents.Section =>
+                                                case Format_Object.Top_Level_Subdivision_Name is
+                                                    when ARM_Output.Chapter =>
+                                                        ARM_Output.Ordinary_Text (Output_Object, "Chapter ");
+                                                    when ARM_Output.Section =>
+                                                        ARM_Output.Ordinary_Text (Output_Object, "Section ");
+                                                    when ARM_Output.Clause =>
+                                                        ARM_Output.Ordinary_Text (Output_Object, "Clause ");
+                                                end case;
+
+                                            when ARM_Contents.Plain_Annex |
+                                                 ARM_Contents.Normative_Annex |
+                                                 ARM_Contents.Informative_Annex =>
+                                                -- For some odd reason, "Annex" is already included with these references.
+                                                null; -- ARM_Output.Ordinary_Text (Output_Object, "Annex ");
+                            
+                                            when ARM_Contents.Clause | ARM_Contents.Subclause |
+                                                 ARM_Contents.Subsubclause =>
+                                                null; -- No prefix needed.
+     
+                                            when ARM_Contents.Unnumbered_Section | ARM_Contents.Dead_Clause =>                          
+                                                Ada.Text_IO.Put_Line ("** Cannot make a numbered section reference for this kind os section, line " & ARM_Input.Line_String (Input_Object));
+                                                Ada.Text_IO.Put_Line ("   Looking for " & Title(1..Title_Length));
+                                        end case;
+                                    -- else nothing extra needed.
+                                    end if;
 				    ARM_Output.Clause_Reference (Output_Object,
 				        Text => Clause_Number_Text,
 					Clause_Number => Clause_Number_Text);
@@ -8056,6 +8091,37 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				    --ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
 				    --ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
 				    ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Double_Quote);
+			        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Full_Number then
+				    Check_Paragraph;
+                                    case ARM_Contents.Lookup_Level (Title) is
+                                        -- Determine the prefix needed, if any.
+                                        when ARM_Contents.Section =>
+                                            case Format_Object.Top_Level_Subdivision_Name is
+                                                when ARM_Output.Chapter =>
+                                                    ARM_Output.Ordinary_Text (Output_Object, "Chapter ");
+                                                when ARM_Output.Section =>
+                                                    ARM_Output.Ordinary_Text (Output_Object, "Section ");
+                                                when ARM_Output.Clause =>
+                                                    ARM_Output.Ordinary_Text (Output_Object, "Clause ");
+                                            end case;
+
+                                        when ARM_Contents.Plain_Annex |
+                                             ARM_Contents.Normative_Annex |
+                                             ARM_Contents.Informative_Annex =>
+                                            -- For some odd reason, "Annex" is already included with these references.
+                                            null; -- ARM_Output.Ordinary_Text (Output_Object, "Annex ");
+                        
+                                        when ARM_Contents.Clause | ARM_Contents.Subclause |
+                                             ARM_Contents.Subsubclause =>
+                                            null; -- No prefix needed.
+ 
+                                        when ARM_Contents.Unnumbered_Section | ARM_Contents.Dead_Clause =>                          
+                                            Ada.Text_IO.Put_Line ("** Cannot make a numbered section reference for this kind os section, line " & ARM_Input.Line_String (Input_Object));
+                                            Ada.Text_IO.Put_Line ("   Looking for " & Title(1..Title_Length));
+                                    end case;
+				    ARM_Output.Clause_Reference (Output_Object,
+				        Text => Clause_Number_Text,
+					Clause_Number => Clause_Number_Text);
 			        else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Number then
 				    Check_Paragraph;
 				    ARM_Output.Clause_Reference (Output_Object,
@@ -8326,6 +8392,60 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 			if Text_Len /= 0 and then Text(Text_Len) /= ' ' then
 		            Format_Object.Last_Non_Space := True;
 			end if;
+		    end;
+		    -- Leave the command end marker, let normal processing
+		    -- get rid of it.
+
+		when ISO_Diff =>
+		    -- @ISODiff{NotISO=[<ntext>],ISOOnly=[<itext>]}
+                    -- Use the appropriate text depending on the ISO show state.
+		    declare
+			Close_Ch : Character;
+			NText : String(1..200);
+			NText_Len : Natural;
+			IText : String(1..200);
+			IText_Len : Natural;
+		    begin
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "NotISO" & (7..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => True,
+			    Param_Close_Bracket => Close_Ch);
+			if Close_Ch /= ' ' then
+			    -- Save AI:
+			    ARM_Input.Copy_to_String_until_Close_Char (
+				Input_Object,
+				Close_Ch,
+				NText,
+				NText_Len);
+			-- else no parameter. An error message has already been produced.
+			end if;
+
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "ISOOnly" & (8..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+			if Close_Ch /= ' ' then
+			    -- Save name:
+			    ARM_Input.Copy_to_String_until_Close_Char (
+				Input_Object,
+				Close_Ch,
+				IText,
+				IText_Len);
+			-- else no parameter. An error message has already been produced.
+			end if;
+
+		        Check_Paragraph;
+                        if Format_Object.Include_ISO then -- @ShowISO
+                            Format_Text (IText(1..IText_Len), Text_Name => "ISO_Only");
+			    if IText_Len /= 0 and then IText(IText_Len) /= ' ' then
+		                Format_Object.Last_Non_Space := True;
+			    end if;
+                        else -- @HideISO
+                            Format_Text (NText(1..NText_Len), Text_Name => "Not_ISO");
+			    if NText_Len /= 0 and then NText(NText_Len) /= ' ' then
+		                Format_Object.Last_Non_Space := True;
+			    end if;
+                        end if;
 		    end;
 		    -- Leave the command end marker, let normal processing
 		    -- get rid of it.
@@ -9766,9 +9886,12 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		     Unnumbered_Section | Subheading | Added_Subheading |
                      Deleted_Subheading | Heading |
 		     Center | Right |
-		     Preface_Section | Ref_Section | Ref_Section_Number | Ref_Section_by_Number |
+		     Preface_Section | Ref_Section | Ref_Section_Full |
+                     Ref_Section_Number | Ref_Section_Full_Number |
+                     Ref_Section_by_Number |
 		     Local_Target | Local_Link | URL_Link | AI_Link |
-		     Change | Change_Reference | Change_Note |
+		     ISO_Diff |
+                     Change | Change_Reference | Change_Note |
 		     Change_Added | Change_Deleted |
 		     Change_Implementation_Defined |
 		     Change_Implementation_Advice |
@@ -10255,7 +10378,22 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 				    Format_Object.Impdef_Info.Paragraph_String (1..Format_Object.Impdef_Info.Paragraph_Len) &
 				    ").";
 			    else -- No paragraph numbers.
-				return " See @RefSecbyNum{" & DB_Clause_String & "}.";
+                                if Format_Object.Clause_Number.Clause = 0 then -- Plain section/annex:
+                                    if ARM_Contents.">=" (Format_Object.Clause_Number.Section, ARM_Contents.ANNEX_START) then
+                                        return " See Annex @RefSecbyNum{" & DB_Clause_String & "}.";
+                                    else
+                                        case Format_Object.Top_Level_Subdivision_Name is
+                                            when ARM_Output.Chapter =>
+                                                return " See Chapter @RefSecbyNum{" & DB_Clause_String & "}.";
+                                            when ARM_Output.Section =>
+                                                return " See Section @RefSecbyNum{" & DB_Clause_String & "}.";
+                                            when ARM_Output.Clause =>
+                                                return " See Clause @RefSecbyNum{" & DB_Clause_String & "}.";
+                                        end case;
+                                    end if;  
+                                else
+                                    return " See @RefSecbyNum{" & DB_Clause_String & "}.";
+                                end if;
 			    end if;
 			when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
 			    if Format_Object.Number_Paragraphs and then
@@ -10265,8 +10403,27 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 				    Format_Object.Impdef_Info.Paragraph_String (1..Format_Object.Impdef_Info.Paragraph_Len) &
 				    ").],Old=[]}";
 			    else -- No paragraph numbers.
-				return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
-				    "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
+                                if Format_Object.Clause_Number.Clause = 0 then -- Plain section/annex:
+                                    if ARM_Contents.">=" (Format_Object.Clause_Number.Section, ARM_Contents.ANNEX_START) then
+                                        return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                            "], New=[ See Annex @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
+                                    else
+                                        case Format_Object.Top_Level_Subdivision_Name is
+                                            when ARM_Output.Chapter =>
+                                                return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                                    "], New=[ See Chapter @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
+                                            when ARM_Output.Section =>
+                                                return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                                    "], New=[ See Section @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
+                                            when ARM_Output.Clause =>
+                                                return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                                    "], New=[ See Clause @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
+                                        end case;
+                                    end if;  
+                                else
+				    return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+				        "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
+                                end if;
 			    end if;
 			when ARM_Database.Deleted |
 			     ARM_Database.Deleted_Inserted_Number |
@@ -10279,8 +10436,27 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 				    Format_Object.Impdef_Info.Paragraph_String (1..Format_Object.Impdef_Info.Paragraph_Len) &
 				    ").]}";
 			    else -- No paragraph numbers.
-				return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
-				    "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}.]}";
+                                if Format_Object.Clause_Number.Clause = 0 then -- Plain section/annex:
+                                    if ARM_Contents.">=" (Format_Object.Clause_Number.Section, ARM_Contents.ANNEX_START) then
+                                        return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                            "], New=[],Old=[ See Annex @RefSecbyNum{" & DB_Clause_String & "}.]}";
+                                    else
+                                        case Format_Object.Top_Level_Subdivision_Name is
+                                            when ARM_Output.Chapter =>
+                                                return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                                    "], New=[],Old=[ See Chapter @RefSecbyNum{" & DB_Clause_String & "}.]}";
+                                            when ARM_Output.Section =>
+                                                return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                                    "], New=[],Old=[ See Section @RefSecbyNum{" & DB_Clause_String & "}.]}";
+                                            when ARM_Output.Clause =>
+                                                return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+                                                     "], New=[],Old=[ See Clause @RefSecbyNum{" & DB_Clause_String & "}.]}";
+                                        end case;
+                                    end if;  
+                                else
+				    return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
+				        "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}.]}";
+                                end if;
 			    end if;
 		    end case;
 		end See_String;

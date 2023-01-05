@@ -52,6 +52,8 @@ private package ARM_Format.Data is
     --  5/11/22 - RLB - Added LabeledRevisedSubClauseIsoClause.
     --  5/26/22 - RLB - Added ChgTermDef, AddedTermList, and Subnumber.
     --  9/15/22 - RLB - Added NewExample.
+    -- 11/11/22 - RLB - Added ISODiff.
+    -- 12/20/22 - RLB - Added RefSecFullNum.
 
     type Command_Type is (
 	-- Paragraphs:
@@ -94,7 +96,8 @@ private package ARM_Format.Data is
 	Unnumbered_Section, Subheading, Heading, Center, Right,
         Added_Subheading, Deleted_Subheading,
 	-- Clause references:
-	Ref_Section, Ref_Section_Number, Ref_Section_by_Number,
+	Ref_Section, Ref_Section_Full, 
+        Ref_Section_Number, Ref_Section_Full_Number, Ref_Section_by_Number,
 	-- Links:
 	Local_Target, Local_Link, URL_Link, AI_Link,
 	-- Information:
@@ -112,6 +115,7 @@ private package ARM_Format.Data is
 	Pragma_Syntax, Pragma_List, Added_Pragma_Syntax, Deleted_Pragma_Syntax,
 	Package_List, Type_List, Subprogram_List, Exception_List, Object_List,
 	-- Corrigendum changes:
+        ISO_Diff,
 	Change, Change_Param_Old, Change_Param_New, -- The latter are the parameters of "Change".
 	Change_Reference, Change_Note,
 	Change_Added, Change_Added_Param, Change_Deleted, Change_Deleted_Param,

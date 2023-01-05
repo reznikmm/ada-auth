@@ -51,6 +51,9 @@ package body ARM_Format.Data is
     --  5/ 8/22 - RLB - Added Deleted_Subheading.
     --  5/11/22 - RLB - Added LabeledRevisedSubClauseIsoClause.
     --  5/25/22 - RLB - Added ChgTermDef and AddedTermList.
+    --  9/15/22 - RLB - Added NewExample.
+    -- 11/11/22 - RLB - Added ISODiff.
+    -- 12/20/22 - RLB - Added RefSecFullNum.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
@@ -352,8 +355,12 @@ package body ARM_Format.Data is
 	    return Preface_Section;
 	elsif Canonical_Name = "refsec" then
 	    return Ref_Section;
+	elsif Canonical_Name = "refsecfull" then
+	    return Ref_Section_Full;
 	elsif Canonical_Name = "refsecnum" then
 	    return Ref_Section_Number;
+	elsif Canonical_Name = "refsecfullnum" then
+	    return Ref_Section_Full_Number;
 	elsif Canonical_Name = "refsecbynum" then
 	    return Ref_Section_By_Number;
 	elsif Canonical_Name = "locallink" then
@@ -364,6 +371,8 @@ package body ARM_Format.Data is
 	    return URL_Link;
 	elsif Canonical_Name = "ailink" then
 	    return AI_Link;
+	elsif Canonical_Name = "isodiff" then
+	    return ISO_Diff;
 	elsif Canonical_Name = "chg" then
 	    return Change;
 	elsif Canonical_Name = "chgadded" then

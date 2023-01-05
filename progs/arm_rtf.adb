@@ -3068,7 +3068,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s8\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext8 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext8 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 3),
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
@@ -3289,7 +3289,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s26\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext26 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext26 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 6), -- Indented examples in annotations.
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
@@ -3653,7 +3653,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s57\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext57 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext57 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 4), -- Syntax Indented examples in annotations.
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
@@ -3697,7 +3697,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s61\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext61 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext61 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 5), -- Code Indented examples in annotations.
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
@@ -3982,7 +3982,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s84\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext84 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext84 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 7), -- Child Indented examples in annotations.
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
