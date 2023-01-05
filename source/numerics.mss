@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.80 $ $Date: 2022/06/21 06:08:02 $ $Author: randy $ }
+@comment{ $Revision: 1.81 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2023/01/05 05:49:09 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -265,7 +265,7 @@ Real'Base.}
       @VirtName{a} + @VirtName{b}*i (or @VirtName{a} + @VirtName{b}*j), if desired. Of course,
       in some contexts the sum will need to be parenthesized.
 
-      @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
+      @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1],ARef=[AI12-0453-1]}
       When an Ada binding to @Chg{Version=[5],New=[ISO/IEC 60559:2020],Old=[IEC 559:1989]}
       that provides (signed) infinities
       as the result of operations that overflow becomes available, it will be
@@ -276,8 +276,8 @@ Real'Base.}
       @en@VirtName{b}@Times @VirtName{d} + @VirtName{a}@Times @VirtName{d}*i, but if one cannot avoid representing the
       pure-imaginary value @VirtName{d}*i as the complex value
       0.0 + @VirtName{d}*i, then a NaN ("Not-a-Number") could be produced
-      as the result of multiplying @VirtName{a} by 0.0 (e.g., when @VirtName{a} is
-      infinite); the NaN could later trigger an exception.
+      as the result of multiplying @VirtName{a} by 0.0 (@Chg{Version=[5],New=[for example],Old=[e.g.]},
+      when @VirtName{a} is infinite); the NaN could later trigger an exception.
       Providing the Imaginary type and overloadings of the
       arithmetic operators for mixtures of Imaginary and Complex operands
       gives the programmer the same control over avoiding premature coercion of
@@ -299,6 +299,7 @@ Real'Base.}
    @end{itemize}
 @end{Reason}
 @begin{Reason}
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
    The base subtype Real'Base is used for the component type of Complex, the
    parent type of Imaginary, and the parameter and result types of some of the
    subprograms to maximize the chances of being able to pass meaningful values
@@ -308,9 +309,10 @@ Real'Base.}
    subprograms in Numerics.Generic_Complex_Types share with those in
    Numerics.Generic_Elementary_Functions, and indeed even with the predefined
    arithmetic operations (see @RefSecNum{Operators and Expression Evaluation}),
-   the property of being free of range checks on input
-   and output, i.e., of being able to exploit the base range of the relevant
-   floating point type fully. As a result, the user loses the ability to
+   the property of being free of range checks on input and output,
+   @Chg{Version=[5],New=[that is],Old=[i.e.]}, of being able to exploit the
+   base range of the relevant floating point type fully. As a result, the user
+   loses the ability to
    impose application-oriented bounds on the range of values that the
    components of a complex variable can acquire; however, it can be argued that
    few, if any, applications have a naturally square domain (as opposed to a
@@ -1439,6 +1441,7 @@ to T'Model_Emin.
    type, which figure in the accuracy and range (overflow avoidance)
    requirements.
 
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
    In hardware that is free of arithmetic anomalies, T'Model_Mantissa,
    T'Model_Emin, T'Safe_First, and T'Safe_Last will yield the same values as
    T'Machine_Mantissa, T'Machine_Emin, T'Base'First, and T'Base'Last,
@@ -1448,7 +1451,8 @@ to T'Model_Emin.
    model-oriented attributes to have these optimal values, since the hardware,
    by definition, and therefore the implementation, cannot conform to the
    stringencies of the resulting model; in this case, the values yielded by the
-   model-oriented parameters have to be made more conservative (i.e., have to
+   model-oriented parameters have to be made more conservative
+   (@Chg{Version=[5],New=[that is],Old=[i.e.]}, have to
    be penalized), with the result that the model numbers are more widely
    separated than the machine numbers, and the safe range is a subrange of the
    base range. The implementation will then be able to conform to the
@@ -1529,10 +1533,11 @@ T'Safe_First and T'Safe_Last; otherwise,
    type is False.}
 @end(itemize)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 For any predefined relation on operands of a floating point type T, the
-implementation may deliver any value (i.e., either True or False) obtained by
-applying the (exact) mathematical comparison to values arbitrarily chosen from
-the respective operand intervals.
+implementation may deliver any value (@Chg{Version=[5],New=[that is],Old=[i.e.]},
+either True or False) obtained by applying the (exact) mathematical comparison
+to values arbitrarily chosen from the respective operand intervals.
 
 The result of a membership test is defined in terms of comparisons of the
 operand value with the lower and upper bounds of the given range or type
@@ -1559,9 +1564,11 @@ restricted to the safe range, are an infinite set.
 
 @begin{Inconsistent83}
 @Defn{inconsistencies with Ada 83}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 Giving the model numbers the hardware radix, instead of always a radix of two,
 allows (in conjunction with other changes) some borderline declared
-types to be represented with less precision than in Ada 83 (i.e., with single
+types to be represented with less precision than in Ada 83
+(@Chg{Version=[5],New=[that is],Old=[i.e.]}, with single
 precision, whereas Ada 83 would have used double precision). Because the lower
 precision satisfies the requirements of the model (and did so in Ada 83 as
 well), this change is viewed as a desirable correction of an anomaly, rather
@@ -1832,19 +1839,23 @@ fully specified.
 accuracy of certain fixed point multiplications and
 divisions.}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 When one operand of a fixed-fixed multiplication or division is of type
 @i(universal_real), that operand is not implicitly converted in the usual sense,
 since the context does not determine a unique target type, but the accuracy of
-the result of the multiplication or division (i.e., whether the result has to
+the result of the multiplication or division
+(@Chg{Version=[5],New=[that is],Old=[i.e.]}, whether the result has to
 belong to the perfect result set or merely the close result set) depends on the
 value of the operand of type @i(universal_real) and on the types of the other
 operand and of the result.
 @begin{Discussion}
-We need not consider here the multiplication or
-division of two such operands, since in that case either the operation is
-evaluated exactly (i.e., it is an operation of a static expression all of whose
-operators are of a root numeric type) or it is considered to be an operation of
-a floating point type.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+  We need not consider here the multiplication or
+  division of two such operands, since in that case either the operation is
+  evaluated exactly (@Chg{Version=[5],New=[that is],Old=[i.e.]}, it is an
+  operation of a static expression all of whose
+  operators are of a root numeric type) or it is considered to be an operation of
+  a floating point type.
 @end{Discussion}
 
 @Leading@;For a fixed point multiplication or division whose (exact)
@@ -1912,14 +1923,16 @@ are defined as follows:
       integers containing the perfect result set as a subset.
 @end(itemize)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 The result of a fixed point multiplication or division shall belong either to
 the perfect result set or to the close result set, as described below, if
 overflow does not occur. In the following
 cases, if the result type is a fixed point type,
 let @VirtName{s} be its @i(small);
-otherwise, i.e. when the result type is an integer type,
-let @VirtName{s} be 1.0.
+otherwise, @Chg{Version=[5],New=[that is],Old=[i.e.]} when the result type 
+is an integer type, let @VirtName{s} be 1.0.
 @begin(itemize)
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
    For a multiplication or division neither of whose operands is of type
    @i(universal_real), let @VirtName{l} and @VirtName{r}
    be the @i(smalls) of the left and right
@@ -1929,7 +1942,8 @@ let @VirtName{s} be 1.0.
    this case), the result shall belong to the perfect result set; otherwise, it
    belongs to the close result set. For a division, if
    @VirtName{l}@ /@ (@VirtName{r}@ @Times@ @VirtName{s}) is an
-   integer or the reciprocal of an integer (i.e., the @i(smalls) are
+   integer or the reciprocal of an integer
+   (@Chg{Version=[5],New=[that is],Old=[i.e.]}, the @i(smalls) are
    compatible), the result shall belong to the perfect result set; otherwise,
    it belongs to the close result set.
    @begin{Ramification}
@@ -2108,12 +2122,13 @@ angle threshold.}
 @end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
 The prescribed results specified in @RefSecNum{Elementary Functions} for certain
 functions at particular parameter values take precedence over the maximum
 relative error bounds; effectively, they narrow to a single value the result
 interval allowed by the maximum relative error bounds. Additional rules with a
-similar effect are given by @Chg{Version=[2],New=[],Old=[the ]}table
-@Chg{Version=[2],New=[G-1],Old=[below]} for the inverse trigonometric
+similar effect are given by @Chg{Version=[2],New=[],Old=[the ]}@Chg{Version=[5],New=[Table],Old=[table]}
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[G.1],Old=[G-1]}],Old=[below]} for the inverse trigonometric
 functions, at particular parameter values for which the mathematical result is
 possibly not a model number of @i{EF}.Float_Type (or is, indeed, even
 transcendental). In each table entry, the values of the parameters are such
@@ -2133,7 +2148,7 @@ with the indicated sign.
 
 @Table[Columns=<5>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
-Caption=<@b{@Chg{Version=[2],New=[Table G-1: ],Old=[]}Tightly Approximated Elementary Function Results}>,
+Caption=<@b{@Chg{Version=[2],New=[Table @Chg{Version=[5],New=[G.1],Old=[G-1]}: ],Old=[]}Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
 Body=<Arcsin@\1.0@\n.a.@\Cycle/4.0@\@Pi/2.0
 Arcsin@\@en@;1.0@\n.a.@\@en@R[Cycle]/4.0@\@en@Pi/2.0
@@ -2215,17 +2230,20 @@ The implementation's representations of generator states and its algorithms for
 generating random numbers shall yield a period of at least 2@+{31}@en@;2;
 much longer periods are desirable but not required.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 The implementations of Numerics.Float_Random.Random and
 Numerics.Discrete_Random.Random shall pass at least 85% of the individual
 trials in a suite of statistical tests. For Numerics.Float_Random, the tests
-are applied directly to the floating point values generated (i.e., they are not
+are applied directly to the floating point values generated
+(@Chg{Version=[5],New=[that is],Old=[i.e.]}, they are not
 converted to integers first), while for Numerics.Discrete_Random they are
 applied to the generated values of various discrete types. Each test suite
 performs 6 different tests, with each test repeated 10 times, yielding a total
 of 60 individual trials. An individual trial is deemed to pass if the
 chi-square value (or other statistic) calculated for the observed counts or
 distribution falls within the range of values corresponding to the 2.5 and 97.5
-percentage points for the relevant degrees of freedom (i.e., it shall be
+percentage points for the relevant degrees of freedom
+(@Chg{Version=[5],New=[that is],Old=[i.e.]}, it shall be
 neither too high nor too low). For the purpose of determining the degrees of
 freedom, measurement categories are combined whenever the expected counts are
 fewer than 5.
@@ -2400,18 +2418,22 @@ Numerics.Generic_@!Complex_@!Elementary_@!Functions shall be as specified here.
 @end{Intro}
 
 @begin{ImplReq}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 When an exception is not raised, the result of evaluating a real function of
-an instance @i{CT} of Numerics.Generic_Complex_Types (i.e., a function that
+an instance @i{CT} of Numerics.Generic_Complex_Types
+(@Chg{Version=[5],New=[that is],Old=[i.e.]}, a function that
 yields a value of subtype @i{CT}.Real'Base or @i{CT}.Imaginary) belongs to a
 result interval defined as for a real elementary function
 (see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 @Defn2{Term=[result interval],
         Sec=[for a component of the result of evaluating a complex function]}
 When an exception is not raised, each component of the result of evaluating a
 complex function of such an instance, or of an instance of
 Numerics.Generic_Complex_Elementary_Functions obtained by instantiating the
-latter with @i{CT} (i.e., a function that yields a value of subtype
+latter with @i{CT} (@Chg{Version=[5],New=[that is],Old=[i.e.]}, a function
+that yields a value of subtype
 @i{CT}.Complex), also belongs to a @i{result interval}. The result intervals
 for the components of the result are either defined by a
 @i{maximum relative error} bound or by a @i{maximum box error} bound.
@@ -2480,7 +2502,8 @@ otherwise,
 @end{itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-The error bounds for particular complex functions are tabulated @Chg{Version=[2],New=[in table G-2],Old=[below]}.
+The error bounds for particular complex functions are tabulated @Chg{Version=[2],New=[in 
+@Chg{Version=[5],New=[Table G.2],Old=[table G-2]}],Old=[below]}.
 In the table, the error bound is given as the coefficient of
 @i{CT}.Real'Model_Epsilon.
 
@@ -2490,7 +2513,7 @@ In the table, the error bound is given as the coefficient of
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @Table[Columns=<4>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
-Caption=<@b{@Chg{Version=[2],New=[Table G-2: ],Old=[]}Error Bounds for Particular Complex Functions}>,
+Caption=<@b{@Chg{Version=[2],New=[Table @Chg{Version=[5],New=[G.2],Old=[G-2]}: ],Old=[]}Error Bounds for Particular Complex Functions}>,
 Headers=<@b{Function or Operator}@\@b{Nature of @*Result}@\@b{Nature of @*Bound}@\@b{Error Bound}>,
 Body=<Modulus@\real@\max. rel. error@\3.0
 Argument@\real@\max. rel. error@\4.0
@@ -3206,7 +3229,8 @@ Numerics.Generic_Real_Arrays shall be documented.]}]}
   @ChgAdded{Version=[3],Text=[Note moreover that the componentwise accuracy
   requirements are not met by subcubic methods for matrix multiplication such
   as that devised by Strassen. These methods, which are typically used for the
-  fast multiplication of very large matrices (e.g. order more than a few
+  fast multiplication of very large matrices
+  (@Chg{Version=[5],New=[that is,],Old=[e.g.]} order more than a few
   thousands), have normwise accuracy properties. If it is desired to use such
   methods, then distinct subprograms should be provided (perhaps in a child
   package). See Section 22.2.2 in the above reference.]}

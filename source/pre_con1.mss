@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -76,7 +76,7 @@ different for hashed maps and ordered maps.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some
-operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a map]}@Defn2{Term=[tamper with elements],Sec=[of a map]}],Old=[of
+operations@Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a map]}@Defn2{Term=[tamper with elements],Sec=[of a map]}],Old=[ of
 these generic packages
 have access-to-subprogram parameters. To ensure such operations are
 well-defined, they guard against certain actions by the designated
@@ -3985,7 +3985,7 @@ hashed sets and ordered sets.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some
-operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a set]}@Defn2{Term=[tamper with elements],Sec=[of a set]}],Old=[of
+operations@Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a set]}@Defn2{Term=[tamper with elements],Sec=[of a set]}],Old=[ of
 these generic packages
 have access-to-subprogram parameters. To ensure such operations are
 well-defined, they guard against certain actions by the designated

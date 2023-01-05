@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:08 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.150 $}
+@Comment{$Revision: 1.151 $}
 
 @begin{Intro}
 
@@ -42,7 +42,7 @@ activity within the execution of a program
 that can proceed in parallel with other activities of the same task, or of
 separate tasks.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[R],Term=[logical thread of control],
-  Def=[an activity within the execution of a program that can proceed in 
+  Def=[activity within the execution of a program that can proceed in 
        parallel with other activities of the same task, or of separate tasks]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0119-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The
@@ -241,9 +241,7 @@ is called the visible part of the task unit.
 The optional list of @nt{task_item}s after the reserved
 word @key{private} is called the private part of the task unit.]
 @begin{TheProof}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-Private part is defined in @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Visibility Rules}.
+Private part is defined in @RefSecFullNum{Visibility Rules}.
 @end{theproof}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0029],ARef=[AI95-00116-01]}
@@ -1144,9 +1142,7 @@ The optional list of @nt{protected_@!element_@!declaration}s after the reserved
 word @key{private} is called the private part of the protected
 unit.]
 @begin{TheProof}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-Private part is defined in @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Visibility Rules}.
+Private part is defined in @RefSecFullNum{Visibility Rules}.
 @end{theproof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00419-01]}
@@ -1755,7 +1751,7 @@ as follows:
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0291-1]}
   If it is a @nt<selected_component> that is not
   an expanded name, then the target object is explicitly
-  specified to be the @Chg{Version=[3],New=[],Old=[task or protected]} object
+  specified to be the @Chg{Version=[3],New=[],Old=[task or protected ]}object
   denoted by the @nt<prefix> of the @nt<name>;
   @Defn{external call}
   @Chg{Version=[3],New=[],Old=[such ]}a call@Chg{Version=[3],New=[ using
@@ -2158,7 +2154,7 @@ ancestor subtype.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[Unless directly specified, for any
-other program unit, first  subtype, or formal object, the Nonblocking aspect
+other program unit, first subtype, or formal object, the Nonblocking aspect
 of the entity is determined by the Nonblocking aspect for the innermost program
 unit enclosing the entity.]}
 
@@ -2883,7 +2879,8 @@ presumed for tasks competing to start a protected action @em
 on a multiprocessor such tasks @Chg{Version=[5],New=[can],Old=[might]} use
 busy-waiting; for @Chg{Version=[5],New=[further ],Old=[]}monoprocessor
 @Chg{Version=[5],New=[and multiprocessor ],Old=[]}considerations,
-see @RefSec{Priority Ceiling Locking}.
+see @ISODiff{NotISO=[@RefSecFull{Priority Ceiling Locking}],
+ISOOnly=[@RefSecFullNum{Priority Ceiling Locking}]}.
 @begin{Discussion}
 The intended implementation on a multi-processor is in terms of
 @lquotes@;spin locks@rquotes@; @em the waiting task will spin.
@@ -3327,9 +3324,10 @@ The elaboration of an @nt<entry_@!declaration> for a single entry
 has no effect.
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 The elaboration of the declaration of a protected subprogram has
-no effect, as specified in @Chg{Version=[3],New=[subclause],Old=[clause]}
-@RefSecNum(Subprogram Declarations).
+no effect, as specified in
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(Subprogram Declarations).
 The default initialization of an object of a task or protected
 type is covered in @RefSecNum(Object Declarations).
 @end{Discussion}
@@ -3360,7 +3358,7 @@ is executed, with the formal parameters associated with the
 corresponding actual parameters of the selected entry call.
 @Chg{Version=[5],New=[Execution of the rendezvous consists of the
 execution ],Old=[]}of the @nt{handled_sequence_of_statements},
-@Chg{Version=[5],New=[ performance of any postcondition or type
+@Chg{Version=[5],New=[performance of any postcondition or type
 invariant checks associated with the entry, and any initialization or
 finalization associated with these checks, as described in
 @RefSecNum{Preconditions and Postconditions} and @RefSecNum{Type Invariants}.
@@ -4481,7 +4479,8 @@ converted to the type Duration, and then rounded up
 to the next clock tick.
 @PDefn2{Term=[implicit subtype conversion],Sec=(delay expression)}
 The time base associated with relative delays
-is as defined in @RefSec{Delay Accuracy} or is
+is as defined in @ISODiff{NotISO=[@RefSecFull{Delay Accuracy}],
+ISOOnly=[@RefSecFullNum{Delay Accuracy}]} or is
 implementation defined.
 @ImplDef{The time base associated with relative delays.}
 @begin{Ramification}
@@ -4691,7 +4690,8 @@ functionality defined in @RefSec{Real-Time Systems}.
 @end{Ramification}
 
 Additional requirements associated with @nt<delay_statement>s
-are given in @RefSec(Delay Accuracy).
+are given in @ISODiff{NotISO=[@RefSecFull{Delay Accuracy}],
+ISOOnly=[@RefSecFullNum{Delay Accuracy}]}.
 
 @end{Notes}
 
@@ -5027,7 +5027,7 @@ environment (such as POSIX).]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
 @ChgAdded{Version=[2],Text=[Type Time_Offset represents
-@Chg{Version=[5],New=[for a given locality at a given moment ],Old=[]} the
+@Chg{Version=[5],New=[for a given locality at a given moment ],Old=[]}the
 number of minutes
 @Chg{Version=[5],New=[the local time is,
 at that moment, ahead (+) or behind (-) Coordinated Universal Time
@@ -5720,9 +5720,10 @@ if no @nt{accept_alternative} can immediately be selected;
 in particular, if all alternatives are closed.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 An open @nt{terminate_alternative} is selected if the conditions stated at the
-end of @Chg{Version=[3],New=[subclause],Old=[clause]}
-@RefSecNum{Task Dependence - Termination of Tasks}
+end of 
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum{Task Dependence - Termination of Tasks}
 are satisfied.
 @begin(Ramification)
   In the absence of a @nt<requeue_statement>, the conditions stated
@@ -5746,9 +5747,10 @@ there is no else part.
 
 @begin{Notes}
 
-A @nt{selective_accept} is allowed to have several open
-@nt{delay_alternative}s. A @nt{selective_accept} is allowed
-to have several open
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+A @nt{selective_accept} @Chg{Version=[5],New=[can],Old=[is allowed to]} have
+several open @nt{delay_alternative}s. A @nt{selective_accept}
+@Chg{Version=[5],New=[can],Old=[is allowed to]} have several open
 @nt{accept_alternative}s for the same entry.
 
 @end{Notes}
@@ -6406,8 +6408,9 @@ only in situations requiring unconditional termination.
 
 A task is allowed to abort any task it can name, including itself.
 
-Additional requirements associated with abort
-are given in @RefSec(Preemptive Abort).
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+Additional requirements associated with abort are given in
+@Chg{Version=[5],New=[@RefSecNum(Preemptive Abort)],Old=[@RefSec(Preemptive Abort)]}.
 @end{Notes}
 
 @begin{DiffWord83}
@@ -6766,7 +6769,7 @@ to be @i<concurrent> actions.@Defn2{Term=[concurrent], Sec=(actions)}@Defn2{Term
 action@Defn{conflict}@Defn2{Term=[actions], Sec=(conflicting)} assigns to an
 object, and the other action reads or assigns to a part of the same
 object (or of a neighboring object if the two are not independently
-addressable).  The action comprising a call on a subprogram or an
+addressable). The action comprising a call on a subprogram or an
 entry is defined to @i{potentially conflict} with another action if the
 Global aspect (or Global'Class aspect in the case of a dispatching
 call) of the called subprogram or entry is such that a conflicting

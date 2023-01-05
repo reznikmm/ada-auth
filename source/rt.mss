@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.136 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
+@comment{ $Revision: 1.137 $ $Date: 2023/01/05 05:49:10 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2023/01/05 05:49:10 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -12,7 +12,8 @@
 This Annex specifies additional characteristics of Ada implementations
 intended for real-time systems software. To conform to this Annex, an
 implementation shall also conform to
-@Chg{Version=[5],New=[@RefSec{Systems Programming}],Old=[the Systems Programming Annex]}.
+@Chg{Version=[5],New=[@ISODiff{NotISO=[@RefSecFull{Systems Programming}],
+ISOOnly=[@RefSecFullNum{Systems Programming}]}],Old=[the Systems Programming Annex]}.
 @end{Intro}
 
 @begin{Metrics}
@@ -72,7 +73,8 @@ This kind of metric can only be partially tested, by finding the value
 of V for one or more test programs.
 
 The metrics do not cover the whole language; they are limited
-to features that are specified in @RefSec{Systems Programming}
+to features that are specified in
+@ISODiff{NotISO=[@RefSecFull{Systems Programming}],ISOOnly=[@RefSecFullNum{Systems Programming}]}
 and in this Annex. The metrics are intended
 to provide guidance to potential users as to whether a particular
 implementation of such a feature is going to be adequate for a
@@ -782,8 +784,7 @@ point.]}]}
 
 @begin{Notes}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Tasks and Synchronization}
+@RefSecFullNum{Tasks and Synchronization}
 specifies under which circumstances a task becomes ready.
 The ready state is affected by the rules for
 task activation and termination, delay statements, and entry calls.
@@ -814,8 +815,10 @@ multiprocessors where dispatching is implemented using a single
 ready queue, as well as those with separate dispatching domains.]
 
 The priority of a task is determined by rules specified in this subclause, and
-under @RefSec{Task Priorities}, @RefSec{Priority Ceiling Locking}, and
-@RefSec{Dynamic Priorities}.
+under 
+@ISODiff{NotISO=[@RefSecFull{Task Priorities}, @RefSecFull{Priority Ceiling Locking}, and
+@RefSecFull{Dynamic Priorities}],ISOOnly=[@RefSecFullNum{Task Priorities},
+@RefSecFullNum{Priority Ceiling Locking}, and @RefSecFullNum{Dynamic Priorities}]}.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
 @ChgNote{This note is moved up from the next subclause.}
@@ -1554,9 +1557,8 @@ Non_Premptive_FIFO_Within_Priorities policy],Old=[]} to
 execute within a protected object without raising its active priority provided
 the associated protected unit does not contain @Chg{Version=[3],New=[any
 subprograms with aspects Interrupt_Handler or Attach_Handler specified, nor
-does the unit have aspect],Old=[pragma]} Interrupt_Priority
-@Chg{Version=[3],New=[ specified. When the locking policy
-(see @RefSecNum{Priority Ceiling Locking}) is
+does the unit have aspect],Old=[pragma]} Interrupt_Priority@Chg{Version=[3],New=[ specified.
+When the locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 Ceiling_Locking, an implementation taking advantage of this permission shall
 ensure that a call to Yield_to_Higher that occurs within a protected action uses
 the ceiling priority of the protected object (rather than the active priority of
@@ -2562,12 +2564,12 @@ Program_Error is raised in the calling task;@Defn2{Term=[Program_Error],Sec=(rai
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0404-1]}@ChgNote{Also changed paragraph numbers}
-@ChgAdded{Version=[2],Text=[when the entry is open@Chg{Version=[5],New=[,],Old=[]}  the entry body is executed
+@ChgAdded{Version=[2],Text=[when the entry is open@Chg{Version=[5],New=[,],Old=[]} the entry body is executed
 at the ceiling priority of the protected object;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0404-1]}@ChgNote{Also changed paragraph numbers}
-@ChgAdded{Version=[2],Text=[when the entry is open@Chg{Version=[5],New=[,],Old=[]}  the entry body is executed
+@ChgAdded{Version=[2],Text=[when the entry is open@Chg{Version=[5],New=[,],Old=[]} the entry body is executed
 at the ceiling priority of the protected object and then Program_Error is
 raised in the calling task; or]}
 
@@ -2670,9 +2672,13 @@ protected actions of that object execute. In the extreme, if
 the ceiling is Interrupt_Priority'Last, all blockable interrupts
 are blocked during that time.
 
-The ceiling priority of a protected object has to be in the
-Interrupt_Priority range if one of its procedures is to be used as
-an interrupt handler (see @RefSecNum{Interrupt Support}).
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[As described in @RefSecNum{Protected Procedure Handlers},
+a check is made whenever an interrupt is handled by one of the protected
+procedures of a protected object that its],Old=[The]} ceiling priority
+@Chg{Version=[5],New=[is],Old=[of a protected object has to be]} in the
+Interrupt_Priority range@Chg{Version=[5],New=[],Old=[ if one of its
+procedures is to be used as an interrupt handler (see @RefSecNum{Interrupt Support})]}.
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 When specifying the ceiling of a protected object,
@@ -3490,14 +3496,17 @@ beginning of @RefSec{Predefined Language Environment}.
 @end{TheProof}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 The rule for when Tasking_Error is raised for Set_Priority or Get_Priority is
 different from the rule for when Tasking_Error is raised on an
 entry call (see @RefSecNum{Entry Calls}). In particular,
-@Chg{Version=[3],New=[],Old=[setting or ]}querying the priority of
-a completed or an abnormal
-task is allowed, so long as the task is not yet
-terminated@Chg{Version=[3],New=[, and setting the priority of a task
-is allowed for any task state (including for terminated tasks)],Old=[]}.
+@Chg{Version=[3],New=[],Old=[setting or ]}@Chg{Version=[5],New=[],Old=[querying ]}the
+priority of a completed or an abnormal
+task @Chg{Version=[5],New=[can be queried],Old=[is allowed,]} so long as
+the task is not yet terminated@Chg{Version=[3],New=[, and 
+@Chg{Version=[5],New=[],Old=[setting ]}the priority of a task
+@Chg{Version=[5],New=[can be set in],Old=[is allowed for]} any task state 
+(including for terminated tasks)],Old=[]}.
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 Changing the priorities of a set of tasks can be performed by a
@@ -4594,8 +4603,11 @@ The required range and accuracy of Time are such that
 used as the representation.
 @end{ImplNote}
 
-Time_Span_First shall be no greater than @en@;3600 seconds, and
-Time_Span_Last shall be no less than 3600 seconds.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
+@Chg{Version=[5],New=[The value of ],Old=[]}Time_Span_First@Chg{Version=[5],New=[ in seconds],Old=[]}
+shall be no greater than @en@;3600@Chg{Version=[5],New=[],Old=[ seconds]}, and
+@Chg{Version=[5],New=[the value of ],Old=[]}Time_Span_Last@Chg{Version=[5],New=[ in seconds],Old=[]}
+shall be no less than 3600@Chg{Version=[5],New=[],Old=[ seconds]}.
 @begin{Reason}
 This is equivalent to @PorM one hour and there is still room for
 a two-microsecond resolution.
@@ -5721,12 +5733,14 @@ partition will execute on a single CPU unless the programmer explicitly uses
 aspect CPU to specify the CPU assignments for tasks. The use of multiple CPUs
 requires care, as many guarantees of single CPU scheduling no longer apply.]}
 
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0055-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[4],Text=[It is not recommended to specify the CPU of a task
 to be Not_A_Specific_CPU when the Ravenscar @Chg{Version=[5],New=[or
 Jorvik ],Old=[]}profile is in effect. How a
 partition executes strongly depends on the assignment of tasks to CPUs.]}
+@end{NotISO}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[5],Text=[Any unit that meets the requirements of the

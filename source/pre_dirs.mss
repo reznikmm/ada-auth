@@ -1,10 +1,11 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.60 $ $Date: 2022/06/21 06:08:02 $ $Author: randy $ }
+@comment{ $Revision: 1.61 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:02 $}
+@Comment{$Date: 2023/01/05 05:49:09 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@notisormnewpagever{Version=[5]}@Comment{Page break in Ada 2022 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
 @begin{Intro}
@@ -1255,13 +1256,15 @@ Containing_Directory will always raise Use_Error.]}
 deletion of directories, then Create_Directory, Create_Path, Delete_Directory,
 and Delete_Tree will always propagate Use_Error.]}
 
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1],ARef=[AI12-0447-1]}
 @ChgAdded{Version=[2],Text=[To move a file or directory to a different
 location, use Rename. Most target systems will allow renaming of files from one
 directory to another. If the target file or directory
 @Chg{Version=[5],New=[can],Old=[might]} already exist,
-@Chg{Version=[5],New=[delete it],Old=[it should be deleted]} first.]}
+it should be deleted first.]}
+@end{NotISO}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[While Rename is only guaranteed to

@@ -89,8 +89,6 @@
 @Source{Name=<12.MSS>,SectionName=<15>,SectionNumber=[15],NewSection=[T]}
 @Source{Name=<13A.MSS>,SectionName=<16>,SectionNumber=[16],NewSection=[T]}
 @Source{Name=<13B.MSS>,SectionName=<16>,SectionNumber=[16],NewSection=[F]}
-@Comment{Now, the "Standard Libraries" separator page}
-@Source{Name=<LIBRARY.MSS>,SectionName=<Lib>,SectionNumber=[0],NewSection=[T]}
 @Comment{Annex A; all of the files starting with "Pre_" are part of Annex A.}
 @Source{Name=<PRE.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[T]}
 @Source{Name=<PRE_Standard.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}

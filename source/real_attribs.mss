@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2022/05/14 04:06:51 $}
+@Comment{$Date: 2023/01/05 05:49:10 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.29 $}
+@comment{$Revision: 1.30 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -268,11 +268,13 @@ S of a floating point type @VirtName{T}.
    canonical-form representation of @VirtName{X}.
 @end{Discussion}
 @begin{Ramification}
-   If @VirtName{Adjustment} is sufficiently small (i.e., sufficiently negative), the
-   result is
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+   If @VirtName{Adjustment} is sufficiently small (@Chg{Version=[5],New=[that is],Old=[i.e.]},
+   sufficiently negative), the result is
    either zero, @VirtName{T}'Model_Small, or (if @VirtName{T}'Denorm is True) a
    denormalized number.
 @end{Ramification}
+
 
 @AttributeLeading{Prefix=<S>, AttrName=<Floor>,
   Text=[S'Floor denotes a function with the following
@@ -282,9 +284,10 @@ S of a floating point type @VirtName{T}.
   @key(return) @VirtName{T}
 @end{DescExample}
 
-   @NoPrefix@;The function yields the value @Floor{@VirtName{X}},
-   i.e., the largest (most positive) integral value less than or equal to
-   @VirtName{X}.
+   @NoPrefix@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+   The function yields the value @Floor{@VirtName{X}},
+   @Chg{Version=[5],New=[that is],Old=[i.e.]}, the largest (most positive)
+   integral value less than or equal to @VirtName{X}.
    When @VirtName{X} is zero, the
    result has the sign of @VirtName{X}; a zero result otherwise has a positive
    sign.]}
@@ -297,12 +300,13 @@ S of a floating point type @VirtName{T}.
   @key(return) @VirtName{T}
 @end{DescExample}
 
-   @NoPrefix@;The function yields the value @Ceiling{@VirtName{X}},
-   i.e., the smallest (most negative) integral value greater than or equal to
-   @VirtName{X}.
+   @NoPrefix@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+   The function yields the value @Ceiling{@VirtName{X}},
+   @Chg{Version=[5],New=[that is],Old=[i.e.]}, the smallest (most negative)
+   integral value greater than or equal to @VirtName{X}.
    When @VirtName{X} is zero, the
-   result has the sign of @VirtName{X}; a zero result otherwise has a negative sign
-   when S'Signed_Zeros is True.]}
+   result has the sign of @VirtName{X}; a zero result otherwise has
+   a negative sign when S'Signed_Zeros is True.]}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Rounding>,
   Text=[S'Rounding denotes a function with the following
@@ -576,15 +580,16 @@ a floating point type @VirtName{T}.
    @VirtName{T}@R('Machine_Radix)@+{@VirtName{T}@R('Model_Emin) @en 1}. The value of this
    attribute is of the type @i{universal_real}.]}
 @begin{Discussion}
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
    In most implementations, this attribute yields the
    smallest positive normalized number of the type @VirtName{T},
-   i.e. the number corresponding to the positive underflow
-   threshold. In some implementations employing a radix-complement
+   @Chg{Version=[5],New=[that is,],Old=[i.e.]} the number corresponding to the 
+   positive underflow threshold. In some implementations employing a radix-complement
    representation for the type @VirtName{T}, the positive underflow threshold is
    closer to zero than is the negative underflow threshold, with the
    consequence that the smallest positive normalized number does not coincide with
-   the positive underflow threshold (i.e., it exceeds the latter). Further
-   discussion can be found in
+   the positive underflow threshold @Chg{Version=[5],New=[that is],Old=[i.e.]}, it
+   exceeds the latter). Further discussion can be found in
    @RefSecNum{Model-Oriented Attributes of Floating Point Types}.
 @end{Discussion}
 

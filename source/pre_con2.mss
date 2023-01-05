@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1241,7 +1241,7 @@ structure as was written by Tree'Write.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[Some
-operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a tree]}@Defn2{Term=[tamper with elements],Sec=[of a tree]}],Old=[of
+operations@Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a tree]}@Defn2{Term=[tamper with elements],Sec=[of a tree]}],Old=[ of
 this generic package have access-to-subprogram parameters. To
 ensure such operations are well-defined, they guard against certain actions by
 the designated subprogram. In particular, some operations]} check for
@@ -4968,14 +4968,14 @@ same value as Empty_Holder.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0262-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[Some operations
-@Chg{Version=[5],New=[],Old=[of this generic package have access-to-subprogram
+@ChgAdded{Version=[3],Text=[@Redundant[Some 
+operations@Chg{Version=[5],New=[],Old=[ of this generic package have access-to-subprogram
 parameters. To
 ensure such operations are well-defined, they guard against certain actions by
 the designated subprogram. In particular, some operations]} check for
 @ldquote@;tampering with the element@rdquote of a container because they depend
 @Defn2{Term=[tamper with elements],Sec=[of a holder]}on the element
-of the container not being replaced.]@Chg{Version=[5],New=[When
+of the container not being replaced.]@Chg{Version=[5],New=[ When
 tampering with the element is @i<prohibited>@Defn2{Term=[prohibited],Sec=[tampering with a holder]}
 @Defn2{Term=[tampering],Sec=[prohibited for a holder]}for a particular
 holder object @i<H>, Program_Error is propagated by the finalization of

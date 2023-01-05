@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.96 $ $Date: 2022/09/17 06:51:40 $ $Author: randy $ }
+@comment{ $Revision: 1.97 $ $Date: 2023/01/05 05:49:12 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2022/09/17 06:51:40 $}
+@Comment{$Date: 2023/01/05 05:49:12 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -81,6 +81,7 @@ common to the string handling packages.
 
 
 @RMNewPageVer{Version=[1]}@Comment{Insert page break so printed Ada 95 w/ Corr RM looks better.}
+@notisormnewpagever{Version=[5]}@Comment{Page break in Ada 2022 RM}
 @LabeledSubClause{The Package Strings.Maps}
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
@@ -2487,9 +2488,11 @@ character mapping in Characters.Handling
 
 @begin{SingleNote}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0114-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[3],Text=[There are certain characters which are defined to be
-lower case letters by ISO 10646 and are therefore allowed in identifiers, but
-are not considered lower case letters by Ada.Strings.Maps.Constants.]}
+lower case letters by ISO@Chg{Version=[5],New=[/IEC],Old=[]} 10646 and are
+therefore allowed in identifiers, but are not considered lower case letters
+by Ada.Strings.Maps.Constants.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3370,12 +3373,12 @@ Strings.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the strings consist
 of the same sequence of characters after applying locale-independent simple case
 folding, as defined by documents referenced in
 @Chg{Version=[5],New=[],Old=[the note in ]}Clause @Chg{Version=[5],New=[2],Old=[1]}
-of ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[2011]}.
+of ISO/IEC 10646:@Chg{Version=[5],New=[2020],Old=[2011]}.
 Otherwise, returns False. This function uses the same method as is
 used to determine whether two identifiers are the same.]}
 
@@ -3390,10 +3393,10 @@ used to determine whether two identifiers are the same.]}
   function will never change for strings made up solely of defined code points;
   there is no such guarantee for case conversion to lower case.]}
 
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0263-1]}
   @ChgAdded{Version=[5],Text=[The @ldquote@;documents
   referenced@rdquote means Unicode, Chapter 4 (specifically, section 4.2 @em
-  Case). See the Implementation Notes in subclause @RefSecNum{Identifiers} for
+  Case). See the Implementation Notes in @RefSecNum{Identifiers} for
   a source for machine-readable definitions of these properties.]}
 @end{Discussion}
 @end{DescribeCode}

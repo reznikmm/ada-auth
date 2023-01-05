@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:06 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.158 $}
+@Comment{$Revision: 1.159 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -82,7 +82,7 @@ declaration).>}
   implicit declarations, as part of a type declaration.
 @end{Discussion}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[declaration],
-Def=[a language construct that associates a name with (a view of) an entity],
+Def=[language construct that associates a name with (a view of) an entity],
 Note1=[A declaration can appear explicitly in the program text (an
 explicit declaration), or can be supposed to occur at a given place
 in the text as a consequence of the semantics of another construct
@@ -144,7 +144,7 @@ Text=<@Chg{Version=[2],New=[A view of an entity reveals some or all of the
 properties of the entity. A single entity may have multiple views.],
 Old=[(See @b[Definition].)]}>}
 @ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[view of an entity],
-    Def=[a representation of an entity that reveals some 
+    Def=[representation of an entity that reveals some 
           or all of the properties of the entity],
     Note1=[A single entity can have multiple views.]}
 
@@ -276,7 +276,7 @@ by this @IntlStdTitle for each construct that has a run-time effect.
   Execution of a declaration is also called @i(elaboration).
   Execution of an expression is also called @i(evaluation).>}
 @ChgTermDef{Version=[5],Kind=(Added),Group=[R],Term=[execution],
-    Def=[the process by which a construct achieves its run-time effect],
+    Def=[process by which a construct achieves its run-time effect],
     Note1=[Execution of a declaration is also called
            elaboration. Execution of an expression is also called evaluation.]}
 @begin{Honest}
@@ -326,10 +326,10 @@ Text=<@ChgAdded{Version=[2],Text=[The process by which an expression achieves
 its run-time effect is called evaluation. Evaluation is one of the forms of
 execution.]}>}
 @ChgTermDef{Version=[5],Kind=(Added),Group=[R],Term=[elaboration],
-    Def=[the process by which a declaration achieves its run-time effect],
+    Def=[process by which a declaration achieves its run-time effect],
     Note1=[Elaboration is one of the forms of execution.]}
 @ChgTermDef{Version=[5],Kind=(Added),Group=[R],Term=[evaluation],
-    Def=[the process by which an expression achieves its run-time effect],
+    Def=[process by which an expression achieves its run-time effect],
     Note1=[Evaluation is one of the forms of execution.]}
 @begin{Honest}
 @Defn{elaborable}
@@ -407,15 +407,12 @@ It becomes a @nt{defining_identifier}, @nt{defining_character_literal}, or
 @nt{defining_operator_symbol} (or some syntactic category composed of these),
 to indicate a defining occurrence;
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 It becomes a @nt{direct_name}, in usage occurrences where
-the usage is required (in @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Visibility Rules}) to be directly visible;
+the usage is required (in @RefSecFullNum{Visibility Rules} to be
+directly visible;
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 It becomes a @nt{selector_name}, in usage occurrences
-where the usage is required (in
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Visibility Rules})
+where the usage is required (in @RefSecFullNum{Visibility Rules})
 to be visible but not necessarily directly visible;
 
 It remains an @nt{identifier}, @nt{character_literal}, or @nt{operator_symbol},
@@ -447,8 +444,7 @@ places where one could have used a @nt{selector_name},
 not just at places where a @nt{selector_name} was actually used.
 Thus, the places where a declaration is directly visible are a
 subset of the places where it is visible.
-See @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Visibility Rules} for details.)
+See @RefSecFullNum{Visibility Rules} for details.)
 
 We use the term @lquotes@;declaration@rquotes@; to cover @ntf<_specification>s that declare
 (views of) objects, such as @nt<parameter_specification>s. In Ada 83,
@@ -538,17 +534,18 @@ a value of the type.
   @Chg{Version=[3],New=[conditions],Old=[condition]}. The values of a subtype
   are a subset of the values of its type.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[type],
-Def=[a defining characteristic of each object and expression of the 
+Def=[defining characteristic of each object and expression of the 
      language, with an associated set of values, and a set of primitive
      operations that implement the fundamental aspects of its semantics],
 Note1=[Types are grouped into categories. Most language-defined categories
        of types are also classes of types.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[subtype],
-Def=[a type together with optional constraints, null exclusions,
+Def=[type together with optional constraints, null exclusions,
      and predicates, which constrain the values of the type to the subset
      that satisfies the implied conditions]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
 @Chg{Version=[2],New=[@Defn2{Term=[category], Sec=(of types)}],
 Old=[]}@Defn2{Term=[class], Sec=(of types)}
 Types are grouped into @Chg{Version=[2],New=[@i(categories)],
@@ -556,7 +553,8 @@ Old=[@i(classes)]} of types@Chg{Version=[2],New=[],Old=[, reflecting the
 similarity of their values and primitive operations]}.
 @Defn2{Term=[language-defined class], Sec=(of types)}
 There exist several @i(language-defined @Chg{Version=[2],New=[categories],
-Old=[classes]}) of types (see NOTES below)@Chg{Version=[2],New=[, reflecting
+Old=[classes]}) of types (@Chg{Version=[5],New=[summarized in the NOTE],
+Old=[see NOTES]} below)@Chg{Version=[2],New=[, reflecting
 the similarity of their values and primitive operations],Old=[]}.@Chg{Version=[2],
 New=[@Defn2{Term=[language-defined category], Sec=(of types)} @Redundant[Most
 categories of types form @i(classes) of types.]],Old=[]}
@@ -670,33 +668,33 @@ anyone complains.>
   for defining recursive data structures.]}>}
 
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[class of types],
-  Def=[a set of types that is @Defn(closed under derivation)closed under
+  Def=[set of types that is @Defn(closed under derivation)closed under
        derivation, which means that if a given type is in the class, then
        all types derived from that type are also in the class],
   Note1=[The set of types of a class share common properties, such as their
          primitive operations.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[category of types],
-  Def=[a set of types with one or more common properties, such as
+  Def=[set of types with one or more common properties, such as
        primitive operations],
   Note1=[A category of types that is closed under derivation is also known
          as a class.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[elementary type],
-  Def=[a type that does not have components]}
+  Def=[type that does not have components]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[composite type],
-  Def=[a type with components, such as an array or record]}
+  Def=[type with components, such as an array or record]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[scalar type],
   Def=[either a discrete type or a real type]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[access type],
-  Def=[a type that has values that designate aliased objects],
+  Def=[type that has values that designate aliased objects],
   Note1=[Access types correspond to @ldquote@;pointer types@rdquote or 
          @ldquote@;reference types@rdquote in some other languages.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[discrete type],
-  Def=[a type that is either an integer type or an enumeration type]}
+  Def=[type that is either an integer type or an enumeration type]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[real type],
-  Def=[a type that has values that are approximations of the real numbers],
+  Def=[type that has values that are approximations of the real numbers],
   Note1=[Floating point and fixed point types are real types.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[integer type],
-  Def=[a type that represents signed or modular integers],
+  Def=[type that represents signed or modular integers],
   Note1=[A signed integer type has a base range that includes both positive and
     negative numbers, and has operations that can raise an exception when the
     result is outside the base range. A modular type has a base range whose
@@ -704,37 +702,47 @@ anyone complains.>
     semantics. Modular types subsume what are called @ldquote@;unsigned types@rdquote
    in some other languages.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[enumeration type],
-  Def=[a type defined by an enumeration of its values,
+  Def=[type defined by an enumeration of its values,
        which can be denoted by identifiers or character literals]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[character type],
-  Def=[an enumeration type whose values include characters]}
+  Def=[enumeration type whose values include characters]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[record type],
-  Def=[a composite type consisting of zero or more named components, possibly
+  Def=[composite type consisting of zero or more named components, possibly
        of different types]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[record extension],
-  Def=[a type that extends another type optionally with additional components]}
+  Def=[type that extends another type optionally with additional components]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[array type],
-  Def=[a composite type whose components are all of the same type]}
+  Def=[composite type whose components are all of the same type]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[task type],
-  Def=[a composite type used to represent active entities which execute 
+  Def=[composite type used to represent active entities which execute 
     concurrently and that can communicate via queued task entries],
   Note1=[The top-level task of a partition is called the environment task.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[protected type],
-  Def=[a composite type whose components are accessible only through one of 
+  Def=[composite type whose components are accessible only through one of 
        its protected operations, which synchronize concurrent access by
        multiple tasks]}
+
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[partial view],
+  Def=[view of a type that reveals only some of its properties],
+  Note1=[The remaining properties are defined by the full view given elsewhere.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[full view],
+  Def=[view of a type that reveals all of its properties],
+  Note1=[There can be other views of the type that reveal fewer properties.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[incomplete view],
+  Def=[view of a type that reveals minimal properties],
+  Note1=[The remaining properties are defined by the full view given elsewhere.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[private type],
-  Def=[a view of a type that reveals only some of its properties],
-  Note1=[The remaining properties are provided by the full view given
-    elsewhere. Private types can be used for defining abstractions that hide
+  Def=[type that defines a partial view],
+  Note1=[Private types can be used for defining abstractions that hide
     unnecessary details from their clients.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[private extension],
-  Def=[a type that extends another type, with the additional properties hidden
+  Def=[type that extends another type, with the additional properties hidden
     from its clients]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[full type],
+  Def=[type that defines a full view]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[incomplete type],
-  Def=[a view of a type that reveals only a few of its properties],
-  Note1=[The remaining properties are provided by the full view given elsewhere.],
-  Note2=[Incomplete types can be used for defining recursive data structures.]}
+  Def=[type that defines an incomplete view],
+  Note1=[Incomplete types can be used for defining recursive data structures.]}
 
 @Defn{scalar type}
 The elementary types are the @i(scalar) types (@i(discrete) and @i(real))
@@ -872,9 +880,9 @@ Old=[type @i(of) the subtype]}.@Chg{Version=[2],New=[@Defn2{Term=[type], Sec=(of
 @Defn2{Term=[subtype], Sec=(type of)}],Old=[]}
 Similarly, the associated constraint is
 called the @Chg{Version=[2],New=[@i(constraint of the subtype)],
-Old=[constraint @i(of) the subtype]}.@Chg{Version=[2],New=[@Defn2{Term=[constraint], Sec=(of a subtype)}
-@Defn2{Term=[subtype], Sec=(constraint of)}],Old=[]} The set of
-values of a subtype consists of the values of its type
+Old=[constraint @i(of) the 
+subtype]}.@Chg{Version=[2],New=[@Defn2{Term=[constraint], Sec=(of a subtype)}@Defn2{Term=[subtype], Sec=(constraint of)}],Old=[]}
+The set of values of a subtype consists of the values of its type
 that satisfy its constraint@Chg{Version=[2],New=[ and any exclusion of the
 null value],
 Old=[]}.
@@ -1167,11 +1175,13 @@ type itself.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @Defn{first subtype}
 The @nt{defining_@!identifier} of a @nt{type_@!declaration} denotes
 the @i(first subtype) of the type.
 The @nt<known_@!discriminant_@!part>, if any,
-defines the discriminants of the type (see @RefSec(Discriminants)).
+defines the discriminants of the type
+(see @Chg{Version=[5],New=[@RefSecNum(Discriminants)],Old=[@RefSec(Discriminants)]}).
 The remainder of the @nt<type_@!declaration> defines the
 remaining characteristics of (the view of) the type.
 
@@ -1227,11 +1237,13 @@ of some full type.]
   separately, as it may occur in renames, which do not declare objects.]}
 @end{Reason}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @PDefn{predefined operator}
 The definition of a type implicitly declares
 certain @i(predefined operators) that operate on the type,
 according to what classes the type belongs,
-as specified in @RefSec(Operators and Expression Evaluation).
+as specified in @Chg{Version=[5],New=[@RefSecNum(Operators and Expression Evaluation)],
+Old=[@RefSec(Operators and Expression Evaluation)]}.
 @begin{Discussion}
   We no longer talk about the implicit declaration of basic operations.
   These are treated like an @nt{if_statement} @em they don't need
@@ -1286,14 +1298,12 @@ creates a distinct type and its first subtype.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of type definitions:)
 @begin(Example)
-(White, Red, Yellow, Green, Blue, Brown, Black)
+@trailing@;(White, Red, Yellow, Green, Blue, Brown, Black)
 @key(range) 1 .. 72
 @key(array)(1 .. 10) @key(of) Integer
 @end(Example)
 
-@begin{WideAbove}
 @leading@keepnext@NewExample@i(Examples of type declarations:)
-@end{WideAbove}
 @begin(Example)
 @key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
 @key(type) Column @key(is) @key(range) 1 .. 72;
@@ -1474,14 +1484,14 @@ unconstrained (see @RefSecNum{Index Constraints and Discrete Ranges} and
 @Leading@keepnext@NewExample@i(Examples of subtype declarations:)
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        --@ExamCom[  see @RefSecNum(Type Declarations)]
+@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;      --@ExamCom[ see @RefSecNum(Type Declarations)]
 @key(subtype) Red_Blue  @key(is) Rainbow;
 @key(subtype) Int       @key(is) Integer;
 @key(subtype) Small_Int @key(is) Integer @key(range) -10 .. 10;
-@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;            --@ExamCom[  see @RefSecNum(Type Declarations)]
-@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);       --@ExamCom[  see @RefSecNum(Array Types)]
-@key(subtype) Male      @key(is) Person(Sex => M);               --@ExamCom[  see @RefSecNum(Incomplete Type Declarations)]@Chg{Version=[2],New=[
-@key(subtype) Binop_Ref @key(is not null) Binop_Ptr;             --@ExamCom[  see @RefSecNum(Access Types)]],Old=[]}
+@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;          --@ExamCom[ see @RefSecNum(Type Declarations)]
+@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);     --@ExamCom[ see @RefSecNum(Array Types)]
+@key(subtype) Male      @key(is) Person(Sex => M);             --@ExamCom[ see @RefSecNum(Incomplete Type Declarations)]@Chg{Version=[2],New=[
+@key(subtype) Binop_Ref @key(is not null) Binop_Ptr;           --@ExamCom[ see @RefSecNum(Access Types)]],Old=[]}
 @end(Example)
 
 @end{Examples}
@@ -1560,7 +1570,7 @@ primitive subprograms.
   in which case the subprogram body invoked is determined
   at run time.>}
 @ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[primitive operations of a type],
-    Def=[the operations (such as subprograms) 
+    Def=[operations (such as subprograms) 
           declared together with the type declarations],
     Note1=[Primitive operations are inherited by other types
            in the same derivation class of types.]}
@@ -1703,7 +1713,7 @@ subtypes. A @i{predicate specification} is an @nt{aspect_specification}
 for one of the two predicate
 aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}@AspectDefn{Static_Predicate}@AspectDefn{Dynamic_Predicate}
 General rules for aspects and @nt{aspect_specification}s are found in
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Aspects}
+@RefSecFullNum{Representation Issues} (@RefSecNum{Operational and Representation Aspects}
 and @RefSecNum{Aspect Specifications} respectively).@Chg{Version=[5],New=[ The predicate
 aspects are assertion aspects (see @RefSecNum{Pragmas Assert and Assertion_Policy}).
 @Redundant[The predicate aspects are not inherited, but their effects are additive, 
@@ -2198,7 +2208,7 @@ predicates applied to scalar types:}]}
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
 @ChgAdded{Version=[4],Text=[@key[subtype] Basic_Letter @key[is] Character -- @examcom[See @RefSecNum{The Package Characters.Handling} for "basic letter".]
    @key[with] Static_Predicate => Basic_Letter @key[in] 'A'..'Z' | 'a'..'z' | '@latin1(198)' | 
-                                '@latin1(230)' | '@latin1(208)' | '@latin1(240)' | '@latin1(222)' | '@latin1(254)' | '@latin1(223)';]}
+                             '@latin1(230)' | '@latin1(208)' | '@latin1(240)' | '@latin1(222)' | '@latin1(254)' | '@latin1(223)';]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
 @ChgAdded{Version=[4],Text=[@key[subtype] Even_Integer @key[is] Integer
@@ -2352,7 +2362,7 @@ All of the following are objects:
   A formal parameter is (a view of) an object.
   A subcomponent of an object is an object.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[object],
-    Def=[an entity that contains a value, and is either a constant or a variable],
+    Def=[entity that contains a value, and is either a constant or a variable],
     Note1=[An object is created by an @nt(object_declaration) 
        or by an @nt(allocator). A formal parameter is (a view of) an object.
        A subcomponent of an object is an object.]}
@@ -2643,9 +2653,8 @@ A component cannot have an indefinite nominal subtype.]
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Nominal subtype>,
 Text=<@ChgAdded{Version=[5],Text=[The nominal subtype of a view of an object is
 the subtype specified when the view is defined.]}>}
-@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],
-    Term=[nominal subtype of a view of an object],
-    Def=[the subtype specified when the view is defined]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[nominal subtype],
+    Def=[subtype specified when a view of an object is defined]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[A view of a composite object is
@@ -2980,6 +2989,7 @@ of a limited type.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 An @nt<object_declaration> with the reserved word @key(constant)
 declares a constant object.
 @Defn{full constant declaration}
@@ -2988,8 +2998,9 @@ then it is called a @i(full constant declaration).
 @Defn{deferred constant declaration}
 Otherwise@Chg{Version=[3],New=[,],Old=[]} it is called
 a @i(deferred constant declaration).
-The rules for deferred constant declarations are given in @Chg{Version=[3],New=[subclause],Old=[clause]}
-@RefSecNum(Deferred Constants). The rules for full constant declarations
+The rules for deferred constant declarations are given in
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(Deferred Constants).
+The rules for full constant declarations
 are given in this subclause.
 
 Any declaration that includes a @nt{defining_identifier_list}
@@ -3090,7 +3101,8 @@ its nominal subtype, as follows:
   that has the Default_Value aspect specified is the value of that aspect
   converted to the nominal subtype (which @Chg{Version=[5],New=[can],Old=[might]}
   raise Constraint_Error @em see 
-  @RefSec{Type Conversions});@PDefn2{Term=[implicit subtype conversion],
+  @ISODiff{NotISO=[@RefSecFull{Type Conversions}],
+   ISOOnly=[@RefSecFullNum{Type Conversions}]});@PDefn2{Term=[implicit subtype conversion],
   Sec=(default value of a scalar)}]}
 
   @begin{Ramification}
@@ -3388,25 +3400,23 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Example of a multiple object declaration:)
 @begin(Example)
---@ExamCom[  the multiple object declaration ]
+--@ExamCom[ the multiple object declaration]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);  --@ExamCom[  see @RefSecNum(Incomplete Type Declarations)]
+John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M); -- @ExamCom[see @RefSecNum(Incomplete Type Declarations)]
 
---@ExamCom[  is equivalent to the two single object declarations in the order given]
+--@ExamCom[ is equivalent to the two single object declarations in the order given]
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@trailing@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 John : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
 Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
 @end(Example)
 
-@begin{WideAbove}
 @leading@keepnext@NewExample@i(Examples of variable declarations:)
-@end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
-Count, Sum  : Integer;
+@trailing@;Count, Sum  : Integer;
 Size        : Integer @key(range) 0 .. 10_000 := 0;
 Sorted      : Boolean := False;
 Color_Table : @key(array)(1 .. Max) @key(of) Color;
@@ -3415,9 +3425,7 @@ Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String 
 @unicode(952), @unicode(966)        : Float @b<range> -@pi .. +@pi;],Old=[]}
 @end(Example)
 
-@begin{WideAbove}
 @leading@keepnext@NewExample@i(Examples of constant declarations:)
-@end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0425-1]}
@@ -3549,6 +3557,7 @@ without an initialization expression.
 A @nt<number_declaration> declares a named number.
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @Defn{static}
 If a value or other property of a construct is required to be
 @i(static) that means it is required to be determined prior
@@ -3556,8 +3565,8 @@ to execution. A @i(static) expression is an expression
 whose value is computed
 at compile time and is usable in contexts where the actual value
 might affect the legality of the construct.
-This is fully defined in @Chg{Version=[3],New=[subclause],Old=[clause]}
-@RefSecNum(Static Expressions and Static Subtypes).
+This is fully defined in @Chg{Version=[5],New=[],
+Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(Static Expressions and Static Subtypes).
 @end{Discussion}
 @end{Intro}
 
@@ -3590,9 +3599,10 @@ aspect, in which case it is interpreted to be of its expected type.]}
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 The @i(static_)@nt{expression} given for a number declaration
-shall be a static expression, as defined by @Chg{Version=[3],New=[subclause],Old=[clause]}
-@RefSecNum(Static Expressions and Static Subtypes).
+shall be a static expression, as defined by 
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(Static Expressions and Static Subtypes).
 @end{Legality}
 
 @begin{StaticSem}
@@ -3618,13 +3628,14 @@ The elaboration of a @nt<number_declaration> has no effect.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of number declarations:)
 @begin(Example)
-Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@ExamCom[ a real number (see @RefSecNum{The Numerics Packages})]
+Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi; 
+                                          --@ExamCom[ a real number (see @RefSecNum{The Numerics Packages})]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-Max           : @key(constant) := 500;                   --@ExamCom[ an integer number]
-Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}                 --@ExamCom[ the integer 83]
-Power_16      : @key(constant) := 2**16;                 --@ExamCom[ the integer 65_536]
-One, Un, Eins : @key(constant) := 1;                     --@ExamCom[ three different names for 1]
+Max           : @key(constant) := 500;          --@ExamCom[ an integer number]
+Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}        --@ExamCom[ the integer 83]
+Power_16      : @key(constant) := 2**16;        --@ExamCom[ the integer 65_536]
+One, Un, Eins : @key(constant) := 1;            --@ExamCom[ three different names for 1]
 @end(Example)
 @end{Examples}
 
@@ -3682,7 +3693,7 @@ Old=[@i(parent type)]}.
   A type together with the types derived from it
   (directly or indirectly) form a derivation class.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[derived type],
-    Def=[a type defined in terms of a parent type and zero or
+    Def=[type defined in terms of a parent type and zero or
          more progenitor types given in a derived type definition],
     Note1=[A derived type inherits properties such as components and primitive
            operations from its parent and progenitors.],
@@ -3738,7 +3749,7 @@ has one parent type and zero or more progenitor types.],Old=[]}
   first type given in the definition of the derived type. The parent
   can be almost any kind of type, including an interface type.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[parent of a derived type],
-    Def=[the first ancestor type given in the definition of the derived type],
+    Def=[first ancestor type given in the definition of the derived type],
     Note1=[The parent can be almost any kind of type, including an
           interface type.]}
 
@@ -4328,12 +4339,12 @@ A @nt{derived_type_definition}, however, never defines an interface type.]}
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of derived type declarations:)
 @begin(Example)
-@key(type) Local_Coordinate @key(is) @key(new) Coordinate;   --@ExamCom[  two different types]
-@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  --@ExamCom[  see @RefSecNum(Enumeration Types)]
-@key(type) Counter @key(is) @key(new) Positive;              --@ExamCom[  same range as Positive ]
+@key(type) Local_Coordinate @key(is) @key(new) Coordinate;  -- @ExamCom[two different types]
+@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu; -- @ExamCom[see @RefSecNum(Enumeration Types)]
+@key(type) Counter @key(is) @key(new) Positive;             -- @ExamCom[same range as Positive ]
 
-@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;   --@ExamCom[  see @RefSecNum(Private Operations)]
-  --@ExamCom[ the inherited subprograms have the following specifications: ]
+@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;  -- @ExamCom[see @RefSecNum(Private Operations)]
+  --@ExamCom[ the inherited subprograms have the following specifications:]
   --@ExamCom[         procedure Get_Key(K : out Special_Key);]
   --@ExamCom[         function "<"(X,Y : Special_Key) return Boolean;]
 @end(Example)
@@ -4691,13 +4702,13 @@ has a unique ultimate ancestor.],Old=[]}
   ancestor are inverse relationships.]}>}
 
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[ancestor of a type],
-    Def=[the type itself or, in the case of a type derived from other types,
+    Def=[type itself or, in the case of a type derived from other types,
          its parent type or one of its progenitor types or one of their
          ancestors],
     Note1=[Ancestor and descendant are inverse relationships.]}
 
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[descendant of a type],
-    Def=[the type itself or a type derived (directly or indirectly) from it],
+    Def=[type itself or a type derived (directly or indirectly) from it],
     Note1=[Descendant and ancestor are inverse relationships.]}
 
 @Defn2{Term=[inherited], Sec=(from an ancestor type)}
@@ -4831,10 +4842,11 @@ are expected to be of the type of the @nt<range>.
   something else like @nt<real_range_specification>s.
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
   We say "the expected type is ..." or "the type is expected to be ..."
   depending on which reads better. They are fundamentally equivalent,
-  and both feed into the type resolution rules of @Chg{Version=[3],New=[subclause],Old=[clause]}
-  @RefSecNum(The Context of Overload Resolution).
+  and both feed into the type resolution rules of
+  @Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(The Context of Overload Resolution).
 
   In some cases, it doesn't work to use expected types.
   For example, in the above rule, we say that
@@ -6122,7 +6134,7 @@ the ambiguity (see @RefSecNum(Qualified Expressions)).
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@NewExample@i(Examples of enumeration types and subtypes: )
+@Leading@keepnext@NewExample@i(Examples of enumeration types and subtypes:)
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0386-1]}
 @key(type) Day        @key(is) (Mon, Tue, Wed, Thu, Fri, Sat, Sun);@Chg{Version=[5],New=[
@@ -6139,7 +6151,8 @@ the ambiguity (see @RefSecNum(Qualified Expressions)).
 
 @key(subtype) Weekday @key(is) Day   @key(range) Mon .. Fri;
 @key(subtype) Major   @key(is) Suit  @key(range) Hearts .. Spades;
-@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;  --@Examcom[  the Color Red, not the Light]
+@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;
+                               --@Examcom[ the Color Red, not the Light]
 @end(Example)
 @end{Examples}
 
@@ -6184,17 +6197,17 @@ one of its enumeration literals is a @nt<character_literal>.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @Defn{Latin-1}
 @Defn{BMP}
-@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}],
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2020}],
 Old=[@Defn{ISO/IEC 10646:2011}]}],
 Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 @Defn{Character}
 The predefined type Character is a character type whose values
 correspond to the 256 code @Chg{Version=[3],New=[points],Old=[positions]}
 of Row 00 (also known as Latin-1) of the
-@Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],
+@Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2020],Old=[2011]}],
 Old=[2003]}],Old=[ISO 10646]} Basic Multilingual Plane (BMP).
 Each of the graphic characters of Row 00 of the BMP has
 a corresponding @nt<character_literal> in Character.
@@ -6206,28 +6219,30 @@ but which is usable with the attributes @Chg{Version=[2],New=[Image,
 Wide_Image, Wide_Wide_Image, Value, Wide_Value, and Wide_Wide_Value],
 Old=[(Wide_)Image and (Wide_)Value]};
 these names are given in the definition of type Character
-in @RefSec{The Package Standard}, but are set in @i{italics}.
+in @ISODiff{NotISO=[@RefSecFull{The Package Standard}],
+   ISOOnly=[@RefSecFullNum{The Package Standard}]},
+but are set in @i{italics}.
 @Defn2{Term=[italics],Sec=(nongraphic characters)}
 @Chg{Version=[3],New=[@PDefn2{Term=[code point],Sec=[for characters]}],Old=[]}
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
-@ChgAdded{Version=[3],Text=[@i{Code point} is defined in ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[2011]}.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
+@ChgAdded{Version=[3],Text=[@i{Code point} is defined in ISO/IEC 10646:@Chg{Version=[5],New=[2020],Old=[2011]}.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @Defn{Wide_Character}
 @Defn{BMP}
-@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}],
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2020}],
 Old=[@Defn{ISO/IEC 10646:2011}]}],
 Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Character is a character type whose
 values correspond to the 65536 code
 @Chg{Version=[3],New=[points],Old=[positions]} of the @Chg{Version=[2],
-New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],
+New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2020],
 Old=[2011]}],Old=[2003]}],Old=[ISO 10646]} Basic Multilingual Plane (BMP).
 Each of the graphic characters of the BMP has
 a corresponding @nt<character_literal> in Wide_Character.
@@ -6248,14 +6263,14 @@ and have]} a corresponding @nt<character_literal>.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}@Comment{This changes the paragraph number! I didn't catch this until 2018, so it stays.}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[2],Text=[@Defn{Wide_Wide_Character}
-@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}],
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2020}],
 Old=[@Defn{ISO/IEC 10646:2011}]}],
 Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Wide_Character is a character type whose values
 correspond to the 2147483648 code @Chg{Version=[3],New=[points],Old=[positions]}
-of the ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],
+of the ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2020],
 Old=[2011]}],Old=[2003]} character set.
 Each of the @ntf{graphic_character}s
 has a corresponding @nt{character_literal} in
@@ -6338,10 +6353,11 @@ of the predefined type Character.
 @end{Honest}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 A conventional character set such as @i(EBCDIC) can be declared as
 a character type; the internal codes of the characters can be specified
 by an @nt<enumeration_representation_clause> as explained in
-@Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum(Enumeration Representation Clauses).
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(Enumeration Representation Clauses).
 @end{Notes}
 
 @begin{Examples}
@@ -6903,13 +6919,15 @@ to Integer'Last should be supported.]}]}
 Integer literals are of the anonymous predefined
 integer type @i(universal_integer). Other integer types
 have no literals. However, the overload resolution rules
-(see @RefSec(The Context of Overload Resolution))
+(see @ISODiff{NotISO=[@RefSecFull{The Context of Overload Resolution}],
+ISOOnly=[@RefSecFullNum{The Context of Overload Resolution}]})
 allow expressions of the type @i(universal_integer)
 whenever an integer type is expected.
 
 The same arithmetic operators are predefined for all signed integer types
 defined by a @nt<signed_integer_type_definition>
-(see @RefSec(Operators and Expression Evaluation)).
+(see @ISODiff{NotISO=[@RefSecFull{Operators and Expression Evaluation}],
+ISOOnly=[@RefSecFullNum{Operators and Expression Evaluation}]}).
 For modular types, these same operators are predefined, plus
 bit-wise logical operators (@key(and), @key(or), @key(xor), and @key(not)).
 In addition, for the unsigned types declared in the language-defined
@@ -7136,7 +7154,6 @@ Unchecked_Conversion.)
 @begin{Notes}
 Indexing and loop iteration use values of discrete types.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @PDefn2{Term=[predefined operations],Sec=(of a discrete type)}
 The predefined operations of a discrete type include the assignment
 operation, qualification, the membership tests, and the
@@ -7149,7 +7166,7 @@ operators, the unary operator @key(abs),
 and the exponentiation operator.
 The assignment operation is described in @RefSecNum(Assignment Statements).
 The other predefined operations are described in
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Names and Expressions}.
+@RefSecFullNum{Names and Expressions}.
 
 As for all types, objects of a discrete type
 have Size and Address attributes (see @RefSecNum(Operational and Representation Attributes)).
@@ -7170,7 +7187,8 @@ are satisfied (in the absence of an exception) by these attributes:
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of attributes of discrete subtypes: )
 @begin(Example)
---@ExamCom[  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+--@ExamCom[  For the types and subtypes declared in @Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum(Enumeration Types) the following hold: ]
 
 --  Color'First   = White,   Color'Last   = Black
 --  Rainbow'First = Red,     Rainbow'Last = Blue
@@ -7578,7 +7596,8 @@ Overflow_Checks, never Range_Checks.
 @key(type) Real @key(is) @key(digits) 8;
 @key(type) Mass @key(is) @key(digits) 7 @key(range) 0.0 .. 1.0E35;
 
-@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;   --@ExamCom[   a subtype with a smaller range]
+@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;
+       --@ExamCom[ a subtype with a smaller range]
 @end(Example)
 @end{Examples}
 
@@ -7676,7 +7695,6 @@ the Machine_Radix is 10.]}
 @end{DiffWord95}
 
 
-@RMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM and ISO version as well}
 @LabeledSubClause{Fixed Point Types}
 
 @begin{Intro}
@@ -7928,7 +7946,8 @@ requires support for decimal @i(small)s, and decimal fixed point
 type declarations with @i(digits) up to at least 18.
 @begin{ImplNote}
 The accuracy requirements for multiplication, division, and conversion
-(see @RefSec{Model of Floating Point Arithmetic})
+(see @ISODiff{NotISO=[@RefSecFull{Model of Floating Point Arithmetic}],
+ISOOnly=[@RefSecFullNum{Model of Floating Point Arithmetic}]})
 are such that
 support for arbitrary @i(small)s should be practical without undue
 implementation effort. Therefore, implementations should support fixed point

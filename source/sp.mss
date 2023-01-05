@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.99 $ $Date: 2022/09/17 06:51:40 $ $Author: randy $ }
+@comment{ $Revision: 1.100 $ $Date: 2023/01/05 05:49:10 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2022/09/17 06:51:40 $}
+@Comment{$Date: 2023/01/05 05:49:10 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -155,14 +155,22 @@ constructs. Examples of such instructions
 include:
 @begin{itemize}
 
-Atomic read-modify-write operations @em e.g., test and set, compare and swap,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+Atomic read-modify-write operations @em
+@Chg{Version=[5],New=[for example],Old=[e.g.]}, test and set, compare and swap,
 decrement and test, enqueue/dequeue.
 
-Standard numeric functions @em e.g., @i{sin}, @i{log}.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+Standard numeric functions @em @Chg{Version=[5],New=[for example],Old=[e.g.]},
+@i{sin}, @i{log}.
 
-String manipulation operations @em e.g., translate and test.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+String manipulation operations @em
+@Chg{Version=[5],New=[for example],Old=[e.g.]}, translate and test.
 
-Vector operations @em e.g., compare vector against thresholds.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
+Vector operations @em @Chg{Version=[5],New=[for example],Old=[e.g.]}, compare
+vector against thresholds.
 
 Direct operations on I/O ports.
 
@@ -184,12 +192,11 @@ items and related features.
 @end{Intro}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @PDefn2{Term=[recommended level of support], Sec=(required in Systems
 Programming Annex)}
 The implementation shall support at least the functionality
-defined by the recommended levels of support in @Chg{Version=[3],New=[Clause],
-Old=[Section]} @RefSecNum{Representation Issues}.
+defined by the recommended levels of support in
+@RefSecFullNum{Representation Issues}.
 @end{ImplReq}
 
 @LabeledClause{Interrupt Support}
@@ -306,8 +313,10 @@ Which run-time stack an interrupt handler uses when it executes as a
 result of an interrupt delivery; if this is configurable, what is the
 mechanism to do so; how to specify how much space to reserve on that stack.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 Any implementation- or hardware-specific activity that happens
-before a user-defined interrupt handler gets control (e.g.,
+before a user-defined interrupt handler gets control
+(@Chg{Version=[5],New=[for example],Old=[e.g.]},
 reading device registers, acknowledging devices).
 
 Any timing or other limitations imposed on the execution of interrupt handlers.
@@ -320,9 +329,10 @@ can attach the corresponding handlers.
 Whether the interrupted task is allowed to resume execution before the
 interrupt handler returns.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 The treatment of interrupt occurrences that are generated while
-the interrupt is blocked; i.e., whether one or more occurrences
-are held for later delivery, or all are lost.
+the interrupt is blocked; @Chg{Version=[5],New=[that is],Old=[i.e.]}, whether 
+one or more occurrences are held for later delivery, or all are lost.
 
 Whether predefined or implementation-defined exceptions are raised as a
 result of the occurrence of any interrupt, and the mapping between the
@@ -356,9 +366,11 @@ This issue is tightly related to the issue of scheduling on a
 multi-processor. In a sense, if a particular interrupt source is not
 available to all processors, the system is not truly homogeneous.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 One way to approach this problem is to assign sub-ranges within
-Interrupt_Id to each interrupt subsystem, such that @lquotes@;similar@rquotes@; interrupt
-sources (e.g. a timer) in different subsystems get a distinct id.
+Interrupt_Id to each interrupt subsystem, such that @lquotes@;similar@rquotes@;
+interrupt sources (@Chg{Version=[5],New=[for example],Old=[e.g.]} a timer) in
+different subsystems get a distinct id.
 @end{Discussion}
 
 Implementations are allowed to impose timing or other limitations on the
@@ -398,11 +410,13 @@ actions should be provided.]}]}
 
 @begin{Notes}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 The default treatment for an interrupt can be to keep the
 interrupt pending or to deliver it to an implementation-defined
 handler. Examples of actions that an implementation-defined
-handler is allowed to perform include aborting the partition, ignoring
-(i.e., discarding occurrences of) the interrupt, or queuing one
+handler @Chg{Version=[5],New=[can],Old=[is allowed to]} perform include 
+aborting the partition, ignoring (@Chg{Version=[5],New=[that is],Old=[i.e.]},
+discarding occurrences of) the interrupt, or queuing one
 or more occurrences of the interrupt for possible later delivery
 when a user-defined handler is attached to that interrupt.
 
@@ -2247,10 +2261,10 @@ other language-defined library units that manipulate atomic objects; its
 declaration is empty.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
-@ChgAdded{Version=[5],Text=[A call to a subprogram is said to be @i<lock-free>
-@Defn{lock-free} if the subprogram is guaranteed to return from the call while
-keeping the processor of the logical thread of control busy for the duration of
-the call.]}
+@ChgAdded{Version=[5],Text=[A call to a subprogram is said to be
+@i<lock-free>@Defn{lock-free} if the subprogram is guaranteed to return from the
+call while keeping the processor of the logical thread of control busy for the
+duration of the call.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
 @ChgAdded{Version=[5],Text=[In each child package, a function Is_Lock_Free(...)

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2023/01/05 05:49:07 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.161 $}
+@Comment{$Revision: 1.162 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -20,7 +20,7 @@
 @IndexSee{Term=[module],See=(package)}
 @IndexSeeAlso{Term=[class],See=(package)}]
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[package],
-  Def=[a program unit that defines the interface to a group of 
+  Def=[program unit that defines the interface to a group of 
        logically related entities, along with their implementation],
   Note1=[Typically, a package contains the declaration of a type (often a
          private type or private extension) along with the declarations of
@@ -278,7 +278,6 @@ have a corresponding body anyway.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 In any @nt{package_body} without @nt{statement}s
 there is an implicit @nt{null_@!statement}.
 For any @nt{package_@!declaration} without an explicit completion,
@@ -295,8 +294,8 @@ the order of the implicit @ntf{package_@!bodies} is unspecified.
 occurs at the place of the instantiation
 (see @RefSecNum{Generic Instantiation}).
 For a library package, the place is partially determined by the
-elaboration dependences (see @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Program Structure and Compilation Issues}).)]
+elaboration dependences (see 
+@RefSecFullNum{Program Structure and Compilation Issues}).)]
 @begin{Discussion}
 Thus, for example, we can refer to something happening just
 after the @key{begin} of a @nt{package_body},
@@ -807,12 +806,12 @@ If the reserved word @key{synchronized} appears in a
 @nt{private_extension_declaration}, the ancestor type shall be a limited
 interface.]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 If the declaration of a partial view includes
 a @nt{known_discriminant_part}, then
 the @nt{full_type_declaration} shall have a fully conforming
-@Redundant[(explicit)]
-@nt{known_discriminant_part}
-@Redundant[(see @RefSec(Conformance Rules))].
+@Redundant[(explicit)] @nt{known_discriminant_part} @Redundant[(see 
+@Chg{Version=[5],New=[@RefSecNum(Conformance Rules)],Old=[@RefSec(Conformance Rules)]})].
 @Defn2{Term=[full conformance],Sec=(required)}
 @Redundant[The ancestor subtype may be unconstrained;
 the parent subtype of the full view is required to be constrained
@@ -1304,14 +1303,15 @@ descendant only through record extensions of a more distant ancestor].]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0065-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0140-1]}@Comment{Only because the paragraph number changes}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0140-1],ARef=[AI12-0451-1]}@Comment{140 only because the paragraph number changes}
 @ChgAdded{Version=[3],Text=[@Redundant[@Chg{Version=[4],New=[Furthermore,
 it],Old=[It]} is possible for there to be places
 where a derived type is @Chg{Version=[4],New=[known to be derived
 indirectly from],Old=[visibly a descendant of]} an ancestor type, but
 @Chg{Version=[4],New=[is ],Old=[]}not a
 descendant of even a partial view of the ancestor type, because the parent
-of the derived type is not visibly a descendant of the ancestor.  In
+of @Chg{Version=[5],New=[this],Old=[the]} derived type is not visibly a
+descendant of the ancestor. In
 this case, the derived type inherits no characteristics from that
 ancestor, but nevertheless is within the derivation class of the
 ancestor for the purposes of type conversion, the "covers"
@@ -1634,27 +1634,53 @@ are also defined for discriminants and inherited components.
    @key[end] "<";
 @key[end] Key_Manager;
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph numbers not change}
+@ChgAdded{Version=[5],Text=[Outside of the package Key_Manager, the operations
+available for objects of type Key include assignment, the comparison for
+equality or inequality, the procedure Get_Key and the operator "<"; they do
+not include other relational operators such as ">=", or arithmetic
+operators.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0440-1],ARef=[AI12-0452-1]}
+@ChgAdded{Version=[5],Text=[The explicitly declared operator "<" hides the
+predefined operator
+"<" implicitly declared by the @nt{full_type_declaration}. Within the
+body of the function, an explicit conversion of X and Y to the
+subtype Natural is necessary to invoke the "<" operator of the parent
+type. Alternatively, the result of the function can 
+be written as @key[not] (X >= Y), since the operator ">=" is not redefined.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}
+@ChgAdded{Version=[5],Text=[The value of the variable Last_Key, declared in the
+package body, remains unchanged between calls of the procedure Get_Key. (See also
+the NOTEs of @RefSecNum{Package Bodies}.)]}
+
 @end{Examples}
 
 @begin{Notes}
-@i{Notes on the example:}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i{Notes on the example:}
 Outside of the package Key_Manager, the operations available for
 objects of type Key include assignment, the comparison for equality
 or inequality, the procedure Get_Key and the operator "<"; they do
 not include other relational operators such as ">=", or arithmetic
-operators.
+operators.]}
 
-@NoPrefix@;The explicitly declared operator "<" hides the predefined operator
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[The explicitly 
+declared operator "<" hides the predefined operator
 "<" implicitly declared by the @nt{full_type_declaration}. Within the
 body of the function, an explicit conversion of X and Y to the
 subtype Natural is necessary to invoke the "<" operator of the parent
-type.
-Alternatively, the result of the function @Chg{Version=[5],New=[can],Old=[could]} 
-be written as @key[not] (X >= Y), since the operator ">=" is not redefined.
+type. Alternatively, the result of the function could 
+be written as @key[not] (X >= Y), since the operator ">=" is not redefined.]}
 
-@NoPrefix@;The value of the variable Last_Key, declared in the package body,
-remains unchanged between calls of the procedure Get_Key. (See also
-the NOTES of @RefSecNum{Package Bodies}.)
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[The value of the variable Last_Key,
+declared in the package body, remains unchanged between calls of the procedure
+Get_Key. (See also the NOTES of @RefSecNum{Package Bodies}.)]}
 @end{Notes}
 
 @begin{DiffWord83}
@@ -1725,7 +1751,7 @@ specified with an @nt{aspect_specification} (see
    Type_Invariant may be specified on a @nt{private_@!type_@!declaration}, on a
    @nt{private_@!extension_@!declaration}, or on a @nt{full_@!type_@!declaration} that
    declares the completion of a private type or private
-   extension.@AspectDefn{Type_Invariant}]}
+   extension.@AspectDefn{Type_Invariant}@Defn{invariant}@Defn{type invariant}@SeeAlso{Primary=[type invariant],Other=[invariant]}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Type_Invariant],
     Text=[@ChgAdded{Version=[3],Text=[A condition that will hold true for all
@@ -1763,10 +1789,8 @@ specified with an @nt{aspect_specification} (see
       objects in a class of types.]}]}
 
 @end{Description}
-@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[type invariant],
-  Def=[see invariant]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[invariant],
-  Def=[an assertion that is expected to be True for all objects of a given
+  Def=[assertion that is expected to be True for all objects of a given
        private type when viewed from outside the defining package]}
 @end{Intro}
 
@@ -2143,7 +2167,7 @@ on the specified object(s):@Defn{invariant check}]}
   access-to-object parameter or result) is incomplete at the point of the
   declaration of the callable entity, and if the completion of that incomplete
   type does not occur in the same declaration list as the incomplete
-  declaration, then  for purposes of the preceding rules the nominal type is
+  declaration, then for purposes of the preceding rules the nominal type is
   considered to have no parts],Old=[The check is performed on
   each such part]} of type @i<T>.]}
 
@@ -2595,7 +2619,7 @@ additive, as defined below.]],Old=[]}]}
 Text=<@ChgAdded{Version=[5],Text=[A default initial condition is a property that
 holds for every default-initialized object of a given type.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[default initial condition],
-  Def=[a property that holds for every default-initialized object of a given type]}
+  Def=[property that holds for every default-initialized object of a given type]}
 @end{Intro}
 
 @begin{Resolution}
@@ -2734,7 +2758,7 @@ Default_Initial_Condition aspect.]}]}
   from SPARK 2014 to remain acceptable in conforming implementations, as well
   as to provide future flexibility. Note the word @ldquote@;extend@rdquote
   in this permission; we expect that any aspect usage
-  that conforms with the (other) rules of this clause will be accepted by
+  that conforms with the (other) rules of this subclause will be accepted by
   any Ada implementation, regardless of any implementation-defined extensions.]}
 @end{Reason}
 @end{ImplPerm}
@@ -2766,7 +2790,7 @@ Text=<@ChgAdded{Version=[5],Text=[A stable property is a characteristic
 associated with objects of a given type that is preserved by many of the
 primitive operations of the type.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[stable property],
-  Def=[a characteristic associated with objects of a given type that is
+  Def=[characteristic associated with objects of a given type that is
        preserved by many of the primitive operations of the type]}
 @end{Intro}
 @begin{StaticSem}
@@ -3176,7 +3200,7 @@ a @i{deferred constant}.
 @PDefn2{Term=[requires a completion], Sec=(deferred constant declaration)}
 @Chg{Version=[3],New=[@Redundant[Unless the Import aspect
 (see @RefSecNum{Interfacing Aspects}) is True for a deferred constant
-declaration, the ]],Old=[A]} deferred constant declaration requires a completion,
+declaration, the]],Old=[A]} deferred constant declaration requires a completion,
 which shall be a full constant declaration
 (called the @i{full declaration} of the deferred
 constant)@Chg{Version=[3],New=[],Old=[,
@@ -3447,9 +3471,11 @@ make both the partial @i{and} full views limited.
   which
   @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[limited type],
-  Def=[a type for which copying (such as in an @nt{assignment_statement})
+  Def=[type for which copying (such as in an @nt{assignment_statement})
        is not allowed],
-  Note1=[A nonlimited type is a type for which copying is allowed.]}
+  Note1=[All types are either limited types or nonlimited types.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[nonlimited type],
+  Def=[type for which copying is allowed]}
 @end{Intro}
 @begin{Legality}
 
@@ -3867,12 +3893,10 @@ circumstances.
    ...
 @key[end] IO_Package;
 @end{Example}
-@end{Examples}
 
-@begin{Notes}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
-@i{Notes on the example:}
-In the example above, an outside subprogram making use of IO_Package
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0440-1],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph numbers not change}
+@ChgAdded{Version=[5],Text=[In the example, an outside subprogram making use of IO_Package
 @Chg{Version=[5],New=[can],Old=[may]} obtain a file name by calling Open and
 later use it in calls to
 Read and Write. Thus, outside the package, a file name obtained from
@@ -3881,21 +3905,54 @@ containing a numeric value) are not known and no other operations
 (such as addition or comparison of internal names) can be performed
 on a file name.
 Most importantly, clients of the package cannot make copies
-of objects of type File_Name.
+of objects of type File_Name.]}
 
-@NoPrefix@;This example is characteristic of any case where complete control
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0442-1],ARef=[AI12-0452-1]}
+@ChgAdded{Version=[5],Text=[This example is characteristic of any case where complete control
 over the operations of a type is desired. Such packages serve a dual
 purpose. They prevent a user from making use of the internal
 structure of the type. They also implement the notion of an
 encapsulated data type where the only operations on the type are
-those given in the package specification.
+those given in the package specification.]}
 
-@NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-The fact that the full view of File_Name is explicitly declared
-@key[limited] means that parameter passing @Chg{Version=[2],New=[],
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0442-1],ARef=[AI12-0452-1]}
+@ChgAdded{Version=[5],Text=[The fact that the full view of File_Name is explicitly declared
+@key[limited] means that parameter passing will always be by reference
+and function results will always be built directly in the result object
+(see @RefSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).]}
+
+@end{Examples}
+
+@begin{Notes}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i{Notes on the example:}
+In the example above, an outside subprogram making use of IO_Package
+may obtain a file name by calling Open and
+later use it in calls to
+Read and Write. Thus, outside the package, a file name obtained from
+Open acts as a kind of password; its internal properties (such as
+containing a numeric value) are not known and no other operations
+(such as addition or comparison of internal names) can be performed
+on a file name.
+Most importantly, clients of the package cannot make copies
+of objects of type File_Name.]}
+
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[This example is characteristic
+of any case where complete control
+over the operations of a type is desired. Such packages serve a dual
+purpose. They prevent a user from making use of the internal
+structure of the type. They also implement the notion of an
+encapsulated data type where the only operations on the type are
+those given in the package specification.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[The fact that the full view of File_Name is 
+explicitly declared @key[limited] means that parameter passing @Chg{Version=[2],New=[],
 Old=[and function return ]}will always be by reference@Chg{Version=[2],New=[
 and function results will always be built directly in the result object],Old=[]}
-(see @RefSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).
+(see @RefSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).]}
 
 @end{Notes}
 
@@ -4025,7 +4082,7 @@ a (nonlimited) controlled object.]
   finalization.
   Objects are always finalized before being destroyed.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[controlled type],
-  Def=[a type that supports user-defined assignment and finalization],
+  Def=[type that supports user-defined assignment and finalization],
   Note1=[Objects are always finalized before being destroyed.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01],ARef=[AI95-00287-01]}
@@ -4151,7 +4208,7 @@ a protected type; or]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[it has a component
-@Chg{Version=[3],New=[whose type ],Old=[that ]} needs finalization; or]}
+@Chg{Version=[3],New=[whose type],Old=[that]} needs finalization; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
@@ -4332,8 +4389,7 @@ controlled parts.]
 @end{Reason}
 
 @PDefn2{Term=[execution], Sec=(assignment_statement)}
-For an @nt{assignment_statement},
-@Redundant[ after the @nt{name} and
+For an @nt{assignment_statement},@Redundant[ after the @nt{name} and
 @nt{expression} have been evaluated,
 and any conversion (including constraint checking) has been done,]
 an anonymous object is created, and
@@ -4347,7 +4403,8 @@ Finally, the anonymous object is finalized.
 @Redundant[As explained below,
 the implementation may eliminate the intermediate anonymous object,
 so this description subsumes the one given in
-@RefSec{Assignment Statements}.]
+@ISODiff{NotISO=[@RefSecFull{Assignment Statements}],
+ISOOnly=[@RefSecFullNum{Assignment Statements}]}.]
 @begin{Reason}
 @leading@;An alternative design for user-defined assignment might involve an
 Assign operation instead of Adjust:
@@ -5027,7 +5084,7 @@ Text=<@ChgAdded{Version=[5],Text=[A master is the execution of a master
 construct. Each object and task is associated with a master. When a master 
 is left, associated tasks are awaited and associated objects are finalized.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[R],Term=[master],
-  Def=[the execution of a master construct],
+  Def=[execution of a master construct],
   Note1=[Each object and task is associated with a master. When a master is
          left, associated tasks are awaited and associated objects are
          finalized.]}
@@ -5729,13 +5786,14 @@ freezing point of the access type.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-The rules of @Chg{Version=[3],New=[Clause],Old=[Section]} 10 imply that
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+The rules of @Chg{Version=[5],New=[@RefSecFullNum{Program Structure and Compilation Issues}],
+Old=[@Chg{Version=[3],New=[Clause],Old=[Section]} 10]} imply that
 immediately prior to partition termination, Finalize operations
 are applied to library-level controlled objects (including those
 created by @nt{allocator}s of library-level access types, except those
 already finalized).
-This occurs after waiting for library-level
-tasks to terminate.
+This occurs after waiting for library-level tasks to terminate.
 @begin{Discussion}
 We considered defining a pragma that would apply to a controlled
 type that would suppress Finalize operations for library-level objects
@@ -5924,16 +5982,15 @@ be possible.
 @end{Notes}
 
 @begin{DiffWord83}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Finalization depends on the concepts of completion and leaving,
 and on the concept of a master.
 Therefore, we have moved the definitions of these concepts here,
 from where they used to be in
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Tasks and Synchronization}.
+@RefSecFullNum{Tasks and Synchronization}.
 These concepts also needed to be generalized somewhat.
 Task waiting is closely related to user-defined finalization;
 the rules here refer to the task-waiting rules of
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Tasks and Synchronization}.
+@RefSecFullNum{Tasks and Synchronization}.
 @end{DiffWord83}
 
 @begin{Inconsistent95}

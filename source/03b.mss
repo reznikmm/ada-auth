@@ -1,10 +1,11 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
+@notisormnewpagever{Version=[5]}@Comment{Page break in Ada 2022 RM}
 @LabeledClause{Array Types}
 
 @begin{Intro}
@@ -364,34 +365,30 @@ is of its own unique type.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@NewExample@i(Examples of type declarations with unconstrained array definitions: )
+@Leading@keepnext@NewExample@i(Examples of type declarations with unconstrained array definitions:)
 @begin(Example)
-@key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
+@trailing@key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
 @key(type) Matrix     @key(is) @key(array)(Integer  @key(range) <>, Integer @key(range) <>) @key(of) Real;
 @key(type) Bit_Vector @key(is) @key(array)(Integer  @key(range) <>) @key(of) Boolean;
 @key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; --@ExamCom[ see @RefSecNum(Character Types)]
 @end(Example)
 
-@begin{WideAbove}
-@leading@keepnext@NewExample@i(Examples of type declarations with constrained array definitions: )
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of type declarations with constrained array definitions:)
 @begin(Example)
-@key(type) Table    @key(is) @key(array)(1 .. 10) @key(of) Integer;
+@trailing@key(type) Table    @key(is) @key(array)(1 .. 10) @key(of) Integer;
 @key(type) Schedule @key(is) @key(array)(Day) @key(of) Boolean;
 @key(type) Line     @key(is) @key(array)(1 .. Max_Line_Size) @key(of) Character;
 @end(Example)
 
-@begin{WideAbove}
-@leading@keepnext@NewExample@i(Examples of object declarations with array type definitions: )
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of object declarations with array type definitions:)
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Grid @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
 Mix  @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;@Chg{Version=[2],New=[
 Msg_Table : @key(constant array)(Error_Code) @key(of access constant) String :=
       (Too_Big => @key(new) String'("Result too big"), Too_Small => ...);],Old=[]}
-Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line :=  --@ExamCom[  an array of arrays]
-  (1 | 50  => Line'(1 | Line'Last => '+', @key(others) => '-'),  --@ExamCom[ see @RefSecNum(Array Aggregates)]
+Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line := --@ExamCom[ an array of arrays]
+  (1 | 50  => Line'(1 | Line'Last => '+', @key(others) => '-'), --@ExamCom[ see @RefSecNum(Array Aggregates)]
    2 .. 49 => Line'(1 | Line'Last => '|', @key(others) => ' '));
     --@ExamCom[ Page is constrained by its initial value to (1..50)]
 @end(Example)
@@ -549,34 +546,30 @@ array subtype match. See @RefSecNum(Type Conversions).
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@NewExample@i(Examples of array declarations including an index constraint: )
+@leading@keepnext@NewExample@i(Examples of array declarations including an index constraint:)
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
-Board     : Matrix(1 .. 8,  1 .. 8);  --  @Examcom[see @RefSecNum(Array Types)]
+Board     : Matrix(1 .. 8,  1 .. 8);  --@Examcom[ see @RefSecNum(Array Types)]
 Rectangle : Matrix(1 .. 20, 1 .. 30);
-Inverse   : Matrix(1 .. N,  1 .. N);  --  @Examcom[N @Chg{Version=[5],New=[can be nonstatic],Old=[need not be static]}]
+Inverse   : Matrix(1 .. N,  1 .. N);  --@Examcom[ N @Chg{Version=[5],New=[can be nonstatic],Old=[need not be static]}]
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI125-0430-1]}
-Filter    : Bit_Vector(0 .. 31);      --  @Examcom[see @RefSecNum(Array Types)]
+@Trailing@ChgRef{Version=[5],Kind=[Revised],ARef=[AI125-0430-1]}
+Filter    : Bit_Vector(0 .. 31);@Chg{Version=[5],New=[      --@Examcom[ see @RefSecNum(Array Types)]],Old=[]}
 @end(Example)
 
-@begin{WideAbove}
-@leading@keepnext@NewExample@i(Example of array declaration with a constrained array subtype: )
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Example of array declaration with a constrained array subtype:)
 @begin(Example)
-My_Schedule : Schedule;  --@ExamCom[  all arrays of type Schedule have the same bounds]
+@Trailing@;My_Schedule : Schedule;  --@ExamCom[ all arrays of type Schedule have the same bounds]
 @end(Example)
 
-@begin{WideAbove}
-@leading@keepnext@NewExample@i(Example of record type with a component that is an array: )
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Example of record type with a component that is an array:)
 @begin(Example)
 @key(type) Var_Line(Length : Natural) @key(is)
    @key(record)
       Image : String(1 .. Length);
    @key(end) @key(record);
 
-Null_Line : Var_Line(0);  --@ExamCom[  Null_Line.Image is a null array]
+Null_Line : Var_Line(0);  --@ExamCom[ Null_Line.Image is a null array]
 @end(Example)
 @end{Examples}
 
@@ -669,7 +662,9 @@ However, if @Chg{Version=[3],New=[convention ],Old=[a @key<pragma>
 Convention(]}Fortran@Chg{Version=[3],New=[ is specified
 for],Old=[, ...) applies to]} a
 multidimensional array type, then column-major order should be used
-instead (see @RefSec{Interfacing with Fortran}).
+instead (see 
+@ISODiff{NotISO=[@RefSecFull{Interfacing with Fortran}],
+  ISOOnly=[@RefSecFullNum{Interfacing with Fortran}]}).
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Multidimensional arrays should be represented in row-major order,
 unless the array has convention Fortran.]}]}
@@ -710,10 +705,11 @@ a character type.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@NewExample@i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
+@Leading@keepnext@NewExample@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+@i{Examples (using arrays declared in the examples of @Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum(Index Constraints and Discrete Ranges)):}
 @begin(Example)
---  Filter'First      =   0   Filter'Last       =  31   Filter'Length =  32
---  Rectangle'Last(1) =  20   Rectangle'Last(2) =  30
+-- Filter'First      =  0   Filter'Last       = 31   Filter'Length = 32
+-- Rectangle'Last(1) = 20   Rectangle'Last(2) = 30
 @end(Example)
 
 @end{Examples}
@@ -757,14 +753,13 @@ these ordering operators correspond to lexicographic order
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of string objects:)
 @begin(Example)
-@TabClear()@TabSet(P49)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
 Question   : @key(constant) String  := "How many characters?";
-@\--@ExamCom[ Question'First = 1, Question'Last = 20]
-@\--@ExamCom[ Question'Length = 20 (the number of characters)]
+                      --@ExamCom[ Question'First = 1, Question'Last = 20]
+                      --@ExamCom[ Question'Length = 20 (the number of characters)]
 
-Ask_Twice  : String  := Question & Question;@\--@ExamCom[ constrained to (1..40)]
-Ninety_Six : @key(constant) Roman   := "XCVI";@\--@ExamCom[ see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
+Ask_Twice  : String  := Question & Question; --@ExamCom[ constrained to (1..40)]
+Ninety_Six : @key(constant) Roman   := "XCVI";     --@ExamCom[ see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
 @end(Example)
 @end{Examples}
 
@@ -847,7 +842,7 @@ are indefinite subtypes.]
   A discriminant @Chg{Version=[2],New=[for],Old=[of]} a task type can be
   used to pass data to a task of the type upon creation.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[discriminant],
-  Def=[a parameter for a composite type, which can control,
+  Def=[parameter for a composite type, which can control,
           for example, the bounds of a component that is an array],
   Note1=[A discriminant for a task type can be used to
          pass data to a task of the type upon its creation.]}
@@ -1661,6 +1656,7 @@ when the discriminant is initialized.
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
+@notisormnewpagever{Version=[5]}@Comment{Page break in Ada 2022 RM}
 @LabeledSubClause{Discriminant Constraints}
 
 @begin{Intro}
@@ -1862,8 +1858,9 @@ from explicit or implicit initialization.
 
 @begin{Examples}
 @Leading@keepnext@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @NewExample@i{Examples (using types declared above in
-@Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum(Discriminants)):}
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(Discriminants)):}
 @begin(Example)
 Large   : Buffer(200);  --@ExamCom[  constrained, always 200 characters]
                         --@ExamCom[   (explicit discriminant value)]
@@ -2113,11 +2110,13 @@ of the record type declaration. @Redundant[The identifiers of all components of
 a record type shall be distinct.]
 @begin{TheProof}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
   The identifiers of all
   components of a record type have to
   be distinct because they are all declared immediately
-  within the same declarative region. See @Chg{Version=[3],New=[Clause],Old=[Section]}
-  @RefSecNum{Visibility Rules}.
+  within the same declarative region. See 
+  @Chg{Version=[5],New=[@RefSecFullNum{Visibility Rules}],
+  Old=[@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Visibility Rules}]}.
 @end{theproof}
 
 
@@ -2356,7 +2355,7 @@ New=[],Old=[, unless the record type is limited]}.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@NewExample@i(Examples of record type declarations: )
+@Leading@keepnext@NewExample@i(Examples of record type declarations:)
 @begin(Example)
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0430-1]}
 @key(type) Date @key(is)
@@ -2374,9 +2373,7 @@ New=[],Old=[, unless the record type is limited]}.
    @key(end) @key(record)@Chg{Version=[5],New=[ Complex],Old=[]};
 @end(Example)
 
-@begin{WideAbove}
-@leading@keepnext@NewExample@i(Examples of record variables: )
-@end{WideAbove}
+@leading@keepnext@NewExample@i(Examples of record variables:)
 @begin(Example)
 Tomorrow, Yesterday : Date;
 A, B, C : Complex;
@@ -2722,7 +2719,7 @@ of the elaboration of the @nt{component_list} of each
 @key(type) Device @key(is) (Printer, Disk, Drum);
 @key(type) State  @key(is) (Open, Closed);
 
-@key(type) Peripheral(Unit : Device := Disk) @key(is)
+@trailing@key(type) Peripheral(Unit : Device := Disk) @key(is)
    @key(record)
       Status : State;
       @key(case) Unit @key(is)
@@ -2735,17 +2732,13 @@ of the elaboration of the @nt{component_list} of each
    @key(end) @key(record);
 @end(Example)
 
-@begin{WideAbove}
 @leading@keepnext@NewExample@i(Examples of record subtypes:)
-@end{WideAbove}
 @begin(Example)
-@key(subtype) Drum_Unit @key(is) Peripheral(Drum);
+@trailing@key(subtype) Drum_Unit @key(is) Peripheral(Drum);
 @key(subtype) Disk_Unit @key(is) Peripheral(Disk);
 @end(Example)
 
-@begin{WideAbove}
 @leading@keepnext@NewExample@i(Examples of constrained record variables:)
-@end{WideAbove}
 @begin(Example)
 Writer   : Peripheral(Unit  => Printer);
 Archive  : Disk_Unit;

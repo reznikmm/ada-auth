@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2023/01/05 05:49:12 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2023/01/05 05:49:12 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -251,17 +251,17 @@ the visible part of package Standard.}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}@Comment{Odd missing paragraph number here}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
-@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@ExamCom{ The declaration of type Wide_Character is based on the standard @Chg{Version=[2],New=[ISO/IEC],Old=[ISO]} 10646@Chg{Version=[2],New=[:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],Old=[]} BMP character@Chg{Version=[2],New=[],Old=[ set.]}}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@ExamCom{ The declaration of type Wide_Character is based on the standard @Chg{Version=[2],New=[ISO/IEC],Old=[ISO]} 10646@Chg{Version=[2],New=[:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2020],Old=[2011]}],Old=[2003]}],Old=[]} BMP character@Chg{Version=[2],New=[],Old=[ set.]}}
    --@ExamCom{ @Chg{Version=[2],New=[set. ],Old=[]}The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
 @comment[blank line]
    @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@VirtName[nul], @VirtName[soh] ... @VirtName[@Chg{Version=[2],New=[Hex_0000FFFE],Old=[FFFE]}], @VirtName[@Chg{Version=[2],New=[Hex_0000FFFF],Old=[FFFF]}]);
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[2],Text=[   --@ExamCom[ The declaration of type Wide_Wide_Character is based on the full]
-   --@ExamCom[ ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} character set. The first 65536 positions have the]
+   --@ExamCom[ ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2020],Old=[2011]}],Old=[2003]} character set. The first 65536 positions have the]
    --@ExamCom[ same contents as type Wide_Character. See @refsecnum[Character types].]
 @comment[blank line]
    @key[type] @AdaTypeDefn{Wide_Wide_Character} @key[is] (@VirtName[nul], @VirtName[soh] ... @VirtName[Hex_7FFFFFFE], @VirtName[Hex_7FFFFFFF]);
@@ -399,8 +399,9 @@ enumeration type Boolean can be written showing the two enumeration
 literals False and True, the short-circuit control forms cannot be
 expressed in the language.
 
-As explained in @RefSec{Declarative Region}
-and @RefSec{The Compilation Process},
+As explained in
+@ISODiff{NotISO=[@RefSecFull{Declarative Region}],ISOOnly=[@RefSecFullNum{Declarative Region}]}
+and @ISODiff{NotISO=[@RefSecFull{The Compilation Process}],ISOOnly=[@RefSecFullNum{The Compilation Process}]},
 the declarative region of the package Standard encloses every
 library unit and consequently the main subprogram;
 the declaration of every library unit is assumed to occur
@@ -408,7 +409,9 @@ within this declarative region.
 @nt{Library_item}s
 are assumed to be ordered in such a way that there are no forward
 semantic dependences.
-However, as explained in @RefSec{Visibility}, the only library units that are
+However, as explained in
+@ISODiff{NotISO=[@RefSecFull{Visibility}],ISOOnly=[@RefSecFullNum{Visibility}]},
+the only library units that are
 visible within a given compilation unit are
 the library units named by all @nt{with_clause}s that
 apply to the given unit,

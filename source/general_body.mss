@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:04 $}
+@Comment{$Date: 2023/01/05 05:49:11 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/general_body.mss,v $}
-@Comment{$Revision: 1.5 $}
+@Comment{$Revision: 1.6 $}
 
 @Comment{The clause header is found in General.Mss. Other parts are found
 in other files, depending upon the version. Note that the subclause labeled
@@ -59,7 +59,7 @@ Clauses 1 through 16
 @end{Itemize}
 
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[core language],
-    Def=[a clause or annex in which are defined language constructs or
+    Def=[clause or annex in which are defined language constructs or
          capabilities that are provided by all conforming implementations],
     Note1=[A construct is said to be part of the core language
            if it is defined in a core language clause or annex.]}
@@ -100,10 +100,11 @@ by certain application areas:
 @end{Itemize}
 
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[specialized needs annex],
-    Def=[an annex in which are defined language 
+    Def=[annex in which are defined language 
           constructs or capabilities that are not necessarily provided by all
           conforming implementations]}
 
+@begin{NotISO}@Comment{ISO doesn't allow this anymore}
 @begin{WideAbove}
 @Leading@Defn{normative}
 @Defn2{Term=[Annex],Sec=(normative)}
@@ -118,6 +119,7 @@ is informative:
     Each @Chg{Version=[3],New=[],Old=[clause or ]}subclause whose title starts
     with the word @lquotes@;Example@rquotes@; or @lquotes@;Examples@rquotes@;.
 @end(Itemize)
+@end{NotISO}
 
 @begin{NotISO}@Comment{This is given above in ISO versions}
 All implementations shall conform to the core language.
@@ -126,10 +128,11 @@ Specialized Needs Annexes.
 @end{NotISO}
 
 @begin{WideAbove}
-@Leading@Keepnext@Defn{informative}
+@Leading@Keepnext@ISODiff{NotISO=[@Defn{informative}
 @IndexSee{Term=[nonnormative],See=(informative)}
-@Defn2{Term=[Annex],Sec=(informative)}
-The following Annexes are informative:
+@Defn2{Term=[Annex],Sec=(informative)}],ISOOnly=[]}
+The following Annexes @ISODiff{NotISO=[are informative],ISOOnly=[provide
+additional information]}:
 @end{WideAbove}
 @begin{Itemize}
 @RefSec{Language-Defined Aspects and Attributes}
@@ -218,7 +221,7 @@ to all of them.
 @Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Chgref{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
 Each @Chg{Version=[4],New=[clause],Old=[section]} is divided into
-@Chg{Version=[3],New=[],Old=[clauses and]} subclauses that have a
+@Chg{Version=[3],New=[],Old=[clauses and ]}subclauses that have a
 common structure.
 Each @Chg{Version=[3],New=[],Old=[section, ]}clause@Chg{Version=[3],New=[],Old=[,]}
 and subclause first introduces its subject.
@@ -428,14 +431,14 @@ However, it shall support at least parameterless procedures.@rquotes
 @Defn{implementation advice}
 @Defn{advice}
 Optional advice given to the implementer.
-The word @lquotes@;should@rquotes@; is used to indicate that the advice is
-a recommendation, not a requirement.
-It is implementation defined
-whether or not a given recommendation is obeyed.
+@ISODiff{NotISO=[The word @lquotes@;should@rquotes@; is used to indicate
+that the advice is a recommendation, not a requirement. ],ISOOnly=[]}It is
+implementation defined whether or not a given recommendation is
+obeyed.@Comment{"ISO Policies" don't allow talking about verbal forms in the body of the Standard}
 @ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
 Text=[Whether or not each recommendation
 given in @ImplAdviceTitle is followed@Chg{Version=[2],
-New=[ @em see @RefSec{Implementation Advice} for a listing],Old=[]}.]}
+New=[ @em see @RefSecNum{Implementation Advice} for a listing],Old=[]}.]}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised]}
 The advice generally shows the intended implementation, but
@@ -464,13 +467,13 @@ burden implementations by requiring the behavior.
 @begin{Notes}
 @Defn{notes}
 Notes emphasize consequences of the rules
-described in the (sub)clause or elsewhere.
-This material is informative.
+described in the (sub)clause or elsewhere.@ISODiff{NotISO=[
+This material is informative.],ISOOnly=[]}
 @end{Notes}
 
 @begin{Examples}
-@NewExample@;Examples illustrate the possible forms of the constructs described.
-This material is informative.
+@NewExample@;Examples illustrate the possible forms of the constructs described.@ISODiff{NotISO=[
+This material is informative.],ISOOnly=[]}
 @begin{Discussion}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0386-1]}
 @ChgAdded{Version=[5],Text=[Names used in examples refer either to 
@@ -1215,7 +1218,12 @@ capability required by the core language as specified.
 In addition,
 an implementation that conforms to this @StdTitle may conform to one
 or more Specialized Needs Annexes (or to none).
-Conformance to a Specialized Needs Annex means that each capability
+Conformance to a Specialized Needs Annex
+@ISODiff{NotISO=[],ISOOnly=[(@RefSecNum{Systems Programming},
+@RefSecNum{Real-Time Systems}, @RefSecNum{Distributed Systems},
+@RefSecNum{Information Systems}, @RefSecNum{Numerics}, and
+@RefSecNum{High Integrity Systems})]}means
+that each capability
 required by the Annex @Chg{Version=[5],New=[shall be],Old=[is]} provided as
 specified.
 @begin{Discussion}
@@ -1343,7 +1351,7 @@ it might cause the program to be less portable, however.
 @end(Discussion)
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
 The behavior of implementations in implementation-defined situations
-shall be documented @em see @RefSec{Implementation-Defined Characteristics}
+shall be documented @em see @RefSecNum{Implementation-Defined Characteristics}
 for a listing.]}]}
 @end{DocReq}
 
@@ -1552,7 +1560,7 @@ ASCII characters; no characters outside of the 7-bit range are required.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0227-1],ARef=[AI05-0299-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[2],Text=[When this @IntlStdName mentions the
 conversion of some character or sequence of characters to upper case, it means
 the character or sequence of characters obtained by using
@@ -1560,7 +1568,7 @@ the character or sequence of characters obtained by using
 full case folding]}, as defined by documents referenced in
 @Chg{Version=[5],New=[],Old=[the note
 in ]}@Chg{Version=[3],New=[Clause],Old=[section]} @Chg{Version=[5],New=[2],Old=[1]}
-of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}.]}
+of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2020],Old=[2011]}],Old=[2003]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
@@ -1600,7 +1608,7 @@ Names of syntactic categories are set in a different font,
   (explicit or implicit) that is an instance of a syntactic category
   defined under @lquotes@;@SyntaxTitle@rquotes@;.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[construct],
-        Def=[a piece of text (explicit or implicit) that is an instance
+        Def=[piece of text (explicit or implicit) that is an instance
           of a syntactic category defined under @SyntaxTitle]}
 @begin{Ramification}
 For example, an @nt{expression} is a construct.

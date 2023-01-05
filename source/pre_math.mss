@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:39 $}
+@Comment{$Date: 2023/01/05 05:49:09 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -14,8 +14,8 @@ together with nongeneric equivalents;
 two others,
 the package Float_Random and the generic package Discrete_Random,
 are defined in @RefSecNum{Random Number Generation}.
-Additional (optional)
-children are defined in @RefSec{Numerics}.
+Additional (optional) children are defined in
+@ISODiff{NotISO=[@RefSecFull{Numerics}],ISOOnly=[@RefSecFullNum{Numerics}]}.
 @end{Intro}
 
 @begin{StaticSem}
@@ -280,9 +280,11 @@ the result at poles is unspecified.
    infinite values.
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
 When one parameter of a function with multiple parameters represents a pole and
-another is outside the function's domain, the latter takes precedence (i.e.,
-Numerics.Argument_Error is raised).
+another is outside the function's domain, the latter takes precedence
+@Chg{Version=[5],New=[and],Old=[(i.e.,]} Numerics.Argument_Error is
+raised@Chg{Version=[5],New=[],Old=[)]}.
 @end{RunTime}
 
 @begin{ImplReq}
@@ -344,8 +346,9 @@ shall be as follows:
    in Numerics.Generic_Elementary_Functions, when Float_Type'Signed_Zeros is
    True.}
 
+   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
    @redundant[A zero result that is not a prescribed result
-   (i.e., one that results from
+   (@Chg{Version=[5],New=[that is],Old=[i.e.]}, one that results from
    rounding or underflow) has the correct mathematical sign.]
    @begin{Reason}
       This is a consequence of the rules specified in IEC 559:1989 as they
@@ -841,7 +844,8 @@ Different sequences of random numbers can be obtained from a given generator in
 different program executions by explicitly initializing the generator to a
 time-dependent state.
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1],ARef=[AI12-0447-1]}
 A given implementation of the Random function in Numerics.Float_Random 
 @Chg{Version=[5],New=[is not guaranteed to],Old=[may or may not]} be capable
 of delivering the values 0.0 or 1.0. @Chg{Version=[5],New=[Applications will be
@@ -849,9 +853,8 @@ more portable if they],Old=[Portable applications should]} assume that these
 values, or values sufficiently close to them to behave
 indistinguishably from them, can occur. If a sequence of random integers from
 some @Chg{Version=[5],New=[],Old=[fixed ]}range is
-@Chg{Version=[5],New=[necessary],Old=[needed]}, @Chg{Version=[5],New=[it is 
-preferred that ],Old=[]}the
-application @Chg{Version=[5],New=[uses one of],Old=[should use]} the Random
+@Chg{Version=[5],New=[necessary],Old=[needed]}, the
+application should use@Chg{Version=[5],New=[ one of],Old=[]} the Random
 @Chg{Version=[5],New=[functions],Old=[function]} in
 an appropriate instantiation of Numerics.Discrete_Random, rather than
 transforming the result of the Random function in 
@@ -872,7 +875,7 @@ result of the floating point Random function such as
 would give a uniform distribution. But this is only true if the period
 of the underlying generator is a multiple of @exam{M}. (This usually requires
 that @exam{M} be a power of two.) In other cases, the @key[mod] operation maps slightly
-more random values to a some result values than others. It is easy to see
+more random values to some result values than others. It is easy to see
 this: consider a 4-bit random integer (with a range of 0 .. 15). If one @key[mod]s
 this by 6 to get a value in 0 .. 5 (to which one would add 1 to get the
 value of a die roll), 3 values would be mapped to each value 0 .. 3, but
@@ -901,6 +904,7 @@ in this expression, the addition of Float'Model_Small avoids the
 exception that would be raised were Log to be given the value zero, without
 affecting the result (in most implementations) when Random returns a nonzero
 value.
+@end{NotISO}
 @end{Notes}
 
 @begin{Examples}
@@ -979,17 +983,31 @@ with a separate generator of event probabilities in each task:}
    ... -- @ExamCom{Wait for the Worker tasks to terminate}@Softpage
 @key[end] Parallel_Simulation;
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph number not change}
+@ChgAdded{Version=[5],Text=[Although each Worker task initializes its generator
+to a different state, those
+states will be the same in every execution of the program. The generator
+states can be initialized uniquely in each program execution by instantiating
+Ada.Numerics.Discrete_Random for the type Integer in the main procedure,
+resetting the generator obtained from that instance to a time-dependent state,
+and then using random integers obtained from that generator to initialize the
+generators in each Worker task.]}
+
+
 @end{Examples}
 
 @begin{Notes}
-@i{Notes on the last example:}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i{Notes on the last example:}
 Although each Worker task initializes its generator to a different state, those
 states will be the same in every execution of the program. The generator
 states can be initialized uniquely in each program execution by instantiating
 Ada.Numerics.Discrete_Random for the type Integer in the main procedure,
 resetting the generator obtained from that instance to a time-dependent state,
 and then using random integers obtained from that generator to initialize the
-generators in each Worker task.
+generators in each Worker task.]}
 @end{Notes}
 
 @begin{Incompatible95}

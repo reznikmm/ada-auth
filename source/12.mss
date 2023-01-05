@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:04 $}
+@Comment{$Date: 2023/01/05 05:49:08 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -32,13 +32,13 @@ generic unit.
   Generic units can be used to perform the role that macros
   sometimes play in other languages.>}@ChgNote{Correction for AI-00024, no mechanism to correct glossary entries.}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[generic unit],
-  Def=[a template for a (nongeneric) program unit],
+  Def=[template for a (nongeneric) program unit],
   Note1=[The template can be parameterized by objects, types, subprograms,
          and packages.],
   Note2=[Generic units can be used to perform the role that macros sometimes
          play in other languages.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[generic instance],
-  Def=[a nongeneric unit created by the instantiation of a generic unit]}
+  Def=[nongeneric unit created by the instantiation of a generic unit]}
 
 @redundant[A generic unit is declared by a @nt{generic_declaration}. This form
 of declaration has a @nt{generic_@!formal_@!part} declaring any generic
@@ -169,12 +169,15 @@ and it can appear in a recursive call of the current instance. For the
 same reason, this name cannot appear after the reserved word @key{new}
 in a (recursive) @nt{generic_instantiation}.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 A @nt{default_expression} or @nt{default_name} appearing in a
 @nt{generic_formal_part} is not evaluated during elaboration of the
 @nt{generic_formal_part}; instead, it is evaluated when used.
-(The usual visibility rules apply to any @nt{name} used in a default:
-the denoted declaration therefore has to be visible at the place of the
-expression.)
+@Chg{Version=[5],New=[However, the],Old=[(The]} usual visibility rules apply
+to any @nt{name} used in a default@Chg{Version=[5],New=[, with name
+resolution performed based on the location of the @nt{name} within the
+@nt{generic_formal_part}.],Old=[: the denoted declaration therefore has
+to be visible at the place of the expression.)]}
 @end{Notes}
 
 @begin{Examples}
@@ -359,7 +362,6 @@ An instance of a generic unit is declared by a
 @end{Intro}
 
 @begin{MetaRules}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0300-1]}
 @Defn{generic contract model}
 @Defn{contract model of generics}
@@ -372,8 +374,8 @@ the instances; if each obeys the rules with respect to the
 @nt{generic_declaration}, then no legality problems will arise.
 This is really a special case of the
 @lquotes@;legality determinable via semantic dependences@rquotes@;
-@MetaRulesName (see @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Program Structure and Compilation Issues}),
+@MetaRulesName (see 
+@RefSecFullNum{Program Structure and Compilation Issues}),
 given that a @nt{generic_instantiation} does not depend semantically
 upon the generic body, nor vice@Chg{Version=[5],New=[ ],Old=[-]}versa.
 
@@ -874,9 +876,12 @@ in @nt{package_specification}s.
 In an instance, a @nt{generic_formal_parameter_declaration} declares a view
 whose properties are identical to those of the actual, except
 @Chg{Version=[5],New=[when],Old=[as]} specified @Chg{Version=[5],New=[otherwise
-(in particular, see @RefSec{Preconditions and Postconditions},],Old=[in]}
-@RefSec{Formal Objects}@Chg{Version=[5],New=[,],Old=[]} and 
-@RefSec{Formal Subprograms}@Chg{Version=[5],New=[)],Old=[]}.
+(in particular, see @ISODiff{NotISO=[@RefSecFull{Preconditions and Postconditions}],
+  ISOOnly=[@RefSecFullNum{Preconditions and Postconditions}]},],Old=[in]}
+@ISODiff{NotISO=[@RefSecFull{Formal Objects}],
+  ISOOnly=[@RefSecFullNum{Formal Objects}]}@Chg{Version=[5],New=[,],Old=[]} and 
+@ISODiff{NotISO=[@RefSecFull{Formal Subprograms}],
+  ISOOnly=[@RefSecFullNum{Formal Subprograms}]}@Chg{Version=[5],New=[)],Old=[]}.
 Similarly, for a declaration within a 
 @nt{generic_formal_parameter_declaration},
 the corresponding declaration in an instance declares a view whose
@@ -1248,7 +1253,7 @@ A := Square(A);
 
 T : Table(1 .. 5) := (10, 20, 30, 40, 50);
 N : Integer := Int_Vectors.Sigma(T);  --@Examcom{  150}
-                                      --@Examcom{ (see @RefSec{Generic Bodies} for the body of Sigma)}
+                                      --@Examcom{ (see @Chg{Version=[5],New=[@RefSecNum{Generic Bodies}],Old=[@RefSec{Generic Bodies}]} for the body of Sigma)}
 
 @key[use] Int_Vectors;
 M : Integer := Sigma(T);  --@Examcom{  150}
@@ -1625,6 +1630,7 @@ the general Dynamic Semantics rule in @RefSecNum{Generic Instantiation}.
 @end{RunTime}
 
 @begin{SingleNote}
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
 The constraints that apply to a generic formal object of mode @key{in
 out} are those of the corresponding generic actual parameter (not
 those implied by the @nt{subtype_mark} that appears in the
@@ -1632,6 +1638,7 @@ those implied by the @nt{subtype_mark} that appears in the
 Therefore, to avoid confusion, it is recommended that the name of a
 first subtype
 be used for the declaration of such a formal object.
+@end{NotISO}
 @begin{Ramification}
 Constraint checks are done at instantiation time for formal objects of
 mode @key{in},
@@ -2650,9 +2657,10 @@ formal @em @key[abstract] on the formal indicates that the actual might
 be abstract.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 If the formal has a @nt{discriminant_part},
 the actual can be either definite or indefinite.
-Otherwise, the actual has to be definite.
+Otherwise, the actual @Chg{Version=[5],New=[can only],Old=[has to]} be definite.
 @end{Notes}
 
 @begin{Incompatible83}
@@ -3628,6 +3636,7 @@ be the same as]} that of the corresponding parameter of the actual
 subprogram; similarly, for these parameters, @nt{default_expression}s
 @Chg{Version=[5],New=[can be different],Old=[need not correspond]}.
 
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
 The constraints that apply to a parameter of a formal subprogram are
 those of the corresponding formal parameter of the matching actual
 subprogram (not those implied by the corresponding @nt{subtype_mark} in
@@ -3635,6 +3644,7 @@ the @ntf{_specification} of the formal subprogram). A similar remark
 applies to the result of a function. Therefore, to avoid confusion, it
 is recommended that the @nt{name} of a first subtype
 be used in any declaration of a formal subprogram.
+@end{NotISO}
 
 The subtype specified for a formal parameter of a generic formal
 subprogram can be any visible subtype, including a generic formal

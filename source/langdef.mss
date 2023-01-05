@@ -1,16 +1,17 @@
 @Part(glossary, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2023/01/05 05:49:12 $}
 @LabeledAddedInformativeAnnex{Version=[2],Name=[Language-Defined Entities]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/langdef.mss,v $}
-@comment{$Revision: 1.8 $}
+@comment{$Revision: 1.9 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
 @ChgAdded{Version=[2],Text=[This annex lists the language-defined entities of
 the language. A list of language-defined library units can be found
-in @RefSec{Predefined Language Environment}.]}
+in @ISODiff{NotISO=[@RefSecFull{Predefined Language Environment}],
+ ISOOnly=[@RefSecFullNum{Predefined Language Environment}]}.]}
 @end{Intro}
 
 @LabeledAddedClause{Version=[2],Name=[Language-Defined Packages]}

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:39 $}
+@Comment{$Date: 2023/01/05 05:49:09 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -140,21 +140,23 @@ only writing, or only appending are to be performed.
 @end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 Several file management operations are common to Sequential_IO,
 Direct_IO, Text_IO, @Chg{Version=[2],New=[],Old=[and ]}Wide_Text_IO@Chg{Version=[2],
 New=[, and Wide_Wide_Text_IO],Old=[]}.
-These operations are described in subclause
-@RefSecNum{File Management} for
+These operations are described in
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{File Management} for
 sequential and direct files.
-Any additional effects concerning text
-input-output are described in subclause @RefSecNum{Text File Management}.
+Any additional effects concerning text input-output are described in
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{Text File Management}.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 The exceptions that can be propagated by the execution of an input-output
 subprogram are defined in the package IO_Exceptions; the situations
 in which they can be propagated are described following the description of
-the subprogram (and in @Chg{Version=[3],New=[subclause],Old=[clause]}
-@RefSecNum{Exceptions in Input-Output}).
+the subprogram (and in 
+@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum{Exceptions in Input-Output}).
 The exceptions Storage_Error and Program_Error may be propagated.
 (Program_Error can only be propagated due to errors made by the
 caller of the subprogram.) Finally, exceptions can be propagated
@@ -456,14 +458,15 @@ any nesting depth, so this note is obsolete.}
 
 @begin{StaticSem}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 The procedures and functions described in this subclause provide for the
 control of external files; their declarations are repeated in each of
 the packages for sequential, direct,
 text, and stream
 input-output. For
 text input-output, the procedures Create, Open, and Reset have
-additional effects described in subclause
-@RefSecNum{Text File Management}.
+additional effects described in
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{Text File Management}.
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key[procedure] Create(File : @key[in] @key[out] File_Type;
@@ -760,7 +763,8 @@ The exception End_Error is propagated if no more elements can be
 read from the given file.
 The exception Data_Error can be propagated if the element read cannot
 be interpreted as a value of the subtype Element_Type
-(see @RefSec{Exceptions in Input-Output}).
+(see @ISODiff{NotISO=[@RefSecFull{Exceptions in Input-Output}],
+  ISOOnly=[@RefSecFullNum{Exceptions in Input-Output}]}).
 @begin{Discussion}
   Data_Error need not be propagated if the check is too complex.
   See @RefSec{Exceptions in Input-Output}.
@@ -1159,17 +1163,19 @@ Storage_IO is new in Ada 95.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 This @Chg{Version=[3],New=[subclause],Old=[clause]} describes the
 package Text_IO, which provides facilities
 for input and output in human-readable form. Each file is read or
 written sequentially, as a sequence of characters grouped into lines,
 and as a sequence of lines grouped into pages. The specification of the
-package is given below in subclause
-@RefSecNum{The Package Text_IO}.
+package is given below in
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{The Package Text_IO}.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-The facilities for file management given above, in subclauses
-@RefSecNum{File Management} and
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+The facilities for file management given above, in
+@Chg{Version=[5],New=[],Old=[subclauses ]}@RefSecNum{File Management} and
 @RefSecNum{Sequential Input-Output Operations},
 are available for text input-output. In place of Read and
 Write, however, there are procedures Get and Put that input values of
@@ -1179,7 +1185,7 @@ in a parameter Item. Several overloaded procedures of these names
 exist, for different types of Item. These Get procedures analyze the
 input sequences of characters based on
 lexical elements (see
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Lexical Elements}) and
+@RefSecFullNum{Lexical Elements}) and
 return the corresponding values; the Put procedures output the given
 values as appropriate lexical elements. Procedures Get and Put are also
 available that input and output individual characters treated as
@@ -1918,12 +1924,13 @@ generic packages Modular_IO and Decimal_IO are new in Ada 95.
 @LabeledSubClause{Text File Management}
 
 @begin{StaticSem}
-@Leading@;The only allowed file modes for text files are the modes In_File,
+@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+The only allowed file modes for text files are the modes In_File,
 Out_File, and Append_File.
-The subprograms given in subclause @RefSecNum{File Management} for the control of
-external files, and the function End_Of_File given in subclause
-@RefSecNum{Sequential Input-Output Operations} for
-sequential input-output, are also available for text files. There is
+The subprograms given in @Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{File Management}
+for the control of external files, and the function End_Of_File given in
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{Sequential Input-Output Operations}
+for sequential input-output, are also available for text files. There is
 also a version of End_Of_File that refers to the current default input
 file. For text files, the procedures have the following additional
 effects:
@@ -2580,8 +2587,9 @@ string is insufficient for the output of the item.
 @end{StaticSem}
 
 @begin{Examples}
-@NewExample@;In the examples, here and in subclauses
-@RefSecNum{Input-Output for Integer Types}
+@NewExample@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+In the examples, here and in
+@Chg{Version=[5],New=[],Old=[subclauses ]}@RefSecNum{Input-Output for Integer Types}
 and @RefSecNum{Input-Output for Real Types}, the string
 quotes and the lower case letter b are not transferred: they are shown
 only to reveal the layout and spaces.
@@ -4057,8 +4065,10 @@ needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0130-1]}
-The subprograms @Chg{Version=[2],New=[given in subclause
-@RefSecNum(File Management) for the control of external files (],Old=[]}Create,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+The subprograms @Chg{Version=[2],New=[given in
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum(File Management)
+ for the control of external files (],Old=[]}Create,
 Open, Close, Delete, Reset, Mode, Name,
 Form,@Chg{Version=[2],New=[@Chg{Version=[4],New=[],Old=[ and]}],Old=[]}
 Is_Open@Chg{Version=[2],New=[@Chg{Version=[4],New=[, and Flush],Old=[]})

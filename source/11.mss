@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:04 $}
+@Comment{$Date: 2023/01/05 05:49:08 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -47,9 +47,9 @@ we sometimes use @lquotes@;@i{occurrence}@rquotes@; as a
 @lquotes@;exception occurrence@rquotes@;.
 @end{Honest}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[exception],
-  Def=[a kind of exceptional situation]}
+  Def=[kind of exceptional situation]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[exception occurrence],
-  Def=[a run-time occurrence of an exceptional situation]}
+  Def=[run-time occurrence of an exceptional situation]}
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1],ARef=[AI05-0258-1]}
@@ -352,7 +352,8 @@ The syntax rule for @nt{handled_sequence_of_statements} is new.
 These are now used in all the places where handlers
 are allowed.
 This obviates the need to explain
-(in @Chg{Version=[3],New=[Clauses],Old=[Sections]} 5, 6, 7, and 9)
+(in @Chg{Version=[3],New=[Clauses],Old=[Sections]} @RefSecNum{Statements},
+@RefSecNum{Subprograms}, @RefSecNum{Packages}, and @RefSecNum{Tasks and Synchronization})
 what portions of the program are handled by the handlers.
 Note that there are more such cases in Ada 95.
 
@@ -565,7 +566,7 @@ Exception_Occurrence value.
 This allows the original cause of the exception to be determined.
 @end{ImplNote}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[raise an exception],
-  Def=[to abandon normal program execution so as to draw attention 
+  Def=[abandon normal program execution so as to draw attention 
        to the fact that the corresponding situation has arisen]}
 @end{RunTime}
 
@@ -759,8 +760,8 @@ the @nt{sequence_of_statements}.
 The rules for exceptions raised in library units,
 main subprograms and partitions follow from the normal rules,
 plus the semantics of the environment task
-described in @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Program Structure and Compilation Issues} (for example, the
+described in 
+@RefSecFullNum{Program Structure and Compilation Issues} (for example, the
 environment task of a partition elaborates library units and calls
 the main subprogram).
 If an exception is propagated by the main subprogram, it is
@@ -770,13 +771,14 @@ Although abnormal termination of tasks is not necessarily an error,
 abnormal termination of a partition due to an exception @i{is} an
 error.
 @end{Ramification}
-@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[handle an exception],
-  Def=[performing some actions in response to the arising of an exception]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[handle an exception],
+  Def=[perform some actions in response to the arising of an exception]}
 @end{RunTime}
 
 @begin{Notes}
-Note that exceptions raised in a @nt{declarative_part} of a body
-are not handled by the handlers of the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
+@Chg{Version=[5],New=[Exceptions],Old=[Note that exceptions]} raised in a 
+@nt{declarative_part} of a body are not handled by the handlers of the
 @nt{handled_@!sequence_of_@!statements} of that body.
 @end{Notes}
 
@@ -1475,7 +1477,7 @@ appears in any of the following: a @nt{pragma} Assert, a predicate, a
 precondition, a postcondition, an invariant, a constraint, or a null exclusion.
 An assertion is expected to be True at run time at certain specified places.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[R],Term=[assertion],
-  Def=[a boolean expression that is expected to be True at run time at certain
+  Def=[boolean expression that is expected to be True at run time at certain
        specified places],
   Note1=[Certain pragmas and aspects define various kinds of assertions.]}
 
@@ -1549,7 +1551,7 @@ of a @nt{pragma} Assert is type String.]}
 @SynI<assertion_>@nt{aspect_mark} of a @nt{pragma} Assertion_Policy shall
 @Chg{Version=[5],New=[identify an
 @i<assertion aspect>,@Defn{assertion aspect}@Defn2{Term=[aspect],Sec=[assertion]}
-namely],Old=[be]}  one of Assert, Static_Predicate, Dynamic_Predicate, 
+namely],Old=[be]} one of Assert, Static_Predicate, Dynamic_Predicate, 
 Pre, Pre'Class, Post, Post'Class, Type_Invariant, Type_Invariant'Class,
 @Chg{Version=[5],New=[Default_Initial_Condition, ],Old=[]}or some
 @Chg{Version=[5],New=[implementation-defined (assertion)],Old=[implementation defined]}
@@ -1868,13 +1870,15 @@ would if]} the first expression had not been evaluated.]}
 @end{Metarules}
 
 @begin{Notes}
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1],ARef=[AI12-0447-1]}
 @ChgAdded{Version=[2],Text=[Normally, the boolean expression in a @nt{pragma}
-Assert @Chg{Version=[5],New=[does],Old=[should]} not call functions that have
+Assert should not call functions that have
 significant side effects when the result of the expression is True, so that
 the particular assertion policy in effect will not affect normal operation
 of the program.]}
+@end{NotISO}
 @end{Notes}
 
 @begin{Extend95}
@@ -2044,10 +2048,11 @@ same basic causes.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The sections labeled @lquotes@;Exceptions Raised During ...@rquotes@;
 are subsumed by this @Chg{Version=[3],New=[subclause],Old=[clause]},
-and by parts of @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Tasks and Synchronization}.
+and by parts of
+@RefSecFullNum{Tasks and Synchronization}.
 @end{DiffWord83}
 
+@notisormnewpagever{Version=[5]}@Comment{Page break in Ada 2022 RM}
 @LabeledClause{Suppressing Checks}
 
 @begin{Intro}
@@ -2064,7 +2069,7 @@ check cannot fail, and to request that the compiler optimize by disabling
 the check. The compiler is not required to honor this request. Suppressing
 checks that can fail can cause a program to behave in arbitrary ways.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[suppress a check],
-  Def=[to assert that the check cannot fail, and to 
+  Def=[assert that the check cannot fail, and 
        request that the compiler optimize by disabling the check],
   Note1=[The compiler is not required to honor this request. Suppressing
          checks that can fail can cause a program to behave in arbitrary ways.]}
@@ -2092,7 +2097,7 @@ in clauses and subclauses throughout the standard.
 Text=<@ChgAdded{Version=[5],Text=[A check is a test made during execution to
 determine whether a language rule has been violated.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[E],Term=[check],
-  Def=[a test made during execution to determine whether a language
+  Def=[test made during execution to determine whether a language
        rule has been violated]}
 @end{Intro}
 
@@ -2731,17 +2736,16 @@ and objects with invalid representations
 
 Various actions that are defined to occur in an arbitrary order.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Behavior in the presence of a misuse of Unchecked_Deallocation,
 Unchecked_Access, or imported or exported entity
-(see @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Representation Issues}).
+(see @RefSecFullNum{Representation Issues}).
 @end{Itemize}
 @end{Discussion}
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[As explained in
-@RefSec{Conformity of an Implementation},
+@ISODiff{NotISO=[@RefSecFull{Conformity of an Implementation}],
+  ISOOnly=[@RefSecFullNum{Conformity of an Implementation}]},
 the external effect of a program is defined in terms of its
 interactions with its external environment.
 Hence, the implementation can perform any internal
@@ -2998,5 +3002,5 @@ We moved @Chg{Version=[3],New=[subclause],Old=[clause]}
 11.7) ],Old=[]}from after 11.6 to
 before 11.6, in order to preserve the famous number @lquotes@;11.6@rquotes@;
 (given the changes to earlier @Chg{Version=[3],New=[subclauses],Old=[clauses]} in
-@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Exceptions}).
+@RefSecFullNum{Exceptions}).
 @end{DiffWord83}

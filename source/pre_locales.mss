@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.11 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
+@comment{ $Revision: 1.12 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:39 $}
+@Comment{$Date: 2023/01/05 05:49:09 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -102,12 +102,12 @@ string representation of an ISO 639-3:2007 alpha-3 code that identifies a langua
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0446-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[3],Text=[Function Country returns the code of the country
 associated with the active locale. If the Country_Code associated with the
 active locale cannot be determined from the environment, then Country returns
 Country_Unknown.@Chg{Version=[5],New=[ Otherwise, the result is an upper-case 
-string representation of an ISO 3166-1:2006 alpha-2 code that identifies a
+string representation of an ISO 3166-1:2020 alpha-2 code that identifies a
 country.],Old=[]}]}
 
 @begin{Discussion}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2023/01/05 05:49:08 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.139 $}
+@Comment{$Revision: 1.140 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -52,11 +52,11 @@ Text=<@ChgAdded{Version=[5],Text=[A representation aspect is an aspect that
 indicates how an entity is mapped onto the underlying hardware, for example the
 size or alignment of an object.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[operational aspect],
-  Def=[an aspect that indicates a logical property 
+  Def=[aspect that indicates a logical property 
        of an entity, such as the precondition of a subprogram, or the 
        procedure used to write a given type of object to a stream]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[representation aspect],
-  Def=[an aspect that indicates how an entity is mapped onto the underlying 
+  Def=[aspect that indicates how an entity is mapped onto the underlying 
        hardware, for example the size or alignment of an object]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI05-0295-1]}
@@ -135,7 +135,7 @@ a specifiable property of an entity. An aspect may be specified by an
 @nt{aspect_specification} on the declaration of the entity. Some aspects may be
 queried via attributes.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[aspect],
-  Def=[a specifiable property of an entity],
+  Def=[specifiable property of an entity],
   Note1=[An aspect can be specified by an @nt{aspect_specification} on the
          declaration of the entity. Some aspects can be queried via attributes.]}
 @end{Intro}
@@ -798,7 +798,7 @@ is illegal to specify a@Chg{Version=[5],New=[ nonconfirming],Old=[]}],Old=[no]}
 type-related representation
 @Chg{Version=[3],New=[aspect],Old=[items are allowed]}
 @Chg{Version=[5],New=[for an untagged type @i<T> if it is derived
-from ],Old=[if the parent type is]} a by-reference type@Chg{Version=[5],New=[ or
+from],Old=[if the parent type is]} a by-reference type@Chg{Version=[5],New=[ or
 inherits one or more by-reference primitives],Old=[]}, or
 @Chg{Version=[5],New=[if one or more types],Old=[has any user-defined primitive
 subprograms.]}@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[ Similarly,
@@ -1515,7 +1515,8 @@ A @i{recommended level of support} is
 and related features in each subclause.
 These recommendations are changed to requirements
 for implementations that support the Systems Programming Annex
-(see @RefSec{Required Representation Support}).
+(see @ISODiff{NotISO=[@RefSecFull{Required Representation Support}],
+  ISOOnly=[@RefSecFullNum{Required Representation Support}]}).
 
 @ChgImplDef{Version=[3],Kind=[Revised],InitialVersion=[0],Text=[The
 interpretation of each @Chg{Version=[3],New=[],Old=[aspect of
@@ -2808,6 +2809,7 @@ required) the rejection of syntax errors within the @nt{aspect_definition}.]}
 @end{Diffword2012}
 
 
+@notisormnewpagever{Version=[5]}@Comment{Page break in Ada 2022 RM}
 @LabeledRevisedClause{Version=[3],New=[Packed Types],Old=[Pragma Pack]}
 
 @begin{Intro}
@@ -5030,13 +5032,20 @@ Device_Register : Medium;
    @key[return] T;
 @key(for) T'@Chg{Version=[2],New=[Input],Old=[Read]} @key(use) @Chg{Version=[2],New=[My_Input],Old=[My_Read]}; --@ExamCom{ see @RefSecNum{Stream-Oriented Attributes}}
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph number not change}
+@ChgAdded{Version=[5],Text=[In the Size clause for Short,
+fifteen bits is the minimum necessary,
+since the type definition requires Short'Small <= 2**(@en@;7).]}
 @end{Examples}
 
 @begin{Notes}
-@i{Notes on the examples:}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i{Notes on the examples:}
 In the Size clause for Short,
 fifteen bits is the minimum necessary,
-since the type definition requires Short'Small <= 2**(@en@;7).
+since the type definition requires Short'Small <= 2**(@en@;7).]}
 @end{Notes}
 
 @begin{Extend83}
@@ -5869,15 +5878,25 @@ Word : @key[constant] := 4;  --@ExamCom{  storage element is byte, 4 bytes per w
 @key[for] Program_Status_Word'Size @key[use] 8*System.Storage_Unit;
 @key[for] Program_Status_Word'Alignment @key[use] 8;
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph number not change}
+@ChgAdded{Version=[5],Text=[The @nt{record_representation_clause} defines the
+record layout. The Size clause guarantees that (at least) eight storage
+elements are used for objects of the type. The Alignment clause guarantees that
+aliased, imported, or exported objects of the type will have
+addresses divisible by eight.]}
+
 @end{Examples}
 
 @begin{Notes}
-@i{Note on the example:}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i{Note on the example:}
 The @nt{record_representation_clause} defines the record layout. The
 Size clause guarantees that (at least) eight storage elements are used
 for objects of the type. The Alignment clause guarantees that
 aliased, imported, or exported objects of the type will have
-addresses divisible by eight.
+addresses divisible by eight.]}
 @end{Notes}
 
 

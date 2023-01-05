@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:07 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.168 $}
+@Comment{$Revision: 1.169 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -35,16 +35,16 @@ returns a result and can be called as part of an expression.]}>}
 Text=<@ChgAdded{Version=[2],Text=[A procedure is a form of subprogram that
 does not return a result and can only be called by a @nt{statement}.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[subprogram],
-  Def=[a unit of a program that can be brought into execution in various
+  Def=[unit of a program that can be brought into execution in various
        contexts, with the invocation being a subprogram call that can 
        parameterize the effect of the subprogram through the passing of operands],
   Note1=[There are two forms of subprograms: functions, 
          which return values, and procedures, which do not.]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[function],
-  Def=[a form of subprogram that returns a result and can be 
+  Def=[form of subprogram that returns a result and can be 
        called as part of an expression]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[procedure],
-  Def=[a form of subprogram that does not return a result and 
+  Def=[form of subprogram that does not return a result and 
        can only be invoked by a statement]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -123,12 +123,14 @@ library units (see @RefSecNum{Compilation Units - Library Units}).]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 The sequence of characters in an @nt{operator_symbol} shall @Chg{Version=[2],
 New=[form a reserved
 word, a delimiter, or compound delimiter that corresponds],Old=[correspond]} to
 an operator belonging to one of the six @Chg{Version=[2],New=[categories],
 Old=[classes]} of operators
-defined in @Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum{Operators and Expression Evaluation}@Chg{Version=[2],
+defined in @Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]}
+]}@RefSecNum{Operators and Expression Evaluation}@Chg{Version=[2],
 New=[],Old=[(spaces are not allowed and the case of letters
 is not significant)]}.
 
@@ -378,17 +380,21 @@ The @i{types of a profile} are the types of those subtypes.]
 @Redundant[A subprogram declared by an
 @nt<abstract_subprogram_declaration>
 is abstract; a subprogram declared by a @nt<subprogram_declaration>
-is not. See @RefSec{Abstract Types and Subprograms}.@Chg{Version=[2],New=[
+is not. See @ISODiff{NotISO=[@RefSecFull{Abstract Types and Subprograms}],
+  ISOOnly=[@RefSecFullNum{Abstract Types and Subprograms}]}.@Chg{Version=[2],New=[
 Similarly, a procedure @Chg{Version=[3],New=[declared],Old=[defined]} by a
 @nt{null_procedure_declaration} is a null procedure; a procedure declared by
-a @nt{subprogram_declaration} is not. See @RefSec{Null Procedures}.@Chg{Version=[3],New=[
+a @nt{subprogram_declaration} is not. See @ISODiff{NotISO=[@RefSecFull{Null Procedures}],
+  ISOOnly=[@RefSecFullNum{Null Procedures}]}.@Chg{Version=[3],New=[
 Finally, a function declared by an @nt{expression_function_declaration} is
 an expression function; a function declared by
-a @nt{subprogram_declaration} is not. See @RefSec{Expression Functions}.],Old=[]}],Old=[]}]
+a @nt{subprogram_declaration} is not. See @ISODiff{NotISO=[@RefSecFull{Expression Functions}],
+  ISOOnly=[@RefSecFullNum{Expression Functions}]}.],Old=[]}],Old=[]}]
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[An @nt{overriding_indicator} is used to
-indicate whether overriding is intended. See @RefSec{Overriding Indicators}.]]}
+indicate whether overriding is intended. See @ISODiff{NotISO=[@RefSecFull{Overriding Indicators}],
+  ISOOnly=[@RefSecFullNum{Overriding Indicators}]}.]]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -405,7 +411,8 @@ to a sequence of single @nt{parameter_specification}s, as explained
 in @RefSecNum{Objects and Named Numbers}.
 
 Abstract subprograms do not have bodies, and cannot be used
-in a nondispatching call (see @RefSec{Abstract Types and Subprograms}).
+in a nondispatching call (see @ISODiff{NotISO=[@RefSecFull{Abstract Types and Subprograms}],
+ISOOnly=[@RefSecFullNum{Abstract Types and Subprograms}]}).
 
 The evaluation of @nt<default_expression>s is caused by certain
 calls, as described in @RefSecNum{Parameter Associations}.
@@ -421,25 +428,25 @@ concurrently from multiple tasks.
 @begin{Example}
 @key[procedure] Traverse_Tree;
 @key[procedure] Increment(X : @key[in] @key[out] Integer);
-@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@ExamCom{  see @RefSecNum{Integer Types}}
-@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
+@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@ExamCom{ see @RefSecNum{Integer Types}}
+@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@ExamCom{ see @RefSecNum{Incomplete Type Declarations}}
 
-@key[function] Random @key[return] Probability;                      --@ExamCom{  see @RefSecNum{Floating Point Types}}
+@key[function] Random @key[return] Probability;                      --@ExamCom{ see @RefSecNum{Floating Point Types}}
 
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
-@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
-@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@ExamCom{  see @RefSecNum{Access Types}}
-@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@ExamCom{  see @RefSecNum{Array Types}}@Chg{Version=[4],New=[
+@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@ExamCom{ see @RefSecNum{Incomplete Type Declarations}}
+@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@ExamCom{ see @RefSecNum{Access Types}}
+@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@ExamCom{ see @RefSecNum{Array Types}}@Chg{Version=[4],New=[
 @key[function] Find(B : @key[aliased in out] Barrel; Key : String) @key[return] Real;
-                                                         --@ExamCom{  see @RefSecNum{User-Defined References}}],Old=[]}
+                                                         --@ExamCom{ see @RefSecNum{User-Defined References}}],Old=[]}
 
-@trailing@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@ExamCom{  see @RefSecNum{Array Types}}
+@trailing@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@ExamCom{ see @RefSecNum{Array Types}}
 @end{Example}
 
 @leading@keepnext@NewExample@i{Examples of @key[in] parameters with default expressions:}
 @begin{Example}
 @key[procedure] Print_Header(Pages  : @key[in] Natural;
-            Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@ExamCom{  see @RefSecNum{Array Types}}
+            Header : @key[in] Line    :=  (1 .. Line'Last => ' '); --@ExamCom{ see @RefSecNum{Array Types}}
             Center : @key[in] Boolean := True);
 @end{Example}
 @end{Examples}
@@ -675,10 +682,10 @@ access-to-subprogram type,],Old=[]} the following language-defined
   applies to corresponding subprograms in descendant types.]}
 @end{Discussion}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[precondition],
-  Def=[an assertion that is expected to be True when a given 
+  Def=[assertion that is expected to be True when a given 
        subprogram is called]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[postcondition],
-  Def=[an assertion that is expected to be True when a given 
+  Def=[assertion that is expected to be True when a given 
        subprogram returns normally]}
 @end{Intro}
 
@@ -697,7 +704,7 @@ subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type @i<T>, a
 @Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a formal parameter
 @Chg{Version=[4],New=[(or @i<S>'Result) ],Old=[]}of type
 @i<T> is interpreted as @Chg{Version=[4],New=[though it had a (notional)
-@Chg{Version=[5],New=[nonabstract ],Old=[]} type
+@Chg{Version=[5],New=[nonabstract ],Old=[]}type
 @i<NT> that is a formal derived type whose ancestor type is @i<T>, with directly
 visible primitive operations],Old=[having type @i<T>'Class]}. Similarly, a
 @Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a
@@ -978,7 +985,7 @@ aspect would be illegal]}.]}
   some calls to non-abstract primitives of a tagged abstract type illegal even if
   no abstract routines are involved in the Pre'Class or Post'Class. It is
   likely that the above rule will be adjusted; check with ARG work at
-  @URLLink{URL=[http://www.ada_auth.org/arg.html], Text=[www.ada_auth.org/arg.html]}
+  @URLLink{URL=[http://www.ada-auth.org/arg.html], Text=[www.ada-auth.org/arg.html]}
   to find the adjusted rules.]}
 @end{Discussion}
 
@@ -1501,7 +1508,7 @@ type],Old=[]}}, the following attribute is defined:]}
   function@Chg{Version=[5],New=[ call for which the postcondition expression is
   evaluated],Old=[]}. The type of this attribute is that
   of the @Chg{Version=[5],New=[result subtype of the ],Old=[]}function
-  @Chg{Version=[5],New=[or access-to-function type ],Old=[result]} except
+  @Chg{Version=[5],New=[or access-to-function type],Old=[result]} except
   within a Post'Class postcondition expression for
   a function with a controlling result or with a controlling access
   result@Chg{Version=[5],New=[; in those cases the type of the attribute is
@@ -2252,7 +2259,7 @@ variables global to the entity that are within the global variable set
 associated with either the @key[in out] or @key[out] @nt{global_mode}s. In
 the absence of the No_Hidden_Indirect_Globals restriction (see
 @RefSecNum{High Integrity Restrictions}),
-this ignores objects reached via a dereference of an access value.  The
+this ignores objects reached via a dereference of an access value. The
 above rule includes any possible Global effects of calls occurring
 during the execution of the operation, except for the following excluded
 calls:]}
@@ -2369,7 +2376,7 @@ Global aspect.]}]}
   from SPARK 2014 to remain acceptable in conforming implementations, as well
   as to provide flexibility for future enhancements. Note the word
   @ldquote@;extend@rdquote in this permission; we expect that any aspect usage
-  that conforms with the (other) rules of this clause will be accepted by
+  that conforms with the (other) rules of this subclause will be accepted by
   any Ada implementation, regardless of any implementation-defined extensions.]}
 @end{Reason}
 
@@ -2377,7 +2384,7 @@ Global aspect.]}]}
 
 @begin{Notes}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-  @ChgAdded{Version=[5],Text=[For an example of the use of these aspects and attributes,
+  @ChgAdded{Version=[5],Text=[For an example of the use of these aspects,
   see the Vector container definition in @RefSecNum{The Generic Package Containers.Vectors}.]}
 @end{Notes}
 
@@ -2458,7 +2465,7 @@ or @Chg{Version=[4],New=[view conversion],Old=[@nt{type_conversion}]}, this
 object is the one associated with the operand.]}@Chg{Version=[4],New=[ For a value
 conversion, the associated object is the anonymous result object if such an
 object is created (see @RefSecNum{Type Conversions}); otherwise it is the
-associated object of the operand.],Old=[]}@Chg{Version=[5],New=[  In
+associated object of the operand.],Old=[]}@Chg{Version=[5],New=[ In
 other cases, the object associated with the evaluated operative constituent of
 the @nt{name} or @nt{expression} (see @RefSecNum{Expressions}) determines its
 associated object.],Old=[@Chg{Version=[3],New=[ For a
@@ -2861,7 +2868,8 @@ conformance, subtype conformance, or full conformance.]
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @leading@Defn{convention}
 @Defn{calling convention}
-@Redundant[As explained in @RefSec{Interfacing Aspects},
+@Redundant[As explained in @ISODiff{NotISO=[@RefSecFull{Interfacing Aspects}],
+ISOOnly=[@RefSecFullNum{Interfacing Aspects}]},
 a @i{convention} can be specified for an entity.]
 @Chg{New=[Unless this @IntlStdName states otherwise, the default
 convention of an entity is Ada.],Old=[]}
@@ -4686,7 +4694,7 @@ is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]
 @ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Previous insertion changes this paragraph number}
 @ChgAdded{Version=[3],Text=[In a function call, for each explicitly aliased
 parameter, a check is made that the accessibility level of the master of the
-actual object is not deeper than that of the  master of the call
+actual object is not deeper than that of the master of the call
 (see @RefSecNum{Operations of Access Types}).]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4917,9 +4925,9 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 A @Chg{Version=[2],New=[@nt{simple_@!return_@!statement} or
-@nt{extended_@!return_@!statement} (collectively called a @i<return statement>)
-@Defn{return statement}],Old=[@nt{return_statement}]} is used to
-complete the execution of the
+@nt{extended_@!return_@!statement} (collectively called a 
+@i<return statement>)@Defn{return statement}],Old=[@nt{return_statement}]}
+is used to complete the execution of the
 innermost enclosing @nt{subprogram_@!body},
 @nt{entry_@!body}, or @nt{accept_@!statement}.
 @end{Intro}
@@ -5702,10 +5710,10 @@ that object.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0058-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0343-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0343-1],ARef=[AI12-0449-1]}
 @Chg{Version=[5],New=[A check is performed that the return value satisfies the
-predicates of the return subtype. If this check fails, the effect is as defined in subclause
-@RefSec{Subtype Predicates}.@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}],Old=[@Chg{Version=[2],New=[For
+predicates of the return subtype. If this check fails, the effect is as defined in
+@RefSecNum{Subtype Predicates}.@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}],Old=[@Chg{Version=[2],New=[For
 the execution of an @nt{extended_@!return_@!statement}, the
 @nt{handled_@!sequence_@!of_@!statements} is executed. Within this
 @nt{handled_@!sequence_@!of_@!statements}, the execution of a
@@ -6403,9 +6411,10 @@ two positional actual parameters being the operand(s) of the operator
 (in order).
 @begin{Honest}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-We also use the term operator
-(in @Chg{Version=[3],New=[Clause],Old=[Section]} 4 and in
-@RefSecNum{Subprogram Declarations})
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+We also use the term operator (in
+@Chg{Version=[5],New=[@RefSecFullNum{Names and Expressions}],Old=[@Chg{Version=[3],New=[Clause],Old=[Section]} 4]}
+and in @RefSecNum{Subprogram Declarations})
 to refer to one of the syntactic categories
 defined in @RefSec{Operators and Expression Evaluation}
 whose names end with @lquotes@;_operator:@rquotes@;

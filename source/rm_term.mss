@@ -1,8 +1,8 @@
 @Part(RM_Term, Root="ada.mss")
 
-@Comment{$Date: 2022/07/06 03:35:26 $}
+@Comment{$Date: 2023/01/05 05:49:12 $}
 @Comment{$Source: e:\\cvsroot/ARM/Source/rm_term.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @Comment{The RM version of "Terms and Definitions". Note that the ISO version 
 only shares generated content, so we don't try to share any part of this
@@ -36,20 +36,20 @@ they have to be somewhere.}
 @begin{Discussion}
 The index contains an entry for every defined term.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00415-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00415-01]}
 @ChgAdded{Version=[2],Text=[The contents of the @i<CRC Concise Encyclopedia of
 Mathematics, Second Edition> can be accessed on
 @URLLink{URL=[http://www.mathworld.com],Text=[http://www.mathworld.com]}.
 The ISBN number of the book is ISBN 1584883472.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0443-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0443-1]}
 @ChgAdded{Version=[5],Text=[The definitions found in this subclause are
 short, descriptive definitions. These are most useful for comprehension when
 an exact meaning is not needed. More formal, detailed definitions are found in
 the body of the @IntlStdTitle; these are needed to determine the exact
 application of rules to constructs and entities.]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0443-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0443-1]}
 @ChgAdded{Version=[5],Text=[To see the difference, consider
 @ldquote@;aliased view@rdquote. The descriptive definition is
 @ldquote@;a view of an object that can be designated by an access value@rdquote.
@@ -74,6 +74,7 @@ like this in the body of the AARM near its detailed formal definition.]}
 @ChgRef{Version=[1],Kind=[Revised]}
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised]}
 Here are some AARM-only definitions:
 @Defn{Ada Rapporteur Group (ARG)}
 @Defn(ARG)
@@ -83,7 +84,9 @@ The Ada Rapporteur Group (ARG) interprets the @Chg{Version=[1],New=<Ada Referenc
 An Ada Issue (AI) is a numbered ruling from the ARG.@Chg{Version=[1],New=< Ada Issues
 created for Ada 83 are denoted as "AI83", while Ada Issues created for Ada 95
 are denoted as "AI95" in this document.@Chg{Version=[3],New=< Similarly,
-Ada Issues created for Ada 2005 are denoted as "AI05">,Old=<>}>,Old=<>}
+Ada Issues created for Ada 2005 are denoted as "AI05"@Chg{Version=[5],New=[,
+Ada Issues created for Ada 2012 are denoted as "AI12", and Ada Issues created
+for Ada 2022 are denoted as "AI22"],Old=[]}.>,Old=<>}>,Old=<>}
 @Defn{Ada Commentary Integration Document (ACID)}
 @Defn(ACID)
 The Ada Commentary Integration Document (ACID)

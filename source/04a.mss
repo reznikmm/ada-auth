@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:07 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.169 $}
+@Comment{$Revision: 1.170 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -177,22 +177,22 @@ denotes the object or subprogram designated by the value of the @nt{name}.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of direct names:)
 @begin(Example)
-@tabclear()@tabset(P9, P47)@trailing
-Pi @\@ExamCom(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
-Limit @\@ExamCom(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
-Count @\@ExamCom(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
-Board @\@ExamCom(-- the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
-Matrix @\@ExamCom(-- the direct name of a type) @\(see @RefSecNum(Array Types))
-Random @\@ExamCom(-- the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
-Error @\@ExamCom(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
+@tabclear()@tabset(P47)@trailing
+Pi      --@ExamCom( the direct name of a number) @\(see @RefSecNum(Number Declarations))
+Limit   --@ExamCom( the direct name of a constant) @\(see @RefSecNum(Object Declarations))
+Count   --@ExamCom( the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
+Board   --@ExamCom( the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
+Matrix  --@ExamCom( the direct name of a type) @\(see @RefSecNum(Array Types))
+Random  --@ExamCom( the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
+Error   --@ExamCom( the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
 @end(Example)
 
 @leading@keepnext@NewExample@i{Examples of dereferences:}
 @begin{Example}@tabclear()@tabset(P19)
-Next_Car.@key[all]@\--@ExamCom[  explicit dereference denoting the object designated by]
-               @\--@ExamCom[  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
-Next_Car.Owner @\--@ExamCom[  selected component with implicit dereference;]
-               @\--@ExamCom[  same as Next_Car.@key[all].Owner]
+Next_Car.@key[all]@\--@ExamCom[ explicit dereference denoting the object designated]
+               @\--@ExamCom[ by the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
+Next_Car.Owner @\--@ExamCom[ selected component with implicit dereference;]
+               @\--@ExamCom[ same as Next_Car.@key[all].Owner]
 @end{Example}
 @end{Examples}
 
@@ -383,26 +383,38 @@ Constraint_Error is raised if this check fails.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of indexed components:)
 @begin{Example}
-@tabclear()@tabset(P64)
- My_Schedule(Sat)     --@ExamCom[  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)             --@ExamCom[  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
- Board(M, J + 1)      --@ExamCom[  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)(20)         --@ExamCom[  a component of a component @\(see @RefSecNum{Array Types})]
- Request(Medium)      --@ExamCom[  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
- Next_Frame(L)(M, N)  --@ExamCom[  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
+@tabclear()@tabset(P60)
+ My_Schedule(Sat)  --@ExamCom[ a component of a one-dimensional array@\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)          --@ExamCom[ a component of a one-dimensional array@\(see @RefSecNum{Array Types})]
+ Board(M, J + 1)   --@ExamCom[ a component of a two-dimensional array@\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)(20)      --@ExamCom[ a component of a component@\(see @RefSecNum{Array Types})]
+ Request(Medium)   --@ExamCom[ an entry in a family of entries@\(see @RefSecNum{Task Units and Task Objects})]
+ Next_Frame(L)(M, N) --@ExamCom[ a component of a function call@\(see @RefSecNum{Subprogram Declarations})]
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph number not change}
+@ChgAdded{Version=[5],Text=[Distinct notations are used for components of
+multidimensional arrays (such as Board) and arrays of arrays (such as Page).
+The components of an array
+of arrays are arrays and can therefore be indexed. Thus Page(10)(20)
+denotes the 20th component of Page(10). In the last example Next_Frame(L)
+is a function call returning an access value that designates a
+two-dimensional array.]}
+
 @end{Examples}
 
 @begin{Notes}
-@i(Notes on the examples:)
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i(Notes on the examples:)
 Distinct notations are used for components of multidimensional arrays (such
 as Board) and arrays of arrays (such as Page). The components of an array
 of arrays are arrays and can therefore be indexed. Thus Page(10)(20)
 denotes the 20th component of Page(10). In the last example Next_Frame(L)
 is a function call returning an access value that designates a
-two-dimensional array.
-
+two-dimensional array.]}
 @end{Notes}
+
 
 @LabeledSubClause{Slices}
 
@@ -456,10 +468,13 @@ Constraint_Error is raised if this check fails.
 @end{RunTime}
 
 @begin{Notes}
-A @nt<slice> is not permitted as the @nt<prefix> of an
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[By the rules given in
+@RefSecNum(Operations of Access Types), a],Old=[A]} @nt<slice> is
+@Chg{Version=[5],New=[illegal],Old=[not permitted]} as the @nt<prefix> of an
 Access @nt<attribute_reference>,
-even if the components or the array as a whole are aliased.
-See @RefSecNum(Operations of Access Types).
+even if the components or the array as a whole are aliased.@Chg{Version=[5],New=[],Old=[
+See @RefSecNum(Operations of Access Types).]}
 @begin{TheProof}
   Slices are not aliased, by @RefSec{Access Types}.
 @end{TheProof}
@@ -479,14 +494,14 @@ component of the array A and has the corresponding component type.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of slices:)
 @begin{Example}
-@tabclear()@tabset(P58)
-  Stars(1 .. 15)        --@ExamCom[  a slice of 15 characters @\(see @RefSecNum{String Types})]
-  Page(10 .. 10 + Size) --@ExamCom[  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
-  Page(L)(A .. B)       --@ExamCom[  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
-  Stars(1 .. 0)         --@ExamCom[  a null slice @\(see @RefSecNum{String Types})]
-  My_Schedule(Weekday)  --@ExamCom[  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
-  Stars(5 .. 15)(K)     --@ExamCom[  same as Stars(K) @\(see @RefSecNum{String Types})]
-                        --@ExamCom[  provided that K is in 5 .. 15]
+@tabclear()@tabset(P50, P56)
+Stars(1 .. 15)        --@ExamCom[ a slice of 15 characters@\@\(see @RefSecNum{String Types})]
+Page(10 .. 10 + Size) --@ExamCom[ a slice of 1 + Size components@\(see @RefSecNum{Array Types})]
+Page(L)(A .. B)       --@ExamCom[ a slice of the array Page(L)@\(see @RefSecNum{Array Types})]
+Stars(1 .. 0)         --@ExamCom[ a null slice@\(see @RefSecNum{String Types})]
+My_Schedule(Weekday)  --@ExamCom[ bounds given by subtype@\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
+Stars(5 .. 15)(K)     --@ExamCom[ same as Stars(K)@\(see @RefSecNum{String Types})]
+                      --@ExamCom[ provided that K is in 5 .. 15]
 @end{Example}
 @end{Examples}
 
@@ -706,30 +721,30 @@ The exception Constraint_Error is raised if this check fails.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of selected components:)
 @begin{Example}
-@tabclear()@tabset(P60)@trailing
+@tabclear()@tabset(P58)@trailing
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178]}
-  Tomorrow.Month     --@ExamCom[  a record component @\(see @RefSecNum{Record Types})]
-  Next_Car.Owner     --@ExamCom[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-  Next_Car.Owner.Age --@ExamCom[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-                     --@ExamCom[  the previous two lines involve implicit dereferences]
-  Writer.Unit        --@ExamCom[  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
-  Min_Cell(H).Value  --@ExamCom[  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
-                     --@ExamCom[  of the function call Min_Cell(H)]
-@Chg{Version=[2],New=<  Cashier.Append     --@ExamCom[  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
->,Old=<>}  Control.Seize      --@ExamCom[  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
-  Pool(K).Write      --@ExamCom[  an entry of the task Pool(K) @\(see @Chg{Version=[5],New=[@RefSecNum{Task Units and Task Objects}],Old=[@RefSecNum{Protected Units and Protected Objects}]})]
+Tomorrow.Month     --@ExamCom[ a record component@\(see @RefSecNum{Record Types})]
+Next_Car.Owner     --@ExamCom[ a record component@\(see @RefSecNum{Incomplete Type Declarations})]
+Next_Car.Owner.Age --@ExamCom[ a record component@\(see @RefSecNum{Incomplete Type Declarations})]
+                   --@ExamCom[ the previous two lines involve implicit dereferences]
+Writer.Unit        --@ExamCom[ a record component (a discriminant)@ISODiff{NotISO=[@\],ISOOnly=[ ]}(see @RefSecNum{Variant Parts and Discrete Choices})]
+Min_Cell(H).Value  --@ExamCom[ a record component of the result@\(see @RefSecNum{Subprogram Declarations})]
+                   --@ExamCom[ of the function call Min_Cell(H)]
+@Chg{Version=[2],New=<Cashier.Append     --@ExamCom[ a prefixed view of a procedure@\(see @RefSecNum{Interface Types})]
+>,Old=<>}Control.Seize      --@ExamCom[ an entry of a protected object@\(see @RefSecNum{Protected Units and Protected Objects})]
+Pool(K).Write      --@ExamCom[ an entry of the task Pool(K)@\(see @Chg{Version=[5],New=[@RefSecNum{Task Units and Task Objects}],Old=[@RefSecNum{Protected Units and Protected Objects}]})]
 @end{Example}
 
 @leading@keepnext@NewExample@i(Examples of expanded names:)
 @begin{Example}
-@tabclear()@tabset(P67)
-  Key_Manager."<"      --@ExamCom[  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
-  Dot_Product.Sum      --@ExamCom[  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
-  Buffer.Pool          --@ExamCom[  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Buffer.Read          --@ExamCom[  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Swap.Temp            --@ExamCom[  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
-  Standard.Boolean     --@ExamCom[  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
+@tabclear()@tabset(P65)
+Key_Manager."<"    --@ExamCom[ an operator of the visible part of a package@ISODiff{NotISO=[@\],ISOOnly=[]}(see @RefSecNum{Private Operations})]
+Dot_Product.Sum    --@ExamCom[ a variable declared in a function body@\(see @RefSecNum{Subprogram Declarations})]
+Buffer.Pool        --@ExamCom[ a variable declared in a protected unit@ISODiff{NotISO=[@\],ISOOnly=[]}(see @RefSecNum{Example of Tasking and Synchronization})]
+Buffer.Read        --@ExamCom[ an entry of a protected unit@\(see @RefSecNum{Example of Tasking and Synchronization})]
+Swap.Temp          --@ExamCom[ a variable declared in a block statement@\(see @RefSecNum{Block Statements})]
+Standard.Boolean   --@ExamCom[ the name of a predefined type@\(see @RefSecNum{The Package Standard})]
 @end{Example}
 @end{Examples}
 
@@ -826,7 +841,7 @@ or a @nt<range_@!attribute_@!reference>.]
 Text=<@ChgAdded{Version=[5],Text=[An attribute is a characteristic or property
 of an entity that can be queried, and in some cases specified.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[attribute],
-  Def=[a characteristic or property of an entity that can be queried, and in
+  Def=[characteristic or property of an entity that can be queried, and in
        some cases specified]}
 @end{Intro}
 
@@ -1062,19 +1077,25 @@ and are summarized in
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00235]}
-In general, the @nt<name> in a @nt<prefix> of an @nt<attribute_reference>
-(or a @nt<range_attribute_reference>) has to be resolved
-without using any context.
-However, in the case of the Access attribute,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[By the],Old=[In]} general@Chg{Version=[5],New=[ rules 
+given above],Old=[]}, @Chg{Version=[5],New=[there is no expected type
+or profile for ],Old=[]}the @nt<name> in a @nt<prefix> of an
+@nt<attribute_reference> (or a @nt<range_attribute_reference>)@Chg{Version=[5],New=[, 
+which means that no context can be used to
+resolve the @nt{name}],Old=[ has to be resolved
+without using any context]}. However, @Chg{Version=[5],New=[by the rules given
+in @RefSecNum{Operations of Access Types} for],Old=[in]} the case of the Access attribute,
 the expected type for the @Chg{Version=[2],New=[@nt{attribute_reference}],
-Old=[@Chg{New=[@nt{prefix}],Old=[prefix]}]} has to be a
+Old=[@Chg{New=[@nt{prefix}],Old=[prefix]}]} @Chg{Version=[5],New=[will],Old=[has to]} be a
 single access type, and@Chg{Version=[2],New=[],Old=[ if it is an
 access-to-subprogram type (see @RefSecNum(Operations of Access Types)) then]}
-the resolution of the @nt<name> can use the fact that
+the resolution of the @nt<name> can @Chg{Version=[5],New=[make use of the
+designated type or profile of this],Old=[use the fact that
 the@Chg{Version=[2],New=[ type of the object or the],Old=[]} profile of the
 callable entity denoted by the @nt<prefix>
 has to @Chg{Version=[2],New=[match the designated type or ],Old=[]}be type
-conformant with the designated profile of the access type.
+conformant with the designated profile of the]} access type.
 @Defn2{Term=[type conformance],Sec=(required)}
 @begin(TheProof)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00235]}
@@ -1095,14 +1116,15 @@ conformant with the designated profile of the access type.
 @Leading@keepnext@NewExample@i(Examples of attributes:)
 @begin{Example}
 @tabclear()@tabset(P64)
-Color'First        --@ExamCom[ minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
-Rainbow'Base'First --@ExamCom[ same as Color'First @\(see @RefSecNum{Enumeration Types})]
-Real'Digits        --@ExamCom[ precision of the type Real @\(see @RefSecNum{Floating Point Types})]
-Board'Last(2)      --@ExamCom[ upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Board'Range(1)     --@ExamCom[ index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Pool(K)'Terminated --@ExamCom[ True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
-Date'Size          --@ExamCom[ number of bits for records of type Date @\(see @RefSecNum{Record Types})]
-Message'Address    --@ExamCom[ address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
+Color'First        --@ExamCom[ minimum value of the enumeration type Color@\(see @RefSecNum{Enumeration Types})]
+Rainbow'Base'First --@ExamCom[ same as Color'First@\(see @RefSecNum{Enumeration Types})]
+Real'Digits        --@ExamCom[ precision of the type Real@\(see @RefSecNum{Floating Point Types})]
+Board'Last(2)      --@ExamCom[ upper bound of the second dimension of Board@\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Board'Range(1)     --@ExamCom[ index range of the first dimension of Board@\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Pool(K)'Terminated --@ExamCom[ True if task Pool(K) is terminated@\(see @RefSecNum{Task Units and Task Objects})]
+Date'Size          --@ExamCom[ number of bits for records of type Date@\(see @RefSecNum{Record Types})]
+Message'Address    --@ExamCom[ address of the record variable Message]
+                   --@ExamCom[ @\(see @RefSecNum{Discriminant Constraints})]
 @end{Example}
 @end{Examples}
 
@@ -1223,7 +1245,7 @@ Text=<@ChgAdded{Version=[3],Text=[A reference type is one that has user-defined
 behavior for @ldquote.@key[all]@rdquote, defined by the
 Implicit_Dereference aspect.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[reference type],
-  Def=[a type that has user-defined behavior for @ldquote@;.all@rdquote,
+  Def=[type that has user-defined behavior for @ldquote@;.all@rdquote,
        defined by the Implicit_Dereference aspect]}
 @end{StaticSem}
 
@@ -1314,7 +1336,8 @@ and use of generalized references:}]}
       -- @ExamCom{"Data" is its reference discriminant.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0268-1]}
-@ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Barrel; Key : String) @key[return] Ref_Element;
+@ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Barrel; Key : String)
+   @key[return] Ref_Element;
    -- @Examcom{Returns a reference to an element of a barrel.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1],ARef=[AI05-0299-1]}
@@ -1428,7 +1451,7 @@ Text=<@ChgAdded{Version=[3],Text=[An indexable container type is one that has
 user-defined behavior for indexing, via the Constant_Indexing or
 Variable_Indexing aspects.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[indexable container type],
-  Def=[a type that has user-defined behavior for indexing, via the
+  Def=[type that has user-defined behavior for indexing, via the
        Constant_Indexing or Variable_Indexing aspects]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
@@ -1649,7 +1672,8 @@ and use of generalized indexing:}]}
   -- @Examcom{Find is the generalized indexing operation.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
-@ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Indexed_Barrel; Key : String) @key[return] Ref_Element;
+@ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Indexed_Barrel; Key : String)
+   @key[return] Ref_Element;
    -- @Examcom{Return a reference to an element of a barrel (see @RefSecNum{User-Defined References}).}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
@@ -2235,7 +2259,7 @@ Text=<@ChgAdded{Version=[5],Text=[An aggregate is a construct used to define a
 value of a composite type by specifying the values of the components of the
 type.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[aggregate],
-  Def=[a construct used to define a value of a composite type by
+  Def=[construct used to define a value of a composite type by
           specifying the values of the components of the type]}
 
 @end{Intro}
@@ -2579,7 +2603,7 @@ can be given by static expressions.
   variants.]}
 @end{Reason}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[needed component],
-  Def=[a component of a record type or record extension that is required
+  Def=[component of a record type or record extension that is required
        to have its value specified within a given aggregate]}
 
 @Leading@Keepnext@PDefn2{Term=[expected type],
@@ -2836,7 +2860,7 @@ different @nt{variant}s of the same @nt{variant_part}.]}
 The evaluation of a @nt<record_aggregate> consists of the
 evaluation of the @nt<record_@!component_@!association_@!list>.
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0086-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0086-1],ARef=[AI12-0451-1]}
 @PDefn2{Term=[evaluation], Sec=(record_component_association_list)}
 For the evaluation of a @nt{record_@!component_@!association_@!list},
 any per-object constraints (see @RefSecNum(Record Types))
@@ -2851,7 +2875,7 @@ elaboration of any per-object constraint that depends on it, which in
 turn occurs prior to the evaluation and conversion of the @nt{expression} for
 the component with the per-object
 constraint.@PDefn2{Term=[arbitrary order],Sec=[allowed]}@Chg{Version=[5],New=[
-If the value of a discriminant that governs a selected @nt{variant_part}  @i{P}
+If the value of a discriminant that governs a selected @nt{variant_part}
 is given by a nonstatic @nt{expression}, and the evaluation of that
 @nt{expression} yields a value that does not belong to the nominal subtype of
 the @nt{expression}, then Constraint_Error is
@@ -2900,17 +2924,20 @@ has to be evaluated. So there is no need to repeat that.]}
 @end{RunTime}
 
 @begin{Notes}
-For a @nt<record_aggregate> with positional associations, expressions
-specifying discriminant
-values appear first since the @nt<known_discriminant_part>
-is given first in the declaration of the type; they have to
-be in the same order as in the @nt<known_discriminant_part>.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[By the rules given above, for],Old=[For]} a
+@nt<record_aggregate> with positional associations, expressions specifying
+discriminant values appear first @Chg{Version=[5],New=[and in the same
+order as their corresponding @nt{discriminant_specification}s, ],Old=[]}since
+the @nt<known_discriminant_part> @Chg{Version=[5],New=[occurs],Old=[is given]}
+first in the declaration of the type@Chg{Version=[5],New=[],Old=[; they have
+to be in the same order as in the @nt<known_discriminant_part>]}.
 @end{Notes}
 
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Example of a record aggregate with positional associations:)
 @begin{Example}
-@trailing@;(4, July, 1776)                                       --@ExamCom[  see @RefSecNum{Record Types} ]
+@trailing@;(4, July, 1776)                                     --@ExamCom[ see @RefSecNum{Record Types} ]
 @end{Example}
 
 @leading@keepnext@NewExample@i(Examples of record aggregates with named associations:)
@@ -2918,7 +2945,7 @@ be in the same order as in the @nt<known_discriminant_part>.
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
 
-@trailing@;(Disk, Closed, Track => 5, Cylinder => 12)            --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@trailing@;(Disk, Closed, Track => 5, Cylinder => 12)          --@ExamCom[ see @RefSecNum{Variant Parts and Discrete Choices}]
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
@@ -2927,16 +2954,15 @@ be in the same order as in the @nt<known_discriminant_part>.
 @Chg{Version=[2],New=[associations],Old=[association]} with
 several choices:)
 @begin{Example}
-@tabclear()@tabset(P50)
-(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\--@ExamCom[  see @RefSecNum{Incomplete Type Declarations}]
-
- --@ExamCom[  The allocator is evaluated twice: Succ and Pred designate different cells]
+(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]
+   --@ExamCom[ The allocator is evaluated twice:]
+   --@ExamCom[ Succ and Pred designate different cells]
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>) @\--@ExamCom[  see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
+@Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>)                       --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
 
 @Trailing@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[ --@ExamCom[  Succ and Pred will be set to @key{null}]],Old=[]}
+@Chg{Version=[2],New=[   --@ExamCom[ Succ and Pred will be set to @key{null}]],Old=[]}
 
 @end{Example}
 
@@ -3222,10 +3248,12 @@ Constraint_Error is raised if this check fails.
 @end{RunTime}
 
 @begin{Notes}
-If all components of the value of the @nt<extension_aggregate>
-are determined by the @nt<ancestor_part>, then
-the @nt<record_@!component_@!association_@!list> is required to be
-simply @key(null record).
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[By the rules given in @RefSecNum{Record Aggregates},
+if],Old=[If]} all components of the value of the
+@nt<extension_aggregate> are determined by the @nt<ancestor_part>, then
+the @nt<record_@!component_@!association_@!list>
+@Chg{Version=[5],New=[will],Old=[is required to]} be simply @key(null record).
 
 If the @nt<ancestor_part> is a @nt<subtype_mark>,
 then its type can be abstract. If its type is controlled,
@@ -3541,7 +3569,7 @@ RM83 omitted this
   case, presumably as an oversight. We want to minimize situations
   where an @nt{expression} becomes illegal if parenthesized.
 @end{Discussion}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AAI05-0147-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0236-1]}
 @ChgAdded{Version=[3],Text=[For a @nt{conditional_expression}@Chg{Version=[5],New=[
 (see @RefSecNum{Conditional Expressions})],Old=[]}, the
@@ -3891,20 +3919,20 @@ with a single component.
 @Leading@keepnext@NewExample@i(Examples of array aggregates with positional associations:)
 @begin{Example}
 @trailing@;(7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
-Table'(5, 8, 4, 1, @key(others) => 0)  --@ExamCom[  see @RefSecNum{Array Types} ]
+Table'(5, 8, 4, 1, @key(others) => 0)  --@ExamCom[ see @RefSecNum{Array Types} ]
 @end{Example}
 
 @leading@keepnext@NewExample@i(Examples of array aggregates with named associations:)
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
-(1 .. 5 => (1 .. 8 => 0.0))      --@ExamCom[  two-dimensional]
-@Chg{Version=[5],New=<[>,Old=<(>}1 .. N => @key(new) Cell@Chg{Version=[5],New=<]>,Old=<)>}             --@ExamCom[  N new cells, in particular for N = 0]
+(1 .. 5 => (1 .. 8 => 0.0))      --@ExamCom[ two-dimensional]
+@Chg{Version=[5],New=<[>,Old=<(>}1 .. N => @key(new) Cell@Chg{Version=[5],New=<]>,Old=<)>}             --@ExamCom[ N new cells, in particular for N = 0]
 
 @trailing@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 Table'(2 | 4 | 10 => 1, @key(others) => 0)
-Schedule'(Mon .. Fri => True,  @key(others) => False)  --@ExamCom[  see @RefSecNum{Array Types}]
+Schedule'(Mon .. Fri => True,  @key(others) => False)  --@ExamCom[ see @RefSecNum{Array Types}]
 Schedule'@Chg{Version=[5],New=<[>,Old=<(>}Wed | Sun  => False, @key(others) => True@Chg{Version=[5],New=<]>,Old=<)>}
-Vector'(1 => 2.5)                                --@ExamCom[  single-component vector]
+Vector'(1 => 2.5)                             --@ExamCom[ single-component vector]
 @end{Example}
 
 @leading@keepnext@NewExample@i(Examples of two-dimensional array aggregates:)
@@ -3914,14 +3942,16 @@ Vector'(1 => 2.5)                                --@ExamCom[  single-component v
 @trailing@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
 (1 => @Chg{Version=[5],New=<[>,Old=<(>}1.1, 1.2, 1.3@Chg{Version=[5],New=<]>,Old=<)>}, 2 => @Chg{Version=[5],New=<[>,Old=<(>}2.1, 2.2, 2.3@Chg{Version=[5],New=<]>,Old=<)>})
-@Chg{Version=[5],New=<[>,Old=<(>}1 => (1 => 1.1, 2 => 1.2, 3 => 1.3), 2 => (1 => 2.1, 2 => 2.2, 3 => 2.3)@Chg{Version=[5],New=<]>,Old=<)>}
+@Chg{Version=[5],New=<[>,Old=<(>}1 => (1 => 1.1, 2 => 1.2, 3 => 1.3),
+ 2 => (1 => 2.1, 2 => 2.2, 3 => 2.3)@Chg{Version=[5],New=<]>,Old=<)>}
 @end{Example}
 
 @leading@keepnext@NewExample@i(Examples of aggregates as initial values:)
 @begin{Example}
 A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        --@ExamCom[ A(1)=7, A(10)=0]
 B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        --@ExamCom[ B(1)=0, B(10)=1]
-C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); --@ExamCom[ C'Last(1)=5, C'Last(2)=8]
+C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0));
+                                          --@ExamCom[ C'Last(1)=5, C'Last(2)=8]
 
 D : Bit_Vector(M .. N) := (M .. N => True);         --@ExamCom[ see @RefSecNum{Array Types}]
 E : Bit_Vector(M .. N) := (@key(others) => True);
@@ -3945,7 +3975,7 @@ provided by an enclosing record aggregate:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
-@ChgAdded{Version=[2],Text=[Buffer'(Size => 50, Pos => 1, Value => @Chg{Version=[5],New=[],Old=[String']}('x', @key(others) => <>))  --@ExamCom[ see @RefSecNum{Discriminants}]]}
+@ChgAdded{Version=[2],Text=[Buffer'(Size => 50, Pos => 1, Value => @Chg{Version=[5],New=[],Old=[String']}('x', @key(others) => <>)) --@ExamCom[ see @RefSecNum{Discriminants}]]}
 @end{Example}
 @end{Examples}
 
@@ -4346,7 +4376,7 @@ Text=<@ChgAdded{Version=[5],Text=[A container aggregate is a construct used to
 define a value of a type that represents a collection of elements, by explicitly
 specifying the elements in the collection.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[container aggregate],
-  Def=[a construct used to define a value of a type that
+  Def=[construct used to define a value of a type that
           represents a collection of elements, by explicitly specifying the
           elements in the collection]}
 
@@ -5232,6 +5262,7 @@ the implementation may either raise Constraint_Error
 or return the value of the object.
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
   This means that if extra-range intermediates are used to
   hold the value of an object of an unconstrained numeric subtype,
   a Constraint_Error can be raised on a read of the object, rather than
@@ -5240,9 +5271,8 @@ or return the value of the object.
   can be deferred until the first read of the object
   (presuming no side effects other than failing an Overflow_Check
   are possible). This permission is over and above that provided
-  by @Chg{Version=[3],New=[subclause],Old=[clause]}
-  @RefSecNum(Exceptions and Optimization), since
-  this allows the Constraint_Error to move to a different handler.
+  by @Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum(Exceptions and Optimization),
+  since this allows the Constraint_Error to move to a different handler.
 @end{Ramification}
 @begin{Reason}
   This permission is intended to allow extra-range registers
@@ -5260,15 +5290,15 @@ or return the value of the object.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of primaries:)
 @begin{Example}
-@Trailing@;4.0                --@ExamCom[  real literal]
-Pi                 --@ExamCom[  named number]
-(1 .. 10 => 0)     --@ExamCom[  array aggregate]
-Sum                --@ExamCom[  variable]
-Integer'Last       --@ExamCom[  attribute]
-Sine(X)            --@ExamCom[  function call]
-Color'(Blue)       --@ExamCom[  qualified expression]
-Real(M*N)          --@ExamCom[  conversion]
-(Line_Count + 10)  --@ExamCom[  parenthesized expression ]
+@Trailing@;4.0                --@ExamCom[ real literal]
+Pi                 --@ExamCom[ named number]
+(1 .. 10 => 0)     --@ExamCom[ array aggregate]
+Sum                --@ExamCom[ variable]
+Integer'Last       --@ExamCom[ attribute]
+Sine(X)            --@ExamCom[ function call]
+Color'(Blue)       --@ExamCom[ qualified expression]
+Real(M*N)          --@ExamCom[ conversion]
+(Line_Count + 10)  --@ExamCom[ parenthesized expression ]
 @end{Example}
 
 @leading@keepnext@NewExample@i(Examples of expressions:)
@@ -5396,7 +5426,9 @@ The language defines the following six categories
 of operators (given in order of increasing
 precedence). The corresponding @nt<operator_symbol>s,
 and only those, can be used as @nt<designator>s in declarations
-of functions for user-defined operators. See @RefSec(Overloading of Operators).]
+of functions for user-defined operators. See
+@ISODiff{NotISO=[@RefSecFull{Overloading of Operators}],
+  ISOOnly=[@RefSecFullNum{Overloading of Operators}]}.]
 @Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
 @Defn{or operator}@Defn2{Term=[operator],Sec=(or)}
 @Defn{xor operator}@Defn2{Term=[operator],Sec=(xor)}
@@ -5486,7 +5518,7 @@ An expression of the form op Y,
 where op is a unary operator,
 is equivalent to a @nt<function_call> of the form "op"(Y).
 The predefined operators and their effects are described
-in subclauses @RefSecNum(Logical Operators and Short-Circuit Control Forms)
+in @ISODiff{NotISO=[subclauses ],ISOOnly=[]}@RefSecNum(Logical Operators and Short-Circuit Control Forms)
 through @RefSecNum(Highest Precedence Operators).]
 @end{StaticSem}
 
@@ -5570,14 +5602,14 @@ as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of precedence:)
 @begin{Example}
-@key(not) Sunny @key(or) Warm    --@ExamCom[  same as (not Sunny) or Warm]
-X > 4.0 @key(and) Y > 0.0  --@ExamCom[  same as (X > 4.0) and (Y > 0.0)]
+@key(not) Sunny @key(or) Warm    --@ExamCom[ same as (not Sunny) or Warm]
+X > 4.0 @key(and) Y > 0.0  --@ExamCom[ same as (X > 4.0) and (Y > 0.0)]
 
--4.0*A**2            --@ExamCom[  same as @en@;(4.0 * (A**2))]
-@key(abs)(1 + A) + B       --@ExamCom[  same as (abs (1 + A)) + B]
-Y**(-3)              --@ExamCom[  parentheses are necessary]
-A / B * C            --@ExamCom[  same as (A/B)*C]
-A + (B + C)          --@ExamCom[  evaluate B + C before adding it to A ]
+-4.0*A**2            --@ExamCom[ same as @en@;(4.0 * (A**2))]
+@key(abs)(1 + A) + B       --@ExamCom[ same as (abs (1 + A)) + B]
+Y**(-3)              --@ExamCom[ parentheses are necessary]
+A / B * C            --@ExamCom[ same as (A/B)*C]
+A + (B + C)          --@ExamCom[ evaluate B + C before adding it to A ]
 @end{Example}
 @end{Examples}
 
@@ -5746,12 +5778,12 @@ following truth table:
 @Leading@keepnext@NewExample@i(Examples of logical operators:)
 @begin{Example}
 @trailing@;Sunny @key(or) Warm
-Filter(1 .. 10) @key(and) Filter(15 .. 24)   --@ExamCom[   see @RefSecNum{Index Constraints and Discrete Ranges} ]
+Filter(1 .. 10) @key(and) Filter(15 .. 24)   --@ExamCom[ see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
 @leading@keepnext@NewExample@i(Examples of short-circuit control forms:)
 @begin{Example}
-Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   --@ExamCom[   see @RefSecNum{Incomplete Type Declarations}]
+Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
 @end{Example}
 @end{Examples}
@@ -6535,7 +6567,7 @@ X /= Y
 @Chg{Version=[5],New=[A_String],Old=["A"]} < @Chg{Version=[5],New=["Bb"],Old=["B"]} @key(and) @Chg{Version=[5],New=[A_String],Old=["A"]} < "A  "  @Chg{Version=[5],New=[],Old=[]}--@Examcom[ True]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-My_Car = @key(null)               --@ExamCom[ @Chg{Version=[3],New=[True],Old=[true]} if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
+My_Car = @key(null)        --@ExamCom[ @Chg{Version=[3],New=[True],Old=[true]} if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
 My_Car = Your_Car           --@ExamCom[ @Chg{Version=[3],New=[True],Old=[true]} if we both share the same car]
 My_Car.@key[all] = Your_Car.@key[all]   --@ExamCom[ @Chg{Version=[3],New=[True],Old=[true]} if the two cars are identical]
 
@@ -6821,11 +6853,11 @@ performed can be followed by a conditional addition of the modulus.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of expressions involving binary adding operators:)
 @begin{Example}
-Z + 0.1      --@ExamCom[  Z has to be of a real type ]
+Z + 0.1     --@ExamCom[ Z has to be of a real type ]
 
-"A" & "BCD"  --@ExamCom[  concatenation of two string literals]
-'A' & "BCD"  --@ExamCom[  concatenation of a character literal and a string literal]
-'A' & 'A'    --@ExamCom[  concatenation of two character literals ]
+"A" & "BCD" --@ExamCom[ concatenation of two string literals]
+'A' & "BCD" --@ExamCom[ concatenation of a character literal and a string literal]
+'A' & 'A'   --@ExamCom[ concatenation of two character literals ]
 @end{Example}
 @end{Examples}
 
@@ -7154,10 +7186,10 @@ I : Integer := 1;
 J : Integer := 2;
 K : Integer := 3;
 
-X : Real := 1.0;                      --@ExamCom[     see @RefSecNum{Floating Point Types}]
+X : Real := 1.0;                      --@ExamCom[ see @RefSecNum{Floating Point Types}]
 Y : Real := 2.0;
 
-F : Fraction := 0.25;                 --@ExamCom[     see @RefSecNum{Fixed Point Types}]
+F : Fraction := 0.25;                 --@ExamCom[ see @RefSecNum{Fixed Point Types}]
 G : Fraction := 0.5;
 @end{Example}
 @begin{Example}
@@ -8037,7 +8069,7 @@ defines how to map or transform a collection of values into a new set of values,
 and then summarize the values by applying an operation to reduce the set to a
 single value.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[reduction expression],
-  Def=[an expression that defines how to map or transform a collection of 
+  Def=[expression that defines how to map or transform a collection of 
        values into a new set of values, and then summarize the values by 
        applying an operation to reduce the set to a single value]}
 @end{Intro}
@@ -8194,8 +8226,8 @@ in @RefSecNum{Loop Statements}, @RefSecNum{User-Defined Iterator Types},
 and @RefSecNum{Generalized Loop Iteration}), as a set of
 non-empty, non-overlapping contiguous
 chunks (@i<subsequences>)@Defn2{Term=[subsequence],Sec=[reduction attribute]}
-with one logical thread of control (see clause
-@RefSecNum{Tasks and Synchronization}) associated with each subsequence.
+with one logical thread of control (see
+@RefSecFullNum{Tasks and Synchronization}) associated with each subsequence.
 If there is a @nt{chunk_specification},
 it determines the maximum number of chunks, as defined in
 @RefSecNum{Loop Statements}; otherwise
@@ -8400,7 +8432,8 @@ expression that computes the Sine of X using a Taylor expansion:>]}
 @Trailing@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={@key[function] Sine (X : Float; Num_Terms : Positive := 5) @key[return] Float @key[is]
    ([@key[for] I @key[in] 1..Num_Terms =>
-      (-1.0)**(I-1) * X**(2*I-1)/Float(Factorial(2*I-1))]'Reduce("+", 0.0));}}
+      (-1.0)**(I-1) * X**(2*I-1)/Float(Factorial(2*I-1))]
+         'Reduce("+", 0.0));}}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1],ARef=[AI12-0429-1]}

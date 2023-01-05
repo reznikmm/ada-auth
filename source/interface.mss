@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.93 $ $Date: 2022/09/17 06:51:40 $ $Author: randy $ }
+@comment{ $Revision: 1.94 $ $Date: 2023/01/05 05:49:12 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:40 $}
+@Comment{$Date: 2023/01/05 05:49:12 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -72,7 +72,7 @@ Convention.@Defn{interfacing aspect}@Defn2{Term=[aspect],Sec=[interfacing]}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 @Chg{Version=[3],New=[@AspectDefn{Import}Specifying the],Old=[A @nt{pragma}]} Import
-@Chg{Version=[3],New=[aspect  to have the value True ],Old=[]}is used to import
+@Chg{Version=[3],New=[aspect to have the value True ],Old=[]}is used to import
 an entity defined in a foreign language into an Ada program, thus allowing
 a foreign-language subprogram to be called from Ada,
 or a foreign-language variable to be accessed from Ada.
@@ -234,7 +234,8 @@ shall be the name of a @i{convention}.
 The convention names are implementation defined,
 except for certain language-defined ones,
 such as Ada and Intrinsic,
-as explained in @RefSec{Conformance Rules}.
+as explained in
+@ISODiff{NotISO=[@RefSecFull{Conformance Rules}],ISOOnly=[@RefSecFullNum{Conformance Rules}]}.
 @Redundant[Additional convention names generally represent
 the calling conventions of foreign languages,
 language implementations, or specific run-time models.]
@@ -403,8 +404,8 @@ then the @nt{pragma} Import is the completion of all of them]}.
 @end(Discussion)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@Defn{imported entity} @Defn{exported entity}
-An entity @Chg{Version=[3],New=[with a True],Old=[specified
+@Defn{imported entity}@Defn{exported entity}An entity
+@Chg{Version=[3],New=[with a True],Old=[specified
 as the Entity argument to a @nt[pragma]]} Import@Chg{Version=[3],New=[ aspect],Old=[]}
 (or @Chg{Version=[3],New=[],Old=[@nt[pragma] ]}Export@Chg{Version=[3],New=[
 aspect],Old=[]}) is said to be @i{imported}
@@ -622,7 +623,7 @@ from a pure package causes erroneous execution.],Old=[]}]}
       real change, so no Chgref}
 @ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
-Text=[If @Chg{Version=[3],New=[],Old=[@nt{pragma} ]} Export is supported
+Text=[If @Chg{Version=[3],New=[],Old=[@nt{pragma} ]}Export is supported
 for a language, the main program should
 be able to be written in that language. Subprograms named "adainit" and
 "adafinal"
@@ -653,7 +654,7 @@ for objects of @i[L]-compatible types and for
 subprograms, and @Chg{Version=[3],New=[the],Old=[@nt(pragma)]} Convention
 @Chg{Version=[3],New=[aspect ],Old=[]}for @i[L]-eligible types and for subprograms,
 presuming the other language has corresponding features.
-@Chg{Version=[3],New=[Specifying the ],Old=[@nt{Pragma}]} Convention
+@Chg{Version=[3],New=[Specifying the],Old=[@nt{Pragma}]} Convention
 @Chg{Version=[3],New=[aspect ],Old=[]}@Chg{Version=[5],New=[should],Old=[need not]}
 be supported for @Chg{Version=[5],New=[],Old=[scalar
 types]}@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[, other than]}
@@ -748,7 +749,9 @@ in an interfacing pragma can denote more than one
 entity in the case of overloading.
 Such a @nt{pragma} applies to all of the denoted entities.]}
 
-See also @RefSec{Machine Code Insertions}.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+@Chg{Version=[5],New=[Machine code insertions can also be relevant for interfacing;
+see @RefSecNum{Machine Code Insertions}],Old=[See also @RefSec{Machine Code Insertions}]}.
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The Intrinsic convention (see @refsecnum(Conformance Rules))
@@ -1140,7 +1143,8 @@ should provide the corresponding
 package or packages described in the following @Chg{Version=[3],New=[subclauses],Old=[clauses]}.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If an interface to C, COBOL, or Fortran is provided, the corresponding
-package or packages described in @RefSec{Interface to Other Languages}
+package or packages described in
+@ISODiff{NotISO=[@RefSecFull{Interface to Other Languages}],ISOOnly=[@RefSecFullNum{Interface to Other Languages}]}
 should also be provided.]}]}
 @begin{ImplNote}
 @Leading@;The intention is that an implementation might support several
@@ -1323,7 +1327,8 @@ Old=[@VirtName{implementation-defined}]};
                      Trim_Nul : @key(in)  Boolean := True);
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   -- @ExamCom[ISO/IEC 10646:2003 compatible types defined by ISO/IEC TR 19769:2004.]]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0450-1]}
+@ChgAdded{Version=[2],Text=[   -- @ExamCom[ISO/IEC 10646@Chg{Version=[5],New=[],Old=[:2003]} compatible types@Chg{Version=[5],New=[],Old=[ defined by ISO/IEC TR 19769:2004]}.]]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_t} @key<is> @VirtName{<implementation-defined character type>};]}
@@ -2651,12 +2656,14 @@ the array containing the Element designated by Target.
 @end{erron}
 
 @begin{SingleNote}
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
 @Leading@;To compose a Pointer from an Element_Array, use 'Access on
 the first element. For example (assuming appropriate instantiations):
 @begin{example}
 Some_Array   : Element_Array(0..5) ;
 Some_Pointer : Pointer := Some_Array(0)'Access;
 @end{example}
+@end{NotISO}
 @end{SingleNote}
 
 @begin{Examples}
@@ -2878,8 +2885,10 @@ These checks include:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0453-1]}
   @ChgAdded{Version=[2],Text=[The check performed when addressing a variant
-  component (i.e., a component that was declared in a variant part) of an
+  component (@Chg{Version=[5],New=[that is],Old=[i.e.]}, a component that was 
+  declared in a variant part) of an
   unchecked union object that the object has this component (see
   @RefSecNum{Selected Components}).]}
 
@@ -3832,12 +3841,12 @@ type (see @RefSecNum(Interfacing Aspects)).
 @end[ImplReq]
 
 @begin{ImplPerm}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 An implementation may add additional declarations to the Fortran interface
 packages. For example, @Chg{Version=[5],New=[declarations are permitted
 for the character types corresponding to Fortran character kinds 'ascii' and
 'iso_10646', which in turn correspond to ISO/IEC 646:1991 and
-to UCS-4 as specified in ISO/IEC 10646:2017],Old=[the Fortran interface
+to UCS-4 as specified in ISO/IEC 10646:2020],Old=[the Fortran interface
 package for an implementation of
 Fortran 77 (ANSI X3.9-1978) that defines types like Integer*@i{n}, Real*@i{n},
 Logical*@i{n}, and Complex*@i{n} may contain the declarations of types named

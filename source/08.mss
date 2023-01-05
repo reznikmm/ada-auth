@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:08 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -14,10 +14,8 @@ which @nt{identifier}s, @nt{character_literal}s, and
 the program are described in this @Chg{Version=[3],New=[clause],Old=[section]}.
 The formulation of these rules uses the notion of a declarative region.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
-As explained in @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Declarations and Types},
+As explained in @RefSecFullNum{Declarations and Types},
 a declaration declares a view of an entity
 and associates a defining name with that view.
 The view comprises an identification of the viewed entity,
@@ -190,7 +188,8 @@ a child of P whose defining name is Q,
 and that after "@key[use] P;" Q can refer (directly) to that child.
 
 As explained above
-and in @RefSec{Compilation Units - Library Units},
+and in @ISODiff{NotISO=[@RefSecFull{Compilation Units - Library Units}],
+ISOOnly=[@RefSecFullNum{Compilation Units - Library Units}]},
 all library units are descendants of Standard,
 and so are contained in the declarative region of Standard.
 They are @i{not} inside the
@@ -383,10 +382,10 @@ The immediate scope of a @nt{library_item} includes only its semantic
 dependents.
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@Chg{Version=[3],New=[Clause],Old=[Section]} 10 defines only a partial ordering of @nt{library_item}s.
+@RefSecFullNum{Program Structure and Compilation Issues}
+defines only a partial ordering of @nt{library_item}s.
 Therefore, it is a good idea to restrict the immediate scope
-(and the scope, defined below)
-to semantic dependents.
+(and the scope, defined below) to semantic dependents.
 
 @leading@;Consider also examples like this:
 @begin{Example}
@@ -615,11 +614,10 @@ appearing outside the package,
 and can be made directly visible by a @nt{use_clause}.
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 There are some obscure @Chg{Version=[2],New=[cases ],Old=[]}involving
 generics @Chg{Version=[2],New=[],Old=[cases ]}in which there is
 no such notation.
-See @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Generic Units}.
+See @RefSecFullNum{Generic Units}.
 @end{Ramification}
 @end{SingleNote}
 
@@ -802,7 +800,7 @@ Text=[@ChgAdded{Version=[2],Text=[An overriding operation
 is one that replaces an inherited primitive operation. Operations may be marked
 explicitly as overriding or not overriding.]}]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[S],Term=[overriding operation],
-  Def=[an operation that replaces an inherited primitive operation],
+  Def=[operation that replaces an inherited primitive operation],
   Note1=[Operations can be marked explicitly as overriding or not overriding.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
@@ -1117,10 +1115,9 @@ within the scope of a @nt{with_clause} that mentions the child.]}
 @Defn2{Term=[visibility], Sec=(immediate)}
 A declaration with a @nt{defining_identifier} or
 @nt{defining_operator_symbol} is immediately visible
-@Redundant[(and hence
-directly visible)] within its immediate scope
-@RootDefn{hidden from direct visibility} except where hidden
-from direct visibility, as follows:
+@Redundant[(and hence directly visible)] within its immediate scope
+except where hidden from direct 
+visibility,@RootDefn{hidden from direct visibility} as follows:
 @begin{Itemize}
   @PDefn2{Term=[hidden from direct visibility], Sec=(by an inner homograph)}
   A declaration is hidden from direct visibility
@@ -1162,7 +1159,8 @@ in a @nt{context_clause}, a @nt{parent_unit_name},
 or a @nt{pragma} that appears at the place of a
 @nt{compilation_unit}.
 For those contexts, see the rules
-in @RefSec{Environment-Level Visibility Rules}.
+in @ISODiff{NotISO=[@RefSecFull{Environment-Level Visibility Rules}],
+ISOOnly=[@RefSecFullNum{Environment-Level Visibility Rules}]}.
 @begin{Ramification}
 Direct visibility is irrelevant for @nt{character_literal}s.
 In terms of overload resolution
@@ -2039,7 +2037,7 @@ Text=<@ChgAdded{Version=[2],Text=[A @nt{renaming_declaration} is a declaration
 that does not define a new entity, but instead defines a view of an existing
 entity.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[renaming],
-  Def=[a declaration that does not define a new entity, but 
+  Def=[declaration that does not define a new entity, but 
        instead defines a new view of an existing entity]}
 @end{Intro}
 
@@ -2718,10 +2716,8 @@ called a @i{renaming-as-declaration}@Redundant[,
 and is used to rename a subprogram
 (possibly an enumeration literal) or an entry].
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 A renaming-as-body is a declaration,
-as defined in @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Declarations and Types}.
+as defined in @RefSecFullNum{Declarations and Types}.
 @end{Ramification}
 @end{Intro}
 

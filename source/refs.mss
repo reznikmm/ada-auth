@@ -1,10 +1,10 @@
 @Part(01, Root="ada.mss")
 
 
-@Comment{$Date: 2022/09/02 07:54:32 $}
+@Comment{$Date: 2023/01/05 05:49:10 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/refs.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @Comment{Header and introductory text is found in ISO_Refs.mss and RM_Refs.mss.}
 
@@ -21,7 +21,7 @@ deleted if the paragraphs are ever renumbered.}
 @Defn{639-3:2007, ISO standard}
 @Defn{Language code standard}
 ISO 639-3:2007, @i{Codes for the representation of names of languages @em Part
-3: Alpha-3 code for comprehensive coverage of languages}.],Old=[]}
+3: Alpha-3 code for comprehensive coverage of languages}@Chg{Version=[5],New=[],Old=[.]}],Old=[]}
 
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0441-1]}
 @ChgDeleted{Version=[5],Text=[@Defn{ISO/IEC 646:1991}
@@ -53,11 +53,13 @@ ISO@Chg{Version=[2],New=[/IEC],Old=[]} 1989:@Chg{Version=[2],New=[2002],Old=[198
 @i{@Chg{Version=[2],New=[Information technology @em ],Old=[]}Programming languages @em COBOL}.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2],ARef=[AI05-0299-1]}
-@Chg{Version=[3],New=[@Defn{ISO/IEC 3166-1:2006}
-@Defn{3166-1:2006, ISO/IEC standard}
-@Defn{Country code standard}
-ISO/IEC 3166-1:2006, @i{Codes for the representation of names of countries and
-their subdivisions @em Part 1: Country Codes}.],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0450-1]}
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO 3166-1:2020}
+@Defn{3166-1:2020, ISO standard}],Old=[@Defn{ISO 3166-1:2006}
+@Defn{3166-1:2006, ISO standard}]}@Defn{Country code standard}
+ISO@Chg{Version=[5],New=[],Old=[/IEC]} 3166-1:@Chg{Version=[5],New=[2020],Old=[2006]},
+@i{Codes for the representation of names of countries and
+their subdivisions @em Part 1: Country Codes}@Chg{Version=[5],New=[],Old=[.]}],Old=[]}
 
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0441-1]}
 @ChgDeleted{Version=[5],Text=[@Defn{ISO/IEC 6429:1992}
@@ -112,16 +114,16 @@ Corrigendum 1:2001 and Technical Corrigendum 2:2004]}],Old=[]}.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0260-1]}
-@Chg{Version=[2],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}
-@Defn{10646:2017, ISO/IEC standard}],Old=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0260-1],ARef=[AI12-0450-1]}
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2020}
+@Defn{10646:2020, ISO/IEC standard}],Old=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}
 @Defn{10646:2011, ISO/IEC standard}],Old=[@Defn{ISO/IEC 10646:2003}
 @Defn{10646:2003, ISO/IEC standard}]}]}
 @Defn2{Term=[character set standard],Sec=(16 and 32-bit)}
-ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[@Chg{Version=[3],New=[2011],Old=[2003]}]},
+ISO/IEC 10646:@Chg{Version=[5],New=[2020],Old=[@Chg{Version=[3],New=[2011],Old=[2003]}]},
 @i{Information technology @em Universal@Chg{Version=[5],New=[],Old=[ Multiple-Octet]}
-Coded Character Set (UCS)}.],
-Old=[@Defn{ISO/IEC 10646-1:1993}
+@Chg{Version=[5],New=[coded character set],Old=[Coded Character Set]}
+(UCS)}@Chg{Version=[5],New=[],Old=[.]}],Old=[@Defn{ISO/IEC 10646-1:1993}
 @Defn{10646-1:1993, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(16-bit)}
 ISO/IEC 10646-1:1993,
@@ -197,8 +199,9 @@ POSIX,
 @end{DiffWord2005}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1],ARef=[AI12-0450-1]}
   @ChgAdded{Version=[5],Text=[Moved all informative references to the
-    (new) @RefSec{Bibliography}.]}
+    (new) @RefSec{Bibliography}. Revised remaining references to the most
+    recent version.]}
 @end{DiffWord2012}
 

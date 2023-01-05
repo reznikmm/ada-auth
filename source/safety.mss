@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.77 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
+@Comment{ $Revision: 1.78 $ $Date: 2023/01/05 05:49:10 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:39 $}
+@Comment{$Date: 2023/01/05 05:49:10 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -619,10 +619,14 @@ be provided.]}]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00209-01]}
-The implementation is not allowed to perform @lquotes@;dead store elimination@rquotes@; on
-the last assignment to a variable prior to a point where the
-variable is inspectable.
-Thus an inspection point has the effect of an
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[Because reaching an inspection point is considered
+an external interaction relative to the values of the inspectable variables,
+the],Old=[The]} implementation @Chg{Version=[5],New=[cannot],Old=[is not
+allowed to]} perform @lquotes@;dead store elimination@rquotes@; on
+the last assignment to @Chg{Version=[5],New=[such ],Old=[]}a variable prior to
+@Chg{Version=[5],New=[an inspection point],Old=[a point where the
+variable is inspectable]}. Thus an inspection point has the effect of an
 implicit @Chg{Version=[2],New=[read of],Old=[reference to]} each of its
 inspectable objects.
 
@@ -640,8 +644,9 @@ to check that a program did not have a `storage leak'.
 
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 The identification of the mapping from source program objects to machine
-resources is allowed to be in the form of an
+resources @Chg{Version=[5],New=[can],Old=[is allowed to]} be in the form of an
 annotated object listing, in human-readable or tool-processable form.
 @begin{Discussion}
 

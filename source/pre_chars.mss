@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2022/06/21 06:08:04 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2023/01/05 05:49:12 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2023/01/05 05:49:12 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -276,10 +276,10 @@ character with position 95 ('_', known as Low_Line or Underscore).]}
 @ChgAdded{Version=[3],Text=[Is_Space@\True if Item is a character with
 position 32 (' ') or 160 (No_Break_Space).]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1],ARef=[AI12-0439-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1],ARef=[AI12-0439-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[5],Text=[Is_NFKC@\True if Item can be present in a string
-normalized to Normalization Form KC (as defined by Clause 21 of ISO/IEC
-10646:2017); this includes all characters except those with positions 160, 168,
+normalized to Normalization Form KC (as defined by Clause 22 of ISO/IEC
+10646:2020); this includes all characters except those with positions 160, 168,
 170, 175, 178, 179, 180, 181, 184, 185, 186, 188, 189, and 190.]}
 @end{description}
 
@@ -289,9 +289,9 @@ functions: one that converts from Character to Character, and the
 other that converts from String to String. The result of each
 Character-to-Character function is described below, in terms of the
 conversion applied to Item, its formal Character parameter. The
-result of each  String-to-String conversion is obtained by applying
+result of each String-to-String conversion is obtained by applying
 to each element of the function's
- String parameter the corresponding Character-to-Character conversion;
+String parameter the corresponding Character-to-Character conversion;
 the result is the null String if the value of the formal parameter
 is the null String.
 The lower bound of the result String is 1.
@@ -423,11 +423,10 @@ are not considered lower case letters by Ada.Characters.Handling.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
   @ChgAdded{Version=[3],Text=[This is to maintain runtime compatibility with
   the Ada 95 definitions of these functions. We don't list the exact characters
   involved because they're likely to change in future character set standards;
-  the list for ISO 10646:@Chg{Version=[5],New=[2017],Old=[2011]} can be found
+  the list for ISO 10646:2011 can be found
   in @AILink{AI=[AI05-0114-1],Text=[AI05-0114-1]}.]}
 @end{Reason}
 @begin{Ramification}
@@ -1164,15 +1163,15 @@ False.]}
 @ChgAdded{Version=[5],Keepnext=[T],Text=[@key[function] Is_Basic (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0260-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0260-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item has no Decomposition Mapping in the code charts of ISO/IEC
-10646:2017; otherwise returns False.]}
+10646:2020; otherwise returns False.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[Decomposition Mapping is defined in Clause 33
-  of ISO/IEC 10646:2017. Machine-readable (and normative!) versions of this
+  of ISO/IEC 10646:2020. Machine-readable (and normative!) versions of this
   can be found as Character Decomposition Mapping, described in file
   @URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt],
   Text=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt]},
@@ -1279,10 +1278,10 @@ False.]}
 @ChgAdded{Version=[5],Keepnext=[T],Text=[@key[function] Is_NFKC (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1],ARef=[AI12-0439-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1],ARef=[AI12-0439-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item can be present in a string normalized to Normalization Form
-KC (as defined by Clause 21 of ISO/IEC 10646:2017), otherwise returns False.]}
+KC (as defined by Clause 22 of ISO/IEC 10646:2020), otherwise returns False.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1324,22 +1323,22 @@ False.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the Simple Lowercase Mapping
 as defined by documents referenced in @Chg{Version=[5],New=[],Old=[the
 note in ]}Clause @Chg{Version=[5],New=[2],Old=[1]} of ISO/IEC
-10646:@Chg{Version=[5],New=[2017],Old=[2011]}
+10646:@Chg{Version=[5],New=[2020],Old=[2011]}
 of the Wide_Character designated by Item. If the Simple Lowercase Mapping does
 not exist for the Wide_Character designated by Item, then the value of Item is
 returned.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
   @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[The @ldquote@;documents
   referenced@rdquote means Unicode, Chapter 4 (specifically, section 4.2
   @em Case). ],Old=[]}The case mappings come from Unicode as
-  ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[2011]}
+  ISO/IEC 10646:@Chg{Version=[5],New=[2020],Old=[2011]}
   does not include @Chg{Version=[5],New=[complete ],Old=[]}case
   mappings@Chg{Version=[5],New=[. See the Implementation Notes in
   subclause @RefSecNum{Method of Description and Syntax Notation} for
@@ -1365,11 +1364,11 @@ Wide_String is 1.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the Simple Uppercase Mapping
 as defined by documents referenced in @Chg{Version=[5],New=[],Old=[the
 note in ]}Clause @Chg{Version=[5],New=[2],Old=[1]} of ISO/IEC
-10646:@Chg{Version=[5],New=[2017],Old=[2011]}
+10646:@Chg{Version=[5],New=[2020],Old=[2011]}
 of the Wide_Character designated by Item. If the Simple Uppercase
 Mapping does not exist for the Wide_Character designated by Item, then the value
 of Item is returned.]}
@@ -1391,10 +1390,10 @@ Wide_String is 1.]}
 @ChgAdded{Version=[5],Keepnext=[T],Text=[@key[function] To_Basic (Item : Wide_Character) @key[return] Wide_Character;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0260-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0260-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Returns the Wide_Character whose
 code point is given by the first value of its Decomposition Mapping in the code
-charts of ISO/IEC 10646:2017 if any; returns Item otherwise.]}
+charts of ISO/IEC 10646:2020 if any; returns Item otherwise.]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
@@ -1421,11 +1420,11 @@ should include either @ldquote@;10646:@rdquote or @ldquote@;Unicode@rdquote@;.]}
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[3],Text=<The intent is that the returned string include the
-year for 10646 (as in "10646:@Chg{Version=[5],New=[2017],Old=[2011]}"), and the
+year for 10646 (as in "10646:@Chg{Version=[5],New=[2020],Old=[2011]}"), and the
 version number for Unicode (as in "Unicode
-@Chg{Version=[5],New=[10.0],Old=[6.0]}"). We don't try to specify that further
+@Chg{Version=[5],New=[13.0],Old=[6.0]}"). We don't try to specify that further
 so we don't need to decide how to represent Corrigenda for 10646, nor which of
 these is preferred. (Giving a Unicode version is more accurate, as the case
 folding and mapping rules always come from a Unicode version [10646 just tells
@@ -1437,15 +1436,19 @@ standards in an ISO standard.)>}
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0266-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1],ARef=[AI12-0450-1]}
 @ChgAdded{Version=[3],Text=[The results returned by these functions
 @Chg{Version=[5],New=[can],Old=[may]} depend
-on which particular version of the 10646 standard is supported by the
+on which particular version of @Chg{Version=[5],New=[ISO/IEC],Old=[the]}
+10646@Chg{Version=[5],New=[],Old=[ standard]} is supported by the
 implementation (see @RefSecNum{Character Set}).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @ChgAdded{Version=[3],Text=[The case insensitive equality comparison routines
-provided in @RefSec{String Comparison} are also available for wide strings
+provided in 
+@Chg{Version=[5],New=[@RefSecNum{String Comparison}],Old=[@RefSec{String Comparison}]}
+are also available for wide strings
 (see @RefSecNum{Wide_String Handling}).]}
 @end{Notes}
 

@@ -1,10 +1,11 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.121 $ $Date: 2022/06/21 06:08:03 $ $Author: randy $ }
+@comment{ $Revision: 1.122 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:03 $}
+@Comment{$Date: 2023/01/05 05:49:09 $}
 
-@RMNewPage
+@rmnewpagever{Version=[2]}@Comment{Page break in Ada 2005 RM}
+@rmnewpagever{Version=[3]}@Comment{Page break in Ada 2012 RM}
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
 @begin{Intro}
@@ -19,7 +20,7 @@ objects all of the same type, which could be class-wide.
 Several predefined container types are provided by the children
 of package Ada.Containers (see @RefSecNum{The Package Containers}).]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[container],
-  Def=[a structured object that represents a collection of elements all of the
+  Def=[structured object that represents a collection of elements all of the
        same (potentially class-wide) type, such as a vector or a tree],
   Note1=[Several predefined container types are provided by the children
          of package Ada.Containers (see @RefSecNum{The Package Containers}).]}
@@ -341,15 +342,18 @@ implementations that are unstable if given buggy hash functions, et al.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @ChgAdded{Version=[4],Text=[Certain subprograms declared within instances of
 some of the generic packages presented in this clause are said to @i<perform
 indefinite insertion>. These subprograms are those corresponding (in the sense
-of the copying described in subclause @RefSecNum{Generic Instantiation}) to
-subprograms that have formal parameters of a generic formal indefinite type and
+of the copying described in
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{Generic Instantiation})
+to subprograms that have formal parameters of a generic formal indefinite type and
 that are identified as performing indefinite insertion in the subclause defining
 the generic package.@Defn{perform indefinite insertion}]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @ChgAdded{Version=[4],Type=[Leading],Text=[If a subprogram performs indefinite
 insertion, then certain run-time checks are performed as part of a call to the
 subprogram; if any of these checks fail, then the resulting exception is
@@ -358,9 +362,9 @@ checks are performed for each parameter corresponding (in the sense of the
 copying described in @RefSecNum{Generic Instantiation}) to a parameter in the
 corresponding generic whose type is a generic formal indefinite type. The checks
 performed for a given parameter are those checks explicitly specified in
-subclause @RefSecNum{Allocators} that would be performed as part of the
-evaluation of an initialized allocator whose access type is declared immediately
-within the instance, where:]}
+@Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{Allocators}
+that would be performed as part of the evaluation of an initialized allocator
+whose access type is declared immediately within the instance, where:]}
 
 @begin{Itemize}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -378,12 +382,14 @@ within the instance, where:]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
   @ChgAdded{Version=[4],Text=[The phrase "explicitly specified" means those
-  checks for which subclause @RefSecNum{Allocators} includes the phrase "<some
-  exception> is raised if ...". It does not refer, for example, to any checks
-  performed as part of any subtype conversion. In particular, this wording
-  includes the checks described in subclause @RefSecNum{Allocators} to be
-  performed in the case of a class-wide designated type, and of a designated
+  checks for which @Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{Allocators}
+  includes the phrase "<some exception> is raised if ...". It does not refer,
+  for example, to any checks performed as part of any subtype conversion. In 
+  particular, this wording includes the checks described in
+  @Chg{Version=[5],New=[],Old=[subclause ]}@RefSecNum{Allocators}
+  to be performed in the case of a class-wide designated type, and of a designated
   subtype that has access discriminant parts. These checks are needed to prevent
   containers from outliving their contained (Element_Type or Key_Type) values.]}
 @end{Discussion}
@@ -1935,8 +1941,8 @@ then the operation propagates Constraint_Error.]}]}@ChgNote{Covered by precondit
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some
-operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a vector]}@Defn2{Term=[tamper with elements],Sec=[of a vector]}],Old=[of this generic package have
-access-to-subprogram parameters. To
+operations@Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a vector]}@Defn2{Term=[tamper with elements],Sec=[of a vector]}],Old=[ of
+this generic package have access-to-subprogram parameters. To
 ensure such operations are well-defined, they guard against certain actions by
 the designated subprogram. In particular, some operations]} check for
 @lquotes@;tampering with cursors@rquotes of a container because they depend on
@@ -5681,7 +5687,7 @@ elements as was written by List'Write.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some
-operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}@Defn2{Term=[tamper with elements],Sec=[of a list]}],Old=[of
+operations@Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}@Defn2{Term=[tamper with elements],Sec=[of a list]}],Old=[ of
 this generic package have access-to-subprogram parameters. To
 ensure such operations are well-defined, they guard against certain actions by
 the designated subprogram. In particular, some operations]} check for

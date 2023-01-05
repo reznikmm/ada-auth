@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:39 $}
+@Comment{$Date: 2023/01/05 05:49:09 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -27,18 +27,22 @@ support formatted and localized output of decimal data, based on
 @end{itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-See also: @RefSec{Fixed Point Types}; @RefSec{Operations of Fixed Point Types};
-@RefSec{Type Conversions};
-@RefSec{Operational and Representation Attributes};
-@RefSec(Input-Output for Real Types);@Chg{Version=[2],
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
+@Chg{Version=[5],New=[Other relevant facilities can be found in],Old=[See also]}:
+@ISODiff{NotISO=[@RefSecFull{Fixed Point Types}],ISOOnly=[@RefSecFullNum{Fixed Point Types}]};
+@ISODiff{NotISO=[@RefSecFull{Operations of Fixed Point Types}],ISOOnly=[@RefSecFullNum{Operations of Fixed Point Types}]};
+@ISODiff{NotISO=[@RefSecFull{Type Conversions}],ISOOnly=[@RefSecFullNum{Type Conversions}]};
+@ISODiff{NotISO=[@RefSecFull{Operational and Representation Attributes}],ISOOnly=[@RefSecFullNum{Operational and Representation Attributes}]};
+@ISODiff{NotISO=[@RefSecFull{Input-Output for Real Types}],ISOOnly=[@RefSecFullNum{Input-Output for Real Types}]};@Chg{Version=[2],
 New=[],Old=[@RefSec{Interfacing with COBOL};]}
-@RefSec{Interfacing with C and C++};@Chg{Version=[2],
-New=[ @RefSec{Interfacing with COBOL};],Old=[]}
-@RefSec{Numerics}.
+@ISODiff{NotISO=[@RefSecFull{Interfacing with C and C++}],ISOOnly=[@RefSecFullNum{Interfacing with C and C++}]};@Chg{Version=[2],
+New=[ @ISODiff{NotISO=[@RefSecFull{Interfacing with COBOL}],ISOOnly=[@RefSecFullNum{Interfacing with COBOL}]};],Old=[]}
+@ISODiff{NotISO=[@RefSecFull{Numerics}],ISOOnly=[@RefSecFullNum{Numerics}]}.
 
 The character and string handling packages in
-@RefSec{Predefined Language Environment}
- are also relevant for Information Systems.
+@ISODiff{NotISO=[@RefSecFull{Predefined Language Environment}],
+ ISOOnly=[@RefSecFullNum{Predefined Language Environment}]}
+are also relevant for Information Systems.
 @end{Intro}
 
 @begin{ImplAdvice}
@@ -326,7 +330,8 @@ indicates the space character.
 The generic packages Text_IO.Decimal_IO@Chg{Version=[2],New=[,],Old=[ and]}
 Wide_@!Text_IO.Decimal_IO@Chg{Version=[2],New=[, and 
 Wide_@!Wide_@!Text_IO.Decimal_IO],Old=[]}
-(see @RefSec(Input-Output for Real Types))
+(see @ISODiff{NotISO=[@RefSecFull{Input-Output for Real Types}],
+ISOOnly=[@RefSecFullNum{Input-Output for Real Types}]})
 provide text input and nonedited text output for decimal types.
 @end{Intro}
 
@@ -693,7 +698,8 @@ and the edited output string is the concatenation of
 string values derived from these categories according to the
 following mapping rules.
 
-Table F-1 shows the mapping from a sign control symbol to a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
+Table @Chg{Version=[5],New=[F.1],Old=[F-1]} shows the mapping from a sign control symbol to a
 corresponding character or string in the edited output. In the
 columns showing the edited output, a lower-case 'b' represents the
 space character.
@@ -703,7 +709,7 @@ is produced.
 
 @Table{Columns=<3>,Alignment=<AllCenter>,FirstColWidth=[1],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
-Caption=<@b{Table F-1: Edited Output for Sign Control Symbols}>,
+Caption=<@b{Table @Chg{Version=[5],New=[F.1],Old=[F-1]}: Edited Output for Sign Control Symbols}>,
 Headers=<@b{Sign Control Symbol}@\@b{Edited Output for @*Nonnegative Number}@\@b{Edited Output for @*Negative Number}>,
 Body=['+'@\'+'@\'@en@;'
 '@en@;'@\'b'@\'@en@;'
@@ -712,8 +718,9 @@ Body=['+'@\'+'@\'@en@;'
 "CR"@\"bb"@\"CR"@Last
 "DB"@\"bb"@\"DB"]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
 An instance of @ntf{fixed_LHS_sign} maps to a character as shown in
-Table F-1.
+Table @Chg{Version=[5],New=[F.1],Old=[F-1]}.
 
 An instance of @ntf{fixed_$_char} maps to Currency.
 
@@ -797,9 +804,9 @@ where:
                    edited output string is produced.
 @end{Enumerate}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
 An instance of @ntf{RHS_sign} maps to a character or string
-as shown in Table F-1.
-
+as shown in Table @Chg{Version=[5],New=[F.1],Old=[F-1]}.
 
 An instance of @ntf{floating_LHS_sign} maps to the string obtained as follows.
 @begin{Enumerate}
@@ -808,8 +815,9 @@ An instance of @ntf{floating_LHS_sign} maps to the string obtained as follows.
                    from the @i{integer_part} of the mapping of the @ntf{number}
                    to the right of the @ntf{floating_LHS_sign} instance.
 
+                  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
                   The next Character to the left is replaced
-                   with the character given by the entry in Table F-1
+                   with the character given by the entry in Table @Chg{Version=[5],New=[F.1],Old=[F-1]}
                    corresponding to the @ntf{LHS_Sign} Character.
 
                   A @ntf{context_sensitive_insertion} Character is replaced
@@ -1204,7 +1212,9 @@ raises the exception Layout_Error.
 @Trailing@;Each of these Put procedures
 outputs Image(Item, Pic, Currency, Fill, Separator, Radix_Mark)
 consistent with the conventions for Put for other real types in case
-of bounded line length (see @RefSec{Get and Put Procedures}).
+of bounded line length (see 
+@ISODiff{NotISO=[@RefSecFull{Get and Put Procedures}],
+  ISOOnly=[@RefSecFullNum{Get and Put Procedures}]}).
 
 @begin{Example}
 @key(procedure) Put (To         : @key(out) String;
@@ -1238,34 +1248,78 @@ if its expanded form exceeds 30 characters.
 @end{Discussion}
 @end{ImplReq}
 
-@begin{SingleNote}
-@Leading@;The rules for edited output are based on COBOL (ANSI X3.23:1985,
-endorsed by ISO as ISO 1989-1985), with the
-following differences:
+@begin{Notes}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0450-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[The rules for edited output
+are based on COBOL (ANSI X3.23:1985, endorsed by ISO as ISO 1989-1985),
+with the following differences:]}
 @begin{Itemize}
-   The COBOL provisions for picture string localization and for 'P' format
-   are absent from Ada.
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+   @ChgDeleted{Version=[5],Text=[The COBOL provisions for picture string
+   localization and for 'P' format are absent from Ada.]}
 
-   @Leading@;The following Ada facilities are not in COBOL:
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+   @ChgDeleted{Version=[5],Type=[Leading],Text=[The following Ada facilities are not in COBOL:]}
 @begin{InnerItemize}
-      currency symbol placement after the number,
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+      @ChgDeleted{Version=[5],Text=[currency symbol placement after the number,]}
 
-      localization of edited output string for multi-character
-      currency string values, including support for both length-preserving
-      and length-expanding currency symbols in picture strings
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+      @ChgDeleted{Version=[5],Text=[localization of edited output string for
+      multi-character currency string values, including support for both
+      length-preserving and length-expanding currency symbols in picture strings]}
 
-      localization of the radix mark, digits separator, and
-      fill character, and
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+      @ChgDeleted{Version=[5],Text=[llocalization of the radix mark, digits separator, and
+      fill character, and]}
 
-      parenthesization of negative values.
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+      @ChgDeleted{Version=[5],Text=[parenthesization of negative values.]}
 @end{InnerItemize}
 @end{Itemize}
 @ChgNote{The following paragraph is missing a number in the original version.
 To give it a number in the new version, it is marked as an insertion.}
-@ChgRef{Version=[0],Kind=[Added]}@NoPrefix
-@Chg{New=[],Old=[@Noparanum@;]}The value of 30 for Max_Picture_Length is the
-same limit as in COBOL.
-@end{SingleNote}
+@ChgRef{Version=[0],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0450-1]}
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[@Chg{New=[],Old=[@Noparanum@;]}The value
+of 30 for Max_Picture_Length is the same limit as in COBOL.]}
+@end{Notes}
+@begin{Discussion}
+@Comment{We can't talk about the 1985 version of anything in the actual
+Standard, so this information has been moved to an AARM note.}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0450-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The rules for edited output
+were based on the 1985 version of COBOL (ANSI X3.23:1985, endorsed by ISO
+as ISO 1989-1985), with the following differences:]}
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[The COBOL provisions for picture string
+   localization and for 'P' format are absent from Ada.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Type=[Leading],Text=[The following Ada facilities are
+   not in the 1985 version of COBOL:]}
+@begin{InnerItemize}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[currency symbol placement after the number;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[localization of edited output string for
+      multi-character currency string values, including support for both
+      length-preserving and length-expanding currency symbols in picture strings;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[localization of the radix mark, digits separator, and
+      fill character; and]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[parenthesization of negative values.]}
+@end{InnerItemize}
+@end{Itemize}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0450-1]}
+@ChgAdded{Version=[5],NoPrefix=[T],Text=[@Chg{New=[],Old=[@Noparanum@;]}The value
+of 30 for Max_Picture_Length is the same limit as in COBOL.]}
+@end{Discussion}
 
 @begin{Reason}
 There are several reasons we have not adopted the COBOL-style permission to

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:37 $}
+@Comment{$Date: 2023/01/05 05:49:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Type Conversions}
@@ -750,7 +750,8 @@ Numeric Type Conversion
   @Defn{accuracy}
   If the target type is some other real type,
   then the result is within the accuracy of the target type
-  (see @RefSec{Numeric Performance Requirements},
+  (see @ISODiff{NotISO=[@RefSecFull{Numeric Performance Requirements}],
+        ISOOnly=[@RefSecFullNum{Numeric Performance Requirements}]},
   for implementations that support the Numerics Annex).
   @begin(Discussion)
     An integer type might have more bits of precision than a real type,
@@ -1068,13 +1069,14 @@ performed as above for a value conversion.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0096-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}@Chg{Version=[3],New=[
 @Defn2{Term=(Assertion_Error),Sec=(raised by failure of runtime check)}],Old=[]}
 If an Accessibility_Check fails, Program_Error is raised.
 @Chg{Version=[3],New=[If a predicate check fails, @Chg{Version=[4],New=[the
-effect is as defined in subclause @RefSec{Subtype Predicates}],
-Old=[Assertions.Assertion_Error is
+effect is as defined in @Chg{Version=[5],New=[@RefSecNum{Subtype Predicates}],Old=[subclause
+@RefSec{Subtype Predicates}]}],Old=[Assertions.Assertion_Error is
 raised]}. ],Old=[]}Any other check associated with a conversion raises
 Constraint_Error if it fails.
 
@@ -1192,6 +1194,7 @@ Similarly, such an @nt{expression} enclosed by parentheses is not
 allowed. A @nt<qualified_expression> (see @RefSecNum(Qualified Expressions))
 can be used instead of such a @nt<type_conversion>.
 
+@begin{NotISO}@ChgNote{Usage Advice not allowed in notes}
 The constraint of the target subtype has no effect
 for a @nt<type_conversion> of an elementary type passed
 as an @key(out) parameter. Hence, it is recommended
@@ -1199,6 +1202,7 @@ that the first subtype be specified
 as the target to minimize confusion
 (a similar recommendation applies to renaming and
 generic formal @key(in out) objects).
+@end{NotISO}
 @end{Notes}
 
 @begin{Examples}
@@ -1534,6 +1538,7 @@ is the subtype denoted by the @nt{subtype_mark}.@Defn2{Term=[nominal subtype],Se
 
 @begin{RunTime}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0100-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @PDefn2{Term=[evaluation], Sec=(qualified_expression)}
 @IndexCheck{Range_Check}
 @IndexCheck{Discriminant_Check}
@@ -1548,7 +1553,8 @@ the @nt{subtype_mark}.
 The exception Constraint_Error is raised if this check fails.@Chg{Version=[4],
 New=[ Furthermore, if predicate checks are enabled for the subtype
 denoted by the @nt{subtype_mark}, a check is performed as defined in
-subclause @RefSec{Subtype Predicates} that the value satifies the predicates
+@Chg{Version=[5],New=[@RefSecNum{Subtype Predicates}],Old=[subclause
+@RefSec{Subtype Predicates}]} that the value satifies the predicates
 of the subtype.],Old=[]}
 @begin{Ramification}
   This is one of the few contexts in Ada 95 where implicit subtype conversion
@@ -2089,7 +2095,9 @@ includes calls on corresponding Initialize or Adjust procedures.
 See @RefSecNum{Assignment and Finalization}.
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
-As explained in @RefSec{Storage Management},
+As explained in 
+@ISODiff{NotISO=[@RefSecFull{Storage Management}],
+ISOOnly=[@RefSecFullNum{Storage Management}]},
 the storage for an object allocated by an @nt{allocator} comes from a
 storage pool (possibly user defined).
 The exception Storage_Error is raised by an @nt<allocator> if there
@@ -2118,18 +2126,21 @@ but not required, to]} provide garbage collection@Chg{Version=[3],New=[],Old=[
 @begin{Examples}
 @Leading@keepnext@NewExample@i{Examples of allocators:}
 @begin{Example}
-@key(new) Cell'(0, @key(null), @key(null))                          @ExamCom[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
-@key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @ExamCom[-- initialized explicitly]
-@key(new) Cell                                          @ExamCom[-- not initialized]
+@key(new) Cell'(0, @key(null), @key(null))           @ISODiff{NotISO=[      ],ISOOnly=[]}--@ExamCom[ initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
+@key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null))
+                                         --@ExamCom[ initialized explicitly]
+@key(new) Cell                                 --@ExamCom[ not initialized]
 
-@key(new) Matrix(1 .. 10, 1 .. 20)                      @ExamCom[-- the bounds only are given]
-@key(new) Matrix'(1 .. 10 => (1 .. 20 => 0.0))          @ExamCom[-- initialized explicitly]
+@key(new) Matrix(1 .. 10, 1 .. 20)             --@ExamCom[ the bounds only are given]
+@key(new) Matrix'(1 .. 10 => (1 .. 20 => 0.0)) --@ExamCom[ initialized explicitly]
 
-@key(new) Buffer(100)                                   @ExamCom[-- the discriminant only is given]
-@key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A')) @ExamCom[-- initialized explicitly]
+@key(new) Buffer(100)                    @ISODiff{NotISO=[      ],ISOOnly=[]}--@ExamCom[ the discriminant only is given]
+@key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A'))
+                                         --@ExamCom[ initialized explicitly]
 
-Expr_Ptr'(@key(new) Literal)                  @ExamCom[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
-Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5))      @ExamCom[-- initialized explicitly]
+Expr_Ptr'(@key(new) Literal)
+                   --@ExamCom[ allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
+Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5)) --@ExamCom[ initialized explicitly]
 
 @end{Example}
 @end{Examples}
@@ -3004,16 +3015,17 @@ between two integers, the rounding is performed away from zero.
 @begin{Examples}
 @Leading@keepnext@NewExample@i(Examples of static expressions:)
 @begin{Example}
-1 + 1       @ExamCom[-- 2]
-@key(abs)(-10)*3  @ExamCom[-- 30]
+1 + 1       --@ExamCom[ 2]
+@key(abs)(-10)*3  --@ExamCom[ 30]
 
 Kilo : @key(constant) := 1000;
-Mega : @key(constant) := Kilo*Kilo;   @ExamCom[-- 1_000_000]
+Mega : @key(constant) := Kilo*Kilo;   --@ExamCom[ 1_000_000]
 Long : @key(constant) := Float'Digits*2;
 
-Half_Pi    : @key(constant) := Pi/2;           @ExamCom[-- see @RefSecNum(Number Declarations)]
+Half_Pi    : @key(constant) := Pi/2;           --@ExamCom[ see @RefSecNum(Number Declarations)]
 Deg_To_Rad : @key(constant) := Half_Pi/90;
-Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad; @ExamCom[-- equivalent to 1.0/((3.14159_26536/2)/90)]
+Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad;
+                           --@ExamCom[ equivalent to 1.0/((3.14159_26536/2)/90)]
 @end{Example}
 @end{Examples}
 
@@ -3619,7 +3631,7 @@ type on a conversion of the parameter of type T to the parent type.]}
   if halfway between) with a single leading character that is either a minus
   sign or a space, a single digit (that is nonzero unless the value is zero), a
   decimal point, S'Digits-1 (see @RefSecNum{Operations of Floating Point Types})
-  digits  after the decimal point (but one if
+  digits after the decimal point (but one if
   S'Digits is one), an upper case E, the sign of the exponent (either + or -),
   and two or more digits (with leading zeros if necessary) representing the
   exponent. If S'Signed_Zeros is True, then the leading character is a minus sign
@@ -3731,7 +3743,7 @@ is the same as described below for a nonderived record type.]}
 @ChgAdded{Version=[5],Text=[If the default implementation of Put_Image writes 
   components, the order in which components are written is the same 
   canonical order in which components of a composite type T are written out
-  by the default implementation of T'Write.  @Redundant[This is also the order
+  by the default implementation of T'Write. @Redundant[This is also the order
   that is used in determining the meaning of a positional aggregate of type T.]]}
 
 @begin{Discussion}

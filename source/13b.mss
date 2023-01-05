@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2022/09/17 06:51:38 $}
+@Comment{$Date: 2023/01/05 05:49:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @RMNewPageVer{Version=[0]}
 @RMNewPageVer{Version=[1]}
@@ -699,10 +699,14 @@ machine code function, for example,
 @lquotes@;Scalar results are returned in register 0@rquotes.
 @end{Discussion}
 
-Intrinsic subprograms (see @RefSec{Conformance Rules})
+Intrinsic subprograms (see
+@ISODiff{NotISO=[@RefSecFull{Conformance Rules}],
+  ISOOnly=[@RefSecFullNum{Conformance Rules}]})
 can also be used to achieve machine code insertions.
 Interface to assembly language can be achieved
-using the features in @RefSec{Interface to Other Languages}.
+using the features in
+@ISODiff{NotISO=[@RefSecFull{Interface to Other Languages}],
+  ISOOnly=[@RefSecFullNum{Interface to Other Languages}]}.
 @end{Notes}
 
 @begin{Examples}
@@ -1507,12 +1511,14 @@ hard-to-understand bugs.]}
 @end{StaticSem}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 This attribute is provided to support the situation where a local
 object is to be inserted into a global linked data structure, when the
 programmer knows that it will always be removed from the data structure prior
 to exiting the object's scope. The Access attribute would
 be illegal in this case
-(see @RefSec{Operations of Access Types}).
+(see @Chg{Version=[5],New=[@RefSecFullNum{Operations of Access Types}],
+ Old=[@RefSecFull{Operations of Access Types}]}).
 @begin{Ramification}
 @PDefn2{Term=[expected type],
   Sec=(Unchecked_Access attribute)}
@@ -1606,7 +1612,7 @@ comes from the storage pool of the type of the @nt{allocator}. Some storage
 pools may be partitioned into subpools in order to support finer-grained storage
 management.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[storage pool object],
-  Def=[an object associated with one or more access 
+  Def=[object associated with one or more access 
        types from which the storage for objects created by allocators of
        the access type(s) is obtained],
   Note1=[Some storage pools can be partitioned into subpools in order to
@@ -2274,7 +2280,8 @@ mutual exclusion.
  If they are used inside protected objects, they cannot block.
 
  If they are used by interrupt handlers
-(see @RefSec{Interrupt Support}),
+(see @ISODiff{NotISO=[@RefSecFull{Interrupt Support}],
+  ISOOnly=[@RefSecFullNum{Interrupt Support}]}),
 the mutual exclusion mechanism has to work properly in that context.
  @end{itemize}
 
@@ -3718,7 +3725,7 @@ overridden.]]}
 @begin{Notes}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1],ARef=[AI12-0447-1]}
 @ChgAdded{Version=[3],Text=[A user-defined storage pool type that supports
 subpools can be implemented by extending the Root_Storage_Pool_With_Subpools
 type, and overriding the primitive subprograms Create_Subpool,
@@ -3726,9 +3733,10 @@ Allocate_From_Subpool, and Deallocate_Subpool. Create_Subpool
 @Chg{Version=[5],New=[is expected to],Old=[should]} call Set_Pool_Of_Subpool
 before returning the subpool handle. To make use of such a pool, a user
 @Chg{Version=[5],New=[can],Old=[would]} declare an object of the type
-extension, use it to define the Storage_Pool attribute of one or more access
-types, and then call Create_Subpool to obtain subpool handles associated with
-the pool.]}
+extension, @Chg{Version=[5],New=[can ],Old=[]}use it to define the Storage_Pool
+attribute of one or more access types, and then
+@Chg{Version=[5],New=[can invoke],Old=[call]} Create_Subpool to obtain subpool
+handles associated with the pool.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}
@@ -4776,7 +4784,7 @@ Text=<@ChgAdded{Version=[3],Text=[A stream is a sequence of elements that can be
 used, along with the stream-oriented attributes, to support marshalling and
 unmarshalling of values of most types.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[stream],
-  Def=[a sequence of elements that can be used, along with the 
+  Def=[sequence of elements that can be used, along with the 
        stream-oriented attributes, to support marshalling and unmarshalling
        of values of most types]}
 @end{Intro}
@@ -5095,8 +5103,9 @@ allocation.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
-See @RefSec{The Package Streams.Stream_IO} for an example of extending
-type Root_Stream_Type.
+See @ISODiff{NotISO=[@RefSecFull{The Package Streams.Stream_IO}],
+  ISOOnly=[@RefSecFullNum{The Package Streams.Stream_IO}]}
+for an example of extending type Root_Stream_Type.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00227-01]}
 @ChgAdded{Version=[2],Text=[If the end of stream has been reached, and
@@ -5293,7 +5302,7 @@ the following attributes are defined.
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
-@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI05-0419-1]}
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0419-1]}
 @ChgAdded{Version=[1],Text=[@Chg{Version=[5],New=[],Old=[For 
 @Chg{Version=[2],New=[an ],Old=[]}untagged
 derived @Chg{Version=[2],New=[type],Old=[types]}, the Write
@@ -5311,7 +5320,7 @@ Read attributes execute as follows:]}]}]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
-  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI05-0419-1]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0419-1]}
   @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The inheritance rules of
   @RefSecNum{Operational and Representation Aspects} say that only specified or
   inherited aspects are inherited; we mention it again here as a clarification.]}]}
@@ -6477,7 +6486,7 @@ class-wide types descended from S.
 @end{DiffWord2005}
 
 @begin{Inconsistent2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0419-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0419-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}The
   switch from inheritance to @ldquote@;implicitly composed@rdquote
   aspects means that there exists an exceedingly unlikely case where
@@ -7445,16 +7454,14 @@ D is not of type T,
 its @nt{default_expression} requires that information.
 @end{Discussion}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Although we define freezing in terms of the program text as a whole
-(i.e. after applying the rules of @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Program Structure and Compilation Issues}),
+(i.e. after applying the rules of
+@RefSecFullNum{Program Structure and Compilation Issues}),
 the freezing rules actually have no effect beyond compilation unit boundaries.
 @end{Ramification}
 @begin{Reason}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-That is important, because @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Program Structure and Compilation Issues} allows some
+That is important, because
+@RefSecFullNum{Program Structure and Compilation Issues} allows some
 implementation definedness in the order of things,
 and we don't want the freezing rules to be implementation defined.
 @end{Reason}

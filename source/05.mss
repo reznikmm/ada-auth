@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:07 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -12,19 +12,21 @@ its execution.]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 @Redundant[This @Chg{Version=[3],New=[clause],Old=[section]} describes the
 general rules applicable to all @nt{statement}s.
 Some @nt{statement}s are discussed in later @Chg{Version=[3],New=[clauses],Old=[sections]}:
 @nt{Procedure_@!call_@!statement}s and
 @Chg{Version=[2],New=[return statements],Old=[@nt{return_@!statement}s]} are
-described in @RefSec{Subprograms}.
+described in @ISODiff{NotISO=[@RefSecFull{Subprograms}],ISOOnly=[@RefSecFullNum{Subprograms}]}.
 @nt{Entry_@!call_@!statement}s, @nt{requeue_@!statement}s,
 @nt{delay_@!statement}s, @nt{accept_@!statement}s,
 @nt{select_@!statement}s, and @nt{abort_@!statement}s are described in
-@RefSec{Tasks and Synchronization}.
-@nt{Raise_@!statement}s are described in @RefSec{Exceptions},
+@ISODiff{NotISO=[@RefSecFull{Tasks and Synchronization}],ISOOnly=[@RefSecFullNum{Tasks and Synchronization}]}.
+@nt{Raise_@!statement}s are described in
+@ISODiff{NotISO=[@RefSecFull{Exceptions}],ISOOnly=[@RefSecFullNum{Exceptions}]},
 and @nt{code_@!statement}s in
-@RefSecNum{Representation Issues}.
+@ISODiff{NotISO=[@RefSecFull{Representation Issues}],ISOOnly=[@RefSecFullNum{Representation Issues}]}.
 The remaining forms of @nt{statement}s are presented in this
 @Chg{Version=[3],New=[clause],Old=[section]}.]
 @end{Intro}
@@ -48,7 +50,7 @@ no other @nt<statement>. A @nt<compound_statement> can enclose
 @nt<simple_statement>s and other @nt<compound_statement>s.]@Chg{Version=[5],New=[
 A @i<parallel construct>@Defn{parallel construct}@Defn2{Term=[construct],Sec=[parallel]}
 is a construct that introduces additional
-logical threads of control (see clause @RefSecNum{Tasks and Synchronization})
+logical threads of control (see @RefSecFullNum{Tasks and Synchronization})
 without creating a new task.
 Parallel loops (see @RefSecNum{Loop Statements}) and
 @nt{parallel_block_statement}s (see
@@ -61,7 +63,7 @@ Text=<@ChgAdded{Version=[5],Text=[A parallel construct is an executable
 construct that defines multiple activities of a single task that can proceed in
 parallel, via the execution of multiple logical threads of control.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[parallel construct],
-  Def=[an executable construct that defines multiple 
+  Def=[executable construct that defines multiple 
        activities of a single task that can proceed in parallel, via the 
        execution of multiple logical threads of control]}
 @end{Intro}
@@ -173,14 +175,14 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
   @end{example}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
   The label in this example is hidden from itself by the loop parameter
-  with the same name;
-  the example is illegal.
+  with the same name; the example is illegal.
   We considered creating a new syntactic category name, separate from
   @nt{direct_name} and @nt{selector_name}, for use in the case of statement
-  labels.
-  However, that would confuse the rules in @Chg{Version=[3],New=[Clause],Old=[Section]}
-  8, so we didn't do it.
+  labels. However, that would confuse the rules in
+  @Chg{Version=[5],New=[@RefSecFullNum{Visibility}],
+  Old=[@Chg{Version=[3],New=[Clause],Old=[Section]} 8]}, so we didn't do it.
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0179-1]}
@@ -505,7 +507,9 @@ raise an exception (see @RefSecNum{Type Conversions}).]
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0439-1]}
 In cases involving controlled types, the target is finalized,
 and an anonymous object @Chg{Version=[5],New=[can],Old=[might]} be used as
-an intermediate in the assignment, as described in @RefSec{Completion and Finalization}.
+an intermediate in the assignment, as described in
+@ISODiff{NotISO=[@RefSecFull{Completion and Finalization}],
+ISOOnly=[@RefSecFullNum{Completion and Finalization}]}.
 @Defn{assignment operation}
 @Defn2{Term=[assignment operation],
 Sec=(during execution of an @nt{assignment_statement})}
@@ -522,9 +526,10 @@ nothing.
   The value of the target becomes the converted value.
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
   If any part of the target is controlled, its value
-  is adjusted as explained in @Chg{Version=[3],New=[subclause],Old=[clause]}
-  @RefSecNum{Assignment and Finalization}.
+  is adjusted as explained in @Chg{Version=[5],New=[],
+  Old=[@Chg{Version=[3],New=[subclause],Old=[clause]} ]}@RefSecNum{Assignment and Finalization}.
 @PDefn2{Term=[adjustment], Sec=(as part of assignment)}
 @begin{Ramification}
     If any parts of the object are controlled,
@@ -570,12 +575,13 @@ component or slice of such a variable
 Value := Max_Value - 1;
 Shade := Blue;
 
-Next_Frame(F)(M, N) := 2.5;        --@ExamCom{  see @RefSecNum{Indexed Components}}
-U := Dot_Product(V, W);            --@ExamCom{  see @RefSecNum{Subprogram Bodies}}
+Next_Frame(F)(M, N) := 2.5;        --@ExamCom{ see @RefSecNum{Indexed Components}}
+U := Dot_Product(V, W);            --@ExamCom{ see @RefSecNum{Subprogram Bodies}}
 
 @Trailing@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
-Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@ExamCom{ see @RefSecNum{Variant Parts and Discrete Choices}}
-@Chg{Version=[4],New=[Next],Old=[Next_Car]}.@key[all] := (72074, @key[null]@Chg{Version=[4],New=[, Head],Old=[]});@Chg{Version=[4],New=[],Old=[ ]}   --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
+Writer := (Status => Open, Unit => Printer, Line_Count => 60);
+                                   --@ExamCom{ see @RefSecNum{Variant Parts and Discrete Choices}}
+@Chg{Version=[4],New=[Next],Old=[Next_Car]}.@key[all] := (72074, @key[null]@Chg{Version=[4],New=[, Head],Old=[]});@Chg{Version=[4],New=[],Old=[ ]}   --@ExamCom{ see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @Leading@keepnext@NewExample@i{Examples involving scalar subtype conversions:}
@@ -584,9 +590,9 @@ I, J : Integer @key[range] 1 .. 10 := 5;
 K    : Integer @key[range] 1 .. 20 := 15;
  ...
 
-I := J;  --@ExamCom{  identical ranges}
-K := J;  --@ExamCom{  compatible ranges}
-J := K;  --@ExamCom{  will raise Constraint_Error if K > 10}
+I := J;  --@ExamCom{ identical ranges}
+K := J;  --@ExamCom{ compatible ranges}
+J := K;  --@ExamCom{ will raise Constraint_Error if K > 10}
 @end{Example}
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -596,22 +602,33 @@ A : String(1 .. 31);
 B : String(3 .. 33);
  ...
 
-A := B;  --@ExamCom{  same number of components}
+A := B;  --@ExamCom{ same number of components}
 
 A(1 .. 9)  := "tar sauce";
-A(4 .. 12) := A(1 .. 9);  --@ExamCom{  A(1 .. 12) = "tartar sauce"}
+A(4 .. 12) := A(1 .. 9);  --@ExamCom{ A(1 .. 12) = "tartar sauce"}
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph number not change}
+@ChgAdded{Version=[5],Text=[@nt{Assignment_statement}s are well-defined
+even in the case of overlapping slices of the same array,
+because the @SynI{variable_}@nt{name} and @nt{expression}
+are both evaluated before copying the value into the variable.
+In the above example, an implementation yielding
+@exam{A(1 .. 12) = "tartartartar"} would be incorrect.]}
+
 @end{Examples}
 
 @begin{Notes}
-@i{Notes on the examples:}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i{Notes on the examples:}
 @nt{Assignment_statement}s are allowed even in the case of overlapping
 slices of the same array,
 because the @SynI{variable_}@nt{name} and @nt{expression}
 are both evaluated before copying the value into the variable.
 In the above example, an
 implementation yielding A(1 .. 12) = "tartartartar" would be
-incorrect.
+incorrect.]}
 @end{Notes}
 
 @begin{Extend83}
@@ -703,16 +720,16 @@ constant view of @i<V>, having the nominal subtype of @i<V>.]]}
 @end{Legality}
 
 @begin{RunTime}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0322-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0322-1],ARef=[AI12-0449-1]}
 @ChgAdded{Version=[5],Text=[For the execution of an @nt{assignment_statement}
 with one or more @nt{target_name}s appearing in its @nt{expression}, the
 @SynI{variable_}@nt{name} @i{V} of the @nt{assignment_statement}
 is evaluated first to determine the object denoted by @i{V}, and then the
 @nt{expression} of the @nt{assignment_statement} is evaluated with the evaluation of
-each @nt{target_name} yielding a constant view of the the target whose
+each @nt{target_name} yielding a constant view of the target whose
 properties are otherwise identical to those of the view provided by @i{V}. The
 remainder of the execution of the @nt{assignment_statement} is as given in
-subclause @RefSecNum{Assignment Statements}.]}
+@RefSecNum{Assignment Statements}.]}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -742,16 +759,18 @@ name symbols:}]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0379-1],ARef=[AI12-0442-1]}
-@ChgAdded{Version=[5],Text=[Board(1, 1) := @@ + 1.0;  -- @Examcom<An abbreviation for Board(1, 1) := Board(1, 1) + 1.0;>
-                       -- @Examcom<(Board is declared in @RefSecNum{Index Constraints and Discrete Ranges}).>]}
+@ChgAdded{Version=[5],Text=[Board(1, 1) := @@ + 1.0;
+            --@Examcom< An abbreviation for Board(1, 1) := Board(1, 1) + 1.0;>
+            --@Examcom< (Board is declared in @RefSecNum{Index Constraints and Discrete Ranges}).>]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
-@ChgAdded{Version=[5],Text=[My_Complex_Array : @key[array] (1 .. Max) @key[of] Complex; -- @Examcom<See @RefSecNum{Number Declarations}, @RefSecNum{Record Types}.>
+@ChgAdded{Version=[5],Text=[My_Complex_Array : @key[array] (1 .. Max) @key[of] Complex; --@Examcom< See @RefSecNum{Number Declarations}, @RefSecNum{Record Types}.>
 ...
--- @Examcom<Square the element in the Count (see @RefSecNum{Object Declarations}) position:>
+--@Examcom< Square the element in the Count (see @RefSecNum{Object Declarations}) position:>
 My_Complex_Array (Count) := (Re => @@.Re**2 - @@.Im**2,
                              Im => 2.0 * @@.Re * @@.Im);
-   -- @Examcom<A target_name can be used multiple times and as a prefix if desired.>]}
+   --@Examcom< A target_name can be used multiple times and>
+   --@Examcom< as a prefix if desired.>]}
 @end{Example}
 @end{Examples}
 
@@ -836,7 +855,7 @@ none of them is executed.
    Put(Item);
 @key[end] @key[if];
 
-@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@ExamCom{  see @RefSecNum{Incomplete Type Declarations}}
+@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@ExamCom{ see @RefSecNum{Incomplete Type Declarations}}
    Report ("Incorrect data");
 @key[end] @key[if];
 @end{Example}
@@ -1254,7 +1273,7 @@ subtype) is that defined by the @nt{discrete_subtype_definition}.]}
 @begin{RunTime}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
 @ChgAdded{Version=[5],Text=[The @i<filter> of an @i{iterator construct}
-@Defn{iterator construct}@Defn2{Term=[filter],Sec={iterator construct}} (a
+@Defn{iterator construct}@Defn2{Term=[filter],Sec={iterator construct}}(a
 @nt{loop_parameter_specification}, @nt{iterator_specification}, or
 @nt{procedural_iterator}) is defined to be
 @i{satisfied}@Defn2{Term=[satisfied],Sec=[filter]} when there is no
@@ -1267,7 +1286,7 @@ Text=<@ChgAdded{Version=[5],Text=[An iterator filter is a construct that is used
 to restrict the elements produced by an iteration to those for which a boolean
 condition evaluates to True.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[iterator filter],
-  Def=[a construct that is used to restrict the elements
+  Def=[construct that is used to restrict the elements
        produced by an iteration to those for which a boolean condition 
        evaluates to True]}
 
@@ -1313,7 +1332,7 @@ in the @nt{iteration_scheme} of a @nt{loop_statement} (a
 @i{parallel loop}),@Defn{parallel loop}@Defn2{Term=[loop],Sec=[parallel]}
 the iterations are partitioned into one or more @Defn{chunk}@i{chunks}, each
 with its own separate logical thread of control (see
-clause @RefSecNum{Tasks and Synchronization}). If a @nt{chunk_specification}
+@RefSecFullNum{Tasks and Synchronization}). If a @nt{chunk_specification}
 is present in a parallel loop, it is elaborated first, and the result of the
 elaboration determines the maximum number of chunks used for the parallel loop.
 @PDefn2{Term=[elaboration], Sec=(chunk_specification)}
@@ -1835,7 +1854,7 @@ Text=<@ChgAdded{Version=[3],Text=[An iterable container type is one that has
 user-defined behavior for iteration, via the Default_Iterator and
 Iterator_Element aspects.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[iterable container type],
-  Def=[a type that has user-defined behavior for 
+  Def=[type that has user-defined behavior for 
        iteration, via the Default_Iterator and Iterator_Element aspects]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
@@ -2032,7 +2051,7 @@ Text=<@ChgAdded{Version=[3],Text=[An iterator is a construct that is used to
 loop over the elements of an array or container. Iterators may be user defined,
 and may perform arbitrary computations to access elements from a container.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[iterator],
-  Def=[a construct that is used to loop over the elements of an 
+  Def=[construct that is used to loop over the elements of an 
        array or container],
   Note1=[Iterators can be user defined, and can perform
          arbitrary computations to access elements from a container.]}
@@ -3049,11 +3068,11 @@ the determined maximum number of chunks is greater than zero. If this check
 fails, Program_Error is raised.@IndexCheck{Program_Error_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1],ARef=[AI12-0436-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0427-1],ARef=[AI12-0436-1],ARef=[AI12-0449-1]}
 @ChgAdded{Version=[5],Text=[Then, the various @nt{sequence_of_statements} are
 grouped into one or more @i<chunks>,@PDefn{chunk}
-each with its own logical thread of control (see clause
-@RefSecNum{Tasks and Synchronization}), up to the maximum number
+each with its own logical thread of control (see
+@RefSecFullNum{Tasks and Synchronization}), up to the maximum number
 of chunks specified by the @nt{chunk_specification}, if any. Within each chunk
 every @nt{sequence_of_statements} of the chunk is executed in turn, in an
 arbitrary order. The

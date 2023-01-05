@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.89 $ $Date: 2022/09/17 06:51:39 $ $Author: randy $ }
+@comment{ $Revision: 1.90 $ $Date: 2023/01/05 05:49:08 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2022/09/17 06:51:39 $}
+@Comment{$Date: 2023/01/05 05:49:08 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -302,7 +302,7 @@ considered a categorization pragma]}.
 A library package or generic library package is called a
 @i{shared passive} library unit if @Chg{Version=[3],New=[the],Old=[a]}
 Shared_Passive @Chg{Version=[3],New=[aspect of the unit is True],Old=[pragma
-applies to it]}. @Defn{remote types library unit} A library package or generic
+applies to it]}. @Defn{remote types library unit}A library package or generic
 library package is called a @i{remote types} library unit if
 @Chg{Version=[3],New=[the],Old=[a]} Remote_Types @Chg{Version=[3],New=[aspect of
 the unit is True],Old=[pragma applies to it]}. @Defn{remote call interface} A
@@ -906,7 +906,8 @@ A value of a remote access-to-class-wide type shall be dereferenced
 (or implicitly converted to an anonymous access type)
 only as part of a dispatching call @Chg{Version=[4],New=[to a primitive
 operation of the designated type ],Old=[]}where the value designates
-a controlling operand of the call (see @RefSec{Remote Subprogram Calls});
+a controlling operand of the call (see @ISODiff{NotISO=[@RefSecFull{Remote Subprogram Calls}],
+  ISOOnly=[@RefSecFullNum{Remote Subprogram Calls}]});
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0034-1]}
   @ChgAdded{Version=[4],Text=[Stream attributes of the designated type are not
@@ -935,7 +936,7 @@ access-to-class-wide type shall not be an actual parameter for a generic
 formal access type@Chg{New=[.],Old=[;]}@Chg{Version=[2],New=[ The Storage_Size
 attribute of a remote access-to-class-wide type yields 0@Chg{Version=[4],
 New=[],Old=[; it is not allowed in an @nt{attribute_definition_clause}]}.],
-Old=[]}@Chg{Version=[4],New=[  The Storage_Pool and Storage_Size aspects
+Old=[]}@Chg{Version=[4],New=[ The Storage_Pool and Storage_Size aspects
 shall not be specified for a remote access-to-class-wide type.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised]}
@@ -2340,7 +2341,7 @@ across active partitions:}
 @key{end} Tape_Client;
 @end{example}
 
-@leading@keepnext@i{Notes on the example}:
+@leading@keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0452-1]}@i{@Chg{Version=[5],New=[Discussion of],Old=[Notes on]} the example}:
 @begin{Discussion}
 The example does not show the case where tapes are removed from or added to
 the system. In the former case, an appropriate exception needs to be defined

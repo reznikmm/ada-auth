@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2022/09/23 04:34:03 $}
+@Comment{$Date: 2023/01/05 05:49:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.161 $}
+@Comment{$Revision: 1.162 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -182,7 +182,7 @@ or in a generic formal part
   is determined at compile time, are also allowed.
   Tagged types may be extended with additional components.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[tagged type],
-  Def=[a type whose objects each have a run-time type tag, 
+  Def=[type whose objects each have a run-time type tag, 
        which indicates the specific type for which the object was 
        originally created],
   Note1=[Tagged types can be extended with additional components.]}
@@ -317,7 +317,8 @@ of the generic body result in distinct tags.@PDefn{Unspecified}
     @key[function] @AdaSubDefn{Internal_Tag}(External : String) @key[return] Tag;
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
-@ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Descendant_Tag}(External : String; Ancestor : Tag) @key[return] Tag;
+@ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Descendant_Tag}(External : String;
+                            Ancestor : Tag) @key[return] Tag;
     @key[function] @AdaSubDefn{Is_Descendant_At_Same_Level}(Descendant, Ancestor : Tag)
         @key[return] Boolean;]}
 
@@ -878,11 +879,16 @@ so that new primitive subprograms can be declared for it.
 
 Once an object has been created, its tag never changes.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 Class-wide types are defined to have unknown discriminants
-(see @RefSecNum(Discriminants)). This means that objects of a class-wide
-type have to be explicitly initialized (whether created by
+(see @RefSecNum(Discriminants)). This means that@Chg{Version=[5],New=[, by 
+the rules in @RefSecNum(Discriminants) for objects with unknown
+discriminants,],Old=[]} objects of a class-wide
+type @Chg{Version=[5],New=[are illegal unless they are],Old=[have to be]}
+explicitly initialized (whether created by
 an @nt<object_declaration> or an @nt<allocator>),
-and that @nt<aggregate>s have to be explicitly qualified with a specific
+and that @nt<aggregate>s @Chg{Version=[5],New=[are illegal unless they
+are],Old=[have to be]} explicitly qualified with a specific
 type when their expected type is class-wide.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00326-01]}
@@ -1308,16 +1314,21 @@ a @Chg{Version=[2],New=[body],Old=[@nt{package_body}]},
 primitive subprograms are inherited and are overridable,
 but new primitive subprograms cannot be added.
 
-A @nt<name> that denotes a component (including a discriminant) of
-the parent type is not allowed within the
-@nt{record_extension_part}.
-Similarly, a @nt<name> that denotes a component defined within the
-@nt{record_extension_part} is not allowed within
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[By the rules given in @RefSecNum{Record Types}, 
+a],Old=[A]} @nt<name> that denotes a component (including a discriminant) of
+the parent type is @Chg{Version=[5],New=[illegal],Old=[not allowed]} within
 the @nt{record_extension_part}.
-It is permissible to use a @nt<name>
-that denotes a discriminant of the record extension, providing there is
-a new @nt{known_discriminant_part} in the enclosing type declaration.
-(The full rule is given in @RefSecNum(Record Types).)
+Similarly, a @nt<name> that denotes a component defined within the
+@nt{record_extension_part} is @Chg{Version=[5],New=[illegal],Old=[not allowed]}
+within the @nt{record_extension_part}.
+@Chg{Version=[5],New=[A],Old=[It is permissible to use a]} @nt<name>
+that denotes a discriminant of the record extension@Chg{Version=[5],New=[ is
+legal],Old=[]}, providing @Chg{Version=[5],New=[that it refers to
+a discriminant defined in],Old=[there is]}
+a new @nt{known_discriminant_part} in the enclosing type 
+declaration.@Chg{Version=[5],New=[],Old=[ (The full rule is given 
+in @RefSecNum(Record Types).)]}
 @begin(Reason)
   The restriction against depending on
   discriminants of the parent is to simplify the definition of extension
@@ -1326,10 +1337,13 @@ a new @nt{known_discriminant_part} in the enclosing type declaration.
   well.
 @end(Reason)
 
-Each visible component of a record extension has to have a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+@Chg{Version=[5],New=[By the rules given in @RefSecNum{Visibility}, 
+each],Old=[Each]} visible component of a record extension 
+@Chg{Version=[5],New=[will],Old=[has to]} have a
 unique name, whether the component is (visibly) inherited
 from the parent type or declared in the
-@nt<record_extension_part> (see @RefSecNum{Visibility}).
+@nt<record_extension_part>@Chg{Version=[5],New=[],Old=[ (see @RefSecNum{Visibility})]}.
 @end{Notes}
 
 @begin{Examples}
@@ -1345,16 +1359,16 @@ from the parent type or declared in the
 Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
 
 @key(type) Literal @key(is new) Expression @key(with)
-  @key(record)                 --@ExamCom[ a leaf in an Expression tree]
+  @key(record)               --@ExamCom[ a leaf in an Expression tree]
     Value : Real;
   @key(end record);
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0404-1]}
 @key(type) Expr_Ptr @key(is access all) Expression'Class;
-                               --@ExamCom[ see @Chg{Version=[5],New=[@RefSecNum{Tagged Types and Type Extensions}],Old=[@RefSecNum(Access Types)]}]
+                             --@ExamCom[ see @Chg{Version=[5],New=[@RefSecNum{Tagged Types and Type Extensions}],Old=[@RefSecNum(Access Types)]}]
 
 @key(type) Binary_Operation @key(is new) Expression @key(with)
-  @key(record)                 --@ExamCom[ an internal node in an Expression tree]
+  @key(record)               --@ExamCom[ an internal node in an Expression tree]
     Left, Right : Expr_Ptr;
   @key(end record);
 
@@ -1362,7 +1376,7 @@ Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
 @key(type) Subtraction @key(is new) Binary_Operation @key(with null record);
   --@ExamCom[ No additional components needed for these extensions]
 
-Tree : Expr_Ptr :=         --@ExamCom[ A tree representation of @lquotes@;5.0 + (13.0@en@;7.0)@rquotes@;]
+Tree : Expr_Ptr :=     --@ExamCom[ A tree representation of @lquotes@;5.0 + (13.0@en@;7.0)@rquotes@;]
    @key(new) Addition'(
       Left  => @key(new) Literal'(Value => 5.0),
       Right => @key(new) Subtraction'(
@@ -2163,7 +2177,7 @@ dispatches to some overriding body.]
   intended for use as an ancestor of other types, but which is not allowed to
   have objects of its own.]}>}
 @ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[abstract type],
-  Def=[a tagged type intended for use as an ancestor of
+  Def=[tagged type intended for use as an ancestor of
        other types, but which is not allowed to have objects of its own]}
 @end{Intro}
 
@@ -2636,8 +2650,10 @@ The elaboration of an @nt{abstract_subprogram_declaration} has no effect.]}
 @end{Runtime}
 
 @begin{Notes}
-Abstractness is not inherited; to declare an abstract type,
-the reserved word @key[abstract] has to be used
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
+Abstractness is not inherited; @Chg{Version=[5],New=[a type is abstract only
+if],Old=[to declare an abstract type,]} the reserved word @key[abstract]
+@Chg{Version=[5],New=[is],Old=[has to be]} used
 in the declaration of the type extension.
 @begin{Ramification}
 A derived type can be abstract even if its parent is not.
@@ -2665,19 +2681,27 @@ some nonabstract type in the class.
     @key(procedure) Take(Element : @key(out) Element_Type;
                    From : @key(in out) Set) @key(is abstract);
 @key(end) Sets;
+
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0442-1],ARef=[AI12-0452-1]}@ChgNote{The
+intent is that the paragraph number not change}
+@ChgAdded{Version=[5],Text=[Given the above abstract type, one can
+derive various (nonabstract) extensions of the type, representing
+alternative implementations of a set. One possibility is to use a bit vector,
+but impose an upper bound on the largest element representable, while another
+possible implementation is a hash table, trading off space for flexibility.]}
+
 @end{Examples}
 
 @begin{Notes}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
-@i(Notes on the example:)
-Given the above abstract type, one @Chg{Version=[5],New=[can],Old=[could then]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
+@ChgDeleted{Version=[5],Text=[@i(Notes on the example:)
+Given the above abstract type, one could then
 derive various (nonabstract) extensions of the type, representing
-alternative implementations of a set. One @Chg{Version=[5],New=[possibility is 
-to],Old=[might]} use a bit
+alternative implementations of a set. One might use a bit
 vector, but impose an upper bound on the largest element representable,
-while another @Chg{Version=[5],New=[possible implementation is],Old=[might
-use]} a hash table, trading off space for flexibility.
+while another might use a hash table, trading off space for flexibility.]}
 @begin{Discussion}
 One way to export a type from a package with some components visible
 and some components private is as follows:
@@ -2810,7 +2834,7 @@ ancestors.]]}
   provide multiple inheritance. Only an interface type can be used as a
   progenitor of another type.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[interface type],
-  Def=[an abstract tagged type that has no components or concrete operations 
+  Def=[abstract tagged type that has no components or concrete operations 
        except possibly null procedures],
   Note1=[Interface types are used for composing other interfaces and tagged
          types and thereby provide multiple inheritance. Only an interface
@@ -2878,11 +2902,10 @@ interfaces.]}
   that will work safely with multiple tasks at one time. A synchronized
   interface can be an ancestor of a task or a protected type. Such a
   task or protected type is called a synchronized tagged type.]}>}
-@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[synchronized entity],
-  Def=[an entity that can be safely operated on by multiple tasks concurrently],
-  Note1=[A synchronized interface can be an ancestor of a task or a 
-         protected type. Such a task or protected type is called a
-         synchronized tagged type.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[synchronized],
+  Def=[can be safely operated on by multiple tasks concurrently],
+  Note1=[Synchronized is used to qualify entities, as in a synchronized 
+  interface.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00443-01]}
 @ChgAdded{Version=[2],Text=[@Defn{synchronized tagged type}
@@ -2958,11 +2981,10 @@ primitive subprograms from its progenitor types
   one of the types given in the definition of the derived type other
   than the first. A progenitor is always an interface type.
   Interfaces, tasks, and protected types may also have progenitors.]}>}
-@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[progenitor of a derived type],
-  Def=[one of the types given in the definition of the derived type other
-       than the first],
-  Note1=[A progenitor is always an interface type. Interfaces, tasks, and
-         protected types can also have progenitors.]}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[progenitor],
+  Def=[type given in the interface list, if any, of an interface, task,
+  protected, or derived type definition],
+  Note1=[A progenitor is always an interface type.]}
 @end{StaticSem}
 
 @begin{Legality}
@@ -3097,7 +3119,8 @@ interface and a synchronized interface extending it:}]}
 --@ExamCom[ Remove_First raises Queue_Error if @Chg{Version=[3],New=[Cur_Count],Old=[Count]}(Q) = 0]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@ExamCom[ see @RefSecNum{Example of Tasking and Synchronization}]
+@ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is}
+                      @key{synchronized interface and} Queue; --@ExamCom[ see @RefSecNum{Example of Tasking and Synchronization}]
 @key{procedure} Append_Wait(Q      : @key{in out} Synchronized_Queue;
                       Person : @key{in}     Person_Name) @key{is abstract};
 @key{procedure} Remove_First_Wait(Q      : @key{in out} Synchronized_Queue;
@@ -3236,9 +3259,10 @@ an appropriate type.
 
 @begin{MetaRules}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 Access values should always be well defined
-(barring uses of certain unchecked features of @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Representation Issues}).
+(barring uses of certain unchecked features of @Chg{Version=[5],New=[@RefSecFullNum{Representation Issues}],
+Old=[@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Representation Issues}]}).
 In particular, uninitialized access variables should be prevented
 by compile-time rules.
 @end{MetaRules}
@@ -3287,7 +3311,9 @@ several access types may share the same storage pool.
 A storage pool is an area of storage used to hold dynamically
 allocated objects (called @i(pool elements)) created
 by allocators@Redundant[; storage pools
-are described further in @RefSec(Storage Management)].
+are described further in
+@ISODiff{NotISO=[@RefSecFull{Storage Management}],
+ ISOOnly=[@RefSecFullNum{Storage Management}]}].
 
 @Defn{pool-specific access type}
 @Defn{general access type}
@@ -3351,7 +3377,7 @@ either by the designated subtype, or by its initial value.]]}
   The Access attribute can be used to create an access value
   designating an aliased object.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[aliased view],
-  Def=[a view of an object that can be designated by an access value],
+  Def=[view of an object that can be designated by an access value],
   Note1=[Objects allocated by allocators are aliased. Objects can also be
          explicitly declared as aliased with the reserved word aliased. The
          Access attribute can be used to create an access value designating
@@ -3811,15 +3837,15 @@ can be applied to access types
 @begin{Example}
 @Trailing@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
-@Chg{Version=[4],New=[@key[type] Frame @key<is access> Matrix;    --@ExamCom[  see @RefSecNum{Array Types}]
-],Old=[]}@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@Chg{Version=[4],New=[@key[type] Frame @key<is access> Matrix;  --@ExamCom[ see @RefSecNum{Array Types}]
+],Old=[]}@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@ExamCom[ see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
-                                           --@ExamCom[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
+                              --@ExamCom[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
 @leading@keepnext@NewExample@i{Example of an access subtype:}
 @begin{Example}
-@Trailing@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  --@ExamCom[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@Trailing@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum); --@ExamCom[ see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
 @leading@keepnext@NewExample@i{Example of an access-to-subprogram type:}
@@ -3832,8 +3858,9 @@ Give_Message : Message_Procedure := Default_Message_Procedure'Access;
 ...
 Give_Message := Other_Procedure'Access;
 ...
-Give_Message("File not found.");  --@ExamCom{ call with parameter (.@key[all] is optional)}
-Give_Message.@key[all];                 --@ExamCom{ call with no parameters}
+Give_Message("File not found.");
+                         --@ExamCom{ call with parameter (.@key[all] is optional)}
+Give_Message.@key[all];        --@ExamCom{ call with no parameters}
 @end{Example}
 @end{Examples}
 
@@ -4381,14 +4408,19 @@ The elaboration of an @nt{incomplete_type_declaration} has no effect.
 @end{RunTime}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 @PDefn{completion legality}
 Within a @nt<declarative_part>, an @nt<incomplete_type_declaration>
 and a corresponding @nt<full_type_declaration> cannot be separated
-by an intervening body.
-This is because a type has to
-be completely defined before it is frozen, and a body freezes
-all types declared prior to it in the same @nt<declarative_part>
-(see @RefSecNum{Freezing Rules}).
+by an intervening body. This is 
+because@Chg{Version=[5],New=[, by the rules given in
+@RefSecNum{Freezing Rules},],Old=[]} a type @Chg{Version=[5],New=[is illegal
+if it is not],Old=[has to be]} completely defined before it is frozen, and
+a body freezes all types declared prior to it in the same
+@nt<declarative_part>@Chg{Version=[5],New=[],Old=[
+(see @RefSecNum{Freezing Rules})]}.
+
+
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[A @nt{name} that denotes an object of an
@@ -4605,13 +4637,11 @@ not at all) for different designated subtypes.
 @LabeledSubClause{Operations of Access Types}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[The attribute Access is used to create access values
 designating aliased objects and nonintrinsic subprograms.
 The @lquotes@;accessibility@rquotes@; rules prevent dangling references
 (in the absence of uses of certain unchecked features
-@em see @Chg{Version=[3],New=[Clause],Old=[Section]}
-@RefSecNum{Representation Issues}).]
+@em see @RefSecFullNum{Representation Issues}).]
 @end{Intro}
 
 @begin{MetaRules}
@@ -4759,7 +4789,7 @@ any of these rules).
   corresponding legality rules that the level of the entity is not statically
   deeper than that of the reference.]}>}
 @ChgTermDef{Version=[5],Kind=(Added),Group=[T],Term=[accessibility level],
-  Def=[a representation of the lifetime of an entity in terms of the level of 
+  Def=[representation of the lifetime of an entity in terms of the level of 
        dynamic nesting within which the entity is known to exist]}
 @Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
@@ -6356,7 +6386,7 @@ See @RefSecNum{Dispatching Operations of Tagged Types}.
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1]}@Defn{downward closure}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0440-1],ARef=[AI12-0451-1]}@Defn{downward closure}
 @Defn2{Term=[closure],Sec=(downward)}
 @Chg{Version=[2],New=[The],Old=[The accessibility rules imply that it
 is not possible to use the]} Access
@@ -6371,9 +6401,12 @@ iterator abstraction@Chg{Version=[2],New=[ or numerical integration.
 Downward],Old=[. Instead, downward]}
 closures can @Chg{Version=[2],New=[also ],Old=[]}be implemented using
 generic formal subprograms (see @RefSecNum{Formal Subprograms}).
-Note that Unchecked_Access is not allowed for subprograms.
+@Chg{Version=[5],New=[Unlike for objects, there is no],Old=[Note that]} 
+Unchecked_Access @Chg{Version=[5],New=[attribute],Old=[is not allowed]} for
+subprograms.
 
-Note that using
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0451-1]}
+@Chg{Version=[5],New=[Using],Old=[Note that using]}
 an access-to-class-wide tagged type with a dispatching operation
 is a potentially more structured alternative to using an
 access-to-subprogram type.
@@ -6748,7 +6781,6 @@ uses of anonymous access types.]}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@IsoOnlyRMNewPageVer{Version=[5]}@Comment{For ISO Ada 2022 only}
 @LabeledClause{Declarative Parts}
 
 @begin{Intro}
@@ -7036,7 +7068,6 @@ completion, they have one by @i{fiat}.]}
 @end{Honest}
 
 @begin(Discussion)
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   The implicit declarations of predefined operators are not allowed to
   have a completion.
   Enumeration literals, although they are subprograms, are not allowed to have a
@@ -7044,8 +7075,7 @@ completion, they have one by @i{fiat}.]}
   That's because the completion rules are described in terms of constructs
   (@nt{subprogram_declaration}s) and not entities (subprograms).
   When a completion is required, it has to be explicit;
-  the implicit null @nt{package_body} that @Chg{Version=[3],New=[Clause],Old=[Section]}
-  @RefSecNum{Packages}
+  the implicit null @nt{package_body} that @RefSecFullNum{Packages}
   talks about cannot serve as the completion of a
   @nt{package_declaration} if a completion is required.
 @end(Discussion)
@@ -7106,12 +7136,14 @@ every kind of entity]}.
   the type.]}
 @end(Discussion)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0449-1]}
 There are rules that prevent premature uses of declarations that have a
 corresponding completion.
 The Elaboration_Checks of @RefSecNum{Declarative Parts} prevent such
 uses at run time for subprograms, protected operations, tasks, and
 generic units.
-The rules of @RefSec{Freezing Rules}
+The @Chg{Version=[5],New=[freezing ],Old=[]}rules
+@Chg{Version=[5],New=[(see @RefSecNum{Freezing Rules})],Old=[of @RefSec{Freezing Rules}]}
 prevent, at compile time, premature uses of other entities
 such as private types and deferred constants.
 @end{Notes}

@@ -1,6 +1,6 @@
 @Part(iso_foreword, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/iso_foreword.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2022/09/17 06:51:40 $}
+@comment{$Revision: 1.4 $ $Date: 2023/01/05 05:49:12 $}
 
 @UnNumberedSection(Foreword)
 
@@ -56,7 +56,7 @@ environments and system software interfaces}.
 
 This fourth edition cancels
 and replaces the third edition (ISO/IEC 8652:2012), which has been technically
-revised. It also incorporates Technical Corrigendum ISO/IEC 8652:2012:Cor.1:2016.
+revised. It also incorporates the Technical Corrigendum ISO/IEC 8652:2012/Cor.1:2016.
 
 @Comment{The remainder of the Foreword is found in Forward-Tail.mss}
 

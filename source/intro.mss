@@ -1,6 +1,6 @@
 @Part(intro, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/intro.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2022/09/17 06:51:40 $}
+@comment{$Revision: 1.5 $ $Date: 2023/01/05 05:49:12 $}
 
 
 @UnNumberedSection{Introduction}
@@ -232,7 +232,7 @@ specification, containing the information that
 @Chg{Version=[5],New=[is],Old=[must be]}
 visible to other units, and a body, containing the
 implementation details, which @Chg{Version=[5],New=[are],Old=[need]}
-not @Chg{Version=[5],New=[],Old=[be]} visible to other
+not @Chg{Version=[5],New=[],Old=[be ]}visible to other
 units. Most program units can be compiled separately.
 
 This distinction of the specification and body, and the
@@ -451,7 +451,7 @@ an operand of any type in a derivation class. For record and private types,
 the derivatives @Chg{Version=[5],New=[can],Old=[may]} be extensions of the 
 parent type. Types that support these object-oriented capabilities of
 class-wide operations and type extension
-@Chg{Version=[5],New=[have to],Old=[must]} be tagged, so that
+@Chg{Version=[5],New=[are],Old=[must be]} tagged, so that
 the specific type of an operand within a derivation class can
 be identified at run time. When an operation of a tagged
 type is applied to an operand whose specific type is not
@@ -633,9 +633,9 @@ to provide specific support for certain application areas:]}
 @begin{ISOOnly}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0313-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[This International Standard
-replaces the @Chg{Version=[5],New=[third],Old=[second]} edition of
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0313-1]}@Comment{Moved to Foreword}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[This
+International Standard replaces the @Chg{Version=[5],New=[third],Old=[second]} edition of
 @Chg{Version=[5],New=[2012],Old=[1995]}. It],Old=[Amendment 1]} modifies the
 @Chg{Version=[3],New=[previous edition],Old=[1995 International Standard]} by
 making changes and additions that improve the capability of the language and
@@ -644,7 +644,7 @@ language.@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[ This
 edition incorporates the changes from Amendment 1 (ISO/IEC 8652:1995:AMD 1:2007),
 which],Old=[In particular the changes]}
 were designed to improve the portability of programs, interfacing to other
-languages, and both the object-oriented and real-time capabilities.]}]}
+languages, and both the object-oriented and real-time capabilities.]}]}]}
 @end{ISOOnly}
 @begin{NotISO}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
