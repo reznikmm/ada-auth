@@ -1,6 +1,6 @@
 @Part(intro, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/intro.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2023/01/05 05:49:12 $}
+@comment{$Revision: 1.6 $ $Date: 2023/10/04 05:40:22 $}
 
 
 @UnNumberedSection{Introduction}
@@ -317,10 +317,11 @@ also introduces the names and parameters of other nested
 subprograms, packages, task units, protected units, and
 generic units to be used in the program unit.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0454-1]}
 The sequence of statements describes a sequence of actions
-that are to be performed. The statements are executed in
-succession (unless a transfer of control causes execution to continue
-from another place).
+@Chg{Version=[5],New=[],Old=[that are ]}to be performed. The statements are
+executed in succession (unless a transfer of control causes execution to
+continue from another place).
 
 An assignment statement changes the value of a variable. A
 procedure call invokes execution of a procedure after

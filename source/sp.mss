@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.100 $ $Date: 2023/01/05 05:49:10 $ $Author: randy $ }
+@comment{ $Revision: 1.101 $ $Date: 2023/10/04 05:40:21 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2023/01/05 05:49:10 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2804,9 +2804,11 @@ The function Current_Task returns a value that identifies the calling task.
 @ChgAdded{Version=[3],Text=[The function Environment_Task returns a value that
 identifies the environment task.]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0454-1]}
 The effect of Abort_Task is the same as the @nt{abort_statement} for the
 task identified by T. @Redundant[In addition, if T identifies the
-environment task, the entire partition is aborted, See @RefSecNum{Partitions}.]
+environment task, the entire partition is aborted,
+@Chg{Version=[5],New=[see],Old=[See]} @RefSecNum{Partitions}.]
 
 The functions Is_Terminated and Is_Callable return the value of the
 corresponding attribute of the task identified by T.

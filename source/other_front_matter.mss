@@ -1,11 +1,16 @@
 @Part(otherfrontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/other_front_matter.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2022/09/17 06:51:40 $}
+@comment{$Revision: 1.4 $ $Date: 2023/10/04 05:40:22 $}
 
 @comment{These parts appear after the Introduction in RM and AARM versions only.}
 
 @begin{NotISO}
-@NewPage
+@RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
+@RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@RMNewPageVer{Version=[4]}@Comment{For printed version of Ada 2012 + TC1 RM}
+@RMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2012 RM}
 @SubHeading(Instructions for Comment Submission)
 
 @begin{Intro}
@@ -101,7 +106,11 @@ a Technical Corrigendum will be issued in accordance with the procedures.]}
 
 
 @begin{NotISO}
-@NewPage
+@RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
+@RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@RMNewPageVer{Version=[4]}@Comment{For printed version of Ada 2012 + TC1 RM}
 @AddedSubHeading{Version=[3],Acknowledgements for the Ada 83 edition}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -409,18 +418,47 @@ while continuing to find obscure interactions; T. Taft, who often solved
 difficult problems that had stumped others; B. Moore, whose frequent suggestions
 for parallel constructs greatly improved the result.
 Other ARG members who substantially contributed were:
-R. Amiard, J. Barnes, A. Burns, A. Charlet, G. Dismukes, C. Dross, R. Duff, 
+R. Amiard, J. Barnes, A. Burns, A. Charlet, G. Dismukes, C. Dross, R. Duff,  E. Fish, 
 E. Ploedereder, J.P. Rosen, F. Schanda, E. Schonberg, J. Squirek, T. Vardanega, 
 and R. Wai.]}
-@Comment{E. Fish has 2.0 meeting points as of #62 (Oct 2019), he has not
-attended since. Added his name if he reappears.}
 
-@Comment{Leave the thanks for Pat until we get closer to done.
 @ChgRef{Version=[5],Kind=[Added]}
 @Chg{Version=[5],New=[Finally, special thanks go to the convenor of ISO/IEC JTC
 1/SC 22/WG 9, P. Rogers, who guided the document through the
 standardization process.],Old=[]} @Comment{The financial contributors
-wanted to remain anonymous, so they are not mentioned here.}}
+wanted to remain anonymous, so they are not mentioned here.}
+
+@AddedSubHeading{Version=[6],Acknowledgements for the Ada 202y version}
+
+@ChgRef{Version=[6],Kind=[Added]}
+@ChgAdded{Version=[6],Text=<The editor [R. Brukardt] would like to thank the
+many people whose hard work and assistance has made this revision possible.>}
+
+@ChgRef{Version=[6],Kind=[Added]}
+@ChgAdded{Version=[6],Text=[Thanks go out to all of the members of the
+ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work in all steps of the
+process, from determining problems to address, reviewing feature designs, and
+creating and editing wording changes, was critical to the entire process.@Comment{Revise
+the following when we get closer to an actual document:
+Especially valuable contributions came from the chairman of the
+ARG through June 2018, J. Cousins,
+who guided the work and ensured we followed defined procedures; his replacement
+as chairman, S. Baird, who ably powered through obstacles to complete the work
+while continuing to find obscure interactions; T. Taft, who often solved
+difficult problems that had stumped others; B. Moore, whose frequent suggestions
+for parallel constructs greatly improved the result.
+Other ARG members who substantially contributed were:
+R. Amiard, J. Barnes, A. Burns, A. Charlet, G. Dismukes, C. Dross, R. Duff, E. Fish, 
+E. Ploedereder, J.P. Rosen, F. Schanda, E. Schonberg, J. Squirek, T. Vardanega, 
+and R. Wai.}]}
+
+@Comment{Revise when closer to end of te process: 
+@ChgRef{Version=[5],Kind=[Added]}
+@Chg{Version=[5],New=[Finally, special thanks go to the convenor of ISO/IEC JTC
+1/SC 22/WG 9, P. Rogers, who guided the document through the
+standardization process.],Old=[]}} @Comment{The financial contributors
+wanted to remain anonymous, so they are not mentioned here.}
+
 @end{Intro}
 @end{NotISO}
 

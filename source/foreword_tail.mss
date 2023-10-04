@@ -1,6 +1,6 @@
 @Part(foreword_tail, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/foreword_tail.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2023/01/05 05:49:11 $}
+@comment{$Revision: 1.5 $ $Date: 2023/10/04 05:40:21 $}
 
 @Comment{This file contains the ending shared part of the Foreword.}
 @Comment{The beginning of the Foreword is found in ISO_Forward.mss and RM_Forward.mss}
@@ -9,7 +9,7 @@
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1]}
 @ChgAdded{Version=[5],Text=[@ISODiff{NotISO=[Significant changes 
-in this edition are],ISOOnly=[The main changes are as follows]}:]}
+in this edition],ISOOnly=[The main changes]} are as follows:]}
 @begin{Itemize}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0313-1],ARef=[AI12-0441-1]}

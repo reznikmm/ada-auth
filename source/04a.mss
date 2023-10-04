@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:07 $}
+@Comment{$Date: 2023/10/04 05:40:20 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.170 $}
+@Comment{$Revision: 1.171 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1078,10 +1078,10 @@ and are summarized in
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00235]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
-@Chg{Version=[5],New=[By the],Old=[In]} general@Chg{Version=[5],New=[ rules 
+@Chg{Version=[5],New=[By the],Old=[In]} general@Chg{Version=[5],New=[ rules
 given above],Old=[]}, @Chg{Version=[5],New=[there is no expected type
 or profile for ],Old=[]}the @nt<name> in a @nt<prefix> of an
-@nt<attribute_reference> (or a @nt<range_attribute_reference>)@Chg{Version=[5],New=[, 
+@nt<attribute_reference> (or a @nt<range_attribute_reference>)@Chg{Version=[5],New=[,
 which means that no context can be used to
 resolve the @nt{name}],Old=[ has to be resolved
 without using any context]}. However, @Chg{Version=[5],New=[by the rules given
@@ -1322,7 +1322,7 @@ named reference object.]}
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of the specification
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Examples of the specification
 and use of generalized references:}]}
 
 @begin{Example}
@@ -2471,6 +2471,7 @@ will work (see @RefSecNum{Assignment and Finalization}).
 @end{Incompatible2012}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledSubClause{Record Aggregates}
 
 @begin{Intro}
@@ -2955,6 +2956,7 @@ to be in the same order as in the @nt<known_discriminant_part>]}.
 several choices:)
 @begin{Example}
 (Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) --@ExamCom[ see @RefSecNum{Incomplete Type Declarations}]
+
    --@ExamCom[ The allocator is evaluated twice:]
    --@ExamCom[ Succ and Pred designate different cells]
 
@@ -4456,7 +4458,7 @@ type.@PDefn2{Term=[element type],Sec=[container aggregate]}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[5],Text=[The @SynI{function_}@nt{name} specified for
-New_Indexed for an Aggregate aspect shall denote exactly one function with 
+New_Indexed for an Aggregate aspect shall denote exactly one function with
 a result type of the container type, and
 two parameters of the same discrete type, with that type being the @i<key type>
 of the container type.@PDefn2{Term=[key type],Sec=[container aggregate]}]}
@@ -8069,8 +8071,8 @@ defines how to map or transform a collection of values into a new set of values,
 and then summarize the values by applying an operation to reduce the set to a
 single value.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[reduction expression],
-  Def=[expression that defines how to map or transform a collection of 
-       values into a new set of values, and then summarize the values by 
+  Def=[expression that defines how to map or transform a collection of
+       values into a new set of values, and then summarize the values by
        applying an operation to reduce the set to a single value]}
 @end{Intro}
 
@@ -8522,8 +8524,8 @@ greater than 100.0:>]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0242-1],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Reduction
-  expressions attributes are new.]}
+  expressions and the associated attributes are new.]}
 @end{Extend2012}
 

@@ -1,12 +1,13 @@
 @Part(01, Root="ada.mss")
 
 
-@Comment{$Date: 2022/07/06 03:35:26 $}
+@Comment{$Date: 2023/10/04 05:40:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/rm_bib.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledAddedSubClause{Version=[5],Name=[Bibliography]}
 
 @begin{Intro}

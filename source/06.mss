@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:07 $}
+@Comment{$Date: 2023/10/04 05:40:20 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.169 $}
+@Comment{$Revision: 1.170 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1010,7 +1010,7 @@ then the respective precondition or postcondition expressions are considered
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[A subexpression of a postcondition expression is @i<known on entry> if it is any
-of:@Defn{Term=[known on entry],Sec=[postcondition]}],Old=[An @nt{expression} is
+of:@Defn2{Term=[known on entry],Sec=[postcondition]}],Old=[An @nt{expression} is
 @i{potentially unevaluated} if it occurs within:@Defn{potentially unevaluated expression}]}]}
 
 @begin{Itemize}
@@ -2307,7 +2307,7 @@ entity, or by its Global'Class aspect if a dispatching call.]}
 @key[in out all] applies to an access-to-subprogram type, then the @nt{prefix}
 of an Access @nt{attribute_reference} producing a value of such a type shall denote
 a subprogram whose Global aspect is not Unspecified and is
-@i<covered>@Defn{Term=[covered],Sec=(global aspect)} by that of the result
+@i<covered>@Defn2{Term=[covered],Sec=(global aspect)} by that of the result
 type, where a global aspect @i<G1> is @i<covered> by a global aspect @i<G2>
 if the set of variables that @i<G1> identifies as readable or updatable is
 a subset of the corresponding set for @i<G2>. Similarly on a conversion to
@@ -2674,6 +2674,7 @@ do not overlap (unless, of course, it can prove otherwise).
 direction of information transfer to or from the @nt{subprogram_body} (see
 @RefSecNum{Subprogram Declarations}).]}
 
+@ChgRef{Version=[4],Kind=[Revised]}@ChgNote{Just a paragraph number change}
 A formal parameter of mode @key(in) is a constant
 view (see @RefSecNum{Objects and Named Numbers});
 it cannot be updated within the @nt{subprogram_body}.

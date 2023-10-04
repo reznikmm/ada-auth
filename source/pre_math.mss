@@ -1,9 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2023/10/04 05:40:21 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:09 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{The Numerics Packages}
 
 @begin{Intro}

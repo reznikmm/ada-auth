@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:08 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2479,7 +2479,7 @@ renamed entity, inheriting the original properties.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0383-1]}
 @begin{Example}
-Uno @key[renames] One;  --@Examcom{ see @RefSecNum{Number Declarations}}
+@ChgAdded{Version=[5],Text=[Uno @key[renames] One;  --@Examcom{ see @RefSecNum{Number Declarations}}]}
 @end{Example}
 @end{Examples}
 

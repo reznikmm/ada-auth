@@ -1,10 +1,10 @@
 @Part(syntax, Root="ada.mss")
 
-@Comment{$Date: 2022/06/21 06:08:04 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.23 $}
+@comment{$Revision: 1.24 $}
 
 @NoParaNum@;This Annex summarizes the complete syntax of the language.
 
@@ -27,6 +27,7 @@ description of the notation used.
 
 @SyntaxSummary
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Syntax Cross Reference}@ChgNote{This was not a 
 clause until Ada 2022, but it probably always should have been 
 in the TOC and a separate HTML file}

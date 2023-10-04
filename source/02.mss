@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:06 $}
+@Comment{$Date: 2023/10/04 05:40:20 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -21,13 +21,13 @@ described in this @Chg{Version=[3],New=[clause],Old=[section]}.]
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1],ARef=[AI12-0450-1],ARef=[AI12-0454-1]}
 @Defn{character set}
 The @Chg{Version=[2],New=[character repertoire for the text of an Ada
 program consists of the
 entire coding space described by the ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2020],Old=[2011]}],Old=[2003]}
-Universal @Chg{Version=[5],New=[coded character set],Old=[Multiple-Octet Coded
-Character Set]}. This coding space is organized in
+Universal @Chg{Version=[5],New=[],Old=[Multiple-Octet ]}Coded
+Character Set. This coding space is organized in
 @i<planes>, each plane comprising 65536 characters.@Defn2{Term=[plane],Sec=[character]}
 @Defn{character plane}],Old=[only characters
 allowed outside of @nt{comment}s are the @nt{graphic_character}s and

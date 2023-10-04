@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:07 $}
+@Comment{$Date: 2023/10/04 05:40:20 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.162 $}
+@Comment{$Revision: 1.163 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -20,7 +20,7 @@
 @IndexSee{Term=[module],See=(package)}
 @IndexSeeAlso{Term=[class],See=(package)}]
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[package],
-  Def=[program unit that defines the interface to a group of 
+  Def=[program unit that defines the interface to a group of
        logically related entities, along with their implementation],
   Note1=[Typically, a package contains the declaration of a type (often a
          private type or private extension) along with the declarations of
@@ -181,7 +181,7 @@ language environment
 In Ada 83, a library package is allowed to have a body even if
 it doesn't need one.
 In Ada 95, a library package body is either required or forbidden @em never
-optional. The workaround is to add 
+optional. The workaround is to add
 @Chg{Version=[5],New=[aspect],Old=[@key[pragma]]} Elaborate_Body,
 or something else requiring a body, to each library package that has a body
 that isn't otherwise required.
@@ -294,7 +294,7 @@ the order of the implicit @ntf{package_@!bodies} is unspecified.
 occurs at the place of the instantiation
 (see @RefSecNum{Generic Instantiation}).
 For a library package, the place is partially determined by the
-elaboration dependences (see 
+elaboration dependences (see
 @RefSecFullNum{Program Structure and Compilation Issues}).)]
 @begin{Discussion}
 Thus, for example, we can refer to something happening just
@@ -402,6 +402,8 @@ is moved here, since it is more generally applicable.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
+
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledClause{Private Types and Private Extensions}
 
 @begin{Intro}
@@ -810,7 +812,7 @@ interface.]}
 If the declaration of a partial view includes
 a @nt{known_discriminant_part}, then
 the @nt{full_type_declaration} shall have a fully conforming
-@Redundant[(explicit)] @nt{known_discriminant_part} @Redundant[(see 
+@Redundant[(explicit)] @nt{known_discriminant_part} @Redundant[(see
 @Chg{Version=[5],New=[@RefSecNum(Conformance Rules)],Old=[@RefSec(Conformance Rules)]})].
 @Defn2{Term=[full conformance],Sec=(required)}
 @Redundant[The ancestor subtype may be unconstrained;
@@ -1649,7 +1651,7 @@ predefined operator
 "<" implicitly declared by the @nt{full_type_declaration}. Within the
 body of the function, an explicit conversion of X and Y to the
 subtype Natural is necessary to invoke the "<" operator of the parent
-type. Alternatively, the result of the function can 
+type. Alternatively, the result of the function can
 be written as @key[not] (X >= Y), since the operator ">=" is not redefined.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0452-1]}
@@ -1669,12 +1671,12 @@ not include other relational operators such as ">=", or arithmetic
 operators.]}
 
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
-@ChgDeleted{Version=[5],NoPrefix=[T],Text=[The explicitly 
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[The explicitly
 declared operator "<" hides the predefined operator
 "<" implicitly declared by the @nt{full_type_declaration}. Within the
 body of the function, an explicit conversion of X and Y to the
 subtype Natural is necessary to invoke the "<" operator of the parent
-type. Alternatively, the result of the function could 
+type. Alternatively, the result of the function could
 be written as @key[not] (X >= Y), since the operator ">=" is not redefined.]}
 
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
@@ -1736,11 +1738,11 @@ has been moved to @lquotes@;Obsolescent Features@rquotes.
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0041-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0396-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For a private 
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a private
 type@Chg{Version=[4],New=[,],Old=[ or]} private
 extension@Chg{Version=[4],New=[, or interface],Old=[]}, the following
-language-defined @Chg{Version=[5],New=[assertion ],Old=[]}aspects may be 
-specified with an @nt{aspect_specification} (see 
+language-defined @Chg{Version=[5],New=[assertion ],Old=[]}aspects may be
+specified with an @nt{aspect_specification} (see
 @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
@@ -2595,7 +2597,7 @@ work can be scheduled for weekends:}]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1],ARef=[AI12-0396-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a private type or private
 extension (including a generic formal type), the following
-language-defined assertion aspect may be specified with an 
+language-defined assertion aspect may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
@@ -2649,7 +2651,7 @@ operations.]}
     default initial condition for an abstract type. Note that,
     presuming T is tagged, it is possible to call class-wide operations
     of the type T given an object of type NT. Similarly it is possible
-    to explicitly convert an object of type NT to a subtype of T, and 
+    to explicitly convert an object of type NT to a subtype of T, and
     pass it to a nonprimitive operation expecting a parameter of type T.
     [Note that one cannot directly convert to (the first subtype of) T
     since it represents the current instance of the type within the
@@ -2897,7 +2899,7 @@ manner.]@Defn{class-wide stable property function}@Defn2{Term=[stable property f
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0405-1]}
 @ChgAdded{Version=[5],Text=[The specific and class-wide stable properties of a type
-together comprise the stable properties of the 
+together comprise the stable properties of the
 type.@Defn2{Term=[stable property function],Sec=[of a type]}@Defn2{Term=[function],Sec={stable property}}
 @Defn2{Term=[type],Sec=[stable property function of]}]}
 
@@ -2991,13 +2993,13 @@ a type @i<T>, the specific stable property functions of @i<S> for type @i<T> are
 @begin{Itemize}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[if @i<S> has an aspect Stable_Properties 
-    specified that does not include @key[not], those functions denoted in the 
-    aspect Stable_Properties for @i<S> that have a parameter of @i<T> or 
+  @ChgAdded{Version=[5],Text=[if @i<S> has an aspect Stable_Properties
+    specified that does not include @key[not], those functions denoted in the
+    aspect Stable_Properties for @i<S> that have a parameter of @i<T> or
     @i<T>'Class;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[if @i<S> has an aspect Stable_Properties 
+  @ChgAdded{Version=[5],Text=[if @i<S> has an aspect Stable_Properties
     specified that includes @key[not], those functions denoted in the aspect
     Stable_Properties for @i<T>, excluding those denoted in the aspect
     Stable_Properties for @i<S>;]}
@@ -3030,7 +3032,7 @@ for a subprogram @i<S> is the @nt{expression} directly specified for @i<S> with
 the Post'Class aspect.@Defn{explicit specific postcondition expression}@Defn{explicit class-wide postcondition expression}@Defn2{Term=[postcondition expression],Sec=(explicit)}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For a primitive subprogram @i<S> 
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a primitive subprogram @i<S>
 of a type @i<T> that has a parameter @i<P> of type @i<T>, the parameter is
 @i{excluded from stable property checks} if:@Defn{excluded from stable property checks}]}
 
@@ -3050,10 +3052,10 @@ of a type @i<T> that has a parameter @i<P> of type @i<T>, the parameter is
 
 @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[A parameter of mode @key[out] doesn't 
+    @ChgAdded{Version=[5],Text=[A parameter of mode @key[out] doesn't
       necessarily have a defined input value, so there is no old
       value to compare with. Ideally, the postcondition
-      will include expressions defining the values of the stable 
+      will include expressions defining the values of the stable
       properties after the call, but we do not try to ensure this.]}
 @end{Reason}
 
@@ -3065,7 +3067,7 @@ of a type @i<T> that has a parameter @i<P> of type @i<T>, the parameter is
 @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[An @key[in] parameter of a Global => @key[null]
-      subprogram cannot be modified, even if it has indirect parts, without 
+      subprogram cannot be modified, even if it has indirect parts, without
       violating the Global aspect. Thus, there is no need to assert that the
       properties don't change.]}
 @end{Reason}
@@ -3073,14 +3075,14 @@ of a type @i<T> that has a parameter @i<P> of type @i<T>, the parameter is
 @end{Itemize}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0324-1],ARef=[AI12-0405-1]}
-@ChgAdded{Version=[5],Text=[For every primitive subprogram @i<S> of a type @i<T> 
+@ChgAdded{Version=[5],Text=[For every primitive subprogram @i<S> of a type @i<T>
 that is not an abstract subprogram or null procedure, the specific postcondition
 expression of @i<S> is modified to include expressions of the
 form @exam{@i<F>(@i<P>) = @i<F>(@i<P>)'Old}, all @key[and]ed with each other
 and any explicit specific postcondition expression, with one such equality
-included for each specific stable property function @i<F> of @i<S> for type 
-@i<T> that does not occur in the explicit specific postcondition expression 
-of @i<S>, and @i<P> is each parameter of @i<S> that has type @i<T> and is not 
+included for each specific stable property function @i<F> of @i<S> for type
+@i<T> that does not occur in the explicit specific postcondition expression
+of @i<S>, and @i<P> is each parameter of @i<S> that has type @i<T> and is not
 excluded from stable property checks. The resulting specific
 postcondition expression of @i<S> is used in place of the explicit specific
 postcondition expression of @i<S> @Redundant[when interpreting the meaning of
@@ -3091,8 +3093,8 @@ the postcondition as defined in @RefSecNum{Preconditions and Postconditions}].]}
     @ChgAdded{Version=[5],Text=[There is one @exam{F(P) = F(P)'Old}
     subexpression for every combination of a specific stable property function of
     type @i<T> and a parameter of type @i<T>. For instance, if there are three
-    specific stable property functions for type @i<T> and two parameters of 
-    type @i<T>, then there are six such subexpressions appended to the 
+    specific stable property functions for type @i<T> and two parameters of
+    type @i<T>, then there are six such subexpressions appended to the
     postcondition.]}
 
     @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3104,7 +3106,7 @@ the postcondition as defined in @RefSecNum{Preconditions and Postconditions}].]}
 
 @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[Null procedures and abstract subprograms are 
+    @ChgAdded{Version=[5],Text=[Null procedures and abstract subprograms are
     excluded as they do not allow specific postconditions. Moreover, for null
     procedures, static analysis tools can be certain that their parameters
     aren't modified so there is no need to assert that the properties don't
@@ -3119,7 +3121,7 @@ expression of @i<S> is modified to include expressions of the form
 explicit class-wide postcondition expression, with one such equality included
 for each class-wide stable property function @i<F> of @i<S> for type @i<T> that
 does not occur in any class-wide postcondition expression that applies to @i<S>,
-and @i<P> is each parameter of @i<S> that has type @i<T> and is not excluded 
+and @i<P> is each parameter of @i<S> that has type @i<T> and is not excluded
 from stable property checks. The resulting
 class-wide postcondition expression of @i<S> is used in place of the explicit
 class-wide postcondition expression of @i<S> @Redundant[when interpreting the
@@ -3144,23 +3146,23 @@ meaning of the postcondition as defined in
     stable property expressions for @i<S>.]}
 
     @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0405-1]}
-    @ChgAdded{Version=[5],Text=[In the case of a derived type @i<T>, when the 
-      preceding rules refer to @ldquote@;every primitive subprogram @i<S> of 
-      a type @i<T>@rdquote, the referenced set of subprograms includes any 
+    @ChgAdded{Version=[5],Text=[In the case of a derived type @i<T>, when the
+      preceding rules refer to @ldquote@;every primitive subprogram @i<S> of
+      a type @i<T>@rdquote, the referenced set of subprograms includes any
       inherited subprograms.]}
 @end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0405-1]}
-@ChgAdded{Version=[5],Text=[The equality operation that is used in the 
+@ChgAdded{Version=[5],Text=[The equality operation that is used in the
 aforementioned equality expressions is as described in the case of an
 individual membership test whose @nt{membership_choice} is a
 @SynI{choice_}@nt{simple_expression}
 (see @RefSecNum{Relational Operators and Membership Tests}).]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0405-1]}
-@ChgAdded{Version=[5],Text=[The Post expression additions described above are 
-  enabled or disabled depending on the Post assertion policy that is in effect 
-  at the point of declaration of the subprogram @i<S>. A similar rule applies 
+@ChgAdded{Version=[5],Text=[The Post expression additions described above are
+  enabled or disabled depending on the Post assertion policy that is in effect
+  at the point of declaration of the subprogram @i<S>. A similar rule applies
   to the Post'Class expression additions.]}
 @end{StaticSem}
 
@@ -3279,7 +3281,7 @@ corresponding full declaration:
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Redundant[A deferred constant declaration
   @Chg{Version=[3],New=[for which the],Old=[that is completed by
-  a @nt{pragma}]} Import @Chg{Version=[3],New=[aspect is 
+  a @nt{pragma}]} Import @Chg{Version=[3],New=[aspect is
   True ],Old=[]}@Chg{Version=[5],New=[can],Old=[need not]} appear
   @Chg{Version=[5],New=[anywhere that an @nt{object_declaration} is
   allowed],Old=[in the visible part of a @nt{package_specification}]},
@@ -3948,7 +3950,7 @@ those given in the package specification.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0452-1]}
-@ChgDeleted{Version=[5],NoPrefix=[T],Text=[The fact that the full view of File_Name is 
+@ChgDeleted{Version=[5],NoPrefix=[T],Text=[The fact that the full view of File_Name is
 explicitly declared @key[limited] means that parameter passing @Chg{Version=[2],New=[],
 Old=[and function return ]}will always be by reference@Chg{Version=[2],New=[
 and function results will always be built directly in the result object],Old=[]}
@@ -4747,7 +4749,7 @@ controlled types.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0444-1]}
 @Chg{Version=[3],New=[If],Old=[For an @nt{assignment_statement} that assigns to]}
 an object @Chg{Version=[3],New=[is assigned ],Old=[]}the value of that same
-object, the implementation @Chg{Version=[5],New=[may omit the 
+object, the implementation @Chg{Version=[5],New=[may omit the
 entire assignment],Old=[need not do anything]}.
 @begin{Ramification}
   In other words, even if an object is controlled and a combination
@@ -4977,6 +4979,7 @@ Controlled types and user-defined finalization are new to Ada 95.
 @end{DiffWord2005}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledSubClause{Completion and Finalization}
 
 @begin{Intro}
@@ -5034,14 +5037,14 @@ Leaving an execution happens immediately after its completion,
 except in the case of @Chg{Version=[5],New=[the execution of a @i{master construct}],Old=[a
 @i{master}]}:@Chg{Version=[5],New=[ @Defn{master construct}@Defn2{Term=[construct],Sec=[master]}],Old=[ the
 execution of ]}a @Chg{Version=[2],New=[body other than a @nt{package_body};
-@Chg{Version=[5],New=[],Old=[the execution of ]}a @nt{statement}; 
+@Chg{Version=[5],New=[],Old=[the execution of ]}a @nt{statement};
 or @Chg{Version=[5],New=[],Old=[the evaluation of ]}an
 @nt{expression}, @nt{function_call}, or @nt{range} that
 is not part of an enclosing @nt{expression}, @nt{function_call}, @nt{range}, or
 @nt{simple_@!statement} other than a @nt{simple_@!return_@!statement}],
 Old=[@nt{task_body}, a @nt{block_@!statement},
 a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_@!statement}]}.
-@Chg{Version=[5],New=[The term @i{master} by itself refers to the execution 
+@Chg{Version=[5],New=[The term @i{master} by itself refers to the execution
 of a master construct. ],Old=[]}A master is finalized after it is
 complete, and before it is left.
 
@@ -5080,8 +5083,8 @@ complete, and before it is left.
 @end{Ramification}
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Master>,
-Text=<@ChgAdded{Version=[5],Text=[A master is the execution of a master 
-construct. Each object and task is associated with a master. When a master 
+Text=<@ChgAdded{Version=[5],Text=[A master is the execution of a master
+construct. Each object and task is associated with a master. When a master
 is left, associated tasks are awaited and associated objects are finalized.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[R],Term=[master],
   Def=[execution of a master construct],
@@ -5089,12 +5092,12 @@ is left, associated tasks are awaited and associated objects are finalized.]}>}
          left, associated tasks are awaited and associated objects are
          finalized.]}
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Master construct>,
-Text=<@ChgAdded{Version=[5],Text=[ A master construct is one of certain 
-executable constructs listed in @RefSecNum{Completion and Finalization}. 
-Execution of a master construct is a master, with which objects and tasks 
+Text=<@ChgAdded{Version=[5],Text=[ A master construct is one of certain
+executable constructs listed in @RefSecNum{Completion and Finalization}.
+Execution of a master construct is a master, with which objects and tasks
 are associated for the purposes of waiting and finalization.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[master construct],
-  Def=[one of certain executable constructs for which 
+  Def=[one of certain executable constructs for which
        there can be objects or tasks whose lifetime ends when the construct
        completes],
   Note1=[Execution of a master construct is a master, with which objects and
@@ -5683,8 +5686,8 @@ but before leaving Main.
 Thus, handler number 1 cannot handle this Program_Error;
 it will be handled either by handler number 2 or handler number 3.
 If it is handled by handler number 2, then
-Finalize(@Chg{Version=[5],New=[Y],Old=[Z]}) will be done before executing the 
-handler. If it is handled by handler number 3, then 
+Finalize(@Chg{Version=[5],New=[Y],Old=[Z]}) will be done before executing the
+handler. If it is handled by handler number 3, then
 Finalize(@Chg{Version=[5],New=[Y],Old=[Z]}) and Finalize(X) will both
 be done before executing the handler.
 @end{Ramification}
@@ -5890,7 +5893,7 @@ these are defined in terms of constant declarations; and
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @nt{aggregate}s (see @RefSecNum{Aggregates})@Chg{Version=[2],New=[, when
 the result is not built-in-place],Old=[]}
-(in this case, the value of each component, and the 
+(in this case, the value of each component, and the
 @Chg{Version=[5],New=[ancestor],Old=[parent]} part, for an
 @nt{extension_aggregate}, is assigned, and therefore adjusted,
 but the value of the @nt{aggregate} as a whole is not adjusted;

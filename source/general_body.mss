@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:11 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/general_body.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @Comment{The clause header is found in General.Mss. Other parts are found
 in other files, depending upon the version. Note that the subclause labeled
@@ -1222,7 +1222,7 @@ Conformance to a Specialized Needs Annex
 @ISODiff{NotISO=[],ISOOnly=[(@RefSecNum{Systems Programming},
 @RefSecNum{Real-Time Systems}, @RefSecNum{Distributed Systems},
 @RefSecNum{Information Systems}, @RefSecNum{Numerics}, and
-@RefSecNum{High Integrity Systems})]}means
+@RefSecNum{High Integrity Systems}) ]}means
 that each capability
 required by the Annex @Chg{Version=[5],New=[shall be],Old=[is]} provided as
 specified.

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:07 $}
+@Comment{$Date: 2023/10/04 05:40:20 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -63,8 +63,8 @@ Text=<@ChgAdded{Version=[5],Text=[A parallel construct is an executable
 construct that defines multiple activities of a single task that can proceed in
 parallel, via the execution of multiple logical threads of control.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[parallel construct],
-  Def=[executable construct that defines multiple 
-       activities of a single task that can proceed in parallel, via the 
+  Def=[executable construct that defines multiple
+       activities of a single task that can proceed in parallel, via the
        execution of multiple logical threads of control]}
 @end{Intro}
 
@@ -267,6 +267,7 @@ task.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{SingleNote}
+@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just a paragraph number change}
 A @nt<statement_identifier> that appears immediately within
 the declarative region of a
 named @nt<loop_statement> or an @nt<accept_statement> is nevertheless
@@ -541,7 +542,7 @@ nothing.
 
 @end{RunTime}
 
-@begin{Notes}
+@begin{SingleNote}
 The tag of an object never changes;
 in particular, an
 @nt{assignment_statement}
@@ -567,7 +568,7 @@ access value returned by a function call, and similarly, as a
 component or slice of such a variable
 (see @RefSec{The Context of Overload Resolution}).
 @end{Ramification}
-@end{Notes}
+@end{SingleNote}
 
 @begin{Examples}
 @Leading@keepnext@NewExample@i{Examples of assignment statements:}
@@ -1287,7 +1288,7 @@ to restrict the elements produced by an iteration to those for which a boolean
 condition evaluates to True.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[iterator filter],
   Def=[construct that is used to restrict the elements
-       produced by an iteration to those for which a boolean condition 
+       produced by an iteration to those for which a boolean condition
        evaluates to True]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
@@ -1483,7 +1484,7 @@ it cannot be updated within the
 (see @RefSecNum{Objects and Named Numbers}).
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
-@Chg{Version=[5],New=[No separate],Old=[An]} @nt{object_declaration} 
+@Chg{Version=[5],New=[No separate],Old=[An]} @nt{object_declaration}
 @Chg{Version=[5],New=[is expected],Old=[should not be given]} for a loop
 parameter, since the loop parameter is automatically declared by
 the @nt{loop_parameter_specification}.
@@ -1497,6 +1498,7 @@ An implementation could give a warning if a variable is hidden by a
 @nt{loop_parameter_specification}.
 @end{ImplNote}
 
+@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just a paragraph number change}
 The @nt<discrete_subtype_definition> of a for loop is elaborated
 just once. Use of the
 reserved word @key[reverse] does not alter the discrete subtype defined,
@@ -1854,7 +1856,7 @@ Text=<@ChgAdded{Version=[3],Text=[An iterable container type is one that has
 user-defined behavior for iteration, via the Default_Iterator and
 Iterator_Element aspects.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[T],Term=[iterable container type],
-  Def=[type that has user-defined behavior for 
+  Def=[type that has user-defined behavior for
        iteration, via the Default_Iterator and Iterator_Element aspects]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
@@ -2051,7 +2053,7 @@ Text=<@ChgAdded{Version=[3],Text=[An iterator is a construct that is used to
 loop over the elements of an array or container. Iterators may be user defined,
 and may perform arbitrary computations to access elements from a container.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[iterator],
-  Def=[construct that is used to loop over the elements of an 
+  Def=[construct that is used to loop over the elements of an
        array or container],
   Note1=[Iterators can be user defined, and can perform
          arbitrary computations to access elements from a container.]}
@@ -2954,7 +2956,6 @@ environment variables (see @RefSecNum{The Package Environment_Variables}):}]}
 @RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
 @RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
-@NotISORMNewPageVer{Version=[5]}@Comment{For Ada 2022 RM}
 @LabeledClause{Block Statements}
 
 @begin{Intro}
@@ -3092,10 +3093,11 @@ by one of the @nt{sequence_of_statements}
 @end{ImplNote}
 @end{Runtime}
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @begin{Examples}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of a parallel block
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Example of a parallel block
 used to walk a binary tree in parallel:}]}
 
 @begin{Example}
@@ -3118,7 +3120,7 @@ used to walk a binary tree in parallel:}]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Example of a parallel block
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[@NewExample@i{Example of a parallel block
 used to search two halves of a string in parallel:}]}
 
 @begin{Example}
@@ -3161,6 +3163,8 @@ used to search two halves of a string in parallel:}]}
 @end{Extend2012}
 
 
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Exit Statements}
 
 @begin{Intro}

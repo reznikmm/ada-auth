@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.94 $ $Date: 2023/01/05 05:49:12 $ $Author: randy $ }
+@comment{ $Revision: 1.95 $ $Date: 2023/10/04 05:40:21 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:12 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -3945,7 +3945,7 @@ ISO/IEC 1594-1:2018 along with the C interfacing features defined in
    Rank      : @key[constant] Fortran_Integer := 100;
    My_Matrix : Fortran_Matrix (1 .. Rank, 1 .. Rank);
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0058-1]}
 @ChgAdded{Version=[5],Text=[   Precision: @b<constant> := 6;
    @key<type> Standard_Deviation @key<is digits> Precision
       @key<with> Convention => Fortran;
@@ -3962,7 +3962,7 @@ ISO/IEC 1594-1:2018 along with the C interfacing features defined in
    Invert (Rank, My_Matrix);
    ...
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0058-1]}
 @ChgAdded{Version=[5],Text=[   Deviation := ...;
    ...]}
 

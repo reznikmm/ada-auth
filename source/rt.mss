@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.137 $ $Date: 2023/01/05 05:49:10 $ $Author: randy $ }
+@comment{ $Revision: 1.138 $ $Date: 2023/10/04 05:40:21 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2023/01/05 05:49:10 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -591,9 +591,12 @@ instance of a generic unit.@PDefn{generic contract issue}]}
 @begin{RunTime}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0454-1]}
 A task @Chg{Version=[2],New=[can become],Old=[runs (that is, it becomes]} a
 @i{running task}@Chg{Version=[2],New=[],Old=[)]} only @Chg{Version=[2],
-New=[if],Old=[when]} it is ready (see @Chg{Version=[2],New=[@RefSecNum{Tasks and Synchronization}],
+New=[if],Old=[when]} it is ready (see
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[@RefSecFullNum{Tasks and Synchronization}],
+Old=[@RefSecNum{Tasks and Synchronization}]}],
 Old=[@RefSecNum{Task Execution - Task Activation}]}) and
 the execution resources required by that task are available.
 Processors are allocated to tasks based on each task's active priority.
@@ -2340,11 +2343,11 @@ follows the existing rules for ceiling locking.],Old=[]}]}
 @end{Diffword2005}
 
 @begin{Incompatible2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0230-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0230-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatiblities with Ada 2012}The
   policy EDF_Across_Priorities was replaced by EDF_Within_Priorities.
   A program using EDF_Across_Priorities could fail to compile. However, we
-  not are aware of any implementations of EDF_Across_Priorities, so it
+  are not aware of any implementations of EDF_Across_Priorities, so it
   seems unlikely that any such programs exist outside of books and papers.]}
 @end{Incompatible2012}
 
@@ -2674,8 +2677,8 @@ are blocked during that time.
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0447-1]}
 @Chg{Version=[5],New=[As described in @RefSecNum{Protected Procedure Handlers},
-a check is made whenever an interrupt is handled by one of the protected
-procedures of a protected object that its],Old=[The]} ceiling priority
+whenever an interrupt is handled by one of the protected procedures of a
+ protected object, a check is made that its],Old=[The]} ceiling priority
 @Chg{Version=[5],New=[is],Old=[of a protected object has to be]} in the
 Interrupt_Priority range@Chg{Version=[5],New=[],Old=[ if one of its
 procedures is to be used as an interrupt handler (see @RefSecNum{Interrupt Support})]}.
@@ -3130,7 +3133,7 @@ or requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
   Defined the new queuing policy Ordered_FIFO_Queuing.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0164-1]}
-  @ChgAdded{Version=[5],Text=[Defined the new aspect Max_Enty_Queue_Length.]}
+  @ChgAdded{Version=[5],Text=[Defined the new aspect Max_Entry_Queue_Length.]}
 @end{Extend2012}
 
 

@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2023/01/05 05:49:09 $ $Author: randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2023/10/04 05:40:21 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1220,7 +1220,7 @@ element in the same container.]}
 Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0437-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[3],Text=[Tree'Write for a Tree object @i<T> writes
 Node_Count(@i<T>) - 1 elements of the tree to the stream. It
 @Chg{Version=[5],New=[may ],Old=[]}also@Chg{Version=[5],New=[],Old=[ may]} write

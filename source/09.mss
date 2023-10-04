@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:08 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.151 $}
+@Comment{$Revision: 1.152 $}
 
 @begin{Intro}
 
@@ -1770,11 +1770,12 @@ Other_Object : Some_Other_Protected_Type;
 @key[protected] @key[body] Pt @key[is]
   @key[procedure] Op1 @key[is] @key[begin] ... @key[end] Op1;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @key[procedure] Op2 @key[is]
   @key[begin]
     Op1; --@ExamCom{ An internal call.}
     Pt.Op1; --@ExamCom{ Another internal call.}
-    PO.Op1; --@ExamCom{ An external call. It the current instance is PO, then}
+    PO.Op1; --@ExamCom{ An external call. @Chg{Version=[5],New=[If],Old=[It]} the current instance is PO, then}
             --@ExamCom{ this is a bounded error (see @RefSecNum{Protected Subprograms and Protected Actions}).}
     Other_Object.Some_Op; --@ExamCom{ An external call.}
   @key[end] Op2;

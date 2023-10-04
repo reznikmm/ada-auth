@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.78 $ $Date: 2023/01/05 05:49:10 $ $Author: randy $ }
+@Comment{ $Revision: 1.79 $ $Date: 2023/10/04 05:40:21 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:10 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1461,6 +1461,7 @@ controlled part.]}
 
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledAddedClause{Version=[2],Name=[Pragma Detect_Blocking]}
 
 @begin{Intro}

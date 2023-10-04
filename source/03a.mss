@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:06 $}
+@Comment{$Date: 2023/10/04 05:40:20 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.159 $}
+@Comment{$Revision: 1.160 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2914,6 +2914,7 @@ assigning to an enclosing object.
 @end{DiffWord2012}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledSubClause{Object Declarations}
 
 @begin{Intro}

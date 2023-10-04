@@ -1,10 +1,10 @@
 @Part(glossary, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:12 $}
+@Comment{$Date: 2023/10/04 05:40:22 $}
 @LabeledAddedInformativeAnnex{Version=[2],Name=[Language-Defined Entities]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/langdef.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
@@ -25,6 +25,7 @@ lists all language-defined packages.@Defn{Language-defined packages}]}
 
 @PackageList
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledAddedClause{Version=[2],Name=[Language-Defined Types and Subtypes]}
 
 @begin{Intro}

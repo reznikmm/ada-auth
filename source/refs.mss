@@ -1,10 +1,10 @@
 @Part(01, Root="ada.mss")
 
 
-@Comment{$Date: 2023/01/05 05:49:10 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/refs.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @Comment{Header and introductory text is found in ISO_Refs.mss and RM_Refs.mss.}
 
@@ -53,13 +53,14 @@ ISO@Chg{Version=[2],New=[/IEC],Old=[]} 1989:@Chg{Version=[2],New=[2002],Old=[198
 @i{@Chg{Version=[2],New=[Information technology @em ],Old=[]}Programming languages @em COBOL}.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2],ARef=[AI05-0299-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0450-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0450-1],ARef=[AI12-0454-1]}
 @Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO 3166-1:2020}
 @Defn{3166-1:2020, ISO standard}],Old=[@Defn{ISO 3166-1:2006}
 @Defn{3166-1:2006, ISO standard}]}@Defn{Country code standard}
 ISO@Chg{Version=[5],New=[],Old=[/IEC]} 3166-1:@Chg{Version=[5],New=[2020],Old=[2006]},
 @i{Codes for the representation of names of countries and
-their subdivisions @em Part 1: Country Codes}@Chg{Version=[5],New=[],Old=[.]}],Old=[]}
+their subdivisions @em Part 1: Country
+@Chg{Version=[5],New=[codes],Old=[Codes]}}@Chg{Version=[5],New=[],Old=[.]}],Old=[]}
 
 @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0441-1]}
 @ChgDeleted{Version=[5],Text=[@Defn{ISO/IEC 6429:1992}

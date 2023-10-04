@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2023/01/05 05:49:08 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -28,14 +28,14 @@ computer.
   A distributed program typically contains multiple partitions,
   which can execute concurrently.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[program],
-  Def=[set of partitions, each of which can execute in a 
+  Def=[set of partitions, each of which can execute in a
        separate address space, possibly on a separate computer]}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[partition],
-  Def=[part of a program, which consists of a set of 
+  Def=[part of a program, which consists of a set of
        interdependent library units],
-  Note1=[Each partition can run in a separate address 
-         space, possibly on a separate computer. A program can contain 
-         just one partition, or it can be distributed across multiple 
+  Note1=[Each partition can run in a separate address
+         space, possibly on a separate computer. A program can contain
+         just one partition, or it can be distributed across multiple
          partitions, which can execute concurrently.]}
 
 @Defn2{Term=[library unit],Sec=(informal introduction)}
@@ -122,7 +122,7 @@ different from that of RM83. @end{DiffWord83}
   other program units.>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[program unit],
   Def=[language construct that is a package, a task unit, a
-       protected unit, a protected entry, a generic unit, or an explicitly 
+       protected unit, a protected entry, a generic unit, or an explicitly
        declared subprogram other than an enumeration literal],
   Note1=[Certain kinds of program units can be separately compiled.
          Alternatively, they can appear physically nested within other
@@ -134,10 +134,6 @@ different from that of RM83. @end{DiffWord83}
   Each @nt(compilation) is a succession of @nt(compilation_unit)s.
   A @nt(compilation_unit) contains either
   the declaration, the body, or a renaming of a program unit.>}]
-@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[compilation unit],
-  Def=[program unit that is separately compiled],
-  Note1=[A @nt(compilation_unit) contains either
-  the declaration, the body, or a renaming of a program unit.]}
 The representation for a @nt<compilation> is implementation-defined.
 @ImplDef{The representation for a @nt{compilation}.}
 @begin{Ramification}
@@ -157,6 +153,10 @@ An instance of a generic unit is a program unit.
 A protected entry is a program unit,
 but protected entries cannot be separately compiled.
 @end{Ramification}
+@ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[compilation unit],
+  Def=[program unit that is separately compiled],
+  Note1=[A @nt(compilation_unit) contains either
+  the declaration, the body, or a renaming of a program unit.]}
 
 @ChgToGlossaryAlso{Version=[5],Kind=[Revised],Term=<Library unit>,
   Text=<A library unit is a separately compiled
@@ -770,7 +770,7 @@ view of a package has no effect.]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0442-1]}
 A simple program @Chg{Version=[5],New=[can],Old=[may]} consist of a single
 compilation unit.
-A @nt{compilation} @Chg{Version=[5],New=[can have no],Old=[need not have any]} 
+A @nt{compilation} @Chg{Version=[5],New=[can have no],Old=[need not have any]}
 compilation units; for example, its text can consist of @nt{pragma}s.
 @begin{Ramification}
 Such @nt{pragma}s cannot have any arguments that are @nt{name}s,
@@ -1516,7 +1516,7 @@ above.
 
 @begin{Examples}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0429-1]}@Comment{OK to renumber non-normative paragraphs}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of use of with 
+@ChgAdded{Version=[5],Type=[Leading],Text=[@NewExample@i{Examples of use of with
 clauses, limited with clauses, and private with clauses:}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -1567,7 +1567,7 @@ clauses, limited with clauses, and private with clauses:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1],ARef=[AI12-0440-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[@i{The} 
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[@i{The}
 @nt{limited_with_clause} @i{can be used to support
 mutually dependent abstractions that are split across multiple packages. In
 this case, an employee is assigned to a department, and a department has a
@@ -1575,7 +1575,7 @@ manager who is an employee. If a} @nt{with_clause} @i{with the reserved word
 @key(private) appears on one library unit and mentions a second library unit,
 it provides visibility to the second library unit, but restricts that
 visibility to the private part and body of the first unit. The compiler checks
-that no use is made of the second unit in the visible part of the first 
+that no use is made of the second unit in the visible part of the first
 unit.}],Old=[The @nt{limited_with_clause} may be used to support
 mutually dependent abstractions that are split across multiple packages. In
 this case, an employee is assigned to a department, and a department has a
@@ -1676,6 +1676,7 @@ definition in @RefSecNum{Use Clauses}.
 @end{DiffWord2012}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledSubClause{Subunits of Compilation Units}
 
 @begin{Intro}
@@ -1747,10 +1748,10 @@ to a subunit of a subunit as well.]}
 @end{Reason}
 
 @ChgToGlossary{Version=[5],Kind=[Added],Term=<Subunit>,
-Text=<@ChgAdded{Version=[5],Text=[A subunit is a body of a program unit that 
+Text=<@ChgAdded{Version=[5],Text=[A subunit is a body of a program unit that
 can be compiled separately from its enclosing program unit.]}>}
 @ChgTermDef{Version=[5],Kind=(AddedNormal),Group=[C],Term=[subunit],
-  Def=[body of a program unit that can be compiled 
+  Def=[body of a program unit that can be compiled
        separately from its enclosing program unit]}
 
 The parent body of a subunit shall be present in the current environment,
@@ -1813,7 +1814,7 @@ the corresponding @nt{proper_body}.
 @end{LinkTime}
 
 @begin{SingleNote}
-@leading@;The rules in 
+@leading@;The rules in
 @ISODiff{NotISO=[@RefSecFull{The Compilation Process}],ISOOnly=[@RefSecFullNum{The Compilation Process}]}
 say that a @nt{body_stub} is equivalent to the corresponding
 @nt{proper_body}. This implies:
@@ -1859,7 +1860,7 @@ The body of a protected unit can be a subunit.
 
 @begin{Examples}
 @leading@keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1]}
-@Chg{Version=[5],New=[@NewExample@i{Example that defines package Parent without 
+@Chg{Version=[5],New=[@NewExample@i{Example that defines package Parent without
 subunits:}],Old=[The package Parent is first written without subunits:]}
 @begin{Example}
 @key[package] Parent @key[is]
@@ -1877,7 +1878,7 @@ subunits:}],Old=[The package Parent is first written without subunits:]}
 @end{Example}
 
 @leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0429-1],ARef=[AI12-0440-1]}
-@Chg{Version=[5],New=[@NewExample@i{Example showing how the body of procedure Inner 
+@Chg{Version=[5],New=[@NewExample@i{Example showing how the body of procedure Inner
 can be turned into a subunit by rewriting the package body as follows
 (with the declaration of Parent remaining the same):}],Old=[The body of
 procedure Inner may be turned into a subunit by rewriting the package body
@@ -2261,8 +2262,8 @@ If there are no @nt{name}s given as arguments,
 the @nt{pragma} applies to the immediately enclosing program unit.]}
 @begin{Ramification}
   @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
-  @ChgDeleted{Version=[5],Text=[The fact that this is a @ResolutionName means 
-  that the @nt{pragma} will not apply to declarations from outer declarative 
+  @ChgDeleted{Version=[5],Text=[The fact that this is a @ResolutionName means
+  that the @nt{pragma} will not apply to declarations from outer declarative
   regions.]}
 @end{Ramification}
 
@@ -2270,7 +2271,7 @@ the @nt{pragma} applies to the immediately enclosing program unit.]}
 
 @begin{Legality}
 @ChgRef{Version=[5], Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
-@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[A program unit 
+@ChgDeleted{Version=[5],Type=[Leading],Keepnext=[T],Text=[A program unit
 pragma shall appear in one of these places:]}
 @begin{Itemize}
 @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
@@ -2284,14 +2285,14 @@ the @nt<pragma> shall have an argument that is a @nt<name> denoting
 that declaration.]}
 @begin{Ramification}
   @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
-  @ChgDeleted{Version=[5],Text=[The @nt{name} has to denote the immediately 
+  @ChgDeleted{Version=[5],Text=[The @nt{name} has to denote the immediately
   preceding @nt{library_unit_declaration}.]}
 @end{Ramification}
 
 @ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033], ARef=[AI95-00136-01]}
 @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[5],Text=[Immediately within the 
-@Chg{New=[visible part],Old=[declaration]} of a program unit and before 
+@ChgDeleted{Version=[5],Text=[Immediately within the
+@Chg{New=[visible part],Old=[declaration]} of a program unit and before
 any nested declaration@Chg{New=[ (but not within a
 generic formal part)], Old=[]}, in which case the argument,
 if any, shall be a @nt{direct_name}
@@ -2314,7 +2315,7 @@ program unit declaration.]}
 @begin{Ramification}
   @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[5],Text=[If you want to denote a @nt<subprogram_body>
-  that is not a completion, or a @nt{package_declaration}, for example, you 
+  that is not a completion, or a @nt{package_declaration}, for example, you
   have to put the @nt{pragma} inside.]}
 @end{Ramification}
 @end{Itemize}
@@ -2333,9 +2334,9 @@ any, in a library unit pragma shall denote the declaration of]} a library
 unit.]}
 @begin{Ramification}
   @ChgRef{Version=[5], Kind=[DeletedNoDelMsg]}
-  @ChgDeleted{Version=[5],Text=[This, together with the rules for program unit 
-  pragmas above, implies that if a library unit pragma applies to a 
-  @nt{subprogram_declaration} (and similar things), it has to appear 
+  @ChgDeleted{Version=[5],Text=[This, together with the rules for program unit
+  pragmas above, implies that if a library unit pragma applies to a
+  @nt{subprogram_declaration} (and similar things), it has to appear
   immediately after the @nt{compilation_unit}, whereas if the @nt{pragma}
   applies to a @nt{package_declaration}, a @nt{subprogram_body} that is not a
   completion (and similar things), it has to appear inside, as the first
@@ -2345,14 +2346,14 @@ unit.]}
 
 @begin{NotIso}
 @ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 through 7
-were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
 @begin{StaticSem}
 @ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041-01]}
 @ChgRef{Version=[5], Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0417-1]}
-@ChgAdded{Version=[1],Text=[@Chg{Version=[5],New=[],Old=[A library unit 
+@ChgAdded{Version=[1],Text=[@Chg{Version=[5],New=[],Old=[A library unit
 pragma that applies to a generic unit does not apply to its instances, unless
 a specific rule for the pragma specifies the contrary.]}]}
 @end{StaticSem}
@@ -2393,14 +2394,14 @@ is not a library unit pragma should apply to each instance of the generic unit
 for which there is not an overriding pragma applied directly to the instance.]}]}
 @Comment{Originally addednormal for version 2}
 @ChgImplAdvice{Version=[5],Kind=[Deleted],InitialVersion=[2],
-Text=[@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[When applied to 
+Text=[@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[When applied to
 a generic unit, a program unit pragma that
 is not a library unit pragma should apply to each instance of the generic unit
 for which there is not an overriding pragma applied directly to the instance.]}]}]}
 @end{ImplAdvice}
 @begin{NotIso}
 @ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraph 10
-was moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+was moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
@@ -2409,7 +2410,7 @@ should be deleted if the paragraphs are ever renumbered.}
   @ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0033], ARef=[AI95-00136-01]}
   @ChgRef{Version=[5], Kind=[Deleted], ARef=[AI12-0417-1]}
   @ChgAdded{Version=[2], Text=[@Chg{Version=[5],New=[],Old=[@B<Corrigendum:>
-  The wording was corrected to ensure that a program unit pragma cannot 
+  The wording was corrected to ensure that a program unit pragma cannot
   appear in private parts or generic formal parts.]}]}
 
   @ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0034], ARef=[AI95-00041-01]}
@@ -2420,9 +2421,9 @@ should be deleted if the paragraphs are ever renumbered.}
 
   @ChgRef{Version=[2], Kind=[AddedNormal]}
   @ChgRef{Version=[5], Kind=[Deleted], ARef=[AI12-0417-1]}
-  @ChgAdded{Version=[2], Text=[@Chg{Version=[5],New=[],Old=[The @ImplAdviceName 
-  added by the Corrigendum was moved, as it was not in the normal order. (This 
-  changes the paragraph number.) It originally was directly after the new 
+  @ChgAdded{Version=[2], Text=[@Chg{Version=[5],New=[],Old=[The @ImplAdviceName
+  added by the Corrigendum was moved, as it was not in the normal order. (This
+  changes the paragraph number.) It originally was directly after the new
   Static Semantics rule.]}]}
 
   @ChgRef{Version=[2], Kind=[AddedNormal], ARef=[AI95-00212-01]}
@@ -2443,7 +2444,7 @@ should be deleted if the paragraphs are ever renumbered.}
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0132-1]}
   @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0417-1]}
-  @ChgAdded{Version=[3], Text=[@Chg{Version=[5],New=[],Old=[@b<Correction:> A 
+  @ChgAdded{Version=[3], Text=[@Chg{Version=[5],New=[],Old=[@b<Correction:> A
   library unit pragma must apply directly to a library unit, even if no name
   is given in the pragma.]}]}
 @end{DiffWord2005}
@@ -2451,7 +2452,7 @@ should be deleted if the paragraphs are ever renumbered.}
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0417-1]}
   @ChgAdded{Version=[5],Text=[The terms @ldquote@;program unit pragma@rdquote
-  and @ldquote@;library unit pragma@rdquote were moved to 
+  and @ldquote@;library unit pragma@rdquote were moved to
   @RefSec{Obsolescent Features} (specifically to @RefSecNum{Aspect-related Pragmas})
   as all of the @nt{pragma}s that use these terms are now in that annex.]}
 @end{DiffWord2012}
@@ -2636,6 +2637,7 @@ that were with-ed by our parent, etc.
 @end{DiffWord95}
 
 
+@NotIsoRMNewPageVer{Version=[5]}@Comment{For printed Ada 2022 RM only}
 @LabeledClause{Program Execution}
 
 @begin{Intro}
@@ -2702,7 +2704,7 @@ compilation units described here.
 
 @begin{Itemize}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0448-1]}
-A compilation unit @Chg{Version=[5],New=[is a needed compilation unit 
+A compilation unit @Chg{Version=[5],New=[is a needed compilation unit
 of],Old=[needs]} itself;
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0448-1]}
@@ -2730,7 +2732,7 @@ corresponding @ntf{proper_bodies}.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0448-1]}
 @ChgAdded{Version=[2],Text=[If the (implicit) declaration of the limited view
-of a library package is 
+of a library package is
 @Chg{Version=[5],New=[among the ],Old=[]}needed@Chg{Version=[5],New=[ compilation units],Old=[]},
 then so is the explicit declaration of the library package.]}
 
@@ -2832,7 +2834,7 @@ Note that elaboration dependences are among @nt{library_item}s,
 whereas the other two forms of dependence are among compilation units.
 Note that elaboration dependence includes semantic dependence.
 It's a little bit sad that @Chg{Version=[5],New=[the],Old=[pragma]}
-Elaborate_Body @Chg{Version=[5],New=[ aspect],Old=[]} can't be folded 
+Elaborate_Body @Chg{Version=[5],New=[ aspect],Old=[]} can't be folded
 into this mechanism. It follows from the definition that the elaboration
 dependence relationship is transitive.
 Note that the wording of the rule does not need to take into account
@@ -2895,7 +2897,7 @@ the order in which they appear in the environment
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
   Any included @nt{library_unit_declaration} @Chg{Version=[3],New=[for],Old=[to]}
   which @Chg{Version=[3],New=[aspect],Old=[a @nt{pragma}]}
-  Elaborate_Body @Chg{Version=[3],New=[is 
+  Elaborate_Body @Chg{Version=[3],New=[is
   True@Chg{Version=[5],New=[],Old=[ @Redundant[(including when a
   @nt{pragma} Elaborate_Body applies)]]}],Old=[applies]}
   is immediately followed by its @nt{library_unit_body}, if included.
@@ -2908,7 +2910,7 @@ the order in which they appear in the environment
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
-  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@nt{Pragma} 
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@nt{Pragma}
   Elaborate_Body sets aspect Elaborate_Body, see
   @RefSecNum{Elaboration Control}.]}]}
 @end{TheProof}
@@ -2945,10 +2947,10 @@ The order is otherwise implementation defined.
 @begin{Discussion}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 The only way to violate this rule is to have
-Elaborate@Chg{Version=[5],New=[ or],Old=[,]} 
+Elaborate@Chg{Version=[5],New=[ or],Old=[,]}
 Elaborate_All@Chg{Version=[5],New=[ @nt{pragma}s],Old=[,]} or
-Elaborate_Body @Chg{Version=[5],New=[aspects],Old=[@nt{pragma}s]} that 
-cause circular ordering requirements, thus preventing an order that has 
+Elaborate_Body @Chg{Version=[5],New=[aspects],Old=[@nt{pragma}s]} that
+cause circular ordering requirements, thus preventing an order that has
 no forward elaboration dependences.
 @end{Discussion}
 @ImplDef{The order of elaboration of @nt{library_item}s.}
@@ -2956,7 +2958,7 @@ no forward elaboration dependences.
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @PDefn2{Term=[requires a completion], Sec=(library_unit_declaration)}
 @Defn{notwithstanding}
-Notwithstanding what the @Chg{Version=[5],New=[RM],Old=[RM95]} says 
+Notwithstanding what the @Chg{Version=[5],New=[RM],Old=[RM95]} says
 elsewhere, each rule that requires a declaration to have a corresponding
 completion is considered to be a @LinkTimeName
 when the declaration is that of a library unit.
@@ -3224,7 +3226,7 @@ necessarily],Old=[need not]} have a main subprogram.
 In such a case, all the work done by the partition would be done by
 elaboration of various @nt{library_item}s, and by tasks created by that
 elaboration. Passive partitions, which cannot have main subprograms,
-are defined in 
+are defined in
 @ISODiff{NotISO=[@RefSecFull{Distributed Systems}],
 ISOOnly=[@RefSecFullNum{Distributed Systems}]}.
 @begin{Ramification}
@@ -3277,7 +3279,6 @@ The program as a whole is an entirely different thing.
 @end{DiffWord95}
 
 
-@notisormnewpagever{Version=[5]}@Comment{Page break in Ada 2022 RM}
 @LabeledSubClause{Elaboration Control}
 
 @begin{Intro}
@@ -3355,7 +3356,7 @@ Text=<@Chg{Version=[5],New=[],Old=[@key{pragma} @prag<Preelaborable_Initializati
 @end{Syntax}
 @begin{NotIso}
 @ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 through 4
-were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
@@ -3498,7 +3499,7 @@ declared within the formal part of the generic unit is
 a @Chg{Version=[3],New=[],Old=[private ]}type@Chg{Version=[3],New=[],Old=[ (or extension)]}
 that does not have preelaborable initialization@Chg{Version=[3],
 New=[, unless @Chg{Version=[5],New=[the],Old=[@nt{pragma}]}
-Preelaborable_Initialization @Chg{Version=[5],New=[aspect was specified 
+Preelaborable_Initialization @Chg{Version=[5],New=[aspect was specified
 for],Old=[has been applied to]} the formal type],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
@@ -3534,14 +3535,14 @@ user-defined subprogram.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1],ARef=[AI05-0243-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 @PDefn{preelaborated}
-@Chg{Version=[5],New=[When the library unit aspect (see 
-@RefSecNum{Aspect Specifications}) Preelaborate@AspectDefn{Preelaborate} of 
-a program unit is True, the],Old=[@Chg{Version=[3],New=[A],Old=[If a]} 
-@nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below) 
+@Chg{Version=[5],New=[When the library unit aspect (see
+@RefSecNum{Aspect Specifications}) Preelaborate@AspectDefn{Preelaborate} of
+a program unit is True, the],Old=[@Chg{Version=[3],New=[A],Old=[If a]}
+@nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below)
 @Chg{Version=[3],New=[is used to specify that], Old=[applies to]} a library]}
-unit@Chg{Version=[3],New=[],Old=[, then it]} is@Chg{Version=[5],New=[ said 
+unit@Chg{Version=[3],New=[],Old=[, then it]} is@Chg{Version=[5],New=[ said
 to be],Old=[]} @i{preelaborated}@Chg{Version=[3],New=[@Chg{Version=[5],New=[.
-When the Preelaborate aspect is specified True for a library unit,],Old=[, 
+When the Preelaborate aspect is specified True for a library unit,],Old=[,
 namely that the Preelaborate
 aspect@AspectDefn{Preelaborate} of the library unit is True;]} all
 compilation units of the
@@ -3613,7 +3614,7 @@ namely that the Preelaborable_Initialization aspect of the entity is True],Old=[
 of a private type or private extension, a protected type without
 @nt<entry_declaration>s, a generic formal private type, or a generic formal
 derived type, @Chg{Version=[3],New=[has],Old=[have]} preelaborable
-initialization if and only if the 
+initialization if and only if the
 @Chg{Version=[5],New=[],Old=[@nt<pragma> ]}Preelaborable_Initialization@Chg{Version=[5],New=[ aspect],Old=[]} has
 been @Chg{Version=[5],New=[specified True for],Old=[applied to]} them.
 @Redundant[A protected type with @nt{entry_declaration}s
@@ -3654,33 +3655,33 @@ initialization, or an interface type.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0409-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{For conditional "Leading"}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[The following attribute is 
-defined for @PrefixType{a nonformal composite subtype S declared within the 
-visible part of a package or a generic package, or a generic formal private 
-subtype or formal derived subtype}:],Old=[A @nt<pragma> 
-Preelaborable_Initialization specifies that a type has preelaborable 
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[The following attribute is
+defined for @PrefixType{a nonformal composite subtype S declared within the
+visible part of a package or a generic package, or a generic formal private
+subtype or formal derived subtype}:],Old=[A @nt<pragma>
+Preelaborable_Initialization specifies that a type has preelaborable
 initialization. This pragma shall appear in the visible part of a package
 or generic package.]}]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Preelaborable_Initialization>,
-  ARef=[AI12-0409-1], InitialVersion=[5], 
-  Text=[@Chg{Version=[5],New=[This attribute is of Boolean type, and its 
-  value reflects whether the type of S has preelaborable 
+  ARef=[AI12-0409-1], InitialVersion=[5],
+  Text=[@Chg{Version=[5],New=[This attribute is of Boolean type, and its
+  value reflects whether the type of S has preelaborable
   initialization.],Old=[]}]}@Comment{End of Annex text here.}
-  @Chg{Version=[5],New=[The value of this attribute, the type-related 
-  Preelaborable_Initialization aspect, may be specified for any type for 
-  which the attribute is defined. The value shall be specified by a 
-  static expression, unless the type is not a formal type but is nevertheless 
-  declared within a generic package. In this latter case, the value may also 
-  be specified by references to the Preelaborable_Initialization attribute 
+  @Chg{Version=[5],New=[The value of this attribute, the type-related
+  Preelaborable_Initialization aspect, may be specified for any type for
+  which the attribute is defined. The value shall be specified by a
+  static expression, unless the type is not a formal type but is nevertheless
+  declared within a generic package. In this latter case, the value may also
+  be specified by references to the Preelaborable_Initialization attribute
   of one or more formal types visible at the point of the declaration of the
   composite type, conjoined with @b<and>.],Old=[]}
 
 @begin{Ramification}
    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0409-1]}
-   @ChgAdded{Version=[5],Text=[@ldquote@;Formal types visible at the point of 
+   @ChgAdded{Version=[5],Text=[@ldquote@;Formal types visible at the point of
     the declaration@rdquote includes all visible formal types, including those
     that might have been declared in formal packages or in child packages.]}
 @end{Ramification}
@@ -3705,20 +3706,20 @@ the same package
 as the @nt<pragma>. ]}If the @Chg{Version=[5],New=[Preelaborable_Initialization
 aspect is specified True for],Old=[@nt<pragma> is applied to]} a private type or a
 private extension, the full view of the type shall have preelaborable
-initialization. If the @Chg{Version=[5],New=[aspect is specified True 
+initialization. If the @Chg{Version=[5],New=[aspect is specified True
 for],Old=[@nt<pragma> is applied to]} a protected type,
 @Chg{Version=[3],New=[the protected type shall not have
 entries, and ],Old=[]}each
 component of the protected type shall have preelaborable initialization.
 @Chg{Version=[3],New=[@Chg{Version=[5],New=[If the aspect is specified True
 for a generic formal type, then in a @nt{generic_instantiation} the
-corresponding actual type shall have preelaborable initialization. If 
+corresponding actual type shall have preelaborable initialization. If
 the aspect definition includes one or more Preelaborable_Initialization
 @nt{attribute_reference}s, then the full view of the type shall have
 preelaborable initialization presuming the types mentioned in the
-@nt{prefix}es of the @nt{attribute_reference}s all have 
-preelaborable initialization. ],Old=[]}For any other composite type, the 
-@Chg{Version=[5],New=[aspect shall be specified statically True or 
+@nt{prefix}es of the @nt{attribute_reference}s all have
+preelaborable initialization. ],Old=[]}For any other composite type, the
+@Chg{Version=[5],New=[aspect shall be specified statically True or
 False only if it is confirming],Old=[type shall have
 preelaborable initialization]}. ],Old=[]}@PDefn{generic contract issue}In
 addition to the places where @LegalityTitle normally apply
@@ -3744,7 +3745,7 @@ also in the private part of an instance of a generic unit.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0409-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[If the @nt<pragma> appears 
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[If the @nt<pragma> appears
 in a @nt<generic_formal_part>, then the
 @nt<direct_name> shall denote a generic formal private type or a generic formal
 derived type declared in the same @nt<generic_formal_part> as the @nt<pragma>.
@@ -3755,7 +3756,7 @@ preelaborable initialization.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0409-1]}
   @ChgAdded{Version=[2],Text=[Not only do protected types with
-  @nt{entry_declaration}s and task types not have 
+  @nt{entry_declaration}s and task types not have
   preelaborable initialization, but they cannot have
   @Chg{Version=[5],New=[],Old=[pragma ]}Preelaborable_Initialization@Chg{Version=[5],New=[ aspect],Old=[]}
   @Chg{Version=[5],New=[specified True for],Old=[applied to]} them.]}
@@ -3793,7 +3794,7 @@ A @nt{pragma} Pure is a library unit pragma.]}
 
 @begin{NotIso}
 @ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 13 through 15
-were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message 
+were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
@@ -3848,9 +3849,9 @@ evaluates such an @nt{allocator};]}
   of a private type or extension using <> or the ancestor subtype of an
   extension aggregate. The
   subtype of a component could use an @nt{allocator} to initialize an access
-  discriminant; the type still could have @Chg{Version=[5],New=[the],Old=[a 
-  pragma]} Preelaborable_Initialization 
-  @Chg{Version=[5],New=[aspect specified],Old=[given]}. Ada 95 did not allow 
+  discriminant; the type still could have @Chg{Version=[5],New=[the],Old=[a
+  pragma]} Preelaborable_Initialization
+  @Chg{Version=[5],New=[aspect specified],Old=[given]}. Ada 95 did not allow
   such private types to have preelaborable
   initialization, so such a default initialization could not have occurred.
   Thus this rule is not incompatible with Ada 95.]}
@@ -4119,9 +4120,9 @@ writer of such a subprogram has to keep this in mind.
 @begin{Syntax}
 @begin{SyntaxText}
 @Leading@Keepnext@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
-@Chg{Version=[5],New=[The following @nt{pragma}s are defined with the 
+@Chg{Version=[5],New=[The following @nt{pragma}s are defined with the
 given forms],Old=[The form of a @nt{pragma} Elaborate,
-Elaborate_All, or Elaborate_Body is as follows:]}: 
+Elaborate_All, or Elaborate_Body is as follows:]}:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Elaborate)(@SynI{library_unit_}@Syn2{name}{, @SynI{library_unit_}@Syn2{name}});'
@@ -4163,7 +4164,7 @@ pragma, nor a library unit pragma.
 @Chg{Version=[5],New=[],Old=[@PDefn2{Term=[requires a completion], Sec=(declaration to which a @nt{pragma} Elaborate_Body applies)}]}
 If @Chg{Version=[3],New=[the aspect],Old=[a @nt{pragma}]} Elaborate_Body
 @Chg{Version=[3],New=[is True for],Old=[applies to]} a
-declaration@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[ 
+declaration@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[
 @Redundant[(including when @nt{pragma} Elaborate_Body applies)]]}],Old=[]},
 then the declaration requires a completion @Redundant[(a
 body)].@Chg{Version=[3],New=[@PDefn2{Term=[requires a completion],
@@ -4172,7 +4173,7 @@ Sec=(declaration for which aspect Elaborate_Body is True)}],Old=[]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0417-1]}
-  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@nt{Pragma} 
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@nt{Pragma}
   Elaborate_Body sets the aspect (see below).]}]}
 @end{TheProof}
 
@@ -4209,7 +4210,7 @@ The official statement of the semantics of these @nt{pragma}s is given in
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0417-1]}
-@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[A @nt{pragma} 
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[A @nt{pragma}
 Elaborate_Body sets the Elaborate_Body representation aspect of the library
 unit to which it applies to the value True.]}@Redundant[If the Elaborate_Body
 aspect of a library unit is True, the body of the library
@@ -4223,13 +4224,13 @@ unit is elaborated immediately after its declaration.@AspectDefn{Elaborate_Body}
 @begin{ImplNote}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0417-1]}
 The @Chg{Version=[5],New=[specification],Old=[presence]} of
-@Chg{Version=[5],New=[the],Old=[a @nt{pragma}]} 
+@Chg{Version=[5],New=[the],Old=[a @nt{pragma}]}
 Elaborate_Body@Chg{Version=[5],New=[ aspect],Old=[]} simplifies the removal of
 unnecessary Elaboration_Checks.
-For a subprogram declared immediately within a library 
+For a subprogram declared immediately within a library
 unit @Chg{Version=[5],New=[for],Old=[to]} which
-@Chg{Version=[5],New=[the],Old=[a @nt{pragma}]} Elaborate_Body 
-@Chg{Version=[5],New=[ aspect is specified as True],Old=[applies]}, the 
+@Chg{Version=[5],New=[the],Old=[a @nt{pragma}]} Elaborate_Body
+@Chg{Version=[5],New=[ aspect is specified as True],Old=[applies]}, the
 only calls that can fail the
 Elaboration_Check are those that occur in the library unit itself,
 between the declaration and body of the called subprogram;
@@ -4256,7 +4257,7 @@ previous @nt{with_clause} of the same @nt{context_clause}.
 @end{Discussion}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Elaborate_Body],
-    InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[A given package 
+    InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[A given package
       @Chg{Version=[5],New=[will],Old=[must]} have a body, and that
       body is elaborated immediately after the declaration.]}]}
 

@@ -1,10 +1,10 @@
 @Part(01, Root="ada.mss")
 
 
-@Comment{$Date: 2023/01/05 05:49:11 $}
+@Comment{$Date: 2023/10/04 05:40:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/biblio.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @Comment{Header and introductory text is found in ISO_Bib.mss and RM_Bib.mss.}
 
@@ -40,11 +40,11 @@ ISO/IEC 6429:1992,
 @i{Information technology @em Control functions for coded
 character sets}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1],ARef=[AI12-0450-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1],ARef=[AI12-0450-1],ARef=[AI12-0454-1]}
 @ChgAdded{Version=[5],Text=[@Defn{ISO 8601-1:2019}@Defn{8601-1:2019, ISO standard}
 @Defn{date and time formatting standard}
-ISO 8601-1:2019, @i{Data elements and interchange formats @em Information
-interchange @em Part 1, Representation of dates and times}]}
+ISO 8601-1:2019, @i{Date and time @em Representations for information
+interchange @em Part 1: Basic rules}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1]}
 @ChgAdded{Version=[5],Text=[@Defn{ISO/IEC 8859-1:1998}
@@ -63,12 +63,12 @@ ISO/IEC 9899:2018,
 @i{Information technology @em Programming
 languages @em C}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1],ARef=[AI12-0450-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0441-1],ARef=[AI12-0450-1],ARef=[AI12-0454-1]}
 @ChgAdded{Version=[5],Text=[@Defn{ISO/IEC 14882:2020}
 @Defn{14882:2020, ISO/IEC standard}
 @Defn{C++ standard}
 ISO/IEC 14882:2020,
-@i{Information technology @em Programming languages @em C++}]}
+@i{Programming languages @em C++}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0437-1]}
 @ChgAdded{Version=[5],Text=[@Defn{ISO/IEC 60559:2020}

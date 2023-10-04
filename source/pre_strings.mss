@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.97 $ $Date: 2023/01/05 05:49:12 $ $Author: randy $ }
+@comment{ $Revision: 1.98 $ $Date: 2023/10/04 05:40:22 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2023/01/05 05:49:12 $}
+@Comment{$Date: 2023/10/04 05:40:22 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -1250,6 +1250,7 @@ string handling subprograms, Constraint_Error is propagated.
 @end{DiffWord2005}
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledSubClause{Bounded-Length String Handling}
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
@@ -1923,6 +1924,7 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 
 
 
+@NotISORMNewPageVer{Version=[5]}@Comment{For printed version of Ada 2022 RM}
 @LabeledSubClause{Unbounded-Length String Handling}
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0445-1]}
@@ -2745,14 +2747,15 @@ Character portion of Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00362-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1],ARef=[AI12-0414-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Aspect],Old=[@nt{Pragma}]} 
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Aspect],Old=[@nt{Pragma}]}
 Pure is replaced by
 @Chg{Version=[5],New=[aspects @Exam{Preelaborate, Nonblocking,
-Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in 
+Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in
 Strings.Wide_Maps.Wide_Constants.]}
 @end{StaticSem}
 
 @begin{SingleNote}
+@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just the paragraph number changed}
 If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
 
@@ -3104,10 +3107,10 @@ Character portion of Wide_Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0302-1],ARef=[AI12-0414-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Aspect],Old=[@nt{Pragma}]} 
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Aspect],Old=[@nt{Pragma}]}
 Pure is replaced by
 @Chg{Version=[5],New=[aspects @Exam{Preelaborate, Nonblocking,
-Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in 
+Global => @key<in out synchronized>}],Old=[@nt{pragma} Preelaborate]} in
 Strings.Wide_Wide_Maps.Wide_Wide_Constants.]}
 
 @end{StaticSem}
@@ -4230,7 +4233,7 @@ the following declarations:]}
 @ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Get} (
       Buffer : @key[in out] Buffer_Type)
       @key[return] String
-      @key[with] Post'Class => 
+      @key[with] Post'Class =>
          Get'Result'First = 1 @key[and then] Current_Indent (Buffer) = 0;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4245,7 +4248,7 @@ the following declarations:]}
       Buffer : @key[in out] Buffer_Type)
       @key[return] Wide_Wide_String
       @key[with] Post'Class =>
-         Wide_Wide_Get'Result'First = 1 
+         Wide_Wide_Get'Result'First = 1
             @key[and then] Current_Indent (Buffer) = 0;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4306,17 +4309,17 @@ currently stored in a text buffer.]}
 @end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
-@ChgAdded{Version=[5],Text=[New_Line stores New_Line_Count characters that 
+@ChgAdded{Version=[5],Text=[New_Line stores New_Line_Count characters that
 represent a new line into a text buffer. Current_Indent returns the current
-indentation associated with the buffer, with zero meaning there is no 
-indentation in effect; Increase_Indent and Decrease_Indent increase or 
+indentation associated with the buffer, with zero meaning there is no
+indentation in effect; Increase_Indent and Decrease_Indent increase or
 decrease the indentation associated with the buffer.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
 @ChgAdded{Version=[5],Text=[A call to Put, Wide_Put, Wide_Wide_Put, Put_UTF_8,
-or Wide_Put_UTF_16 stores a sequence of characters into the text buffer, 
+or Wide_Put_UTF_16 stores a sequence of characters into the text buffer,
 preceded by Current_Indent(Buffer) spaces (Wide_Wide_Characters with position
-32) if there is at least one character in Item and it would have been the 
+32) if there is at least one character in Item and it would have been the
 first character on the current line.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1],ARef=[AI12-0384-2]}
@@ -4326,8 +4329,8 @@ present in the calls that stored the characters into the buffer, if
 representable. For a call to Get, if any character in the sequence
 is not defined in Character, the result is implementation defined. Similarly,
 for a call to Wide_Get, if any character in the sequence is not defined in
-Wide_Character, the result is implementation defined. As part of a call on 
-any of the Get functions, the buffer is reset to an empty state, with no 
+Wide_Character, the result is implementation defined. As part of a call on
+any of the Get functions, the buffer is reset to an empty state, with no
 stored characters.]}
 
 @ChgImplDef{Version=[5],Kind=[AddedNormal],Text=[@ChgAdded{Version=[5],
@@ -4339,9 +4342,9 @@ Text=[The value returned by a call to a Text_Buffer Wide_Get procedure if any
 character in the returned sequence is not defined in Wide_Character.]}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0384-2]}
-@ChgAdded{Version=[5],Text=[In the case of a Buf of type 
+@ChgAdded{Version=[5],Text=[In the case of a Buf of type
 Text_Buffers.Bounded.Buffer_Type, Text_Truncated (Buf) returns True if the
-various Put procedures together have attempted to store more than 
+various Put procedures together have attempted to store more than
 Buf.Max_Characters into Buf. If this function returns True, then the various
 Get functions return a representation of only the first Buf.Max_Characters
 characters that were stored in Buf.]}
