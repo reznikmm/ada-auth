@@ -8,8 +8,8 @@ package body ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011, 2012, 2021, 2022  AXE Consultants. All rights reserved.
-    -- P.O. Box 1512, Madison WI  53701
+    -- Copyright 2011, 2012, 2021, 2022, 2023  AXE Consultants. All rights reserved.
+    -- 621 N. Sherman Ave., Suite B6, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
     --
     -- ARM_Form is free software: you can redistribute it and/or modify
@@ -54,6 +54,7 @@ package body ARM_Format.Data is
     --  9/15/22 - RLB - Added NewExample.
     -- 11/11/22 - RLB - Added ISODiff.
     -- 12/20/22 - RLB - Added RefSecFullNum.
+    --  9/11/23 - RLB - Added UsageName and UsageTitle commands.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is

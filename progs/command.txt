@@ -1,9 +1,9 @@
 Ada formatting tool.
 
 Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012, 2016, 
-          2019, 2021, 2022
+          2019, 2021, 2022, 2023
    AXE Consultants.
-P.O. Box 1512, Madison WI  53701
+   621 N. Sherman Ave., Suite B6, Madison WI  53704
 E-Mail: randy@rrsoftware.com
 
 ARM_Form is free software: you can redistribute it and/or modify
@@ -115,7 +115,7 @@ Note that regular source commands are not allowed in the master file, unless
 otherwise noted.
 
 Source commands (the order of these determines the collating order):
-@Source{Name=<File Name>,SectionName=<Name>,SectionNumber=<AlphaNum>,NewSection=[T|F]} -
+@Source{Name=<File Name>,SectionName=<Name>,SectionNumber=<AlphaNum>,NewSection=[T|F][,Omit=[T|F]]}
      Specifies a source file for the document. The <File Name> indicates where
      the source file is found, and may include a path if desired. If <File Name>
      does not include an extension, ".MSS" is assumed. <Name> gives
@@ -125,7 +125,23 @@ Source commands (the order of these determines the collating order):
      from A .. Z. If NewSection is true (T), this is the first file for the
      indicated section; otherwise, this is a continuation file for the
      section. (If this setting is wrong, there will be extra or missing headers
-     for the section.)
+     for the section.) If Omit is given and true (T), the file will be
+	 processed normally, but the contents of this file will be omitted from
+	 the output. This means that the file's contents will be included in
+	 generated sections like the index, it can be referred to in cross
+	 references, but the contents will left out of the generated document.
+	 This is most useful for multi-volume documents, where the generated
+	 data is to encompass all of the volumes as if it is a single large
+	 document.
+	 
+	 Warning: If Omit=[T] is used with formats that contain active hotlinks
+	 (such as HTML), links to the omitted text will be generated but will
+	 point nowhere. This feature is mainly intended to be used with formats
+     that do not use hotlinks (such as RTF and plain text). Also, the Table
+	 of Contents will include all of the omitted items (although the generated
+	 TOC used in RTF will only include subclauses included in the text of the
+	 document). 
+
 @TOC
      Specifies where the table of contents will appear in the collating order;
      if this is omitted, there will be no table of contents.
@@ -400,10 +416,11 @@ RTF Output properties:
      is true (T) - this means the footer will be in a Swiss font with multiple
      sizes; otherwise (and this is the default) the footer will be in the body
      font with a single size.
-@RTFPageSize{Letter|A4|HalfLetter|Ada95}
+@RTFPageSize{Letter|A4|SpringA4|HalfLetter|Ada95}
      Specifies the size of the RTF output; Letter is used if this is not
      specified. Letter is 8.5"x11"; A4 is European standard size; HalfLetter
-     is 5.5"x8.5"; Ada95 is 7"x9".
+     is 5.5"x8.5"; Ada95 is 7"x9"; SpringA4 is the European standard size with
+	 wider margins as specified by Springer.
 @RTFSizes{Small|Normal|ISO2021}
     Specifies the font/line sizes for the output file. "Small" is the usual
     Ada 95 sizes, used on HalfLetter and Ada95 pages. "Normal" is the usual
@@ -1293,7 +1310,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
     Classification kinds:
         -- These work like formatting, not groupings. No format is implied by
         -- them, and they can be nested inside of groupings (but not
-	-- classifications).
+        -- classifications).
 	NotIso    - Text that is not included in ISO documents.
 	IsoOnly   - Text that is included only in ISO documents.
 	RMOnly    - Text that is not included in the AARM (that is, it is only
@@ -1315,6 +1332,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Metrics	  - Metrics.
 	ImplPerm  - Implementation Permissions.
 	ImplAdvice- Implementation Advice.
+	Usage     - Usage suggestions and advice.
 	Notes	  - Notes. (Each of these is numbered and indented 1 unit.)
 		    The format is controlled by the @NoteFormat command
 		    in the master file.
@@ -1347,6 +1365,10 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Incompatible2012 - Incompatibilities with Ada 2012.
 	Extend2012  - Extensions to Ada 2012.
 	DiffWord2012- Wording Changes from Ada 2012.
+	Inconsistent2022 - Inconsistencies with Ada 2022.
+	Incompatible2022 - Incompatibilities with Ada 2022.
+	Extend2022  - Extensions to Ada 2022.
+	DiffWord2022- Wording Changes from Ada 2022.
 
     AARM annotations: (not shown if HideAnnotations is used)
 	Reason    - Why a rule is necessary.

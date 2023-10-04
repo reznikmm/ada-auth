@@ -17,9 +17,10 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, 2017, 2019, 2021, 2022
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, 2017, 2019, 2021,
+    --   2022, 2023
     --   AXE Consultants. All rights reserved.
-    -- P.O. Box 1512, Madison WI  53701
+    --   621 N. Sherman Ave., Suite B6, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
     --
     -- ARM_Form is free software: you can redistribute it and/or modify
@@ -79,6 +80,7 @@ procedure ARM_Formatter is
     --  1/29/22 - RLB - Updated copyright date.
     --  2/ 2/22 - RLB - Updated help to use Ada 2022 and define Ada 2022 TC1.
     --  4/ 8/22 - RLB - Added ReST format for future use.
+    --  7/26/23 - RLB - Updated copyright date and address.
 
     -- Standard commands for Ada standards:
     -- For Original (Ada 95) RM:
@@ -313,8 +315,8 @@ procedure ARM_Formatter is
 begin
     Ada.Text_IO.Put_Line ("Ada Manual formatter");
     Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, ");
-    Ada.Text_IO.Put_Line ("            2017, 2019, 2021, 2022  AXE Consultants");
-    Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
+    Ada.Text_IO.Put_Line ("            2017, 2019, 2021, 2022, 2023  AXE Consultants");
+    Ada.Text_IO.Put_Line ("  621 N. Sherman Ave., Suite B6, Madison WI  53704");
 
     Get_Commands;
 

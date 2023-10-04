@@ -19,9 +19,9 @@ package body ARM_RTF is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012,
-    --	    2013, 2016, 2021, 2022
+    --	    2013, 2016, 2021, 2022, 2023
     --   AXE Consultants. All rights reserved.
-    -- P.O. Box 1512, Madison WI  53701
+    --   621 N. Sherman Ave., Suite B6, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
     --
     -- ARM_Form is free software: you can redistribute it and/or modify
@@ -162,6 +162,7 @@ package body ARM_RTF is
     --                  small not indented style.
     --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
     --  8/23/22 - RLB - Added Use_ISO_Bullets setting.
+    --  7/26/23 - RLB - Added Springer_A4 page size.
 
 
     -- Note: We assume a lot about the Section_Names passed into
@@ -438,8 +439,11 @@ package body ARM_RTF is
 	    -- Return the paper width in twips:
 	begin
 	    case Output_Object.Page_Size is
-		when ARM_RTF.A4 =>
+		when ARM_RTF.A4 =>                
 		    return "9030";
+                when ARM_RTF.Springer_A4 =>
+                    --return "6920"; -- Original Springer size.
+                    return "7826"; -- Revised size.
 		when ARM_RTF.Letter =>
 		    return "9360";
 		when ARM_RTF.Half_Letter =>
@@ -454,7 +458,10 @@ package body ARM_RTF is
 	begin
 	    case Output_Object.Page_Size is
 		when ARM_RTF.A4 =>
-		    return "4515";
+                    return "4515";
+                when ARM_RTF.Springer_A4 =>
+		    --return "3460"; -- Original Springer size.
+                    return "3913";
 		when ARM_RTF.Letter =>
 		    return "4680";
 		when ARM_RTF.Half_Letter =>
@@ -3079,7 +3086,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s9\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext9 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext9 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Normal, 1), -- Syntax indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -3300,7 +3307,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s27\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext27 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext27 ");
 
             Set_Style (Header_Info,
 		       Font => ARM_Output.Default,
@@ -3664,7 +3671,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s58\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext58 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext58 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples, 2), -- Syntax Indented examples
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
@@ -3686,7 +3693,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s60\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext60 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext60 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Examples, 3), -- Code Indented examples
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
@@ -3708,7 +3715,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s62\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext62 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext62 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples, 3), -- Code Indented examples
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
@@ -3730,7 +3737,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s64\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext64 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext64 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Title, 0),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -3938,7 +3945,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s80\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext80 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext80 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples, 1),
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
@@ -3949,7 +3956,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s81\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext81 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext81 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples, 2),
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
@@ -3960,7 +3967,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s82\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext82 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext82 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 1),
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
@@ -3971,7 +3978,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s83\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext83 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext83 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Examples, 5), -- Child Indented examples
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
@@ -3993,7 +4000,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s85\widctlpar\adjustright",
-		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext85 ");
+		       Style_String_Suffix => "\cgrid\ql\sl-210\slmult0 \snext85 ");
 
 	    -- The following are indented three extra levels:
 	    Set_Style (Paragraph_Info(ARM_Output.Narrow_Hanging, 4),
@@ -4406,7 +4413,7 @@ package body ARM_RTF is
 	-- Note: If changing the page size or margins, be sure to change the
 	-- header and footer tab settings as well.
 	case Output_Object.Page_Size is
-	    when ARM_RTF.A4 =>
+	    when ARM_RTF.A4 | ARM_RTF.Springer_A4 =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw11909\paperh16834"); -- Set paper to A4.
 	    when ARM_RTF.Letter =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw12240\paperh15840"); -- Set paper to US Letter.
@@ -4423,6 +4430,11 @@ package body ARM_RTF is
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1440\margr900\margt1080\margb1080");
 	    when ARM_RTF.Letter | ARM_RTF.A4 =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1800\margr1080\margt1440\margb1440");
+    	    when ARM_RTF.Springer_A4 =>
+	        --Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl2494\margr2494\margt2948\margb2381");
+                    -- Original Springer size (L, R 44 mm; B 42 mm; T 52 mm)
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl2041\margr2041\margt2494\margb1928");
+                    -- Revised Springer size (L, R 36 mm; B 34 mm; T 44 mm)                
 	end case;
 	-- Revisions:
 	if Output_Object.Includes_Changes then
@@ -4448,7 +4460,14 @@ package body ARM_RTF is
 	    -- \pgbrdrfoot - Page border surrounds footer;
 	    -- \fet0	- Footnote/endnote control: 0 - Footnotes only (or none);
 	-- Section properties:
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "\sectd\linex0\endnhere\sectdefaultcl\sbkodd\headery540\footery540");
+        if Output_Object.Page_Size = ARM_RTF.Springer_A4 then
+	    --Ada.Text_IO.Put_Line (Output_Object.Output_File, "\sectd\linex0\endnhere\sectdefaultcl\sbkodd\headery1480\footery1160");
+                -- Original Springer size.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\sectd\linex0\endnhere\sectdefaultcl\sbkodd\headery1246\footery964");
+                -- Revised Springer size.              
+        else
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\sectd\linex0\endnhere\sectdefaultcl\sbkodd\headery540\footery540");
+        end if;
 	    -- \sectd	- Default section properties;
 	    -- \linex0  - Line number spacing (0 - none);
 	    -- \endnhere- Endnotes included;
@@ -5886,6 +5905,9 @@ package body ARM_RTF is
 	case Output_Object.Page_Size is
 	    when ARM_RTF.A4 =>
 	        Page_Width := 9030;
+            when ARM_RTF.Springer_A4 =>
+	        --Page_Width := 6920; -- Original Springer size.
+                Page_Width := 7826; -- Revised size.
 	    when ARM_RTF.Letter =>
 	        Page_Width := 9360;
 	    when ARM_RTF.Half_Letter =>

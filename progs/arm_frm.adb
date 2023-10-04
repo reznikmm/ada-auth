@@ -23,9 +23,10 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022
-    -- AXE Consultants. All rights reserved.
-    -- P.O. Box 1512, Madison WI  53701
+    --           2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020, 2021,
+    --           2022, 2023
+    --   AXE Consultants. All rights reserved.
+    --   621 N. Sherman Ave., Suite B6, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
     --
     -- ARM_Form is free software: you can redistribute it and/or modify
@@ -315,7 +316,8 @@ package body ARM_Format is
     --  9/15/22 - RLB - Added Examples_Format, renamed Group_Format_Kind.
     -- 11/11/22 - RLB - Added ISO_Diff.
     -- 12/20/22 - RLB - Added RefSecFullNum.
-
+    --  8/24/23 - RLB - Added missing ISO code to Add_Subheading/Delete_Subheading.
+    --  9/11/23 - RLB - Added Usage category and commands.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -347,7 +349,7 @@ package body ARM_Format is
 	    return T;
 	else
 	    Allocated_Reference_Count := Allocated_Reference_Count + 1;
-	    if Allocated_Reference_Count > 20 then -- Never more than this on one paragraph.
+	    if Allocated_Reference_Count > 28 then -- Never more than this on one paragraph.
                 Ada.Text_IO.Put_Line ("  ** Too many references allocated");
 	    end if;
 	    return new Reference;
@@ -1170,8 +1172,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		     Static_Semantics | Link_Time |
 		     Run_Time | Bounded_Errors |
 		     Erroneous | Requirements | Documentation |
-		     Metrics | Permissions | Advice | Notes | Single_Note |
-		     Examples =>
+		     Metrics | Permissions | Advice | Usage |
+                     Notes | Single_Note | Examples =>
 		    return False;
 	        when Language_Design | Ada83_Inconsistencies |
 		     Ada83_Incompatibilities | Ada83_Extensions |
@@ -1558,6 +1560,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 				         Metrics |
 				         Permissions | -- ImplPerm
 				         Advice | -- ImplAdvice
+                                         Usage |
 				         Examples =>
 					return 0; -- No indent.
 				    when Wide_Above =>
@@ -1685,7 +1688,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 				         Static_Semantics | Link_Time |
 				         Run_Time | Bounded_Errors |
 				         Erroneous | Requirements | Documentation |
-				         Metrics | Permissions | Advice =>
+				         Metrics | Permissions | Advice | Usage =>
 				        return False;
 			            when Examples =>
                                         if Format_Object.Examples_Format = Ada95 then
@@ -1751,7 +1754,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Documentation | -- DocReq
 		         Metrics |
 		         Permissions | -- ImplPerm
-		         Advice => -- ImplAdvice
+		         Advice | -- ImplAdvice
+                         Usage =>
 			Format_Object.Style := ARM_Output.Normal;
 			Format_Object.Indent := 0; -- No indent.
 			Format_Object.No_Breaks := False;
@@ -2112,7 +2116,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Documentation | -- DocReq
 		         Metrics |
 		         Permissions | -- ImplPerm
-		         Advice => -- ImplAdvice
+		         Advice | -- ImplAdvice
+                         Usage =>
 			ARM_Output.Category_Header (Output_Object,
                             ARM_Paragraph.Paragraph_Kind_Title(For_Type).Str(1..ARM_Paragraph.Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
@@ -2212,6 +2217,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Metrics |
 		         Permissions | -- ImplPerm
 		         Advice | -- ImplAdvice
+                         Usage |
 		         Examples |
 			 Notes | Single_Note |
 		         Language_Design | -- "MetaRules"
@@ -7934,8 +7940,15 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 
 			    Format_Object.Text_Format := ARM_Output.NORMAL_FORMAT;
 			    Format_Object.Text_Format.Bold := True;
-			    Format_Object.Text_Format.Font := ARM_Output.Swiss;
-			    Format_Object.Text_Format.Size := 2;
+	                    -- *** Hack: This should be controlled some other way.
+        	            if Format_Object.Include_ISO then -- Use ISO 2021 format.
+	                        Format_Object.Text_Format.Font := ARM_Output.Roman;
+			        Format_Object.Text_Format.Size := 1;
+
+			    else
+	                        Format_Object.Text_Format.Font := ARM_Output.Swiss;
+			        Format_Object.Text_Format.Size := 2;
+	                    end if;
 			    ARM_Output.Text_Format (Output_Object,
 						    Format_Object.Text_Format);
 		        else -- Insertion or Deletion.
@@ -7949,8 +7962,15 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 
 			    Format_Object.Text_Format := ARM_Output.NORMAL_FORMAT;
 			    Format_Object.Text_Format.Bold := True;
-			    Format_Object.Text_Format.Font := ARM_Output.Swiss;
-			    Format_Object.Text_Format.Size := 2;
+	                    -- *** Hack: This should be controlled some other way.
+        	            if Format_Object.Include_ISO then -- Use ISO 2021 format.
+	                        Format_Object.Text_Format.Font := ARM_Output.Roman;
+			        Format_Object.Text_Format.Size := 1;
+
+			    else
+	                        Format_Object.Text_Format.Font := ARM_Output.Swiss;
+			        Format_Object.Text_Format.Size := 2;
+	                    end if;
                             Format_Object.Text_Format.Change := Disposition; -- Insertion or Deletion
 			    Format_Object.Text_Format.Version := Version;
 			    ARM_Output.Text_Format (Output_Object,
@@ -8025,10 +8045,10 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				    ARM_Contents.Lookup_Clause_Number (Title);
 			    begin
 			        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section or else
-			           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Full then                                   
+			           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Full then
 				    Check_Paragraph;
-                                    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Full then 
-                                        -- Add the prefix:    
+                                    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Full then
+                                        -- Add the prefix:
                                         case ARM_Contents.Lookup_Level (Title) is
                                             -- Determine the prefix needed, if any.
                                             when ARM_Contents.Section =>
@@ -8046,12 +8066,12 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
                                                  ARM_Contents.Informative_Annex =>
                                                 -- For some odd reason, "Annex" is already included with these references.
                                                 null; -- ARM_Output.Ordinary_Text (Output_Object, "Annex ");
-                            
+
                                             when ARM_Contents.Clause | ARM_Contents.Subclause |
                                                  ARM_Contents.Subsubclause =>
                                                 null; -- No prefix needed.
-     
-                                            when ARM_Contents.Unnumbered_Section | ARM_Contents.Dead_Clause =>                          
+
+                                            when ARM_Contents.Unnumbered_Section | ARM_Contents.Dead_Clause =>
                                                 Ada.Text_IO.Put_Line ("** Cannot make a numbered section reference for this kind os section, line " & ARM_Input.Line_String (Input_Object));
                                                 Ada.Text_IO.Put_Line ("   Looking for " & Title(1..Title_Length));
                                         end case;
@@ -8110,12 +8130,12 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
                                              ARM_Contents.Informative_Annex =>
                                             -- For some odd reason, "Annex" is already included with these references.
                                             null; -- ARM_Output.Ordinary_Text (Output_Object, "Annex ");
-                        
+
                                         when ARM_Contents.Clause | ARM_Contents.Subclause |
                                              ARM_Contents.Subsubclause =>
                                             null; -- No prefix needed.
- 
-                                        when ARM_Contents.Unnumbered_Section | ARM_Contents.Dead_Clause =>                          
+
+                                        when ARM_Contents.Unnumbered_Section | ARM_Contents.Dead_Clause =>
                                             Ada.Text_IO.Put_Line ("** Cannot make a numbered section reference for this kind os section, line " & ARM_Input.Line_String (Input_Object));
                                             Ada.Text_IO.Put_Line ("   Looking for " & Title(1..Title_Length));
                                     end case;
@@ -9615,7 +9635,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		     Legality_Name | Static_Name | Link_Name | Run_Name |
 		     Bounded_Name | Erroneous_Name | Req_Name |
 		     Doc_Name | Metrics_Name | Permission_Name | Advice_Name |
-		     Notes_Name | Single_Note_Name | Examples_Name |
+		     Usage_Name | Notes_Name | Single_Note_Name | Examples_Name |
 		     Meta_Name | Inconsistent83_Name |
 		     Incompatible83_Name | Extend83_Name | Wording83_Name |
 		     Inconsistent95_Name |
@@ -9629,8 +9649,8 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		     Syntax_Title | Resolution_Title | Legality_Title |
 		     Static_Title | Link_Title | Run_Title | Bounded_Title |
 		     Erroneous_Title | Req_Title | Doc_Title | Metrics_Title |
-		     Permission_Title | Advice_Title | Notes_Title |
-		     Single_Note_Title |
+		     Permission_Title | Advice_Title | Usage_Title |
+                     Notes_Title | Single_Note_Title |
 		     Examples_Title | Meta_Title | Inconsistent83_Title |
 		     Incompatible83_Title | Extend83_Title | Wording83_Title |
 		     Inconsistent95_Title |
@@ -9986,6 +10006,8 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		    Put_Name(Permissions);
 		when Advice_Name =>
 		    Put_Name(Advice);
+		when Usage_Name =>
+		    Put_Name(Usage);
 		when Notes_Name =>
 		    Put_Name(Notes);
 		when Single_Note_Name =>
@@ -10061,6 +10083,8 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
 		    Put_Title(Permissions);
 		when Advice_Title =>
 		    Put_Title(Advice);
+		when Usage_Title =>
+		    Put_Title(Usage);
 		when Notes_Title =>
 		    Put_Title(Notes);
 		when Single_Note_Title =>
@@ -10390,7 +10414,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
                                             when ARM_Output.Clause =>
                                                 return " See Clause @RefSecbyNum{" & DB_Clause_String & "}.";
                                         end case;
-                                    end if;  
+                                    end if;
                                 else
                                     return " See @RefSecbyNum{" & DB_Clause_String & "}.";
                                 end if;
@@ -10419,7 +10443,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
                                                 return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
                                                     "], New=[ See Clause @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
                                         end case;
-                                    end if;  
+                                    end if;
                                 else
 				    return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
 				        "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
@@ -10452,7 +10476,7 @@ Ada.Text_IO.Put_Line ("-- Report Term list for Group" & Group'Image & " on line 
                                                 return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
                                                      "], New=[],Old=[ See Clause @RefSecbyNum{" & DB_Clause_String & "}.]}";
                                         end case;
-                                    end if;  
+                                    end if;
                                 else
 				    return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
 				        "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}.]}";

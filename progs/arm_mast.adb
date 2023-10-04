@@ -11,6 +11,7 @@ with ARM_Input,
      ARM_HTML,
      ARM_RTF,
      ARM_Corr,
+     ARM_Blackhole,
      ARM_Paragraph,
      ARM_Contents;
 package body ARM_Master is
@@ -22,9 +23,9 @@ package body ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2007, 2009, 2011, 2012, 2013, 2016, 2022
+    -- Copyright 2006, 2007, 2009, 2011, 2012, 2013, 2016, 2022, 2023
     --   AXE Consultants. All rights reserved.
-    -- P.O. Box 1512, Madison WI  53701
+    --   621 N. Sherman Ave., Suite B6, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
     --
     -- ARM_Form is free software: you can redistribute it and/or modify
@@ -84,6 +85,8 @@ package body ARM_Master is
     --  8/22/22 - RLB - Added NonterminalFont command.
     --  8/23/22 - RLB - Added RTFBulletFormat command.
     --  9/15/22 - RLB - Added ExamplesFormat command.
+    --  7/26/23 - RLB - Added SpringA4 page size.
+    --  8/23/23 - RLB - Added Omit option to the Source command.
 
     type Command_Type is (
 	-- Source commands:
@@ -153,6 +156,7 @@ package body ARM_Master is
 		Section_Name_Len   : Natural;
 		Section_Number     : ARM_Contents.Section_Number_Type;
 		Starts_New_Section : Boolean;
+                Omit_from_Output   : Boolean;
 	end case;
     end record;
 
@@ -788,7 +792,7 @@ package body ARM_Master is
 
 	    procedure Process_Source_Command is
 	        -- @Source{Name=<File Name>,SectionName=<Name>,
-		-- SectionNumber=<AlphaNum>,NewSection=[T|F]}
+		-- SectionNumber=<AlphaNum>,NewSection=[T|F][,Omit=[T|F]]}
 	        Param_Close_Ch : Character;
 	        Item : String(1..80);
 	        ILen : Natural := 0;
@@ -807,7 +811,8 @@ package body ARM_Master is
 			 Section_Name       => (others => ' '),
 			 Section_Name_Len   => 0,
 			 Section_Number     => 0,
-			 Starts_New_Section => True);
+			 Starts_New_Section => True,
+                         Omit_from_Output   => False);
 		    ARM_Input.Check_Parameter_Name (Input_Object,
 		        Param_Name => "Name" & (5..ARM_Input.Command_Name_Type'Last => ' '),
 		        Is_First => True,
@@ -887,6 +892,18 @@ package body ARM_Master is
 				 Source_Data(Source_Length).Starts_New_Section);
 
 	            ARM_Input.Get_Char (Input_Object, Ch);
+                    -- Skip any spaces:
+                    while Ch = ' ' loop
+	                ARM_Input.Get_Char (Input_Object, Ch);
+                    end loop;
+                    if Ch = ',' then -- The optional parameter exists.
+	                ARM_Input.Replace_Char (Input_Object);
+		        Get_Boolean ("Omit" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+				     Source_Data(Source_Length).Omit_from_Output);
+	                ARM_Input.Get_Char (Input_Object, Ch);
+                    else -- No optional "Omit" parameter.
+                        Source_Data(Source_Length).Omit_from_Output := False;
+                    end if;
 	            if Ch = Close_Ch then
 		        null;
 		    else
@@ -1473,7 +1490,7 @@ package body ARM_Master is
 		    Process_Versioned_String (Version_Name);
 
 		when RTF_Page_Size =>
-		    -- @RTFPageSize{Letter|A4|HalfLetter|Ada95}
+		    -- @RTFPageSize{Letter|A4|SpringA4HalfLetter|Ada95}
 		    declare
 			Size : constant String :=
 			    Ada.Characters.Handling.To_Lower (Get_Single_String);
@@ -1482,6 +1499,8 @@ package body ARM_Master is
 			    Page_Size := ARM_RTF.Letter;
 			elsif Size = "a4" then
 			    Page_Size := ARM_RTF.A4;
+			elsif Size = "springa4" then
+			    Page_Size := ARM_RTF.Springer_A4;
 			elsif Size = "halfletter" then
 			    Page_Size := ARM_RTF.Half_Letter;
 			elsif Size = "ada95" then
@@ -1667,6 +1686,7 @@ package body ARM_Master is
 	ARM_Format.Destroy (Format_Object);
     end Scan_Sources;
 
+    Blackhole_Output_Object : ARM_Blackhole.Blackhole_Output_Type;
 
     procedure Generate_Sources (Output_Object : in out ARM_Output.Output_Type'Class) is
 	-- Generate the results from the source files:
@@ -1679,12 +1699,23 @@ package body ARM_Master is
 		when TOC =>
 		    ARM_Format.Write_Table_of_Contents (Format_Object, Output_Object);
 		when A_File =>
-		    ARM_Format.Process (Format_Object,
-		        Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len),
-		        Output_Object,
-		        Section_Name   => Source_Data(Source_Index).Section_Name(1..Source_Data(Source_Index).Section_Name_Len),
-		        Section_Number => Source_Data(Source_Index).Section_Number,
-		        Starts_New_Section => Source_Data(Source_Index).Starts_New_Section);
+                    if Source_Data(Source_Index).Omit_from_Output then
+		        Ada.Text_IO.Put_Line ("-- Omit " &
+                            Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len) & " from output");                        
+		        ARM_Format.Process (Format_Object,
+		            Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len),
+		            Blackhole_Output_Object,
+		            Section_Name   => Source_Data(Source_Index).Section_Name(1..Source_Data(Source_Index).Section_Name_Len),
+		            Section_Number => Source_Data(Source_Index).Section_Number,
+		            Starts_New_Section => Source_Data(Source_Index).Starts_New_Section);
+                    else
+		        ARM_Format.Process (Format_Object,
+		            Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len),
+		            Output_Object,
+		            Section_Name   => Source_Data(Source_Index).Section_Name(1..Source_Data(Source_Index).Section_Name_Len),
+		            Section_Number => Source_Data(Source_Index).Section_Number,
+		            Starts_New_Section => Source_Data(Source_Index).Starts_New_Section);
+                    end if;
 		when Empty => null;
 	    end case;
 	end loop;
@@ -1722,6 +1753,9 @@ package body ARM_Master is
 	Ada.Text_IO.Put_Line ("  Lines processed: " &
 		ARM_File.Line_String (Input_Object));
 	Arm_File.Close (Input_Object);
+
+        -- Initialize the blackhole in case we need it:
+        ARM_Blackhole.Create (Blackhole_Output_Object);
 
 	-- Now, execute the commands from the file.
 

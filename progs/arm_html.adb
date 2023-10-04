@@ -4238,7 +4238,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 --" small chars=" & Natural'Image(Output_Object.Disp_Char_Count - Output_Object.Disp_Large_Char_Count) &
 --" Hang_Outdent=" & Natural'Image(Paragraph_Info(Output_Object.Paragraph_Format).Hang_Outdent));
 	        if (Output_Object.Disp_Large_Char_Count*13) +
-	           ((Output_Object.Disp_Char_Count-Output_Object.Disp_Large_Char_Count)*8) >
+	           ((Output_Object.Disp_Char_Count-Output_Object.Disp_Large_Char_Count)*8) >=
 	           Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Hang_Outdent*40 then
 	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "<br clear=""left"">");
 			-- We use "clear=left" so that the next line always

@@ -16,7 +16,7 @@ package body ARM_Corr is
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2022
     --   AXE Consultants. All rights reserved.
-    -- P.O. Box 1512, Madison WI  53701
+    -- 621 N. Sherman Ave., Suite B6, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
     --
     -- ARM_Form is free software: you can redistribute it and/or modify
