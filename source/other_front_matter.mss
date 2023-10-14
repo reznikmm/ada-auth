@@ -1,6 +1,6 @@
 @Part(otherfrontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/other_front_matter.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2023/10/04 05:40:22 $}
+@comment{$Revision: 1.5 $ $Date: 2023/10/14 06:42:23 $}
 
 @comment{These parts appear after the Introduction in RM and AARM versions only.}
 
@@ -432,7 +432,7 @@ wanted to remain anonymous, so they are not mentioned here.}
 
 @ChgRef{Version=[6],Kind=[Added]}
 @ChgAdded{Version=[6],Text=<The editor [R. Brukardt] would like to thank the
-many people whose hard work and assistance has made this revision possible.>}
+many people whose hard work and assistance has made this update possible.>}
 
 @ChgRef{Version=[6],Kind=[Added]}
 @ChgAdded{Version=[6],Text=[Thanks go out to all of the members of the
@@ -452,9 +452,9 @@ R. Amiard, J. Barnes, A. Burns, A. Charlet, G. Dismukes, C. Dross, R. Duff, E. F
 E. Ploedereder, J.P. Rosen, F. Schanda, E. Schonberg, J. Squirek, T. Vardanega, 
 and R. Wai.}]}
 
-@Comment{Revise when closer to end of te process: 
-@ChgRef{Version=[5],Kind=[Added]}
-@Chg{Version=[5],New=[Finally, special thanks go to the convenor of ISO/IEC JTC
+@Comment{Revise when closer to end of the process: 
+@ChgRef{Version=[6],Kind=[Added]}
+@Chg{Version=[6],New=[Finally, special thanks go to the convenor of ISO/IEC JTC
 1/SC 22/WG 9, P. Rogers, who guided the document through the
 standardization process.],Old=[]}} @Comment{The financial contributors
 wanted to remain anonymous, so they are not mentioned here.}
@@ -467,7 +467,7 @@ wanted to remain anonymous, so they are not mentioned here.}
 @begin{Intro}
 @AddedSubHeading{Version=[1],Using this version of the Ada Reference Manual}
 
-@ChgNote{The following text should be redone once we decide what form Ada 2022
+@ChgNote{The following text should be redone once we decide what form Ada 202y
 will take.}
 
 @begin{RMOnly}
@@ -476,14 +476,16 @@ will take.}
 @ChgRef{Version=[3],Kind=[Revised]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgRef{Version=[5],Kind=[Revised]}
-@Chg{New=[This document has been revised with @Chg{Version=[4],New=[
+@ChgRef{Version=[6],Kind=[Revised]}
+@Chg{New=[This document has been revised with  @Chg{Version=[6],New=[changes
+for Ada 202y],Old=[@Chg{Version=[4],New=[
 the corrections specified in Technical Corrigendum 1 for Ada 2012
 (which corresponds to ISO/IEC 8652:2012/COR.1:2016)@Chg{Version=[5],New=[ 
-and other changes specifically for Ada 2022],Old=[]}],
+and other changes specifically for this fourth edition],Old=[]}],
 Old=[the corrections specified in Technical Corrigendum 1 for Ada 95
 (which corresponds to ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and
 Amendment 1 (which corresponds to ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[,
-along with changes specifically for this third edition],Old=[]}],Old=[]}]}.
+along with changes specifically for this third edition],Old=[]}],Old=[]}]}]}.
 In addition, a variety of editorial errors have been corrected.],Old=[]}
 @end{RMOnly}
 @begin{AARMOnly}
@@ -492,14 +494,16 @@ In addition, a variety of editorial errors have been corrected.],Old=[]}
 @ChgRef{Version=[3],Kind=[Revised]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgRef{Version=[5],Kind=[Revised]}
-@Chg{New=[This document has been revised with @Chg{Version=[4],New=[
+@ChgRef{Version=[6],Kind=[Revised]}
+@Chg{New=[This document has been revised with @Chg{Version=[6],New=[changes
+for Ada 202y],Old=[@Chg{Version=[4],New=[
 the corrections specified in Technical Corrigendum 1 for Ada 2012
 (which corresponds to ISO/IEC 8652:2012/COR.1:2016)@Chg{Version=[5],New=[ 
-and other changes specifically for Ada 2022],Old=[]}],
+and other changes specifically for this fourth edition],Old=[]}],
 Old=[the corrections specified in Technical Corrigendum 1
 (which corresponds to ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and
 Amendment 1 (which corresponds to ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[,
-along with changes specifically for this third edition],Old=[]}],Old=[]}]}.
+along with changes specifically for this third edition],Old=[]}],Old=[]}]}]}.
 In addition, @Chg{Version=[3],New=[more],Old=[additional]} annotations
 have been added and a variety of editorial errors have been corrected.],Old=[]}
 @end{AARMOnly}
@@ -510,6 +514,7 @@ have been added and a variety of editorial errors have been corrected.],Old=[]}
 @ChgRef{Version=[3],Kind=[Revised]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgRef{Version=[5],Kind=[Revised]}
+@ChgRef{Version=[6],Kind=[Revised]}
 @Chg{New=[Changes to the original 1995 version of the Ada Reference Manual 
 can be identified by the version
 number @Chg{Version=[2],New=[],Old=[/1 ]}following the paragraph
@@ -518,13 +523,13 @@ changed by Technical Corrigendum 1 @Chg{Version=[4],New=[for Ada 95 ],Old=[]}or
 were editorial corrections at that time,
 while paragraphs with a version number of /2 were changed by Amendment 1 or were
 more recent editorial corrections@Chg{Version=[3],New=[, and paragraphs with a
-version number of /3 were changed by the 2012 edition of the Reference Manual
-or were still
-more recent editorial corrections],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
-with a version number of /4 are changed by Technical Corrigendum 1 for Ada 2012
+version number of /3 were changed by the 2012 edition of the Reference
+Manual (including additional editorial corrections)],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
+with a version number of /4 were changed by Technical Corrigendum 1 for Ada 2012
 or were editorial corrections at that time.],Old=[]}@Chg{Version=[5],New=[ Paragraphs
-with a version number of /5 are changes or
-editorial corrections for Ada 2022.],Old=[]}
+with a version number of /5 were changed by the 2022 edition of the Reference
+Manual (including additional editorial corrections).],Old=[]}@Chg{Version=[6],New=[ Paragraphs
+with a version number of /6 were changed for Ada 202y or are recent editorial corrections.],Old=[]}
 Paragraphs not so marked are unchanged since the original 1995 edition of
 the Ada Reference Manual, and have the same paragraph numbers as in that
 edition. In addition, some versions of this document include revision bars 
@@ -544,6 +549,7 @@ Ada Reference Manual.],Old=[]}
 @ChgRef{Version=[3],Kind=[Revised]}
 @ChgRef{Version=[4],Kind=[Revised]}
 @ChgRef{Version=[5],Kind=[Revised]}
+@ChgRef{Version=[6],Kind=[Revised]}
 @Chg{New=[Changes to the original 1995 version of the Annotated Ada Reference
 Manual (AARM) can be identified by the version
 number @Chg{Version=[2],New=[],Old=[/1 ]}following the paragraph
@@ -553,12 +559,12 @@ were editorial corrections at that time,
 while paragraphs with a version number of /2 were changed by Amendment 1 or were
 more recent editorial corrections@Chg{Version=[3],New=[, and paragraphs with a
 version number of /3 were changed by the 2012 edition of the AARM
-or were still
-more recent editorial corrections],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
-with a version number of /4 are changed by Technical Corrigendum 1 for Ada 2012
+(including additional editorial corrections)],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
+with a version number of /4 were changed by Technical Corrigendum 1 for Ada 2012
 or were editorial corrections at that time.],Old=[]}@Chg{Version=[5],New=[ Paragraphs
-with a version number of /5 are changes or
-editorial corrections for Ada 2022.],Old=[]}
+with a version number of /5 were changed by the 2022 edition of the AARM
+(including additional editorial corrections).],Old=[]}@Chg{Version=[6],New=[ Paragraphs
+with a version number of /6 were changed for Ada 202y or are recent editorial corrections.],Old=[]}
 Paragraphs not so marked are unchanged since the original 1995 edition of
 the Annotated Ada Reference Manual, and have the same paragraph numbers as in that
 edition. Inserted text is indicated
@@ -575,9 +581,13 @@ the],Old=[original]} Ada Reference Manual. Similar markings and numbering
 are used for changes to annotations.],Old=[]}
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The paragraph number is considered part of the
-  paragraph; when a paragraph is moved to a different paragraph number, it is
-  marked as changed even if the contents have not changed.]}
+  @ChgRef{Version=[4],Kind=[Revised]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[For normative text, the],Old=[The]}
+  paragraph number is considered part of the paragraph; when a paragraph is moved
+  to a different paragraph number, it is marked as changed even if the contents have
+  not changed.@Chg{Version=[4],New=[ For non-normative text such as @Notestitle and
+  @ExamplesTitle, paragraph numbers of unchanged context may change without indication.
+  This may happen if additional normative content is added to a subclause.],Old=[]}]}
 @end{Honest}
 @end{AARMOnly}
 @end{Intro}
