@@ -1,6 +1,6 @@
 @Part(intro, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/intro.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2023/10/04 05:40:22 $}
+@comment{$Revision: 1.7 $ $Date: 2023/10/14 06:28:34 $}
 
 
 @UnNumberedSection{Introduction}
@@ -14,8 +14,8 @@ This is the Annotated Ada Reference Manual.
 @ChgRef{Version=[5],Kind=[Revised]}
 This document is the Annotated Ada Reference Manual (AARM).
 It contains the entire text of the Ada
-@Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[95]} standard
-(ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[1995]}),
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Chg{Version=[6],New=[202y],Old=[2022]}],Old=[2012]}],Old=[95]} standard
+(ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Chg{Version=[6],New=[202y],Old=[2023]}],Old=[2012]}],Old=[1995]}),
 plus various annotations.
 It is intended primarily for compiler writers,
 validation test writers, and other language lawyers.
@@ -73,7 +73,7 @@ lists in detail the changes made to the 1987 edition of the standard.]}
 @ChgRef{Version=[3],Kind=[Revised]}
 The Ada Reference Manual (RM).
 This directly corresponds to the International Standard @em
-ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2022],Old=[2012]}],Old=[1995]}.
+ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Chg{Version=[6],New=[202y],Old=[2023]}],Old=[2012]}],Old=[1995]}.
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
