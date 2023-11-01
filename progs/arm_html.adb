@@ -198,6 +198,7 @@ package body ARM_HTML is
     --  2/19/19 - RLB - Added some (commented out) hang tracing.
     --  2/ 4/22 - RLB - Added AI22 links.
     --  8/22/22 - RLB - Added All_Formats parameter to URL_Link.
+    -- 10/ 9/23 - RLB - Defined change colors for versions 7 and 8.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1326,9 +1327,22 @@ package body ARM_HTML is
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('6') then
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert6 {text-decoration: underline; color: rgb(0,102,153) }"); -- Turquiose.
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete6 {text-decoration: line-through; color: rgb(0,102,153) }");
-            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both6 {text-decoration: underline, line-through; color: rgb(0,102,153) }");
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert6 {text-decoration: underline; color: rgb(0,51,204) }"); -- Royal blue.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete6 {text-decoration: line-through; color: rgb(0,51,204) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both6 {text-decoration: underline, line-through; color: rgb(0,51,204) }");
+		-- Both doesn't seem to work, so forget it.
+        end if;
+	if Revision_Used ('7') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert7 {text-decoration: underline; color: rgb(0,102,153) }"); -- Turquiose.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete7 {text-decoration: line-through; color: rgb(0,102,153) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both7 {text-decoration: underline, line-through; color: rgb(0,102,153) }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
+	if Revision_Used ('7') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert8 {text-decoration: underline; color: rgb(204,51,0) }"); -- Bright red.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete8 {text-decoration: line-through; color: rgb(204,51,0) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both8 {text-decoration: underline, line-through; color: rgb(204,51,0) }");
 		-- Both doesn't seem to work, so forget it.
 	-- else not used, don't generate it.
 	end if;

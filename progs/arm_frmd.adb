@@ -412,6 +412,8 @@ package body ARM_Format.Data is
 	    return Permission_Name;
 	elsif Canonical_Name = "impladvicename" then
 	    return Advice_Name;
+	elsif Canonical_Name = "usagename" then
+	    return Usage_Name;
 	elsif Canonical_Name = "notesname" then
 	    return Notes_Name;
 	elsif Canonical_Name = "singlenotename" then
@@ -486,6 +488,8 @@ package body ARM_Format.Data is
 	    return Permission_Title;
 	elsif Canonical_Name = "impladvicetitle" then
 	    return Advice_Title;
+	elsif Canonical_Name = "usagetitle" then
+	    return Usage_Title;
 	elsif Canonical_Name = "notestitle" then
 	    return Notes_Title;
 	elsif Canonical_Name = "singlenotetitle" then
