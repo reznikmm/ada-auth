@@ -1,0 +1,15 @@
+name = "ada_form"
+description = "Formatted output of the Ada Reference Manual"
+version = "0.1.0-dev"
+website = "http://www.ada-auth.org/arm.html"
+licenses = "GPL-3.0-only"
+
+authors = ["Randy Brukardt"]
+maintainers = ["Max Reznik <reznikmm@gmail.com>"]
+maintainers-logins = ["reznikmm"]
+
+executables = ["ada_form"]
+project-files = ["ada_form.gpr"]
+
+[configuration]
+disabled = true

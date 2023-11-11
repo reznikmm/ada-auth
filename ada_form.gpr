@@ -18,6 +18,8 @@ project Ada_Form is
       for Spec ("arm_syntax") use "arm_syn.ads";
       for Spec ("arm_format.data") use "arm_frmd.ads";
       for Spec ("arm_texinfo") use "arm_texi.ads";
+      for Spec ("arm_paragraph") use "arm_para.ads";
+      for Spec ("arm_blackhole") use "arm_blac.ads";
 
       for Body ("arm_master") use "arm_mast.adb";
       for Body ("arm_contents") use "arm_cont.adb";
@@ -31,6 +33,8 @@ project Ada_Form is
       for Body ("arm_format.data") use "arm_frmd.adb";
       for Body ("arm_format.scan") use "arm_frms.adb";
       for Body ("arm_texinfo") use "arm_texi.adb";
+      for Body ("arm_paragraph") use "arm_para.adb";
+      for Body ("arm_blackhole") use "arm_blac.adb";
    end Naming;
 
    package Compiler is
